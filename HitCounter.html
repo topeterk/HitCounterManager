@@ -1,0 +1,91 @@
+<html>
+<head>
+ <title>Hitcounter</title>
+ <meta http-equiv="Refresh" content="1"> <!-- OBS' CLR browser plugin might use CSS extension. Disable the CSS when it flickers. -->
+ <style language="css">
+ table {
+	border-spacing: 0px;
+	margin-left:auto; 
+    margin-right:auto;
+ }
+ td {
+	padding:3px 4px 3px 4px;
+	border-bottom:2px solid #ccc;
+	text-shadow: 0 2px 2px #000;
+	font-size: 21px;
+	font-family: 'Open Sans', sans-serif;
+	color: white;
+	text-align: center;
+ }
+  
+ td.first { text-align: left; }
+ td.major { font-size: 23px; }
+ td.bottom { border:0px; }
+ td.better { color: #08FF20; }
+ td.worse { color: #FF4A4A; }
+ tr.current { background-color: #005000; }
+ </style>
+</head>
+
+<body>
+<table>
+ <tr>
+  <td class="major first">Split</td>
+  <td class="major" width="30px">Now</td>
+  <td class="major" width="30px">Diff</td>
+  <td class="major" width="30px">PB</td>
+ </tr>
+
+<script language="javascript">
+var list = [
+["Gundyr", 0, 0, 0],
+["Vordt", 1, 2, 0],
+["AbyssWatchers", 0, 0, 0],
+["Wolnir", 0, 0, 0],
+["Dancer", 4, 4, 0],
+["Crystal&nbsp;Sage", 0, 0, 0],
+["Deacons", 0, 2, 0],
+["Yhorm", 0, 0, 0],
+["Pontiff", 0, 0, 0],
+["Aldrich", 5, 3, 0],
+["Dragonslayer", 0, 0, 0],
+["Princess", 0, 0, 0],
+["Soul&nbsp;of&nbsp;Cinder", 0, 5, 0],
+["Greatwood", 0, 0, 0],
+["Old&nbsp;Deamon&nbsp;King", 0, 1, 0],
+["Ocelot", 4, 0, 0],
+["Champion&nbsp;Gundyr", 0, 0, 1],
+["Wyvern", 5, 0, 0],
+["Nameless&nbsp;King", 0, 0, 0],
+];
+
+function printsinged(i) { if (i > 0) return "+" + i; else return i; }
+
+var sum = 0;
+var pb = 0;
+var active = false;
+
+for ( i = 0 ; i < list.length ; i = i + 1 )
+{
+	sum = sum + list[i][1];
+	pb = pb + list[i][2];
+	document.write("<tr class=\"" + (list[i][3] ? "current" : "") + "\">" +
+		"<td class=\"first " + (!active ? (list[i][1] == 0 ? "better" : "worse") : "") + "\">" + list[i][0] + "</td>" +
+		"<td>" + list[i][1] + "</td>" +
+		"<td>" + printsinged(list[i][1] - list[i][2]) + "</td>" +
+		"<td>" + list[i][2] + "(" + pb + ")</td>" +
+		"</tr>");
+	if (list[i][3]) active = true;
+}
+document.write("<tr>" +
+	"<td class=\"major bottom " + (sum - pb <= 0 ? "better" : "worse") + " first\">Total:</td>" +
+	"<td class=\"major bottom " + (sum - pb <= 0 ? "better" : "worse") + "\">" + sum + "</td>" +
+	"<td class=\"major bottom " + (sum - pb <= 0 ? "better" : "worse") + "\">" + printsinged(sum - pb) + "</td>" +
+	"<td class=\"major bottom " + (sum - pb <= 0 ? "better" : "worse") + "\">" + pb + "</td>" +
+	"</tr>");
+</script>
+
+</table>
+</body>
+</html>
+
