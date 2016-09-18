@@ -19,13 +19,15 @@ It was designed for Dark Souls III 0 hit runs, to count every hit during the pla
   * Yes/No (shows check marks or crosses if one got hit at current run or PB)
 > Note: Those features will be available the first time with version 1.1.0.0
 
+Want to have a look at the front-end? **Find some [images here] (../../wiki)**.
+
 ## Get the software
 Checkout the [Releases] (https://github.com/topeterk/HitCounterManager/releases) section and choose the version of you choice.
 
-## Systemrequirements
-.Net Framework 4.5
-
 ## Installation
+
+### Systemrequirements
+.Net Framework 4.5
 
 ### Using the Installer
 The installer places the executable and an inital configuration file at your installation folder (default: Program Files).  
