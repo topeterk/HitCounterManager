@@ -18,6 +18,9 @@ It was designed for Dark Souls III 0 hit runs, to count every hit during the pla
 ## Get the software
 Checkout the [Releases] (https://github.com/topeterk/HitCounterManager/releases) section and choose the version of you choice.
 
+## Systemrequirements
+.Net Framework 4.5
+
 ## Installation
 The installer places the executable and an inital configuration file at your installation folder (default: Program Files).  
 It additionally places a template and HTML file at %localappdata%\HitCounterManager.  
