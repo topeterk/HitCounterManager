@@ -314,7 +314,7 @@ Partial Class Settings
         '
         'OpenFileDialog1
         '
-        Me.OpenFileDialog1.FileName = "HitCounter.*"
+        Me.OpenFileDialog1.FileName = "HitCounter*"
         '
         'Settings
         '

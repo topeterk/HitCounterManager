@@ -76,6 +76,7 @@ Public Class Form1
 
             om.FilePathIn = .Inputfile
             om.FilePathOut = .OutputFile
+            om.Update()
         End With
 
     End Sub
@@ -346,4 +347,5 @@ Public Class Form1
     Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
         SaveSettings()
     End Sub
+
 End Class

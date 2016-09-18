@@ -1,0 +1,85 @@
+<html>
+<head>
+ <title>Hitcounter Numeric</title>
+ <!-- OBS' CLR browser plugin might use CSS extension. Disable the CSS when it flickers. -->
+ <!-- Method also needs --allow-file-access-from-files to be set -->
+ <style language="css">
+ table {
+	border-spacing: 0px;
+	margin-left:auto; 
+    margin-right:auto;
+ }
+ td {
+	padding:3px 4px 3px 4px;
+	border-bottom:2px solid #ccc;
+	text-shadow: 0 2px 2px #000;
+	font-size: 21px;
+	font-family: 'Open Sans', sans-serif;
+	color: white;
+	text-align: center;
+ }
+  
+ td.first { text-align: left; }
+ td.major { font-size: 23px; }
+ td.bottom { border:0px; }
+ td.better { color: #08FF20; }
+ td.worse { color: #FF4A4A; }
+ tr.current { background-color: #005000; }
+ </style>
+</head>
+
+<body>
+<iframe src="HitCounter.html" style="display:none;"></iframe>
+<table id="table"></table>
+<script language="javascript">
+
+function printsinged(i) { if (i > 0) return "+" + i; else return i; }
+
+function DoUpdate(list)
+{
+	var active = false;
+	var new_tbl = ""
+	var sum = 0;
+	var pb = 0;
+
+	var tbl = document.getElementById('table');
+	new_tbl =
+ '<tr>' +
+  '<td class="major first">Split</td>' +
+  '<td class="major" width="30px">Now</td>' +
+  '<td class="major" width="30px">Diff</td>' +
+  '<td class="major" width="30px">PB</td>' +
+ '</tr>';
+
+	for ( i = 0 ; i < list.length ; i = i + 1 )
+	{
+		sum = sum + list[i][1];
+		pb = pb + list[i][2];
+		new_tbl +=
+ '<tr class="' + (list[i][3] ? 'current' : '') + '">' +
+  '<td class="first ' + (!active ? (list[i][1] == 0 ? 'better' : 'worse') : '') + '">' + list[i][0] + '</td>' +
+  '<td>' + list[i][1] + '</td>' +
+  '<td>' + printsinged(list[i][1] - list[i][2]) + '</td>' +
+  '<td>' + list[i][2] + '(' + pb + ')</td>' +
+ '</tr>';
+		if (list[i][3]) active = true;
+	}
+
+	new_tbl +=
+ '<tr>' +
+  '<td class="major bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + ' first">Total:</td>' +
+  '<td class="major bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + sum + '</td>' +
+  '<td class="major bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + printsinged(sum - pb) + '</td>' +
+  '<td class="major bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + pb + '</td>' +
+ '</tr>';
+
+	tbl.innerHTML = new_tbl;
+
+	setTimeout(function() { document.getElementsByTagName('iframe')[0].src = 'HitCounter.html';	}, 1000); // refresh every second
+}
+
+</script>
+
+</body>
+</html>
+

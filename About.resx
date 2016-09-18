@@ -127,11 +127,21 @@ License: Free for commercial and non-commercial use, modifications allowed
 Condition: Keep information about original author and source location [This paragraph here]
 For more details about source, see LICENSE file
 
- --  Icon:
+ -- Icon:
 Artist: Iconka.com (Available for custom work)
 Iconset: Pioneer Camp Icons (6 icons)
 License: Linkware (Backlink to http://www.iconka.com required)
 Commercial usage: Allowed (Backlink to http://www.iconka.com required)
+
+ -- Check Mark Image
+https://pixabay.com/p-1292787/
+Licence: CC0 Public Domain  (Free for commercial use)
+Conditions: None
+
+ -- Cross Image
+https://pixabay.com/p-304374/
+Licence: CC0 Public Domain  (Free for commercial use)
+Conditions: None
 </value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
