@@ -19,13 +19,15 @@ It was designed for Dark Souls III 0 hit runs, to count every hit during the pla
   * Yes/No (shows check marks or crosses if one got hit at current run or PB)
 > Note: Those features will be available the first time with version 1.1.0.0
 
+Want to have a look at the front-end? **Find some [images here] (../../wiki)**.
+
 ## Get the software
 Checkout the [Releases] (https://github.com/topeterk/HitCounterManager/releases) section and choose the version of you choice.
 
-## Systemrequirements
-.Net Framework 4.5
-
 ## Installation
+
+### Systemrequirements
+.Net Framework 4.5
 
 ### Using the Installer
 The installer places the executable and an inital configuration file at your installation folder (default: Program Files).  
@@ -42,6 +44,17 @@ The pre-delivered [HitCounterNumeric.html] (HitCounterNumeric.html) or [HitCount
 
 The opacity can be set to 100% because the background will be rendered transparent, so no color-keying is involved. Since CRL browser plugin come with some pre-defined CSS, this may cause trouble with the rendering of the HTML file (flickering or misplacement). If you encounter issues here, try to simply remove the CLR browser plugin's CSS overrides.  
 > Recommended: Opacity 100% and no CSS overrides
+
+When no data is displayed, there could be a problem with cross-domain security settings. This is because the HTMLs are rendered via file:// protocol instead of http://. Make sure to allow file access from files.
+> OBS -> Settings -> Browser -> Instance -> ...  
+> * FileAccessFromFilesUrls (Set to **Enabled**)
+> * UniversialAccessFromFilesUrls (Set to **Enabled**, _but should also work when disabled_)
+> * WebSecurity (Set to **Disabled**, _but should also work when enabled_)
+
+### Using usual standalone Chrome browser
+When no data is displayed, there could be a problem with cross-domain security settings. This is because the HTMLs are rendered via file:// protocol instead of http://. Make sure to allow file access from files.
+> Start Chrome with **--allow-file-access-from-files**  
+> Example: _"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files_
 
 ### Changing layout and design
 You can modify or create new custom graphical representation. Simply create a new HTML file based on [HitCounterNumeric.html] (HitCounterNumeric.html) or [HitCounterYesNo.html] (HitCounterYesNo.html).  
