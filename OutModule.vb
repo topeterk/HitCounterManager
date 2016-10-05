@@ -35,7 +35,7 @@ Public Class OutModule
         dgv = DataGridView
     End Sub
 
-    ' Read a file into butter
+    ' Read a file into buffer
     Public Property FilePathIn() As String
         Get
             Return _FilePathIn
@@ -88,7 +88,12 @@ Public Class OutModule
                 Dim active As Integer
                 For r = 0 To dgv.RowCount - 2 Step 1
                     cells = dgv.Rows.Item(r).Cells
-                    title = cells.Item("cTitle").Value.ToString().Replace(" ", "&nbsp;")
+                    title = cells.Item("cTitle").Value
+                    If Not IsNothing(title) Then
+                        title = title.ToString().Replace("&", "&amp;").Replace(" ", "&nbsp;")
+                        title = title.Replace("ä", "&auml;").Replace("ö", "&ouml;").Replace("ü", "&uuml;")
+                        title = title.Replace("Ä", "&Auml;").Replace("Ö", "&Ouml;").Replace("Ü", "&Uuml;")
+                    End If
                     hits = cells.Item("cHits").Value
                     diff = cells.Item("cDiff").Value
                     PB = cells.Item("cPB").Value

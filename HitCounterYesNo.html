@@ -37,8 +37,9 @@ function printyesno(i) { return '<img src="' + (i > 0 ? 'img_cross.png" height="
 
 function DoUpdate(list)
 {
-	var active = "&nbsp;";
-	var new_tbl = ""
+	var active = false;
+	var split = "&nbsp;";
+	var new_tbl = "";
 
 	var tbl = document.getElementById('table');
 	new_tbl =
@@ -50,23 +51,24 @@ function DoUpdate(list)
 
 	for ( i = 0 ; i < list.length ; i = i + 1 )
 	{
+		if (list[i][3]) { active = true; split = list[i][0]; }
+
 		new_tbl +=
  '<tr class="' + (list[i][3] ? 'current' : '') + '">' +
   '<td class="first">' + list[i][0] + '</td>' +
-  '<td>' + printyesno(list[i][1]) + '</td>' +
+  '<td>' + printyesno(!active ? list[i][1] : 1) + '</td>' +
   '<td>' + printyesno(list[i][2]) + '</td>' +
  '</tr>';
-		if (list[i][3]) active = list[i][0];
 	}
 
 	new_tbl +=
  '<tr>' +
-  '<td colspan="3" class="major bottom">' + active + '</td>' +
+  '<td colspan="3" class="major bottom">' + split + '</td>' +
  '</tr>';
 
 	tbl.innerHTML = new_tbl;
 
-	setTimeout(function() { document.getElementsByTagName('iframe')[0].src = 'HitCounter.html';	}, 1000); // refresh every second
+	setTimeout(function() { document.getElementsByTagName('iframe')[0].src = 'HitCounter.html';	}, 2000); // refresh every second
 }
 
 </script>

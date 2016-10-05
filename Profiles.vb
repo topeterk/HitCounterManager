@@ -40,6 +40,12 @@ Public Class ProfileRow
         Dim i As Integer
         Dim val As String
         Dim col = 0
+
+        Title = ""
+        Hits = 0
+        Diff = 0
+        PB = 0
+
         Do
             i = InStr(Line, ";")
             If i = 0 Then Exit Do ' no more data in this lne
@@ -120,7 +126,7 @@ Public Class Profiles
     End Function
 
     ' updates a datagrid based on a specific internally cached profile
-    Public Sub LoadProfileInto(Name As String, DataGridView As DataGridView)
+    Public Sub LoadProfileInto(Name As String, ByRef DataGridView As DataGridView)
         For Each prof In _Profiles
             If prof.Name = Name Then
 

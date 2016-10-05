@@ -62,7 +62,6 @@ Public Class Form1
                 ComboBox1.Items.Add("Unnamed")
             End If
             ComboBox1.SelectedItem = .ProfilesSelected
-            profs.LoadProfileInto(ComboBox1.SelectedItem, DataGridView1)
             DataGridView1.Rows.Item(0).Selected = True
             DataGridView1_CellValueChanged(Nothing, Nothing)
 
@@ -169,7 +168,7 @@ Public Class Form1
 
     Private Sub btnSplit_Click(sender As Object, e As EventArgs) Handles btnSplit.Click
         Dim idx = DataGridView1.SelectedCells.Item(0).RowIndex + 1
-        If idx < DataGridView1.RowCount - 1 Then
+        If idx <= DataGridView1.RowCount - 1 Then
             DataGridView1.ClearSelection()
             DataGridView1.Rows.Item(idx).Selected = True
         End If
@@ -185,15 +184,30 @@ Public Class Form1
         SaveSettings()
     End Sub
 
-    Private Sub DataGridView1_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles DataGridView1.CellValidating
-        If InStr(e.FormattedValue, ";") Then
-            e.Cancel = True
+    Private Function IsInvalidConfigString(str As String) As Boolean
+        IsInvalidConfigString = True
+        If InStr(str, ";") Then
             MessageBox.Show("Not allowed to use "";""!")
-            Exit Sub
+            Exit Function
         End If
-        If InStr(e.FormattedValue, "|") Then
-            e.Cancel = True
+        If InStr(str, "|") Then
             MessageBox.Show("Not allowed to use ""|""!")
+            Exit Function
+        End If
+        If InStr(str, "<") Then
+            MessageBox.Show("Not allowed to use ""<""!")
+            Exit Function
+        End If
+        If InStr(str, ">") Then
+            MessageBox.Show("Not allowed to use "">""!")
+            Exit Function
+        End If
+        IsInvalidConfigString = False
+    End Function
+
+    Private Sub DataGridView1_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles DataGridView1.CellValidating
+        If IsInvalidConfigString(e.FormattedValue) Then
+            e.Cancel = True
             Exit Sub
         End If
         If e.ColumnIndex > 0 Then
@@ -259,12 +273,7 @@ Public Class Form1
         Dim name = InputBox("Enter name of new profile", "New profile", ComboBox1.SelectedItem)
         If name.Length = 0 Then Exit Sub
 
-        If InStr(name, ";") Then
-            MessageBox.Show("Not allowed to use "";""!")
-            Exit Sub
-        End If
-        If InStr(name, "|") Then
-            MessageBox.Show("Not allowed to use ""|""!")
+        If IsInvalidConfigString(name) Then
             Exit Sub
         End If
 
@@ -314,12 +323,7 @@ Public Class Form1
         If ComboBox1.Items.Count = 0 Then Exit Sub
 
         Dim name = InputBox("Enter new name for profile """ & ComboBox1.SelectedItem & """!", "Rename profile", ComboBox1.SelectedItem)
-        If InStr(name, ";") Then
-            MessageBox.Show("Not allowed to use "";""!")
-            Exit Sub
-        End If
-        If InStr(name, "|") Then
-            MessageBox.Show("Not allowed to use ""|""!")
+        If IsInvalidConfigString(name) Then
             Exit Sub
         End If
 
@@ -338,6 +342,7 @@ Public Class Form1
         End If
         profs.LoadProfileInto(ComboBox1.SelectedItem, DataGridView1)
         ComboBox1PrevSelectedItem = ComboBox1.SelectedItem
+        om.Update()
     End Sub
 
     Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click

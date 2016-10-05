@@ -1,6 +1,6 @@
 <html>
 <head>
- <title>Hitcounter Numeric</title>
+ <title>Hitcounter YesNo</title>
  <!-- OBS' CLR browser plugin might use CSS extension. Disable the CSS when it flickers. -->
  <!-- Method also needs --allow-file-access-from-files to be set -->
  <style language="css">
@@ -21,7 +21,7 @@
   
  td.first { text-align: left; }
  td.major { font-size: 23px; }
- td.bottom { border:0px; }
+ td.bottom { border:0px; text-align: right; }
  td.better { color: #08FF20; }
  td.worse { color: #FF4A4A; }
  tr.current { background-color: #005000; }
@@ -33,44 +33,37 @@
 <table id="table"></table>
 <script language="javascript">
 
-function printsinged(i) { if (i > 0) return "+" + i; else return i; }
+function printyesno(i) { return '<img src="' + (i > 0 ? 'img_cross.png" height="15px"' : 'img_check.png" height="21px"') + '>'; }
 
 function DoUpdate(list)
 {
 	var active = false;
-	var new_tbl = ""
-	var sum = 0;
-	var pb = 0;
+	var split = "&nbsp;";
+	var new_tbl = "";
 
 	var tbl = document.getElementById('table');
 	new_tbl =
  '<tr>' +
   '<td class="major first">Split</td>' +
   '<td class="major" width="30px">Now</td>' +
-  '<td class="major" width="30px">Diff</td>' +
   '<td class="major" width="30px">PB</td>' +
  '</tr>';
 
 	for ( i = 0 ; i < list.length ; i = i + 1 )
 	{
-		sum = sum + list[i][1];
-		pb = pb + list[i][2];
+		if (list[i][3]) { active = true; split = list[i][0]; }
+
 		new_tbl +=
  '<tr class="' + (list[i][3] ? 'current' : '') + '">' +
-  '<td class="first ' + (!active ? (list[i][1] == 0 ? 'better' : 'worse') : '') + '">' + list[i][0] + '</td>' +
-  '<td>' + list[i][1] + '</td>' +
-  '<td>' + printsinged(list[i][1] - list[i][2]) + '</td>' +
-  '<td>' + list[i][2] + '(' + pb + ')</td>' +
+  '<td class="first">' + list[i][0] + '</td>' +
+  '<td>' + printyesno(!active ? 0 : 1) + '</td>' +
+  '<td>' + printyesno(list[i][2]) + '</td>' +
  '</tr>';
-		if (list[i][3]) active = true;
 	}
 
 	new_tbl +=
  '<tr>' +
-  '<td class="major bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + ' first">Total:</td>' +
-  '<td class="major bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + sum + '</td>' +
-  '<td class="major bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + printsinged(sum - pb) + '</td>' +
-  '<td class="major bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + pb + '</td>' +
+  '<td colspan="3" class="major bottom">' + split + '</td>' +
  '</tr>';
 
 	tbl.innerHTML = new_tbl;
