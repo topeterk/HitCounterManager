@@ -20,7 +20,7 @@ It was designed for Dark Souls III 0 hit or no death runs, to count every hit du
 * Comes with 3 graphical representations:
   * Numeric (shows all counters of all splits for current run, PB and their differences)
   * Yes/No (shows check marks or crosses if one got hit at current run or PB)
-  * NoDeath (shows check mars for all split already done, ignoring the hit counts)
+  * NoDeath (shows check marks for all split already done, ignoring the hit counts)
 > Note: Those features will be available the first time with version 1.2.0.0
 
 Want to have a look at the front-end? **Find some [images here] (../../wiki)**.
