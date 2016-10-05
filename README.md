@@ -2,7 +2,7 @@
 Manages a hit counter  
 
 ## Features
-It was designed for Dark Souls III 0 hit runs, to count every hit during the playthrough
+It was designed for Dark Souls III 0 hit or no death runs, to count every hit during the playthrough
 * Creates a HTML file of the hit counters (can be used by CLR browser plugin in Open BroadCaster Software in order to make it visible on stream)
 * Instead of using GUI buttons, keyboard shortcuts can be configured:
   * Increase hit count of the current split
@@ -13,11 +13,15 @@ It was designed for Dark Souls III 0 hit runs, to count every hit during the pla
 * Multiple profiles can be created (e.g. "Any%", "AllBosses", "DLC only"..)
 * Switching to other profiles will keep hit counts of currently selected profile
 * Button to save current run as PB (personal best)
-* Comes with sample profile: Dark Souls III 0 Hit All Bosses Vanilla
-* Comes with 2 graphical representations:
+* Comes with sample profiles:
+  * Dark Souls III All Bosses Vanilla
+  * Dark Souls II All Bosses Vanilla
+  * Dark Souls II Any% GER
+* Comes with 3 graphical representations:
   * Numeric (shows all counters of all splits for current run, PB and their differences)
   * Yes/No (shows check marks or crosses if one got hit at current run or PB)
-> Note: Those features will be available the first time with version 1.1.0.0
+  * NoDeath (shows check mars for all split already done, ignoring the hit counts)
+> Note: Those features will be available the first time with version 1.2.0.0
 
 Want to have a look at the front-end? **Find some [images here] (../../wiki)**.
 
@@ -38,7 +42,7 @@ After first execution a further configuration file will be stored within %locala
 After first execution a configuration file will be stored within %localappdata%\HitCounterManager.
 
 ### Configuring CLR browser plugin for OBS
-The pre-delivered [HitCounterNumeric.html] (HitCounterNumeric.html) or [HitCounterYesNo.html] (HitCounterYesNo.html) will update themself once a second, so there should be no need to render more frames than one every second. However, to speed up loading time and to give the browser the opportunity doing some background tasks, it should be a slightly higher number.  
+The pre-delivered [HitCounterNumeric.html] (HitCounterNumeric.html) or [HitCounterYesNo.html] (HitCounterYesNo.html) or [HitCounterNoDeath.html] (HitCounterNoDeath.html) will update themself every two seconds, so there should be no need to render more frames than one every second. However, to speed up loading time and to give the browser the opportunity doing some background tasks, it should be a slightly higher number.  
 > By now I created a 400 to 800 pixel wide window and run it with 3 FPS without issues so far.  
 > Recommended: FPS between 3 and 10
 
@@ -67,9 +71,10 @@ This way you are 100% free in the design of your hit counter.
 Message me via github, e-mail or simple open an issue and I will try to help you out.
 
 ## Special thanks
-I would never have created this tool without the inspiration by watching the awesome 0 hit runners...
+I would never have created this tool without the inspiration by watching the awesome 0 hit and no death runners...
 Thanks to:
 * [The_Happy_Hob] (https://www.twitch.tv/the_happy_hob)
 * [FaraazKhan] (https://www.twitch.tv/faraazkhan)
 * [SquillaKilla] (https://www.twitch.tv/squillakilla)
 * [SayviTV] (https://www.twitch.tv/sayvitv)
+* [Kazoodle] (https://www.twitch.tv/kazoodle)
