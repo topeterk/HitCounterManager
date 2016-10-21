@@ -164,9 +164,15 @@ Public Class Settings
         If IsNothing(sc) Then Exit Sub ' when invoked during form load
 
         If radioHotKeyMethod_sync.Checked Then
-            sc.NextStart_Method = Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync
+            If Not sc.NextStart_Method = Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync Then
+                sc.NextStart_Method = Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync
+                MessageBox.Show("Changes only take effect after restarting the application.", "Restart required", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
         ElseIf radioHotKeyMethod_async.Checked Then
-            sc.NextStart_Method = Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async
+            If Not sc.NextStart_Method = Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async Then
+                sc.NextStart_Method = Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async
+                MessageBox.Show("Changes only take effect after restarting the application.", "Restart required", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
         End If
     End Sub
 End Class
