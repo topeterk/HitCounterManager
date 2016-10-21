@@ -22,30 +22,52 @@
 
 ' Holds data about a hotkey
 Public Class ShortcutsKey
-    Public Const KEY_PRESSED_SINCE_LAST_CALL As Long = &H0001
+    Public Const KEY_PRESSED_NOW As Long = &H8000
 
     <Runtime.InteropServices.DllImport("User32.dll")>
     Public Shared Function GetAsyncKeyState(ByVal vKey As Long) As System.UInt16
     End Function
 
     Private _used As Boolean ' tells if shortcut is registered at windows
+    Private _down As Boolean ' tells if shortcut is currently pressed
     Public valid As Boolean ' tell if a valid key/modifier pair was ever set
     Public key As KeyEventArgs
+
+    Public Sub New()
+        _used = False
+        _down = False
+        valid = False
+        key = New KeyEventArgs(0)
+    End Sub
 
     Public Function ShallowCopy() As ShortcutsKey
         Return DirectCast(Me.MemberwiseClone(), ShortcutsKey)
     End Function
 
-    ' Checks current key stat and returns if all pressed registered keys are pressed
-    Public Function CheckPressedState(ShiftState As Boolean, ControlState As Boolean, AltState As Boolean) As Boolean
+    ' Checks current key stat and returns if all registered keys are pressed at the moment
+    Private Function CheckPressedState(ShiftState As Boolean, ControlState As Boolean, AltState As Boolean) As Boolean
         CheckPressedState = False ' assume not pressed
 
-        If Not GetAsyncKeyState(key.KeyCode) And KEY_PRESSED_SINCE_LAST_CALL Then Exit Function
+        If Not GetAsyncKeyState(key.KeyCode) And KEY_PRESSED_NOW Then Exit Function
         If key.Shift And Not ShiftState Then Exit Function
         If key.Control And Not ControlState Then Exit Function
         If key.Alt And Not AltState Then Exit Function
 
         CheckPressedState = True
+    End Function
+
+    ' Checks if all registered keys are just pressed the first time
+    Public Function WasPressed(ShiftState As Boolean, ControlState As Boolean, AltState As Boolean) As Boolean
+        WasPressed = False ' assume not pressed
+
+        If CheckPressedState(ShiftState, ControlState, AltState) Then ' Is key down right now?
+            If Not _down Then ' Did key go down the first time?
+                WasPressed = True ' Okay, key was just pressed!
+                _down = True ' Make sure key gets released before going down again
+            End If
+        Else
+            _down = False ' Key is up again, so re-arm 'first time' trigger 
+        End If
     End Function
 
     ' tells if shortcut is registered as hotkey
@@ -66,7 +88,7 @@ Public Class Shortcuts
     Public Const VK_SHIFT As Long = &H10
     Public Const VK_CONTROL As Long = &H11
     Public Const VK_MENU As Long = &H12
-    Public Const KEY_PRESSED_NOW As Long = &H8001
+    Public Const KEY_PRESSED_NOW As Long = &H8000
 
     <Runtime.InteropServices.DllImport("User32.dll")>
     Public Shared Function RegisterHotKey(ByVal hwnd As IntPtr, ByVal id As Integer, ByVal fsModifiers As Integer, ByVal vk As Integer) As Integer
@@ -119,14 +141,11 @@ Public Class Shortcuts
         NextStart_Method = method
         For i = 0 To SC_Type.SC_Type_MAX - 1 Step 1
             sc_list(i) = New ShortcutsKey()
-            sc_list(i).key = New KeyEventArgs(0)
-            sc_list(i).valid = False
-            sc_list(i).used = False
         Next
 
         If method = SC_HotKeyMethod.SC_HotKeyMethod_Async Then
             TimerProcKeepAliveReference = New TimerProc(AddressOf timer_event) ' stupid garbage collection fixup
-            SetTimer(hwnd, 0, 50, TimerProcKeepAliveReference)
+            SetTimer(hwnd, 0, 20, TimerProcKeepAliveReference)
         End If
     End Sub
 
@@ -208,7 +227,7 @@ Public Class Shortcuts
         Key_Get = key.ShallowCopy()
     End Function
 
-    ' Timer interrupt to check for keys pressed (needed to some full screen applications Or applications that Not use window messages
+    ' Timer interrupt to check for keys pressed (needed for some full screen applications or applications that do not use window messages
     Sub timer_event(ByVal hwnd As IntPtr, ByVal uMsg As UInteger, ByVal nIDEvent As IntPtr, ByVal dwTime As UInteger)
         Dim k_shift As Boolean
         Dim k_control As Boolean
@@ -220,7 +239,7 @@ Public Class Shortcuts
 
         For i = 0 To SC_Type.SC_Type_MAX - 1 Step 1
             If sc_list(i).used Then
-                If sc_list(i).CheckPressedState(k_shift, k_control, k_alt) Then SendMessage(hwnd, WM_HOTKEY, i, 0)
+                If sc_list(i).WasPressed(k_shift, k_control, k_alt) Then SendMessage(hwnd, WM_HOTKEY, i, 0)
             End If
         Next
     End Sub
