@@ -21,7 +21,7 @@
 'SOFTWARE.
 
 ' a row as part of a profile (equals a row at datagridview)
-Public Class ProfileRow
+<Serializable()> Public Class ProfileRow
     Public Title As String
     Public Hits As Integer
     Public Diff As Integer
@@ -69,7 +69,7 @@ Public Class ProfileRow
 End Class
 
 ' single profile (equals a whole datagridview data collection)
-Public Class Profile
+<Serializable()> Public Class Profile
     Public Name As String
     Public Rows As New List(Of ProfileRow)()
 
@@ -79,9 +79,14 @@ Public Class Profile
 End Class
 
 ' manages multiple profiles
-Public Class Profiles
+<Serializable()> Public Class Profiles
 
     Private _Profiles As New List(Of Profile)()
+    Public ReadOnly Property ProfileList() As List(Of Profile)
+        Get
+            Return _Profiles
+        End Get
+    End Property
 
     ' loads all profiles which are part of a newline, pipe and comma separated string into the internal cache
     Public Sub LoadProfiles(ProfileStr As String)
