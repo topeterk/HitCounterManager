@@ -55,14 +55,11 @@ Partial Class Settings
         Me.txtReset = New System.Windows.Forms.TextBox()
         Me.cbScNextSplit = New System.Windows.Forms.CheckBox()
         Me.cbScHit = New System.Windows.Forms.CheckBox()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.txtInput = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.btnCfg = New System.Windows.Forms.Button()
-        Me.txtCfg = New System.Windows.Forms.TextBox()
         Me.btnOutput = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtOutput = New System.Windows.Forms.TextBox()
@@ -114,22 +111,22 @@ Partial Class Settings
         'radioHotKeyMethod_async
         '
         Me.radioHotKeyMethod_async.AutoSize = True
+        Me.radioHotKeyMethod_async.Checked = True
         Me.radioHotKeyMethod_async.Location = New System.Drawing.Point(6, 170)
         Me.radioHotKeyMethod_async.Name = "radioHotKeyMethod_async"
         Me.radioHotKeyMethod_async.Size = New System.Drawing.Size(201, 17)
         Me.radioHotKeyMethod_async.TabIndex = 8
+        Me.radioHotKeyMethod_async.TabStop = True
         Me.radioHotKeyMethod_async.Text = "Asynchronous - *should* always work"
         Me.radioHotKeyMethod_async.UseVisualStyleBackColor = True
         '
         'radioHotKeyMethod_sync
         '
         Me.radioHotKeyMethod_sync.AutoSize = True
-        Me.radioHotKeyMethod_sync.Checked = True
         Me.radioHotKeyMethod_sync.Location = New System.Drawing.Point(6, 147)
         Me.radioHotKeyMethod_sync.Name = "radioHotKeyMethod_sync"
         Me.radioHotKeyMethod_sync.Size = New System.Drawing.Size(477, 17)
         Me.radioHotKeyMethod_sync.TabIndex = 7
-        Me.radioHotKeyMethod_sync.TabStop = True
         Me.radioHotKeyMethod_sync.Text = "Synchronous - Safer, but may not always work (recommendation: test and keep it wh" &
     "en it works)"
         Me.radioHotKeyMethod_sync.UseVisualStyleBackColor = True
@@ -193,18 +190,9 @@ Partial Class Settings
         Me.cbScHit.Text = "Got hit"
         Me.cbScHit.UseVisualStyleBackColor = True
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 201)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(54, 13)
-        Me.Label3.TabIndex = 3
-        Me.Label3.Text = "Config dir:"
-        '
         'txtInput
         '
-        Me.txtInput.Location = New System.Drawing.Point(70, 90)
+        Me.txtInput.Location = New System.Drawing.Point(70, 106)
         Me.txtInput.Name = "txtInput"
         Me.txtInput.ReadOnly = True
         Me.txtInput.Size = New System.Drawing.Size(440, 20)
@@ -214,7 +202,7 @@ Partial Class Settings
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 93)
+        Me.Label2.Location = New System.Drawing.Point(6, 109)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(50, 13)
         Me.Label2.TabIndex = 7
@@ -224,18 +212,15 @@ Partial Class Settings
         '
         Me.GroupBox2.Controls.Add(Me.Label7)
         Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.btnCfg)
-        Me.GroupBox2.Controls.Add(Me.txtCfg)
         Me.GroupBox2.Controls.Add(Me.btnOutput)
         Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Controls.Add(Me.txtOutput)
         Me.GroupBox2.Controls.Add(Me.btnInput)
         Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Controls.Add(Me.txtInput)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 222)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(596, 234)
+        Me.GroupBox2.Size = New System.Drawing.Size(596, 215)
         Me.GroupBox2.TabIndex = 8
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Filepaths"
@@ -243,9 +228,9 @@ Partial Class Settings
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(6, 147)
+        Me.Label7.Location = New System.Drawing.Point(6, 163)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(565, 39)
+        Me.Label7.Size = New System.Drawing.Size(561, 39)
         Me.Label7.TabIndex = 14
         Me.Label7.Text = resources.GetString("Label7.Text")
         '
@@ -254,31 +239,13 @@ Partial Class Settings
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(6, 16)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(396, 65)
+        Me.Label5.Size = New System.Drawing.Size(416, 78)
         Me.Label5.TabIndex = 7
         Me.Label5.Text = resources.GetString("Label5.Text")
         '
-        'btnCfg
-        '
-        Me.btnCfg.Location = New System.Drawing.Point(516, 196)
-        Me.btnCfg.Name = "btnCfg"
-        Me.btnCfg.Size = New System.Drawing.Size(74, 23)
-        Me.btnCfg.TabIndex = 13
-        Me.btnCfg.Text = "Lookup"
-        Me.btnCfg.UseVisualStyleBackColor = True
-        '
-        'txtCfg
-        '
-        Me.txtCfg.Location = New System.Drawing.Point(70, 198)
-        Me.txtCfg.Name = "txtCfg"
-        Me.txtCfg.ReadOnly = True
-        Me.txtCfg.Size = New System.Drawing.Size(440, 20)
-        Me.txtCfg.TabIndex = 12
-        Me.txtCfg.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'btnOutput
         '
-        Me.btnOutput.Location = New System.Drawing.Point(516, 114)
+        Me.btnOutput.Location = New System.Drawing.Point(516, 130)
         Me.btnOutput.Name = "btnOutput"
         Me.btnOutput.Size = New System.Drawing.Size(74, 23)
         Me.btnOutput.TabIndex = 11
@@ -288,7 +255,7 @@ Partial Class Settings
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 119)
+        Me.Label4.Location = New System.Drawing.Point(6, 135)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(58, 13)
         Me.Label4.TabIndex = 10
@@ -296,7 +263,7 @@ Partial Class Settings
         '
         'txtOutput
         '
-        Me.txtOutput.Location = New System.Drawing.Point(70, 116)
+        Me.txtOutput.Location = New System.Drawing.Point(70, 132)
         Me.txtOutput.Name = "txtOutput"
         Me.txtOutput.ReadOnly = True
         Me.txtOutput.Size = New System.Drawing.Size(440, 20)
@@ -305,7 +272,7 @@ Partial Class Settings
         '
         'btnInput
         '
-        Me.btnInput.Location = New System.Drawing.Point(516, 88)
+        Me.btnInput.Location = New System.Drawing.Point(516, 104)
         Me.btnInput.Name = "btnInput"
         Me.btnInput.Size = New System.Drawing.Size(74, 23)
         Me.btnInput.TabIndex = 8
@@ -320,7 +287,7 @@ Partial Class Settings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(620, 468)
+        Me.ClientSize = New System.Drawing.Size(620, 449)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -345,7 +312,6 @@ Partial Class Settings
     Friend WithEvents txtHit As TextBox
     Friend WithEvents txtReset As TextBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents Label3 As Label
     Friend WithEvents txtInput As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents GroupBox2 As GroupBox
@@ -354,8 +320,6 @@ Partial Class Settings
     Friend WithEvents btnOutput As Button
     Friend WithEvents Label4 As Label
     Friend WithEvents txtOutput As TextBox
-    Friend WithEvents txtCfg As TextBox
-    Friend WithEvents btnCfg As Button
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents radioHotKeyMethod_async As RadioButton

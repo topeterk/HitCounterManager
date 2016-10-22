@@ -113,7 +113,6 @@ Public Class Settings
         If key.valid Then UpdateKeyName(txtNextSplit, key.key)
 
         Dim UserCfgFile = System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath
-        txtCfg.Text = FileIO.FileSystem.GetParentPath(UserCfgFile)
 
         txtInput.Text = om.FilePathIn
         txtOutput.Text = om.FilePathOut
@@ -133,10 +132,14 @@ Public Class Settings
     Private Sub btnInput_Click(sender As Object, e As EventArgs) Handles btnInput.Click
         If FileIO.FileSystem.FileExists(txtInput.Text) Then
             OpenFileDialog1.InitialDirectory = FileIO.FileSystem.GetParentPath(txtInput.Text)
+            OpenFileDialog1.FileName = FileIO.FileSystem.GetName(txtInput.Text)
         Else
             OpenFileDialog1.InitialDirectory = Environment.CurrentDirectory
+            OpenFileDialog1.FileName = "*.template"
         End If
 
+        OpenFileDialog1.Filter = "Templates (*.template)|*.template|All files (*.*)|*.*"
+        OpenFileDialog1.FilterIndex = 0
         If OpenFileDialog1.ShowDialog(Me) = DialogResult.OK Then
             txtInput.Text = OpenFileDialog1.FileName
             om.FilePathIn = OpenFileDialog1.FileName
@@ -145,19 +148,19 @@ Public Class Settings
 
     Private Sub btnOutput_Click(sender As Object, e As EventArgs) Handles btnOutput.Click
         If FileIO.FileSystem.FileExists(txtOutput.Text) Then
-            OpenFileDialog1.InitialDirectory = FileIO.FileSystem.GetFileInfo(txtOutput.Text).Directory.FullName
+            OpenFileDialog1.InitialDirectory = FileIO.FileSystem.GetParentPath(txtOutput.Text)
+            OpenFileDialog1.FileName = FileIO.FileSystem.GetName(txtOutput.Text)
         Else
             OpenFileDialog1.InitialDirectory = Environment.CurrentDirectory
+            OpenFileDialog1.FileName = "*.html"
         End If
 
+        OpenFileDialog1.Filter = "HTML (*.html)|*.html|All files (*.*)|*.*"
+        OpenFileDialog1.FilterIndex = 0
         If OpenFileDialog1.ShowDialog(Me) = DialogResult.OK Then
             txtOutput.Text = OpenFileDialog1.FileName
             om.FilePathOut = OpenFileDialog1.FileName
         End If
-    End Sub
-
-    Private Sub btnCfg_Click(sender As Object, e As EventArgs) Handles btnCfg.Click
-        System.Diagnostics.Process.Start("explorer.exe", txtCfg.Text)
     End Sub
 
     Private Sub radioHotKeyMethod_CheckedChanged(sender As Object, e As EventArgs) Handles radioHotKeyMethod_sync.CheckedChanged, radioHotKeyMethod_async.CheckedChanged
