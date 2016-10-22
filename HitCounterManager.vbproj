@@ -112,6 +112,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -151,6 +152,7 @@
     </Compile>
     <Compile Include="OutModule.vb" />
     <Compile Include="Profiles.vb" />
+    <Compile Include="SaveModule.vb" />
     <Compile Include="Settings.Designer.vb">
       <DependentUpon>Settings.vb</DependentUpon>
     </Compile>
