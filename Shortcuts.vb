@@ -84,6 +84,9 @@ End Class
 
 ' Manages all hot keys aka shortcuts
 Public Class Shortcuts
+    Public Const MOD_ALT As Integer = &H0001
+    Public Const MOD_CONTROL As Integer = &H0002
+    Public Const MOD_SHIFT As Integer = &H0004
     Public Const WM_HOTKEY As Integer = &H312
     Public Const VK_SHIFT As Long = &H10
     Public Const VK_CONTROL As Long = &H11
@@ -162,10 +165,16 @@ Public Class Shortcuts
 
     ' Registers and unregisters a hotkey
     Private Sub HotKeyRegister(Id As SC_Type, key As ShortcutsKey, Enable As Boolean)
+        Dim modifier As Integer = 0
+
+        If key.key.Shift Then modifier += MOD_SHIFT
+        If key.key.Control Then modifier += MOD_CONTROL
+        If key.key.Alt Then modifier += MOD_ALT
+
         If method = SC_HotKeyMethod.SC_HotKeyMethod_Sync Then
 
             If Enable Then
-                If 0 = RegisterHotKey(hwnd, Id, key.key.Modifiers >> 16, key.key.KeyCode) Then
+                If 0 = RegisterHotKey(hwnd, Id, modifier, key.key.KeyCode) Then
                     'anything went wrong while registering, clear key..
                     key.used = False
                     key.valid = False
@@ -181,7 +190,7 @@ Public Class Shortcuts
         ElseIf method = SC_HotKeyMethod.SC_HotKeyMethod_Async Then
 
             If Enable Then
-                If 0 = RegisterHotKey(hwnd, Id, key.key.Modifiers >> 16, key.key.KeyCode) Then
+                If 0 = RegisterHotKey(hwnd, Id, modifier, key.key.KeyCode) Then
                     'anything went wrong while registering, clear key..
                     key.used = False
                     key.valid = False
