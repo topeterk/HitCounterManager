@@ -19,6 +19,7 @@
 'LIABILITY, WHETHER In AN ACTION Of CONTRACT, TORT Or OTHERWISE, ARISING FROM,
 'OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
 'SOFTWARE.
+
 Public Class Form1
     Public Const WM_HOTKEY As Integer = &H312
 
@@ -28,87 +29,9 @@ Public Class Form1
     Private ComboBox1PrevSelectedItem As Object = Nothing
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim key = New ShortcutsKey
-
         Text = Text + " - v" + Application.ProductVersion
-
-        With My.Settings
-            sc = New Shortcuts(Me.Handle, .HotKeyMethod)
-            om = New OutModule(DataGridView1)
-
-            key.key = New KeyEventArgs(.ShortcutResetKeyCode)
-            If .ShortcutResetEnable Then
-                sc.Key_Set(Shortcuts.SC_Type.SC_Type_Reset, key)
-            Else
-                sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_Reset, key)
-            End If
-            key.key = New KeyEventArgs(.ShortcutHitKeyCode)
-            If .ShortcutHitEnable Then
-                sc.Key_Set(Shortcuts.SC_Type.SC_Type_Hit, key)
-            Else
-                sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_Hit, key)
-            End If
-            key.key = New KeyEventArgs(.ShortcutSplitKeyCode)
-            If .ShortcutSplitEnable Then
-                sc.Key_Set(Shortcuts.SC_Type.SC_Type_Split, key)
-            Else
-                sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_Split, key)
-            End If
-
-            profs.LoadProfiles(.ProfilesString)
-
-            ComboBox1.Items.AddRange(profs.GetProfileList)
-            If ComboBox1.Items.Count = 0 Then
-                ComboBox1.Items.Add("Unnamed")
-            End If
-            ComboBox1.SelectedItem = .ProfilesSelected
-            DataGridView1.Rows.Item(0).Selected = True
-            DataGridView1_CellValueChanged(Nothing, Nothing)
-
-            If .MainWidth > 400 Then MyClass.Width = .MainWidth
-            If .MainHeight > 400 Then MyClass.Height = .MainHeight
-
-            ' set at last to avoid generating output while data is still loading
-
-            If .Inputfile = "" Then .Inputfile = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\" & Application.ProductName & "\HitCounter.template"
-            If .OutputFile = "" Then .OutputFile = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\" & Application.ProductName & "\HitCounter.html"
-
-            om.FilePathIn = .Inputfile
-            om.FilePathOut = .OutputFile
-            om.Update()
-        End With
-
-    End Sub
-
-    Private Sub SaveSettings()
-        Dim key = New ShortcutsKey
-
-        With My.Settings
-            .HotKeyMethod = sc.NextStart_Method
-
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Reset)
-            .ShortcutResetEnable = key.used
-            .ShortcutResetKeyCode = key.key.KeyData
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Hit)
-            .ShortcutHitEnable = key.used
-            .ShortcutHitKeyCode = key.key.KeyData
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Split)
-            .ShortcutSplitEnable = key.used
-            .ShortcutSplitKeyCode = key.key.KeyData
-
-            profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1)
-            .ProfilesString = profs.GetProfilesString()
-            .ProfilesSelected = ComboBox1.SelectedItem
-
-            .MainWidth = MyClass.Width
-            .MainHeight = MyClass.Height
-
-            .Inputfile = om.FilePathIn
-            .OutputFile = om.FilePathOut
-
-            .Save()
-        End With
-
+        LoadSettings()
+        om.Update()
     End Sub
 
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
