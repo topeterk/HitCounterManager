@@ -27,7 +27,7 @@ Imports System.Xml.Serialization
 '    Public test As String
 'End Class
 
-Public Class SaveModule(Of t As {New})
+Public Class SaveModule(Of t) ' (Of t As {New})
     Private _Filename As String
     Private xml As XmlSerializer
 
@@ -43,7 +43,10 @@ Public Class SaveModule(Of t As {New})
             ReadXML = CType(xml.Deserialize(file), t)
             file.Close()
         Catch ex As Exception
-            Exit Sub
+            If Not ex.HResult = -2147024894 Then
+                MessageBox.Show(ex.Message & vbNewLine & "==> Using defaults", "Error loading settings!", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+            Exit Function
         End Try
     End Function
 
@@ -55,7 +58,8 @@ Public Class SaveModule(Of t As {New})
             file.Close()
             WriteXML = True
         Catch ex As Exception
-            Exit Sub
+            MessageBox.Show(ex.Message, "Error writing settings!", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Function
         End Try
     End Function
 End Class
