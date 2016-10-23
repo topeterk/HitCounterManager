@@ -1,9 +1,11 @@
 # HitCounterManager
 Manages a hit counter  
+This readme is compatible with version 1.3.0.0 or newer
 
 ## Features
 It was designed for Dark Souls III 0 hit or no death runs, to count every hit during the playthrough
 * Creates a HTML file of the hit counters (can be used by CLR browser plugin in Open BroadCaster Software in order to make it visible on stream)
+  * The design and layout can be costumized completely
 * Instead of using GUI buttons, keyboard shortcuts can be configured:
   * Increase hit count of the current split
   * Reset the run (set all hit counts to 0 and select first split)
@@ -13,10 +15,12 @@ It was designed for Dark Souls III 0 hit or no death runs, to count every hit du
 * Multiple profiles can be created (e.g. "Any%", "AllBosses", "DLC only"..)
 * Switching to other profiles will keep hit counts of currently selected profile
 * Button to save current run as PB (personal best)
-* Comes with sample profiles:
+* Settings file "HitCounterManagerSave.xml" holds all your configuration data and is designed to work in newer versions, too. Save and restore this file at any time.
+* Comes with some sample profiles:
   * Dark Souls III All Bosses Vanilla
   * Dark Souls II All Bosses Vanilla
   * Dark Souls II Any% GER
+  * Dark Souls I PtdE All Bosses
 * Comes with 3 graphical representations:
   * Numeric (shows all counters of all splits for current run, PB and their differences)
   * Yes/No (shows check marks or crosses if one got hit at current run or PB)
@@ -34,16 +38,16 @@ Checkout the [Releases] (https://github.com/topeterk/HitCounterManager/releases)
 .Net Framework 4.5
 
 ### Using the Installer
-The installer places the executable and an inital configuration file at your installation folder (default: Program Files).  
-It additionally places templates and HTML files at %localappdata%\HitCounterManager.  
-After first execution a further configuration file will be stored within %localappdata%\HitCounterManager.
+The installer places all files at your installation folder (default: My Documents) or any other location you like.  
+> Note: There is only one requirement that the application is able to read/write data in the installation folder.
 
-### Using the portable version
-After first execution a configuration file will be stored within %localappdata%\HitCounterManager.
+### Configuration file
+After first execution a configuration file "HitCounterManagerSave.xml" is created and will be used in future.  
+You can save and restore this file at any time or copy it to a newer/portable version of this application.
+> Note: It holds all your settings and profiles in one place. No other files are involved.
 
 ### Configuring CLR browser plugin for OBS
-The pre-delivered [HitCounterNumeric.html] (HitCounterNumeric.html) or [HitCounterYesNo.html] (HitCounterYesNo.html) or [HitCounterNoDeath.html] (HitCounterNoDeath.html) will update themself every two seconds, so there should be no need to render more frames than one every second. However, to speed up loading time and to give the browser the opportunity doing some background tasks, it should be a slightly higher number.  
-> By now I created a 400 to 800 pixel wide window and run it with 3 FPS without issues so far.  
+The pre-delivered [HitCounterNumeric.html] (HitCounterNumeric.html) or [HitCounterYesNo.html] (HitCounterYesNo.html) or [HitCounterNoDeath.html] (HitCounterNoDeath.html) will update themself every second, so there should be no need to render more frames than one every second. However, to speed up loading time and to give the browser the opportunity doing some background tasks, it should be a slightly higher number.  
 > Recommended: FPS between 3 and 10
 
 The opacity can be set to 100% because the background will be rendered transparent, so no color-keying is involved. Since CRL browser plugin come with some pre-defined CSS, this may cause trouble with the rendering of the HTML file (flickering or misplacement). If you encounter issues here, try to simply remove the CLR browser plugin's CSS overrides.  
@@ -61,10 +65,10 @@ When no data is displayed, there could be a problem with cross-domain security s
 > Example: _"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files_
 
 ### Changing layout and design
-You can modify or create new custom graphical representation. Simply create a new HTML file based on [HitCounterNumeric.html] (HitCounterNumeric.html) or [HitCounterYesNo.html] (HitCounterYesNo.html).  
+You can modify or create new custom graphical representation. Simply create a new HTML file based on [HitCounterNumeric.html] (HitCounterNumeric.html) or [HitCounterYesNo.html] (HitCounterYesNo.html) or [HitCounterNoDeath.html] (HitCounterNoDeath.html).  
 
 Alternatively you can modify the [HitCounter.template] (HitCounter.template) which comes with the installation or you can create an own template file to get the look you want.  
-> The application is using JavaScript to write the data into the HTML table. For that the template have to have a line with the text **HITCOUNTER_LIST_START** which is the starting mark. The mark with all further lines will be replaced with the JavaScript equivalent of the application's current data. This happens until the **HITCOUNTER_LIST_END** text mark is reached.
+> The application is using JavaScript syntax when writing data into the output file. For that the template has to have a line with the text **HITCOUNTER_LIST_START** which is the starting mark. The mark with all further lines will be replaced with the JavaScript equivalent of the application's current data. This happens until the **HITCOUNTER_LIST_END** text mark is reached.
 This way you are 100% free in the design of your hit counter.
 
 ## Something is missing, annoying, can be improvent or you just found a bug?
