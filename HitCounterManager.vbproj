@@ -28,10 +28,11 @@
     <SupportUrl>https://github.com/topeterk/HitCounterManager</SupportUrl>
     <ErrorReportUrl>https://github.com/topeterk/HitCounterManager</ErrorReportUrl>
     <ProductName>HitCounterManager</ProductName>
+    <PublisherName>GunriderProductions</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <DisallowUrlActivation>true</DisallowUrlActivation>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.2.0.0</ApplicationVersion>
+    <ApplicationVersion>1.3.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
