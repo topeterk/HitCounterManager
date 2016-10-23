@@ -35,6 +35,16 @@
 
 function printyesno(i) { return '<img src="' + (i > 0 ? 'img_cross.png" height="15px"' : 'img_check.png" height="21px"') + '>'; }
 
+var heartbeat = 0;
+function Watchdog()
+{
+	setTimeout(function() { Watchdog();	}, 1000); // refresh every second
+	if (heartbeat <= 1)
+		heartbeat++;
+	else
+		document.getElementsByTagName('iframe')[0].src = 'HitCounter.html'; // retry reloading file in case of errors
+}
+
 function DoUpdate(list)
 {
 	var active = false;
@@ -68,9 +78,10 @@ function DoUpdate(list)
 
 	tbl.innerHTML = new_tbl;
 
-	setTimeout(function() { document.getElementsByTagName('iframe')[0].src = 'HitCounter.html';	}, 2000); // refresh every second
+	setTimeout(function() { document.getElementsByTagName('iframe')[0].src = 'HitCounter.html';	}, 1000); // refresh every second
 }
 
+Watchdog();
 </script>
 
 </body>
