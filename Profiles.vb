@@ -82,30 +82,6 @@ End Class
 <Serializable()> Public Class Profiles
 
     Private _Profiles As New List(Of Profile)()
-    Public ReadOnly Property ProfileList() As List(Of Profile)
-        Get
-            Return _Profiles
-        End Get
-    End Property
-
-    ' loads all profiles which are part of a newline, pipe and comma separated string into the internal cache
-    Public Sub LoadProfiles(ProfileStr As String)
-        Dim line As String
-        Dim prof As Profile
-
-        For Each line In ProfileStr.Split(vbNewLine)
-            line = line.Replace(vbLf, "")
-            If 1 < line.Length Then ' skip empty lines
-                If line.EndsWith("|") Then
-                    prof = New Profile()
-                    prof.Name = line.Replace("|", "")
-                    _Profiles.Add(prof)
-                ElseIf _Profiles.Count > 0 Then
-                    _Profiles.Item(_Profiles.Count - 1).AddNewRow(line)
-                End If
-            End If
-        Next
-    End Sub
 
     ' builds a newline, pipe and comma separated string for all internally cached profiles
     Public Function GetProfilesString() As String
@@ -132,20 +108,19 @@ End Class
 
     ' updates a datagrid based on a specific internally cached profile
     Public Sub LoadProfileInto(Name As String, ByRef DataGridView As DataGridView)
-        For Each prof In _Profiles
-            If prof.Name = Name Then
+        With DataGridView
+            .Rows.Clear()
 
-                With DataGridView
-                    .Rows.Clear()
+            For Each prof In _Profiles
+                If prof.Name = Name Then
                     For Each row In prof.Rows
                         Dim cells() As String = {row.Title, row.Hits, row.Diff, row.PB}
                         .Rows.Add(cells)
                     Next row
-                End With
-
-                Exit Sub ' done
-            End If
-        Next prof
+                    Exit Sub ' done
+                End If
+            Next prof
+        End With
     End Sub
 
     ' updates internal profile cache of a specific profile by reading data from datagrid

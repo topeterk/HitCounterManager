@@ -161,6 +161,7 @@ Public Class Form1
         For r = 0 To DataGridView1.RowCount - 2 Step 1
             DataGridView1.Rows.Item(r).Cells.Item("cDiff").Value = DataGridView1.Rows.Item(r).Cells.Item("cHits").Value - DataGridView1.Rows.Item(r).Cells.Item("cPB").Value
         Next
+        profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1, True)
     End Sub
 
     Private Sub btnUp_Click(sender As Object, e As EventArgs) Handles btnUp.Click
@@ -194,11 +195,7 @@ Public Class Form1
     Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
         Dim IsCopy = False
         Dim name = InputBox("Enter name of new profile", "New profile", ComboBox1.SelectedItem)
-        If name.Length = 0 Then Exit Sub
-
-        If IsInvalidConfigString(name) Then
-            Exit Sub
-        End If
+        If name.Length = 0 Or IsInvalidConfigString(name) Then Exit Sub
 
         If ComboBox1.Items.Contains(name) Then
             If Not DialogResult.OK = MessageBox.Show("A profile with this name already exists. Do you want to create as copy from the currently selected?", "Profile already exists", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then Exit Sub
@@ -246,9 +243,7 @@ Public Class Form1
         If ComboBox1.Items.Count = 0 Then Exit Sub
 
         Dim name = InputBox("Enter new name for profile """ & ComboBox1.SelectedItem & """!", "Rename profile", ComboBox1.SelectedItem)
-        If IsInvalidConfigString(name) Then
-            Exit Sub
-        End If
+        If name.Length = 0 Or IsInvalidConfigString(name) Then Exit Sub
 
         If ComboBox1.Items.Contains(name) Then
             MessageBox.Show("A profile with this name already exists!", "Profile already exists")
@@ -273,6 +268,7 @@ Public Class Form1
     End Sub
 
     Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
+        profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1)
         SaveSettings()
     End Sub
 
