@@ -44,7 +44,7 @@ The installer places all files at your installation folder (default: My Document
 > Note: There is only one requirement that the application must able to read/write data in the installation folder.
 
 ### Configuration file
-The file "HitCounterManagerSave.xml" is used for all settings you can set by this application.  
+The file [HitCounterManagerSave.xml] (HitCounterManagerSave.xml) is used for all settings you can set by this application.  
 You can save and restore this file at any time or copy it to a newer/portable version of this application.
 > Note: It holds all your settings and profiles in one place. No other files are involved.
 
