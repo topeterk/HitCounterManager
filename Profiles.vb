@@ -82,6 +82,11 @@ End Class
 <Serializable()> Public Class Profiles
 
     Private _Profiles As New List(Of Profile)()
+    Public ReadOnly Property ProfileList() As List(Of Profile) ' used by XML serialization!
+        Get
+            Return _Profiles
+        End Get
+    End Property
 
     ' builds a newline, pipe and comma separated string for all internally cached profiles
     Public Function GetProfilesString() As String
