@@ -2,6 +2,8 @@
 Manages a hit counter  
 This readme is compatible with version 1.4.0.0 or newer
 
+A SneakPeek/HowToVideo can be found on YouTube ([here] (https://www.youtube.com/watch?v=aa4nRtGxnvE))
+
 ## Features
 It was designed for Dark Souls III 0 hit or no death runs to count every hit during the playthrough
 * Creates a HTML file of the hit counters (can be used by CLR browser plugin in Open BroadCaster Software in order to make it visible on stream)
