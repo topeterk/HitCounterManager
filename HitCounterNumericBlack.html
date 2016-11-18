@@ -11,6 +11,8 @@
  }
 
  tr.current { background-color: #005000; }
+ tr.even { background-color: #242424; }
+ tr.odd { background-color: #161616; }
 
  td {
 	padding:3px 4px 3px 4px;
@@ -22,9 +24,9 @@
 	color: white;
 	text-align: center;
  }
-  
+
  td.first { text-align: left; }
- td.major { font-size: 23px; }
+ td.major { font-size: 23px; background-color: black; }
  td.better { color: #08FF20; }
  td.worse { color: #FF4A4A; }
  td.bottom { border:0px; }
@@ -69,7 +71,7 @@ function DoUpdate(list)
 		sum = sum + list[i][1];
 		pb = pb + list[i][2];
 		new_tbl +=
- '<tr class="' + (list[i][3] ? 'current' : '') + '">' +
+ '<tr class="' + (list[i][3] ? 'current' : (i%2==0 ? 'even' : 'odd')) + '">' +
   '<td class="first ' + (!active ? (list[i][1] == 0 ? 'better' : 'worse') : '') + '">' + list[i][0] + '</td>' +
   '<td>' + list[i][1] + '</td>' +
   '<td>' + printsinged(list[i][1] - list[i][2]) + '</td>' +
