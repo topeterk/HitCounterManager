@@ -27,6 +27,7 @@ Public Class Form1
     Public om As OutModule
     Private profs As Profiles = New Profiles()
     Private ComboBox1PrevSelectedItem As Object = Nothing
+    Private SettingsDialogOpen = False
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Text = Text + " - v" + Application.ProductVersion
@@ -36,22 +37,27 @@ Public Class Form1
 
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
         If m.Msg = WM_HOTKEY Then
-            Dim Id As Shortcuts.SC_Type = m.WParam
-            Select Case (Id)
-                Case Shortcuts.SC_Type.SC_Type_Reset
-                    btnReset_Click(Nothing, Nothing)
-                Case Shortcuts.SC_Type.SC_Type_Hit
-                    btnHit_Click(Nothing, Nothing)
-                Case Shortcuts.SC_Type.SC_Type_Split
-                    btnSplit_Click(Nothing, Nothing)
-            End Select
+            If Not SettingsDialogOpen Then
+                Dim Id As Shortcuts.SC_Type = m.WParam
+                Select Case (Id)
+                    Case Shortcuts.SC_Type.SC_Type_Reset
+                        btnReset_Click(Nothing, Nothing)
+                    Case Shortcuts.SC_Type.SC_Type_Hit
+                        btnHit_Click(Nothing, Nothing)
+                    Case Shortcuts.SC_Type.SC_Type_Split
+                        btnSplit_Click(Nothing, Nothing)
+                End Select
+            End If
         End If
+
         MyBase.WndProc(m)
     End Sub
 
     Private Sub FileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FileToolStripMenuItem.Click
         Dim form = New Settings()
+        SettingsDialogOpen = True
         form.ShowDialog(Me)
+        SettingsDialogOpen = False
     End Sub
 
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
