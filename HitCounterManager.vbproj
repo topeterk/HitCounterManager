@@ -32,7 +32,7 @@
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <DisallowUrlActivation>true</DisallowUrlActivation>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.4.0.0</ApplicationVersion>
+    <ApplicationVersion>1.5.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -187,8 +187,11 @@
     <Content Include="HitCounter.template" />
     <Content Include="HitCounterManagerSave.xml" />
     <Content Include="HitCounterNoDeath.html" />
+    <Content Include="HitCounterNoDeathBlack.html" />
     <Content Include="HitCounterNumeric.html" />
+    <Content Include="HitCounterNumericBlack.html" />
     <Content Include="HitCounterYesNo.html" />
+    <Content Include="HitCounterYesNoBlack.html" />
     <Content Include="img_check.png" />
     <Content Include="img_cross.png" />
     <None Include="My Project\app.manifest" />
