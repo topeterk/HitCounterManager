@@ -6,8 +6,6 @@ No need any more to keep any windows open for a window capture.
 To see some **screenshots** of this application go to the **[Wiki pages] (../../wiki)**.  
 To see **how to** use the application watch the **[Tutorial on YouTube] (https://www.youtube.com/watch?v=aa4nRtGxnvE)**.
 
-A SneakPeek/HowToVideo can be found on YouTube ([here] (https://www.youtube.com/watch?v=aa4nRtGxnvE))
-
 ## Features
 It was designed for Dark Souls III 0 hit or no death runs to count every hit during the playthrough
 * Creates a HTML file of the hit counters (can be used by CLR browser plugin in Open BroadCaster Software in order to make it visible on stream)
