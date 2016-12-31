@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Manages a hit counter")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("HitCounterManager")>
-<Assembly: AssemblyCopyright("Copyright © Peter Kirmeier 2016")>
+<Assembly: AssemblyCopyright("Copyright © Peter Kirmeier 2017")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
