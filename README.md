@@ -90,7 +90,7 @@ Alternatively you can modify the [HitCounter.template] (HitCounter.template) whi
 The mark with all further lines will be replaced with the JavaScript equivalent of the application's current data. This happens until the **HITCOUNTER_LIST_END** text mark is reached.
 This way you are 100% free in the design of your hit counter.
 
-## Something is missing, annoying, can be improvent or you just found a bug?
+## Anything is missing, something is annoying/can be improved or you just found a bug?
 Message me via GitHub / e-mail or simply open an issue and I will try to help you out.
 
 ## Special thanks
@@ -100,8 +100,8 @@ Thanks to:
 * [FaraazKhan] (https://www.twitch.tv/faraazkhan)
 * [SquillaKilla] (https://www.twitch.tv/squillakilla)
 * [SayviTV] (https://www.twitch.tv/sayvitv)
-* [Kazoodle] (https://www.twitch.tv/kazoodle)
-
+* [Kazoodle] (https://www.twitch.tv/kazoodle)  
+  
   
   
 > Praise the sun!  :sunny: . . . :fire: . . .  :running: :dash: 
