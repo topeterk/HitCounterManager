@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SettingsRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <MainWidth>559</MainWidth>
-  <MainHeight>723</MainHeight>
+  <MainHeight>787</MainHeight>
   <HotKeyMethod>1</HotKeyMethod>
   <ShortcutResetEnable>false</ShortcutResetEnable>
   <ShortcutResetKeyCode>65653</ShortcutResetKeyCode>
@@ -11,11 +11,11 @@
   <ShortcutSplitKeyCode>65655</ShortcutSplitKeyCode>
   <Inputfile>HitCounter.template</Inputfile>
   <OutputFile>HitCounter.html</OutputFile>
-  <ProfileSelected>Dark Souls III All Bosses AoA EXAMPLE</ProfileSelected>
+  <ProfileSelected>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE</ProfileSelected>
   <Profiles>
     <ProfileList>
       <Profile>
-        <Name>Dark Souls III All Bosses Vanilla</Name>
+        <Name>Dark Souls 3 (All Bosses)</Name>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>
@@ -134,7 +134,7 @@
         </Rows>
       </Profile>
       <Profile>
-        <Name>Dark Souls II All Bosses Vanilla</Name>
+        <Name>Dark Souls 2 (All Bosses) [EN]</Name>
         <Rows>
           <ProfileRow>
             <Title>Last Giant</Title>
@@ -331,7 +331,7 @@
         </Rows>
       </Profile>
       <Profile>
-        <Name>Dark Souls II Any% GER</Name>
+        <Name>Dark Souls 2 (Any%) [DE]</Name>
         <Rows>
           <ProfileRow>
             <Title>Letzer Riese</Title>
@@ -462,7 +462,7 @@
         </Rows>
       </Profile>
       <Profile>
-        <Name>Dark Souls I PtdE All Bosses</Name>
+        <Name>Dark Souls 1 Prepair to Die Edition (All Bosses) [EN]</Name>
         <Rows>
           <ProfileRow>
             <Title>Asylum Demon</Title>
@@ -623,7 +623,7 @@
         </Rows>
       </Profile>
       <Profile>
-        <Name>Dark Souls III All Bosses AoA</Name>
+        <Name>Dark Souls 3 Ashes of Ariandel (All Bosses) [EN]</Name>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>
@@ -754,7 +754,7 @@
         </Rows>
       </Profile>
       <Profile>
-        <Name>Dark Souls III All Bosses AoA EXAMPLE</Name>
+        <Name>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE</Name>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>
@@ -881,6 +881,185 @@
             <Hits>1</Hits>
             <Diff>0</Diff>
             <PB>1</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Demon Prince</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Darkeater Midir</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Halflight</Title>
+            <Hits>1</Hits>
+            <Diff>0</Diff>
+            <PB>1</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Gael</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+        </Rows>
+      </Profile>
+      <Profile>
+        <Name>Dark Souls 3 The Ringed City (All Bosses) [EN]</Name>
+        <Rows>
+          <ProfileRow>
+            <Title>Vordt</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Gundyr</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Abyss Watchers</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Wolnir</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Dancer</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Crystal Sage</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Deacons</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Yhorm</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Pontiff</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Aldrich</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Dragonslayer</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Princess</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Soul of Cinder</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Greatwood</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Old Deamon King</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Ocelot</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Champion Gundyr</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Wyvern</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Nameless King</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Sister Friede</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Gravetenders</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Demon Prince</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Darkeater Midir</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Halflight</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Gael</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
           </ProfileRow>
         </Rows>
       </Profile>
