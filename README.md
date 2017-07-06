@@ -105,7 +105,8 @@ Thanks to:
 * [FaraazKhan](https://www.twitch.tv/faraazkhan)
 * [SquillaKilla](https://www.twitch.tv/squillakilla)
 * [SayviTV](https://www.twitch.tv/sayvitv)
-* [Kazoodle](https://www.twitch.tv/kazoodle)  
+* [Kazoodle](https://www.twitch.tv/kazoodle)
+* [GUD_LAK](https://www.twitch.tv/gud_lak)  
   
   
   
