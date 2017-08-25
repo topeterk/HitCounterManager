@@ -212,15 +212,18 @@ Public Class Form1
             Loop
         End If
 
-        profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1)
+        profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1) ' save previous selected profile
+
+        ' create, select and save new profile..
+        ComboBox1.Items.Add(name)
         If IsCopy Then
             profs.SaveProfileFrom(name, DataGridView1, True) ' copy old data to new profile
+            ComboBox1.SelectedItem = name
         Else
+            ComboBox1.SelectedItem = name
             DataGridView1.Rows.Clear()
-            profs.SaveProfileFrom(name, DataGridView1, True)
+            profs.SaveProfileFrom(name, DataGridView1, True) ' save new empty profile
         End If
-        ComboBox1.Items.Add(name)
-        ComboBox1.SelectedItem = name
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
