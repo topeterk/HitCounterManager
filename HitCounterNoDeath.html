@@ -50,6 +50,8 @@ function Watchdog()
 
 function DoUpdate(list)
 {
+	heartbeat = 0; // reset heartbeat, because we are alive
+
 	var active = false;
 	var split = "&nbsp;";
 	var new_tbl = "";
