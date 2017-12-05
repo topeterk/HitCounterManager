@@ -1,0 +1,95 @@
+<html>
+<head>
+ <title>Hitcounter YesNo</title>
+ <!-- OBS' CLR browser plugin might use CSS extension. Disable the CSS when it flickers. -->
+ <!-- Method also needs --allow-file-access-from-files to be set -->
+ <link href='https://fonts.googleapis.com/css?family=Fontdiner Swanky' rel='stylesheet'>
+ <style language="css">
+ table {
+	border-spacing: 0px;
+	margin-left:auto; 
+	margin-right:auto;
+ }
+
+ tr.current { background-color: #ffB6D9; }
+
+ td {
+	padding:3px 4px 3px 4px;
+	border-bottom:2px ridge #FF1493;
+	text-shadow: 0px 2px 1px #000000;
+	font-size: 18px;
+	font-family: 'Fontdiner Swanky', 'Open Sans', sans-serif;
+	font-weight: bold;
+	color: #ff97d3;
+	text-align: center;
+ }
+  
+ td.first { text-align: left; }
+ td.major { font-size: 20px; }
+ td.better { color: #d74894; }
+ td.worse { color: #FF4A4A; }
+ td.bottom { border:0px; text-align: right; }
+ </style>
+</head>
+
+<body>
+<iframe src="HitCounter.html" style="display:none;"></iframe>
+<table id="table"></table>
+<script language="javascript">
+
+function printyesno(i) { return '<img src="' + (i > 0 ? 'img_cross.png" height="15px"' : 'img_check.png" height="21px"') + '>'; }
+
+var heartbeat = 0;
+function Watchdog()
+{
+	setTimeout(function() { Watchdog();	}, 1500); // refresh every second
+	if (heartbeat <= 1)
+		heartbeat++;
+	else
+		document.getElementsByTagName('iframe')[0].src = 'HitCounter.html'; // retry reloading file in case of errors
+}
+
+function DoUpdate(list)
+{
+	heartbeat = 0; // reset heartbeat, because we are alive
+
+	var active = false;
+	var split = "&nbsp;";
+	var new_tbl = "";
+
+	var tbl = document.getElementById('table');
+	new_tbl =
+ '<tr>' +
+  '<td class="major first">Split</td>' +
+  '<td class="major" width="30px">Now</td>' +
+  '<td class="major" width="30px">PB</td>' +
+ '</tr>';
+
+	for ( i = 0 ; i < list.length ; i = i + 1 )
+	{
+		if (list[i][3]) { active = true; split = list[i][0]; }
+
+		new_tbl +=
+ '<tr class="' + (list[i][3] ? 'current' : '') + '">' +
+  '<td class="first">' + list[i][0] + '</td>' +
+  '<td>' + printyesno(!active ? 0 : 1) + '</td>' +
+  '<td>' + printyesno(list[i][2]) + '</td>' +
+ '</tr>';
+	}
+
+	new_tbl +=
+ '<tr>' +
+  '<td colspan="3" class="major bottom">' + split + '</td>' +
+ '</tr>';
+
+	tbl.innerHTML = new_tbl;
+
+	setTimeout(function() { document.getElementsByTagName('iframe')[0].src = 'HitCounter.html';	}, 1500); // refresh every second
+}
+
+Watchdog();
+</script>
+
+</body>
+</html>
+

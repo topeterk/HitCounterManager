@@ -1,7 +1,7 @@
 # HitCounterManager
 
 Manages a hit counter running in the background, so you can focus on your stream.  
-No need any more to keep any windows open for a window capture.  
+No need to keep any windows open for a window capture any more.
   
 To see some **screenshots** of this application go to the **[Wiki pages](../../wiki)**.  
 To see **how to** use the application watch the **[Tutorial on YouTube](https://www.youtube.com/watch?v=aa4nRtGxnvE)**.
@@ -28,6 +28,7 @@ It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit
 * Button to save current run as PB (personal best)
 * Settings file "HitCounterManagerSave.xml" holds all your configuration data and is designed to work in newer versions, too. Save and restore this file at any time.
 * Comes with some pre-defined profiles for:
+  * Bloodborne + The old hunters
   * Dark Souls 1 Prepare To Die Edition
   * Dark Souls 2
   * Dark Souls 3 + Ashes of Ariandel + The Ringed City
@@ -64,11 +65,15 @@ The pre-delivered HTML representations will update themself every 1.5 seconds, s
 
 Those pre-delivered HTML representations are available:
 * 
+* [HitCounterNumeric.html](HitCounterNumeric.html)
 * [HitCounterNumericBlack.html](HitCounterNumericBlack.html)
+* [HitCounterNumericPink.html](HitCounterNumericPink.html)
 * [HitCounterYesNo.html](HitCounterYesNo.html)
 * [HitCounterYesNoBlack.html](HitCounterYesNoBlack.html)
+* [HitCounterYesNoPink.html](HitCounterYesNoPink.html)
 * [HitCounterNoDeath.html](HitCounterNoDeath.html)
 * [HitCounterNoDeathBlack.html](HitCounterNoDeathBlack.html)
+* [HitCounterNoDeathPink.html](HitCounterNoDeathPink.html)
 
 > Previews can be found at the **[Wiki pages](../../wiki)**.
 
@@ -105,6 +110,8 @@ Thanks to:
 * [The_Happy_Hob](https://www.twitch.tv/the_happy_hob)
 * [FaraazKhan](https://www.twitch.tv/faraazkhan)
 * [SquillaKilla](https://www.twitch.tv/squillakilla)
+* [CouchJockey](https://www.twitch.tv/couchjockey)
+* [SlipperySuzie](https://www.twitch.tv/slipperysuzie)
 * [SayviTV](https://www.twitch.tv/sayvitv)
 * [Kazoodle](https://www.twitch.tv/kazoodle)
 * [GUD_LAK](https://www.twitch.tv/gud_lak)  

@@ -188,10 +188,13 @@
     <Content Include="HitCounterManagerSave.xml" />
     <Content Include="HitCounterNoDeath.html" />
     <Content Include="HitCounterNoDeathBlack.html" />
+    <Content Include="HitCounterNoDeathPink.html" />
     <Content Include="HitCounterNumeric.html" />
     <Content Include="HitCounterNumericBlack.html" />
+    <Content Include="HitCounterNumericPink.html" />
     <Content Include="HitCounterYesNo.html" />
     <Content Include="HitCounterYesNoBlack.html" />
+    <Content Include="HitCounterYesNoPink.html" />
     <Content Include="img_check.png" />
     <Content Include="img_cross.png" />
     <None Include="My Project\app.manifest" />
