@@ -15,7 +15,7 @@
   <Profiles>
     <ProfileList>
       <Profile>
-        <Name>Dark Souls 3 (All Bosses)</Name>
+        <Name>Dark Souls 3 (All Bosses) [EN]</Name>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>
@@ -1092,6 +1092,250 @@
           </ProfileRow>
           <ProfileRow>
             <Title>Rogue Process</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+        </Rows>
+      </Profile>
+      <Profile>
+        <Name>Bloodborne The old hunters (All Bosses) [EN]</Name>
+        <Rows>
+          <ProfileRow>
+            <Title>Father Gascoigne</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Blood Starved Beast</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Vicar Amelia</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Shadow of Yharnam</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Rom</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Darkbeast Paarl</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>One Reborn</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Micolash</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Mergo's Wet Nurse</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Amygdala</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Cleric Beast</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Witch of Hemwick</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Celestial Emissary</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Ebrietas</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Martyr Logarius</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Gehrman</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Moon Presence</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Ludwig</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Laurence</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Living Failures</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Lady Maria</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Orphan of Kos</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+        </Rows>
+      </Profile>
+      <Profile>
+        <Name>Bloodborne (All Bosses) [EN]</Name>
+        <Rows>
+          <ProfileRow>
+            <Title>Father Gascoigne</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Blood Starved Beast</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Vicar Amelia</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Shadow of Yharnam</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Rom</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Darkbeast Paarl</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>One Reborn</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Micolash</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Mergo's Wet Nurse</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Amygdala</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Cleric Beast</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Witch of Hemwick</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Celestial Emissary</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Ebrietas</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Martyr Logarius</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Gehrman</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Moon Presence</Title>
             <Hits>0</Hits>
             <Diff>0</Diff>
             <PB>0</PB>
