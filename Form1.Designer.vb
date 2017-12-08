@@ -67,6 +67,8 @@ Partial Class Form1
         Me.btnNew = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnPB = New System.Windows.Forms.Button()
+        Me.lbl_progress = New System.Windows.Forms.Label()
+        Me.lbl_totals = New System.Windows.Forms.Label()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -109,10 +111,10 @@ Partial Class Form1
         Me.DataGridView1.AllowUserToResizeRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cTitle, Me.cHits, Me.cDiff, Me.cPB})
-        Me.DataGridView1.Location = New System.Drawing.Point(13, 143)
+        Me.DataGridView1.Location = New System.Drawing.Point(13, 153)
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(523, 221)
+        Me.DataGridView1.Size = New System.Drawing.Size(523, 211)
         Me.DataGridView1.TabIndex = 4
         '
         'cTitle
@@ -161,9 +163,10 @@ Partial Class Form1
         'btnReset
         '
         Me.btnReset.BackColor = System.Drawing.Color.Salmon
+        Me.btnReset.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnReset.Location = New System.Drawing.Point(13, 27)
         Me.btnReset.Name = "btnReset"
-        Me.btnReset.Size = New System.Drawing.Size(75, 52)
+        Me.btnReset.Size = New System.Drawing.Size(75, 40)
         Me.btnReset.TabIndex = 1
         Me.btnReset.Text = "Reset"
         Me.btnReset.UseVisualStyleBackColor = False
@@ -171,9 +174,10 @@ Partial Class Form1
         'btnHit
         '
         Me.btnHit.BackColor = System.Drawing.Color.LightBlue
+        Me.btnHit.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnHit.Location = New System.Drawing.Point(175, 27)
         Me.btnHit.Name = "btnHit"
-        Me.btnHit.Size = New System.Drawing.Size(280, 52)
+        Me.btnHit.Size = New System.Drawing.Size(280, 40)
         Me.btnHit.TabIndex = 2
         Me.btnHit.Text = "Hit"
         Me.btnHit.UseVisualStyleBackColor = False
@@ -181,16 +185,17 @@ Partial Class Form1
         'btnSplit
         '
         Me.btnSplit.BackColor = System.Drawing.Color.LightGreen
+        Me.btnSplit.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSplit.Location = New System.Drawing.Point(461, 27)
         Me.btnSplit.Name = "btnSplit"
-        Me.btnSplit.Size = New System.Drawing.Size(75, 52)
+        Me.btnSplit.Size = New System.Drawing.Size(75, 40)
         Me.btnSplit.TabIndex = 3
         Me.btnSplit.Text = "Split"
         Me.btnSplit.UseVisualStyleBackColor = False
         '
         'btnDown
         '
-        Me.btnDown.Location = New System.Drawing.Point(460, 112)
+        Me.btnDown.Location = New System.Drawing.Point(460, 100)
         Me.btnDown.Name = "btnDown"
         Me.btnDown.Size = New System.Drawing.Size(75, 23)
         Me.btnDown.TabIndex = 5
@@ -199,7 +204,7 @@ Partial Class Form1
         '
         'btnUp
         '
-        Me.btnUp.Location = New System.Drawing.Point(461, 83)
+        Me.btnUp.Location = New System.Drawing.Point(461, 71)
         Me.btnUp.Name = "btnUp"
         Me.btnUp.Size = New System.Drawing.Size(75, 23)
         Me.btnUp.TabIndex = 6
@@ -210,7 +215,7 @@ Partial Class Form1
         '
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(13, 114)
+        Me.ComboBox1.Location = New System.Drawing.Point(13, 102)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(441, 21)
         Me.ComboBox1.Sorted = True
@@ -218,7 +223,7 @@ Partial Class Form1
         '
         'btnRename
         '
-        Me.btnRename.Location = New System.Drawing.Point(175, 85)
+        Me.btnRename.Location = New System.Drawing.Point(175, 73)
         Me.btnRename.Name = "btnRename"
         Me.btnRename.Size = New System.Drawing.Size(75, 23)
         Me.btnRename.TabIndex = 9
@@ -227,7 +232,7 @@ Partial Class Form1
         '
         'btnNew
         '
-        Me.btnNew.Location = New System.Drawing.Point(13, 85)
+        Me.btnNew.Location = New System.Drawing.Point(13, 73)
         Me.btnNew.Name = "btnNew"
         Me.btnNew.Size = New System.Drawing.Size(75, 23)
         Me.btnNew.TabIndex = 8
@@ -236,7 +241,7 @@ Partial Class Form1
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(94, 85)
+        Me.btnDelete.Location = New System.Drawing.Point(94, 73)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 10
@@ -246,18 +251,43 @@ Partial Class Form1
         'btnPB
         '
         Me.btnPB.BackColor = System.Drawing.Color.LightYellow
+        Me.btnPB.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPB.Location = New System.Drawing.Point(94, 27)
         Me.btnPB.Name = "btnPB"
-        Me.btnPB.Size = New System.Drawing.Size(75, 52)
+        Me.btnPB.Size = New System.Drawing.Size(75, 40)
         Me.btnPB.TabIndex = 11
         Me.btnPB.Text = "PB"
         Me.btnPB.UseVisualStyleBackColor = False
+        '
+        'lbl_progress
+        '
+        Me.lbl_progress.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_progress.Location = New System.Drawing.Point(12, 130)
+        Me.lbl_progress.Name = "lbl_progress"
+        Me.lbl_progress.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        Me.lbl_progress.Size = New System.Drawing.Size(157, 20)
+        Me.lbl_progress.TabIndex = 12
+        Me.lbl_progress.Text = "Progress:  ?? / ??"
+        Me.lbl_progress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lbl_totals
+        '
+        Me.lbl_totals.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_totals.Location = New System.Drawing.Point(175, 130)
+        Me.lbl_totals.Name = "lbl_totals"
+        Me.lbl_totals.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        Me.lbl_totals.Size = New System.Drawing.Size(360, 20)
+        Me.lbl_totals.TabIndex = 13
+        Me.lbl_totals.Text = "Total: ??? Hits   ??? PB"
+        Me.lbl_totals.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(548, 376)
+        Me.Controls.Add(Me.lbl_totals)
+        Me.Controls.Add(Me.lbl_progress)
         Me.Controls.Add(Me.btnPB)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnRename)
@@ -303,4 +333,6 @@ Partial Class Form1
     Friend WithEvents btnPB As Button
     Friend WithEvents HelpToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SaveToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents lbl_progress As Label
+    Friend WithEvents lbl_totals As Label
 End Class

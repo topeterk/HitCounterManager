@@ -106,6 +106,7 @@ Public Class Form1
 
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         If DataGridView1.SelectedCells.Count = 0 Then Exit Sub
+        UpdateProgressAndTotals()
         om.Update()
     End Sub
 
@@ -161,6 +162,8 @@ Public Class Form1
 
         btnHit.Width = btnSplit.Left - Pad / 2 - btnHit.Left
         ComboBox1.Width = btnDown.Left - Pad / 2 - ComboBox1.Left
+
+        lbl_totals.Width = Width - Pad - 15 - lbl_totals.Left
     End Sub
 
     Private Sub DataGridView1_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
@@ -168,6 +171,7 @@ Public Class Form1
             DataGridView1.Rows.Item(r).Cells.Item("cDiff").Value = DataGridView1.Rows.Item(r).Cells.Item("cHits").Value - DataGridView1.Rows.Item(r).Cells.Item("cPB").Value
         Next
         profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1, True)
+        UpdateProgressAndTotals()
     End Sub
 
     Private Sub btnUp_Click(sender As Object, e As EventArgs) Handles btnUp.Click
@@ -269,6 +273,7 @@ Public Class Form1
         End If
         profs.LoadProfileInto(ComboBox1.SelectedItem, DataGridView1)
         ComboBox1PrevSelectedItem = ComboBox1.SelectedItem
+        UpdateProgressAndTotals()
         om.Update()
     End Sub
 
@@ -279,6 +284,26 @@ Public Class Form1
     Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
         profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1)
         SaveSettings()
+    End Sub
+
+    Private Sub UpdateProgressAndTotals()
+        Dim TotalHits = 0
+        Dim TotalPB = 0
+        Dim Splits = DataGridView1.RowCount - 2
+
+        For r = 0 To Splits Step 1
+            TotalHits = TotalHits + DataGridView1.Rows.Item(r).Cells.Item("cHits").Value
+            TotalPB = TotalPB + DataGridView1.Rows.Item(r).Cells.Item("cPB").Value
+        Next
+
+        lbl_totals.Text = "Total: " & TotalHits & " Hits   " & TotalPB & " PB"
+
+        Try
+            Dim Split = DataGridView1.SelectedCells.Item(0).RowIndex
+            lbl_progress.Text = "Progress:  " & Split & " / " & Splits + 1
+        Catch ex As Exception
+            lbl_totals.Text = "Progress:  ?? / ??"
+        End Try
     End Sub
 
 End Class
