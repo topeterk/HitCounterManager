@@ -94,7 +94,7 @@ When no data is displayed, there could be a problem with cross-domain security s
 > Example: _"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files_
 
 ### Changing layout and design
-You can modify or create new custom graphical representation. Simply create a new HTML file based on [HitCounter.html] (HitCounter.html) and any of the pre-delivered HTML representations.  
+You can modify or create new custom graphical representation. Simply create a new HTML file based on [HitCounter.html](HitCounter.html) and any of the pre-delivered HTML representations.  
 
 Alternatively you can modify the [HitCounter.template](HitCounter.template) which comes with the installation or you can create an own template file to get the look you want.  
 > The application is using JavaScript syntax when writing data into the output file. For that the template has to have a line with the text **HITCOUNTER_LIST_START** which is the starting mark.
