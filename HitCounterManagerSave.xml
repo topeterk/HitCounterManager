@@ -1342,6 +1342,53 @@
           </ProfileRow>
         </Rows>
       </Profile>
+      <Profile>
+        <Name>The Surge A walk in the park (All Bosses) [EN]</Name>
+        <Rows>
+          <ProfileRow>
+            <Title>P.A.X.</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>LU-74 Firebug</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>BigSister 1/3</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Chief Helvig</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Carbon Cat</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>The Black Cerberus</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Rogue Process</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+        </Rows>
+      </Profile>
     </ProfileList>
   </Profiles>
 </SettingsRoot>
