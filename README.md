@@ -32,7 +32,7 @@ It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit
   * Dark Souls 1 Prepare To Die Edition
   * Dark Souls 2
   * Dark Souls 3 + Ashes of Ariandel + The Ringed City
-  * The Surge
+  * The Surge + A walk in the part
 * Comes with **3 high quality** graphical representations (white and pink):
   * Numeric (shows all counters of all splits for current run, PB and their differences)
   * Yes/No (shows check marks or crosses if one got hit at current run or PB)
