@@ -64,7 +64,6 @@ The pre-delivered HTML representations will update themself every 1.5 seconds, s
 > Recommended: FPS between 5 and 10
 
 Those pre-delivered HTML representations are available:
-* 
 * [HitCounterNumeric.html](HitCounterNumeric.html)
 * [HitCounterNumericBlack.html](HitCounterNumericBlack.html)
 * [HitCounterNumericPink.html](HitCounterNumericPink.html)
