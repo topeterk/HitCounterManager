@@ -71,7 +71,7 @@ function DoUpdate(list)
 
 		new_tbl +=
  '<tr class="' + (list[i][3] ? 'current' : '') + '">' +
-  '<td class="first">' + list[i][0] + '</td>' +
+  '<td class="first ' + (!active ? 'better' : '') + '">' + list[i][0] + '</td>' +
   '<td>' + printyesno(!active ? 0 : 1) + '</td>' +
   '<td>' + printyesno(list[i][2]) + '</td>' +
  '</tr>';
