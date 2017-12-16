@@ -59,9 +59,9 @@ The file [HitCounterManagerSave.xml](HitCounterManagerSave.xml) is used for all 
 You can save and restore this file at any time or copy it to a newer/portable version of this application.
 > Note: It holds all your settings and profiles in one place. No other files are involved.
 
-### Configuring CLR browser plugin for OBS
+### Graphical representation (Output)
 The pre-delivered HTML representations will update themself every 1.5 seconds, so there is no need for high frame rates.  
-> Recommended: FPS between 5 and 10
+> Recommended: FPS 20
 
 Those pre-delivered HTML representations are available:
 * [HitCounterNumeric.html](HitCounterNumeric.html)
@@ -76,6 +76,12 @@ Those pre-delivered HTML representations are available:
 
 > Previews can be found at the **[Wiki pages](../../wiki)**.
 
+#### Configuring Browser Source for OBS Studio
+Just insert the HTML's filepath in the URL field.
+> To avoid cross domain issues, OBS Studio added the pseudo domain _absolute_ for local files. That said the path sould look like this:
+> http://absolute/C:/MyHitCounter/HitCounterNumeric.html
+
+#### Configuring CLR browser plugin for OBS
 The opacity can be set to 100% because the background will be rendered transparent, so no color-keying is involved.
 Since CRL browser plugin come with some pre-defined CSS, this may cause trouble with the rendering of the HTML file (flickering or misplacement).
 If you encounter issues here, try to simply remove the CLR browser plugin's CSS overrides.  
@@ -87,7 +93,7 @@ When no data is displayed, there could be a problem with cross-domain security s
 > * UniversialAccessFromFilesUrls (Set to **Enabled**, _but should also work when disabled_)
 > * WebSecurity (Set to **Disabled**, _but should also work when enabled_)
 
-### Using standalone Chrome browser
+#### Using standalone Chrome browser
 When no data is displayed, there could be a problem with cross-domain security settings. This is because the HTMLs are rendered via file:// protocol instead of http://. Make sure to allow file access from files.
 > Start Chrome with **--allow-file-access-from-files**  
 > Example: _"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files_
