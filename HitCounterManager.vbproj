@@ -186,23 +186,23 @@
   <ItemGroup>
     <Content Include="HitCounter.template" />
     <Content Include="HitCounterManagerSave.xml" />
-    <Content Include="HitCounterNoDeath.html" />
-    <Content Include="HitCounterNoDeathBlack.html" />
-    <Content Include="HitCounterNoDeathPink.html" />
-    <Content Include="HitCounterNumeric.html" />
-    <Content Include="HitCounterNumericBlack.html" />
-    <Content Include="HitCounterNumericPink.html" />
-    <Content Include="HitCounterYesNo.html" />
-    <Content Include="HitCounterYesNoBlack.html" />
-    <Content Include="HitCounterYesNoPink.html" />
+    <Content Include="Designs\HitCounterNoDeath.html" />
+    <Content Include="Designs\HitCounterNoDeathBlack.html" />
+    <Content Include="Designs\HitCounterNoDeathPink.html" />
+    <Content Include="Designs\HitCounterNumeric.html" />
+    <Content Include="Designs\HitCounterNumericBlack.html" />
+    <Content Include="Designs\HitCounterNumericPink.html" />
+    <Content Include="Designs\HitCounterYesNo.html" />
+    <Content Include="Designs\HitCounterYesNoBlack.html" />
+    <Content Include="Designs\HitCounterYesNoPink.html" />
     <None Include="Images\icons8-add-20.png" />
     <None Include="Images\icons8-trash-20.png" />
     <None Include="Images\icons8-edit-20.png" />
     <None Include="Images\icons8-copy-20.png" />
     <None Include="Images\icons8-scroll-up-20.png" />
     <None Include="Images\icons8-scroll-down-20.png" />
-    <Content Include="img_check.png" />
-    <Content Include="img_cross.png" />
+    <Content Include="Designs\img_check.png" />
+    <Content Include="Designs\img_cross.png" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

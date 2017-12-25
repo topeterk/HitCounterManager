@@ -13,6 +13,9 @@ echo Creating portable package:
 echo ^ ^ Copy files from %DIR_OUTPUT%
 FOR %%G IN (HitCounterManager.exe HitCounterManager.exe.config) DO copy %DIR_OUTPUT%\%%G %DIR_DEST%
 echo ^ ^ Copy files from %DIR_SRC%
-FOR %%G IN (img_check.png img_cross.png HitCounterManagerSave.xml HitCounter.html HitCounter.template HitCounterNoDeath.html HitCounterNoDeathBlack.html HitCounterNoDeathPink.html HitCounterNumeric.html HitCounterNumericBlack.html HitCounterNumericPink.html HitCounterYesNo.html HitCounterYesNoBlack.html HitCounterYesNoPink.html) DO copy %DIR_SRC%\%%G %DIR_DEST%
+FOR %%G IN (HitCounterManagerSave.xml HitCounter.html HitCounter.template) DO copy %DIR_SRC%\%%G %DIR_DEST%
+echo ^ ^ Copy files from %DIR_SRC%\Designs
+mkdir %DIR_DEST%\Designs
+copy %DIR_SRC%\Designs %DIR_DEST%\Designs
 
 echo PostBuild.bat END ===========

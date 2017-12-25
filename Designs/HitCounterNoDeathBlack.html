@@ -34,7 +34,7 @@
 </head>
 
 <body>
-<iframe src="HitCounter.html" style="display:none;"></iframe>
+<iframe src="../HitCounter.html" style="display:none;"></iframe>
 <table id="table"></table>
 <script language="javascript">
 
@@ -47,7 +47,7 @@ function Watchdog()
 	if (heartbeat <= 1)
 		heartbeat++;
 	else
-		document.getElementsByTagName('iframe')[0].src = 'HitCounter.html'; // retry reloading file in case of errors
+		document.getElementsByTagName('iframe')[0].src = '../HitCounter.html'; // retry reloading file in case of errors
 }
 
 function DoUpdate(list)
@@ -85,7 +85,7 @@ function DoUpdate(list)
 
 	tbl.innerHTML = new_tbl;
 
-	setTimeout(function() { document.getElementsByTagName('iframe')[0].src = 'HitCounter.html';	}, 1500); // refresh every second
+	setTimeout(function() { document.getElementsByTagName('iframe')[0].src = '../HitCounter.html';	}, 1500); // refresh every second
 }
 
 Watchdog();
