@@ -32,15 +32,14 @@ It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit
   * Dark Souls 1 Prepare To Die Edition
   * Dark Souls 2
   * Dark Souls 3 + Ashes of Ariandel + The Ringed City
-  * The Surge + A walk in the part
-* Comes with **3 high quality** graphical representations (white and pink):
-  * Numeric (shows all counters of all splits for current run, PB and their differences)
-  * Yes/No (shows check marks or crosses if one got hit at current run or PB)
-  * NoDeath (shows check marks for all splits being alive, ignoring the hit counts)
-* Comes with **3 low quality** graphical representations:
-  * Numeric **Black** (shows all counters of all splits for current run, PB and their differences)
-  * Yes/No **Black** (shows check marks or crosses if one got hit at current run or PB)
-  * NoDeath **Black** (shows check marks for all splits being alive, ignoring the hit counts)  
+  * The Surge + A walk in the park
+* Comes with **high quality** and **low quality** graphical representations for different uses:
+  * Numeric
+    * Shows all hit counts of all splits for the current run, PB and their differences
+  * Yes/No
+    * Shows check marks/crosses if one got hit at the current run and PB
+  * NoDeath
+    * Shows check marks for all splits being alive, ignoring the hit counts
 
 ## Get the software
 All available releases can be found at the [Releases page](../../releases) on GitHub.
@@ -48,7 +47,8 @@ All available releases can be found at the [Releases page](../../releases) on Gi
 ## Installation
 
 ### Systemrequirements
-.Net Framework 4.5
+* OS: Windows Vista, Windows Server 2003 or newer
+* [.Net Framework 4.5](https://www.microsoft.com/net)
 
 ### Using the Installer
 The installer places all files at your installation folder (default: My Documents) or any other location you like.  
@@ -62,6 +62,8 @@ You can save and restore this file at any time or copy it to a newer/portable ve
 ### Graphical representation (Output)
 The pre-delivered HTML representations will update themself every 1.5 seconds, so there is no need for high frame rates.  
 > Recommended: FPS 20
+
+The **high quality** representations like __White__ and __Pink__ are best for streams with high bitrates. The **low quality** representations like __Black__ is designed for streams supporting lower bitrates (for mobile device, for example).
 
 Those pre-delivered HTML representations are available:
 * [HitCounterNumeric.html](HitCounterNumeric.html)
@@ -101,13 +103,11 @@ When no data is displayed, there could be a problem with cross-domain security s
 ### Changing layout and design
 You can modify or create new custom graphical representation. Simply create a new HTML file based on [HitCounter.html](HitCounter.html) and any of the pre-delivered HTML representations.  
 
-Alternatively you can modify the [HitCounter.template](HitCounter.template) which comes with the installation or you can create an own template file to get the look you want.  
-> The application is using JavaScript syntax when writing data into the output file. For that the template has to have a line with the text **HITCOUNTER_LIST_START** which is the starting mark.
-The mark with all further lines will be replaced with the JavaScript equivalent of the application's current data. This happens until the **HITCOUNTER_LIST_END** text mark is reached.
-This way you are 100% free in the design of your hit counter.
+Alternatively you can modify the [HitCounter.template](HitCounter.template) which comes with the installation or you can create an own template file to get the look you want. That means **you are 100% free in the design of your hit counter**.  
+> The application is using JavaScript syntax when writing data into the output file. Therefore the template has to have a line with the text **HITCOUNTER_LIST_START** which is the starting mark. The mark with all further lines will be replaced with the JavaScript equivalent of the application's current data. This replacement is done until the **HITCOUNTER_LIST_END** text mark is reached.  
 
 ## Anything is missing, something is annoying/can be improved or you just found a bug?
-Message me via GitHub / e-mail or simply open an issue and I will try to help you out.
+Message me via GitHub / e-mail or simply open an issue and I will try to help you out. Alternatively you can also send me a whipser on Twitch: [GeneralGunrider](https://www.twitch.tv/generalgunrider)
 
 ## Special thanks
 I would never have created this tool without the inspiration by watching the awesome 0 hit and no death runners...  
