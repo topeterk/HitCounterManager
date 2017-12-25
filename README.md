@@ -33,7 +33,7 @@ It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit
   * Dark Souls 2
   * Dark Souls 3 + Ashes of Ariandel + The Ringed City
   * The Surge + A walk in the park
-* Comes with **high quality** and **low quality** graphical representations for different uses:
+* Comes with **high quality** and **low quality** designs for different uses:
   * Numeric
     * Shows all hit counts of all splits for the current run, PB and their differences
   * Yes/No
@@ -59,22 +59,22 @@ The file [HitCounterManagerSave.xml](HitCounterManagerSave.xml) is used for all 
 You can save and restore this file at any time or copy it to a newer/portable version of this application.
 > Note: It holds all your settings and profiles in one place. No other files are involved.
 
-### Graphical representation (Output)
-The pre-delivered HTML representations will update themself every 1.5 seconds, so there is no need for high frame rates.  
+### Designs
+The pre-delivered HTML designs will update themself every 1.5 seconds, so there is no need for high frame rates.  
 > Recommended: FPS 20
 
-The **high quality** representations like __White__ and __Pink__ are best for streams with high bitrates. The **low quality** representations like __Black__ is designed for streams supporting lower bitrates (for mobile device, for example).
+The **high quality** designs like __White__ and __Pink__ are best for streams with high bitrates. The **low quality** designs like __Black__ is designed for streams supporting lower bitrates (for mobile device, for example).
 
-Those pre-delivered HTML representations are available:
-* [HitCounterNumeric.html](HitCounterNumeric.html)
-* [HitCounterNumericBlack.html](HitCounterNumericBlack.html)
-* [HitCounterNumericPink.html](HitCounterNumericPink.html)
-* [HitCounterYesNo.html](HitCounterYesNo.html)
-* [HitCounterYesNoBlack.html](HitCounterYesNoBlack.html)
-* [HitCounterYesNoPink.html](HitCounterYesNoPink.html)
-* [HitCounterNoDeath.html](HitCounterNoDeath.html)
-* [HitCounterNoDeathBlack.html](HitCounterNoDeathBlack.html)
-* [HitCounterNoDeathPink.html](HitCounterNoDeathPink.html)
+Those pre-delivered HTML desings are available:
+* [HitCounterNumeric.html](Designs/HitCounterNumeric.html)
+* [HitCounterNumericBlack.html](Designs/HitCounterNumericBlack.html)
+* [HitCounterNumericPink.html](Designs/HitCounterNumericPink.html)
+* [HitCounterYesNo.html](Designs/HitCounterYesNo.html)
+* [HitCounterYesNoBlack.html](Designs/HitCounterYesNoBlack.html)
+* [HitCounterYesNoPink.html](Designs/HitCounterYesNoPink.html)
+* [HitCounterNoDeath.html](Designs/HitCounterNoDeath.html)
+* [HitCounterNoDeathBlack.html](Designs/HitCounterNoDeathBlack.html)
+* [HitCounterNoDeathPink.html](Designs/HitCounterNoDeathPink.html)
 
 > Previews can be found at the **[Wiki pages](../../wiki)**.
 
@@ -101,7 +101,7 @@ When no data is displayed, there could be a problem with cross-domain security s
 > Example: _"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files_
 
 ### Changing layout and design
-You can modify or create new custom graphical representation. Simply create a new HTML file based on [HitCounter.html](HitCounter.html) and any of the pre-delivered HTML representations.  
+You can modify or create new custom designs. Simply modify or create a new HTML file based on any of the pre-delivered designs.  
 
 Alternatively you can modify the [HitCounter.template](HitCounter.template) which comes with the installation or you can create an own template file to get the look you want. That means **you are 100% free in the design of your hit counter**.  
 > The application is using JavaScript syntax when writing data into the output file. Therefore the template has to have a line with the text **HITCOUNTER_LIST_START** which is the starting mark. The mark with all further lines will be replaced with the JavaScript equivalent of the application's current data. This replacement is done until the **HITCOUNTER_LIST_END** text mark is reached.  
