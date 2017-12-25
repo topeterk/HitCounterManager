@@ -57,6 +57,7 @@ Partial Class About
         Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.TextBox1.Size = New System.Drawing.Size(509, 212)
         Me.TextBox1.TabIndex = 0
+        Me.TextBox1.TabStop = False
         Me.TextBox1.Text = resources.GetString("TextBox1.Text")
         '
         'About
