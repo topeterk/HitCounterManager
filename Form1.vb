@@ -53,14 +53,23 @@ Public Class Form1
         MyBase.WndProc(m)
     End Sub
 
-    Private Sub FileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FileToolStripMenuItem.Click
+    Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
         Dim form = New Settings()
         SettingsDialogOpen = True
         form.ShowDialog(Me)
         SettingsDialogOpen = False
     End Sub
 
-    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1)
+        SaveSettings()
+    End Sub
+
+    Private Sub btnWeb_Click(sender As Object, e As EventArgs) Handles btnWeb.Click
+        System.Diagnostics.Process.Start("https://github.com/topeterk/HitCounterManager")
+    End Sub
+
+    Private Sub btnAbout_Click(sender As Object, e As EventArgs) Handles btnAbout.Click
         Dim form = New About()
         form.ShowDialog(Me)
     End Sub
@@ -75,6 +84,8 @@ Public Class Form1
     End Sub
 
     Private Sub btnPB_Click(sender As Object, e As EventArgs) Handles btnPB.Click
+        If DataGridView1.RowCount < 2 Then Exit Sub
+
         For r = 0 To DataGridView1.RowCount - 2 Step 1
             DataGridView1.Rows.Item(r).Cells.Item("cPB").Value = DataGridView1.Rows.Item(r).Cells.Item("cHits").Value
         Next
@@ -156,7 +167,7 @@ Public Class Form1
         ComboBox1.Width = Width - Pad * 2 - 15
         DataGridView1.Left = Pad
         DataGridView1.Width = ComboBox1.Width
-        DataGridView1.Height = Height - DataGridView1.Top - Pad - MenuStrip1.Height - 15
+        DataGridView1.Height = Height - DataGridView1.Top - Pad - btnSettings.Height - 15
 
         ' right aligned
         btnSplit.Left = Width - Pad - 15 - btnSplit.Width
@@ -285,15 +296,6 @@ Public Class Form1
         ComboBox1PrevSelectedItem = ComboBox1.SelectedItem
         UpdateProgressAndTotals()
         om.Update()
-    End Sub
-
-    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
-        System.Diagnostics.Process.Start("https://github.com/topeterk/HitCounterManager")
-    End Sub
-
-    Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
-        profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1)
-        SaveSettings()
     End Sub
 
     Private Sub UpdateProgressAndTotals()
