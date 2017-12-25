@@ -54,10 +54,6 @@ Partial Class Form1
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.cTitle = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cHits = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cDiff = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cPB = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnReset = New System.Windows.Forms.Button()
         Me.btnHit = New System.Windows.Forms.Button()
         Me.btnSplit = New System.Windows.Forms.Button()
@@ -72,6 +68,10 @@ Partial Class Form1
         Me.lbl_totals = New System.Windows.Forms.Label()
         Me.btnCopy = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.cTitle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cHits = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cDiff = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cPB = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -120,49 +120,6 @@ Partial Class Form1
         Me.DataGridView1.Size = New System.Drawing.Size(523, 211)
         Me.DataGridView1.TabIndex = 4
         '
-        'cTitle
-        '
-        Me.cTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.cTitle.HeaderText = "Title"
-        Me.cTitle.MinimumWidth = 30
-        Me.cTitle.Name = "cTitle"
-        Me.cTitle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.cTitle.Width = 300
-        '
-        'cHits
-        '
-        Me.cHits.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle1.NullValue = "0"
-        Me.cHits.DefaultCellStyle = DataGridViewCellStyle1
-        Me.cHits.HeaderText = "Hits"
-        Me.cHits.MinimumWidth = 30
-        Me.cHits.Name = "cHits"
-        Me.cHits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.cHits.Width = 50
-        '
-        'cDiff
-        '
-        Me.cDiff.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle2.NullValue = "0"
-        Me.cDiff.DefaultCellStyle = DataGridViewCellStyle2
-        Me.cDiff.HeaderText = "Diff"
-        Me.cDiff.MinimumWidth = 30
-        Me.cDiff.Name = "cDiff"
-        Me.cDiff.ReadOnly = True
-        Me.cDiff.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.cDiff.Width = 50
-        '
-        'cPB
-        '
-        Me.cPB.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle3.NullValue = "0"
-        Me.cPB.DefaultCellStyle = DataGridViewCellStyle3
-        Me.cPB.HeaderText = "PB"
-        Me.cPB.MinimumWidth = 30
-        Me.cPB.Name = "cPB"
-        Me.cPB.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.cPB.Width = 50
-        '
         'btnReset
         '
         Me.btnReset.BackColor = System.Drawing.Color.Salmon
@@ -172,6 +129,7 @@ Partial Class Form1
         Me.btnReset.Size = New System.Drawing.Size(75, 40)
         Me.btnReset.TabIndex = 1
         Me.btnReset.Text = "Reset"
+        Me.ToolTip1.SetToolTip(Me.btnReset, "RESET the current run")
         Me.btnReset.UseVisualStyleBackColor = False
         '
         'btnHit
@@ -183,6 +141,7 @@ Partial Class Form1
         Me.btnHit.Size = New System.Drawing.Size(280, 40)
         Me.btnHit.TabIndex = 2
         Me.btnHit.Text = "Hit"
+        Me.ToolTip1.SetToolTip(Me.btnHit, "Count a HIT on the current split")
         Me.btnHit.UseVisualStyleBackColor = False
         '
         'btnSplit
@@ -194,6 +153,7 @@ Partial Class Form1
         Me.btnSplit.Size = New System.Drawing.Size(75, 40)
         Me.btnSplit.TabIndex = 3
         Me.btnSplit.Text = "Split"
+        Me.ToolTip1.SetToolTip(Me.btnSplit, "Jump to the next SPLIT")
         Me.btnSplit.UseVisualStyleBackColor = False
         '
         'btnDown
@@ -275,6 +235,7 @@ Partial Class Form1
         Me.btnPB.Size = New System.Drawing.Size(75, 40)
         Me.btnPB.TabIndex = 11
         Me.btnPB.Text = "PB"
+        Me.ToolTip1.SetToolTip(Me.btnPB, "Record run as PB (personal best)")
         Me.btnPB.UseVisualStyleBackColor = False
         '
         'lbl_progress
@@ -310,6 +271,53 @@ Partial Class Form1
         Me.btnCopy.TabIndex = 14
         Me.ToolTip1.SetToolTip(Me.btnCopy, "Copy profile")
         Me.btnCopy.UseVisualStyleBackColor = True
+        '
+        'cTitle
+        '
+        Me.cTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.cTitle.HeaderText = "Title"
+        Me.cTitle.MinimumWidth = 30
+        Me.cTitle.Name = "cTitle"
+        Me.cTitle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.cTitle.ToolTipText = "Title of the split"
+        Me.cTitle.Width = 300
+        '
+        'cHits
+        '
+        Me.cHits.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle1.NullValue = "0"
+        Me.cHits.DefaultCellStyle = DataGridViewCellStyle1
+        Me.cHits.HeaderText = "Hits"
+        Me.cHits.MinimumWidth = 30
+        Me.cHits.Name = "cHits"
+        Me.cHits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.cHits.ToolTipText = "Counted hits"
+        Me.cHits.Width = 50
+        '
+        'cDiff
+        '
+        Me.cDiff.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle2.NullValue = "0"
+        Me.cDiff.DefaultCellStyle = DataGridViewCellStyle2
+        Me.cDiff.HeaderText = "Diff"
+        Me.cDiff.MinimumWidth = 30
+        Me.cDiff.Name = "cDiff"
+        Me.cDiff.ReadOnly = True
+        Me.cDiff.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.cDiff.ToolTipText = "Difference between Hits and PB"
+        Me.cDiff.Width = 50
+        '
+        'cPB
+        '
+        Me.cPB.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle3.NullValue = "0"
+        Me.cPB.DefaultCellStyle = DataGridViewCellStyle3
+        Me.cPB.HeaderText = "PB"
+        Me.cPB.MinimumWidth = 30
+        Me.cPB.Name = "cPB"
+        Me.cPB.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.cPB.ToolTipText = "Person best"
+        Me.cPB.Width = 50
         '
         'Form1
         '
@@ -351,10 +359,6 @@ Partial Class Form1
     Friend WithEvents btnHit As Button
     Friend WithEvents btnSplit As Button
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents cPB As DataGridViewTextBoxColumn
-    Friend WithEvents cDiff As DataGridViewTextBoxColumn
-    Friend WithEvents cHits As DataGridViewTextBoxColumn
-    Friend WithEvents cTitle As DataGridViewTextBoxColumn
     Friend WithEvents btnDown As Button
     Friend WithEvents btnUp As Button
     Friend WithEvents ComboBox1 As ComboBox
@@ -368,4 +372,8 @@ Partial Class Form1
     Friend WithEvents lbl_totals As Label
     Friend WithEvents btnCopy As Button
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents cPB As DataGridViewTextBoxColumn
+    Friend WithEvents cDiff As DataGridViewTextBoxColumn
+    Friend WithEvents cHits As DataGridViewTextBoxColumn
+    Friend WithEvents cTitle As DataGridViewTextBoxColumn
 End Class
