@@ -195,6 +195,12 @@
     <Content Include="HitCounterYesNo.html" />
     <Content Include="HitCounterYesNoBlack.html" />
     <Content Include="HitCounterYesNoPink.html" />
+    <None Include="Images\icons8-add-20.png" />
+    <None Include="Images\icons8-trash-20.png" />
+    <None Include="Images\icons8-edit-20.png" />
+    <None Include="Images\icons8-copy-20.png" />
+    <None Include="Images\icons8-scroll-up-20.png" />
+    <None Include="Images\icons8-scroll-down-20.png" />
     <Content Include="img_check.png" />
     <Content Include="img_cross.png" />
     <None Include="My Project\app.manifest" />

@@ -43,6 +43,7 @@ Partial Class Form1
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -69,6 +70,8 @@ Partial Class Form1
         Me.btnPB = New System.Windows.Forms.Button()
         Me.lbl_progress = New System.Windows.Forms.Label()
         Me.lbl_totals = New System.Windows.Forms.Label()
+        Me.btnCopy = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.MenuStrip1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -195,20 +198,26 @@ Partial Class Form1
         '
         'btnDown
         '
-        Me.btnDown.Location = New System.Drawing.Point(460, 100)
+        Me.btnDown.BackgroundImage = Global.HitCounterManager.My.Resources.Resources.icons8_scroll_down_20
+        Me.btnDown.FlatAppearance.BorderSize = 0
+        Me.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDown.Location = New System.Drawing.Point(515, 73)
         Me.btnDown.Name = "btnDown"
-        Me.btnDown.Size = New System.Drawing.Size(75, 23)
+        Me.btnDown.Size = New System.Drawing.Size(20, 20)
         Me.btnDown.TabIndex = 5
-        Me.btnDown.Text = "Down"
+        Me.ToolTip1.SetToolTip(Me.btnDown, "Move selected split DOWN")
         Me.btnDown.UseVisualStyleBackColor = True
         '
         'btnUp
         '
-        Me.btnUp.Location = New System.Drawing.Point(461, 71)
+        Me.btnUp.BackgroundImage = Global.HitCounterManager.My.Resources.Resources.icons8_scroll_up_20
+        Me.btnUp.FlatAppearance.BorderSize = 0
+        Me.btnUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUp.Location = New System.Drawing.Point(489, 73)
         Me.btnUp.Name = "btnUp"
-        Me.btnUp.Size = New System.Drawing.Size(75, 23)
+        Me.btnUp.Size = New System.Drawing.Size(20, 20)
         Me.btnUp.TabIndex = 6
-        Me.btnUp.Text = "Up"
+        Me.ToolTip1.SetToolTip(Me.btnUp, "Move selected split UP")
         Me.btnUp.UseVisualStyleBackColor = True
         '
         'ComboBox1
@@ -217,35 +226,44 @@ Partial Class Form1
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Location = New System.Drawing.Point(13, 102)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(441, 21)
+        Me.ComboBox1.Size = New System.Drawing.Size(522, 21)
         Me.ComboBox1.Sorted = True
         Me.ComboBox1.TabIndex = 7
         '
         'btnRename
         '
-        Me.btnRename.Location = New System.Drawing.Point(175, 73)
+        Me.btnRename.BackgroundImage = Global.HitCounterManager.My.Resources.Resources.icons8_edit_20
+        Me.btnRename.FlatAppearance.BorderSize = 0
+        Me.btnRename.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRename.Location = New System.Drawing.Point(39, 73)
         Me.btnRename.Name = "btnRename"
-        Me.btnRename.Size = New System.Drawing.Size(75, 23)
+        Me.btnRename.Size = New System.Drawing.Size(20, 20)
         Me.btnRename.TabIndex = 9
-        Me.btnRename.Text = "Rename"
+        Me.ToolTip1.SetToolTip(Me.btnRename, "Rename profile")
         Me.btnRename.UseVisualStyleBackColor = True
         '
         'btnNew
         '
+        Me.btnNew.BackgroundImage = Global.HitCounterManager.My.Resources.Resources.icons8_add_20
+        Me.btnNew.FlatAppearance.BorderSize = 0
+        Me.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNew.Location = New System.Drawing.Point(13, 73)
         Me.btnNew.Name = "btnNew"
-        Me.btnNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnNew.Size = New System.Drawing.Size(20, 20)
         Me.btnNew.TabIndex = 8
-        Me.btnNew.Text = "New"
+        Me.ToolTip1.SetToolTip(Me.btnNew, "New profile")
         Me.btnNew.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(94, 73)
+        Me.btnDelete.BackgroundImage = Global.HitCounterManager.My.Resources.Resources.icons8_trash_20
+        Me.btnDelete.FlatAppearance.BorderSize = 0
+        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDelete.Location = New System.Drawing.Point(91, 73)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(20, 20)
         Me.btnDelete.TabIndex = 10
-        Me.btnDelete.Text = "Delete"
+        Me.ToolTip1.SetToolTip(Me.btnDelete, "Delete profile")
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnPB
@@ -281,11 +299,24 @@ Partial Class Form1
         Me.lbl_totals.Text = "Total: ??? Hits   ??? PB"
         Me.lbl_totals.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'btnCopy
+        '
+        Me.btnCopy.BackgroundImage = Global.HitCounterManager.My.Resources.Resources.icons8_copy_20
+        Me.btnCopy.FlatAppearance.BorderSize = 0
+        Me.btnCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCopy.Location = New System.Drawing.Point(65, 73)
+        Me.btnCopy.Name = "btnCopy"
+        Me.btnCopy.Size = New System.Drawing.Size(20, 20)
+        Me.btnCopy.TabIndex = 14
+        Me.ToolTip1.SetToolTip(Me.btnCopy, "Copy profile")
+        Me.btnCopy.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(548, 376)
+        Me.Controls.Add(Me.btnCopy)
         Me.Controls.Add(Me.lbl_totals)
         Me.Controls.Add(Me.lbl_progress)
         Me.Controls.Add(Me.btnPB)
@@ -335,4 +366,6 @@ Partial Class Form1
     Friend WithEvents SaveToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lbl_progress As Label
     Friend WithEvents lbl_totals As Label
+    Friend WithEvents btnCopy As Button
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

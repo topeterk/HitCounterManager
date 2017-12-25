@@ -152,17 +152,19 @@ Public Class Form1
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         Const Pad = 13
 
+        ' fill
+        ComboBox1.Width = Width - Pad * 2 - 15
         DataGridView1.Left = Pad
-        DataGridView1.Width = Width - Pad * 2 - 15
+        DataGridView1.Width = ComboBox1.Width
         DataGridView1.Height = Height - DataGridView1.Top - Pad - MenuStrip1.Height - 15
 
+        ' right aligned
         btnSplit.Left = Width - Pad - 15 - btnSplit.Width
-        btnUp.Left = Width - Pad - 15 - btnUp.Width
         btnDown.Left = Width - Pad - 15 - btnDown.Width
+        btnUp.Left = btnDown.Left - btnDown.Width - btnDown.Margin.Left - btnUp.Margin.Right
 
+        ' left aligned
         btnHit.Width = btnSplit.Left - Pad / 2 - btnHit.Left
-        ComboBox1.Width = btnDown.Left - Pad / 2 - ComboBox1.Left
-
         lbl_totals.Width = Width - Pad - 15 - lbl_totals.Left
     End Sub
 
@@ -177,7 +179,7 @@ Public Class Form1
     Private Sub btnUp_Click(sender As Object, e As EventArgs) Handles btnUp.Click
         Dim idx_old = DataGridView1.SelectedCells.Item(0).RowIndex
         Dim idx_new = DataGridView1.SelectedCells.Item(0).RowIndex - 1
-        If 0 <= idx_new Then
+        If 0 <= idx_new And idx_old < DataGridView1.Rows.Count - 1 Then ' Do not move when UP is not possible
             For i = 0 To DataGridView1.Columns.Count - 1 Step 1
                 Dim cell As Object = DataGridView1.Rows(idx_old).Cells(i).Value
                 DataGridView1.Rows(idx_old).Cells(i).Value = DataGridView1.Rows(idx_new).Cells(i).Value
@@ -191,7 +193,7 @@ Public Class Form1
     Private Sub btnDown_Click(sender As Object, e As EventArgs) Handles btnDown.Click
         Dim idx_old = DataGridView1.SelectedCells.Item(0).RowIndex
         Dim idx_new = DataGridView1.SelectedCells.Item(0).RowIndex + 1
-        If idx_new < DataGridView1.RowCount - 1 Then
+        If idx_new < DataGridView1.RowCount - 1 Then ' Do not move when DOWN is not possible
             For i = 0 To DataGridView1.Columns.Count - 1 Step 1
                 Dim cell As Object = DataGridView1.Rows(idx_old).Cells(i).Value
                 DataGridView1.Rows(idx_old).Cells(i).Value = DataGridView1.Rows(idx_new).Cells(i).Value
@@ -203,31 +205,39 @@ Public Class Form1
     End Sub
 
     Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
-        Dim IsCopy = False
         Dim name = InputBox("Enter name of new profile", "New profile", ComboBox1.SelectedItem)
         If name.Length = 0 Or IsInvalidConfigString(name) Then Exit Sub
 
         If ComboBox1.Items.Contains(name) Then
             If Not DialogResult.OK = MessageBox.Show("A profile with this name already exists. Do you want to create as copy from the currently selected?", "Profile already exists", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then Exit Sub
-            IsCopy = True
-            Do
-                name += " COPY"
-                If Not ComboBox1.Items.Contains(name) Then Exit Do
-            Loop
+            btnCopy_Click(sender, e)
+            Exit Sub
         End If
 
         profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1) ' save previous selected profile
 
         ' create, select and save new profile..
         ComboBox1.Items.Add(name)
-        If IsCopy Then
-            profs.SaveProfileFrom(name, DataGridView1, True) ' copy old data to new profile
-            ComboBox1.SelectedItem = name
-        Else
-            ComboBox1.SelectedItem = name
-            DataGridView1.Rows.Clear()
-            profs.SaveProfileFrom(name, DataGridView1, True) ' save new empty profile
-        End If
+        ComboBox1.SelectedItem = name
+        DataGridView1.Rows.Clear()
+        profs.SaveProfileFrom(name, DataGridView1, True) ' save new empty profile
+        UpdateProgressAndTotals()
+    End Sub
+
+    Private Sub btnCopy_Click(sender As Object, e As EventArgs) Handles btnCopy.Click
+        Dim name = ComboBox1.SelectedItem
+
+        Do
+            name += " COPY"
+            If Not ComboBox1.Items.Contains(name) Then Exit Do
+        Loop
+
+        profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1) ' save previous selected profile
+
+        ' create, select and save new profile..
+        ComboBox1.Items.Add(name)
+        profs.SaveProfileFrom(name, DataGridView1, True) ' copy current data to new profile
+        ComboBox1.SelectedItem = name
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -302,7 +312,7 @@ Public Class Form1
             Dim Split = DataGridView1.SelectedCells.Item(0).RowIndex
             lbl_progress.Text = "Progress:  " & Split & " / " & Splits + 1
         Catch ex As Exception
-            lbl_totals.Text = "Progress:  ?? / ??"
+            lbl_progress.Text = "Progress:  ?? / ??"
         End Try
     End Sub
 

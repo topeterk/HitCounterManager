@@ -120,29 +120,51 @@
   <data name="TextBox1.Text" xml:space="preserve">
     <value>Licence information:
 
- -- Application:
+==============================================================================
+Application
+
 Original Author: Peter Kirmeier &lt;topeterk@freenet.de&gt;
 Source: GitHub at https://github.com/topeterk/HitCounterManager
 License: Free for commercial and non-commercial use, modifications allowed
 Condition: Keep information about original author and source location [This paragraph here]
-For more details about source, see LICENSE file
+For more details about source, see LICENSE and THIRDPARTYLICENSEREADME file
 
- -- Icon:
+==============================================================================
+Application Icon
+
 Artist: Iconka.com (Available for custom work)
 Iconset: Pioneer Camp Icons (6 icons)
-License: Linkware (Backlink to http://www.iconka.com required)
-Commercial usage: Allowed (Backlink to http://www.iconka.com required)
 
- -- Check Mark Image
+License: Linkware
+Conditions: Backlink to http://www.iconka.com
+Commercial usage: Allowed
+
+==============================================================================
+Check Mark Image
+
 https://pixabay.com/p-1292787/
-Licence: CC0 Public Domain  (Free for commercial use)
-Conditions: None
 
- -- Cross Image
-https://pixabay.com/p-304374/
-Licence: CC0 Public Domain  (Free for commercial use)
+Licence: CC0 1.0  https://creativecommons.org/publicdomain/zero/1.0/deed.en
 Conditions: None
-</value>
+Commercial usage: Allowed
+
+==============================================================================
+Cross Image
+
+https://pixabay.com/p-304374/
+
+Licence: CC0 1.0  https://creativecommons.org/publicdomain/zero/1.0/deed.en
+Conditions: None
+Commercial usage: Allowed
+
+==============================================================================
+Application Button Images
+
+https://icons8.com/
+
+Licence: CC BY-ND 3.0  https://creativecommons.org/licenses/by-nd/3.0/
+Conditions: Backlink to https://icons8.com/
+Commercial usage: Allowed</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
