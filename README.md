@@ -26,6 +26,7 @@ It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit
 * Multiple profiles can be created (e.g. "Any%", "AllBosses", "DLC only"..)
 * Switching to other profiles will keep hit counts of currently selected profile
 * Button to save current run as PB (personal best)
+* Counts the attempts of each run (implicitly on every run's reset or manually)
 * Settings file "HitCounterManagerSave.xml" holds all your configuration data and is designed to work in newer versions, too. Save and restore this file at any time.
 * Comes with some pre-defined profiles for:
   * Bloodborne + The old hunters
@@ -112,6 +113,7 @@ Thanks to:
 * [SquillaKilla](https://www.twitch.tv/squillakilla)
 * [CouchJockey](https://www.twitch.tv/couchjockey)
 * [SlipperySuzie](https://www.twitch.tv/slipperysuzie)
+* [DonnyRekt](https://www.twitch.tv/donnyrekt)
 * [TigerG92](https://www.twitch.tv/tigerg92)
 * [SayviTV](https://www.twitch.tv/sayvitv)
 * [Kazoodle](https://www.twitch.tv/kazoodle)

@@ -71,7 +71,9 @@ Partial Class Form1
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnWeb = New System.Windows.Forms.Button()
         Me.btnAbout = New System.Windows.Forms.Button()
+        Me.btnAttempts = New System.Windows.Forms.Button()
         Me.Spacer1 = New System.Windows.Forms.Label()
+        Me.Spacer2 = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -257,18 +259,18 @@ Partial Class Form1
         Me.lbl_progress.Location = New System.Drawing.Point(11, 100)
         Me.lbl_progress.Name = "lbl_progress"
         Me.lbl_progress.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        Me.lbl_progress.Size = New System.Drawing.Size(157, 20)
+        Me.lbl_progress.Size = New System.Drawing.Size(193, 20)
         Me.lbl_progress.TabIndex = 12
-        Me.lbl_progress.Text = "Progress:  ?? / ??"
+        Me.lbl_progress.Text = "Progress:  ?? / ??  # ???"
         Me.lbl_progress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lbl_totals
         '
         Me.lbl_totals.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_totals.Location = New System.Drawing.Point(176, 100)
+        Me.lbl_totals.Location = New System.Drawing.Point(210, 100)
         Me.lbl_totals.Name = "lbl_totals"
         Me.lbl_totals.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        Me.lbl_totals.Size = New System.Drawing.Size(360, 20)
+        Me.lbl_totals.Size = New System.Drawing.Size(326, 20)
         Me.lbl_totals.TabIndex = 13
         Me.lbl_totals.Text = "Total: ??? Hits   ??? PB"
         Me.lbl_totals.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -333,6 +335,18 @@ Partial Class Form1
         Me.ToolTip1.SetToolTip(Me.btnAbout, "About")
         Me.btnAbout.UseVisualStyleBackColor = True
         '
+        'btnAttempts
+        '
+        Me.btnAttempts.BackgroundImage = Global.HitCounterManager.My.Resources.Resources.icons8_counter_20
+        Me.btnAttempts.FlatAppearance.BorderSize = 0
+        Me.btnAttempts.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAttempts.Location = New System.Drawing.Point(251, 4)
+        Me.btnAttempts.Name = "btnAttempts"
+        Me.btnAttempts.Size = New System.Drawing.Size(20, 20)
+        Me.btnAttempts.TabIndex = 21
+        Me.ToolTip1.SetToolTip(Me.btnAttempts, "Set amount of attempts manually")
+        Me.btnAttempts.UseVisualStyleBackColor = True
+        '
         'Spacer1
         '
         Me.Spacer1.AutoSize = True
@@ -343,11 +357,23 @@ Partial Class Form1
         Me.Spacer1.TabIndex = 19
         Me.Spacer1.Text = "|"
         '
+        'Spacer2
+        '
+        Me.Spacer2.AutoSize = True
+        Me.Spacer2.ForeColor = System.Drawing.SystemColors.ControlDark
+        Me.Spacer2.Location = New System.Drawing.Point(236, 8)
+        Me.Spacer2.Name = "Spacer2"
+        Me.Spacer2.Size = New System.Drawing.Size(9, 13)
+        Me.Spacer2.TabIndex = 20
+        Me.Spacer2.Text = "|"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(548, 376)
+        Me.Controls.Add(Me.btnAttempts)
+        Me.Controls.Add(Me.Spacer2)
         Me.Controls.Add(Me.Spacer1)
         Me.Controls.Add(Me.btnAbout)
         Me.Controls.Add(Me.btnWeb)
@@ -400,4 +426,6 @@ Partial Class Form1
     Friend WithEvents btnWeb As Button
     Friend WithEvents btnAbout As Button
     Friend WithEvents Spacer1 As Label
+    Friend WithEvents Spacer2 As Label
+    Friend WithEvents btnAttempts As Button
 End Class

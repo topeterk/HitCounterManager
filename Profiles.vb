@@ -71,6 +71,7 @@ End Class
 ' single profile (equals a whole datagridview data collection)
 <Serializable()> Public Class Profile
     Public Name As String
+    Public Attempts As Integer
     Public Rows As New List(Of ProfileRow)()
 
     Public Sub AddNewRow(Line As String)
@@ -112,12 +113,14 @@ End Class
     End Function
 
     ' updates a datagrid based on a specific internally cached profile
-    Public Sub LoadProfileInto(Name As String, ByRef DataGridView As DataGridView)
+    Public Sub LoadProfileInto(Name As String, ByRef DataGridView As DataGridView, ByRef Attempts As Integer)
+        Attempts = 0
         With DataGridView
             .Rows.Clear()
 
             For Each prof In _Profiles
                 If prof.Name = Name Then
+                    Attempts = prof.Attempts
                     For Each row In prof.Rows
                         Dim cells() As String = {row.Title, row.Hits, row.Diff, row.PB}
                         .Rows.Add(cells)
@@ -129,7 +132,7 @@ End Class
     End Sub
 
     ' updates internal profile cache of a specific profile by reading data from datagrid
-    Public Sub SaveProfileFrom(Name As String, DataGridView As DataGridView, Optional AllowCreation As Boolean = False)
+    Public Sub SaveProfileFrom(Name As String, DataGridView As DataGridView, Attempts As Integer, Optional AllowCreation As Boolean = False)
         Dim prof_save As Profile = Nothing
         Dim cells As DataGridViewCellCollection
         Dim ProfileRow As ProfileRow
@@ -152,6 +155,7 @@ End Class
         prof_save.Rows.Clear()
 
         ' collecting data, nom nom nom
+        prof_save.Attempts = Attempts
         With DataGridView
             For r = 0 To .RowCount - 2 Step 1
                 ProfileRow = New ProfileRow()

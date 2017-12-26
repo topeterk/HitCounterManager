@@ -26,6 +26,7 @@ Public Class Form1
     Public sc As Shortcuts
     Public om As OutModule
     Private profs As Profiles = New Profiles()
+    Private AttemptsCounter As Integer = 0
     Private ComboBox1PrevSelectedItem As Object = Nothing
     Private SettingsDialogOpen = False
 
@@ -61,7 +62,7 @@ Public Class Form1
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1)
+        profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1, AttemptsCounter)
         SaveSettings()
     End Sub
 
@@ -75,6 +76,8 @@ Public Class Form1
     End Sub
 
     Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
+        AttemptsCounter = AttemptsCounter + 1 ' Increase attempts
+
         For r = 0 To DataGridView1.RowCount - 2 Step 1
             DataGridView1.Rows.Item(r).Cells.Item("cHits").Value = 0
         Next
@@ -183,7 +186,7 @@ Public Class Form1
         For r = 0 To DataGridView1.RowCount - 2 Step 1
             DataGridView1.Rows.Item(r).Cells.Item("cDiff").Value = DataGridView1.Rows.Item(r).Cells.Item("cHits").Value - DataGridView1.Rows.Item(r).Cells.Item("cPB").Value
         Next
-        profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1, True)
+        profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1, AttemptsCounter, True)
         UpdateProgressAndTotals()
     End Sub
 
@@ -225,13 +228,13 @@ Public Class Form1
             Exit Sub
         End If
 
-        profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1) ' save previous selected profile
+        profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1, AttemptsCounter) ' save previous selected profile
 
         ' create, select and save new profile..
         ComboBox1.Items.Add(name)
         ComboBox1.SelectedItem = name
         DataGridView1.Rows.Clear()
-        profs.SaveProfileFrom(name, DataGridView1, True) ' save new empty profile
+        profs.SaveProfileFrom(name, DataGridView1, AttemptsCounter, True) ' save new empty profile
         UpdateProgressAndTotals()
     End Sub
 
@@ -243,11 +246,11 @@ Public Class Form1
             If Not ComboBox1.Items.Contains(name) Then Exit Do
         Loop
 
-        profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1) ' save previous selected profile
+        profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1, AttemptsCounter) ' save previous selected profile
 
         ' create, select and save new profile..
         ComboBox1.Items.Add(name)
-        profs.SaveProfileFrom(name, DataGridView1, True) ' copy current data to new profile
+        profs.SaveProfileFrom(name, DataGridView1, AttemptsCounter, True) ' copy current data to new profile
         ComboBox1.SelectedItem = name
     End Sub
 
@@ -269,7 +272,7 @@ Public Class Form1
                 ComboBox1.SelectedIndex = idx
             End If
 
-            profs.LoadProfileInto(ComboBox1.SelectedItem, DataGridView1)
+            profs.LoadProfileInto(ComboBox1.SelectedItem, DataGridView1, AttemptsCounter)
         End If
     End Sub
 
@@ -288,11 +291,22 @@ Public Class Form1
         ComboBox1.Items.Item(ComboBox1.SelectedIndex) = name
     End Sub
 
+    Private Sub btnAttempts_Click(sender As Object, e As EventArgs) Handles btnAttempts.Click
+        Dim amount = InputBox("Enter amount to be set!", "Set amount of attempts", AttemptsCounter)
+        If Not IsNumeric(amount) Then
+            MessageBox.Show("Only numbers are allowed!")
+            Exit Sub
+        End If
+        AttemptsCounter = amount
+        profs.SaveProfileFrom(ComboBox1PrevSelectedItem, DataGridView1, AttemptsCounter)
+        UpdateProgressAndTotals()
+    End Sub
+
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         If Not IsNothing(ComboBox1PrevSelectedItem) Then
-            profs.SaveProfileFrom(ComboBox1PrevSelectedItem, DataGridView1)
+            profs.SaveProfileFrom(ComboBox1PrevSelectedItem, DataGridView1, AttemptsCounter)
         End If
-        profs.LoadProfileInto(ComboBox1.SelectedItem, DataGridView1)
+        profs.LoadProfileInto(ComboBox1.SelectedItem, DataGridView1, AttemptsCounter)
         ComboBox1PrevSelectedItem = ComboBox1.SelectedItem
         UpdateProgressAndTotals()
         om.Update()
@@ -312,9 +326,9 @@ Public Class Form1
 
         Try
             Dim Split = DataGridView1.SelectedCells.Item(0).RowIndex
-            lbl_progress.Text = "Progress:  " & Split & " / " & Splits + 1
+            lbl_progress.Text = "Progress:  " & Split & " / " & Splits + 1 & "  # " & AttemptsCounter.ToString("D3")
         Catch ex As Exception
-            lbl_progress.Text = "Progress:  ?? / ??"
+            lbl_progress.Text = "Progress:  ?? / ??  # " & AttemptsCounter.ToString("D3")
         End Try
     End Sub
 
