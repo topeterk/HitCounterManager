@@ -195,6 +195,10 @@
     <Content Include="Designs\HitCounterYesNo.html" />
     <Content Include="Designs\HitCounterYesNoBlack.html" />
     <Content Include="Designs\HitCounterYesNoPink.html" />
+    <None Include="Images\icons8-staircase-32.png" />
+    <None Include="Images\icons8-attack-32.png" />
+    <None Include="Images\icons8-trophy-32.png" />
+    <None Include="Images\icons8-repeat-one-32.png" />
     <None Include="Images\icons8-counter-20.png" />
     <None Include="Images\icons8-about-20.png" />
     <None Include="Images\icons8-website-20.png" />

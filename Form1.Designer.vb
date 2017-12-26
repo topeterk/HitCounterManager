@@ -139,11 +139,11 @@ Partial Class Form1
         '
         Me.btnReset.BackColor = System.Drawing.Color.Salmon
         Me.btnReset.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReset.Image = Global.HitCounterManager.My.Resources.Resources.icons8_repeat_one_32
         Me.btnReset.Location = New System.Drawing.Point(12, 57)
         Me.btnReset.Name = "btnReset"
         Me.btnReset.Size = New System.Drawing.Size(75, 40)
         Me.btnReset.TabIndex = 1
-        Me.btnReset.Text = "Reset"
         Me.ToolTip1.SetToolTip(Me.btnReset, "RESET the current run")
         Me.btnReset.UseVisualStyleBackColor = False
         '
@@ -151,11 +151,11 @@ Partial Class Form1
         '
         Me.btnHit.BackColor = System.Drawing.Color.LightBlue
         Me.btnHit.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnHit.Image = Global.HitCounterManager.My.Resources.Resources.icons8_attack_32
         Me.btnHit.Location = New System.Drawing.Point(174, 57)
         Me.btnHit.Name = "btnHit"
         Me.btnHit.Size = New System.Drawing.Size(280, 40)
         Me.btnHit.TabIndex = 2
-        Me.btnHit.Text = "Hit"
         Me.ToolTip1.SetToolTip(Me.btnHit, "Count a HIT on the current split")
         Me.btnHit.UseVisualStyleBackColor = False
         '
@@ -163,11 +163,11 @@ Partial Class Form1
         '
         Me.btnSplit.BackColor = System.Drawing.Color.LightGreen
         Me.btnSplit.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSplit.Image = Global.HitCounterManager.My.Resources.Resources.icons8_staircase_32
         Me.btnSplit.Location = New System.Drawing.Point(460, 57)
         Me.btnSplit.Name = "btnSplit"
         Me.btnSplit.Size = New System.Drawing.Size(75, 40)
         Me.btnSplit.TabIndex = 3
-        Me.btnSplit.Text = "Split"
         Me.ToolTip1.SetToolTip(Me.btnSplit, "Jump to the next SPLIT")
         Me.btnSplit.UseVisualStyleBackColor = False
         '
@@ -245,11 +245,11 @@ Partial Class Form1
         '
         Me.btnPB.BackColor = System.Drawing.Color.LightYellow
         Me.btnPB.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPB.Image = Global.HitCounterManager.My.Resources.Resources.icons8_trophy_32
         Me.btnPB.Location = New System.Drawing.Point(93, 57)
         Me.btnPB.Name = "btnPB"
         Me.btnPB.Size = New System.Drawing.Size(75, 40)
         Me.btnPB.TabIndex = 11
-        Me.btnPB.Text = "PB"
         Me.ToolTip1.SetToolTip(Me.btnPB, "Record run as PB (personal best)")
         Me.btnPB.UseVisualStyleBackColor = False
         '
