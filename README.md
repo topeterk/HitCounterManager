@@ -33,13 +33,19 @@ It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit
   * Dark Souls 2
   * Dark Souls 3 + Ashes of Ariandel + The Ringed City
   * The Surge + A walk in the park
-* Comes with **high quality** and **low quality** designs for different uses:
-  * Numeric
-    * Shows all hit counts of all splits for the current run, PB and their differences
-  * Yes/No
+* Comes with pre-defined **high quality** and **low quality** designs for different uses:
+  * **Numeric**
+    * Shows the amount of hits for the current run, PB and their differences
+    * Every split is marked "better" which has an amount of zero hits
+  * **PBSplits**
+    * Shows the amount of hits for the current run, PB and their differences
+    * Every split is marked "better" which has a less or equal amount of hits compared to the PB split
+  * **YesNo**
     * Shows check marks/crosses if one got hit at the current run and PB
-  * NoDeath
-    * Shows check marks for all splits being alive, ignoring the hit counts
+    * Every split has a check mark which has an amount of zero hits
+  * **NoDeath**
+    * Shows check marks/crosses until the players death for the current run and PB
+    * All splits have check marks until the current split appears (__Now__ only) or a split appears that has already counted hits.
 
 ## Get the software
 All available releases can be found at the [Releases page](../../releases) on GitHub.
@@ -65,18 +71,7 @@ The pre-delivered HTML designs will update themself every 1.5 seconds, so there 
 
 The **high quality** designs like __White__ and __Pink__ are best for streams with high bitrates. The **low quality** designs like __Black__ is designed for streams supporting lower bitrates (for mobile device, for example).
 
-Those pre-delivered HTML desings are available:
-* [HitCounterNumeric.html](Designs/HitCounterNumeric.html)
-* [HitCounterNumericBlack.html](Designs/HitCounterNumericBlack.html)
-* [HitCounterNumericPink.html](Designs/HitCounterNumericPink.html)
-* [HitCounterYesNo.html](Designs/HitCounterYesNo.html)
-* [HitCounterYesNoBlack.html](Designs/HitCounterYesNoBlack.html)
-* [HitCounterYesNoPink.html](Designs/HitCounterYesNoPink.html)
-* [HitCounterNoDeath.html](Designs/HitCounterNoDeath.html)
-* [HitCounterNoDeathBlack.html](Designs/HitCounterNoDeathBlack.html)
-* [HitCounterNoDeathPink.html](Designs/HitCounterNoDeathPink.html)
-
-> Previews can be found at the **[Wiki pages](../../wiki)**.
+> Previews of the pre-delivered HTML desings can be found at the **[Wiki pages](../../wiki)**.
 
 #### Configuring Browser Source for OBS Studio
 Just insert the HTML's filepath in the URL field.
@@ -117,6 +112,7 @@ Thanks to:
 * [SquillaKilla](https://www.twitch.tv/squillakilla)
 * [CouchJockey](https://www.twitch.tv/couchjockey)
 * [SlipperySuzie](https://www.twitch.tv/slipperysuzie)
+* [TigerG92](https://www.twitch.tv/tigerg92)
 * [SayviTV](https://www.twitch.tv/sayvitv)
 * [Kazoodle](https://www.twitch.tv/kazoodle)
 * [GUD_LAK](https://www.twitch.tv/gud_lak)  
