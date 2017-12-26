@@ -56,7 +56,8 @@ function DoUpdate(list)
 {
 	heartbeat = 0; // reset heartbeat, because we are alive
 
-	var active = false;
+	var firsthitNow = false;
+	var firsthitPB = false;
 	var split = "&nbsp;";
 	var new_tbl = "";
 
@@ -70,13 +71,15 @@ function DoUpdate(list)
 
 	for ( i = 0 ; i < list.length ; i = i + 1 )
 	{
-		if (list[i][3]) { active = true; split = list[i][0]; }
+		if (list[i][1]) { firsthitNow = true; }
+		if (list[i][2]) { firsthitPB  = true; }
+		if (list[i][3]) { firsthitNow = true; split = list[i][0]; }
 
 		new_tbl +=
  '<tr class="' + (list[i][3] ? 'current' : '') + '">' +
-  '<td class="first ' + (!active ? 'better' : '') + '">' + list[i][0] + '</td>' +
-  '<td>' + printyesno(!active ? 0 : 1) + '</td>' +
-  '<td>' + printyesno(list[i][2]) + '</td>' +
+  '<td class="first ' + (firsthitNow ? '' : 'better') + '">' + list[i][0] + '</td>' +
+  '<td>' + printyesno(firsthitNow ? 1 : 0) + '</td>' +
+  '<td>' + printyesno(firsthitPB ? 1 : 0) + '</td>' +
  '</tr>';
 	}
 
