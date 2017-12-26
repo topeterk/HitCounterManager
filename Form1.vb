@@ -315,19 +315,17 @@ Public Class Form1
         Dim TotalPB = 0
         Dim Splits = DataGridView1.RowCount - 2
 
-        For r = 0 To Splits Step 1
-            TotalHits = TotalHits + DataGridView1.Rows.Item(r).Cells.Item("cHits").Value
-            TotalPB = TotalPB + DataGridView1.Rows.Item(r).Cells.Item("cPB").Value
-        Next
-
-        lbl_totals.Text = "Total: " & TotalHits & " Hits   " & TotalPB & " PB"
-
-        Try
-            Dim Split = DataGridView1.SelectedCells.Item(0).RowIndex
-            lbl_progress.Text = "Progress:  " & Split & " / " & Splits + 1 & "  # " & AttemptsCounter.ToString("D3")
-        Catch ex As Exception
+        If Splits < 0 Then ' Check for valid entries
             lbl_progress.Text = "Progress:  ?? / ??  # " & AttemptsCounter.ToString("D3")
-        End Try
+        Else
+            For r = 0 To Splits Step 1
+                TotalHits = TotalHits + DataGridView1.Rows.Item(r).Cells.Item("cHits").Value
+                TotalPB = TotalPB + DataGridView1.Rows.Item(r).Cells.Item("cPB").Value
+            Next
+
+            lbl_progress.Text = "Progress:  " & DataGridView1.SelectedCells.Item(0).RowIndex & " / " & Splits + 1 & "  # " & AttemptsCounter.ToString("D3")
+        End If
+        lbl_totals.Text = "Total: " & TotalHits & " Hits   " & TotalPB & " PB"
     End Sub
 
 End Class
