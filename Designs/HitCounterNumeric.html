@@ -59,6 +59,7 @@ function DoUpdate(list)
 	var new_tbl = ""
 	var sum = 0;
 	var pb = 0;
+	var betterworseclass;
 
 	var tbl = document.getElementById('table');
 	new_tbl =
@@ -73,12 +74,13 @@ function DoUpdate(list)
 	{
 		sum = sum + list[i][1];
 		pb = pb + list[i][2];
+		betterworseclass = (!active ? (list[i][1] == 0 ? 'better' : 'worse') : '');
 		new_tbl +=
  '<tr class="' + (list[i][3] ? 'current' : '') + '">' +
-  '<td class="first ' + (!active ? (list[i][1] == 0 ? 'better' : 'worse') : '') + '">' + list[i][0] + '</td>' +
-  '<td>' + list[i][1] + '</td>' +
-  '<td>' + printsinged(list[i][1] - list[i][2]) + '</td>' +
-  '<td>' + list[i][2] + '(' + pb + ')</td>' +
+  '<td class="first ' + betterworseclass + '">' + list[i][0] + '</td>' +
+  '<td class="' + betterworseclass + '">' + list[i][1] + '</td>' +
+  '<td class="' + betterworseclass + '">' + printsinged(list[i][1] - list[i][2]) + '</td>' +
+  '<td class="' + betterworseclass + '">' + list[i][2] + '(' + pb + ')</td>' +
  '</tr>';
 		if (list[i][3]) active = true;
 	}
