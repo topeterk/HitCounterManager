@@ -40,7 +40,7 @@
 <table id="table"></table>
 <script language="javascript">
 
-function printsinged(i) { if (i > 0) return "+" + i; else return i; }
+function printsigned(i) { if (i > 0) return "+" + i; else return i; }
 
 var heartbeat = 0;
 function Watchdog()
@@ -80,7 +80,7 @@ function DoUpdate(list)
  '<tr class="' + (list[i][3] ? 'current' : '') + '">' +
   '<td class="first ' + betterworseclass + '">' + list[i][0] + '</td>' +
   '<td class="' + betterworseclass + '">' + list[i][1] + '</td>' +
-  '<td class="' + betterworseclass + '">' + printsinged(list[i][1] - list[i][2]) + '</td>' +
+  '<td class="' + betterworseclass + '">' + printsigned(list[i][1] - list[i][2]) + '</td>' +
   '<td class="' + betterworseclass + '">' + list[i][2] + '(' + pb + ')</td>' +
  '</tr>';
 		if (list[i][3]) active = true;
@@ -90,7 +90,7 @@ function DoUpdate(list)
  '<tr>' +
   '<td class="major bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + ' first">Total:</td>' +
   '<td class="major bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + sum + '</td>' +
-  '<td class="major bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + printsinged(sum - pb) + '</td>' +
+  '<td class="major bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + printsigned(sum - pb) + '</td>' +
   '<td class="major bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + pb + '</td>' +
  '</tr>';
 
