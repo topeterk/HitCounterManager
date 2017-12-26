@@ -174,12 +174,10 @@ Public Class Form1
 
         ' right aligned
         btnSplit.Left = Width - Pad - 15 - btnSplit.Width
-        btnDown.Left = Width - Pad - 15 - btnDown.Width
-        btnUp.Left = btnDown.Left - btnDown.Width - btnDown.Margin.Left - btnUp.Margin.Right
+        lbl_totals.Width = Width - Pad - 15 - lbl_totals.Left
 
         ' left aligned
         btnHit.Width = btnSplit.Left - Pad / 2 - btnHit.Left
-        lbl_totals.Width = Width - Pad - 15 - lbl_totals.Left
     End Sub
 
     Private Sub DataGridView1_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged

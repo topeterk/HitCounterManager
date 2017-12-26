@@ -176,7 +176,7 @@ Partial Class Form1
         Me.btnDown.BackgroundImage = Global.HitCounterManager.My.Resources.Resources.icons8_scroll_down_20
         Me.btnDown.FlatAppearance.BorderSize = 0
         Me.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDown.Location = New System.Drawing.Point(516, 4)
+        Me.btnDown.Location = New System.Drawing.Point(303, 4)
         Me.btnDown.Name = "btnDown"
         Me.btnDown.Size = New System.Drawing.Size(20, 20)
         Me.btnDown.TabIndex = 5
@@ -188,7 +188,7 @@ Partial Class Form1
         Me.btnUp.BackgroundImage = Global.HitCounterManager.My.Resources.Resources.icons8_scroll_up_20
         Me.btnUp.FlatAppearance.BorderSize = 0
         Me.btnUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUp.Location = New System.Drawing.Point(490, 4)
+        Me.btnUp.Location = New System.Drawing.Point(277, 4)
         Me.btnUp.Name = "btnUp"
         Me.btnUp.Size = New System.Drawing.Size(20, 20)
         Me.btnUp.TabIndex = 6
