@@ -16,6 +16,7 @@
     <ProfileList>
       <Profile>
         <Name>Dark Souls 3 (All Bosses) [EN]</Name>
+        <Attempts>0</Attempts>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>
@@ -135,6 +136,7 @@
       </Profile>
       <Profile>
         <Name>Dark Souls 2 (All Bosses) [EN]</Name>
+        <Attempts>0</Attempts>
         <Rows>
           <ProfileRow>
             <Title>Last Giant</Title>
@@ -332,6 +334,7 @@
       </Profile>
       <Profile>
         <Name>Dark Souls 2 (Any%) [DE]</Name>
+        <Attempts>0</Attempts>
         <Rows>
           <ProfileRow>
             <Title>Letzer Riese</Title>
@@ -463,6 +466,7 @@
       </Profile>
       <Profile>
         <Name>Dark Souls 1 Prepair to Die Edition (All Bosses) [EN]</Name>
+        <Attempts>0</Attempts>
         <Rows>
           <ProfileRow>
             <Title>Asylum Demon</Title>
@@ -624,6 +628,7 @@
       </Profile>
       <Profile>
         <Name>Dark Souls 3 Ashes of Ariandel (All Bosses) [EN]</Name>
+        <Attempts>0</Attempts>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>
@@ -755,6 +760,7 @@
       </Profile>
       <Profile>
         <Name>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE</Name>
+        <Attempts>0</Attempts>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>
@@ -910,6 +916,7 @@
       </Profile>
       <Profile>
         <Name>Dark Souls 3 The Ringed City (All Bosses) [EN]</Name>
+        <Attempts>0</Attempts>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>
@@ -1065,6 +1072,7 @@
       </Profile>
       <Profile>
         <Name>The Surge [EN]</Name>
+        <Attempts>0</Attempts>
         <Rows>
           <ProfileRow>
             <Title>P.A.X.</Title>
@@ -1100,6 +1108,7 @@
       </Profile>
       <Profile>
         <Name>Bloodborne The old hunters (All Bosses) [EN]</Name>
+        <Attempts>0</Attempts>
         <Rows>
           <ProfileRow>
             <Title>Father Gascoigne</Title>
@@ -1237,6 +1246,7 @@
       </Profile>
       <Profile>
         <Name>Bloodborne (All Bosses) [EN]</Name>
+        <Attempts>0</Attempts>
         <Rows>
           <ProfileRow>
             <Title>Father Gascoigne</Title>
@@ -1344,6 +1354,7 @@
       </Profile>
       <Profile>
         <Name>The Surge A walk in the park (All Bosses) [EN]</Name>
+        <Attempts>0</Attempts>
         <Rows>
           <ProfileRow>
             <Title>P.A.X.</Title>
