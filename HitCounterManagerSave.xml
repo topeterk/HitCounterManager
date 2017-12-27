@@ -770,9 +770,9 @@
           </ProfileRow>
           <ProfileRow>
             <Title>Vordt</Title>
-            <Hits>1</Hits>
-            <Diff>-1</Diff>
-            <PB>2</PB>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
           </ProfileRow>
           <ProfileRow>
             <Title>Abyss Watchers</Title>
@@ -788,15 +788,15 @@
           </ProfileRow>
           <ProfileRow>
             <Title>Dancer</Title>
-            <Hits>4</Hits>
-            <Diff>0</Diff>
-            <PB>4</PB>
+            <Hits>0</Hits>
+            <Diff>-1</Diff>
+            <PB>1</PB>
           </ProfileRow>
           <ProfileRow>
             <Title>Crystal Sage</Title>
-            <Hits>0</Hits>
-            <Diff>0</Diff>
-            <PB>0</PB>
+            <Hits>1</Hits>
+            <Diff>-1</Diff>
+            <PB>2</PB>
           </ProfileRow>
           <ProfileRow>
             <Title>Deacons</Title>
@@ -806,9 +806,9 @@
           </ProfileRow>
           <ProfileRow>
             <Title>Yhorm</Title>
-            <Hits>0</Hits>
+            <Hits>4</Hits>
             <Diff>0</Diff>
-            <PB>0</PB>
+            <PB>4</PB>
           </ProfileRow>
           <ProfileRow>
             <Title>Pontiff</Title>
@@ -884,8 +884,8 @@
           </ProfileRow>
           <ProfileRow>
             <Title>Gravetenders</Title>
-            <Hits>1</Hits>
-            <Diff>0</Diff>
+            <Hits>0</Hits>
+            <Diff>-1</Diff>
             <PB>1</PB>
           </ProfileRow>
           <ProfileRow>
@@ -902,8 +902,8 @@
           </ProfileRow>
           <ProfileRow>
             <Title>Halflight</Title>
-            <Hits>1</Hits>
-            <Diff>0</Diff>
+            <Hits>0</Hits>
+            <Diff>-1</Diff>
             <PB>1</PB>
           </ProfileRow>
           <ProfileRow>
