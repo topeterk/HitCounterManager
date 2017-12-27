@@ -292,6 +292,7 @@ Public Class Form1
     Private Sub btnAttempts_Click(sender As Object, e As EventArgs) Handles btnAttempts.Click
         Dim amount = InputBox("Enter amount to be set!", "Set amount of attempts", AttemptsCounter)
         If Not IsNumeric(amount) Then
+            If amount.Equals("") Then Exit Sub ' Unfortunately this is the Cancel button
             MessageBox.Show("Only numbers are allowed!")
             Exit Sub
         End If
