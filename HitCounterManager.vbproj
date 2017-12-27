@@ -184,6 +184,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Designs\HitCounterPBSplits.html" />
+    <Content Include="Designs\HitCounterPBSplitsBlack.html" />
+    <Content Include="Designs\HitCounterPBSplitsPink.html" />
     <Content Include="HitCounter.template" />
     <Content Include="HitCounterManagerSave.xml" />
     <Content Include="Designs\HitCounterNoDeath.html" />
