@@ -1,0 +1,32 @@
+ table {
+	border-spacing: 0px;
+	margin-left:auto; 
+    margin-right:auto;
+	/*   This adds 3D rendering and gives more depth to the counter: */
+	/*   Please note that you may need to update the values to match with your hit counter position and size! */
+	/* transform: translate(-10px,50px) perspective(1000px) rotateY(-10deg) scale(1.0,1.0); */
+ }
+
+ tr.current { background-color: #005000; }
+ tr.even { background-color: #242424; }
+ tr.odd { background-color: #161616; }
+
+ td {
+	padding:3px 4px 3px 4px;
+	border-bottom:2px solid #ccc;
+	text-shadow: 0 2px 2px #000;
+	font-size: 21px;
+	font-family: sans-serif;
+	font-weight: bold;
+	color: white;
+	text-align: center;
+ }
+
+ td.major { font-size: 23px; }
+ td.dark { background-color: black; }
+ td.better { color: #08FF20; }
+ td.worse { color: #FF4A4A; }
+ td.bottom { border: 0px; }
+ td.left { text-align: left; }
+ td.right { text-align: right; }
+ 

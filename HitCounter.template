@@ -1,33 +1,49 @@
 <html>
 <head>
- <title>HitcounterData</title>
+ <title>HitCounterData</title>
 </head>
 <body>
 <script language="javascript">
-var list = [
-/* HITCOUNTER_LIST_START */
-["Gundyr", 0, 0, 0],
-["Vordt", 1, 2, 0],
-["AbyssWatchers", 0, 0, 0],
-["Wolnir", 0, 0, 0],
-["Dancer", 4, 4, 0],
-["Crystal&nbsp;Sage", 0, 0, 1],
-["Deacons", 0, 2, 0],
-["Yhorm", 0, 0, 0],
-["Pontiff", 0, 0, 0],
-["Aldrich", 5, 3, 0],
-["Dragonslayer", 0, 0, 0],
-["Princess", 0, 0, 0],
-["Soul&nbsp;of&nbsp;Cinder", 0, 5, 0],
-["Greatwood", 0, 0, 0],
-["Old&nbsp;Deamon&nbsp;King", 0, 1, 0],
-["Ocelot", 4, 0, 0],
-["Champion&nbsp;Gundyr", 0, 0, 0],
-["Wyvern", 5, 0, 0],
-["Nameless&nbsp;King", 0, 0, 0],
-/* HITCOUNTER_LIST_END */
-];
-parent.DoUpdate(list);
+var data =
+/* HITCOUNTER_JSON_START */
+{
+"list": [
+["Gundyr", 0, 0],
+["Vordt", 0, 0],
+["Abyss&nbsp;Watchers", 0, 0],
+["Wolnir", 0, 0],
+["Dancer", 0, 1],
+["Crystal&nbsp;Sage", 1, 2],
+["Deacons", 0, 2],
+["Yhorm", 4, 4],
+["Pontiff", 0, 0],
+["Aldrich", 5, 3],
+["Dragonslayer", 0, 0],
+["Princess", 0, 0],
+["Soul&nbsp;of&nbsp;Cinder", 0, 5],
+["Greatwood", 0, 0],
+["Old&nbsp;Deamon&nbsp;King", 0, 1],
+["Ocelot", 4, 0],
+["Champion&nbsp;Gundyr", 0, 0],
+["Wyvern", 5, 0],
+["Nameless&nbsp;King", 0, 0],
+["Sister&nbsp;Friede", 0, 0],
+["Gravetenders", 0, 1],
+["Demon&nbsp;Prince", 0, 0],
+["Darkeater&nbsp;Midir", 0, 0],
+["Halflight", 0, 1],
+["Gael", 0, 0]
+],
+"split_active": 18,
+"split_first": 0,
+"split_last": 999,
+"font_url": "",              // "https://fonts.googleapis.com/css?family=Fontdiner%20Swanky",
+"css_url": "stylesheet.css", // "stylesheet_pink.css"
+"high_contrast": false
+}
+/* HITCOUNTER_JSON_END */
+;
+parent.DoUpdate(data);
 </script>
 </body>
 </html>

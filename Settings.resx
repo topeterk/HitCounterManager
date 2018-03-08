@@ -123,12 +123,12 @@ You can backup, restore or share this file at any time.
 Saving is done automatically by either closing the application or by hitting the "Save" button at the main window.</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
-    <value>The input file (e.g. "HitCounter.template") will be read once when the application starts.
+    <value>The input file will be read once when the application starts.
 For the output generation those actions will be taken:
-- search for a line containing "HITCOUNTER_LIST_START"
-- remove all lines afterwards until a line contains "HITCOUNTER_LIST_END"
-- insert javascript table including the currently selected profile's table
-- save the generated output into the output file.</value>
+- search for a line containing the keywork "HITCOUNTER_JSON_START"
+- remove all lines afterwards until a line contains the ending keyword "HITCOUNTER_JSON_END"
+- insert the JSON formatted data at this location
+- save the generated output file</value>
   </data>
   <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

@@ -3,104 +3,58 @@
  <title>Hitcounter Numeric</title>
  <!-- OBS' CLR browser plugin might use CSS extension. Disable the CSS when it flickers. -->
  <!-- Method also needs --allow-file-access-from-files to be set -->
- <style language="css">
- table {
-	border-spacing: 0px;
-	margin-left:auto; 
-    margin-right:auto;
-	/*   This adds 3D rendering and gives more depth to the counter: */
-	/*   Please note that you may need to update the values to match with your hit counter position and size! */
-	/* transform: translate(-10px,50px) perspective(1000px) rotateY(-10deg) scale(1.0,1.0); */
- }
-
- tr.current { background-color: #005000; }
-
- td {
-	padding:3px 4px 3px 4px;
-	border-bottom:2px solid #ccc;
-	text-shadow: 0 2px 2px #000;
-	font-size: 21px;
-	font-family: 'Open Sans', sans-serif;
-	font-weight: bold;
-	color: white;
-	text-align: center;
- }
-  
- td.first { text-align: left; }
- td.major { font-size: 23px; }
- td.better { color: #08FF20; }
- td.worse { color: #FF4A4A; }
- td.bottom { border:0px; }
- </style>
+ <script type="text/javascript" src="javascript.js"></script>
 </head>
-
 <body>
-<iframe src="../HitCounter.html" style="display:none;"></iframe>
 <table id="table"></table>
 <script language="javascript">
 
-function printsigned(i) { if (i > 0) return "+" + i; else return i; }
-
-var heartbeat = 0;
-function Watchdog()
+function DoVisualUpdate(data)
 {
-	setTimeout(function() { Watchdog();	}, 1500); // refresh every second
-	if (heartbeat <= 1)
-		heartbeat++;
-	else
-		document.getElementsByTagName('iframe')[0].src = '../HitCounter.html'; // retry reloading file in case of errors
-}
-
-function DoUpdate(list)
-{
-	heartbeat = 0; // reset heartbeat, because we are alive
-
 	var active = false;
-	var new_tbl = ""
+	var new_tbl = "";
 	var sum = 0;
 	var pb = 0;
 	var betterworseclass;
+	var majorclass = (data.high_contrast ? 'major dark' : 'major');
 
 	var tbl = document.getElementById('table');
 	new_tbl =
  '<tr>' +
-  '<td class="major first">Split</td>' +
-  '<td class="major" width="30px">Now</td>' +
-  '<td class="major" width="30px">Diff</td>' +
-  '<td class="major" width="30px">PB</td>' +
+  '<td class="' + majorclass + ' left">Split</td>' +
+  '<td class="' + majorclass + '" width="30px">Now</td>' +
+  '<td class="' + majorclass + '" width="30px">Diff</td>' +
+  '<td class="' + majorclass + '" width="30px">PB</td>' +
  '</tr>';
 
-	for ( i = 0 ; i < list.length ; i = i + 1 )
+	for ( i = data.split_first ; (i < data.split_last) && (i < data.list.length) ; i = i + 1 )
 	{
-		sum = sum + list[i][1];
-		pb = pb + list[i][2];
-		betterworseclass = (!active ? (list[i][1] == 0 ? 'better' : 'worse') : '');
+		sum = sum + data.list[i][1];
+		pb = pb + data.list[i][2];
+		betterworseclass = (!active ? (data.list[i][1] == 0 ? 'better' : 'worse') : '');
 		new_tbl +=
- '<tr class="' + (list[i][3] ? 'current' : '') + '">' +
-  '<td class="first ' + betterworseclass + '">' + list[i][0] + '</td>' +
-  '<td class="' + betterworseclass + '">' + list[i][1] + '</td>' +
-  '<td class="' + betterworseclass + '">' + printsigned(list[i][1] - list[i][2]) + '</td>' +
-  '<td class="' + betterworseclass + '">' + list[i][2] + '(' + pb + ')</td>' +
+ '<tr class="' + (data.split_active == i ? 'current' : (data.high_contrast ? (i%2==0 ? 'even' : 'odd') : '')) + '">' +
+  '<td class="' + betterworseclass + ' left">' + data.list[i][0] + '</td>' +
+  '<td class="' + (data.high_contrast ? '' : betterworseclass) + '">' + data.list[i][1] + '</td>' +
+  '<td class="' + (data.high_contrast ? '' : betterworseclass) + '">' + IntToStringSigned(data.list[i][1] - data.list[i][2]) + '</td>' +
+  '<td class="' + (data.high_contrast ? '' : betterworseclass) + '">' + data.list[i][2] + '(' + pb + ')</td>' +
  '</tr>';
-		if (list[i][3]) active = true;
+		if (data.split_active == i) active = true;
 	}
 
 	new_tbl +=
  '<tr>' +
-  '<td class="major bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + ' first">Total:</td>' +
-  '<td class="major bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + sum + '</td>' +
-  '<td class="major bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + printsigned(sum - pb) + '</td>' +
-  '<td class="major bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + pb + '</td>' +
+  '<td class="' + majorclass + ' bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + ' left">Total:</td>' +
+  '<td class="' + majorclass + ' bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + sum + '</td>' +
+  '<td class="' + majorclass + ' bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + IntToStringSigned(sum - pb) + '</td>' +
+  '<td class="' + majorclass + ' bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + pb + '</td>' +
  '</tr>';
 
-	tbl.innerHTML = new_tbl;
-
-	setTimeout(function() { document.getElementsByTagName('iframe')[0].src = '../HitCounter.html';	}, 1500); // refresh every second
+	tbl.innerHTML = new_tbl; // update DOM in one shot
 }
 
-Watchdog();
-</script>
+Start(); // Enter eternal loop
 
+</script>
 </body>
 </html>
-

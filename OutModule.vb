@@ -1,6 +1,6 @@
 ﻿'MIT License
 
-'Copyright(c) 2016 Peter Kirmeier
+'Copyright(c) 2016-2018 Peter Kirmeier
 
 'Permission Is hereby granted, free Of charge, to any person obtaining a copy
 'of this software And associated documentation files (the "Software"), to deal
@@ -60,10 +60,30 @@ Public Class OutModule
         End Set
     End Property
 
+    ' Escapes special HTML characters
+    Private Function SimpleHtmlEscape(Str As String)
+        If Not IsNothing(Str) Then
+            Str = Str.ToString().Replace("&", "&amp;").Replace(" ", "&nbsp;")
+            Str = Str.Replace("ä", "&auml;").Replace("ö", "&ouml;").Replace("ü", "&uuml;")
+            Str = Str.Replace("Ä", "&Auml;").Replace("Ö", "&Ouml;").Replace("Ü", "&Uuml;")
+        End If
+        SimpleHtmlEscape = Str
+    End Function
+
+    ' Creates a JSON string of a boolean
+    Private Function ToJsonBooleanString(ByRef bool As Boolean)
+        If bool Then
+            ToJsonBooleanString = "true"
+        Else
+            ToJsonBooleanString = "false"
+        End If
+    End Function
+
     ' Use buffer to create outputfile while patching some data
     Public Sub Update()
         Dim sr As StreamWriter
-        Dim IsPatching = False
+        Dim IsWritingList = False ' Kept for old designs before version 1.10
+        Dim IsWritingJson = False
 
         If IsNothing(_FilePathOut) Then Exit Sub
 
@@ -79,33 +99,68 @@ Public Class OutModule
         sr.NewLine = vbNewLine
 
         For Each line In template.Split(vbNewLine)
-            If InStr(line, "HITCOUNTER_LIST_START") Then
-                Dim cells As DataGridViewCellCollection
-                Dim title As String
-                Dim diff As Integer
-                Dim hits As Integer
-                Dim PB As Integer
-                Dim active As Integer
-                For r = 0 To dgv.RowCount - 2 Step 1
-                    cells = dgv.Rows.Item(r).Cells
-                    title = cells.Item("cTitle").Value
-                    If Not IsNothing(title) Then
-                        title = title.ToString().Replace("&", "&amp;").Replace(" ", "&nbsp;")
-                        title = title.Replace("ä", "&auml;").Replace("ö", "&ouml;").Replace("ü", "&uuml;")
-                        title = title.Replace("Ä", "&Auml;").Replace("Ö", "&Ouml;").Replace("Ü", "&Uuml;")
-                    End If
-                    hits = cells.Item("cHits").Value
-                    diff = cells.Item("cDiff").Value
-                    PB = cells.Item("cPB").Value
-                    If r = dgv.SelectedCells.Item(0).RowIndex Then active = 1 Else active = 0
+            If IsWritingJson Then
+                If InStr(line, "HITCOUNTER_JSON_END") Then IsWritingJson = False
+            ElseIf IsWritingList Then
+                If InStr(line, "HITCOUNTER_LIST_END") Then IsWritingList = False
+            Else
+                If InStr(line, "HITCOUNTER_JSON_START") Then ' Format data according to RFC 4627 (JSON)
+                    Dim cells As DataGridViewCellCollection
+                    Dim title As String
+                    Dim diff As Integer
+                    Dim hits As Integer
+                    Dim PB As Integer
+                    Dim active = 0
+                    Dim high_contrast = False
 
-                    sr.WriteLine("[""" & title & """, " & hits & ", " & PB & ", " & active & "],")
-                Next
-                IsPatching = True
-            ElseIf InStr(line, "HITCOUNTER_LIST_END") Then
-                IsPatching = False
-            ElseIf Not IsPatching Then
-                sr.WriteLine(line.Replace(vbLf, ""))
+                    sr.WriteLine("{")
+
+                    sr.WriteLine("""list"": [")
+                    For r = 0 To dgv.RowCount - 2 Step 1
+                        cells = dgv.Rows.Item(r).Cells
+                        title = SimpleHtmlEscape(cells.Item("cTitle").Value)
+                        hits = cells.Item("cHits").Value
+                        diff = cells.Item("cDiff").Value
+                        PB = cells.Item("cPB").Value
+                        If r = dgv.SelectedCells.Item(0).RowIndex Then active = r
+
+                        If r <> 0 Then sr.WriteLine(",") ' separator
+                        sr.Write("[""" & title & """, " & hits & ", " & PB & "]")
+                    Next
+                    sr.WriteLine("") ' no trailing separator
+                    sr.WriteLine("],")
+
+                    sr.WriteLine("""split_active"": " + active.ToString() + ",")
+                    sr.WriteLine("""split_first"": " + 0.ToString() + ",") ' TODO! TODO! TODO! TODO!
+                    sr.WriteLine("""split_last"": " + 999.ToString() + ",") ' TODO! TODO! TODO! TODO!
+
+                    sr.WriteLine("""font_url"": ""https://fonts.googleapis.com/css?family=Fontdiner%20Swanky"",") ' TODO! TODO! TODO! TODO!
+                    sr.WriteLine("""css_url"": ""stylesheet.css"",") ' TODO! TODO! TODO! TODO!
+                    sr.WriteLine("""high_contrast"": " + ToJsonBooleanString(high_contrast)) ' TODO! TODO! TODO! TODO!
+
+                    sr.WriteLine("}")
+                    IsWritingJson = True
+                ElseIf InStr(line, "HITCOUNTER_LIST_START") Then ' Kept for old designs before version 1.10
+                    Dim cells As DataGridViewCellCollection
+                    Dim title As String
+                    Dim diff As Integer
+                    Dim hits As Integer
+                    Dim PB As Integer
+                    Dim active As Integer
+                    For r = 0 To dgv.RowCount - 2 Step 1
+                        cells = dgv.Rows.Item(r).Cells
+                        title = SimpleHtmlEscape(cells.Item("cTitle").Value)
+                        hits = cells.Item("cHits").Value
+                        diff = cells.Item("cDiff").Value
+                        PB = cells.Item("cPB").Value
+                        If r = dgv.SelectedCells.Item(0).RowIndex Then active = 1 Else active = 0
+
+                        sr.WriteLine("[""" & title & """, " & hits & ", " & PB & ", " & active & "],")
+                    Next
+                    IsWritingList = True
+                ElseIf Not IsWritingList And Not IsWritingJson Then
+                    sr.WriteLine(line.Replace(vbLf, ""))
+                End If
             End If
         Next
         sr.Close()

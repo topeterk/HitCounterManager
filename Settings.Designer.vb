@@ -206,7 +206,7 @@ Partial Class Settings
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(6, 10)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(416, 78)
+        Me.Label5.Size = New System.Drawing.Size(473, 78)
         Me.Label5.TabIndex = 7
         Me.Label5.Text = resources.GetString("Label5.Text")
         '
@@ -286,7 +286,7 @@ Partial Class Settings
         Me.tab_appearance.Location = New System.Drawing.Point(4, 22)
         Me.tab_appearance.Name = "tab_appearance"
         Me.tab_appearance.Padding = New System.Windows.Forms.Padding(3, 10, 3, 3)
-        Me.tab_appearance.Size = New System.Drawing.Size(588, 213)
+        Me.tab_appearance.Size = New System.Drawing.Size(588, 209)
         Me.tab_appearance.TabIndex = 1
         Me.tab_appearance.Text = "Appearance"
         Me.tab_appearance.UseVisualStyleBackColor = True

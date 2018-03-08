@@ -185,19 +185,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Designs\HitCounterPBSplits.html" />
-    <Content Include="Designs\HitCounterPBSplitsBlack.html" />
-    <Content Include="Designs\HitCounterPBSplitsPink.html" />
+    <Content Include="Designs\javascript.js" />
+    <Content Include="Designs\stylesheet.css" />
+    <Content Include="Designs\stylesheet_pink.css" />
     <Content Include="HitCounter.template" />
     <Content Include="HitCounterManagerSave.xml" />
     <Content Include="Designs\HitCounterNoDeath.html" />
-    <Content Include="Designs\HitCounterNoDeathBlack.html" />
-    <Content Include="Designs\HitCounterNoDeathPink.html" />
     <Content Include="Designs\HitCounterNumeric.html" />
-    <Content Include="Designs\HitCounterNumericBlack.html" />
-    <Content Include="Designs\HitCounterNumericPink.html" />
     <Content Include="Designs\HitCounterYesNo.html" />
-    <Content Include="Designs\HitCounterYesNoBlack.html" />
-    <Content Include="Designs\HitCounterYesNoPink.html" />
     <None Include="Images\icons8-staircase-32.png" />
     <None Include="Images\icons8-attack-32.png" />
     <None Include="Images\icons8-trophy-32.png" />
