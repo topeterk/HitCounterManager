@@ -27,6 +27,12 @@ function DoVisualUpdate(data)
   '<td class="' + majorclass + '" width="30px">PB</td>' +
  '</tr>';
 
+	for ( i = 0 ; (i < data.split_first) && (i < data.list.length) ; i = i + 1 )
+	{
+		sum = sum + data.list[i][1];
+		pb = pb + data.list[i][2];
+	}
+
 	for ( i = data.split_first ; (i < data.split_last) && (i < data.list.length) ; i = i + 1 )
 	{
 		sum = sum + data.list[i][1];
@@ -40,6 +46,12 @@ function DoVisualUpdate(data)
   '<td class="' + (data.high_contrast ? '' : betterworseclass) + '">' + data.list[i][2] + '(' + pb + ')</td>' +
  '</tr>';
 		if (data.split_active == i) active = true;
+	}
+
+	for ( i = data.split_last ; i < data.list.length ; i = i + 1 )
+	{
+		sum = sum + data.list[i][1];
+		pb = pb + data.list[i][2];
 	}
 
 	new_tbl +=
