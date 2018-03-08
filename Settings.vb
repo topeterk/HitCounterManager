@@ -1,6 +1,6 @@
 ﻿'MIT License
 
-'Copyright(c) 2016 Peter Kirmeier
+'Copyright(c) 2016-2018 Peter Kirmeier
 
 'Permission Is hereby granted, free Of charge, to any person obtaining a copy
 'of this software And associated documentation files (the "Software"), to deal
@@ -177,5 +177,10 @@ Public Class Settings
                 MessageBox.Show("Changes only take effect after restarting the application.", "Restart required", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
         End If
+    End Sub
+
+    Private Sub cbApCustomCss_CheckedChanged(sender As Object, e As EventArgs) Handles cbApCustomCss.CheckedChanged
+        txtCssUrl.Enabled = cbApCustomCss.Checked
+        txtFontUrl.Enabled = cbApCustomCss.Checked
     End Sub
 End Class
