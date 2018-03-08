@@ -30,6 +30,13 @@ Public Class OutModule
     Private template As String = ""
     Private dgv As DataGridView
 
+    Public ShowSplitsCountFinished As Integer = 999
+    Public ShowSplitsCountUpcoming As Integer = 999
+    Public StyleUseHighContrast As Boolean = False
+    Public StyleUseCustom As Boolean = False
+    Public StyleCssUrl As String = ""
+    Public StyleFontUrl As String = ""
+
     ' bind object to a data grid
     Public Sub New(DataGridView As DataGridView)
         dgv = DataGridView
@@ -111,7 +118,8 @@ Public Class OutModule
                     Dim hits As Integer
                     Dim PB As Integer
                     Dim active = 0
-                    Dim high_contrast = False
+                    Dim iTemp As Integer
+                    Dim sTemp As String
 
                     sr.WriteLine("{")
 
@@ -131,12 +139,18 @@ Public Class OutModule
                     sr.WriteLine("],")
 
                     sr.WriteLine("""split_active"": " + active.ToString() + ",")
-                    sr.WriteLine("""split_first"": " + 0.ToString() + ",") ' TODO! TODO! TODO! TODO!
-                    sr.WriteLine("""split_last"": " + 999.ToString() + ",") ' TODO! TODO! TODO! TODO!
+                    iTemp = active - ShowSplitsCountFinished
+                    If iTemp < 0 Then iTemp = 0
+                    sr.WriteLine("""split_first"": " + iTemp.ToString() + ",")
+                    iTemp = active + ShowSplitsCountUpcoming
+                    If 999 < iTemp Then iTemp = 999
+                    sr.WriteLine("""split_last"": " + iTemp.ToString() + ",")
 
-                    sr.WriteLine("""font_url"": ""https://fonts.googleapis.com/css?family=Fontdiner%20Swanky"",") ' TODO! TODO! TODO! TODO!
-                    sr.WriteLine("""css_url"": ""stylesheet.css"",") ' TODO! TODO! TODO! TODO!
-                    sr.WriteLine("""high_contrast"": " + ToJsonBooleanString(high_contrast)) ' TODO! TODO! TODO! TODO!
+                    If StyleUseCustom Then sTemp = StyleFontUrl Else sTemp = ""
+                    sr.WriteLine("""font_url"": """ + sTemp + """,")
+                    If StyleUseCustom Then sTemp = StyleCssUrl Else sTemp = "stylesheet.css"
+                    sr.WriteLine("""css_url"": """ + sTemp + """,")
+                    sr.WriteLine("""high_contrast"": " + ToJsonBooleanString(StyleUseHighContrast))
 
                     sr.WriteLine("}")
                     IsWritingJson = True

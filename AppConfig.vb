@@ -1,6 +1,6 @@
 ﻿'MIT License
 
-'Copyright(c) 2016 Peter Kirmeier
+'Copyright(c) 2016-2018 Peter Kirmeier
 
 'Permission Is hereby granted, free Of charge, to any person obtaining a copy
 'of this software And associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@
 'SOFTWARE.
 
 <Serializable()> Public Class SettingsRoot
+    Public Version As Integer
     Public MainWidth As Integer
     Public MainHeight As Integer
     Public HotKeyMethod As Integer
@@ -32,6 +33,12 @@
     Public ShortcutSplitKeyCode As Integer
     Public Inputfile As String
     Public OutputFile As String
+    Public ShowSplitsCountFinished As Integer
+    Public ShowSplitsCountUpcoming As Integer
+    Public StyleUseHighContrast As Boolean
+    Public StyleUseCustom As Boolean
+    Public StyleCssUrl As String
+    Public StyleFontUrl As String
     Public ProfileSelected As String
     Public Profiles As Profiles
 End Class
@@ -50,6 +57,7 @@ Partial Public Class Form1
             _settings = New SettingsRoot()
 
             ' prepare defaults..
+            _settings.Version = 0
             _settings.MainWidth = 559
             _settings.MainHeight = 723
             _settings.HotKeyMethod = Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async
@@ -63,6 +71,15 @@ Partial Public Class Form1
             _settings.OutputFile = "HitCounter.html"
             _settings.ProfileSelected = "Unnamed"
             _settings.Profiles = New Profiles()
+        End If
+        If _settings.Version = 0 Then ' Coming from version 1.9 or older
+            _settings.Version = 1
+            _settings.ShowSplitsCountFinished = 999
+            _settings.ShowSplitsCountUpcoming = 999
+            _settings.StyleUseHighContrast = False
+            _settings.StyleUseCustom = False
+            _settings.StyleCssUrl = "stylesheet_pink.css"
+            _settings.StyleFontUrl = "https://fonts.googleapis.com/css?family=Fontdiner%20Swanky"
         End If
 
         'Apply settings..
@@ -103,6 +120,12 @@ Partial Public Class Form1
 
         om.FilePathIn = _settings.Inputfile
         om.FilePathOut = _settings.OutputFile
+        om.ShowSplitsCountFinished = _settings.ShowSplitsCountFinished
+        om.ShowSplitsCountUpcoming = _settings.ShowSplitsCountUpcoming
+        om.StyleUseHighContrast = _settings.StyleUseHighContrast
+        om.StyleUseCustom = _settings.StyleUseCustom
+        om.StyleCssUrl = _settings.StyleCssUrl
+        om.StyleFontUrl = _settings.StyleFontUrl
 
     End Sub
 
@@ -123,6 +146,12 @@ Partial Public Class Form1
         _settings.ShortcutSplitKeyCode = key.key.KeyData
         _settings.Inputfile = om.FilePathIn
         _settings.OutputFile = om.FilePathOut
+        _settings.ShowSplitsCountFinished = om.ShowSplitsCountFinished
+        _settings.ShowSplitsCountUpcoming = om.ShowSplitsCountUpcoming
+        _settings.StyleUseHighContrast = om.StyleUseHighContrast
+        _settings.StyleUseCustom = om.StyleUseCustom
+        _settings.StyleCssUrl = om.StyleCssUrl
+        _settings.StyleFontUrl = om.StyleFontUrl
         _settings.ProfileSelected = ComboBox1.SelectedItem
         _settings.Profiles = profs
         sm.WriteXML(_settings)

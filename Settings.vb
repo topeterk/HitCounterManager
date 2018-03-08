@@ -127,6 +127,13 @@ Public Class Settings
             radioHotKeyMethod_sync.Checked = False
             radioHotKeyMethod_async.Checked = False
         End If
+
+        numShowSplitsCountFinished.Value = om.ShowSplitsCountFinished
+        numShowSplitsCountUpcoming.Value = om.ShowSplitsCountUpcoming
+        cbApCustomCss.Checked = om.StyleUseCustom
+        txtCssUrl.Text = om.StyleCssUrl
+        txtFontUrl.Text = om.StyleFontUrl
+        cbApHighContrast.Checked = om.StyleUseHighContrast
     End Sub
 
     Private Sub btnInput_Click(sender As Object, e As EventArgs) Handles btnInput.Click
@@ -179,8 +186,19 @@ Public Class Settings
         End If
     End Sub
 
+    Private Sub btnApApply_Click(sender As Object, e As EventArgs) Handles btnApApply.Click
+        om.ShowSplitsCountFinished = numShowSplitsCountFinished.Value
+        om.ShowSplitsCountUpcoming = numShowSplitsCountUpcoming.Value
+        om.StyleUseCustom = cbApCustomCss.Checked
+        om.StyleCssUrl = txtCssUrl.Text
+        om.StyleFontUrl = txtFontUrl.Text
+        om.StyleUseHighContrast = cbApHighContrast.Checked
+        om.Update()
+    End Sub
+
     Private Sub cbApCustomCss_CheckedChanged(sender As Object, e As EventArgs) Handles cbApCustomCss.CheckedChanged
         txtCssUrl.Enabled = cbApCustomCss.Checked
         txtFontUrl.Enabled = cbApCustomCss.Checked
     End Sub
+
 End Class

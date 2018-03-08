@@ -460,12 +460,14 @@ Partial Class Settings
         '
         'btnApApply
         '
+        Me.btnApApply.BackColor = System.Drawing.Color.LightYellow
+        Me.btnApApply.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
         Me.btnApApply.Location = New System.Drawing.Point(10, 13)
         Me.btnApApply.Name = "btnApApply"
         Me.btnApApply.Size = New System.Drawing.Size(90, 46)
         Me.btnApApply.TabIndex = 15
         Me.btnApApply.Text = "Apply"
-        Me.btnApApply.UseVisualStyleBackColor = True
+        Me.btnApApply.UseVisualStyleBackColor = False
         '
         'Settings
         '
