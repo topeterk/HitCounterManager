@@ -37,6 +37,9 @@ var data =
 "split_active": 18,
 "split_first": 0,
 "split_last": 999,
+"attempts": 42,
+"show_attempts": true,
+"show_headline": true,
 "font_url": "",              // "https://fonts.googleapis.com/css?family=Fontdiner%20Swanky",
 "css_url": "stylesheet.css", // "stylesheet_pink.css"
 "high_contrast": false

@@ -33,6 +33,8 @@
     Public ShortcutSplitKeyCode As Integer
     Public Inputfile As String
     Public OutputFile As String
+    Public ShowAttemptsCounter As Boolean
+    Public ShowHeadline As Boolean
     Public ShowSplitsCountFinished As Integer
     Public ShowSplitsCountUpcoming As Integer
     Public StyleUseHighContrast As Boolean
@@ -74,6 +76,8 @@ Partial Public Class Form1
         End If
         If _settings.Version = 0 Then ' Coming from version 1.9 or older
             _settings.Version = 1
+            _settings.ShowAttemptsCounter = True
+            _settings.ShowHeadline = True
             _settings.ShowSplitsCountFinished = 999
             _settings.ShowSplitsCountUpcoming = 999
             _settings.StyleUseHighContrast = False
@@ -120,6 +124,8 @@ Partial Public Class Form1
 
         om.FilePathIn = _settings.Inputfile
         om.FilePathOut = _settings.OutputFile
+        om.ShowAttemptsCounter = _settings.ShowAttemptsCounter
+        om.ShowHeadline = _settings.ShowHeadline
         om.ShowSplitsCountFinished = _settings.ShowSplitsCountFinished
         om.ShowSplitsCountUpcoming = _settings.ShowSplitsCountUpcoming
         om.StyleUseHighContrast = _settings.StyleUseHighContrast
@@ -146,6 +152,8 @@ Partial Public Class Form1
         _settings.ShortcutSplitKeyCode = key.key.KeyData
         _settings.Inputfile = om.FilePathIn
         _settings.OutputFile = om.FilePathOut
+        _settings.ShowAttemptsCounter = om.ShowAttemptsCounter
+        _settings.ShowHeadline = om.ShowHeadline
         _settings.ShowSplitsCountFinished = om.ShowSplitsCountFinished
         _settings.ShowSplitsCountUpcoming = om.ShowSplitsCountUpcoming
         _settings.StyleUseHighContrast = om.StyleUseHighContrast

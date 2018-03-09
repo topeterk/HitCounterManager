@@ -1,6 +1,6 @@
 ﻿'MIT License
 
-'Copyright(c) 2016 Peter Kirmeier
+'Copyright(c) 2016-2018 Peter Kirmeier
 
 'Permission Is hereby granted, free Of charge, to any person obtaining a copy
 'of this software And associated documentation files (the "Software"), to deal
@@ -26,9 +26,20 @@ Public Class Form1
     Public sc As Shortcuts
     Public om As OutModule
     Private profs As Profiles = New Profiles()
-    Private AttemptsCounter As Integer = 0
+    Private _AttemptsCounter As Integer = 0
     Private ComboBox1PrevSelectedItem As Object = Nothing
     Private SettingsDialogOpen = False
+
+    ' Sync AttemptsCounter with output module
+    Private Property AttemptsCounter() As Integer
+        Get
+            Return _AttemptsCounter
+        End Get
+        Set(AttemptsCounter As Integer)
+            _AttemptsCounter = AttemptsCounter
+            om.AttemptsCount = AttemptsCounter
+        End Set
+    End Property
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Text = Text + " - v" + Application.ProductVersion
@@ -299,6 +310,7 @@ Public Class Form1
         AttemptsCounter = amount
         profs.SaveProfileFrom(ComboBox1PrevSelectedItem, DataGridView1, AttemptsCounter)
         UpdateProgressAndTotals()
+        om.Update()
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged

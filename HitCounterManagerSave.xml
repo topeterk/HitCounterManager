@@ -12,6 +12,8 @@
   <ShortcutSplitKeyCode>65655</ShortcutSplitKeyCode>
   <Inputfile>HitCounter.template</Inputfile>
   <OutputFile>HitCounter.html</OutputFile>
+  <ShowAttemptsCounter>true</ShowAttemptsCounter>
+  <ShowHeadline>true</ShowHeadline>
   <ShowSplitsCountFinished>999</ShowSplitsCountFinished>
   <ShowSplitsCountUpcoming>999</ShowSplitsCountUpcoming>
   <StyleUseHighContrast>false</StyleUseHighContrast>
@@ -767,7 +769,7 @@
       </Profile>
       <Profile>
         <Name>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE</Name>
-        <Attempts>0</Attempts>
+        <Attempts>42</Attempts>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>

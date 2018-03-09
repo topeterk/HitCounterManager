@@ -29,7 +29,9 @@ Public Class OutModule
     Private _FilePathOut As String
     Private template As String = ""
     Private dgv As DataGridView
-
+    Public AttemptsCount As Integer = 0
+    Public ShowAttemptsCounter = True
+    Public ShowHeadline = True
     Public ShowSplitsCountFinished As Integer = 999
     Public ShowSplitsCountUpcoming As Integer = 999
     Public StyleUseHighContrast As Boolean = False
@@ -145,6 +147,10 @@ Public Class OutModule
                     iTemp = active + ShowSplitsCountUpcoming
                     If 999 < iTemp Then iTemp = 999
                     sr.WriteLine("""split_last"": " + iTemp.ToString() + ",")
+
+                    sr.WriteLine("""attempts"": " + AttemptsCount.ToString() + ",")
+                    sr.WriteLine("""show_attempts"": " + ToJsonBooleanString(ShowAttemptsCounter) + ",")
+                    sr.WriteLine("""show_headline"": " + ToJsonBooleanString(ShowHeadline) + ",")
 
                     If StyleUseCustom Then sTemp = StyleFontUrl Else sTemp = ""
                     sr.WriteLine("""font_url"": """ + sTemp + """,")

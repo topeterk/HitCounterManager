@@ -9,6 +9,8 @@
 <table id="table"></table>
 <script language="javascript">
 
+var tbl = document.getElementById('table');
+
 function DoVisualUpdate(data)
 {
 	var active = false;
@@ -18,8 +20,12 @@ function DoVisualUpdate(data)
 	var betterworseclass;
 	var majorclass = (data.high_contrast ? 'major dark' : 'major');
 
-	var tbl = document.getElementById('table');
-	new_tbl =
+	if (data.show_attempts)	new_tbl +=
+ '<tr>' +
+  '<td colspan="4" class="' + majorclass + ' top">Run # ' + data.attempts + '</td>' +
+ '</tr>';
+
+	if (data.show_headline)	new_tbl +=
  '<tr>' +
   '<td class="' + majorclass + ' left">Split</td>' +
   '<td class="' + majorclass + '" width="30px">Now</td>' +

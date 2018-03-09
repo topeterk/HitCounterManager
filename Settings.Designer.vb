@@ -66,27 +66,29 @@ Partial Class Settings
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tab_globalshortcuts = New System.Windows.Forms.TabPage()
         Me.tab_appearance = New System.Windows.Forms.TabPage()
-        Me.tab_filepaths = New System.Windows.Forms.TabPage()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.numShowSplitsCountFinished = New System.Windows.Forms.NumericUpDown()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.numShowSplitsCountUpcoming = New System.Windows.Forms.NumericUpDown()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.txtFontUrl = New System.Windows.Forms.TextBox()
-        Me.cbApCustomCss = New System.Windows.Forms.CheckBox()
-        Me.txtCssUrl = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.cbApHighContrast = New System.Windows.Forms.CheckBox()
         Me.btnApApply = New System.Windows.Forms.Button()
+        Me.cbApHighContrast = New System.Windows.Forms.CheckBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.cbApCustomCss = New System.Windows.Forms.CheckBox()
+        Me.txtFontUrl = New System.Windows.Forms.TextBox()
+        Me.numShowSplitsCountUpcoming = New System.Windows.Forms.NumericUpDown()
+        Me.txtCssUrl = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.numShowSplitsCountFinished = New System.Windows.Forms.NumericUpDown()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.tab_filepaths = New System.Windows.Forms.TabPage()
+        Me.cbShowHeadline = New System.Windows.Forms.CheckBox()
+        Me.cbShowAttempts = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.tab_globalshortcuts.SuspendLayout()
         Me.tab_appearance.SuspendLayout()
-        Me.tab_filepaths.SuspendLayout()
-        CType(Me.numShowSplitsCountFinished, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numShowSplitsCountUpcoming, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.numShowSplitsCountFinished, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tab_filepaths.SuspendLayout()
         Me.SuspendLayout()
         '
         'cbScReset
@@ -300,6 +302,8 @@ Partial Class Settings
         '
         'tab_appearance
         '
+        Me.tab_appearance.Controls.Add(Me.cbShowAttempts)
+        Me.tab_appearance.Controls.Add(Me.cbShowHeadline)
         Me.tab_appearance.Controls.Add(Me.btnApApply)
         Me.tab_appearance.Controls.Add(Me.cbApHighContrast)
         Me.tab_appearance.Controls.Add(Me.Label13)
@@ -322,6 +326,135 @@ Partial Class Settings
         Me.tab_appearance.Text = "Appearance"
         Me.tab_appearance.UseVisualStyleBackColor = True
         '
+        'btnApApply
+        '
+        Me.btnApApply.BackColor = System.Drawing.Color.LightYellow
+        Me.btnApApply.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.btnApApply.Location = New System.Drawing.Point(10, 13)
+        Me.btnApApply.Name = "btnApApply"
+        Me.btnApApply.Size = New System.Drawing.Size(90, 46)
+        Me.btnApApply.TabIndex = 15
+        Me.btnApApply.Text = "Apply"
+        Me.btnApApply.UseVisualStyleBackColor = False
+        '
+        'cbApHighContrast
+        '
+        Me.cbApHighContrast.AutoSize = True
+        Me.cbApHighContrast.Location = New System.Drawing.Point(10, 76)
+        Me.cbApHighContrast.Name = "cbApHighContrast"
+        Me.cbApHighContrast.Size = New System.Drawing.Size(138, 17)
+        Me.cbApHighContrast.TabIndex = 14
+        Me.cbApHighContrast.Text = "Use high contrast mode"
+        Me.cbApHighContrast.UseVisualStyleBackColor = True
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(72, 171)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(399, 26)
+        Me.Label13.TabIndex = 13
+        Me.Label13.Text = "Keep the font's URL empty if no custom font needs to be loaded at all." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Make sure" &
+    " the stylesheet uses the font otherwise the font gets loaded but not used."
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(7, 151)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(62, 13)
+        Me.Label12.TabIndex = 12
+        Me.Label12.Text = "Font: (URL)"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(7, 125)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(62, 13)
+        Me.Label11.TabIndex = 11
+        Me.Label11.Text = "CSS: (URL)"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(268, 41)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(82, 13)
+        Me.Label9.TabIndex = 5
+        Me.Label9.Text = "upcoming splits."
+        '
+        'cbApCustomCss
+        '
+        Me.cbApCustomCss.AutoSize = True
+        Me.cbApCustomCss.Location = New System.Drawing.Point(10, 99)
+        Me.cbApCustomCss.Name = "cbApCustomCss"
+        Me.cbApCustomCss.Size = New System.Drawing.Size(177, 17)
+        Me.cbApCustomCss.TabIndex = 10
+        Me.cbApCustomCss.Text = "Use custom stylesheet and font:"
+        Me.cbApCustomCss.UseVisualStyleBackColor = True
+        '
+        'txtFontUrl
+        '
+        Me.txtFontUrl.Enabled = False
+        Me.txtFontUrl.Location = New System.Drawing.Point(75, 148)
+        Me.txtFontUrl.Name = "txtFontUrl"
+        Me.txtFontUrl.Size = New System.Drawing.Size(498, 20)
+        Me.txtFontUrl.TabIndex = 7
+        '
+        'numShowSplitsCountUpcoming
+        '
+        Me.numShowSplitsCountUpcoming.Location = New System.Drawing.Point(205, 39)
+        Me.numShowSplitsCountUpcoming.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
+        Me.numShowSplitsCountUpcoming.Name = "numShowSplitsCountUpcoming"
+        Me.numShowSplitsCountUpcoming.Size = New System.Drawing.Size(57, 20)
+        Me.numShowSplitsCountUpcoming.TabIndex = 4
+        Me.numShowSplitsCountUpcoming.Value = New Decimal(New Integer() {999, 0, 0, 0})
+        '
+        'txtCssUrl
+        '
+        Me.txtCssUrl.Enabled = False
+        Me.txtCssUrl.Location = New System.Drawing.Point(75, 122)
+        Me.txtCssUrl.Name = "txtCssUrl"
+        Me.txtCssUrl.Size = New System.Drawing.Size(498, 20)
+        Me.txtCssUrl.TabIndex = 9
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(124, 41)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(75, 13)
+        Me.Label10.TabIndex = 3
+        Me.Label10.Text = "Show the next"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(268, 15)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(72, 13)
+        Me.Label8.TabIndex = 2
+        Me.Label8.Text = "finished splits."
+        '
+        'numShowSplitsCountFinished
+        '
+        Me.numShowSplitsCountFinished.Location = New System.Drawing.Point(205, 13)
+        Me.numShowSplitsCountFinished.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
+        Me.numShowSplitsCountFinished.Name = "numShowSplitsCountFinished"
+        Me.numShowSplitsCountFinished.Size = New System.Drawing.Size(57, 20)
+        Me.numShowSplitsCountFinished.TabIndex = 1
+        Me.numShowSplitsCountFinished.Value = New Decimal(New Integer() {999, 0, 0, 0})
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(124, 15)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(71, 13)
+        Me.Label3.TabIndex = 0
+        Me.Label3.Text = "Show the last"
+        '
         'tab_filepaths
         '
         Me.tab_filepaths.Controls.Add(Me.Label7)
@@ -340,134 +473,29 @@ Partial Class Settings
         Me.tab_filepaths.Text = "Filepaths"
         Me.tab_filepaths.UseVisualStyleBackColor = True
         '
-        'Label3
+        'cbShowHeadline
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(124, 15)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(71, 13)
-        Me.Label3.TabIndex = 0
-        Me.Label3.Text = "Show the last"
+        Me.cbShowHeadline.AutoSize = True
+        Me.cbShowHeadline.Checked = True
+        Me.cbShowHeadline.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbShowHeadline.Location = New System.Drawing.Point(375, 40)
+        Me.cbShowHeadline.Name = "cbShowHeadline"
+        Me.cbShowHeadline.Size = New System.Drawing.Size(96, 17)
+        Me.cbShowHeadline.TabIndex = 16
+        Me.cbShowHeadline.Text = "Show headline"
+        Me.cbShowHeadline.UseVisualStyleBackColor = True
         '
-        'numShowSplitsCountFinished
+        'cbShowAttempts
         '
-        Me.numShowSplitsCountFinished.Location = New System.Drawing.Point(205, 13)
-        Me.numShowSplitsCountFinished.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
-        Me.numShowSplitsCountFinished.Name = "numShowSplitsCountFinished"
-        Me.numShowSplitsCountFinished.Size = New System.Drawing.Size(57, 20)
-        Me.numShowSplitsCountFinished.TabIndex = 1
-        Me.numShowSplitsCountFinished.Value = New Decimal(New Integer() {999, 0, 0, 0})
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(268, 15)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(72, 13)
-        Me.Label8.TabIndex = 2
-        Me.Label8.Text = "finished splits."
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(268, 41)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(82, 13)
-        Me.Label9.TabIndex = 5
-        Me.Label9.Text = "upcoming splits."
-        '
-        'numShowSplitsCountUpcoming
-        '
-        Me.numShowSplitsCountUpcoming.Location = New System.Drawing.Point(205, 39)
-        Me.numShowSplitsCountUpcoming.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
-        Me.numShowSplitsCountUpcoming.Name = "numShowSplitsCountUpcoming"
-        Me.numShowSplitsCountUpcoming.Size = New System.Drawing.Size(57, 20)
-        Me.numShowSplitsCountUpcoming.TabIndex = 4
-        Me.numShowSplitsCountUpcoming.Value = New Decimal(New Integer() {999, 0, 0, 0})
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(124, 41)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(75, 13)
-        Me.Label10.TabIndex = 3
-        Me.Label10.Text = "Show the next"
-        '
-        'txtFontUrl
-        '
-        Me.txtFontUrl.Enabled = False
-        Me.txtFontUrl.Location = New System.Drawing.Point(75, 129)
-        Me.txtFontUrl.Name = "txtFontUrl"
-        Me.txtFontUrl.Size = New System.Drawing.Size(498, 20)
-        Me.txtFontUrl.TabIndex = 7
-        '
-        'cbApCustomCss
-        '
-        Me.cbApCustomCss.AutoSize = True
-        Me.cbApCustomCss.Location = New System.Drawing.Point(10, 80)
-        Me.cbApCustomCss.Name = "cbApCustomCss"
-        Me.cbApCustomCss.Size = New System.Drawing.Size(177, 17)
-        Me.cbApCustomCss.TabIndex = 10
-        Me.cbApCustomCss.Text = "Use custom stylesheet and font:"
-        Me.cbApCustomCss.UseVisualStyleBackColor = True
-        '
-        'txtCssUrl
-        '
-        Me.txtCssUrl.Enabled = False
-        Me.txtCssUrl.Location = New System.Drawing.Point(75, 103)
-        Me.txtCssUrl.Name = "txtCssUrl"
-        Me.txtCssUrl.Size = New System.Drawing.Size(498, 20)
-        Me.txtCssUrl.TabIndex = 9
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(7, 106)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(62, 13)
-        Me.Label11.TabIndex = 11
-        Me.Label11.Text = "CSS: (URL)"
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(7, 132)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(62, 13)
-        Me.Label12.TabIndex = 12
-        Me.Label12.Text = "Font: (URL)"
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(72, 152)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(399, 26)
-        Me.Label13.TabIndex = 13
-        Me.Label13.Text = "Keep the font's URL empty if no custom font needs to be loaded at all." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Make sure" &
-    " the stylesheet uses the font otherwise the font gets loaded but not used."
-        '
-        'cbApHighContrast
-        '
-        Me.cbApHighContrast.AutoSize = True
-        Me.cbApHighContrast.Location = New System.Drawing.Point(10, 186)
-        Me.cbApHighContrast.Name = "cbApHighContrast"
-        Me.cbApHighContrast.Size = New System.Drawing.Size(138, 17)
-        Me.cbApHighContrast.TabIndex = 14
-        Me.cbApHighContrast.Text = "Use high contrast mode"
-        Me.cbApHighContrast.UseVisualStyleBackColor = True
-        '
-        'btnApApply
-        '
-        Me.btnApApply.BackColor = System.Drawing.Color.LightYellow
-        Me.btnApApply.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.btnApApply.Location = New System.Drawing.Point(10, 13)
-        Me.btnApApply.Name = "btnApApply"
-        Me.btnApApply.Size = New System.Drawing.Size(90, 46)
-        Me.btnApApply.TabIndex = 15
-        Me.btnApApply.Text = "Apply"
-        Me.btnApApply.UseVisualStyleBackColor = False
+        Me.cbShowAttempts.AutoSize = True
+        Me.cbShowAttempts.Checked = True
+        Me.cbShowAttempts.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbShowAttempts.Location = New System.Drawing.Point(375, 14)
+        Me.cbShowAttempts.Name = "cbShowAttempts"
+        Me.cbShowAttempts.Size = New System.Drawing.Size(135, 17)
+        Me.cbShowAttempts.TabIndex = 17
+        Me.cbShowAttempts.Text = "Show attempts counter"
+        Me.cbShowAttempts.UseVisualStyleBackColor = True
         '
         'Settings
         '
@@ -486,10 +514,10 @@ Partial Class Settings
         Me.tab_globalshortcuts.PerformLayout()
         Me.tab_appearance.ResumeLayout(False)
         Me.tab_appearance.PerformLayout()
+        CType(Me.numShowSplitsCountUpcoming, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.numShowSplitsCountFinished, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tab_filepaths.ResumeLayout(False)
         Me.tab_filepaths.PerformLayout()
-        CType(Me.numShowSplitsCountFinished, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.numShowSplitsCountUpcoming, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -531,4 +559,6 @@ Partial Class Settings
     Friend WithEvents Label3 As Label
     Friend WithEvents cbApHighContrast As CheckBox
     Friend WithEvents btnApApply As Button
+    Friend WithEvents cbShowAttempts As CheckBox
+    Friend WithEvents cbShowHeadline As CheckBox
 End Class

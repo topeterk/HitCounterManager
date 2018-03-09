@@ -26,6 +26,7 @@
  td.dark { background-color: black; }
  td.better { color: #d74894; }
  td.worse { color: #FF4A4A; }
+ td.top { text-align: center; }
  td.bottom { border: 0px; }
  td.left { text-align: left; }
  td.right { text-align: right; }
