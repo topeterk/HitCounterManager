@@ -4,7 +4,7 @@ var link_font = document.createElement('link');
 var link_font_href = '';
 var link_css = document.createElement('link');
 var link_css_href = 'stylesheet.css';
-var iframe = document.createElement('iframe');
+var iframe;
 
 link_font.rel  = 'stylesheet';
 link_font.href = link_font_href;
@@ -15,9 +15,8 @@ document.getElementsByTagName('head')[0].appendChild(link_css);
 
 function Start()
 {
-	iframe.src   = '../HitCounter.html';
-	iframe.style = 'display:none;';
-	document.getElementsByTagName('body')[0].appendChild(iframe);
+	iframe = document.getElementsByTagName('iframe')[0];
+	iframe.src="../HitCounter.html";
 
 	Watchdog(); // Starts actual eternal loop
 }
@@ -37,7 +36,7 @@ function Watchdog()
 	if (heartbeat <= 1)
 		heartbeat++;
 	else
-		document.getElementsByTagName('iframe')[0].src = '../HitCounter.html'; // retry reloading file in case of errors
+		iframe.src = '../HitCounter.html'; // retry reloading file in case of errors
 }
 
 // --- Periodic update
@@ -52,5 +51,5 @@ function DoUpdate(data)
 
 	DoVisualUpdate(data); // build graphical content
 
-	setTimeout(function() { document.getElementsByTagName('iframe')[0].src = '../HitCounter.html';}, 1500); // refresh around every second
+	setTimeout(function() { iframe.src = '../HitCounter.html';}, 1500); // refresh around every second
 }
