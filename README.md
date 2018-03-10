@@ -82,7 +82,7 @@ Just insert the HTML's filepath in the URL field.
 > To avoid cross domain issues, OBS Studio added the pseudo domain _absolute_ for local files. That said the path sould look like this:
 > http://absolute/C:/MyHitCounter/HitCounterNumeric.html
 
-#### Configuring CLR browser plugin for OBS
+#### Configuring CLR browser plugin for Open Broadcaster Software (OBS, not OBS Studio!)
 The opacity can be set to 100% because the background will be rendered transparent, so no color-keying is involved.
 Since CRL browser plugin come with some pre-defined CSS, this may cause trouble with the rendering of the HTML file (flickering or misplacement).
 If you encounter issues here, try to simply remove the CLR browser plugin's CSS overrides.  
