@@ -4,7 +4,7 @@ Manages a hit counter running in the background, so you can focus on your stream
 No need to keep any windows open for a window capture any more.
   
 To see some **screenshots** of this application go to the **[Wiki pages](../../wiki)**.  
-To see **how to** use the application watch the **[Tutorial on YouTube](https://www.youtube.com/watch?v=aa4nRtGxnvE)**.
+To see **how to** use the application watch the **[Tutorial on YouTube](https://www.youtube.com/watch?v=iXGExlS4xeM)**.
 
 ## Key-Features
 
@@ -15,7 +15,7 @@ To see **how to** use the application watch the **[Tutorial on YouTube](https://
 
 ## Features
 It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit/death during the playthrough
-* Creates a HTML file of the hit counters (can be used by CLR browser plugin in Open BroadCaster Software in order to make it visible on stream)
+* Creates a HTML file of the hit counter that can be used by Open BroadCaster Software in order to make it visible on stream
   * The design and layout can be costumized completely
 * Instead of using GUI buttons, keyboard shortcuts can be configured:
   * Increase hit count of the current split
@@ -34,7 +34,7 @@ It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit
   * Dark Souls 2
   * Dark Souls 3 + Ashes of Ariandel + The Ringed City
   * The Surge + A walk in the park
-* Comes with pre-defined **high quality** and **low quality** designs for different uses:
+* Comes with different designs:
   * **Numeric**
     * Shows the amount of hits for the current run, PB and their differences
     * Every split is marked "better" which has an amount of zero hits
@@ -47,6 +47,13 @@ It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit
   * **NoDeath**
     * Shows check marks/crosses until the players death for the current run and PB
     * All splits have check marks until the current split appears (__Now__ only) or a split appears that has already counted hits.
+* The appearance of all designs can by modified via GUI
+  * Set the amount of shown splits that are already finished
+  * Set the amount of shown splits that are upcoming
+  * Show or hide the attempts counter
+  * Show or hide the headline
+  * Enable or disable the high contrast mode to support better readability on low bitrate streams
+  * Switch to a custom CSS and font
 
 ## Get the software
 All available releases can be found at the [Releases page](../../releases) on GitHub.
@@ -67,11 +74,7 @@ You can save and restore this file at any time or copy it to a newer/portable ve
 > Note: It holds all your settings and profiles in one place. No other files are involved.
 
 ### Designs
-The pre-delivered HTML designs will update themself every 1.5 seconds, so there is no need for high frame rates.  
-> Recommended: FPS 20
-
-The **high quality** designs like __White__ and __Pink__ are best for streams with high bitrates. The **low quality** designs like __Black__ is designed for streams supporting lower bitrates (for mobile device, for example).
-
+The pre-delivered HTML designs will update themself every 1.5 seconds.
 > Previews of the pre-delivered HTML desings can be found at the **[Wiki pages](../../wiki)**.
 
 #### Configuring Browser Source for OBS Studio
