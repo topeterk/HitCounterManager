@@ -78,9 +78,9 @@ The pre-delivered HTML designs will update themself every 1.5 seconds.
 > Previews of the pre-delivered HTML desings can be found at the **[Wiki pages](../../wiki)**.
 
 #### Configuring Browser Source for OBS Studio
-Just insert the HTML's filepath in the URL field.
+Just insert the HTML's filepath into the URL field.
 > To avoid cross domain issues, OBS Studio added the pseudo domain _absolute_ for local files. That said the path sould look like this:
-> http://absolute/C:/MyHitCounter/HitCounterNumeric.html
+> http://absolute/C:/MyHitCounter/Designs/HitCounterNumeric.html
 
 #### Configuring CLR browser plugin for Open Broadcaster Software (OBS, not OBS Studio!)
 The opacity can be set to 100% because the background will be rendered transparent, so no color-keying is involved.
@@ -93,6 +93,11 @@ When no data is displayed, there could be a problem with cross-domain security s
 > * FileAccessFromFilesUrls (Set to **Enabled**)
 > * UniversialAccessFromFilesUrls (Set to **Enabled**, _but should also work when disabled_)
 > * WebSecurity (Set to **Disabled**, _but should also work when enabled_)
+
+#### Configuring Browser Source for Streamlabs OBS (SLOBS)
+Just check "Local file" and insert the HTML's filepath into the "Local File" field.
+> That said the path sould look simple like this: C:/MyHitCounter/Designs/HitCounterNumeric.html  
+> Note: It was tested with the beta version 0.9.1, so the instruction *may* change in the release version.
 
 #### Using standalone Chrome browser
 When no data is displayed, there could be a problem with cross-domain security settings. This is because the HTMLs are rendered via file:// protocol instead of http://. Make sure to allow file access from files.
