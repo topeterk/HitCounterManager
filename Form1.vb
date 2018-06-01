@@ -122,15 +122,16 @@ Public Class Form1
 
     Private Sub btnSplit_Click(sender As Object, e As EventArgs) Handles btnSplit.Click
         Dim idx = DataGridView1.SelectedCells.Item(0).RowIndex + 1
+        Dim session_progress = idx
         If idx <= DataGridView1.RowCount - 1 Then
             DataGridView1.ClearSelection()
             DataGridView1.Rows.Item(idx).Selected = True
         End If
         If idx <= DataGridView1.RowCount - 2 Then
-            For r = 0 To DataGridView1.RowCount - 2 Step 1
-                DataGridView1.Rows.Item(r).Cells.Item("cSP").Value = False
+            For r = session_progress To DataGridView1.RowCount - 2 Step 1
+                If DataGridView1.Rows.Item(r).Cells.Item("cSP").Value Then session_progress = r
             Next
-            DataGridView1.Rows.Item(idx).Cells.Item("cSP").Value = True
+            DataGridView1.Rows.Item(session_progress).Cells.Item("cSP").Value = True
         End If
         om.Update()
     End Sub
@@ -208,15 +209,19 @@ Public Class Form1
             DataGridView1.Rows.Item(r).Cells.Item("cDiff").Value = DataGridView1.Rows.Item(r).Cells.Item("cHits").Value - DataGridView1.Rows.Item(r).Cells.Item("cPB").Value
         Next
 
-        If DataGridView1.SelectedCells.Count <> 0 Then
-            Dim idx = DataGridView1.SelectedCells.Item(0).RowIndex
-            If idx <= DataGridView1.RowCount - 2 Then
-                SemaValueChange = True
-                For r = 0 To DataGridView1.RowCount - 2 Step 1
-                    DataGridView1.Rows.Item(r).Cells.Item("cSP").Value = False
-                Next
-                DataGridView1.Rows.Item(idx).Cells.Item("cSP").Value = True
-                SemaValueChange = False
+        If e IsNot Nothing Then
+            If 0 <= e.RowIndex And 0 <= e.ColumnIndex Then
+                If e.ColumnIndex = DataGridView1.Rows.Item(0).Cells.Item("cSP").ColumnIndex Then
+                    Dim idx = e.RowIndex
+                    If idx <= DataGridView1.RowCount - 2 Then
+                        SemaValueChange = True
+                        For r = 0 To DataGridView1.RowCount - 2 Step 1
+                            DataGridView1.Rows.Item(r).Cells.Item("cSP").Value = False
+                        Next
+                        DataGridView1.Rows.Item(idx).Cells.Item("cSP").Value = True
+                        SemaValueChange = False
+                    End If
+                End If
             End If
         End If
 
