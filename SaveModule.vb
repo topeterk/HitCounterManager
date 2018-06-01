@@ -40,7 +40,7 @@ Public Class SaveModule(Of t) ' (Of t As {New})
         ReadXML = Nothing
         If Filename Is Nothing Then Filename = _Filename
         Try
-            Dim file As New StreamReader(_Filename)
+            Dim file As New StreamReader(Filename)
             ReadXML = CType(xml.Deserialize(file), t)
             file.Close()
         Catch ex As Exception
