@@ -88,6 +88,7 @@ Partial Class Settings
         Me.Label3 = New System.Windows.Forms.Label()
         Me.tab_filepaths = New System.Windows.Forms.TabPage()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TabControl1.SuspendLayout()
         Me.tab_globalshortcuts.SuspendLayout()
         Me.tab_appearance.SuspendLayout()
@@ -95,6 +96,7 @@ Partial Class Settings
         CType(Me.numShowSplitsCountUpcoming, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numShowSplitsCountFinished, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tab_filepaths.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'cbScReset
@@ -318,19 +320,14 @@ Partial Class Settings
         '
         'tab_appearance
         '
+        Me.tab_appearance.Controls.Add(Me.GroupBox1)
         Me.tab_appearance.Controls.Add(Me.cbShowSessionProgress)
         Me.tab_appearance.Controls.Add(Me.cbShowAttempts)
         Me.tab_appearance.Controls.Add(Me.cbShowHeadline)
-        Me.tab_appearance.Controls.Add(Me.btnApApply)
         Me.tab_appearance.Controls.Add(Me.cbApHighContrast)
-        Me.tab_appearance.Controls.Add(Me.Label12)
-        Me.tab_appearance.Controls.Add(Me.Label11)
         Me.tab_appearance.Controls.Add(Me.Label9)
-        Me.tab_appearance.Controls.Add(Me.cbApCustomCss)
-        Me.tab_appearance.Controls.Add(Me.txtFontUrl)
         Me.tab_appearance.Controls.Add(Me.numStyleDesiredWidth)
         Me.tab_appearance.Controls.Add(Me.numShowSplitsCountUpcoming)
-        Me.tab_appearance.Controls.Add(Me.txtCssUrl)
         Me.tab_appearance.Controls.Add(Me.Label13)
         Me.tab_appearance.Controls.Add(Me.Label14)
         Me.tab_appearance.Controls.Add(Me.Label10)
@@ -350,7 +347,7 @@ Partial Class Settings
         Me.cbShowSessionProgress.AutoSize = True
         Me.cbShowSessionProgress.Checked = True
         Me.cbShowSessionProgress.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.cbShowSessionProgress.Location = New System.Drawing.Point(258, 61)
+        Me.cbShowSessionProgress.Location = New System.Drawing.Point(258, 55)
         Me.cbShowSessionProgress.Name = "cbShowSessionProgress"
         Me.cbShowSessionProgress.Size = New System.Drawing.Size(134, 17)
         Me.cbShowSessionProgress.TabIndex = 18
@@ -377,7 +374,7 @@ Partial Class Settings
         Me.cbShowHeadline.AutoSize = True
         Me.cbShowHeadline.Checked = True
         Me.cbShowHeadline.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.cbShowHeadline.Location = New System.Drawing.Point(258, 35)
+        Me.cbShowHeadline.Location = New System.Drawing.Point(258, 32)
         Me.cbShowHeadline.Name = "cbShowHeadline"
         Me.cbShowHeadline.Size = New System.Drawing.Size(96, 17)
         Me.cbShowHeadline.TabIndex = 16
@@ -389,17 +386,19 @@ Partial Class Settings
         '
         Me.btnApApply.BackColor = System.Drawing.Color.LightYellow
         Me.btnApApply.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.btnApApply.Location = New System.Drawing.Point(483, 8)
+        Me.btnApApply.Location = New System.Drawing.Point(502, 19)
         Me.btnApApply.Name = "btnApApply"
-        Me.btnApApply.Size = New System.Drawing.Size(90, 46)
+        Me.btnApApply.Size = New System.Drawing.Size(55, 69)
         Me.btnApApply.TabIndex = 15
         Me.btnApApply.Text = "Apply"
+        Me.ToolTip1.SetToolTip(Me.btnApApply, "To prevent issues with loading incomplete URLs, please apply manually after editi" &
+        "ng")
         Me.btnApApply.UseVisualStyleBackColor = False
         '
         'cbApHighContrast
         '
         Me.cbApHighContrast.AutoSize = True
-        Me.cbApHighContrast.Location = New System.Drawing.Point(10, 101)
+        Me.cbApHighContrast.Location = New System.Drawing.Point(258, 78)
         Me.cbApHighContrast.Name = "cbApHighContrast"
         Me.cbApHighContrast.Size = New System.Drawing.Size(138, 17)
         Me.cbApHighContrast.TabIndex = 14
@@ -411,7 +410,7 @@ Partial Class Settings
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(7, 176)
+        Me.Label12.Location = New System.Drawing.Point(3, 71)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(62, 13)
         Me.Label12.TabIndex = 12
@@ -420,7 +419,7 @@ Partial Class Settings
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(7, 150)
+        Me.Label11.Location = New System.Drawing.Point(3, 45)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(62, 13)
         Me.Label11.TabIndex = 11
@@ -438,7 +437,7 @@ Partial Class Settings
         'cbApCustomCss
         '
         Me.cbApCustomCss.AutoSize = True
-        Me.cbApCustomCss.Location = New System.Drawing.Point(10, 124)
+        Me.cbApCustomCss.Location = New System.Drawing.Point(6, 19)
         Me.cbApCustomCss.Name = "cbApCustomCss"
         Me.cbApCustomCss.Size = New System.Drawing.Size(177, 17)
         Me.cbApCustomCss.TabIndex = 10
@@ -449,9 +448,9 @@ Partial Class Settings
         'txtFontUrl
         '
         Me.txtFontUrl.Enabled = False
-        Me.txtFontUrl.Location = New System.Drawing.Point(75, 173)
+        Me.txtFontUrl.Location = New System.Drawing.Point(71, 68)
         Me.txtFontUrl.Name = "txtFontUrl"
-        Me.txtFontUrl.Size = New System.Drawing.Size(498, 20)
+        Me.txtFontUrl.Size = New System.Drawing.Size(425, 20)
         Me.txtFontUrl.TabIndex = 7
         Me.ToolTip1.SetToolTip(Me.txtFontUrl, resources.GetString("txtFontUrl.ToolTip"))
         '
@@ -477,9 +476,9 @@ Partial Class Settings
         'txtCssUrl
         '
         Me.txtCssUrl.Enabled = False
-        Me.txtCssUrl.Location = New System.Drawing.Point(75, 147)
+        Me.txtCssUrl.Location = New System.Drawing.Point(71, 42)
         Me.txtCssUrl.Name = "txtCssUrl"
-        Me.txtCssUrl.Size = New System.Drawing.Size(498, 20)
+        Me.txtCssUrl.Size = New System.Drawing.Size(425, 20)
         Me.txtCssUrl.TabIndex = 9
         Me.ToolTip1.SetToolTip(Me.txtCssUrl, "Personalize the design by switching to another stylesheet")
         '
@@ -556,6 +555,21 @@ Partial Class Settings
         Me.tab_filepaths.Text = "Filepaths"
         Me.tab_filepaths.UseVisualStyleBackColor = True
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.cbApCustomCss)
+        Me.GroupBox1.Controls.Add(Me.txtCssUrl)
+        Me.GroupBox1.Controls.Add(Me.txtFontUrl)
+        Me.GroupBox1.Controls.Add(Me.Label11)
+        Me.GroupBox1.Controls.Add(Me.btnApApply)
+        Me.GroupBox1.Controls.Add(Me.Label12)
+        Me.GroupBox1.Location = New System.Drawing.Point(10, 103)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(563, 100)
+        Me.GroupBox1.TabIndex = 19
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Customization"
+        '
         'Settings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -578,6 +592,8 @@ Partial Class Settings
         CType(Me.numShowSplitsCountFinished, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tab_filepaths.ResumeLayout(False)
         Me.tab_filepaths.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -625,4 +641,5 @@ Partial Class Settings
     Friend WithEvents numStyleDesiredWidth As NumericUpDown
     Friend WithEvents Label14 As Label
     Friend WithEvents Label13 As Label
+    Friend WithEvents GroupBox1 As GroupBox
 End Class

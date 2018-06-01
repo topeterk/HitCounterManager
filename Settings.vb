@@ -191,17 +191,10 @@ Public Class Settings
     End Sub
 
     Private Sub btnApApply_Click(sender As Object, e As EventArgs) Handles btnApApply.Click
-        om.ShowAttemptsCounter = cbShowAttempts.Checked
-        om.ShowHeadline = cbShowHeadline.Checked
-        om.ShowSessionProgress = cbShowSessionProgress.Checked
-        om.ShowSplitsCountFinished = numShowSplitsCountFinished.Value
-        om.ShowSplitsCountUpcoming = numShowSplitsCountUpcoming.Value
         om.StyleUseCustom = cbApCustomCss.Checked
         om.StyleCssUrl = txtCssUrl.Text
         om.StyleFontUrl = txtFontUrl.Text
-        om.StyleUseHighContrast = cbApHighContrast.Checked
-        om.StyleDesiredWidth = numStyleDesiredWidth.Value
-        om.Update()
+        appearance_apply(sender, e)
     End Sub
 
     Private Sub cbApCustomCss_CheckedChanged(sender As Object, e As EventArgs) Handles cbApCustomCss.CheckedChanged
@@ -209,4 +202,16 @@ Public Class Settings
         txtFontUrl.Enabled = cbApCustomCss.Checked
     End Sub
 
+    Private Sub appearance_apply(sender As Object, e As EventArgs) Handles numShowSplitsCountFinished.ValueChanged, numStyleDesiredWidth.ValueChanged, numShowSplitsCountUpcoming.ValueChanged, cbShowSessionProgress.CheckedChanged, cbShowHeadline.CheckedChanged, cbShowAttempts.CheckedChanged, cbApHighContrast.CheckedChanged
+        If om Is Nothing Then Exit Sub
+
+        om.ShowAttemptsCounter = cbShowAttempts.Checked
+        om.ShowHeadline = cbShowHeadline.Checked
+        om.ShowSessionProgress = cbShowSessionProgress.Checked
+        om.ShowSplitsCountFinished = numShowSplitsCountFinished.Value
+        om.ShowSplitsCountUpcoming = numShowSplitsCountUpcoming.Value
+        om.StyleUseHighContrast = cbApHighContrast.Checked
+        om.StyleDesiredWidth = numStyleDesiredWidth.Value
+        om.Update()
+    End Sub
 End Class

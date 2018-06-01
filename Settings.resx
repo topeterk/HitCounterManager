@@ -136,6 +136,9 @@ For the output generation those actions will be taken:
   <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>159, 17</value>
+  </metadata>
   <data name="txtFontUrl.ToolTip" xml:space="preserve">
     <value>Personalize the design by switching to another font style
 Keep the font's URL empty if no custom font needs to be loaded at all
