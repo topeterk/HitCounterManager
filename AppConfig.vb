@@ -58,6 +58,11 @@ Partial Public Class Form1
         _settings = sm.ReadXML()
 
         If IsNothing(_settings) Then
+            ' When no user save file is available, try loading the init file instead to provide predefined profiles and settings
+            _settings = sm.ReadXML(Application.ProductName & "Init.xml")
+        End If
+
+        If IsNothing(_settings) Then
             _settings = New SettingsRoot()
 
             ' prepare defaults..

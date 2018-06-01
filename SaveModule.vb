@@ -1,6 +1,6 @@
 ﻿'MIT License
 
-'Copyright(c) 2016 Peter Kirmeier
+'Copyright(c) 2016-2018 Peter Kirmeier
 
 'Permission Is hereby granted, free Of charge, to any person obtaining a copy
 'of this software And associated documentation files (the "Software"), to deal
@@ -36,8 +36,9 @@ Public Class SaveModule(Of t) ' (Of t As {New})
         xml = New XmlSerializer(GetType(t))
     End Sub
 
-    Public Function ReadXML() As t
+    Public Function ReadXML(Optional Filename As String = Nothing) As t
         ReadXML = Nothing
+        If Filename Is Nothing Then Filename = _Filename
         Try
             Dim file As New StreamReader(_Filename)
             ReadXML = CType(xml.Deserialize(file), t)

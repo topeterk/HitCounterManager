@@ -189,7 +189,7 @@
     <Content Include="Designs\stylesheet.css" />
     <Content Include="Designs\stylesheet_pink.css" />
     <Content Include="HitCounter.template" />
-    <Content Include="HitCounterManagerSave.xml" />
+    <Content Include="HitCounterManagerInit.xml" />
     <Content Include="Designs\HitCounterNoDeath.html" />
     <Content Include="Designs\HitCounterNumeric.html" />
     <Content Include="Designs\HitCounterYesNo.html" />
@@ -242,7 +242,7 @@
     <Content Include="HitCounter.html" />
   </ItemGroup>
   <ItemGroup>
-    <PublishFile Include="HitCounterManagerSave.xml">
+    <PublishFile Include="HitCounterManagerInit.xml">
       <Visible>False</Visible>
       <Group>
       </Group>

@@ -13,7 +13,7 @@ echo Creating portable package:
 echo ^ ^ Copy files from %DIR_OUTPUT%
 FOR %%G IN (HitCounterManager.exe HitCounterManager.exe.config) DO copy %DIR_OUTPUT%\%%G %DIR_DEST%
 echo ^ ^ Copy files from %DIR_SRC%
-FOR %%G IN (HitCounterManagerSave.xml HitCounter.html HitCounter.template) DO copy %DIR_SRC%\%%G %DIR_DEST%
+FOR %%G IN (HitCounterManagerInit.xml HitCounter.html HitCounter.template) DO copy %DIR_SRC%\%%G %DIR_DEST%
 echo ^ ^ Copy files from %DIR_SRC%\Designs
 mkdir %DIR_DEST%\Designs
 copy %DIR_SRC%\Designs %DIR_DEST%\Designs
