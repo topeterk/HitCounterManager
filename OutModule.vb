@@ -39,6 +39,7 @@ Public Class OutModule
     Public StyleUseCustom As Boolean = False
     Public StyleCssUrl As String = ""
     Public StyleFontUrl As String = ""
+    Public StyleDesiredWidth As Integer = 0
 
     ' bind object to a data grid
     Public Sub New(DataGridView As DataGridView)
@@ -162,7 +163,8 @@ Public Class OutModule
                     sr.WriteLine("""font_url"": """ + sTemp + """,")
                     If StyleUseCustom Then sTemp = StyleCssUrl Else sTemp = "stylesheet.css"
                     sr.WriteLine("""css_url"": """ + sTemp + """,")
-                    sr.WriteLine("""high_contrast"": " + ToJsonBooleanString(StyleUseHighContrast))
+                    sr.WriteLine("""high_contrast"": " + ToJsonBooleanString(StyleUseHighContrast) + ",")
+                    sr.WriteLine("""width"": " + StyleDesiredWidth.ToString())
 
                     sr.WriteLine("}")
                     IsWritingJson = True

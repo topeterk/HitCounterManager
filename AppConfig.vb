@@ -42,6 +42,7 @@
     Public StyleUseCustom As Boolean
     Public StyleCssUrl As String
     Public StyleFontUrl As String
+    Public StyleDesiredWidth As Integer
     Public ProfileSelected As String
     Public Profiles As Profiles
 End Class
@@ -90,6 +91,7 @@ Partial Public Class Form1
             _settings.Version = 2
             _settings.MainWidth += 31 ' added new checkbox to datagrid
             _settings.ShowSessionProgress = True
+            _settings.StyleDesiredWidth = 0
         End If
 
         'Apply settings..
@@ -140,6 +142,7 @@ Partial Public Class Form1
         om.StyleUseCustom = _settings.StyleUseCustom
         om.StyleCssUrl = _settings.StyleCssUrl
         om.StyleFontUrl = _settings.StyleFontUrl
+        om.StyleDesiredWidth = _settings.StyleDesiredWidth
 
     End Sub
 
@@ -169,6 +172,7 @@ Partial Public Class Form1
         _settings.StyleUseCustom = om.StyleUseCustom
         _settings.StyleCssUrl = om.StyleCssUrl
         _settings.StyleFontUrl = om.StyleFontUrl
+        _settings.StyleDesiredWidth = om.StyleDesiredWidth
         _settings.ProfileSelected = ComboBox1.SelectedItem
         _settings.Profiles = profs
         sm.WriteXML(_settings)

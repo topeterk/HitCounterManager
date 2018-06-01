@@ -136,6 +136,7 @@ Public Class Settings
         cbApCustomCss.Checked = om.StyleUseCustom
         txtCssUrl.Text = om.StyleCssUrl
         txtFontUrl.Text = om.StyleFontUrl
+        numStyleDesiredWidth.Value = om.StyleDesiredWidth
         cbApHighContrast.Checked = om.StyleUseHighContrast
     End Sub
 
@@ -199,6 +200,7 @@ Public Class Settings
         om.StyleCssUrl = txtCssUrl.Text
         om.StyleFontUrl = txtFontUrl.Text
         om.StyleUseHighContrast = cbApHighContrast.Checked
+        om.StyleDesiredWidth = numStyleDesiredWidth.Value
         om.Update()
     End Sub
 

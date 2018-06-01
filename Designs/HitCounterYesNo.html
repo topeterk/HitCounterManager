@@ -50,6 +50,7 @@ function DoVisualUpdate(data)
   '<td colspan="' + (3 + (data.show_session_progress ? 1 : 0)) + '" class="' + majorclass + ' bottom right">' + split + '</td>' +
  '</tr>';
 
+	if (0 < data.width) tbl.style.width = data.width; else tbl.style = ""
 	tbl.innerHTML = new_tbl; // update DOM in one shot
 }
 

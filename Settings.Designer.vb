@@ -43,6 +43,7 @@ Partial Class Settings
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Settings))
         Me.cbScReset = New System.Windows.Forms.CheckBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -66,27 +67,31 @@ Partial Class Settings
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tab_globalshortcuts = New System.Windows.Forms.TabPage()
         Me.tab_appearance = New System.Windows.Forms.TabPage()
+        Me.cbShowSessionProgress = New System.Windows.Forms.CheckBox()
+        Me.cbShowAttempts = New System.Windows.Forms.CheckBox()
+        Me.cbShowHeadline = New System.Windows.Forms.CheckBox()
         Me.btnApApply = New System.Windows.Forms.Button()
         Me.cbApHighContrast = New System.Windows.Forms.CheckBox()
-        Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.cbApCustomCss = New System.Windows.Forms.CheckBox()
         Me.txtFontUrl = New System.Windows.Forms.TextBox()
+        Me.numStyleDesiredWidth = New System.Windows.Forms.NumericUpDown()
         Me.numShowSplitsCountUpcoming = New System.Windows.Forms.NumericUpDown()
         Me.txtCssUrl = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.numShowSplitsCountFinished = New System.Windows.Forms.NumericUpDown()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.tab_filepaths = New System.Windows.Forms.TabPage()
-        Me.cbShowHeadline = New System.Windows.Forms.CheckBox()
-        Me.cbShowAttempts = New System.Windows.Forms.CheckBox()
-        Me.cbShowSessionProgress = New System.Windows.Forms.CheckBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.TabControl1.SuspendLayout()
         Me.tab_globalshortcuts.SuspendLayout()
         Me.tab_appearance.SuspendLayout()
+        CType(Me.numStyleDesiredWidth, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numShowSplitsCountUpcoming, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numShowSplitsCountFinished, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tab_filepaths.SuspendLayout()
@@ -100,6 +105,7 @@ Partial Class Settings
         Me.cbScReset.Size = New System.Drawing.Size(111, 17)
         Me.cbScReset.TabIndex = 0
         Me.cbScReset.Text = "Reset currect run:"
+        Me.ToolTip1.SetToolTip(Me.cbScReset, "Enable hot key for resetting the run")
         Me.cbScReset.UseVisualStyleBackColor = True
         '
         'Label6
@@ -122,6 +128,8 @@ Partial Class Settings
         Me.radioHotKeyMethod_async.TabIndex = 8
         Me.radioHotKeyMethod_async.TabStop = True
         Me.radioHotKeyMethod_async.Text = "Asynchronous - *should* always work"
+        Me.ToolTip1.SetToolTip(Me.radioHotKeyMethod_async, "Method that should always work, however the syncronous is the safer method and sh" &
+        "ould be preferred if possible")
         Me.radioHotKeyMethod_async.UseVisualStyleBackColor = True
         '
         'radioHotKeyMethod_sync
@@ -133,6 +141,8 @@ Partial Class Settings
         Me.radioHotKeyMethod_sync.TabIndex = 7
         Me.radioHotKeyMethod_sync.Text = "Synchronous - Safer, but may not always work (recommendation: test and keep it wh" &
     "en it works)"
+        Me.ToolTip1.SetToolTip(Me.radioHotKeyMethod_sync, "Safer method, but may not always work (recommendation: test and keep it when it w" &
+        "orks)")
         Me.radioHotKeyMethod_sync.UseVisualStyleBackColor = True
         '
         'Label1
@@ -153,6 +163,7 @@ Partial Class Settings
         Me.txtNextSplit.TabIndex = 5
         Me.txtNextSplit.Text = "None"
         Me.txtNextSplit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ToolTip1.SetToolTip(Me.txtNextSplit, "Click into the field and press the hot key you want to use")
         '
         'txtHit
         '
@@ -163,6 +174,7 @@ Partial Class Settings
         Me.txtHit.TabIndex = 4
         Me.txtHit.Text = "None"
         Me.txtHit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ToolTip1.SetToolTip(Me.txtHit, "Click into the field and press the hot key you want to use")
         '
         'txtReset
         '
@@ -173,6 +185,7 @@ Partial Class Settings
         Me.txtReset.TabIndex = 3
         Me.txtReset.Text = "None"
         Me.txtReset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ToolTip1.SetToolTip(Me.txtReset, "Click into the field and press the hot key you want to use")
         '
         'cbScNextSplit
         '
@@ -182,6 +195,7 @@ Partial Class Settings
         Me.cbScNextSplit.Size = New System.Drawing.Size(72, 17)
         Me.cbScNextSplit.TabIndex = 2
         Me.cbScNextSplit.Text = "Next split:"
+        Me.ToolTip1.SetToolTip(Me.cbScNextSplit, "Enable hot key for entering next split")
         Me.cbScNextSplit.UseVisualStyleBackColor = True
         '
         'cbScHit
@@ -192,6 +206,7 @@ Partial Class Settings
         Me.cbScHit.Size = New System.Drawing.Size(60, 17)
         Me.cbScHit.TabIndex = 1
         Me.cbScHit.Text = "Got hit:"
+        Me.ToolTip1.SetToolTip(Me.cbScHit, "Enable hot key for getting hit")
         Me.cbScHit.UseVisualStyleBackColor = True
         '
         'txtInput
@@ -308,14 +323,16 @@ Partial Class Settings
         Me.tab_appearance.Controls.Add(Me.cbShowHeadline)
         Me.tab_appearance.Controls.Add(Me.btnApApply)
         Me.tab_appearance.Controls.Add(Me.cbApHighContrast)
-        Me.tab_appearance.Controls.Add(Me.Label13)
         Me.tab_appearance.Controls.Add(Me.Label12)
         Me.tab_appearance.Controls.Add(Me.Label11)
         Me.tab_appearance.Controls.Add(Me.Label9)
         Me.tab_appearance.Controls.Add(Me.cbApCustomCss)
         Me.tab_appearance.Controls.Add(Me.txtFontUrl)
+        Me.tab_appearance.Controls.Add(Me.numStyleDesiredWidth)
         Me.tab_appearance.Controls.Add(Me.numShowSplitsCountUpcoming)
         Me.tab_appearance.Controls.Add(Me.txtCssUrl)
+        Me.tab_appearance.Controls.Add(Me.Label13)
+        Me.tab_appearance.Controls.Add(Me.Label14)
         Me.tab_appearance.Controls.Add(Me.Label10)
         Me.tab_appearance.Controls.Add(Me.Label8)
         Me.tab_appearance.Controls.Add(Me.numShowSplitsCountFinished)
@@ -328,11 +345,51 @@ Partial Class Settings
         Me.tab_appearance.Text = "Appearance"
         Me.tab_appearance.UseVisualStyleBackColor = True
         '
+        'cbShowSessionProgress
+        '
+        Me.cbShowSessionProgress.AutoSize = True
+        Me.cbShowSessionProgress.Checked = True
+        Me.cbShowSessionProgress.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbShowSessionProgress.Location = New System.Drawing.Point(258, 61)
+        Me.cbShowSessionProgress.Name = "cbShowSessionProgress"
+        Me.cbShowSessionProgress.Size = New System.Drawing.Size(134, 17)
+        Me.cbShowSessionProgress.TabIndex = 18
+        Me.cbShowSessionProgress.Text = "Show session progress"
+        Me.ToolTip1.SetToolTip(Me.cbShowSessionProgress, "Displays the icon to represent the farthest split since last time the application" &
+        " started")
+        Me.cbShowSessionProgress.UseVisualStyleBackColor = True
+        '
+        'cbShowAttempts
+        '
+        Me.cbShowAttempts.AutoSize = True
+        Me.cbShowAttempts.Checked = True
+        Me.cbShowAttempts.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbShowAttempts.Location = New System.Drawing.Point(258, 9)
+        Me.cbShowAttempts.Name = "cbShowAttempts"
+        Me.cbShowAttempts.Size = New System.Drawing.Size(135, 17)
+        Me.cbShowAttempts.TabIndex = 17
+        Me.cbShowAttempts.Text = "Show attempts counter"
+        Me.ToolTip1.SetToolTip(Me.cbShowAttempts, "Displays how many runs have been done yet")
+        Me.cbShowAttempts.UseVisualStyleBackColor = True
+        '
+        'cbShowHeadline
+        '
+        Me.cbShowHeadline.AutoSize = True
+        Me.cbShowHeadline.Checked = True
+        Me.cbShowHeadline.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbShowHeadline.Location = New System.Drawing.Point(258, 35)
+        Me.cbShowHeadline.Name = "cbShowHeadline"
+        Me.cbShowHeadline.Size = New System.Drawing.Size(96, 17)
+        Me.cbShowHeadline.TabIndex = 16
+        Me.cbShowHeadline.Text = "Show headline"
+        Me.ToolTip1.SetToolTip(Me.cbShowHeadline, "Displays the headlines of the columns")
+        Me.cbShowHeadline.UseVisualStyleBackColor = True
+        '
         'btnApApply
         '
         Me.btnApApply.BackColor = System.Drawing.Color.LightYellow
         Me.btnApApply.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.btnApApply.Location = New System.Drawing.Point(10, 13)
+        Me.btnApApply.Location = New System.Drawing.Point(483, 8)
         Me.btnApApply.Name = "btnApApply"
         Me.btnApApply.Size = New System.Drawing.Size(90, 46)
         Me.btnApApply.TabIndex = 15
@@ -342,27 +399,19 @@ Partial Class Settings
         'cbApHighContrast
         '
         Me.cbApHighContrast.AutoSize = True
-        Me.cbApHighContrast.Location = New System.Drawing.Point(10, 76)
+        Me.cbApHighContrast.Location = New System.Drawing.Point(10, 101)
         Me.cbApHighContrast.Name = "cbApHighContrast"
         Me.cbApHighContrast.Size = New System.Drawing.Size(138, 17)
         Me.cbApHighContrast.TabIndex = 14
         Me.cbApHighContrast.Text = "Use high contrast mode"
+        Me.ToolTip1.SetToolTip(Me.cbApHighContrast, "Change design (like removing transparency, other colors, fatter text) for better " &
+        "readability")
         Me.cbApHighContrast.UseVisualStyleBackColor = True
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(72, 171)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(399, 26)
-        Me.Label13.TabIndex = 13
-        Me.Label13.Text = "Keep the font's URL empty if no custom font needs to be loaded at all." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Make sure" &
-    " the stylesheet uses the font otherwise the font gets loaded but not used."
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(7, 151)
+        Me.Label12.Location = New System.Drawing.Point(7, 176)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(62, 13)
         Me.Label12.TabIndex = 12
@@ -371,7 +420,7 @@ Partial Class Settings
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(7, 125)
+        Me.Label11.Location = New System.Drawing.Point(7, 150)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(62, 13)
         Me.Label11.TabIndex = 11
@@ -380,7 +429,7 @@ Partial Class Settings
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(268, 41)
+        Me.Label9.Location = New System.Drawing.Point(151, 36)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(82, 13)
         Me.Label9.TabIndex = 5
@@ -389,42 +438,73 @@ Partial Class Settings
         'cbApCustomCss
         '
         Me.cbApCustomCss.AutoSize = True
-        Me.cbApCustomCss.Location = New System.Drawing.Point(10, 99)
+        Me.cbApCustomCss.Location = New System.Drawing.Point(10, 124)
         Me.cbApCustomCss.Name = "cbApCustomCss"
         Me.cbApCustomCss.Size = New System.Drawing.Size(177, 17)
         Me.cbApCustomCss.TabIndex = 10
         Me.cbApCustomCss.Text = "Use custom stylesheet and font:"
+        Me.ToolTip1.SetToolTip(Me.cbApCustomCss, "Use a custom stylesheet and font for a personalized look and feel")
         Me.cbApCustomCss.UseVisualStyleBackColor = True
         '
         'txtFontUrl
         '
         Me.txtFontUrl.Enabled = False
-        Me.txtFontUrl.Location = New System.Drawing.Point(75, 148)
+        Me.txtFontUrl.Location = New System.Drawing.Point(75, 173)
         Me.txtFontUrl.Name = "txtFontUrl"
         Me.txtFontUrl.Size = New System.Drawing.Size(498, 20)
         Me.txtFontUrl.TabIndex = 7
+        Me.ToolTip1.SetToolTip(Me.txtFontUrl, resources.GetString("txtFontUrl.ToolTip"))
+        '
+        'numStyleDesiredWidth
+        '
+        Me.numStyleDesiredWidth.Location = New System.Drawing.Point(88, 60)
+        Me.numStyleDesiredWidth.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
+        Me.numStyleDesiredWidth.Name = "numStyleDesiredWidth"
+        Me.numStyleDesiredWidth.Size = New System.Drawing.Size(57, 20)
+        Me.numStyleDesiredWidth.TabIndex = 4
+        Me.ToolTip1.SetToolTip(Me.numStyleDesiredWidth, resources.GetString("numStyleDesiredWidth.ToolTip"))
         '
         'numShowSplitsCountUpcoming
         '
-        Me.numShowSplitsCountUpcoming.Location = New System.Drawing.Point(205, 39)
+        Me.numShowSplitsCountUpcoming.Location = New System.Drawing.Point(88, 34)
         Me.numShowSplitsCountUpcoming.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
         Me.numShowSplitsCountUpcoming.Name = "numShowSplitsCountUpcoming"
         Me.numShowSplitsCountUpcoming.Size = New System.Drawing.Size(57, 20)
         Me.numShowSplitsCountUpcoming.TabIndex = 4
+        Me.ToolTip1.SetToolTip(Me.numShowSplitsCountUpcoming, "Hide splits that are coming later to spare space")
         Me.numShowSplitsCountUpcoming.Value = New Decimal(New Integer() {999, 0, 0, 0})
         '
         'txtCssUrl
         '
         Me.txtCssUrl.Enabled = False
-        Me.txtCssUrl.Location = New System.Drawing.Point(75, 122)
+        Me.txtCssUrl.Location = New System.Drawing.Point(75, 147)
         Me.txtCssUrl.Name = "txtCssUrl"
         Me.txtCssUrl.Size = New System.Drawing.Size(498, 20)
         Me.txtCssUrl.TabIndex = 9
+        Me.ToolTip1.SetToolTip(Me.txtCssUrl, "Personalize the design by switching to another stylesheet")
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(151, 62)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(18, 13)
+        Me.Label13.TabIndex = 3
+        Me.Label13.Text = "px"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(7, 62)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(74, 13)
+        Me.Label14.TabIndex = 3
+        Me.Label14.Text = "Desired width:"
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(124, 41)
+        Me.Label10.Location = New System.Drawing.Point(7, 36)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(75, 13)
         Me.Label10.TabIndex = 3
@@ -433,7 +513,7 @@ Partial Class Settings
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(268, 15)
+        Me.Label8.Location = New System.Drawing.Point(151, 10)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(72, 13)
         Me.Label8.TabIndex = 2
@@ -441,17 +521,18 @@ Partial Class Settings
         '
         'numShowSplitsCountFinished
         '
-        Me.numShowSplitsCountFinished.Location = New System.Drawing.Point(205, 13)
+        Me.numShowSplitsCountFinished.Location = New System.Drawing.Point(88, 8)
         Me.numShowSplitsCountFinished.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
         Me.numShowSplitsCountFinished.Name = "numShowSplitsCountFinished"
         Me.numShowSplitsCountFinished.Size = New System.Drawing.Size(57, 20)
         Me.numShowSplitsCountFinished.TabIndex = 1
+        Me.ToolTip1.SetToolTip(Me.numShowSplitsCountFinished, "Hide splits that are done already to spare space")
         Me.numShowSplitsCountFinished.Value = New Decimal(New Integer() {999, 0, 0, 0})
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(124, 15)
+        Me.Label3.Location = New System.Drawing.Point(7, 10)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(71, 13)
         Me.Label3.TabIndex = 0
@@ -475,42 +556,6 @@ Partial Class Settings
         Me.tab_filepaths.Text = "Filepaths"
         Me.tab_filepaths.UseVisualStyleBackColor = True
         '
-        'cbShowHeadline
-        '
-        Me.cbShowHeadline.AutoSize = True
-        Me.cbShowHeadline.Checked = True
-        Me.cbShowHeadline.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.cbShowHeadline.Location = New System.Drawing.Point(375, 40)
-        Me.cbShowHeadline.Name = "cbShowHeadline"
-        Me.cbShowHeadline.Size = New System.Drawing.Size(96, 17)
-        Me.cbShowHeadline.TabIndex = 16
-        Me.cbShowHeadline.Text = "Show headline"
-        Me.cbShowHeadline.UseVisualStyleBackColor = True
-        '
-        'cbShowAttempts
-        '
-        Me.cbShowAttempts.AutoSize = True
-        Me.cbShowAttempts.Checked = True
-        Me.cbShowAttempts.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.cbShowAttempts.Location = New System.Drawing.Point(375, 14)
-        Me.cbShowAttempts.Name = "cbShowAttempts"
-        Me.cbShowAttempts.Size = New System.Drawing.Size(135, 17)
-        Me.cbShowAttempts.TabIndex = 17
-        Me.cbShowAttempts.Text = "Show attempts counter"
-        Me.cbShowAttempts.UseVisualStyleBackColor = True
-        '
-        'cbShowSessionProgress
-        '
-        Me.cbShowSessionProgress.AutoSize = True
-        Me.cbShowSessionProgress.Checked = True
-        Me.cbShowSessionProgress.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.cbShowSessionProgress.Location = New System.Drawing.Point(375, 66)
-        Me.cbShowSessionProgress.Name = "cbShowSessionProgress"
-        Me.cbShowSessionProgress.Size = New System.Drawing.Size(134, 17)
-        Me.cbShowSessionProgress.TabIndex = 18
-        Me.cbShowSessionProgress.Text = "Show session progress"
-        Me.cbShowSessionProgress.UseVisualStyleBackColor = True
-        '
         'Settings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -528,6 +573,7 @@ Partial Class Settings
         Me.tab_globalshortcuts.PerformLayout()
         Me.tab_appearance.ResumeLayout(False)
         Me.tab_appearance.PerformLayout()
+        CType(Me.numStyleDesiredWidth, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.numShowSplitsCountUpcoming, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.numShowSplitsCountFinished, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tab_filepaths.ResumeLayout(False)
@@ -559,7 +605,6 @@ Partial Class Settings
     Friend WithEvents tab_globalshortcuts As TabPage
     Friend WithEvents tab_appearance As TabPage
     Friend WithEvents tab_filepaths As TabPage
-    Friend WithEvents Label13 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents Label9 As Label
@@ -576,4 +621,8 @@ Partial Class Settings
     Friend WithEvents cbShowAttempts As CheckBox
     Friend WithEvents cbShowHeadline As CheckBox
     Friend WithEvents cbShowSessionProgress As CheckBox
+    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents numStyleDesiredWidth As NumericUpDown
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label13 As Label
 End Class

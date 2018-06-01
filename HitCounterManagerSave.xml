@@ -20,6 +20,7 @@
   <StyleUseHighContrast>false</StyleUseHighContrast>
   <StyleUseCustom>false</StyleUseCustom>
   <StyleCssUrl>stylesheet_pink.css</StyleCssUrl>
+  <StyleDesiredWidth>0</StyleDesiredWidth>
   <StyleFontUrl>https://fonts.googleapis.com/css?family=Fontdiner%20Swanky</StyleFontUrl>
   <ProfileSelected>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE</ProfileSelected>
   <Profiles>
@@ -1412,4 +1413,5 @@
       </Profile>
     </ProfileList>
   </Profiles>
+
 </SettingsRoot>

@@ -44,7 +44,8 @@ var data =
 "show_session_progress": true,
 "font_url": "",              // "https://fonts.googleapis.com/css?family=Fontdiner%20Swanky",
 "css_url": "stylesheet.css", // "stylesheet_pink.css"
-"high_contrast": false
+"high_contrast": false,
+"width": 0
 }
 /* HITCOUNTER_JSON_END */
 ;
