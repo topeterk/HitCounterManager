@@ -27,6 +27,7 @@ It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit
 * Switching to other profiles will keep hit counts of currently selected profile
 * Button to save current run as PB (personal best)
 * Counts the attempts of each run (implicitly on every run's reset or manually)
+* Shows furthest progress since last application start (can also be set manually)
 * Settings file "HitCounterManagerSave.xml" holds all your configuration data and is designed to work in newer versions, too. Save and restore this file at any time.
 * Comes with some pre-defined profiles for:
   * Bloodborne + The old hunters
