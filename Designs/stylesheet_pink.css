@@ -1,7 +1,7 @@
  table {
 	border-spacing: 0px;
-	margin-left:auto; 
-    margin-right:auto;
+	margin-left:auto;
+	margin-right:auto;
 	/*   This adds 3D rendering and gives more depth to the counter: */
 	/*   Please note that you may need to update the values to match with your hit counter position and size! */
 	/* transform: translate(-10px,50px) perspective(1000px) rotateY(-10deg) scale(1.0,1.0); */
@@ -12,7 +12,7 @@
  tr.odd { background-color: #161616; }
 
  td {
-	padding:3px 4px 3px 4px;
+	padding:2px 2px 2px 2px;
 	border-bottom:2px ridge #FF1493;
 	text-shadow: 0px 2px 1px #000000;
 	font-size: 18px;

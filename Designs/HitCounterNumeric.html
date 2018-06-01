@@ -29,10 +29,10 @@ function DoVisualUpdate(data)
 	if (data.show_headline)	new_tbl +=
  '<tr>' +
   '<td class="' + majorclass + ' left">Split</td>' +
-  '<td class="' + majorclass + '" width="30px">Now</td>' +
-  '<td class="' + majorclass + '" width="30px">Diff</td>' +
-  '<td class="' + majorclass + '" width="30px">PB</td>' +
-  (data.show_session_progress ? '<td class="' + majorclass + '" width="30px">&nbsp</td>' : '') +
+  '<td class="' + majorclass + '" width="30">Now</td>' +
+  '<td class="' + majorclass + '" width="30">Diff</td>' +
+  '<td class="' + majorclass + '" width="30">PB</td>' +
+  (data.show_session_progress ? '<td class="' + majorclass + '" width="22">&nbsp</td>' : '') +
  '</tr>';
 
 	for ( i = 0 ; (i < data.split_first) && (i < data.list.length) ; i = i + 1 )
