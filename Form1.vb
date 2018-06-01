@@ -94,7 +94,6 @@ Public Class Form1
         Next
         DataGridView1.ClearSelection()
         DataGridView1.Rows.Item(0).Selected = True
-        DataGridView1.Rows.Item(0).Cells.Item("cSP").Value = True
         om.Update()
     End Sub
 
@@ -227,6 +226,7 @@ Public Class Form1
 
     Private Sub DataGridView1_CellMouseUp(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView1.CellMouseUp
         ' Workaround to fire CellValueChanged on a Checkbox change via mouse (left click) by switching cell focus
+        If (e.RowIndex < 0) Or (e.ColumnIndex < 0) Then Exit Sub
         If DataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex).GetType.Name = "DataGridViewCheckBoxCell" Then
             DataGridView1.Rows(DataGridView1.RowCount - 1).Cells(DataGridView1.ColumnCount - 1).Selected = True
             DataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex).Selected = True
