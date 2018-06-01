@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SettingsRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Version>1</Version>
-  <MainWidth>559</MainWidth>
+  <Version>2</Version>
+  <MainWidth>590</MainWidth>
   <MainHeight>787</MainHeight>
   <HotKeyMethod>1</HotKeyMethod>
   <ShortcutResetEnable>false</ShortcutResetEnable>
@@ -14,6 +14,7 @@
   <OutputFile>HitCounter.html</OutputFile>
   <ShowAttemptsCounter>true</ShowAttemptsCounter>
   <ShowHeadline>true</ShowHeadline>
+  <ShowSessionProgress>true</ShowSessionProgress>
   <ShowSplitsCountFinished>999</ShowSplitsCountFinished>
   <ShowSplitsCountUpcoming>999</ShowSplitsCountUpcoming>
   <StyleUseHighContrast>false</StyleUseHighContrast>

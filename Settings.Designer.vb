@@ -83,6 +83,7 @@ Partial Class Settings
         Me.tab_filepaths = New System.Windows.Forms.TabPage()
         Me.cbShowHeadline = New System.Windows.Forms.CheckBox()
         Me.cbShowAttempts = New System.Windows.Forms.CheckBox()
+        Me.cbShowSessionProgress = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.tab_globalshortcuts.SuspendLayout()
         Me.tab_appearance.SuspendLayout()
@@ -302,6 +303,7 @@ Partial Class Settings
         '
         'tab_appearance
         '
+        Me.tab_appearance.Controls.Add(Me.cbShowSessionProgress)
         Me.tab_appearance.Controls.Add(Me.cbShowAttempts)
         Me.tab_appearance.Controls.Add(Me.cbShowHeadline)
         Me.tab_appearance.Controls.Add(Me.btnApApply)
@@ -497,6 +499,18 @@ Partial Class Settings
         Me.cbShowAttempts.Text = "Show attempts counter"
         Me.cbShowAttempts.UseVisualStyleBackColor = True
         '
+        'cbShowSessionProgress
+        '
+        Me.cbShowSessionProgress.AutoSize = True
+        Me.cbShowSessionProgress.Checked = True
+        Me.cbShowSessionProgress.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbShowSessionProgress.Location = New System.Drawing.Point(375, 66)
+        Me.cbShowSessionProgress.Name = "cbShowSessionProgress"
+        Me.cbShowSessionProgress.Size = New System.Drawing.Size(134, 17)
+        Me.cbShowSessionProgress.TabIndex = 18
+        Me.cbShowSessionProgress.Text = "Show session progress"
+        Me.cbShowSessionProgress.UseVisualStyleBackColor = True
+        '
         'Settings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -561,4 +575,5 @@ Partial Class Settings
     Friend WithEvents btnApApply As Button
     Friend WithEvents cbShowAttempts As CheckBox
     Friend WithEvents cbShowHeadline As CheckBox
+    Friend WithEvents cbShowSessionProgress As CheckBox
 End Class

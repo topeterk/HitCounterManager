@@ -210,6 +210,7 @@
     <None Include="Images\icons8-scroll-down-20.png" />
     <Content Include="Designs\img_check.png" />
     <Content Include="Designs\img_cross.png" />
+    <Content Include="Designs\img_star.png" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

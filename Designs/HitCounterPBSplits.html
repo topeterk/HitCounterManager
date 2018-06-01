@@ -23,7 +23,7 @@ function DoVisualUpdate(data)
 
 	if (data.show_attempts)	new_tbl +=
  '<tr>' +
-  '<td colspan="4" class="' + majorclass + ' top">Run # ' + data.attempts + '</td>' +
+  '<td colspan="' + (4 + (data.show_session_progress ? 1 : 0)) + '" class="' + majorclass + ' top">Run # ' + data.attempts + '</td>' +
  '</tr>';
 
 	if (data.show_headline)	new_tbl +=
@@ -32,6 +32,7 @@ function DoVisualUpdate(data)
   '<td class="' + majorclass + '" width="30px">Now</td>' +
   '<td class="' + majorclass + '" width="30px">Diff</td>' +
   '<td class="' + majorclass + '" width="30px">PB</td>' +
+  (data.show_session_progress ? '<td class="' + majorclass + '" width="30px">&nbsp</td>' : '') +
  '</tr>';
 
 	for ( i = 0 ; (i < data.split_first) && (i < data.list.length) ; i = i + 1 )
@@ -51,6 +52,7 @@ function DoVisualUpdate(data)
   '<td class="' + (data.high_contrast ? '' : betterworseclass) + '">' + data.list[i][1] + '</td>' +
   '<td class="' + (data.high_contrast ? '' : betterworseclass) + '">' + IntToStringSigned(data.list[i][1] - data.list[i][2]) + '</td>' +
   '<td class="' + (data.high_contrast ? '' : betterworseclass) + '">' + data.list[i][2] + '(' + pb + ')</td>' +
+  (data.show_session_progress ? '<td class="' + (data.high_contrast ? '' : betterworseclass) + '">' + (data.session_progress == i ? ShowSessionProgress() : '&nbsp;') + '</td>' : '') +
  '</tr>';
 		if (data.split_active == i) active = true;
 	}
@@ -67,6 +69,7 @@ function DoVisualUpdate(data)
   '<td class="' + majorclass + ' bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + sum + '</td>' +
   '<td class="' + majorclass + ' bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + IntToStringSigned(sum - pb) + '</td>' +
   '<td class="' + majorclass + ' bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">' + pb + '</td>' +
+  (data.show_session_progress ? '<td class="' + majorclass + ' bottom ' + (sum - pb <= 0 ? 'better' : 'worse') + '">&nbsp;</td>' : '') +
  '</tr>';
 
 	tbl.innerHTML = new_tbl; // update DOM in one shot

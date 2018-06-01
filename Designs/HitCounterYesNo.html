@@ -21,7 +21,7 @@ function DoVisualUpdate(data)
 
 	if (data.show_attempts)	new_tbl +=
  '<tr>' +
-  '<td colspan="3" class="' + majorclass + ' top">Run # ' + data.attempts + '</td>' +
+  '<td colspan="' + (3 + (data.show_session_progress ? 1 : 0)) + '" class="' + majorclass + ' top">Run # ' + data.attempts + '</td>' +
  '</tr>';
 
 	if (data.show_headline)	new_tbl +=
@@ -29,6 +29,7 @@ function DoVisualUpdate(data)
   '<td class="' + majorclass + ' left">Split</td>' +
   '<td class="' + majorclass + '" width="30px">Now</td>' +
   '<td class="' + majorclass + '" width="30px">PB</td>' +
+  (data.show_session_progress ? '<td class="' + majorclass + '" width="30px">&nbsp</td>' : '') +
  '</tr>';
 
 	for ( i = data.split_first ; (i < data.split_last) && (i < data.list.length) ; i = i + 1 )
@@ -40,12 +41,13 @@ function DoVisualUpdate(data)
   '<td class="left">' + data.list[i][0] + '</td>' +
   '<td>' + ShowCrossOrCheckMark(!active ? data.list[i][1] : 1) + '</td>' +
   '<td>' + ShowCrossOrCheckMark(data.list[i][2]) + '</td>' +
+  (data.show_session_progress ? '<td>' + (data.session_progress == i ? ShowSessionProgress() : '&nbsp;') + '</td>' : '') +
  '</tr>';
 	}
 
 	new_tbl +=
  '<tr>' +
-  '<td colspan="3" class="' + majorclass + ' bottom right">' + split + '</td>' +
+  '<td colspan="' + (3 + (data.show_session_progress ? 1 : 0)) + '" class="' + majorclass + ' bottom right">' + split + '</td>' +
  '</tr>';
 
 	tbl.innerHTML = new_tbl; // update DOM in one shot

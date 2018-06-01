@@ -1,6 +1,6 @@
 ﻿'MIT License
 
-'Copyright(c) 2016 Peter Kirmeier
+'Copyright(c) 2016-2018 Peter Kirmeier
 
 'Permission Is hereby granted, free Of charge, to any person obtaining a copy
 'of this software And associated documentation files (the "Software"), to deal
@@ -53,6 +53,7 @@ Partial Class Form1
         Me.cHits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cDiff = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cPB = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cSP = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.btnReset = New System.Windows.Forms.Button()
         Me.btnHit = New System.Windows.Forms.Button()
         Me.btnSplit = New System.Windows.Forms.Button()
@@ -81,11 +82,11 @@ Partial Class Form1
         '
         Me.DataGridView1.AllowUserToResizeRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cTitle, Me.cHits, Me.cDiff, Me.cPB})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cTitle, Me.cHits, Me.cDiff, Me.cPB, Me.cSP})
         Me.DataGridView1.Location = New System.Drawing.Point(13, 123)
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(523, 241)
+        Me.DataGridView1.Size = New System.Drawing.Size(547, 241)
         Me.DataGridView1.TabIndex = 4
         '
         'cTitle
@@ -135,6 +136,15 @@ Partial Class Form1
         Me.cPB.ToolTipText = "Person best"
         Me.cPB.Width = 50
         '
+        'cSP
+        '
+        Me.cSP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.cSP.HeaderText = "SP"
+        Me.cSP.MinimumWidth = 30
+        Me.cSP.Name = "cSP"
+        Me.cSP.ToolTipText = "Session progress"
+        Me.cSP.Width = 30
+        '
         'btnReset
         '
         Me.btnReset.BackColor = System.Drawing.Color.Salmon
@@ -154,7 +164,7 @@ Partial Class Form1
         Me.btnHit.Image = Global.HitCounterManager.My.Resources.Resources.icons8_attack_32
         Me.btnHit.Location = New System.Drawing.Point(174, 57)
         Me.btnHit.Name = "btnHit"
-        Me.btnHit.Size = New System.Drawing.Size(280, 40)
+        Me.btnHit.Size = New System.Drawing.Size(305, 40)
         Me.btnHit.TabIndex = 2
         Me.ToolTip1.SetToolTip(Me.btnHit, "Count a HIT on the current split")
         Me.btnHit.UseVisualStyleBackColor = False
@@ -164,7 +174,7 @@ Partial Class Form1
         Me.btnSplit.BackColor = System.Drawing.Color.LightGreen
         Me.btnSplit.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSplit.Image = Global.HitCounterManager.My.Resources.Resources.icons8_staircase_32
-        Me.btnSplit.Location = New System.Drawing.Point(460, 57)
+        Me.btnSplit.Location = New System.Drawing.Point(485, 57)
         Me.btnSplit.Name = "btnSplit"
         Me.btnSplit.Size = New System.Drawing.Size(75, 40)
         Me.btnSplit.TabIndex = 3
@@ -201,7 +211,7 @@ Partial Class Form1
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Location = New System.Drawing.Point(12, 30)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(523, 21)
+        Me.ComboBox1.Size = New System.Drawing.Size(548, 21)
         Me.ComboBox1.Sorted = True
         Me.ComboBox1.TabIndex = 7
         '
@@ -259,7 +269,7 @@ Partial Class Form1
         Me.lbl_progress.Location = New System.Drawing.Point(11, 100)
         Me.lbl_progress.Name = "lbl_progress"
         Me.lbl_progress.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        Me.lbl_progress.Size = New System.Drawing.Size(193, 20)
+        Me.lbl_progress.Size = New System.Drawing.Size(219, 20)
         Me.lbl_progress.TabIndex = 12
         Me.lbl_progress.Text = "Progress:  ?? / ??  # ???"
         Me.lbl_progress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -267,7 +277,7 @@ Partial Class Form1
         'lbl_totals
         '
         Me.lbl_totals.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_totals.Location = New System.Drawing.Point(210, 100)
+        Me.lbl_totals.Location = New System.Drawing.Point(234, 100)
         Me.lbl_totals.Name = "lbl_totals"
         Me.lbl_totals.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
         Me.lbl_totals.Size = New System.Drawing.Size(326, 20)
@@ -371,7 +381,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(548, 376)
+        Me.ClientSize = New System.Drawing.Size(572, 376)
         Me.Controls.Add(Me.btnAttempts)
         Me.Controls.Add(Me.Spacer2)
         Me.Controls.Add(Me.Spacer1)
@@ -417,6 +427,7 @@ Partial Class Form1
     Friend WithEvents lbl_totals As Label
     Friend WithEvents btnCopy As Button
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents cSP As DataGridViewCheckBoxColumn
     Friend WithEvents cPB As DataGridViewTextBoxColumn
     Friend WithEvents cDiff As DataGridViewTextBoxColumn
     Friend WithEvents cHits As DataGridViewTextBoxColumn

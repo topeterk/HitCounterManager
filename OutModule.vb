@@ -32,6 +32,7 @@ Public Class OutModule
     Public AttemptsCount As Integer = 0
     Public ShowAttemptsCounter = True
     Public ShowHeadline = True
+    Public ShowSessionProgress = True
     Public ShowSplitsCountFinished As Integer = 999
     Public ShowSplitsCountUpcoming As Integer = 999
     Public StyleUseHighContrast As Boolean = False
@@ -120,6 +121,7 @@ Public Class OutModule
                     Dim hits As Integer
                     Dim PB As Integer
                     Dim active = 0
+                    Dim session_progress = 0
                     Dim iTemp As Integer
                     Dim sTemp As String
 
@@ -132,6 +134,7 @@ Public Class OutModule
                         hits = cells.Item("cHits").Value
                         diff = cells.Item("cDiff").Value
                         PB = cells.Item("cPB").Value
+                        If cells.Item("cSP").Value Then session_progress = r
                         If r = dgv.SelectedCells.Item(0).RowIndex Then active = r
 
                         If r <> 0 Then sr.WriteLine(",") ' separator
@@ -139,6 +142,8 @@ Public Class OutModule
                     Next
                     sr.WriteLine("") ' no trailing separator
                     sr.WriteLine("],")
+
+                    sr.WriteLine("""session_progress"": " + session_progress.ToString() + ",")
 
                     sr.WriteLine("""split_active"": " + active.ToString() + ",")
                     iTemp = active - ShowSplitsCountFinished
@@ -151,6 +156,7 @@ Public Class OutModule
                     sr.WriteLine("""attempts"": " + AttemptsCount.ToString() + ",")
                     sr.WriteLine("""show_attempts"": " + ToJsonBooleanString(ShowAttemptsCounter) + ",")
                     sr.WriteLine("""show_headline"": " + ToJsonBooleanString(ShowHeadline) + ",")
+                    sr.WriteLine("""show_session_progress"": " + ToJsonBooleanString(ShowSessionProgress) + ",")
 
                     If StyleUseCustom Then sTemp = StyleFontUrl Else sTemp = ""
                     sr.WriteLine("""font_url"": """ + sTemp + """,")

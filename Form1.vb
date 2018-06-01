@@ -94,6 +94,7 @@ Public Class Form1
         Next
         DataGridView1.ClearSelection()
         DataGridView1.Rows.Item(0).Selected = True
+        DataGridView1.Rows.Item(0).Cells.Item("cSP").Value = True
         om.Update()
     End Sub
 
@@ -125,6 +126,12 @@ Public Class Form1
         If idx <= DataGridView1.RowCount - 1 Then
             DataGridView1.ClearSelection()
             DataGridView1.Rows.Item(idx).Selected = True
+        End If
+        If idx <= DataGridView1.RowCount - 2 Then
+            For r = 0 To DataGridView1.RowCount - 2 Step 1
+                DataGridView1.Rows.Item(r).Cells.Item("cSP").Value = False
+            Next
+            DataGridView1.Rows.Item(idx).Cells.Item("cSP").Value = True
         End If
         om.Update()
     End Sub
@@ -161,11 +168,14 @@ Public Class Form1
     End Function
 
     Private Sub DataGridView1_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles DataGridView1.CellValidating
+        If DataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex).GetType.Name = "DataGridViewCheckBoxCell" Then Exit Sub
+
         If IsInvalidConfigString(e.FormattedValue) Then
             e.Cancel = True
             Exit Sub
         End If
-        If e.ColumnIndex > 0 Then
+
+        If e.ColumnIndex <> DataGridView1.Rows.Item(0).Cells.Item("cTitle").ColumnIndex Then
             Dim i As Integer
             If Not Integer.TryParse(e.FormattedValue, i) Then
                 e.Cancel = True
@@ -192,11 +202,48 @@ Public Class Form1
     End Sub
 
     Private Sub DataGridView1_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
+        Static Dim SemaValueChange = False
+        If SemaValueChange Then Exit Sub
+
         For r = 0 To DataGridView1.RowCount - 2 Step 1
             DataGridView1.Rows.Item(r).Cells.Item("cDiff").Value = DataGridView1.Rows.Item(r).Cells.Item("cHits").Value - DataGridView1.Rows.Item(r).Cells.Item("cPB").Value
         Next
+
+        If DataGridView1.SelectedCells.Count <> 0 Then
+            Dim idx = DataGridView1.SelectedCells.Item(0).RowIndex
+            If idx <= DataGridView1.RowCount - 2 Then
+                SemaValueChange = True
+                For r = 0 To DataGridView1.RowCount - 2 Step 1
+                    DataGridView1.Rows.Item(r).Cells.Item("cSP").Value = False
+                Next
+                DataGridView1.Rows.Item(idx).Cells.Item("cSP").Value = True
+                SemaValueChange = False
+            End If
+        End If
+
         profs.SaveProfileFrom(ComboBox1.SelectedItem, DataGridView1, AttemptsCounter, True)
         UpdateProgressAndTotals()
+    End Sub
+
+    Private Sub DataGridView1_CellMouseUp(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView1.CellMouseUp
+        ' Workaround to fire CellValueChanged on a Checkbox change via mouse (left click) by switching cell focus
+        If DataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex).GetType.Name = "DataGridViewCheckBoxCell" Then
+            DataGridView1.Rows(DataGridView1.RowCount - 1).Cells(DataGridView1.ColumnCount - 1).Selected = True
+            DataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex).Selected = True
+        End If
+    End Sub
+
+    Private Sub DataGridView1_KeyUp(sender As Object, e As KeyEventArgs) Handles DataGridView1.KeyUp
+        ' Workaround to fire CellValueChanged on a Checkbox change via keyboard (space) by switching cell focus
+        If e.KeyCode = Keys.Space Then
+            Dim SelectedCell = DataGridView1.SelectedCells.Item(0)
+            If SelectedCell.GetType.Name = "DataGridViewCheckBoxCell" Then
+                e.Handled = True
+                SelectedCell.Value = Not SelectedCell.Value
+                DataGridView1.Rows(DataGridView1.RowCount - 1).Cells(DataGridView1.ColumnCount - 1).Selected = True
+                DataGridView1.Rows(SelectedCell.RowIndex).Cells(SelectedCell.ColumnIndex).Selected = True
+            End If
+        End If
     End Sub
 
     Private Sub btnUp_Click(sender As Object, e As EventArgs) Handles btnUp.Click

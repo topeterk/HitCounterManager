@@ -27,6 +27,8 @@ function IntToStringSigned(i) { if (i > 0) return "+" + i; else return i; }
 
 function ShowCrossOrCheckMark(i) { return '<img src="' + (i > 0 ? 'img_cross.png" height="15px"' : 'img_check.png" height="21px"') + '>'; }
 
+function ShowSessionProgress() { return '<img src="img_star.png" height="21px">'; }
+
 // --- Watchdog
 
 var heartbeat = 0;

@@ -35,6 +35,7 @@
     Public OutputFile As String
     Public ShowAttemptsCounter As Boolean
     Public ShowHeadline As Boolean
+    Public ShowSessionProgress As Boolean
     Public ShowSplitsCountFinished As Integer
     Public ShowSplitsCountUpcoming As Integer
     Public StyleUseHighContrast As Boolean
@@ -85,6 +86,11 @@ Partial Public Class Form1
             _settings.StyleCssUrl = "stylesheet_pink.css"
             _settings.StyleFontUrl = "https://fonts.googleapis.com/css?family=Fontdiner%20Swanky"
         End If
+        If _settings.Version = 1 Then ' Coming from version 1.10
+            _settings.Version = 2
+            _settings.MainWidth += 31 ' added new checkbox to datagrid
+            _settings.ShowSessionProgress = True
+        End If
 
         'Apply settings..
         sc = New Shortcuts(Me.Handle, _settings.HotKeyMethod)
@@ -117,6 +123,7 @@ Partial Public Class Form1
         End If
 
         DataGridView1.Rows.Item(0).Selected = True
+        DataGridView1.Rows.Item(0).Cells.Item("cSP").Value = True
         DataGridView1_CellValueChanged(Nothing, Nothing)
 
         If _settings.MainWidth > 400 Then MyClass.Width = _settings.MainWidth
@@ -126,6 +133,7 @@ Partial Public Class Form1
         om.FilePathOut = _settings.OutputFile
         om.ShowAttemptsCounter = _settings.ShowAttemptsCounter
         om.ShowHeadline = _settings.ShowHeadline
+        om.ShowSessionProgress = _settings.ShowSessionProgress
         om.ShowSplitsCountFinished = _settings.ShowSplitsCountFinished
         om.ShowSplitsCountUpcoming = _settings.ShowSplitsCountUpcoming
         om.StyleUseHighContrast = _settings.StyleUseHighContrast
@@ -154,6 +162,7 @@ Partial Public Class Form1
         _settings.OutputFile = om.FilePathOut
         _settings.ShowAttemptsCounter = om.ShowAttemptsCounter
         _settings.ShowHeadline = om.ShowHeadline
+        _settings.ShowSessionProgress = om.ShowSessionProgress
         _settings.ShowSplitsCountFinished = om.ShowSplitsCountFinished
         _settings.ShowSplitsCountUpcoming = om.ShowSplitsCountUpcoming
         _settings.StyleUseHighContrast = om.StyleUseHighContrast

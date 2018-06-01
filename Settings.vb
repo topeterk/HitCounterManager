@@ -130,6 +130,7 @@ Public Class Settings
 
         cbShowAttempts.Checked = om.ShowAttemptsCounter
         cbShowHeadline.Checked = om.ShowHeadline
+        cbShowSessionProgress.Checked = om.ShowSessionProgress
         numShowSplitsCountFinished.Value = om.ShowSplitsCountFinished
         numShowSplitsCountUpcoming.Value = om.ShowSplitsCountUpcoming
         cbApCustomCss.Checked = om.StyleUseCustom
@@ -191,6 +192,7 @@ Public Class Settings
     Private Sub btnApApply_Click(sender As Object, e As EventArgs) Handles btnApApply.Click
         om.ShowAttemptsCounter = cbShowAttempts.Checked
         om.ShowHeadline = cbShowHeadline.Checked
+        om.ShowSessionProgress = cbShowSessionProgress.Checked
         om.ShowSplitsCountFinished = numShowSplitsCountFinished.Value
         om.ShowSplitsCountUpcoming = numShowSplitsCountUpcoming.Value
         om.StyleUseCustom = cbApCustomCss.Checked
