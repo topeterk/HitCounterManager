@@ -28,10 +28,11 @@
 		</TaggedOutputs> -->
 	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2015Limited\InstallShield.targets"/>
+	<ItemGroup/>
 	<ItemGroup>
-		<ProjectReference Include="..\HitCounterManager.vbproj">
+		<ProjectReference Include="..\HitCounterManager.csproj">
 			<Name>HitCounterManager</Name>
-			<Project>{0502BB6E-BB4A-450B-B397-043233D1DF19}</Project>
+			<Project>{8007D948-906F-4F80-8F32-C41EC7CCEFD5}</Project>
 		</ProjectReference>
 	</ItemGroup>
 </Project>

@@ -341,8 +341,7 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>HitCounterManager.Inhaltsdateien1</td><td>{A770C2E0-83ED-483C-9E27-3776D6651C0F}</td><td>INSTALLDIR</td><td>2</td><td/><td>hitcountermanager.inhaltsdat1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>HitCounterManager.Prim_re_Ausgabe</td><td>{FBC6E823-2A43-4880-86EF-1491F102B48F}</td><td>INSTALLDIR</td><td>2</td><td/><td>hitcountermanager.prim_re_au</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>HitCounterManager.Inhaltsdateien</td><td>{5E7569C7-6179-4B70-B48B-2D09E44B7B85}</td><td>INSTALLDIR</td><td>2</td><td/><td>hitcountermanager.inhaltsdat</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{AAF2E9C3-9668-4C58-9250-B5A9AEBD36C5}</td><td>ProgramFiles64Folder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{BA03D0A1-7B4A-43C7-8381-B4DC0CC985AF}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td>{FE6DBB4F-C06F-46E2-829F-7164D3064D3F}</td><td>LocalAppDataFolder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -1059,8 +1058,7 @@
 	<table name="CreateFolder">
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
-		<row><td>INSTALLDIR</td><td>HitCounterManager.Inhaltsdateien1</td></row>
-		<row><td>INSTALLDIR</td><td>HitCounterManager.Prim_re_Ausgabe</td></row>
+		<row><td>INSTALLDIR</td><td>HitCounterManager.Inhaltsdateien</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT1</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT2</td></row>
@@ -1886,8 +1884,7 @@
 	<table name="FeatureComponents">
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
-		<row><td>AlwaysInstall</td><td>HitCounterManager.Inhaltsdateien1</td></row>
-		<row><td>AlwaysInstall</td><td>HitCounterManager.Prim_re_Ausgabe</td></row>
+		<row><td>AlwaysInstall</td><td>HitCounterManager.Inhaltsdateien</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT1</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT2</td></row>
@@ -1909,8 +1906,7 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>hitcountermanager.inhaltsdat1</td><td>HitCounterManager.Inhaltsdateien1</td><td>HitCounterManager.Inhaltsdateien</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;HitCounterManager&gt;|ContentFiles</td><td>3</td><td/></row>
-		<row><td>hitcountermanager.prim_re_au</td><td>HitCounterManager.Prim_re_Ausgabe</td><td>HitCounterManager.Primäre Ausgabe</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;HitCounterManager&gt;|Built</td><td>3</td><td/></row>
+		<row><td>hitcountermanager.inhaltsdat</td><td>HitCounterManager.Inhaltsdateien</td><td>HitCounterManager.Inhaltsdateien</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;HitCounterManager1&gt;|ContentFiles</td><td>3</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2053,8 +2049,7 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>HitCounterManager.Inhaltsdateien1</td><td/><td/><td>_AADA86B7_0D80_47DF_A7E5_91E80AEA2FB8_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>HitCounterManager.Prim_re_Ausgabe</td><td/><td/><td>_BDA62BAA_68B8_48B7_8C35_2B37064C7D5F_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>HitCounterManager.Inhaltsdateien</td><td/><td/><td>_386BEE63_E103_4B14_8D1E_EE5B4A49C6B2_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_8ED72E7E_3EC8_47A5_ABFE_B846212CDB1A_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_9C51422C_0A3A_4CFF_BB96_C7E64B8EFCD1_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td/><td/><td>_A9A5E702_3BB3_457F_9925_573F58D3B280_FILTER</td><td/><td/><td/><td/></row>
@@ -2341,6 +2336,7 @@
 		<col def="i4">Type</col>
 		<row><td>CommonFilesFolder</td><td/><td/><td>1</td></row>
 		<row><td>HitCounterManager</td><td>HitCounterManager.vbproj</td><td/><td>2</td></row>
+		<row><td>HitCounterManager1</td><td>HitCounterManager.csproj</td><td/><td>2</td></row>
 		<row><td>ISPROJECTDIR</td><td/><td/><td>1</td></row>
 		<row><td>ISProductFolder</td><td/><td/><td>1</td></row>
 		<row><td>ISProjectDataFolder</td><td/><td/><td>1</td></row>
@@ -2650,7 +2646,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>GunriderProductions</td><td>0</td><td/><td>1956944885</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>GunriderProductions</td><td>0</td><td/><td>-215575282</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>1956938709</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>1956938709</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>1956936757</td></row>
@@ -3752,8 +3748,8 @@
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>1956938709</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>1956938709</td></row>
 		<row><td>ID_STRING1</td><td>1033</td><td/><td>0</td><td/><td>1956938709</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>https://github.com/topeterk/HitCounterManager</td><td>0</td><td/><td>1956963317</td></row>
-		<row><td>ID_STRING3</td><td>1033</td><td>GunriderProductions</td><td>0</td><td/><td>1956944885</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>http://www.GunriderProductions.com</td><td>0</td><td/><td>-215575282</td></row>
+		<row><td>ID_STRING3</td><td>1033</td><td>GunriderProductions</td><td>0</td><td/><td>-215575282</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>Launch |ContentFiles</td><td>0</td><td/><td>1956930709</td></row>
 		<row><td>ID_STRING5</td><td>1033</td><td>HITCOU~1|HitCounterManager</td><td>0</td><td/><td>1956908341</td></row>
 		<row><td>ID_STRING6</td><td>1033</td><td>HITCOU~1|HitCounterManager</td><td>0</td><td/><td>1956916533</td></row>
@@ -4245,7 +4241,6 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="s0">PropertyKey</col>
 		<col def="s0">PropVariantValue</col>
 		<row><td>ShortcutProperty1</td><td>UNINST_Uninstall_HitCounterManager</td><td>{9F4C2855-9F79-4B39-A8D0-E1D42DE1D5F3}, 12</td><td>1</td></row>
-		<row><td>ShortcutProperty2</td><td>NewShortcut1</td><td>{9F4C2855-9F79-4B39-A8D0-E1D42DE1D5F3}, 12</td><td>1</td></row>
 	</table>
 
 	<table name="ODBCAttribute">
@@ -4463,7 +4458,6 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="L255">FileName</col>
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
-		<row><td>NewShortcut11</td><td>HitCounterManager.Prim_re_Ausgabe</td><td/><td>hitcou_1_hitcountermanager</td><td>2</td></row>
 		<row><td>UNINST_Uninstall_HitCounterManager</td><td>IS_ININSTALL_SHORTCUT</td><td/><td>hitcou_1_hitcountermanager</td><td>2</td></row>
 	</table>
 
@@ -4550,8 +4544,6 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>NewShortcut1</td><td>DesktopFolder</td><td>##ID_STRING5##</td><td>HitCounterManager.Prim_re_Ausgabe</td><td>AlwaysInstall</td><td/><td/><td/><td/><td/><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td>Run HitCounterManager</td><td/><td/></row>
-		<row><td>NewShortcut11</td><td>hitcou_1_hitcountermanager</td><td>##ID_STRING6##</td><td>HitCounterManager.Prim_re_Ausgabe</td><td>AlwaysInstall</td><td/><td/><td/><td/><td/><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td>Run HitCounterManager</td><td/><td/></row>
 		<row><td>UNINST_Uninstall_HitCounterManager</td><td>hitcou_1_hitcountermanager</td><td>UNINST|Uninstall HitCounterManager</td><td>IS_ININSTALL_SHORTCUT</td><td>[SystemFolder]msiexec.exe</td><td>/x {B39B6ADA-995A-426C-B0B1-351CB70B812A}</td><td/><td/><td>UNINST_Uninstall_H_AB16A3F91F434A24A1E8CA47B5BD30E2.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
