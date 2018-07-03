@@ -35,7 +35,7 @@ namespace HitCounterManager
 
         private Profiles profs = new Profiles();
         private int _AttemptsCounter = 0;
-        private object ComboBox1PrevSelectedItem = null;
+        private string ComboBox1PrevSelectedItem = null;
         private bool SettingsDialogOpen = false;
 
         // Sync AttemptsCounter with output module
@@ -370,6 +370,22 @@ namespace HitCounterManager
                 }
                 DataGridView1.Rows[session_progress].Cells["cSP"].Value = true;
             }
+            om.Update();
+        }
+
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (null != ComboBox1PrevSelectedItem)
+            {
+                profs.SaveProfileFrom(ComboBox1PrevSelectedItem, DataGridView1, AttemptsCounter);
+            }
+
+            int CsharpWorkaroundForBadPropertyImplementation = AttemptsCounter; // getter/setter cannot be passed as reference
+            profs.LoadProfileInto((string)ComboBox1.SelectedItem, ref DataGridView1, ref CsharpWorkaroundForBadPropertyImplementation);
+            AttemptsCounter = CsharpWorkaroundForBadPropertyImplementation;
+
+            ComboBox1PrevSelectedItem = (string)ComboBox1.SelectedItem;
+            UpdateProgressAndTotals();
             om.Update();
         }
 

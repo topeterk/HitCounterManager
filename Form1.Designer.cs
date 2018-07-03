@@ -365,6 +365,7 @@
             this.ComboBox1.Size = new System.Drawing.Size(548, 21);
             this.ComboBox1.Sorted = true;
             this.ComboBox1.TabIndex = 28;
+            this.ComboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             // 
             // DataGridView1
             // 
