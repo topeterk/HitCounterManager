@@ -148,12 +148,13 @@ namespace HitCounterManager
                     Attempts = prof.Attempts;
                     foreach (ProfileRow row in prof.Rows)
                     {
-                        object[] cells = { row.Title, row.Hits, row.Diff, row.PB };
+                        object[] cells = { row.Title, row.Hits, row.Diff, row.PB, false };
                         dgv.Rows.Add(cells);
                     }
-                    return; // done
+                    break;
                 }
             }
+            dgv.Rows[0].Cells["cSP"].Value = true;
         }
 
         /// <summary>

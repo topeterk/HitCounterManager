@@ -130,7 +130,7 @@ namespace HitCounterManager
 
         private bool IsInvalidConfigString(string str)
         {
-            bool result = true;
+            bool isInvalid = false;
             string errormessage = "";
 
             foreach (string s in new string[] { ";", "|", "<", ">" })
@@ -138,12 +138,12 @@ namespace HitCounterManager
                 if (str.Contains(s))
                 {
                     errormessage += "Not allowed to use \";\"!" + Environment.NewLine;
-                    result = false;
+                    isInvalid = true;
                 }
             }
 
-            if (!result) MessageBox.Show(errormessage);
-            return result;
+            if (isInvalid) MessageBox.Show(errormessage);
+            return isInvalid;
         }
 
         #endregion
@@ -193,7 +193,6 @@ namespace HitCounterManager
             // create, select and save new profile..
             ComboBox1.Items.Add(name);
             ComboBox1.SelectedItem = name;
-            DataGridView1.Rows.Clear();
             profs.SaveProfileFrom(name, DataGridView1, AttemptsCounter, true); // save new empty profile
             UpdateProgressAndTotals();
         }
@@ -219,7 +218,7 @@ namespace HitCounterManager
         {
             string name = (string)ComboBox1.SelectedItem;
 
-            do { name += " COPY"; } while (!ComboBox1.Items.Contains(name)); // extend name till it becomes unique
+            do { name += " COPY"; } while (ComboBox1.Items.Contains(name)); // extend name till it becomes unique
 
             profs.SaveProfileFrom((string)ComboBox1.SelectedItem, DataGridView1, AttemptsCounter); // save previous selected profile
 
@@ -416,6 +415,7 @@ namespace HitCounterManager
                     e.Cancel = true;
                     MessageBox.Show("Must be numeric!");
                 }
+                else DataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].ValueType = typeof(int); // Force int otherwise it is most likely treated as string
             }
         }
                 
@@ -426,6 +426,12 @@ namespace HitCounterManager
 
             for (int r = 0; r <= DataGridView1.RowCount - 2; r++)
             {
+                // populate values if row gets created
+                if (null == DataGridView1.Rows[r].Cells["cTitle"].Value) DataGridView1.Rows[r].Cells["cTitle"].Value = "";
+                if (null == DataGridView1.Rows[r].Cells["cHits"].Value) DataGridView1.Rows[r].Cells["cHits"].Value = 0;
+                if (null == DataGridView1.Rows[r].Cells["cPB"].Value) DataGridView1.Rows[r].Cells["cPB"].Value = 0;
+                if (null == DataGridView1.Rows[r].Cells["cSP"].Value) DataGridView1.Rows[r].Cells["cSP"].Value = false;
+                
                 DataGridView1.Rows[r].Cells["cDiff"].Value = (int)DataGridView1.Rows[r].Cells["cHits"].Value - (int)DataGridView1.Rows[r].Cells["cPB"].Value;
             }
 
