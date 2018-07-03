@@ -71,6 +71,7 @@ namespace HitCounterManager
                 {
                     StreamReader sr = new StreamReader(_FilePathIn);
                     template = sr.ReadToEnd();
+                    sr.Close();
                 }
             }
         }
@@ -124,10 +125,7 @@ namespace HitCounterManager
 
             try
             {
-                if (File.Exists(_FilePathOut))
-                {
-                    File.Create(_FilePathOut).Close();
-                }
+                if (File.Exists(_FilePathOut)) File.Create(_FilePathOut).Close();
                 sr = new StreamWriter(_FilePathOut);
             }
             catch { return; }
