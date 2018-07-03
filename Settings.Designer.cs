@@ -174,7 +174,7 @@
             this.ToolTip1.SetToolTip(this.cbShowSessionProgress, "Displays the icon to represent the farthest split since last time the application" +
         " started");
             this.cbShowSessionProgress.UseVisualStyleBackColor = true;
-            this.cbShowSessionProgress.CheckedChanged += new System.EventHandler(this.appearance_apply);
+            this.cbShowSessionProgress.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // cbShowAttempts
             // 
@@ -188,7 +188,7 @@
             this.cbShowAttempts.Text = "Show attempts counter";
             this.ToolTip1.SetToolTip(this.cbShowAttempts, "Displays how many runs have been done yet");
             this.cbShowAttempts.UseVisualStyleBackColor = true;
-            this.cbShowAttempts.CheckedChanged += new System.EventHandler(this.appearance_apply);
+            this.cbShowAttempts.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // cbShowHeadline
             // 
@@ -202,7 +202,7 @@
             this.cbShowHeadline.Text = "Show headline";
             this.ToolTip1.SetToolTip(this.cbShowHeadline, "Displays the headlines of the columns");
             this.cbShowHeadline.UseVisualStyleBackColor = true;
-            this.cbShowHeadline.CheckedChanged += new System.EventHandler(this.appearance_apply);
+            this.cbShowHeadline.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // cbApHighContrast
             // 
@@ -215,7 +215,7 @@
             this.ToolTip1.SetToolTip(this.cbApHighContrast, "Change design (like removing transparency, other colors, fatter text) for better " +
         "readability");
             this.cbApHighContrast.UseVisualStyleBackColor = true;
-            this.cbApHighContrast.CheckedChanged += new System.EventHandler(this.appearance_apply);
+            this.cbApHighContrast.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // Label9
             // 
@@ -238,7 +238,7 @@
             this.numStyleDesiredWidth.Size = new System.Drawing.Size(57, 20);
             this.numStyleDesiredWidth.TabIndex = 4;
             this.ToolTip1.SetToolTip(this.numStyleDesiredWidth, resources.GetString("numStyleDesiredWidth.ToolTip"));
-            this.numStyleDesiredWidth.ValueChanged += new System.EventHandler(this.appearance_apply);
+            this.numStyleDesiredWidth.ValueChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // numShowSplitsCountUpcoming
             // 
@@ -257,7 +257,7 @@
             0,
             0,
             0});
-            this.numShowSplitsCountUpcoming.ValueChanged += new System.EventHandler(this.appearance_apply);
+            this.numShowSplitsCountUpcoming.ValueChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // Label13
             // 
@@ -312,7 +312,7 @@
             0,
             0,
             0});
-            this.numShowSplitsCountFinished.ValueChanged += new System.EventHandler(this.appearance_apply);
+            this.numShowSplitsCountFinished.ValueChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // Label3
             // 

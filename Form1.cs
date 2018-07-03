@@ -21,13 +21,6 @@
 //SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 
@@ -35,7 +28,7 @@ namespace HitCounterManager
 {
     public partial class Form1 : Form
     {
-        public const int WM_HOTKEY = 0x312;
+        private const int WM_HOTKEY = 0x312;
 
         public Shortcuts sc;
         public OutModule om;
@@ -56,6 +49,8 @@ namespace HitCounterManager
             }
         }
 
+        #region Form
+
         public Form1()
         {
             InitializeComponent();
@@ -66,6 +61,28 @@ namespace HitCounterManager
             Text = Text + " - v" + Application.ProductVersion;
             LoadSettings();
             om.Update();
+        }
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveSettings();
+        }
+        
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            const int Pad = 13;
+
+            // fill
+            ComboBox1.Width = Width - Pad * 2 - 15;
+            DataGridView1.Left = Pad;
+            DataGridView1.Width = ComboBox1.Width;
+            DataGridView1.Height = Height - DataGridView1.Top - Pad - btnSettings.Height - 15;
+
+            // right aligned
+            btnSplit.Left = Width - Pad - 15 - btnSplit.Width;
+            lbl_totals.Width = Width - Pad - 15 - lbl_totals.Left;
+
+            // left aligned
+            btnHit.Width = btnSplit.Left - Pad / 2 - btnHit.Left;
         }
 
         protected override void WndProc(ref Message m)
@@ -85,7 +102,53 @@ namespace HitCounterManager
 
             base.WndProc(ref m);
         }
+
+        #endregion
+        #region Functions
         
+        private void UpdateProgressAndTotals()
+        {
+            int TotalHits = 0;
+            int TotalPB = 0;
+            int Splits = DataGridView1.RowCount - 2;
+
+            if (Splits < 0) // Check for valid entries
+                lbl_progress.Text = "Progress:  ?? / ??  # " + AttemptsCounter.ToString("D3");
+            else
+            {
+                for (int r = 0; r <= Splits; r++)
+                {
+                    TotalHits = TotalHits + (int)DataGridView1.Rows[r].Cells["cHits"].Value;
+                    TotalPB = TotalPB + (int)DataGridView1.Rows[r].Cells["cPB"].Value;
+                }
+
+                lbl_progress.Text = "Progress:  " + DataGridView1.SelectedCells[0].RowIndex + " / " + (Splits + 1) + "  # " + AttemptsCounter.ToString("D3");
+            }
+
+            lbl_totals.Text = "Total: " + TotalHits + " Hits   " + TotalPB + " PB";
+        }
+
+        private bool IsInvalidConfigString(string str)
+        {
+            bool result = true;
+            string errormessage = "";
+
+            foreach (string s in new string[] { ";", "|", "<", ">" })
+            {
+                if (str.Contains(s))
+                {
+                    errormessage += "Not allowed to use \";\"!" + Environment.NewLine;
+                    result = false;
+                }
+            }
+
+            if (!result) MessageBox.Show(errormessage);
+            return result;
+        }
+
+        #endregion
+        #region UI
+
         private void btnSettings_Click(object sender, EventArgs e)
         {
             Form form = new Settings();
@@ -109,6 +172,142 @@ namespace HitCounterManager
         {
             Form form = new About();
             form.ShowDialog(this);
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            string name = Interaction.InputBox("Enter name of new profile", "New profile", (string)ComboBox1.SelectedItem);
+            if (name.Length == 0 || IsInvalidConfigString(name)) return;
+
+            if (ComboBox1.Items.Contains(name))
+            {
+                if (DialogResult.OK != MessageBox.Show("A profile with this name already exists. Do you want to create as copy from the currently selected?", "Profile already exists", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
+                    return;
+
+                btnCopy_Click(sender, e);
+                return;
+            }
+
+            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, DataGridView1, AttemptsCounter); // save previous selected profile
+
+            // create, select and save new profile..
+            ComboBox1.Items.Add(name);
+            ComboBox1.SelectedItem = name;
+            DataGridView1.Rows.Clear();
+            profs.SaveProfileFrom(name, DataGridView1, AttemptsCounter, true); // save new empty profile
+            UpdateProgressAndTotals();
+        }
+
+        private void btnRename_Click(object sender, EventArgs e)
+        {
+            if (ComboBox1.Items.Count == 0) return;
+
+            string name = Interaction.InputBox("Enter new name for profile \"" + (string)ComboBox1.SelectedItem + "\"!", "Rename profile", (string)ComboBox1.SelectedItem);
+            if (name.Length == 0 || IsInvalidConfigString(name)) return;
+
+            if (ComboBox1.Items.Contains(name))
+            {
+                MessageBox.Show("A profile with this name already exists!", "Profile already exists");
+                return;
+            }
+
+            profs.RenameProfile((string)ComboBox1.SelectedItem, name);
+            ComboBox1.Items[ComboBox1.SelectedIndex] = name;
+        }
+
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
+            string name = (string)ComboBox1.SelectedItem;
+
+            do { name += " COPY"; } while (!ComboBox1.Items.Contains(name)); // extend name till it becomes unique
+
+            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, DataGridView1, AttemptsCounter); // save previous selected profile
+
+            // create, select and save new profile..
+            ComboBox1.Items.Add(name);
+            profs.SaveProfileFrom(name, DataGridView1, AttemptsCounter, true); // copy current data to new profile
+            ComboBox1.SelectedItem = name;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (ComboBox1.Items.Count == 0) return;
+
+            if (DialogResult.OK == MessageBox.Show("Do you really want to delete profile \"" + (string)ComboBox1.SelectedItem + "\"?", "Deleting profile", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
+            {
+                int idx = ComboBox1.SelectedIndex;
+
+                profs.DeleteProfile((string)ComboBox1.SelectedItem);
+                ComboBox1.Items.RemoveAt(idx);
+
+                if (ComboBox1.Items.Count == 0)
+                {
+                    ComboBox1.Items.Add("Unnamed");
+                    ComboBox1.SelectedIndex = 0;
+                }
+                else if (ComboBox1.Items.Count >= idx)
+                    ComboBox1.SelectedIndex = ComboBox1.Items.Count - 1;
+                else
+                    ComboBox1.SelectedIndex = idx;
+
+                int CsharpWorkaroundForBadPropertyImplementation = AttemptsCounter; // getter/setter cannot be passed as reference
+                profs.LoadProfileInto((string)ComboBox1.SelectedItem, ref DataGridView1, ref CsharpWorkaroundForBadPropertyImplementation);
+                AttemptsCounter = CsharpWorkaroundForBadPropertyImplementation;
+            }
+        }
+
+        private void btnAttempts_Click(object sender, EventArgs e)
+        {
+            string amount_string = Interaction.InputBox("Enter amount to be set!", "Set amount of attempts", AttemptsCounter.ToString());
+            int amount_value;
+            if (!int.TryParse(amount_string, out amount_value))
+            {
+                if (amount_string.Equals("")) return; // Unfortunately this is the Cancel button
+                MessageBox.Show("Only numbers are allowed!");
+                return;
+            }
+            AttemptsCounter = amount_value;
+            profs.SaveProfileFrom((string)ComboBox1PrevSelectedItem, DataGridView1, AttemptsCounter);
+            UpdateProgressAndTotals();
+            om.Update();
+        }
+
+        private void btnUp_Click(object sender, EventArgs e)
+        {
+            int idx_old = DataGridView1.SelectedCells[0].RowIndex;
+            int idx_new = idx_old - 1;
+
+            if (0 <= idx_new && (idx_old < DataGridView1.Rows.Count - 1)) // Do not move when UP is not possible
+            {
+                for (int i = 0; i <= DataGridView1.Columns.Count - 1; i++)
+                {
+                    object cell = DataGridView1.Rows[idx_old].Cells[i].Value;
+                    DataGridView1.Rows[idx_old].Cells[i].Value = DataGridView1.Rows[idx_new].Cells[i].Value;
+                    DataGridView1.Rows[idx_new].Cells[i].Value = cell;
+                }
+
+                DataGridView1.ClearSelection();
+                DataGridView1.Rows[idx_new].Selected = true;
+            }
+        }
+
+        private void btnDown_Click(object sender, EventArgs e)
+        {
+            int idx_old = DataGridView1.SelectedCells[0].RowIndex;
+            int idx_new = idx_old + 1;
+
+            if (idx_new < DataGridView1.RowCount - 1) // Do not move when DOWN is not possible
+            {
+                for (int i = 0; i <= DataGridView1.Columns.Count - 1; i++)
+                {
+                    object cell = DataGridView1.Rows[idx_old].Cells[i].Value;
+                    DataGridView1.Rows[idx_old].Cells[i].Value = DataGridView1.Rows[idx_new].Cells[i].Value;
+                    DataGridView1.Rows[idx_new].Cells[i].Value = cell;
+                }
+
+                DataGridView1.ClearSelection();
+                DataGridView1.Rows[idx_new].Selected = true;
+            }
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -182,28 +381,6 @@ namespace HitCounterManager
                 om.Update();
             }
         }
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            SaveSettings();
-        }
-        
-        private bool IsInvalidConfigString(string str)
-        {
-            bool result = true;
-            string errormessage = "";
-
-            foreach (string s in new string[]{ ";", "|", "<", ">"})
-            {
-                if (str.Contains(s))
-                {
-                    errormessage += "Not allowed to use \";\"!" + Environment.NewLine;
-                    result = false;
-                }
-            }
-
-            if (!result) MessageBox.Show(errormessage);
-            return result;
-        }
 
         private void DataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
@@ -225,25 +402,7 @@ namespace HitCounterManager
                 }
             }
         }
-
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            const int Pad = 13;
-
-            // fill
-            ComboBox1.Width = Width - Pad * 2 - 15;
-            DataGridView1.Left = Pad;
-            DataGridView1.Width = ComboBox1.Width;
-            DataGridView1.Height = Height - DataGridView1.Top - Pad - btnSettings.Height - 15;
-
-            // right aligned
-            btnSplit.Left = Width - Pad - 15 - btnSplit.Width;
-            lbl_totals.Width = Width - Pad - 15 - lbl_totals.Left;
-
-            // left aligned
-            btnHit.Width = btnSplit.Left - Pad / 2 - btnHit.Left;
-        }
-        
+                
         private bool SemaValueChange = false;
         private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -307,162 +466,7 @@ namespace HitCounterManager
                 }
             }
         }
-        private void btnUp_Click(object sender, EventArgs e)
-        {
-            int idx_old = DataGridView1.SelectedCells[0].RowIndex;
-            int idx_new = idx_old - 1;
 
-            if (0 <= idx_new && (idx_old < DataGridView1.Rows.Count - 1)) // Do not move when UP is not possible
-            {
-                for (int i = 0; i <= DataGridView1.Columns.Count - 1; i++)
-                {
-                    object cell = DataGridView1.Rows[idx_old].Cells[i].Value;
-                    DataGridView1.Rows[idx_old].Cells[i].Value = DataGridView1.Rows[idx_new].Cells[i].Value;
-                    DataGridView1.Rows[idx_new].Cells[i].Value = cell;
-                }
-
-                DataGridView1.ClearSelection();
-                DataGridView1.Rows[idx_new].Selected = true;
-            }
-        }
-
-        private void btnDown_Click(object sender, EventArgs e)
-        {
-            int idx_old = DataGridView1.SelectedCells[0].RowIndex;
-            int idx_new = idx_old + 1;
-
-            if (idx_new < DataGridView1.RowCount - 1) // Do not move when DOWN is not possible
-            {
-                for (int i = 0; i <= DataGridView1.Columns.Count - 1; i++)
-                {
-                    object cell = DataGridView1.Rows[idx_old].Cells[i].Value;
-                    DataGridView1.Rows[idx_old].Cells[i].Value = DataGridView1.Rows[idx_new].Cells[i].Value;
-                    DataGridView1.Rows[idx_new].Cells[i].Value = cell;
-                }
-
-                DataGridView1.ClearSelection();
-                DataGridView1.Rows[idx_new].Selected = true;
-            }
-        }
-
-        private void btnNew_Click(object sender, EventArgs e)
-        {
-            string name = Interaction.InputBox("Enter name of new profile", "New profile", (string)ComboBox1.SelectedItem);
-            if (name.Length == 0 || IsInvalidConfigString(name)) return;
-
-            if (ComboBox1.Items.Contains(name))
-            {
-                if (DialogResult.OK != MessageBox.Show("A profile with this name already exists. Do you want to create as copy from the currently selected?", "Profile already exists", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
-                    return;
-
-                btnCopy_Click(sender, e);
-                return;
-            }
-
-            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, DataGridView1, AttemptsCounter); // save previous selected profile
-
-            // create, select and save new profile..
-            ComboBox1.Items.Add(name);
-            ComboBox1.SelectedItem = name;
-            DataGridView1.Rows.Clear();
-            profs.SaveProfileFrom(name, DataGridView1, AttemptsCounter, true); // save new empty profile
-            UpdateProgressAndTotals();
-        }
-
-        private void btnCopy_Click(object sender, EventArgs e)
-        {
-            string name = (string)ComboBox1.SelectedItem;
-
-            do { name += " COPY"; } while (!ComboBox1.Items.Contains(name)); // extend name till it becomes unique
-
-            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, DataGridView1, AttemptsCounter); // save previous selected profile
-
-            // create, select and save new profile..
-            ComboBox1.Items.Add(name);
-            profs.SaveProfileFrom(name, DataGridView1, AttemptsCounter, true); // copy current data to new profile
-            ComboBox1.SelectedItem = name;
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (ComboBox1.Items.Count == 0) return;
-
-            if (DialogResult.OK == MessageBox.Show("Do you really want to delete profile \"" + (string)ComboBox1.SelectedItem + "\"?", "Deleting profile", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
-            {
-                int idx = ComboBox1.SelectedIndex;
-
-                profs.DeleteProfile((string)ComboBox1.SelectedItem);
-                ComboBox1.Items.RemoveAt(idx);
-
-                if (ComboBox1.Items.Count == 0)
-                {
-                    ComboBox1.Items.Add("Unnamed");
-                    ComboBox1.SelectedIndex = 0;
-                }
-                else if (ComboBox1.Items.Count >= idx)
-                    ComboBox1.SelectedIndex = ComboBox1.Items.Count - 1;
-                else
-                    ComboBox1.SelectedIndex = idx;
-
-                int CsharpWorkaroundForBadPropertyImplementation = AttemptsCounter; // getter/setter cannot be passed as reference
-                profs.LoadProfileInto((string)ComboBox1.SelectedItem, ref DataGridView1, ref CsharpWorkaroundForBadPropertyImplementation);
-                AttemptsCounter = CsharpWorkaroundForBadPropertyImplementation;
-            }
-        }
-
-        private void btnRename_Click(object sender, EventArgs e)
-        {
-            if (ComboBox1.Items.Count == 0) return;
-
-            string name = Interaction.InputBox("Enter new name for profile \"" + (string)ComboBox1.SelectedItem + "\"!", "Rename profile", (string)ComboBox1.SelectedItem);
-            if (name.Length == 0 || IsInvalidConfigString(name)) return;
-
-            if (ComboBox1.Items.Contains(name))
-            {
-                MessageBox.Show("A profile with this name already exists!", "Profile already exists");
-                return;
-            }
-
-            profs.RenameProfile((string)ComboBox1.SelectedItem, name);
-            ComboBox1.Items[ComboBox1.SelectedIndex] = name;
-        }
-
-        private void btnAttempts_Click(object sender, EventArgs e)
-        {
-            string amount_string = Interaction.InputBox("Enter amount to be set!", "Set amount of attempts", AttemptsCounter.ToString());
-            int amount_value;
-            if (!int.TryParse(amount_string, out amount_value))
-            {
-                if (amount_string.Equals("")) return; // Unfortunately this is the Cancel button
-                MessageBox.Show("Only numbers are allowed!");
-                return;
-            }
-            AttemptsCounter = amount_value;
-            profs.SaveProfileFrom((string)ComboBox1PrevSelectedItem, DataGridView1, AttemptsCounter);
-            UpdateProgressAndTotals();
-            om.Update();
-        }
-
-        private void UpdateProgressAndTotals()
-        {
-            int TotalHits = 0;
-            int TotalPB = 0;
-            int Splits = DataGridView1.RowCount - 2;
-
-            if (Splits < 0) // Check for valid entries
-                lbl_progress.Text = "Progress:  ?? / ??  # " + AttemptsCounter.ToString("D3");
-            else
-            {
-                for (int r = 0; r <= Splits; r++)
-                {
-                    TotalHits = TotalHits + (int)DataGridView1.Rows[r].Cells["cHits"].Value;
-                    TotalPB = TotalPB + (int)DataGridView1.Rows[r].Cells["cPB"].Value;
-                }
-
-                lbl_progress.Text = "Progress:  " + DataGridView1.SelectedCells[0].RowIndex + " / " + (Splits + 1) + "  # " + AttemptsCounter.ToString("D3");
-            }
-
-            lbl_totals.Text = "Total: " + TotalHits + " Hits   " + TotalPB + " PB";
-        }
+        #endregion
     }
 }

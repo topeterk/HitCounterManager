@@ -21,15 +21,8 @@
 //SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HitCounterManager
@@ -47,10 +40,49 @@ namespace HitCounterManager
         private Shortcuts sc;
         private OutModule om = null;
 
+        #region Form
+
         public Settings()
         {
             InitializeComponent();
         }
+
+        private void Settings_Load(object sender, EventArgs e)
+        {
+            sc = ((Form1)Owner).sc;
+            om = ((Form1)Owner).om;
+
+            ShortcutsKey key;
+            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Reset);
+            cbScReset.Checked = key.used;
+            if (key.valid) UpdateKeyName(txtReset, key.key);
+            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Hit);
+            cbScHit.Checked = key.used;
+            if (key.valid) UpdateKeyName(txtHit, key.key);
+            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Split);
+            cbScNextSplit.Checked = key.used;
+            if (key.valid) UpdateKeyName(txtNextSplit, key.key);
+
+            txtInput.Text = om.FilePathIn;
+            txtOutput.Text = om.FilePathOut;
+
+            radioHotKeyMethod_sync.Checked = (sc.NextStart_Method == Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync);
+            radioHotKeyMethod_async.Checked = (sc.NextStart_Method == Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async);
+
+            cbShowAttempts.Checked = om.ShowAttemptsCounter;
+            cbShowHeadline.Checked = om.ShowHeadline;
+            cbShowSessionProgress.Checked = om.ShowSessionProgress;
+            numShowSplitsCountFinished.Value = om.ShowSplitsCountFinished;
+            numShowSplitsCountUpcoming.Value = om.ShowSplitsCountUpcoming;
+            cbApCustomCss.Checked = om.StyleUseCustom;
+            txtCssUrl.Text = om.StyleCssUrl;
+            txtFontUrl.Text = om.StyleFontUrl;
+            numStyleDesiredWidth.Value = om.StyleDesiredWidth;
+            cbApHighContrast.Checked = om.StyleUseHighContrast;
+        }
+
+        #endregion
+        #region Functions
 
         private string GetNameFromKeyCode(Keys keyCode)
         {
@@ -89,6 +121,23 @@ namespace HitCounterManager
             UpdateKeyName(txt, e);
         }
 
+        private void ApplyAppearance(object sender, EventArgs e)
+        {
+            if (null == om) return;
+
+            om.ShowAttemptsCounter = cbShowAttempts.Checked;
+            om.ShowHeadline = cbShowHeadline.Checked;
+            om.ShowSessionProgress = cbShowSessionProgress.Checked;
+            om.ShowSplitsCountFinished = (int)numShowSplitsCountFinished.Value;
+            om.ShowSplitsCountUpcoming = (int)numShowSplitsCountUpcoming.Value;
+            om.StyleUseHighContrast = cbApHighContrast.Checked;
+            om.StyleDesiredWidth = (int)numStyleDesiredWidth.Value;
+            om.Update();
+        }
+
+        #endregion
+        #region UI
+
         private void txtReset_KeyDown(object sender, KeyEventArgs e)
         {
             RegisterHotKey(txtReset, null, Shortcuts.SC_Type.SC_Type_Reset, e);
@@ -120,40 +169,6 @@ namespace HitCounterManager
         private void cbScNextSplit_CheckedChanged(object sender, EventArgs e)
         {
             sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Split, cbScNextSplit.Checked);
-        }
-
-        private void Settings_Load(object sender, EventArgs e)
-        {
-            sc = ((Form1)Owner).sc;
-            om = ((Form1)Owner).om;
-
-            ShortcutsKey key;
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Reset);
-            cbScReset.Checked = key.used;
-            if (key.valid) UpdateKeyName(txtReset, key.key);
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Hit);
-            cbScHit.Checked = key.used;
-            if (key.valid) UpdateKeyName(txtHit, key.key);
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Split);
-            cbScNextSplit.Checked = key.used;
-            if (key.valid) UpdateKeyName(txtNextSplit, key.key);
-            
-            txtInput.Text = om.FilePathIn;
-            txtOutput.Text = om.FilePathOut;
-
-            radioHotKeyMethod_sync.Checked = (sc.NextStart_Method == Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync);
-            radioHotKeyMethod_async.Checked = (sc.NextStart_Method == Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async);
-
-            cbShowAttempts.Checked = om.ShowAttemptsCounter;
-            cbShowHeadline.Checked = om.ShowHeadline;
-            cbShowSessionProgress.Checked = om.ShowSessionProgress;
-            numShowSplitsCountFinished.Value = om.ShowSplitsCountFinished;
-            numShowSplitsCountUpcoming.Value = om.ShowSplitsCountUpcoming;
-            cbApCustomCss.Checked = om.StyleUseCustom;
-            txtCssUrl.Text = om.StyleCssUrl;
-            txtFontUrl.Text = om.StyleFontUrl;
-            numStyleDesiredWidth.Value = om.StyleDesiredWidth;
-            cbApHighContrast.Checked = om.StyleUseHighContrast;
         }
 
         private void btnInput_Click(object sender, EventArgs e)
@@ -227,7 +242,7 @@ namespace HitCounterManager
             om.StyleUseCustom = cbApCustomCss.Checked;
             om.StyleCssUrl = txtCssUrl.Text;
             om.StyleFontUrl = txtFontUrl.Text;
-            appearance_apply(sender, e);
+            ApplyAppearance(sender, e);
         }
 
         private void cbApCustomCss_CheckedChanged(object sender, EventArgs e)
@@ -236,18 +251,6 @@ namespace HitCounterManager
             txtFontUrl.Enabled = cbApCustomCss.Checked;
         }
 
-        private void appearance_apply(object sender, EventArgs e)
-        {
-            if (null == om) return;
-
-            om.ShowAttemptsCounter = cbShowAttempts.Checked;
-            om.ShowHeadline = cbShowHeadline.Checked;
-            om.ShowSessionProgress = cbShowSessionProgress.Checked;
-            om.ShowSplitsCountFinished = (int)numShowSplitsCountFinished.Value;
-            om.ShowSplitsCountUpcoming = (int)numShowSplitsCountUpcoming.Value;
-            om.StyleUseHighContrast = cbApHighContrast.Checked;
-            om.StyleDesiredWidth = (int)numStyleDesiredWidth.Value;
-            om.Update();
-        }
+        #endregion
     }
 }

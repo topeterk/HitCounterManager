@@ -31,7 +31,7 @@ namespace HitCounterManager
     /// </summary>
     public class ShortcutsKey
     {
-        public const int KEY_PRESSED_NOW = 0x8000;
+        private const int KEY_PRESSED_NOW = 0x8000;
 
         [DllImport("User32.dll")]
         private static extern short GetAsyncKeyState(System.Windows.Forms.Keys vKey);
@@ -105,14 +105,14 @@ namespace HitCounterManager
     /// </summary>
     public class Shortcuts
     {
-        public const int MOD_ALT = 0x0001;
-        public const int MOD_CONTROL = 0x0002;
-        public const int MOD_SHIFT = 0x0004;
-        public const int WM_HOTKEY = 0x312;
-        public const int VK_SHIFT = 0x10;
-        public const int VK_CONTROL = 0x11;
-        public const int VK_MENU = 0x12;
-        public const int KEY_PRESSED_NOW = 0x8000;
+        private const int MOD_ALT = 0x0001;
+        private const int MOD_CONTROL = 0x0002;
+        private const int MOD_SHIFT = 0x0004;
+        private const int WM_HOTKEY = 0x312;
+        private const int VK_SHIFT = 0x10;
+        private const int VK_CONTROL = 0x11;
+        private const int VK_MENU = 0x12;
+        private const int KEY_PRESSED_NOW = 0x8000;
 
         [DllImport("User32.dll")]
         private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, int vk);
@@ -120,7 +120,7 @@ namespace HitCounterManager
         [DllImport("User32.dll")]
         private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
-        public delegate void TimerProc(IntPtr hWnd, uint uMsg, IntPtr nIDEvent, uint dwTime);
+        private delegate void TimerProc(IntPtr hWnd, uint uMsg, IntPtr nIDEvent, uint dwTime);
         private TimerProc TimerProcKeepAliveReference; // prevent garbage collector freeing up the callback without any reason
 
         [DllImport("User32.dll")]
