@@ -161,6 +161,13 @@ namespace HitCounterManager
         /// </summary>
         /// <returns>Split count</returns>
         int GetSplitCount();
+
+        /// <summary>
+        /// Gets the split index of the currently active one
+        /// </summary>
+        /// <returns>Index of current split</returns>
+        int GetActiveSplit();
+
         /// <summary>
         /// Removes all splits
         /// </summary>

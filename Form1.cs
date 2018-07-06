@@ -495,6 +495,15 @@ namespace HitCounterManager
     public class ProfileDataGridView : DataGridView, IProfileInfo
     {
         public int GetSplitCount() { return RowCount - 1; } // Remove the "new line"
+        public int GetActiveSplit()
+        {
+            for (int Index = 0; Index < GetSplitCount(); Index++)
+            {
+                if (SelectedCells[0].RowIndex == Index) return Index;
+            }
+            return 0;
+        }
+
         public void ClearSplits() { Rows.Clear(); }
         public void AddSplit(string Title, int Hits, int Diff, int PB) { Rows.Add(new object[] { Title, Hits, Diff, PB, false }); }
 

@@ -22,7 +22,6 @@
 
 using System;
 using System.IO;
-using System.Windows.Forms;
 
 namespace HitCounterManager
 {
@@ -33,7 +32,7 @@ namespace HitCounterManager
     {
         private string _FilePathIn;
         private string template = "";
-        private DataGridView dgv;
+        private IProfileInfo pi;
 
         public string FilePathOut = null;
         public int AttemptsCount = 0;
@@ -52,9 +51,9 @@ namespace HitCounterManager
         /// Bind object to a data grid
         /// </summary>
         /// <param name="dgv">object to set binding</param>
-        public OutModule(DataGridView DataGridView)
+        public OutModule(IProfileInfo ProfileInfo)
         {
-            dgv = DataGridView;
+            pi = ProfileInfo;
         }
 
         /// <summary>
@@ -146,34 +145,21 @@ namespace HitCounterManager
                 }
                 else if (line.Contains("HITCOUNTER_JSON_START")) // Format data according to RFC 4627 (JSON)
                 {
-                    DataGridViewCellCollection cells;
-                    string title;
-                    int diff;
-                    int hits;
-                    int PB;
-                    int active = 0;
-                    int session_progress = 0;
+                    int active = pi.GetActiveSplit();
                     int iTemp;
 
                     sr.WriteLine("{");
 
                     sr.WriteLine("\"list\": [");
-                    for (int r = 0; r <= dgv.RowCount - 2; r++)
+                    for (int r = 0; r < pi.GetSplitCount(); r++)
                     {
-                        cells = dgv.Rows[r].Cells;
-                        title = SimpleHtmlEscape((string)cells["cTitle"].Value);
-                        hits = (int)cells["cHits"].Value;
-                        diff = (int)cells["cDiff"].Value;
-                        PB = (int)cells["cPB"].Value;
-                        if ((bool)(cells["cSP"].Value)) session_progress = r;
-                        if (r == dgv.SelectedCells[0].RowIndex) active = r;
                         if (r != 0) sr.WriteLine(","); // separator
-                        sr.Write("[\"" + title + "\", " + hits + ", " + PB + "]");
+                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + pi.GetSplitHits(r) + ", " + pi.GetSplitPB(r) + "]");
                     }
                     sr.WriteLine(""); // no trailing separator
                     sr.WriteLine("],");
 
-                    WriteJsonSimpleValue(sr, "session_progress", session_progress);
+                    WriteJsonSimpleValue(sr, "session_progress", pi.GetSessionProgress());
 
                     WriteJsonSimpleValue(sr, "split_active", active);
                     iTemp = active - ShowSplitsCountFinished;
@@ -197,22 +183,12 @@ namespace HitCounterManager
                 }
                 else if (line.Contains("HITCOUNTER_LIST_START")) // Kept for old designs before version 1.10
                 {
-                    DataGridViewCellCollection cells;
-                    string title;
-                    int diff;
-                    int hits;
-                    int PB;
                     int active;
 
-                    for (int r = 0; r <= dgv.RowCount - 2; r++)
+                    for (int r = 0; r < pi.GetSplitCount(); r++)
                     {
-                        cells = dgv.Rows[r].Cells;
-                        title = SimpleHtmlEscape((string)cells["cTitle"].Value);
-                        hits = (int)cells["cHits"].Value;
-                        diff = (int)cells["cDiff"].Value;
-                        PB = (int)cells["cPB"].Value;
-                        if (r == dgv.SelectedCells[0].RowIndex) active = r; else active = 0;
-                        sr.Write("[\"" + title + "\", " + hits + ", " + PB + ", " + active + "]");
+                        if (r == pi.GetActiveSplit()) active = r; else active = 0;
+                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + pi.GetSplitHits(r) + ", " + pi.GetSplitPB(r) + ", " + active + "]");
                     }
 
                     IsWritingList = true;
