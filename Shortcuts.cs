@@ -74,7 +74,7 @@ namespace HitCounterManager
         /// </summary>
         private bool CheckPressedState(bool ShiftState, bool ControlState, bool AltState)
         {
-            if (0 != (GetAsyncKeyState(key.KeyCode) & KEY_PRESSED_NOW)) return false;
+            if (0 == (GetAsyncKeyState(key.KeyCode) & KEY_PRESSED_NOW)) return false;
             if (key.Shift && !ShiftState) return false;
             if (key.Control && !ControlState) return false;
             if (key.Alt && !AltState) return false;
@@ -154,21 +154,12 @@ namespace HitCounterManager
         public SC_HotKeyMethod NextStart_Method;
 
         /// <summary>
-        /// Build empty hot key list, save window handle (and setup timer)
+        /// Build empty hot key list, save window handle
         /// </summary>
-        public Shortcuts(IntPtr WindowHandle, SC_HotKeyMethod HotKeyMethod)
+        public Shortcuts(IntPtr WindowHandle)
         {
             hwnd = WindowHandle;
-            method = HotKeyMethod;
-            NextStart_Method = method;
-
             for (int i = 0; i < (int)SC_Type.SC_Type_MAX; i++) sc_list[i] = new ShortcutsKey();
-
-            if (method == SC_HotKeyMethod.SC_HotKeyMethod_Async)
-            {
-                TimerProcKeepAliveReference = new TimerProc(timer_event); // stupid garbage collection fixup
-                SetTimer(hwnd, (IntPtr)0, 20, TimerProcKeepAliveReference);
-            }
         }
 
         /// <summary>
@@ -177,6 +168,22 @@ namespace HitCounterManager
         ~Shortcuts()
         {
             if (method == SC_HotKeyMethod.SC_HotKeyMethod_Async) KillTimer(hwnd, (IntPtr)0);
+        }
+
+        /// <summary>
+        /// Initializes oject by setting the method (and configure timer)
+        /// </summary>
+        public void Initialize(SC_HotKeyMethod HotKeyMethod)
+        {
+            NextStart_Method = method = HotKeyMethod;
+
+            for (int i = 0; i < (int)SC_Type.SC_Type_MAX; i++) sc_list[i] = new ShortcutsKey();
+
+            if (method == SC_HotKeyMethod.SC_HotKeyMethod_Async)
+            {
+                TimerProcKeepAliveReference = new TimerProc(timer_event); // stupid garbage collection fixup
+                SetTimer(hwnd, (IntPtr)0, 20, TimerProcKeepAliveReference);
+            }
         }
 
         /// <summary>

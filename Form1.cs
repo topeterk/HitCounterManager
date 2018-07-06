@@ -57,6 +57,7 @@ namespace HitCounterManager
             InitializeComponent();
             pi = DataGridView1; // for better capsulation
             om = new OutModule(pi);
+            sc = new Shortcuts(Handle);
         }
 
         private void Form1_Load(object sender, EventArgs e)

@@ -112,7 +112,7 @@ namespace HitCounterManager
             }
 
             // Apply settings..
-            sc = new Shortcuts(this.Handle, (Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod); // TODO: Let Form1 create the object
+            sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
             profs = _settings.Profiles;
 
             this.ComboBox1.Items.AddRange(profs.GetProfileList());
