@@ -183,12 +183,11 @@ namespace HitCounterManager
                 }
                 else if (line.Contains("HITCOUNTER_LIST_START")) // Kept for old designs before version 1.10
                 {
-                    int active;
+                    int active = pi.GetActiveSplit();
 
                     for (int r = 0; r < pi.GetSplitCount(); r++)
                     {
-                        if (r == pi.GetActiveSplit()) active = r; else active = 0;
-                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + pi.GetSplitHits(r) + ", " + pi.GetSplitPB(r) + ", " + active + "]");
+                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + pi.GetSplitHits(r) + ", " + pi.GetSplitPB(r) + ", " + (r == active ? "1" : "0") + "]");
                     }
 
                     IsWritingList = true;
