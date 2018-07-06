@@ -27,60 +27,19 @@ using System.Windows.Forms;
 namespace HitCounterManager
 {
     /// <summary>
-    /// A row as part of a profile (equals a row at datagridview)
+    /// A row as part of a profile (used for a row at datagridview)
     /// </summary>
     [Serializable]
     public class ProfileRow
     {
-        public string Title;
-        public int Hits;
-        public int Diff;
-        public int PB;
-
-        /// <summary>
-        /// Creates an empty entry
-        /// </summary>
-        public ProfileRow()
-        {
-            Title = "";
-            Hits = 0;
-            Diff = 0;
-            PB = 0;
-        }
-
-        /// <summary>
-        /// Creates an entry based on comma separated string
-        /// </summary>
-        public ProfileRow(string Line)
-        {
-            int i;
-            string val;
-            int col = 0;
-
-            Title = "";
-            Hits = 0;
-            Diff = 0;
-            PB = 0;
-
-            do {
-                if (!Line.Contains(";")) break; // no more data in this lne
-                i = Line.IndexOf(";");
-                val = Line.Substring(0, i);
-                switch (col)
-                {
-                    case 0: Title = val; break;
-                    case 1: Int32.TryParse(val, out Hits); break;
-                    case 2: Int32.TryParse(val, out Diff); break;
-                    case 3: Int32.TryParse(val, out PB); break;
-                }
-                col++;
-                Line = Line.Substring(i + 1);
-            } while (true);
-        }
+        public string Title = "";
+        public int Hits = 0;
+        public int Diff = 0;
+        public int PB = 0;
     }
 
     /// <summary>
-    /// Single profile (equals a whole datagridview data collection)
+    /// Single profile (used for a whole datagridview data collection)
     /// </summary>
     [Serializable]
     public class Profile
@@ -88,14 +47,6 @@ namespace HitCounterManager
         public string Name;
         public int Attempts;
         public List<ProfileRow> Rows = new List<ProfileRow>();
-
-        /// <summary>
-        /// Add a new profile row
-        /// </summary>
-        public void AddNewRow(string Line)
-        {
-            Rows.Add(new ProfileRow(Line));
-        }
     }
 
     /// <summary>
@@ -123,24 +74,7 @@ namespace HitCounterManager
             profile = null;
             return false;
         }
-
-        /// <summary>
-        /// Builds a newline, pipe and comma separated string for all internally cached profiles
-        /// </summary>
-        public string GetProfilesString()
-        {
-            string ProfileStr = "";
-            foreach (Profile prof in _Profiles)
-            {
-                ProfileStr += prof.Name + "|" + Environment.NewLine;
-                foreach (ProfileRow row in prof.Rows)
-                {
-                    ProfileStr += row.Title + ";" + row.Hits + ";" + row.Diff + ";" + row.PB + ";" + Environment.NewLine;
-                }
-            }
-            return ProfileStr;
-        }
-
+        
         /// <summary>
         /// Returns a list of all available internally cached profile names
         /// </summary>
