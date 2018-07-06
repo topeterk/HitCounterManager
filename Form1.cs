@@ -503,6 +503,7 @@ namespace HitCounterManager
             }
             return 0;
         }
+        public void SetActiveSplit(int Index) { Rows[Index].Selected = true; }
 
         public void ClearSplits() { Rows.Clear(); }
         public void AddSplit(string Title, int Hits, int Diff, int PB) { Rows.Add(new object[] { Title, Hits, Diff, PB, false }); }

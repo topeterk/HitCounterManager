@@ -136,8 +136,8 @@ namespace HitCounterManager
             else
                 sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_Split, key);
 
-            DataGridView1.Rows[0].Selected = true;
-            DataGridView1.Rows[0].Cells["cSP"].Value = true;
+            DataGridView1.SetActiveSplit(0);
+            DataGridView1.SetSessionProgress(0);
             DataGridView1_CellValueChanged(null, null);
 
             if (_settings.MainWidth > 400) this.Width = _settings.MainWidth;

@@ -167,6 +167,10 @@ namespace HitCounterManager
         /// </summary>
         /// <returns>Index of current split</returns>
         int GetActiveSplit();
+        /// <summary>
+        /// Sets the split as active
+        /// </summary>
+        void SetActiveSplit(int Index);
 
         /// <summary>
         /// Removes all splits
