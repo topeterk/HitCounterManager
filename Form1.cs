@@ -471,7 +471,7 @@ namespace HitCounterManager
         public void SetActiveSplit(int Index) { ClearSelection(); Rows[Index].Selected = true; }
 
         public void ClearSplits() { Rows.Clear(); }
-        public void AddSplit(string Title, int Hits, int Diff, int PB) { Rows.Add(new object[] { Title, Hits, Diff, PB, false }); }
+        public void AddSplit(string Title, int Hits, int PB) { Rows.Add(new object[] { Title, Hits, Hits - PB, PB, false }); }
 
         public int GetSessionProgress()
         {

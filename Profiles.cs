@@ -97,7 +97,7 @@ namespace HitCounterManager
                 Attempts = prof.Attempts;
                 foreach (ProfileRow row in prof.Rows)
                 {
-                    pi.AddSplit(row.Title, row.Hits, row.Diff, row.PB);
+                    pi.AddSplit(row.Title, row.Hits, row.PB);
                 }
             }
             pi.SetSessionProgress(0);
@@ -181,9 +181,8 @@ namespace HitCounterManager
         /// </summary>
         /// <param name="Title">Title</param>
         /// <param name="Hits">Amount of hits</param>
-        /// <param name="Diff">Hit count difference</param>
         /// <param name="PB">Amount of personal best hits</param>
-        void AddSplit(string Title, int Hits, int Diff, int PB); // TODO: Remove Diff and calculate it
+        void AddSplit(string Title, int Hits, int PB);
 
         /// <summary>
         /// Gets the split index of the session progress
