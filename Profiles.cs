@@ -22,7 +22,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace HitCounterManager
 {
@@ -88,21 +87,20 @@ namespace HitCounterManager
         /// <summary>
         /// Updates a datagrid based on a specific internally cached profile
         /// </summary>
-        public void LoadProfileInto(string Name, ref ProfileDataGridView dgv, ref int Attempts)
+        public void LoadProfileInto(string Name, IProfileInfo pi, ref int Attempts)
         {
             Profile prof;
             Attempts = 0;
-            dgv.Rows.Clear();
+            pi.ClearSplits();
             if (_FindProfile(Name, out prof))
             {
                 Attempts = prof.Attempts;
                 foreach (ProfileRow row in prof.Rows)
                 {
-                    object[] cells = { row.Title, row.Hits, row.Diff, row.PB, false };
-                    dgv.Rows.Add(cells);
+                    pi.AddSplit(row.Title, row.Hits, row.Diff, row.PB);
                 }
             }
-            dgv.Rows[0].Cells["cSP"].Value = true;
+            pi.SetSessionProgress(0);
         }
 
         /// <summary>
@@ -164,10 +162,28 @@ namespace HitCounterManager
         /// <returns>Split count</returns>
         int GetSplitCount();
         /// <summary>
+        /// Removes all splits
+        /// </summary>
+        void ClearSplits();
+        /// <summary>
+        /// Add split
+        /// </summary>
+        /// <param name="Title">Title</param>
+        /// <param name="Hits">Amount of hits</param>
+        /// <param name="Diff">Hit count difference</param>
+        /// <param name="PB">Amount of personal best hits</param>
+        void AddSplit(string Title, int Hits, int Diff, int PB); // TODO: Remove Diff and calculate it
+
+        /// <summary>
         /// Gets the split index of the session progress
         /// </summary>
         /// <returns>Session progress</returns>
         int GetSessionProgress();
+        /// <summary>
+        /// Sets the split index of the session progress
+        /// </summary>
+        /// <returns>Session progress</returns>
+        void SetSessionProgress(int Index);
 
         /// <summary>
         /// Gets the title of a split
@@ -193,5 +209,30 @@ namespace HitCounterManager
         /// <param name="Index">Index</param>
         /// <returns>Amount of personal best hits</returns>
         int GetSplitPB(int Index);
+
+        /// <summary>
+        /// Sets the title of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <param name="Title">Title</param>
+        void SetSplitTitle(int Index, string Title);
+        /// <summary>
+        /// Sets the hit counts of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <param name="Hits">Amount of hits</param>
+        void SetSplitHits(int Index, int Hits);
+        /// <summary>
+        /// Sets the hit difference of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <param name="Diff">Hit count difference</param>
+        void SetSplitDiff(int Index, int Diff);
+        /// <summary>
+        /// Sets the person best hit counts of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <param name="PBHits">Amount of personal best hits</param>
+        void SetSplitPB(int Index, int PBHits);
     }
 }

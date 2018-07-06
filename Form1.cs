@@ -250,7 +250,7 @@ namespace HitCounterManager
                     ComboBox1.SelectedIndex = idx;
 
                 int CsharpWorkaroundForBadPropertyImplementation = AttemptsCounter; // getter/setter cannot be passed as reference
-                profs.LoadProfileInto((string)ComboBox1.SelectedItem, ref DataGridView1, ref CsharpWorkaroundForBadPropertyImplementation);
+                profs.LoadProfileInto((string)ComboBox1.SelectedItem, DataGridView1, ref CsharpWorkaroundForBadPropertyImplementation);
                 AttemptsCounter = CsharpWorkaroundForBadPropertyImplementation;
             }
         }
@@ -380,7 +380,7 @@ namespace HitCounterManager
             }
 
             int CsharpWorkaroundForBadPropertyImplementation = AttemptsCounter; // getter/setter cannot be passed as reference
-            profs.LoadProfileInto((string)ComboBox1.SelectedItem, ref DataGridView1, ref CsharpWorkaroundForBadPropertyImplementation);
+            profs.LoadProfileInto((string)ComboBox1.SelectedItem, DataGridView1, ref CsharpWorkaroundForBadPropertyImplementation);
             AttemptsCounter = CsharpWorkaroundForBadPropertyImplementation;
 
             ComboBox1PrevSelectedItem = (string)ComboBox1.SelectedItem;
@@ -424,7 +424,7 @@ namespace HitCounterManager
         {
             if (SemaValueChange) return;
 
-            for (int r = 0; r <= DataGridView1.RowCount - 2; r++)
+            for (int r = 0; r <= DataGridView1.RowCount - 2; r++) // TODO: Check if looping here is necessary?
             {
                 // populate values if row gets created
                 if (null == DataGridView1.Rows[r].Cells["cTitle"].Value) DataGridView1.Rows[r].Cells["cTitle"].Value = "";
@@ -495,6 +495,9 @@ namespace HitCounterManager
     public class ProfileDataGridView : DataGridView, IProfileInfo
     {
         public int GetSplitCount() { return RowCount - 1; } // Remove the "new line"
+        public void ClearSplits() { Rows.Clear(); }
+        public void AddSplit(string Title, int Hits, int Diff, int PB) { Rows.Add(new object[] { Title, Hits, Diff, PB, false }); }
+
         public int GetSessionProgress()
         {
             for (int Index = 0; Index < GetSplitCount(); Index++)
@@ -508,6 +511,14 @@ namespace HitCounterManager
         public int GetSplitHits(int Index) { return (int)Rows[Index].Cells["cHits"].Value; }
         public int GetSplitDiff(int Index) { return (int)Rows[Index].Cells["cDiff"].Value; }
         public int GetSplitPB(int Index) { return (int)Rows[Index].Cells["cPB"].Value; }
+
+        public void SetSessionProgress(int Index) { Rows[Index].Cells["cSP"].Value = true; } // TODO: check if other ones get disabled here
+
+        // TODO: Check if .ValueType = typeof(int) is required
+        public void SetSplitTitle(int Index, string Title) { Rows[Index].Cells["cTitle"].Value = Title; }
+        public void SetSplitHits(int Index, int Hits) { Rows[Index].Cells["cHits"].Value = Hits; }
+        public void SetSplitDiff(int Index, int Diff) { Rows[Index].Cells["cDiff"].Value = Diff; }
+        public void SetSplitPB(int Index, int PBHits) { Rows[Index].Cells["cPB"].Value = PBHits; }
     }
 }
 
