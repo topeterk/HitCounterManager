@@ -34,7 +34,7 @@ namespace HitCounterManager
         private const int KEY_PRESSED_NOW = 0x8000;
 
         [DllImport("User32.dll")]
-        private static extern short GetAsyncKeyState(System.Windows.Forms.Keys vKey);
+        private static extern short GetAsyncKeyState(Keys vKey);
 
         private bool _used; // tells if shortcut is registered at windows
         private bool _down; // tells if shortcut is currently pressed
