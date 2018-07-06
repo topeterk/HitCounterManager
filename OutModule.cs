@@ -134,7 +134,7 @@ namespace HitCounterManager
 
             sr.NewLine = Environment.NewLine;
 
-            foreach (string line in template.Split(Environment.NewLine.ToCharArray()))
+            foreach (string line in template.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
                 if (IsWritingJson)
                 {
@@ -154,7 +154,6 @@ namespace HitCounterManager
                     int active = 0;
                     int session_progress = 0;
                     int iTemp;
-                    string sTemp;
 
                     sr.WriteLine("{");
 
@@ -178,21 +177,17 @@ namespace HitCounterManager
 
                     WriteJsonSimpleValue(sr, "split_active", active);
                     iTemp = active - ShowSplitsCountFinished;
-                    if (iTemp < 0) iTemp = 0;
-                    WriteJsonSimpleValue(sr, "split_first", iTemp);
+                    WriteJsonSimpleValue(sr, "split_first", (iTemp < 0 ? 0 : iTemp));
                     iTemp = active + ShowSplitsCountUpcoming;
-                    if (999 < iTemp) iTemp = 999;
-                    WriteJsonSimpleValue(sr, "split_last", iTemp);
+                    WriteJsonSimpleValue(sr, "split_last", (999 < iTemp ? 999 : iTemp));
 
                     WriteJsonSimpleValue(sr, "attempts", AttemptsCount);
                     WriteJsonSimpleValue(sr, "show_attempts", ShowAttemptsCounter);
                     WriteJsonSimpleValue(sr, "show_headline", ShowHeadline);
                     WriteJsonSimpleValue(sr, "show_session_progress", ShowSessionProgress);
-
-                    if (StyleUseCustom) sTemp = StyleFontUrl; else sTemp = "";
-                    WriteJsonSimpleValue(sr, "font_url", sTemp);
-                    if (StyleUseCustom) sTemp = StyleCssUrl; else sTemp = "stylesheet.css";
-                    WriteJsonSimpleValue(sr, "css_url", sTemp);
+                    
+                    WriteJsonSimpleValue(sr, "font_url", (StyleUseCustom ? StyleFontUrl : ""));
+                    WriteJsonSimpleValue(sr, "css_url", (StyleUseCustom ? StyleCssUrl : "stylesheet.css"));
                     WriteJsonSimpleValue(sr, "high_contrast", StyleUseHighContrast);
                     WriteJsonSimpleValue(sr, "width", StyleDesiredWidth);
 
