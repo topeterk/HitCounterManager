@@ -66,7 +66,7 @@ namespace HitCounterManager
         {
             SaveSettings();
         }
-        
+
         private void Form1_Resize(object sender, EventArgs e)
         {
             const int Pad = 13;
@@ -105,7 +105,7 @@ namespace HitCounterManager
 
         #endregion
         #region Functions
-        
+
         private void UpdateProgressAndTotals()
         {
             int TotalHits = 0;
@@ -418,7 +418,7 @@ namespace HitCounterManager
                 else DataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].ValueType = typeof(int); // Force int otherwise it is most likely treated as string
             }
         }
-                
+
         private bool SemaValueChange = false;
         private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -431,7 +431,7 @@ namespace HitCounterManager
                 if (null == DataGridView1.Rows[r].Cells["cHits"].Value) DataGridView1.Rows[r].Cells["cHits"].Value = 0;
                 if (null == DataGridView1.Rows[r].Cells["cPB"].Value) DataGridView1.Rows[r].Cells["cPB"].Value = 0;
                 if (null == DataGridView1.Rows[r].Cells["cSP"].Value) DataGridView1.Rows[r].Cells["cSP"].Value = false;
-                
+
                 DataGridView1.Rows[r].Cells["cDiff"].Value = (int)DataGridView1.Rows[r].Cells["cHits"].Value - (int)DataGridView1.Rows[r].Cells["cPB"].Value;
             }
 
@@ -491,4 +491,23 @@ namespace HitCounterManager
 
         #endregion
     }
+
+    public class ProfileDataGridView : DataGridView, IProfileInfo
+    {
+        public int GetSplitCount() { return RowCount - 1; } // Remove the "new line"
+        public int GetSessionProgress()
+        {
+            for (int Index = 0; Index < GetSplitCount(); Index++)
+            {
+                if ((bool)(Rows[Index].Cells["cSP"].Value)) return Index;
+            }
+            return 0;
+        }
+
+        public string GetSplitTitle(int Index) { return (string)Rows[Index].Cells["cTitle"].Value; }
+        public int GetSplitHits(int Index) { return (int)Rows[Index].Cells["cHits"].Value; }
+        public int GetSplitDiff(int Index) { return (int)Rows[Index].Cells["cDiff"].Value; }
+        public int GetSplitPB(int Index) { return (int)Rows[Index].Cells["cPB"].Value; }
+    }
 }
+

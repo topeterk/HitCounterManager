@@ -88,7 +88,7 @@ namespace HitCounterManager
         /// <summary>
         /// Updates a datagrid based on a specific internally cached profile
         /// </summary>
-        public void LoadProfileInto(string Name, ref DataGridView dgv, ref int Attempts)
+        public void LoadProfileInto(string Name, ref ProfileDataGridView dgv, ref int Attempts)
         {
             Profile prof;
             Attempts = 0;
@@ -108,35 +108,32 @@ namespace HitCounterManager
         /// <summary>
         /// Updates internal profile cache of a specific profile by reading data from datagrid
         /// </summary>
-        public void SaveProfileFrom(string Name, DataGridView dgv, int Attempts, bool AllowCreation = false)
+        public void SaveProfileFrom(string Name, IProfileInfo pi, int Attempts, bool AllowCreation = false)
         {
-            Profile prof_save;
-            DataGridViewCellCollection cells;
-            ProfileRow ProfileRow;
+            Profile prof;
 
             // look for existing one and create if not exists
-            if (!_FindProfile(Name, out prof_save))
+            if (!_FindProfile(Name, out prof))
             {
                 if (!AllowCreation) return;
 
-                prof_save = new Profile();
-                prof_save.Name = Name;
-                _Profiles.Add(prof_save);
+                prof = new Profile();
+                prof.Name = Name;
+                _Profiles.Add(prof);
             }
 
-            prof_save.Rows.Clear();
+            prof.Rows.Clear();
 
             // collecting data, nom nom nom
-            prof_save.Attempts = Attempts;
-            for (int r = 0; r <= dgv.RowCount - 2; r++)
+            prof.Attempts = Attempts;
+            for (int r = 0; r < pi.GetSplitCount(); r++)
             {
-                ProfileRow = new ProfileRow();
-                cells = dgv.Rows[r].Cells;
-                ProfileRow.Title = (string)cells["cTitle"].Value;
-                ProfileRow.Hits = (int)cells["cHits"].Value;
-                ProfileRow.Diff = (int)cells["cDiff"].Value;
-                ProfileRow.PB = (int)cells["cPB"].Value;
-                prof_save.Rows.Add(ProfileRow);
+                ProfileRow ProfileRow = new ProfileRow();
+                ProfileRow.Title = pi.GetSplitTitle(r);
+                ProfileRow.Hits = pi.GetSplitHits(r);
+                ProfileRow.Diff = pi.GetSplitDiff(r);
+                ProfileRow.PB = pi.GetSplitPB(r);
+                prof.Rows.Add(ProfileRow);
             }
         }
 
@@ -157,5 +154,44 @@ namespace HitCounterManager
             Profile prof;
             if (_FindProfile(NameOld, out prof)) prof.Name = NameNew;
         }
+    }
+
+    public interface IProfileInfo
+    {
+        /// <summary>
+        /// Gets amount of splits
+        /// </summary>
+        /// <returns>Split count</returns>
+        int GetSplitCount();
+        /// <summary>
+        /// Gets the split index of the session progress
+        /// </summary>
+        /// <returns>Session progress</returns>
+        int GetSessionProgress();
+
+        /// <summary>
+        /// Gets the title of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <returns>Title</returns>
+        string GetSplitTitle(int Index);
+        /// <summary>
+        /// Gets the hit counts of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <returns>Amount of hits</returns>
+        int GetSplitHits(int Index);
+        /// <summary>
+        /// Gets the hit difference of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <returns>Hit count difference</returns>
+        int GetSplitDiff(int Index);
+        /// <summary>
+        /// Gets the person best hit counts of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <returns>Amount of personal best hits</returns>
+        int GetSplitPB(int Index);
     }
 }
