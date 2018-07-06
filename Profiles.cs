@@ -108,6 +108,23 @@ namespace HitCounterManager
         public List<Profile> ProfileList { get { return _Profiles; } } // used by XML serialization!
 
         /// <summary>
+        /// Checks if a profile with given name exists and gets its instance
+        /// </summary>
+        private bool _FindProfile(string Name, out Profile profile)
+        {
+            foreach (Profile prof in _Profiles)
+            {
+                if (prof.Name == Name)
+                {
+                    profile = prof;
+                    return true;
+                }
+            }
+            profile = null;
+            return false;
+        }
+
+        /// <summary>
         /// Builds a newline, pipe and comma separated string for all internally cached profiles
         /// </summary>
         public string GetProfilesString()
@@ -139,19 +156,16 @@ namespace HitCounterManager
         /// </summary>
         public void LoadProfileInto(string Name, ref DataGridView dgv, ref int Attempts)
         {
+            Profile prof;
             Attempts = 0;
             dgv.Rows.Clear();
-            foreach (Profile prof in _Profiles)
+            if (_FindProfile(Name, out prof))
             {
-                if (prof.Name == Name)
+                Attempts = prof.Attempts;
+                foreach (ProfileRow row in prof.Rows)
                 {
-                    Attempts = prof.Attempts;
-                    foreach (ProfileRow row in prof.Rows)
-                    {
-                        object[] cells = { row.Title, row.Hits, row.Diff, row.PB, false };
-                        dgv.Rows.Add(cells);
-                    }
-                    break;
+                    object[] cells = { row.Title, row.Hits, row.Diff, row.PB, false };
+                    dgv.Rows.Add(cells);
                 }
             }
             dgv.Rows[0].Cells["cSP"].Value = true;
@@ -162,22 +176,12 @@ namespace HitCounterManager
         /// </summary>
         public void SaveProfileFrom(string Name, DataGridView dgv, int Attempts, bool AllowCreation = false)
         {
-            Profile prof_save = null;
+            Profile prof_save;
             DataGridViewCellCollection cells;
             ProfileRow ProfileRow;
 
-            // look for existing one
-            foreach (Profile prof in _Profiles)
-            {
-                if (prof.Name == Name)
-                {
-                    prof_save = prof;
-                    break;
-                }
-            }
-
-            // create if not exists
-            if (null == prof_save)
+            // look for existing one and create if not exists
+            if (!_FindProfile(Name, out prof_save))
             {
                 if (!AllowCreation) return;
 
@@ -207,14 +211,8 @@ namespace HitCounterManager
         /// </summary>
         public void DeleteProfile(string Name)
         {
-            foreach (Profile prof in _Profiles)
-            {
-                if (prof.Name == Name)
-                {
-                    _Profiles.Remove(prof);
-                    return;
-                }
-            }
+            Profile prof;
+            if (_FindProfile(Name, out prof)) _Profiles.Remove(prof); 
         }
 
         /// <summary>
@@ -222,14 +220,8 @@ namespace HitCounterManager
         /// </summary>
         public void RenameProfile(string NameOld, string NameNew)
         {
-            foreach (Profile prof in _Profiles)
-            {
-                if (prof.Name == NameOld)
-                {
-                    prof.Name = NameNew;
-                    return;
-                }
-            }
+            Profile prof;
+            if (_FindProfile(NameOld, out prof)) prof.Name = NameNew;
         }
     }
 }
