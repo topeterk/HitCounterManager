@@ -32,10 +32,10 @@ namespace HitCounterManager
     public class OutModule
     {
         private string _FilePathIn;
-        private string _FilePathOut;
         private string template = "";
         private DataGridView dgv;
 
+        public string FilePathOut = null;
         public int AttemptsCount = 0;
         public bool ShowAttemptsCounter = true;
         public bool ShowHeadline = true;
@@ -77,16 +77,6 @@ namespace HitCounterManager
         }
 
         /// <summary>
-        /// Output file configuration
-        /// </summary>
-        public string FilePathOut
-        {
-            get { return _FilePathOut; }
-            set { _FilePathOut = value; }
-
-        }
-
-        /// <summary>
         /// Escapes special HTML characters
         /// </summary>
         /// <param name="Str">String with special characters</param>
@@ -103,13 +93,25 @@ namespace HitCounterManager
         }
 
         /// <summary>
-        /// Creates a JSON string of a boolean
+        /// Writes a JSON statement to assign a simple value
         /// </summary>
-        /// <param name="Bool">boolean value</param>
-        /// <returns>String equivalent</returns>
-        private string ToJsonBooleanString(bool Bool)
+        private void WriteJsonSimpleValue(StreamWriter File, string Name, bool Bool)
         {
-            return (Bool ? "true" : "false");
+            File.WriteLine("\"" + Name + "\": " + (Bool ? "true" : "false") + ",");
+        }
+        /// <summary>
+        /// Writes a JSON statement to assign a simple value
+        /// </summary>
+        private void WriteJsonSimpleValue(StreamWriter File, string Name, int Integer)
+        {
+            File.WriteLine("\"" + Name + "\": " + Integer.ToString() + ",");
+        }
+        /// <summary>
+        /// Writes a JSON statement to assign a simple value
+        /// </summary>
+        private void WriteJsonSimpleValue(StreamWriter File, string Name, string String)
+        {
+            File.WriteLine("\"" + Name + "\": \"" + String + "\",");
         }
 
         /// <summary>
@@ -121,12 +123,12 @@ namespace HitCounterManager
             bool IsWritingList = false; // Kept for old designs before version 1.10
             bool IsWritingJson = false;
 
-            if (null == _FilePathOut) return;
+            if (null == FilePathOut) return;
 
             try
             {
-                if (File.Exists(_FilePathOut)) File.Create(_FilePathOut).Close();
-                sr = new StreamWriter(_FilePathOut);
+                if (File.Exists(FilePathOut)) File.Create(FilePathOut).Close();
+                sr = new StreamWriter(FilePathOut);
             }
             catch { return; }
 
@@ -172,27 +174,27 @@ namespace HitCounterManager
                     sr.WriteLine(""); // no trailing separator
                     sr.WriteLine("],");
 
-                    sr.WriteLine("\"session_progress\": " + session_progress.ToString() + ",");
+                    WriteJsonSimpleValue(sr, "session_progress", session_progress);
 
-                    sr.WriteLine("\"split_active\": " + active.ToString() + ",");
+                    WriteJsonSimpleValue(sr, "split_active", active);
                     iTemp = active - ShowSplitsCountFinished;
                     if (iTemp < 0) iTemp = 0;
-                    sr.WriteLine("\"split_first\": " + iTemp.ToString() + ",");
+                    WriteJsonSimpleValue(sr, "split_first", iTemp);
                     iTemp = active + ShowSplitsCountUpcoming;
                     if (999 < iTemp) iTemp = 999;
-                    sr.WriteLine("\"split_last\": " + iTemp.ToString() + ",");
+                    WriteJsonSimpleValue(sr, "split_last", iTemp);
 
-                    sr.WriteLine("\"attempts\": " + AttemptsCount.ToString() + ",");
-                    sr.WriteLine("\"show_attempts\": " + ToJsonBooleanString(ShowAttemptsCounter) + ",");
-                    sr.WriteLine("\"show_headline\": " + ToJsonBooleanString(ShowHeadline) + ",");
-                    sr.WriteLine("\"show_session_progress\": " + ToJsonBooleanString(ShowSessionProgress) + ",");
+                    WriteJsonSimpleValue(sr, "attempts", AttemptsCount);
+                    WriteJsonSimpleValue(sr, "show_attempts", ShowAttemptsCounter);
+                    WriteJsonSimpleValue(sr, "show_headline", ShowHeadline);
+                    WriteJsonSimpleValue(sr, "show_session_progress", ShowSessionProgress);
 
                     if (StyleUseCustom) sTemp = StyleFontUrl; else sTemp = "";
-                    sr.WriteLine("\"font_url\": \"" + sTemp + "\",");
+                    WriteJsonSimpleValue(sr, "font_url", sTemp);
                     if (StyleUseCustom) sTemp = StyleCssUrl; else sTemp = "stylesheet.css";
-                    sr.WriteLine("\"css_url\": \"" + sTemp + "\",");
-                    sr.WriteLine("\"high_contrast\": " + ToJsonBooleanString(StyleUseHighContrast) + ",");
-                    sr.WriteLine("\"width\": " + StyleDesiredWidth.ToString());
+                    WriteJsonSimpleValue(sr, "css_url", sTemp);
+                    WriteJsonSimpleValue(sr, "high_contrast", StyleUseHighContrast);
+                    WriteJsonSimpleValue(sr, "width", StyleDesiredWidth);
 
                     sr.WriteLine("}");
 
