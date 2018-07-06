@@ -37,6 +37,7 @@ namespace HitCounterManager
         private int _AttemptsCounter = 0;
         private string ComboBox1PrevSelectedItem = null;
         private bool SettingsDialogOpen = false;
+        private IProfileInfo pi;
 
         // Sync AttemptsCounter with output module
         private int AttemptsCounter
@@ -54,6 +55,8 @@ namespace HitCounterManager
         public Form1()
         {
             InitializeComponent();
+            pi = DataGridView1; // for better capsulation
+            om = new OutModule(pi);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -62,6 +65,7 @@ namespace HitCounterManager
             LoadSettings();
             om.Update();
         }
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveSettings();
@@ -110,19 +114,19 @@ namespace HitCounterManager
         {
             int TotalHits = 0;
             int TotalPB = 0;
-            int Splits = DataGridView1.RowCount - 2;
+            int Splits = pi.GetSplitCount();
 
             if (Splits < 0) // Check for valid entries
                 lbl_progress.Text = "Progress:  ?? / ??  # " + AttemptsCounter.ToString("D3");
             else
             {
-                for (int r = 0; r <= Splits; r++)
+                for (int r = 0; r < Splits; r++)
                 {
-                    TotalHits = TotalHits + (int)DataGridView1.Rows[r].Cells["cHits"].Value;
-                    TotalPB = TotalPB + (int)DataGridView1.Rows[r].Cells["cPB"].Value;
+                    TotalHits = TotalHits + pi.GetSplitHits(r);
+                    TotalPB = TotalPB + pi.GetSplitPB(r);
                 }
 
-                lbl_progress.Text = "Progress:  " + DataGridView1.SelectedCells[0].RowIndex + " / " + (Splits + 1) + "  # " + AttemptsCounter.ToString("D3");
+                lbl_progress.Text = "Progress:  " + pi.GetActiveSplit() + " / " + Splits + "  # " + AttemptsCounter.ToString("D3");
             }
 
             lbl_totals.Text = "Total: " + TotalHits + " Hits   " + TotalPB + " PB";
@@ -159,7 +163,7 @@ namespace HitCounterManager
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, DataGridView1, AttemptsCounter);
+            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, pi, AttemptsCounter);
             SaveSettings();
         }
 
@@ -188,12 +192,12 @@ namespace HitCounterManager
                 return;
             }
 
-            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, DataGridView1, AttemptsCounter); // save previous selected profile
+            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, pi, AttemptsCounter); // save previous selected profile
 
             // create, select and save new profile..
             ComboBox1.Items.Add(name);
             ComboBox1.SelectedItem = name;
-            profs.SaveProfileFrom(name, DataGridView1, AttemptsCounter, true); // save new empty profile
+            profs.SaveProfileFrom(name, pi, AttemptsCounter, true); // save new empty profile
             UpdateProgressAndTotals();
         }
 
@@ -220,11 +224,11 @@ namespace HitCounterManager
 
             do { name += " COPY"; } while (ComboBox1.Items.Contains(name)); // extend name till it becomes unique
 
-            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, DataGridView1, AttemptsCounter); // save previous selected profile
+            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, pi, AttemptsCounter); // save previous selected profile
 
             // create, select and save new profile..
             ComboBox1.Items.Add(name);
-            profs.SaveProfileFrom(name, DataGridView1, AttemptsCounter, true); // copy current data to new profile
+            profs.SaveProfileFrom(name, pi, AttemptsCounter, true); // copy current data to new profile
             ComboBox1.SelectedItem = name;
         }
 
@@ -250,7 +254,7 @@ namespace HitCounterManager
                     ComboBox1.SelectedIndex = idx;
 
                 int CsharpWorkaroundForBadPropertyImplementation = AttemptsCounter; // getter/setter cannot be passed as reference
-                profs.LoadProfileInto((string)ComboBox1.SelectedItem, DataGridView1, ref CsharpWorkaroundForBadPropertyImplementation);
+                profs.LoadProfileInto((string)ComboBox1.SelectedItem, pi, ref CsharpWorkaroundForBadPropertyImplementation);
                 AttemptsCounter = CsharpWorkaroundForBadPropertyImplementation;
             }
         }
@@ -266,17 +270,17 @@ namespace HitCounterManager
                 return;
             }
             AttemptsCounter = amount_value;
-            profs.SaveProfileFrom((string)ComboBox1PrevSelectedItem, DataGridView1, AttemptsCounter);
+            profs.SaveProfileFrom((string)ComboBox1PrevSelectedItem, pi, AttemptsCounter);
             UpdateProgressAndTotals();
             om.Update();
         }
 
         private void btnUp_Click(object sender, EventArgs e)
         {
-            int idx_old = DataGridView1.SelectedCells[0].RowIndex;
+            int idx_old = pi.GetActiveSplit();
             int idx_new = idx_old - 1;
 
-            if (0 <= idx_new && (idx_old < DataGridView1.Rows.Count - 1)) // Do not move when UP is not possible
+            if (0 <= idx_new && (idx_old < pi.GetSplitCount())) // Do not move when UP is not possible
             {
                 for (int i = 0; i <= DataGridView1.Columns.Count - 1; i++)
                 {
@@ -285,17 +289,16 @@ namespace HitCounterManager
                     DataGridView1.Rows[idx_new].Cells[i].Value = cell;
                 }
 
-                DataGridView1.ClearSelection();
-                DataGridView1.Rows[idx_new].Selected = true;
+                pi.SetActiveSplit(idx_new);
             }
         }
 
         private void btnDown_Click(object sender, EventArgs e)
         {
-            int idx_old = DataGridView1.SelectedCells[0].RowIndex;
+            int idx_old = pi.GetActiveSplit();
             int idx_new = idx_old + 1;
 
-            if (idx_new < DataGridView1.RowCount - 1) // Do not move when DOWN is not possible
+            if (idx_new < pi.GetSplitCount()) // Do not move when DOWN is not possible
             {
                 for (int i = 0; i <= DataGridView1.Columns.Count - 1; i++)
                 {
@@ -304,8 +307,7 @@ namespace HitCounterManager
                     DataGridView1.Rows[idx_new].Cells[i].Value = cell;
                 }
 
-                DataGridView1.ClearSelection();
-                DataGridView1.Rows[idx_new].Selected = true;
+                pi.SetActiveSplit(idx_new);
             }
         }
 
@@ -313,62 +315,43 @@ namespace HitCounterManager
         {
             AttemptsCounter++; // Increase attempts
 
-            for (int r = 0; r <= DataGridView1.RowCount - 2; r++)
-            {
-                DataGridView1.Rows[r].Cells["cHits"].Value = 0;
-            }
-            DataGridView1.ClearSelection();
-            DataGridView1.Rows[0].Selected = true;
+            for (int r = 0; r < pi.GetSplitCount(); r++) pi.SetSplitHits(r, 0);
+
+            pi.SetActiveSplit(0);
             om.Update();
         }
 
         private void btnPB_Click(object sender, EventArgs e)
         {
-            if (DataGridView1.RowCount < 2) return;
+            int Splits = pi.GetSplitCount();
+            if (0 == Splits) return;
 
-            for (int r = 0; r <= DataGridView1.RowCount - 2; r++)
-            {
-                DataGridView1.Rows[r].Cells["cPB"].Value = DataGridView1.Rows[r].Cells["cHits"].Value;
-            }
+            for (int r = 0; r < Splits; r++) pi.SetSplitPB(r, pi.GetSplitHits(r));
 
-            DataGridView1.ClearSelection();
-            DataGridView1.Rows[DataGridView1.RowCount - 2].Selected = true;
+            pi.SetActiveSplit(Splits);
+            pi.SetSessionProgress(Splits-1);
             om.Update();
         }
 
         private void btnHit_Click(object sender, EventArgs e)
         {
-            if (DataGridView1.SelectedCells.Count == 0) return;
-
-            int idx = DataGridView1.SelectedCells[0].RowIndex;
-            int val;
-
-            if (int.TryParse((string)DataGridView1.Rows[DataGridView1.SelectedCells[0].RowIndex].Cells["cHits"].Value, out val))
-                DataGridView1.Rows[DataGridView1.SelectedCells[0].RowIndex].Cells["cHits"].Value = val + 1;
-
-            DataGridView1.ClearSelection();
-            DataGridView1.Rows[idx].Selected = true;
+            int active = pi.GetActiveSplit();
+            pi.SetSplitHits(active, pi.GetSplitHits(active) + 1);
+            pi.SetActiveSplit(active); // row is already selected already but we make sure the whole row gets visually selected if user has selected a cell only
             om.Update();
         }
 
         private void btnSplit_Click(object sender, EventArgs e)
         {
-            int idx = DataGridView1.SelectedCells[0].RowIndex + 1;
-            int session_progress = idx;
+            int next_index = pi.GetActiveSplit() + 1;
+            int session_progress = next_index;
 
-            if (idx <= DataGridView1.RowCount - 1)
+            if (next_index <= pi.GetSplitCount())
             {
-                DataGridView1.ClearSelection();
-                DataGridView1.Rows[idx].Selected = true;
+                pi.SetActiveSplit(next_index);
+                if (next_index < pi.GetSplitCount()) pi.SetSessionProgress(next_index);
             }
-            if (idx <= DataGridView1.RowCount - 2)
-            {
-                for (int r = session_progress; r <= DataGridView1.RowCount - 2; r++)
-                {
-                    if ((bool)DataGridView1.Rows[r].Cells["cSP"].Value) session_progress = r;
-                }
-                DataGridView1.Rows[session_progress].Cells["cSP"].Value = true;
-            }
+            UpdateProgressAndTotals();
             om.Update();
         }
 
@@ -376,11 +359,11 @@ namespace HitCounterManager
         {
             if (null != ComboBox1PrevSelectedItem)
             {
-                profs.SaveProfileFrom(ComboBox1PrevSelectedItem, DataGridView1, AttemptsCounter);
+                profs.SaveProfileFrom(ComboBox1PrevSelectedItem, pi, AttemptsCounter);
             }
 
             int CsharpWorkaroundForBadPropertyImplementation = AttemptsCounter; // getter/setter cannot be passed as reference
-            profs.LoadProfileInto((string)ComboBox1.SelectedItem, DataGridView1, ref CsharpWorkaroundForBadPropertyImplementation);
+            profs.LoadProfileInto((string)ComboBox1.SelectedItem, pi, ref CsharpWorkaroundForBadPropertyImplementation);
             AttemptsCounter = CsharpWorkaroundForBadPropertyImplementation;
 
             ComboBox1PrevSelectedItem = (string)ComboBox1.SelectedItem;
@@ -424,34 +407,19 @@ namespace HitCounterManager
         {
             if (SemaValueChange) return;
 
-            for (int r = 0; r <= DataGridView1.RowCount - 2; r++) // TODO: Check if looping here is necessary?
+            if (0 <= e.RowIndex && 0 <= e.ColumnIndex)
             {
-                // populate values if row gets created
-                if (null == DataGridView1.Rows[r].Cells["cTitle"].Value) DataGridView1.Rows[r].Cells["cTitle"].Value = "";
-                if (null == DataGridView1.Rows[r].Cells["cHits"].Value) DataGridView1.Rows[r].Cells["cHits"].Value = 0;
-                if (null == DataGridView1.Rows[r].Cells["cPB"].Value) DataGridView1.Rows[r].Cells["cPB"].Value = 0;
-                if (null == DataGridView1.Rows[r].Cells["cSP"].Value) DataGridView1.Rows[r].Cells["cSP"].Value = false;
+                pi.SetSplitDiff(e.RowIndex, pi.GetSplitHits(e.RowIndex) - pi.GetSplitPB(e.RowIndex));
 
-                DataGridView1.Rows[r].Cells["cDiff"].Value = (int)DataGridView1.Rows[r].Cells["cHits"].Value - (int)DataGridView1.Rows[r].Cells["cPB"].Value;
-            }
-
-            if (null != e)
-            {
-                if (0 <= e.RowIndex && 0 <= e.ColumnIndex)
+                if (e.ColumnIndex == DataGridView1.Rows[0].Cells["cSP"].ColumnIndex)
                 {
-                    if (e.ColumnIndex == DataGridView1.Rows[0].Cells["cSP"].ColumnIndex)
+                    int idx = e.RowIndex;
+                    if (idx < pi.GetSplitCount())
                     {
-                        int idx = e.RowIndex;
-                        if (idx <= DataGridView1.RowCount - 2)
-                        {
-                            SemaValueChange = true;
-                            for (int r = 0; r <= DataGridView1.RowCount - 2; r++)
-                            {
-                                DataGridView1.Rows[r].Cells["cSP"].Value = false;
-                            }
-                            DataGridView1.Rows[idx].Cells["cSP"].Value = true;
-                            SemaValueChange = false;
-                        }
+                        SemaValueChange = true;
+                        for (int r = 0; r <= DataGridView1.RowCount - 2; r++) DataGridView1.Rows[r].Cells["cSP"].Value = false;
+                        pi.SetSessionProgress(idx);
+                        SemaValueChange = false;
                     }
                 }
             }
@@ -497,13 +465,10 @@ namespace HitCounterManager
         public int GetSplitCount() { return RowCount - 1; } // Remove the "new line"
         public int GetActiveSplit()
         {
-            for (int Index = 0; Index < GetSplitCount(); Index++)
-            {
-                if (SelectedCells[0].RowIndex == Index) return Index;
-            }
-            return 0;
+            if (0 == SelectedCells.Count) SetActiveSplit(0);
+            return SelectedCells[0].RowIndex;
         }
-        public void SetActiveSplit(int Index) { Rows[Index].Selected = true; }
+        public void SetActiveSplit(int Index) { ClearSelection(); Rows[Index].Selected = true; }
 
         public void ClearSplits() { Rows.Clear(); }
         public void AddSplit(string Title, int Hits, int Diff, int PB) { Rows.Add(new object[] { Title, Hits, Diff, PB, false }); }
@@ -517,18 +482,19 @@ namespace HitCounterManager
             return 0;
         }
 
-        public string GetSplitTitle(int Index) { return (string)Rows[Index].Cells["cTitle"].Value; }
-        public int GetSplitHits(int Index) { return (int)Rows[Index].Cells["cHits"].Value; }
-        public int GetSplitDiff(int Index) { return (int)Rows[Index].Cells["cDiff"].Value; }
-        public int GetSplitPB(int Index) { return (int)Rows[Index].Cells["cPB"].Value; }
+        public string GetSplitTitle(int Index) { return (null == Rows[Index].Cells["cTitle"].Value ? "" : (string)Rows[Index].Cells["cTitle"].Value); }
+        public int GetSplitHits(int Index) { return (null == Rows[Index].Cells["cHits"].Value ? 0 : (int)Rows[Index].Cells["cHits"].Value); }
+        public int GetSplitDiff(int Index) { return (null == Rows[Index].Cells["cDiff"].Value ? 0 : (int)Rows[Index].Cells["cDiff"].Value); }
+        public int GetSplitPB(int Index) { return (null == Rows[Index].Cells["cPB"].Value ? 0 : (int)Rows[Index].Cells["cPB"].Value); }
 
-        public void SetSessionProgress(int Index) { Rows[Index].Cells["cSP"].Value = true; } // TODO: check if other ones get disabled here
+        public void SetSessionProgress(int Index, bool AllowReset = false)
+        {
+            if ((GetSessionProgress() <= Index) || AllowReset) Rows[Index].Cells["cSP"].Value = true;
+        }
 
-        // TODO: Check if .ValueType = typeof(int) is required
         public void SetSplitTitle(int Index, string Title) { Rows[Index].Cells["cTitle"].Value = Title; }
         public void SetSplitHits(int Index, int Hits) { Rows[Index].Cells["cHits"].Value = Hits; }
         public void SetSplitDiff(int Index, int Diff) { Rows[Index].Cells["cDiff"].Value = Diff; }
         public void SetSplitPB(int Index, int PBHits) { Rows[Index].Cells["cPB"].Value = PBHits; }
     }
 }
-

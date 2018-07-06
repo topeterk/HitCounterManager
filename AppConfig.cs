@@ -112,8 +112,7 @@ namespace HitCounterManager
             }
 
             // Apply settings..
-            sc = new Shortcuts(this.Handle, (Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
-            om = new OutModule(DataGridView1);
+            sc = new Shortcuts(this.Handle, (Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod); // TODO: Let Form1 create the object
             profs = _settings.Profiles;
 
             this.ComboBox1.Items.AddRange(profs.GetProfileList());
@@ -136,9 +135,8 @@ namespace HitCounterManager
             else
                 sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_Split, key);
 
-            DataGridView1.SetActiveSplit(0);
-            DataGridView1.SetSessionProgress(0);
-            DataGridView1_CellValueChanged(null, null);
+            pi.SetActiveSplit(0);
+            pi.SetSessionProgress(0, true);
 
             if (_settings.MainWidth > 400) this.Width = _settings.MainWidth;
             if (_settings.MainHeight > 400) this.Height = _settings.MainHeight;

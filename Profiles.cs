@@ -192,9 +192,11 @@ namespace HitCounterManager
         int GetSessionProgress();
         /// <summary>
         /// Sets the split index of the session progress
+        /// Can only be higher unless AllowReset is set
         /// </summary>
-        /// <returns>Session progress</returns>
-        void SetSessionProgress(int Index);
+        /// <param name="Index">Index of the new session progress</param>
+        /// <param name="AllowReset">True allows to set lower values</param>
+        void SetSessionProgress(int Index, bool AllowReset = false);
 
         /// <summary>
         /// Gets the title of a split
