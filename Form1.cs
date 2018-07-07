@@ -64,7 +64,7 @@ namespace HitCounterManager
         {
             Text = Text + " - v" + Application.ProductVersion;
             LoadSettings();
-            om.Update();
+            UpdateProgressAndTotals();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -131,6 +131,8 @@ namespace HitCounterManager
             }
 
             lbl_totals.Text = "Total: " + TotalHits + " Hits   " + TotalPB + " PB";
+
+            om.Update();
         }
 
         private bool IsInvalidConfigString(string str)
@@ -273,7 +275,6 @@ namespace HitCounterManager
             AttemptsCounter = amount_value;
             profs.SaveProfileFrom((string)ComboBox1PrevSelectedItem, pi, AttemptsCounter);
             UpdateProgressAndTotals();
-            om.Update();
         }
 
         private void btnUp_Click(object sender, EventArgs e)
@@ -319,7 +320,7 @@ namespace HitCounterManager
             for (int r = 0; r < pi.GetSplitCount(); r++) pi.SetSplitHits(r, 0);
 
             pi.SetActiveSplit(0);
-            om.Update();
+            UpdateProgressAndTotals();
         }
 
         private void btnPB_Click(object sender, EventArgs e)
@@ -331,7 +332,7 @@ namespace HitCounterManager
 
             pi.SetActiveSplit(Splits);
             pi.SetSessionProgress(Splits-1);
-            om.Update();
+            UpdateProgressAndTotals();
         }
 
         private void btnHit_Click(object sender, EventArgs e)
@@ -339,7 +340,7 @@ namespace HitCounterManager
             int active = pi.GetActiveSplit();
             pi.SetSplitHits(active, pi.GetSplitHits(active) + 1);
             pi.SetActiveSplit(active); // row is already selected already but we make sure the whole row gets visually selected if user has selected a cell only
-            om.Update();
+            UpdateProgressAndTotals();
         }
 
         private void btnSplit_Click(object sender, EventArgs e)
@@ -353,7 +354,6 @@ namespace HitCounterManager
                 if (next_index < pi.GetSplitCount()) pi.SetSessionProgress(next_index);
             }
             UpdateProgressAndTotals();
-            om.Update();
         }
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -369,16 +369,11 @@ namespace HitCounterManager
 
             ComboBox1PrevSelectedItem = (string)ComboBox1.SelectedItem;
             UpdateProgressAndTotals();
-            om.Update();
         }
 
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (0 < DataGridView1.SelectedCells.Count)
-            {
-                UpdateProgressAndTotals();
-                om.Update();
-            }
+            if (0 < DataGridView1.SelectedCells.Count) UpdateProgressAndTotals();
         }
 
         private void DataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
