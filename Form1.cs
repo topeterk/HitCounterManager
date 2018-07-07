@@ -34,7 +34,6 @@ namespace HitCounterManager
         public OutModule om;
 
         private Profiles profs = new Profiles();
-        private string ComboBox1PrevSelectedItem = null;
         private bool SettingsDialogOpen = false;
         private IProfileInfo pi;
 
@@ -154,7 +153,7 @@ namespace HitCounterManager
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, pi);
+            profs.SaveProfileFrom(pi);
             SaveSettings();
         }
 
@@ -183,12 +182,13 @@ namespace HitCounterManager
                 return;
             }
 
-            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, pi); // save previous selected profile
+            profs.SaveProfileFrom(pi); // save previous selected profile
 
             // create, select and save new profile..
             ComboBox1.Items.Add(name);
             ComboBox1.SelectedItem = name;
-            profs.SaveProfileFrom(name, pi, true); // save new empty profile
+            pi.SetProfileName(name);
+            profs.SaveProfileFrom(pi, true); // save new empty profile
             UpdateProgressAndTotals();
         }
 
@@ -215,11 +215,12 @@ namespace HitCounterManager
 
             do { name += " COPY"; } while (ComboBox1.Items.Contains(name)); // extend name till it becomes unique
 
-            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, pi); // save previous selected profile
+            profs.SaveProfileFrom(pi); // save previous selected profile
 
             // create, select and save new profile..
             ComboBox1.Items.Add(name);
-            profs.SaveProfileFrom(name, pi, true); // copy current data to new profile
+            pi.SetProfileName(name);
+            profs.SaveProfileFrom(pi, true); // copy current data to new profile
             ComboBox1.SelectedItem = name;
         }
 
@@ -260,7 +261,7 @@ namespace HitCounterManager
                 return;
             }
             pi.SetAttemptsCount(om.AttemptsCount = amount_value);
-            profs.SaveProfileFrom((string)ComboBox1PrevSelectedItem, pi);
+            profs.SaveProfileFrom(pi);
             UpdateProgressAndTotals();
         }
 
@@ -343,15 +344,15 @@ namespace HitCounterManager
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (null != ComboBox1PrevSelectedItem)
+            if (null != pi.GetProfileName())
             {
-                profs.SaveProfileFrom(ComboBox1PrevSelectedItem, pi);
+                profs.SaveProfileFrom(pi);
             }
             
             profs.LoadProfileInto((string)ComboBox1.SelectedItem, pi);
             om.AttemptsCount = pi.GetAttemptsCount();
 
-            ComboBox1PrevSelectedItem = (string)ComboBox1.SelectedItem;
+            pi.SetProfileName((string)ComboBox1.SelectedItem);
             UpdateProgressAndTotals();
         }
 
@@ -404,7 +405,7 @@ namespace HitCounterManager
                 }
             }
 
-            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, DataGridView1, true);
+            profs.SaveProfileFrom(pi, true);
             UpdateProgressAndTotals();
         }
 
@@ -442,7 +443,11 @@ namespace HitCounterManager
 
     public class ProfileDataGridView : DataGridView, IProfileInfo
     {
+        private string _ProfileName = null;
         private int _AttemptsCounter = 0;
+
+        public string GetProfileName() { return _ProfileName; }
+        public void SetProfileName(string Name) { _ProfileName = Name; }
 
         public int GetSplitCount() { return RowCount - 1; } // Remove the "new line"
         public int GetActiveSplit()

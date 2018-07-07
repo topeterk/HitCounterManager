@@ -90,6 +90,7 @@ namespace HitCounterManager
         public void LoadProfileInto(string Name, IProfileInfo pi)
         {
             Profile prof;
+            pi.SetProfileName(Name);
             pi.SetAttemptsCount(0);
             pi.ClearSplits();
             if (_FindProfile(Name, out prof))
@@ -106,17 +107,17 @@ namespace HitCounterManager
         /// <summary>
         /// Updates internal profile cache of a specific profile by reading data from datagrid
         /// </summary>
-        public void SaveProfileFrom(string Name, IProfileInfo pi, bool AllowCreation = false)
+        public void SaveProfileFrom(IProfileInfo pi, bool AllowCreation = false)
         {
             Profile prof;
 
             // look for existing one and create if not exists
-            if (!_FindProfile(Name, out prof))
+            if (!_FindProfile(pi.GetProfileName(), out prof))
             {
                 if (!AllowCreation) return;
 
                 prof = new Profile();
-                prof.Name = Name;
+                prof.Name = pi.GetProfileName();
                 _Profiles.Add(prof);
             }
 
@@ -154,8 +155,22 @@ namespace HitCounterManager
         }
     }
 
+    /// <summary>
+    /// Interface to maintain the currently loaded profile data
+    /// </summary>
     public interface IProfileInfo
     {
+        /// <summary>
+        /// Gets the name of the currently loaded profile
+        /// </summary>
+        /// <returns>Profile name</returns>
+        string GetProfileName();
+        /// <summary>
+        /// Sets the name of the currently loaded profile
+        /// </summary>
+        /// <param name="Name">Profile name</param>
+        void SetProfileName(string Name);
+
         /// <summary>
         /// Gets amount of splits
         /// </summary>
