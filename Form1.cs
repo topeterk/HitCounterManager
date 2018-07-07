@@ -153,7 +153,7 @@ namespace HitCounterManager
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            profs.SaveProfileFrom(pi);
+            profs.SaveProfile(pi);
             SaveSettings();
         }
 
@@ -182,13 +182,13 @@ namespace HitCounterManager
                 return;
             }
 
-            profs.SaveProfileFrom(pi); // save previous selected profile
+            profs.SaveProfile(pi); // save previous selected profile
 
             // create, select and save new profile..
             ComboBox1.Items.Add(name);
             ComboBox1.SelectedItem = name;
             pi.SetProfileName(name);
-            profs.SaveProfileFrom(pi, true); // save new empty profile
+            profs.SaveProfile(pi, true); // save new empty profile
             UpdateProgressAndTotals();
         }
 
@@ -215,12 +215,12 @@ namespace HitCounterManager
 
             do { name += " COPY"; } while (ComboBox1.Items.Contains(name)); // extend name till it becomes unique
 
-            profs.SaveProfileFrom(pi); // save previous selected profile
+            profs.SaveProfile(pi); // save previous selected profile
 
             // create, select and save new profile..
             ComboBox1.Items.Add(name);
             pi.SetProfileName(name);
-            profs.SaveProfileFrom(pi, true); // copy current data to new profile
+            profs.SaveProfile(pi, true); // copy current data to new profile
             ComboBox1.SelectedItem = name;
         }
 
@@ -245,7 +245,7 @@ namespace HitCounterManager
                 else
                     ComboBox1.SelectedIndex = idx;
                 
-                profs.LoadProfileInto((string)ComboBox1.SelectedItem, pi);
+                profs.LoadProfile((string)ComboBox1.SelectedItem, pi);
                 om.AttemptsCount = pi.GetAttemptsCount();
             }
         }
@@ -261,7 +261,7 @@ namespace HitCounterManager
                 return;
             }
             pi.SetAttemptsCount(om.AttemptsCount = amount_value);
-            profs.SaveProfileFrom(pi);
+            profs.SaveProfile(pi);
             UpdateProgressAndTotals();
         }
 
@@ -346,10 +346,10 @@ namespace HitCounterManager
         {
             if (null != pi.GetProfileName())
             {
-                profs.SaveProfileFrom(pi);
+                profs.SaveProfile(pi);
             }
             
-            profs.LoadProfileInto((string)ComboBox1.SelectedItem, pi);
+            profs.LoadProfile((string)ComboBox1.SelectedItem, pi);
             om.AttemptsCount = pi.GetAttemptsCount();
 
             pi.SetProfileName((string)ComboBox1.SelectedItem);
@@ -405,7 +405,7 @@ namespace HitCounterManager
                 }
             }
 
-            profs.SaveProfileFrom(pi, true);
+            profs.SaveProfile(pi, true);
             UpdateProgressAndTotals();
         }
 

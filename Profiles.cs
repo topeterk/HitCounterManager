@@ -85,9 +85,11 @@ namespace HitCounterManager
         }
 
         /// <summary>
-        /// Updates a datagrid based on a specific internally cached profile
+        /// Updates profile info based on a specific internally cached profile
         /// </summary>
-        public void LoadProfileInto(string Name, IProfileInfo pi)
+        /// <param name="Name">Name of profile that gets loaded</param>
+        /// <param name="pi">Interface to Profile Info</param>
+        public void LoadProfile(string Name, IProfileInfo pi)
         {
             Profile prof;
             pi.SetProfileName(Name);
@@ -105,9 +107,11 @@ namespace HitCounterManager
         }
 
         /// <summary>
-        /// Updates internal profile cache of a specific profile by reading data from datagrid
+        /// Updates internally cached profile with data from profile info
         /// </summary>
-        public void SaveProfileFrom(IProfileInfo pi, bool AllowCreation = false)
+        /// <param name="pi">Interface to Profile Info</param>
+        /// <param name="AllowCreation">True allows to add a new profile when it does not exist in cache already</param>
+        public void SaveProfile(IProfileInfo pi, bool AllowCreation = false)
         {
             Profile prof;
 
