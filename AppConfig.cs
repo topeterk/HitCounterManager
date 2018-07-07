@@ -25,6 +25,9 @@ using System.Windows.Forms;
 
 namespace HitCounterManager
 {
+    /// <summary>
+    /// Content of XML stored user data (settings)
+    /// </summary>
     [Serializable]
     public class SettingsRoot
     {
@@ -59,6 +62,9 @@ namespace HitCounterManager
         private SaveModule<SettingsRoot> sm;
         private SettingsRoot _settings;
 
+        /// <summary>
+        /// Loads user data from XML
+        /// </summary>
         private void LoadSettings()
         {
             ShortcutsKey key = new ShortcutsKey();
@@ -155,6 +161,9 @@ namespace HitCounterManager
             om.StyleDesiredWidth = _settings.StyleDesiredWidth;
         }
 
+        /// <summary>
+        /// Stores user data in XML
+        /// </summary>
         private void SaveSettings()
         {
             ShortcutsKey key = new ShortcutsKey();

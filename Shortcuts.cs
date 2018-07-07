@@ -154,7 +154,8 @@ namespace HitCounterManager
         public SC_HotKeyMethod NextStart_Method;
 
         /// <summary>
-        /// Build empty hot key list, save window handle
+        /// Build empty hot key list, save window handle.
+        /// Call Initialize() to start using hot keys
         /// </summary>
         public Shortcuts(IntPtr WindowHandle)
         {
@@ -284,6 +285,9 @@ namespace HitCounterManager
             return key.ShallowCopy();
         }
 
+        /// <summary>
+        /// Timer message handler to check for async hot keys
+        /// </summary>
         private void timer_event(IntPtr hwnd, uint uMsg, IntPtr nIDEvent, uint dwTime)
         {
             bool k_shift;
