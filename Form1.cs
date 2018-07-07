@@ -34,21 +34,9 @@ namespace HitCounterManager
         public OutModule om;
 
         private Profiles profs = new Profiles();
-        private int _AttemptsCounter = 0;
         private string ComboBox1PrevSelectedItem = null;
         private bool SettingsDialogOpen = false;
         private IProfileInfo pi;
-
-        // Sync AttemptsCounter with output module
-        private int AttemptsCounter
-        {
-            get { return _AttemptsCounter; }
-            set
-            {
-                _AttemptsCounter = value;
-                om.AttemptsCount = value;
-            }
-        }
 
         #region Form
 
@@ -118,7 +106,7 @@ namespace HitCounterManager
             int Splits = pi.GetSplitCount();
 
             if (Splits < 0) // Check for valid entries
-                lbl_progress.Text = "Progress:  ?? / ??  # " + AttemptsCounter.ToString("D3");
+                lbl_progress.Text = "Progress:  ?? / ??  # " + pi.GetAttemptsCount().ToString("D3");
             else
             {
                 for (int r = 0; r < Splits; r++)
@@ -127,7 +115,7 @@ namespace HitCounterManager
                     TotalPB = TotalPB + pi.GetSplitPB(r);
                 }
 
-                lbl_progress.Text = "Progress:  " + pi.GetActiveSplit() + " / " + Splits + "  # " + AttemptsCounter.ToString("D3");
+                lbl_progress.Text = "Progress:  " + pi.GetActiveSplit() + " / " + Splits + "  # " + pi.GetAttemptsCount().ToString("D3");
             }
 
             lbl_totals.Text = "Total: " + TotalHits + " Hits   " + TotalPB + " PB";
@@ -166,7 +154,7 @@ namespace HitCounterManager
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, pi, AttemptsCounter);
+            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, pi);
             SaveSettings();
         }
 
@@ -195,12 +183,12 @@ namespace HitCounterManager
                 return;
             }
 
-            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, pi, AttemptsCounter); // save previous selected profile
+            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, pi); // save previous selected profile
 
             // create, select and save new profile..
             ComboBox1.Items.Add(name);
             ComboBox1.SelectedItem = name;
-            profs.SaveProfileFrom(name, pi, AttemptsCounter, true); // save new empty profile
+            profs.SaveProfileFrom(name, pi, true); // save new empty profile
             UpdateProgressAndTotals();
         }
 
@@ -227,11 +215,11 @@ namespace HitCounterManager
 
             do { name += " COPY"; } while (ComboBox1.Items.Contains(name)); // extend name till it becomes unique
 
-            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, pi, AttemptsCounter); // save previous selected profile
+            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, pi); // save previous selected profile
 
             // create, select and save new profile..
             ComboBox1.Items.Add(name);
-            profs.SaveProfileFrom(name, pi, AttemptsCounter, true); // copy current data to new profile
+            profs.SaveProfileFrom(name, pi, true); // copy current data to new profile
             ComboBox1.SelectedItem = name;
         }
 
@@ -255,16 +243,15 @@ namespace HitCounterManager
                     ComboBox1.SelectedIndex = ComboBox1.Items.Count - 1;
                 else
                     ComboBox1.SelectedIndex = idx;
-
-                int CsharpWorkaroundForBadPropertyImplementation = AttemptsCounter; // getter/setter cannot be passed as reference
-                profs.LoadProfileInto((string)ComboBox1.SelectedItem, pi, ref CsharpWorkaroundForBadPropertyImplementation);
-                AttemptsCounter = CsharpWorkaroundForBadPropertyImplementation;
+                
+                profs.LoadProfileInto((string)ComboBox1.SelectedItem, pi);
+                om.AttemptsCount = pi.GetAttemptsCount();
             }
         }
 
         private void btnAttempts_Click(object sender, EventArgs e)
         {
-            string amount_string = Interaction.InputBox("Enter amount to be set!", "Set amount of attempts", AttemptsCounter.ToString());
+            string amount_string = Interaction.InputBox("Enter amount to be set!", "Set amount of attempts", pi.GetAttemptsCount().ToString());
             int amount_value;
             if (!int.TryParse(amount_string, out amount_value))
             {
@@ -272,8 +259,8 @@ namespace HitCounterManager
                 MessageBox.Show("Only numbers are allowed!");
                 return;
             }
-            AttemptsCounter = amount_value;
-            profs.SaveProfileFrom((string)ComboBox1PrevSelectedItem, pi, AttemptsCounter);
+            pi.SetAttemptsCount(om.AttemptsCount = amount_value);
+            profs.SaveProfileFrom((string)ComboBox1PrevSelectedItem, pi);
             UpdateProgressAndTotals();
         }
 
@@ -315,10 +302,8 @@ namespace HitCounterManager
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            AttemptsCounter++; // Increase attempts
-
+            pi.SetAttemptsCount(om.AttemptsCount = pi.GetAttemptsCount() + 1); // Increase attempts
             for (int r = 0; r < pi.GetSplitCount(); r++) pi.SetSplitHits(r, 0);
-
             pi.SetActiveSplit(0);
             UpdateProgressAndTotals();
         }
@@ -360,12 +345,11 @@ namespace HitCounterManager
         {
             if (null != ComboBox1PrevSelectedItem)
             {
-                profs.SaveProfileFrom(ComboBox1PrevSelectedItem, pi, AttemptsCounter);
+                profs.SaveProfileFrom(ComboBox1PrevSelectedItem, pi);
             }
-
-            int CsharpWorkaroundForBadPropertyImplementation = AttemptsCounter; // getter/setter cannot be passed as reference
-            profs.LoadProfileInto((string)ComboBox1.SelectedItem, pi, ref CsharpWorkaroundForBadPropertyImplementation);
-            AttemptsCounter = CsharpWorkaroundForBadPropertyImplementation;
+            
+            profs.LoadProfileInto((string)ComboBox1.SelectedItem, pi);
+            om.AttemptsCount = pi.GetAttemptsCount();
 
             ComboBox1PrevSelectedItem = (string)ComboBox1.SelectedItem;
             UpdateProgressAndTotals();
@@ -420,7 +404,7 @@ namespace HitCounterManager
                 }
             }
 
-            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, DataGridView1, AttemptsCounter, true);
+            profs.SaveProfileFrom((string)ComboBox1.SelectedItem, DataGridView1, true);
             UpdateProgressAndTotals();
         }
 
@@ -458,6 +442,8 @@ namespace HitCounterManager
 
     public class ProfileDataGridView : DataGridView, IProfileInfo
     {
+        private int _AttemptsCounter = 0;
+
         public int GetSplitCount() { return RowCount - 1; } // Remove the "new line"
         public int GetActiveSplit()
         {
@@ -468,6 +454,9 @@ namespace HitCounterManager
 
         public void ClearSplits() { Rows.Clear(); }
         public void AddSplit(string Title, int Hits, int PB) { Rows.Add(new object[] { Title, Hits, Hits - PB, PB, false }); }
+
+        public int GetAttemptsCount() { return _AttemptsCounter; }
+        public void SetAttemptsCount(int Attempts) { _AttemptsCounter = Attempts; }
 
         public int GetSessionProgress()
         {

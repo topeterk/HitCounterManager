@@ -87,14 +87,14 @@ namespace HitCounterManager
         /// <summary>
         /// Updates a datagrid based on a specific internally cached profile
         /// </summary>
-        public void LoadProfileInto(string Name, IProfileInfo pi, ref int Attempts)
+        public void LoadProfileInto(string Name, IProfileInfo pi)
         {
             Profile prof;
-            Attempts = 0;
+            pi.SetAttemptsCount(0);
             pi.ClearSplits();
             if (_FindProfile(Name, out prof))
             {
-                Attempts = prof.Attempts;
+                pi.SetAttemptsCount(prof.Attempts);
                 foreach (ProfileRow row in prof.Rows)
                 {
                     pi.AddSplit(row.Title, row.Hits, row.PB);
@@ -106,7 +106,7 @@ namespace HitCounterManager
         /// <summary>
         /// Updates internal profile cache of a specific profile by reading data from datagrid
         /// </summary>
-        public void SaveProfileFrom(string Name, IProfileInfo pi, int Attempts, bool AllowCreation = false)
+        public void SaveProfileFrom(string Name, IProfileInfo pi, bool AllowCreation = false)
         {
             Profile prof;
 
@@ -123,7 +123,7 @@ namespace HitCounterManager
             prof.Rows.Clear();
 
             // collecting data, nom nom nom
-            prof.Attempts = Attempts;
+            prof.Attempts = pi.GetAttemptsCount();
             for (int r = 0; r < pi.GetSplitCount(); r++)
             {
                 ProfileRow ProfileRow = new ProfileRow();
@@ -183,6 +183,17 @@ namespace HitCounterManager
         /// <param name="Hits">Amount of hits</param>
         /// <param name="PB">Amount of personal best hits</param>
         void AddSplit(string Title, int Hits, int PB);
+
+        /// <summary>
+        /// Gets the amount of attempts
+        /// </summary>
+        /// <returns>Count of tries</returns>
+        int GetAttemptsCount();
+        /// <summary>
+        /// Sets the amount of attempts
+        /// </summary>
+        /// <param name="Attempts">Count of tries</param>
+        void SetAttemptsCount(int Attempts);
 
         /// <summary>
         /// Gets the split index of the session progress
