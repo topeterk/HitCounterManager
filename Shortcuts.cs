@@ -34,7 +34,7 @@ namespace HitCounterManager
         private const int KEY_PRESSED_NOW = 0x8000;
 
         [DllImport("User32.dll")]
-        private static extern short GetAsyncKeyState(System.Windows.Forms.Keys vKey);
+        private static extern short GetAsyncKeyState(Keys vKey);
 
         private bool _used; // tells if shortcut is registered at windows
         private bool _down; // tells if shortcut is currently pressed
@@ -74,7 +74,7 @@ namespace HitCounterManager
         /// </summary>
         private bool CheckPressedState(bool ShiftState, bool ControlState, bool AltState)
         {
-            if (0 != (GetAsyncKeyState(key.KeyCode) & KEY_PRESSED_NOW)) return false;
+            if (0 == (GetAsyncKeyState(key.KeyCode) & KEY_PRESSED_NOW)) return false;
             if (key.Shift && !ShiftState) return false;
             if (key.Control && !ControlState) return false;
             if (key.Alt && !AltState) return false;
@@ -154,21 +154,13 @@ namespace HitCounterManager
         public SC_HotKeyMethod NextStart_Method;
 
         /// <summary>
-        /// Build empty hot key list, save window handle (and setup timer)
+        /// Build empty hot key list, save window handle.
+        /// Call Initialize() to start using hot keys
         /// </summary>
-        public Shortcuts(IntPtr WindowHandle, SC_HotKeyMethod HotKeyMethod)
+        public Shortcuts(IntPtr WindowHandle)
         {
             hwnd = WindowHandle;
-            method = HotKeyMethod;
-            NextStart_Method = method;
-
             for (int i = 0; i < (int)SC_Type.SC_Type_MAX; i++) sc_list[i] = new ShortcutsKey();
-
-            if (method == SC_HotKeyMethod.SC_HotKeyMethod_Async)
-            {
-                TimerProcKeepAliveReference = new TimerProc(timer_event); // stupid garbage collection fixup
-                SetTimer(hwnd, (IntPtr)0, 20, TimerProcKeepAliveReference);
-            }
         }
 
         /// <summary>
@@ -177,6 +169,22 @@ namespace HitCounterManager
         ~Shortcuts()
         {
             if (method == SC_HotKeyMethod.SC_HotKeyMethod_Async) KillTimer(hwnd, (IntPtr)0);
+        }
+
+        /// <summary>
+        /// Initializes oject by setting the method (and configure timer)
+        /// </summary>
+        public void Initialize(SC_HotKeyMethod HotKeyMethod)
+        {
+            NextStart_Method = method = HotKeyMethod;
+
+            for (int i = 0; i < (int)SC_Type.SC_Type_MAX; i++) sc_list[i] = new ShortcutsKey();
+
+            if (method == SC_HotKeyMethod.SC_HotKeyMethod_Async)
+            {
+                TimerProcKeepAliveReference = new TimerProc(timer_event); // stupid garbage collection fixup
+                SetTimer(hwnd, (IntPtr)0, 20, TimerProcKeepAliveReference);
+            }
         }
 
         /// <summary>
@@ -277,6 +285,9 @@ namespace HitCounterManager
             return key.ShallowCopy();
         }
 
+        /// <summary>
+        /// Timer message handler to check for async hot keys
+        /// </summary>
         private void timer_event(IntPtr hwnd, uint uMsg, IntPtr nIDEvent, uint dwTime)
         {
             bool k_shift;

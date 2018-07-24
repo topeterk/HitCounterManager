@@ -22,65 +22,23 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace HitCounterManager
 {
     /// <summary>
-    /// A row as part of a profile (equals a row at datagridview)
+    /// A row as part of a profile (used for a row at datagridview)
     /// </summary>
     [Serializable]
     public class ProfileRow
     {
-        public string Title;
-        public int Hits;
-        public int Diff;
-        public int PB;
-
-        /// <summary>
-        /// Creates an empty entry
-        /// </summary>
-        public ProfileRow()
-        {
-            Title = "";
-            Hits = 0;
-            Diff = 0;
-            PB = 0;
-        }
-
-        /// <summary>
-        /// Creates an entry based on comma separated string
-        /// </summary>
-        public ProfileRow(string Line)
-        {
-            int i;
-            string val;
-            int col = 0;
-
-            Title = "";
-            Hits = 0;
-            Diff = 0;
-            PB = 0;
-
-            do {
-                if (!Line.Contains(";")) break; // no more data in this lne
-                i = Line.IndexOf(";");
-                val = Line.Substring(0, i);
-                switch (col)
-                {
-                    case 0: Title = val; break;
-                    case 1: Int32.TryParse(val, out Hits); break;
-                    case 2: Int32.TryParse(val, out Diff); break;
-                    case 3: Int32.TryParse(val, out PB); break;
-                }
-                col++;
-                Line = Line.Substring(i + 1);
-            } while (true);
-        }
+        public string Title = "";
+        public int Hits = 0;
+        public int Diff = 0;
+        public int PB = 0;
     }
 
     /// <summary>
-    /// Single profile (equals a whole datagridview data collection)
+    /// Single profile (used for a whole datagridview data collection)
     /// </summary>
     [Serializable]
     public class Profile
@@ -88,14 +46,6 @@ namespace HitCounterManager
         public string Name;
         public int Attempts;
         public List<ProfileRow> Rows = new List<ProfileRow>();
-
-        /// <summary>
-        /// Add a new profile row
-        /// </summary>
-        public void AddNewRow(string Line)
-        {
-            Rows.Add(new ProfileRow(Line));
-        }
     }
 
     /// <summary>
@@ -108,22 +58,22 @@ namespace HitCounterManager
         public List<Profile> ProfileList { get { return _Profiles; } } // used by XML serialization!
 
         /// <summary>
-        /// Builds a newline, pipe and comma separated string for all internally cached profiles
+        /// Checks if a profile with given name exists and gets its instance
         /// </summary>
-        public string GetProfilesString()
+        private bool _FindProfile(string Name, out Profile profile)
         {
-            string ProfileStr = "";
             foreach (Profile prof in _Profiles)
             {
-                ProfileStr += prof.Name + "|" + Environment.NewLine;
-                foreach (ProfileRow row in prof.Rows)
+                if (prof.Name == Name)
                 {
-                    ProfileStr += row.Title + ";" + row.Hits + ";" + row.Diff + ";" + row.PB + ";" + Environment.NewLine;
+                    profile = prof;
+                    return true;
                 }
             }
-            return ProfileStr;
+            profile = null;
+            return false;
         }
-
+        
         /// <summary>
         /// Returns a list of all available internally cached profile names
         /// </summary>
@@ -135,69 +85,58 @@ namespace HitCounterManager
         }
 
         /// <summary>
-        /// Updates a datagrid based on a specific internally cached profile
+        /// Updates profile info based on a specific internally cached profile
         /// </summary>
-        public void LoadProfileInto(string Name, ref DataGridView dgv, ref int Attempts)
+        /// <param name="Name">Name of profile that gets loaded</param>
+        /// <param name="pi">Interface to Profile Info</param>
+        public void LoadProfile(string Name, IProfileInfo pi)
         {
-            Attempts = 0;
-            dgv.Rows.Clear();
-            foreach (Profile prof in _Profiles)
+            Profile prof;
+            pi.SetProfileName(Name);
+            pi.SetAttemptsCount(0);
+            pi.ClearSplits();
+            if (_FindProfile(Name, out prof))
             {
-                if (prof.Name == Name)
+                pi.SetAttemptsCount(prof.Attempts);
+                foreach (ProfileRow row in prof.Rows)
                 {
-                    Attempts = prof.Attempts;
-                    foreach (ProfileRow row in prof.Rows)
-                    {
-                        object[] cells = { row.Title, row.Hits, row.Diff, row.PB };
-                        dgv.Rows.Add(cells);
-                    }
-                    return; // done
+                    pi.AddSplit(row.Title, row.Hits, row.PB);
                 }
             }
+            pi.SetSessionProgress(0);
         }
 
         /// <summary>
-        /// Updates internal profile cache of a specific profile by reading data from datagrid
+        /// Updates internally cached profile with data from profile info
         /// </summary>
-        public void SaveProfileFrom(string Name, DataGridView dgv, int Attempts, bool AllowCreation = false)
+        /// <param name="pi">Interface to Profile Info</param>
+        /// <param name="AllowCreation">True allows to add a new profile when it does not exist in cache already</param>
+        public void SaveProfile(IProfileInfo pi, bool AllowCreation = false)
         {
-            Profile prof_save = null;
-            DataGridViewCellCollection cells;
-            ProfileRow ProfileRow;
+            Profile prof;
 
-            // look for existing one
-            foreach (Profile prof in _Profiles)
-            {
-                if (prof.Name == Name)
-                {
-                    prof_save = prof;
-                    break;
-                }
-            }
-
-            // create if not exists
-            if (null == prof_save)
+            // look for existing one and create if not exists
+            if (!_FindProfile(pi.GetProfileName(), out prof))
             {
                 if (!AllowCreation) return;
 
-                prof_save = new Profile();
-                prof_save.Name = Name;
-                _Profiles.Add(prof_save);
+                prof = new Profile();
+                prof.Name = pi.GetProfileName();
+                _Profiles.Add(prof);
             }
 
-            prof_save.Rows.Clear();
+            prof.Rows.Clear();
 
             // collecting data, nom nom nom
-            prof_save.Attempts = Attempts;
-            for (int r = 0; r <= dgv.RowCount - 2; r++)
+            prof.Attempts = pi.GetAttemptsCount();
+            for (int r = 0; r < pi.GetSplitCount(); r++)
             {
-                ProfileRow = new ProfileRow();
-                cells = dgv.Rows[r].Cells;
-                ProfileRow.Title = (string)cells["cTitle"].Value;
-                ProfileRow.Hits = (int)cells["cHits"].Value;
-                ProfileRow.Diff = (int)cells["cDiff"].Value;
-                ProfileRow.PB = (int)cells["cPB"].Value;
-                prof_save.Rows.Add(ProfileRow);
+                ProfileRow ProfileRow = new ProfileRow();
+                ProfileRow.Title = pi.GetSplitTitle(r);
+                ProfileRow.Hits = pi.GetSplitHits(r);
+                ProfileRow.Diff = pi.GetSplitDiff(r);
+                ProfileRow.PB = pi.GetSplitPB(r);
+                prof.Rows.Add(ProfileRow);
             }
         }
 
@@ -206,14 +145,8 @@ namespace HitCounterManager
         /// </summary>
         public void DeleteProfile(string Name)
         {
-            foreach (Profile prof in _Profiles)
-            {
-                if (prof.Name == Name)
-                {
-                    _Profiles.Remove(prof);
-                    return;
-                }
-            }
+            Profile prof;
+            if (_FindProfile(Name, out prof)) _Profiles.Remove(prof); 
         }
 
         /// <summary>
@@ -221,14 +154,127 @@ namespace HitCounterManager
         /// </summary>
         public void RenameProfile(string NameOld, string NameNew)
         {
-            foreach (Profile prof in _Profiles)
-            {
-                if (prof.Name == NameOld)
-                {
-                    prof.Name = NameNew;
-                    return;
-                }
-            }
+            Profile prof;
+            if (_FindProfile(NameOld, out prof)) prof.Name = NameNew;
         }
+    }
+
+    /// <summary>
+    /// Interface to maintain the currently loaded profile data
+    /// </summary>
+    public interface IProfileInfo
+    {
+        /// <summary>
+        /// Gets the name of the currently loaded profile
+        /// </summary>
+        /// <returns>Profile name</returns>
+        string GetProfileName();
+        /// <summary>
+        /// Sets the name of the currently loaded profile
+        /// </summary>
+        /// <param name="Name">Profile name</param>
+        void SetProfileName(string Name);
+
+        /// <summary>
+        /// Gets amount of splits
+        /// </summary>
+        /// <returns>Split count</returns>
+        int GetSplitCount();
+
+        /// <summary>
+        /// Gets the split index of the currently active one
+        /// </summary>
+        /// <returns>Index of current split</returns>
+        int GetActiveSplit();
+        /// <summary>
+        /// Sets the split as active
+        /// </summary>
+        void SetActiveSplit(int Index);
+
+        /// <summary>
+        /// Removes all splits
+        /// </summary>
+        void ClearSplits();
+        /// <summary>
+        /// Add split
+        /// </summary>
+        /// <param name="Title">Title</param>
+        /// <param name="Hits">Amount of hits</param>
+        /// <param name="PB">Amount of personal best hits</param>
+        void AddSplit(string Title, int Hits, int PB);
+
+        /// <summary>
+        /// Gets the amount of attempts
+        /// </summary>
+        /// <returns>Count of tries</returns>
+        int GetAttemptsCount();
+        /// <summary>
+        /// Sets the amount of attempts
+        /// </summary>
+        /// <param name="Attempts">Count of tries</param>
+        void SetAttemptsCount(int Attempts);
+
+        /// <summary>
+        /// Gets the split index of the session progress
+        /// </summary>
+        /// <returns>Session progress</returns>
+        int GetSessionProgress();
+        /// <summary>
+        /// Sets the split index of the session progress
+        /// Can only be higher unless AllowReset is set
+        /// </summary>
+        /// <param name="Index">Index of the new session progress</param>
+        /// <param name="AllowReset">True allows to set lower values</param>
+        void SetSessionProgress(int Index, bool AllowReset = false);
+
+        /// <summary>
+        /// Gets the title of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <returns>Title</returns>
+        string GetSplitTitle(int Index);
+        /// <summary>
+        /// Gets the hit counts of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <returns>Amount of hits</returns>
+        int GetSplitHits(int Index);
+        /// <summary>
+        /// Gets the hit difference of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <returns>Hit count difference</returns>
+        int GetSplitDiff(int Index);
+        /// <summary>
+        /// Gets the person best hit counts of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <returns>Amount of personal best hits</returns>
+        int GetSplitPB(int Index);
+
+        /// <summary>
+        /// Sets the title of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <param name="Title">Title</param>
+        void SetSplitTitle(int Index, string Title);
+        /// <summary>
+        /// Sets the hit counts of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <param name="Hits">Amount of hits</param>
+        void SetSplitHits(int Index, int Hits);
+        /// <summary>
+        /// Sets the hit difference of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <param name="Diff">Hit count difference</param>
+        void SetSplitDiff(int Index, int Diff);
+        /// <summary>
+        /// Sets the person best hit counts of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <param name="PBHits">Amount of personal best hits</param>
+        void SetSplitPB(int Index, int PBHits);
     }
 }

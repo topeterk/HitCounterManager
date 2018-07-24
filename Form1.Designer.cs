@@ -59,7 +59,7 @@
             this.cHits = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ComboBox1 = new System.Windows.Forms.ComboBox();
-            this.DataGridView1 = new System.Windows.Forms.DataGridView();
+            this.DataGridView1 = new ProfileDataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -365,6 +365,7 @@
             this.ComboBox1.Size = new System.Drawing.Size(548, 21);
             this.ComboBox1.Sorted = true;
             this.ComboBox1.TabIndex = 28;
+            this.ComboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             // 
             // DataGridView1
             // 
@@ -454,6 +455,6 @@
         internal System.Windows.Forms.DataGridViewTextBoxColumn cHits;
         internal System.Windows.Forms.DataGridViewTextBoxColumn cTitle;
         internal System.Windows.Forms.ComboBox ComboBox1;
-        internal System.Windows.Forms.DataGridView DataGridView1;
+        internal ProfileDataGridView DataGridView1;
     }
 }

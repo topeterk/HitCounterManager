@@ -59,13 +59,18 @@ namespace HitCounterManager
         /// <returns>Data of data type</returns>
         public T ReadXML(string Filename = null)
         {
+            StreamReader file = null;
             if (null == Filename) Filename = _Filename;
             try
             {
-                return (T)xml.Deserialize(new StreamReader(Filename));
+                file = new StreamReader(Filename);
+                T result = (T)xml.Deserialize(file);
+                file.Close();
+                return result;
             }
             catch (Exception ex)
             {
+                if (null != file) file.Close();
                 if (ex.HResult != unchecked((int)0x80070002))
                 {
                     MessageBox.Show(ex.Message + Environment.NewLine + "==> Using defaults", "Error loading settings!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -81,13 +86,17 @@ namespace HitCounterManager
         /// <returns>Success state</returns>
         public bool WriteXML(T data)
         {
+            StreamWriter file = null;
             try
             {
-                xml.Serialize(new StreamWriter(_Filename), data);
+                file = new StreamWriter(_Filename);
+                xml.Serialize(file, data);
+                file.Close();
                 return true;
             }
             catch (Exception ex)
             {
+                if (null != file) file.Close();
                 MessageBox.Show(ex.Message, "Error writing settings!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return false;

@@ -22,7 +22,6 @@
 
 using System;
 using System.IO;
-using System.Windows.Forms;
 
 namespace HitCounterManager
 {
@@ -32,10 +31,10 @@ namespace HitCounterManager
     public class OutModule
     {
         private string _FilePathIn;
-        private string _FilePathOut;
         private string template = "";
-        private DataGridView dgv;
+        private IProfileInfo pi;
 
+        public string FilePathOut = null;
         public int AttemptsCount = 0;
         public bool ShowAttemptsCounter = true;
         public bool ShowHeadline = true;
@@ -52,9 +51,9 @@ namespace HitCounterManager
         /// Bind object to a data grid
         /// </summary>
         /// <param name="dgv">object to set binding</param>
-        public OutModule(DataGridView DataGridView)
+        public OutModule(IProfileInfo ProfileInfo)
         {
-            dgv = DataGridView;
+            pi = ProfileInfo;
         }
 
         /// <summary>
@@ -71,18 +70,9 @@ namespace HitCounterManager
                 {
                     StreamReader sr = new StreamReader(_FilePathIn);
                     template = sr.ReadToEnd();
+                    sr.Close();
                 }
             }
-        }
-
-        /// <summary>
-        /// Output file configuration
-        /// </summary>
-        public string FilePathOut
-        {
-            get { return _FilePathOut; }
-            set { _FilePathOut = value; }
-
         }
 
         /// <summary>
@@ -102,13 +92,25 @@ namespace HitCounterManager
         }
 
         /// <summary>
-        /// Creates a JSON string of a boolean
+        /// Writes a JSON statement to assign a simple value
         /// </summary>
-        /// <param name="Bool">boolean value</param>
-        /// <returns>String equivalent</returns>
-        private string ToJsonBooleanString(bool Bool)
+        private void WriteJsonSimpleValue(StreamWriter File, string Name, bool Bool)
         {
-            return (Bool ? "true" : "false");
+            File.WriteLine("\"" + Name + "\": " + (Bool ? "true" : "false") + ",");
+        }
+        /// <summary>
+        /// Writes a JSON statement to assign a simple value
+        /// </summary>
+        private void WriteJsonSimpleValue(StreamWriter File, string Name, int Integer)
+        {
+            File.WriteLine("\"" + Name + "\": " + Integer.ToString() + ",");
+        }
+        /// <summary>
+        /// Writes a JSON statement to assign a simple value
+        /// </summary>
+        private void WriteJsonSimpleValue(StreamWriter File, string Name, string String)
+        {
+            File.WriteLine("\"" + Name + "\": \"" + String + "\",");
         }
 
         /// <summary>
@@ -120,21 +122,18 @@ namespace HitCounterManager
             bool IsWritingList = false; // Kept for old designs before version 1.10
             bool IsWritingJson = false;
 
-            if (null == _FilePathOut) return;
+            if (null == FilePathOut) return;
 
             try
             {
-                if (File.Exists(_FilePathOut))
-                {
-                    File.Create(_FilePathOut).Close();
-                }
-                sr = new StreamWriter(_FilePathOut);
+                if (File.Exists(FilePathOut)) File.Create(FilePathOut).Close();
+                sr = new StreamWriter(FilePathOut);
             }
             catch { return; }
 
             sr.NewLine = Environment.NewLine;
 
-            foreach (string line in template.Split(Environment.NewLine.ToCharArray()))
+            foreach (string line in template.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
                 if (IsWritingJson)
                 {
@@ -146,55 +145,37 @@ namespace HitCounterManager
                 }
                 else if (line.Contains("HITCOUNTER_JSON_START")) // Format data according to RFC 4627 (JSON)
                 {
-                    DataGridViewCellCollection cells;
-                    string title;
-                    int diff;
-                    int hits;
-                    int PB;
-                    int active = 0;
-                    int session_progress = 0;
+                    int active = pi.GetActiveSplit();
                     int iTemp;
-                    string sTemp;
 
                     sr.WriteLine("{");
 
                     sr.WriteLine("\"list\": [");
-                    for (int r = 0; r <= dgv.RowCount - 2; r++)
+                    for (int r = 0; r < pi.GetSplitCount(); r++)
                     {
-                        cells = dgv.Rows[r].Cells;
-                        title = SimpleHtmlEscape((string)cells["cTitle"].Value);
-                        hits = (int)cells["cHits"].Value;
-                        diff = (int)cells["cDiff"].Value;
-                        PB = (int)cells["cPB"].Value;
-                        if ((bool)(cells["cSP"].Value)) session_progress = r;
-                        if (r == dgv.SelectedCells[0].RowIndex) active = r;
                         if (r != 0) sr.WriteLine(","); // separator
-                        sr.Write("[\"" + title + "\", " + hits + ", " + PB + "]");
+                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + pi.GetSplitHits(r) + ", " + pi.GetSplitPB(r) + "]");
                     }
                     sr.WriteLine(""); // no trailing separator
                     sr.WriteLine("],");
 
-                    sr.WriteLine("\"session_progress\": " + session_progress.ToString() + ",");
+                    WriteJsonSimpleValue(sr, "session_progress", pi.GetSessionProgress());
 
-                    sr.WriteLine("\"split_active\": " + active.ToString() + ",");
+                    WriteJsonSimpleValue(sr, "split_active", active);
                     iTemp = active - ShowSplitsCountFinished;
-                    if (iTemp < 0) iTemp = 0;
-                    sr.WriteLine("\"split_first\": " + iTemp.ToString() + ",");
+                    WriteJsonSimpleValue(sr, "split_first", (iTemp < 0 ? 0 : iTemp));
                     iTemp = active + ShowSplitsCountUpcoming;
-                    if (999 < iTemp) iTemp = 999;
-                    sr.WriteLine("\"split_last\": " + iTemp.ToString() + ",");
+                    WriteJsonSimpleValue(sr, "split_last", (999 < iTemp ? 999 : iTemp));
 
-                    sr.WriteLine("\"attempts\": " + AttemptsCount.ToString() + ",");
-                    sr.WriteLine("\"show_attempts\": " + ToJsonBooleanString(ShowAttemptsCounter) + ",");
-                    sr.WriteLine("\"show_headline\": " + ToJsonBooleanString(ShowHeadline) + ",");
-                    sr.WriteLine("\"show_session_progress\": " + ToJsonBooleanString(ShowSessionProgress) + ",");
-
-                    if (StyleUseCustom) sTemp = StyleFontUrl; else sTemp = "";
-                    sr.WriteLine("\"font_url\": \"" + sTemp + "\",");
-                    if (StyleUseCustom) sTemp = StyleCssUrl; else sTemp = "stylesheet.css";
-                    sr.WriteLine("\"css_url\": \"" + sTemp + "\",");
-                    sr.WriteLine("\"high_contrast\": " + ToJsonBooleanString(StyleUseHighContrast) + ",");
-                    sr.WriteLine("\"width\": " + StyleDesiredWidth.ToString());
+                    WriteJsonSimpleValue(sr, "attempts", AttemptsCount);
+                    WriteJsonSimpleValue(sr, "show_attempts", ShowAttemptsCounter);
+                    WriteJsonSimpleValue(sr, "show_headline", ShowHeadline);
+                    WriteJsonSimpleValue(sr, "show_session_progress", ShowSessionProgress);
+                    
+                    WriteJsonSimpleValue(sr, "font_url", (StyleUseCustom ? StyleFontUrl : ""));
+                    WriteJsonSimpleValue(sr, "css_url", (StyleUseCustom ? StyleCssUrl : "stylesheet.css"));
+                    WriteJsonSimpleValue(sr, "high_contrast", StyleUseHighContrast);
+                    WriteJsonSimpleValue(sr, "width", StyleDesiredWidth);
 
                     sr.WriteLine("}");
 
@@ -202,22 +183,11 @@ namespace HitCounterManager
                 }
                 else if (line.Contains("HITCOUNTER_LIST_START")) // Kept for old designs before version 1.10
                 {
-                    DataGridViewCellCollection cells;
-                    string title;
-                    int diff;
-                    int hits;
-                    int PB;
-                    int active;
+                    int active = pi.GetActiveSplit();
 
-                    for (int r = 0; r <= dgv.RowCount - 2; r++)
+                    for (int r = 0; r < pi.GetSplitCount(); r++)
                     {
-                        cells = dgv.Rows[r].Cells;
-                        title = SimpleHtmlEscape((string)cells["cTitle"].Value);
-                        hits = (int)cells["cHits"].Value;
-                        diff = (int)cells["cDiff"].Value;
-                        PB = (int)cells["cPB"].Value;
-                        if (r == dgv.SelectedCells[0].RowIndex) active = r; else active = 0;
-                        sr.Write("[\"" + title + "\", " + hits + ", " + PB + ", " + active + "]");
+                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + pi.GetSplitHits(r) + ", " + pi.GetSplitPB(r) + ", " + (r == active ? "1" : "0") + "]");
                     }
 
                     IsWritingList = true;

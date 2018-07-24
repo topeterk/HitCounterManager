@@ -105,7 +105,7 @@ namespace HitCounterManager
             txt.Text += GetNameFromKeyCode(e.KeyCode);
         }
 
-        private void RegisterHotKey(TextBox txt, CheckBox cb, Shortcuts.SC_Type Id, KeyEventArgs e)
+        private void RegisterHotKey(TextBox txt, Shortcuts.SC_Type Id, KeyEventArgs e)
         {
             ShortcutsKey key = new ShortcutsKey();
 
@@ -135,24 +135,44 @@ namespace HitCounterManager
             om.Update();
         }
 
+        private string AskForFilename(string StartFilename, string StartFilter, string Filter)
+        {
+            string result = null;
+            if (File.Exists(StartFilename))
+            {
+                OpenFileDialog1.InitialDirectory = new FileInfo(StartFilename).Directory.FullName;
+                OpenFileDialog1.FileName = Path.GetFileName(StartFilename);
+            }
+            else
+            {
+                OpenFileDialog1.InitialDirectory = Environment.CurrentDirectory;
+                OpenFileDialog1.FileName = StartFilter;
+            }
+
+            OpenFileDialog1.Filter = Filter;
+            OpenFileDialog1.FilterIndex = 0;
+            if (DialogResult.OK == OpenFileDialog1.ShowDialog(this)) result = OpenFileDialog1.FileName;
+            return result;
+        }
+
         #endregion
         #region UI
 
         private void txtReset_KeyDown(object sender, KeyEventArgs e)
         {
-            RegisterHotKey(txtReset, null, Shortcuts.SC_Type.SC_Type_Reset, e);
+            RegisterHotKey(txtReset, Shortcuts.SC_Type.SC_Type_Reset, e);
             cbScReset.Checked = true;
         }
 
         private void txtHit_KeyDown(object sender, KeyEventArgs e)
         {
-            RegisterHotKey(txtHit, null, Shortcuts.SC_Type.SC_Type_Hit, e);
+            RegisterHotKey(txtHit, Shortcuts.SC_Type.SC_Type_Hit, e);
             cbScHit.Checked = true;
         }
 
         private void txtNextSplit_KeyDown(object sender, KeyEventArgs e)
         {
-            RegisterHotKey(txtNextSplit, null, Shortcuts.SC_Type.SC_Type_Split, e);
+            RegisterHotKey(txtNextSplit, Shortcuts.SC_Type.SC_Type_Split, e);
             cbScNextSplit.Checked = true;
         }
 
@@ -173,51 +193,25 @@ namespace HitCounterManager
 
         private void btnInput_Click(object sender, EventArgs e)
         {
-            if (File.Exists(txtInput.Text))
+            string Filename = AskForFilename(txtInput.Text, "*.template", "Templates (*.template)|*.template|All files (*.*)|*.*");
+            if (null != Filename)
             {
-                OpenFileDialog1.InitialDirectory = new FileInfo(txtInput.Text).Directory.FullName;
-                OpenFileDialog1.FileName = Path.GetFileName(txtInput.Text);
-            }
-            else
-            {
-                OpenFileDialog1.InitialDirectory = Environment.CurrentDirectory;
-                OpenFileDialog1.FileName = "*.template";
-            }
-
-            OpenFileDialog1.Filter = "Templates (*.template)|*.template|All files (*.*)|*.*";
-            OpenFileDialog1.FilterIndex = 0;
-            if (DialogResult.OK == OpenFileDialog1.ShowDialog(this))
-            {
-                txtInput.Text = OpenFileDialog1.FileName;
-                om.FilePathIn = OpenFileDialog1.FileName;
+                om.FilePathIn = txtInput.Text = Filename;
             }
         }
 
         private void btnOutput_Click(object sender, EventArgs e)
         {
-            if (File.Exists(txtOutput.Text))
+            string Filename = AskForFilename(txtOutput.Text, "*.html", "HTML (*.html)|*.html|All files (*.*)|*.*");
+            if (null != Filename)
             {
-                OpenFileDialog1.InitialDirectory = new FileInfo(txtOutput.Text).Directory.FullName;
-                OpenFileDialog1.FileName = Path.GetFileName(txtOutput.Text);
-            }
-            else
-            {
-                OpenFileDialog1.InitialDirectory = Environment.CurrentDirectory;
-                OpenFileDialog1.FileName = "*.html";
-            }
-
-            OpenFileDialog1.Filter = "HTML (*.html)|*.html|All files (*.*)|*.*";
-            OpenFileDialog1.FilterIndex = 0;
-            if (DialogResult.OK == OpenFileDialog1.ShowDialog(this))
-            {
-                txtOutput.Text = OpenFileDialog1.FileName;
-                om.FilePathOut = OpenFileDialog1.FileName;
+                om.FilePathOut = txtOutput.Text = Filename;
             }
         }
 
         private void radioHotKeyMethod_CheckedChanged(object sender, EventArgs e)
         {
-            if (null == sc) return; // when invoked during form load
+            if (null == sc) return; // when invoked during initialization
 
             if (radioHotKeyMethod_sync.Checked)
             {

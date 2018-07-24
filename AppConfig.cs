@@ -25,6 +25,9 @@ using System.Windows.Forms;
 
 namespace HitCounterManager
 {
+    /// <summary>
+    /// Content of XML stored user data (settings)
+    /// </summary>
     [Serializable]
     public class SettingsRoot
     {
@@ -59,6 +62,9 @@ namespace HitCounterManager
         private SaveModule<SettingsRoot> sm;
         private SettingsRoot _settings;
 
+        /// <summary>
+        /// Loads user data from XML
+        /// </summary>
         private void LoadSettings()
         {
             ShortcutsKey key = new ShortcutsKey();
@@ -112,8 +118,7 @@ namespace HitCounterManager
             }
 
             // Apply settings..
-            sc = new Shortcuts(this.Handle, (Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
-            om = new OutModule(DataGridView1);
+            sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
             profs = _settings.Profiles;
 
             this.ComboBox1.Items.AddRange(profs.GetProfileList());
@@ -136,9 +141,8 @@ namespace HitCounterManager
             else
                 sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_Split, key);
 
-            DataGridView1.Rows[0].Selected = true;
-            DataGridView1.Rows[0].Cells["cSP"].Value = true;
-            DataGridView1_CellValueChanged(null, null);
+            pi.SetActiveSplit(0);
+            pi.SetSessionProgress(0, true);
 
             if (_settings.MainWidth > 400) this.Width = _settings.MainWidth;
             if (_settings.MainHeight > 400) this.Height = _settings.MainHeight;
@@ -157,6 +161,9 @@ namespace HitCounterManager
             om.StyleDesiredWidth = _settings.StyleDesiredWidth;
         }
 
+        /// <summary>
+        /// Stores user data in XML
+        /// </summary>
         private void SaveSettings()
         {
             ShortcutsKey key = new ShortcutsKey();

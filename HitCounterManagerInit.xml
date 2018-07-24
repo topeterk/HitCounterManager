@@ -20,8 +20,8 @@
   <StyleUseHighContrast>false</StyleUseHighContrast>
   <StyleUseCustom>false</StyleUseCustom>
   <StyleCssUrl>stylesheet_pink.css</StyleCssUrl>
-  <StyleDesiredWidth>0</StyleDesiredWidth>
   <StyleFontUrl>https://fonts.googleapis.com/css?family=Fontdiner%20Swanky</StyleFontUrl>
+  <StyleDesiredWidth>0</StyleDesiredWidth>
   <ProfileSelected>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE</ProfileSelected>
   <Profiles>
     <ProfileList>
@@ -1411,7 +1411,120 @@
           </ProfileRow>
         </Rows>
       </Profile>
+      <Profile>
+        <Name>Demon's Souls (All Bosses) [EN]</Name>
+        <Attempts>0</Attempts>
+        <Rows>
+          <ProfileRow>
+            <Title>Vanguard</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Phalanx</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Adjudicator</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Tower Knight</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Old Hero</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Storm King</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Armor Spider</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Fool's Idol</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Flamelurker</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Dragon God</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Maneater</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Old Monk</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Leechmonger</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Dirty Colossus</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Maiden Astraea</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Penetrator</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>False King Allant</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>King Allant</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+        </Rows>
+      </Profile>
     </ProfileList>
   </Profiles>
-
 </SettingsRoot>
