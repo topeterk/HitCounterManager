@@ -40,7 +40,6 @@ Public Class Settings
             Dim lParam As Long
             Dim lpString As New String(vbNullChar, 256)
             lParam = ScanCode * &H10000
-            Dim i = GetKeyNameTextW(lParam, lpString, lpString.Length)
             If 0 < GetKeyNameTextW(lParam, lpString, lpString.Length) Then
                 GetNameFromKeyCode = lpString.ToString()
             Else
@@ -111,8 +110,6 @@ Public Class Settings
         key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Split)
         cbScNextSplit.Checked = key.used
         If key.valid Then UpdateKeyName(txtNextSplit, key.key)
-
-        Dim UserCfgFile = System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath
 
         txtInput.Text = om.FilePathIn
         txtOutput.Text = om.FilePathOut
