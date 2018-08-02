@@ -29,14 +29,6 @@ namespace HitCounterManager
 {
     public partial class Settings : Form
     {
-        private const int MAPVK_VK_TO_VSC = 0;
-
-        [DllImport("User32.dll", CharSet = CharSet.Unicode)]
-        private static extern int GetKeyNameTextW(long lParam, string lpBuffer, int nSize);
-
-        [DllImport("User32.dll")]
-        private static extern int MapVirtualKey(int uCode, int uMapType);
-
         private Shortcuts sc;
         private OutModule om = null;
 
@@ -55,13 +47,13 @@ namespace HitCounterManager
             ShortcutsKey key;
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Reset);
             cbScReset.Checked = key.used;
-            if (key.valid) UpdateKeyName(txtReset, key.key);
+            if (key.valid) txtReset.Text = key.GetDescriptionString();
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Hit);
             cbScHit.Checked = key.used;
-            if (key.valid) UpdateKeyName(txtHit, key.key);
+            if (key.valid) txtHit.Text = key.GetDescriptionString();
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Split);
             cbScNextSplit.Checked = key.used;
-            if (key.valid) UpdateKeyName(txtNextSplit, key.key);
+            if (key.valid) txtNextSplit.Text = key.GetDescriptionString();
 
             txtInput.Text = om.FilePathIn;
             txtOutput.Text = om.FilePathOut;
@@ -84,27 +76,6 @@ namespace HitCounterManager
         #endregion
         #region Functions
 
-        private string GetNameFromKeyCode(Keys keyCode)
-        {
-            if (keyCode == Keys.None) return "None";
-            
-            long lParam = MapVirtualKey((int)keyCode, MAPVK_VK_TO_VSC) << 16;
-            string lpString = new string('\0', 256);
-
-            if (0 == GetKeyNameTextW(lParam, lpString, lpString.Length)) return "?";
-
-            return lpString;
-        }
-
-        private void UpdateKeyName(TextBox txt, KeyEventArgs e)
-        {
-            txt.Text = "";
-            if (e.Alt) txt.Text += "ALT + ";
-            if (e.Control) txt.Text += "CTRL + ";
-            if (e.Shift) txt.Text += "SHIFT + ";
-            txt.Text += GetNameFromKeyCode(e.KeyCode);
-        }
-
         private void RegisterHotKey(TextBox txt, Shortcuts.SC_Type Id, KeyEventArgs e)
         {
             ShortcutsKey key = new ShortcutsKey();
@@ -118,7 +89,7 @@ namespace HitCounterManager
             key.key = e;
             sc.Key_Set(Id, key);
 
-            UpdateKeyName(txt, e);
+            txt.Text = key.GetDescriptionString();
         }
 
         private void ApplyAppearance(object sender, EventArgs e)

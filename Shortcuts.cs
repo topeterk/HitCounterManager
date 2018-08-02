@@ -31,10 +31,17 @@ namespace HitCounterManager
     /// </summary>
     public class ShortcutsKey
     {
+        private const int MAPVK_VK_TO_VSC = 0;
         private const int KEY_PRESSED_NOW = 0x8000;
 
         [DllImport("User32.dll")]
         private static extern short GetAsyncKeyState(Keys vKey);
+
+        [DllImport("User32.dll", CharSet = CharSet.Unicode)]
+        private static extern int GetKeyNameTextW(long lParam, string lpBuffer, int nSize);
+
+        [DllImport("User32.dll")]
+        private static extern int MapVirtualKey(int uCode, int uMapType);
 
         private bool _used; // tells if shortcut is registered at windows
         private bool _down; // tells if shortcut is currently pressed
@@ -59,6 +66,26 @@ namespace HitCounterManager
             _down = false;
             valid = false;
             key = new KeyEventArgs(0);
+        }
+
+        /// <summary>
+        /// Returns the name of the key and its modifiers
+        /// </summary>
+        /// <returns>Description</returns>
+        public string GetDescriptionString()
+        {
+            if (key.KeyCode == Keys.None) return "None";
+
+            string lpKeyNameString = new string('\0', 256);
+            long lParam = MapVirtualKey((int)key.KeyCode, MAPVK_VK_TO_VSC) << 16;
+            if (0 == GetKeyNameTextW(lParam, lpKeyNameString, lpKeyNameString.Length))
+                lpKeyNameString = "?";
+
+            string Description = "";
+            if (key.Alt) Description += "ALT + ";
+            if (key.Control) Description += "CTRL + ";
+            if (key.Shift) Description += "SHIFT + ";
+            return Description + lpKeyNameString;
         }
 
         /// <summary>
