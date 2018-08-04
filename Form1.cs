@@ -271,12 +271,14 @@ namespace HitCounterManager
 
             if (0 <= idx_new && (idx_old < pi.GetSplitCount())) // Do not move when UP is not possible
             {
+                om.DataUpdatePending = true;
                 for (int i = 0; i <= DataGridView1.Columns.Count - 1; i++)
                 {
                     object cell = DataGridView1.Rows[idx_old].Cells[i].Value;
                     DataGridView1.Rows[idx_old].Cells[i].Value = DataGridView1.Rows[idx_new].Cells[i].Value;
                     DataGridView1.Rows[idx_new].Cells[i].Value = cell;
                 }
+                om.DataUpdatePending = false;
 
                 pi.SetActiveSplit(idx_new);
             }
@@ -289,12 +291,14 @@ namespace HitCounterManager
 
             if (idx_new < pi.GetSplitCount()) // Do not move when DOWN is not possible
             {
+                om.DataUpdatePending = true;
                 for (int i = 0; i <= DataGridView1.Columns.Count - 1; i++)
                 {
                     object cell = DataGridView1.Rows[idx_old].Cells[i].Value;
                     DataGridView1.Rows[idx_old].Cells[i].Value = DataGridView1.Rows[idx_new].Cells[i].Value;
                     DataGridView1.Rows[idx_new].Cells[i].Value = cell;
                 }
+                om.DataUpdatePending = false;
 
                 pi.SetActiveSplit(idx_new);
             }
@@ -302,9 +306,11 @@ namespace HitCounterManager
 
         private void btnReset_Click(object sender, EventArgs e)
         {
+            om.DataUpdatePending = true;
             pi.SetAttemptsCount(pi.GetAttemptsCount() + 1); // Increase attempts
             for (int r = 0; r < pi.GetSplitCount(); r++) pi.SetSplitHits(r, 0);
             pi.SetActiveSplit(0);
+            om.DataUpdatePending = false;
             UpdateProgressAndTotals();
         }
 
@@ -313,10 +319,11 @@ namespace HitCounterManager
             int Splits = pi.GetSplitCount();
             if (0 == Splits) return;
 
+            om.DataUpdatePending = true;
             for (int r = 0; r < Splits; r++) pi.SetSplitPB(r, pi.GetSplitHits(r));
-
             pi.SetActiveSplit(Splits);
             pi.SetSessionProgress(Splits-1);
+            om.DataUpdatePending = false;
             UpdateProgressAndTotals();
         }
 
@@ -333,11 +340,13 @@ namespace HitCounterManager
             int next_index = pi.GetActiveSplit() + 1;
             int session_progress = next_index;
 
+            om.DataUpdatePending = true;
             if (next_index <= pi.GetSplitCount())
             {
                 pi.SetActiveSplit(next_index);
                 if (next_index < pi.GetSplitCount()) pi.SetSessionProgress(next_index);
             }
+            om.DataUpdatePending = false;
             UpdateProgressAndTotals();
         }
 
@@ -347,10 +356,11 @@ namespace HitCounterManager
             {
                 profs.SaveProfile(pi);
             }
-            
-            profs.LoadProfile((string)ComboBox1.SelectedItem, pi);
 
+            om.DataUpdatePending = true;
+            profs.LoadProfile((string)ComboBox1.SelectedItem, pi);
             pi.SetProfileName((string)ComboBox1.SelectedItem);
+            om.DataUpdatePending = false;
             UpdateProgressAndTotals();
         }
 
@@ -424,7 +434,9 @@ namespace HitCounterManager
 
             if (DataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].GetType().Name == "DataGridViewCheckBoxCell")
             {
+                om.DataUpdatePending = true;
                 DataGridView1.Rows[DataGridView1.RowCount - 1].Cells[DataGridView1.ColumnCount - 1].Selected = true;
+                om.DataUpdatePending = false;
                 DataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
             }
         }
@@ -434,14 +446,17 @@ namespace HitCounterManager
             // Workaround to fire CellValueChanged on a Checkbox change via keyboard (space) by switching cell focus
             if (e.KeyCode == Keys.Space)
             {
-                if (DataGridView1.SelectedCells[0].GetType().Name == "DataGridViewCheckBoxCell")
+                foreach (DataGridViewCell cell in DataGridView1.SelectedCells)
                 {
-                    DataGridViewCheckBoxCell SelectedCell = (DataGridViewCheckBoxCell)DataGridView1.SelectedCells[0];
-                    e.Handled = true;
+                    if (cell.GetType().Name == "DataGridViewCheckBoxCell")
+                    {
+                        DataGridViewCheckBoxCell SelectedCell = (DataGridViewCheckBoxCell)cell;
+                        e.Handled = true;
 
-                    SelectedCell.Value = !(bool)SelectedCell.Value;
-                    DataGridView1.Rows[DataGridView1.RowCount - 1].Cells[DataGridView1.ColumnCount - 1].Selected = true;
-                    DataGridView1.Rows[SelectedCell.RowIndex].Cells[SelectedCell.ColumnIndex].Selected = true;
+                        SelectedCell.Value = !(bool)SelectedCell.Value;
+                        DataGridView1.Rows[DataGridView1.RowCount - 1].Cells[DataGridView1.ColumnCount - 1].Selected = true;
+                        DataGridView1.Rows[SelectedCell.RowIndex].Cells[SelectedCell.ColumnIndex].Selected = true;
+                    }
                 }
             }
         }
