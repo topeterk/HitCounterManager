@@ -68,13 +68,14 @@ namespace HitCounterManager
                 file.Close();
                 return result;
             }
+            catch (FileNotFoundException) { } // Exception.HResult == COR_E_FILENOTFOUND only be available since .Net 4.5, use overloading for older frameworks
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message + Environment.NewLine + "==> Using defaults", "Error loading settings!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
                 if (null != file) file.Close();
-                if (ex.HResult != unchecked((int)0x80070002))
-                {
-                    MessageBox.Show(ex.Message + Environment.NewLine + "==> Using defaults", "Error loading settings!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
             }
             return null;
         }
