@@ -64,7 +64,7 @@ All available releases can be found at the [Releases page](../../releases) on Gi
 ### Systemrequirements
 * OS: Windows Vista, Windows Server 2003 or newer  
 * [.Net Framework 4.5 or newer](https://www.microsoft.com/net)  
-> With version 1.14 the portable release should work with .Net Framework 2.0 or 3.5 as well
+> With version 1.14 the portable release should work with .Net Framework 2.0, 3.5 and 4.0 as well
 
 ### Using the Installer
 The installer places all files at your installation folder (default: My Documents) or any other location you like.  
