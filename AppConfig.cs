@@ -69,6 +69,8 @@ namespace HitCounterManager
         {
             ShortcutsKey key = new ShortcutsKey();
 
+            om.DataUpdatePending = true;
+
             sm = new SaveModule<SettingsRoot>(Application.ProductName + "Save.xml");
             _settings = sm.ReadXML();
 
@@ -159,6 +161,7 @@ namespace HitCounterManager
             om.StyleCssUrl = _settings.StyleCssUrl;
             om.StyleFontUrl = _settings.StyleFontUrl;
             om.StyleDesiredWidth = _settings.StyleDesiredWidth;
+            om.DataUpdatePending = false;
         }
 
         /// <summary>

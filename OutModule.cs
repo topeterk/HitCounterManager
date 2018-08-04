@@ -34,6 +34,7 @@ namespace HitCounterManager
         private string template = "";
         private IProfileInfo pi;
 
+        public bool DataUpdatePending = false;
         public string FilePathOut = null;
         public bool ShowAttemptsCounter = true;
         public bool ShowHeadline = true;
@@ -118,6 +119,8 @@ namespace HitCounterManager
         /// <param name="Force">true = Force producing output, false = Output only on pending changes</param>
         public void Update(bool Force = false)
         {
+            if (DataUpdatePending) return; // Data is incomplete, wait till data is no longer dirty
+
             if (!Force && !pi.HasChanged(true)) return; // Prevent writing the same idendical output multiple times
   
             //Console.Beep(); // For debugging to check whenever output is beeing generated :)
