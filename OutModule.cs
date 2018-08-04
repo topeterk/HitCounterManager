@@ -115,8 +115,13 @@ namespace HitCounterManager
         /// <summary>
         /// Use buffer to create outputfile while patching some data
         /// </summary>
-        public void Update()
+        /// <param name="Force">true = Force producing output, false = Output only on pending changes</param>
+        public void Update(bool Force = false)
         {
+            if (!Force && !pi.HasChanged(true)) return; // Prevent writing the same idendical output multiple times
+  
+            //Console.Beep(); // For debugging to check whenever output is beeing generated :)
+
             StreamWriter sr;
             bool IsWritingList = false; // Kept for old designs before version 1.10
             bool IsWritingJson = false;

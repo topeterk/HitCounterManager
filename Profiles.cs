@@ -276,5 +276,12 @@ namespace HitCounterManager
         /// <param name="Index">Index</param>
         /// <param name="PBHits">Amount of personal best hits</param>
         void SetSplitPB(int Index, int PBHits);
+
+        /// <summary>
+        /// Checks if any value of the Profile Info has been changed
+        /// </summary>
+        /// <param name="Reset">True will reset to "unchanged"</param>
+        /// <returns>Profile Info was modified since last reset</returns>
+        bool HasChanged(bool Reset = false);
     }
 }

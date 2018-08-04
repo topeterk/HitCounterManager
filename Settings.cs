@@ -103,7 +103,7 @@ namespace HitCounterManager
             om.ShowSplitsCountUpcoming = (int)numShowSplitsCountUpcoming.Value;
             om.StyleUseHighContrast = cbApHighContrast.Checked;
             om.StyleDesiredWidth = (int)numStyleDesiredWidth.Value;
-            om.Update();
+            om.Update(true);
         }
 
         private string AskForFilename(string StartFilename, string StartFilter, string Filter)
@@ -168,6 +168,7 @@ namespace HitCounterManager
             if (null != Filename)
             {
                 om.FilePathIn = txtInput.Text = Filename;
+                om.Update(true);
             }
         }
 
@@ -177,6 +178,7 @@ namespace HitCounterManager
             if (null != Filename)
             {
                 om.FilePathOut = txtOutput.Text = Filename;
+                om.Update(true);
             }
         }
 

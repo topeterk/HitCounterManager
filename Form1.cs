@@ -356,7 +356,11 @@ namespace HitCounterManager
 
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (0 < DataGridView1.SelectedCells.Count) UpdateProgressAndTotals();
+            if (0 < DataGridView1.SelectedCells.Count)
+            {
+                pi.SetActiveSplit(DataGridView1.SelectedCells[0].RowIndex);
+                UpdateProgressAndTotals();
+            }
         }
 
         private void DataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -379,6 +383,11 @@ namespace HitCounterManager
                 }
                 else DataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].ValueType = typeof(int); // Force int otherwise it is most likely treated as string
             }
+            else
+            {
+                // Make sure we mark any title changes as "modified"
+                pi.SetSplitTitle(e.RowIndex, (string)e.FormattedValue);
+            }
         }
 
         private bool SemaValueChange = false;
@@ -390,6 +399,7 @@ namespace HitCounterManager
             {
                 pi.SetSplitDiff(e.RowIndex, pi.GetSplitHits(e.RowIndex) - pi.GetSplitPB(e.RowIndex));
 
+                // When the session progress selection has changed, make sure no other selection is active at the same time
                 if (e.ColumnIndex == DataGridView1.Rows[0].Cells["cSP"].ColumnIndex)
                 {
                     int idx = e.RowIndex;
@@ -443,9 +453,18 @@ namespace HitCounterManager
     {
         private string _ProfileName = null;
         private int _AttemptsCounter = 0;
+        private bool ModifiedFlag = false;
+        private int LastActiveSplit = 0;
 
         public string GetProfileName() { return _ProfileName; }
-        public void SetProfileName(string Name) { _ProfileName = Name; }
+        public void SetProfileName(string Name)
+        {
+            if (_ProfileName != Name)
+            {
+                ModifiedFlag = true;
+                _ProfileName = Name;
+            }
+        }
 
         public int GetSplitCount() { return RowCount - 1; } // Remove the "new line"
         public int GetActiveSplit()
@@ -453,19 +472,36 @@ namespace HitCounterManager
             if (0 == SelectedCells.Count) SetActiveSplit(0);
             return SelectedCells[0].RowIndex;
         }
-        public void SetActiveSplit(int Index) { ClearSelection(); Rows[Index].Selected = true; }
+        public void SetActiveSplit(int Index)
+        {
+            if (LastActiveSplit != Index)
+            {
+                LastActiveSplit = Index;
+                ModifiedFlag = true;
+
+                ClearSelection();
+                Rows[Index].Selected = true;
+            }
+        }
 
         public void ClearSplits() { Rows.Clear(); }
-        public void AddSplit(string Title, int Hits, int PB) { Rows.Add(new object[] { Title, Hits, Hits - PB, PB, false }); }
+        public void AddSplit(string Title, int Hits, int PB) { ModifiedFlag = true; Rows.Add(new object[] { Title, Hits, Hits - PB, PB, false }); }
 
         public int GetAttemptsCount() { return _AttemptsCounter; }
-        public void SetAttemptsCount(int Attempts) { _AttemptsCounter = Attempts; }
+        public void SetAttemptsCount(int Attempts)
+        {
+            if (_AttemptsCounter != Attempts)
+            {
+                ModifiedFlag = true;
+                _AttemptsCounter = Attempts;
+            }
+        }
 
         public int GetSessionProgress()
         {
             for (int Index = 0; Index < GetSplitCount(); Index++)
             {
-                if ((bool)(Rows[Index].Cells["cSP"].Value)) return Index;
+                if ((bool)Rows[Index].Cells["cSP"].Value) return Index;
             }
             return 0;
         }
@@ -478,12 +514,54 @@ namespace HitCounterManager
 
         public void SetSessionProgress(int Index, bool AllowReset = false)
         {
-            if ((GetSessionProgress() <= Index) || AllowReset) Rows[Index].Cells["cSP"].Value = true;
+            if ((GetSessionProgress() <= Index) || AllowReset)
+            {
+                if (!(bool)Rows[Index].Cells["cSP"].Value)
+                {
+                    ModifiedFlag = true;
+                    Rows[Index].Cells["cSP"].Value = true;
+                }
+            }
         }
 
-        public void SetSplitTitle(int Index, string Title) { Rows[Index].Cells["cTitle"].Value = Title; }
-        public void SetSplitHits(int Index, int Hits) { Rows[Index].Cells["cHits"].Value = Hits; }
-        public void SetSplitDiff(int Index, int Diff) { Rows[Index].Cells["cDiff"].Value = Diff; }
-        public void SetSplitPB(int Index, int PBHits) { Rows[Index].Cells["cPB"].Value = PBHits; }
+        public void SetSplitTitle(int Index, string Title)
+        {
+            if (GetSplitTitle(Index) != Title)
+            {
+                ModifiedFlag = true;
+                Rows[Index].Cells["cTitle"].Value = Title;
+            }
+        }
+        public void SetSplitHits(int Index, int Hits)
+        {
+            if (GetSplitHits(Index) != Hits)
+            {
+                ModifiedFlag = true;
+                Rows[Index].Cells["cHits"].Value = Hits;
+            }
+        }
+        public void SetSplitDiff(int Index, int Diff)
+        {
+            if (GetSplitDiff(Index) != Diff)
+            {
+                ModifiedFlag = true;
+                Rows[Index].Cells["cDiff"].Value = Diff;
+            }
+        }
+        public void SetSplitPB(int Index, int PBHits)
+        {
+            if (GetSplitPB(Index) != PBHits)
+            {
+                ModifiedFlag = true;
+                Rows[Index].Cells["cPB"].Value = PBHits;
+            }
+        }
+
+        public bool HasChanged(bool Reset = false)
+        {
+            bool WasModified = ModifiedFlag;
+            if (Reset) ModifiedFlag = false;
+            return WasModified;
+        }
     }
 }
