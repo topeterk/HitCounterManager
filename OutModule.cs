@@ -35,7 +35,6 @@ namespace HitCounterManager
         private IProfileInfo pi;
 
         public string FilePathOut = null;
-        public int AttemptsCount = 0;
         public bool ShowAttemptsCounter = true;
         public bool ShowHeadline = true;
         public bool ShowSessionProgress = true;
@@ -167,7 +166,7 @@ namespace HitCounterManager
                     iTemp = active + ShowSplitsCountUpcoming;
                     WriteJsonSimpleValue(sr, "split_last", (999 < iTemp ? 999 : iTemp));
 
-                    WriteJsonSimpleValue(sr, "attempts", AttemptsCount);
+                    WriteJsonSimpleValue(sr, "attempts", pi.GetAttemptsCount());
                     WriteJsonSimpleValue(sr, "show_attempts", ShowAttemptsCounter);
                     WriteJsonSimpleValue(sr, "show_headline", ShowHeadline);
                     WriteJsonSimpleValue(sr, "show_session_progress", ShowSessionProgress);

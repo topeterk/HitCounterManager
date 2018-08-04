@@ -54,10 +54,6 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="HitCounter.template" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="About.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +121,7 @@
     <Content Include="Designs\stylesheet.css" />
     <Content Include="Designs\stylesheet_pink.css" />
     <Content Include="HitCounter.html" />
+    <Content Include="HitCounter.template" />
     <Content Include="HitCounterManagerInit.xml" />
     <None Include="Images\icons8-website-20.png" />
     <None Include="Images\icons8-trophy-32.png" />
@@ -141,6 +138,7 @@
     <None Include="Images\icons8-attack-32.png" />
     <None Include="Images\icons8-add-20.png" />
     <None Include="Images\icons8-about-20.png" />
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

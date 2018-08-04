@@ -246,7 +246,6 @@ namespace HitCounterManager
                     ComboBox1.SelectedIndex = idx;
                 
                 profs.LoadProfile((string)ComboBox1.SelectedItem, pi);
-                om.AttemptsCount = pi.GetAttemptsCount();
             }
         }
 
@@ -260,7 +259,7 @@ namespace HitCounterManager
                 MessageBox.Show("Only numbers are allowed!");
                 return;
             }
-            pi.SetAttemptsCount(om.AttemptsCount = amount_value);
+            pi.SetAttemptsCount(amount_value);
             profs.SaveProfile(pi);
             UpdateProgressAndTotals();
         }
@@ -303,7 +302,7 @@ namespace HitCounterManager
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            pi.SetAttemptsCount(om.AttemptsCount = pi.GetAttemptsCount() + 1); // Increase attempts
+            pi.SetAttemptsCount(pi.GetAttemptsCount() + 1); // Increase attempts
             for (int r = 0; r < pi.GetSplitCount(); r++) pi.SetSplitHits(r, 0);
             pi.SetActiveSplit(0);
             UpdateProgressAndTotals();
@@ -350,7 +349,6 @@ namespace HitCounterManager
             }
             
             profs.LoadProfile((string)ComboBox1.SelectedItem, pi);
-            om.AttemptsCount = pi.GetAttemptsCount();
 
             pi.SetProfileName((string)ComboBox1.SelectedItem);
             UpdateProgressAndTotals();
@@ -472,10 +470,11 @@ namespace HitCounterManager
             return 0;
         }
 
-        public string GetSplitTitle(int Index) { return (null == Rows[Index].Cells["cTitle"].Value ? "" : (string)Rows[Index].Cells["cTitle"].Value); }
-        public int GetSplitHits(int Index) { return (null == Rows[Index].Cells["cHits"].Value ? 0 : (int)Rows[Index].Cells["cHits"].Value); }
-        public int GetSplitDiff(int Index) { return (null == Rows[Index].Cells["cDiff"].Value ? 0 : (int)Rows[Index].Cells["cDiff"].Value); }
-        public int GetSplitPB(int Index) { return (null == Rows[Index].Cells["cPB"].Value ? 0 : (int)Rows[Index].Cells["cPB"].Value); }
+        private T GetCellValueOfType<T>(DataGridViewCell Cell, T Default) {  try { return (null == Cell.Value ? Default : (T)Cell.Value); } catch { return Default; } }
+        public string GetSplitTitle(int Index) { return GetCellValueOfType<string>(Rows[Index].Cells["cTitle"], ""); }
+        public int GetSplitHits(int Index) { return GetCellValueOfType<int>(Rows[Index].Cells["cHits"], 0); }
+        public int GetSplitDiff(int Index) { return GetCellValueOfType<int>(Rows[Index].Cells["cDiff"], 0); }
+        public int GetSplitPB(int Index) { return GetCellValueOfType<int>(Rows[Index].Cells["cPB"], 0); }
 
         public void SetSessionProgress(int Index, bool AllowReset = false)
         {
