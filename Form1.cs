@@ -454,7 +454,7 @@ namespace HitCounterManager
         private string _ProfileName = null;
         private int _AttemptsCounter = 0;
         private bool ModifiedFlag = false;
-        private int LastActiveSplit = 0;
+        private int LastActiveSplit = -1;
 
         public string GetProfileName() { return _ProfileName; }
         public void SetProfileName(string Name)
@@ -516,7 +516,7 @@ namespace HitCounterManager
         {
             if ((GetSessionProgress() <= Index) || AllowReset)
             {
-                if (!(bool)Rows[Index].Cells["cSP"].Value)
+                if (!GetCellValueOfType<bool>(Rows[Index].Cells["cSP"], false))
                 {
                     ModifiedFlag = true;
                     Rows[Index].Cells["cSP"].Value = true;
