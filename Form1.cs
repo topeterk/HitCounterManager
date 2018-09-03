@@ -423,7 +423,7 @@ namespace HitCounterManager
                 }
             }
 
-            profs.SaveProfile(pi, true);
+            if (!om.DataUpdatePending) profs.SaveProfile(pi, true);
             UpdateProgressAndTotals();
         }
 
