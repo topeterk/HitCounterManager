@@ -68,6 +68,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Sources\Main.cs" />
+    <Compile Include="Sources\OsLayerWindows.cs" />
     <Compile Include="Sources\OutModule.cs" />
     <Compile Include="Sources\Profiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

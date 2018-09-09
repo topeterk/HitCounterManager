@@ -21,7 +21,6 @@
 //SOFTWARE.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace HitCounterManager
@@ -31,18 +30,6 @@ namespace HitCounterManager
     /// </summary>
     public class ShortcutsKey
     {
-        private const int MAPVK_VK_TO_VSC = 0;
-        private const int KEY_PRESSED_NOW = 0x8000;
-
-        [DllImport("User32.dll")]
-        private static extern short GetAsyncKeyState(Keys vKey);
-
-        [DllImport("User32.dll", CharSet = CharSet.Unicode)]
-        private static extern int GetKeyNameTextW(long lParam, string lpBuffer, int nSize);
-
-        [DllImport("User32.dll")]
-        private static extern int MapVirtualKey(int uCode, int uMapType);
-
         private bool _used; // tells if shortcut is registered at windows
         private bool _down; // tells if shortcut is currently pressed
         public bool valid; // tell if a valid key/modifier pair was ever set
@@ -76,16 +63,11 @@ namespace HitCounterManager
         {
             if (key.KeyCode == Keys.None) return "None";
 
-            string lpKeyNameString = new string('\0', 256);
-            long lParam = MapVirtualKey((int)key.KeyCode, MAPVK_VK_TO_VSC) << 16;
-            if (0 == GetKeyNameTextW(lParam, lpKeyNameString, lpKeyNameString.Length))
-                lpKeyNameString = "?";
-
             string Description = "";
             if (key.Alt) Description += "ALT + ";
             if (key.Control) Description += "CTRL + ";
             if (key.Shift) Description += "SHIFT + ";
-            return Description + lpKeyNameString;
+            return Description + OsLayer.GetKeyName(key.KeyCode);
         }
 
         /// <summary>
@@ -101,7 +83,7 @@ namespace HitCounterManager
         /// </summary>
         private bool CheckPressedState(bool ShiftState, bool ControlState, bool AltState)
         {
-            if (0 == (GetAsyncKeyState(key.KeyCode) & KEY_PRESSED_NOW)) return false;
+            if (!OsLayer.IsKeyPressedAsync(key.KeyCode)) return false;
             if (key.Shift && !ShiftState) return false;
             if (key.Control && !ControlState) return false;
             if (key.Alt && !AltState) return false;
@@ -135,32 +117,11 @@ namespace HitCounterManager
         private const int MOD_ALT = 0x0001;
         private const int MOD_CONTROL = 0x0002;
         private const int MOD_SHIFT = 0x0004;
-        private const int WM_HOTKEY = 0x312;
-        private const int VK_SHIFT = 0x10;
-        private const int VK_CONTROL = 0x11;
-        private const int VK_MENU = 0x12;
-        private const int KEY_PRESSED_NOW = 0x8000;
+        private const Keys VK_SHIFT = (Keys)0x10;
+        private const Keys VK_CONTROL = (Keys)0x11;
+        private const Keys VK_MENU = (Keys)0x12;
 
-        [DllImport("User32.dll")]
-        private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, int vk);
-
-        [DllImport("User32.dll")]
-        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-
-        private delegate void TimerProc(IntPtr hWnd, uint uMsg, IntPtr nIDEvent, uint dwTime);
-        private TimerProc TimerProcKeepAliveReference; // prevent garbage collector freeing up the callback without any reason
-
-        [DllImport("User32.dll")]
-        private static extern IntPtr SetTimer(IntPtr hWnd, IntPtr nIDEvent, uint uElapse, TimerProc lpTimerFunc);
-
-        [DllImport("User32.dll")]
-        private static extern bool KillTimer(IntPtr hWnd, IntPtr nIDEvent);
-
-        [DllImport("User32.dll")]
-        private static extern short GetAsyncKeyState(System.Int32 vKey);
-
-        [DllImport("User32.dll")]
-        private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        private OsLayer.TimerProc TimerProcKeepAliveReference; // prevent garbage collector freeing up the callback without any reason
 
         public enum SC_Type {
             SC_Type_Reset = 0,
@@ -195,7 +156,7 @@ namespace HitCounterManager
         /// </summary>
         ~Shortcuts()
         {
-            if (method == SC_HotKeyMethod.SC_HotKeyMethod_Async) KillTimer(hwnd, (IntPtr)0);
+            if (method == SC_HotKeyMethod.SC_HotKeyMethod_Async) OsLayer.KillTimer(hwnd, 0);
         }
 
         /// <summary>
@@ -209,8 +170,8 @@ namespace HitCounterManager
 
             if (method == SC_HotKeyMethod.SC_HotKeyMethod_Async)
             {
-                TimerProcKeepAliveReference = new TimerProc(timer_event); // stupid garbage collection fixup
-                SetTimer(hwnd, (IntPtr)0, 20, TimerProcKeepAliveReference);
+                TimerProcKeepAliveReference = new OsLayer.TimerProc(timer_event); // stupid garbage collection fixup
+                OsLayer.SetTimer(hwnd, 0, 20, TimerProcKeepAliveReference);
             }
         }
 
@@ -229,7 +190,7 @@ namespace HitCounterManager
             {
                 if (Enable)
                 {
-                    if (RegisterHotKey(hwnd, (int)Id, modifier, (int)key.key.KeyCode))
+                    if (OsLayer.SetHotKey(hwnd, (int)Id, modifier, key.key.KeyCode))
                     {
                         key.used = true;
                         key.valid = true;
@@ -243,7 +204,7 @@ namespace HitCounterManager
                 }
                 else
                 {
-                    UnregisterHotKey(hwnd, (int)Id);
+                    OsLayer.KillHotKey(hwnd, (int)Id);
                     key.used = false;
                 }
             }
@@ -251,9 +212,9 @@ namespace HitCounterManager
             {
                 if (Enable)
                 {
-                    if (RegisterHotKey(hwnd, (int)Id, modifier, (int)key.key.KeyCode))
+                    if (OsLayer.SetHotKey(hwnd, (int)Id, modifier, key.key.KeyCode))
                     {
-                        UnregisterHotKey(hwnd, (int)Id); // don't use this method, we just used registration to check if keycode is valid and works
+                        OsLayer.KillHotKey(hwnd, (int)Id); // don't use this method, we just used registration to check if keycode is valid and works
                         key.used = true;
                         key.valid = true;
                     }
@@ -321,15 +282,15 @@ namespace HitCounterManager
             bool k_control;
             bool k_alt;
 
-            k_shift = (0 != (GetAsyncKeyState(VK_SHIFT) & KEY_PRESSED_NOW));
-            k_control = (0 != (GetAsyncKeyState(VK_CONTROL) & KEY_PRESSED_NOW));
-            k_alt = (0 != (GetAsyncKeyState(VK_MENU) & KEY_PRESSED_NOW));
+            k_shift = OsLayer.IsKeyPressedAsync(VK_SHIFT);
+            k_control = OsLayer.IsKeyPressedAsync(VK_CONTROL);
+            k_alt = OsLayer.IsKeyPressedAsync(VK_MENU);
 
             for (int i = 0; i < (int)SC_Type.SC_Type_MAX; i++)
             {
                 if (sc_list[i].used)
                 {
-                    if (sc_list[i].WasPressed(k_shift, k_control, k_alt)) SendMessage(hwnd, WM_HOTKEY, (IntPtr)i, (IntPtr)0);
+                    if (sc_list[i].WasPressed(k_shift, k_control, k_alt)) OsLayer.SendHotKeyMessage(hwnd, (IntPtr)i, (IntPtr)0);
                 }
             }
         }
