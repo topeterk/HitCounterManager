@@ -20,9 +20,8 @@
 //OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
 //SOFTWARE.
 
-#if OS_WINDOWS
+#if OS_ANY
 using System;
-using System.Runtime.InteropServices;
 
 namespace HitCounterManager
 {
@@ -30,61 +29,19 @@ namespace HitCounterManager
     {
         public delegate void TimerProc(IntPtr hWnd, uint uMsg, IntPtr nIDEvent, uint dwTime);
 
-        #region Windows API Imports
-
-        [DllImport("User32.dll")]
-        private static extern short GetAsyncKeyState(int vKey);
-
-        [DllImport("User32.dll")]
-        private static extern int MapVirtualKey(int uCode, int uMapType);
-
-        [DllImport("User32.dll", CharSet = CharSet.Unicode)]
-        private static extern int GetKeyNameTextW(long lParam, string lpBuffer, int nSize);
-
-        [DllImport("User32.dll")]
-        private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, int vk);
-
-        [DllImport("User32.dll")]
-        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-
-
-        [DllImport("User32.dll")]
-        private static extern IntPtr SetTimer(IntPtr hWnd, IntPtr nIDEvent, uint uElapse, TimerProc lpTimerFunc);
-
-        [DllImport("User32.dll")]
-        private static extern bool KillTimer(IntPtr hWnd, IntPtr nIDEvent);
-
-        [DllImport("User32.dll")]
-        private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
-
-        #endregion
-
-        private const int MAPVK_VK_TO_VSC = 0;
-        private const int KEY_PRESSED_NOW = 0x8000;
-        private const int WM_HOTKEY = 0x312;
-
         /// <summary>
         /// Checks if a given key is pressed right now
         /// </summary>
         /// <param name="KeyCode">The key to check</param>
         /// <returns>true = pressed, false = released</returns>
-        public static bool IsKeyPressedAsync(int KeyCode)
-        {
-            return (0 != (GetAsyncKeyState(KeyCode) & KEY_PRESSED_NOW));
-        }
+        public static bool IsKeyPressedAsync(int KeyCode) { return false; }
+
         /// <summary>
         /// Retrieves the name of a given key
         /// </summary>
         /// <param name="KeyCode">Key name to gather</param>
         /// <returns>Key name</returns>
-        public static string GetKeyName(int KeyCode)
-        {
-            string lpKeyNameString = new string('\0', 256);
-            long lParam = MapVirtualKey(KeyCode, MAPVK_VK_TO_VSC) << 16;
-            if (0 == GetKeyNameTextW(lParam, lpKeyNameString, lpKeyNameString.Length))
-                lpKeyNameString = "?";
-            return lpKeyNameString;
-        }
+        public static string GetKeyName(int KeyCode) { return "?"; }
 
         /// <summary>
         /// Registers a hot key
@@ -94,10 +51,7 @@ namespace HitCounterManager
         /// <param name="Modifiers">Key modifiers</param>
         /// <param name="KeyCode">Key to register</param>
         /// <returns>Success state</returns>
-        public static bool SetHotKey(IntPtr WindowHandle, int HotKeyID, uint Modifiers, int KeyCode)
-        {
-            return RegisterHotKey(WindowHandle, HotKeyID, Modifiers, KeyCode);
-        }
+        public static bool SetHotKey(IntPtr WindowHandle, int HotKeyID, uint Modifiers, int KeyCode) { return false; }
 
         /// <summary>
         /// Unregisters a hot key
@@ -105,10 +59,7 @@ namespace HitCounterManager
         /// <param name="WindowHandle">Window handle that is receiving the hotkey message</param>
         /// <param name="HotKeyID">Custom ID for the hotkey</param>
         /// <returns>Success state</returns>
-        public static bool KillHotKey(IntPtr WindowHandle, int HotKeyID)
-        {
-            return UnregisterHotKey(WindowHandle, HotKeyID);
-        }
+        public static bool KillHotKey(IntPtr WindowHandle, int HotKeyID) { return false; }
 
         /// <summary>
         /// Creates a timer repeatedly calling the callback upon timeout
@@ -118,10 +69,7 @@ namespace HitCounterManager
         /// <param name="Timeout">Timeout in milliseconds</param>
         /// <param name="CallbackAsync">Callback function pointer</param>
         /// <returns>Timer identifier (non-zero on success)</returns>
-        public static IntPtr SetTimer(IntPtr WindowHandle, int TimerID, uint Timeout, TimerProc CallbackAsync)
-        {
-            return SetTimer(WindowHandle, (IntPtr)TimerID, Timeout, CallbackAsync);
-        }
+        public static IntPtr SetTimer(IntPtr WindowHandle, int TimerID, uint Timeout, TimerProc CallbackAsync) { return (IntPtr)0; }
 
         /// <summary>
         /// Removes a timer
@@ -129,10 +77,7 @@ namespace HitCounterManager
         /// <param name="WindowHandle">Window handle that the timer is registered at</param>
         /// <param name="TimerID">Custom ID for the timer</param>
         /// <returns>Success state</returns>
-        public static bool KillTimer(IntPtr WindowHandle, int TimerID)
-        {
-            return KillTimer(WindowHandle, (IntPtr)TimerID);
-        }
+        public static bool KillTimer(IntPtr WindowHandle, int TimerID) { return false; }
 
         /// <summary>
         /// Sends an hotkey message to the given window
@@ -141,10 +86,7 @@ namespace HitCounterManager
         /// <param name="wParam">Parameter 1 of message</param>
         /// <param name="lParam">Parameter 2 of message</param>
         /// <returns>Message result</returns>
-        public static IntPtr SendHotKeyMessage(IntPtr WindowHandle, IntPtr wParam, IntPtr lParam)
-        {
-            return SendMessage(WindowHandle, WM_HOTKEY, wParam, lParam);
-        }
+        public static IntPtr SendHotKeyMessage(IntPtr WindowHandle, IntPtr wParam, IntPtr lParam) { return (IntPtr)0; }
     }
 }
 #endif

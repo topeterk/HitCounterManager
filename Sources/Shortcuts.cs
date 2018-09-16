@@ -67,7 +67,7 @@ namespace HitCounterManager
             if (key.Alt) Description += "ALT + ";
             if (key.Control) Description += "CTRL + ";
             if (key.Shift) Description += "SHIFT + ";
-            return Description + OsLayer.GetKeyName(key.KeyCode);
+            return Description + OsLayer.GetKeyName((int)key.KeyCode);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace HitCounterManager
         /// </summary>
         private bool CheckPressedState(bool ShiftState, bool ControlState, bool AltState)
         {
-            if (!OsLayer.IsKeyPressedAsync(key.KeyCode)) return false;
+            if (!OsLayer.IsKeyPressedAsync((int)key.KeyCode)) return false;
             if (key.Shift && !ShiftState) return false;
             if (key.Control && !ControlState) return false;
             if (key.Alt && !AltState) return false;
@@ -117,9 +117,9 @@ namespace HitCounterManager
         private const int MOD_ALT = 0x0001;
         private const int MOD_CONTROL = 0x0002;
         private const int MOD_SHIFT = 0x0004;
-        private const Keys VK_SHIFT = (Keys)0x10;
-        private const Keys VK_CONTROL = (Keys)0x11;
-        private const Keys VK_MENU = (Keys)0x12;
+        private const int VK_SHIFT = 0x10;
+        private const int VK_CONTROL = 0x11;
+        private const int VK_MENU = 0x12;
 
         private OsLayer.TimerProc TimerProcKeepAliveReference; // prevent garbage collector freeing up the callback without any reason
 
@@ -190,7 +190,7 @@ namespace HitCounterManager
             {
                 if (Enable)
                 {
-                    if (OsLayer.SetHotKey(hwnd, (int)Id, modifier, key.key.KeyCode))
+                    if (OsLayer.SetHotKey(hwnd, (int)Id, modifier, (int)key.key.KeyCode))
                     {
                         key.used = true;
                         key.valid = true;
@@ -212,7 +212,7 @@ namespace HitCounterManager
             {
                 if (Enable)
                 {
-                    if (OsLayer.SetHotKey(hwnd, (int)Id, modifier, key.key.KeyCode))
+                    if (OsLayer.SetHotKey(hwnd, (int)Id, modifier, (int)key.key.KeyCode))
                     {
                         OsLayer.KillHotKey(hwnd, (int)Id); // don't use this method, we just used registration to check if keycode is valid and works
                         key.used = true;
