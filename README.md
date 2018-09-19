@@ -48,7 +48,7 @@ It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit
   * **NoDeath**
     * Shows check marks/crosses until the players death for the current run and PB
     * All splits have check marks until the current split appears (__Now__ only) or a split appears that has already counted hits.
-* The appearance of all designs can by modified via GUI
+* The appearance of all designs can be modified via GUI
   * Set the amount of shown splits that are already finished
   * Set the amount of shown splits that are upcoming
   * Show or hide the attempts counter
