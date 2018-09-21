@@ -59,7 +59,7 @@
             this.cHits = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ComboBox1 = new System.Windows.Forms.ComboBox();
-            this.DataGridView1 = new ProfileDataGridView();
+            this.DataGridView1 = new HitCounterManager.ProfileDataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -303,10 +303,12 @@
             // cSP
             // 
             this.cSP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.cSP.FalseValue = "false";
             this.cSP.HeaderText = "SP";
             this.cSP.MinimumWidth = 30;
             this.cSP.Name = "cSP";
             this.cSP.ToolTipText = "Session progress";
+            this.cSP.TrueValue = "true";
             this.cSP.Width = 30;
             // 
             // cPB
@@ -449,11 +451,11 @@
         internal System.Windows.Forms.Label Spacer1;
         internal System.Windows.Forms.Label lbl_totals;
         internal System.Windows.Forms.Label lbl_progress;
-        internal System.Windows.Forms.DataGridViewCheckBoxColumn cSP;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn cPB;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn cDiff;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn cHits;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn cTitle;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn cSP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cPB;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cDiff;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cHits;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cTitle;
         internal System.Windows.Forms.ComboBox ComboBox1;
         internal ProfileDataGridView DataGridView1;
     }
