@@ -303,12 +303,10 @@
             // cSP
             // 
             this.cSP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.cSP.FalseValue = "false";
             this.cSP.HeaderText = "SP";
             this.cSP.MinimumWidth = 30;
             this.cSP.Name = "cSP";
             this.cSP.ToolTipText = "Session progress";
-            this.cSP.TrueValue = "true";
             this.cSP.Width = 30;
             // 
             // cPB

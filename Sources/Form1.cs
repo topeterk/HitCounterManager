@@ -489,7 +489,7 @@ namespace HitCounterManager
         }
         public void SetActiveSplit(int Index)
         {
-            if (LastActiveSplit != Index)
+            if ((LastActiveSplit != Index) || (0 == SelectedCells.Count))
             {
                 LastActiveSplit = Index;
                 ModifiedFlag = true;
@@ -516,7 +516,7 @@ namespace HitCounterManager
         {
             for (int Index = 0; Index < GetSplitCount(); Index++)
             {
-                if ((bool)Rows[Index].Cells["cSP"].Value) return Index;
+                if (GetCellValueOfType<bool>(Rows[Index].Cells["cSP"], false)) return Index;
             }
             return 0;
         }
@@ -534,7 +534,8 @@ namespace HitCounterManager
                 if (!GetCellValueOfType<bool>(Rows[Index].Cells["cSP"], false))
                 {
                     ModifiedFlag = true;
-                    Rows[Index].Cells["cSP"].Value = true;
+                    if (null != Rows[Index].Cells["cSP"].Value)
+                        Rows[Index].Cells["cSP"].Value = true;
                 }
             }
         }
