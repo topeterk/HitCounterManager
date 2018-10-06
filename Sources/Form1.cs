@@ -48,7 +48,7 @@ namespace HitCounterManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = Text + " - v" + Application.ProductVersion;
+            Text = Text + " - v" + Application.ProductVersion + " " + OsLayer.Name;
             LoadSettings();
             UpdateProgressAndTotals();
         }

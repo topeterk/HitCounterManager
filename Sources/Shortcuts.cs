@@ -30,9 +30,9 @@ namespace HitCounterManager
     /// </summary>
     public class ShortcutsKey
     {
-        private bool _used; // tells if shortcut is registered at windows
-        private bool _down; // tells if shortcut is currently pressed
-        public bool valid; // tell if a valid key/modifier pair was ever set
+        private bool _used; // indicates if shortcut is registered at windows
+        private bool _down; // indicates if shortcut is currently pressed
+        public bool valid;  // indicates if a valid key/modifier pair was ever set
         public KeyEventArgs key;
         public bool used
         {
@@ -43,7 +43,7 @@ namespace HitCounterManager
                 _used = value;
             }
         }
- 
+
         /// <summary>
         /// Creates a key shortcut object
         /// </summary>
@@ -174,6 +174,11 @@ namespace HitCounterManager
                 OsLayer.SetTimer(hwnd, 0, 20, TimerProcKeepAliveReference);
             }
         }
+
+        /// <summary>
+        /// Indicates if implementation can support global hotkeys
+        /// </summary>
+        public bool IsGlobalHotKeySupported { get { return OsLayer.GlobalHotKeySupport; } }
 
         /// <summary>
         /// Registers and unregisters a hotkey

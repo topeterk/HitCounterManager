@@ -28,6 +28,11 @@ namespace HitCounterManager
 {
     public static class OsLayer
     {
+        /// <summary>
+        /// Name of this OS implementation
+        /// </summary>
+        public const string Name = "Win";
+
         public delegate void TimerProc(IntPtr hWnd, uint uMsg, IntPtr nIDEvent, uint dwTime);
 
         #region Windows API Imports
@@ -58,6 +63,11 @@ namespace HitCounterManager
         private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
         #endregion
+
+        /// <summary>
+        /// Indicates if this OS is capable of global hotkeys
+        /// </summary>
+        public const bool GlobalHotKeySupport = true;
 
         private const int MAPVK_VK_TO_VSC = 0;
         private const int KEY_PRESSED_NOW = 0x8000;

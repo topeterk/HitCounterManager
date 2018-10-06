@@ -71,6 +71,12 @@ namespace HitCounterManager
             txtFontUrl.Text = om.StyleFontUrl;
             numStyleDesiredWidth.Value = om.StyleDesiredWidth;
             cbApHighContrast.Checked = om.StyleUseHighContrast;
+
+            if (!sc.IsGlobalHotKeySupported)
+            {
+                tab_globalshortcuts.Text = tab_globalshortcuts.Text + " (OS not supported)";
+                tab_globalshortcuts.Enabled = false;
+            }
         }
 
         #endregion

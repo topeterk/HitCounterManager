@@ -27,7 +27,17 @@ namespace HitCounterManager
 {
     public static class OsLayer
     {
+        /// <summary>
+        /// Name of this OS implementation
+        /// </summary>
+        public const string Name = "Any";
+
         public delegate void TimerProc(IntPtr hWnd, uint uMsg, IntPtr nIDEvent, uint dwTime);
+
+        /// <summary>
+        /// Indicates if this OS is capable of global hotkeys
+        /// </summary>
+        public const bool GlobalHotKeySupport = false;
 
         /// <summary>
         /// Checks if a given key is pressed right now
