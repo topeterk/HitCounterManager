@@ -4380,7 +4380,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGRAMFILETOLAUNCHATEND</td><td>[INSTALLDIR]HitCounterManager.Primäre Ausgabe</td><td/></row>
 		<row><td>ProductCode</td><td>{B39B6ADA-995A-426C-B0B1-351CB70B812A}</td><td/></row>
 		<row><td>ProductName</td><td>HitCounterManager</td><td/></row>
-		<row><td>ProductVersion</td><td>1.13.0003</td><td/></row>
+		<row><td>ProductVersion</td><td>1.13.0004</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
