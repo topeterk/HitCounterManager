@@ -22,7 +22,6 @@
 
 using System;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
 
 namespace HitCounterManager
 {
@@ -93,6 +92,66 @@ namespace HitCounterManager
             }
 
             base.WndProc(ref m);
+        }
+
+        #endregion
+        #region InputBox (replaceable with Microsoft.​Visual​Basic.Interaction.Input​Box)
+
+        /// <summary>
+        /// Creates an InputBox
+        /// </summary>
+        /// <returns>Value of UserInput</returns>
+        /// <param name="Prompt">Prompt text</param>
+        /// <param name="Title">Title</param>
+        /// <param name="DefaultResponse">Initial user input value</param>
+        public static string InputBox(string Prompt, string Title = "", string DefaultResponse = "")
+        {
+            Form inputBox = new Form();
+
+            inputBox.FormBorderStyle = FormBorderStyle.FixedDialog;
+            inputBox.ShowIcon = false;
+            inputBox.ShowInTaskbar = false;
+            inputBox.MaximizeBox = false;
+            inputBox.MinimizeBox = false;
+            inputBox.ClientSize = new System.Drawing.Size(500, 80);
+            inputBox.Text = Title;
+
+            Label label = new Label();
+            label.Size = new System.Drawing.Size(inputBox.ClientSize.Width - 10, 23);
+            label.Location = new System.Drawing.Point(5, 5);
+            label.Text = Prompt;
+            inputBox.Controls.Add(label);
+
+            TextBox textBox = new TextBox();
+            textBox.Size = new System.Drawing.Size(inputBox.ClientSize.Width - 10, 23);
+            textBox.Location = new System.Drawing.Point(5, label.Location.Y + label.Size.Height + 10);
+            textBox.Text = DefaultResponse;
+            inputBox.Controls.Add(textBox);
+
+            Button okButton = new Button();
+            okButton.DialogResult = DialogResult.OK;
+            okButton.Name = "okButton";
+            okButton.Size = new System.Drawing.Size(75, 23);
+            okButton.Text = "&OK";
+            okButton.Location = new System.Drawing.Point(inputBox.ClientSize.Width - 80 - 80, textBox.Location.Y + textBox.Size.Height + 10);
+            inputBox.Controls.Add(okButton);
+
+            Button cancelButton = new Button();
+            cancelButton.DialogResult = DialogResult.Cancel;
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = okButton.Size;
+            cancelButton.Text = "&Cancel";
+            cancelButton.Location = new System.Drawing.Point(inputBox.ClientSize.Width - 80, okButton.Location.Y);
+            inputBox.Controls.Add(cancelButton);
+
+            inputBox.ClientSize = new System.Drawing.Size(inputBox.ClientSize.Width, cancelButton.Location.Y + cancelButton.Size.Height + 5);
+            inputBox.AcceptButton = okButton;
+            inputBox.CancelButton = cancelButton;
+
+            if (DialogResult.OK != inputBox.ShowDialog())
+                return "";
+
+            return textBox.Text;
         }
 
         #endregion
@@ -170,7 +229,7 @@ namespace HitCounterManager
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            string name = Interaction.InputBox("Enter name of new profile", "New profile", (string)ComboBox1.SelectedItem);
+            string name = InputBox("Enter name of new profile", "New profile", (string)ComboBox1.SelectedItem);
             if (name.Length == 0 || IsInvalidConfigString(name)) return;
 
             if (ComboBox1.Items.Contains(name))
@@ -196,7 +255,7 @@ namespace HitCounterManager
         {
             if (ComboBox1.Items.Count == 0) return;
 
-            string name = Interaction.InputBox("Enter new name for profile \"" + (string)ComboBox1.SelectedItem + "\"!", "Rename profile", (string)ComboBox1.SelectedItem);
+            string name = InputBox("Enter new name for profile \"" + (string)ComboBox1.SelectedItem + "\"!", "Rename profile", (string)ComboBox1.SelectedItem);
             if (name.Length == 0 || IsInvalidConfigString(name)) return;
 
             if (ComboBox1.Items.Contains(name))
@@ -251,7 +310,7 @@ namespace HitCounterManager
 
         private void btnAttempts_Click(object sender, EventArgs e)
         {
-            string amount_string = Interaction.InputBox("Enter amount to be set!", "Set amount of attempts", pi.GetAttemptsCount().ToString());
+            string amount_string = InputBox("Enter amount to be set!", "Set amount of attempts", pi.GetAttemptsCount().ToString());
             int amount_value;
             if (!int.TryParse(amount_string, out amount_value))
             {
