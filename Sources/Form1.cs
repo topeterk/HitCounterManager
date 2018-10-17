@@ -493,10 +493,14 @@ namespace HitCounterManager
 
             if (DataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].GetType().Name == "DataGridViewCheckBoxCell")
             {
+                // Care with changing the following sequence as during lots of testing
+                // this is the first and only combination that works in Windows and Mono..
                 om.DataUpdatePending = true;
-                DataGridView1.Rows[DataGridView1.RowCount - 1].Cells[DataGridView1.ColumnCount - 1].Selected = true;
+                DataGridView1.EndEdit();
+                DataGridView1.ClearSelection();
                 om.DataUpdatePending = false;
                 DataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+                DataGridView1.Rows[e.RowIndex].Selected = true;
             }
         }
 
@@ -512,8 +516,13 @@ namespace HitCounterManager
                         DataGridViewCheckBoxCell SelectedCell = (DataGridViewCheckBoxCell)cell;
                         e.Handled = true;
 
-                        SelectedCell.Value = !(bool)SelectedCell.Value;
-                        DataGridView1.Rows[DataGridView1.RowCount - 1].Cells[DataGridView1.ColumnCount - 1].Selected = true;
+                        // Care with changing the following sequence as during lots of testing
+                        // this is the first and only combination that works in Windows and Mono..
+                        om.DataUpdatePending = true;
+                        SelectedCell.Value = !(SelectedCell.Value == null ? /*not set yet, so it's not checked*/ false : (bool)SelectedCell.Value);
+                        om.DataUpdatePending = false;
+                        DataGridView1.EndEdit();
+                        DataGridView1.ClearSelection();
                         DataGridView1.Rows[SelectedCell.RowIndex].Cells[SelectedCell.ColumnIndex].Selected = true;
                     }
                 }
