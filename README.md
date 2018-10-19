@@ -84,13 +84,19 @@ The pre-delivered HTML designs will update with an interval of 1.5 seconds.
 
 ## Setting up Broadcasting software
 
+### Streamlabs OBS (SLOBS)
+* Add a **Browser Source** to your scene
+* Check the **Local file** checkbox
+* Insert the HTML's filepath of a design file into the **Local File** field.
+> Example: _C:\MyHitCounter\Designs\HitCounterNumeric.html_  
+> Note: It was tested with some beta versions up to 0.11.1, so the instruction _may_ change in newer versions.
+
 ### OBS Studio
 * Add a **Browser Source** to your scene
-* Insert the HTML's filepath of a design file into the **URL** field including this prefix: **http://absolute/**
-> To avoid cross domain issues, OBS Studio added the pseudo domain _absolute_ for local files.
-> Example:_http://absolute/C:/MyHitCounter/Designs/HitCounterNumeric.html_
+* Insert the HTML's filepath of a design file into the **URL** field including this prefix that allows access to local files: **http://absolute/**
+> Example: _http://absolute/C:/MyHitCounter/Designs/HitCounterNumeric.html_
 
-### Open Broadcaster Software (OBS, **not** OBS Studio!)
+### Open Broadcaster Software (OBS, _not_ OBS Studio!)
 * Add a **CLR Browser** to your scene
 * The opacity can be set to 100% because the background will be rendered transparent, so no color-keying is required.
 * Insert the HTML's filepath of a design file into the **URL** field.
@@ -101,13 +107,6 @@ The pre-delivered HTML designs will update with an interval of 1.5 seconds.
     * UniversialAccessFromFilesUrls (Set to **Enabled**, _but should also work when disabled_)
     * WebSecurity (Set to **Disabled**, _but should also work when enabled_)
 
-### Streamlabs OBS (SLOBS)
-* Add a **Browser Source** to your scene
-* Check the **Local file** checkbox
-* Insert the HTML's filepath of a design file into the **Local File** field.
-> Example: _C:\MyHitCounter\Designs\HitCounterNumeric.html_  
-> Note: It was tested with some beta versions up to 0.11.1, so the instruction _may_ change in newer versions.
-
 ## Moders and Developers
 
 ### Using standalone Chrome browser instead of broadcasting software
@@ -116,7 +115,7 @@ The pre-delivered HTML designs will update with an interval of 1.5 seconds.
   > Example: _"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files_
 
 ### Changing layout and design
-You can modify or create new custom designs. Simply modify or create a new HTML, CSS or Javascript files based on any of the pre-delivered designs. For example, the style like background color, font color or sizes can be easily modified in the CSS files.  
+You can modify or create new custom designs. Simply modify or create a new HTML, CSS or Javascript files based on any of the pre-delivered designs. For example, the style like **background color, font color or sizes can be easily modified in the CSS files**.  
 You can modify the [HitCounter.template](HitCounter.template) which comes with the installation or you can create an own template file to set custom settings for your designs at a single location.  
 > The application is using JavaScript syntax when writing data into the output file. Therefore the template has to have a line with the text **HITCOUNTER_LIST_START** which is the starting mark. The mark with all further lines will be replaced with the JavaScript equivalent of the application's current data. This replacement is done until the **HITCOUNTER_LIST_END** text mark is reached.  
 Eventually it means **you are 100% free in the design of your hit counter**.  
@@ -138,8 +137,6 @@ Thanks to:
 * [Kazoodle](https://www.twitch.tv/kazoodle)
 * [GUD_LAK](https://www.twitch.tv/gud_lak)
 * Every member of the [Hitless team on Twitch](https://www.twitch.tv/team/hitless)
-* And also all the other great challange runners out there that I cannot name here all.
-  
- 
+* And also all the other great challenge runners out there that I cannot name here all.
   
 > Praise the sun!  :sunny: . . . :fire: . . .  :running: :dash: 
