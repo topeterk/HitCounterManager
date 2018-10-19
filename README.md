@@ -62,13 +62,16 @@ All available releases can be found at the [Releases page](../../releases) on Gi
 ## Installation
 
 ### Systemrequirements
-* OS: Windows Vista, Windows Server 2003 or newer  
-* [.Net Framework 4.5 or newer](https://www.microsoft.com/net)  
-> With version 1.14 the portable release should work with .Net Framework 2.0, 3.5 and 4.0 as well
-
-### Using the Installer
-The installer places all files at your installation folder (default: My Documents) or any other location you like.  
-> Note: There is only one requirement that the application must able to read/write data in the installation folder.
+* OS: Windows Vista, Windows Server 2003 or newer (32/64 bit)
+  * Portable version (ZIP)
+    * [.Net Framework 2.0 or newer](https://www.microsoft.com/net)
+    > Note: Version 1.13 and older required: [.Net Framework 4.5 or newer](https://www.microsoft.com/net) 
+  * Installer version (Setup)
+    * [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
+* OS: Any (32/64 bit)
+  * Portable version (ZIP)
+    * [Mono](https://www.mono-project.com/) (_tested with 5.14.0_)
+    > Note: Global hot keys are not supported in this version!
 
 ### Configuration file
 The file [HitCounterManagerSave.xml](HitCounterManagerSave.xml) is used for all settings you can set by this application.  
@@ -76,41 +79,47 @@ You can save and restore this file at any time or copy it to a newer/portable ve
 > Note: It holds all your settings and profiles in one place. No other files are involved.
 
 ### Designs
-The pre-delivered HTML designs will update themself every 1.5 seconds.
+The pre-delivered HTML designs will update with an interval of 1.5 seconds.
 > Previews of the pre-delivered HTML desings can be found at the **[Wiki pages](../../wiki)**.
 
-#### Configuring Browser Source for OBS Studio
-Just insert the HTML's filepath into the URL field.
-> To avoid cross domain issues, OBS Studio added the pseudo domain _absolute_ for local files. That said the path sould look like this:
-> http://absolute/C:/MyHitCounter/Designs/HitCounterNumeric.html
+## Setting up Broadcasting software
 
-#### Configuring CLR browser plugin for Open Broadcaster Software (OBS, not OBS Studio!)
-The opacity can be set to 100% because the background will be rendered transparent, so no color-keying is involved.
-Since CRL browser plugin come with some pre-defined CSS, this may cause trouble with the rendering of the HTML file (flickering or misplacement).
-If you encounter issues here, try to simply remove the CLR browser plugin's CSS overrides.  
-> Recommended: Opacity 100% and no CSS overrides
+### OBS Studio
+* Add a **Browser Source** to your scene
+* Insert the HTML's filepath of a design file into the **URL** field including this prefix: **http://absolute/**
+> To avoid cross domain issues, OBS Studio added the pseudo domain _absolute_ for local files.
+> Example:_http://absolute/C:/MyHitCounter/Designs/HitCounterNumeric.html_
 
-When no data is displayed, there could be a problem with cross-domain security settings. This is because the HTMLs are rendered via file:// protocol instead of http://. Make sure to allow file access from files.
-> OBS -> Settings -> Browser -> Instance -> ...  
-> * FileAccessFromFilesUrls (Set to **Enabled**)
-> * UniversialAccessFromFilesUrls (Set to **Enabled**, _but should also work when disabled_)
-> * WebSecurity (Set to **Disabled**, _but should also work when enabled_)
+### Open Broadcaster Software (OBS, **not** OBS Studio!)
+* Add a **CLR Browser** to your scene
+* The opacity can be set to 100% because the background will be rendered transparent, so no color-keying is required.
+* Insert the HTML's filepath of a design file into the **URL** field.
+> Example: _C:\MyHitCounter\Designs\HitCounterNumeric.html_
+* If you experience troubles with the rendering of the HTML file (flickering or misplacement), try removing the CSS overrides of the CLR Brower instance.
+* When no data is displayed, there could be a problem with the cross-domain security settings. This is because the HTMLs are rendered via file:// protocol instead of http://, so maybe you need to change some deeper settings of the CLR browser under _OBS -> Settings -> Browser -> Instance -> ..._
+    * FileAccessFromFilesUrls (Set to **Enabled**)
+    * UniversialAccessFromFilesUrls (Set to **Enabled**, _but should also work when disabled_)
+    * WebSecurity (Set to **Disabled**, _but should also work when enabled_)
 
-#### Configuring Browser Source for Streamlabs OBS (SLOBS)
-Just check "Local file" and insert the HTML's filepath into the "Local File" field.
-> That said the path sould look simple like this: C:/MyHitCounter/Designs/HitCounterNumeric.html  
-> Note: It was tested with the beta version 0.9.1, so the instruction *may* change in the release version.
+### Streamlabs OBS (SLOBS)
+* Add a **Browser Source** to your scene
+* Check the **Local file** checkbox
+* Insert the HTML's filepath of a design file into the **Local File** field.
+> Example: _C:\MyHitCounter\Designs\HitCounterNumeric.html_  
+> Note: It was tested with some beta versions up to 0.11.1, so the instruction _may_ change in newer versions.
 
-#### Using standalone Chrome browser
-When no data is displayed, there could be a problem with cross-domain security settings. This is because the HTMLs are rendered via file:// protocol instead of http://. Make sure to allow file access from files.
-> Start Chrome with **--allow-file-access-from-files**  
-> Example: _"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files_
+## Moders and Developers
+
+### Using standalone Chrome browser instead of broadcasting software
+* When no data is displayed, there could be a problem with cross-domain security settings that can be avoided by allowing acces to local files in general:
+  * Start Chrome with **--allow-file-access-from-files**
+  > Example: _"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files_
 
 ### Changing layout and design
-You can modify or create new custom designs. Simply modify or create a new HTML file based on any of the pre-delivered designs.  
-
-Alternatively you can modify the [HitCounter.template](HitCounter.template) which comes with the installation or you can create an own template file to get the look you want. That means **you are 100% free in the design of your hit counter**.  
+You can modify or create new custom designs. Simply modify or create a new HTML, CSS or Javascript files based on any of the pre-delivered designs. For example, the style like background color, font color or sizes can be easily modified in the CSS files.  
+You can modify the [HitCounter.template](HitCounter.template) which comes with the installation or you can create an own template file to set custom settings for your designs at a single location.  
 > The application is using JavaScript syntax when writing data into the output file. Therefore the template has to have a line with the text **HITCOUNTER_LIST_START** which is the starting mark. The mark with all further lines will be replaced with the JavaScript equivalent of the application's current data. This replacement is done until the **HITCOUNTER_LIST_END** text mark is reached.  
+Eventually it means **you are 100% free in the design of your hit counter**.  
 
 ## Anything is missing, something is annoying/can be improved or you just found a bug?
 Message me via GitHub / e-mail or simply open an issue and I will try to help you out. Alternatively you can also send me a whipser on Twitch: [GeneralGunrider](https://www.twitch.tv/generalgunrider)
@@ -127,8 +136,10 @@ Thanks to:
 * [TigerG92](https://www.twitch.tv/tigerg92)
 * [SayviTV](https://www.twitch.tv/sayvitv)
 * [Kazoodle](https://www.twitch.tv/kazoodle)
-* [GUD_LAK](https://www.twitch.tv/gud_lak)  
+* [GUD_LAK](https://www.twitch.tv/gud_lak)
+* Every member of the [Hitless team on Twitch](https://www.twitch.tv/team/hitless)
+* And also all the other great challange runners out there that I cannot name here all.
   
-  
+ 
   
 > Praise the sun!  :sunny: . . . :fire: . . .  :running: :dash: 
