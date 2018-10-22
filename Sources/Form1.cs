@@ -55,7 +55,9 @@ namespace HitCounterManager
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SaveSettings();
+            DialogResult result = MessageBox.Show("Do you want to save this session?", this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes) SaveSettings();
+            else if (result == DialogResult.Cancel) e.Cancel = true;
         }
 
         private void Form1_Resize(object sender, EventArgs e)
