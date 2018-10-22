@@ -11,7 +11,7 @@ To see **how to** use the application watch the **[Tutorial on YouTube](https://
 * Offline application
 * No window capture needed for stream integration
 * Easy to use profile management
-* Hot key support for seamless use ingame
+* Hot key support for seamless use ingame (Windows only)
 
 ## Features
 It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit/death during the playthrough
@@ -65,7 +65,7 @@ All available releases can be found at the [Releases page](../../releases) on Gi
 * OS: Windows Vista, Windows Server 2003 or newer (32/64 bit)
   * Portable version (ZIP)
     * [.Net Framework 2.0 or newer](https://www.microsoft.com/net)
-    > Note: Version 1.13 and older required: [.Net Framework 4.5 or newer](https://www.microsoft.com/net) 
+    > Note: Version 1.13 and older requires [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
   * Installer version (Setup)
     * [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
 * OS: Any (32/64 bit)
