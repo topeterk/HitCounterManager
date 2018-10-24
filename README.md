@@ -34,6 +34,7 @@ It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit
   * Dark Souls 1 Prepare To Die Edition
   * Dark Souls 2
   * Dark Souls 3 + Ashes of Ariandel + The Ringed City
+  * Demon's Souls
   * The Surge + A walk in the park
 * Comes with different designs:
   * **Numeric**
