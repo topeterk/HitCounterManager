@@ -72,8 +72,8 @@ All available releases can be found at the [Releases page](../../releases) on Gi
 * OS: Any (32/64 bit)
   * Portable version (ZIP)
     * [Mono](https://www.mono-project.com/) (_tested with 5.14.0_)  
-      Run the application in the application's directoy with **mono HitCounterManager.exe**
-    > Note: Global hot keys are not supported in this version!
+      Run the application in the application's directory with **mono HitCounterManager.exe**  
+      **Note**: The Non-Windows / Mono version does not support global hot keys
 
 ### Configuration file
 The file [HitCounterManagerSave.xml](HitCounterManagerSave.xml) is used for all settings you can set by this application.  
