@@ -70,7 +70,8 @@ All available releases can be found at the [Releases page](../../releases) on Gi
     * [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
 * OS: Any (32/64 bit)
   * Portable version (ZIP)
-    * [Mono](https://www.mono-project.com/) (_tested with 5.14.0_)
+    * [Mono](https://www.mono-project.com/) (_tested with 5.14.0_)  
+      Run the application in the application's directoy with **mono HitCounterManager.exe**
     > Note: Global hot keys are not supported in this version!
 
 ### Configuration file
