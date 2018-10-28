@@ -22,27 +22,23 @@
 # OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
 # SOFTWARE.
 
-echo PostBuild.sh START ===========
+echo PrepareRelease.sh START ===========
 
-DIR_SRC=$1
-DIR_OUTPUT=$2
-DIR_DEST=$3
+PR_FINAL=./FinalFiles
+mkdir -p "$PR_FINAL"
 
-rm -rf $DIR_DEST 2>/dev/null
-mkdir $DIR_DEST
-echo Creating portable package:
-echo "  Copy files from Output"
-cp $DIR_OUTPUT/{HitCounterManager.exe,HitCounterManager.exe.config} $DIR_DEST
-echo "  Copy files from Sources"
-cp $DIR_SRC/Sources/{HitCounterManagerInit.xml,HitCounter.html,HitCounter.template,HitCounterManagerMono.sh} $DIR_DEST
-echo "  Copy files from Designs"
-mkdir $DIR_DEST/Designs
-cp -r $DIR_SRC/Designs $DIR_DEST
-echo "  Applying file permissions"
-chmod 644 $DIR_DEST/*
-chmod 666 $DIR_DEST/HitCounter.html
-chmod 755 $DIR_DEST/HitCounterManagerMono.sh $DIR_DEST/HitCounterManager.exe
-chmod 755 $DIR_DEST/Designs
-chmod 644 $DIR_DEST/Designs/*
+echo Packing Mono Portable Release:
+PR_BASE=bin/ReleaseMono
+PR_TARGET=$PR_FINAL/ReleaseMonoPortable
+PR_OUTPUT=$PR_FINAL/HitCounterManager_Mono_Portable_v1.x.y.z.tar.gz
+rm -rf "$PR_TARGET" 2>/dev/null
+mkdir "$PR_TARGET"
+./PostBuild.sh ./ "$PR_BASE/" "$PR_TARGET/"
+pushd $PR_TARGET >/dev/null
+rm -f ../archive.tar.gz 2>/dev/null
+tar -czf ../archive.tar.gz *
+popd >/dev/null
+rm -f "$PR_OUTPUT" 2>/dev/null
+mv $PR_TARGET/../archive.tar.gz $PR_OUTPUT
 
-echo PostBuild.sh END ===========
+echo PrepareRelease.sh END ===========

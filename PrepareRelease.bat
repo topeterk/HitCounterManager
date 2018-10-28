@@ -27,23 +27,21 @@ echo PrepareRelease.bat START ===========
 REM To run this script you need to have 7zip installed at the default path.
 
 set PATH=%PATH%;C:\Program Files\7-Zip
-set DIR_PACKAGE=PortablePackage
-set DIR_FINAL=FinalFiles
-
-rmdir /S /Q %DIR_FINAL% 2>nul
-mkdir %DIR_FINAL%
+set PR_FINAL=FinalFiles
+if not exist %PR_FINAL% mkdir %PR_FINAL%
 
 echo Packing Windows Portable Release:
-mkdir %DIR_FINAL%\ReleaseWinPortable\
-call PostBuild.bat .\ bin\ReleaseWin\ %DIR_FINAL%\ReleaseWinPortable\
-7z a %DIR_FINAL%\HitCounterManager_Win_Portable_v1.x.y.z.zip .\%DIR_FINAL%\ReleaseWinPortable\*
-
-echo Packing Mono Portable Release:
-mkdir %DIR_FINAL%\ReleaseMonoPortable\
-call PostBuild.bat .\ bin\ReleaseMono\ %DIR_FINAL%\ReleaseMonoPortable\
-7z a %DIR_FINAL%\HitCounterManager_Mono_Portable_v1.x.y.z.zip .\%DIR_FINAL%\ReleaseMonoPortable\*
+set PR_BASE=bin\ReleaseWin
+set PR_TARGET=%PR_FINAL%\ReleaseWinPortable
+set PR_OUTPUT=%PR_FINAL%\HitCounterManager_Win_Portable_v1.x.y.z.zip
+rmdir /S /Q %PR_TARGET% 2>nul
+mkdir %PR_TARGET%
+call PostBuild.bat .\ %PR_BASE%\ %PR_TARGET%\
+del %PR_OUTPUT% 2>nul
+7z a %PR_OUTPUT% .\%PR_TARGET%\*
 
 echo Packing Windows Setup Release:
-copy /B Setup\Setup\Express\SingleImage\DiskImages\DISK1\setup.exe %DIR_FINAL%\HitCounterManager_Win_Setup_v1.x.y.z.exe
+set PR_OUTPUT=%PR_FINAL%\HitCounterManager_Win_Setup_v1.x.y.z.exe
+copy /B Setup\Setup\Express\SingleImage\DiskImages\DISK1\setup.exe %PR_OUTPUT%
 
 echo PrepareRelease.bat END ===========

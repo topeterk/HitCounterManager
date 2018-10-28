@@ -22,27 +22,6 @@
 # OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
 # SOFTWARE.
 
-echo PostBuild.sh START ===========
-
-DIR_SRC=$1
-DIR_OUTPUT=$2
-DIR_DEST=$3
-
-rm -rf $DIR_DEST 2>/dev/null
-mkdir $DIR_DEST
-echo Creating portable package:
-echo "  Copy files from Output"
-cp $DIR_OUTPUT/{HitCounterManager.exe,HitCounterManager.exe.config} $DIR_DEST
-echo "  Copy files from Sources"
-cp $DIR_SRC/Sources/{HitCounterManagerInit.xml,HitCounter.html,HitCounter.template,HitCounterManagerMono.sh} $DIR_DEST
-echo "  Copy files from Designs"
-mkdir $DIR_DEST/Designs
-cp -r $DIR_SRC/Designs $DIR_DEST
-echo "  Applying file permissions"
-chmod 644 $DIR_DEST/*
-chmod 666 $DIR_DEST/HitCounter.html
-chmod 755 $DIR_DEST/HitCounterManagerMono.sh $DIR_DEST/HitCounterManager.exe
-chmod 755 $DIR_DEST/Designs
-chmod 644 $DIR_DEST/Designs/*
-
-echo PostBuild.sh END ===========
+# We have to switch the working directory where the application resides
+cd `dirname "$0"`
+mono HitCounterManager.exe &
