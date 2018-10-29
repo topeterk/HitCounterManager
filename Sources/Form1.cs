@@ -438,26 +438,32 @@ namespace HitCounterManager
         {
             if (DataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].GetType().Name == "DataGridViewCheckBoxCell") return;
 
-            if (IsInvalidConfigString((string)e.FormattedValue))
+            if (e.ColumnIndex == DataGridView1.Rows[0].Cells["cTitle"].ColumnIndex)
             {
-                e.Cancel = true;
-                return;
-            }
-
-            if (e.ColumnIndex != DataGridView1.Rows[0].Cells["cTitle"].ColumnIndex)
-            {
-                int i;
-                if (!int.TryParse((string)e.FormattedValue, out i))
+                if (IsInvalidConfigString((string)e.FormattedValue))
                 {
                     e.Cancel = true;
-                    MessageBox.Show("Must be numeric!");
                 }
-                else DataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].ValueType = typeof(int); // Force int otherwise it is most likely treated as string
+                else
+                {
+                    // Make sure we mark any title changes as "modified"
+                    pi.SetSplitTitle(e.RowIndex, (string)e.FormattedValue);
+                }
             }
             else
             {
-                // Make sure we mark any title changes as "modified"
-                pi.SetSplitTitle(e.RowIndex, (string)e.FormattedValue);
+                // We expect integers only here, so either it is of type int or can be converted
+                if (!(e.FormattedValue is int))
+                {
+                    int i;
+                    if (!int.TryParse((string)e.FormattedValue, out i))
+                    {
+                        e.Cancel = true;
+                        MessageBox.Show("Must be numeric!");
+                        return;
+                    }
+                }
+                DataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].ValueType = typeof(int); // Force int otherwise it is most likely treated as string
             }
         }
 
