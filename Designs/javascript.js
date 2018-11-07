@@ -32,13 +32,27 @@ function ShowSessionProgress() { return '<img src="img_star.png" height="21px">'
 // --- Watchdog
 
 var heartbeat = 0;
+var init_done = false;
 function Watchdog()
 {
 	setTimeout(function() { Watchdog();	}, 1500); // refresh every second
 	if (heartbeat <= 1)
 		heartbeat++;
 	else
+	{
+		if (!init_done) // reading the data file never worked before?
+		{
+			ShowHelpText('The browser or broadcasting software cannot read the hit counter data file.<br/>' +
+			'Please try one of the following:<br/>&nbsp;<br>' +
+			'- <u>SLOBS</u>: Make sure "local file" is check at your browser source<br/>' +
+			'- <u>OBS Studio</u>: Make sure the URL of the browser source looks like this: <b>http://absolute/</b>C:/MyHitCounter/Designs/HitCounterNumeric.html<br/>' +
+			'- <u>Chrome</u>: Make sure to start the browser with command line option <b>--allow-file-access-from-files</b><br/>' +
+			'- <u>Others or not working?</u>: Please disable cross domain protection as reading local files don\'t have a "domain",' +
+			'so the data file is treated being hosted on another domain which does not allow reading the file due to security reasons by most browsers\'  default.' +
+			'Please look at the online readme on github for the latest instructions that may already contain additional instructions.<br/>');
+		}
 		iframe.src = '../HitCounter.html'; // retry reloading file in case of errors
+	}
 }
 
 // --- Periodic update
@@ -46,6 +60,7 @@ function Watchdog()
 function DoUpdate(data)
 {
 	heartbeat = 0; // reset heartbeat, because we are alive
+	init_done = true; // the data file could be loaded successfully
 
 	// reload new files if changed..
 	if (link_font_href != data.font_url) link_font.href = link_font_href = data.font_url;

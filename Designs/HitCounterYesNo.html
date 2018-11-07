@@ -7,10 +7,15 @@
 </head>
 <body>
 <iframe style="display:none;"></iframe>
-<table id="table"></table>
+<table id="table"><tr><td>..loading..</td></tr></table>
 <script language="javascript">
 
 var tbl = document.getElementById('table');
+
+function ShowHelpText(instructions)
+{
+	tbl.innerHTML = '<tr><td class="major dark">' + instructions + '</td></tr>';
+}
 
 function DoVisualUpdate(data)
 {
