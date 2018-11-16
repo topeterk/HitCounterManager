@@ -22,7 +22,6 @@
 
 using System;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace HitCounterManager
@@ -51,9 +50,15 @@ namespace HitCounterManager
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Hit);
             cbScHit.Checked = key.used;
             if (key.valid) txtHit.Text = key.GetDescriptionString();
+            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_HitUndo);
+            cbScHitUndo.Checked = key.used;
+            if (key.valid) txtHitUndo.Text = key.GetDescriptionString();
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Split);
             cbScNextSplit.Checked = key.used;
             if (key.valid) txtNextSplit.Text = key.GetDescriptionString();
+            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_SplitPrev);
+            cbScPrevSplit.Checked = key.used;
+            if (key.valid) txtPrevSplit.Text = key.GetDescriptionString();
 
             txtInput.Text = om.FilePathIn;
             txtOutput.Text = om.FilePathOut;
@@ -147,12 +152,24 @@ namespace HitCounterManager
             cbScHit.Checked = true;
         }
 
+        private void txtHitUndo_KeyDown(object sender, KeyEventArgs e)
+        {
+            RegisterHotKey(txtHitUndo, Shortcuts.SC_Type.SC_Type_HitUndo, e);
+            cbScHitUndo.Checked = true;
+        }
+
         private void txtNextSplit_KeyDown(object sender, KeyEventArgs e)
         {
             RegisterHotKey(txtNextSplit, Shortcuts.SC_Type.SC_Type_Split, e);
             cbScNextSplit.Checked = true;
         }
 
+        private void txtPrevSplit_KeyDown(object sender, KeyEventArgs e)
+        {
+            RegisterHotKey(txtPrevSplit, Shortcuts.SC_Type.SC_Type_SplitPrev, e);
+            cbScPrevSplit.Checked = true;
+        }
+        
         private void cbScReset_CheckedChanged(object sender, EventArgs e)
         {
             sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Reset, cbScReset.Checked);
@@ -163,9 +180,19 @@ namespace HitCounterManager
             sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Hit, cbScHit.Checked);
         }
 
+        private void cbScHitUndo_CheckedChanged(object sender, EventArgs e)
+        {
+            sc.Key_SetState(Shortcuts.SC_Type.SC_Type_HitUndo, cbScHitUndo.Checked);
+        }
+
         private void cbScNextSplit_CheckedChanged(object sender, EventArgs e)
         {
             sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Split, cbScNextSplit.Checked);
+        }
+
+        private void cbScPrevSplit_CheckedChanged(object sender, EventArgs e)
+        {
+            sc.Key_SetState(Shortcuts.SC_Type.SC_Type_SplitPrev, cbScPrevSplit.Checked);
         }
 
         private void btnInput_Click(object sender, EventArgs e)

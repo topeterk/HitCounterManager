@@ -89,6 +89,8 @@ namespace HitCounterManager
                         case Shortcuts.SC_Type.SC_Type_Reset: btnReset_Click(null, null); break;
                         case Shortcuts.SC_Type.SC_Type_Hit: btnHit_Click(null, null); break;
                         case Shortcuts.SC_Type.SC_Type_Split: btnSplit_Click(null, null); break;
+                        case Shortcuts.SC_Type.SC_Type_HitUndo: btnHitUndo_Click(null, null); break;
+                        case Shortcuts.SC_Type.SC_Type_SplitPrev: btnSplitPrev_Click(null, null); break;
                     }
                 }
             }
@@ -396,19 +398,42 @@ namespace HitCounterManager
             UpdateProgressAndTotals();
         }
 
+        private void btnHitUndo_Click(object sender, EventArgs e)
+        {
+            int active = pi.GetActiveSplit();
+            int hits = pi.GetSplitHits(active);
+            if (0 < hits)
+            {
+                pi.SetSplitHits(active, hits - 1);
+                pi.SetActiveSplit(active); // row is already selected already but we make sure the whole row gets visually selected if user has selected a cell only
+                UpdateProgressAndTotals();
+            }
+        }
+
         private void btnSplit_Click(object sender, EventArgs e)
         {
             int next_index = pi.GetActiveSplit() + 1;
-            int session_progress = next_index;
-
-            om.DataUpdatePending = true;
             if (next_index <= pi.GetSplitCount())
             {
+                om.DataUpdatePending = true;
                 pi.SetActiveSplit(next_index);
                 if (next_index < pi.GetSplitCount()) pi.SetSessionProgress(next_index);
+                om.DataUpdatePending = false;
+                UpdateProgressAndTotals();
             }
-            om.DataUpdatePending = false;
-            UpdateProgressAndTotals();
+        }
+
+        private void btnSplitPrev_Click(object sender, EventArgs e)
+        {
+            int next_index = pi.GetActiveSplit() - 1;
+            if (0 <= next_index)
+            {
+                om.DataUpdatePending = true;
+                pi.SetActiveSplit(next_index);
+                // we do not update session progress here as we don't know if it was already set on a previous run
+                om.DataUpdatePending = false;
+                UpdateProgressAndTotals();
+            }
         }
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)

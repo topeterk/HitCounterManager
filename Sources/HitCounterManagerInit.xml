@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SettingsRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Version>2</Version>
+  <Version>3</Version>
   <MainWidth>590</MainWidth>
   <MainHeight>787</MainHeight>
   <HotKeyMethod>1</HotKeyMethod>
@@ -8,8 +8,12 @@
   <ShortcutResetKeyCode>65653</ShortcutResetKeyCode>
   <ShortcutHitEnable>false</ShortcutHitEnable>
   <ShortcutHitKeyCode>65654</ShortcutHitKeyCode>
+  <ShortcutHitUndoEnable>false</ShortcutHitUndoEnable>
+  <ShortcutHitUndoKeyCode>65656</ShortcutHitUndoKeyCode>
   <ShortcutSplitEnable>false</ShortcutSplitEnable>
   <ShortcutSplitKeyCode>65655</ShortcutSplitKeyCode>
+  <ShortcutSplitPrevEnable>false</ShortcutSplitPrevEnable>
+  <ShortcutSplitPrevKeyCode>65657</ShortcutSplitPrevKeyCode>
   <Inputfile>HitCounter.template</Inputfile>
   <OutputFile>HitCounter.html</OutputFile>
   <ShowAttemptsCounter>true</ShowAttemptsCounter>

@@ -51,6 +51,10 @@
             this.numShowSplitsCountFinished = new System.Windows.Forms.NumericUpDown();
             this.Label3 = new System.Windows.Forms.Label();
             this.tab_globalshortcuts = new System.Windows.Forms.TabPage();
+            this.cbScHitUndo = new System.Windows.Forms.CheckBox();
+            this.txtHitUndo = new System.Windows.Forms.TextBox();
+            this.txtPrevSplit = new System.Windows.Forms.TextBox();
+            this.cbScPrevSplit = new System.Windows.Forms.CheckBox();
             this.Label6 = new System.Windows.Forms.Label();
             this.radioHotKeyMethod_async = new System.Windows.Forms.RadioButton();
             this.Label1 = new System.Windows.Forms.Label();
@@ -325,6 +329,10 @@
             // 
             // tab_globalshortcuts
             // 
+            this.tab_globalshortcuts.Controls.Add(this.cbScHitUndo);
+            this.tab_globalshortcuts.Controls.Add(this.txtHitUndo);
+            this.tab_globalshortcuts.Controls.Add(this.txtPrevSplit);
+            this.tab_globalshortcuts.Controls.Add(this.cbScPrevSplit);
             this.tab_globalshortcuts.Controls.Add(this.Label6);
             this.tab_globalshortcuts.Controls.Add(this.radioHotKeyMethod_async);
             this.tab_globalshortcuts.Controls.Add(this.Label1);
@@ -343,6 +351,54 @@
             this.tab_globalshortcuts.Text = "Global shortcuts";
             this.tab_globalshortcuts.UseVisualStyleBackColor = true;
             // 
+            // cbScHitUndo
+            // 
+            this.cbScHitUndo.AutoSize = true;
+            this.cbScHitUndo.Location = new System.Drawing.Point(300, 58);
+            this.cbScHitUndo.Name = "cbScHitUndo";
+            this.cbScHitUndo.Size = new System.Drawing.Size(69, 17);
+            this.cbScHitUndo.TabIndex = 12;
+            this.cbScHitUndo.Text = "Undo hit:";
+            this.ToolTip1.SetToolTip(this.cbScHitUndo, "Enable hot key for undoing hits");
+            this.cbScHitUndo.UseVisualStyleBackColor = true;
+            this.cbScHitUndo.CheckedChanged += new System.EventHandler(this.cbScHitUndo_CheckedChanged);
+            // 
+            // txtHitUndo
+            // 
+            this.txtHitUndo.Location = new System.Drawing.Point(383, 56);
+            this.txtHitUndo.Name = "txtHitUndo";
+            this.txtHitUndo.ReadOnly = true;
+            this.txtHitUndo.Size = new System.Drawing.Size(199, 20);
+            this.txtHitUndo.TabIndex = 13;
+            this.txtHitUndo.Text = "None";
+            this.txtHitUndo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip1.SetToolTip(this.txtHitUndo, "Click into the field and press the hot key you want to use");
+            this.txtHitUndo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtHitUndo_KeyDown);
+            // 
+            // txtPrevSplit
+            // 
+            this.txtPrevSplit.Location = new System.Drawing.Point(383, 82);
+            this.txtPrevSplit.Name = "txtPrevSplit";
+            this.txtPrevSplit.ReadOnly = true;
+            this.txtPrevSplit.Size = new System.Drawing.Size(199, 20);
+            this.txtPrevSplit.TabIndex = 11;
+            this.txtPrevSplit.Text = "None";
+            this.txtPrevSplit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip1.SetToolTip(this.txtPrevSplit, "Click into the field and press the hot key you want to use");
+            this.txtPrevSplit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPrevSplit_KeyDown);
+            // 
+            // cbScPrevSplit
+            // 
+            this.cbScPrevSplit.AutoSize = true;
+            this.cbScPrevSplit.Location = new System.Drawing.Point(300, 84);
+            this.cbScPrevSplit.Name = "cbScPrevSplit";
+            this.cbScPrevSplit.Size = new System.Drawing.Size(72, 17);
+            this.cbScPrevSplit.TabIndex = 10;
+            this.cbScPrevSplit.Text = "Prev split:";
+            this.ToolTip1.SetToolTip(this.cbScPrevSplit, "Enable hot key for entering previous split");
+            this.cbScPrevSplit.UseVisualStyleBackColor = true;
+            this.cbScPrevSplit.CheckedChanged += new System.EventHandler(this.cbScPrevSplit_CheckedChanged);
+            // 
             // Label6
             // 
             this.Label6.AutoSize = true;
@@ -357,7 +413,7 @@
             // 
             this.radioHotKeyMethod_async.AutoSize = true;
             this.radioHotKeyMethod_async.Checked = true;
-            this.radioHotKeyMethod_async.Location = new System.Drawing.Point(6, 164);
+            this.radioHotKeyMethod_async.Location = new System.Drawing.Point(6, 167);
             this.radioHotKeyMethod_async.Name = "radioHotKeyMethod_async";
             this.radioHotKeyMethod_async.Size = new System.Drawing.Size(201, 17);
             this.radioHotKeyMethod_async.TabIndex = 8;
@@ -380,7 +436,7 @@
             // radioHotKeyMethod_sync
             // 
             this.radioHotKeyMethod_sync.AutoSize = true;
-            this.radioHotKeyMethod_sync.Location = new System.Drawing.Point(6, 141);
+            this.radioHotKeyMethod_sync.Location = new System.Drawing.Point(6, 144);
             this.radioHotKeyMethod_sync.Name = "radioHotKeyMethod_sync";
             this.radioHotKeyMethod_sync.Size = new System.Drawing.Size(477, 17);
             this.radioHotKeyMethod_sync.TabIndex = 7;
@@ -394,11 +450,11 @@
             // cbScReset
             // 
             this.cbScReset.AutoSize = true;
-            this.cbScReset.Location = new System.Drawing.Point(6, 35);
+            this.cbScReset.Location = new System.Drawing.Point(6, 32);
             this.cbScReset.Name = "cbScReset";
-            this.cbScReset.Size = new System.Drawing.Size(111, 17);
+            this.cbScReset.Size = new System.Drawing.Size(75, 17);
             this.cbScReset.TabIndex = 0;
-            this.cbScReset.Text = "Reset currect run:";
+            this.cbScReset.Text = "Reset run:";
             this.ToolTip1.SetToolTip(this.cbScReset, "Enable hot key for resetting the run");
             this.cbScReset.UseVisualStyleBackColor = true;
             this.cbScReset.CheckedChanged += new System.EventHandler(this.cbScReset_CheckedChanged);
@@ -417,10 +473,10 @@
             // 
             // txtNextSplit
             // 
-            this.txtNextSplit.Location = new System.Drawing.Point(123, 79);
+            this.txtNextSplit.Location = new System.Drawing.Point(92, 82);
             this.txtNextSplit.Name = "txtNextSplit";
             this.txtNextSplit.ReadOnly = true;
-            this.txtNextSplit.Size = new System.Drawing.Size(459, 20);
+            this.txtNextSplit.Size = new System.Drawing.Size(199, 20);
             this.txtNextSplit.TabIndex = 5;
             this.txtNextSplit.Text = "None";
             this.txtNextSplit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -430,7 +486,7 @@
             // cbScNextSplit
             // 
             this.cbScNextSplit.AutoSize = true;
-            this.cbScNextSplit.Location = new System.Drawing.Point(6, 81);
+            this.cbScNextSplit.Location = new System.Drawing.Point(6, 84);
             this.cbScNextSplit.Name = "cbScNextSplit";
             this.cbScNextSplit.Size = new System.Drawing.Size(72, 17);
             this.cbScNextSplit.TabIndex = 2;
@@ -441,10 +497,10 @@
             // 
             // txtHit
             // 
-            this.txtHit.Location = new System.Drawing.Point(123, 56);
+            this.txtHit.Location = new System.Drawing.Point(92, 56);
             this.txtHit.Name = "txtHit";
             this.txtHit.ReadOnly = true;
-            this.txtHit.Size = new System.Drawing.Size(459, 20);
+            this.txtHit.Size = new System.Drawing.Size(199, 20);
             this.txtHit.TabIndex = 4;
             this.txtHit.Text = "None";
             this.txtHit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -453,10 +509,10 @@
             // 
             // txtReset
             // 
-            this.txtReset.Location = new System.Drawing.Point(123, 33);
+            this.txtReset.Location = new System.Drawing.Point(92, 30);
             this.txtReset.Name = "txtReset";
             this.txtReset.ReadOnly = true;
-            this.txtReset.Size = new System.Drawing.Size(459, 20);
+            this.txtReset.Size = new System.Drawing.Size(199, 20);
             this.txtReset.TabIndex = 3;
             this.txtReset.Text = "None";
             this.txtReset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -669,5 +725,9 @@
         internal System.Windows.Forms.Button btnInput;
         internal System.Windows.Forms.OpenFileDialog OpenFileDialog1;
         internal System.Windows.Forms.TabControl TabControl1;
+        internal System.Windows.Forms.TextBox txtPrevSplit;
+        internal System.Windows.Forms.CheckBox cbScPrevSplit;
+        internal System.Windows.Forms.CheckBox cbScHitUndo;
+        internal System.Windows.Forms.TextBox txtHitUndo;
     }
 }

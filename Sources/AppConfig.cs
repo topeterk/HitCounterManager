@@ -39,8 +39,12 @@ namespace HitCounterManager
         public int ShortcutResetKeyCode;
         public bool ShortcutHitEnable;
         public int ShortcutHitKeyCode;
+        public bool ShortcutHitUndoEnable;
+        public int ShortcutHitUndoKeyCode;
         public bool ShortcutSplitEnable;
         public int ShortcutSplitKeyCode;
+        public bool ShortcutSplitPrevEnable;
+        public int ShortcutSplitPrevKeyCode;
         public string Inputfile;
         public string OutputFile;
         public bool ShowAttemptsCounter;
@@ -89,11 +93,11 @@ namespace HitCounterManager
                 _settings.MainHeight = 723;
                 _settings.HotKeyMethod = (int)Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async;
                 _settings.ShortcutResetEnable = false;
-                _settings.ShortcutResetKeyCode = 65653; // F6
+                _settings.ShortcutResetKeyCode = 0x10000 | 0x75; // Shift F6
                 _settings.ShortcutHitEnable = false;
-                _settings.ShortcutHitKeyCode = 65654; // F7
+                _settings.ShortcutHitKeyCode = 0x10000 | 0x76; // Shift F7
                 _settings.ShortcutSplitEnable = false;
-                _settings.ShortcutSplitKeyCode = 65655; // F8
+                _settings.ShortcutSplitKeyCode = 0x10000 | 0x77; // Shift F8
                 _settings.Inputfile = "HitCounter.template";
                 _settings.OutputFile = "HitCounter.html";
                 _settings.ProfileSelected = "Unnamed";
@@ -118,6 +122,14 @@ namespace HitCounterManager
                 _settings.ShowSessionProgress = true;
                 _settings.StyleDesiredWidth = 0;
             }
+            if (_settings.Version == 2) // Coming from version 1.11 to 1.14
+            {
+                _settings.Version = 3;
+                _settings.ShortcutHitUndoEnable = false;
+                _settings.ShortcutHitUndoKeyCode = 0x10000 | 0x78; // Shift F9
+                _settings.ShortcutSplitPrevEnable = false;
+                _settings.ShortcutSplitPrevKeyCode = 0x10000 | 0x79; // Shift F10
+            }
 
             // Apply settings..
             sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
@@ -137,11 +149,21 @@ namespace HitCounterManager
                 sc.Key_Set(Shortcuts.SC_Type.SC_Type_Hit, key);
             else
                 sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_Hit, key);
+            key.key = new KeyEventArgs((Keys)_settings.ShortcutHitUndoKeyCode);
+            if (_settings.ShortcutHitUndoEnable)
+                sc.Key_Set(Shortcuts.SC_Type.SC_Type_HitUndo, key);
+            else
+                sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_HitUndo, key);
             key.key = new KeyEventArgs((Keys)_settings.ShortcutSplitKeyCode);
             if (_settings.ShortcutSplitEnable)
                 sc.Key_Set(Shortcuts.SC_Type.SC_Type_Split, key);
             else
                 sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_Split, key);
+            key.key = new KeyEventArgs((Keys)_settings.ShortcutSplitPrevKeyCode);
+            if (_settings.ShortcutSplitPrevEnable)
+                sc.Key_Set(Shortcuts.SC_Type.SC_Type_SplitPrev, key);
+            else
+                sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_SplitPrev, key);
 
             pi.SetActiveSplit(0);
             pi.SetSessionProgress(0, true);
@@ -180,9 +202,15 @@ namespace HitCounterManager
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Hit);
             _settings.ShortcutHitEnable = key.used;
             _settings.ShortcutHitKeyCode = (int)key.key.KeyData;
+            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_HitUndo);
+            _settings.ShortcutHitUndoEnable = key.used;
+            _settings.ShortcutHitUndoKeyCode = (int)key.key.KeyData;
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Split);
             _settings.ShortcutSplitEnable = key.used;
             _settings.ShortcutSplitKeyCode = (int)key.key.KeyData;
+            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_SplitPrev);
+            _settings.ShortcutSplitPrevEnable = key.used;
+            _settings.ShortcutSplitPrevKeyCode = (int)key.key.KeyData;
             _settings.Inputfile = om.FilePathIn;
             _settings.OutputFile = om.FilePathOut;
             _settings.ShowAttemptsCounter = om.ShowAttemptsCounter;

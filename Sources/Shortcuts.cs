@@ -127,7 +127,10 @@ namespace HitCounterManager
             SC_Type_Reset = 0,
             SC_Type_Hit = 1,
             SC_Type_Split = 2,
-            SC_Type_MAX = 3
+            // Since version 1.15:
+            SC_Type_HitUndo = 3,
+            SC_Type_SplitPrev = 4,
+            SC_Type_MAX = 5
         };
 
         public enum SC_HotKeyMethod {
