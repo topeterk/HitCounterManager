@@ -1,7 +1,8 @@
-# HitCounterManager
+# HitCounterManager - A Dark Souls inspired Hit Counter
 
-Manages a hit counter running in the background, so you can focus on your stream.  
-No need to keep any windows open for a window capture any more.
+Free Hit Counter that is running in the background, so you can focus on your stream.  
+No need to keep any windows open for a window capture any more.  
+Initially designed for Dark Souls and similar games but supports any game.
   
 To see some **screenshots** of this application go to the **[Wiki pages](../../wiki)**.  
 To see **how to** use the application watch the **[Tutorial on YouTube](https://www.youtube.com/watch?v=iXGExlS4xeM)**.
@@ -9,9 +10,9 @@ To see **how to** use the application watch the **[Tutorial on YouTube](https://
 ## Key-Features
 
 * Offline application
-* No window capture needed for stream integration
+* No window capture needed for stream integration with OBS-Studio, for example.
 * Easy to use profile management
-* Hot key support for seamless use ingame (Windows only)
+* Hot key support for seamless use **ingame** (Windows only)
 
 ## Features
 It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit/death during the playthrough
@@ -19,12 +20,12 @@ It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit
   * The design and layout can be costumized completely
 * Instead of using GUI buttons, keyboard shortcuts can be configured:
   * Increase hit count of the current split
-  * Reset the run (set all hit counts to 0 and select first split)
-  * Select next split
+  * Go to next split
+  * Reset the run (sets all hit counts to 0 and selects first split)
 * Keyboard shortcuts are working in fullscreen applications (like Dark Souls III)
 * Via GUI every value can be changed at any time
 * Multiple profiles can be created (e.g. "Any%", "AllBosses", "DLC only"..)
-* Switching to other profiles will keep hit counts of currently selected profile
+* Switching to other profiles will remember the hit counts of the currently selected profile
 * Button to save current run as PB (personal best)
 * Counts the attempts of each run (implicitly on every run's reset or manually)
 * Shows furthest progress since last application start (can also be set manually)
@@ -36,19 +37,30 @@ It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit
   * Dark Souls 3 + Ashes of Ariandel + The Ringed City
   * Demon's Souls
   * The Surge + A walk in the park
-* Comes with different designs:
-  * **Numeric**
-    * Shows the amount of hits for the current run, PB and their differences
-    * Every split is marked "better" which has an amount of zero hits
-  * **PBSplits**
-    * Shows the amount of hits for the current run, PB and their differences
-    * Every split is marked "better" which has a less or equal amount of hits compared to the PB split
-  * **YesNo**
-    * Shows check marks/crosses if one got hit at the current run and PB
-    * Every split has a check mark which has an amount of zero hits
-  * **NoDeath**
-    * Shows check marks/crosses until the players death for the current run and PB
-    * All splits have check marks until the current split appears (__Now__ only) or a split appears that has already counted hits.
+* Comes with different designs..
+  * **.. for counting hits:**
+  
+    * **Numeric** _(Traditional no hit runs)_
+      * Shows the amount of hits for the current run, PB and their differences
+      * Every split is marked "better" which has an amount of zero hits
+    * **YesNo** _(Traditional no hit runs)_
+      * Shows check marks/crosses if one got hit at the current run and PB
+      * Every split has a check mark which has an amount of zero hits
+    * **PBSplits**
+      * Shows the amount of hits for the current run, PB and their differences
+      * Every split is marked "better" which has a less or equal amount of hits compared to the PB split
+  * **.. for counting deaths:**
+  
+    * **Deaths** _(Very basic death counter)_
+      * Very simple counter that only shows sum of all hits (deaths)
+    * **NoDeath** _(Traditional no death runs)_
+      * Shows check marks/crosses until the players death for the current run and PB
+      * All splits have check marks until the current split appears (__Now__ only) or a split appears that has already counted hits.
+  * **.. for measuring progress:**
+  
+    * **Bosses** _(Simple boss or split checklist)_
+      * Shows check marks/crosses for every boss (split) that is still alive or already defeated at the current run
+      * Every boss (split) is marked "done" when hit count on that split is no longer 0
 * The appearance of all designs can be modified via GUI
   * Set the amount of shown splits that are already finished
   * Set the amount of shown splits that are upcoming
