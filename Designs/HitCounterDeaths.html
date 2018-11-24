@@ -1,0 +1,43 @@
+<html>
+<head>
+ <title>Hitcounter Deaths</title>
+ <!-- OBS' CLR browser plugin might use CSS extension. Disable the CSS when it flickers. -->
+ <!-- Method also needs --allow-file-access-from-files to be set -->
+ <script type="text/javascript" src="javascript.js"></script>
+</head>
+<body>
+<iframe style="display:none;"></iframe>
+<table id="table"><tr><td>..loading..</td></tr></table>
+<script language="javascript">
+
+var tbl = document.getElementById('table');
+
+function ShowHelpText(instructions)
+{
+	tbl.innerHTML = '<tr><td class="major dark">' + instructions + '</td></tr>';
+}
+
+function DoVisualUpdate(data)
+{
+	var new_tbl = "";
+	var sum = 0;
+
+	for ( i = data.split_first ; (i < data.split_last) && (i < data.list.length) ; i = i + 1 )
+	{
+		sum = sum + data.list[i][1];
+	}
+
+	new_tbl +=
+ '<tr class="' + (data.high_contrast ? 'even' : '') + '">' +
+  '<td class="bottom left">Deaths: ' + sum + '</td>' +
+ '</tr>';
+
+	if (0 < data.width) tbl.style.width = data.width; else tbl.style = ""
+	tbl.innerHTML = new_tbl; // update DOM in one shot
+}
+
+Start(); // Enter eternal loop
+
+</script>
+</body>
+</html>
