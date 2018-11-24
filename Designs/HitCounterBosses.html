@@ -1,0 +1,53 @@
+<html>
+<head>
+ <title>Hitcounter YesNo</title>
+ <!-- OBS' CLR browser plugin might use CSS extension. Disable the CSS when it flickers. -->
+ <!-- Method also needs --allow-file-access-from-files to be set -->
+ <script type="text/javascript" src="javascript.js"></script>
+</head>
+<body>
+<iframe style="display:none;"></iframe>
+<table id="table"><tr><td>..loading..</td></tr></table>
+<script language="javascript">
+
+var tbl = document.getElementById('table');
+
+function ShowHelpText(instructions)
+{
+	tbl.innerHTML = '<tr><td class="major dark">' + instructions + '</td></tr>';
+}
+
+function DoVisualUpdate(data)
+{
+	var new_tbl = "";
+	var majorclass = (data.high_contrast ? 'major dark' : 'major');
+
+	if (data.show_attempts)	new_tbl +=
+ '<tr>' +
+  '<td colspan="2" class="' + majorclass + ' top">Run # ' + data.attempts + '</td>' +
+ '</tr>';
+
+	if (data.show_headline)	new_tbl +=
+ '<tr>' +
+  '<td class="' + majorclass + ' left">Boss</td>' +
+  '<td class="' + majorclass + '" width="30px">Done</td>' +
+ '</tr>';
+
+	for ( i = data.split_first ; (i < data.split_last) && (i < data.list.length) ; i = i + 1 )
+	{
+		new_tbl +=
+ '<tr class="' + (data.split_active == i ? 'current' : (data.high_contrast ? (i%2==0 ? 'even' : 'odd') : '')) + '">' +
+  '<td class="left">' + data.list[i][0] + '</td>' +
+  '<td>' + ShowCrossOrCheckMark(data.list[i][1] > 0 ? 0 : 1) + '</td>' +
+ '</tr>';
+	}
+
+	if (0 < data.width) tbl.style.width = data.width; else tbl.style = ""
+	tbl.innerHTML = new_tbl; // update DOM in one shot
+}
+
+Start(); // Enter eternal loop
+
+</script>
+</body>
+</html>
