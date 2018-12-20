@@ -108,7 +108,7 @@
             this.btnWeb.Name = "btnWeb";
             this.btnWeb.Size = new System.Drawing.Size(20, 20);
             this.btnWeb.TabIndex = 38;
-            this.ToolTip1.SetToolTip(this.btnWeb, "Help");
+            this.ToolTip1.SetToolTip(this.btnWeb, "Help / Website");
             this.btnWeb.UseVisualStyleBackColor = true;
             this.btnWeb.Click += new System.EventHandler(this.btnWeb_Click);
             // 
