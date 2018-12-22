@@ -1,6 +1,7 @@
 ﻿//The MIT License (MIT)
 
 //Copyright (c) 2018 Alex Parker
+//Copyright (c) 2018 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy of
 //this software and associated documentation files (the "Software"), to deal in
@@ -25,6 +26,13 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
+
+// We require this to work with .Net framework 2.0 as well:
+namespace System.Runtime.CompilerServices
+{
+    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method)]
+    public sealed class ExtensionAttribute : Attribute { }
+}
 
 namespace TinyJson
 {
@@ -331,7 +339,7 @@ namespace TinyJson
             Dictionary<string, T> nameToMember = new Dictionary<string, T>(StringComparer.OrdinalIgnoreCase);
             for (int i = 0; i < members.Length; i++)
             {
-                T member = members[i];
+                /*T member = members[i];
                 if (member.IsDefined(typeof(IgnoreDataMemberAttribute), true))
                     continue;
 
@@ -343,7 +351,9 @@ namespace TinyJson
                         name = dataMemberAttribute.Name;
                 }
 
-                nameToMember.Add(name, member);
+                nameToMember.Add(name, member);*/
+                // The above code is not working with .Net framework 2.0, so we ignore these attributes for compatibility reasons:
+                nameToMember.Add(members[i].Name, members[i]);
             }
 
             return nameToMember;
