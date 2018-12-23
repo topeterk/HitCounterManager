@@ -23,8 +23,8 @@ It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit
 * Creates a HTML file of the hit counter that can be used by Open BroadCaster Software in order to make it visible on stream
   * The design and layout can be costumized completely
 * Instead of using GUI buttons, keyboard shortcuts can be configured:
-  * Increase hit count of the current split
-  * Go to next split
+  * Increase/Decrease hit count of the current split
+  * Go to next/previous split
   * Reset the run (sets all hit counts to 0 and selects first split)
 * Keyboard shortcuts are working in fullscreen applications (like Dark Souls III)
 * Via GUI every value can be changed at any time
@@ -64,7 +64,7 @@ It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit
   
     * **Bosses** _(Simple boss or split checklist)_
       * Shows check marks/crosses for every boss (split) that is still alive or already defeated at the current run
-      * Every boss (split) is marked "done" when hit count on that split is no longer 0
+      * Just add a hit to the boss/split to "mark the boss done"
 * The appearance of all designs can be modified via GUI
   * Set the amount of shown splits that are already finished
   * Set the amount of shown splits that are upcoming
