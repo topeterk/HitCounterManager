@@ -21,7 +21,10 @@
 //SOFTWARE.
 
 using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Windows.Forms;
+using TinyJson;
 
 namespace HitCounterManager
 {
@@ -44,6 +47,10 @@ namespace HitCounterManager
             pi = DataGridView1; // for better capsulation
             om = new OutModule(pi);
             sc = new Shortcuts(Handle);
+
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.ServerCertificateValidationCallback += (sender2, certificate, chain, errors) => { return true; };
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -223,6 +230,37 @@ namespace HitCounterManager
         private void btnWeb_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/topeterk/HitCounterManager");
+        }
+
+        private void btnCheckVersion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                WebClient client = new WebClient();
+
+                // https://developer.github.com/v3/#user-agent-required
+                client.Headers.Add("User-Agent", "HitCounterManager/" + Application.ProductVersion);
+                // https://developer.github.com/v3/media/#request-specific-version
+                client.Headers.Add("Accept", "application/vnd.github.v3.text+json");
+                // https://developer.github.com/v3/repos/releases/#get-a-single-release
+                string response = client.DownloadString("http://api.github.com/repos/topeterk/HitCounterManager/releases/latest");
+
+                Dictionary<string, object> json = response.FromJson<Dictionary<string, object>>();
+                if (json["tag_name"].ToString() == Application.ProductVersion.ToString())
+                {
+                    MessageBox.Show("You are using the latest version!", "Up to date!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Latest available version:\n\n   " + json["name"].ToString() + "\n\n" +
+                        "Please visit the github project website (WWW button).\n" +
+                        "Then look for the releases to download the new version.", "New version available!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred during update check!\n\n" + ex.Message.ToString(), "Check for updated failed!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void btnAbout_Click(object sender, EventArgs e)

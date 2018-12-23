@@ -93,6 +93,16 @@ namespace HitCounterManager.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_cloud_20 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-cloud-20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_copy_20 {
             get {
                 object obj = ResourceManager.GetObject("icons8_copy_20", resourceCulture);

@@ -67,6 +67,7 @@
     <Compile Include="Sources\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sources\JsonParser.cs" />
     <Compile Include="Sources\Main.cs" />
     <Compile Include="Sources\OsLayerAny.cs" />
     <Compile Include="Sources\OsLayerWindows.cs" />
@@ -126,6 +127,7 @@
     <Content Include="Sources\HitCounter.html" />
     <Content Include="Sources\HitCounter.template" />
     <Content Include="Sources\HitCounterManagerInit.xml" />
+    <None Include="Images\icons8-cloud-20.png" />
     <None Include="Images\icons8-website-20.png" />
     <None Include="Images\icons8-trophy-32.png" />
     <None Include="Images\icons8-trash-20.png" />

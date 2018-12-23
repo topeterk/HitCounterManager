@@ -33,6 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.btnCheckVersion = new System.Windows.Forms.Button();
             this.btnAttempts = new System.Windows.Forms.Button();
             this.Spacer2 = new System.Windows.Forms.Label();
             this.btnAbout = new System.Windows.Forms.Button();
@@ -63,12 +64,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
+            // btnCheckVersion
+            // 
+            this.btnCheckVersion.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_cloud_20;
+            this.btnCheckVersion.FlatAppearance.BorderSize = 0;
+            this.btnCheckVersion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCheckVersion.Location = new System.Drawing.Point(91, 4);
+            this.btnCheckVersion.Name = "btnCheckVersion";
+            this.btnCheckVersion.Size = new System.Drawing.Size(20, 20);
+            this.btnCheckVersion.TabIndex = 43;
+            this.ToolTip1.SetToolTip(this.btnCheckVersion, "Check for a new version");
+            this.btnCheckVersion.UseVisualStyleBackColor = true;
+            this.btnCheckVersion.Click += new System.EventHandler(this.btnCheckVersion_Click);
+            // 
             // btnAttempts
             // 
             this.btnAttempts.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_counter_20;
             this.btnAttempts.FlatAppearance.BorderSize = 0;
             this.btnAttempts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAttempts.Location = new System.Drawing.Point(251, 4);
+            this.btnAttempts.Location = new System.Drawing.Point(277, 4);
             this.btnAttempts.Name = "btnAttempts";
             this.btnAttempts.Size = new System.Drawing.Size(20, 20);
             this.btnAttempts.TabIndex = 42;
@@ -80,7 +94,7 @@
             // 
             this.Spacer2.AutoSize = true;
             this.Spacer2.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.Spacer2.Location = new System.Drawing.Point(236, 8);
+            this.Spacer2.Location = new System.Drawing.Point(262, 8);
             this.Spacer2.Name = "Spacer2";
             this.Spacer2.Size = new System.Drawing.Size(9, 13);
             this.Spacer2.TabIndex = 41;
@@ -91,7 +105,7 @@
             this.btnAbout.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_about_20;
             this.btnAbout.FlatAppearance.BorderSize = 0;
             this.btnAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAbout.Location = new System.Drawing.Point(91, 4);
+            this.btnAbout.Location = new System.Drawing.Point(117, 4);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(20, 20);
             this.btnAbout.TabIndex = 39;
@@ -143,7 +157,7 @@
             this.btnCopy.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_copy_20;
             this.btnCopy.FlatAppearance.BorderSize = 0;
             this.btnCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCopy.Location = new System.Drawing.Point(184, 4);
+            this.btnCopy.Location = new System.Drawing.Point(210, 4);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(20, 20);
             this.btnCopy.TabIndex = 35;
@@ -169,7 +183,7 @@
             this.btnDelete.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_trash_20;
             this.btnDelete.FlatAppearance.BorderSize = 0;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Location = new System.Drawing.Point(210, 4);
+            this.btnDelete.Location = new System.Drawing.Point(236, 4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(20, 20);
             this.btnDelete.TabIndex = 31;
@@ -182,7 +196,7 @@
             this.btnRename.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_edit_20;
             this.btnRename.FlatAppearance.BorderSize = 0;
             this.btnRename.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRename.Location = new System.Drawing.Point(158, 4);
+            this.btnRename.Location = new System.Drawing.Point(184, 4);
             this.btnRename.Name = "btnRename";
             this.btnRename.Size = new System.Drawing.Size(20, 20);
             this.btnRename.TabIndex = 30;
@@ -195,7 +209,7 @@
             this.btnNew.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_add_20;
             this.btnNew.FlatAppearance.BorderSize = 0;
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNew.Location = new System.Drawing.Point(132, 4);
+            this.btnNew.Location = new System.Drawing.Point(158, 4);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(20, 20);
             this.btnNew.TabIndex = 29;
@@ -208,7 +222,7 @@
             this.btnUp.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_scroll_up_20;
             this.btnUp.FlatAppearance.BorderSize = 0;
             this.btnUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUp.Location = new System.Drawing.Point(277, 4);
+            this.btnUp.Location = new System.Drawing.Point(303, 4);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(20, 20);
             this.btnUp.TabIndex = 27;
@@ -221,7 +235,7 @@
             this.btnDown.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_scroll_down_20;
             this.btnDown.FlatAppearance.BorderSize = 0;
             this.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDown.Location = new System.Drawing.Point(303, 4);
+            this.btnDown.Location = new System.Drawing.Point(329, 4);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(20, 20);
             this.btnDown.TabIndex = 26;
@@ -272,7 +286,7 @@
             // 
             this.Spacer1.AutoSize = true;
             this.Spacer1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.Spacer1.Location = new System.Drawing.Point(117, 8);
+            this.Spacer1.Location = new System.Drawing.Point(143, 8);
             this.Spacer1.Name = "Spacer1";
             this.Spacer1.Size = new System.Drawing.Size(9, 13);
             this.Spacer1.TabIndex = 40;
@@ -393,6 +407,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(572, 376);
+            this.Controls.Add(this.btnCheckVersion);
             this.Controls.Add(this.btnAttempts);
             this.Controls.Add(this.Spacer2);
             this.Controls.Add(this.btnAbout);
@@ -429,6 +444,7 @@
 
         #endregion
 
+        internal System.Windows.Forms.Button btnCheckVersion;
         internal System.Windows.Forms.Button btnAttempts;
         internal System.Windows.Forms.ToolTip ToolTip1;
         internal System.Windows.Forms.Label Spacer2;
