@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright(c) 2016-2018 Peter Kirmeier
+//Copyright(c) 2016-2019 Peter Kirmeier
 
 //Permission Is hereby granted, free Of charge, to any person obtaining a copy
 //of this software And associated documentation files (the "Software"), to deal
@@ -82,9 +82,10 @@ namespace HitCounterManager
         /// <returns>String with HTML encoded special character</returns>
         public string SimpleHtmlEscape(string Str)
         {
-            if (null == Str)
+            if (null != Str)
             {
                 Str = Str.ToString().Replace("&", "&amp;").Replace(" ", "&nbsp;");
+                // Keep for compatibility to support designs up to version 1.15 that were not using Unicode:
                 Str = Str.Replace("ä", "&auml;").Replace("ö", "&ouml;").Replace("ü", "&uuml;");
                 Str = Str.Replace("Ä", "&Auml;").Replace("Ö", "&Ouml;").Replace("Ü", "&Uuml;");
             }
@@ -133,8 +134,7 @@ namespace HitCounterManager
 
             try
             {
-                if (File.Exists(FilePathOut)) File.Create(FilePathOut).Close();
-                sr = new StreamWriter(FilePathOut);
+                sr = new StreamWriter(FilePathOut, false, System.Text.Encoding.Unicode); // UTF16LE
             }
             catch { return; }
 
