@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright(c) 2016-2018 Peter Kirmeier
+//Copyright(c) 2016-2019 Peter Kirmeier
 
 //Permission Is hereby granted, free Of charge, to any person obtaining a copy
 //of this software And associated documentation files (the "Software"), to deal
@@ -56,6 +56,7 @@ namespace HitCounterManager
         public bool StyleUseCustom;
         public string StyleCssUrl;
         public string StyleFontUrl;
+        public string StyleFontName;
         public int StyleDesiredWidth;
         public string ProfileSelected;
         public Profiles Profiles;
@@ -130,6 +131,11 @@ namespace HitCounterManager
                 _settings.ShortcutSplitPrevEnable = false;
                 _settings.ShortcutSplitPrevKeyCode = 0x10000 | 0x79; // Shift F10
             }
+            if (_settings.Version == 3) // Coming from version 1.15
+            {
+                _settings.Version = 4;
+                _settings.StyleFontName = "Fontdiner Swanky";
+            }
 
             // Apply settings..
             sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
@@ -182,6 +188,7 @@ namespace HitCounterManager
             om.StyleUseCustom = _settings.StyleUseCustom;
             om.StyleCssUrl = _settings.StyleCssUrl;
             om.StyleFontUrl = _settings.StyleFontUrl;
+            om.StyleFontName = _settings.StyleFontName;
             om.StyleDesiredWidth = _settings.StyleDesiredWidth;
             om.DataUpdatePending = false;
         }
@@ -222,6 +229,7 @@ namespace HitCounterManager
             _settings.StyleUseCustom = om.StyleUseCustom;
             _settings.StyleCssUrl = om.StyleCssUrl;
             _settings.StyleFontUrl = om.StyleFontUrl;
+            _settings.StyleFontName = om.StyleFontName;
             _settings.StyleDesiredWidth = om.StyleDesiredWidth;
             _settings.ProfileSelected = (string)ComboBox1.SelectedItem;
             _settings.Profiles = profs;

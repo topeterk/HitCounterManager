@@ -78,6 +78,8 @@
             this.btnInput = new System.Windows.Forms.Button();
             this.OpenFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.TabControl1 = new System.Windows.Forms.TabControl();
+            this.txtFontName = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.GroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
@@ -90,6 +92,8 @@
             // 
             // GroupBox1
             // 
+            this.GroupBox1.Controls.Add(this.label15);
+            this.GroupBox1.Controls.Add(this.txtFontName);
             this.GroupBox1.Controls.Add(this.cbApCustomCss);
             this.GroupBox1.Controls.Add(this.txtCssUrl);
             this.GroupBox1.Controls.Add(this.txtFontUrl);
@@ -131,7 +135,9 @@
             this.txtFontUrl.Name = "txtFontUrl";
             this.txtFontUrl.Size = new System.Drawing.Size(425, 20);
             this.txtFontUrl.TabIndex = 7;
-            this.ToolTip1.SetToolTip(this.txtFontUrl, resources.GetString("txtFontUrl.ToolTip"));
+            this.ToolTip1.SetToolTip(this.txtFontUrl, "Personalize the design by switching to another font.\r\nKeep the field empty if you" +
+        " dont use an external font.\r\nOtherwise specify the path to an @font-face ressour" +
+        "ce.");
             // 
             // Label11
             // 
@@ -650,6 +656,24 @@
             this.TabControl1.Size = new System.Drawing.Size(596, 235);
             this.TabControl1.TabIndex = 10;
             // 
+            // txtFontName
+            // 
+            this.txtFontName.Enabled = false;
+            this.txtFontName.Location = new System.Drawing.Point(343, 16);
+            this.txtFontName.Name = "txtFontName";
+            this.txtFontName.Size = new System.Drawing.Size(153, 20);
+            this.txtFontName.TabIndex = 16;
+            this.ToolTip1.SetToolTip(this.txtFontName, resources.GetString("txtFontName.ToolTip"));
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(275, 20);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(60, 13);
+            this.label15.TabIndex = 17;
+            this.label15.Text = "Font name:";
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -729,5 +753,7 @@
         internal System.Windows.Forms.CheckBox cbScPrevSplit;
         internal System.Windows.Forms.CheckBox cbScHitUndo;
         internal System.Windows.Forms.TextBox txtHitUndo;
+        internal System.Windows.Forms.Label label15;
+        internal System.Windows.Forms.TextBox txtFontName;
     }
 }

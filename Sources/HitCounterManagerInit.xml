@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SettingsRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Version>3</Version>
+  <Version>4</Version>
   <MainWidth>590</MainWidth>
   <MainHeight>787</MainHeight>
   <HotKeyMethod>1</HotKeyMethod>
@@ -25,6 +25,7 @@
   <StyleUseCustom>false</StyleUseCustom>
   <StyleCssUrl>stylesheet_pink.css</StyleCssUrl>
   <StyleFontUrl>https://fonts.googleapis.com/css?family=Fontdiner%20Swanky</StyleFontUrl>
+  <StyleFontUrl>Fontdiner Swanky</StyleFontUrl>
   <StyleDesiredWidth>0</StyleDesiredWidth>
   <ProfileSelected>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE</ProfileSelected>
   <Profiles>

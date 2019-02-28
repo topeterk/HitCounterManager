@@ -45,6 +45,7 @@ namespace HitCounterManager
         public bool StyleUseCustom = false;
         public string StyleCssUrl = "";
         public string StyleFontUrl = "";
+        public string StyleFontName = "";
         public int StyleDesiredWidth = 0;
 
         /// <summary>
@@ -111,7 +112,7 @@ namespace HitCounterManager
         /// </summary>
         private void WriteJsonSimpleValue(StreamWriter File, string Name, string String)
         {
-            File.WriteLine("\"" + Name + "\": \"" + String + "\",");
+            File.WriteLine("\"" + Name + "\": " + (null != String ? "\"" + String + "\"" : "undefined") + ",");
         }
 
         /// <summary>
@@ -178,7 +179,8 @@ namespace HitCounterManager
                     WriteJsonSimpleValue(sr, "show_attempts", ShowAttemptsCounter);
                     WriteJsonSimpleValue(sr, "show_headline", ShowHeadline);
                     WriteJsonSimpleValue(sr, "show_session_progress", ShowSessionProgress);
-                    
+
+                    WriteJsonSimpleValue(sr, "font_name", (StyleUseCustom ? StyleFontName : null));
                     WriteJsonSimpleValue(sr, "font_url", (StyleUseCustom ? StyleFontUrl : ""));
                     WriteJsonSimpleValue(sr, "css_url", (StyleUseCustom ? StyleCssUrl : "stylesheet.css"));
                     WriteJsonSimpleValue(sr, "high_contrast", StyleUseHighContrast);

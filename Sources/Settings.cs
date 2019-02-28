@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright(c) 2016-2018 Peter Kirmeier
+//Copyright(c) 2016-2019 Peter Kirmeier
 
 //Permission Is hereby granted, free Of charge, to any person obtaining a copy
 //of this software And associated documentation files (the "Software"), to deal
@@ -74,6 +74,7 @@ namespace HitCounterManager
             cbApCustomCss.Checked = om.StyleUseCustom;
             txtCssUrl.Text = om.StyleCssUrl;
             txtFontUrl.Text = om.StyleFontUrl;
+            txtFontName.Text = om.StyleFontName;
             numStyleDesiredWidth.Value = om.StyleDesiredWidth;
             cbApHighContrast.Checked = om.StyleUseHighContrast;
 
@@ -242,6 +243,7 @@ namespace HitCounterManager
             om.StyleUseCustom = cbApCustomCss.Checked;
             om.StyleCssUrl = txtCssUrl.Text;
             om.StyleFontUrl = txtFontUrl.Text;
+            om.StyleFontName = txtFontName.Text;
             ApplyAppearance(sender, e);
         }
 
@@ -249,6 +251,7 @@ namespace HitCounterManager
         {
             txtCssUrl.Enabled = cbApCustomCss.Checked;
             txtFontUrl.Enabled = cbApCustomCss.Checked;
+            txtFontName.Enabled = cbApCustomCss.Checked;
         }
 
         #endregion
