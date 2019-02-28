@@ -96,9 +96,26 @@ The file [HitCounterManagerSave.xml](HitCounterManagerSave.xml) is used for all 
 You can save and restore this file at any time or copy it to a newer/portable version of this application.
 > Note: It holds all your settings and profiles in one place. No other files are involved.
 
-### Designs
+### Designs / Fonts
 The pre-delivered HTML designs will update with an interval of 1.5 seconds.
 > Previews of the pre-delivered HTML desings can be found at the **[Wiki pages](../../wiki)**.
+
+A specific font can be selected at the appearance dialog in two ways:
+* The font is already installed locally on the system
+  * _(Not required but recommended)_ Clear the field for the font URL as no external font must be loaded
+  * Enter your font family name of choice at the font name field and hit Apply
+  > Example: _sans-serif_ or _courier_
+* The font is **not** installed locally and must be loaded from an external _@font-face_ ressource
+  * Enter the URL to the ressource into the font URL field
+  * Enter the matching font family name at the font name field and hit Apply
+  > Example: URL _https://fonts.googleapis.com/css?family=Fontdiner+Swanky_ and name _Fontdiner Swanky_
+
+To find suitable fonts I can recommend Google's font collection: [https://fonts.google.com](https://fonts.google.com).  
+Search for one of your liking and see the embedded font and/or CSS instruction as you can simply copy URL and name from there into the application. For the previous example the instructions looked like this _(the part to copy in bold)_:
+> URL from Embed Font instructions:  
+> _&lt;link href="**https://fonts.googleapis.com/css?family=Fontdiner+Swanky**" rel="stylesheet"&gt;_  
+> Name from CSS instructions:  
+> _font-family: '**Fontdiner Swanky**', cursive;_
 
 ## Setting up Broadcasting software
 
