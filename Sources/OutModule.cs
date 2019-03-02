@@ -154,12 +154,14 @@ namespace HitCounterManager
                 else if (line.Contains("HITCOUNTER_JSON_START")) // Format data according to RFC 4627 (JSON)
                 {
                     int active = pi.GetActiveSplit();
-                    int iTemp;
+                    int iSplitCount = pi.GetSplitCount();
+                    int iSplitFirst;
+                    int iSplitLast;
 
                     sr.WriteLine("{");
 
                     sr.WriteLine("\"list\": [");
-                    for (int r = 0; r < pi.GetSplitCount(); r++)
+                    for (int r = 0; r < iSplitCount; r++)
                     {
                         if (r != 0) sr.WriteLine(","); // separator
                         sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + pi.GetSplitHits(r) + ", " + pi.GetSplitPB(r) + "]");
@@ -169,11 +171,35 @@ namespace HitCounterManager
 
                     WriteJsonSimpleValue(sr, "session_progress", pi.GetSessionProgress());
 
+                    // Calculation to show same amount of splits independent from active split:
+                    // Example: ShowSplitsCountFinished = 3 , ShowSplitsCountUpcoming = 2 , iSplitCount = 7 (0-6)
+                    //  A:  B:  C:  D:  E:  F:  G:
+                    // <0>  0   0   0
+                    //  1  <1>  1   1   1   1   1
+                    //  2   2  <2>  2   2   2   2
+                    //  3   3   3  <3>  3   3   3
+                    //  4   4   4   4  <4>  4   4
+                    //  5   5   5   5   5  <5>  5
+                    //                  6   6  <6>
+
+                    if (active < ShowSplitsCountFinished) // A-C: less previous, more upcoming
+                    {
+                        iSplitFirst = 0;
+                        iSplitLast = ShowSplitsCountUpcoming + ShowSplitsCountFinished;
+                    }
+                    else if (iSplitCount - active > ShowSplitsCountUpcoming) // D-E: previous and upcoming as it is
+                    {
+                        iSplitFirst = active - ShowSplitsCountFinished;
+                        iSplitLast = active + ShowSplitsCountUpcoming;
+                    }
+                    else // F-G: more previous, less upcoming
+                    {
+                        iSplitFirst = iSplitCount - 1 - ShowSplitsCountUpcoming - ShowSplitsCountFinished;
+                        iSplitLast = iSplitCount - 1;
+                    }
                     WriteJsonSimpleValue(sr, "split_active", active);
-                    iTemp = active - ShowSplitsCountFinished;
-                    WriteJsonSimpleValue(sr, "split_first", (iTemp < 0 ? 0 : iTemp));
-                    iTemp = active + ShowSplitsCountUpcoming;
-                    WriteJsonSimpleValue(sr, "split_last", (999 < iTemp ? 999 : iTemp));
+                    WriteJsonSimpleValue(sr, "split_first", (iSplitFirst < 0 ? 0 : iSplitFirst));
+                    WriteJsonSimpleValue(sr, "split_last", (iSplitCount <= iSplitLast ? iSplitCount-1 : iSplitLast));
 
                     WriteJsonSimpleValue(sr, "attempts", pi.GetAttemptsCount());
                     WriteJsonSimpleValue(sr, "show_attempts", ShowAttemptsCounter);
