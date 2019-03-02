@@ -30,6 +30,7 @@ namespace HitCounterManager
     {
         private Shortcuts sc;
         private OutModule om = null;
+        private bool IsFormLoaded = false;
 
         #region Form
 
@@ -83,6 +84,8 @@ namespace HitCounterManager
                 tab_globalshortcuts.Text = tab_globalshortcuts.Text + " (OS not supported)";
                 tab_globalshortcuts.Enabled = false;
             }
+
+            IsFormLoaded = true;
         }
 
         #endregion
@@ -106,7 +109,7 @@ namespace HitCounterManager
 
         private void ApplyAppearance(object sender, EventArgs e)
         {
-            if (null == om) return;
+            if (!IsFormLoaded) return;
 
             om.ShowAttemptsCounter = cbShowAttempts.Checked;
             om.ShowHeadline = cbShowHeadline.Checked;
