@@ -177,8 +177,6 @@ namespace HitCounterManager
             if (_settings.MainWidth > 400) this.Width = _settings.MainWidth;
             if (_settings.MainHeight > 400) this.Height = _settings.MainHeight;
 
-            om.FilePathIn = _settings.Inputfile;
-            om.FilePathOut = _settings.OutputFile;
             om.ShowAttemptsCounter = _settings.ShowAttemptsCounter;
             om.ShowHeadline = _settings.ShowHeadline;
             om.ShowSessionProgress = _settings.ShowSessionProgress;
@@ -190,6 +188,9 @@ namespace HitCounterManager
             om.StyleFontUrl = _settings.StyleFontUrl;
             om.StyleFontName = _settings.StyleFontName;
             om.StyleDesiredWidth = _settings.StyleDesiredWidth;
+
+            om.FilePathIn = _settings.Inputfile;
+            om.FilePathOut = _settings.OutputFile; // setting output filepath will allow writing output, so keep this line last
             om.DataUpdatePending = false;
         }
 

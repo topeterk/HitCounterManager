@@ -58,6 +58,7 @@ namespace HitCounterManager
             Text = Text + " - v" + Application.ProductVersion + " " + OsLayer.Name;
             LoadSettings();
             UpdateProgressAndTotals();
+            om.Update(true); // Write very first output once after application start
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
