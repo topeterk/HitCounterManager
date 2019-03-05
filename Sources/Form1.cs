@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright(c) 2016-2018 Peter Kirmeier
+//Copyright(c) 2016-2019 Peter Kirmeier
 
 //Permission Is hereby granted, free Of charge, to any person obtaining a copy
 //of this software And associated documentation files (the "Software"), to deal
@@ -255,7 +255,7 @@ namespace HitCounterManager
                 {
                     MessageBox.Show("Latest available version:\n\n   " + json["name"].ToString() + "\n\n" +
                         "Please visit the github project website (WWW button).\n" +
-                        "Then look for the releases to download the new version.", "New version available!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        "Then look at the releases to download the new version.", "New version available!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
