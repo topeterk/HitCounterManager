@@ -25,7 +25,7 @@
   <StyleUseCustom>false</StyleUseCustom>
   <StyleCssUrl>stylesheet_pink.css</StyleCssUrl>
   <StyleFontUrl>https://fonts.googleapis.com/css?family=Fontdiner%20Swanky</StyleFontUrl>
-  <StyleFontUrl>Fontdiner Swanky</StyleFontUrl>
+  <StyleFontName>Fontdiner Swanky</StyleFontName>
   <StyleDesiredWidth>0</StyleDesiredWidth>
   <ProfileSelected>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE</ProfileSelected>
   <Profiles>
@@ -1668,6 +1668,102 @@
           </ProfileRow>
           <ProfileRow>
             <Title>Nameless God</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+        </Rows>
+      </Profile>
+      <Profile>
+        <Name>Sekiro (All Main Bosses) [EN]</Name>
+        <Attempts>0</Attempts>
+        <Rows>
+          <ProfileRow>
+            <Title>Genichiro Ashina</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Gyoubu Masataka Oniwa</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Genichiro, Way of Tomoe</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Folding Screen Monkeys</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Lady Butterfly</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Guardian Ape</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Headless Ape</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Demon of Hatred</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Emma, the Gentle Blade</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Great Shinobi Owl</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Great Shinobi Owl (Father)</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Corrupted Monk</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Divine Dragon</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Isshin Ashina</Title>
+            <Hits>0</Hits>
+            <Diff>0</Diff>
+            <PB>0</PB>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Isshin, the Sword Saint</Title>
             <Hits>0</Hits>
             <Diff>0</Diff>
             <PB>0</PB>
