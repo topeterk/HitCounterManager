@@ -33,6 +33,7 @@ namespace HitCounterManager
     {
         public string Title = "";
         public int Hits = 0;
+        public int WayHits = 0;
         public int Diff = 0;
         public int PB = 0;
     }
@@ -100,7 +101,7 @@ namespace HitCounterManager
                 pi.SetAttemptsCount(prof.Attempts);
                 foreach (ProfileRow row in prof.Rows)
                 {
-                    pi.AddSplit(row.Title, row.Hits, row.PB);
+                    pi.AddSplit(row.Title, row.Hits, row.WayHits, row.PB);
                 }
             }
             pi.SetSessionProgress(0);
@@ -134,6 +135,7 @@ namespace HitCounterManager
                 ProfileRow ProfileRow = new ProfileRow();
                 ProfileRow.Title = pi.GetSplitTitle(r);
                 ProfileRow.Hits = pi.GetSplitHits(r);
+                ProfileRow.WayHits = pi.GetSplitWayHits(r);
                 ProfileRow.Diff = pi.GetSplitDiff(r);
                 ProfileRow.PB = pi.GetSplitPB(r);
                 prof.Rows.Add(ProfileRow);
@@ -199,9 +201,10 @@ namespace HitCounterManager
         /// Add split
         /// </summary>
         /// <param name="Title">Title</param>
-        /// <param name="Hits">Amount of hits</param>
+        /// <param name="Hits">Amount of hits at nosses (or all)</param>
+        /// <param name="WaysHits">Amount of hits on the way</param>
         /// <param name="PB">Amount of personal best hits</param>
-        void AddSplit(string Title, int Hits, int PB);
+        void AddSplit(string Title, int Hits, int WayHits, int PB);
 
         /// <summary>
         /// Gets the amount of attempts
@@ -234,11 +237,17 @@ namespace HitCounterManager
         /// <returns>Title</returns>
         string GetSplitTitle(int Index);
         /// <summary>
-        /// Gets the hit counts of a split
+        /// Gets the hit counts (boss) of a split
         /// </summary>
         /// <param name="Index">Index</param>
         /// <returns>Amount of hits</returns>
         int GetSplitHits(int Index);
+        /// <summary>
+        /// Gets the hit counts (way) of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <returns>Amount of hits</returns>
+        int GetSplitWayHits(int Index);
         /// <summary>
         /// Gets the hit difference of a split
         /// </summary>
@@ -262,8 +271,14 @@ namespace HitCounterManager
         /// Sets the hit counts of a split
         /// </summary>
         /// <param name="Index">Index</param>
-        /// <param name="Hits">Amount of hits</param>
+        /// <param name="Hits">Amount of hits at bosses (or all)</param>
         void SetSplitHits(int Index, int Hits);
+        /// <summary>
+        /// Sets the hit counts of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <param name="WayHits">Amount of hits on the way</param>
+        void SetSplitWayHits(int Index, int WayHits);
         /// <summary>
         /// Sets the hit difference of a split
         /// </summary>

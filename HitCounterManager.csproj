@@ -143,6 +143,7 @@
     <None Include="Images\icons8-attack-32.png" />
     <None Include="Images\icons8-add-20.png" />
     <None Include="Images\icons8-about-20.png" />
+    <None Include="Images\icons8-watch-your-step-20.png" />
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -213,6 +213,16 @@ namespace HitCounterManager.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_watch_your_step_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-watch-your-step-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_website_20 {
             get {
                 object obj = ResourceManager.GetObject("icons8_website_20", resourceCulture);

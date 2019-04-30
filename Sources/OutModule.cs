@@ -164,7 +164,7 @@ namespace HitCounterManager
                     for (int r = 0; r < iSplitCount; r++)
                     {
                         if (r != 0) sr.WriteLine(","); // separator
-                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + pi.GetSplitHits(r) + ", " + pi.GetSplitPB(r) + "]");
+                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + pi.GetSplitHits(r) + pi.GetSplitWayHits(r) + ", " + pi.GetSplitPB(r) + "]");
                     }
                     sr.WriteLine(""); // no trailing separator
                     sr.WriteLine("],");
@@ -222,7 +222,7 @@ namespace HitCounterManager
 
                     for (int r = 0; r < pi.GetSplitCount(); r++)
                     {
-                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + pi.GetSplitHits(r) + ", " + pi.GetSplitPB(r) + ", " + (r == active ? "1" : "0") + "]");
+                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + pi.GetSplitHits(r) + pi.GetSplitWayHits(r) + ", " + pi.GetSplitPB(r) + ", " + (r == active ? "1" : "0") + "]");
                     }
 
                     IsWritingList = true;

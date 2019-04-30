@@ -119,7 +119,7 @@ namespace HitCounterManager
             if (_settings.Version == 1) // Coming from version 1.10
             {
                 _settings.Version = 2;
-                _settings.MainWidth += 31; // added new checkbox to datagrid
+                _settings.MainWidth += 31; // added "SP" checkbox to datagrid
                 _settings.ShowSessionProgress = true;
                 _settings.StyleDesiredWidth = 0;
             }
@@ -135,6 +135,12 @@ namespace HitCounterManager
             {
                 _settings.Version = 4;
                 _settings.StyleFontName = "Fontdiner Swanky";
+            }
+            if (_settings.Version == 4) // Coming from version 1.16
+            {
+                _settings.Version = 5;
+                _settings.MainWidth += 50; // added "WayHits" textbox to datagrid
+                _settings.MainHeight += 13; // added second line to datagrid column header
             }
 
             // Apply settings..

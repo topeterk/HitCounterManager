@@ -80,10 +80,11 @@ namespace HitCounterManager
 
             // right aligned
             btnSplit.Left = Width - Pad - 15 - btnSplit.Width;
+            btnWayHit.Left = btnSplit.Left - Pad / 2 - btnWayHit.Width;
             lbl_totals.Width = Width - Pad - 15 - lbl_totals.Left;
 
             // left aligned
-            btnHit.Width = btnSplit.Left - Pad / 2 - btnHit.Left;
+            btnHit.Width = btnWayHit.Left - Pad / 2 - btnHit.Left;
         }
 
         protected override void WndProc(ref Message m)
@@ -181,7 +182,7 @@ namespace HitCounterManager
             {
                 for (int r = 0; r < Splits; r++)
                 {
-                    TotalHits = TotalHits + pi.GetSplitHits(r);
+                    TotalHits = TotalHits + pi.GetSplitHits(r) + pi.GetSplitWayHits(r);
                     TotalPB = TotalPB + pi.GetSplitPB(r);
                 }
 
@@ -410,7 +411,7 @@ namespace HitCounterManager
         {
             om.DataUpdatePending = true;
             pi.SetAttemptsCount(pi.GetAttemptsCount() + 1); // Increase attempts
-            for (int r = 0; r < pi.GetSplitCount(); r++) pi.SetSplitHits(r, 0);
+            for (int r = 0; r < pi.GetSplitCount(); r++) { pi.SetSplitHits(r, 0); pi.SetSplitWayHits(r, 0); }
             pi.SetActiveSplit(0);
             om.DataUpdatePending = false;
             UpdateProgressAndTotals();
@@ -422,7 +423,7 @@ namespace HitCounterManager
             if (0 == Splits) return;
 
             om.DataUpdatePending = true;
-            for (int r = 0; r < Splits; r++) pi.SetSplitPB(r, pi.GetSplitHits(r));
+            for (int r = 0; r < Splits; r++) pi.SetSplitPB(r, pi.GetSplitHits(r) + pi.GetSplitWayHits(r));
             pi.SetActiveSplit(Splits);
             pi.SetSessionProgress(Splits-1);
             om.DataUpdatePending = false;
@@ -444,6 +445,25 @@ namespace HitCounterManager
             if (0 < hits)
             {
                 pi.SetSplitHits(active, hits - 1);
+                pi.SetActiveSplit(active); // row is already selected already but we make sure the whole row gets visually selected if user has selected a cell only
+                UpdateProgressAndTotals();
+            }
+        }
+        private void btnWayHit_Click(object sender, EventArgs e)
+        {
+            int active = pi.GetActiveSplit();
+            pi.SetSplitWayHits(active, pi.GetSplitWayHits(active) + 1);
+            pi.SetActiveSplit(active); // row is already selected already but we make sure the whole row gets visually selected if user has selected a cell only
+            UpdateProgressAndTotals();
+        }
+
+        private void btnWayHitUndo_Click(object sender, EventArgs e)
+        {
+            int active = pi.GetActiveSplit();
+            int hits = pi.GetSplitWayHits(active);
+            if (0 < hits)
+            {
+                pi.SetSplitWayHits(active, hits - 1);
                 pi.SetActiveSplit(active); // row is already selected already but we make sure the whole row gets visually selected if user has selected a cell only
                 UpdateProgressAndTotals();
             }
@@ -538,7 +558,7 @@ namespace HitCounterManager
 
             if (0 <= e.RowIndex && 0 <= e.ColumnIndex)
             {
-                pi.SetSplitDiff(e.RowIndex, pi.GetSplitHits(e.RowIndex) - pi.GetSplitPB(e.RowIndex));
+                pi.SetSplitDiff(e.RowIndex, pi.GetSplitHits(e.RowIndex) + pi.GetSplitWayHits(e.RowIndex) - pi.GetSplitPB(e.RowIndex));
 
                 // When the session progress selection has changed, make sure no other selection is active at the same time
                 if (e.ColumnIndex == DataGridView1.Rows[0].Cells["cSP"].ColumnIndex)
@@ -640,7 +660,7 @@ namespace HitCounterManager
         }
 
         public void ClearSplits() { Rows.Clear(); }
-        public void AddSplit(string Title, int Hits, int PB) { ModifiedFlag = true; Rows.Add(new object[] { Title, Hits, Hits - PB, PB, false }); }
+        public void AddSplit(string Title, int Hits, int WayHits, int PB) { ModifiedFlag = true; Rows.Add(new object[] { Title, Hits, WayHits, Hits + WayHits - PB, PB, false }); }
 
         public int GetAttemptsCount() { return _AttemptsCounter; }
         public void SetAttemptsCount(int Attempts)
@@ -664,6 +684,7 @@ namespace HitCounterManager
         private T GetCellValueOfType<T>(DataGridViewCell Cell, T Default) {  try { return (null == Cell.Value ? Default : (T)Cell.Value); } catch { return Default; } }
         public string GetSplitTitle(int Index) { return GetCellValueOfType<string>(Rows[Index].Cells["cTitle"], ""); }
         public int GetSplitHits(int Index) { return GetCellValueOfType<int>(Rows[Index].Cells["cHits"], 0); }
+        public int GetSplitWayHits(int Index) { return GetCellValueOfType<int>(Rows[Index].Cells["cWayHits"], 0); }
         public int GetSplitDiff(int Index) { return GetCellValueOfType<int>(Rows[Index].Cells["cDiff"], 0); }
         public int GetSplitPB(int Index) { return GetCellValueOfType<int>(Rows[Index].Cells["cPB"], 0); }
 
@@ -694,6 +715,14 @@ namespace HitCounterManager
             {
                 ModifiedFlag = true;
                 Rows[Index].Cells["cHits"].Value = Hits;
+            }
+        }
+        public void SetSplitWayHits(int Index, int WayHits)
+        {
+            if (GetSplitWayHits(Index) != WayHits)
+            {
+                ModifiedFlag = true;
+                Rows[Index].Cells["cWayHits"].Value = WayHits;
             }
         }
         public void SetSplitDiff(int Index, int Diff)

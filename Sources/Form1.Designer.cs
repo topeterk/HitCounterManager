@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnCheckVersion = new System.Windows.Forms.Button();
             this.btnAttempts = new System.Windows.Forms.Button();
@@ -49,6 +50,7 @@
             this.btnUp = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
             this.btnHit = new System.Windows.Forms.Button();
+            this.btnWayHit = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnSplit = new System.Windows.Forms.Button();
             this.Spacer1 = new System.Windows.Forms.Label();
@@ -58,6 +60,7 @@
             this.cPB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cDiff = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cHits = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cWayHits = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ComboBox1 = new System.Windows.Forms.ComboBox();
             this.DataGridView1 = new HitCounterManager.ProfileDataGridView();
@@ -245,14 +248,14 @@
             // 
             // btnHit
             // 
-            this.btnHit.BackColor = System.Drawing.Color.LightBlue;
+            this.btnHit.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnHit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHit.Image = global::HitCounterManager.Properties.Resources.icons8_attack_32;
             this.btnHit.Location = new System.Drawing.Point(174, 57);
             this.btnHit.Name = "btnHit";
-            this.btnHit.Size = new System.Drawing.Size(305, 40);
+            this.btnHit.Size = new System.Drawing.Size(274, 40);
             this.btnHit.TabIndex = 23;
-            this.ToolTip1.SetToolTip(this.btnHit, "Count a HIT on the current split");
+            this.ToolTip1.SetToolTip(this.btnHit, "Count a HIT (boss) on the current split");
             this.btnHit.UseVisualStyleBackColor = false;
             this.btnHit.Click += new System.EventHandler(this.btnHit_Click);
             // 
@@ -274,13 +277,26 @@
             this.btnSplit.BackColor = System.Drawing.Color.LightGreen;
             this.btnSplit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSplit.Image = global::HitCounterManager.Properties.Resources.icons8_staircase_32;
-            this.btnSplit.Location = new System.Drawing.Point(485, 57);
+            this.btnSplit.Location = new System.Drawing.Point(535, 57);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(75, 40);
             this.btnSplit.TabIndex = 24;
             this.ToolTip1.SetToolTip(this.btnSplit, "Jump to the next SPLIT");
             this.btnSplit.UseVisualStyleBackColor = false;
             this.btnSplit.Click += new System.EventHandler(this.btnSplit_Click);
+            // 
+            // btnWayHit
+            // 
+            this.btnWayHit.BackColor = System.Drawing.Color.LightBlue;
+            this.btnWayHit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnWayHit.Image = global::HitCounterManager.Properties.Resources.icons8_watch_your_step_32;
+            this.btnWayHit.Location = new System.Drawing.Point(454, 57);
+            this.btnWayHit.Name = "btnWayHit";
+            this.btnWayHit.Size = new System.Drawing.Size(75, 40);
+            this.btnWayHit.TabIndex = 44;
+            this.ToolTip1.SetToolTip(this.btnWayHit, "Count a HIT (way) on the current split");
+            this.btnWayHit.UseVisualStyleBackColor = false;
+            this.btnWayHit.Click += new System.EventHandler(this.btnWayHit_Click);
             // 
             // Spacer1
             // 
@@ -353,12 +369,24 @@
             this.cHits.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle3.NullValue = "0";
             this.cHits.DefaultCellStyle = dataGridViewCellStyle3;
-            this.cHits.HeaderText = "Hits";
+            this.cHits.HeaderText = "Hits (Boss)";
             this.cHits.MinimumWidth = 30;
             this.cHits.Name = "cHits";
             this.cHits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cHits.ToolTipText = "Counted hits";
+            this.cHits.ToolTipText = "Actual split hit count (counter for all or boss hits only)";
             this.cHits.Width = 50;
+            // 
+            // cWayHits
+            // 
+            this.cWayHits.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle4.NullValue = "0";
+            this.cWayHits.DefaultCellStyle = dataGridViewCellStyle4;
+            this.cWayHits.HeaderText = "Hits (Way)";
+            this.cWayHits.MinimumWidth = 30;
+            this.cWayHits.Name = "cWayHits";
+            this.cWayHits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cWayHits.ToolTipText = "Actual split hit count (counter for hits outside of bosses)";
+            this.cWayHits.Width = 50;
             // 
             // cTitle
             // 
@@ -376,7 +404,7 @@
             this.ComboBox1.FormattingEnabled = true;
             this.ComboBox1.Location = new System.Drawing.Point(12, 30);
             this.ComboBox1.Name = "ComboBox1";
-            this.ComboBox1.Size = new System.Drawing.Size(548, 21);
+            this.ComboBox1.Size = new System.Drawing.Size(598, 21);
             this.ComboBox1.Sorted = true;
             this.ComboBox1.TabIndex = 28;
             this.ComboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
@@ -388,13 +416,14 @@
             this.DataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cTitle,
             this.cHits,
+            this.cWayHits,
             this.cDiff,
             this.cPB,
             this.cSP});
             this.DataGridView1.Location = new System.Drawing.Point(13, 123);
             this.DataGridView1.MultiSelect = false;
             this.DataGridView1.Name = "DataGridView1";
-            this.DataGridView1.Size = new System.Drawing.Size(547, 241);
+            this.DataGridView1.Size = new System.Drawing.Size(597, 254);
             this.DataGridView1.TabIndex = 25;
             this.DataGridView1.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridView1_CellMouseUp);
             this.DataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DataGridView1_CellValidating);
@@ -406,7 +435,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(572, 376);
+            this.ClientSize = new System.Drawing.Size(622, 389);
+            this.Controls.Add(this.btnWayHit);
             this.Controls.Add(this.btnCheckVersion);
             this.Controls.Add(this.btnAttempts);
             this.Controls.Add(this.Spacer2);
@@ -430,7 +460,7 @@
             this.Controls.Add(this.ComboBox1);
             this.Controls.Add(this.DataGridView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(400, 400);
+            this.MinimumSize = new System.Drawing.Size(450, 400);
             this.Name = "Form1";
             this.Text = "HitCounterManager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -460,6 +490,7 @@
         internal System.Windows.Forms.Button btnUp;
         internal System.Windows.Forms.Button btnDown;
         internal System.Windows.Forms.Button btnHit;
+        internal System.Windows.Forms.Button btnWayHit;
         internal System.Windows.Forms.Button btnReset;
         internal System.Windows.Forms.Button btnSplit;
         internal System.Windows.Forms.Label Spacer1;
@@ -469,6 +500,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cPB;
         private System.Windows.Forms.DataGridViewTextBoxColumn cDiff;
         private System.Windows.Forms.DataGridViewTextBoxColumn cHits;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cWayHits;
         private System.Windows.Forms.DataGridViewTextBoxColumn cTitle;
         internal System.Windows.Forms.ComboBox ComboBox1;
         internal ProfileDataGridView DataGridView1;
