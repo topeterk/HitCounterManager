@@ -2,7 +2,7 @@
 
 REM MIT License
 
-REM Copyright(c) 2018-2018 Peter Kirmeier
+REM Copyright(c) 2018-2019 Peter Kirmeier
 
 REM Permission Is hereby granted, free Of charge, to any person obtaining a copy
 REM of this software And associated documentation files (the "Software"), to deal
@@ -24,7 +24,8 @@ REM SOFTWARE.
 
 echo PrepareRelease.bat START ===========
 
-REM To run this script you need to have 7zip installed at the default path.
+REM To run this script you need to have 7zip installed at the default path
+REM or you have update the path:
 
 set PATH=%PATH%;C:\Program Files\7-Zip
 set PR_FINAL=FinalFiles
@@ -39,9 +40,5 @@ mkdir %PR_TARGET%
 call PostBuild.bat .\ %PR_BASE%\ %PR_TARGET%\
 del %PR_OUTPUT% 2>nul
 7z a %PR_OUTPUT% .\%PR_TARGET%\*
-
-echo Packing Windows Setup Release:
-set PR_OUTPUT=%PR_FINAL%\HitCounterManager_Win_Setup_v1.x.y.z.exe
-copy /B Setup\Setup\Express\SingleImage\DiskImages\DISK1\setup.exe %PR_OUTPUT%
 
 echo PrepareRelease.bat END ===========
