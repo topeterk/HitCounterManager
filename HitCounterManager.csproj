@@ -73,7 +73,7 @@
     <Compile Include="Sources\OsLayerWindows.cs" />
     <Compile Include="Sources\OutModule.cs" />
     <Compile Include="Sources\Profiles.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sources\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
