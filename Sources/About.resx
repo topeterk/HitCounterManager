@@ -122,7 +122,7 @@
 
 The software aims to only use licenses that allow commercial and non-commercial use.
 Moreover it aims to use the whole software without any charge.
-Therefore it should be free for everyone to use without any costs.
+Therefore it should be free for everyone to use it without any costs.
 DISCLAIMER: Above notice comes without warranty, so please refer to the explicit licenses below.
 
 ==============================================================================
@@ -140,30 +140,20 @@ Title: Pioneer Camp
 Author: Iconka  http://www.iconka.com
 Source: https://iconka.com/en/269/
 License: Linkware
+Licence information:
+
+The software aims to only use licenses that allow commercial and non-commercial use.
+Moreover it aims to use the whole software without any charge.
+Therefore it should be free for everyone to use it without any costs.
+DISCLAIMER: Above notice comes without warranty, so please refer to the explicit licenses below.
 
 ==============================================================================
-Check Mark Image
+Application
 
-Title: -
-Author: OpenClipart-Vectors
-Source: https://pixabay.com/p-1292787/
-Licence: CC0 1.0  https://creativecommons.org/publicdomain/zero/1.0/deed.en
-
-==============================================================================
-Cross Image
-
-Title: -
-Author: Clker-Free-Vector-Images
-Source: https://pixabay.com/p-304374/
-Licence: CC0 1.0  https://creativecommons.org/publicdomain/zero/1.0/deed.en
-
-==============================================================================
-Star Image
-
-Title: -
-Author: OpenClipart-Vectors
-Source: https://pixabay.com/de/commonwealth-commonwealth-of-star-2024305/
-Licence: CC0 1.0  https://creativecommons.org/publicdomain/zero/1.0/deed.en
+Title: HitCounterManager
+Author: Peter Kirmeier &lt;topeterk@freenet.de&gt;
+Source: https://github.com/topeterk/HitCounterManager
+Licence: MIT https://opensource.org/licenses/MIT
 
 ==============================================================================
 Application Button Images
@@ -174,12 +164,45 @@ Source: https://icons8.com/
 Licence: CC BY-ND 3.0  https://creativecommons.org/licenses/by-nd/3.0/
 
 ==============================================================================
+Check Mark Image
+
+Title: -
+Author: OpenClipart-Vectors
+Source: https://pixabay.com/p-1292787/
+Licence: Pixabay License
+
+==============================================================================
+Cross Image
+
+Title: -
+Author: Clker-Free-Vector-Images
+Source: https://pixabay.com/p-304374/
+Licence: Pixabay License
+
+==============================================================================
+Star Image
+
+Title: -
+Author: OpenClipart-Vectors
+Source: https://pixabay.com/de/commonwealth-commonwealth-of-star-2024305/
+Licence: Pixabay License
+
+==============================================================================
+Setup Banner Image
+
+Title: -
+Author: Free-Photos
+Source: https://pixabay.com/photos/bonfire-fire-man-dancing-rituals-1209269/
+Licence: Pixabay License
+
+==============================================================================
 C# JSON parser
 
 Title: Tiny Json
 Author: Alex Parker
 Source: https://github.com/zanders3/json
 Licence:
+
 The MIT License (MIT)
 
 Copyright (c) 2018 Alex Parker
@@ -200,7 +223,23 @@ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-</value>
+
+URL: https://opensource.org/licenses/MIT
+
+==============================================================================
+Pixabay License
+
+Images and Videos on Pixabay are made available under the Pixabay License on the following terms.Under the Pixabay License you are granted an irrevocable, worldwide, non-exclusive and royalty free right to use, download, copy, modify or adapt the Images and Videos for commercial or non-commercial purposes.Attribution of the photographer or Pixabay is not required but is always appreciated. 
+
+The Pixabay License does not allow:
+a.sale or distribution of Images or Videos as digital stock photos or as digital wallpapers;
+b.sale or distribution of Images or Videos e.g. as a posters, digital prints or physical products, without adding any additional elements or otherwise adding value;
+c.depiction of identifiable persons in an offensive, pornographic, obscene, immoral, defamatory or libelous way; or
+d.any suggestion that there is an endorsement of products and services by depicted persons, brands, and organisations, unless permission was granted.
+
+Please be aware that while all Images and Videos on Pixabay are free to use for commercial and non-commercial purposes, depicted items in the Images or Videos, such as identifiable people, logos, brands, etc. may be subject to additional copyrights, property rights, privacy rights, trademarks etc. and may require the consent of a third party or the license of these rights - particularly for commercial applications. Pixabay does not represent or warrant that such consents or licenses have been obtained, and expressly disclaims any liability in this respect.
+
+URL: https://pixabay.com/de/service/license/</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
