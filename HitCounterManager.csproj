@@ -144,7 +144,7 @@
     <None Include="Images\icons8-add-20.png" />
     <None Include="Images\icons8-about-20.png" />
     <None Include="Images\icons8-watch-your-step-20.png" />
-    <None Include="App.config" />
+    <None Include="Sources\App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
