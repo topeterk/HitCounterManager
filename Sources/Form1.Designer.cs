@@ -69,7 +69,7 @@
             // 
             // btnCheckVersion
             // 
-            this.btnCheckVersion.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_cloud_20;
+            this.btnCheckVersion.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_cloud_20;
             this.btnCheckVersion.FlatAppearance.BorderSize = 0;
             this.btnCheckVersion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCheckVersion.Location = new System.Drawing.Point(91, 4);
@@ -82,7 +82,7 @@
             // 
             // btnAttempts
             // 
-            this.btnAttempts.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_counter_20;
+            this.btnAttempts.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_counter_20;
             this.btnAttempts.FlatAppearance.BorderSize = 0;
             this.btnAttempts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAttempts.Location = new System.Drawing.Point(277, 4);
@@ -105,7 +105,7 @@
             // 
             // btnAbout
             // 
-            this.btnAbout.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_about_20;
+            this.btnAbout.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_about_20;
             this.btnAbout.FlatAppearance.BorderSize = 0;
             this.btnAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAbout.Location = new System.Drawing.Point(117, 4);
@@ -118,7 +118,7 @@
             // 
             // btnWeb
             // 
-            this.btnWeb.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_website_20;
+            this.btnWeb.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_website_20;
             this.btnWeb.FlatAppearance.BorderSize = 0;
             this.btnWeb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWeb.Location = new System.Drawing.Point(65, 4);
@@ -131,7 +131,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_save_20;
+            this.btnSave.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_save_20;
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Location = new System.Drawing.Point(39, 4);
@@ -144,7 +144,7 @@
             // 
             // btnSettings
             // 
-            this.btnSettings.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_settings_20;
+            this.btnSettings.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_settings_20;
             this.btnSettings.FlatAppearance.BorderSize = 0;
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettings.Location = new System.Drawing.Point(13, 4);
@@ -157,7 +157,7 @@
             // 
             // btnCopy
             // 
-            this.btnCopy.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_copy_20;
+            this.btnCopy.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_copy_20;
             this.btnCopy.FlatAppearance.BorderSize = 0;
             this.btnCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCopy.Location = new System.Drawing.Point(210, 4);
@@ -172,7 +172,7 @@
             // 
             this.btnPB.BackColor = System.Drawing.Color.LightYellow;
             this.btnPB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPB.Image = global::HitCounterManager.Properties.Resources.icons8_trophy_32;
+            this.btnPB.Image = global::HitCounterManager.Sources.Resources.icons8_trophy_32;
             this.btnPB.Location = new System.Drawing.Point(93, 57);
             this.btnPB.Name = "btnPB";
             this.btnPB.Size = new System.Drawing.Size(75, 40);
@@ -183,7 +183,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_trash_20;
+            this.btnDelete.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_trash_20;
             this.btnDelete.FlatAppearance.BorderSize = 0;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Location = new System.Drawing.Point(236, 4);
@@ -196,7 +196,7 @@
             // 
             // btnRename
             // 
-            this.btnRename.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_edit_20;
+            this.btnRename.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_edit_20;
             this.btnRename.FlatAppearance.BorderSize = 0;
             this.btnRename.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRename.Location = new System.Drawing.Point(184, 4);
@@ -209,7 +209,7 @@
             // 
             // btnNew
             // 
-            this.btnNew.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_add_20;
+            this.btnNew.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_add_20;
             this.btnNew.FlatAppearance.BorderSize = 0;
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Location = new System.Drawing.Point(158, 4);
@@ -222,7 +222,7 @@
             // 
             // btnUp
             // 
-            this.btnUp.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_scroll_up_20;
+            this.btnUp.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_scroll_up_20;
             this.btnUp.FlatAppearance.BorderSize = 0;
             this.btnUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUp.Location = new System.Drawing.Point(303, 4);
@@ -235,7 +235,7 @@
             // 
             // btnDown
             // 
-            this.btnDown.BackgroundImage = global::HitCounterManager.Properties.Resources.icons8_scroll_down_20;
+            this.btnDown.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_scroll_down_20;
             this.btnDown.FlatAppearance.BorderSize = 0;
             this.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDown.Location = new System.Drawing.Point(329, 4);
@@ -250,7 +250,7 @@
             // 
             this.btnHit.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnHit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHit.Image = global::HitCounterManager.Properties.Resources.icons8_attack_32;
+            this.btnHit.Image = global::HitCounterManager.Sources.Resources.icons8_attack_32;
             this.btnHit.Location = new System.Drawing.Point(174, 57);
             this.btnHit.Name = "btnHit";
             this.btnHit.Size = new System.Drawing.Size(274, 40);
@@ -263,7 +263,7 @@
             // 
             this.btnReset.BackColor = System.Drawing.Color.Salmon;
             this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.Image = global::HitCounterManager.Properties.Resources.icons8_repeat_one_32;
+            this.btnReset.Image = global::HitCounterManager.Sources.Resources.icons8_repeat_one_32;
             this.btnReset.Location = new System.Drawing.Point(12, 57);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 40);
@@ -276,7 +276,7 @@
             // 
             this.btnSplit.BackColor = System.Drawing.Color.LightGreen;
             this.btnSplit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSplit.Image = global::HitCounterManager.Properties.Resources.icons8_staircase_32;
+            this.btnSplit.Image = global::HitCounterManager.Sources.Resources.icons8_staircase_32;
             this.btnSplit.Location = new System.Drawing.Point(535, 57);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(75, 40);
@@ -289,7 +289,7 @@
             // 
             this.btnWayHit.BackColor = System.Drawing.Color.LightBlue;
             this.btnWayHit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnWayHit.Image = global::HitCounterManager.Properties.Resources.icons8_watch_your_step_32;
+            this.btnWayHit.Image = global::HitCounterManager.Sources.Resources.icons8_watch_your_step_32;
             this.btnWayHit.Location = new System.Drawing.Point(454, 57);
             this.btnWayHit.Name = "btnWayHit";
             this.btnWayHit.Size = new System.Drawing.Size(75, 40);
