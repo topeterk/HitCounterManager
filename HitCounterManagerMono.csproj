@@ -19,6 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\DebugMono\</OutputPath>
+    <IntermediateOutputPath>obj\DebugMono\</IntermediateOutputPath>
     <DefineConstants>TRACE;DEBUG;OS_ANY</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -38,6 +39,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
     <OutputPath>bin\ReleaseMono\</OutputPath>
+    <IntermediateOutputPath>obj\ReleaseMono\</IntermediateOutputPath>
     <DefineConstants>TRACET;OS_ANY</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
