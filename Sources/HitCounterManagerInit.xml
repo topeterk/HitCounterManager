@@ -5,15 +5,19 @@
   <MainHeight>800</MainHeight>
   <HotKeyMethod>1</HotKeyMethod>
   <ShortcutResetEnable>false</ShortcutResetEnable>
-  <ShortcutResetKeyCode>65653</ShortcutResetKeyCode>
+  <ShortcutResetKeyCode>65655</ShortcutResetKeyCode>
   <ShortcutHitEnable>false</ShortcutHitEnable>
-  <ShortcutHitKeyCode>65654</ShortcutHitKeyCode>
+  <ShortcutHitKeyCode>65648</ShortcutHitKeyCode>
   <ShortcutHitUndoEnable>false</ShortcutHitUndoEnable>
-  <ShortcutHitUndoKeyCode>65656</ShortcutHitUndoKeyCode>
+  <ShortcutHitUndoKeyCode>65652</ShortcutHitUndoKeyCode>
+  <ShortcutWayHitEnable>false</ShortcutWayHitEnable>
+  <ShortcutWayHitKeyCode>65649</ShortcutWayHitKeyCode>
+  <ShortcutWayHitUndoEnable>false</ShortcutWayHitUndoEnable>
+  <ShortcutWayHitUndoKeyCode>65653</ShortcutWayHitUndoKeyCode>
   <ShortcutSplitEnable>false</ShortcutSplitEnable>
-  <ShortcutSplitKeyCode>65655</ShortcutSplitKeyCode>
+  <ShortcutSplitKeyCode>65650</ShortcutSplitKeyCode>
   <ShortcutSplitPrevEnable>false</ShortcutSplitPrevEnable>
-  <ShortcutSplitPrevKeyCode>65657</ShortcutSplitPrevKeyCode>
+  <ShortcutSplitPrevKeyCode>65654</ShortcutSplitPrevKeyCode>
   <Inputfile>HitCounter.template</Inputfile>
   <OutputFile>HitCounter.html</OutputFile>
   <ShowAttemptsCounter>true</ShowAttemptsCounter>

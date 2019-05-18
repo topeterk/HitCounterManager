@@ -54,6 +54,12 @@ namespace HitCounterManager
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_HitUndo);
             cbScHitUndo.Checked = key.used;
             if (key.valid) txtHitUndo.Text = key.GetDescriptionString();
+            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_WayHit);
+            cbScWayHit.Checked = key.used;
+            if (key.valid) txtWayHit.Text = key.GetDescriptionString();
+            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_WayHitUndo);
+            cbScWayHitUndo.Checked = key.used;
+            if (key.valid) txtWayHitUndo.Text = key.GetDescriptionString();
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Split);
             cbScNextSplit.Checked = key.used;
             if (key.valid) txtNextSplit.Text = key.GetDescriptionString();
@@ -162,6 +168,18 @@ namespace HitCounterManager
             cbScHitUndo.Checked = true;
         }
 
+        private void TxtWayHit_KeyDown(object sender, KeyEventArgs e)
+        {
+            RegisterHotKey(txtWayHit, Shortcuts.SC_Type.SC_Type_WayHit, e);
+            cbScWayHit.Checked = true;
+        }
+
+        private void TxtWayHitUndo_KeyDown(object sender, KeyEventArgs e)
+        {
+            RegisterHotKey(txtWayHitUndo, Shortcuts.SC_Type.SC_Type_WayHitUndo, e);
+            cbScWayHitUndo.Checked = true;
+        }
+
         private void txtNextSplit_KeyDown(object sender, KeyEventArgs e)
         {
             RegisterHotKey(txtNextSplit, Shortcuts.SC_Type.SC_Type_Split, e);
@@ -187,6 +205,16 @@ namespace HitCounterManager
         private void cbScHitUndo_CheckedChanged(object sender, EventArgs e)
         {
             sc.Key_SetState(Shortcuts.SC_Type.SC_Type_HitUndo, cbScHitUndo.Checked);
+        }
+
+        private void CbScWayHit_CheckedChanged(object sender, EventArgs e)
+        {
+            sc.Key_SetState(Shortcuts.SC_Type.SC_Type_WayHit, cbScWayHit.Checked);
+        }
+
+        private void CbScWayHitUndo_CheckedChanged(object sender, EventArgs e)
+        {
+            sc.Key_SetState(Shortcuts.SC_Type.SC_Type_WayHitUndo, cbScWayHitUndo.Checked);
         }
 
         private void cbScNextSplit_CheckedChanged(object sender, EventArgs e)

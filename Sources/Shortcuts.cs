@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright(c) 2016-2018 Peter Kirmeier
+//Copyright(c) 2016-2019 Peter Kirmeier
 
 //Permission Is hereby granted, free Of charge, to any person obtaining a copy
 //of this software And associated documentation files (the "Software"), to deal
@@ -130,7 +130,10 @@ namespace HitCounterManager
             // Since version 1.15:
             SC_Type_HitUndo = 3,
             SC_Type_SplitPrev = 4,
-            SC_Type_MAX = 5
+            // Since version 1.17:
+            SC_Type_WayHit = 5,
+            SC_Type_WayHitUndo = 6,
+            SC_Type_MAX = 7
         };
 
         public enum SC_HotKeyMethod {

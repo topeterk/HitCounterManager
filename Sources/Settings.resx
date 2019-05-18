@@ -123,7 +123,7 @@
   <data name="txtFontName.ToolTip" xml:space="preserve">
     <value>Personalize the design by switching to another font.
 Enter a font family name that is installed on your computer like sans-serif or courier.
-Or enter the font family name of an external font that is loaded using the font URL field.</value>
+Or enter the font family name of an external font that is loaded using the "Font: (URL)" field.</value>
   </data>
   <data name="numStyleDesiredWidth.ToolTip" xml:space="preserve">
     <value>Sets the display width in pixels to maintain a specific size even when different profiles are loaded.

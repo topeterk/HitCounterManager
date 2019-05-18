@@ -41,6 +41,10 @@ namespace HitCounterManager
         public int ShortcutHitKeyCode;
         public bool ShortcutHitUndoEnable;
         public int ShortcutHitUndoKeyCode;
+        public bool ShortcutWayHitEnable;
+        public int ShortcutWayHitKeyCode;
+        public bool ShortcutWayHitUndoEnable;
+        public int ShortcutWayHitUndoKeyCode;
         public bool ShortcutSplitEnable;
         public int ShortcutSplitKeyCode;
         public bool ShortcutSplitPrevEnable;
@@ -73,6 +77,7 @@ namespace HitCounterManager
         private void LoadSettings()
         {
             ShortcutsKey key = new ShortcutsKey();
+            bool bNewSettings = false;
 
             om.DataUpdatePending = true;
 
@@ -87,6 +92,7 @@ namespace HitCounterManager
             if (null == _settings)
             {
                 _settings = new SettingsRoot();
+                bNewSettings = true; // no settings loaded, so we create complete new one
 
                 // prepare defaults..
                 _settings.Version = 0;
@@ -141,6 +147,23 @@ namespace HitCounterManager
                 _settings.Version = 5;
                 _settings.MainWidth += 50; // added "WayHits" textbox to datagrid
                 _settings.MainHeight += 13; // added second line to datagrid column header
+                _settings.ShortcutWayHitEnable = false;
+                _settings.ShortcutWayHitKeyCode = 0x10000 | 0x74; // Shift F5
+                _settings.ShortcutWayHitUndoEnable = false;
+                _settings.ShortcutWayHitUndoKeyCode = 0x10000 | 0x7A; // Shift F11
+            }
+
+            if (bNewSettings)
+            {
+                // Use different hot keys when loaded the first time
+                _settings.ShortcutHitKeyCode = 0x10000 | 0x70; // Shift F1
+                _settings.ShortcutWayHitKeyCode = 0x10000 | 0x71; // Shift F2
+                _settings.ShortcutSplitKeyCode = 0x10000 | 0x72; // Shift F3
+
+                _settings.ShortcutHitUndoKeyCode = 0x10000 | 0x74; // Shift F5
+                _settings.ShortcutWayHitUndoKeyCode = 0x10000 | 0x75; // Shift F6
+                _settings.ShortcutSplitPrevKeyCode = 0x10000 | 0x76; // Shift F7
+                _settings.ShortcutResetKeyCode = 0x10000 | 0x77; // Shift F8
             }
 
             // Apply settings..
@@ -166,6 +189,16 @@ namespace HitCounterManager
                 sc.Key_Set(Shortcuts.SC_Type.SC_Type_HitUndo, key);
             else
                 sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_HitUndo, key);
+            key.key = new KeyEventArgs((Keys)_settings.ShortcutWayHitKeyCode);
+            if (_settings.ShortcutWayHitEnable)
+                sc.Key_Set(Shortcuts.SC_Type.SC_Type_WayHit, key);
+            else
+                sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_WayHit, key);
+            key.key = new KeyEventArgs((Keys)_settings.ShortcutWayHitUndoKeyCode);
+            if (_settings.ShortcutWayHitUndoEnable)
+                sc.Key_Set(Shortcuts.SC_Type.SC_Type_WayHitUndo, key);
+            else
+                sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_WayHitUndo, key);
             key.key = new KeyEventArgs((Keys)_settings.ShortcutSplitKeyCode);
             if (_settings.ShortcutSplitEnable)
                 sc.Key_Set(Shortcuts.SC_Type.SC_Type_Split, key);
@@ -219,6 +252,12 @@ namespace HitCounterManager
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_HitUndo);
             _settings.ShortcutHitUndoEnable = key.used;
             _settings.ShortcutHitUndoKeyCode = (int)key.key.KeyData;
+            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_WayHit);
+            _settings.ShortcutWayHitEnable = key.used;
+            _settings.ShortcutWayHitKeyCode = (int)key.key.KeyData;
+            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_WayHitUndo);
+            _settings.ShortcutWayHitUndoEnable = key.used;
+            _settings.ShortcutWayHitUndoKeyCode = (int)key.key.KeyData;
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Split);
             _settings.ShortcutSplitEnable = key.used;
             _settings.ShortcutSplitKeyCode = (int)key.key.KeyData;

@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtFontName = new System.Windows.Forms.TextBox();
             this.cbApCustomCss = new System.Windows.Forms.CheckBox();
             this.txtCssUrl = new System.Windows.Forms.TextBox();
             this.txtFontUrl = new System.Windows.Forms.TextBox();
@@ -51,9 +53,16 @@
             this.numShowSplitsCountFinished = new System.Windows.Forms.NumericUpDown();
             this.Label3 = new System.Windows.Forms.Label();
             this.tab_globalshortcuts = new System.Windows.Forms.TabPage();
-            this.cbScHitUndo = new System.Windows.Forms.CheckBox();
+            this.txtWayHitUndo = new System.Windows.Forms.TextBox();
+            this.txtWayHit = new System.Windows.Forms.TextBox();
             this.txtHitUndo = new System.Windows.Forms.TextBox();
             this.txtPrevSplit = new System.Windows.Forms.TextBox();
+            this.txtNextSplit = new System.Windows.Forms.TextBox();
+            this.txtHit = new System.Windows.Forms.TextBox();
+            this.txtReset = new System.Windows.Forms.TextBox();
+            this.cbScWayHitUndo = new System.Windows.Forms.CheckBox();
+            this.cbScWayHit = new System.Windows.Forms.CheckBox();
+            this.cbScHitUndo = new System.Windows.Forms.CheckBox();
             this.cbScPrevSplit = new System.Windows.Forms.CheckBox();
             this.Label6 = new System.Windows.Forms.Label();
             this.radioHotKeyMethod_async = new System.Windows.Forms.RadioButton();
@@ -61,10 +70,7 @@
             this.radioHotKeyMethod_sync = new System.Windows.Forms.RadioButton();
             this.cbScReset = new System.Windows.Forms.CheckBox();
             this.cbScHit = new System.Windows.Forms.CheckBox();
-            this.txtNextSplit = new System.Windows.Forms.TextBox();
             this.cbScNextSplit = new System.Windows.Forms.CheckBox();
-            this.txtHit = new System.Windows.Forms.TextBox();
-            this.txtReset = new System.Windows.Forms.TextBox();
             this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tab_appearance = new System.Windows.Forms.TabPage();
             this.tab_filepaths = new System.Windows.Forms.TabPage();
@@ -78,8 +84,6 @@
             this.btnInput = new System.Windows.Forms.Button();
             this.OpenFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.TabControl1 = new System.Windows.Forms.TabControl();
-            this.txtFontName = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.GroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
@@ -102,10 +106,28 @@
             this.GroupBox1.Controls.Add(this.Label12);
             this.GroupBox1.Location = new System.Drawing.Point(10, 103);
             this.GroupBox1.Name = "GroupBox1";
-            this.GroupBox1.Size = new System.Drawing.Size(563, 100);
+            this.GroupBox1.Size = new System.Drawing.Size(563, 126);
             this.GroupBox1.TabIndex = 19;
             this.GroupBox1.TabStop = false;
             this.GroupBox1.Text = "Customization";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 71);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(60, 13);
+            this.label15.TabIndex = 17;
+            this.label15.Text = "Font name:";
+            // 
+            // txtFontName
+            // 
+            this.txtFontName.Enabled = false;
+            this.txtFontName.Location = new System.Drawing.Point(74, 68);
+            this.txtFontName.Name = "txtFontName";
+            this.txtFontName.Size = new System.Drawing.Size(222, 20);
+            this.txtFontName.TabIndex = 16;
+            this.ToolTip1.SetToolTip(this.txtFontName, resources.GetString("txtFontName.ToolTip"));
             // 
             // cbApCustomCss
             // 
@@ -122,27 +144,27 @@
             // txtCssUrl
             // 
             this.txtCssUrl.Enabled = false;
-            this.txtCssUrl.Location = new System.Drawing.Point(71, 42);
+            this.txtCssUrl.Location = new System.Drawing.Point(74, 42);
             this.txtCssUrl.Name = "txtCssUrl";
-            this.txtCssUrl.Size = new System.Drawing.Size(425, 20);
+            this.txtCssUrl.Size = new System.Drawing.Size(422, 20);
             this.txtCssUrl.TabIndex = 9;
             this.ToolTip1.SetToolTip(this.txtCssUrl, "Personalize the design by switching to another stylesheet");
             // 
             // txtFontUrl
             // 
             this.txtFontUrl.Enabled = false;
-            this.txtFontUrl.Location = new System.Drawing.Point(71, 68);
+            this.txtFontUrl.Location = new System.Drawing.Point(74, 94);
             this.txtFontUrl.Name = "txtFontUrl";
-            this.txtFontUrl.Size = new System.Drawing.Size(425, 20);
+            this.txtFontUrl.Size = new System.Drawing.Size(422, 20);
             this.txtFontUrl.TabIndex = 7;
             this.ToolTip1.SetToolTip(this.txtFontUrl, "Personalize the design by switching to another font.\r\nKeep the field empty if you" +
-        " dont use an external font.\r\nOtherwise specify the path to an @font-face ressour" +
-        "ce.");
+        " do not use an external font.\r\nOtherwise specify the path to a @font-face ressou" +
+        "rce.");
             // 
             // Label11
             // 
             this.Label11.AutoSize = true;
-            this.Label11.Location = new System.Drawing.Point(3, 45);
+            this.Label11.Location = new System.Drawing.Point(6, 45);
             this.Label11.Name = "Label11";
             this.Label11.Size = new System.Drawing.Size(62, 13);
             this.Label11.TabIndex = 11;
@@ -152,20 +174,20 @@
             // 
             this.btnApApply.BackColor = System.Drawing.Color.LightYellow;
             this.btnApApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.btnApApply.Location = new System.Drawing.Point(502, 19);
+            this.btnApApply.Location = new System.Drawing.Point(502, 42);
             this.btnApApply.Name = "btnApApply";
-            this.btnApApply.Size = new System.Drawing.Size(55, 69);
+            this.btnApApply.Size = new System.Drawing.Size(55, 72);
             this.btnApApply.TabIndex = 15;
             this.btnApApply.Text = "Apply";
-            this.ToolTip1.SetToolTip(this.btnApApply, "To prevent issues with loading incomplete URLs, please apply manually after editi" +
-        "ng");
+            this.ToolTip1.SetToolTip(this.btnApApply, "To prevent issues with loading incomplete URLs, please click the Apply button man" +
+        "ually after editing.");
             this.btnApApply.UseVisualStyleBackColor = false;
             this.btnApApply.Click += new System.EventHandler(this.btnApApply_Click);
             // 
             // Label12
             // 
             this.Label12.AutoSize = true;
-            this.Label12.Location = new System.Drawing.Point(3, 71);
+            this.Label12.Location = new System.Drawing.Point(6, 97);
             this.Label12.Name = "Label12";
             this.Label12.Size = new System.Drawing.Size(62, 13);
             this.Label12.TabIndex = 12;
@@ -335,9 +357,16 @@
             // 
             // tab_globalshortcuts
             // 
-            this.tab_globalshortcuts.Controls.Add(this.cbScHitUndo);
+            this.tab_globalshortcuts.Controls.Add(this.txtWayHitUndo);
+            this.tab_globalshortcuts.Controls.Add(this.txtWayHit);
             this.tab_globalshortcuts.Controls.Add(this.txtHitUndo);
             this.tab_globalshortcuts.Controls.Add(this.txtPrevSplit);
+            this.tab_globalshortcuts.Controls.Add(this.txtNextSplit);
+            this.tab_globalshortcuts.Controls.Add(this.txtHit);
+            this.tab_globalshortcuts.Controls.Add(this.txtReset);
+            this.tab_globalshortcuts.Controls.Add(this.cbScWayHitUndo);
+            this.tab_globalshortcuts.Controls.Add(this.cbScWayHit);
+            this.tab_globalshortcuts.Controls.Add(this.cbScHitUndo);
             this.tab_globalshortcuts.Controls.Add(this.cbScPrevSplit);
             this.tab_globalshortcuts.Controls.Add(this.Label6);
             this.tab_globalshortcuts.Controls.Add(this.radioHotKeyMethod_async);
@@ -345,36 +374,45 @@
             this.tab_globalshortcuts.Controls.Add(this.radioHotKeyMethod_sync);
             this.tab_globalshortcuts.Controls.Add(this.cbScReset);
             this.tab_globalshortcuts.Controls.Add(this.cbScHit);
-            this.tab_globalshortcuts.Controls.Add(this.txtNextSplit);
             this.tab_globalshortcuts.Controls.Add(this.cbScNextSplit);
-            this.tab_globalshortcuts.Controls.Add(this.txtHit);
-            this.tab_globalshortcuts.Controls.Add(this.txtReset);
             this.tab_globalshortcuts.Location = new System.Drawing.Point(4, 22);
             this.tab_globalshortcuts.Name = "tab_globalshortcuts";
             this.tab_globalshortcuts.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.tab_globalshortcuts.Size = new System.Drawing.Size(588, 209);
+            this.tab_globalshortcuts.Size = new System.Drawing.Size(588, 235);
             this.tab_globalshortcuts.TabIndex = 0;
             this.tab_globalshortcuts.Text = "Global shortcuts";
             this.tab_globalshortcuts.UseVisualStyleBackColor = true;
             // 
-            // cbScHitUndo
+            // txtWayHitUndo
             // 
-            this.cbScHitUndo.AutoSize = true;
-            this.cbScHitUndo.Location = new System.Drawing.Point(300, 58);
-            this.cbScHitUndo.Name = "cbScHitUndo";
-            this.cbScHitUndo.Size = new System.Drawing.Size(69, 17);
-            this.cbScHitUndo.TabIndex = 12;
-            this.cbScHitUndo.Text = "Undo hit:";
-            this.ToolTip1.SetToolTip(this.cbScHitUndo, "Enable hot key for undoing hits");
-            this.cbScHitUndo.UseVisualStyleBackColor = true;
-            this.cbScHitUndo.CheckedChanged += new System.EventHandler(this.cbScHitUndo_CheckedChanged);
+            this.txtWayHitUndo.Location = new System.Drawing.Point(384, 55);
+            this.txtWayHitUndo.Name = "txtWayHitUndo";
+            this.txtWayHitUndo.ReadOnly = true;
+            this.txtWayHitUndo.Size = new System.Drawing.Size(194, 20);
+            this.txtWayHitUndo.TabIndex = 17;
+            this.txtWayHitUndo.Text = "None";
+            this.txtWayHitUndo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip1.SetToolTip(this.txtWayHitUndo, "Click into the field and press the hot key you want to use");
+            this.txtWayHitUndo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtWayHitUndo_KeyDown);
+            // 
+            // txtWayHit
+            // 
+            this.txtWayHit.Location = new System.Drawing.Point(85, 56);
+            this.txtWayHit.Name = "txtWayHit";
+            this.txtWayHit.ReadOnly = true;
+            this.txtWayHit.Size = new System.Drawing.Size(194, 20);
+            this.txtWayHit.TabIndex = 15;
+            this.txtWayHit.Text = "None";
+            this.txtWayHit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip1.SetToolTip(this.txtWayHit, "Click into the field and press the hot key you want to use");
+            this.txtWayHit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtWayHit_KeyDown);
             // 
             // txtHitUndo
             // 
-            this.txtHitUndo.Location = new System.Drawing.Point(383, 56);
+            this.txtHitUndo.Location = new System.Drawing.Point(384, 30);
             this.txtHitUndo.Name = "txtHitUndo";
             this.txtHitUndo.ReadOnly = true;
-            this.txtHitUndo.Size = new System.Drawing.Size(199, 20);
+            this.txtHitUndo.Size = new System.Drawing.Size(194, 20);
             this.txtHitUndo.TabIndex = 13;
             this.txtHitUndo.Text = "None";
             this.txtHitUndo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -383,20 +421,92 @@
             // 
             // txtPrevSplit
             // 
-            this.txtPrevSplit.Location = new System.Drawing.Point(383, 82);
+            this.txtPrevSplit.Location = new System.Drawing.Point(384, 82);
             this.txtPrevSplit.Name = "txtPrevSplit";
             this.txtPrevSplit.ReadOnly = true;
-            this.txtPrevSplit.Size = new System.Drawing.Size(199, 20);
+            this.txtPrevSplit.Size = new System.Drawing.Size(194, 20);
             this.txtPrevSplit.TabIndex = 11;
             this.txtPrevSplit.Text = "None";
             this.txtPrevSplit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip1.SetToolTip(this.txtPrevSplit, "Click into the field and press the hot key you want to use");
             this.txtPrevSplit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPrevSplit_KeyDown);
             // 
+            // txtNextSplit
+            // 
+            this.txtNextSplit.Location = new System.Drawing.Point(85, 82);
+            this.txtNextSplit.Name = "txtNextSplit";
+            this.txtNextSplit.ReadOnly = true;
+            this.txtNextSplit.Size = new System.Drawing.Size(194, 20);
+            this.txtNextSplit.TabIndex = 5;
+            this.txtNextSplit.Text = "None";
+            this.txtNextSplit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip1.SetToolTip(this.txtNextSplit, "Click into the field and press the hot key you want to use");
+            this.txtNextSplit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNextSplit_KeyDown);
+            // 
+            // txtHit
+            // 
+            this.txtHit.Location = new System.Drawing.Point(85, 30);
+            this.txtHit.Name = "txtHit";
+            this.txtHit.ReadOnly = true;
+            this.txtHit.Size = new System.Drawing.Size(194, 20);
+            this.txtHit.TabIndex = 4;
+            this.txtHit.Text = "None";
+            this.txtHit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip1.SetToolTip(this.txtHit, "Click into the field and press the hot key you want to use");
+            this.txtHit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtHit_KeyDown);
+            // 
+            // txtReset
+            // 
+            this.txtReset.Location = new System.Drawing.Point(384, 108);
+            this.txtReset.Name = "txtReset";
+            this.txtReset.ReadOnly = true;
+            this.txtReset.Size = new System.Drawing.Size(194, 20);
+            this.txtReset.TabIndex = 3;
+            this.txtReset.Text = "None";
+            this.txtReset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip1.SetToolTip(this.txtReset, "Click into the field and press the hot key you want to use");
+            this.txtReset.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtReset_KeyDown);
+            // 
+            // cbScWayHitUndo
+            // 
+            this.cbScWayHitUndo.AutoSize = true;
+            this.cbScWayHitUndo.Location = new System.Drawing.Point(285, 58);
+            this.cbScWayHitUndo.Name = "cbScWayHitUndo";
+            this.cbScWayHitUndo.Size = new System.Drawing.Size(97, 17);
+            this.cbScWayHitUndo.TabIndex = 16;
+            this.cbScWayHitUndo.Text = "Undo hit (way):";
+            this.ToolTip1.SetToolTip(this.cbScWayHitUndo, "Enable hot key for undoing hits (way)");
+            this.cbScWayHitUndo.UseVisualStyleBackColor = true;
+            this.cbScWayHitUndo.CheckedChanged += new System.EventHandler(this.CbScWayHitUndo_CheckedChanged);
+            // 
+            // cbScWayHit
+            // 
+            this.cbScWayHit.AutoSize = true;
+            this.cbScWayHit.Location = new System.Drawing.Point(6, 58);
+            this.cbScWayHit.Name = "cbScWayHit";
+            this.cbScWayHit.Size = new System.Drawing.Size(73, 17);
+            this.cbScWayHit.TabIndex = 14;
+            this.cbScWayHit.Text = "Hit (Way):";
+            this.ToolTip1.SetToolTip(this.cbScWayHit, "Enable hot key for getting hit (way)");
+            this.cbScWayHit.UseVisualStyleBackColor = true;
+            this.cbScWayHit.CheckedChanged += new System.EventHandler(this.CbScWayHit_CheckedChanged);
+            // 
+            // cbScHitUndo
+            // 
+            this.cbScHitUndo.AutoSize = true;
+            this.cbScHitUndo.Location = new System.Drawing.Point(285, 32);
+            this.cbScHitUndo.Name = "cbScHitUndo";
+            this.cbScHitUndo.Size = new System.Drawing.Size(100, 17);
+            this.cbScHitUndo.TabIndex = 12;
+            this.cbScHitUndo.Text = "Undo hit (boss):";
+            this.ToolTip1.SetToolTip(this.cbScHitUndo, "Enable hot key for undoing hits (boss)");
+            this.cbScHitUndo.UseVisualStyleBackColor = true;
+            this.cbScHitUndo.CheckedChanged += new System.EventHandler(this.cbScHitUndo_CheckedChanged);
+            // 
             // cbScPrevSplit
             // 
             this.cbScPrevSplit.AutoSize = true;
-            this.cbScPrevSplit.Location = new System.Drawing.Point(300, 84);
+            this.cbScPrevSplit.Location = new System.Drawing.Point(285, 84);
             this.cbScPrevSplit.Name = "cbScPrevSplit";
             this.cbScPrevSplit.Size = new System.Drawing.Size(72, 17);
             this.cbScPrevSplit.TabIndex = 10;
@@ -408,7 +518,7 @@
             // Label6
             // 
             this.Label6.AutoSize = true;
-            this.Label6.Location = new System.Drawing.Point(3, 125);
+            this.Label6.Location = new System.Drawing.Point(3, 151);
             this.Label6.Name = "Label6";
             this.Label6.Size = new System.Drawing.Size(393, 13);
             this.Label6.TabIndex = 9;
@@ -419,7 +529,7 @@
             // 
             this.radioHotKeyMethod_async.AutoSize = true;
             this.radioHotKeyMethod_async.Checked = true;
-            this.radioHotKeyMethod_async.Location = new System.Drawing.Point(6, 167);
+            this.radioHotKeyMethod_async.Location = new System.Drawing.Point(6, 193);
             this.radioHotKeyMethod_async.Name = "radioHotKeyMethod_async";
             this.radioHotKeyMethod_async.Size = new System.Drawing.Size(201, 17);
             this.radioHotKeyMethod_async.TabIndex = 8;
@@ -435,14 +545,15 @@
             this.Label1.AutoSize = true;
             this.Label1.Location = new System.Drawing.Point(6, 10);
             this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(338, 13);
+            this.Label1.Size = new System.Drawing.Size(462, 13);
             this.Label1.TabIndex = 6;
-            this.Label1.Text = "Click into textbox and press any key combination to setup your hotkey:";
+            this.Label1.Text = "Click into a textbox and press any key combination to setup your hotkey for the r" +
+    "espective event:";
             // 
             // radioHotKeyMethod_sync
             // 
             this.radioHotKeyMethod_sync.AutoSize = true;
-            this.radioHotKeyMethod_sync.Location = new System.Drawing.Point(6, 144);
+            this.radioHotKeyMethod_sync.Location = new System.Drawing.Point(6, 170);
             this.radioHotKeyMethod_sync.Name = "radioHotKeyMethod_sync";
             this.radioHotKeyMethod_sync.Size = new System.Drawing.Size(477, 17);
             this.radioHotKeyMethod_sync.TabIndex = 7;
@@ -456,7 +567,7 @@
             // cbScReset
             // 
             this.cbScReset.AutoSize = true;
-            this.cbScReset.Location = new System.Drawing.Point(6, 32);
+            this.cbScReset.Location = new System.Drawing.Point(285, 110);
             this.cbScReset.Name = "cbScReset";
             this.cbScReset.Size = new System.Drawing.Size(75, 17);
             this.cbScReset.TabIndex = 0;
@@ -468,26 +579,14 @@
             // cbScHit
             // 
             this.cbScHit.AutoSize = true;
-            this.cbScHit.Location = new System.Drawing.Point(6, 58);
+            this.cbScHit.Location = new System.Drawing.Point(6, 32);
             this.cbScHit.Name = "cbScHit";
-            this.cbScHit.Size = new System.Drawing.Size(60, 17);
+            this.cbScHit.Size = new System.Drawing.Size(73, 17);
             this.cbScHit.TabIndex = 1;
-            this.cbScHit.Text = "Got hit:";
-            this.ToolTip1.SetToolTip(this.cbScHit, "Enable hot key for getting hit");
+            this.cbScHit.Text = "Hit (boss):";
+            this.ToolTip1.SetToolTip(this.cbScHit, "Enable hot key for getting hit (boss)");
             this.cbScHit.UseVisualStyleBackColor = true;
             this.cbScHit.CheckedChanged += new System.EventHandler(this.cbScHit_CheckedChanged);
-            // 
-            // txtNextSplit
-            // 
-            this.txtNextSplit.Location = new System.Drawing.Point(92, 82);
-            this.txtNextSplit.Name = "txtNextSplit";
-            this.txtNextSplit.ReadOnly = true;
-            this.txtNextSplit.Size = new System.Drawing.Size(199, 20);
-            this.txtNextSplit.TabIndex = 5;
-            this.txtNextSplit.Text = "None";
-            this.txtNextSplit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ToolTip1.SetToolTip(this.txtNextSplit, "Click into the field and press the hot key you want to use");
-            this.txtNextSplit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNextSplit_KeyDown);
             // 
             // cbScNextSplit
             // 
@@ -500,30 +599,6 @@
             this.ToolTip1.SetToolTip(this.cbScNextSplit, "Enable hot key for entering next split");
             this.cbScNextSplit.UseVisualStyleBackColor = true;
             this.cbScNextSplit.CheckedChanged += new System.EventHandler(this.cbScNextSplit_CheckedChanged);
-            // 
-            // txtHit
-            // 
-            this.txtHit.Location = new System.Drawing.Point(92, 56);
-            this.txtHit.Name = "txtHit";
-            this.txtHit.ReadOnly = true;
-            this.txtHit.Size = new System.Drawing.Size(199, 20);
-            this.txtHit.TabIndex = 4;
-            this.txtHit.Text = "None";
-            this.txtHit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ToolTip1.SetToolTip(this.txtHit, "Click into the field and press the hot key you want to use");
-            this.txtHit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtHit_KeyDown);
-            // 
-            // txtReset
-            // 
-            this.txtReset.Location = new System.Drawing.Point(92, 30);
-            this.txtReset.Name = "txtReset";
-            this.txtReset.ReadOnly = true;
-            this.txtReset.Size = new System.Drawing.Size(199, 20);
-            this.txtReset.TabIndex = 3;
-            this.txtReset.Text = "None";
-            this.txtReset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ToolTip1.SetToolTip(this.txtReset, "Click into the field and press the hot key you want to use");
-            this.txtReset.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtReset_KeyDown);
             // 
             // tab_appearance
             // 
@@ -544,7 +619,7 @@
             this.tab_appearance.Location = new System.Drawing.Point(4, 22);
             this.tab_appearance.Name = "tab_appearance";
             this.tab_appearance.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.tab_appearance.Size = new System.Drawing.Size(588, 209);
+            this.tab_appearance.Size = new System.Drawing.Size(588, 235);
             this.tab_appearance.TabIndex = 1;
             this.tab_appearance.Text = "Appearance";
             this.tab_appearance.UseVisualStyleBackColor = true;
@@ -562,7 +637,7 @@
             this.tab_filepaths.Location = new System.Drawing.Point(4, 22);
             this.tab_filepaths.Name = "tab_filepaths";
             this.tab_filepaths.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.tab_filepaths.Size = new System.Drawing.Size(588, 209);
+            this.tab_filepaths.Size = new System.Drawing.Size(588, 235);
             this.tab_filepaths.TabIndex = 2;
             this.tab_filepaths.Text = "Filepaths";
             this.tab_filepaths.UseVisualStyleBackColor = true;
@@ -653,32 +728,14 @@
             this.TabControl1.Location = new System.Drawing.Point(12, 12);
             this.TabControl1.Name = "TabControl1";
             this.TabControl1.SelectedIndex = 0;
-            this.TabControl1.Size = new System.Drawing.Size(596, 235);
+            this.TabControl1.Size = new System.Drawing.Size(596, 261);
             this.TabControl1.TabIndex = 10;
-            // 
-            // txtFontName
-            // 
-            this.txtFontName.Enabled = false;
-            this.txtFontName.Location = new System.Drawing.Point(343, 16);
-            this.txtFontName.Name = "txtFontName";
-            this.txtFontName.Size = new System.Drawing.Size(153, 20);
-            this.txtFontName.TabIndex = 16;
-            this.ToolTip1.SetToolTip(this.txtFontName, resources.GetString("txtFontName.ToolTip"));
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(275, 20);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(60, 13);
-            this.label15.TabIndex = 17;
-            this.label15.Text = "Font name:";
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(620, 259);
+            this.ClientSize = new System.Drawing.Size(620, 285);
             this.Controls.Add(this.TabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -755,5 +812,9 @@
         internal System.Windows.Forms.TextBox txtHitUndo;
         internal System.Windows.Forms.Label label15;
         internal System.Windows.Forms.TextBox txtFontName;
+        internal System.Windows.Forms.TextBox txtWayHitUndo;
+        internal System.Windows.Forms.CheckBox cbScWayHitUndo;
+        internal System.Windows.Forms.TextBox txtWayHit;
+        internal System.Windows.Forms.CheckBox cbScWayHit;
     }
 }
