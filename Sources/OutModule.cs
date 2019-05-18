@@ -164,7 +164,7 @@ namespace HitCounterManager
                     for (int r = 0; r < iSplitCount; r++)
                     {
                         if (r != 0) sr.WriteLine(","); // separator
-                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + pi.GetSplitHits(r) + pi.GetSplitWayHits(r) + ", " + pi.GetSplitPB(r) + "]");
+                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + (pi.GetSplitHits(r) + pi.GetSplitWayHits(r)) + ", " + pi.GetSplitPB(r) + ", " + pi.GetSplitWayHits(r) + "]");
                     }
                     sr.WriteLine(""); // no trailing separator
                     sr.WriteLine("],");
