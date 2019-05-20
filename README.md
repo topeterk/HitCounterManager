@@ -40,13 +40,16 @@ It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit
   * Dark Souls 2
   * Dark Souls 3 + Ashes of Ariandel + The Ringed City
   * Demon's Souls
+  * Salt and Sanctuary
+  * Sekiro
   * The Surge + A walk in the park
 * Comes with different designs..
   * **.. for counting hits:**
   
     * **Numeric** _(Traditional no hit runs)_
       * Shows the amount of hits for the current run, PB and their differences
-      * Every split is marked "better" which has an amount of zero hits
+    * **NumericWay** _(Traditional no hit runs)_
+      * As **Numeric** except that hits are shown splitted into boss hits and way hits
     * **YesNo** _(Traditional no hit runs)_
       * Shows check marks/crosses if one got hit at the current run and PB
       * Every split has a check mark which has an amount of zero hits
@@ -160,17 +163,19 @@ Message me via GitHub / e-mail or simply open an issue and I will try to help yo
 
 ## Special thanks
 I would never have created this tool without the inspiration by watching the awesome 0 hit and no death runners...  
-Thanks to:
-* [The_Happy_Hob](https://www.twitch.tv/the_happy_hob)
-* [FaraazKhan](https://www.twitch.tv/faraazkhan)
-* [SquillaKilla](https://www.twitch.tv/squillakilla)
+Thanks to (in alphabetical order):
 * [CouchJockey](https://www.twitch.tv/couchjockey)
-* [SlipperySuzie](https://www.twitch.tv/slipperysuzie)
+* [Dinossindgeil](https://www.twitch.tv/dinossindgeil)
 * [DonnyRekt](https://www.twitch.tv/donnyrekt)
-* [TigerG92](https://www.twitch.tv/tigerg92)
-* [SayviTV](https://www.twitch.tv/sayvitv)
-* [Kazoodle](https://www.twitch.tv/kazoodle)
+* [FaraazKhan](https://www.twitch.tv/faraazkhan)
 * [GUD_LAK](https://www.twitch.tv/gud_lak)
+* [Kazoodle](https://www.twitch.tv/kazoodle)
+* [Sayvi](https://www.twitch.tv/sayvi)
+* [SlipperySuzie](https://www.twitch.tv/slipperysuzie)
+* [Soldi](https://www.twitch.tv/soldi)
+* [SquillaKilla](https://www.twitch.tv/squillakilla)
+* [The_Happy_Hob](https://www.twitch.tv/the_happy_hob)
+* [TigerG92](https://www.twitch.tv/tigerg92)
 * Every member of the [Hitless team on Twitch](https://www.twitch.tv/team/hitless)
 * And also all the other great challenge runners out there that I cannot name here all.
   
