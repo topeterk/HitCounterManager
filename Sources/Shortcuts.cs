@@ -133,7 +133,8 @@ namespace HitCounterManager
             // Since version 1.17:
             SC_Type_WayHit = 5,
             SC_Type_WayHitUndo = 6,
-            SC_Type_MAX = 7
+            SC_Type_PB = 7,
+            SC_Type_MAX = 8
         };
 
         public enum SC_HotKeyMethod {

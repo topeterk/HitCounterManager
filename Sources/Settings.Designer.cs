@@ -84,6 +84,8 @@
             this.btnInput = new System.Windows.Forms.Button();
             this.OpenFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.TabControl1 = new System.Windows.Forms.TabControl();
+            this.txtPB = new System.Windows.Forms.TextBox();
+            this.cbScPB = new System.Windows.Forms.CheckBox();
             this.GroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
@@ -357,6 +359,8 @@
             // 
             // tab_globalshortcuts
             // 
+            this.tab_globalshortcuts.Controls.Add(this.txtPB);
+            this.tab_globalshortcuts.Controls.Add(this.cbScPB);
             this.tab_globalshortcuts.Controls.Add(this.txtWayHitUndo);
             this.tab_globalshortcuts.Controls.Add(this.txtWayHit);
             this.tab_globalshortcuts.Controls.Add(this.txtHitUndo);
@@ -569,9 +573,9 @@
             this.cbScReset.AutoSize = true;
             this.cbScReset.Location = new System.Drawing.Point(285, 110);
             this.cbScReset.Name = "cbScReset";
-            this.cbScReset.Size = new System.Drawing.Size(75, 17);
+            this.cbScReset.Size = new System.Drawing.Size(57, 17);
             this.cbScReset.TabIndex = 0;
-            this.cbScReset.Text = "Reset run:";
+            this.cbScReset.Text = "Reset:";
             this.ToolTip1.SetToolTip(this.cbScReset, "Enable hot key for resetting the run");
             this.cbScReset.UseVisualStyleBackColor = true;
             this.cbScReset.CheckedChanged += new System.EventHandler(this.cbScReset_CheckedChanged);
@@ -731,6 +735,30 @@
             this.TabControl1.Size = new System.Drawing.Size(596, 261);
             this.TabControl1.TabIndex = 10;
             // 
+            // txtPB
+            // 
+            this.txtPB.Location = new System.Drawing.Point(85, 108);
+            this.txtPB.Name = "txtPB";
+            this.txtPB.ReadOnly = true;
+            this.txtPB.Size = new System.Drawing.Size(194, 20);
+            this.txtPB.TabIndex = 19;
+            this.txtPB.Text = "None";
+            this.txtPB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip1.SetToolTip(this.txtPB, "Click into the field and press the hot key you want to use");
+            this.txtPB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPB_KeyDown);
+            // 
+            // cbScPB
+            // 
+            this.cbScPB.AutoSize = true;
+            this.cbScPB.Location = new System.Drawing.Point(6, 110);
+            this.cbScPB.Name = "cbScPB";
+            this.cbScPB.Size = new System.Drawing.Size(62, 17);
+            this.cbScPB.TabIndex = 18;
+            this.cbScPB.Text = "Set PB:";
+            this.ToolTip1.SetToolTip(this.cbScPB, "Enable hot key for setting run as personal best");
+            this.cbScPB.UseVisualStyleBackColor = true;
+            this.cbScPB.CheckedChanged += new System.EventHandler(this.cbScPB_CheckedChanged);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -816,5 +844,7 @@
         internal System.Windows.Forms.CheckBox cbScWayHitUndo;
         internal System.Windows.Forms.TextBox txtWayHit;
         internal System.Windows.Forms.CheckBox cbScWayHit;
+        internal System.Windows.Forms.TextBox txtPB;
+        internal System.Windows.Forms.CheckBox cbScPB;
     }
 }

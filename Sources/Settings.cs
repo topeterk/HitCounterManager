@@ -66,6 +66,9 @@ namespace HitCounterManager
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_SplitPrev);
             cbScPrevSplit.Checked = key.used;
             if (key.valid) txtPrevSplit.Text = key.GetDescriptionString();
+            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_PB);
+            cbScPB.Checked = key.used;
+            if (key.valid) txtPB.Text = key.GetDescriptionString();
 
             txtInput.Text = om.FilePathIn;
             txtOutput.Text = om.FilePathOut;
@@ -191,6 +194,12 @@ namespace HitCounterManager
             RegisterHotKey(txtPrevSplit, Shortcuts.SC_Type.SC_Type_SplitPrev, e);
             cbScPrevSplit.Checked = true;
         }
+
+        private void txtPB_KeyDown(object sender, KeyEventArgs e)
+        {
+            RegisterHotKey(txtPB, Shortcuts.SC_Type.SC_Type_PB, e);
+            cbScPB.Checked = true;
+        }
         
         private void cbScReset_CheckedChanged(object sender, EventArgs e)
         {
@@ -225,6 +234,11 @@ namespace HitCounterManager
         private void cbScPrevSplit_CheckedChanged(object sender, EventArgs e)
         {
             sc.Key_SetState(Shortcuts.SC_Type.SC_Type_SplitPrev, cbScPrevSplit.Checked);
+        }
+
+        private void cbScPB_CheckedChanged(object sender, EventArgs e)
+        {
+            sc.Key_SetState(Shortcuts.SC_Type.SC_Type_PB, cbScPB.Checked);
         }
 
         private void btnInput_Click(object sender, EventArgs e)

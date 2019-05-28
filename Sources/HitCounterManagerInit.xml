@@ -18,6 +18,8 @@
   <ShortcutSplitKeyCode>65650</ShortcutSplitKeyCode>
   <ShortcutSplitPrevEnable>false</ShortcutSplitPrevEnable>
   <ShortcutSplitPrevKeyCode>65654</ShortcutSplitPrevKeyCode>
+  <ShortcutPBEnable>false</ShortcutPBEnable>
+  <ShortcutPBKeyCode>65651</ShortcutPBKeyCode>
   <Inputfile>HitCounter.template</Inputfile>
   <OutputFile>HitCounter.html</OutputFile>
   <ShowAttemptsCounter>true</ShowAttemptsCounter>

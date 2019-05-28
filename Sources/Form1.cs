@@ -102,6 +102,7 @@ namespace HitCounterManager
                         case Shortcuts.SC_Type.SC_Type_SplitPrev: btnSplitPrev_Click(null, null); break;
                         case Shortcuts.SC_Type.SC_Type_WayHit: btnWayHit_Click(null, null); break;
                         case Shortcuts.SC_Type.SC_Type_WayHitUndo: btnWayHitUndo_Click(null, null); break;
+                        case Shortcuts.SC_Type.SC_Type_PB: btnPB_Click(null, null); break;
                     }
                 }
             }
