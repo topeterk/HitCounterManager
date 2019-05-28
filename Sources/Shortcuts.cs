@@ -64,6 +64,7 @@ namespace HitCounterManager
             if (key.KeyCode == Keys.None) return "None";
 
             string Description = "";
+            if (!valid) Description += "ERROR:   ";
             if (key.Alt) Description += "ALT + ";
             if (key.Control) Description += "CTRL + ";
             if (key.Shift) Description += "SHIFT + ";
