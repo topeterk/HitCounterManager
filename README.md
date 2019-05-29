@@ -3,29 +3,34 @@
 Free Hit Counter that is running in the background, so you can focus on your stream.  
 No need to keep any windows open for a window capture any more.  
 Initially designed for Dark Souls and similar games but supports any game.
-  
+
 To see some **screenshots** of this application go to the **[Wiki pages](../../wiki)**.  
 To see **how to** use the application watch the **[Tutorial on YouTube](https://www.youtube.com/watch?v=iXGExlS4xeM)**.
 
-[![Releases](https://img.shields.io/github/release/topeterk/HitCounterManager.svg?label=Latest%20release:&longCache=true&style=for-the-badge&colorB=0088FF)](../../releases/latest)
-[![GitHub Releases](https://img.shields.io/github/downloads/topeterk/HitCounterManager/total.svg?label=Downloads:&longCache=true&style=for-the-badge&colorB=0088FF)](../../releases)
+<p align="center"><a href="Images/Preview.png"><img src="Images/Preview.png" alt="Preview" height="250px"/></a></p>
+
+<img src="Images/installer-banner.png" alt="banner" align="right">
+
+[![Releases](https://img.shields.io/github/release/topeterk/HitCounterManager.svg?label=Latest%20release:&longCache=true&style=for-the-badge&colorB=0088FF)](../../releases/latest)  
+[![GitHub Releases](https://img.shields.io/github/downloads/topeterk/HitCounterManager/total.svg?label=Downloads:&longCache=true&style=for-the-badge&colorB=0088FF)](../../releases)  
 [![GitHub](https://img.shields.io/github/license/topeterk/HitCounterManager.svg?label=License:&longCache=true&style=for-the-badge&colorB=0088FF)](LICENSE)
 
 ## Key-Features
 
 * Offline application
-* No window capture needed for stream integration with OBS-Studio, for example.
-* Easy to use profile management
+* No window capture needed for stream integration
 * Hot key support for seamless use **ingame** (Windows only)
+* Easy to use profile management
 
 ## Features
 It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit/death during the playthrough
 * Creates a HTML file of the hit counter that can be used by Open BroadCaster Software in order to make it visible on stream
   * The design and layout can be costumized completely
 * Instead of using GUI buttons, keyboard shortcuts can be configured:
-  * Increase/Decrease hit count of the current split
+  * Increase/Decrease hit count of the current split (boss hits and hits on the way separately)
   * Go to next/previous split
   * Reset the run (sets all hit counts to 0 and selects first split)
+  * Save the run as your PB (personal best)
 * Keyboard shortcuts are working in fullscreen applications (like Dark Souls III)
 * Via GUI every value can be changed at any time
 * Multiple profiles can be created (e.g. "Any%", "AllBosses", "DLC only"..)
