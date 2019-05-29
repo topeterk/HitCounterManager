@@ -27,6 +27,10 @@
   <ShowSessionProgress>true</ShowSessionProgress>
   <ShowSplitsCountFinished>999</ShowSplitsCountFinished>
   <ShowSplitsCountUpcoming>999</ShowSplitsCountUpcoming>
+  <ShowHitsCombined>true</ShowHitsCombined>
+  <ShowNumbers>true</ShowNumbers>
+  <Purpose>0</Purpose>
+  <Severity>0</Severity>
   <StyleUseHighContrast>false</StyleUseHighContrast>
   <StyleUseCustom>false</StyleUseCustom>
   <StyleCssUrl>stylesheet_pink.css</StyleCssUrl>
@@ -975,9 +979,9 @@
           </ProfileRow>
           <ProfileRow>
             <Title>Dragonslayer</Title>
-            <Hits>0</Hits>
+            <Hits>3</Hits>
             <WayHits>2</WayHits>
-            <Diff>2</Diff>
+            <Diff>5</Diff>
             <PB>0</PB>
           </ProfileRow>
           <ProfileRow>
