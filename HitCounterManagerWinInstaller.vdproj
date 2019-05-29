@@ -51,6 +51,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_49B500FCEC2542D783BFC297EA2E3495"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_4E85C5850B8E422B95CC739B7A47A175"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -320,6 +326,26 @@
             {
             "SourcePath" = "8:Designs\\javascript.js"
             "TargetName" = "8:javascript.js"
+            "Tag" = "8:"
+            "Folder" = "8:_3F401D01D1EC40B0865BDA131CB5CBBC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_49B500FCEC2542D783BFC297EA2E3495"
+            {
+            "SourcePath" = "8:Designs\\HitCounterGui.html"
+            "TargetName" = "8:HitCounterGui.html"
             "Tag" = "8:"
             "Folder" = "8:_3F401D01D1EC40B0865BDA131CB5CBBC"
             "Condition" = "8:"
@@ -1009,7 +1035,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_E73481EAB59C480EAACFF94F3334D77E"
             {
-            "SourcePath" = "8:obj\\Release\\HitCounterManager.exe"
+            "SourcePath" = "8:obj\\DebugWin\\HitCounterManager.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_DFB6FB4DFF4E4C228DA381CF60E540D8"

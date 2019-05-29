@@ -61,7 +61,25 @@
             this.cbScHit = new System.Windows.Forms.CheckBox();
             this.cbScNextSplit = new System.Windows.Forms.CheckBox();
             this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.txtFontName = new System.Windows.Forms.TextBox();
+            this.cbApCustomCss = new System.Windows.Forms.CheckBox();
+            this.txtCssUrl = new System.Windows.Forms.TextBox();
+            this.txtFontUrl = new System.Windows.Forms.TextBox();
+            this.btnApApply = new System.Windows.Forms.Button();
+            this.cbApHighContrast = new System.Windows.Forms.CheckBox();
+            this.numStyleDesiredWidth = new System.Windows.Forms.NumericUpDown();
+            this.cbShowNumbers = new System.Windows.Forms.CheckBox();
+            this.cbShowHitsCombined = new System.Windows.Forms.CheckBox();
+            this.radioSeverityAnyHitCritical = new System.Windows.Forms.RadioButton();
+            this.radioSeverityComparePB = new System.Windows.Forms.RadioButton();
+            this.radioSeverityBossHitCritical = new System.Windows.Forms.RadioButton();
             this.tab_behavior = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.radioPurposeChecklist = new System.Windows.Forms.RadioButton();
+            this.radioPurposeDeathCounter = new System.Windows.Forms.RadioButton();
+            this.radioPurposeSplitCounter = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tab_filepaths = new System.Windows.Forms.TabPage();
             this.Label7 = new System.Windows.Forms.Label();
             this.Label5 = new System.Windows.Forms.Label();
@@ -76,40 +94,23 @@
             this.tab_style = new System.Windows.Forms.TabPage();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.txtFontName = new System.Windows.Forms.TextBox();
-            this.cbApCustomCss = new System.Windows.Forms.CheckBox();
-            this.txtCssUrl = new System.Windows.Forms.TextBox();
-            this.txtFontUrl = new System.Windows.Forms.TextBox();
             this.Label11 = new System.Windows.Forms.Label();
-            this.btnApApply = new System.Windows.Forms.Button();
             this.Label12 = new System.Windows.Forms.Label();
-            this.cbApHighContrast = new System.Windows.Forms.CheckBox();
-            this.numStyleDesiredWidth = new System.Windows.Forms.NumericUpDown();
             this.Label13 = new System.Windows.Forms.Label();
             this.Label14 = new System.Windows.Forms.Label();
-            this.cbShowNumbers = new System.Windows.Forms.CheckBox();
-            this.cbShowHitsCombined = new System.Windows.Forms.CheckBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioSeverityAnyHitCritical = new System.Windows.Forms.RadioButton();
-            this.radioSeverityComparePB = new System.Windows.Forms.RadioButton();
-            this.radioSeverityBossHitCritical = new System.Windows.Forms.RadioButton();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.radioPurposeSplitCounter = new System.Windows.Forms.RadioButton();
-            this.radioPurposeDeathCounter = new System.Windows.Forms.RadioButton();
-            this.radioPurposeChecklist = new System.Windows.Forms.RadioButton();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             this.tab_globalshortcuts.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredWidth)).BeginInit();
             this.tab_behavior.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.tab_filepaths.SuspendLayout();
             this.TabControl1.SuspendLayout();
             this.tab_style.SuspendLayout();
             this.GroupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredWidth)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbShowSessionProgress
@@ -500,6 +501,152 @@
             this.cbScNextSplit.UseVisualStyleBackColor = true;
             this.cbScNextSplit.CheckedChanged += new System.EventHandler(this.cbScNextSplit_CheckedChanged);
             // 
+            // txtFontName
+            // 
+            this.txtFontName.Enabled = false;
+            this.txtFontName.Location = new System.Drawing.Point(74, 68);
+            this.txtFontName.Name = "txtFontName";
+            this.txtFontName.Size = new System.Drawing.Size(222, 20);
+            this.txtFontName.TabIndex = 2;
+            this.ToolTip1.SetToolTip(this.txtFontName, resources.GetString("txtFontName.ToolTip"));
+            // 
+            // cbApCustomCss
+            // 
+            this.cbApCustomCss.AutoSize = true;
+            this.cbApCustomCss.Location = new System.Drawing.Point(6, 19);
+            this.cbApCustomCss.Name = "cbApCustomCss";
+            this.cbApCustomCss.Size = new System.Drawing.Size(177, 17);
+            this.cbApCustomCss.TabIndex = 0;
+            this.cbApCustomCss.Text = "Use custom stylesheet and font:";
+            this.ToolTip1.SetToolTip(this.cbApCustomCss, "Use a custom stylesheet and font for a personalized look and feel");
+            this.cbApCustomCss.UseVisualStyleBackColor = true;
+            // 
+            // txtCssUrl
+            // 
+            this.txtCssUrl.Enabled = false;
+            this.txtCssUrl.Location = new System.Drawing.Point(74, 42);
+            this.txtCssUrl.Name = "txtCssUrl";
+            this.txtCssUrl.Size = new System.Drawing.Size(422, 20);
+            this.txtCssUrl.TabIndex = 1;
+            this.ToolTip1.SetToolTip(this.txtCssUrl, "Personalize the design by switching to another stylesheet");
+            // 
+            // txtFontUrl
+            // 
+            this.txtFontUrl.Enabled = false;
+            this.txtFontUrl.Location = new System.Drawing.Point(74, 94);
+            this.txtFontUrl.Name = "txtFontUrl";
+            this.txtFontUrl.Size = new System.Drawing.Size(422, 20);
+            this.txtFontUrl.TabIndex = 3;
+            this.ToolTip1.SetToolTip(this.txtFontUrl, "Personalize the design by switching to another font.\r\nKeep the field empty if you" +
+        " do not use an external font.\r\nOtherwise specify the path to a @font-face ressou" +
+        "rce.");
+            // 
+            // btnApApply
+            // 
+            this.btnApApply.BackColor = System.Drawing.Color.LightYellow;
+            this.btnApApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnApApply.Location = new System.Drawing.Point(502, 42);
+            this.btnApApply.Name = "btnApApply";
+            this.btnApApply.Size = new System.Drawing.Size(55, 72);
+            this.btnApApply.TabIndex = 4;
+            this.btnApApply.Text = "Apply";
+            this.ToolTip1.SetToolTip(this.btnApApply, "To prevent issues with loading incomplete URLs, please click the Apply button man" +
+        "ually after editing.");
+            this.btnApApply.UseVisualStyleBackColor = false;
+            // 
+            // cbApHighContrast
+            // 
+            this.cbApHighContrast.AutoSize = true;
+            this.cbApHighContrast.Location = new System.Drawing.Point(6, 13);
+            this.cbApHighContrast.Name = "cbApHighContrast";
+            this.cbApHighContrast.Size = new System.Drawing.Size(245, 17);
+            this.cbApHighContrast.TabIndex = 0;
+            this.cbApHighContrast.Text = "Use high contrast mode (Enables background)";
+            this.ToolTip1.SetToolTip(this.cbApHighContrast, "Change design (like removing transparency, other colors, fatter text) for better " +
+        "readability");
+            this.cbApHighContrast.UseVisualStyleBackColor = true;
+            this.cbApHighContrast.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // numStyleDesiredWidth
+            // 
+            this.numStyleDesiredWidth.Location = new System.Drawing.Point(496, 12);
+            this.numStyleDesiredWidth.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numStyleDesiredWidth.Name = "numStyleDesiredWidth";
+            this.numStyleDesiredWidth.Size = new System.Drawing.Size(57, 20);
+            this.numStyleDesiredWidth.TabIndex = 1;
+            this.ToolTip1.SetToolTip(this.numStyleDesiredWidth, resources.GetString("numStyleDesiredWidth.ToolTip"));
+            this.numStyleDesiredWidth.ValueChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // cbShowNumbers
+            // 
+            this.cbShowNumbers.AutoSize = true;
+            this.cbShowNumbers.Checked = true;
+            this.cbShowNumbers.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbShowNumbers.Location = new System.Drawing.Point(6, 111);
+            this.cbShowNumbers.Name = "cbShowNumbers";
+            this.cbShowNumbers.Size = new System.Drawing.Size(247, 17);
+            this.cbShowNumbers.TabIndex = 4;
+            this.cbShowNumbers.Text = "Show numbers, no images (Numeric vs YesNo)";
+            this.ToolTip1.SetToolTip(this.cbShowNumbers, "Show the actual hit count instead of images");
+            this.cbShowNumbers.UseVisualStyleBackColor = true;
+            this.cbShowNumbers.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // cbShowHitsCombined
+            // 
+            this.cbShowHitsCombined.AutoSize = true;
+            this.cbShowHitsCombined.Checked = true;
+            this.cbShowHitsCombined.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbShowHitsCombined.Location = new System.Drawing.Point(6, 88);
+            this.cbShowHitsCombined.Name = "cbShowHitsCombined";
+            this.cbShowHitsCombined.Size = new System.Drawing.Size(206, 17);
+            this.cbShowHitsCombined.TabIndex = 3;
+            this.cbShowHitsCombined.Text = "Show hits combined (bosses and way)";
+            this.ToolTip1.SetToolTip(this.cbShowHitsCombined, "Show boss and way hits either separately or combined");
+            this.cbShowHitsCombined.UseVisualStyleBackColor = true;
+            this.cbShowHitsCombined.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // radioSeverityAnyHitCritical
+            // 
+            this.radioSeverityAnyHitCritical.AutoSize = true;
+            this.radioSeverityAnyHitCritical.Checked = true;
+            this.radioSeverityAnyHitCritical.Location = new System.Drawing.Point(7, 20);
+            this.radioSeverityAnyHitCritical.Name = "radioSeverityAnyHitCritical";
+            this.radioSeverityAnyHitCritical.Size = new System.Drawing.Size(104, 17);
+            this.radioSeverityAnyHitCritical.TabIndex = 0;
+            this.radioSeverityAnyHitCritical.TabStop = true;
+            this.radioSeverityAnyHitCritical.Text = "Any hit as critical";
+            this.ToolTip1.SetToolTip(this.radioSeverityAnyHitCritical, "Any hit counts as critical hit");
+            this.radioSeverityAnyHitCritical.UseVisualStyleBackColor = true;
+            this.radioSeverityAnyHitCritical.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // radioSeverityComparePB
+            // 
+            this.radioSeverityComparePB.AutoSize = true;
+            this.radioSeverityComparePB.Location = new System.Drawing.Point(6, 66);
+            this.radioSeverityComparePB.Name = "radioSeverityComparePB";
+            this.radioSeverityComparePB.Size = new System.Drawing.Size(178, 17);
+            this.radioSeverityComparePB.TabIndex = 2;
+            this.radioSeverityComparePB.Text = "Compare with personal best (PB)";
+            this.ToolTip1.SetToolTip(this.radioSeverityComparePB, "Any hit till PB is reached count as normal hit, any above as critical hits");
+            this.radioSeverityComparePB.UseVisualStyleBackColor = true;
+            this.radioSeverityComparePB.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // radioSeverityBossHitCritical
+            // 
+            this.radioSeverityBossHitCritical.AutoSize = true;
+            this.radioSeverityBossHitCritical.Location = new System.Drawing.Point(6, 43);
+            this.radioSeverityBossHitCritical.Name = "radioSeverityBossHitCritical";
+            this.radioSeverityBossHitCritical.Size = new System.Drawing.Size(100, 17);
+            this.radioSeverityBossHitCritical.TabIndex = 1;
+            this.radioSeverityBossHitCritical.Text = "Boss hits critical";
+            this.ToolTip1.SetToolTip(this.radioSeverityBossHitCritical, "Boss hits count as critical hits, hits on the way count as normal hits");
+            this.radioSeverityBossHitCritical.UseVisualStyleBackColor = true;
+            this.radioSeverityBossHitCritical.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
             // tab_behavior
             // 
             this.tab_behavior.Controls.Add(this.groupBox5);
@@ -512,6 +659,85 @@
             this.tab_behavior.TabIndex = 1;
             this.tab_behavior.Text = "Behavior";
             this.tab_behavior.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.cbShowAttempts);
+            this.groupBox5.Controls.Add(this.cbShowHeadline);
+            this.groupBox5.Controls.Add(this.cbShowSessionProgress);
+            this.groupBox5.Controls.Add(this.Label9);
+            this.groupBox5.Controls.Add(this.cbShowHitsCombined);
+            this.groupBox5.Controls.Add(this.numShowSplitsCountUpcoming);
+            this.groupBox5.Controls.Add(this.cbShowNumbers);
+            this.groupBox5.Controls.Add(this.Label10);
+            this.groupBox5.Controls.Add(this.Label8);
+            this.groupBox5.Controls.Add(this.Label3);
+            this.groupBox5.Controls.Add(this.numShowSplitsCountFinished);
+            this.groupBox5.Location = new System.Drawing.Point(215, 13);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(367, 216);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Appearance";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.radioPurposeChecklist);
+            this.groupBox4.Controls.Add(this.radioPurposeDeathCounter);
+            this.groupBox4.Controls.Add(this.radioPurposeSplitCounter);
+            this.groupBox4.Location = new System.Drawing.Point(6, 13);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(200, 100);
+            this.groupBox4.TabIndex = 0;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Purpose";
+            // 
+            // radioPurposeChecklist
+            // 
+            this.radioPurposeChecklist.AutoSize = true;
+            this.radioPurposeChecklist.Location = new System.Drawing.Point(7, 66);
+            this.radioPurposeChecklist.Name = "radioPurposeChecklist";
+            this.radioPurposeChecklist.Size = new System.Drawing.Size(68, 17);
+            this.radioPurposeChecklist.TabIndex = 2;
+            this.radioPurposeChecklist.Text = "Checklist";
+            this.radioPurposeChecklist.UseVisualStyleBackColor = true;
+            this.radioPurposeChecklist.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // radioPurposeDeathCounter
+            // 
+            this.radioPurposeDeathCounter.AutoSize = true;
+            this.radioPurposeDeathCounter.Location = new System.Drawing.Point(7, 43);
+            this.radioPurposeDeathCounter.Name = "radioPurposeDeathCounter";
+            this.radioPurposeDeathCounter.Size = new System.Drawing.Size(93, 17);
+            this.radioPurposeDeathCounter.TabIndex = 1;
+            this.radioPurposeDeathCounter.Text = "Death counter";
+            this.radioPurposeDeathCounter.UseVisualStyleBackColor = true;
+            this.radioPurposeDeathCounter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // radioPurposeSplitCounter
+            // 
+            this.radioPurposeSplitCounter.AutoSize = true;
+            this.radioPurposeSplitCounter.Checked = true;
+            this.radioPurposeSplitCounter.Location = new System.Drawing.Point(7, 20);
+            this.radioPurposeSplitCounter.Name = "radioPurposeSplitCounter";
+            this.radioPurposeSplitCounter.Size = new System.Drawing.Size(84, 17);
+            this.radioPurposeSplitCounter.TabIndex = 0;
+            this.radioPurposeSplitCounter.TabStop = true;
+            this.radioPurposeSplitCounter.Text = "Split counter";
+            this.radioPurposeSplitCounter.UseVisualStyleBackColor = true;
+            this.radioPurposeSplitCounter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.radioSeverityBossHitCritical);
+            this.groupBox2.Controls.Add(this.radioSeverityComparePB);
+            this.groupBox2.Controls.Add(this.radioSeverityAnyHitCritical);
+            this.groupBox2.Location = new System.Drawing.Point(6, 128);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 101);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Hit severity (color) within a single split";
             // 
             // tab_filepaths
             // 
@@ -623,6 +849,7 @@
             // 
             // tab_style
             // 
+            this.tab_style.Controls.Add(this.label16);
             this.tab_style.Controls.Add(this.GroupBox1);
             this.tab_style.Controls.Add(this.cbApHighContrast);
             this.tab_style.Controls.Add(this.numStyleDesiredWidth);
@@ -661,46 +888,6 @@
             this.label15.TabIndex = 17;
             this.label15.Text = "Font name:";
             // 
-            // txtFontName
-            // 
-            this.txtFontName.Enabled = false;
-            this.txtFontName.Location = new System.Drawing.Point(74, 68);
-            this.txtFontName.Name = "txtFontName";
-            this.txtFontName.Size = new System.Drawing.Size(222, 20);
-            this.txtFontName.TabIndex = 2;
-            this.ToolTip1.SetToolTip(this.txtFontName, resources.GetString("txtFontName.ToolTip"));
-            // 
-            // cbApCustomCss
-            // 
-            this.cbApCustomCss.AutoSize = true;
-            this.cbApCustomCss.Location = new System.Drawing.Point(6, 19);
-            this.cbApCustomCss.Name = "cbApCustomCss";
-            this.cbApCustomCss.Size = new System.Drawing.Size(177, 17);
-            this.cbApCustomCss.TabIndex = 0;
-            this.cbApCustomCss.Text = "Use custom stylesheet and font:";
-            this.ToolTip1.SetToolTip(this.cbApCustomCss, "Use a custom stylesheet and font for a personalized look and feel");
-            this.cbApCustomCss.UseVisualStyleBackColor = true;
-            // 
-            // txtCssUrl
-            // 
-            this.txtCssUrl.Enabled = false;
-            this.txtCssUrl.Location = new System.Drawing.Point(74, 42);
-            this.txtCssUrl.Name = "txtCssUrl";
-            this.txtCssUrl.Size = new System.Drawing.Size(422, 20);
-            this.txtCssUrl.TabIndex = 1;
-            this.ToolTip1.SetToolTip(this.txtCssUrl, "Personalize the design by switching to another stylesheet");
-            // 
-            // txtFontUrl
-            // 
-            this.txtFontUrl.Enabled = false;
-            this.txtFontUrl.Location = new System.Drawing.Point(74, 94);
-            this.txtFontUrl.Name = "txtFontUrl";
-            this.txtFontUrl.Size = new System.Drawing.Size(422, 20);
-            this.txtFontUrl.TabIndex = 3;
-            this.ToolTip1.SetToolTip(this.txtFontUrl, "Personalize the design by switching to another font.\r\nKeep the field empty if you" +
-        " do not use an external font.\r\nOtherwise specify the path to a @font-face ressou" +
-        "rce.");
-            // 
             // Label11
             // 
             this.Label11.AutoSize = true;
@@ -710,19 +897,6 @@
             this.Label11.TabIndex = 11;
             this.Label11.Text = "CSS: (URL)";
             // 
-            // btnApApply
-            // 
-            this.btnApApply.BackColor = System.Drawing.Color.LightYellow;
-            this.btnApApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.btnApApply.Location = new System.Drawing.Point(502, 42);
-            this.btnApApply.Name = "btnApApply";
-            this.btnApApply.Size = new System.Drawing.Size(55, 72);
-            this.btnApApply.TabIndex = 4;
-            this.btnApApply.Text = "Apply";
-            this.ToolTip1.SetToolTip(this.btnApApply, "To prevent issues with loading incomplete URLs, please click the Apply button man" +
-        "ually after editing.");
-            this.btnApApply.UseVisualStyleBackColor = false;
-            // 
             // Label12
             // 
             this.Label12.AutoSize = true;
@@ -731,31 +905,6 @@
             this.Label12.Size = new System.Drawing.Size(62, 13);
             this.Label12.TabIndex = 12;
             this.Label12.Text = "Font: (URL)";
-            // 
-            // cbApHighContrast
-            // 
-            this.cbApHighContrast.AutoSize = true;
-            this.cbApHighContrast.Location = new System.Drawing.Point(6, 13);
-            this.cbApHighContrast.Name = "cbApHighContrast";
-            this.cbApHighContrast.Size = new System.Drawing.Size(245, 17);
-            this.cbApHighContrast.TabIndex = 0;
-            this.cbApHighContrast.Text = "Use high contrast mode (Enables background)";
-            this.ToolTip1.SetToolTip(this.cbApHighContrast, "Change design (like removing transparency, other colors, fatter text) for better " +
-        "readability");
-            this.cbApHighContrast.UseVisualStyleBackColor = true;
-            // 
-            // numStyleDesiredWidth
-            // 
-            this.numStyleDesiredWidth.Location = new System.Drawing.Point(496, 12);
-            this.numStyleDesiredWidth.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.numStyleDesiredWidth.Name = "numStyleDesiredWidth";
-            this.numStyleDesiredWidth.Size = new System.Drawing.Size(57, 20);
-            this.numStyleDesiredWidth.TabIndex = 1;
-            this.ToolTip1.SetToolTip(this.numStyleDesiredWidth, resources.GetString("numStyleDesiredWidth.ToolTip"));
             // 
             // Label13
             // 
@@ -775,149 +924,13 @@
             this.Label14.TabIndex = 21;
             this.Label14.Text = "Desired width:";
             // 
-            // cbShowNumbers
+            // label16
             // 
-            this.cbShowNumbers.AutoSize = true;
-            this.cbShowNumbers.Checked = true;
-            this.cbShowNumbers.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowNumbers.Location = new System.Drawing.Point(6, 111);
-            this.cbShowNumbers.Name = "cbShowNumbers";
-            this.cbShowNumbers.Size = new System.Drawing.Size(150, 17);
-            this.cbShowNumbers.TabIndex = 4;
-            this.cbShowNumbers.Text = "Show numbers, no images";
-            this.ToolTip1.SetToolTip(this.cbShowNumbers, "Show the actual hit count instead of images");
-            this.cbShowNumbers.UseVisualStyleBackColor = true;
-            this.cbShowNumbers.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
-            // 
-            // cbShowHitsCombined
-            // 
-            this.cbShowHitsCombined.AutoSize = true;
-            this.cbShowHitsCombined.Checked = true;
-            this.cbShowHitsCombined.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowHitsCombined.Location = new System.Drawing.Point(6, 88);
-            this.cbShowHitsCombined.Name = "cbShowHitsCombined";
-            this.cbShowHitsCombined.Size = new System.Drawing.Size(206, 17);
-            this.cbShowHitsCombined.TabIndex = 3;
-            this.cbShowHitsCombined.Text = "Show hits combined (bosses and way)";
-            this.ToolTip1.SetToolTip(this.cbShowHitsCombined, "Show boss and way hits either separately or combined");
-            this.cbShowHitsCombined.UseVisualStyleBackColor = true;
-            this.cbShowHitsCombined.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.radioSeverityBossHitCritical);
-            this.groupBox2.Controls.Add(this.radioSeverityComparePB);
-            this.groupBox2.Controls.Add(this.radioSeverityAnyHitCritical);
-            this.groupBox2.Location = new System.Drawing.Point(6, 128);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 101);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Hit severity (color) within a single split";
-            // 
-            // radioSeverityAnyHitCritical
-            // 
-            this.radioSeverityAnyHitCritical.AutoSize = true;
-            this.radioSeverityAnyHitCritical.Checked = true;
-            this.radioSeverityAnyHitCritical.Location = new System.Drawing.Point(7, 20);
-            this.radioSeverityAnyHitCritical.Name = "radioSeverityAnyHitCritical";
-            this.radioSeverityAnyHitCritical.Size = new System.Drawing.Size(104, 17);
-            this.radioSeverityAnyHitCritical.TabIndex = 0;
-            this.radioSeverityAnyHitCritical.TabStop = true;
-            this.radioSeverityAnyHitCritical.Text = "Any hit as critical";
-            this.ToolTip1.SetToolTip(this.radioSeverityAnyHitCritical, "Any hit counts as critical hit");
-            this.radioSeverityAnyHitCritical.UseVisualStyleBackColor = true;
-            this.radioSeverityAnyHitCritical.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
-            // 
-            // radioSeverityComparePB
-            // 
-            this.radioSeverityComparePB.AutoSize = true;
-            this.radioSeverityComparePB.Location = new System.Drawing.Point(6, 66);
-            this.radioSeverityComparePB.Name = "radioSeverityComparePB";
-            this.radioSeverityComparePB.Size = new System.Drawing.Size(178, 17);
-            this.radioSeverityComparePB.TabIndex = 2;
-            this.radioSeverityComparePB.Text = "Compare with personal best (PB)";
-            this.ToolTip1.SetToolTip(this.radioSeverityComparePB, "Any hit till PB is reached count as normal hit, any above as critical hits");
-            this.radioSeverityComparePB.UseVisualStyleBackColor = true;
-            this.radioSeverityComparePB.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
-            // 
-            // radioSeverityBossHitCritical
-            // 
-            this.radioSeverityBossHitCritical.AutoSize = true;
-            this.radioSeverityBossHitCritical.Location = new System.Drawing.Point(6, 43);
-            this.radioSeverityBossHitCritical.Name = "radioSeverityBossHitCritical";
-            this.radioSeverityBossHitCritical.Size = new System.Drawing.Size(100, 17);
-            this.radioSeverityBossHitCritical.TabIndex = 1;
-            this.radioSeverityBossHitCritical.Text = "Boss hits critical";
-            this.ToolTip1.SetToolTip(this.radioSeverityBossHitCritical, "Boss hits count as critical hits, hits on the way count as normal hits");
-            this.radioSeverityBossHitCritical.UseVisualStyleBackColor = true;
-            this.radioSeverityBossHitCritical.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.radioPurposeChecklist);
-            this.groupBox4.Controls.Add(this.radioPurposeDeathCounter);
-            this.groupBox4.Controls.Add(this.radioPurposeSplitCounter);
-            this.groupBox4.Location = new System.Drawing.Point(6, 13);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 100);
-            this.groupBox4.TabIndex = 0;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Purpose";
-            // 
-            // radioPurposeSplitCounter
-            // 
-            this.radioPurposeSplitCounter.AutoSize = true;
-            this.radioPurposeSplitCounter.Checked = true;
-            this.radioPurposeSplitCounter.Location = new System.Drawing.Point(7, 20);
-            this.radioPurposeSplitCounter.Name = "radioPurposeSplitCounter";
-            this.radioPurposeSplitCounter.Size = new System.Drawing.Size(84, 17);
-            this.radioPurposeSplitCounter.TabIndex = 0;
-            this.radioPurposeSplitCounter.Text = "Split counter";
-            this.radioPurposeSplitCounter.UseVisualStyleBackColor = true;
-            this.radioPurposeSplitCounter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
-            // 
-            // radioPurposeDeathCounter
-            // 
-            this.radioPurposeDeathCounter.AutoSize = true;
-            this.radioPurposeDeathCounter.Location = new System.Drawing.Point(7, 43);
-            this.radioPurposeDeathCounter.Name = "radioPurposeDeathCounter";
-            this.radioPurposeDeathCounter.Size = new System.Drawing.Size(93, 17);
-            this.radioPurposeDeathCounter.TabIndex = 1;
-            this.radioPurposeDeathCounter.Text = "Death counter";
-            this.radioPurposeDeathCounter.UseVisualStyleBackColor = true;
-            this.radioPurposeDeathCounter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
-            // 
-            // radioPurposeChecklist
-            // 
-            this.radioPurposeChecklist.AutoSize = true;
-            this.radioPurposeChecklist.Location = new System.Drawing.Point(7, 66);
-            this.radioPurposeChecklist.Name = "radioPurposeChecklist";
-            this.radioPurposeChecklist.Size = new System.Drawing.Size(68, 17);
-            this.radioPurposeChecklist.TabIndex = 2;
-            this.radioPurposeChecklist.Text = "Checklist";
-            this.radioPurposeChecklist.UseVisualStyleBackColor = true;
-            this.radioPurposeChecklist.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.cbShowAttempts);
-            this.groupBox5.Controls.Add(this.cbShowHeadline);
-            this.groupBox5.Controls.Add(this.cbShowSessionProgress);
-            this.groupBox5.Controls.Add(this.Label9);
-            this.groupBox5.Controls.Add(this.cbShowHitsCombined);
-            this.groupBox5.Controls.Add(this.numShowSplitsCountUpcoming);
-            this.groupBox5.Controls.Add(this.cbShowNumbers);
-            this.groupBox5.Controls.Add(this.Label10);
-            this.groupBox5.Controls.Add(this.Label8);
-            this.groupBox5.Controls.Add(this.Label3);
-            this.groupBox5.Controls.Add(this.numShowSplitsCountFinished);
-            this.groupBox5.Location = new System.Drawing.Point(215, 13);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(367, 216);
-            this.groupBox5.TabIndex = 3;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Appearance";
+            this.label16.Location = new System.Drawing.Point(402, 35);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(183, 35);
+            this.label16.TabIndex = 22;
+            this.label16.Text = "Note: When value is set back to 0, you may have to reload the browser.";
             // 
             // Settings
             // 
@@ -936,7 +949,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).EndInit();
             this.tab_globalshortcuts.ResumeLayout(false);
             this.tab_globalshortcuts.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredWidth)).EndInit();
             this.tab_behavior.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.tab_filepaths.ResumeLayout(false);
             this.tab_filepaths.PerformLayout();
             this.TabControl1.ResumeLayout(false);
@@ -944,13 +964,6 @@
             this.tab_style.PerformLayout();
             this.GroupBox1.ResumeLayout(false);
             this.GroupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredWidth)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1024,5 +1037,6 @@
         private System.Windows.Forms.RadioButton radioPurposeDeathCounter;
         private System.Windows.Forms.RadioButton radioPurposeSplitCounter;
         private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label16;
     }
 }
