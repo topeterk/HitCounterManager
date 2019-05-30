@@ -139,6 +139,7 @@
     <Content Include="Designs\HitCounterNumeric.html" />
     <Content Include="Designs\HitCounterPBSplits.html" />
     <Content Include="Designs\HitCounterYesNo.html" />
+    <Content Include="Designs\img_bar.png" />
     <Content Include="Designs\img_check.png" />
     <Content Include="Designs\img_cross.png" />
     <Content Include="Designs\img_star.png" />

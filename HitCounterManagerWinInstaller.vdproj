@@ -27,6 +27,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_0EDB8A12B61E47A09CFE65C890B30671"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_15F85E4C9485467CBA1BE1E7E44AEF9A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -246,6 +252,26 @@
             {
             "SourcePath" = "8:Designs\\img_star.png"
             "TargetName" = "8:img_star.png"
+            "Tag" = "8:"
+            "Folder" = "8:_3F401D01D1EC40B0865BDA131CB5CBBC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0EDB8A12B61E47A09CFE65C890B30671"
+            {
+            "SourcePath" = "8:Designs\\img_bar.png"
+            "TargetName" = "8:img_bar.png"
             "Tag" = "8:"
             "Folder" = "8:_3F401D01D1EC40B0865BDA131CB5CBBC"
             "Condition" = "8:"
