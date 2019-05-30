@@ -82,7 +82,8 @@ namespace HitCounterManager
 
             // Style
             numStyleDesiredWidth.Value = om.StyleDesiredWidth;
-            cbApHighContrast.Checked = om.StyleUseHighContrast;
+            cbHighContrast.Checked = om.StyleUseHighContrast;
+            cbHighContrastNames.Checked = om.StyleUseHighContrastNames;
             cbApCustomCss.Checked = om.StyleUseCustom;
             txtCssUrl.Text = om.StyleCssUrl;
             txtFontUrl.Text = om.StyleFontUrl;
@@ -96,6 +97,7 @@ namespace HitCounterManager
             numShowSplitsCountUpcoming.Value = om.ShowSplitsCountUpcoming;
             cbShowHitsCombined.Checked = om.ShowHitsCombined;
             cbShowNumbers.Checked = om.ShowNumbers;
+            cbShowPB.Checked = om.ShowPB;
             radioPurposeChecklist.Checked = (om.Purpose == OutModule.OM_Purpose.OM_Purpose_Checklist);
             radioPurposeDeathCounter.Checked = (om.Purpose == OutModule.OM_Purpose.OM_Purpose_DeathCounter);
             radioPurposeSplitCounter.Checked = (om.Purpose == OutModule.OM_Purpose.OM_Purpose_SplitCounter);
@@ -134,7 +136,8 @@ namespace HitCounterManager
             if (!IsFormLoaded) return;
 
             // Style
-            om.StyleUseHighContrast = cbApHighContrast.Checked;
+            om.StyleUseHighContrast = cbHighContrast.Checked;
+            om.StyleUseHighContrastNames = cbHighContrastNames.Checked;
             om.StyleDesiredWidth = (int)numStyleDesiredWidth.Value;
 
             // Behavior
@@ -145,6 +148,7 @@ namespace HitCounterManager
             om.ShowSplitsCountUpcoming = (int)numShowSplitsCountUpcoming.Value;
             om.ShowHitsCombined = cbShowHitsCombined.Checked;
             om.ShowNumbers = cbShowNumbers.Checked;
+            om.ShowPB = cbShowPB.Checked;
             if (radioPurposeChecklist.Checked)
                 om.Purpose = OutModule.OM_Purpose.OM_Purpose_Checklist;
             else if (radioPurposeDeathCounter.Checked)

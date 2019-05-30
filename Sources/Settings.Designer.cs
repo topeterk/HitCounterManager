@@ -66,7 +66,7 @@
             this.txtCssUrl = new System.Windows.Forms.TextBox();
             this.txtFontUrl = new System.Windows.Forms.TextBox();
             this.btnApApply = new System.Windows.Forms.Button();
-            this.cbApHighContrast = new System.Windows.Forms.CheckBox();
+            this.cbHighContrast = new System.Windows.Forms.CheckBox();
             this.numStyleDesiredWidth = new System.Windows.Forms.NumericUpDown();
             this.cbShowNumbers = new System.Windows.Forms.CheckBox();
             this.cbShowHitsCombined = new System.Windows.Forms.CheckBox();
@@ -99,6 +99,9 @@
             this.Label12 = new System.Windows.Forms.Label();
             this.Label13 = new System.Windows.Forms.Label();
             this.Label14 = new System.Windows.Forms.Label();
+            this.cbHighContrastNames = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cbShowPB = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             this.tab_globalshortcuts.SuspendLayout();
@@ -111,6 +114,7 @@
             this.TabControl1.SuspendLayout();
             this.tab_style.SuspendLayout();
             this.GroupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbShowSessionProgress
@@ -159,7 +163,7 @@
             // Label9
             // 
             this.Label9.AutoSize = true;
-            this.Label9.Location = new System.Drawing.Point(150, 186);
+            this.Label9.Location = new System.Drawing.Point(147, 186);
             this.Label9.Name = "Label9";
             this.Label9.Size = new System.Drawing.Size(82, 13);
             this.Label9.TabIndex = 5;
@@ -167,7 +171,7 @@
             // 
             // numShowSplitsCountUpcoming
             // 
-            this.numShowSplitsCountUpcoming.Location = new System.Drawing.Point(87, 184);
+            this.numShowSplitsCountUpcoming.Location = new System.Drawing.Point(84, 184);
             this.numShowSplitsCountUpcoming.Maximum = new decimal(new int[] {
             999,
             0,
@@ -187,7 +191,7 @@
             // Label10
             // 
             this.Label10.AutoSize = true;
-            this.Label10.Location = new System.Drawing.Point(6, 186);
+            this.Label10.Location = new System.Drawing.Point(3, 186);
             this.Label10.Name = "Label10";
             this.Label10.Size = new System.Drawing.Size(75, 13);
             this.Label10.TabIndex = 3;
@@ -196,7 +200,7 @@
             // Label8
             // 
             this.Label8.AutoSize = true;
-            this.Label8.Location = new System.Drawing.Point(150, 160);
+            this.Label8.Location = new System.Drawing.Point(147, 160);
             this.Label8.Name = "Label8";
             this.Label8.Size = new System.Drawing.Size(72, 13);
             this.Label8.TabIndex = 2;
@@ -204,7 +208,7 @@
             // 
             // numShowSplitsCountFinished
             // 
-            this.numShowSplitsCountFinished.Location = new System.Drawing.Point(87, 158);
+            this.numShowSplitsCountFinished.Location = new System.Drawing.Point(84, 158);
             this.numShowSplitsCountFinished.Maximum = new decimal(new int[] {
             999,
             0,
@@ -224,7 +228,7 @@
             // Label3
             // 
             this.Label3.AutoSize = true;
-            this.Label3.Location = new System.Drawing.Point(6, 160);
+            this.Label3.Location = new System.Drawing.Point(3, 160);
             this.Label3.Name = "Label3";
             this.Label3.Size = new System.Drawing.Size(71, 13);
             this.Label3.TabIndex = 0;
@@ -554,21 +558,21 @@
         "ually after editing.");
             this.btnApApply.UseVisualStyleBackColor = false;
             // 
-            // cbApHighContrast
+            // cbHighContrast
             // 
-            this.cbApHighContrast.AutoSize = true;
-            this.cbApHighContrast.Location = new System.Drawing.Point(6, 13);
-            this.cbApHighContrast.Name = "cbApHighContrast";
-            this.cbApHighContrast.Size = new System.Drawing.Size(224, 17);
-            this.cbApHighContrast.TabIndex = 0;
-            this.cbApHighContrast.Text = "Disable transparency (high contrast mode)";
-            this.ToolTip1.SetToolTip(this.cbApHighContrast, "Check to switch to high contrast mode in order to improve readability");
-            this.cbApHighContrast.UseVisualStyleBackColor = true;
-            this.cbApHighContrast.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            this.cbHighContrast.AutoSize = true;
+            this.cbHighContrast.Location = new System.Drawing.Point(6, 22);
+            this.cbHighContrast.Name = "cbHighContrast";
+            this.cbHighContrast.Size = new System.Drawing.Size(125, 17);
+            this.cbHighContrast.TabIndex = 0;
+            this.cbHighContrast.Text = "Disable transparency";
+            this.ToolTip1.SetToolTip(this.cbHighContrast, "Solid background will be shown");
+            this.cbHighContrast.UseVisualStyleBackColor = true;
+            this.cbHighContrast.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // numStyleDesiredWidth
             // 
-            this.numStyleDesiredWidth.Location = new System.Drawing.Point(496, 12);
+            this.numStyleDesiredWidth.Location = new System.Drawing.Point(496, 11);
             this.numStyleDesiredWidth.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -601,9 +605,9 @@
             this.cbShowHitsCombined.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbShowHitsCombined.Location = new System.Drawing.Point(6, 88);
             this.cbShowHitsCombined.Name = "cbShowHitsCombined";
-            this.cbShowHitsCombined.Size = new System.Drawing.Size(206, 17);
+            this.cbShowHitsCombined.Size = new System.Drawing.Size(214, 17);
             this.cbShowHitsCombined.TabIndex = 3;
-            this.cbShowHitsCombined.Text = "Show hits combined (bosses and way)";
+            this.cbShowHitsCombined.Text = "Show hits combined (boss and way hits)";
             this.ToolTip1.SetToolTip(this.cbShowHitsCombined, "Show boss and way hits either separately or combined");
             this.cbShowHitsCombined.UseVisualStyleBackColor = true;
             this.cbShowHitsCombined.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
@@ -661,6 +665,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.cbShowPB);
             this.groupBox5.Controls.Add(this.cbShowAttempts);
             this.groupBox5.Controls.Add(this.cbShowHeadline);
             this.groupBox5.Controls.Add(this.cbShowSessionProgress);
@@ -848,9 +853,9 @@
             // 
             // tab_style
             // 
+            this.tab_style.Controls.Add(this.groupBox3);
             this.tab_style.Controls.Add(this.label16);
             this.tab_style.Controls.Add(this.GroupBox1);
-            this.tab_style.Controls.Add(this.cbApHighContrast);
             this.tab_style.Controls.Add(this.numStyleDesiredWidth);
             this.tab_style.Controls.Add(this.Label13);
             this.tab_style.Controls.Add(this.Label14);
@@ -863,7 +868,7 @@
             // 
             // label16
             // 
-            this.label16.Location = new System.Drawing.Point(402, 35);
+            this.label16.Location = new System.Drawing.Point(394, 34);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(183, 35);
             this.label16.TabIndex = 22;
@@ -882,7 +887,7 @@
             this.GroupBox1.Location = new System.Drawing.Point(6, 106);
             this.GroupBox1.Name = "GroupBox1";
             this.GroupBox1.Size = new System.Drawing.Size(571, 126);
-            this.GroupBox1.TabIndex = 3;
+            this.GroupBox1.TabIndex = 2;
             this.GroupBox1.TabStop = false;
             this.GroupBox1.Text = "Customization";
             // 
@@ -916,7 +921,7 @@
             // Label13
             // 
             this.Label13.AutoSize = true;
-            this.Label13.Location = new System.Drawing.Point(559, 14);
+            this.Label13.Location = new System.Drawing.Point(559, 13);
             this.Label13.Name = "Label13";
             this.Label13.Size = new System.Drawing.Size(18, 13);
             this.Label13.TabIndex = 20;
@@ -925,11 +930,47 @@
             // Label14
             // 
             this.Label14.AutoSize = true;
-            this.Label14.Location = new System.Drawing.Point(415, 14);
+            this.Label14.Location = new System.Drawing.Point(415, 13);
             this.Label14.Name = "Label14";
             this.Label14.Size = new System.Drawing.Size(74, 13);
             this.Label14.TabIndex = 21;
             this.Label14.Text = "Desired width:";
+            // 
+            // cbHighContrastNames
+            // 
+            this.cbHighContrastNames.AutoSize = true;
+            this.cbHighContrastNames.Location = new System.Drawing.Point(6, 45);
+            this.cbHighContrastNames.Name = "cbHighContrastNames";
+            this.cbHighContrastNames.Size = new System.Drawing.Size(147, 17);
+            this.cbHighContrastNames.TabIndex = 1;
+            this.cbHighContrastNames.Text = "Disable coloring of names";
+            this.ToolTip1.SetToolTip(this.cbHighContrastNames, "Applies to the split names");
+            this.cbHighContrastNames.UseVisualStyleBackColor = true;
+            this.cbHighContrastNames.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cbHighContrast);
+            this.groupBox3.Controls.Add(this.cbHighContrastNames);
+            this.groupBox3.Location = new System.Drawing.Point(6, 13);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(273, 87);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "High contrast mode (check for better readability)";
+            // 
+            // cbShowPB
+            // 
+            this.cbShowPB.AutoSize = true;
+            this.cbShowPB.Checked = true;
+            this.cbShowPB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbShowPB.Location = new System.Drawing.Point(6, 135);
+            this.cbShowPB.Name = "cbShowPB";
+            this.cbShowPB.Size = new System.Drawing.Size(142, 17);
+            this.cbShowPB.TabIndex = 7;
+            this.cbShowPB.Text = "Show personal best (PB)";
+            this.cbShowPB.UseVisualStyleBackColor = true;
+            this.cbShowPB.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // Settings
             // 
@@ -963,6 +1004,8 @@
             this.tab_style.PerformLayout();
             this.GroupBox1.ResumeLayout(false);
             this.GroupBox1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1021,7 +1064,7 @@
         internal System.Windows.Forms.Label Label11;
         internal System.Windows.Forms.Button btnApApply;
         internal System.Windows.Forms.Label Label12;
-        internal System.Windows.Forms.CheckBox cbApHighContrast;
+        internal System.Windows.Forms.CheckBox cbHighContrast;
         internal System.Windows.Forms.NumericUpDown numStyleDesiredWidth;
         internal System.Windows.Forms.Label Label13;
         internal System.Windows.Forms.Label Label14;
@@ -1037,5 +1080,8 @@
         private System.Windows.Forms.RadioButton radioPurposeSplitCounter;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.CheckBox cbHighContrastNames;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckBox cbShowPB;
     }
 }

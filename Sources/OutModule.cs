@@ -54,10 +54,12 @@ namespace HitCounterManager
         public int ShowSplitsCountUpcoming = 999;
         public bool ShowHitsCombined = true;
         public bool ShowNumbers = true;
+        public bool ShowPB = true;
         public OM_Purpose Purpose = OM_Purpose.OM_Purpose_SplitCounter;
         public OM_Severity Severity = OM_Severity.OM_Severity_AnyHitsCritical;
 
         public bool StyleUseHighContrast = false;
+        public bool StyleUseHighContrastNames = false;
         public bool StyleUseCustom = false;
         public string StyleCssUrl = "";
         public string StyleFontUrl = "";
@@ -226,6 +228,7 @@ namespace HitCounterManager
                     WriteJsonSimpleValue(sr, "show_session_progress", ShowSessionProgress);
                     WriteJsonSimpleValue(sr, "show_hitscombined", ShowHitsCombined);
                     WriteJsonSimpleValue(sr, "show_numbers", ShowNumbers);
+                    WriteJsonSimpleValue(sr, "show_pb", ShowPB);
                     WriteJsonSimpleValue(sr, "purpose", (int)Purpose);
                     WriteJsonSimpleValue(sr, "severity", (int)Severity);
 
@@ -233,6 +236,7 @@ namespace HitCounterManager
                     WriteJsonSimpleValue(sr, "font_url", (StyleUseCustom ? StyleFontUrl : ""));
                     WriteJsonSimpleValue(sr, "css_url", (StyleUseCustom ? StyleCssUrl : "stylesheet.css"));
                     WriteJsonSimpleValue(sr, "high_contrast", StyleUseHighContrast);
+                    WriteJsonSimpleValue(sr, "high_contrast_names", StyleUseHighContrastNames);
                     WriteJsonSimpleValue(sr, "width", StyleDesiredWidth);
 
                     sr.WriteLine("}");

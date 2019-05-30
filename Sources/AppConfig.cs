@@ -60,9 +60,11 @@ namespace HitCounterManager
         public int ShowSplitsCountUpcoming;
         public bool ShowHitsCombined;
         public bool ShowNumbers;
+        public bool ShowPB;
         public int Purpose;
         public int Severity;
         public bool StyleUseHighContrast;
+        public bool StyleUseHighContrastNames;
         public bool StyleUseCustom;
         public string StyleCssUrl;
         public string StyleFontUrl;
@@ -162,8 +164,10 @@ namespace HitCounterManager
                 _settings.ShortcutPBKeyCode = 0x10000 | 0x73; // Shift F4
                 _settings.ShowHitsCombined = true;
                 _settings.ShowNumbers = true;
+                _settings.ShowPB = true;
                 _settings.Purpose = (int)OutModule.OM_Purpose.OM_Purpose_SplitCounter;
                 _settings.Severity = (int)OutModule.OM_Severity.OM_Severity_AnyHitsCritical;
+                _settings.StyleUseHighContrastNames = false;
             }
 
             if (bNewSettings)
@@ -269,6 +273,7 @@ namespace HitCounterManager
             om.ShowSplitsCountUpcoming = _settings.ShowSplitsCountUpcoming;
             om.ShowHitsCombined = _settings.ShowHitsCombined;
             om.ShowNumbers = _settings.ShowNumbers;
+            om.ShowPB = _settings.ShowPB;
             if (_settings.Purpose < (int)OutModule.OM_Purpose.OM_Purpose_MAX)
                 om.Purpose = (OutModule.OM_Purpose)_settings.Purpose;
             else
@@ -279,6 +284,7 @@ namespace HitCounterManager
                 om.Severity = OutModule.OM_Severity.OM_Severity_AnyHitsCritical;
 
             om.StyleUseHighContrast = _settings.StyleUseHighContrast;
+            om.StyleUseHighContrastNames = _settings.StyleUseHighContrastNames;
             om.StyleUseCustom = _settings.StyleUseCustom;
             om.StyleCssUrl = _settings.StyleCssUrl;
             om.StyleFontUrl = _settings.StyleFontUrl;
@@ -335,10 +341,12 @@ namespace HitCounterManager
             _settings.ShowSplitsCountUpcoming = om.ShowSplitsCountUpcoming;
             _settings.ShowHitsCombined = om.ShowHitsCombined;
             _settings.ShowNumbers = om.ShowNumbers;
+            _settings.ShowPB = om.ShowPB;
             _settings.Purpose = (int)om.Purpose;
             _settings.Severity = (int)om.Severity;
 
             _settings.StyleUseHighContrast = om.StyleUseHighContrast;
+            _settings.StyleUseHighContrastNames = om.StyleUseHighContrastNames;
             _settings.StyleUseCustom = om.StyleUseCustom;
             _settings.StyleCssUrl = om.StyleCssUrl;
             _settings.StyleFontUrl = om.StyleFontUrl;

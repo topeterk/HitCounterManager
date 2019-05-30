@@ -29,9 +29,11 @@
   <ShowSplitsCountUpcoming>999</ShowSplitsCountUpcoming>
   <ShowHitsCombined>true</ShowHitsCombined>
   <ShowNumbers>true</ShowNumbers>
+  <ShowPB>true</ShowPB>
   <Purpose>0</Purpose>
   <Severity>0</Severity>
   <StyleUseHighContrast>false</StyleUseHighContrast>
+  <StyleUseHighContrastNames>false</StyleUseHighContrastNames>
   <StyleUseCustom>false</StyleUseCustom>
   <StyleCssUrl>stylesheet_pink.css</StyleCssUrl>
   <StyleFontUrl>https://fonts.googleapis.com/css?family=Fontdiner%20Swanky</StyleFontUrl>
