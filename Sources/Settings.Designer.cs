@@ -92,13 +92,13 @@
             this.OpenFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.TabControl1 = new System.Windows.Forms.TabControl();
             this.tab_style = new System.Windows.Forms.TabPage();
+            this.label16 = new System.Windows.Forms.Label();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
             this.Label11 = new System.Windows.Forms.Label();
             this.Label12 = new System.Windows.Forms.Label();
             this.Label13 = new System.Windows.Forms.Label();
             this.Label14 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             this.tab_globalshortcuts.SuspendLayout();
@@ -559,11 +559,10 @@
             this.cbApHighContrast.AutoSize = true;
             this.cbApHighContrast.Location = new System.Drawing.Point(6, 13);
             this.cbApHighContrast.Name = "cbApHighContrast";
-            this.cbApHighContrast.Size = new System.Drawing.Size(245, 17);
+            this.cbApHighContrast.Size = new System.Drawing.Size(224, 17);
             this.cbApHighContrast.TabIndex = 0;
-            this.cbApHighContrast.Text = "Use high contrast mode (Enables background)";
-            this.ToolTip1.SetToolTip(this.cbApHighContrast, "Change design (like removing transparency, other colors, fatter text) for better " +
-        "readability");
+            this.cbApHighContrast.Text = "Disable transparency (high contrast mode)";
+            this.ToolTip1.SetToolTip(this.cbApHighContrast, "Check to switch to high contrast mode in order to improve readability");
             this.cbApHighContrast.UseVisualStyleBackColor = true;
             this.cbApHighContrast.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
@@ -862,6 +861,14 @@
             this.tab_style.Text = "Style";
             this.tab_style.UseVisualStyleBackColor = true;
             // 
+            // label16
+            // 
+            this.label16.Location = new System.Drawing.Point(402, 35);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(183, 35);
+            this.label16.TabIndex = 22;
+            this.label16.Text = "Note: When value is set back to 0, you may have to reload the browser.";
+            // 
             // GroupBox1
             // 
             this.GroupBox1.Controls.Add(this.label15);
@@ -923,14 +930,6 @@
             this.Label14.Size = new System.Drawing.Size(74, 13);
             this.Label14.TabIndex = 21;
             this.Label14.Text = "Desired width:";
-            // 
-            // label16
-            // 
-            this.label16.Location = new System.Drawing.Point(402, 35);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(183, 35);
-            this.label16.TabIndex = 22;
-            this.label16.Text = "Note: When value is set back to 0, you may have to reload the browser.";
             // 
             // Settings
             // 
