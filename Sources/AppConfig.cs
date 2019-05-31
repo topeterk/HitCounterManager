@@ -80,11 +80,29 @@ namespace HitCounterManager
         private SettingsRoot _settings;
 
         /// <summary>
+        /// Validates a hotkey and when enabled registers it
+        /// </summary>
+        private bool LoadHotKeySettings(Shortcuts.SC_Type Type, int KeyCode, bool Enable)
+        {
+            ShortcutsKey key = new ShortcutsKey();
+            key.key = new KeyEventArgs((Keys)KeyCode);
+            if (Enable)
+            {
+                sc.Key_Set(Type, key);
+                if (!sc.Key_Get(Type).valid)
+                    return false;
+            }
+            else
+                sc.Key_PreSet(Type, key);
+
+            return true;
+        }
+
+        /// <summary>
         /// Loads user data from XML
         /// </summary>
         private void LoadSettings()
         {
-            ShortcutsKey key = new ShortcutsKey();
             bool bNewSettings = false;
             bool isKeyInvalid = false;
 
@@ -191,72 +209,15 @@ namespace HitCounterManager
             this.ComboBox1.Items.AddRange(profs.GetProfileList());
             if (this.ComboBox1.Items.Count == 0) this.ComboBox1.Items.Add("Unnamed");
             this.ComboBox1.SelectedItem = _settings.ProfileSelected;
-            
-            key.key = new KeyEventArgs((Keys)_settings.ShortcutResetKeyCode);
-            if (_settings.ShortcutResetEnable)
-            {
-                sc.Key_Set(Shortcuts.SC_Type.SC_Type_Reset, key);
-                if (!sc.Key_Get(Shortcuts.SC_Type.SC_Type_Reset).valid) isKeyInvalid = true;
-            }
-            else
-                sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_Reset, key);
-            key.key = new KeyEventArgs((Keys)_settings.ShortcutHitKeyCode);
-            if (_settings.ShortcutHitEnable)
-            {
-                sc.Key_Set(Shortcuts.SC_Type.SC_Type_Hit, key);
-                if (!sc.Key_Get(Shortcuts.SC_Type.SC_Type_Hit).valid) isKeyInvalid = true;
-            }
-            else
-                sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_Hit, key);
-            key.key = new KeyEventArgs((Keys)_settings.ShortcutHitUndoKeyCode);
-            if (_settings.ShortcutHitUndoEnable)
-            {
-                sc.Key_Set(Shortcuts.SC_Type.SC_Type_HitUndo, key);
-                if (!sc.Key_Get(Shortcuts.SC_Type.SC_Type_HitUndo).valid) isKeyInvalid = true;
-            }
-            else
-                sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_HitUndo, key);
-            key.key = new KeyEventArgs((Keys)_settings.ShortcutWayHitKeyCode);
-            if (_settings.ShortcutWayHitEnable)
-            {
-                sc.Key_Set(Shortcuts.SC_Type.SC_Type_WayHit, key);
-                if (!sc.Key_Get(Shortcuts.SC_Type.SC_Type_WayHit).valid) isKeyInvalid = true;
-            }
-            else
-                sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_WayHit, key);
-            key.key = new KeyEventArgs((Keys)_settings.ShortcutWayHitUndoKeyCode);
-            if (_settings.ShortcutWayHitUndoEnable)
-            {
-                sc.Key_Set(Shortcuts.SC_Type.SC_Type_WayHitUndo, key);
-                if (!sc.Key_Get(Shortcuts.SC_Type.SC_Type_WayHitUndo).valid) isKeyInvalid = true;
-            }
-            else
-                sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_WayHitUndo, key);
-            key.key = new KeyEventArgs((Keys)_settings.ShortcutSplitKeyCode);
-            if (_settings.ShortcutSplitEnable)
-            {
-                sc.Key_Set(Shortcuts.SC_Type.SC_Type_Split, key);
-                if (!sc.Key_Get(Shortcuts.SC_Type.SC_Type_Split).valid) isKeyInvalid = true;
-            }
-            else
-                sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_Split, key);
-            key.key = new KeyEventArgs((Keys)_settings.ShortcutSplitPrevKeyCode);
-            if (_settings.ShortcutSplitPrevEnable)
-            {
-                sc.Key_Set(Shortcuts.SC_Type.SC_Type_SplitPrev, key);
-                if (!sc.Key_Get(Shortcuts.SC_Type.SC_Type_SplitPrev).valid) isKeyInvalid = true;
-            }
-            else
-                sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_SplitPrev, key);
-            key.key = new KeyEventArgs((Keys)_settings.ShortcutPBKeyCode);
-            if (_settings.ShortcutPBEnable)
-            {
-                sc.Key_Set(Shortcuts.SC_Type.SC_Type_PB, key);
-                if (!sc.Key_Get(Shortcuts.SC_Type.SC_Type_PB).valid) isKeyInvalid = true;
-            }
-            else
-                sc.Key_PreSet(Shortcuts.SC_Type.SC_Type_PB, key);
 
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Reset, _settings.ShortcutResetKeyCode , _settings.ShortcutResetEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Hit, _settings.ShortcutHitKeyCode , _settings.ShortcutHitEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_HitUndo, _settings.ShortcutHitUndoKeyCode , _settings.ShortcutHitUndoEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHit, _settings.ShortcutWayHitKeyCode , _settings.ShortcutWayHitEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHitUndo, _settings.ShortcutWayHitUndoKeyCode , _settings.ShortcutWayHitUndoEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Split, _settings.ShortcutSplitKeyCode , _settings.ShortcutSplitEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_SplitPrev, _settings.ShortcutSplitPrevKeyCode , _settings.ShortcutSplitPrevEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_PB, _settings.ShortcutPBKeyCode , _settings.ShortcutPBEnable)) isKeyInvalid = true;
             if (isKeyInvalid)
                 MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
 
