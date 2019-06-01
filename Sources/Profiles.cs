@@ -46,6 +46,7 @@ namespace HitCounterManager
     {
         public string Name;
         public int Attempts;
+        public int ActiveSplit;
         public List<ProfileRow> Rows = new List<ProfileRow>();
     }
 
@@ -103,6 +104,7 @@ namespace HitCounterManager
                 {
                     pi.AddSplit(row.Title, row.Hits, row.WayHits, row.PB);
                 }
+                pi.SetActiveSplit(prof.ActiveSplit);
             }
             pi.SetSessionProgress(0);
         }
@@ -130,6 +132,7 @@ namespace HitCounterManager
 
             // collecting data, nom nom nom
             prof.Attempts = pi.GetAttemptsCount();
+            prof.ActiveSplit = pi.GetActiveSplit();
             for (int r = 0; r < pi.GetSplitCount(); r++)
             {
                 ProfileRow ProfileRow = new ProfileRow();

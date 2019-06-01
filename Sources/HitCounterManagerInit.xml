@@ -45,6 +45,7 @@
       <Profile>
         <Name>Dark Souls 3 (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
+        <ActiveSplit>0</ActiveSplit>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>
@@ -184,6 +185,7 @@
       <Profile>
         <Name>Dark Souls 2 (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
+        <ActiveSplit>0</ActiveSplit>
         <Rows>
           <ProfileRow>
             <Title>Last Giant</Title>
@@ -414,6 +416,7 @@
       <Profile>
         <Name>Dark Souls 2 (Any%) [DE]</Name>
         <Attempts>0</Attempts>
+        <ActiveSplit>0</ActiveSplit>
         <Rows>
           <ProfileRow>
             <Title>Letzer Riese</Title>
@@ -567,6 +570,7 @@
       <Profile>
         <Name>Dark Souls 1 Prepair to Die Edition (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
+        <ActiveSplit>0</ActiveSplit>
         <Rows>
           <ProfileRow>
             <Title>Asylum Demon</Title>
@@ -755,6 +759,7 @@
       <Profile>
         <Name>Dark Souls 3 Ashes of Ariandel (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
+        <ActiveSplit>0</ActiveSplit>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>
@@ -908,6 +913,7 @@
       <Profile>
         <Name>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE</Name>
         <Attempts>42</Attempts>
+        <ActiveSplit>18</ActiveSplit>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>
@@ -1089,6 +1095,7 @@
       <Profile>
         <Name>Dark Souls 3 The Ringed City (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
+        <ActiveSplit>0</ActiveSplit>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>
@@ -1270,6 +1277,7 @@
       <Profile>
         <Name>The Surge [EN]</Name>
         <Attempts>0</Attempts>
+        <ActiveSplit>0</ActiveSplit>
         <Rows>
           <ProfileRow>
             <Title>P.A.X.</Title>
@@ -1311,6 +1319,7 @@
       <Profile>
         <Name>Bloodborne The old hunters (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
+        <ActiveSplit>0</ActiveSplit>
         <Rows>
           <ProfileRow>
             <Title>Father Gascoigne</Title>
@@ -1471,6 +1480,7 @@
       <Profile>
         <Name>Bloodborne (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
+        <ActiveSplit>0</ActiveSplit>
         <Rows>
           <ProfileRow>
             <Title>Father Gascoigne</Title>
@@ -1596,6 +1606,7 @@
       <Profile>
         <Name>The Surge A walk in the park (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
+        <ActiveSplit>0</ActiveSplit>
         <Rows>
           <ProfileRow>
             <Title>P.A.X.</Title>
@@ -1651,6 +1662,7 @@
       <Profile>
         <Name>Demon's Souls (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
+        <ActiveSplit>0</ActiveSplit>
         <Rows>
           <ProfileRow>
             <Title>Vanguard</Title>
@@ -1783,6 +1795,7 @@
       <Profile>
         <Name>Salt &amp; Sanctuary (All Bosses)</Name>
         <Attempts>0</Attempts>
+        <ActiveSplit>0</ActiveSplit>
         <Rows>
           <ProfileRow>
             <Title>Unspeakable Deep</Title>
@@ -1950,6 +1963,7 @@
       <Profile>
         <Name>Sekiro (All Main Bosses) [EN]</Name>
         <Attempts>0</Attempts>
+        <ActiveSplit>0</ActiveSplit>
         <Rows>
           <ProfileRow>
             <Title>Genichiro Ashina</Title>

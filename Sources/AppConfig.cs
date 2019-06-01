@@ -221,7 +221,6 @@ namespace HitCounterManager
             if (isKeyInvalid)
                 MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
 
-            pi.SetActiveSplit(0);
             pi.SetSessionProgress(0, true);
 
             if (_settings.MainWidth > 400) this.Width = _settings.MainWidth;
