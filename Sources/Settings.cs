@@ -92,6 +92,7 @@ namespace HitCounterManager
             // Behavior
             cbShowAttempts.Checked = om.ShowAttemptsCounter;
             cbShowHeadline.Checked = om.ShowHeadline;
+            cbShowFooter.Checked = om.ShowFooter;
             cbShowSessionProgress.Checked = om.ShowSessionProgress;
             numShowSplitsCountFinished.Value = om.ShowSplitsCountFinished;
             numShowSplitsCountUpcoming.Value = om.ShowSplitsCountUpcoming;
@@ -143,6 +144,7 @@ namespace HitCounterManager
             // Behavior
             om.ShowAttemptsCounter = cbShowAttempts.Checked;
             om.ShowHeadline = cbShowHeadline.Checked;
+            om.ShowFooter = cbShowFooter.Checked;
             om.ShowSessionProgress = cbShowSessionProgress.Checked;
             om.ShowSplitsCountFinished = (int)numShowSplitsCountFinished.Value;
             om.ShowSplitsCountUpcoming = (int)numShowSplitsCountUpcoming.Value;

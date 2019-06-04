@@ -49,6 +49,7 @@ namespace HitCounterManager
 
         public bool ShowAttemptsCounter = true;
         public bool ShowHeadline = true;
+        public bool ShowFooter = true;
         public bool ShowSessionProgress = true;
         public int ShowSplitsCountFinished = 999;
         public int ShowSplitsCountUpcoming = 999;
@@ -225,6 +226,7 @@ namespace HitCounterManager
                     WriteJsonSimpleValue(sr, "attempts", pi.GetAttemptsCount());
                     WriteJsonSimpleValue(sr, "show_attempts", ShowAttemptsCounter);
                     WriteJsonSimpleValue(sr, "show_headline", ShowHeadline);
+                    WriteJsonSimpleValue(sr, "show_footer", ShowFooter);
                     WriteJsonSimpleValue(sr, "show_session_progress", ShowSessionProgress);
                     WriteJsonSimpleValue(sr, "show_hitscombined", ShowHitsCombined);
                     WriteJsonSimpleValue(sr, "show_numbers", ShowNumbers);

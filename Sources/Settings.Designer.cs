@@ -73,8 +73,10 @@
             this.radioSeverityAnyHitCritical = new System.Windows.Forms.RadioButton();
             this.radioSeverityComparePB = new System.Windows.Forms.RadioButton();
             this.radioSeverityBossHitCritical = new System.Windows.Forms.RadioButton();
+            this.cbHighContrastNames = new System.Windows.Forms.CheckBox();
             this.tab_behavior = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.cbShowPB = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.radioPurposeChecklist = new System.Windows.Forms.RadioButton();
             this.radioPurposeDeathCounter = new System.Windows.Forms.RadioButton();
@@ -92,6 +94,7 @@
             this.OpenFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.TabControl1 = new System.Windows.Forms.TabControl();
             this.tab_style = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label16 = new System.Windows.Forms.Label();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -99,9 +102,7 @@
             this.Label12 = new System.Windows.Forms.Label();
             this.Label13 = new System.Windows.Forms.Label();
             this.Label14 = new System.Windows.Forms.Label();
-            this.cbHighContrastNames = new System.Windows.Forms.CheckBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.cbShowPB = new System.Windows.Forms.CheckBox();
+            this.cbShowFooter = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             this.tab_globalshortcuts.SuspendLayout();
@@ -113,8 +114,8 @@
             this.tab_filepaths.SuspendLayout();
             this.TabControl1.SuspendLayout();
             this.tab_style.SuspendLayout();
-            this.GroupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.GroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbShowSessionProgress
@@ -125,7 +126,7 @@
             this.cbShowSessionProgress.Location = new System.Drawing.Point(6, 65);
             this.cbShowSessionProgress.Name = "cbShowSessionProgress";
             this.cbShowSessionProgress.Size = new System.Drawing.Size(134, 17);
-            this.cbShowSessionProgress.TabIndex = 2;
+            this.cbShowSessionProgress.TabIndex = 3;
             this.cbShowSessionProgress.Text = "Show session progress";
             this.ToolTip1.SetToolTip(this.cbShowSessionProgress, "Displays the icon to represent the farthest split since last time the application" +
         " started");
@@ -139,9 +140,9 @@
             this.cbShowAttempts.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbShowAttempts.Location = new System.Drawing.Point(6, 19);
             this.cbShowAttempts.Name = "cbShowAttempts";
-            this.cbShowAttempts.Size = new System.Drawing.Size(135, 17);
+            this.cbShowAttempts.Size = new System.Drawing.Size(158, 17);
             this.cbShowAttempts.TabIndex = 0;
-            this.cbShowAttempts.Text = "Show attempts counter";
+            this.cbShowAttempts.Text = "Show run number (attempts)";
             this.ToolTip1.SetToolTip(this.cbShowAttempts, "Displays how many runs have been done yet");
             this.cbShowAttempts.UseVisualStyleBackColor = true;
             this.cbShowAttempts.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
@@ -179,7 +180,7 @@
             0});
             this.numShowSplitsCountUpcoming.Name = "numShowSplitsCountUpcoming";
             this.numShowSplitsCountUpcoming.Size = new System.Drawing.Size(57, 20);
-            this.numShowSplitsCountUpcoming.TabIndex = 6;
+            this.numShowSplitsCountUpcoming.TabIndex = 8;
             this.ToolTip1.SetToolTip(this.numShowSplitsCountUpcoming, "Hide splits that are coming later to spare space");
             this.numShowSplitsCountUpcoming.Value = new decimal(new int[] {
             999,
@@ -216,7 +217,7 @@
             0});
             this.numShowSplitsCountFinished.Name = "numShowSplitsCountFinished";
             this.numShowSplitsCountFinished.Size = new System.Drawing.Size(57, 20);
-            this.numShowSplitsCountFinished.TabIndex = 5;
+            this.numShowSplitsCountFinished.TabIndex = 7;
             this.ToolTip1.SetToolTip(this.numShowSplitsCountFinished, "Hide splits that are done already to spare space");
             this.numShowSplitsCountFinished.Value = new decimal(new int[] {
             999,
@@ -592,7 +593,7 @@
             this.cbShowNumbers.Location = new System.Drawing.Point(6, 111);
             this.cbShowNumbers.Name = "cbShowNumbers";
             this.cbShowNumbers.Size = new System.Drawing.Size(247, 17);
-            this.cbShowNumbers.TabIndex = 4;
+            this.cbShowNumbers.TabIndex = 5;
             this.cbShowNumbers.Text = "Show numbers, no images (Numeric vs YesNo)";
             this.ToolTip1.SetToolTip(this.cbShowNumbers, "Show the actual hit count instead of images");
             this.cbShowNumbers.UseVisualStyleBackColor = true;
@@ -606,7 +607,7 @@
             this.cbShowHitsCombined.Location = new System.Drawing.Point(6, 88);
             this.cbShowHitsCombined.Name = "cbShowHitsCombined";
             this.cbShowHitsCombined.Size = new System.Drawing.Size(214, 17);
-            this.cbShowHitsCombined.TabIndex = 3;
+            this.cbShowHitsCombined.TabIndex = 4;
             this.cbShowHitsCombined.Text = "Show hits combined (boss and way hits)";
             this.ToolTip1.SetToolTip(this.cbShowHitsCombined, "Show boss and way hits either separately or combined");
             this.cbShowHitsCombined.UseVisualStyleBackColor = true;
@@ -650,6 +651,18 @@
             this.radioSeverityBossHitCritical.UseVisualStyleBackColor = true;
             this.radioSeverityBossHitCritical.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
+            // cbHighContrastNames
+            // 
+            this.cbHighContrastNames.AutoSize = true;
+            this.cbHighContrastNames.Location = new System.Drawing.Point(6, 45);
+            this.cbHighContrastNames.Name = "cbHighContrastNames";
+            this.cbHighContrastNames.Size = new System.Drawing.Size(147, 17);
+            this.cbHighContrastNames.TabIndex = 1;
+            this.cbHighContrastNames.Text = "Disable coloring of names";
+            this.ToolTip1.SetToolTip(this.cbHighContrastNames, "Applies to the split names");
+            this.cbHighContrastNames.UseVisualStyleBackColor = true;
+            this.cbHighContrastNames.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
             // tab_behavior
             // 
             this.tab_behavior.Controls.Add(this.groupBox5);
@@ -665,6 +678,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.cbShowFooter);
             this.groupBox5.Controls.Add(this.cbShowPB);
             this.groupBox5.Controls.Add(this.cbShowAttempts);
             this.groupBox5.Controls.Add(this.cbShowHeadline);
@@ -683,6 +697,19 @@
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Appearance";
+            // 
+            // cbShowPB
+            // 
+            this.cbShowPB.AutoSize = true;
+            this.cbShowPB.Checked = true;
+            this.cbShowPB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbShowPB.Location = new System.Drawing.Point(6, 135);
+            this.cbShowPB.Name = "cbShowPB";
+            this.cbShowPB.Size = new System.Drawing.Size(142, 17);
+            this.cbShowPB.TabIndex = 6;
+            this.cbShowPB.Text = "Show personal best (PB)";
+            this.cbShowPB.UseVisualStyleBackColor = true;
+            this.cbShowPB.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // groupBox4
             // 
@@ -866,6 +893,17 @@
             this.tab_style.Text = "Style";
             this.tab_style.UseVisualStyleBackColor = true;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cbHighContrast);
+            this.groupBox3.Controls.Add(this.cbHighContrastNames);
+            this.groupBox3.Location = new System.Drawing.Point(6, 13);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(273, 87);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "High contrast mode (check for better readability)";
+            // 
             // label16
             // 
             this.label16.Location = new System.Drawing.Point(394, 34);
@@ -936,41 +974,19 @@
             this.Label14.TabIndex = 21;
             this.Label14.Text = "Desired width:";
             // 
-            // cbHighContrastNames
+            // cbShowFooter
             // 
-            this.cbHighContrastNames.AutoSize = true;
-            this.cbHighContrastNames.Location = new System.Drawing.Point(6, 45);
-            this.cbHighContrastNames.Name = "cbHighContrastNames";
-            this.cbHighContrastNames.Size = new System.Drawing.Size(147, 17);
-            this.cbHighContrastNames.TabIndex = 1;
-            this.cbHighContrastNames.Text = "Disable coloring of names";
-            this.ToolTip1.SetToolTip(this.cbHighContrastNames, "Applies to the split names");
-            this.cbHighContrastNames.UseVisualStyleBackColor = true;
-            this.cbHighContrastNames.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.cbHighContrast);
-            this.groupBox3.Controls.Add(this.cbHighContrastNames);
-            this.groupBox3.Location = new System.Drawing.Point(6, 13);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(273, 87);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "High contrast mode (check for better readability)";
-            // 
-            // cbShowPB
-            // 
-            this.cbShowPB.AutoSize = true;
-            this.cbShowPB.Checked = true;
-            this.cbShowPB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowPB.Location = new System.Drawing.Point(6, 135);
-            this.cbShowPB.Name = "cbShowPB";
-            this.cbShowPB.Size = new System.Drawing.Size(142, 17);
-            this.cbShowPB.TabIndex = 7;
-            this.cbShowPB.Text = "Show personal best (PB)";
-            this.cbShowPB.UseVisualStyleBackColor = true;
-            this.cbShowPB.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            this.cbShowFooter.AutoSize = true;
+            this.cbShowFooter.Checked = true;
+            this.cbShowFooter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbShowFooter.Location = new System.Drawing.Point(124, 42);
+            this.cbShowFooter.Name = "cbShowFooter";
+            this.cbShowFooter.Size = new System.Drawing.Size(83, 17);
+            this.cbShowFooter.TabIndex = 2;
+            this.cbShowFooter.Text = "Show footer";
+            this.ToolTip1.SetToolTip(this.cbShowFooter, "Displays the summary at the buttom");
+            this.cbShowFooter.UseVisualStyleBackColor = true;
+            this.cbShowFooter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // Settings
             // 
@@ -1002,10 +1018,10 @@
             this.TabControl1.ResumeLayout(false);
             this.tab_style.ResumeLayout(false);
             this.tab_style.PerformLayout();
-            this.GroupBox1.ResumeLayout(false);
-            this.GroupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.GroupBox1.ResumeLayout(false);
+            this.GroupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1083,5 +1099,6 @@
         private System.Windows.Forms.CheckBox cbHighContrastNames;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox cbShowPB;
+        internal System.Windows.Forms.CheckBox cbShowFooter;
     }
 }

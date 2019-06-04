@@ -89,7 +89,7 @@
             this.btnAttempts.Name = "btnAttempts";
             this.btnAttempts.Size = new System.Drawing.Size(20, 20);
             this.btnAttempts.TabIndex = 42;
-            this.ToolTip1.SetToolTip(this.btnAttempts, "Set amount of attempts manually");
+            this.ToolTip1.SetToolTip(this.btnAttempts, "Set run number (amount of attempts) manually");
             this.btnAttempts.UseVisualStyleBackColor = true;
             this.btnAttempts.Click += new System.EventHandler(this.btnAttempts_Click);
             // 

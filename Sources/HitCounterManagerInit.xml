@@ -24,6 +24,7 @@
   <OutputFile>HitCounter.html</OutputFile>
   <ShowAttemptsCounter>true</ShowAttemptsCounter>
   <ShowHeadline>true</ShowHeadline>
+  <ShowFooter>true</ShowFooter>
   <ShowSessionProgress>true</ShowSessionProgress>
   <ShowSplitsCountFinished>999</ShowSplitsCountFinished>
   <ShowSplitsCountUpcoming>999</ShowSplitsCountUpcoming>

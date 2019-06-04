@@ -55,6 +55,7 @@ namespace HitCounterManager
         public string OutputFile;
         public bool ShowAttemptsCounter;
         public bool ShowHeadline;
+        public bool ShowFooter;
         public bool ShowSessionProgress;
         public int ShowSplitsCountFinished;
         public int ShowSplitsCountUpcoming;
@@ -180,6 +181,7 @@ namespace HitCounterManager
                 _settings.ShortcutWayHitUndoKeyCode = 0x10000 | 0x7A; // Shift F11
                 _settings.ShortcutPBEnable = false;
                 _settings.ShortcutPBKeyCode = 0x10000 | 0x73; // Shift F4
+                _settings.ShowFooter = true;
                 _settings.ShowHitsCombined = true;
                 _settings.ShowNumbers = true;
                 _settings.ShowPB = true;
@@ -228,6 +230,7 @@ namespace HitCounterManager
 
             om.ShowAttemptsCounter = _settings.ShowAttemptsCounter;
             om.ShowHeadline = _settings.ShowHeadline;
+            om.ShowFooter = _settings.ShowFooter;
             om.ShowSessionProgress = _settings.ShowSessionProgress;
             om.ShowSplitsCountFinished = _settings.ShowSplitsCountFinished;
             om.ShowSplitsCountUpcoming = _settings.ShowSplitsCountUpcoming;
@@ -296,6 +299,7 @@ namespace HitCounterManager
 
             _settings.ShowAttemptsCounter = om.ShowAttemptsCounter;
             _settings.ShowHeadline = om.ShowHeadline;
+            _settings.ShowFooter = om.ShowFooter;
             _settings.ShowSessionProgress = om.ShowSessionProgress;
             _settings.ShowSplitsCountFinished = om.ShowSplitsCountFinished;
             _settings.ShowSplitsCountUpcoming = om.ShowSplitsCountUpcoming;

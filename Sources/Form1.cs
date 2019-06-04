@@ -357,7 +357,7 @@ namespace HitCounterManager
 
         private void btnAttempts_Click(object sender, EventArgs e)
         {
-            string amount_string = InputBox("Enter amount to be set!", "Set amount of attempts", pi.GetAttemptsCount().ToString());
+            string amount_string = InputBox("Enter amount to be set!", "Set new run number (amount of attempts)", pi.GetAttemptsCount().ToString());
             int amount_value;
             if (!int.TryParse(amount_string, out amount_value))
             {
