@@ -103,6 +103,7 @@
             this.Label13 = new System.Windows.Forms.Label();
             this.Label14 = new System.Windows.Forms.Label();
             this.cbShowFooter = new System.Windows.Forms.CheckBox();
+            this.lblShowSplitCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             this.tab_globalshortcuts.SuspendLayout();
@@ -678,6 +679,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.lblShowSplitCount);
             this.groupBox5.Controls.Add(this.cbShowFooter);
             this.groupBox5.Controls.Add(this.cbShowPB);
             this.groupBox5.Controls.Add(this.cbShowAttempts);
@@ -988,6 +990,16 @@
             this.cbShowFooter.UseVisualStyleBackColor = true;
             this.cbShowFooter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
+            // lblShowSplitCount
+            // 
+            this.lblShowSplitCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblShowSplitCount.Location = new System.Drawing.Point(235, 160);
+            this.lblShowSplitCount.Name = "lblShowSplitCount";
+            this.lblShowSplitCount.Size = new System.Drawing.Size(126, 44);
+            this.lblShowSplitCount.TabIndex = 9;
+            this.lblShowSplitCount.Text = "Current configuration will show up to ??? splits.";
+            this.lblShowSplitCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1100,5 +1112,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox cbShowPB;
         internal System.Windows.Forms.CheckBox cbShowFooter;
+        private System.Windows.Forms.Label lblShowSplitCount;
     }
 }

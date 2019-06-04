@@ -110,6 +110,7 @@ namespace HitCounterManager
             txtInput.Text = om.FilePathIn;
             txtOutput.Text = om.FilePathOut;
 
+            ApplyAppearance(sender, null);
             IsFormLoaded = true;
         }
 
@@ -134,6 +135,9 @@ namespace HitCounterManager
 
         private void ApplyAppearance(object sender, EventArgs e)
         {
+
+            lblShowSplitCount.Text = "Current configuration will show up to " + (1 + numShowSplitsCountFinished.Value + numShowSplitsCountUpcoming.Value) + " splits.";
+
             if (!IsFormLoaded) return;
 
             // Style
