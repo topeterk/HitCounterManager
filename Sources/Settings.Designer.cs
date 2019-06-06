@@ -74,8 +74,10 @@
             this.radioSeverityComparePB = new System.Windows.Forms.RadioButton();
             this.radioSeverityBossHitCritical = new System.Windows.Forms.RadioButton();
             this.cbHighContrastNames = new System.Windows.Forms.CheckBox();
+            this.cbShowFooter = new System.Windows.Forms.CheckBox();
             this.tab_behavior = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.lblShowSplitCount = new System.Windows.Forms.Label();
             this.cbShowPB = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.radioPurposeChecklist = new System.Windows.Forms.RadioButton();
@@ -102,8 +104,6 @@
             this.Label12 = new System.Windows.Forms.Label();
             this.Label13 = new System.Windows.Forms.Label();
             this.Label14 = new System.Windows.Forms.Label();
-            this.cbShowFooter = new System.Windows.Forms.CheckBox();
-            this.lblShowSplitCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             this.tab_globalshortcuts.SuspendLayout();
@@ -526,6 +526,7 @@
             this.cbApCustomCss.Text = "Use custom stylesheet and font:";
             this.ToolTip1.SetToolTip(this.cbApCustomCss, "Use a custom stylesheet and font for a personalized look and feel");
             this.cbApCustomCss.UseVisualStyleBackColor = true;
+            this.cbApCustomCss.CheckedChanged += new System.EventHandler(this.cbApCustomCss_CheckedChanged);
             // 
             // txtCssUrl
             // 
@@ -559,6 +560,7 @@
             this.ToolTip1.SetToolTip(this.btnApApply, "To prevent issues with loading incomplete URLs, please click the Apply button man" +
         "ually after editing.");
             this.btnApApply.UseVisualStyleBackColor = false;
+            this.btnApApply.Click += new System.EventHandler(this.btnApApply_Click);
             // 
             // cbHighContrast
             // 
@@ -664,6 +666,20 @@
             this.cbHighContrastNames.UseVisualStyleBackColor = true;
             this.cbHighContrastNames.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
+            // cbShowFooter
+            // 
+            this.cbShowFooter.AutoSize = true;
+            this.cbShowFooter.Checked = true;
+            this.cbShowFooter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbShowFooter.Location = new System.Drawing.Point(124, 42);
+            this.cbShowFooter.Name = "cbShowFooter";
+            this.cbShowFooter.Size = new System.Drawing.Size(83, 17);
+            this.cbShowFooter.TabIndex = 2;
+            this.cbShowFooter.Text = "Show footer";
+            this.ToolTip1.SetToolTip(this.cbShowFooter, "Displays the summary at the buttom");
+            this.cbShowFooter.UseVisualStyleBackColor = true;
+            this.cbShowFooter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
             // tab_behavior
             // 
             this.tab_behavior.Controls.Add(this.groupBox5);
@@ -699,6 +715,16 @@
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Appearance";
+            // 
+            // lblShowSplitCount
+            // 
+            this.lblShowSplitCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblShowSplitCount.Location = new System.Drawing.Point(235, 160);
+            this.lblShowSplitCount.Name = "lblShowSplitCount";
+            this.lblShowSplitCount.Size = new System.Drawing.Size(126, 44);
+            this.lblShowSplitCount.TabIndex = 9;
+            this.lblShowSplitCount.Text = "Current configuration will show up to ??? splits.";
+            this.lblShowSplitCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cbShowPB
             // 
@@ -975,30 +1001,6 @@
             this.Label14.Size = new System.Drawing.Size(74, 13);
             this.Label14.TabIndex = 21;
             this.Label14.Text = "Desired width:";
-            // 
-            // cbShowFooter
-            // 
-            this.cbShowFooter.AutoSize = true;
-            this.cbShowFooter.Checked = true;
-            this.cbShowFooter.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowFooter.Location = new System.Drawing.Point(124, 42);
-            this.cbShowFooter.Name = "cbShowFooter";
-            this.cbShowFooter.Size = new System.Drawing.Size(83, 17);
-            this.cbShowFooter.TabIndex = 2;
-            this.cbShowFooter.Text = "Show footer";
-            this.ToolTip1.SetToolTip(this.cbShowFooter, "Displays the summary at the buttom");
-            this.cbShowFooter.UseVisualStyleBackColor = true;
-            this.cbShowFooter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
-            // 
-            // lblShowSplitCount
-            // 
-            this.lblShowSplitCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblShowSplitCount.Location = new System.Drawing.Point(235, 160);
-            this.lblShowSplitCount.Name = "lblShowSplitCount";
-            this.lblShowSplitCount.Size = new System.Drawing.Size(126, 44);
-            this.lblShowSplitCount.TabIndex = 9;
-            this.lblShowSplitCount.Text = "Current configuration will show up to ??? splits.";
-            this.lblShowSplitCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Settings
             // 
