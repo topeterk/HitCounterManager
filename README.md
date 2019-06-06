@@ -152,10 +152,19 @@ Search for one of your liking and see the embedded font and/or CSS instruction a
 
 ## Moders and Developers
 
-### Using standalone Chrome browser instead of broadcasting software
+### Using standalone web browser instead of broadcasting software
 * When no data is displayed, there could be a problem with cross-domain security settings that can be avoided by allowing acces to local files in general:
-  * Start Chrome with **--allow-file-access-from-files**
-  > Example: _"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files_
+  * **Chrome**
+    * Start with command line option **--allow-file-access-from-files** like
+    > Example: _"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files_
+  * **Firefox**
+    * Change the security policy in the browser settings
+    > Location: _about:config -> security.fileuri.strict_origin_policy -> false_  
+    > Note: _This is a global settings, means you should enable this only for offline/trusted website!_
+  * **Internet Explorer 11**
+    * Accepting the initially blocked execution of the script should be sufficient
+  * **Edge**
+    * No issues here so far
 
 ### Changing layout and design
 You can modify or create new custom designs. Simply modify or create a new HTML, CSS or Javascript files based on any of the pre-delivered designs. For example, the style like **background color, font color or sizes can be easily modified in the CSS files**.  
