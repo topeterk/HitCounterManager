@@ -1,8 +1,10 @@
 # HitCounterManager - A Dark Souls inspired Hit Counter
 
-Free Hit Counter that is running in the background, so you can focus on your stream.  
+**Free Hit Counter** that is running in the background, so you can focus on your stream.  
 No need to keep any windows open for a window capture any more.  
-Initially designed for Dark Souls and similar games but supports any game.
+Initially designed for Dark Souls and similar games but supports any game.  
+Just add the local HTML file to you broadcasting software and the setup is done.  
+**Works completely offline, no account or login required.**
 
 To see some **screenshots** of this application go to the **[Wiki pages](../../wiki)**.  
 To see **how to** use the application watch the **[Tutorial on YouTube](https://www.youtube.com/watch?v=iXGExlS4xeM)**.
@@ -21,65 +23,68 @@ To see **how to** use the application watch the **[Tutorial on YouTube](https://
 * No window capture needed for stream integration
 * Hot key support for seamless use **ingame** (Windows only)
 * Easy to use profile management
+* On the fly configurable design
 
-## Features
-It was designed for Dark Souls III "0 hit" or "no death" runs to count every hit/death during the playthrough
-* Creates a HTML file of the hit counter that can be used by Open BroadCaster Software in order to make it visible on stream
-  * The design and layout can be costumized completely
-* Instead of using GUI buttons, keyboard shortcuts can be configured:
+### Features in detail
+
+* Configurable keyboard hot keys can be used while running fullscreen games (like Dark Souls III):
   * Increase/Decrease hit count of the current split (boss hits and hits on the way separately)
   * Go to next/previous split
   * Reset the run (sets all hit counts to 0 and selects first split)
   * Save the run as your PB (personal best)
-* Keyboard shortcuts are working in fullscreen applications (like Dark Souls III)
-* Via GUI every value can be changed at any time
-* Multiple profiles can be created (e.g. "Any%", "AllBosses", "DLC only"..)
-* Switching to other profiles will remember the hit counts of the currently selected profile
-* Button to save current run as PB (personal best)
-* Counts the attempts of each run (implicitly on every run's reset or manually)
-* Shows furthest progress since last application start (can also be set manually)
-* Settings file "HitCounterManagerSave.xml" holds all your configuration data and is designed to work in newer versions, too. Save and restore this file at any time.
-* Comes with some pre-defined profiles for:
-  * Bloodborne + The old hunters
-  * Dark Souls 1 Prepare To Die Edition
-  * Dark Souls 2
-  * Dark Souls 3 + Ashes of Ariandel + The Ringed City
-  * Demon's Souls
-  * Salt and Sanctuary
-  * Sekiro
-  * The Surge + A walk in the park
-* Comes with different designs..
-  * **.. for counting hits:**
+* One single save file: [HitCounterManagerSave.xml](HitCounterManagerSave.xml)
+  * Holds all your settings, profiles and is designed to work in newer/upcoming versions, too. Save and restore this file at any time.
+* Create profiles for each challange or game
+  * Keeps the current progress and your personal bests saved
+  * Keep track of each profile how many runs/attempts your already started
+  * Multiple profiles can be created and switched very easily (e.g. multiple games for Dark Souls trilogy runs)
+    * Switching to other profiles will remember the hit counts of the currently selected profile
+* Keep track of furthest progress since last application start
+
+### Pre-defined profiles
+
+* Bloodborne + The old hunters
+* Dark Souls 1 Prepare To Die Edition
+* Dark Souls 2
+* Dark Souls 3 + Ashes of Ariandel + The Ringed City
+* Demon's Souls
+* Salt and Sanctuary
+* Sekiro
+* The Surge + A walk in the park
+
+### Design configurations
+
+The appearance of all designs can be modified via GUI on the fly:  
+> Updates run with an interval of 1.5 seconds to spare performance  
+> Previews can be found at the **[Wiki pages](../../wiki)**.
+
+* Purpose
   
-    * **Numeric** _(Traditional no hit runs)_
-      * Shows the amount of hits for the current run, PB and their differences
-    * **NumericWay** _(Traditional no hit runs)_
-      * As **Numeric** except that hits are shown splitted into boss hits and way hits
-    * **YesNo** _(Traditional no hit runs)_
-      * Shows check marks/crosses if one got hit at the current run and PB
-      * Every split has a check mark which has an amount of zero hits
-    * **PBSplits**
-      * Shows the amount of hits for the current run, PB and their differences
-      * Every split is marked "better" which has a less or equal amount of hits compared to the PB split
-  * **.. for counting deaths:**
+  * Act as split counter _(traditional no hit runs)_
+  * Death counter _(Very basic death counter)_
+  * Checklist _(Simple boss or split checklist)_
+* Choose severity of hits _(ends up in differnt split colors)_
   
-    * **Deaths** _(Very basic death counter)_
-      * Very simple counter that only shows sum of all hits (deaths)
-    * **NoDeath** _(Traditional no death runs)_
-      * Shows check marks/crosses until the players death for the current run and PB
-      * All splits have check marks until the current split appears (__Now__ only) or a split appears that has already counted hits.
-  * **.. for measuring progress:**
+  * Any hit counts as a critical hit
+  * Boss hits are critical, hits on the way count normal
+  * Splits having hits less than PB count normal, otherwise critically
+* Appearance
   
-    * **Bosses** _(Simple boss or split checklist)_
-      * Shows check marks/crosses for every boss (split) that is still alive or already defeated at the current run
-      * Just add a hit to the boss/split to "mark the boss done"
-* The appearance of all designs can be modified via GUI
-  * Set the amount of shown splits that are already finished
-  * Set the amount of shown splits that are upcoming
-  * Show or hide the attempts counter
-  * Show or hide the headline
-  * Enable or disable the high contrast mode to support better readability on low bitrate streams
-  * Switch to a custom CSS and font
+  * Show/Hide amount of runs that has already been started
+  * Show/Hide the headline and/or footer
+  * Show/Hide the session progress icon
+  * Show the hits separately or as a combination of boss hits and hits on the way
+  * Show numbers or images to represent hits
+  * Show/Hide the personal best
+* Readability _(e.g. for lower bitrates or mobile devices)_
+  
+  * Limit the visible splits when you have lots of splits
+  * Enable/Disable transparency
+  * Enable/Disable colored split names
+* Custom design
+  
+  * Switch to a different font
+  * Choose an alternative CSS file _(pink colored alternative available)_
 
 ## Get the software
 All available releases can be found at the [Releases page](../../releases) on GitHub.
@@ -99,14 +104,7 @@ All available releases can be found at the [Releases page](../../releases) on Gi
       Run the application in the application's directory with **mono HitCounterManager.exe**  
       **Note**: The Non-Windows / Mono version does not support global hot keys
 
-### Configuration file
-The file [HitCounterManagerSave.xml](HitCounterManagerSave.xml) is used for all settings you can set by this application.  
-You can save and restore this file at any time or copy it to a newer/portable version of this application.
-> Note: It holds all your settings and profiles in one place. No other files are involved.
-
 ### Designs / Fonts
-The pre-delivered HTML designs will update with an interval of 1.5 seconds.
-> Previews of the pre-delivered HTML desings can be found at the **[Wiki pages](../../wiki)**.
 
 A specific font can be selected at the appearance dialog in two ways:
 * The font is already installed locally on the system
@@ -150,17 +148,16 @@ Search for one of your liking and see the embedded font and/or CSS instruction a
     * UniversialAccessFromFilesUrls (Set to **Enabled**, _but should also work when disabled_)
     * WebSecurity (Set to **Disabled**, _but should also work when enabled_)
 
-## Moders and Developers
+## Modders and developers
 
 ### Using standalone web browser instead of broadcasting software
 * When no data is displayed, there could be a problem with cross-domain security settings that can be avoided by allowing acces to local files in general:
   * **Chrome**
-    * Start with command line option **--allow-file-access-from-files** like
+    * Start with command line option **--allow-file-access-from-files**
     > Example: _"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files_
   * **Firefox**
-    * Change the security policy in the browser settings
-    > Location: _about:config -> security.fileuri.strict_origin_policy -> false_  
-    > Note: _This is a global settings, means you should enable this only for offline/trusted website!_
+    * Change the security policy in the browser settings **about:config -> security.fileuri.strict_origin_policy -> false**
+    > Note: This is a global settings, means you should enable this only for offline/trusted websites!
   * **Internet Explorer 11**
     * Accepting the initially blocked execution of the script should be sufficient
   * **Edge**
