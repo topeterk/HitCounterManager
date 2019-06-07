@@ -25,7 +25,7 @@ REM SOFTWARE.
 echo PrepareRelease.bat START ===========
 
 REM To run this script you need to have 7zip installed at the default path
-REM or you have update the path:
+REM or you have to update the path:
 
 set PATH=%PATH%;C:\Program Files\7-Zip
 set PR_FINAL=FinalFiles

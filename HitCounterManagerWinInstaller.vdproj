@@ -33,12 +33,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_15F85E4C9485467CBA1BE1E7E44AEF9A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_20218FA7FE9C4BE0880175AD49073944"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -69,12 +63,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_5879A365272947CEA9A7D6AF83799E2D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_69EAECF3E9AA4674BD22F77E82C066A8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -87,19 +75,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_893FFB61F75E461AB93294C7CB55AF13"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_8B5EDD84CC594C4D881995F0A910FB05"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A427CD9825B04AD78DEDAB075D368460"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -111,19 +87,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D567F823C8F943078DD18C5E105975B2"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_E73481EAB59C480EAACFF94F3334D77E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_EA4DCAAD27AF4F239A6AC64AB6343BFD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -288,26 +252,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_15F85E4C9485467CBA1BE1E7E44AEF9A"
-            {
-            "SourcePath" = "8:Designs\\HitCounterDeaths.html"
-            "TargetName" = "8:HitCounterDeaths.html"
-            "Tag" = "8:"
-            "Folder" = "8:_3F401D01D1EC40B0865BDA131CB5CBBC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_20218FA7FE9C4BE0880175AD49073944"
             {
             "SourcePath" = "8:Designs\\img_check.png"
@@ -408,26 +352,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5879A365272947CEA9A7D6AF83799E2D"
-            {
-            "SourcePath" = "8:Designs\\HitCounterPBSplits.html"
-            "TargetName" = "8:HitCounterPBSplits.html"
-            "Tag" = "8:"
-            "Folder" = "8:_3F401D01D1EC40B0865BDA131CB5CBBC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_69EAECF3E9AA4674BD22F77E82C066A8"
             {
             "SourcePath" = "8:Designs\\stylesheet.css"
@@ -468,50 +392,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_893FFB61F75E461AB93294C7CB55AF13"
-            {
-            "SourcePath" = "8:Designs\\HitCounterBosses.html"
-            "TargetName" = "8:HitCounterBosses.html"
-            "Tag" = "8:"
-            "Folder" = "8:_3F401D01D1EC40B0865BDA131CB5CBBC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8B5EDD84CC594C4D881995F0A910FB05"
             {
             "SourcePath" = "8:Designs\\stylesheet_pink.css"
             "TargetName" = "8:stylesheet_pink.css"
-            "Tag" = "8:"
-            "Folder" = "8:_3F401D01D1EC40B0865BDA131CB5CBBC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A427CD9825B04AD78DEDAB075D368460"
-            {
-            "SourcePath" = "8:Designs\\HitCounterNoDeath.html"
-            "TargetName" = "8:HitCounterNoDeath.html"
             "Tag" = "8:"
             "Folder" = "8:_3F401D01D1EC40B0865BDA131CB5CBBC"
             "Condition" = "8:"
@@ -534,46 +418,6 @@
             "TargetName" = "8:HitCounter.html"
             "Tag" = "8:"
             "Folder" = "8:_DFB6FB4DFF4E4C228DA381CF60E540D8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D567F823C8F943078DD18C5E105975B2"
-            {
-            "SourcePath" = "8:Designs\\HitCounterYesNo.html"
-            "TargetName" = "8:HitCounterYesNo.html"
-            "Tag" = "8:"
-            "Folder" = "8:_3F401D01D1EC40B0865BDA131CB5CBBC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EA4DCAAD27AF4F239A6AC64AB6343BFD"
-            {
-            "SourcePath" = "8:Designs\\HitCounterNumeric.html"
-            "TargetName" = "8:HitCounterNumeric.html"
-            "Tag" = "8:"
-            "Folder" = "8:_3F401D01D1EC40B0865BDA131CB5CBBC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -730,7 +574,7 @@
             "Transitive" = "11:FALSE"
             "Target" = "8:_E73481EAB59C480EAACFF94F3334D77E"
             "Folder" = "8:_9A4CA99C01444399BC2C3C556C0D55C8"
-            "WorkingFolder" = "8:"
+            "WorkingFolder" = "8:_DFB6FB4DFF4E4C228DA381CF60E540D8"
             "Icon" = "8:_E73481EAB59C480EAACFF94F3334D77E"
             "Feature" = "8:"
             }
@@ -744,7 +588,7 @@
             "Transitive" = "11:FALSE"
             "Target" = "8:_E73481EAB59C480EAACFF94F3334D77E"
             "Folder" = "8:_B482B6AE3DE24618AF96C2D9E45E8C0E"
-            "WorkingFolder" = "8:"
+            "WorkingFolder" = "8:_DFB6FB4DFF4E4C228DA381CF60E540D8"
             "Icon" = "8:_E73481EAB59C480EAACFF94F3334D77E"
             "Feature" = "8:"
             }

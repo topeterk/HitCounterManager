@@ -114,13 +114,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Designs\HitCounterBosses.html" />
-    <Content Include="Designs\HitCounterDeaths.html" />
     <Content Include="Designs\HitCounterGui.html" />
-    <Content Include="Designs\HitCounterNoDeath.html" />
-    <Content Include="Designs\HitCounterNumeric.html" />
-    <Content Include="Designs\HitCounterPBSplits.html" />
-    <Content Include="Designs\HitCounterYesNo.html" />
     <Content Include="Designs\img_bar.png" />
     <Content Include="Designs\img_check.png" />
     <Content Include="Designs\img_cross.png" />
