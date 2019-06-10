@@ -9,7 +9,7 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 To see some **screenshots** of this application go to the **[Wiki pages](../../wiki)**.  
 To see **how to** use the application watch the **[Tutorial on YouTube](https://www.youtube.com/watch?v=iXGExlS4xeM)**.
 
-<p align="center"><a href="Images/Preview.png"><img src="Images/Preview.png" alt="Preview" height="250px"/></a></p>
+<p align="center"><a href="Images/Preview.png"><img src="Images/Preview.png" alt="Preview" width="700px"/></a></p>
 
 <img src="Images/installer-banner.png" alt="banner" align="right">
 
@@ -86,6 +86,8 @@ The appearance of all designs can be modified via GUI on the fly:
   
   * Switch to a different font
   * Choose an alternative CSS file _(pink colored alternative available)_
+
+<p align="center"><a href="Images/SampleDesigns.gif"><img src="Images/SampleDesigns.gif" alt="Designs animation"/></a></p>
 
 ## Get the software
 All available releases can be found at the [Releases page](../../releases) on GitHub.
