@@ -225,8 +225,9 @@ namespace HitCounterManager
 
             pi.SetSessionProgress(0, true);
 
-            if (_settings.MainWidth > 400) this.Width = _settings.MainWidth;
-            if (_settings.MainHeight > 400) this.Height = _settings.MainHeight;
+            if (_settings.MainWidth < this.MinimumSize.Width) _settings.MainWidth = this.MinimumSize.Width;
+            if (_settings.MainHeight < this.MinimumSize.Height) _settings.MainHeight = this.MinimumSize.Height;
+            this.Size = new System.Drawing.Size(_settings.MainWidth, _settings.MainHeight);
 
             om.ShowAttemptsCounter = _settings.ShowAttemptsCounter;
             om.ShowHeadline = _settings.ShowHeadline;

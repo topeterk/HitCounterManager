@@ -38,12 +38,19 @@ namespace HitCounterManager
         private Profiles profs = new Profiles();
         private bool SettingsDialogOpen = false;
         private IProfileInfo pi;
+        private bool DataGridView1_ValueChangedSema = false;
 
         #region Form
 
         public Form1()
         {
+            // The designer sometimes orders the control creation in an order
+            // that would call event handlers already during initialization.
+            // But not all variables are available yet, so we prevent access to them.
+            DataGridView1_ValueChangedSema = true; 
             InitializeComponent();
+            DataGridView1_ValueChangedSema = false;
+
             pi = DataGridView1; // for better capsulation
             om = new OutModule(pi);
             sc = new Shortcuts(Handle);
@@ -56,6 +63,7 @@ namespace HitCounterManager
         private void Form1_Load(object sender, EventArgs e)
         {
             Text = Text + " - v" + Application.ProductVersion + " " + OsLayer.Name;
+            btnHit.Select();
             LoadSettings();
             UpdateProgressAndTotals();
             om.Update(true); // Write very first output once after application start
@@ -70,21 +78,25 @@ namespace HitCounterManager
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            const int Pad = 13;
+            const int Pad_Controls = 6;
+            const int Pad_Frame = 15;
+
+            int Frame_Width = ClientRectangle.Width;
+            int Frame_Height = ClientRectangle.Height;
 
             // fill
-            ComboBox1.Width = Width - Pad * 2 - 15;
-            DataGridView1.Left = Pad;
+            ComboBox1.Width = Frame_Width - Pad_Frame * 2;
+            DataGridView1.Left = Pad_Frame;
             DataGridView1.Width = ComboBox1.Width;
-            DataGridView1.Height = Height - DataGridView1.Top - Pad - btnSettings.Height - 15;
+            DataGridView1.Height = Frame_Height - DataGridView1.Top - Pad_Frame;
 
             // right aligned
-            btnSplit.Left = Width - Pad - 15 - btnSplit.Width;
-            btnWayHit.Left = btnSplit.Left - Pad / 2 - btnWayHit.Width;
-            lbl_totals.Width = Width - Pad - 15 - lbl_totals.Left;
+            btnSplit.Left = Frame_Width - btnSplit.Width - Pad_Frame;
+            btnWayHit.Left = btnSplit.Left - Pad_Controls - btnWayHit.Width;
+            lbl_totals.Width = Frame_Width - lbl_totals.Left - Pad_Frame;
 
             // left aligned
-            btnHit.Width = btnWayHit.Left - Pad / 2 - btnHit.Left;
+            btnHit.Width = btnWayHit.Left - Pad_Controls - btnHit.Left;
         }
 
         protected override void WndProc(ref Message m)
@@ -555,10 +567,9 @@ namespace HitCounterManager
             }
         }
 
-        private bool SemaValueChange = false;
         private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (SemaValueChange) return;
+            if (DataGridView1_ValueChangedSema) return;
 
             if (0 <= e.RowIndex && 0 <= e.ColumnIndex)
             {
@@ -570,10 +581,10 @@ namespace HitCounterManager
                     int idx = e.RowIndex;
                     if (idx < pi.GetSplitCount())
                     {
-                        SemaValueChange = true;
+                        DataGridView1_ValueChangedSema = true;
                         for (int r = 0; r <= DataGridView1.RowCount - 2; r++) DataGridView1.Rows[r].Cells["cSP"].Value = false;
                         pi.SetSessionProgress(idx);
-                        SemaValueChange = false;
+                        DataGridView1_ValueChangedSema = false;
                     }
                 }
             }

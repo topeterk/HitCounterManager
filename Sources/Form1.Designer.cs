@@ -75,7 +75,7 @@
             this.btnCheckVersion.Location = new System.Drawing.Point(91, 4);
             this.btnCheckVersion.Name = "btnCheckVersion";
             this.btnCheckVersion.Size = new System.Drawing.Size(20, 20);
-            this.btnCheckVersion.TabIndex = 43;
+            this.btnCheckVersion.TabIndex = 3;
             this.ToolTip1.SetToolTip(this.btnCheckVersion, "Check for a new version");
             this.btnCheckVersion.UseVisualStyleBackColor = true;
             this.btnCheckVersion.Click += new System.EventHandler(this.btnCheckVersion_Click);
@@ -88,7 +88,7 @@
             this.btnAttempts.Location = new System.Drawing.Point(277, 4);
             this.btnAttempts.Name = "btnAttempts";
             this.btnAttempts.Size = new System.Drawing.Size(20, 20);
-            this.btnAttempts.TabIndex = 42;
+            this.btnAttempts.TabIndex = 9;
             this.ToolTip1.SetToolTip(this.btnAttempts, "Set run number (amount of attempts) manually");
             this.btnAttempts.UseVisualStyleBackColor = true;
             this.btnAttempts.Click += new System.EventHandler(this.btnAttempts_Click);
@@ -111,7 +111,7 @@
             this.btnAbout.Location = new System.Drawing.Point(117, 4);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(20, 20);
-            this.btnAbout.TabIndex = 39;
+            this.btnAbout.TabIndex = 4;
             this.ToolTip1.SetToolTip(this.btnAbout, "About");
             this.btnAbout.UseVisualStyleBackColor = true;
             this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
@@ -124,7 +124,7 @@
             this.btnWeb.Location = new System.Drawing.Point(65, 4);
             this.btnWeb.Name = "btnWeb";
             this.btnWeb.Size = new System.Drawing.Size(20, 20);
-            this.btnWeb.TabIndex = 38;
+            this.btnWeb.TabIndex = 2;
             this.ToolTip1.SetToolTip(this.btnWeb, "Help / Website");
             this.btnWeb.UseVisualStyleBackColor = true;
             this.btnWeb.Click += new System.EventHandler(this.btnWeb_Click);
@@ -137,7 +137,7 @@
             this.btnSave.Location = new System.Drawing.Point(39, 4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(20, 20);
-            this.btnSave.TabIndex = 37;
+            this.btnSave.TabIndex = 1;
             this.ToolTip1.SetToolTip(this.btnSave, "Save");
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -150,7 +150,7 @@
             this.btnSettings.Location = new System.Drawing.Point(13, 4);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(20, 20);
-            this.btnSettings.TabIndex = 36;
+            this.btnSettings.TabIndex = 0;
             this.ToolTip1.SetToolTip(this.btnSettings, "Settings");
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
@@ -163,7 +163,7 @@
             this.btnCopy.Location = new System.Drawing.Point(210, 4);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(20, 20);
-            this.btnCopy.TabIndex = 35;
+            this.btnCopy.TabIndex = 7;
             this.ToolTip1.SetToolTip(this.btnCopy, "Copy profile");
             this.btnCopy.UseVisualStyleBackColor = true;
             this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
@@ -176,7 +176,7 @@
             this.btnPB.Location = new System.Drawing.Point(93, 57);
             this.btnPB.Name = "btnPB";
             this.btnPB.Size = new System.Drawing.Size(75, 40);
-            this.btnPB.TabIndex = 32;
+            this.btnPB.TabIndex = 14;
             this.ToolTip1.SetToolTip(this.btnPB, "Record run as PB (personal best)");
             this.btnPB.UseVisualStyleBackColor = false;
             this.btnPB.Click += new System.EventHandler(this.btnPB_Click);
@@ -189,7 +189,7 @@
             this.btnDelete.Location = new System.Drawing.Point(236, 4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(20, 20);
-            this.btnDelete.TabIndex = 31;
+            this.btnDelete.TabIndex = 8;
             this.ToolTip1.SetToolTip(this.btnDelete, "Delete profile");
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -202,7 +202,7 @@
             this.btnRename.Location = new System.Drawing.Point(184, 4);
             this.btnRename.Name = "btnRename";
             this.btnRename.Size = new System.Drawing.Size(20, 20);
-            this.btnRename.TabIndex = 30;
+            this.btnRename.TabIndex = 6;
             this.ToolTip1.SetToolTip(this.btnRename, "Rename profile");
             this.btnRename.UseVisualStyleBackColor = true;
             this.btnRename.Click += new System.EventHandler(this.btnRename_Click);
@@ -215,7 +215,7 @@
             this.btnNew.Location = new System.Drawing.Point(158, 4);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(20, 20);
-            this.btnNew.TabIndex = 29;
+            this.btnNew.TabIndex = 5;
             this.ToolTip1.SetToolTip(this.btnNew, "New profile");
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
@@ -228,7 +228,7 @@
             this.btnUp.Location = new System.Drawing.Point(303, 4);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(20, 20);
-            this.btnUp.TabIndex = 27;
+            this.btnUp.TabIndex = 10;
             this.ToolTip1.SetToolTip(this.btnUp, "Move selected split UP");
             this.btnUp.UseVisualStyleBackColor = true;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
@@ -241,7 +241,7 @@
             this.btnDown.Location = new System.Drawing.Point(329, 4);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(20, 20);
-            this.btnDown.TabIndex = 26;
+            this.btnDown.TabIndex = 11;
             this.ToolTip1.SetToolTip(this.btnDown, "Move selected split DOWN");
             this.btnDown.UseVisualStyleBackColor = true;
             this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
@@ -254,7 +254,7 @@
             this.btnHit.Location = new System.Drawing.Point(174, 57);
             this.btnHit.Name = "btnHit";
             this.btnHit.Size = new System.Drawing.Size(274, 40);
-            this.btnHit.TabIndex = 23;
+            this.btnHit.TabIndex = 15;
             this.ToolTip1.SetToolTip(this.btnHit, "Count a HIT (boss) on the current split");
             this.btnHit.UseVisualStyleBackColor = false;
             this.btnHit.Click += new System.EventHandler(this.btnHit_Click);
@@ -267,7 +267,7 @@
             this.btnReset.Location = new System.Drawing.Point(12, 57);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 40);
-            this.btnReset.TabIndex = 22;
+            this.btnReset.TabIndex = 13;
             this.ToolTip1.SetToolTip(this.btnReset, "RESET the current run");
             this.btnReset.UseVisualStyleBackColor = false;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
@@ -280,7 +280,7 @@
             this.btnSplit.Location = new System.Drawing.Point(535, 57);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(75, 40);
-            this.btnSplit.TabIndex = 24;
+            this.btnSplit.TabIndex = 17;
             this.ToolTip1.SetToolTip(this.btnSplit, "Jump to the next SPLIT");
             this.btnSplit.UseVisualStyleBackColor = false;
             this.btnSplit.Click += new System.EventHandler(this.btnSplit_Click);
@@ -293,7 +293,7 @@
             this.btnWayHit.Location = new System.Drawing.Point(454, 57);
             this.btnWayHit.Name = "btnWayHit";
             this.btnWayHit.Size = new System.Drawing.Size(75, 40);
-            this.btnWayHit.TabIndex = 44;
+            this.btnWayHit.TabIndex = 16;
             this.ToolTip1.SetToolTip(this.btnWayHit, "Count a HIT (way) on the current split");
             this.btnWayHit.UseVisualStyleBackColor = false;
             this.btnWayHit.Click += new System.EventHandler(this.btnWayHit_Click);
@@ -311,10 +311,10 @@
             // lbl_totals
             // 
             this.lbl_totals.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_totals.Location = new System.Drawing.Point(234, 100);
+            this.lbl_totals.Location = new System.Drawing.Point(236, 100);
             this.lbl_totals.Name = "lbl_totals";
             this.lbl_totals.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.lbl_totals.Size = new System.Drawing.Size(326, 20);
+            this.lbl_totals.Size = new System.Drawing.Size(374, 20);
             this.lbl_totals.TabIndex = 34;
             this.lbl_totals.Text = "Total: ??? Hits   ??? PB";
             this.lbl_totals.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -406,7 +406,7 @@
             this.ComboBox1.Name = "ComboBox1";
             this.ComboBox1.Size = new System.Drawing.Size(598, 21);
             this.ComboBox1.Sorted = true;
-            this.ComboBox1.TabIndex = 28;
+            this.ComboBox1.TabIndex = 12;
             this.ComboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             // 
             // DataGridView1
@@ -424,7 +424,7 @@
             this.DataGridView1.MultiSelect = false;
             this.DataGridView1.Name = "DataGridView1";
             this.DataGridView1.Size = new System.Drawing.Size(597, 254);
-            this.DataGridView1.TabIndex = 25;
+            this.DataGridView1.TabIndex = 18;
             this.DataGridView1.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridView1_CellMouseUp);
             this.DataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DataGridView1_CellValidating);
             this.DataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellValueChanged);
