@@ -39,6 +39,7 @@ namespace HitCounterManager
         private bool SettingsDialogOpen = false;
         private IProfileInfo pi;
         private bool DataGridView1_ValueChangedSema = false;
+        private bool gpSuccession_ValueChangedSema = false;
 
         #region Form
 
@@ -47,8 +48,10 @@ namespace HitCounterManager
             // The designer sometimes orders the control creation in an order
             // that would call event handlers already during initialization.
             // But not all variables are available yet, so we prevent access to them.
-            DataGridView1_ValueChangedSema = true; 
+            DataGridView1_ValueChangedSema = true;
+            gpSuccession_ValueChangedSema = true;
             InitializeComponent();
+            gpSuccession_ValueChangedSema = false;
             DataGridView1_ValueChangedSema = false;
 
             pi = DataGridView1; // for better capsulation
@@ -85,18 +88,26 @@ namespace HitCounterManager
             int Frame_Height = ClientRectangle.Height;
 
             // fill
+            ComboBox1.Left = Pad_Frame;
             ComboBox1.Width = Frame_Width - Pad_Frame * 2;
+            gpSuccession.Left = Pad_Frame;
+            gpSuccession.Width = ComboBox1.Width;
+            gpSuccession.Top = Frame_Height - gpSuccession.Height - Pad_Frame;
             DataGridView1.Left = Pad_Frame;
             DataGridView1.Width = ComboBox1.Width;
-            DataGridView1.Height = Frame_Height - DataGridView1.Top - Pad_Frame;
+            DataGridView1.Height = gpSuccession.Top - DataGridView1.Top - Pad_Controls;
 
             // right aligned
-            btnSplit.Left = Frame_Width - btnSplit.Width - Pad_Frame;
+            btnSuccessionProceed.Left = Frame_Width - btnSuccessionProceed.Width - Pad_Frame;
+            btnSplit.Left = btnSuccessionProceed.Left - Pad_Controls - btnSplit.Width;
             btnWayHit.Left = btnSplit.Left - Pad_Controls - btnWayHit.Width;
             lbl_totals.Width = Frame_Width - lbl_totals.Left - Pad_Frame;
 
             // left aligned
             btnHit.Width = btnWayHit.Left - Pad_Controls - btnHit.Left;
+
+            // succession group
+            txtPredecessorTitle.Width = gpSuccession.Width - txtPredecessorTitle.Left - Pad_Frame;
         }
 
         protected override void WndProc(ref Message m)
@@ -185,9 +196,27 @@ namespace HitCounterManager
         #endregion
         #region Functions
 
+        private void GetCalculatedSums(ref int TotalHits, ref int TotalHitsWay, ref int TotalPB)
+        {
+            int Splits = pi.GetSplitCount();
+
+            TotalHits = TotalHitsWay = TotalPB = 0;
+            for (int i = 0; i < Splits; i++)
+            {
+                TotalHits += pi.GetSplitHits(i);
+                TotalHitsWay += pi.GetSplitWayHits(i);
+                TotalPB += pi.GetSplitPB(i);
+            }
+
+            TotalHits += (int)numHits.Value;
+            TotalHitsWay += (int)numHitsWay.Value;
+            TotalPB += (int)numPB.Value;
+        }
+
         private void UpdateProgressAndTotals()
         {
             int TotalHits = 0;
+            int TotalHitsWay = 0;
             int TotalPB = 0;
             int Splits = pi.GetSplitCount();
 
@@ -195,16 +224,11 @@ namespace HitCounterManager
                 lbl_progress.Text = "Progress:  ?? / ??  # " + pi.GetAttemptsCount().ToString("D3");
             else
             {
-                for (int r = 0; r < Splits; r++)
-                {
-                    TotalHits = TotalHits + pi.GetSplitHits(r) + pi.GetSplitWayHits(r);
-                    TotalPB = TotalPB + pi.GetSplitPB(r);
-                }
-
+                GetCalculatedSums(ref TotalHits, ref TotalHitsWay, ref TotalPB);
                 lbl_progress.Text = "Progress:  " + pi.GetActiveSplit() + " / " + Splits + "  # " + pi.GetAttemptsCount().ToString("D3");
             }
 
-            lbl_totals.Text = "Total: " + TotalHits + " Hits   " + TotalPB + " PB";
+            lbl_totals.Text = "Total: " + (TotalHits + TotalHitsWay) + " Hits   " + TotalPB + " PB";
 
             om.Update();
         }
@@ -424,11 +448,31 @@ namespace HitCounterManager
 
         private void btnReset_Click(object sender, EventArgs e)
         {
+            bool SuccessionReset = true;
+            if ((null != sender) && (cbShowPredecessor.Checked)) // avoid message box when not called from GUI (e.g. called by hot key)
+            {
+                DialogResult result = MessageBox.Show("Reset the currently running succession?\nYes: reset current profile and succession\nNo: reset current profile only\nCancel: abort reset", "Succession", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (result == DialogResult.No) SuccessionReset = false;
+                else if (result == DialogResult.Cancel) return;
+            }
+
             om.DataUpdatePending = true;
             pi.SetAttemptsCount(pi.GetAttemptsCount() + 1); // Increase attempts
             for (int r = 0; r < pi.GetSplitCount(); r++) { pi.SetSplitHits(r, 0); pi.SetSplitWayHits(r, 0); }
             pi.SetActiveSplit(0);
             om.DataUpdatePending = false;
+
+            if (SuccessionReset)
+            {
+                gpSuccession_ValueChangedSema = true;
+                numHits.Value = 0;
+                numHitsWay.Value = 0;
+                numPB.Value = 0;
+                cbShowPredecessor.Checked = false;
+                gpSuccession_ValueChangedSema = false;
+                SuccessionChanged(sender, e);
+            }
+
             UpdateProgressAndTotals();
         }
 
@@ -633,6 +677,46 @@ namespace HitCounterManager
                         DataGridView1.Rows[SelectedCell.RowIndex].Cells[SelectedCell.ColumnIndex].Selected = true;
                     }
                 }
+            }
+        }
+        
+        private void BtnSuccessionProceed_Click(object sender, EventArgs e)
+        {
+            int TotalHits = 0;
+            int TotalHitsWay = 0;
+            int TotalPB = 0;
+            GetCalculatedSums(ref TotalHits, ref TotalHitsWay, ref TotalPB);
+            SetSuccession(TotalHits, TotalHitsWay, TotalPB);
+            SuccessionChanged(sender, e);
+
+            MessageBox.Show("The progress of this profile was saved.\nYou can select your next profile now!", "Succession", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void SetSuccession(int TotalHits, int TotalHitsWay, int TotalPB, string Title = null, bool ShowPredecessor = true)
+        {
+            gpSuccession_ValueChangedSema = true;
+            if (null != Title) txtPredecessorTitle.Text = Title;
+            numHits.Value = TotalHits;
+            numHitsWay.Value = TotalHitsWay;
+            numPB.Value = TotalPB;
+            cbShowPredecessor.Checked = ShowPredecessor;
+            gpSuccession_ValueChangedSema = false;
+        }
+
+        private void SuccessionChanged(object sender, EventArgs e)
+        {
+            if (gpSuccession_ValueChangedSema) return;
+
+            om.ShowSuccession = cbShowPredecessor.Checked;
+            om.SuccessionTitle = txtPredecessorTitle.Text;
+            om.SuccessionHits = (int)numHits.Value;
+            om.SuccessionHitsWay = (int)numHitsWay.Value;
+            om.SuccessionHitsPB = (int)numPB.Value;
+
+            if (null != sender) // update on a GUI handler only
+            {
+                UpdateProgressAndTotals();
+                om.Update(true);
             }
         }
 

@@ -62,6 +62,7 @@ namespace HitCounterManager
         public bool ShowHitsCombined;
         public bool ShowNumbers;
         public bool ShowPB;
+        public bool ShowSuccession;
         public int Purpose;
         public int Severity;
         public bool StyleUseHighContrast;
@@ -71,6 +72,10 @@ namespace HitCounterManager
         public string StyleFontUrl;
         public string StyleFontName;
         public int StyleDesiredWidth;
+        public string SuccessionTitle;
+        public int SuccessionHits;
+        public int SuccessionHitsWay;
+        public int SuccessionHitsPB;
         public string ProfileSelected;
         public Profiles Profiles;
     }
@@ -173,8 +178,8 @@ namespace HitCounterManager
             if (_settings.Version == 4) // Coming from version 1.16
             {
                 _settings.Version = 5;
-                _settings.MainWidth += 50; // added "WayHits" textbox to datagrid
-                _settings.MainHeight += 13; // added second line to datagrid column header
+                _settings.MainWidth += 50; // added "WayHits" textbox to datagrid (50)
+                _settings.MainHeight += 13 + 70; // added second line to datagrid column header(13) and "Succession" group box
                 _settings.ShortcutWayHitEnable = false;
                 _settings.ShortcutWayHitKeyCode = 0x10000 | 0x74; // Shift F5
                 _settings.ShortcutWayHitUndoEnable = false;
@@ -188,6 +193,10 @@ namespace HitCounterManager
                 _settings.Purpose = (int)OutModule.OM_Purpose.OM_Purpose_SplitCounter;
                 _settings.Severity = (int)OutModule.OM_Severity.OM_Severity_AnyHitsCritical;
                 _settings.StyleUseHighContrastNames = false;
+                _settings.SuccessionTitle = "Predecessors";
+                _settings.SuccessionHits = 0;
+                _settings.SuccessionHitsWay = 0;
+                _settings.SuccessionHitsPB = 0;
             }
 
             if (bNewSettings)
@@ -224,6 +233,8 @@ namespace HitCounterManager
                 MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
 
             pi.SetSessionProgress(0, true);
+            SetSuccession(_settings.SuccessionHits, _settings.SuccessionHitsWay, _settings.SuccessionHitsPB, _settings.SuccessionTitle, _settings.ShowSuccession);
+            SuccessionChanged(null, null);
 
             if (_settings.MainWidth < this.MinimumSize.Width) _settings.MainWidth = this.MinimumSize.Width;
             if (_settings.MainHeight < this.MinimumSize.Height) _settings.MainHeight = this.MinimumSize.Height;
@@ -307,6 +318,7 @@ namespace HitCounterManager
             _settings.ShowHitsCombined = om.ShowHitsCombined;
             _settings.ShowNumbers = om.ShowNumbers;
             _settings.ShowPB = om.ShowPB;
+            _settings.ShowSuccession = om.ShowSuccession;
             _settings.Purpose = (int)om.Purpose;
             _settings.Severity = (int)om.Severity;
 
@@ -317,6 +329,11 @@ namespace HitCounterManager
             _settings.StyleFontUrl = om.StyleFontUrl;
             _settings.StyleFontName = om.StyleFontName;
             _settings.StyleDesiredWidth = om.StyleDesiredWidth;
+
+            _settings.SuccessionTitle = om.SuccessionTitle;
+            _settings.SuccessionHits = om.SuccessionHits;
+            _settings.SuccessionHitsWay = om.SuccessionHitsWay;
+            _settings.SuccessionHitsPB = om.SuccessionHitsPB;
 
             _settings.ProfileSelected = (string)ComboBox1.SelectedItem;
             _settings.Profiles = profs;

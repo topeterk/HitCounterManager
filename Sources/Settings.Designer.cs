@@ -479,7 +479,7 @@
             this.cbScReset.Size = new System.Drawing.Size(57, 17);
             this.cbScReset.TabIndex = 15;
             this.cbScReset.Text = "Reset:";
-            this.ToolTip1.SetToolTip(this.cbScReset, "Enable hot key for resetting the run");
+            this.ToolTip1.SetToolTip(this.cbScReset, "Enable hot key for resetting the run and succession");
             this.cbScReset.UseVisualStyleBackColor = true;
             this.cbScReset.CheckedChanged += new System.EventHandler(this.cbScReset_CheckedChanged);
             // 

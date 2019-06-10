@@ -127,6 +127,9 @@
   <data name="icons8_attack_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8-attack-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8-cloud-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-cloud-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8_copy_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8-copy-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -154,19 +157,19 @@
   <data name="icons8_staircase_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8-staircase-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8-tasklist-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-tasklist-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8_trash_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8-trash-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8_trophy_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8-trophy-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8_website_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-website-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-cloud-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-cloud-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icons8-watch-your-step-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8-watch-your-step-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_website_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-website-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

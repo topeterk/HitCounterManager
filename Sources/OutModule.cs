@@ -67,6 +67,12 @@ namespace HitCounterManager
         public string StyleFontName = "";
         public int StyleDesiredWidth = 0;
 
+        public bool ShowSuccession = false;
+        public string SuccessionTitle = "";
+        public int SuccessionHits = 0;
+        public int SuccessionHitsWay = 0;
+        public int SuccessionHitsPB = 0;
+
         private IProfileInfo pi;
         public bool DataUpdatePending = false;
 
@@ -179,10 +185,17 @@ namespace HitCounterManager
                     int iSplitCount = pi.GetSplitCount();
                     int iSplitFirst;
                     int iSplitLast;
+                    int InjectedSplitCount = 0;
 
                     sr.WriteLine("{");
 
                     sr.WriteLine("\"list\": [");
+                    if (ShowSuccession)
+                    {
+                        InjectedSplitCount++;
+                        sr.Write("[\"" + SimpleHtmlEscape(SuccessionTitle) + "\", " + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + "]");
+                        if (0 < iSplitCount) sr.WriteLine(","); // separator
+                    }
                     for (int r = 0; r < iSplitCount; r++)
                     {
                         if (r != 0) sr.WriteLine(","); // separator
@@ -191,7 +204,8 @@ namespace HitCounterManager
                     sr.WriteLine(""); // no trailing separator
                     sr.WriteLine("],");
 
-                    WriteJsonSimpleValue(sr, "session_progress", pi.GetSessionProgress());
+                    iSplitCount += InjectedSplitCount;
+                    WriteJsonSimpleValue(sr, "session_progress", pi.GetSessionProgress() + InjectedSplitCount);
 
                     // Calculation to show same amount of splits independent from active split:
                     // Example: ShowSplitsCountFinished = 3 , ShowSplitsCountUpcoming = 2 , iSplitCount = 7 (0-6)
