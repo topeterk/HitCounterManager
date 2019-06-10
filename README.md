@@ -34,12 +34,13 @@ To see **how to** use the application watch the **[Tutorial on YouTube](https://
   * Save the run as your PB (personal best)
 * One single save file: [HitCounterManagerSave.xml](HitCounterManagerSave.xml)
   * Holds all your settings, profiles and is designed to work in newer/upcoming versions, too. Save and restore this file at any time.
-* Create profiles for each challange or game
+* Create profiles for each challenge or game
   * Keeps the current progress and your personal bests saved
   * Keep track of each profile how many runs/attempts your already started
   * Multiple profiles can be created and switched very easily (e.g. multiple games for Dark Souls trilogy runs)
     * Switching to other profiles will remember the hit counts of the currently selected profile
-* Keep track of furthest progress since last application start
+* Combine profiles in a succession, e.g. for _Dark Souls Trilogy_ (means: take over hits from last run)
+* Keep track of furthest progress in the current session
 
 ### Pre-defined profiles
 
