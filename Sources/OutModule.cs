@@ -204,6 +204,7 @@ namespace HitCounterManager
                     sr.WriteLine(""); // no trailing separator
                     sr.WriteLine("],");
 
+                    active += InjectedSplitCount;
                     iSplitCount += InjectedSplitCount;
                     WriteJsonSimpleValue(sr, "session_progress", pi.GetSessionProgress() + InjectedSplitCount);
 
