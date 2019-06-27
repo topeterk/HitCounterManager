@@ -72,6 +72,7 @@ namespace HitCounterManager
         public string StyleFontUrl;
         public string StyleFontName;
         public int StyleDesiredWidth;
+        public bool StyleSuperscriptPB;
         public string SuccessionTitle;
         public int SuccessionHits;
         public int SuccessionHitsWay;
@@ -109,7 +110,7 @@ namespace HitCounterManager
         /// </summary>
         private void LoadSettings()
         {
-            bool bNewSettings = false;
+            int baseVersion = -1;
             bool isKeyInvalid = false;
 
             om.DataUpdatePending = true;
@@ -122,10 +123,11 @@ namespace HitCounterManager
                 // When no user save file is available, try loading the init file instead to provide predefined profiles and settings
                 _settings = sm.ReadXML(Application.ProductName + "Init.xml");
             }
-            if (null == _settings)
+            if (null != _settings)
+                baseVersion = _settings.Version; // successfully loaded Save or Init file, so remember original version for upgrade
+            else
             {
                 _settings = new SettingsRoot();
-                bNewSettings = true; // no settings loaded, so we create complete new one
 
                 // prepare defaults..
                 _settings.Version = 0;
@@ -198,8 +200,15 @@ namespace HitCounterManager
                 _settings.SuccessionHitsWay = 0;
                 _settings.SuccessionHitsPB = 0;
             }
+            if (_settings.Version == 5) // Coming from version 1.17
+            {
+                _settings.Version = 6;
+                // Should be set false but in version 5 it was introduced with true,
+                // so only for users that were running version 5, we keep it true.
+                _settings.StyleSuperscriptPB = (baseVersion == 5 ? true : false); 
+            }
 
-            if (bNewSettings)
+            if (baseVersion < 0) // no settings were loaded, we created complete new one
             {
                 // Use different hot keys when loaded the first time
                 // (we don't have to take care of previous user/default settings)
@@ -265,6 +274,7 @@ namespace HitCounterManager
             om.StyleFontUrl = _settings.StyleFontUrl;
             om.StyleFontName = _settings.StyleFontName;
             om.StyleDesiredWidth = _settings.StyleDesiredWidth;
+            om.StyleSuperscriptPB = _settings.StyleSuperscriptPB;
 
             om.FilePathIn = _settings.Inputfile;
             om.FilePathOut = _settings.OutputFile; // setting output filepath will allow writing output, so keep this line last
@@ -329,6 +339,7 @@ namespace HitCounterManager
             _settings.StyleFontUrl = om.StyleFontUrl;
             _settings.StyleFontName = om.StyleFontName;
             _settings.StyleDesiredWidth = om.StyleDesiredWidth;
+            _settings.StyleSuperscriptPB = om.StyleSuperscriptPB;
 
             _settings.SuccessionTitle = om.SuccessionTitle;
             _settings.SuccessionHits = om.SuccessionHits;

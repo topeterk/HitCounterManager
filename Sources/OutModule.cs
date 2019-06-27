@@ -66,6 +66,7 @@ namespace HitCounterManager
         public string StyleFontUrl = "";
         public string StyleFontName = "";
         public int StyleDesiredWidth = 0;
+        public bool StyleSuperscriptPB = false;
 
         public bool ShowSuccession = false;
         public string SuccessionTitle = "";
@@ -255,6 +256,7 @@ namespace HitCounterManager
                     WriteJsonSimpleValue(sr, "high_contrast", StyleUseHighContrast);
                     WriteJsonSimpleValue(sr, "high_contrast_names", StyleUseHighContrastNames);
                     WriteJsonSimpleValue(sr, "width", StyleDesiredWidth);
+                    WriteJsonSimpleValue(sr, "supPB", StyleSuperscriptPB);
 
                     sr.WriteLine("}");
 

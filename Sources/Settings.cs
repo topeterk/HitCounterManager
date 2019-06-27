@@ -84,6 +84,7 @@ namespace HitCounterManager
             numStyleDesiredWidth.Value = om.StyleDesiredWidth;
             cbHighContrast.Checked = om.StyleUseHighContrast;
             cbHighContrastNames.Checked = om.StyleUseHighContrastNames;
+            cbSuperscriptPB.Checked = om.StyleSuperscriptPB;
             cbApCustomCss.Checked = om.StyleUseCustom;
             txtCssUrl.Text = om.StyleCssUrl;
             txtFontUrl.Text = om.StyleFontUrl;
@@ -135,7 +136,6 @@ namespace HitCounterManager
 
         private void ApplyAppearance(object sender, EventArgs e)
         {
-
             lblShowSplitCount.Text = "Current configuration will show up to " + (1 + numShowSplitsCountFinished.Value + numShowSplitsCountUpcoming.Value) + " splits.";
 
             if (!IsFormLoaded) return;
@@ -143,6 +143,7 @@ namespace HitCounterManager
             // Style
             om.StyleUseHighContrast = cbHighContrast.Checked;
             om.StyleUseHighContrastNames = cbHighContrastNames.Checked;
+            om.StyleSuperscriptPB = cbSuperscriptPB.Checked;
             om.StyleDesiredWidth = (int)numStyleDesiredWidth.Value;
 
             // Behavior

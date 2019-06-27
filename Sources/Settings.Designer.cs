@@ -104,6 +104,7 @@
             this.Label12 = new System.Windows.Forms.Label();
             this.Label13 = new System.Windows.Forms.Label();
             this.Label14 = new System.Windows.Forms.Label();
+            this.cbSuperscriptPB = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             this.tab_globalshortcuts.SuspendLayout();
@@ -261,7 +262,7 @@
             this.tab_globalshortcuts.Location = new System.Drawing.Point(4, 22);
             this.tab_globalshortcuts.Name = "tab_globalshortcuts";
             this.tab_globalshortcuts.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.tab_globalshortcuts.Size = new System.Drawing.Size(588, 235);
+            this.tab_globalshortcuts.Size = new System.Drawing.Size(588, 251);
             this.tab_globalshortcuts.TabIndex = 0;
             this.tab_globalshortcuts.Text = "Global shortcuts";
             this.tab_globalshortcuts.UseVisualStyleBackColor = true;
@@ -688,7 +689,7 @@
             this.tab_behavior.Location = new System.Drawing.Point(4, 22);
             this.tab_behavior.Name = "tab_behavior";
             this.tab_behavior.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.tab_behavior.Size = new System.Drawing.Size(588, 235);
+            this.tab_behavior.Size = new System.Drawing.Size(588, 251);
             this.tab_behavior.TabIndex = 1;
             this.tab_behavior.Text = "Behavior";
             this.tab_behavior.UseVisualStyleBackColor = true;
@@ -711,7 +712,7 @@
             this.groupBox5.Controls.Add(this.numShowSplitsCountFinished);
             this.groupBox5.Location = new System.Drawing.Point(215, 13);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(367, 216);
+            this.groupBox5.Size = new System.Drawing.Size(367, 232);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Appearance";
@@ -746,7 +747,7 @@
             this.groupBox4.Controls.Add(this.radioPurposeSplitCounter);
             this.groupBox4.Location = new System.Drawing.Point(6, 13);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 100);
+            this.groupBox4.Size = new System.Drawing.Size(200, 114);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Purpose";
@@ -791,9 +792,9 @@
             this.groupBox2.Controls.Add(this.radioSeverityBossHitCritical);
             this.groupBox2.Controls.Add(this.radioSeverityComparePB);
             this.groupBox2.Controls.Add(this.radioSeverityAnyHitCritical);
-            this.groupBox2.Location = new System.Drawing.Point(6, 128);
+            this.groupBox2.Location = new System.Drawing.Point(6, 133);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 101);
+            this.groupBox2.Size = new System.Drawing.Size(200, 112);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Hit severity (color) within a single split";
@@ -811,7 +812,7 @@
             this.tab_filepaths.Location = new System.Drawing.Point(4, 22);
             this.tab_filepaths.Name = "tab_filepaths";
             this.tab_filepaths.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.tab_filepaths.Size = new System.Drawing.Size(588, 235);
+            this.tab_filepaths.Size = new System.Drawing.Size(588, 251);
             this.tab_filepaths.TabIndex = 2;
             this.tab_filepaths.Text = "Filepaths";
             this.tab_filepaths.UseVisualStyleBackColor = true;
@@ -903,7 +904,7 @@
             this.TabControl1.Location = new System.Drawing.Point(12, 12);
             this.TabControl1.Name = "TabControl1";
             this.TabControl1.SelectedIndex = 0;
-            this.TabControl1.Size = new System.Drawing.Size(596, 261);
+            this.TabControl1.Size = new System.Drawing.Size(596, 277);
             this.TabControl1.TabIndex = 10;
             // 
             // tab_style
@@ -916,18 +917,19 @@
             this.tab_style.Controls.Add(this.Label14);
             this.tab_style.Location = new System.Drawing.Point(4, 22);
             this.tab_style.Name = "tab_style";
-            this.tab_style.Size = new System.Drawing.Size(588, 235);
+            this.tab_style.Size = new System.Drawing.Size(588, 251);
             this.tab_style.TabIndex = 3;
             this.tab_style.Text = "Style";
             this.tab_style.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.cbSuperscriptPB);
             this.groupBox3.Controls.Add(this.cbHighContrast);
             this.groupBox3.Controls.Add(this.cbHighContrastNames);
             this.groupBox3.Location = new System.Drawing.Point(6, 13);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(273, 87);
+            this.groupBox3.Size = new System.Drawing.Size(273, 103);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "High contrast mode (check for better readability)";
@@ -950,7 +952,7 @@
             this.GroupBox1.Controls.Add(this.Label11);
             this.GroupBox1.Controls.Add(this.btnApApply);
             this.GroupBox1.Controls.Add(this.Label12);
-            this.GroupBox1.Location = new System.Drawing.Point(6, 106);
+            this.GroupBox1.Location = new System.Drawing.Point(6, 122);
             this.GroupBox1.Name = "GroupBox1";
             this.GroupBox1.Size = new System.Drawing.Size(571, 126);
             this.GroupBox1.TabIndex = 2;
@@ -1002,11 +1004,23 @@
             this.Label14.TabIndex = 21;
             this.Label14.Text = "Desired width:";
             // 
+            // cbSuperscriptPB
+            // 
+            this.cbSuperscriptPB.AutoSize = true;
+            this.cbSuperscriptPB.Location = new System.Drawing.Point(6, 68);
+            this.cbSuperscriptPB.Name = "cbSuperscriptPB";
+            this.cbSuperscriptPB.Size = new System.Drawing.Size(136, 17);
+            this.cbSuperscriptPB.TabIndex = 2;
+            this.cbSuperscriptPB.Text = "Superscripted PB totals";
+            this.ToolTip1.SetToolTip(this.cbSuperscriptPB, "Applies to the split names");
+            this.cbSuperscriptPB.UseVisualStyleBackColor = true;
+            this.cbSuperscriptPB.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(620, 285);
+            this.ClientSize = new System.Drawing.Size(620, 301);
             this.Controls.Add(this.TabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1115,5 +1129,6 @@
         private System.Windows.Forms.CheckBox cbShowPB;
         internal System.Windows.Forms.CheckBox cbShowFooter;
         private System.Windows.Forms.Label lblShowSplitCount;
+        private System.Windows.Forms.CheckBox cbSuperscriptPB;
     }
 }
