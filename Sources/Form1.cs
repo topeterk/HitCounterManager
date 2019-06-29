@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Net;
 using System.Windows.Forms;
 using TinyJson;
@@ -251,6 +252,14 @@ namespace HitCounterManager
             return isInvalid;
         }
 
+        private void SetAlwaysOnTop(bool AlwaysOnTop)
+        {
+            if (this.TopMost = AlwaysOnTop)
+                btnOnTop.BackColor = Color.LimeGreen;
+            else
+                btnOnTop.BackColor = Color.FromKnownColor(KnownColor.Control);
+        }
+
         #endregion
         #region UI
 
@@ -444,6 +453,11 @@ namespace HitCounterManager
 
                 pi.SetActiveSplit(idx_new);
             }
+        }
+
+        private void BtnOnTop_Click(object sender, EventArgs e)
+        {
+            SetAlwaysOnTop(!this.TopMost);
         }
 
         private void btnReset_Click(object sender, EventArgs e)

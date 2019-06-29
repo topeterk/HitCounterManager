@@ -34,6 +34,7 @@ namespace HitCounterManager
         public int Version;
         public int MainWidth;
         public int MainHeight;
+        public bool AlwaysOnTop;
         public int HotKeyMethod;
         public bool ShortcutResetEnable;
         public int ShortcutResetKeyCode;
@@ -203,9 +204,10 @@ namespace HitCounterManager
             if (_settings.Version == 5) // Coming from version 1.17
             {
                 _settings.Version = 6;
+                _settings.AlwaysOnTop = false;
                 // Should be set false but in version 5 it was introduced with true,
                 // so only for users that were running version 5, we keep it true.
-                _settings.StyleSuperscriptPB = (baseVersion == 5 ? true : false); 
+                _settings.StyleSuperscriptPB = (baseVersion == 5 ? true : false);
             }
 
             if (baseVersion < 0) // no settings were loaded, we created complete new one
@@ -248,6 +250,7 @@ namespace HitCounterManager
             if (_settings.MainWidth < this.MinimumSize.Width) _settings.MainWidth = this.MinimumSize.Width;
             if (_settings.MainHeight < this.MinimumSize.Height) _settings.MainHeight = this.MinimumSize.Height;
             this.Size = new System.Drawing.Size(_settings.MainWidth, _settings.MainHeight);
+            SetAlwaysOnTop(_settings.AlwaysOnTop);
 
             om.ShowAttemptsCounter = _settings.ShowAttemptsCounter;
             om.ShowHeadline = _settings.ShowHeadline;
@@ -290,6 +293,7 @@ namespace HitCounterManager
 
             _settings.MainWidth = this.Width;
             _settings.MainHeight = this.Height;
+            _settings.AlwaysOnTop = this.TopMost;
             _settings.HotKeyMethod = (int)sc.NextStart_Method;
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Reset);
             _settings.ShortcutResetEnable = key.used;
