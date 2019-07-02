@@ -1,23 +1,23 @@
 ﻿//MIT License
 
-//Copyright(c) 2018-2018 Peter Kirmeier
+//Copyright (c) 2018-2019 Peter Kirmeier
 
-//Permission Is hereby granted, free Of charge, to any person obtaining a copy
-//of this software And associated documentation files (the "Software"), to deal
+//Permission is hereby granted, free of charge, to any person obtaining a copy
+//of this software and associated documentation files (the "Software"), to deal
 //in the Software without restriction, including without limitation the rights
-//to use, copy, modify, merge, publish, distribute, sublicense, And/Or sell
-//copies of the Software, And to permit persons to whom the Software Is
+//to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//copies of the Software, and to permit persons to whom the Software is
 //furnished to do so, subject to the following conditions:
 
-//The above copyright notice And this permission notice shall be included In all
-//copies Or substantial portions of the Software.
+//The above copyright notice and this permission notice shall be included in all
+//copies or substantial portions of the Software.
 
-//THE SOFTWARE Is PROVIDED "AS IS", WITHOUT WARRANTY Of ANY KIND, EXPRESS Or
-//IMPLIED, INCLUDING BUT Not LIMITED To THE WARRANTIES Of MERCHANTABILITY,
-//FITNESS FOR A PARTICULAR PURPOSE And NONINFRINGEMENT. IN NO EVENT SHALL THE
-//AUTHORS Or COPYRIGHT HOLDERS BE LIABLE For ANY CLAIM, DAMAGES Or OTHER
-//LIABILITY, WHETHER In AN ACTION Of CONTRACT, TORT Or OTHERWISE, ARISING FROM,
-//OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
 #if OS_ANY
@@ -97,6 +97,29 @@ namespace HitCounterManager
         /// <param name="lParam">Parameter 2 of message</param>
         /// <returns>Message result</returns>
         public static IntPtr SendHotKeyMessage(IntPtr WindowHandle, IntPtr wParam, IntPtr lParam) { return (IntPtr)0; }
+
+        /// <summary>
+        /// If you know how to use breakpoints in MonoDevelop within
+        /// Windows Forms' event handlers that will not lead to a freeze
+        /// of the whole operating system's UI when the debugging application has focus:
+        /// Please let me know as using this workaround is pretty annoying!
+        /// 
+        /// To make this work, we have to ensure that we removed focus from the application
+        /// we are currently debugging. When the timer runs down we have to switch focus
+        /// to another application (most likely) MonoDevelop and we will be fine.
+        /// </summary>
+        public static void EnableBreakpoint()
+        {
+            System.Diagnostics.Debug.WriteLine("Hitting breakpoint, switch to debugger!");
+            System.Diagnostics.Debug.Write("In");
+            // Option 1:
+            for (int i = 3; 0 < i; i--)
+            {
+                System.Diagnostics.Debug.Write(" .. " + i);
+                System.Threading.Thread.Sleep(1000);
+            }
+            System.Diagnostics.Debug.WriteLine(".. HIT!");
+        } // set breakpoint here
     }
 }
 #endif
