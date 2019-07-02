@@ -661,7 +661,7 @@ namespace HitCounterManager
                 // Care with changing the following sequence as during lots of testing
                 // this is the first and only combination that works in Windows and Mono..
                 pi.ProfileUpdateBegin();
-                DataGridView1.EndEdit();
+                DataGridView1.EndEdit(); // will fire CellValueChanged
                 DataGridView1.ClearSelection();
                 pi.ProfileUpdateEnd();
                 DataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
@@ -678,13 +678,14 @@ namespace HitCounterManager
                 {
                     if (cell.GetType().Name == "DataGridViewCheckBoxCell")
                     {
-                        DataGridViewCheckBoxCell SelectedCell = (DataGridViewCheckBoxCell)cell;
                         e.Handled = true;
+                        if (cell.RowIndex >= pi.GetSplitCount()) return; // avoid creating a split from the "new line" row
 
                         // Care with changing the following sequence as during lots of testing
                         // this is the first and only combination that works in Windows and Mono..
+                        DataGridViewCheckBoxCell SelectedCell = (DataGridViewCheckBoxCell)cell;
                         pi.ProfileUpdateBegin();
-                        SelectedCell.Value = !(SelectedCell.Value == null ? /*not set yet, so it's not checked*/ false : (bool)SelectedCell.Value);
+                        SelectedCell.Value = !(SelectedCell.Value == null ? /*not set yet, so it's not checked*/ false : (bool)SelectedCell.Value); // will fire CellValueChanged
                         pi.ProfileUpdateEnd();
                         DataGridView1.EndEdit();
                         DataGridView1.ClearSelection();
