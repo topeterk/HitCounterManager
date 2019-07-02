@@ -114,8 +114,6 @@ namespace HitCounterManager
             int baseVersion = -1;
             bool isKeyInvalid = false;
 
-            om.DataUpdatePending = true;
-
             sm = new SaveModule<SettingsRoot>(Application.ProductName + "Save.xml");
             _settings = sm.ReadXML();
 
@@ -225,6 +223,8 @@ namespace HitCounterManager
             }
 
             // Apply settings..
+            pi.ProfileUpdateBegin();
+
             sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
             profs = _settings.Profiles;
 
@@ -281,7 +281,8 @@ namespace HitCounterManager
 
             om.FilePathIn = _settings.Inputfile;
             om.FilePathOut = _settings.OutputFile; // setting output filepath will allow writing output, so keep this line last
-            om.DataUpdatePending = false;
+
+            pi.ProfileUpdateEnd();
         }
 
         /// <summary>

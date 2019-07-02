@@ -422,14 +422,14 @@ namespace HitCounterManager
 
             if (0 <= idx_new && (idx_old < pi.GetSplitCount())) // Do not move when UP is not possible
             {
-                om.DataUpdatePending = true;
+                pi.ProfileUpdateBegin();
                 for (int i = 0; i <= DataGridView1.Columns.Count - 1; i++)
                 {
                     object cell = DataGridView1.Rows[idx_old].Cells[i].Value;
                     DataGridView1.Rows[idx_old].Cells[i].Value = DataGridView1.Rows[idx_new].Cells[i].Value;
                     DataGridView1.Rows[idx_new].Cells[i].Value = cell;
                 }
-                om.DataUpdatePending = false;
+                pi.ProfileUpdateEnd();
 
                 pi.SetActiveSplit(idx_new);
             }
@@ -442,14 +442,14 @@ namespace HitCounterManager
 
             if (idx_new < pi.GetSplitCount()) // Do not move when DOWN is not possible
             {
-                om.DataUpdatePending = true;
+                pi.ProfileUpdateBegin();
                 for (int i = 0; i <= DataGridView1.Columns.Count - 1; i++)
                 {
                     object cell = DataGridView1.Rows[idx_old].Cells[i].Value;
                     DataGridView1.Rows[idx_old].Cells[i].Value = DataGridView1.Rows[idx_new].Cells[i].Value;
                     DataGridView1.Rows[idx_new].Cells[i].Value = cell;
                 }
-                om.DataUpdatePending = false;
+                pi.ProfileUpdateEnd();
 
                 pi.SetActiveSplit(idx_new);
             }
@@ -470,11 +470,11 @@ namespace HitCounterManager
                 else if (result == DialogResult.Cancel) return;
             }
 
-            om.DataUpdatePending = true;
+            pi.ProfileUpdateBegin();
             pi.SetAttemptsCount(pi.GetAttemptsCount() + 1); // Increase attempts
             for (int r = 0; r < pi.GetSplitCount(); r++) { pi.SetSplitHits(r, 0); pi.SetSplitWayHits(r, 0); }
             pi.SetActiveSplit(0);
-            om.DataUpdatePending = false;
+            pi.ProfileUpdateEnd();
 
             if (SuccessionReset)
             {
@@ -495,11 +495,11 @@ namespace HitCounterManager
             int Splits = pi.GetSplitCount();
             if (0 == Splits) return;
 
-            om.DataUpdatePending = true;
+            pi.ProfileUpdateBegin();
             for (int r = 0; r < Splits; r++) pi.SetSplitPB(r, pi.GetSplitHits(r) + pi.GetSplitWayHits(r));
             pi.SetActiveSplit(Splits);
             pi.SetSessionProgress(Splits-1);
-            om.DataUpdatePending = false;
+            pi.ProfileUpdateEnd();
             UpdateProgressAndTotals();
         }
 
@@ -547,10 +547,10 @@ namespace HitCounterManager
             int next_index = pi.GetActiveSplit() + 1;
             if (next_index <= pi.GetSplitCount())
             {
-                om.DataUpdatePending = true;
+                pi.ProfileUpdateBegin();
                 pi.SetActiveSplit(next_index);
                 if (next_index < pi.GetSplitCount()) pi.SetSessionProgress(next_index);
-                om.DataUpdatePending = false;
+                pi.ProfileUpdateEnd();
                 UpdateProgressAndTotals();
             }
         }
@@ -560,10 +560,10 @@ namespace HitCounterManager
             int next_index = pi.GetActiveSplit() - 1;
             if (0 <= next_index)
             {
-                om.DataUpdatePending = true;
+                pi.ProfileUpdateBegin();
                 pi.SetActiveSplit(next_index);
                 // we do not update session progress here as we don't know if it was already set on a previous run
-                om.DataUpdatePending = false;
+                pi.ProfileUpdateEnd();
                 UpdateProgressAndTotals();
             }
         }
@@ -575,10 +575,10 @@ namespace HitCounterManager
                 profs.SaveProfile(pi);
             }
 
-            om.DataUpdatePending = true;
+            pi.ProfileUpdateBegin();
             profs.LoadProfile((string)ComboBox1.SelectedItem, pi);
             pi.SetProfileName((string)ComboBox1.SelectedItem);
-            om.DataUpdatePending = false;
+            pi.ProfileUpdateEnd();
             UpdateProgressAndTotals();
         }
 
@@ -647,7 +647,7 @@ namespace HitCounterManager
                 }
             }
 
-            if (!om.DataUpdatePending) profs.SaveProfile(pi, true);
+            if (!pi.IsProfileUpdatePending()) profs.SaveProfile(pi, true);
             UpdateProgressAndTotals();
         }
 
@@ -660,10 +660,10 @@ namespace HitCounterManager
             {
                 // Care with changing the following sequence as during lots of testing
                 // this is the first and only combination that works in Windows and Mono..
-                om.DataUpdatePending = true;
+                pi.ProfileUpdateBegin();
                 DataGridView1.EndEdit();
                 DataGridView1.ClearSelection();
-                om.DataUpdatePending = false;
+                pi.ProfileUpdateEnd();
                 DataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
                 DataGridView1.Rows[e.RowIndex].Selected = true;
             }
@@ -683,9 +683,9 @@ namespace HitCounterManager
 
                         // Care with changing the following sequence as during lots of testing
                         // this is the first and only combination that works in Windows and Mono..
-                        om.DataUpdatePending = true;
+                        pi.ProfileUpdateBegin();
                         SelectedCell.Value = !(SelectedCell.Value == null ? /*not set yet, so it's not checked*/ false : (bool)SelectedCell.Value);
-                        om.DataUpdatePending = false;
+                        pi.ProfileUpdateEnd();
                         DataGridView1.EndEdit();
                         DataGridView1.ClearSelection();
                         DataGridView1.Rows[SelectedCell.RowIndex].Cells[SelectedCell.ColumnIndex].Selected = true;
@@ -743,6 +743,7 @@ namespace HitCounterManager
         private int _AttemptsCounter = 0;
         private bool ModifiedFlag = false;
         private int LastActiveSplit = -1;
+        private bool DataUpdatePending = false;
 
         public string GetProfileName() { return _ProfileName; }
         public void SetProfileName(string Name)
@@ -861,5 +862,9 @@ namespace HitCounterManager
             if (Reset) ModifiedFlag = false;
             return WasModified;
         }
+
+        public void ProfileUpdateBegin() { DataUpdatePending = true; }
+        public void ProfileUpdateEnd() { DataUpdatePending = false; }
+        public bool IsProfileUpdatePending() { return DataUpdatePending; }
     }
 }

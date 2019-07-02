@@ -75,7 +75,6 @@ namespace HitCounterManager
         public int SuccessionHitsPB = 0;
 
         private IProfileInfo pi;
-        public bool DataUpdatePending = false;
 
         /// <summary>
         /// Bind object to a data grid
@@ -150,7 +149,7 @@ namespace HitCounterManager
         /// <param name="Force">true = Force producing output, false = Output only on pending changes</param>
         public void Update(bool Force = false)
         {
-            if (DataUpdatePending) return; // Data is incomplete, wait till data is no longer dirty
+            if (pi.IsProfileUpdatePending()) return; // Data is incomplete, wait till data becomes valid
 
             if (!Force && !pi.HasChanged(true)) return; // Prevent writing the same idendical output multiple times
   

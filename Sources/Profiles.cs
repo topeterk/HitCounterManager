@@ -299,5 +299,19 @@ namespace HitCounterManager
         /// <param name="Reset">True will reset to "unchanged"</param>
         /// <returns>Profile Info was modified since last reset</returns>
         bool HasChanged(bool Reset = false);
+
+        /// <summary>
+        /// Marks that an update will be performed
+        /// </summary>
+        void ProfileUpdateBegin();
+        /// <summary>
+        /// Marks that the current update has ended
+        /// </summary>
+        void ProfileUpdateEnd();
+        /// <summary>
+        /// Checks if an update is currently running
+        /// </summary>
+        /// <returns>true when called between ProfileUpdateBegin and ProfileUpdateEnd</returns>
+        bool IsProfileUpdatePending();
     }
 }
