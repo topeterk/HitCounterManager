@@ -127,6 +127,7 @@
     <Content Include="Sources\HitCounterManagerInit.xml" />
     <None Include="Images\icons8-about-20.png" />
     <None Include="Images\icons8-add-20.png" />
+    <None Include="Images\icons8-add-list-20.png" />
     <None Include="Images\icons8-attack-32.png" />
     <None Include="Images\icons8-cloud-20.png" />
     <None Include="Images\icons8-copy-20.png" />

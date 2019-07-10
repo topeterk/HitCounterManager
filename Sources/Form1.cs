@@ -455,6 +455,13 @@ namespace HitCounterManager
             }
         }
 
+        private void BtnInsertSplit_Click(object sender, EventArgs e)
+        {
+            pi.ProfileUpdateBegin();
+            DataGridView1.Rows.Insert(pi.GetActiveSplit(), 1);
+            pi.ProfileUpdateEnd();
+        }
+
         private void BtnOnTop_Click(object sender, EventArgs e)
         {
             SetAlwaysOnTop(!this.TopMost);

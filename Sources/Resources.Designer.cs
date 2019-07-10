@@ -83,6 +83,16 @@ namespace HitCounterManager.Sources {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_add_list_20 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_add_list_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_attack_32 {
             get {
                 object obj = ResourceManager.GetObject("icons8_attack_32", resourceCulture);

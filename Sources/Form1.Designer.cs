@@ -49,6 +49,7 @@
             this.btnAttempts = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
+            this.btnInsertSplit = new System.Windows.Forms.Button();
             this.Spacer3 = new System.Windows.Forms.Label();
             this.btnOnTop = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
@@ -259,11 +260,24 @@
             this.btnDown.UseVisualStyleBackColor = true;
             this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
+            // btnInsertSplit
+            // 
+            this.btnInsertSplit.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_add_list_20;
+            this.btnInsertSplit.FlatAppearance.BorderSize = 0;
+            this.btnInsertSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInsertSplit.Location = new System.Drawing.Point(355, 4);
+            this.btnInsertSplit.Name = "btnInsertSplit";
+            this.btnInsertSplit.Size = new System.Drawing.Size(20, 20);
+            this.btnInsertSplit.TabIndex = 43;
+            this.ToolTip1.SetToolTip(this.btnInsertSplit, "Insert new split above selected");
+            this.btnInsertSplit.UseVisualStyleBackColor = true;
+            this.btnInsertSplit.Click += new System.EventHandler(this.BtnInsertSplit_Click);
+            // 
             // Spacer3
             // 
             this.Spacer3.AutoSize = true;
             this.Spacer3.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.Spacer3.Location = new System.Drawing.Point(355, 8);
+            this.Spacer3.Location = new System.Drawing.Point(381, 8);
             this.Spacer3.Name = "Spacer3";
             this.Spacer3.Size = new System.Drawing.Size(9, 13);
             this.Spacer3.TabIndex = 42;
@@ -274,7 +288,7 @@
             this.btnOnTop.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_pin_20;
             this.btnOnTop.FlatAppearance.BorderSize = 0;
             this.btnOnTop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOnTop.Location = new System.Drawing.Point(370, 4);
+            this.btnOnTop.Location = new System.Drawing.Point(396, 4);
             this.btnOnTop.Name = "btnOnTop";
             this.btnOnTop.Size = new System.Drawing.Size(20, 20);
             this.btnOnTop.TabIndex = 12;
@@ -612,6 +626,7 @@
             this.Controls.Add(this.btnAttempts);
             this.Controls.Add(this.btnUp);
             this.Controls.Add(this.btnDown);
+            this.Controls.Add(this.btnInsertSplit);
             this.Controls.Add(this.Spacer3);
             this.Controls.Add(this.btnOnTop);
             this.Controls.Add(this.btnReset);
@@ -660,6 +675,7 @@
         internal System.Windows.Forms.Button btnAttempts;
         internal System.Windows.Forms.Button btnUp;
         internal System.Windows.Forms.Button btnDown;
+        internal System.Windows.Forms.Button btnInsertSplit;
         internal System.Windows.Forms.Label Spacer3;
         internal System.Windows.Forms.Button btnOnTop;
         internal System.Windows.Forms.Button btnReset;
