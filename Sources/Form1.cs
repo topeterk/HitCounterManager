@@ -457,8 +457,14 @@ namespace HitCounterManager
 
         private void BtnInsertSplit_Click(object sender, EventArgs e)
         {
+            int idx = pi.GetActiveSplit();
+
             pi.ProfileUpdateBegin();
-            DataGridView1.Rows.Insert(pi.GetActiveSplit(), 1);
+            DataGridView1.Rows.Insert(idx, 1);
+            // Select new row's title cell that user can directly start typing name of new split
+            DataGridView1.CurrentCell = DataGridView1.Rows[idx].Cells["cTitle"];
+            DataGridView1.Rows[idx].Selected = true;
+            DataGridView1.Focus();
             pi.ProfileUpdateEnd();
         }
 

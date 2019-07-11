@@ -40,17 +40,14 @@
             this.btnWeb = new System.Windows.Forms.Button();
             this.btnCheckVersion = new System.Windows.Forms.Button();
             this.btnAbout = new System.Windows.Forms.Button();
-            this.Spacer1 = new System.Windows.Forms.Label();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnRename = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.Spacer2 = new System.Windows.Forms.Label();
             this.btnAttempts = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
             this.btnInsertSplit = new System.Windows.Forms.Button();
-            this.Spacer3 = new System.Windows.Forms.Label();
             this.btnOnTop = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnPB = new System.Windows.Forms.Button();
@@ -67,6 +64,9 @@
             this.numHits = new System.Windows.Forms.NumericUpDown();
             this.txtPredecessorTitle = new System.Windows.Forms.TextBox();
             this.cbShowPredecessor = new System.Windows.Forms.CheckBox();
+            this.Spacer1 = new System.Windows.Forms.Label();
+            this.Spacer2 = new System.Windows.Forms.Label();
+            this.Spacer3 = new System.Windows.Forms.Label();
             this.lbl_totals = new System.Windows.Forms.Label();
             this.lbl_progress = new System.Windows.Forms.Label();
             this.cTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -149,16 +149,6 @@
             this.btnAbout.UseVisualStyleBackColor = true;
             this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
             // 
-            // Spacer1
-            // 
-            this.Spacer1.AutoSize = true;
-            this.Spacer1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.Spacer1.Location = new System.Drawing.Point(143, 8);
-            this.Spacer1.Name = "Spacer1";
-            this.Spacer1.Size = new System.Drawing.Size(9, 13);
-            this.Spacer1.TabIndex = 40;
-            this.Spacer1.Text = "|";
-            // 
             // btnNew
             // 
             this.btnNew.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_add_20;
@@ -211,16 +201,6 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // Spacer2
-            // 
-            this.Spacer2.AutoSize = true;
-            this.Spacer2.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.Spacer2.Location = new System.Drawing.Point(262, 8);
-            this.Spacer2.Name = "Spacer2";
-            this.Spacer2.Size = new System.Drawing.Size(9, 13);
-            this.Spacer2.TabIndex = 41;
-            this.Spacer2.Text = "|";
-            // 
             // btnAttempts
             // 
             this.btnAttempts.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_counter_20;
@@ -268,20 +248,10 @@
             this.btnInsertSplit.Location = new System.Drawing.Point(355, 4);
             this.btnInsertSplit.Name = "btnInsertSplit";
             this.btnInsertSplit.Size = new System.Drawing.Size(20, 20);
-            this.btnInsertSplit.TabIndex = 43;
+            this.btnInsertSplit.TabIndex = 12;
             this.ToolTip1.SetToolTip(this.btnInsertSplit, "Insert new split above selected");
             this.btnInsertSplit.UseVisualStyleBackColor = true;
             this.btnInsertSplit.Click += new System.EventHandler(this.BtnInsertSplit_Click);
-            // 
-            // Spacer3
-            // 
-            this.Spacer3.AutoSize = true;
-            this.Spacer3.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.Spacer3.Location = new System.Drawing.Point(381, 8);
-            this.Spacer3.Name = "Spacer3";
-            this.Spacer3.Size = new System.Drawing.Size(9, 13);
-            this.Spacer3.TabIndex = 42;
-            this.Spacer3.Text = "|";
             // 
             // btnOnTop
             // 
@@ -291,7 +261,7 @@
             this.btnOnTop.Location = new System.Drawing.Point(396, 4);
             this.btnOnTop.Name = "btnOnTop";
             this.btnOnTop.Size = new System.Drawing.Size(20, 20);
-            this.btnOnTop.TabIndex = 12;
+            this.btnOnTop.TabIndex = 13;
             this.ToolTip1.SetToolTip(this.btnOnTop, "Set window always on top");
             this.btnOnTop.UseVisualStyleBackColor = true;
             this.btnOnTop.Click += new System.EventHandler(this.BtnOnTop_Click);
@@ -304,7 +274,7 @@
             this.btnReset.Location = new System.Drawing.Point(12, 57);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 40);
-            this.btnReset.TabIndex = 14;
+            this.btnReset.TabIndex = 15;
             this.ToolTip1.SetToolTip(this.btnReset, "RESET the current run");
             this.btnReset.UseVisualStyleBackColor = false;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
@@ -317,7 +287,7 @@
             this.btnPB.Location = new System.Drawing.Point(93, 57);
             this.btnPB.Name = "btnPB";
             this.btnPB.Size = new System.Drawing.Size(75, 40);
-            this.btnPB.TabIndex = 15;
+            this.btnPB.TabIndex = 16;
             this.ToolTip1.SetToolTip(this.btnPB, "Record run as PB (personal best)");
             this.btnPB.UseVisualStyleBackColor = false;
             this.btnPB.Click += new System.EventHandler(this.btnPB_Click);
@@ -330,7 +300,7 @@
             this.btnHit.Location = new System.Drawing.Point(174, 57);
             this.btnHit.Name = "btnHit";
             this.btnHit.Size = new System.Drawing.Size(274, 40);
-            this.btnHit.TabIndex = 16;
+            this.btnHit.TabIndex = 17;
             this.ToolTip1.SetToolTip(this.btnHit, "Count a HIT (boss) on the current split");
             this.btnHit.UseVisualStyleBackColor = false;
             this.btnHit.Click += new System.EventHandler(this.btnHit_Click);
@@ -343,7 +313,7 @@
             this.btnWayHit.Location = new System.Drawing.Point(454, 57);
             this.btnWayHit.Name = "btnWayHit";
             this.btnWayHit.Size = new System.Drawing.Size(75, 40);
-            this.btnWayHit.TabIndex = 17;
+            this.btnWayHit.TabIndex = 18;
             this.ToolTip1.SetToolTip(this.btnWayHit, "Count a HIT (way) on the current split");
             this.btnWayHit.UseVisualStyleBackColor = false;
             this.btnWayHit.Click += new System.EventHandler(this.btnWayHit_Click);
@@ -356,7 +326,7 @@
             this.btnSplit.Location = new System.Drawing.Point(535, 57);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(75, 40);
-            this.btnSplit.TabIndex = 18;
+            this.btnSplit.TabIndex = 19;
             this.ToolTip1.SetToolTip(this.btnSplit, "Jump to the next SPLIT");
             this.btnSplit.UseVisualStyleBackColor = false;
             this.btnSplit.Click += new System.EventHandler(this.btnSplit_Click);
@@ -369,7 +339,7 @@
             this.btnSuccessionProceed.Location = new System.Drawing.Point(616, 57);
             this.btnSuccessionProceed.Name = "btnSuccessionProceed";
             this.btnSuccessionProceed.Size = new System.Drawing.Size(75, 40);
-            this.btnSuccessionProceed.TabIndex = 19;
+            this.btnSuccessionProceed.TabIndex = 20;
             this.ToolTip1.SetToolTip(this.btnSuccessionProceed, "At the end of your run: Click once to save succession and continue with your next" +
         " profile");
             this.btnSuccessionProceed.UseVisualStyleBackColor = false;
@@ -388,7 +358,7 @@
             this.gpSuccession.Location = new System.Drawing.Point(12, 384);
             this.gpSuccession.Name = "gpSuccession";
             this.gpSuccession.Size = new System.Drawing.Size(679, 74);
-            this.gpSuccession.TabIndex = 21;
+            this.gpSuccession.TabIndex = 22;
             this.gpSuccession.TabStop = false;
             this.gpSuccession.Text = "Succession";
             this.ToolTip1.SetToolTip(this.gpSuccession, "E.g. Dark Souls trilogy run");
@@ -483,6 +453,36 @@
         "");
             this.cbShowPredecessor.UseVisualStyleBackColor = true;
             this.cbShowPredecessor.CheckedChanged += new System.EventHandler(this.SuccessionChanged);
+            // 
+            // Spacer1
+            // 
+            this.Spacer1.AutoSize = true;
+            this.Spacer1.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.Spacer1.Location = new System.Drawing.Point(143, 8);
+            this.Spacer1.Name = "Spacer1";
+            this.Spacer1.Size = new System.Drawing.Size(9, 13);
+            this.Spacer1.TabIndex = 40;
+            this.Spacer1.Text = "|";
+            // 
+            // Spacer2
+            // 
+            this.Spacer2.AutoSize = true;
+            this.Spacer2.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.Spacer2.Location = new System.Drawing.Point(262, 8);
+            this.Spacer2.Name = "Spacer2";
+            this.Spacer2.Size = new System.Drawing.Size(9, 13);
+            this.Spacer2.TabIndex = 41;
+            this.Spacer2.Text = "|";
+            // 
+            // Spacer3
+            // 
+            this.Spacer3.AutoSize = true;
+            this.Spacer3.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.Spacer3.Location = new System.Drawing.Point(381, 8);
+            this.Spacer3.Name = "Spacer3";
+            this.Spacer3.Size = new System.Drawing.Size(9, 13);
+            this.Spacer3.TabIndex = 42;
+            this.Spacer3.Text = "|";
             // 
             // lbl_totals
             // 
@@ -582,7 +582,7 @@
             this.ComboBox1.Name = "ComboBox1";
             this.ComboBox1.Size = new System.Drawing.Size(679, 21);
             this.ComboBox1.Sorted = true;
-            this.ComboBox1.TabIndex = 13;
+            this.ComboBox1.TabIndex = 14;
             this.ComboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             // 
             // DataGridView1
@@ -600,7 +600,7 @@
             this.DataGridView1.MultiSelect = false;
             this.DataGridView1.Name = "DataGridView1";
             this.DataGridView1.Size = new System.Drawing.Size(678, 254);
-            this.DataGridView1.TabIndex = 20;
+            this.DataGridView1.TabIndex = 21;
             this.DataGridView1.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridView1_CellMouseUp);
             this.DataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DataGridView1_CellValidating);
             this.DataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellValueChanged);
@@ -617,17 +617,14 @@
             this.Controls.Add(this.btnWeb);
             this.Controls.Add(this.btnCheckVersion);
             this.Controls.Add(this.btnAbout);
-            this.Controls.Add(this.Spacer1);
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.btnRename);
             this.Controls.Add(this.btnCopy);
             this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.Spacer2);
             this.Controls.Add(this.btnAttempts);
             this.Controls.Add(this.btnUp);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.btnInsertSplit);
-            this.Controls.Add(this.Spacer3);
             this.Controls.Add(this.btnOnTop);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnPB);
@@ -635,6 +632,9 @@
             this.Controls.Add(this.btnWayHit);
             this.Controls.Add(this.btnSplit);
             this.Controls.Add(this.btnSuccessionProceed);
+            this.Controls.Add(this.Spacer1);
+            this.Controls.Add(this.Spacer2);
+            this.Controls.Add(this.Spacer3);
             this.Controls.Add(this.lbl_totals);
             this.Controls.Add(this.lbl_progress);
             this.Controls.Add(this.gpSuccession);
@@ -666,17 +666,14 @@
         internal System.Windows.Forms.Button btnWeb;
         internal System.Windows.Forms.Button btnCheckVersion;
         internal System.Windows.Forms.Button btnAbout;
-        internal System.Windows.Forms.Label Spacer1;
         internal System.Windows.Forms.Button btnNew;
         internal System.Windows.Forms.Button btnRename;
         internal System.Windows.Forms.Button btnCopy;
         internal System.Windows.Forms.Button btnDelete;
-        internal System.Windows.Forms.Label Spacer2;
         internal System.Windows.Forms.Button btnAttempts;
         internal System.Windows.Forms.Button btnUp;
         internal System.Windows.Forms.Button btnDown;
         internal System.Windows.Forms.Button btnInsertSplit;
-        internal System.Windows.Forms.Label Spacer3;
         internal System.Windows.Forms.Button btnOnTop;
         internal System.Windows.Forms.Button btnReset;
         internal System.Windows.Forms.Button btnPB;
@@ -684,6 +681,9 @@
         internal System.Windows.Forms.Button btnWayHit;
         internal System.Windows.Forms.Button btnSplit;
         internal System.Windows.Forms.Button btnSuccessionProceed;
+        internal System.Windows.Forms.Label Spacer1;
+        internal System.Windows.Forms.Label Spacer2;
+        internal System.Windows.Forms.Label Spacer3;
         internal System.Windows.Forms.Label lbl_totals;
         internal System.Windows.Forms.Label lbl_progress;
         private System.Windows.Forms.DataGridViewTextBoxColumn cTitle;
