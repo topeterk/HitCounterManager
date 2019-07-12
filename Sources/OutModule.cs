@@ -117,6 +117,7 @@ namespace HitCounterManager
                 // Keep for compatibility to support designs up to version 1.15 that were not using Unicode:
                 Str = Str.Replace("ä", "&auml;").Replace("ö", "&ouml;").Replace("ü", "&uuml;");
                 Str = Str.Replace("Ä", "&Auml;").Replace("Ö", "&Ouml;").Replace("Ü", "&Uuml;");
+                Str = Str.Replace("\"", "\\\"");
             }
             return Str;
         }
@@ -140,7 +141,7 @@ namespace HitCounterManager
         /// </summary>
         private void WriteJsonSimpleValue(StreamWriter File, string Name, string String)
         {
-            File.WriteLine("\"" + Name + "\": " + (null != String ? "\"" + String + "\"" : "undefined") + ",");
+            File.WriteLine("\"" + Name + "\": " + (null != String ? "\"" + String.Replace("\"", "\\\"") + "\"" : "undefined") + ",");
         }
 
         /// <summary>

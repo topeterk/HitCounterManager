@@ -234,24 +234,6 @@ namespace HitCounterManager
             om.Update();
         }
 
-        private bool IsInvalidConfigString(string str)
-        {
-            bool isInvalid = false;
-            string errormessage = "";
-
-            foreach (string s in new string[] { ";", "|", "<", ">" })
-            {
-                if (str.Contains(s))
-                {
-                    errormessage += "Not allowed to use \";\"!" + Environment.NewLine;
-                    isInvalid = true;
-                }
-            }
-
-            if (isInvalid) MessageBox.Show(errormessage);
-            return isInvalid;
-        }
-
         private void SetAlwaysOnTop(bool AlwaysOnTop)
         {
             if (this.TopMost = AlwaysOnTop)
@@ -322,7 +304,7 @@ namespace HitCounterManager
         private void btnNew_Click(object sender, EventArgs e)
         {
             string name = InputBox("Enter name of new profile", "New profile", (string)ComboBox1.SelectedItem);
-            if (name.Length == 0 || IsInvalidConfigString(name)) return;
+            if (name.Length == 0) return;
 
             if (ComboBox1.Items.Contains(name))
             {
@@ -348,7 +330,7 @@ namespace HitCounterManager
             if (ComboBox1.Items.Count == 0) return;
 
             string name = InputBox("Enter new name for profile \"" + (string)ComboBox1.SelectedItem + "\"!", "Rename profile", (string)ComboBox1.SelectedItem);
-            if (name.Length == 0 || IsInvalidConfigString(name)) return;
+            if (name.Length == 0) return;
 
             if (ComboBox1.Items.Contains(name))
             {
@@ -611,15 +593,8 @@ namespace HitCounterManager
 
             if (e.ColumnIndex == DataGridView1.Rows[0].Cells["cTitle"].ColumnIndex)
             {
-                if (IsInvalidConfigString((string)e.FormattedValue))
-                {
-                    e.Cancel = true;
-                }
-                else
-                {
-                    // Make sure we mark any title changes as "modified"
-                    pi.SetSplitTitle(e.RowIndex, (string)e.FormattedValue);
-                }
+                // Make sure we mark any title changes as "modified"
+                pi.SetSplitTitle(e.RowIndex, (string)e.FormattedValue);
             }
             else
             {
