@@ -399,42 +399,12 @@ namespace HitCounterManager
 
         private void btnUp_Click(object sender, EventArgs e)
         {
-            int idx_old = pi.GetActiveSplit();
-            int idx_new = idx_old - 1;
-
-            if (0 <= idx_new && (idx_old < pi.GetSplitCount())) // Do not move when UP is not possible
-            {
-                pi.ProfileUpdateBegin();
-                for (int i = 0; i <= DataGridView1.Columns.Count - 1; i++)
-                {
-                    object cell = DataGridView1.Rows[idx_old].Cells[i].Value;
-                    DataGridView1.Rows[idx_old].Cells[i].Value = DataGridView1.Rows[idx_new].Cells[i].Value;
-                    DataGridView1.Rows[idx_new].Cells[i].Value = cell;
-                }
-                pi.ProfileUpdateEnd();
-
-                pi.SetActiveSplit(idx_new);
-            }
+            PermuteSplit(pi.GetActiveSplit(), -1);
         }
 
         private void btnDown_Click(object sender, EventArgs e)
         {
-            int idx_old = pi.GetActiveSplit();
-            int idx_new = idx_old + 1;
-
-            if (idx_new < pi.GetSplitCount()) // Do not move when DOWN is not possible
-            {
-                pi.ProfileUpdateBegin();
-                for (int i = 0; i <= DataGridView1.Columns.Count - 1; i++)
-                {
-                    object cell = DataGridView1.Rows[idx_old].Cells[i].Value;
-                    DataGridView1.Rows[idx_old].Cells[i].Value = DataGridView1.Rows[idx_new].Cells[i].Value;
-                    DataGridView1.Rows[idx_new].Cells[i].Value = cell;
-                }
-                pi.ProfileUpdateEnd();
-
-                pi.SetActiveSplit(idx_new);
-            }
+            PermuteSplit(pi.GetActiveSplit(), +1);
         }
 
         private void BtnInsertSplit_Click(object sender, EventArgs e)
@@ -638,50 +608,6 @@ namespace HitCounterManager
             if (!pi.IsProfileUpdatePending()) profs.SaveProfile(pi, true);
             UpdateProgressAndTotals();
         }
-
-        private void DataGridView1_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            // Workaround to fire CellValueChanged on a Checkbox change via mouse (left click) by switching cell focus
-            if ((e.RowIndex < 0) || (e.ColumnIndex < 0)) return;
-
-            if (DataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].GetType().Name == "DataGridViewCheckBoxCell")
-            {
-                // Care with changing the following sequence as during lots of testing
-                // this is the first and only combination that works in Windows and Mono..
-                pi.ProfileUpdateBegin();
-                DataGridView1.EndEdit(); // will fire CellValueChanged
-                DataGridView1.ClearSelection();
-                pi.ProfileUpdateEnd();
-                DataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
-                DataGridView1.Rows[e.RowIndex].Selected = true;
-            }
-        }
-
-        private void DataGridView1_KeyUp(object sender, KeyEventArgs e)
-        {
-            // Workaround to fire CellValueChanged on a Checkbox change via keyboard (space) by switching cell focus
-            if (e.KeyCode == Keys.Space)
-            {
-                foreach (DataGridViewCell cell in DataGridView1.SelectedCells)
-                {
-                    if (cell.GetType().Name == "DataGridViewCheckBoxCell")
-                    {
-                        e.Handled = true;
-                        if (cell.RowIndex >= pi.GetSplitCount()) return; // avoid creating a split from the "new line" row
-
-                        // Care with changing the following sequence as during lots of testing
-                        // this is the first and only combination that works in Windows and Mono..
-                        DataGridViewCheckBoxCell SelectedCell = (DataGridViewCheckBoxCell)cell;
-                        pi.ProfileUpdateBegin();
-                        SelectedCell.Value = !(SelectedCell.Value == null ? /*not set yet, so it's not checked*/ false : (bool)SelectedCell.Value); // will fire CellValueChanged
-                        pi.ProfileUpdateEnd();
-                        DataGridView1.EndEdit();
-                        DataGridView1.ClearSelection();
-                        DataGridView1.Rows[SelectedCell.RowIndex].Cells[SelectedCell.ColumnIndex].Selected = true;
-                    }
-                }
-            }
-        }
         
         private void BtnSuccessionProceed_Click(object sender, EventArgs e)
         {
@@ -693,6 +619,31 @@ namespace HitCounterManager
             SuccessionChanged(sender, e);
 
             MessageBox.Show("The progress of this profile was saved.\nYou can select your next profile now!", "Succession", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        
+        /// <summary>
+        /// Interchange of two data rows
+        /// </summary>
+        /// <param name="idx_from">Source row</param>
+        /// <param name="offset">Offset to row that shall be permuted</param>
+        /// <returns>False: no action was done; True: permutation successfull</returns>
+        private bool PermuteSplit(int idx_from, int offset)
+        {
+            int idx_to = idx_from + offset;
+            if ((0 > idx_from) || (0 > idx_to) || (pi.GetSplitCount() <= idx_from) || (pi.GetSplitCount() <= idx_to)) // Is permutation in range?
+                return false;
+
+            pi.ProfileUpdateBegin();
+            for (int i = 0; i <= DataGridView1.Columns.Count - 1; i++)
+            {
+                object cell = DataGridView1.Rows[idx_from].Cells[i].Value;
+                DataGridView1.Rows[idx_from].Cells[i].Value = DataGridView1.Rows[idx_to].Cells[i].Value;
+                DataGridView1.Rows[idx_to].Cells[i].Value = cell;
+            }
+            pi.ProfileUpdateEnd();
+
+            pi.SetActiveSplit(idx_to);
+            return true;
         }
 
         private void SetSuccession(int TotalHits, int TotalHitsWay, int TotalPB, string Title = null, bool ShowPredecessor = true)
@@ -728,6 +679,62 @@ namespace HitCounterManager
 
     public class ProfileDataGridView : DataGridView, IProfileInfo
     {
+        #region DataGridViewCheckBoxCell support
+
+        public ProfileDataGridView()
+        {
+            this.CellMouseUp += new DataGridViewCellMouseEventHandler(this.CellMouseUpEventHandler);
+            this.KeyUp += new KeyEventHandler(this.KeyUpEventHandler);
+        }
+        
+        private void CellMouseUpEventHandler(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            // Workaround to fire CellValueChanged on a Checkbox change via mouse (left click) by switching cell focus
+            if ((e.RowIndex < 0) || (e.ColumnIndex < 0)) return;
+
+            if (Rows[e.RowIndex].Cells[e.ColumnIndex].GetType().Name == "DataGridViewCheckBoxCell")
+            {
+                // Care with changing the following sequence as during lots of testing
+                // this is the first and only combination that works in Windows and Mono..
+                ProfileUpdateBegin();
+                EndEdit(); // will fire CellValueChanged
+                ClearSelection();
+                ProfileUpdateEnd();
+                Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+                Rows[e.RowIndex].Selected = true;
+            }
+        }
+
+        private void KeyUpEventHandler(object sender, KeyEventArgs e)
+        {
+            // Workaround to fire CellValueChanged on a Checkbox change via keyboard (space) by switching cell focus
+            if (e.KeyCode == Keys.Space)
+            {
+                foreach (DataGridViewCell cell in SelectedCells)
+                {
+                    if (cell.GetType().Name == "DataGridViewCheckBoxCell")
+                    {
+                        e.Handled = true;
+                        if (cell.RowIndex >= GetSplitCount()) return; // avoid creating a split from the "new line" row
+
+                        // Care with changing the following sequence as during lots of testing
+                        // this is the first and only combination that works in Windows and Mono..
+                        DataGridViewCheckBoxCell SelectedCell = (DataGridViewCheckBoxCell)cell;
+                        ProfileUpdateBegin();
+                        SelectedCell.Value = !(SelectedCell.Value == null ? /*not set yet, so it's not checked*/ false : (bool)SelectedCell.Value); // will fire CellValueChanged
+                        ProfileUpdateEnd();
+                        EndEdit();
+                        ClearSelection();
+                        Rows[SelectedCell.RowIndex].Cells[SelectedCell.ColumnIndex].Selected = true;
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region IProfileInfo implementation
+
         private string _ProfileName = null;
         private int _AttemptsCounter = 0;
         private bool ModifiedFlag = false;
@@ -855,5 +862,7 @@ namespace HitCounterManager
         public void ProfileUpdateBegin() { DataUpdatePending = true; }
         public void ProfileUpdateEnd() { DataUpdatePending = false; }
         public bool IsProfileUpdatePending() { return DataUpdatePending; }
+
+        #endregion
     }
 }
