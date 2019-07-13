@@ -44,32 +44,14 @@ namespace HitCounterManager
             sc = ((Form1)Owner).sc;
             om = ((Form1)Owner).om;
 
-            // Shortcuts
-            ShortcutsKey key;
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Reset);
-            cbScReset.Checked = key.used;
-            txtReset.Text = key.GetDescriptionString();
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Hit);
-            cbScHit.Checked = key.used;
-            txtHit.Text = key.GetDescriptionString();
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_HitUndo);
-            cbScHitUndo.Checked = key.used;
-            txtHitUndo.Text = key.GetDescriptionString();
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_WayHit);
-            cbScWayHit.Checked = key.used;
-            txtWayHit.Text = key.GetDescriptionString();
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_WayHitUndo);
-            cbScWayHitUndo.Checked = key.used;
-            txtWayHitUndo.Text = key.GetDescriptionString();
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Split);
-            cbScNextSplit.Checked = key.used;
-            txtNextSplit.Text = key.GetDescriptionString();
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_SplitPrev);
-            cbScPrevSplit.Checked = key.used;
-            txtPrevSplit.Text = key.GetDescriptionString();
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_PB);
-            cbScPB.Checked = key.used;
-            txtPB.Text = key.GetDescriptionString();
+            LoadHotKey(Shortcuts.SC_Type.SC_Type_Reset, cbScReset, txtReset);
+            LoadHotKey(Shortcuts.SC_Type.SC_Type_Hit, cbScHit, txtHit);
+            LoadHotKey(Shortcuts.SC_Type.SC_Type_HitUndo, cbScHitUndo, txtHitUndo);
+            LoadHotKey(Shortcuts.SC_Type.SC_Type_WayHit, cbScWayHit, txtWayHit);
+            LoadHotKey(Shortcuts.SC_Type.SC_Type_WayHitUndo, cbScWayHitUndo, txtWayHitUndo);
+            LoadHotKey(Shortcuts.SC_Type.SC_Type_Split, cbScNextSplit, txtNextSplit);
+            LoadHotKey(Shortcuts.SC_Type.SC_Type_SplitPrev, cbScPrevSplit, txtPrevSplit);
+            LoadHotKey(Shortcuts.SC_Type.SC_Type_PB, cbScPB, txtPB);
 
             radioHotKeyMethod_sync.Checked = (sc.NextStart_Method == Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync);
             radioHotKeyMethod_async.Checked = (sc.NextStart_Method == Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async);
@@ -118,7 +100,36 @@ namespace HitCounterManager
         #endregion
         #region Functions
 
-        private void RegisterHotKey(TextBox txt, Shortcuts.SC_Type Id, KeyEventArgs e)
+        /// <summary>
+        /// Reads the hot key configuration and setup the UI elements accordingly
+        /// </summary>
+        /// <param name="Id">Configuration type to be read</param>
+        /// <param name="cb">Checkbox to show enable/disable status</param>
+        /// <param name="txt">Textbox to show description string</param>
+        private void LoadHotKey(Shortcuts.SC_Type Id, CheckBox cb, TextBox txt)
+        {
+            ShortcutsKey key = sc.Key_Get(Id);
+            cb.Checked = key.used;
+            txt.Text = key.GetDescriptionString();
+        }
+
+        private void SetHotKeyMethod(Shortcuts.SC_HotKeyMethod Method)
+        {
+            if (sc.NextStart_Method == Method) // has setting changed?
+            {
+                sc.NextStart_Method = Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync;
+                MessageBox.Show("Changes only take effect after restarting the application.", "Restart required", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        /// <summary>
+        /// Registers a hot key and stores current configuration
+        /// </summary>
+        /// <param name="Id">Configuration type to be assigned to hot key</param>
+        /// <param name="cb">Checkbox that will be checked</param>
+        /// <param name="txt">Textbox to show description string</param>
+        /// <param name="e">HotKey configuration</param>
+        private void RegisterHotKey(Shortcuts.SC_Type Id, CheckBox cb, TextBox txt, KeyEventArgs e)
         {
             ShortcutsKey key = new ShortcutsKey();
 
@@ -131,6 +142,7 @@ namespace HitCounterManager
             key.key = e;
             sc.Key_Set(Id, key);
 
+            cb.Checked = true;
             txt.Text = key.GetDescriptionString();
         }
 
@@ -195,93 +207,23 @@ namespace HitCounterManager
         #endregion
         #region UI
 
-        private void txtReset_KeyDown(object sender, KeyEventArgs e)
-        {
-            RegisterHotKey(txtReset, Shortcuts.SC_Type.SC_Type_Reset, e);
-            cbScReset.Checked = true;
-        }
+        private void txtReset_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_Reset, cbScReset, txtReset, e); }
+        private void txtHit_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_Hit, cbScHit, txtHit, e); }
+        private void txtHitUndo_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_HitUndo, cbScHitUndo, txtHitUndo, e); }
+        private void TxtWayHit_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_WayHit, cbScWayHit, txtWayHit, e); }
+        private void TxtWayHitUndo_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_WayHitUndo, cbScWayHitUndo, txtWayHitUndo, e); }
+        private void txtNextSplit_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_Split, cbScNextSplit, txtNextSplit, e); }
+        private void txtPrevSplit_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_SplitPrev, cbScPrevSplit, txtPrevSplit, e); }
+        private void txtPB_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_PB, cbScPB, txtPB, e); }
 
-        private void txtHit_KeyDown(object sender, KeyEventArgs e)
-        {
-            RegisterHotKey(txtHit, Shortcuts.SC_Type.SC_Type_Hit, e);
-            cbScHit.Checked = true;
-        }
-
-        private void txtHitUndo_KeyDown(object sender, KeyEventArgs e)
-        {
-            RegisterHotKey(txtHitUndo, Shortcuts.SC_Type.SC_Type_HitUndo, e);
-            cbScHitUndo.Checked = true;
-        }
-
-        private void TxtWayHit_KeyDown(object sender, KeyEventArgs e)
-        {
-            RegisterHotKey(txtWayHit, Shortcuts.SC_Type.SC_Type_WayHit, e);
-            cbScWayHit.Checked = true;
-        }
-
-        private void TxtWayHitUndo_KeyDown(object sender, KeyEventArgs e)
-        {
-            RegisterHotKey(txtWayHitUndo, Shortcuts.SC_Type.SC_Type_WayHitUndo, e);
-            cbScWayHitUndo.Checked = true;
-        }
-
-        private void txtNextSplit_KeyDown(object sender, KeyEventArgs e)
-        {
-            RegisterHotKey(txtNextSplit, Shortcuts.SC_Type.SC_Type_Split, e);
-            cbScNextSplit.Checked = true;
-        }
-
-        private void txtPrevSplit_KeyDown(object sender, KeyEventArgs e)
-        {
-            RegisterHotKey(txtPrevSplit, Shortcuts.SC_Type.SC_Type_SplitPrev, e);
-            cbScPrevSplit.Checked = true;
-        }
-
-        private void txtPB_KeyDown(object sender, KeyEventArgs e)
-        {
-            RegisterHotKey(txtPB, Shortcuts.SC_Type.SC_Type_PB, e);
-            cbScPB.Checked = true;
-        }
-        
-        private void cbScReset_CheckedChanged(object sender, EventArgs e)
-        {
-            sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Reset, cbScReset.Checked);
-        }
-
-        private void cbScHit_CheckedChanged(object sender, EventArgs e)
-        {
-            sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Hit, cbScHit.Checked);
-        }
-
-        private void cbScHitUndo_CheckedChanged(object sender, EventArgs e)
-        {
-            sc.Key_SetState(Shortcuts.SC_Type.SC_Type_HitUndo, cbScHitUndo.Checked);
-        }
-
-        private void CbScWayHit_CheckedChanged(object sender, EventArgs e)
-        {
-            sc.Key_SetState(Shortcuts.SC_Type.SC_Type_WayHit, cbScWayHit.Checked);
-        }
-
-        private void CbScWayHitUndo_CheckedChanged(object sender, EventArgs e)
-        {
-            sc.Key_SetState(Shortcuts.SC_Type.SC_Type_WayHitUndo, cbScWayHitUndo.Checked);
-        }
-
-        private void cbScNextSplit_CheckedChanged(object sender, EventArgs e)
-        {
-            sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Split, cbScNextSplit.Checked);
-        }
-
-        private void cbScPrevSplit_CheckedChanged(object sender, EventArgs e)
-        {
-            sc.Key_SetState(Shortcuts.SC_Type.SC_Type_SplitPrev, cbScPrevSplit.Checked);
-        }
-
-        private void cbScPB_CheckedChanged(object sender, EventArgs e)
-        {
-            sc.Key_SetState(Shortcuts.SC_Type.SC_Type_PB, cbScPB.Checked);
-        }
+        private void cbScReset_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Reset, cbScReset.Checked); }
+        private void cbScHit_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Hit, cbScHit.Checked); }
+        private void cbScHitUndo_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_HitUndo, cbScHitUndo.Checked); }
+        private void CbScWayHit_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_WayHit, cbScWayHit.Checked); }
+        private void CbScWayHitUndo_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_WayHitUndo, cbScWayHitUndo.Checked); }
+        private void cbScNextSplit_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Split, cbScNextSplit.Checked); }
+        private void cbScPrevSplit_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_SplitPrev, cbScPrevSplit.Checked); }
+        private void cbScPB_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_PB, cbScPB.Checked); }
 
         private void btnInput_Click(object sender, EventArgs e)
         {
@@ -305,24 +247,8 @@ namespace HitCounterManager
 
         private void radioHotKeyMethod_CheckedChanged(object sender, EventArgs e)
         {
-            if (null == sc) return; // when invoked during initialization
-
-            if (radioHotKeyMethod_sync.Checked)
-            {
-                if (sc.NextStart_Method != Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync)
-                {
-                    sc.NextStart_Method = Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync;
-                    MessageBox.Show("Changes only take effect after restarting the application.", "Restart required", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            else if (radioHotKeyMethod_async.Checked)
-            {
-                if (sc.NextStart_Method != Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async)
-                {
-                    sc.NextStart_Method = Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async;
-                    MessageBox.Show("Changes only take effect after restarting the application.", "Restart required", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
+            if (radioHotKeyMethod_sync.Checked) SetHotKeyMethod(Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync);
+            else if (radioHotKeyMethod_async.Checked) SetHotKeyMethod(Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async);
         }
 
         private void btnApApply_Click(object sender, EventArgs e)
