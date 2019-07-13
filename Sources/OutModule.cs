@@ -148,7 +148,7 @@ namespace HitCounterManager
         /// Use buffer to create outputfile while patching some data
         /// </summary>
         /// <param name="Force">true = Force producing output, false = Output only on pending changes</param>
-        public void Update(bool Force = false)
+        public void Update(bool Force)
         {
             if (pi.IsProfileUpdatePending()) return; // Data is incomplete, wait till data becomes valid
 

@@ -69,8 +69,7 @@ namespace HitCounterManager
             Text = Text + " - v" + Application.ProductVersion + " " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();
-            UpdateProgressAndTotals();
-            om.Update(true); // Write very first output once after application start
+            UpdateProgressAndTotals(true); // Write very first output once after application start
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -214,7 +213,7 @@ namespace HitCounterManager
             TotalPB += (int)numPB.Value;
         }
 
-        private void UpdateProgressAndTotals()
+        private void UpdateProgressAndTotals(bool ForceOutputUpdate = false)
         {
             int TotalHits = 0;
             int TotalHitsWay = 0;
@@ -231,7 +230,7 @@ namespace HitCounterManager
 
             lbl_totals.Text = "Total: " + (TotalHits + TotalHitsWay) + " Hits   " + TotalPB + " PB";
 
-            om.Update();
+            om.Update(ForceOutputUpdate);
         }
 
         private void SetAlwaysOnTop(bool AlwaysOnTop)
@@ -546,8 +545,7 @@ namespace HitCounterManager
             if (0 < DataGridView1.SelectedCells.Count)
             {
                 pi.SetActiveSplit(DataGridView1.SelectedCells[0].RowIndex);
-                om.Update(true); // Row could have been deleted ending up at the same index, so we should definitely update
-                UpdateProgressAndTotals();
+                UpdateProgressAndTotals(true); // Row could have been deleted ending up at the same index, so we should definitely update
             }
         }
 
@@ -663,8 +661,7 @@ namespace HitCounterManager
 
             if (null != sender) // update on a GUI handler only
             {
-                UpdateProgressAndTotals();
-                om.Update(true);
+                UpdateProgressAndTotals(true);
             }
         }
 
