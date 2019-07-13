@@ -252,15 +252,9 @@ namespace HitCounterManager
             SettingsDialogOpen = false;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            SaveSettings();
-        }
+        private void btnSave_Click(object sender, EventArgs e) { SaveSettings(); }
 
-        private void btnWeb_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/topeterk/HitCounterManager");
-        }
+        private void btnWeb_Click(object sender, EventArgs e) { System.Diagnostics.Process.Start("https://github.com/topeterk/HitCounterManager"); }
 
         private void btnCheckVersion_Click(object sender, EventArgs e)
         {
@@ -293,11 +287,7 @@ namespace HitCounterManager
             }
         }
 
-        private void btnAbout_Click(object sender, EventArgs e)
-        {
-            Form form = new About();
-            form.ShowDialog(this);
-        }
+        private void btnAbout_Click(object sender, EventArgs e) { new About().ShowDialog(this); }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
@@ -395,15 +385,9 @@ namespace HitCounterManager
             UpdateProgressAndTotals();
         }
 
-        private void btnUp_Click(object sender, EventArgs e)
-        {
-            PermuteSplit(pi.GetActiveSplit(), -1);
-        }
+        private void btnUp_Click(object sender, EventArgs e) { PermuteSplit(pi.GetActiveSplit(), -1); }
 
-        private void btnDown_Click(object sender, EventArgs e)
-        {
-            PermuteSplit(pi.GetActiveSplit(), +1);
-        }
+        private void btnDown_Click(object sender, EventArgs e) { PermuteSplit(pi.GetActiveSplit(), +1); }
 
         private void BtnInsertSplit_Click(object sender, EventArgs e)
         {
@@ -418,10 +402,7 @@ namespace HitCounterManager
             pi.ProfileUpdateEnd();
         }
 
-        private void BtnOnTop_Click(object sender, EventArgs e)
-        {
-            SetAlwaysOnTop(!this.TopMost);
-        }
+        private void BtnOnTop_Click(object sender, EventArgs e) { SetAlwaysOnTop(!this.TopMost); }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
