@@ -255,7 +255,6 @@ namespace HitCounterManager
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            profs.SaveProfile(pi);
             SaveSettings();
         }
 
@@ -315,13 +314,13 @@ namespace HitCounterManager
                 return;
             }
 
-            profs.SaveProfile(pi); // save previous selected profile
+            profs.SaveProfile(false); // save previous selected profile
 
             // create, select and save new profile..
             ComboBox1.Items.Add(name);
             ComboBox1.SelectedItem = name;
             pi.SetProfileName(name);
-            profs.SaveProfile(pi, true); // save new empty profile
+            profs.SaveProfile(true); // save new empty profile
             UpdateProgressAndTotals();
         }
 
@@ -348,12 +347,12 @@ namespace HitCounterManager
 
             do { name += " COPY"; } while (ComboBox1.Items.Contains(name)); // extend name till it becomes unique
 
-            profs.SaveProfile(pi); // save previous selected profile
+            profs.SaveProfile(false); // save previous selected profile
 
             // create, select and save new profile..
             ComboBox1.Items.Add(name);
             pi.SetProfileName(name);
-            profs.SaveProfile(pi, true); // copy current data to new profile
+            profs.SaveProfile(true); // copy current data to new profile
             ComboBox1.SelectedItem = name;
         }
 
@@ -378,7 +377,7 @@ namespace HitCounterManager
                 else
                     ComboBox1.SelectedIndex = idx;
                 
-                profs.LoadProfile((string)ComboBox1.SelectedItem, pi);
+                profs.LoadProfile((string)ComboBox1.SelectedItem);
             }
         }
 
@@ -393,7 +392,7 @@ namespace HitCounterManager
                 return;
             }
             pi.SetAttemptsCount(amount_value);
-            profs.SaveProfile(pi);
+            profs.SaveProfile(false);
             UpdateProgressAndTotals();
         }
 
@@ -443,12 +442,7 @@ namespace HitCounterManager
 
             if (SuccessionReset)
             {
-                gpSuccession_ValueChangedSema = true;
-                numHits.Value = 0;
-                numHitsWay.Value = 0;
-                numPB.Value = 0;
-                cbShowPredecessor.Checked = false;
-                gpSuccession_ValueChangedSema = false;
+                SetSuccession(0, 0, 0, null, false);
                 SuccessionChanged(sender, e);
             }
 
@@ -537,11 +531,11 @@ namespace HitCounterManager
         {
             if (null != pi.GetProfileName())
             {
-                profs.SaveProfile(pi);
+                profs.SaveProfile(false);
             }
 
             pi.ProfileUpdateBegin();
-            profs.LoadProfile((string)ComboBox1.SelectedItem, pi);
+            profs.LoadProfile((string)ComboBox1.SelectedItem);
             pi.SetProfileName((string)ComboBox1.SelectedItem);
             pi.ProfileUpdateEnd();
             UpdateProgressAndTotals();
@@ -605,7 +599,7 @@ namespace HitCounterManager
                 }
             }
 
-            if (!pi.IsProfileUpdatePending()) profs.SaveProfile(pi, true);
+            if (!pi.IsProfileUpdatePending()) profs.SaveProfile(true);
             UpdateProgressAndTotals();
         }
         

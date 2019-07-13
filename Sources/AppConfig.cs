@@ -227,6 +227,7 @@ namespace HitCounterManager
 
             sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
             profs = _settings.Profiles;
+            profs.SetProfileInfo(pi);
 
             this.ComboBox1.Items.AddRange(profs.GetProfileList());
             if (this.ComboBox1.Items.Count == 0) this.ComboBox1.Items.Add("Unnamed");
@@ -352,7 +353,10 @@ namespace HitCounterManager
             _settings.SuccessionHitsPB = om.SuccessionHitsPB;
 
             _settings.ProfileSelected = (string)ComboBox1.SelectedItem;
+
+            profs.SaveProfile(false); // Make sure all changes have been saved eventually
             _settings.Profiles = profs;
+
             sm.WriteXML(_settings);
         }
     }

@@ -55,8 +55,15 @@ namespace HitCounterManager
     [Serializable]
     public class Profiles
     {
+        private IProfileInfo _pi = null;
         private List<Profile> _Profiles = new List<Profile>();
         public List<Profile> ProfileList { get { return _Profiles; } } // used by XML serialization!
+
+        /// <summary>
+        /// Set the profile info interface that will be used for all operations
+        /// </summary>
+        /// <param name="pi">Interface to Profile Info</param>
+        public void SetProfileInfo(IProfileInfo pi) { _pi = pi; }
 
         /// <summary>
         /// Checks if a profile with given name exists and gets its instance
@@ -86,59 +93,61 @@ namespace HitCounterManager
         }
 
         /// <summary>
-        /// Updates profile info based on a specific internally cached profile
+        /// Updates profile info based on a specific internally cached profile.
         /// </summary>
         /// <param name="Name">Name of profile that gets loaded</param>
-        /// <param name="pi">Interface to Profile Info</param>
-        public void LoadProfile(string Name, IProfileInfo pi)
+        public void LoadProfile(string Name)
         {
+            if (null == _pi) return; // just for safety should never happen
+
             Profile prof;
-            pi.SetProfileName(Name);
-            pi.SetAttemptsCount(0);
-            pi.ClearSplits();
+            _pi.SetProfileName(Name);
+            _pi.SetAttemptsCount(0);
+            _pi.ClearSplits();
             if (_FindProfile(Name, out prof))
             {
-                pi.SetAttemptsCount(prof.Attempts);
+                _pi.SetAttemptsCount(prof.Attempts);
                 foreach (ProfileRow row in prof.Rows)
                 {
-                    pi.AddSplit(row.Title, row.Hits, row.WayHits, row.PB);
+                    _pi.AddSplit(row.Title, row.Hits, row.WayHits, row.PB);
                 }
-                pi.SetActiveSplit(prof.ActiveSplit);
+                _pi.SetActiveSplit(prof.ActiveSplit);
             }
-            pi.SetSessionProgress(0);
+            _pi.SetSessionProgress(0);
         }
 
         /// <summary>
         /// Updates internally cached profile with data from profile info
         /// </summary>
-        /// <param name="pi">Interface to Profile Info</param>
         /// <param name="AllowCreation">True allows to add a new profile when it does not exist in cache already</param>
-        public void SaveProfile(IProfileInfo pi, bool AllowCreation = false)
+        public void SaveProfile(bool AllowCreation)
         {
+            if (null == _pi) return; // just for safety should never happen
+
             Profile prof;
 
             // look for existing one and create if not exists
-            if (!_FindProfile(pi.GetProfileName(), out prof))
+            if (!_FindProfile(_pi.GetProfileName(), out prof))
             {
                 if (!AllowCreation) return;
 
                 prof = new Profile();
-                prof.Name = pi.GetProfileName();
+                prof.Name = _pi.GetProfileName();
                 _Profiles.Add(prof);
             }
 
             prof.Rows.Clear();
 
             // collecting data, nom nom nom
-            prof.Attempts = pi.GetAttemptsCount();
-            prof.ActiveSplit = pi.GetActiveSplit();
-            for (int r = 0; r < pi.GetSplitCount(); r++)
+            prof.Attempts = _pi.GetAttemptsCount();
+            prof.ActiveSplit = _pi.GetActiveSplit();
+            for (int r = 0; r < _pi.GetSplitCount(); r++)
             {
                 ProfileRow ProfileRow = new ProfileRow();
-                ProfileRow.Title = pi.GetSplitTitle(r);
-                ProfileRow.Hits = pi.GetSplitHits(r);
-                ProfileRow.WayHits = pi.GetSplitWayHits(r);
-                ProfileRow.PB = pi.GetSplitPB(r);
+                ProfileRow.Title = _pi.GetSplitTitle(r);
+                ProfileRow.Hits = _pi.GetSplitHits(r);
+                ProfileRow.WayHits = _pi.GetSplitWayHits(r);
+                ProfileRow.PB = _pi.GetSplitPB(r);
                 prof.Rows.Add(ProfileRow);
             }
         }
