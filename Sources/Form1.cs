@@ -42,6 +42,8 @@ namespace HitCounterManager
         private bool DataGridView1_ValueChangedSema = false;
         private bool gpSuccession_ValueChangedSema = false;
 
+        private readonly int gpSuccession_Height;
+
         #region Form
 
         public Form1()
@@ -54,6 +56,9 @@ namespace HitCounterManager
             InitializeComponent();
             gpSuccession_ValueChangedSema = false;
             DataGridView1_ValueChangedSema = false;
+
+            gpSuccession_Height = gpSuccession.Height;
+            ShowSuccessionMenu(false); // start collapsed
 
             pi = DataGridView1; // for better capsulation
             om = new OutModule(pi);
@@ -108,6 +113,7 @@ namespace HitCounterManager
 
             // succession group
             txtPredecessorTitle.Width = gpSuccession.Width - txtPredecessorTitle.Left - Pad_Frame;
+            btnSuccessionVisibility.Left = gpSuccession.Width - btnSuccessionVisibility.Width - Pad_Frame;
         }
 
         protected override void WndProc(ref Message m)
@@ -589,11 +595,14 @@ namespace HitCounterManager
             int TotalPB = 0;
             GetCalculatedSums(ref TotalHits, ref TotalHitsWay, ref TotalPB);
             SetSuccession(TotalHits, TotalHitsWay, TotalPB);
+            ShowSuccessionMenu(true);
             SuccessionChanged(sender, e);
 
             MessageBox.Show("The progress of this profile was saved.\nYou can select your next profile now!", "Succession", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-        
+    
+        private void btnSuccessionVisibility_Click(object sender, EventArgs e) { ShowSuccessionMenu();  }
+
         /// <summary>
         /// Interchange of two data rows
         /// </summary>
@@ -617,6 +626,31 @@ namespace HitCounterManager
 
             pi.SetActiveSplit(idx_to);
             return true;
+        }
+
+        /// <summary>
+        /// Collapses or expands succession menu
+        /// </summary>
+        /// <param name="expand">TRUE = Expand, FALSE = Collapse, NULL = Toggle</param>
+        private void ShowSuccessionMenu(Nullable<bool> expand = null)
+        {
+            int diff = 0;
+
+            if (!expand.HasValue) expand = gpSuccession.Height != gpSuccession_Height; // Toggle
+
+            if (expand.Value) // Expand..
+            {
+                diff = gpSuccession_Height - gpSuccession.Height;
+                gpSuccession.Height = gpSuccession_Height;
+                btnSuccessionVisibility.BackgroundImage = Sources.Resources.icons8_double_up_20;
+            }
+            else // Collapse..
+            {
+                diff = btnSuccessionVisibility.Height - gpSuccession.Height;
+                gpSuccession.Height = btnSuccessionVisibility.Height;
+                btnSuccessionVisibility.BackgroundImage = Sources.Resources.icons8_double_down_20;
+            }
+            Height += diff;
         }
 
         private void SetSuccession(int TotalHits, int TotalHitsWay, int TotalPB, string Title = null, bool ShowPredecessor = true)

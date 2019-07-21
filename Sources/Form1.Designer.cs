@@ -56,6 +56,7 @@
             this.btnSplit = new System.Windows.Forms.Button();
             this.btnSuccessionProceed = new System.Windows.Forms.Button();
             this.gpSuccession = new System.Windows.Forms.GroupBox();
+            this.btnSuccessionVisibility = new System.Windows.Forms.Button();
             this.lbl_succession_pb = new System.Windows.Forms.Label();
             this.numPB = new System.Windows.Forms.NumericUpDown();
             this.lbl_succession_hitsway = new System.Windows.Forms.Label();
@@ -347,6 +348,7 @@
             // 
             // gpSuccession
             // 
+            this.gpSuccession.Controls.Add(this.btnSuccessionVisibility);
             this.gpSuccession.Controls.Add(this.lbl_succession_pb);
             this.gpSuccession.Controls.Add(this.numPB);
             this.gpSuccession.Controls.Add(this.lbl_succession_hitsway);
@@ -357,16 +359,29 @@
             this.gpSuccession.Controls.Add(this.cbShowPredecessor);
             this.gpSuccession.Location = new System.Drawing.Point(12, 384);
             this.gpSuccession.Name = "gpSuccession";
-            this.gpSuccession.Size = new System.Drawing.Size(679, 74);
+            this.gpSuccession.Size = new System.Drawing.Size(679, 79);
             this.gpSuccession.TabIndex = 22;
             this.gpSuccession.TabStop = false;
             this.gpSuccession.Text = "Succession";
             this.ToolTip1.SetToolTip(this.gpSuccession, "E.g. Dark Souls trilogy run");
             // 
+            // btnSuccessionVisibility
+            // 
+            this.btnSuccessionVisibility.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_double_up_20;
+            this.btnSuccessionVisibility.FlatAppearance.BorderSize = 0;
+            this.btnSuccessionVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSuccessionVisibility.Location = new System.Drawing.Point(653, 0);
+            this.btnSuccessionVisibility.Name = "btnSuccessionVisibility";
+            this.btnSuccessionVisibility.Size = new System.Drawing.Size(20, 20);
+            this.btnSuccessionVisibility.TabIndex = 6;
+            this.ToolTip1.SetToolTip(this.btnSuccessionVisibility, "Collapse Succession");
+            this.btnSuccessionVisibility.UseVisualStyleBackColor = true;
+            this.btnSuccessionVisibility.Click += new System.EventHandler(this.btnSuccessionVisibility_Click);
+            // 
             // lbl_succession_pb
             // 
             this.lbl_succession_pb.AutoSize = true;
-            this.lbl_succession_pb.Location = new System.Drawing.Point(267, 45);
+            this.lbl_succession_pb.Location = new System.Drawing.Point(270, 54);
             this.lbl_succession_pb.Name = "lbl_succession_pb";
             this.lbl_succession_pb.Size = new System.Drawing.Size(24, 13);
             this.lbl_succession_pb.TabIndex = 19;
@@ -374,7 +389,7 @@
             // 
             // numPB
             // 
-            this.numPB.Location = new System.Drawing.Point(297, 43);
+            this.numPB.Location = new System.Drawing.Point(300, 52);
             this.numPB.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -389,7 +404,7 @@
             // lbl_succession_hitsway
             // 
             this.lbl_succession_hitsway.AutoSize = true;
-            this.lbl_succession_hitsway.Location = new System.Drawing.Point(135, 45);
+            this.lbl_succession_hitsway.Location = new System.Drawing.Point(138, 54);
             this.lbl_succession_hitsway.Name = "lbl_succession_hitsway";
             this.lbl_succession_hitsway.Size = new System.Drawing.Size(59, 13);
             this.lbl_succession_hitsway.TabIndex = 7;
@@ -397,7 +412,7 @@
             // 
             // numHitsWay
             // 
-            this.numHitsWay.Location = new System.Drawing.Point(201, 43);
+            this.numHitsWay.Location = new System.Drawing.Point(204, 52);
             this.numHitsWay.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -412,7 +427,7 @@
             // lbl_succession_hits
             // 
             this.lbl_succession_hits.AutoSize = true;
-            this.lbl_succession_hits.Location = new System.Drawing.Point(3, 45);
+            this.lbl_succession_hits.Location = new System.Drawing.Point(6, 54);
             this.lbl_succession_hits.Name = "lbl_succession_hits";
             this.lbl_succession_hits.Size = new System.Drawing.Size(60, 13);
             this.lbl_succession_hits.TabIndex = 5;
@@ -420,7 +435,7 @@
             // 
             // numHits
             // 
-            this.numHits.Location = new System.Drawing.Point(69, 43);
+            this.numHits.Location = new System.Drawing.Point(72, 52);
             this.numHits.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -434,9 +449,9 @@
             // 
             // txtPredecessorTitle
             // 
-            this.txtPredecessorTitle.Location = new System.Drawing.Point(109, 17);
+            this.txtPredecessorTitle.Location = new System.Drawing.Point(109, 26);
             this.txtPredecessorTitle.Name = "txtPredecessorTitle";
-            this.txtPredecessorTitle.Size = new System.Drawing.Size(248, 20);
+            this.txtPredecessorTitle.Size = new System.Drawing.Size(251, 20);
             this.txtPredecessorTitle.TabIndex = 2;
             this.ToolTip1.SetToolTip(this.txtPredecessorTitle, "Name of the precessor split");
             this.txtPredecessorTitle.TextChanged += new System.EventHandler(this.SuccessionChanged);
@@ -444,7 +459,7 @@
             // cbShowPredecessor
             // 
             this.cbShowPredecessor.AutoSize = true;
-            this.cbShowPredecessor.Location = new System.Drawing.Point(6, 19);
+            this.cbShowPredecessor.Location = new System.Drawing.Point(6, 28);
             this.cbShowPredecessor.Name = "cbShowPredecessor";
             this.cbShowPredecessor.Size = new System.Drawing.Size(97, 17);
             this.cbShowPredecessor.TabIndex = 1;
@@ -609,7 +624,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(703, 470);
+            this.ClientSize = new System.Drawing.Size(703, 475);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnWeb);
@@ -691,6 +706,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cPB;
         private System.Windows.Forms.DataGridViewCheckBoxColumn cSP;
         private System.Windows.Forms.GroupBox gpSuccession;
+        internal System.Windows.Forms.Button btnSuccessionVisibility;
         private System.Windows.Forms.CheckBox cbShowPredecessor;
         private System.Windows.Forms.TextBox txtPredecessorTitle;
         private System.Windows.Forms.Label lbl_succession_hits;
