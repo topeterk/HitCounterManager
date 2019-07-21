@@ -58,6 +58,7 @@ namespace HitCounterManager
         public bool ShowHeadline;
         public bool ShowFooter;
         public bool ShowSessionProgress;
+        public bool ShowProgressBar;
         public int ShowSplitsCountFinished;
         public int ShowSplitsCountUpcoming;
         public bool ShowHitsCombined;
@@ -203,6 +204,7 @@ namespace HitCounterManager
             {
                 _settings.Version = 6;
                 _settings.AlwaysOnTop = false;
+                _settings.ShowSessionProgress = false;
                 // Should be set false but in version 5 it was introduced with true,
                 // so only for users that were running version 5, we keep it true.
                 _settings.StyleSuperscriptPB = (baseVersion == 5 ? true : false);
@@ -257,6 +259,7 @@ namespace HitCounterManager
             om.ShowHeadline = _settings.ShowHeadline;
             om.ShowFooter = _settings.ShowFooter;
             om.ShowSessionProgress = _settings.ShowSessionProgress;
+            om.ShowProgressBar = _settings.ShowProgressBar;
             om.ShowSplitsCountFinished = _settings.ShowSplitsCountFinished;
             om.ShowSplitsCountUpcoming = _settings.ShowSplitsCountUpcoming;
             om.ShowHitsCombined = _settings.ShowHitsCombined;
@@ -329,6 +332,7 @@ namespace HitCounterManager
             _settings.ShowHeadline = om.ShowHeadline;
             _settings.ShowFooter = om.ShowFooter;
             _settings.ShowSessionProgress = om.ShowSessionProgress;
+            _settings.ShowProgressBar = om.ShowProgressBar;
             _settings.ShowSplitsCountFinished = om.ShowSplitsCountFinished;
             _settings.ShowSplitsCountUpcoming = om.ShowSplitsCountUpcoming;
             _settings.ShowHitsCombined = om.ShowHitsCombined;

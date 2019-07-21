@@ -75,6 +75,7 @@
             this.radioSeverityBossHitCritical = new System.Windows.Forms.RadioButton();
             this.cbHighContrastNames = new System.Windows.Forms.CheckBox();
             this.cbShowFooter = new System.Windows.Forms.CheckBox();
+            this.cbSuperscriptPB = new System.Windows.Forms.CheckBox();
             this.tab_behavior = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lblShowSplitCount = new System.Windows.Forms.Label();
@@ -104,7 +105,7 @@
             this.Label12 = new System.Windows.Forms.Label();
             this.Label13 = new System.Windows.Forms.Label();
             this.Label14 = new System.Windows.Forms.Label();
-            this.cbSuperscriptPB = new System.Windows.Forms.CheckBox();
+            this.cbShowProgressBar = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             this.tab_globalshortcuts.SuspendLayout();
@@ -182,7 +183,7 @@
             0});
             this.numShowSplitsCountUpcoming.Name = "numShowSplitsCountUpcoming";
             this.numShowSplitsCountUpcoming.Size = new System.Drawing.Size(57, 20);
-            this.numShowSplitsCountUpcoming.TabIndex = 8;
+            this.numShowSplitsCountUpcoming.TabIndex = 9;
             this.ToolTip1.SetToolTip(this.numShowSplitsCountUpcoming, "Hide splits that are coming later to spare space");
             this.numShowSplitsCountUpcoming.Value = new decimal(new int[] {
             999,
@@ -219,7 +220,7 @@
             0});
             this.numShowSplitsCountFinished.Name = "numShowSplitsCountFinished";
             this.numShowSplitsCountFinished.Size = new System.Drawing.Size(57, 20);
-            this.numShowSplitsCountFinished.TabIndex = 7;
+            this.numShowSplitsCountFinished.TabIndex = 8;
             this.ToolTip1.SetToolTip(this.numShowSplitsCountFinished, "Hide splits that are done already to spare space");
             this.numShowSplitsCountFinished.Value = new decimal(new int[] {
             999,
@@ -597,7 +598,7 @@
             this.cbShowNumbers.Location = new System.Drawing.Point(6, 111);
             this.cbShowNumbers.Name = "cbShowNumbers";
             this.cbShowNumbers.Size = new System.Drawing.Size(247, 17);
-            this.cbShowNumbers.TabIndex = 5;
+            this.cbShowNumbers.TabIndex = 6;
             this.cbShowNumbers.Text = "Show numbers, no images (Numeric vs YesNo)";
             this.ToolTip1.SetToolTip(this.cbShowNumbers, "Show the actual hit count instead of images");
             this.cbShowNumbers.UseVisualStyleBackColor = true;
@@ -611,7 +612,7 @@
             this.cbShowHitsCombined.Location = new System.Drawing.Point(6, 88);
             this.cbShowHitsCombined.Name = "cbShowHitsCombined";
             this.cbShowHitsCombined.Size = new System.Drawing.Size(214, 17);
-            this.cbShowHitsCombined.TabIndex = 4;
+            this.cbShowHitsCombined.TabIndex = 5;
             this.cbShowHitsCombined.Text = "Show hits combined (boss and way hits)";
             this.ToolTip1.SetToolTip(this.cbShowHitsCombined, "Show boss and way hits either separately or combined");
             this.cbShowHitsCombined.UseVisualStyleBackColor = true;
@@ -672,7 +673,7 @@
             this.cbShowFooter.AutoSize = true;
             this.cbShowFooter.Checked = true;
             this.cbShowFooter.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowFooter.Location = new System.Drawing.Point(124, 42);
+            this.cbShowFooter.Location = new System.Drawing.Point(146, 42);
             this.cbShowFooter.Name = "cbShowFooter";
             this.cbShowFooter.Size = new System.Drawing.Size(83, 17);
             this.cbShowFooter.TabIndex = 2;
@@ -680,6 +681,18 @@
             this.ToolTip1.SetToolTip(this.cbShowFooter, "Displays the summary at the buttom");
             this.cbShowFooter.UseVisualStyleBackColor = true;
             this.cbShowFooter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // cbSuperscriptPB
+            // 
+            this.cbSuperscriptPB.AutoSize = true;
+            this.cbSuperscriptPB.Location = new System.Drawing.Point(6, 68);
+            this.cbSuperscriptPB.Name = "cbSuperscriptPB";
+            this.cbSuperscriptPB.Size = new System.Drawing.Size(136, 17);
+            this.cbSuperscriptPB.TabIndex = 2;
+            this.cbSuperscriptPB.Text = "Superscripted PB totals";
+            this.ToolTip1.SetToolTip(this.cbSuperscriptPB, "Applies to the split names");
+            this.cbSuperscriptPB.UseVisualStyleBackColor = true;
+            this.cbSuperscriptPB.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // tab_behavior
             // 
@@ -696,6 +709,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.cbShowProgressBar);
             this.groupBox5.Controls.Add(this.lblShowSplitCount);
             this.groupBox5.Controls.Add(this.cbShowFooter);
             this.groupBox5.Controls.Add(this.cbShowPB);
@@ -735,7 +749,7 @@
             this.cbShowPB.Location = new System.Drawing.Point(6, 135);
             this.cbShowPB.Name = "cbShowPB";
             this.cbShowPB.Size = new System.Drawing.Size(142, 17);
-            this.cbShowPB.TabIndex = 6;
+            this.cbShowPB.TabIndex = 7;
             this.cbShowPB.Text = "Show personal best (PB)";
             this.cbShowPB.UseVisualStyleBackColor = true;
             this.cbShowPB.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
@@ -1004,17 +1018,19 @@
             this.Label14.TabIndex = 21;
             this.Label14.Text = "Desired width:";
             // 
-            // cbSuperscriptPB
+            // cbShowProgressBar
             // 
-            this.cbSuperscriptPB.AutoSize = true;
-            this.cbSuperscriptPB.Location = new System.Drawing.Point(6, 68);
-            this.cbSuperscriptPB.Name = "cbSuperscriptPB";
-            this.cbSuperscriptPB.Size = new System.Drawing.Size(136, 17);
-            this.cbSuperscriptPB.TabIndex = 2;
-            this.cbSuperscriptPB.Text = "Superscripted PB totals";
-            this.ToolTip1.SetToolTip(this.cbSuperscriptPB, "Applies to the split names");
-            this.cbSuperscriptPB.UseVisualStyleBackColor = true;
-            this.cbSuperscriptPB.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            this.cbShowProgressBar.AutoSize = true;
+            this.cbShowProgressBar.Checked = true;
+            this.cbShowProgressBar.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbShowProgressBar.Location = new System.Drawing.Point(146, 65);
+            this.cbShowProgressBar.Name = "cbShowProgressBar";
+            this.cbShowProgressBar.Size = new System.Drawing.Size(114, 17);
+            this.cbShowProgressBar.TabIndex = 4;
+            this.cbShowProgressBar.Text = "Show progress bar";
+            this.ToolTip1.SetToolTip(this.cbShowProgressBar, "Displays a progress bar to represent the percentage of splits already done\r\n");
+            this.cbShowProgressBar.UseVisualStyleBackColor = true;
+            this.cbShowProgressBar.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // Settings
             // 
@@ -1130,5 +1146,6 @@
         internal System.Windows.Forms.CheckBox cbShowFooter;
         private System.Windows.Forms.Label lblShowSplitCount;
         private System.Windows.Forms.CheckBox cbSuperscriptPB;
+        internal System.Windows.Forms.CheckBox cbShowProgressBar;
     }
 }

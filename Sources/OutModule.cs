@@ -51,6 +51,7 @@ namespace HitCounterManager
         public bool ShowHeadline = true;
         public bool ShowFooter = true;
         public bool ShowSessionProgress = true;
+        public bool ShowProgressBar = true;
         public int ShowSplitsCountFinished = 999;
         public int ShowSplitsCountUpcoming = 999;
         public bool ShowHitsCombined = true;
@@ -244,6 +245,7 @@ namespace HitCounterManager
                     WriteJsonSimpleValue(sr, "show_headline", ShowHeadline);
                     WriteJsonSimpleValue(sr, "show_footer", ShowFooter);
                     WriteJsonSimpleValue(sr, "show_session_progress", ShowSessionProgress);
+                    WriteJsonSimpleValue(sr, "show_progress_bar", ShowProgressBar);
                     WriteJsonSimpleValue(sr, "show_hitscombined", ShowHitsCombined);
                     WriteJsonSimpleValue(sr, "show_numbers", ShowNumbers);
                     WriteJsonSimpleValue(sr, "show_pb", ShowPB);
