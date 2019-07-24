@@ -72,6 +72,7 @@ The appearance of all designs can be modified via GUI on the fly:
   * Show/Hide amount of runs that has already been started
   * Show/Hide the headline and/or footer
   * Show/Hide the session progress icon
+  * Show/Hide progress bar
   * Show the hits separately or as a combination of boss hits and hits on the way
   * Show numbers or images to represent hits
   * Show/Hide the personal best
@@ -80,6 +81,7 @@ The appearance of all designs can be modified via GUI on the fly:
   * Limit the visible splits when you have lots of splits
   * Enable/Disable transparency
   * Enable/Disable colored split names
+  * Enable/Disable superscripted PB sum
 * Custom design
   
   * Switch to a different font
