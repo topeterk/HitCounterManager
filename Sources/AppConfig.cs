@@ -164,7 +164,7 @@ namespace HitCounterManager
                 _settings.ShowSessionProgress = true;
                 _settings.StyleDesiredWidth = 0;
             }
-            if (_settings.Version == 2) // Coming from version 1.11 to 1.14
+            if (_settings.Version == 2) // Coming from version 1.11 - 1.14
             {
                 _settings.Version = 3;
                 _settings.ShortcutHitUndoEnable = false;
@@ -199,29 +199,32 @@ namespace HitCounterManager
                 _settings.SuccessionHits = 0;
                 _settings.SuccessionHitsWay = 0;
                 _settings.SuccessionHitsPB = 0;
+
+                if (baseVersion < 0)
+                {
+                    // Use different hot keys when loaded without any previous settings
+                    // (we don't have to take care of previous user/default settings)
+                    _settings.ShortcutHitKeyCode = 0x10000 | 0x70; // Shift F1
+                    _settings.ShortcutWayHitKeyCode = 0x10000 | 0x71; // Shift F2
+                    _settings.ShortcutSplitKeyCode = 0x10000 | 0x72; // Shift F3
+                    _settings.ShortcutPBKeyCode = 0x10000 | 0x73; // Shift F4
+                    _settings.ShortcutHitUndoKeyCode = 0x10000 | 0x74; // Shift F5
+                    _settings.ShortcutWayHitUndoKeyCode = 0x10000 | 0x75; // Shift F6
+                    _settings.ShortcutSplitPrevKeyCode = 0x10000 | 0x76; // Shift F7
+                    _settings.ShortcutResetKeyCode = 0x10000 | 0x77; // Shift F8
+                }
             }
             if (_settings.Version == 5) // Coming from version 1.17
             {
                 _settings.Version = 6;
+                _settings.MainHeight -= 59; // "Succession" group box starts collapsed
                 _settings.AlwaysOnTop = false;
-                _settings.ShowSessionProgress = false;
+
+                // Only enable progress bar when new settings were created
+                _settings.ShowSessionProgress = (baseVersion < 0 ? true : false);
                 // Should be set false but in version 5 it was introduced with true,
                 // so only for users that were running version 5, we keep it true.
                 _settings.StyleSuperscriptPB = (baseVersion == 5 ? true : false);
-            }
-
-            if (baseVersion < 0) // no settings were loaded, we created complete new one
-            {
-                // Use different hot keys when loaded the first time
-                // (we don't have to take care of previous user/default settings)
-                _settings.ShortcutHitKeyCode = 0x10000 | 0x70; // Shift F1
-                _settings.ShortcutWayHitKeyCode = 0x10000 | 0x71; // Shift F2
-                _settings.ShortcutSplitKeyCode = 0x10000 | 0x72; // Shift F3
-                _settings.ShortcutPBKeyCode = 0x10000 | 0x73; // Shift F4
-                _settings.ShortcutHitUndoKeyCode = 0x10000 | 0x74; // Shift F5
-                _settings.ShortcutWayHitUndoKeyCode = 0x10000 | 0x75; // Shift F6
-                _settings.ShortcutSplitPrevKeyCode = 0x10000 | 0x76; // Shift F7
-                _settings.ShortcutResetKeyCode = 0x10000 | 0x77; // Shift F8
             }
 
             // Apply settings..
@@ -297,7 +300,7 @@ namespace HitCounterManager
             ShortcutsKey key = new ShortcutsKey();
 
             _settings.MainWidth = this.Width;
-            _settings.MainHeight = this.Height;
+            _settings.MainHeight = this.Height - gpSuccession.Height + gpSuccession_Height; // always save expandend values
             _settings.AlwaysOnTop = this.TopMost;
             _settings.HotKeyMethod = (int)sc.NextStart_Method;
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Reset);

@@ -57,8 +57,7 @@ namespace HitCounterManager
             gpSuccession_ValueChangedSema = false;
             DataGridView1_ValueChangedSema = false;
 
-            gpSuccession_Height = gpSuccession.Height;
-            ShowSuccessionMenu(false); // start collapsed
+            gpSuccession_Height = gpSuccession.Height; // remember expanded size from designer settings
 
             pi = DataGridView1; // for better capsulation
             om = new OutModule(pi);
@@ -74,6 +73,7 @@ namespace HitCounterManager
             Text = Text + " - v" + Application.ProductVersion + " " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();
+            ShowSuccessionMenu(false); // start collapsed
             UpdateProgressAndTotals(true); // Write very first output once after application start
         }
 
