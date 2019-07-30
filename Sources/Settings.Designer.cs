@@ -76,6 +76,8 @@
             this.cbHighContrastNames = new System.Windows.Forms.CheckBox();
             this.cbShowFooter = new System.Windows.Forms.CheckBox();
             this.cbSuperscriptPB = new System.Windows.Forms.CheckBox();
+            this.cbShowProgressBar = new System.Windows.Forms.CheckBox();
+            this.cbProgressBarColored = new System.Windows.Forms.CheckBox();
             this.tab_behavior = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lblShowSplitCount = new System.Windows.Forms.Label();
@@ -105,7 +107,6 @@
             this.Label12 = new System.Windows.Forms.Label();
             this.Label13 = new System.Windows.Forms.Label();
             this.Label14 = new System.Windows.Forms.Label();
-            this.cbShowProgressBar = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             this.tab_globalshortcuts.SuspendLayout();
@@ -685,14 +686,40 @@
             // cbSuperscriptPB
             // 
             this.cbSuperscriptPB.AutoSize = true;
-            this.cbSuperscriptPB.Location = new System.Drawing.Point(6, 68);
+            this.cbSuperscriptPB.Location = new System.Drawing.Point(154, 22);
             this.cbSuperscriptPB.Name = "cbSuperscriptPB";
             this.cbSuperscriptPB.Size = new System.Drawing.Size(136, 17);
-            this.cbSuperscriptPB.TabIndex = 2;
+            this.cbSuperscriptPB.TabIndex = 3;
             this.cbSuperscriptPB.Text = "Superscripted PB totals";
             this.ToolTip1.SetToolTip(this.cbSuperscriptPB, "Applies to the split names");
             this.cbSuperscriptPB.UseVisualStyleBackColor = true;
             this.cbSuperscriptPB.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // cbShowProgressBar
+            // 
+            this.cbShowProgressBar.AutoSize = true;
+            this.cbShowProgressBar.Checked = true;
+            this.cbShowProgressBar.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbShowProgressBar.Location = new System.Drawing.Point(146, 65);
+            this.cbShowProgressBar.Name = "cbShowProgressBar";
+            this.cbShowProgressBar.Size = new System.Drawing.Size(114, 17);
+            this.cbShowProgressBar.TabIndex = 4;
+            this.cbShowProgressBar.Text = "Show progress bar";
+            this.ToolTip1.SetToolTip(this.cbShowProgressBar, "Displays a progress bar to represent the percentage of splits already done\r\n");
+            this.cbShowProgressBar.UseVisualStyleBackColor = true;
+            this.cbShowProgressBar.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // cbProgressBarColored
+            // 
+            this.cbProgressBarColored.AutoSize = true;
+            this.cbProgressBarColored.Location = new System.Drawing.Point(6, 68);
+            this.cbProgressBarColored.Name = "cbProgressBarColored";
+            this.cbProgressBarColored.Size = new System.Drawing.Size(174, 17);
+            this.cbProgressBarColored.TabIndex = 2;
+            this.cbProgressBarColored.Text = "Disable coloring of progress bar";
+            this.ToolTip1.SetToolTip(this.cbProgressBarColored, "Applies to the split colors of the progress bar");
+            this.cbProgressBarColored.UseVisualStyleBackColor = true;
+            this.cbProgressBarColored.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // tab_behavior
             // 
@@ -938,23 +965,26 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.cbProgressBarColored);
             this.groupBox3.Controls.Add(this.cbSuperscriptPB);
             this.groupBox3.Controls.Add(this.cbHighContrast);
             this.groupBox3.Controls.Add(this.cbHighContrastNames);
             this.groupBox3.Location = new System.Drawing.Point(6, 13);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(273, 103);
+            this.groupBox3.Size = new System.Drawing.Size(296, 103);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "High contrast mode (check for better readability)";
             // 
             // label16
             // 
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic);
             this.label16.Location = new System.Drawing.Point(394, 34);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(183, 35);
             this.label16.TabIndex = 22;
-            this.label16.Text = "Note: When value is set back to 0, you may have to reload the browser.";
+            this.label16.Text = "When value is set back to 0, you may have to reload the browser.";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // GroupBox1
             // 
@@ -1017,20 +1047,6 @@
             this.Label14.Size = new System.Drawing.Size(74, 13);
             this.Label14.TabIndex = 21;
             this.Label14.Text = "Desired width:";
-            // 
-            // cbShowProgressBar
-            // 
-            this.cbShowProgressBar.AutoSize = true;
-            this.cbShowProgressBar.Checked = true;
-            this.cbShowProgressBar.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowProgressBar.Location = new System.Drawing.Point(146, 65);
-            this.cbShowProgressBar.Name = "cbShowProgressBar";
-            this.cbShowProgressBar.Size = new System.Drawing.Size(114, 17);
-            this.cbShowProgressBar.TabIndex = 4;
-            this.cbShowProgressBar.Text = "Show progress bar";
-            this.ToolTip1.SetToolTip(this.cbShowProgressBar, "Displays a progress bar to represent the percentage of splits already done\r\n");
-            this.cbShowProgressBar.UseVisualStyleBackColor = true;
-            this.cbShowProgressBar.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // Settings
             // 
@@ -1147,5 +1163,6 @@
         private System.Windows.Forms.Label lblShowSplitCount;
         private System.Windows.Forms.CheckBox cbSuperscriptPB;
         internal System.Windows.Forms.CheckBox cbShowProgressBar;
+        private System.Windows.Forms.CheckBox cbProgressBarColored;
     }
 }

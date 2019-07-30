@@ -62,6 +62,7 @@ namespace HitCounterManager
 
         public bool StyleUseHighContrast = false;
         public bool StyleUseHighContrastNames = false;
+        public bool StyleProgressBarColored = true;
         public bool StyleUseCustom = false;
         public string StyleCssUrl = "";
         public string StyleFontUrl = "";
@@ -257,6 +258,7 @@ namespace HitCounterManager
                     WriteJsonSimpleValue(sr, "css_url", (StyleUseCustom ? StyleCssUrl : "stylesheet.css"));
                     WriteJsonSimpleValue(sr, "high_contrast", StyleUseHighContrast);
                     WriteJsonSimpleValue(sr, "high_contrast_names", StyleUseHighContrastNames);
+                    WriteJsonSimpleValue(sr, "progress_bar_colored", StyleProgressBarColored);
                     WriteJsonSimpleValue(sr, "width", StyleDesiredWidth);
                     WriteJsonSimpleValue(sr, "supPB", StyleSuperscriptPB);
 

@@ -69,6 +69,7 @@ namespace HitCounterManager
         public int Severity;
         public bool StyleUseHighContrast;
         public bool StyleUseHighContrastNames;
+        public bool StyleProgressBarColored;
         public bool StyleUseCustom;
         public string StyleCssUrl;
         public string StyleFontUrl;
@@ -222,10 +223,16 @@ namespace HitCounterManager
 
                 // Only enable progress bar when new settings were created
                 _settings.ShowSessionProgress = (baseVersion < 0 ? true : false);
-                // Should be set false but in version 5 it was introduced with true,
-                // so only for users that were running version 5, we keep it true.
-                _settings.StyleSuperscriptPB = (baseVersion == 5 ? true : false);
+                // Introduced with true in version 5, keep user setting when this version was used
+                _settings.StyleProgressBarColored = (baseVersion == 5 ? true : false);
             }
+            if (_settings.Version == 6) // Coming from version 1.18
+            {
+                _settings.Version = 7;
+                // Introduced with false in version 6, keep user setting when this version was used
+                _settings.StyleProgressBarColored = (baseVersion == 6 ? false : true);
+            }
+            
 
             // Apply settings..
             pi.ProfileUpdateBegin();
@@ -279,6 +286,7 @@ namespace HitCounterManager
 
             om.StyleUseHighContrast = _settings.StyleUseHighContrast;
             om.StyleUseHighContrastNames = _settings.StyleUseHighContrastNames;
+            om.StyleProgressBarColored = _settings.StyleProgressBarColored;
             om.StyleUseCustom = _settings.StyleUseCustom;
             om.StyleCssUrl = _settings.StyleCssUrl;
             om.StyleFontUrl = _settings.StyleFontUrl;
@@ -347,6 +355,7 @@ namespace HitCounterManager
 
             _settings.StyleUseHighContrast = om.StyleUseHighContrast;
             _settings.StyleUseHighContrastNames = om.StyleUseHighContrastNames;
+            _settings.StyleProgressBarColored = om.StyleProgressBarColored;
             _settings.StyleUseCustom = om.StyleUseCustom;
             _settings.StyleCssUrl = om.StyleCssUrl;
             _settings.StyleFontUrl = om.StyleFontUrl;
