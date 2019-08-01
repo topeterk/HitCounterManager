@@ -71,6 +71,7 @@ namespace HitCounterManager
         public int Severity;
         public bool StyleUseHighContrast;
         public bool StyleUseHighContrastNames;
+        public bool StyleUseRoman;
         public bool StyleProgressBarColored;
         public bool StyleUseCustom;
         public string StyleCssUrl;
@@ -233,6 +234,7 @@ namespace HitCounterManager
                 _settings.Version = 7;
                 _settings.MainPosX = this.Left;
                 _settings.MainPosY = this.Top;
+                _settings.StyleUseRoman = false;
                 // Introduced with false in version 6, keep user setting when this version was used
                 _settings.StyleProgressBarColored = (baseVersion == 6 ? false : true);
             }
@@ -291,6 +293,7 @@ namespace HitCounterManager
 
             om.StyleUseHighContrast = _settings.StyleUseHighContrast;
             om.StyleUseHighContrastNames = _settings.StyleUseHighContrastNames;
+            om.StyleUseRoman = _settings.StyleUseRoman;
             om.StyleProgressBarColored = _settings.StyleProgressBarColored;
             om.StyleUseCustom = _settings.StyleUseCustom;
             om.StyleCssUrl = _settings.StyleCssUrl;
@@ -369,6 +372,7 @@ namespace HitCounterManager
 
             _settings.StyleUseHighContrast = om.StyleUseHighContrast;
             _settings.StyleUseHighContrastNames = om.StyleUseHighContrastNames;
+            _settings.StyleUseRoman = om.StyleUseRoman;
             _settings.StyleProgressBarColored = om.StyleProgressBarColored;
             _settings.StyleUseCustom = om.StyleUseCustom;
             _settings.StyleCssUrl = om.StyleCssUrl;

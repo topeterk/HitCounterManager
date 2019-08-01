@@ -107,6 +107,7 @@
             this.Label12 = new System.Windows.Forms.Label();
             this.Label13 = new System.Windows.Forms.Label();
             this.Label14 = new System.Windows.Forms.Label();
+            this.cbUseRoman = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             this.tab_globalshortcuts.SuspendLayout();
@@ -686,7 +687,7 @@
             // cbSuperscriptPB
             // 
             this.cbSuperscriptPB.AutoSize = true;
-            this.cbSuperscriptPB.Location = new System.Drawing.Point(154, 22);
+            this.cbSuperscriptPB.Location = new System.Drawing.Point(186, 22);
             this.cbSuperscriptPB.Name = "cbSuperscriptPB";
             this.cbSuperscriptPB.Size = new System.Drawing.Size(136, 17);
             this.cbSuperscriptPB.TabIndex = 3;
@@ -756,7 +757,7 @@
             this.groupBox5.Size = new System.Drawing.Size(367, 232);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Appearance";
+            this.groupBox5.Text = "Features";
             // 
             // lblShowSplitCount
             // 
@@ -965,16 +966,17 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.cbUseRoman);
             this.groupBox3.Controls.Add(this.cbProgressBarColored);
             this.groupBox3.Controls.Add(this.cbSuperscriptPB);
             this.groupBox3.Controls.Add(this.cbHighContrast);
             this.groupBox3.Controls.Add(this.cbHighContrastNames);
             this.groupBox3.Location = new System.Drawing.Point(6, 13);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(296, 103);
+            this.groupBox3.Size = new System.Drawing.Size(382, 103);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "High contrast mode (check for better readability)";
+            this.groupBox3.Text = "Appearance";
             // 
             // label16
             // 
@@ -1047,6 +1049,18 @@
             this.Label14.Size = new System.Drawing.Size(74, 13);
             this.Label14.TabIndex = 21;
             this.Label14.Text = "Desired width:";
+            // 
+            // cbUseRoman
+            // 
+            this.cbUseRoman.AutoSize = true;
+            this.cbUseRoman.Location = new System.Drawing.Point(186, 45);
+            this.cbUseRoman.Name = "cbUseRoman";
+            this.cbUseRoman.Size = new System.Drawing.Size(105, 17);
+            this.cbUseRoman.TabIndex = 4;
+            this.cbUseRoman.Text = "Roman numerals";
+            this.ToolTip1.SetToolTip(this.cbUseRoman, "Show hits and PB as Roman numerals");
+            this.cbUseRoman.UseVisualStyleBackColor = true;
+            this.cbUseRoman.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // Settings
             // 
@@ -1165,5 +1179,6 @@
         private System.Windows.Forms.CheckBox cbSuperscriptPB;
         internal System.Windows.Forms.CheckBox cbShowProgressBar;
         private System.Windows.Forms.CheckBox cbProgressBarColored;
+        private System.Windows.Forms.CheckBox cbUseRoman;
     }
 }

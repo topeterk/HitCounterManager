@@ -66,6 +66,7 @@ namespace HitCounterManager
             numStyleDesiredWidth.Value = om.StyleDesiredWidth;
             cbHighContrast.Checked = om.StyleUseHighContrast;
             cbHighContrastNames.Checked = om.StyleUseHighContrastNames;
+            cbUseRoman.Checked = om.StyleUseRoman;
             cbProgressBarColored.Checked = !om.StyleProgressBarColored;
             cbSuperscriptPB.Checked = om.StyleSuperscriptPB;
             cbApCustomCss.Checked = om.StyleUseCustom;
@@ -157,6 +158,7 @@ namespace HitCounterManager
             // Style
             om.StyleUseHighContrast = cbHighContrast.Checked;
             om.StyleUseHighContrastNames = cbHighContrastNames.Checked;
+            om.StyleUseRoman = cbUseRoman.Checked;
             om.StyleProgressBarColored = !cbProgressBarColored.Checked;
             om.StyleSuperscriptPB = cbSuperscriptPB.Checked;
             om.StyleDesiredWidth = (int)numStyleDesiredWidth.Value;
