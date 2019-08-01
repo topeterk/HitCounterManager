@@ -34,6 +34,8 @@ namespace HitCounterManager
         public int Version;
         public int MainWidth;
         public int MainHeight;
+        public int MainPosX;
+        public int MainPosY;
         public bool AlwaysOnTop;
         public int HotKeyMethod;
         public bool ShortcutResetEnable;
@@ -229,10 +231,11 @@ namespace HitCounterManager
             if (_settings.Version == 6) // Coming from version 1.18
             {
                 _settings.Version = 7;
+                _settings.MainPosX = this.Left;
+                _settings.MainPosY = this.Top;
                 // Introduced with false in version 6, keep user setting when this version was used
                 _settings.StyleProgressBarColored = (baseVersion == 6 ? false : true);
             }
-            
 
             // Apply settings..
             pi.ProfileUpdateBegin();
@@ -262,7 +265,9 @@ namespace HitCounterManager
 
             if (_settings.MainWidth < this.MinimumSize.Width) _settings.MainWidth = this.MinimumSize.Width;
             if (_settings.MainHeight < this.MinimumSize.Height) _settings.MainHeight = this.MinimumSize.Height;
-            this.Size = new System.Drawing.Size(_settings.MainWidth, _settings.MainHeight);
+            // set window size and when possible also set location (just make sure window is not outside of screen)
+            this.SetBounds(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth, _settings.MainHeight,
+                IsOnScreen(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth, _settings.MainHeight) ? BoundsSpecified.All : BoundsSpecified.Size);
             SetAlwaysOnTop(_settings.AlwaysOnTop);
 
             om.ShowAttemptsCounter = _settings.ShowAttemptsCounter;
@@ -307,8 +312,17 @@ namespace HitCounterManager
         {
             ShortcutsKey key = new ShortcutsKey();
 
-            _settings.MainWidth = this.Width;
-            _settings.MainHeight = this.Height - gpSuccession.Height + gpSuccession_Height; // always save expandend values
+            if (this.WindowState == FormWindowState.Normal) // Don't save window size and location when maximized or minimized
+            {
+                _settings.MainWidth = this.Width;
+                _settings.MainHeight = this.Height - gpSuccession.Height + gpSuccession_Height; // always save expandend values
+                if (IsOnScreen(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth, _settings.MainHeight))
+                {
+                    // remember values when not outside of screen
+                    _settings.MainPosX = this.Left;
+                    _settings.MainPosY = this.Top;
+                }
+            }
             _settings.AlwaysOnTop = this.TopMost;
             _settings.HotKeyMethod = (int)sc.NextStart_Method;
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Reset);

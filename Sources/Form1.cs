@@ -202,6 +202,21 @@ namespace HitCounterManager
         #endregion
         #region Functions
 
+        public bool IsOnScreen(int Left, int Top, int Width, int Height)
+        {
+            const int threshold = 10; // we add this to ensure moving at the outer borders of the screens is still fine
+            const int rectSize = 30; // enough of the title bar that must be visible
+            Rectangle rectLeft  = new Rectangle( Left      +threshold,          Top+threshold, rectSize, rectSize); // upper left corner
+            Rectangle rectRight = new Rectangle( Left+Width-threshold-rectSize, Top+threshold, rectSize, rectSize); // upper right corner
+            foreach( Screen screen in Screen.AllScreens )
+            {
+                // at least one of the edges must be present on any screen
+                if( screen.WorkingArea.Contains( rectLeft ) ) return true;
+                else if( screen.WorkingArea.Contains( rectRight ) ) return true;
+            }
+            return false;
+        }
+
         private void GetCalculatedSums(ref int TotalHits, ref int TotalHitsWay, ref int TotalPB)
         {
             int Splits = pi.GetSplitCount();
