@@ -402,26 +402,13 @@ namespace HitCounterManager
                 return;
             }
             pi.SetAttemptsCount(amount_value);
-            profs.SaveProfile(false);
             UpdateProgressAndTotals();
         }
 
-        private void btnUp_Click(object sender, EventArgs e) { PermuteSplit(pi.GetActiveSplit(), -1); }
+        private void btnUp_Click(object sender, EventArgs e) { pi.PermuteSplit(pi.GetActiveSplit(), -1); }
+        private void btnDown_Click(object sender, EventArgs e) { pi.PermuteSplit(pi.GetActiveSplit(), +1); }
 
-        private void btnDown_Click(object sender, EventArgs e) { PermuteSplit(pi.GetActiveSplit(), +1); }
-
-        private void BtnInsertSplit_Click(object sender, EventArgs e)
-        {
-            int idx = pi.GetActiveSplit();
-
-            pi.ProfileUpdateBegin();
-            DataGridView1.Rows.Insert(idx, 1);
-            // Select new row's title cell that user can directly start typing name of new split
-            DataGridView1.CurrentCell = DataGridView1.Rows[idx].Cells["cTitle"];
-            DataGridView1.Rows[idx].Selected = true;
-            DataGridView1.Focus();
-            pi.ProfileUpdateEnd();
-        }
+        private void BtnInsertSplit_Click(object sender, EventArgs e) { pi.InsertSplit(); }
 
         private void BtnOnTop_Click(object sender, EventArgs e) { SetAlwaysOnTop(!this.TopMost); }
 
@@ -435,11 +422,7 @@ namespace HitCounterManager
                 else if (result == DialogResult.Cancel) return;
             }
 
-            pi.ProfileUpdateBegin();
-            pi.SetAttemptsCount(pi.GetAttemptsCount() + 1); // Increase attempts
-            for (int r = 0; r < pi.GetSplitCount(); r++) { pi.SetSplitHits(r, 0); pi.SetSplitWayHits(r, 0); }
-            pi.SetActiveSplit(0);
-            pi.ProfileUpdateEnd();
+            pi.ResetRun();
 
             if (SuccessionReset)
             {
@@ -450,156 +433,33 @@ namespace HitCounterManager
             UpdateProgressAndTotals();
         }
 
-        private void btnPB_Click(object sender, EventArgs e)
-        {
-            int Splits = pi.GetSplitCount();
-            if (0 == Splits) return;
+        private void btnPB_Click(object sender, EventArgs e) { pi.setPB(); UpdateProgressAndTotals(); }
 
-            pi.ProfileUpdateBegin();
-            for (int r = 0; r < Splits; r++) pi.SetSplitPB(r, pi.GetSplitHits(r) + pi.GetSplitWayHits(r));
-            pi.SetActiveSplit(Splits);
-            pi.SetSessionProgress(Splits-1);
-            pi.ProfileUpdateEnd();
-            UpdateProgressAndTotals();
-        }
+        private void btnHit_Click(object sender, EventArgs e) { pi.Hit(+1); UpdateProgressAndTotals(); }
+        private void btnHitUndo_Click(object sender, EventArgs e) { pi.Hit(-1); UpdateProgressAndTotals(); }
 
-        private void btnHit_Click(object sender, EventArgs e)
-        {
-            int active = pi.GetActiveSplit();
-            pi.SetSplitHits(active, pi.GetSplitHits(active) + 1);
-            pi.SetActiveSplit(active); // row is already selected already but we make sure the whole row gets visually selected if user has selected a cell only
-            UpdateProgressAndTotals();
-        }
+        private void btnWayHit_Click(object sender, EventArgs e) { pi.WayHit(+1); UpdateProgressAndTotals(); }
+        private void btnWayHitUndo_Click(object sender, EventArgs e) { pi.WayHit(-1); UpdateProgressAndTotals(); }
 
-        private void btnHitUndo_Click(object sender, EventArgs e)
-        {
-            int active = pi.GetActiveSplit();
-            int hits = pi.GetSplitHits(active);
-            if (0 < hits)
-            {
-                pi.SetSplitHits(active, hits - 1);
-                pi.SetActiveSplit(active); // row is already selected already but we make sure the whole row gets visually selected if user has selected a cell only
-                UpdateProgressAndTotals();
-            }
-        }
-        private void btnWayHit_Click(object sender, EventArgs e)
-        {
-            int active = pi.GetActiveSplit();
-            pi.SetSplitWayHits(active, pi.GetSplitWayHits(active) + 1);
-            pi.SetActiveSplit(active); // row is already selected already but we make sure the whole row gets visually selected if user has selected a cell only
-            UpdateProgressAndTotals();
-        }
-
-        private void btnWayHitUndo_Click(object sender, EventArgs e)
-        {
-            int active = pi.GetActiveSplit();
-            int hits = pi.GetSplitWayHits(active);
-            if (0 < hits)
-            {
-                pi.SetSplitWayHits(active, hits - 1);
-                pi.SetActiveSplit(active); // row is already selected already but we make sure the whole row gets visually selected if user has selected a cell only
-                UpdateProgressAndTotals();
-            }
-        }
-
-        private void btnSplit_Click(object sender, EventArgs e)
-        {
-            int next_index = pi.GetActiveSplit() + 1;
-            if (next_index <= pi.GetSplitCount())
-            {
-                pi.ProfileUpdateBegin();
-                pi.SetActiveSplit(next_index);
-                if (next_index < pi.GetSplitCount()) pi.SetSessionProgress(next_index);
-                pi.ProfileUpdateEnd();
-                UpdateProgressAndTotals();
-            }
-        }
-
-        private void btnSplitPrev_Click(object sender, EventArgs e)
-        {
-            int next_index = pi.GetActiveSplit() - 1;
-            if (0 <= next_index)
-            {
-                pi.ProfileUpdateBegin();
-                pi.SetActiveSplit(next_index);
-                // we do not update session progress here as we don't know if it was already set on a previous run
-                pi.ProfileUpdateEnd();
-                UpdateProgressAndTotals();
-            }
-        }
+        private void btnSplit_Click(object sender, EventArgs e) { pi.MoveSplits(+1); UpdateProgressAndTotals(); }
+        private void btnSplitPrev_Click(object sender, EventArgs e) { pi.MoveSplits(-1); UpdateProgressAndTotals(); }
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (null != pi.GetProfileName())
-            {
-                profs.SaveProfile(false);
-            }
-
-            pi.ProfileUpdateBegin();
+            profs.SaveProfile(false); // save currently selected profile
             profs.LoadProfile((string)ComboBox1.SelectedItem);
-            pi.SetProfileName((string)ComboBox1.SelectedItem);
-            pi.ProfileUpdateEnd();
             UpdateProgressAndTotals();
         }
 
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             if (0 < DataGridView1.SelectedCells.Count)
-            {
-                pi.SetActiveSplit(DataGridView1.SelectedCells[0].RowIndex);
                 UpdateProgressAndTotals(true); // Row could have been deleted ending up at the same index, so we should definitely update
-            }
-        }
-
-        private void DataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            if (DataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].GetType().Name == "DataGridViewCheckBoxCell") return;
-
-            if (e.ColumnIndex == DataGridView1.Rows[0].Cells["cTitle"].ColumnIndex)
-            {
-                // Make sure we mark any title changes as "modified"
-                pi.SetSplitTitle(e.RowIndex, (string)e.FormattedValue);
-            }
-            else
-            {
-                // We expect integers only here, so either it is of type int or can be converted
-                if (!(e.FormattedValue is int))
-                {
-                    int i;
-                    if (!int.TryParse((string)e.FormattedValue, out i))
-                    {
-                        e.Cancel = true;
-                        MessageBox.Show("Must be numeric!");
-                        return;
-                    }
-                }
-                DataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].ValueType = typeof(int); // Force int otherwise it is most likely treated as string
-            }
         }
 
         private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (DataGridView1_ValueChangedSema) return;
-
-            if (0 <= e.RowIndex && 0 <= e.ColumnIndex)
-            {
-                pi.SetSplitDiff(e.RowIndex, pi.GetSplitHits(e.RowIndex) + pi.GetSplitWayHits(e.RowIndex) - pi.GetSplitPB(e.RowIndex));
-
-                // When the session progress selection has changed, make sure no other selection is active at the same time
-                if (e.ColumnIndex == DataGridView1.Rows[0].Cells["cSP"].ColumnIndex)
-                {
-                    int idx = e.RowIndex;
-                    if (idx < pi.GetSplitCount())
-                    {
-                        DataGridView1_ValueChangedSema = true;
-                        for (int r = 0; r <= DataGridView1.RowCount - 2; r++) DataGridView1.Rows[r].Cells["cSP"].Value = false;
-                        pi.SetSessionProgress(idx);
-                        DataGridView1_ValueChangedSema = false;
-                    }
-                }
-            }
-
-            if (!pi.IsProfileUpdatePending()) profs.SaveProfile(true);
             UpdateProgressAndTotals();
         }
         
@@ -617,31 +477,6 @@ namespace HitCounterManager
         }
     
         private void btnSuccessionVisibility_Click(object sender, EventArgs e) { ShowSuccessionMenu();  }
-
-        /// <summary>
-        /// Interchange of two data rows
-        /// </summary>
-        /// <param name="idx_from">Source row</param>
-        /// <param name="offset">Offset to row that shall be permuted</param>
-        /// <returns>False: no action was done; True: permutation successfull</returns>
-        private bool PermuteSplit(int idx_from, int offset)
-        {
-            int idx_to = idx_from + offset;
-            if ((0 > idx_from) || (0 > idx_to) || (pi.GetSplitCount() <= idx_from) || (pi.GetSplitCount() <= idx_to)) // Is permutation in range?
-                return false;
-
-            pi.ProfileUpdateBegin();
-            for (int i = 0; i <= DataGridView1.Columns.Count - 1; i++)
-            {
-                object cell = DataGridView1.Rows[idx_from].Cells[i].Value;
-                DataGridView1.Rows[idx_from].Cells[i].Value = DataGridView1.Rows[idx_to].Cells[i].Value;
-                DataGridView1.Rows[idx_to].Cells[i].Value = cell;
-            }
-            pi.ProfileUpdateEnd();
-
-            pi.SetActiveSplit(idx_to);
-            return true;
-        }
 
         /// <summary>
         /// Collapses or expands succession menu
@@ -700,14 +535,68 @@ namespace HitCounterManager
 
     public class ProfileDataGridView : DataGridView, IProfileInfo
     {
-        #region DataGridViewCheckBoxCell support
+        #region DataGridView event handlers
+        
+        private bool ValueChangedSema = false;
 
         public ProfileDataGridView()
         {
+            this.CellValidating += new DataGridViewCellValidatingEventHandler(this.CellValidatingHandler);
+            this.CellValueChanged += new DataGridViewCellEventHandler(this.CellValueChangedHandler);
             this.CellMouseUp += new DataGridViewCellMouseEventHandler(this.CellMouseUpEventHandler);
             this.KeyUp += new KeyEventHandler(this.KeyUpEventHandler);
+            this.SelectionChanged += new EventHandler(this.SelectionChangedHandler);
         }
-        
+
+        private void CellValidatingHandler(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (Rows[e.RowIndex].Cells[e.ColumnIndex].GetType().Name == "DataGridViewCheckBoxCell") return;
+
+            if (e.ColumnIndex == Rows[0].Cells["cTitle"].ColumnIndex)
+            {
+                // Make sure we mark any title changes as "modified"
+                SetSplitTitle(e.RowIndex, (string)e.FormattedValue);
+            }
+            else
+            {
+                // We expect integers only here, so either it is of type int or can be converted
+                if (!(e.FormattedValue is int))
+                {
+                    int i;
+                    if (!int.TryParse((string)e.FormattedValue, out i))
+                    {
+                        e.Cancel = true;
+                        MessageBox.Show("Must be numeric!");
+                        return;
+                    }
+                }
+                Rows[e.RowIndex].Cells[e.ColumnIndex].ValueType = typeof(int); // Force int otherwise it is most likely treated as string
+            }
+        }
+
+        private void CellValueChangedHandler(object sender, DataGridViewCellEventArgs e)
+        {
+            if (ValueChangedSema) return;
+
+            if (0 <= e.RowIndex && 0 <= e.ColumnIndex)
+            {
+                SetSplitDiff(e.RowIndex, GetSplitHits(e.RowIndex) + GetSplitWayHits(e.RowIndex) - GetSplitPB(e.RowIndex));
+
+                // When the session progress selection has changed, make sure no other selection is active at the same time
+                if (e.ColumnIndex == Rows[0].Cells["cSP"].ColumnIndex)
+                {
+                    int idx = e.RowIndex;
+                    if (idx < GetSplitCount())
+                    {
+                        ValueChangedSema = true;
+                        for (int r = 0; r <= RowCount - 2; r++) Rows[r].Cells["cSP"].Value = false;
+                        SetSessionProgress(idx);
+                        ValueChangedSema = false;
+                    }
+                }
+            }
+        }
+
         private void CellMouseUpEventHandler(object sender, DataGridViewCellMouseEventArgs e)
         {
             // Workaround to fire CellValueChanged on a Checkbox change via mouse (left click) by switching cell focus
@@ -752,6 +641,11 @@ namespace HitCounterManager
             }
         }
 
+        private void SelectionChangedHandler(object sender, EventArgs e)
+        {
+            if (0 < SelectedCells.Count) SetActiveSplit(SelectedCells[0].RowIndex);
+        }
+
         #endregion
 
         #region IProfileInfo implementation
@@ -778,7 +672,7 @@ namespace HitCounterManager
             if (0 == SelectedCells.Count) SetActiveSplit(0);
             return SelectedCells[0].RowIndex;
         }
-        public void SetActiveSplit(int Index)
+        private void SetActiveSplit(int Index)
         {
             if ((LastActiveSplit != Index) || (0 == SelectedCells.Count))
             {
@@ -790,8 +684,86 @@ namespace HitCounterManager
             }
         }
 
-        public void ClearSplits() { Rows.Clear(); }
+        public void ClearSplits() { ModifiedFlag = true; Rows.Clear(); }
         public void AddSplit(string Title, int Hits, int WayHits, int PB) { ModifiedFlag = true; Rows.Add(new object[] { Title, Hits, WayHits, Hits + WayHits - PB, PB, false }); }
+        public void InsertSplit()
+        {
+            int idx = GetActiveSplit();
+
+            ProfileUpdateBegin();
+            ModifiedFlag = true;
+            Rows.Insert(idx, 1);
+            // Select new row's title cell that user can directly start typing name of new split
+            CurrentCell = Rows[idx].Cells["cTitle"];
+            Rows[idx].Selected = true;
+            Focus();
+            ProfileUpdateEnd();
+        }
+
+        public void ResetRun()
+        {
+            ProfileUpdateBegin();
+            SetAttemptsCount(GetAttemptsCount() + 1); // Increase attempts
+            for (int r = 0; r < GetSplitCount(); r++) { SetSplitHits(r, 0); SetSplitWayHits(r, 0); }
+            SetActiveSplit(0);
+            ProfileUpdateEnd();
+        }
+        public void setPB()
+        {
+            int Splits = GetSplitCount();
+            if (0 == Splits) return;
+
+            ProfileUpdateBegin();
+            for (int r = 0; r < Splits; r++) SetSplitPB(r, GetSplitHits(r) + GetSplitWayHits(r));
+            SetActiveSplit(Splits);
+            SetSessionProgress(Splits-1);
+            ProfileUpdateEnd();
+        }
+        public void Hit(int Amount)
+        {
+            int active = GetActiveSplit();
+            int hits = GetSplitHits(active) + Amount;
+            if (hits < 0) hits = 0;
+            SetSplitHits(active, hits);
+            Rows[active].Selected = true; // row is already selected already but we make sure the whole row gets visually selected if user has selected a cell only
+        }
+        public void WayHit(int Amount)
+        {
+            int active = GetActiveSplit();
+            int hits = GetSplitWayHits(active) + Amount;
+            if (hits < 0) hits = 0;
+            SetSplitWayHits(active, hits);
+            Rows[active].Selected = true; // row is already selected already but we make sure the whole row gets visually selected if user has selected a cell only
+        }
+        public void MoveSplits(int Amount)
+        {
+            int split = GetActiveSplit() + Amount;
+            if ((0 <= split) && (split <= GetSplitCount()))
+            {
+                ProfileUpdateBegin();
+                SetActiveSplit(split);
+                if (0 < Amount) SetSessionProgress(split);
+                ProfileUpdateEnd();
+            }
+        }
+        public void PermuteSplit(int Index, int Offset)
+        {
+            int IndexDst = Index + Offset;
+            if ((0 <= Index) && (Index < GetSplitCount()) &&
+                (0 <= IndexDst) && (IndexDst < GetSplitCount())) // Is permutation in range?
+            {
+                ProfileUpdateBegin();
+                for (int i = 0; i <= Columns.Count - 1; i++)
+                {
+                    object cell = Rows[Index].Cells[i].Value;
+                    Rows[Index].Cells[i].Value = Rows[IndexDst].Cells[i].Value;
+                    Rows[IndexDst].Cells[i].Value = cell;
+                }
+                ProfileUpdateEnd();
+
+                SetActiveSplit(IndexDst);
+            }
+        }
 
         public int GetAttemptsCount() { return _AttemptsCounter; }
         public void SetAttemptsCount(int Attempts)
@@ -821,6 +793,8 @@ namespace HitCounterManager
 
         public void SetSessionProgress(int Index, bool AllowReset = false)
         {
+            if (GetSplitCount() <= Index) return;
+
             if ((GetSessionProgress() <= Index) || AllowReset)
             {
                 if (!GetCellValueOfType<bool>(Rows[Index].Cells["cSP"], false))

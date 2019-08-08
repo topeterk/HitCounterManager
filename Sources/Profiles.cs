@@ -101,6 +101,7 @@ namespace HitCounterManager
             if (null == _pi) return; // just for safety should never happen
 
             Profile prof;
+            _pi.ProfileUpdateBegin();
             _pi.SetProfileName(Name);
             _pi.SetAttemptsCount(0);
             _pi.ClearSplits();
@@ -114,6 +115,7 @@ namespace HitCounterManager
                 _pi.SetActiveSplit(prof.ActiveSplit);
             }
             _pi.SetSessionProgress(0);
+            _pi.ProfileUpdateEnd();
         }
 
         /// <summary>
@@ -123,6 +125,7 @@ namespace HitCounterManager
         public void SaveProfile(bool AllowCreation)
         {
             if (null == _pi) return; // just for safety should never happen
+            if (_pi.IsProfileUpdatePending()) return;
 
             Profile prof;
 
@@ -215,6 +218,40 @@ namespace HitCounterManager
         /// <param name="WaysHits">Amount of hits on the way</param>
         /// <param name="PB">Amount of personal best hits</param>
         void AddSplit(string Title, int Hits, int WayHits, int PB);
+        /// <summary>
+        /// Insert a new split before the current one
+        /// </summary>
+        void InsertSplit();
+
+        /// <summary>
+        /// Clear all hits, increase attempts counter and select first split
+        /// </summary>
+        void ResetRun();
+        /// <summary>
+        /// Mark the run as PB and jump to the run's end
+        /// </summary>
+        void setPB();
+        /// <summary>
+        /// Modifies the hit count of the current split
+        /// </summary>
+        /// <param name="Amount">Amount of hits that will be added/subtracted</param>
+        void Hit(int Amount);
+        /// <summary>
+        /// Modifies the way hit count of the current split
+        /// </summary>
+        /// <param name="Amount">Amount of hits that will be added/subtracted</param>
+        void WayHit(int Amount);
+        /// <summary>
+        /// Modifies the currently selected split
+        /// </summary>
+        /// <param name="Amount">Amount of splits that will be moved forwards/backwards</param>
+        void MoveSplits(int Amount);
+        /// <summary>
+        /// Interchange of two data rows
+        /// </summary>
+        /// <param name="Index">Source row</param>
+        /// <param name="Offset">Offset to row that shall be permuted</param>
+        void PermuteSplit(int Index, int Offset);
 
         /// <summary>
         /// Gets the amount of attempts

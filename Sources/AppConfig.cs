@@ -240,8 +240,6 @@ namespace HitCounterManager
             }
 
             // Apply settings..
-            pi.ProfileUpdateBegin();
-
             sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
             profs = _settings.Profiles;
             profs.SetProfileInfo(pi);
@@ -304,8 +302,6 @@ namespace HitCounterManager
 
             om.FilePathIn = _settings.Inputfile;
             om.FilePathOut = _settings.OutputFile; // setting output filepath will allow writing output, so keep this line last
-
-            pi.ProfileUpdateEnd();
         }
 
         /// <summary>

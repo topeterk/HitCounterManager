@@ -616,7 +616,6 @@
             this.DataGridView1.Name = "DataGridView1";
             this.DataGridView1.Size = new System.Drawing.Size(678, 254);
             this.DataGridView1.TabIndex = 21;
-            this.DataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DataGridView1_CellValidating);
             this.DataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellValueChanged);
             this.DataGridView1.SelectionChanged += new System.EventHandler(this.DataGridView1_SelectionChanged);
             // 
