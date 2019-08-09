@@ -102,17 +102,17 @@ namespace HitCounterManager
 
             Profile prof;
             _pi.ProfileUpdateBegin();
-            _pi.SetProfileName(Name);
-            _pi.SetAttemptsCount(0);
+            _pi.ProfileName = Name;
+            _pi.AttemptsCount = 0;
             _pi.ClearSplits();
             if (_FindProfile(Name, out prof))
             {
-                _pi.SetAttemptsCount(prof.Attempts);
+                _pi.AttemptsCount = prof.Attempts;
                 foreach (ProfileRow row in prof.Rows)
                 {
                     _pi.AddSplit(row.Title, row.Hits, row.WayHits, row.PB);
                 }
-                _pi.SetActiveSplit(prof.ActiveSplit);
+                _pi.ActiveSplit = prof.ActiveSplit;
             }
             _pi.SetSessionProgress(0);
             _pi.ProfileUpdateEnd();
@@ -125,26 +125,25 @@ namespace HitCounterManager
         public void SaveProfile(bool AllowCreation)
         {
             if (null == _pi) return; // just for safety should never happen
-            if (_pi.IsProfileUpdatePending()) return;
 
             Profile prof;
 
             // look for existing one and create if not exists
-            if (!_FindProfile(_pi.GetProfileName(), out prof))
+            if (!_FindProfile(_pi.ProfileName, out prof))
             {
                 if (!AllowCreation) return;
 
                 prof = new Profile();
-                prof.Name = _pi.GetProfileName();
+                prof.Name = _pi.ProfileName;
                 _Profiles.Add(prof);
             }
 
             prof.Rows.Clear();
 
             // collecting data, nom nom nom
-            prof.Attempts = _pi.GetAttemptsCount();
-            prof.ActiveSplit = _pi.GetActiveSplit();
-            for (int r = 0; r < _pi.GetSplitCount(); r++)
+            prof.Attempts = _pi.AttemptsCount;
+            prof.ActiveSplit = _pi.ActiveSplit;
+            for (int r = 0; r < _pi.SplitCount; r++)
             {
                 ProfileRow ProfileRow = new ProfileRow();
                 ProfileRow.Title = _pi.GetSplitTitle(r);
@@ -180,31 +179,24 @@ namespace HitCounterManager
     public interface IProfileInfo
     {
         /// <summary>
-        /// Gets the name of the currently loaded profile
+        /// Name of the currently loaded profile
         /// </summary>
-        /// <returns>Profile name</returns>
-        string GetProfileName();
-        /// <summary>
-        /// Sets the name of the currently loaded profile
-        /// </summary>
-        /// <param name="Name">Profile name</param>
-        void SetProfileName(string Name);
+        string ProfileName { get; set; }
 
         /// <summary>
-        /// Gets amount of splits
+        /// Amount of attempts
         /// </summary>
-        /// <returns>Split count</returns>
-        int GetSplitCount();
+        int AttemptsCount { get; set; }
 
         /// <summary>
-        /// Gets the split index of the currently active one
+        /// Amount of splits
         /// </summary>
-        /// <returns>Index of current split</returns>
-        int GetActiveSplit();
+        int SplitCount { get; }
+
         /// <summary>
-        /// Sets the split as active
+        /// Index of currently active split
         /// </summary>
-        void SetActiveSplit(int Index);
+        int ActiveSplit { get; set; }
 
         /// <summary>
         /// Removes all splits
@@ -252,17 +244,6 @@ namespace HitCounterManager
         /// <param name="Index">Source row</param>
         /// <param name="Offset">Offset to row that shall be permuted</param>
         void PermuteSplit(int Index, int Offset);
-
-        /// <summary>
-        /// Gets the amount of attempts
-        /// </summary>
-        /// <returns>Count of tries</returns>
-        int GetAttemptsCount();
-        /// <summary>
-        /// Sets the amount of attempts
-        /// </summary>
-        /// <param name="Attempts">Count of tries</param>
-        void SetAttemptsCount(int Attempts);
 
         /// <summary>
         /// Gets the split index of the session progress

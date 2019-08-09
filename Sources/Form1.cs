@@ -219,7 +219,7 @@ namespace HitCounterManager
 
         private void GetCalculatedSums(ref int TotalHits, ref int TotalHitsWay, ref int TotalPB)
         {
-            int Splits = pi.GetSplitCount();
+            int Splits = pi.SplitCount;
 
             TotalHits = TotalHitsWay = TotalPB = 0;
             for (int i = 0; i < Splits; i++)
@@ -239,14 +239,14 @@ namespace HitCounterManager
             int TotalHits = 0;
             int TotalHitsWay = 0;
             int TotalPB = 0;
-            int Splits = pi.GetSplitCount();
+            int Splits = pi.SplitCount;
 
             if (Splits < 0) // Check for valid entries
-                lbl_progress.Text = "Progress:  ?? / ??  # " + pi.GetAttemptsCount().ToString("D3");
+                lbl_progress.Text = "Progress:  ?? / ??  # " + pi.AttemptsCount.ToString("D3");
             else
             {
                 GetCalculatedSums(ref TotalHits, ref TotalHitsWay, ref TotalPB);
-                lbl_progress.Text = "Progress:  " + pi.GetActiveSplit() + " / " + Splits + "  # " + pi.GetAttemptsCount().ToString("D3");
+                lbl_progress.Text = "Progress:  " + pi.ActiveSplit + " / " + Splits + "  # " + pi.AttemptsCount.ToString("D3");
             }
 
             lbl_totals.Text = "Total: " + (TotalHits + TotalHitsWay) + " Hits   " + TotalPB + " PB";
@@ -329,7 +329,7 @@ namespace HitCounterManager
             // create, select and save new profile..
             ComboBox1.Items.Add(name);
             ComboBox1.SelectedItem = name;
-            pi.SetProfileName(name);
+            pi.ProfileName = name;
             profs.SaveProfile(true); // save new empty profile
             UpdateProgressAndTotals();
         }
@@ -361,7 +361,7 @@ namespace HitCounterManager
 
             // create, select and save new profile..
             ComboBox1.Items.Add(name);
-            pi.SetProfileName(name);
+            pi.ProfileName = name;
             profs.SaveProfile(true); // copy current data to new profile
             ComboBox1.SelectedItem = name;
         }
@@ -393,7 +393,7 @@ namespace HitCounterManager
 
         private void btnAttempts_Click(object sender, EventArgs e)
         {
-            string amount_string = InputBox("Enter amount to be set!", "Set new run number (amount of attempts)", pi.GetAttemptsCount().ToString());
+            string amount_string = InputBox("Enter amount to be set!", "Set new run number (amount of attempts)", pi.AttemptsCount.ToString());
             int amount_value;
             if (!int.TryParse(amount_string, out amount_value))
             {
@@ -401,12 +401,12 @@ namespace HitCounterManager
                 MessageBox.Show("Only numbers are allowed!");
                 return;
             }
-            pi.SetAttemptsCount(amount_value);
+            pi.AttemptsCount = amount_value;
             UpdateProgressAndTotals();
         }
 
-        private void btnUp_Click(object sender, EventArgs e) { pi.PermuteSplit(pi.GetActiveSplit(), -1); }
-        private void btnDown_Click(object sender, EventArgs e) { pi.PermuteSplit(pi.GetActiveSplit(), +1); }
+        private void btnUp_Click(object sender, EventArgs e) { pi.PermuteSplit(pi.ActiveSplit, -1); }
+        private void btnDown_Click(object sender, EventArgs e) { pi.PermuteSplit(pi.ActiveSplit, +1); }
 
         private void BtnInsertSplit_Click(object sender, EventArgs e) { pi.InsertSplit(); }
 
@@ -586,7 +586,7 @@ namespace HitCounterManager
                 if (e.ColumnIndex == Rows[0].Cells["cSP"].ColumnIndex)
                 {
                     int idx = e.RowIndex;
-                    if (idx < GetSplitCount())
+                    if (idx < SplitCount)
                     {
                         ValueChangedSema = true;
                         for (int r = 0; r <= RowCount - 2; r++) Rows[r].Cells["cSP"].Value = false;
@@ -625,7 +625,7 @@ namespace HitCounterManager
                     if (cell.GetType().Name == "DataGridViewCheckBoxCell")
                     {
                         e.Handled = true;
-                        if (cell.RowIndex >= GetSplitCount()) return; // avoid creating a split from the "new line" row
+                        if (cell.RowIndex >= SplitCount) return; // avoid creating a split from the "new line" row
 
                         // Care with changing the following sequence as during lots of testing
                         // this is the first and only combination that works in Windows and Mono..
@@ -643,7 +643,7 @@ namespace HitCounterManager
 
         private void SelectionChangedHandler(object sender, EventArgs e)
         {
-            if (0 < SelectedCells.Count) SetActiveSplit(SelectedCells[0].RowIndex);
+            if (0 < SelectedCells.Count) ActiveSplit = SelectedCells[0].RowIndex;
         }
 
         #endregion
@@ -656,31 +656,51 @@ namespace HitCounterManager
         private int LastActiveSplit = -1;
         private bool DataUpdatePending = false;
 
-        public string GetProfileName() { return _ProfileName; }
-        public void SetProfileName(string Name)
+        public string ProfileName
         {
-            if (_ProfileName != Name)
+            get { return _ProfileName; }
+            set
             {
-                ModifiedFlag = true;
-                _ProfileName = Name;
+                if (_ProfileName != value)
+                {
+                    ModifiedFlag = true;
+                    _ProfileName = value;
+                }
             }
         }
 
-        public int GetSplitCount() { return RowCount - 1; } // Remove the "new line"
-        public int GetActiveSplit()
+        public int AttemptsCount
         {
-            if (0 == SelectedCells.Count) SetActiveSplit(0);
-            return SelectedCells[0].RowIndex;
-        }
-        public void SetActiveSplit(int Index)
-        {
-            if ((LastActiveSplit != Index) || (0 == SelectedCells.Count))
+            get { return _AttemptsCounter; }
+            set
             {
-                LastActiveSplit = Index;
-                ModifiedFlag = true;
+                if (_AttemptsCounter != value)
+                {
+                    ModifiedFlag = true;
+                    _AttemptsCounter = value;
+                }
+            }
+        }
 
-                ClearSelection();
-                Rows[Index].Selected = true;
+        public int SplitCount { get { return RowCount - 1; } } // Remove the "new line"
+
+        public int ActiveSplit
+        {
+            get
+            {
+                if (0 == SelectedCells.Count) ActiveSplit = 0;
+                return SelectedCells[0].RowIndex;
+            }
+            set
+            {
+                if ((LastActiveSplit != value) || (0 == SelectedCells.Count))
+                {
+                    LastActiveSplit = value;
+                    ModifiedFlag = true;
+
+                    ClearSelection();
+                    Rows[value].Selected = true;
+                }
             }
         }
 
@@ -688,7 +708,7 @@ namespace HitCounterManager
         public void AddSplit(string Title, int Hits, int WayHits, int PB) { ModifiedFlag = true; Rows.Add(new object[] { Title, Hits, WayHits, Hits + WayHits - PB, PB, false }); }
         public void InsertSplit()
         {
-            int idx = GetActiveSplit();
+            int idx = ActiveSplit;
 
             ProfileUpdateBegin();
             ModifiedFlag = true;
@@ -703,25 +723,25 @@ namespace HitCounterManager
         public void ResetRun()
         {
             ProfileUpdateBegin();
-            SetAttemptsCount(GetAttemptsCount() + 1); // Increase attempts
-            for (int r = 0; r < GetSplitCount(); r++) { SetSplitHits(r, 0); SetSplitWayHits(r, 0); }
-            SetActiveSplit(0);
+            AttemptsCount++; // Increase attempts
+            for (int r = 0; r < SplitCount; r++) { SetSplitHits(r, 0); SetSplitWayHits(r, 0); }
+            ActiveSplit = 0;
             ProfileUpdateEnd();
         }
         public void setPB()
         {
-            int Splits = GetSplitCount();
+            int Splits = SplitCount;
             if (0 == Splits) return;
 
             ProfileUpdateBegin();
             for (int r = 0; r < Splits; r++) SetSplitPB(r, GetSplitHits(r) + GetSplitWayHits(r));
-            SetActiveSplit(Splits);
+            ActiveSplit = Splits;
             SetSessionProgress(Splits-1);
             ProfileUpdateEnd();
         }
         public void Hit(int Amount)
         {
-            int active = GetActiveSplit();
+            int active = ActiveSplit;
             int hits = GetSplitHits(active) + Amount;
             if (hits < 0) hits = 0;
             SetSplitHits(active, hits);
@@ -729,7 +749,7 @@ namespace HitCounterManager
         }
         public void WayHit(int Amount)
         {
-            int active = GetActiveSplit();
+            int active = ActiveSplit;
             int hits = GetSplitWayHits(active) + Amount;
             if (hits < 0) hits = 0;
             SetSplitWayHits(active, hits);
@@ -737,11 +757,11 @@ namespace HitCounterManager
         }
         public void MoveSplits(int Amount)
         {
-            int split = GetActiveSplit() + Amount;
-            if ((0 <= split) && (split <= GetSplitCount()))
+            int split = ActiveSplit + Amount;
+            if ((0 <= split) && (split <= SplitCount))
             {
                 ProfileUpdateBegin();
-                SetActiveSplit(split);
+                ActiveSplit = split;
                 if (0 < Amount) SetSessionProgress(split);
                 ProfileUpdateEnd();
             }
@@ -749,8 +769,8 @@ namespace HitCounterManager
         public void PermuteSplit(int Index, int Offset)
         {
             int IndexDst = Index + Offset;
-            if ((0 <= Index) && (Index < GetSplitCount()) &&
-                (0 <= IndexDst) && (IndexDst < GetSplitCount())) // Is permutation in range?
+            if ((0 <= Index) && (Index < SplitCount) &&
+                (0 <= IndexDst) && (IndexDst < SplitCount)) // Is permutation in range?
             {
                 ProfileUpdateBegin();
                 for (int i = 0; i <= Columns.Count - 1; i++)
@@ -761,23 +781,13 @@ namespace HitCounterManager
                 }
                 ProfileUpdateEnd();
 
-                SetActiveSplit(IndexDst);
-            }
-        }
-
-        public int GetAttemptsCount() { return _AttemptsCounter; }
-        public void SetAttemptsCount(int Attempts)
-        {
-            if (_AttemptsCounter != Attempts)
-            {
-                ModifiedFlag = true;
-                _AttemptsCounter = Attempts;
+                ActiveSplit = IndexDst;
             }
         }
 
         public int GetSessionProgress()
         {
-            for (int Index = 0; Index < GetSplitCount(); Index++)
+            for (int Index = 0; Index < SplitCount; Index++)
             {
                 if (GetCellValueOfType<bool>(Rows[Index].Cells["cSP"], false)) return Index;
             }
@@ -793,7 +803,7 @@ namespace HitCounterManager
 
         public void SetSessionProgress(int Index, bool AllowReset = false)
         {
-            if (GetSplitCount() <= Index) return;
+            if (SplitCount <= Index) return;
 
             if ((GetSessionProgress() <= Index) || AllowReset)
             {

@@ -185,8 +185,8 @@ namespace HitCounterManager
                 }
                 else if (line.Contains("HITCOUNTER_JSON_START")) // Format data according to RFC 4627 (JSON)
                 {
-                    int active = pi.GetActiveSplit();
-                    int iSplitCount = pi.GetSplitCount();
+                    int active = pi.ActiveSplit;
+                    int iSplitCount = pi.SplitCount;
                     int iSplitFirst;
                     int iSplitLast;
                     int InjectedSplitCount = 0;
@@ -242,7 +242,7 @@ namespace HitCounterManager
                     WriteJsonSimpleValue(sr, "split_first", (iSplitFirst < 0 ? 0 : iSplitFirst));
                     WriteJsonSimpleValue(sr, "split_last", (iSplitCount <= iSplitLast ? iSplitCount-1 : iSplitLast));
 
-                    WriteJsonSimpleValue(sr, "attempts", pi.GetAttemptsCount());
+                    WriteJsonSimpleValue(sr, "attempts", pi.AttemptsCount);
                     WriteJsonSimpleValue(sr, "show_attempts", ShowAttemptsCounter);
                     WriteJsonSimpleValue(sr, "show_headline", ShowHeadline);
                     WriteJsonSimpleValue(sr, "show_footer", ShowFooter);
@@ -270,9 +270,9 @@ namespace HitCounterManager
                 }
                 else if (line.Contains("HITCOUNTER_LIST_START")) // Kept for old designs before version 1.10
                 {
-                    int active = pi.GetActiveSplit();
+                    int active = pi.ActiveSplit;
 
-                    for (int r = 0; r < pi.GetSplitCount(); r++)
+                    for (int r = 0; r < pi.SplitCount; r++)
                     {
                         sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + pi.GetSplitHits(r) + pi.GetSplitWayHits(r) + ", " + pi.GetSplitPB(r) + ", " + (r == active ? "1" : "0") + "]");
                     }
