@@ -150,13 +150,8 @@ namespace HitCounterManager
         /// <summary>
         /// Use buffer to create outputfile while patching some data
         /// </summary>
-        /// <param name="Force">true = Force producing output, false = Output only on pending changes</param>
-        public void Update(bool Force)
+        public void Update()
         {
-            if (pi.IsProfileUpdatePending()) return; // Data is incomplete, wait till data becomes valid
-
-            if (!Force && !pi.HasChanged(true)) return; // Prevent writing the same idendical output multiple times
-  
             //Console.Beep(); // For debugging to check whenever output is beeing generated :)
 
             StreamWriter sr;

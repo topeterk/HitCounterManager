@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Net;
 using System.Windows.Forms;
@@ -39,7 +40,6 @@ namespace HitCounterManager
         private Profiles profs = new Profiles();
         private bool SettingsDialogOpen = false;
         private IProfileInfo pi;
-        private bool DataGridView1_ValueChangedSema = false;
         private bool gpSuccession_ValueChangedSema = false;
 
         private readonly int gpSuccession_Height;
@@ -51,17 +51,17 @@ namespace HitCounterManager
             // The designer sometimes orders the control creation in an order
             // that would call event handlers already during initialization.
             // But not all variables are available yet, so we prevent access to them.
-            DataGridView1_ValueChangedSema = true;
             gpSuccession_ValueChangedSema = true;
             InitializeComponent();
             gpSuccession_ValueChangedSema = false;
-            DataGridView1_ValueChangedSema = false;
 
             gpSuccession_Height = gpSuccession.Height; // remember expanded size from designer settings
 
             pi = DataGridView1; // for better capsulation
             om = new OutModule(pi);
             sc = new Shortcuts(Handle);
+
+            pi.ProfileChanged += DataGridView1_ProfileChanged;
 
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -72,9 +72,10 @@ namespace HitCounterManager
         {
             Text = Text + " - v" + Application.ProductVersion + " " + OsLayer.Name;
             btnHit.Select();
+            pi.ProfileUpdateBegin();
             LoadSettings();
             ShowSuccessionMenu(false); // start collapsed
-            UpdateProgressAndTotals(true); // Write very first output once after application start
+            pi.ProfileUpdateEnd(); // Write very first output once after application start (fires ProfileChanged with UpdateProgressAndTotals())
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -234,7 +235,12 @@ namespace HitCounterManager
             TotalPB += (int)numPB.Value;
         }
 
-        private void UpdateProgressAndTotals(bool ForceOutputUpdate = false)
+        private void DataGridView1_ProfileChanged(object sender, EventArgs e)
+        {
+            UpdateProgressAndTotals();
+        }
+
+        private void UpdateProgressAndTotals()
         {
             int TotalHits = 0;
             int TotalHitsWay = 0;
@@ -251,7 +257,7 @@ namespace HitCounterManager
 
             lbl_totals.Text = "Total: " + (TotalHits + TotalHitsWay) + " Hits   " + TotalPB + " PB";
 
-            om.Update(ForceOutputUpdate);
+            om.Update();
         }
 
         private void SetAlwaysOnTop(bool AlwaysOnTop)
@@ -331,7 +337,6 @@ namespace HitCounterManager
             ComboBox1.SelectedItem = name;
             pi.ProfileName = name;
             profs.SaveProfile(true); // save new empty profile
-            UpdateProgressAndTotals();
         }
 
         private void btnRename_Click(object sender, EventArgs e)
@@ -402,7 +407,6 @@ namespace HitCounterManager
                 return;
             }
             pi.AttemptsCount = amount_value;
-            UpdateProgressAndTotals();
         }
 
         private void btnUp_Click(object sender, EventArgs e) { pi.PermuteSplit(pi.ActiveSplit, -1); }
@@ -427,22 +431,22 @@ namespace HitCounterManager
             if (SuccessionReset)
             {
                 SetSuccession(0, 0, 0, null, false);
-                SuccessionChanged(sender, e);
+                SuccessionChanged(null, null);
             }
 
             UpdateProgressAndTotals();
         }
 
-        private void btnPB_Click(object sender, EventArgs e) { pi.setPB(); UpdateProgressAndTotals(); }
+        private void btnPB_Click(object sender, EventArgs e) { pi.setPB(); }
 
-        private void btnHit_Click(object sender, EventArgs e) { pi.Hit(+1); UpdateProgressAndTotals(); }
-        private void btnHitUndo_Click(object sender, EventArgs e) { pi.Hit(-1); UpdateProgressAndTotals(); }
+        private void btnHit_Click(object sender, EventArgs e) { pi.Hit(+1); }
+        private void btnHitUndo_Click(object sender, EventArgs e) { pi.Hit(-1); }
 
-        private void btnWayHit_Click(object sender, EventArgs e) { pi.WayHit(+1); UpdateProgressAndTotals(); }
-        private void btnWayHitUndo_Click(object sender, EventArgs e) { pi.WayHit(-1); UpdateProgressAndTotals(); }
+        private void btnWayHit_Click(object sender, EventArgs e) { pi.WayHit(+1); }
+        private void btnWayHitUndo_Click(object sender, EventArgs e) { pi.WayHit(-1); }
 
-        private void btnSplit_Click(object sender, EventArgs e) { pi.MoveSplits(+1); UpdateProgressAndTotals(); }
-        private void btnSplitPrev_Click(object sender, EventArgs e) { pi.MoveSplits(-1); UpdateProgressAndTotals(); }
+        private void btnSplit_Click(object sender, EventArgs e) { pi.MoveSplits(+1); }
+        private void btnSplitPrev_Click(object sender, EventArgs e) { pi.MoveSplits(-1); }
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -451,18 +455,6 @@ namespace HitCounterManager
             UpdateProgressAndTotals();
         }
 
-        private void DataGridView1_SelectionChanged(object sender, EventArgs e)
-        {
-            if (0 < DataGridView1.SelectedCells.Count)
-                UpdateProgressAndTotals(true); // Row could have been deleted ending up at the same index, so we should definitely update
-        }
-
-        private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (DataGridView1_ValueChangedSema) return;
-            UpdateProgressAndTotals();
-        }
-        
         private void BtnSuccessionProceed_Click(object sender, EventArgs e)
         {
             int TotalHits = 0;
@@ -471,7 +463,7 @@ namespace HitCounterManager
             GetCalculatedSums(ref TotalHits, ref TotalHitsWay, ref TotalPB);
             SetSuccession(TotalHits, TotalHitsWay, TotalPB);
             ShowSuccessionMenu(true);
-            SuccessionChanged(sender, e);
+            SuccessionChanged(null, null);
 
             MessageBox.Show("The progress of this profile was saved.\nYou can select your next profile now!", "Succession", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -526,7 +518,7 @@ namespace HitCounterManager
 
             if (null != sender) // update on a GUI handler only
             {
-                UpdateProgressAndTotals(true);
+                UpdateProgressAndTotals();
             }
         }
 
@@ -552,12 +544,7 @@ namespace HitCounterManager
         {
             if (Rows[e.RowIndex].Cells[e.ColumnIndex].GetType().Name == "DataGridViewCheckBoxCell") return;
 
-            if (e.ColumnIndex == Rows[0].Cells["cTitle"].ColumnIndex)
-            {
-                // Make sure we mark any title changes as "modified"
-                SetSplitTitle(e.RowIndex, (string)e.FormattedValue);
-            }
-            else
+            if (e.ColumnIndex != Rows[0].Cells["cTitle"].ColumnIndex)
             {
                 // We expect integers only here, so either it is of type int or can be converted
                 if (!(e.FormattedValue is int))
@@ -580,20 +567,18 @@ namespace HitCounterManager
 
             if (0 <= e.RowIndex && 0 <= e.ColumnIndex)
             {
+                ProfileUpdateBegin();
                 SetSplitDiff(e.RowIndex, GetSplitHits(e.RowIndex) + GetSplitWayHits(e.RowIndex) - GetSplitPB(e.RowIndex));
 
                 // When the session progress selection has changed, make sure no other selection is active at the same time
                 if (e.ColumnIndex == Rows[0].Cells["cSP"].ColumnIndex)
                 {
-                    int idx = e.RowIndex;
-                    if (idx < SplitCount)
-                    {
-                        ValueChangedSema = true;
-                        for (int r = 0; r <= RowCount - 2; r++) Rows[r].Cells["cSP"].Value = false;
-                        SetSessionProgress(idx);
-                        ValueChangedSema = false;
-                    }
+                    ValueChangedSema = true;
+                    for (int r = 0; r <= RowCount - 2; r++) Rows[r].Cells["cSP"].Value = false;
+                    SetSessionProgress(e.RowIndex);
+                    ValueChangedSema = false;
                 }
+                ProfileUpdateEnd();
             }
         }
 
@@ -609,9 +594,9 @@ namespace HitCounterManager
                 ProfileUpdateBegin();
                 EndEdit(); // will fire CellValueChanged
                 ClearSelection();
-                ProfileUpdateEnd();
                 Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
                 Rows[e.RowIndex].Selected = true;
+                ProfileUpdateEnd();
             }
         }
 
@@ -632,10 +617,10 @@ namespace HitCounterManager
                         DataGridViewCheckBoxCell SelectedCell = (DataGridViewCheckBoxCell)cell;
                         ProfileUpdateBegin();
                         SelectedCell.Value = !(SelectedCell.Value == null ? /*not set yet, so it's not checked*/ false : (bool)SelectedCell.Value); // will fire CellValueChanged
-                        ProfileUpdateEnd();
                         EndEdit();
                         ClearSelection();
                         Rows[SelectedCell.RowIndex].Cells[SelectedCell.ColumnIndex].Selected = true;
+                        ProfileUpdateEnd();
                     }
                 }
             }
@@ -643,7 +628,13 @@ namespace HitCounterManager
 
         private void SelectionChangedHandler(object sender, EventArgs e)
         {
-            if (0 < SelectedCells.Count) ActiveSplit = SelectedCells[0].RowIndex;
+            if (0 < SelectedCells.Count)
+            {
+                // Row could have been deleted ending up at the same index, so we should definitely treat it as usual update
+                ProfileUpdateBegin();
+                ActiveSplit = SelectedCells[0].RowIndex;
+                ProfileUpdateEnd();
+            }
         }
 
         #endregion
@@ -652,10 +643,11 @@ namespace HitCounterManager
 
         private string _ProfileName = null;
         private int _AttemptsCounter = 0;
-        private bool ModifiedFlag = false;
         private int LastActiveSplit = -1;
-        private bool DataUpdatePending = false;
-
+        private uint DataUpdatePending = 0;
+        
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public string ProfileName
         {
             get { return _ProfileName; }
@@ -663,12 +655,15 @@ namespace HitCounterManager
             {
                 if (_ProfileName != value)
                 {
-                    ModifiedFlag = true;
+                    ProfileUpdateBegin();
                     _ProfileName = value;
+                    ProfileUpdateEnd();
                 }
             }
         }
-
+        
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public int AttemptsCount
         {
             get { return _AttemptsCounter; }
@@ -676,14 +671,19 @@ namespace HitCounterManager
             {
                 if (_AttemptsCounter != value)
                 {
-                    ModifiedFlag = true;
+                    ProfileUpdateBegin();
                     _AttemptsCounter = value;
+                    ProfileUpdateEnd();
                 }
             }
         }
-
+        
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public int SplitCount { get { return RowCount - 1; } } // Remove the "new line"
-
+        
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public int ActiveSplit
         {
             get
@@ -696,22 +696,22 @@ namespace HitCounterManager
                 if ((LastActiveSplit != value) || (0 == SelectedCells.Count))
                 {
                     LastActiveSplit = value;
-                    ModifiedFlag = true;
 
+                    ProfileUpdateBegin();
                     ClearSelection();
                     Rows[value].Selected = true;
+                    ProfileUpdateEnd();
                 }
             }
         }
 
-        public void ClearSplits() { ModifiedFlag = true; Rows.Clear(); }
-        public void AddSplit(string Title, int Hits, int WayHits, int PB) { ModifiedFlag = true; Rows.Add(new object[] { Title, Hits, WayHits, Hits + WayHits - PB, PB, false }); }
+        public void ClearSplits() { ProfileUpdateBegin(); Rows.Clear(); ProfileUpdateEnd(); }
+        public void AddSplit(string Title, int Hits, int WayHits, int PB) { ProfileUpdateBegin(); Rows.Add(new object[] { Title, Hits, WayHits, Hits + WayHits - PB, PB, false }); ProfileUpdateEnd(); }
         public void InsertSplit()
         {
             int idx = ActiveSplit;
 
             ProfileUpdateBegin();
-            ModifiedFlag = true;
             Rows.Insert(idx, 1);
             // Select new row's title cell that user can directly start typing name of new split
             CurrentCell = Rows[idx].Cells["cTitle"];
@@ -744,16 +744,22 @@ namespace HitCounterManager
             int active = ActiveSplit;
             int hits = GetSplitHits(active) + Amount;
             if (hits < 0) hits = 0;
+
+            ProfileUpdateBegin();
             SetSplitHits(active, hits);
             Rows[active].Selected = true; // row is already selected already but we make sure the whole row gets visually selected if user has selected a cell only
+            ProfileUpdateEnd();
         }
         public void WayHit(int Amount)
         {
             int active = ActiveSplit;
             int hits = GetSplitWayHits(active) + Amount;
             if (hits < 0) hits = 0;
+
+            ProfileUpdateBegin();
             SetSplitWayHits(active, hits);
             Rows[active].Selected = true; // row is already selected already but we make sure the whole row gets visually selected if user has selected a cell only
+            ProfileUpdateEnd();
         }
         public void MoveSplits(int Amount)
         {
@@ -779,9 +785,9 @@ namespace HitCounterManager
                     Rows[Index].Cells[i].Value = Rows[IndexDst].Cells[i].Value;
                     Rows[IndexDst].Cells[i].Value = cell;
                 }
-                ProfileUpdateEnd();
 
                 ActiveSplit = IndexDst;
+                ProfileUpdateEnd();
             }
         }
 
@@ -809,9 +815,12 @@ namespace HitCounterManager
             {
                 if (!GetCellValueOfType<bool>(Rows[Index].Cells["cSP"], false))
                 {
-                    ModifiedFlag = true;
                     if (null != Rows[Index].Cells["cSP"].Value)
+                    {
+                        ProfileUpdateBegin();
                         Rows[Index].Cells["cSP"].Value = true;
+                        ProfileUpdateEnd();
+                    }
                 }
             }
         }
@@ -820,53 +829,61 @@ namespace HitCounterManager
         {
             if (GetSplitTitle(Index) != Title)
             {
-                ModifiedFlag = true;
+                ProfileUpdateBegin();
                 Rows[Index].Cells["cTitle"].Value = Title;
+                ProfileUpdateEnd();
             }
         }
         public void SetSplitHits(int Index, int Hits)
         {
             if (GetSplitHits(Index) != Hits)
             {
-                ModifiedFlag = true;
+                ProfileUpdateBegin();
                 Rows[Index].Cells["cHits"].Value = Hits;
+                ProfileUpdateEnd();
             }
         }
         public void SetSplitWayHits(int Index, int WayHits)
         {
             if (GetSplitWayHits(Index) != WayHits)
             {
-                ModifiedFlag = true;
+                ProfileUpdateBegin();
                 Rows[Index].Cells["cWayHits"].Value = WayHits;
+                ProfileUpdateEnd();
             }
         }
         public void SetSplitDiff(int Index, int Diff)
         {
             if (GetSplitDiff(Index) != Diff)
             {
-                ModifiedFlag = true;
+                ProfileUpdateBegin();
                 Rows[Index].Cells["cDiff"].Value = Diff;
+                ProfileUpdateEnd();
             }
         }
         public void SetSplitPB(int Index, int PBHits)
         {
             if (GetSplitPB(Index) != PBHits)
             {
-                ModifiedFlag = true;
+                ProfileUpdateBegin();
                 Rows[Index].Cells["cPB"].Value = PBHits;
+                ProfileUpdateEnd();
             }
         }
 
-        public bool HasChanged(bool Reset = false)
+        public void ProfileUpdateBegin() { DataUpdatePending++; }
+        public void ProfileUpdateEnd()
         {
-            bool WasModified = ModifiedFlag;
-            if (Reset) ModifiedFlag = false;
-            return WasModified;
-        }
+            if (0 < DataUpdatePending)  // check for safety - you never know
+                DataUpdatePending--;
 
-        public void ProfileUpdateBegin() { DataUpdatePending = true; }
-        public void ProfileUpdateEnd() { DataUpdatePending = false; }
-        public bool IsProfileUpdatePending() { return DataUpdatePending; }
+            if (0 == DataUpdatePending)
+            {
+                if (null != ProfileChanged) ProfileChanged(this, new EventArgs());
+            }
+        }
+        
+        public event EventHandler<EventArgs> ProfileChanged;
 
         #endregion
     }

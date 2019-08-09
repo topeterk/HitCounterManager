@@ -321,24 +321,19 @@ namespace HitCounterManager
         void SetSplitPB(int Index, int PBHits);
 
         /// <summary>
-        /// Checks if any value of the Profile Info has been changed
-        /// </summary>
-        /// <param name="Reset">True will reset to "unchanged"</param>
-        /// <returns>Profile Info was modified since last reset</returns>
-        bool HasChanged(bool Reset = false);
-
-        /// <summary>
         /// Marks that an update will be performed
+        /// Rises ProfileChanged event after update has completed
         /// </summary>
         void ProfileUpdateBegin();
         /// <summary>
-        /// Marks that the current update has ended
+        /// Marks that the current update has ended.
+        /// Rises ProfileChanged on completion
         /// </summary>
         void ProfileUpdateEnd();
+
         /// <summary>
-        /// Checks if an update is currently running
+        /// Event that fires when any kind of data changed
         /// </summary>
-        /// <returns>true when called between ProfileUpdateBegin and ProfileUpdateEnd</returns>
-        bool IsProfileUpdatePending();
+        event EventHandler<EventArgs> ProfileChanged;
     }
 }

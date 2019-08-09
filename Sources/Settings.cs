@@ -187,7 +187,7 @@ namespace HitCounterManager
             else
                 om.Severity = OutModule.OM_Severity.OM_Severity_AnyHitsCritical;
 
-            om.Update(true);
+            om.Update();
         }
 
         private string AskForFilename(string StartFilename, string StartFilter, string Filter)
@@ -237,7 +237,7 @@ namespace HitCounterManager
             if (null != Filename)
             {
                 om.FilePathIn = txtInput.Text = Filename;
-                om.Update(true);
+                om.Update();
             }
         }
 
@@ -247,7 +247,7 @@ namespace HitCounterManager
             if (null != Filename)
             {
                 om.FilePathOut = txtOutput.Text = Filename;
-                om.Update(true);
+                om.Update();
             }
         }
 
