@@ -672,7 +672,7 @@ namespace HitCounterManager
             if (0 == SelectedCells.Count) SetActiveSplit(0);
             return SelectedCells[0].RowIndex;
         }
-        private void SetActiveSplit(int Index)
+        public void SetActiveSplit(int Index)
         {
             if ((LastActiveSplit != Index) || (0 == SelectedCells.Count))
             {
