@@ -1,7 +1,7 @@
 ﻿//The MIT License (MIT)
 
 //Copyright (c) 2018 Alex Parker
-//Copyright (c) 2018 Peter Kirmeier
+//Copyright (c) 2018-2019 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy of
 //this software and associated documentation files (the "Software"), to deal in
@@ -308,8 +308,7 @@ namespace TinyJson
             }
             if (json[0] == '"' && json[json.Length - 1] == '"')
             {
-                string str = json.Substring(1, json.Length - 2);
-                return str.Replace("\\", string.Empty);
+                return ParseValue(typeof(string), json); // fix https://github.com/zanders3/json/issues/29
             }
             if (char.IsDigit(json[0]) || json[0] == '-')
             {
