@@ -82,7 +82,7 @@ namespace HitCounterManager
         /// <summary>
         /// Bind object to a data grid
         /// </summary>
-        /// <param name="dgv">object to set binding</param>
+        /// <param name="ProfileInfo">interface of object to set binding</param>
         public OutModule(IProfileInfo ProfileInfo)
         {
             pi = ProfileInfo;
@@ -117,7 +117,7 @@ namespace HitCounterManager
             if (null != Str)
             {
                 Str = Str.ToString().Replace("&", "&amp;").Replace(" ", "&nbsp;");
-                // Keep for compatibility to support designs up to version 1.15 that were not using Unicode:
+                // Keep for compatibility supporting designs up to version 1.15 as they have not used Unicode:
                 Str = Str.Replace("ä", "&auml;").Replace("ö", "&ouml;").Replace("ü", "&uuml;");
                 Str = Str.Replace("Ä", "&Auml;").Replace("Ö", "&Ouml;").Replace("Ü", "&Uuml;");
                 Str = Str.Replace("\"", "\\\"");
