@@ -426,15 +426,14 @@ namespace HitCounterManager
                 else if (result == DialogResult.Cancel) return;
             }
 
+            pi.ProfileUpdateBegin();
             pi.ResetRun();
-
             if (SuccessionReset)
             {
                 SetSuccession(0, 0, 0, null, false);
                 SuccessionChanged(null, null);
             }
-
-            UpdateProgressAndTotals();
+            pi.ProfileUpdateEnd();
         }
 
         private void btnPB_Click(object sender, EventArgs e) { pi.setPB(); }
@@ -452,7 +451,6 @@ namespace HitCounterManager
         {
             profs.SaveProfile(false); // save currently selected profile
             profs.LoadProfile((string)ComboBox1.SelectedItem);
-            UpdateProgressAndTotals();
         }
 
         private void BtnSuccessionProceed_Click(object sender, EventArgs e)
