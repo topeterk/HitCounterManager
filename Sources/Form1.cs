@@ -94,27 +94,8 @@ namespace HitCounterManager
             int Frame_Height = ClientRectangle.Height;
 
             // fill
-            ComboBox1.Left = Pad_Frame;
-            ComboBox1.Width = Frame_Width - Pad_Frame * 2;
-            gpSuccession.Left = Pad_Frame;
-            gpSuccession.Width = ComboBox1.Width;
             gpSuccession.Top = Frame_Height - gpSuccession.Height - Pad_Frame;
-            DataGridView1.Left = Pad_Frame;
-            DataGridView1.Width = ComboBox1.Width;
-            DataGridView1.Height = gpSuccession.Top - DataGridView1.Top - Pad_Controls;
-
-            // right aligned
-            btnSuccessionProceed.Left = Frame_Width - btnSuccessionProceed.Width - Pad_Frame;
-            btnSplit.Left = btnSuccessionProceed.Left - Pad_Controls - btnSplit.Width;
-            btnWayHit.Left = btnSplit.Left - Pad_Controls - btnWayHit.Width;
-            lbl_totals.Width = Frame_Width - lbl_totals.Left - Pad_Frame;
-
-            // left aligned
-            btnHit.Width = btnWayHit.Left - Pad_Controls - btnHit.Left;
-
-            // succession group
-            txtPredecessorTitle.Width = gpSuccession.Width - txtPredecessorTitle.Left - Pad_Frame;
-            btnSuccessionVisibility.Left = gpSuccession.Width - btnSuccessionVisibility.Width - Pad_Frame;
+            tabControl1.Height = gpSuccession.Top - tabControl1.Top - Pad_Controls;
         }
 
         protected override void WndProc(ref Message m)
@@ -521,6 +502,57 @@ namespace HitCounterManager
         }
 
         #endregion
+
+        private TabPage TabPageDragDrop = null;
+
+        private void TabControl1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                // Start of DragDrop
+                TabPage hover_Tab = HoverTab();
+                if (hover_Tab == null ) return;
+                if (hover_Tab.Text.Equals("+")) return;
+                TabPageDragDrop = hover_Tab;
+            }
+        }
+
+        private void TabControl1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (null == TabPageDragDrop) return; // No DragDrop currently active
+
+            if (e.Button != MouseButtons.Left)
+            {
+                // DragDrop stopped
+                TabPageDragDrop = null;
+            }
+            else
+            {
+                // During DragDrop
+                TabPage hover_Tab = HoverTab();
+                if (hover_Tab == null) return;
+                if (hover_Tab.Text.Equals("+") || (hover_Tab == TabPageDragDrop)) return;
+
+                // Switch tabs but retain numbering
+                int Index1 = tabControl1.TabPages.IndexOf(TabPageDragDrop);
+                int Index2 = tabControl1.TabPages.IndexOf(hover_Tab);
+                tabControl1.TabPages[Index1] = hover_Tab;
+                tabControl1.TabPages[Index2] = TabPageDragDrop;
+                hover_Tab.Text = (Index1+1).ToString();
+                TabPageDragDrop.Text = (Index2+1).ToString();
+                tabControl1.SelectedTab = TabPageDragDrop;
+            }
+        }
+
+        private TabPage HoverTab()
+        {
+            for (int index = 0; index <= tabControl1.TabCount - 1; index++)
+            {
+                if (tabControl1.GetTabRect(index).Contains(tabControl1.PointToClient(Cursor.Position)))
+                    return tabControl1.TabPages[index];
+            }
+            return null;
+        }
     }
 
     public class ProfileDataGridView : DataGridView, IProfileInfo

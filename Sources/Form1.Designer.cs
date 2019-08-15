@@ -78,11 +78,15 @@
             this.cSP = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ComboBox1 = new System.Windows.Forms.ComboBox();
             this.DataGridView1 = new HitCounterManager.ProfileDataGridView();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.gpSuccession.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHitsWay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHits)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSettings
@@ -272,7 +276,7 @@
             this.btnReset.BackColor = System.Drawing.Color.Salmon;
             this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReset.Image = global::HitCounterManager.Sources.Resources.icons8_repeat_one_32;
-            this.btnReset.Location = new System.Drawing.Point(12, 57);
+            this.btnReset.Location = new System.Drawing.Point(12, 30);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 40);
             this.btnReset.TabIndex = 15;
@@ -285,7 +289,7 @@
             this.btnPB.BackColor = System.Drawing.Color.LightYellow;
             this.btnPB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPB.Image = global::HitCounterManager.Sources.Resources.icons8_trophy_32;
-            this.btnPB.Location = new System.Drawing.Point(93, 57);
+            this.btnPB.Location = new System.Drawing.Point(93, 30);
             this.btnPB.Name = "btnPB";
             this.btnPB.Size = new System.Drawing.Size(75, 40);
             this.btnPB.TabIndex = 16;
@@ -295,10 +299,12 @@
             // 
             // btnHit
             // 
+            this.btnHit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnHit.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnHit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHit.Image = global::HitCounterManager.Sources.Resources.icons8_attack_32;
-            this.btnHit.Location = new System.Drawing.Point(174, 57);
+            this.btnHit.Location = new System.Drawing.Point(174, 30);
             this.btnHit.Name = "btnHit";
             this.btnHit.Size = new System.Drawing.Size(274, 40);
             this.btnHit.TabIndex = 17;
@@ -308,10 +314,11 @@
             // 
             // btnWayHit
             // 
+            this.btnWayHit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnWayHit.BackColor = System.Drawing.Color.LightBlue;
             this.btnWayHit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnWayHit.Image = global::HitCounterManager.Sources.Resources.icons8_watch_your_step_32;
-            this.btnWayHit.Location = new System.Drawing.Point(454, 57);
+            this.btnWayHit.Location = new System.Drawing.Point(454, 30);
             this.btnWayHit.Name = "btnWayHit";
             this.btnWayHit.Size = new System.Drawing.Size(75, 40);
             this.btnWayHit.TabIndex = 18;
@@ -321,10 +328,11 @@
             // 
             // btnSplit
             // 
+            this.btnSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSplit.BackColor = System.Drawing.Color.LightGreen;
             this.btnSplit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSplit.Image = global::HitCounterManager.Sources.Resources.icons8_staircase_32;
-            this.btnSplit.Location = new System.Drawing.Point(535, 57);
+            this.btnSplit.Location = new System.Drawing.Point(535, 30);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(75, 40);
             this.btnSplit.TabIndex = 19;
@@ -334,10 +342,11 @@
             // 
             // btnSuccessionProceed
             // 
+            this.btnSuccessionProceed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSuccessionProceed.BackColor = System.Drawing.Color.LightPink;
             this.btnSuccessionProceed.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSuccessionProceed.Image = global::HitCounterManager.Sources.Resources.icons8_tasklist_32;
-            this.btnSuccessionProceed.Location = new System.Drawing.Point(616, 57);
+            this.btnSuccessionProceed.Location = new System.Drawing.Point(616, 30);
             this.btnSuccessionProceed.Name = "btnSuccessionProceed";
             this.btnSuccessionProceed.Size = new System.Drawing.Size(75, 40);
             this.btnSuccessionProceed.TabIndex = 20;
@@ -348,6 +357,8 @@
             // 
             // gpSuccession
             // 
+            this.gpSuccession.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gpSuccession.Controls.Add(this.btnSuccessionVisibility);
             this.gpSuccession.Controls.Add(this.lbl_succession_pb);
             this.gpSuccession.Controls.Add(this.numPB);
@@ -367,6 +378,7 @@
             // 
             // btnSuccessionVisibility
             // 
+            this.btnSuccessionVisibility.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSuccessionVisibility.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_double_up_20;
             this.btnSuccessionVisibility.FlatAppearance.BorderSize = 0;
             this.btnSuccessionVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -449,9 +461,11 @@
             // 
             // txtPredecessorTitle
             // 
+            this.txtPredecessorTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPredecessorTitle.Location = new System.Drawing.Point(109, 26);
             this.txtPredecessorTitle.Name = "txtPredecessorTitle";
-            this.txtPredecessorTitle.Size = new System.Drawing.Size(251, 20);
+            this.txtPredecessorTitle.Size = new System.Drawing.Size(564, 20);
             this.txtPredecessorTitle.TabIndex = 2;
             this.ToolTip1.SetToolTip(this.txtPredecessorTitle, "Name of the precessor split");
             this.txtPredecessorTitle.TextChanged += new System.EventHandler(this.SuccessionChanged);
@@ -501,8 +515,10 @@
             // 
             // lbl_totals
             // 
+            this.lbl_totals.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_totals.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_totals.Location = new System.Drawing.Point(236, 100);
+            this.lbl_totals.Location = new System.Drawing.Point(236, 73);
             this.lbl_totals.Name = "lbl_totals";
             this.lbl_totals.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.lbl_totals.Size = new System.Drawing.Size(455, 20);
@@ -513,7 +529,7 @@
             // lbl_progress
             // 
             this.lbl_progress.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_progress.Location = new System.Drawing.Point(11, 100);
+            this.lbl_progress.Location = new System.Drawing.Point(11, 73);
             this.lbl_progress.Name = "lbl_progress";
             this.lbl_progress.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.lbl_progress.Size = new System.Drawing.Size(219, 20);
@@ -591,11 +607,13 @@
             // 
             // ComboBox1
             // 
+            this.ComboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBox1.FormattingEnabled = true;
-            this.ComboBox1.Location = new System.Drawing.Point(12, 30);
+            this.ComboBox1.Location = new System.Drawing.Point(6, 6);
             this.ComboBox1.Name = "ComboBox1";
-            this.ComboBox1.Size = new System.Drawing.Size(679, 21);
+            this.ComboBox1.Size = new System.Drawing.Size(659, 21);
             this.ComboBox1.Sorted = true;
             this.ComboBox1.TabIndex = 14;
             this.ComboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
@@ -603,6 +621,9 @@
             // DataGridView1
             // 
             this.DataGridView1.AllowUserToResizeRows = false;
+            this.DataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cTitle,
@@ -611,11 +632,36 @@
             this.cDiff,
             this.cPB,
             this.cSP});
-            this.DataGridView1.Location = new System.Drawing.Point(13, 123);
+            this.DataGridView1.Location = new System.Drawing.Point(6, 33);
             this.DataGridView1.MultiSelect = false;
             this.DataGridView1.Name = "DataGridView1";
-            this.DataGridView1.Size = new System.Drawing.Size(678, 254);
+            this.DataGridView1.Size = new System.Drawing.Size(659, 220);
             this.DataGridView1.TabIndex = 21;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.AllowDrop = true;
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Location = new System.Drawing.Point(12, 96);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(679, 282);
+            this.tabControl1.TabIndex = 43;
+            this.tabControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TabControl1_MouseDown);
+            this.tabControl1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TabControl1_MouseMove);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.ComboBox1);
+            this.tabPage1.Controls.Add(this.DataGridView1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(671, 256);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "<tabs available soon>";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -648,8 +694,7 @@
             this.Controls.Add(this.lbl_totals);
             this.Controls.Add(this.lbl_progress);
             this.Controls.Add(this.gpSuccession);
-            this.Controls.Add(this.ComboBox1);
-            this.Controls.Add(this.DataGridView1);
+            this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(530, 400);
             this.Name = "Form1";
@@ -663,6 +708,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numHitsWay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHits)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -714,5 +761,7 @@
         private System.Windows.Forms.NumericUpDown numPB;
         internal System.Windows.Forms.ComboBox ComboBox1;
         internal ProfileDataGridView DataGridView1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
     }
 }
