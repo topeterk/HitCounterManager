@@ -56,6 +56,12 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Sources\ProfileViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sources\ProfileViewControl.Designer.cs">
+      <DependentUpon>ProfileViewControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sources\About.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,7 +81,6 @@
     <Compile Include="Sources\OsLayerWindows.cs" />
     <Compile Include="Sources\OutModule.cs" />
     <Compile Include="Sources\Profiles.cs" />
-    <Compile Include="Sources\AssemblyInfo.cs" />
     <Compile Include="Sources\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -89,6 +94,7 @@
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="Sources\Shortcuts.cs" />
+    <Compile Include="Sources\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -98,6 +104,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Sources\ProfileViewControl.resx">
+      <DependentUpon>ProfileViewControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sources\About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>

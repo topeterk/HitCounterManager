@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnSettings = new System.Windows.Forms.Button();
@@ -70,21 +66,13 @@
             this.Spacer3 = new System.Windows.Forms.Label();
             this.lbl_totals = new System.Windows.Forms.Label();
             this.lbl_progress = new System.Windows.Forms.Label();
-            this.cTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cHits = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cWayHits = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cDiff = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cPB = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cSP = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ComboBox1 = new System.Windows.Forms.ComboBox();
-            this.DataGridView1 = new HitCounterManager.ProfileDataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.profileViewControl1 = new HitCounterManager.ProfileViewControl();
             this.gpSuccession.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHitsWay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHits)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -537,107 +525,6 @@
             this.lbl_progress.Text = "Progress:  ?? / ??  # ???";
             this.lbl_progress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // cTitle
-            // 
-            this.cTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.cTitle.HeaderText = "Title";
-            this.cTitle.MinimumWidth = 30;
-            this.cTitle.Name = "cTitle";
-            this.cTitle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cTitle.ToolTipText = "Title of the split";
-            this.cTitle.Width = 300;
-            // 
-            // cHits
-            // 
-            this.cHits.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle1.NullValue = "0";
-            this.cHits.DefaultCellStyle = dataGridViewCellStyle1;
-            this.cHits.HeaderText = "Hits (Boss)";
-            this.cHits.MinimumWidth = 30;
-            this.cHits.Name = "cHits";
-            this.cHits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cHits.ToolTipText = "Actual split hit count (counter for all or boss hits only)";
-            this.cHits.Width = 50;
-            // 
-            // cWayHits
-            // 
-            this.cWayHits.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle2.NullValue = "0";
-            this.cWayHits.DefaultCellStyle = dataGridViewCellStyle2;
-            this.cWayHits.HeaderText = "Hits (Way)";
-            this.cWayHits.MinimumWidth = 30;
-            this.cWayHits.Name = "cWayHits";
-            this.cWayHits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cWayHits.ToolTipText = "Actual split hit count (counter for hits outside of bosses)";
-            this.cWayHits.Width = 50;
-            // 
-            // cDiff
-            // 
-            this.cDiff.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle3.NullValue = "0";
-            this.cDiff.DefaultCellStyle = dataGridViewCellStyle3;
-            this.cDiff.HeaderText = "Diff";
-            this.cDiff.MinimumWidth = 30;
-            this.cDiff.Name = "cDiff";
-            this.cDiff.ReadOnly = true;
-            this.cDiff.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cDiff.ToolTipText = "Difference between Hits and PB";
-            this.cDiff.Width = 50;
-            // 
-            // cPB
-            // 
-            this.cPB.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle4.NullValue = "0";
-            this.cPB.DefaultCellStyle = dataGridViewCellStyle4;
-            this.cPB.HeaderText = "PB";
-            this.cPB.MinimumWidth = 30;
-            this.cPB.Name = "cPB";
-            this.cPB.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cPB.ToolTipText = "Person best";
-            this.cPB.Width = 50;
-            // 
-            // cSP
-            // 
-            this.cSP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.cSP.HeaderText = "SP";
-            this.cSP.MinimumWidth = 30;
-            this.cSP.Name = "cSP";
-            this.cSP.ToolTipText = "Session progress";
-            this.cSP.Width = 30;
-            // 
-            // ComboBox1
-            // 
-            this.ComboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBox1.FormattingEnabled = true;
-            this.ComboBox1.Location = new System.Drawing.Point(6, 6);
-            this.ComboBox1.Name = "ComboBox1";
-            this.ComboBox1.Size = new System.Drawing.Size(659, 21);
-            this.ComboBox1.Sorted = true;
-            this.ComboBox1.TabIndex = 14;
-            this.ComboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
-            // 
-            // DataGridView1
-            // 
-            this.DataGridView1.AllowUserToResizeRows = false;
-            this.DataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.cTitle,
-            this.cHits,
-            this.cWayHits,
-            this.cDiff,
-            this.cPB,
-            this.cSP});
-            this.DataGridView1.Location = new System.Drawing.Point(6, 33);
-            this.DataGridView1.MultiSelect = false;
-            this.DataGridView1.Name = "DataGridView1";
-            this.DataGridView1.Size = new System.Drawing.Size(659, 220);
-            this.DataGridView1.TabIndex = 21;
-            // 
             // tabControl1
             // 
             this.tabControl1.AllowDrop = true;
@@ -654,14 +541,23 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.ComboBox1);
-            this.tabPage1.Controls.Add(this.DataGridView1);
+            this.tabPage1.Controls.Add(this.profileViewControl1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Size = new System.Drawing.Size(671, 256);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "<tabs available soon>";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // profileViewControl1
+            // 
+            this.profileViewControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.profileViewControl1.Location = new System.Drawing.Point(3, 3);
+            this.profileViewControl1.Name = "profileViewControl1";
+            this.profileViewControl1.Size = new System.Drawing.Size(665, 250);
+            this.profileViewControl1.TabIndex = 0;
             // 
             // Form1
             // 
@@ -707,7 +603,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numPB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHitsWay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHits)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -743,12 +638,6 @@
         internal System.Windows.Forms.Label Spacer3;
         internal System.Windows.Forms.Label lbl_totals;
         internal System.Windows.Forms.Label lbl_progress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cTitle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cHits;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cWayHits;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cDiff;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cPB;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn cSP;
         private System.Windows.Forms.GroupBox gpSuccession;
         internal System.Windows.Forms.Button btnSuccessionVisibility;
         private System.Windows.Forms.CheckBox cbShowPredecessor;
@@ -759,9 +648,8 @@
         private System.Windows.Forms.NumericUpDown numHitsWay;
         private System.Windows.Forms.Label lbl_succession_pb;
         private System.Windows.Forms.NumericUpDown numPB;
-        internal System.Windows.Forms.ComboBox ComboBox1;
-        internal ProfileDataGridView DataGridView1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
+        private ProfileViewControl profileViewControl1;
     }
 }

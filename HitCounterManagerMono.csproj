@@ -15,6 +15,7 @@
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -37,10 +38,11 @@
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <Optimize>true</Optimize>
     <OutputPath>bin\ReleaseMono\</OutputPath>
     <IntermediateOutputPath>obj\ReleaseMono\</IntermediateOutputPath>
-    <DefineConstants>TRACET;OS_ANY</DefineConstants>
+    <DefineConstants>TRACE;OS_ANY</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -74,6 +76,12 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Sources\ProfileViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sources\ProfileViewControl.Designer.cs">
+      <DependentUpon>ProfileViewControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sources\About.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +124,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Sources\ProfileViewControl.resx">
+      <DependentUpon>ProfileViewControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sources\About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
@@ -169,8 +180,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent />
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
