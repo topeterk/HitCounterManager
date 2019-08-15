@@ -430,7 +430,7 @@ namespace HitCounterManager
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            profs.SaveProfile(false); // save currently selected profile
+            profs.SaveProfile(true); // save currently selected profile
             profs.LoadProfile((string)profileViewControl1.ComboBox1.SelectedItem);
         }
 
