@@ -125,6 +125,7 @@ namespace HitCounterManager
         public void SaveProfile(bool AllowCreation)
         {
             if (null == _pi) return; // just for safety should never happen
+            if (null == _pi.ProfileName) return;
 
             Profile prof;
 
