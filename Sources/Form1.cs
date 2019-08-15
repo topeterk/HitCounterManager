@@ -311,13 +311,13 @@ namespace HitCounterManager
                 return;
             }
 
-            profs.SaveProfile(false); // save previous selected profile
+            profs.SaveProfile(); // save previous selected profile
 
             // create, select and save new profile..
             profileViewControl1.ComboBox1.Items.Add(name);
             profileViewControl1.SelectedProfile = name;
             pi.ProfileName = name;
-            profs.SaveProfile(true); // save new empty profile
+            profs.SaveProfile(); // save new empty profile
         }
 
         private void btnRename_Click(object sender, EventArgs e)
@@ -343,36 +343,21 @@ namespace HitCounterManager
 
             do { name += " COPY"; } while (profileViewControl1.ComboBox1.Items.Contains(name)); // extend name till it becomes unique
 
-            profs.SaveProfile(false); // save previous selected profile
+            profs.SaveProfile(); // save previous selected profile
 
             // create, select and save new profile..
             profileViewControl1.ComboBox1.Items.Add(name);
             pi.ProfileName = name;
-            profs.SaveProfile(true); // copy current data to new profile
+            profs.SaveProfile(); // copy current data to new profile
             profileViewControl1.SelectedProfile = name;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (profileViewControl1.ComboBox1.Items.Count == 0) return;
-
             if (DialogResult.OK == MessageBox.Show("Do you really want to delete profile \"" + profileViewControl1.SelectedProfile + "\"?", "Deleting profile", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
             {
-                int idx = profileViewControl1.ComboBox1.SelectedIndex;
-
                 profs.DeleteProfile(profileViewControl1.SelectedProfile);
-                profileViewControl1.ComboBox1.Items.RemoveAt(idx);
-
-                if (profileViewControl1.ComboBox1.Items.Count == 0)
-                {
-                    profileViewControl1.ComboBox1.Items.Add("Unnamed");
-                    profileViewControl1.ComboBox1.SelectedIndex = 0;
-                }
-                else if (profileViewControl1.ComboBox1.Items.Count >= idx)
-                    profileViewControl1.ComboBox1.SelectedIndex = profileViewControl1.ComboBox1.Items.Count - 1;
-                else
-                    profileViewControl1.ComboBox1.SelectedIndex = idx;
-                
+                profileViewControl1.DeleteSelectedProfile();
                 profs.LoadProfile(profileViewControl1.SelectedProfile);
             }
         }
@@ -428,9 +413,13 @@ namespace HitCounterManager
         private void btnSplit_Click(object sender, EventArgs e) { pi.MoveSplits(+1); }
         private void btnSplitPrev_Click(object sender, EventArgs e) { pi.MoveSplits(-1); }
 
-        private void profileViewControl1_SelectedProfileChanged(object sender, EventArgs e)
+        private void profileViewControl1_SelectedProfileChanged(object sender, ProfileViewControl.SelectedProfileChangedCauseType cause)
         {
-            profs.SaveProfile(true); // save currently selected profile
+            if ((cause != ProfileViewControl.SelectedProfileChangedCauseType.Delete) ||
+                (cause != ProfileViewControl.SelectedProfileChangedCauseType.Init))
+            {
+                profs.SaveProfile(); // save currently selected profile
+            }
             profs.LoadProfile(((ProfileViewControl)sender).SelectedProfile);
         }
 

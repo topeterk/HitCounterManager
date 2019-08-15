@@ -121,8 +121,7 @@ namespace HitCounterManager
         /// <summary>
         /// Updates internally cached profile with data from profile info
         /// </summary>
-        /// <param name="AllowCreation">True allows to add a new profile when it does not exist in cache already</param>
-        public void SaveProfile(bool AllowCreation)
+        public void SaveProfile()
         {
             if (null == _pi) return; // just for safety should never happen
             if (null == _pi.ProfileName) return;
@@ -132,8 +131,6 @@ namespace HitCounterManager
             // look for existing one and create if not exists
             if (!_FindProfile(_pi.ProfileName, out prof))
             {
-                if (!AllowCreation) return;
-
                 prof = new Profile();
                 prof.Name = _pi.ProfileName;
                 _Profiles.Add(prof);

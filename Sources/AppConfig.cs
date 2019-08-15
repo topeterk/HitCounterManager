@@ -382,7 +382,7 @@ namespace HitCounterManager
 
             _settings.ProfileSelected = profileViewControl1.SelectedProfile;
 
-            profs.SaveProfile(false); // Make sure all changes have been saved eventually
+            profs.SaveProfile(); // Make sure all changes have been saved eventually
             _settings.Profiles = profs;
 
             sm.WriteXML(_settings);
