@@ -85,7 +85,7 @@ namespace HitCounterManager
         /// <summary>
         /// Returns a list of all available internally cached profile names
         /// </summary>
-        public object[] GetProfileList()
+        public string[] GetProfileList()
         {
             List<string> ret = new List<string>();
             foreach (Profile prof in _Profiles) ret.Add(prof.Name);

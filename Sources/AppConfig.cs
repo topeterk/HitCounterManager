@@ -244,9 +244,7 @@ namespace HitCounterManager
             profs = _settings.Profiles;
             profs.SetProfileInfo(pi);
 
-            profileViewControl1.ComboBox1.Items.AddRange(profs.GetProfileList());
-            if (profileViewControl1.ComboBox1.Items.Count == 0) profileViewControl1.ComboBox1.Items.Add("Unnamed");
-            profileViewControl1.ComboBox1.SelectedItem = _settings.ProfileSelected;
+            profileViewControl1.SetProfileList(profs.GetProfileList(), _settings.ProfileSelected);
 
             if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Reset, _settings.ShortcutResetKeyCode , _settings.ShortcutResetEnable)) isKeyInvalid = true;
             if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Hit, _settings.ShortcutHitKeyCode , _settings.ShortcutHitEnable)) isKeyInvalid = true;
@@ -382,7 +380,7 @@ namespace HitCounterManager
             _settings.SuccessionHitsWay = om.SuccessionHitsWay;
             _settings.SuccessionHitsPB = om.SuccessionHitsPB;
 
-            _settings.ProfileSelected = (string)profileViewControl1.ComboBox1.SelectedItem;
+            _settings.ProfileSelected = profileViewControl1.SelectedProfile;
 
             profs.SaveProfile(false); // Make sure all changes have been saved eventually
             _settings.Profiles = profs;
