@@ -30,7 +30,7 @@ namespace HitCounterManager
     {
         private IProfileInfo pi;
 
-        public enum SelectedProfileChangedCauseType { Select, Init, Delete, Copy };
+        public enum SelectedProfileChangedCauseType { Select, Init, Create, Copy, Delete };
 
         private SelectedProfileChangedCauseType SelectedProfileChangedCause = SelectedProfileChangedCauseType.Select;
 
@@ -68,20 +68,16 @@ namespace HitCounterManager
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }
 
-        public void DeleteSelectedProfile()
+        public void CreateNewProfile(string name)
         {
             SelectedProfileChangedCauseType SelectedProfileChangedCausePrev = SelectedProfileChangedCause;
-            SelectedProfileChangedCause = SelectedProfileChangedCauseType.Delete;
+            SelectedProfileChangedCause = SelectedProfileChangedCauseType.Create;
 
-            int idx = ComboBox1.SelectedIndex;
-            ComboBox1.Items.RemoveAt(idx);
-
-            if (ComboBox1.Items.Count == 0)
-            {
-                ComboBox1.Items.Add("Unnamed");
-                ComboBox1.SelectedIndex = 0;
-            }
-            else ComboBox1.SelectedIndex = (ComboBox1.Items.Count >= idx ? ComboBox1.Items.Count - 1 : idx);
+            // create, select and save new profile..
+            ComboBox1.Items.Add(name);
+            pi.ProfileName = name;
+            pi.ClearSplits();
+            SelectedProfile = name;
 
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }
@@ -98,6 +94,24 @@ namespace HitCounterManager
             ComboBox1.Items.Add(name);
             pi.ProfileName = name;
             SelectedProfile = name;
+
+            SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
+        }
+
+        public void DeleteSelectedProfile()
+        {
+            SelectedProfileChangedCauseType SelectedProfileChangedCausePrev = SelectedProfileChangedCause;
+            SelectedProfileChangedCause = SelectedProfileChangedCauseType.Delete;
+
+            int idx = ComboBox1.SelectedIndex;
+            ComboBox1.Items.RemoveAt(idx);
+
+            if (ComboBox1.Items.Count == 0)
+            {
+                ComboBox1.Items.Add("Unnamed");
+                ComboBox1.SelectedIndex = 0;
+            }
+            else ComboBox1.SelectedIndex = (ComboBox1.Items.Count >= idx ? ComboBox1.Items.Count - 1 : idx);
 
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }

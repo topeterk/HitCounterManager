@@ -312,12 +312,7 @@ namespace HitCounterManager
             }
 
             profs.SaveProfile(); // save previous selected profile
-
-            // create, select and save new profile..
-            profileViewControl1.ComboBox1.Items.Add(name);
-            profileViewControl1.SelectedProfile = name;
-            pi.ProfileName = name;
-            profs.SaveProfile(); // save new empty profile
+            profileViewControl1.CreateNewProfile(name);
         }
 
         private void btnRename_Click(object sender, EventArgs e)
