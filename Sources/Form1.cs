@@ -302,7 +302,7 @@ namespace HitCounterManager
             string name = InputBox("Enter name of new profile", "New profile", profileViewControl1.SelectedProfile);
             if (name.Length == 0) return;
 
-            if (profileViewControl1.ComboBox1.Items.Contains(name))
+            if (profileViewControl1.HasProfile(name))
             {
                 if (DialogResult.OK != MessageBox.Show("A profile with this name already exists. Do you want to create as copy from the currently selected?", "Profile already exists", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
                     return;
@@ -317,19 +317,19 @@ namespace HitCounterManager
 
         private void btnRename_Click(object sender, EventArgs e)
         {
-            if (profileViewControl1.ComboBox1.Items.Count == 0) return;
+            if (null == profileViewControl1.SelectedProfile) return;
 
             string name = InputBox("Enter new name for profile \"" + profileViewControl1.SelectedProfile + "\"!", "Rename profile", profileViewControl1.SelectedProfile);
             if (name.Length == 0) return;
 
-            if (profileViewControl1.ComboBox1.Items.Contains(name))
+            if (profileViewControl1.HasProfile(name))
             {
                 MessageBox.Show("A profile with this name already exists!", "Profile already exists");
                 return;
             }
 
             profs.RenameProfile(profileViewControl1.SelectedProfile, name);
-            profileViewControl1.ComboBox1.Items[profileViewControl1.ComboBox1.SelectedIndex] = name;
+            profileViewControl1.RenameSelectedProfile(name);
         }
 
         private void btnCopy_Click(object sender, EventArgs e)
@@ -401,8 +401,7 @@ namespace HitCounterManager
 
         private void profileViewControl1_SelectedProfileChanged(object sender, ProfileViewControl.SelectedProfileChangedCauseType cause)
         {
-            if ((cause != ProfileViewControl.SelectedProfileChangedCauseType.Delete) ||
-                (cause != ProfileViewControl.SelectedProfileChangedCauseType.Init))
+            if (cause != ProfileViewControl.SelectedProfileChangedCauseType.Delete)
             {
                 profs.SaveProfile(); // save currently selected profile
             }

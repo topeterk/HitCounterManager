@@ -30,7 +30,7 @@ namespace HitCounterManager
     {
         private IProfileInfo pi;
 
-        public enum SelectedProfileChangedCauseType { Select, Init, Create, Copy, Delete };
+        public enum SelectedProfileChangedCauseType { Select, Init, Create, Copy, Rename, Delete };
 
         private SelectedProfileChangedCauseType SelectedProfileChangedCause = SelectedProfileChangedCauseType.Select;
 
@@ -49,7 +49,11 @@ namespace HitCounterManager
         public event EventHandler<SelectedProfileChangedCauseType> SelectedProfileChanged;
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (null != SelectedProfileChanged) SelectedProfileChanged(this, SelectedProfileChangedCause);
+            if (null == SelectedProfileChanged) return;
+
+            if (SelectedProfileChangedCause == SelectedProfileChangedCauseType.Rename) return;
+
+            SelectedProfileChanged(this, SelectedProfileChangedCause); // Fire event
         }
 
         public void SetProfileList(string[] ProfileNames, string SelectProfile)
@@ -60,10 +64,11 @@ namespace HitCounterManager
             ComboBox1.Items.AddRange(ProfileNames);
             if (ComboBox1.Items.Count == 0)
             {
-                ComboBox1.Items.Add("Unnamed");
-                ComboBox1.SelectedIndex = 0;
+                SelectProfile = "Unnamed";
+                ComboBox1.Items.Add(SelectProfile);
+                pi.ProfileName = SelectProfile;
             }
-            else this.SelectedProfile = SelectProfile;
+            this.SelectedProfile = SelectProfile;
 
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }
@@ -98,6 +103,16 @@ namespace HitCounterManager
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }
 
+        public void RenameSelectedProfile(string name)
+        {
+            SelectedProfileChangedCauseType SelectedProfileChangedCausePrev = SelectedProfileChangedCause;
+            SelectedProfileChangedCause = SelectedProfileChangedCauseType.Rename;
+
+            ComboBox1.Items[ComboBox1.SelectedIndex] = name;
+
+            SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
+        }
+
         public void DeleteSelectedProfile()
         {
             SelectedProfileChangedCauseType SelectedProfileChangedCausePrev = SelectedProfileChangedCause;
@@ -115,6 +130,8 @@ namespace HitCounterManager
 
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }
+
+        public bool HasProfile(string name) { return ComboBox1.Items.Contains(name); }
     }
 
     public class ProfileDataGridView : DataGridView, IProfileInfo
