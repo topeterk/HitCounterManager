@@ -244,7 +244,7 @@ namespace HitCounterManager
             profs = _settings.Profiles;
             profs.SetProfileInfo(pi);
 
-            profileViewControl1.SetProfileList(profs.GetProfileList(), _settings.ProfileSelected);
+            pvc.SetProfileList(profs.GetProfileList(), _settings.ProfileSelected);
 
             if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Reset, _settings.ShortcutResetKeyCode , _settings.ShortcutResetEnable)) isKeyInvalid = true;
             if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Hit, _settings.ShortcutHitKeyCode , _settings.ShortcutHitEnable)) isKeyInvalid = true;
@@ -380,7 +380,7 @@ namespace HitCounterManager
             _settings.SuccessionHitsWay = om.SuccessionHitsWay;
             _settings.SuccessionHitsPB = om.SuccessionHitsPB;
 
-            _settings.ProfileSelected = profileViewControl1.SelectedProfile;
+            _settings.ProfileSelected = pvc.SelectedProfile;
 
             profs.SaveProfile(); // Make sure all changes have been saved eventually
             _settings.Profiles = profs;

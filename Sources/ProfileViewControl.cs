@@ -39,7 +39,9 @@ namespace HitCounterManager
             InitializeComponent();
             pi = DataGridView1; // for better capsulation
         }
-
+        
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public string SelectedProfile
         {
             get { return (string)ComboBox1.SelectedItem; }

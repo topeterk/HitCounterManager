@@ -56,12 +56,12 @@ namespace HitCounterManager
 
             gpSuccession_Height = gpSuccession.Height; // remember expanded size from designer settings
 
-            pi = profileViewControl1.DataGridView1; // for better capsulation
+            pi = pvc.DataGridView1; // for better capsulation
             om = new OutModule(pi);
             sc = new Shortcuts(Handle);
 
             pi.ProfileChanged += DataGridView1_ProfileChanged;
-            profileViewControl1.SelectedProfileChanged += profileViewControl1_SelectedProfileChanged;
+            pvc.SelectedProfileChanged += profileViewControl1_SelectedProfileChanged;
 
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -299,10 +299,10 @@ namespace HitCounterManager
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            string name = InputBox("Enter name of new profile", "New profile", profileViewControl1.SelectedProfile);
+            string name = InputBox("Enter name of new profile", "New profile", pvc.SelectedProfile);
             if (name.Length == 0) return;
 
-            if (profileViewControl1.HasProfile(name))
+            if (pvc.HasProfile(name))
             {
                 if (DialogResult.OK != MessageBox.Show("A profile with this name already exists. Do you want to create as copy from the currently selected?", "Profile already exists", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
                     return;
@@ -312,39 +312,39 @@ namespace HitCounterManager
             }
 
             profs.SaveProfile(); // save previous selected profile
-            profileViewControl1.CreateNewProfile(name);
+            pvc.CreateNewProfile(name);
         }
 
         private void btnRename_Click(object sender, EventArgs e)
         {
-            if (null == profileViewControl1.SelectedProfile) return;
+            if (null == pvc.SelectedProfile) return;
 
-            string name = InputBox("Enter new name for profile \"" + profileViewControl1.SelectedProfile + "\"!", "Rename profile", profileViewControl1.SelectedProfile);
+            string name = InputBox("Enter new name for profile \"" + pvc.SelectedProfile + "\"!", "Rename profile", pvc.SelectedProfile);
             if (name.Length == 0) return;
 
-            if (profileViewControl1.HasProfile(name))
+            if (pvc.HasProfile(name))
             {
                 MessageBox.Show("A profile with this name already exists!", "Profile already exists");
                 return;
             }
 
-            profs.RenameProfile(profileViewControl1.SelectedProfile, name);
-            profileViewControl1.RenameSelectedProfile(name);
+            profs.RenameProfile(pvc.SelectedProfile, name);
+            pvc.RenameSelectedProfile(name);
         }
 
         private void btnCopy_Click(object sender, EventArgs e)
         {
             profs.SaveProfile(); // save previous selected profile
-            profileViewControl1.CopySelectedProfile();
+            pvc.CopySelectedProfile();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (DialogResult.OK == MessageBox.Show("Do you really want to delete profile \"" + profileViewControl1.SelectedProfile + "\"?", "Deleting profile", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
+            if (DialogResult.OK == MessageBox.Show("Do you really want to delete profile \"" + pvc.SelectedProfile + "\"?", "Deleting profile", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
             {
-                profs.DeleteProfile(profileViewControl1.SelectedProfile);
-                profileViewControl1.DeleteSelectedProfile();
-                profs.LoadProfile(profileViewControl1.SelectedProfile);
+                profs.DeleteProfile(pvc.SelectedProfile);
+                pvc.DeleteSelectedProfile();
+                profs.LoadProfile(pvc.SelectedProfile);
             }
         }
 
@@ -486,7 +486,7 @@ namespace HitCounterManager
                 // Start of DragDrop
                 TabPage hover_Tab = HoverTab();
                 if (hover_Tab == null ) return;
-                if (hover_Tab.Text.Equals("+")) return;
+                if (hover_Tab.Text.Equals("+")) return; // Keep "New page" tab at the end
                 TabPageDragDrop = hover_Tab;
             }
         }
@@ -505,7 +505,7 @@ namespace HitCounterManager
                 // During DragDrop
                 TabPage hover_Tab = HoverTab();
                 if (hover_Tab == null) return;
-                if (hover_Tab.Text.Equals("+") || (hover_Tab == TabPageDragDrop)) return;
+                if (hover_Tab.Text.Equals("+") || (hover_Tab == TabPageDragDrop)) return; // Keep "New page" tab at the end
 
                 // Switch tabs but retain numbering
                 int Index1 = tabControl1.TabPages.IndexOf(TabPageDragDrop);
@@ -526,6 +526,28 @@ namespace HitCounterManager
                     return tabControl1.TabPages[index];
             }
             return null;
+        }
+
+        private void TabControl1_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (e.TabPage.Text.Equals("+"))
+            {
+                Control template = tabControl1.TabPages[0].Controls["pvc"];
+                TabPage page = e.TabPage;
+
+                // Reuse the "New page" tab for the actual new page and create an new "New page" tab
+                page.Text = (e.TabPageIndex+1).ToString();
+                tabControl1.TabPages.Add("+");
+
+                // Fill controls of the tab
+                ProfileViewControl pvc = new ProfileViewControl();
+                page.Controls.Add(pvc);
+                pvc.Anchor = template.Anchor;
+                pvc.Location = template.Location;
+                pvc.Name = "pvc";
+                pvc.Size = template.Size;
+                pvc.TabIndex = 0;
+            }
         }
     }
 }

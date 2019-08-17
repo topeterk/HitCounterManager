@@ -68,7 +68,8 @@
             this.lbl_progress = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.profileViewControl1 = new HitCounterManager.ProfileViewControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.pvc = new HitCounterManager.ProfileViewControl();
             this.gpSuccession.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHitsWay)).BeginInit();
@@ -531,33 +532,44 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(12, 96);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(679, 282);
             this.tabControl1.TabIndex = 43;
+            this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabControl1_Selecting);
             this.tabControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TabControl1_MouseDown);
             this.tabControl1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TabControl1_MouseMove);
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.profileViewControl1);
+            this.tabPage1.Controls.Add(this.pvc);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Size = new System.Drawing.Size(671, 256);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "<tabs available soon>";
+            this.tabPage1.Text = "1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // profileViewControl1
+            // tabPage2
             // 
-            this.profileViewControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(671, 256);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "+";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // pvc
+            // 
+            this.pvc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.profileViewControl1.Location = new System.Drawing.Point(3, 3);
-            this.profileViewControl1.Name = "profileViewControl1";
-            this.profileViewControl1.Size = new System.Drawing.Size(665, 250);
-            this.profileViewControl1.TabIndex = 0;
+            this.pvc.Location = new System.Drawing.Point(3, 3);
+            this.pvc.Name = "pvc";
+            this.pvc.Size = new System.Drawing.Size(665, 250);
+            this.pvc.TabIndex = 0;
             // 
             // Form1
             // 
@@ -650,6 +662,7 @@
         private System.Windows.Forms.NumericUpDown numPB;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private ProfileViewControl profileViewControl1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private ProfileViewControl pvc;
     }
 }
