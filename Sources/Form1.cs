@@ -339,17 +339,8 @@ namespace HitCounterManager
 
         private void btnCopy_Click(object sender, EventArgs e)
         {
-            string name = profileViewControl1.SelectedProfile;
-
-            do { name += " COPY"; } while (profileViewControl1.ComboBox1.Items.Contains(name)); // extend name till it becomes unique
-
             profs.SaveProfile(); // save previous selected profile
-
-            // create, select and save new profile..
-            profileViewControl1.ComboBox1.Items.Add(name);
-            pi.ProfileName = name;
-            profs.SaveProfile(); // copy current data to new profile
-            profileViewControl1.SelectedProfile = name;
+            profileViewControl1.CopySelectedProfile();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

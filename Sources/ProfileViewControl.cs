@@ -28,13 +28,16 @@ namespace HitCounterManager
 {
     public partial class ProfileViewControl : UserControl
     {
-        public enum SelectedProfileChangedCauseType { Select, Init, Delete };
+        private IProfileInfo pi;
+
+        public enum SelectedProfileChangedCauseType { Select, Init, Delete, Copy };
 
         private SelectedProfileChangedCauseType SelectedProfileChangedCause = SelectedProfileChangedCauseType.Select;
 
         public ProfileViewControl()
         {
             InitializeComponent();
+            pi = DataGridView1; // for better capsulation
         }
 
         public string SelectedProfile
@@ -52,23 +55,25 @@ namespace HitCounterManager
         public void SetProfileList(string[] ProfileNames, string SelectProfile)
         {
             SelectedProfileChangedCauseType SelectedProfileChangedCausePrev = SelectedProfileChangedCause;
-            ComboBox1.Items.AddRange(ProfileNames);
             SelectedProfileChangedCause = SelectedProfileChangedCauseType.Init;
+
+            ComboBox1.Items.AddRange(ProfileNames);
             if (ComboBox1.Items.Count == 0)
             {
                 ComboBox1.Items.Add("Unnamed");
                 ComboBox1.SelectedIndex = 0;
             }
             else this.SelectedProfile = SelectProfile;
+
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }
 
         public void DeleteSelectedProfile()
         {
             SelectedProfileChangedCauseType SelectedProfileChangedCausePrev = SelectedProfileChangedCause;
-            int idx = ComboBox1.SelectedIndex;
-
             SelectedProfileChangedCause = SelectedProfileChangedCauseType.Delete;
+
+            int idx = ComboBox1.SelectedIndex;
             ComboBox1.Items.RemoveAt(idx);
 
             if (ComboBox1.Items.Count == 0)
@@ -77,6 +82,23 @@ namespace HitCounterManager
                 ComboBox1.SelectedIndex = 0;
             }
             else ComboBox1.SelectedIndex = (ComboBox1.Items.Count >= idx ? ComboBox1.Items.Count - 1 : idx);
+
+            SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
+        }
+
+        public void CopySelectedProfile()
+        {
+            SelectedProfileChangedCauseType SelectedProfileChangedCausePrev = SelectedProfileChangedCause;
+            SelectedProfileChangedCause = SelectedProfileChangedCauseType.Copy;
+
+            string name = SelectedProfile;
+            do { name += " COPY"; } while (ComboBox1.Items.Contains(name)); // extend name till it becomes unique
+
+            // create, select and save new profile..
+            ComboBox1.Items.Add(name);
+            pi.ProfileName = name;
+            SelectedProfile = name;
+
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }
     }
