@@ -69,6 +69,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.pvc = new HitCounterManager.ProfileViewControl();
             this.gpSuccession.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPB)).BeginInit();
@@ -533,14 +534,19 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 96);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(679, 282);
             this.tabControl1.TabIndex = 43;
+            this.ToolTip1.SetToolTip(this.tabControl1, "Reorder successive profiles by dragging the tab to the desired position.\r\nAdd new" +
+        " tabs by selecting the \"+\" tab.\r\nDelete a tab by dragging the tab over the \"-\" t" +
+        "ab.");
             this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabControl1_Selecting);
             this.tabControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TabControl1_MouseDown);
             this.tabControl1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TabControl1_MouseMove);
+            this.tabControl1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TabControl1_MouseUp);
             // 
             // tabPage1
             // 
@@ -560,6 +566,15 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "+";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(671, 256);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "-";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // pvc
             // 
@@ -624,34 +639,34 @@
 
         #endregion
 
-        internal System.Windows.Forms.ToolTip ToolTip1;
-        internal System.Windows.Forms.Button btnSettings;
-        internal System.Windows.Forms.Button btnSave;
-        internal System.Windows.Forms.Button btnWeb;
-        internal System.Windows.Forms.Button btnCheckVersion;
-        internal System.Windows.Forms.Button btnAbout;
-        internal System.Windows.Forms.Button btnNew;
-        internal System.Windows.Forms.Button btnRename;
-        internal System.Windows.Forms.Button btnCopy;
-        internal System.Windows.Forms.Button btnDelete;
-        internal System.Windows.Forms.Button btnAttempts;
-        internal System.Windows.Forms.Button btnUp;
-        internal System.Windows.Forms.Button btnDown;
-        internal System.Windows.Forms.Button btnInsertSplit;
-        internal System.Windows.Forms.Button btnOnTop;
-        internal System.Windows.Forms.Button btnReset;
-        internal System.Windows.Forms.Button btnPB;
-        internal System.Windows.Forms.Button btnHit;
-        internal System.Windows.Forms.Button btnWayHit;
-        internal System.Windows.Forms.Button btnSplit;
-        internal System.Windows.Forms.Button btnSuccessionProceed;
-        internal System.Windows.Forms.Label Spacer1;
-        internal System.Windows.Forms.Label Spacer2;
-        internal System.Windows.Forms.Label Spacer3;
-        internal System.Windows.Forms.Label lbl_totals;
-        internal System.Windows.Forms.Label lbl_progress;
+        private System.Windows.Forms.ToolTip ToolTip1;
+        private System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnWeb;
+        private System.Windows.Forms.Button btnCheckVersion;
+        private System.Windows.Forms.Button btnAbout;
+        private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.Button btnRename;
+        private System.Windows.Forms.Button btnCopy;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnAttempts;
+        private System.Windows.Forms.Button btnUp;
+        private System.Windows.Forms.Button btnDown;
+        private System.Windows.Forms.Button btnInsertSplit;
+        private System.Windows.Forms.Button btnOnTop;
+        private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button btnPB;
+        private System.Windows.Forms.Button btnHit;
+        private System.Windows.Forms.Button btnWayHit;
+        private System.Windows.Forms.Button btnSplit;
+        private System.Windows.Forms.Button btnSuccessionProceed;
+        private System.Windows.Forms.Label Spacer1;
+        private System.Windows.Forms.Label Spacer2;
+        private System.Windows.Forms.Label Spacer3;
+        private System.Windows.Forms.Label lbl_totals;
+        private System.Windows.Forms.Label lbl_progress;
         private System.Windows.Forms.GroupBox gpSuccession;
-        internal System.Windows.Forms.Button btnSuccessionVisibility;
+        private System.Windows.Forms.Button btnSuccessionVisibility;
         private System.Windows.Forms.CheckBox cbShowPredecessor;
         private System.Windows.Forms.TextBox txtPredecessorTitle;
         private System.Windows.Forms.Label lbl_succession_hits;
@@ -663,6 +678,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
         private ProfileViewControl pvc;
     }
 }

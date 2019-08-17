@@ -486,8 +486,28 @@ namespace HitCounterManager
                 // Start of DragDrop
                 TabPage hover_Tab = HoverTab();
                 if (hover_Tab == null ) return;
-                if (hover_Tab.Text.Equals("+")) return; // Keep "New page" tab at the end
+                if (hover_Tab.Text.Equals("+") && hover_Tab.Text.Equals("-")) return; // Keep "New"/"Delete" tab at the end
                 TabPageDragDrop = hover_Tab;
+            }
+        }
+
+        private void TabControl1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (null == TabPageDragDrop) return; // No DragDrop currently active
+
+            if (e.Button == MouseButtons.Left)
+            {
+                // DragDrop stopped
+                TabPage hover_Tab = HoverTab();
+                if ((hover_Tab != null) && (hover_Tab != TabPageDragDrop)) // Dragged onto nothing or itself?
+                {
+                    if (hover_Tab.Text.Equals("-"))// Dragged on "Delete" tab?
+                    {
+                        // Remove tab but we still need one regular, the "New" and "Delete tabs.
+                        if (3 < tabControl1.TabPages.Count) tabControl1.TabPages.Remove(TabPageDragDrop);
+                    }
+                }
+                TabPageDragDrop = null;
             }
         }
 
@@ -497,6 +517,7 @@ namespace HitCounterManager
 
             if (e.Button != MouseButtons.Left)
             {
+                // Should be coverd by MouseUp, just for safety
                 // DragDrop stopped
                 TabPageDragDrop = null;
             }
@@ -504,8 +525,8 @@ namespace HitCounterManager
             {
                 // During DragDrop
                 TabPage hover_Tab = HoverTab();
-                if (hover_Tab == null) return;
-                if (hover_Tab.Text.Equals("+") || (hover_Tab == TabPageDragDrop)) return; // Keep "New page" tab at the end
+                if ((hover_Tab == null) || (hover_Tab == TabPageDragDrop)) return; // Dragged onto nothing or itself?
+                if (hover_Tab.Text.Equals("+") || hover_Tab.Text.Equals("-")) return; // Keep "New"/"Delete" tab at the end
 
                 // Switch tabs but retain numbering
                 int Index1 = tabControl1.TabPages.IndexOf(TabPageDragDrop);
@@ -535,9 +556,9 @@ namespace HitCounterManager
                 Control template = tabControl1.TabPages[0].Controls["pvc"];
                 TabPage page = e.TabPage;
 
-                // Reuse the "New page" tab for the actual new page and create an new "New page" tab
+                // Reuse the "New" tab for the actual new page and create an new "New" tab
                 page.Text = (e.TabPageIndex+1).ToString();
-                tabControl1.TabPages.Add("+");
+                tabControl1.TabPages.Insert(e.TabPageIndex+1, "+");
 
                 // Fill controls of the tab
                 ProfileViewControl pvc = new ProfileViewControl();
@@ -548,6 +569,7 @@ namespace HitCounterManager
                 pvc.Size = template.Size;
                 pvc.TabIndex = 0;
             }
+            else if (e.TabPage.Text.Equals("-"))  e.Cancel = true; // "Delete" tab cannot be selected
         }
     }
 }
