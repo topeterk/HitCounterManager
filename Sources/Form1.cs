@@ -56,7 +56,7 @@ namespace HitCounterManager
 
             gpSuccession_Height = gpSuccession.Height; // remember expanded size from designer settings
 
-            pi = pvc.DataGridView1; // for better capsulation
+            pi = pvc.ProfileInfo; // for better capsulation
             om = new OutModule(pi);
             sc = new Shortcuts(Handle);
 

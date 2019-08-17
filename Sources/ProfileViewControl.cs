@@ -28,7 +28,10 @@ namespace HitCounterManager
 {
     public partial class ProfileViewControl : UserControl
     {
-        private IProfileInfo pi;
+        private readonly IProfileInfo pi;
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
+        public IProfileInfo ProfileInfo { get { return pi; } }
 
         public enum SelectedProfileChangedCauseType { Select, Init, Create, Copy, Rename, Delete };
 
@@ -37,7 +40,7 @@ namespace HitCounterManager
         public ProfileViewControl()
         {
             InitializeComponent();
-            pi = DataGridView1; // for better capsulation
+            pi = DataGridView1; // for better encapsulation
         }
         
         [Browsable(false)] // Hide from designer

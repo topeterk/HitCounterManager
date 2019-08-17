@@ -159,8 +159,8 @@
 
         #endregion
 
-        internal System.Windows.Forms.ComboBox ComboBox1;
-        internal ProfileDataGridView DataGridView1;
+        private System.Windows.Forms.ComboBox ComboBox1;
+        private ProfileDataGridView DataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn cTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn cHits;
         private System.Windows.Forms.DataGridViewTextBoxColumn cWayHits;
