@@ -59,6 +59,8 @@ namespace HitCounterManager
             if (SelectedProfileChangedCause == SelectedProfileChangedCauseType.Rename) return;
 
             SelectedProfileChanged(this, SelectedProfileChangedCause); // Fire event
+
+            DataGridView1.Visible = (0 < ComboBox1.Items.Count);
         }
 
         public void SetProfileList(string[] ProfileNames, string SelectProfile)
@@ -73,7 +75,7 @@ namespace HitCounterManager
                 ComboBox1.Items.Add(SelectProfile);
                 pi.ProfileName = SelectProfile;
             }
-            this.SelectedProfile = SelectProfile;
+            if (SelectProfile != null) this.SelectedProfile = SelectProfile;
 
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }

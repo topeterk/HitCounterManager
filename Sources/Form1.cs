@@ -486,7 +486,7 @@ namespace HitCounterManager
                 // Start of DragDrop
                 TabPage hover_Tab = HoverTab();
                 if (hover_Tab == null ) return;
-                if (hover_Tab.Text.Equals("+") && hover_Tab.Text.Equals("-")) return; // Keep "New"/"Delete" tab at the end
+                if (hover_Tab.Text.Equals("+") || hover_Tab.Text.Equals("-")) return; // Keep "New"/"Delete" tab at the end
                 TabPageDragDrop = hover_Tab;
             }
         }
@@ -551,7 +551,9 @@ namespace HitCounterManager
 
         private void TabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            if (e.TabPage.Text.Equals("+"))
+            ProfileViewControl pvc;
+
+            if (e.TabPage.Text.Equals("+")) // Create new tab?
             {
                 Control template = tabControl1.TabPages[0].Controls["pvc"];
                 TabPage page = e.TabPage;
@@ -561,15 +563,35 @@ namespace HitCounterManager
                 tabControl1.TabPages.Insert(e.TabPageIndex+1, "+");
 
                 // Fill controls of the tab
-                ProfileViewControl pvc = new ProfileViewControl();
-                page.Controls.Add(pvc);
+                pvc = new ProfileViewControl();
                 pvc.Anchor = template.Anchor;
                 pvc.Location = template.Location;
                 pvc.Name = "pvc";
                 pvc.Size = template.Size;
                 pvc.TabIndex = 0;
+
+                profs.SaveProfile(); // save current tab's profile
+                pi = pvc.ProfileInfo;
+                pvc.SelectedProfileChanged += profileViewControl1_SelectedProfileChanged;
+                pvc.SetProfileList(profs.GetProfileList(), null);
+                pvc.ProfileInfo.ProfileChanged += DataGridView1_ProfileChanged;
+
+                page.Controls.Add(pvc);
             }
-            else if (e.TabPage.Text.Equals("-"))  e.Cancel = true; // "Delete" tab cannot be selected
+
+            if (!e.TabPage.Text.Equals("-")) // Switch to tab?
+            {
+                profs.SaveProfile(); // save current tab's profile
+
+                // Switch UI to interact with selected tab
+                pvc = (ProfileViewControl)e.TabPage.Controls["pvc"];
+                pi = pvc.ProfileInfo;
+                pi.ProfileUpdateBegin();
+                profs.SetProfileInfo(pi);
+                om = new OutModule(pi);
+                pi.ProfileUpdateEnd();
+            }
+            else e.Cancel = true; // "Delete" tab cannot be selected
         }
     }
 }

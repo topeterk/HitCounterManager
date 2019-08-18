@@ -75,6 +75,7 @@
             this.DataGridView1.Name = "DataGridView1";
             this.DataGridView1.Size = new System.Drawing.Size(624, 198);
             this.DataGridView1.TabIndex = 23;
+            this.DataGridView1.Visible = false;
             // 
             // cTitle
             // 
