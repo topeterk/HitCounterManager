@@ -312,13 +312,11 @@ namespace HitCounterManager
             }
 
             profs.SaveProfile(); // save previous selected profile
-            pvc.CreateNewProfile(Name, true); // Apply on foreground tab
 
-            // Apply on all background tabs
-            foreach(TabPage page in tabControl1.TabPages)
+            // Apply on all tabs
+            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
             {
-                if (page.Text.Equals("+") || page.Text.Equals("-") || (page == tabControl1.SelectedTab)) continue; // Skip "New"/"Delete" and own tab
-                ((ProfileViewControl)page.Controls["pvc"]).CreateNewProfile(Name, false);
+                pvc_tab.CreateNewProfile(Name, (pvc_tab == pvc)); // Select only on the current tab
             }
         }
 
@@ -337,13 +335,11 @@ namespace HitCounterManager
             }
 
             profs.RenameProfile(NameOld, NameNew);
-            pvc.RenameProfile(NameOld, NameNew); // Apply on foreground tab
 
-            // Apply on all background tabs
-            foreach(TabPage page in tabControl1.TabPages)
+            // Apply on all tabs
+            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
             {
-                if (page.Text.Equals("+") || page.Text.Equals("-") || (page == tabControl1.SelectedTab)) continue; // Skip "New"/"Delete" and own tab
-                ((ProfileViewControl)page.Controls["pvc"]).RenameProfile(NameOld, NameNew);
+                pvc_tab.RenameProfile(NameOld, NameNew);
             }
         }
 
@@ -353,10 +349,10 @@ namespace HitCounterManager
             pvc.CopySelectedProfile(); // Apply on foreground tab
 
             // Apply on all background tabs
-            foreach(TabPage page in tabControl1.TabPages)
+            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
             {
-                if (page.Text.Equals("+") || page.Text.Equals("-") || (page == tabControl1.SelectedTab)) continue; // Skip "New"/"Delete" and own tab
-                ((ProfileViewControl)page.Controls["pvc"]).CreateNewProfile(pvc.SelectedProfile, false);
+                if (pvc_tab == pvc) continue; // Skip current tab
+                pvc_tab.CreateNewProfile(pvc.SelectedProfile, false);
             }
         }
 
@@ -369,10 +365,10 @@ namespace HitCounterManager
                 pvc.DeleteSelectedProfile(); // Apply on foreground tab
 
                 // Apply on all background tabs
-                foreach(TabPage page in tabControl1.TabPages)
+                foreach(ProfileViewControl pvc_tab in ProfileViewControls)
                 {
-                    if (page.Text.Equals("+") || page.Text.Equals("-") || (page == tabControl1.SelectedTab)) continue; // Skip "New"/"Delete" and own tab
-                    ((ProfileViewControl)page.Controls["pvc"]).DeleteProfile(Name);
+                    if (pvc_tab == pvc) continue; // Skip current tab
+                    pvc_tab.DeleteProfile(Name);
                 }
 
                 profs.LoadProfile(pvc.SelectedProfile);
@@ -507,6 +503,21 @@ namespace HitCounterManager
         }
 
         #endregion
+
+        private ProfileViewControl[] ProfileViewControls
+        {
+            get
+            {
+                ProfileViewControl[] pvcs = new ProfileViewControl[tabControl1.TabCount-2];
+                int i = 0;
+                foreach(TabPage page in tabControl1.TabPages)
+                {
+                    if (page.Text.Equals("+") || page.Text.Equals("-")) continue; // Skip "New"/"Delete" tab
+                    pvcs[i++] = (ProfileViewControl)page.Controls["pvc"];
+                }
+                return pvcs;
+            }
+        }
 
         private TabPage TabPageDragDrop = null;
 
