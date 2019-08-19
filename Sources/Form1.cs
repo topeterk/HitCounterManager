@@ -572,44 +572,43 @@ namespace HitCounterManager
 
         private void TabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
+            if (e.TabPage.Text.Equals("-")) // Switch to tab?
+            {
+                e.Cancel = true; // "Delete" tab cannot be selected
+                return;
+            }
+            
+            profs.SaveProfile(); // save current tab's profile
+
             if (e.TabPage.Text.Equals("+")) // Create new tab?
             {
                 Control template = tabControl1.TabPages[0].Controls["pvc"];
                 TabPage page = e.TabPage;
 
                 // Reuse the "New" tab for the actual new page and create an new "New" tab
-                page.Text = (e.TabPageIndex+1).ToString();
-                tabControl1.TabPages.Insert(e.TabPageIndex+1, "+");
+                page.Text = (e.TabPageIndex + 1).ToString();
+                tabControl1.TabPages.Insert(e.TabPageIndex + 1, "+");
 
                 // Fill controls of the tab
-                ProfileViewControl pvc = new ProfileViewControl();
-                pvc.Anchor = template.Anchor;
-                pvc.Location = template.Location;
-                pvc.Name = "pvc";
-                pvc.Size = template.Size;
-                pvc.TabIndex = 0;
+                ProfileViewControl pvc_new = new ProfileViewControl();
+                pvc_new.Anchor = template.Anchor;
+                pvc_new.Location = template.Location;
+                pvc_new.Name = "pvc";
+                pvc_new.Size = template.Size;
+                pvc_new.TabIndex = 0;
+                pvc_new.ProfileInfo.ProfileChanged += DataGridView1_ProfileChanged;
+                pvc_new.SelectedProfileChanged += profileViewControl1_SelectedProfileChanged;
+                page.Controls.Add(pvc_new);
 
-                profs.SaveProfile(); // save current tab's profile
-                pi = pvc.ProfileInfo;
-                pvc.SelectedProfileChanged += profileViewControl1_SelectedProfileChanged;
-                pvc.SetProfileList(profs.GetProfileList(), null);
-                pvc.ProfileInfo.ProfileChanged += DataGridView1_ProfileChanged;
-
-                page.Controls.Add(pvc);
+                pvc_new.SetProfileList(profs.GetProfileList(), null);
             }
 
-            if (!e.TabPage.Text.Equals("-")) // Switch to tab?
-            {
-                profs.SaveProfile(); // save current tab's profile
-
-                // Switch UI to interact with selected tab
-                pvc = (ProfileViewControl)e.TabPage.Controls["pvc"];
-                pi = pvc.ProfileInfo;
-                profs.SetProfileInfo(pi);
-                profs.LoadProfile(pi.ProfileName);
-                om = new OutModule(pi);
-            }
-            else e.Cancel = true; // "Delete" tab cannot be selected
+            // Switch UI to interact with selected tab
+            pvc = (ProfileViewControl)e.TabPage.Controls["pvc"];
+            pi = pvc.ProfileInfo;
+            profs.SetProfileInfo(pi);
+            profs.LoadProfile(pi.ProfileName);
+            om = new OutModule(pi);
         }
     }
 }

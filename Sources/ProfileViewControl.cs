@@ -58,9 +58,8 @@ namespace HitCounterManager
 
             if (SelectedProfileChangedCause == SelectedProfileChangedCauseType.Rename) return;
 
+            DataGridView1.Visible = (0 < ComboBox1.Items.Count); // "Enable" via visibility to make it fully useable
             SelectedProfileChanged(this, SelectedProfileChangedCause); // Fire event
-
-            DataGridView1.Visible = (0 < ComboBox1.Items.Count);
         }
 
         public void SetProfileList(string[] ProfileNames, string SelectProfile)
