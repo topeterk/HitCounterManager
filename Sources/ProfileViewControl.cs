@@ -113,17 +113,15 @@ namespace HitCounterManager
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }
 
-        public void RenameSelectedProfile(string NameNew)
+        public void RenameProfile(string NameOld, string NameNew)
         {
             SelectedProfileChangedCauseType SelectedProfileChangedCausePrev = SelectedProfileChangedCause;
             SelectedProfileChangedCause = SelectedProfileChangedCauseType.Rename;
 
-            ComboBox1.Items[ComboBox1.SelectedIndex] = NameNew;
+            ComboBox1.Items[ComboBox1.Items.IndexOf(NameOld)] = NameNew;
 
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }
-
-        public void RenameProfile(string NameOld, string NameNew) { ComboBox1.Items[ComboBox1.Items.IndexOf(NameOld)] = NameNew; }
 
         public void DeleteSelectedProfile()
         {
@@ -139,6 +137,21 @@ namespace HitCounterManager
                 ComboBox1.SelectedIndex = 0;
             }
             else ComboBox1.SelectedIndex = (ComboBox1.Items.Count >= idx ? ComboBox1.Items.Count - 1 : idx);
+
+            SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
+        }
+
+        public void DeleteProfile(string Name)
+        {
+            SelectedProfileChangedCauseType SelectedProfileChangedCausePrev = SelectedProfileChangedCause;
+            SelectedProfileChangedCause = SelectedProfileChangedCauseType.Delete;
+
+            int idx = ComboBox1.Items.IndexOf(Name);
+            if (idx == ComboBox1.SelectedIndex)
+            {
+                ComboBox1.SelectedItem = null;
+            }
+            ComboBox1.Items.RemoveAt(idx);
 
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }

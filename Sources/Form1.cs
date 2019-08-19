@@ -312,6 +312,7 @@ namespace HitCounterManager
             }
 
             profs.SaveProfile(); // save previous selected profile
+            pvc.CreateNewProfile(Name, true); // Apply on foreground tab
 
             // Apply on all background tabs
             foreach(TabPage page in tabControl1.TabPages)
@@ -319,38 +320,38 @@ namespace HitCounterManager
                 if (page.Text.Equals("+") || page.Text.Equals("-") || (page == tabControl1.SelectedTab)) continue; // Skip "New"/"Delete" and own tab
                 ((ProfileViewControl)page.Controls["pvc"]).CreateNewProfile(Name, false);
             }
-            pvc.CreateNewProfile(Name, true); // Apply on foreground tab
         }
 
         private void btnRename_Click(object sender, EventArgs e)
         {
             if (null == pvc.SelectedProfile) return;
+            
+            string NameOld = pvc.SelectedProfile;
+            string NameNew = InputBox("Enter new name for profile \"" + NameOld + "\"!", "Rename profile", NameOld);
+            if (NameNew.Length == 0) return;
 
-            string Name = InputBox("Enter new name for profile \"" + pvc.SelectedProfile + "\"!", "Rename profile", pvc.SelectedProfile);
-            if (Name.Length == 0) return;
-
-            if (pvc.HasProfile(Name))
+            if (pvc.HasProfile(NameNew))
             {
                 MessageBox.Show("A profile with this name already exists!", "Profile already exists");
                 return;
             }
 
-            profs.RenameProfile(pvc.SelectedProfile, Name);
+            profs.RenameProfile(NameOld, NameNew);
+            pvc.RenameProfile(NameOld, NameNew); // Apply on foreground tab
 
             // Apply on all background tabs
             foreach(TabPage page in tabControl1.TabPages)
             {
                 if (page.Text.Equals("+") || page.Text.Equals("-") || (page == tabControl1.SelectedTab)) continue; // Skip "New"/"Delete" and own tab
-                ((ProfileViewControl)page.Controls["pvc"]).RenameProfile(pvc.SelectedProfile, Name);
+                ((ProfileViewControl)page.Controls["pvc"]).RenameProfile(NameOld, NameNew);
             }
-            pvc.RenameSelectedProfile(Name); // Apply on foreground tab
         }
 
         private void btnCopy_Click(object sender, EventArgs e)
         {
             profs.SaveProfile(); // save previous selected profile
+            pvc.CopySelectedProfile(); // Apply on foreground tab
 
-            pvc.CopySelectedProfile(); // Apply on foreground tab (beforehand as we need to know the resulting name of the new profile first)
             // Apply on all background tabs
             foreach(TabPage page in tabControl1.TabPages)
             {
@@ -361,10 +362,19 @@ namespace HitCounterManager
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (DialogResult.OK == MessageBox.Show("Do you really want to delete profile \"" + pvc.SelectedProfile + "\"?", "Deleting profile", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
+            string Name = pvc.SelectedProfile;
+            if (DialogResult.OK == MessageBox.Show("Do you really want to delete profile \"" + Name + "\"?", "Deleting profile", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
             {
-                profs.DeleteProfile(pvc.SelectedProfile);
-                pvc.DeleteSelectedProfile();
+                profs.DeleteProfile(Name);
+                pvc.DeleteSelectedProfile(); // Apply on foreground tab
+
+                // Apply on all background tabs
+                foreach(TabPage page in tabControl1.TabPages)
+                {
+                    if (page.Text.Equals("+") || page.Text.Equals("-") || (page == tabControl1.SelectedTab)) continue; // Skip "New"/"Delete" and own tab
+                    ((ProfileViewControl)page.Controls["pvc"]).DeleteProfile(Name);
+                }
+
                 profs.LoadProfile(pvc.SelectedProfile);
             }
         }
