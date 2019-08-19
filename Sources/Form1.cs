@@ -299,10 +299,10 @@ namespace HitCounterManager
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            string name = InputBox("Enter name of new profile", "New profile", pvc.SelectedProfile);
-            if (name.Length == 0) return;
+            string Name = InputBox("Enter name of new profile", "New profile", pvc.SelectedProfile);
+            if (Name.Length == 0) return;
 
-            if (pvc.HasProfile(name))
+            if (pvc.HasProfile(Name))
             {
                 if (DialogResult.OK != MessageBox.Show("A profile with this name already exists. Do you want to create as copy from the currently selected?", "Profile already exists", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
                     return;
@@ -312,30 +312,51 @@ namespace HitCounterManager
             }
 
             profs.SaveProfile(); // save previous selected profile
-            pvc.CreateNewProfile(name);
+
+            // Apply on all background tabs
+            foreach(TabPage page in tabControl1.TabPages)
+            {
+                if (page.Text.Equals("+") || page.Text.Equals("-") || (page == tabControl1.SelectedTab)) continue; // Skip "New"/"Delete" and own tab
+                ((ProfileViewControl)page.Controls["pvc"]).CreateNewProfile(Name, false);
+            }
+            pvc.CreateNewProfile(Name, true); // Apply on foreground tab
         }
 
         private void btnRename_Click(object sender, EventArgs e)
         {
             if (null == pvc.SelectedProfile) return;
 
-            string name = InputBox("Enter new name for profile \"" + pvc.SelectedProfile + "\"!", "Rename profile", pvc.SelectedProfile);
-            if (name.Length == 0) return;
+            string Name = InputBox("Enter new name for profile \"" + pvc.SelectedProfile + "\"!", "Rename profile", pvc.SelectedProfile);
+            if (Name.Length == 0) return;
 
-            if (pvc.HasProfile(name))
+            if (pvc.HasProfile(Name))
             {
                 MessageBox.Show("A profile with this name already exists!", "Profile already exists");
                 return;
             }
 
-            profs.RenameProfile(pvc.SelectedProfile, name);
-            pvc.RenameSelectedProfile(name);
+            profs.RenameProfile(pvc.SelectedProfile, Name);
+
+            // Apply on all background tabs
+            foreach(TabPage page in tabControl1.TabPages)
+            {
+                if (page.Text.Equals("+") || page.Text.Equals("-") || (page == tabControl1.SelectedTab)) continue; // Skip "New"/"Delete" and own tab
+                ((ProfileViewControl)page.Controls["pvc"]).RenameProfile(pvc.SelectedProfile, Name);
+            }
+            pvc.RenameSelectedProfile(Name); // Apply on foreground tab
         }
 
         private void btnCopy_Click(object sender, EventArgs e)
         {
             profs.SaveProfile(); // save previous selected profile
-            pvc.CopySelectedProfile();
+
+            pvc.CopySelectedProfile(); // Apply on foreground tab (beforehand as we need to know the resulting name of the new profile first)
+            // Apply on all background tabs
+            foreach(TabPage page in tabControl1.TabPages)
+            {
+                if (page.Text.Equals("+") || page.Text.Equals("-") || (page == tabControl1.SelectedTab)) continue; // Skip "New"/"Delete" and own tab
+                ((ProfileViewControl)page.Controls["pvc"]).CreateNewProfile(pvc.SelectedProfile, false);
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -551,8 +572,6 @@ namespace HitCounterManager
 
         private void TabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            ProfileViewControl pvc;
-
             if (e.TabPage.Text.Equals("+")) // Create new tab?
             {
                 Control template = tabControl1.TabPages[0].Controls["pvc"];
@@ -563,7 +582,7 @@ namespace HitCounterManager
                 tabControl1.TabPages.Insert(e.TabPageIndex+1, "+");
 
                 // Fill controls of the tab
-                pvc = new ProfileViewControl();
+                ProfileViewControl pvc = new ProfileViewControl();
                 pvc.Anchor = template.Anchor;
                 pvc.Location = template.Location;
                 pvc.Name = "pvc";
@@ -586,10 +605,9 @@ namespace HitCounterManager
                 // Switch UI to interact with selected tab
                 pvc = (ProfileViewControl)e.TabPage.Controls["pvc"];
                 pi = pvc.ProfileInfo;
-                pi.ProfileUpdateBegin();
                 profs.SetProfileInfo(pi);
+                profs.LoadProfile(pi.ProfileName);
                 om = new OutModule(pi);
-                pi.ProfileUpdateEnd();
             }
             else e.Cancel = true; // "Delete" tab cannot be selected
         }

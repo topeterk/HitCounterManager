@@ -80,16 +80,20 @@ namespace HitCounterManager
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }
 
-        public void CreateNewProfile(string name)
+        public void CreateNewProfile(string NameNew, bool Select)
         {
             SelectedProfileChangedCauseType SelectedProfileChangedCausePrev = SelectedProfileChangedCause;
             SelectedProfileChangedCause = SelectedProfileChangedCauseType.Create;
 
-            // create, select and save new profile..
-            ComboBox1.Items.Add(name);
-            pi.ProfileName = name;
-            pi.ClearSplits();
-            SelectedProfile = name;
+            // Add new profile to the list..
+            ComboBox1.Items.Add(NameNew);
+            if (Select)
+            {
+                // Select and reset new profile..
+                pi.ProfileName = NameNew;
+                pi.ClearSplits();
+                SelectedProfile = NameNew;
+            }
 
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }
@@ -99,26 +103,28 @@ namespace HitCounterManager
             SelectedProfileChangedCauseType SelectedProfileChangedCausePrev = SelectedProfileChangedCause;
             SelectedProfileChangedCause = SelectedProfileChangedCauseType.Copy;
 
-            string name = SelectedProfile;
-            do { name += " COPY"; } while (ComboBox1.Items.Contains(name)); // extend name till it becomes unique
+            string Name = SelectedProfile;
+            do { Name += " COPY"; } while (ComboBox1.Items.Contains(Name)); // extend name till it becomes unique
 
             // create, select and save new profile..
-            ComboBox1.Items.Add(name);
-            pi.ProfileName = name;
-            SelectedProfile = name;
+            ComboBox1.Items.Add(Name);
+            pi.ProfileName = Name;
+            SelectedProfile = Name;
 
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }
 
-        public void RenameSelectedProfile(string name)
+        public void RenameSelectedProfile(string NameNew)
         {
             SelectedProfileChangedCauseType SelectedProfileChangedCausePrev = SelectedProfileChangedCause;
             SelectedProfileChangedCause = SelectedProfileChangedCauseType.Rename;
 
-            ComboBox1.Items[ComboBox1.SelectedIndex] = name;
+            ComboBox1.Items[ComboBox1.SelectedIndex] = NameNew;
 
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }
+
+        public void RenameProfile(string NameOld, string NameNew) { ComboBox1.Items[ComboBox1.Items.IndexOf(NameOld)] = NameNew; }
 
         public void DeleteSelectedProfile()
         {
@@ -138,7 +144,7 @@ namespace HitCounterManager
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }
 
-        public bool HasProfile(string name) { return ComboBox1.Items.Contains(name); }
+        public bool HasProfile(string Name) { return ComboBox1.Items.Contains(Name); }
     }
 
     public class ProfileDataGridView : DataGridView, IProfileInfo
