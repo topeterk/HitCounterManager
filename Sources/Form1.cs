@@ -199,21 +199,39 @@ namespace HitCounterManager
             return false;
         }
 
-        private void GetCalculatedSums(ref int TotalHits, ref int TotalHitsWay, ref int TotalPB)
+        private void GetCalculatedSums(out int TotalSplits, out int TotalActiveSplit, out int TotalHits, out int TotalHitsWay, out int TotalPB)
         {
-            int Splits = pi.SplitCount;
+            bool ActiveProfileFound = false;
+            ProfileViewControl[] pvcs;
+            if (cbShowPredecessor.Checked) // Succession?
+                pvcs = ProfileViewControls; // Evaluate all tabs
+            else
+                pvcs = new ProfileViewControl[] { pvc }; // Use only the current one
 
-            TotalHits = TotalHitsWay = TotalPB = 0;
-            for (int i = 0; i < Splits; i++)
+            TotalSplits = TotalActiveSplit = TotalHits = TotalHitsWay = TotalPB = 0;
+            foreach(ProfileViewControl pvc_tab in pvcs)
             {
-                TotalHits += pi.GetSplitHits(i);
-                TotalHitsWay += pi.GetSplitWayHits(i);
-                TotalPB += pi.GetSplitPB(i);
-            }
+                IProfileInfo pi_tab = pvc_tab.ProfileInfo;
+                int Splits = pi_tab.SplitCount;
 
-            TotalHits += (int)numHits.Value;
-            TotalHitsWay += (int)numHitsWay.Value;
-            TotalPB += (int)numPB.Value;
+                TotalSplits += Splits;
+                for (int i = 0; i < Splits; i++)
+                {
+                    TotalHits += pi_tab.GetSplitHits(i);
+                    TotalHitsWay += pi_tab.GetSplitWayHits(i);
+                    TotalPB += pi_tab.GetSplitPB(i);
+                }
+
+                if (!ActiveProfileFound)
+                {
+                    if (pvc_tab == pvc) // Active profile tab found
+                    {
+                        TotalActiveSplit += pi.ActiveSplit;
+                        ActiveProfileFound = true;
+                    }
+                    else TotalActiveSplit += Splits; // Add all splits of preceeding profiles
+                }
+            }
         }
 
         private void DataGridView1_ProfileChanged(object sender, EventArgs e)
@@ -223,19 +241,9 @@ namespace HitCounterManager
 
         private void UpdateProgressAndTotals()
         {
-            int TotalHits = 0;
-            int TotalHitsWay = 0;
-            int TotalPB = 0;
-            int Splits = pi.SplitCount;
-
-            if (Splits < 0) // Check for valid entries
-                lbl_progress.Text = "Progress:  ?? / ??  # " + pi.AttemptsCount.ToString("D3");
-            else
-            {
-                GetCalculatedSums(ref TotalHits, ref TotalHitsWay, ref TotalPB);
-                lbl_progress.Text = "Progress:  " + pi.ActiveSplit + " / " + Splits + "  # " + pi.AttemptsCount.ToString("D3");
-            }
-
+            int TotalSplits, TotalActiveSplit, TotalHits, TotalHitsWay, TotalPB;
+            GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB);
+            lbl_progress.Text = "Progress:  " + TotalActiveSplit + " / " + TotalSplits + "  # " + pi.AttemptsCount.ToString("D3");
             lbl_totals.Text = "Total: " + (TotalHits + TotalHitsWay) + " Hits   " + TotalPB + " PB";
 
             om.Update();
@@ -435,12 +443,10 @@ namespace HitCounterManager
             profs.LoadProfile(((ProfileViewControl)sender).SelectedProfile);
         }
 
-        private void BtnSuccessionProceed_Click(object sender, EventArgs e)
+        private void BtnSuccessionProceed_Click(object sender, EventArgs e) // TODO Update to tabs
         {
-            int TotalHits = 0;
-            int TotalHitsWay = 0;
-            int TotalPB = 0;
-            GetCalculatedSums(ref TotalHits, ref TotalHitsWay, ref TotalPB);
+            int TotalSplits, TotalActiveSplit, TotalHits, TotalHitsWay, TotalPB;
+            GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB);
             SetSuccession(TotalHits, TotalHitsWay, TotalPB);
             ShowSuccessionMenu(true);
             SuccessionChanged(null, null);
