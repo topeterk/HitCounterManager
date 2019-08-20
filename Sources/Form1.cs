@@ -202,14 +202,10 @@ namespace HitCounterManager
         private void GetCalculatedSums(out int TotalSplits, out int TotalActiveSplit, out int TotalHits, out int TotalHitsWay, out int TotalPB)
         {
             bool ActiveProfileFound = false;
-            ProfileViewControl[] pvcs;
-            if (cbShowPredecessor.Checked) // Succession?
-                pvcs = ProfileViewControls; // Evaluate all tabs
-            else
-                pvcs = new ProfileViewControl[] { pvc }; // Use only the current one
 
             TotalSplits = TotalActiveSplit = TotalHits = TotalHitsWay = TotalPB = 0;
-            foreach(ProfileViewControl pvc_tab in pvcs)
+
+            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
             {
                 IProfileInfo pi_tab = pvc_tab.ProfileInfo;
                 int Splits = pi_tab.SplitCount;
@@ -383,7 +379,7 @@ namespace HitCounterManager
             }
         }
 
-        private void btnAttempts_Click(object sender, EventArgs e)
+        private void btnAttempts_Click(object sender, EventArgs e) // TODO Succession with tabs
         {
             string amount_string = InputBox("Enter amount to be set!", "Set new run number (amount of attempts)", pi.AttemptsCount.ToString());
             int amount_value;
@@ -403,7 +399,7 @@ namespace HitCounterManager
 
         private void BtnOnTop_Click(object sender, EventArgs e) { SetAlwaysOnTop(!this.TopMost); }
 
-        private void btnReset_Click(object sender, EventArgs e)
+        private void btnReset_Click(object sender, EventArgs e) // TODO Succession with tabs
         {
             bool SuccessionReset = true;
             if ((null != sender) && (cbShowPredecessor.Checked)) // avoid message box when not called from GUI (e.g. called by hot key)
@@ -423,7 +419,19 @@ namespace HitCounterManager
             pi.ProfileUpdateEnd();
         }
 
-        private void btnPB_Click(object sender, EventArgs e) { pi.setPB(); }
+        private void btnPB_Click(object sender, EventArgs e)
+        {
+            // Apply on all tabs
+            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+            {
+                IProfileInfo pi_tab = pvc_tab.ProfileInfo;
+                profs.SetProfileInfo(pi_tab);
+                pi_tab.setPB();
+                profs.SaveProfile(); // save tab's profile
+            }
+
+            profs.SetProfileInfo(pvc.ProfileInfo); // Restore current profile selection
+        }
 
         private void btnHit_Click(object sender, EventArgs e) { pi.Hit(+1); }
         private void btnHitUndo_Click(object sender, EventArgs e) { pi.Hit(-1); }
@@ -609,6 +617,24 @@ namespace HitCounterManager
 
             if (e.TabPage.Text.Equals("+")) // Create new tab?
             {
+                if (ProfileViewControls.Length == 1) // Warning message only on the first tab creation
+                {
+                    DialogResult result = MessageBox.Show(
+                        "Opening further tabs combine multiple profiles into one run. " +
+                        "Best known as a trilogy run for Dark Souls 1 to 3.\n\n" +
+                        "There is a separate attempts counter. All profiles' attempts counters are paused.\n\n" + // TODO separate attempts counter
+                        "Please BE AWARE the Reset and PB buttons/hotkeys will apply to ALL open profiles! " +
+                        "For example, pressing reset will reset all the selected profiles of all available tabs!\n\n" +
+                        "OK = I understand, continue using tabs\n" +
+                        "Cancel = Ups, I better stick with one tab only",
+                        "Succession", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    if (result != DialogResult.OK)
+                    {
+                        e.Cancel = true; // Action aborted
+                        return;
+                    }
+                }
+
                 Control template = tabControl1.TabPages[0].Controls["pvc"];
                 TabPage page = e.TabPage;
 
