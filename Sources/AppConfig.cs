@@ -232,6 +232,8 @@ namespace HitCounterManager
             if (_settings.Version == 6) // Coming from version 1.18
             {
                 _settings.Version = 7;
+                _settings.MainWidth += 6; // added tabs (6)
+                _settings.MainHeight += 27; // added tabs (27)
                 _settings.MainPosX = this.Left;
                 _settings.MainPosY = this.Top;
                 _settings.StyleUseRoman = false;
