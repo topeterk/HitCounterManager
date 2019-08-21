@@ -239,6 +239,12 @@ namespace HitCounterManager
                 _settings.StyleUseRoman = false;
                 // Introduced with false in version 6, keep user setting when this version was used
                 _settings.StyleProgressBarColored = (baseVersion == 6 ? false : true);
+
+                if (baseVersion < 0)
+                {
+                    // Never seen the original default name, so we change it to most commonly used
+                    _settings.SuccessionTitle = "Previous";
+                }
             }
 
             // Apply settings..
