@@ -80,9 +80,9 @@ namespace HitCounterManager
         public int StyleDesiredWidth;
         public bool StyleSuperscriptPB;
         public string SuccessionTitle;
-        public int SuccessionHits;
-        public int SuccessionHitsWay;
-        public int SuccessionHitsPB;
+        public int SuccessionHits;    // obsolete since version 7 - keep for backwards compatibility
+        public int SuccessionHitsWay; // obsolete since version 7 - keep for backwards compatibility
+        public int SuccessionHitsPB;  // obsolete since version 7 - keep for backwards compatibility
         public string ProfileSelected;
         public Profiles Profiles;
     }
@@ -266,7 +266,7 @@ namespace HitCounterManager
                 MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
 
             pi.SetSessionProgress(0, true);
-            SetSuccession(_settings.SuccessionHits, _settings.SuccessionHitsWay, _settings.SuccessionHitsPB, _settings.SuccessionTitle, _settings.ShowSuccession);
+            SetSuccession(_settings.SuccessionTitle, _settings.ShowSuccession);
             SuccessionChanged(null, null);
 
             if (_settings.MainWidth < this.MinimumSize.Width) _settings.MainWidth = this.MinimumSize.Width;
@@ -384,9 +384,9 @@ namespace HitCounterManager
             _settings.StyleSuperscriptPB = om.StyleSuperscriptPB;
 
             _settings.SuccessionTitle = om.SuccessionTitle;
-            _settings.SuccessionHits = om.SuccessionHits;
-            _settings.SuccessionHitsWay = om.SuccessionHitsWay;
-            _settings.SuccessionHitsPB = om.SuccessionHitsPB;
+            _settings.SuccessionHits = om.SuccessionHits;       // obsolete since version 7 - keep for backwards compatibility
+            _settings.SuccessionHitsWay = om.SuccessionHitsWay; // obsolete since version 7 - keep for backwards compatibility
+            _settings.SuccessionHitsPB = om.SuccessionHitsPB;   // obsolete since version 7 - keep for backwards compatibility
 
             _settings.ProfileSelected = pvc.SelectedProfile;
 

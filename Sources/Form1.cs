@@ -470,13 +470,10 @@ namespace HitCounterManager
             Height += diff;
         }
 
-        private void SetSuccession(int TotalHits, int TotalHitsWay, int TotalPB, string Title = null, bool ShowPredecessor = true)
+        private void SetSuccession(string Title, bool ShowPredecessor)
         {
             gpSuccession_ValueChangedSema = true;
             if (null != Title) txtPredecessorTitle.Text = Title;
-            numHits.Value = TotalHits;
-            numHitsWay.Value = TotalHitsWay;
-            numPB.Value = TotalPB;
             cbShowPredecessor.Checked = ShowPredecessor;
             gpSuccession_ValueChangedSema = false;
         }
@@ -487,9 +484,6 @@ namespace HitCounterManager
 
             om.ShowSuccession = cbShowPredecessor.Checked;
             om.SuccessionTitle = txtPredecessorTitle.Text;
-            om.SuccessionHits = (int)numHits.Value;
-            om.SuccessionHitsWay = (int)numHitsWay.Value;
-            om.SuccessionHitsPB = (int)numPB.Value;
 
             if (null != sender) // update on a GUI handler only
             {

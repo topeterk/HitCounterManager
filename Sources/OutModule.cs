@@ -73,9 +73,9 @@ namespace HitCounterManager
 
         public bool ShowSuccession = false;
         public string SuccessionTitle = "";
-        public int SuccessionHits = 0;
-        public int SuccessionHitsWay = 0;
-        public int SuccessionHitsPB = 0;
+        public int SuccessionHits = 0; // TODO: Calculate
+        public int SuccessionHitsWay = 0; // TODO: Calculate
+        public int SuccessionHitsPB = 0; // TODO: Calculate
 
         private IProfileInfo pi;
 

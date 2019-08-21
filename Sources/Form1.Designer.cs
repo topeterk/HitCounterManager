@@ -52,12 +52,6 @@
             this.btnSplit = new System.Windows.Forms.Button();
             this.gpSuccession = new System.Windows.Forms.GroupBox();
             this.btnSuccessionVisibility = new System.Windows.Forms.Button();
-            this.lbl_succession_pb = new System.Windows.Forms.Label();
-            this.numPB = new System.Windows.Forms.NumericUpDown();
-            this.lbl_succession_hitsway = new System.Windows.Forms.Label();
-            this.numHitsWay = new System.Windows.Forms.NumericUpDown();
-            this.lbl_succession_hits = new System.Windows.Forms.Label();
-            this.numHits = new System.Windows.Forms.NumericUpDown();
             this.txtPredecessorTitle = new System.Windows.Forms.TextBox();
             this.cbShowPredecessor = new System.Windows.Forms.CheckBox();
             this.Spacer1 = new System.Windows.Forms.Label();
@@ -71,9 +65,6 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.pvc = new HitCounterManager.ProfileViewControl();
             this.gpSuccession.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numPB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHitsWay)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHits)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -334,17 +325,11 @@
             this.gpSuccession.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gpSuccession.Controls.Add(this.btnSuccessionVisibility);
-            this.gpSuccession.Controls.Add(this.lbl_succession_pb);
-            this.gpSuccession.Controls.Add(this.numPB);
-            this.gpSuccession.Controls.Add(this.lbl_succession_hitsway);
-            this.gpSuccession.Controls.Add(this.numHitsWay);
-            this.gpSuccession.Controls.Add(this.lbl_succession_hits);
-            this.gpSuccession.Controls.Add(this.numHits);
             this.gpSuccession.Controls.Add(this.txtPredecessorTitle);
             this.gpSuccession.Controls.Add(this.cbShowPredecessor);
-            this.gpSuccession.Location = new System.Drawing.Point(12, 384);
+            this.gpSuccession.Location = new System.Drawing.Point(12, 404);
             this.gpSuccession.Name = "gpSuccession";
-            this.gpSuccession.Size = new System.Drawing.Size(679, 79);
+            this.gpSuccession.Size = new System.Drawing.Size(679, 59);
             this.gpSuccession.TabIndex = 22;
             this.gpSuccession.TabStop = false;
             this.gpSuccession.Text = "Succession";
@@ -364,82 +349,13 @@
             this.btnSuccessionVisibility.UseVisualStyleBackColor = true;
             this.btnSuccessionVisibility.Click += new System.EventHandler(this.btnSuccessionVisibility_Click);
             // 
-            // lbl_succession_pb
-            // 
-            this.lbl_succession_pb.AutoSize = true;
-            this.lbl_succession_pb.Location = new System.Drawing.Point(270, 54);
-            this.lbl_succession_pb.Name = "lbl_succession_pb";
-            this.lbl_succession_pb.Size = new System.Drawing.Size(24, 13);
-            this.lbl_succession_pb.TabIndex = 19;
-            this.lbl_succession_pb.Text = "PB:";
-            // 
-            // numPB
-            // 
-            this.numPB.Location = new System.Drawing.Point(300, 52);
-            this.numPB.Maximum = new decimal(new int[] {
-            99999,
-            0,
-            0,
-            0});
-            this.numPB.Name = "numPB";
-            this.numPB.Size = new System.Drawing.Size(60, 20);
-            this.numPB.TabIndex = 5;
-            this.ToolTip1.SetToolTip(this.numPB, "Hits (Boss) collected in previous runs");
-            this.numPB.ValueChanged += new System.EventHandler(this.SuccessionChanged);
-            // 
-            // lbl_succession_hitsway
-            // 
-            this.lbl_succession_hitsway.AutoSize = true;
-            this.lbl_succession_hitsway.Location = new System.Drawing.Point(138, 54);
-            this.lbl_succession_hitsway.Name = "lbl_succession_hitsway";
-            this.lbl_succession_hitsway.Size = new System.Drawing.Size(59, 13);
-            this.lbl_succession_hitsway.TabIndex = 7;
-            this.lbl_succession_hitsway.Text = "Hits (Way):";
-            // 
-            // numHitsWay
-            // 
-            this.numHitsWay.Location = new System.Drawing.Point(204, 52);
-            this.numHitsWay.Maximum = new decimal(new int[] {
-            99999,
-            0,
-            0,
-            0});
-            this.numHitsWay.Name = "numHitsWay";
-            this.numHitsWay.Size = new System.Drawing.Size(60, 20);
-            this.numHitsWay.TabIndex = 4;
-            this.ToolTip1.SetToolTip(this.numHitsWay, "Hits (Boss) collected in previous runs");
-            this.numHitsWay.ValueChanged += new System.EventHandler(this.SuccessionChanged);
-            // 
-            // lbl_succession_hits
-            // 
-            this.lbl_succession_hits.AutoSize = true;
-            this.lbl_succession_hits.Location = new System.Drawing.Point(6, 54);
-            this.lbl_succession_hits.Name = "lbl_succession_hits";
-            this.lbl_succession_hits.Size = new System.Drawing.Size(60, 13);
-            this.lbl_succession_hits.TabIndex = 5;
-            this.lbl_succession_hits.Text = "Hits (Boss):";
-            // 
-            // numHits
-            // 
-            this.numHits.Location = new System.Drawing.Point(72, 52);
-            this.numHits.Maximum = new decimal(new int[] {
-            99999,
-            0,
-            0,
-            0});
-            this.numHits.Name = "numHits";
-            this.numHits.Size = new System.Drawing.Size(60, 20);
-            this.numHits.TabIndex = 3;
-            this.ToolTip1.SetToolTip(this.numHits, "Hits (Boss) collected in previous runs");
-            this.numHits.ValueChanged += new System.EventHandler(this.SuccessionChanged);
-            // 
             // txtPredecessorTitle
             // 
             this.txtPredecessorTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPredecessorTitle.Location = new System.Drawing.Point(134, 26);
+            this.txtPredecessorTitle.Location = new System.Drawing.Point(138, 26);
             this.txtPredecessorTitle.Name = "txtPredecessorTitle";
-            this.txtPredecessorTitle.Size = new System.Drawing.Size(539, 20);
+            this.txtPredecessorTitle.Size = new System.Drawing.Size(535, 20);
             this.txtPredecessorTitle.TabIndex = 2;
             this.ToolTip1.SetToolTip(this.txtPredecessorTitle, "Split name for the sums of the previous runs.");
             this.txtPredecessorTitle.TextChanged += new System.EventHandler(this.SuccessionChanged);
@@ -522,7 +438,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 96);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(679, 282);
+            this.tabControl1.Size = new System.Drawing.Size(679, 302);
             this.tabControl1.TabIndex = 43;
             this.ToolTip1.SetToolTip(this.tabControl1, "Reorder successive profiles by dragging the tab to the desired position.\r\nAdd new" +
         " tabs by selecting the \"+\" tab.\r\nDelete a tab by dragging the tab over the \"-\" t" +
@@ -537,7 +453,7 @@
             this.tabPage1.Controls.Add(this.pvc);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(671, 256);
+            this.tabPage1.Size = new System.Drawing.Size(671, 276);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -567,7 +483,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pvc.Location = new System.Drawing.Point(3, 3);
             this.pvc.Name = "pvc";
-            this.pvc.Size = new System.Drawing.Size(665, 250);
+            this.pvc.Size = new System.Drawing.Size(665, 270);
             this.pvc.TabIndex = 0;
             // 
             // Form1
@@ -610,9 +526,6 @@
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.gpSuccession.ResumeLayout(false);
             this.gpSuccession.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numPB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHitsWay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHits)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -651,12 +564,6 @@
         private System.Windows.Forms.Button btnSuccessionVisibility;
         private System.Windows.Forms.CheckBox cbShowPredecessor;
         private System.Windows.Forms.TextBox txtPredecessorTitle;
-        private System.Windows.Forms.Label lbl_succession_hits;
-        private System.Windows.Forms.NumericUpDown numHits;
-        private System.Windows.Forms.Label lbl_succession_hitsway;
-        private System.Windows.Forms.NumericUpDown numHitsWay;
-        private System.Windows.Forms.Label lbl_succession_pb;
-        private System.Windows.Forms.NumericUpDown numPB;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
