@@ -399,24 +399,16 @@ namespace HitCounterManager
 
         private void BtnOnTop_Click(object sender, EventArgs e) { SetAlwaysOnTop(!this.TopMost); }
 
-        private void btnReset_Click(object sender, EventArgs e) // TODO Succession with tabs
+        private void btnReset_Click(object sender, EventArgs e)
         {
-            bool SuccessionReset = true;
-            if ((null != sender) && (cbShowPredecessor.Checked)) // avoid message box when not called from GUI (e.g. called by hot key)
+            // Apply on all tabs
+            foreach (ProfileViewControl pvc_tab in ProfileViewControls)
             {
-                DialogResult result = MessageBox.Show("Reset the currently running succession?\nYes: reset current profile and succession\nNo: reset current profile only\nCancel: abort reset", "Succession", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (result == DialogResult.No) SuccessionReset = false;
-                else if (result == DialogResult.Cancel) return;
+                IProfileInfo pi_tab = pvc_tab.ProfileInfo;
+                profs.SetProfileInfo(pi_tab);
+                pi_tab.ResetRun();
+                profs.SaveProfile(); // save tab's profile
             }
-
-            pi.ProfileUpdateBegin();
-            pi.ResetRun();
-            if (SuccessionReset)
-            {
-                SetSuccession(0, 0, 0, null, false);
-                SuccessionChanged(null, null);
-            }
-            pi.ProfileUpdateEnd();
         }
 
         private void btnPB_Click(object sender, EventArgs e)
@@ -451,17 +443,6 @@ namespace HitCounterManager
             profs.LoadProfile(((ProfileViewControl)sender).SelectedProfile);
         }
 
-        private void BtnSuccessionProceed_Click(object sender, EventArgs e) // TODO Update to tabs
-        {
-            int TotalSplits, TotalActiveSplit, TotalHits, TotalHitsWay, TotalPB;
-            GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB);
-            SetSuccession(TotalHits, TotalHitsWay, TotalPB);
-            ShowSuccessionMenu(true);
-            SuccessionChanged(null, null);
-
-            MessageBox.Show("The progress of this profile was saved.\nYou can select your next profile now!", "Succession", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-    
         private void btnSuccessionVisibility_Click(object sender, EventArgs e) { ShowSuccessionMenu();  }
 
         /// <summary>

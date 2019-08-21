@@ -50,7 +50,6 @@
             this.btnHit = new System.Windows.Forms.Button();
             this.btnWayHit = new System.Windows.Forms.Button();
             this.btnSplit = new System.Windows.Forms.Button();
-            this.btnSuccessionProceed = new System.Windows.Forms.Button();
             this.gpSuccession = new System.Windows.Forms.GroupBox();
             this.btnSuccessionVisibility = new System.Windows.Forms.Button();
             this.lbl_succession_pb = new System.Windows.Forms.Label();
@@ -296,7 +295,7 @@
             this.btnHit.Image = global::HitCounterManager.Sources.Resources.icons8_attack_32;
             this.btnHit.Location = new System.Drawing.Point(174, 30);
             this.btnHit.Name = "btnHit";
-            this.btnHit.Size = new System.Drawing.Size(274, 40);
+            this.btnHit.Size = new System.Drawing.Size(355, 40);
             this.btnHit.TabIndex = 17;
             this.ToolTip1.SetToolTip(this.btnHit, "Count a HIT (boss) on the current split");
             this.btnHit.UseVisualStyleBackColor = false;
@@ -308,7 +307,7 @@
             this.btnWayHit.BackColor = System.Drawing.Color.LightBlue;
             this.btnWayHit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnWayHit.Image = global::HitCounterManager.Sources.Resources.icons8_watch_your_step_32;
-            this.btnWayHit.Location = new System.Drawing.Point(454, 30);
+            this.btnWayHit.Location = new System.Drawing.Point(535, 30);
             this.btnWayHit.Name = "btnWayHit";
             this.btnWayHit.Size = new System.Drawing.Size(75, 40);
             this.btnWayHit.TabIndex = 18;
@@ -322,28 +321,13 @@
             this.btnSplit.BackColor = System.Drawing.Color.LightGreen;
             this.btnSplit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSplit.Image = global::HitCounterManager.Sources.Resources.icons8_staircase_32;
-            this.btnSplit.Location = new System.Drawing.Point(535, 30);
+            this.btnSplit.Location = new System.Drawing.Point(616, 30);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(75, 40);
             this.btnSplit.TabIndex = 19;
             this.ToolTip1.SetToolTip(this.btnSplit, "Jump to the next SPLIT");
             this.btnSplit.UseVisualStyleBackColor = false;
             this.btnSplit.Click += new System.EventHandler(this.btnSplit_Click);
-            // 
-            // btnSuccessionProceed
-            // 
-            this.btnSuccessionProceed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSuccessionProceed.BackColor = System.Drawing.Color.LightPink;
-            this.btnSuccessionProceed.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSuccessionProceed.Image = global::HitCounterManager.Sources.Resources.icons8_tasklist_32;
-            this.btnSuccessionProceed.Location = new System.Drawing.Point(616, 30);
-            this.btnSuccessionProceed.Name = "btnSuccessionProceed";
-            this.btnSuccessionProceed.Size = new System.Drawing.Size(75, 40);
-            this.btnSuccessionProceed.TabIndex = 20;
-            this.ToolTip1.SetToolTip(this.btnSuccessionProceed, "At the end of your run: Click once to save succession and continue with your next" +
-        " profile");
-            this.btnSuccessionProceed.UseVisualStyleBackColor = false;
-            this.btnSuccessionProceed.Click += new System.EventHandler(this.BtnSuccessionProceed_Click);
             // 
             // gpSuccession
             // 
@@ -610,7 +594,6 @@
             this.Controls.Add(this.btnHit);
             this.Controls.Add(this.btnWayHit);
             this.Controls.Add(this.btnSplit);
-            this.Controls.Add(this.btnSuccessionProceed);
             this.Controls.Add(this.Spacer1);
             this.Controls.Add(this.Spacer2);
             this.Controls.Add(this.Spacer3);
@@ -659,7 +642,6 @@
         private System.Windows.Forms.Button btnHit;
         private System.Windows.Forms.Button btnWayHit;
         private System.Windows.Forms.Button btnSplit;
-        private System.Windows.Forms.Button btnSuccessionProceed;
         private System.Windows.Forms.Label Spacer1;
         private System.Windows.Forms.Label Spacer2;
         private System.Windows.Forms.Label Spacer3;
