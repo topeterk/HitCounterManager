@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Net;
 using System.Windows.Forms;
@@ -205,7 +206,7 @@ namespace HitCounterManager
 
             TotalSplits = TotalActiveSplit = TotalHits = TotalHitsWay = TotalPB = 0;
 
-            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+            foreach(ProfileViewControl pvc_tab in tabControl1.ProfileViewControls)
             {
                 IProfileInfo pi_tab = pvc_tab.ProfileInfo;
                 int Splits = pi_tab.SplitCount;
@@ -318,7 +319,7 @@ namespace HitCounterManager
             profs.SaveProfile(); // save previous selected profile
 
             // Apply on all tabs
-            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+            foreach(ProfileViewControl pvc_tab in tabControl1.ProfileViewControls)
             {
                 pvc_tab.CreateNewProfile(Name, (pvc_tab == pvc)); // Select only on the current tab
             }
@@ -341,7 +342,7 @@ namespace HitCounterManager
             profs.RenameProfile(NameOld, NameNew);
 
             // Apply on all tabs
-            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+            foreach(ProfileViewControl pvc_tab in tabControl1.ProfileViewControls)
             {
                 pvc_tab.RenameProfile(NameOld, NameNew);
             }
@@ -353,7 +354,7 @@ namespace HitCounterManager
             pvc.CopySelectedProfile(); // Apply on foreground tab
 
             // Apply on all background tabs
-            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+            foreach(ProfileViewControl pvc_tab in tabControl1.ProfileViewControls)
             {
                 if (pvc_tab == pvc) continue; // Skip current tab
                 pvc_tab.CreateNewProfile(pvc.SelectedProfile, false);
@@ -369,7 +370,7 @@ namespace HitCounterManager
                 pvc.DeleteSelectedProfile(); // Apply on foreground tab
 
                 // Apply on all background tabs
-                foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+                foreach(ProfileViewControl pvc_tab in tabControl1.ProfileViewControls)
                 {
                     if (pvc_tab == pvc) continue; // Skip current tab
                     pvc_tab.DeleteProfile(Name);
@@ -402,7 +403,7 @@ namespace HitCounterManager
         private void btnReset_Click(object sender, EventArgs e)
         {
             // Apply on all tabs
-            foreach (ProfileViewControl pvc_tab in ProfileViewControls)
+            foreach (ProfileViewControl pvc_tab in tabControl1.ProfileViewControls)
             {
                 IProfileInfo pi_tab = pvc_tab.ProfileInfo;
                 profs.SetProfileInfo(pi_tab);
@@ -414,7 +415,7 @@ namespace HitCounterManager
         private void btnPB_Click(object sender, EventArgs e)
         {
             // Apply on all tabs
-            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+            foreach(ProfileViewControl pvc_tab in tabControl1.ProfileViewControls)
             {
                 IProfileInfo pi_tab = pvc_tab.ProfileInfo;
                 profs.SetProfileInfo(pi_tab);
@@ -493,93 +494,6 @@ namespace HitCounterManager
 
         #endregion
 
-        private ProfileViewControl[] ProfileViewControls
-        {
-            get
-            {
-                ProfileViewControl[] pvcs = new ProfileViewControl[tabControl1.TabCount-2];
-                int i = 0;
-                foreach(TabPage page in tabControl1.TabPages)
-                {
-                    if (page.Text.Equals("+") || page.Text.Equals("-")) continue; // Skip "New"/"Delete" tab
-                    pvcs[i++] = (ProfileViewControl)page.Controls["pvc"];
-                }
-                return pvcs;
-            }
-        }
-
-        private TabPage TabPageDragDrop = null;
-
-        private void TabControl1_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                // Start of DragDrop
-                TabPage hover_Tab = HoverTab();
-                if (hover_Tab == null ) return;
-                if (hover_Tab.Text.Equals("+") || hover_Tab.Text.Equals("-")) return; // Keep "New"/"Delete" tab at the end
-                TabPageDragDrop = hover_Tab;
-            }
-        }
-
-        private void TabControl1_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (null == TabPageDragDrop) return; // No DragDrop currently active
-
-            if (e.Button == MouseButtons.Left)
-            {
-                // DragDrop stopped
-                TabPage hover_Tab = HoverTab();
-                if ((hover_Tab != null) && (hover_Tab != TabPageDragDrop)) // Dragged onto nothing or itself?
-                {
-                    if (hover_Tab.Text.Equals("-"))// Dragged on "Delete" tab?
-                    {
-                        // Remove tab but we still need one regular, the "New" and "Delete tabs.
-                        if (3 < tabControl1.TabPages.Count) tabControl1.TabPages.Remove(TabPageDragDrop);
-                    }
-                }
-                TabPageDragDrop = null;
-            }
-        }
-
-        private void TabControl1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (null == TabPageDragDrop) return; // No DragDrop currently active
-
-            if (e.Button != MouseButtons.Left)
-            {
-                // Should be coverd by MouseUp, just for safety
-                // DragDrop stopped
-                TabPageDragDrop = null;
-            }
-            else
-            {
-                // During DragDrop
-                TabPage hover_Tab = HoverTab();
-                if ((hover_Tab == null) || (hover_Tab == TabPageDragDrop)) return; // Dragged onto nothing or itself?
-                if (hover_Tab.Text.Equals("+") || hover_Tab.Text.Equals("-")) return; // Keep "New"/"Delete" tab at the end
-
-                // Switch tabs but retain numbering
-                int Index1 = tabControl1.TabPages.IndexOf(TabPageDragDrop);
-                int Index2 = tabControl1.TabPages.IndexOf(hover_Tab);
-                tabControl1.TabPages[Index1] = hover_Tab;
-                tabControl1.TabPages[Index2] = TabPageDragDrop;
-                hover_Tab.Text = (Index1+1).ToString();
-                TabPageDragDrop.Text = (Index2+1).ToString();
-                tabControl1.SelectedTab = TabPageDragDrop;
-            }
-        }
-
-        private TabPage HoverTab()
-        {
-            for (int index = 0; index <= tabControl1.TabCount - 1; index++)
-            {
-                if (tabControl1.GetTabRect(index).Contains(tabControl1.PointToClient(Cursor.Position)))
-                    return tabControl1.TabPages[index];
-            }
-            return null;
-        }
-
         private void TabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
             if (e.TabPage.Text.Equals("-")) // Switch to tab?
@@ -592,7 +506,7 @@ namespace HitCounterManager
 
             if (e.TabPage.Text.Equals("+")) // Create new tab?
             {
-                if (ProfileViewControls.Length == 1) // Warning message only on the first tab creation
+                if (tabControl1.ProfileViewControls.Length == 1) // Warning message only on the first tab creation
                 {
                     DialogResult result = MessageBox.Show(
                         "Opening further tabs combine multiple profiles into one run. " +
@@ -637,6 +551,109 @@ namespace HitCounterManager
             profs.SetProfileInfo(pi);
             profs.LoadProfile(pi.ProfileName);
             om = new OutModule(pi);
+        }
+    }
+
+    public class ProfileTabControl : TabControl
+    {
+        #region TabControl event handlers (mainly DragAndDrop)
+
+        private TabPage TabPageDragDrop = null;
+
+        public ProfileTabControl()
+        {
+            MouseDown += new MouseEventHandler(MouseDownHandler);
+            MouseUp += new MouseEventHandler(MouseUpHandler);
+            MouseMove += new MouseEventHandler(MouseMoveHandler);
+        }
+
+        private TabPage GetTabUnderMouse()
+        {
+            for (int index = 0; index <= TabCount - 1; index++)
+            {
+                if (GetTabRect(index).Contains(PointToClient(Cursor.Position)))
+                    return TabPages[index];
+            }
+            return null;
+        }
+
+        private void MouseDownHandler(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                // Start of DragDrop
+                TabPage hover_Tab = GetTabUnderMouse();
+                if (hover_Tab == null ) return;
+                if (hover_Tab.Text.Equals("+") || hover_Tab.Text.Equals("-")) return; // Keep "New"/"Delete" tab at the end
+                TabPageDragDrop = hover_Tab;
+            }
+        }
+ 
+        private void MouseUpHandler(object sender, MouseEventArgs e)
+        {
+            if (null == TabPageDragDrop) return; // No DragDrop currently active
+
+            if (e.Button == MouseButtons.Left)
+            {
+                // DragDrop stopped
+                TabPage hover_Tab = GetTabUnderMouse();
+                if ((hover_Tab != null) && (hover_Tab != TabPageDragDrop)) // Dragged onto nothing or itself?
+                {
+                    if (hover_Tab.Text.Equals("-"))// Dragged on "Delete" tab?
+                    {
+                        // Remove tab but we still need one regular, the "New" and "Delete tabs.
+                        if (3 < TabPages.Count) TabPages.Remove(TabPageDragDrop);
+                    }
+                }
+                TabPageDragDrop = null;
+            }
+        }
+
+        private void MouseMoveHandler(object sender, MouseEventArgs e)
+        {
+            if (null == TabPageDragDrop) return; // No DragDrop currently active
+
+            if (e.Button != MouseButtons.Left)
+            {
+                // Should be coverd by MouseUp, just for safety
+                // DragDrop stopped
+                TabPageDragDrop = null;
+            }
+            else
+            {
+                // During DragDrop
+                TabPage hover_Tab = GetTabUnderMouse();
+                if ((hover_Tab == null) || (hover_Tab == TabPageDragDrop)) return; // Dragged onto nothing or itself?
+                if (hover_Tab.Text.Equals("+") || hover_Tab.Text.Equals("-")) return; // Keep "New"/"Delete" tab at the end
+
+                // Switch tabs but retain numbering
+                int Index1 = TabPages.IndexOf(TabPageDragDrop);
+                int Index2 = TabPages.IndexOf(hover_Tab);
+                TabPages[Index1] = hover_Tab;
+                TabPages[Index2] = TabPageDragDrop;
+                hover_Tab.Text = (Index1+1).ToString();
+                TabPageDragDrop.Text = (Index2+1).ToString();
+                SelectedTab = TabPageDragDrop;
+            }
+        }
+
+        #endregion
+
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
+        public ProfileViewControl[] ProfileViewControls
+        {
+            get
+            {
+                ProfileViewControl[] pvcs = new ProfileViewControl[TabCount-2];
+                int i = 0;
+                foreach(TabPage page in TabPages)
+                {
+                    if (page.Text.Equals("+") || page.Text.Equals("-")) continue; // Skip "New"/"Delete" tab
+                    pvcs[i++] = (ProfileViewControl)page.Controls["pvc"];
+                }
+                return pvcs;
+            }
         }
     }
 }

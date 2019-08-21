@@ -59,7 +59,7 @@
             this.Spacer3 = new System.Windows.Forms.Label();
             this.lbl_totals = new System.Windows.Forms.Label();
             this.lbl_progress = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControl1 = new HitCounterManager.ProfileTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -444,9 +444,6 @@
         " tabs by selecting the \"+\" tab.\r\nDelete a tab by dragging the tab over the \"-\" t" +
         "ab.");
             this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabControl1_Selecting);
-            this.tabControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TabControl1_MouseDown);
-            this.tabControl1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TabControl1_MouseMove);
-            this.tabControl1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TabControl1_MouseUp);
             // 
             // tabPage1
             // 
@@ -462,7 +459,7 @@
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(671, 256);
+            this.tabPage2.Size = new System.Drawing.Size(671, 276);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "+";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -471,7 +468,7 @@
             // 
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(671, 256);
+            this.tabPage3.Size = new System.Drawing.Size(671, 276);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "-";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -564,7 +561,7 @@
         private System.Windows.Forms.Button btnSuccessionVisibility;
         private System.Windows.Forms.CheckBox cbShowPredecessor;
         private System.Windows.Forms.TextBox txtPredecessorTitle;
-        private System.Windows.Forms.TabControl tabControl1;
+        private ProfileTabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
