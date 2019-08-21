@@ -437,11 +437,11 @@
             // 
             this.txtPredecessorTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPredecessorTitle.Location = new System.Drawing.Point(109, 26);
+            this.txtPredecessorTitle.Location = new System.Drawing.Point(134, 26);
             this.txtPredecessorTitle.Name = "txtPredecessorTitle";
-            this.txtPredecessorTitle.Size = new System.Drawing.Size(564, 20);
+            this.txtPredecessorTitle.Size = new System.Drawing.Size(539, 20);
             this.txtPredecessorTitle.TabIndex = 2;
-            this.ToolTip1.SetToolTip(this.txtPredecessorTitle, "Name of the precessor split");
+            this.ToolTip1.SetToolTip(this.txtPredecessorTitle, "Split name for the sums of the previous runs.");
             this.txtPredecessorTitle.TextChanged += new System.EventHandler(this.SuccessionChanged);
             // 
             // cbShowPredecessor
@@ -449,11 +449,11 @@
             this.cbShowPredecessor.AutoSize = true;
             this.cbShowPredecessor.Location = new System.Drawing.Point(6, 28);
             this.cbShowPredecessor.Name = "cbShowPredecessor";
-            this.cbShowPredecessor.Size = new System.Drawing.Size(97, 17);
+            this.cbShowPredecessor.Size = new System.Drawing.Size(126, 17);
             this.cbShowPredecessor.TabIndex = 1;
-            this.cbShowPredecessor.Text = "Show with title:";
-            this.ToolTip1.SetToolTip(this.cbShowPredecessor, "Uncheck: No succession or just started, Check: Show predecessor during succession" +
-        "");
+            this.cbShowPredecessor.Text = "Show previous sums:";
+            this.ToolTip1.SetToolTip(this.cbShowPredecessor, "The sum of all previous tabs/profiles will be shown in a leading split of the cur" +
+        "rent run.\r\nThe title of the split can be changed in the text box.");
             this.cbShowPredecessor.UseVisualStyleBackColor = true;
             this.cbShowPredecessor.CheckedChanged += new System.EventHandler(this.SuccessionChanged);
             // 
