@@ -443,7 +443,6 @@
             this.ToolTip1.SetToolTip(this.tabControl1, "Reorder successive profiles by dragging the tab to the desired position.\r\nAdd new" +
         " tabs by selecting the \"+\" tab.\r\nDelete a tab by dragging the tab over the \"-\" t" +
         "ab.");
-            this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabControl1_Selecting);
             // 
             // tabPage1
             // 

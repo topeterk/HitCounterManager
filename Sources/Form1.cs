@@ -53,6 +53,7 @@ namespace HitCounterManager
             // But not all variables are available yet, so we prevent access to them.
             gpSuccession_ValueChangedSema = true;
             InitializeComponent();
+            tabControl1.InitializeProfileTabControl();
             gpSuccession_ValueChangedSema = false;
 
             gpSuccession_Height = gpSuccession.Height; // remember expanded size from designer settings
@@ -61,8 +62,9 @@ namespace HitCounterManager
             om = new OutModule(pi);
             sc = new Shortcuts(Handle);
 
-            pi.ProfileChanged += DataGridView1_ProfileChanged;
-            pvc.SelectedProfileChanged += profileViewControl1_SelectedProfileChanged;
+            tabControl1.ProfileChanged += UpdateProgressAndTotals;
+            tabControl1.SelectedProfileChanged += profileViewControl1_SelectedProfileChanged;
+            tabControl1.ProfileViewControlSelected += TabControl1_ProfileTabSelected;
 
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -75,6 +77,7 @@ namespace HitCounterManager
             btnHit.Select();
             pi.ProfileUpdateBegin();
             LoadSettings();
+            tabControl1.LoadProfileTabControl(profs);
             ShowSuccessionMenu(false); // start collapsed
             pi.ProfileUpdateEnd(); // Write very first output once after application start (fires ProfileChanged with UpdateProgressAndTotals())
         }
@@ -231,12 +234,7 @@ namespace HitCounterManager
             }
         }
 
-        private void DataGridView1_ProfileChanged(object sender, EventArgs e)
-        {
-            UpdateProgressAndTotals();
-        }
-
-        private void UpdateProgressAndTotals()
+        private void UpdateProgressAndTotals(object sender, EventArgs e)
         {
             int TotalSplits, TotalActiveSplit, TotalHits, TotalHitsWay, TotalPB;
             GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB);
@@ -488,68 +486,17 @@ namespace HitCounterManager
 
             if (null != sender) // update on a GUI handler only
             {
-                UpdateProgressAndTotals();
+                UpdateProgressAndTotals(sender, e);
             }
         }
 
         #endregion
 
-        private void TabControl1_Selecting(object sender, TabControlCancelEventArgs e)
+        private void TabControl1_ProfileTabSelected(object sender, TabControlCancelEventArgs e)
         {
-            if (e.TabPage.Text.Equals("-")) // Switch to tab?
-            {
-                e.Cancel = true; // "Delete" tab cannot be selected
-                return;
-            }
-            
-            profs.SaveProfile(); // save current tab's profile
-
-            if (e.TabPage.Text.Equals("+")) // Create new tab?
-            {
-                if (tabControl1.ProfileViewControls.Length == 1) // Warning message only on the first tab creation
-                {
-                    DialogResult result = MessageBox.Show(
-                        "Opening further tabs combine multiple profiles into one run. " +
-                        "Best known as a trilogy run for Dark Souls 1 to 3.\n\n" +
-                        "There is a separate attempts counter. All profiles' attempts counters are paused.\n\n" + // TODO separate attempts counter
-                        "Please BE AWARE the Reset and PB buttons/hotkeys will apply to ALL open profiles! " +
-                        "For example, pressing reset will reset all the selected profiles of all available tabs!\n\n" +
-                        "OK = I understand, continue using tabs\n" +
-                        "Cancel = Ups, I better stick with one tab only",
-                        "Succession", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                    if (result != DialogResult.OK)
-                    {
-                        e.Cancel = true; // Action aborted
-                        return;
-                    }
-                }
-
-                Control template = tabControl1.TabPages[0].Controls["pvc"];
-                TabPage page = e.TabPage;
-
-                // Reuse the "New" tab for the actual new page and create an new "New" tab
-                page.Text = (e.TabPageIndex + 1).ToString();
-                tabControl1.TabPages.Insert(e.TabPageIndex + 1, "+");
-
-                // Fill controls of the tab
-                ProfileViewControl pvc_new = new ProfileViewControl();
-                pvc_new.Anchor = template.Anchor;
-                pvc_new.Location = template.Location;
-                pvc_new.Name = "pvc";
-                pvc_new.Size = template.Size;
-                pvc_new.TabIndex = 0;
-                pvc_new.ProfileInfo.ProfileChanged += DataGridView1_ProfileChanged;
-                pvc_new.SelectedProfileChanged += profileViewControl1_SelectedProfileChanged;
-                page.Controls.Add(pvc_new);
-
-                pvc_new.SetProfileList(profs.GetProfileList(), null);
-            }
-
             // Switch UI to interact with selected tab
-            pvc = (ProfileViewControl)e.TabPage.Controls["pvc"];
+            pvc = (ProfileViewControl)sender;
             pi = pvc.ProfileInfo;
-            profs.SetProfileInfo(pi);
-            profs.LoadProfile(pi.ProfileName);
             om = new OutModule(pi);
         }
     }
@@ -638,6 +585,10 @@ namespace HitCounterManager
         }
 
         #endregion
+        
+        #region Profile related implementation
+        
+        private Profiles profs;
 
         [Browsable(false)] // Hide from designer
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
@@ -655,5 +606,89 @@ namespace HitCounterManager
                 return pvcs;
             }
         }
+        
+        public void InitializeProfileTabControl()
+        {
+            ProfileViewControl pvc_initial = ProfileViewControls[0]; // the only one created by designer
+            pvc_initial.ProfileInfo.ProfileChanged += PVC_ProfileChangedHandler;
+            pvc_initial.SelectedProfileChanged += PVC_SelectedProfileChangedHandler;
+            Selecting += TabSelectingHandler;
+        }
+        public void LoadProfileTabControl(Profiles profiles) { profs = profiles; }
+
+        public event EventHandler<ProfileViewControl.SelectedProfileChangedCauseType> SelectedProfileChanged;
+        public void PVC_SelectedProfileChangedHandler(object sender, ProfileViewControl.SelectedProfileChangedCauseType cause)
+        {
+            if (null != SelectedProfileChanged) SelectedProfileChanged(sender, cause); // Fire event
+        }
+        
+        public event EventHandler<EventArgs> ProfileChanged;
+        public void PVC_ProfileChangedHandler(object sender, EventArgs e)
+        {
+            if (null != ProfileChanged) ProfileChanged(sender, e); // Fire event
+        }
+
+        public event EventHandler<TabControlCancelEventArgs> ProfileViewControlSelected;
+        private void TabSelectingHandler(object sender, TabControlCancelEventArgs e)
+        {
+            if (e.TabPage.Text.Equals("-")) // Switch to tab?
+            {
+                e.Cancel = true; // "Delete" tab cannot be selected
+                return;
+            }
+            
+            profs.SaveProfile(); // save current tab's profile
+
+            if (e.TabPage.Text.Equals("+")) // Create new tab?
+            {
+                if (ProfileViewControls.Length == 1) // Warning message only on the first tab creation
+                {
+                    DialogResult result = MessageBox.Show(
+                        "Opening further tabs combine multiple profiles into one run. " +
+                        "Best known as a trilogy run for Dark Souls 1 to 3.\n\n" +
+                        "There is a separate attempts counter. All profiles' attempts counters are paused.\n\n" + // TODO separate attempts counter
+                        "Please BE AWARE the Reset and PB buttons/hotkeys will apply to ALL open profiles! " +
+                        "For example, pressing reset will reset all the selected profiles of all available tabs!\n\n" +
+                        "OK = I understand, continue using tabs\n" +
+                        "Cancel = Ups, I better stick with one tab only",
+                        "Succession", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    if (result != DialogResult.OK)
+                    {
+                        e.Cancel = true; // Action aborted
+                        return;
+                    }
+                }
+
+                Control template = TabPages[0].Controls["pvc"];
+                TabPage page = e.TabPage;
+
+                // Reuse the "New" tab for the actual new page and create an new "New" tab
+                page.Text = (e.TabPageIndex + 1).ToString();
+                TabPages.Insert(e.TabPageIndex + 1, "+");
+
+                // Fill controls of the tab
+                ProfileViewControl pvc_new = new ProfileViewControl();
+                pvc_new.Anchor = template.Anchor;
+                pvc_new.Location = template.Location;
+                pvc_new.Name = "pvc";
+                pvc_new.Size = template.Size;
+                pvc_new.TabIndex = 0;
+                pvc_new.ProfileInfo.ProfileChanged += PVC_ProfileChangedHandler;
+                pvc_new.SelectedProfileChanged += PVC_SelectedProfileChangedHandler;
+                page.Controls.Add(pvc_new);
+
+                pvc_new.SetProfileList(profs.GetProfileList(), null);
+            }
+
+            // Switch UI to interact with selected tab
+            ProfileViewControl pvc_selected = (ProfileViewControl)e.TabPage.Controls["pvc"];
+            IProfileInfo pi_selected = pvc_selected.ProfileInfo;
+            profs.SetProfileInfo(pi_selected);
+            profs.LoadProfile(pi_selected.ProfileName);
+
+            if (null != ProfileViewControlSelected) ProfileViewControlSelected(pvc_selected, e); // Fire event
+        }
+
+        #endregion
     }
 }
