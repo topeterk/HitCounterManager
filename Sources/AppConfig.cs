@@ -252,7 +252,7 @@ namespace HitCounterManager
             profs = _settings.Profiles;
             profs.SetProfileInfo(pi);
 
-            pvc.SetProfileList(profs.GetProfileList(), _settings.ProfileSelected);
+            tabControl1.SelectedProfileViewControl.SetProfileList(profs.GetProfileList(), _settings.ProfileSelected);
 
             if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Reset, _settings.ShortcutResetKeyCode , _settings.ShortcutResetEnable)) isKeyInvalid = true;
             if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Hit, _settings.ShortcutHitKeyCode , _settings.ShortcutHitEnable)) isKeyInvalid = true;
@@ -388,7 +388,7 @@ namespace HitCounterManager
             _settings.SuccessionHitsWay = om.SuccessionHitsWay; // obsolete since version 7 - keep for backwards compatibility
             _settings.SuccessionHitsPB = om.SuccessionHitsPB;   // obsolete since version 7 - keep for backwards compatibility
 
-            _settings.ProfileSelected = pvc.SelectedProfile;
+            _settings.ProfileSelected = tabControl1.SelectedProfileViewControl.SelectedProfile;
 
             profs.SaveProfile(); // Make sure all changes have been saved eventually
             _settings.Profiles = profs;

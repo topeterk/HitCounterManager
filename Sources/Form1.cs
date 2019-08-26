@@ -58,7 +58,7 @@ namespace HitCounterManager
 
             gpSuccession_Height = gpSuccession.Height; // remember expanded size from designer settings
 
-            pi = pvc.ProfileInfo; // for better capsulation
+            pi = tabControl1.SelectedProfileInfo; // for better capsulation
             om = new OutModule(pi);
             sc = new Shortcuts(Handle);
 
@@ -271,10 +271,10 @@ namespace HitCounterManager
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            string Name = InputBox("Enter name of new profile", "New profile", pvc.SelectedProfile);
+            string Name = InputBox("Enter name of new profile", "New profile", tabControl1.SelectedProfileViewControl.SelectedProfile);
             if (Name.Length == 0) return;
 
-            if (pvc.HasProfile(Name))
+            if (tabControl1.SelectedProfileViewControl.HasProfile(Name))
             {
                 if (DialogResult.OK != MessageBox.Show("A profile with this name already exists. Do you want to create as copy from the currently selected?", "Profile already exists", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
                     return;
@@ -288,21 +288,21 @@ namespace HitCounterManager
             // Apply on all tabs
             foreach(ProfileViewControl pvc_tab in tabControl1.ProfileViewControls)
             {
-                pvc_tab.CreateNewProfile(Name, (pvc_tab == pvc)); // Select only on the current tab
+                pvc_tab.CreateNewProfile(Name, (pvc_tab == tabControl1.SelectedProfileViewControl)); // Select only on the current tab
             }
         }
 
         private void btnRename_Click(object sender, EventArgs e)
         {
-            if (null == pvc.SelectedProfile) return;
-            
-            string NameOld = pvc.SelectedProfile;
+            string NameOld = tabControl1.SelectedProfileViewControl.SelectedProfile;
+            if (null == NameOld) return;
+
             string NameNew = InputBox("Enter new name for profile \"" + NameOld + "\"!", "Rename profile", NameOld);
             if (NameNew.Length == 0) return;
 
-            if (pvc.HasProfile(NameNew))
+            if (tabControl1.SelectedProfileViewControl.HasProfile(NameNew))
             {
-                MessageBox.Show("A profile with this name already exists!", "Profile already exists");
+                MessageBox.Show("A profile with this name already exists!", "Profile already exists", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 
@@ -318,32 +318,34 @@ namespace HitCounterManager
         private void btnCopy_Click(object sender, EventArgs e)
         {
             profs.SaveProfile(); // save previous selected profile
-            pvc.CopySelectedProfile(); // Apply on foreground tab
 
-            // Apply on all background tabs
+            // Apply on all tabs
             foreach(ProfileViewControl pvc_tab in tabControl1.ProfileViewControls)
             {
-                if (pvc_tab == pvc) continue; // Skip current tab
-                pvc_tab.CreateNewProfile(pvc.SelectedProfile, false);
+                if (pvc_tab == tabControl1.SelectedProfileViewControl)
+                    tabControl1.SelectedProfileViewControl.CopySelectedProfile(); // Apply on foreground tab
+                else
+                    pvc_tab.CreateNewProfile(tabControl1.SelectedProfileViewControl.SelectedProfile, false);
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            string Name = pvc.SelectedProfile;
+            string Name = tabControl1.SelectedProfileViewControl.SelectedProfile;
             if (DialogResult.OK == MessageBox.Show("Do you really want to delete profile \"" + Name + "\"?", "Deleting profile", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
             {
                 profs.DeleteProfile(Name);
-                pvc.DeleteSelectedProfile(); // Apply on foreground tab
+                tabControl1.SelectedProfileViewControl.DeleteSelectedProfile(); // Apply on foreground tab
 
                 // Apply on all background tabs
                 foreach(ProfileViewControl pvc_tab in tabControl1.ProfileViewControls)
                 {
-                    if (pvc_tab == pvc) continue; // Skip current tab
+                    if (pvc_tab == tabControl1.SelectedProfileViewControl) continue; // Skip current tab
                     pvc_tab.DeleteProfile(Name);
                 }
 
-                profs.LoadProfile(pvc.SelectedProfile);
+                // profile was changed by deletion, so try loading the newly selected profile
+                profs.LoadProfile(tabControl1.SelectedProfileViewControl.SelectedProfile);
             }
         }
 
@@ -390,7 +392,7 @@ namespace HitCounterManager
                 profs.SaveProfile(); // save tab's profile
             }
 
-            profs.SetProfileInfo(pvc.ProfileInfo); // Restore current profile selection
+            profs.SetProfileInfo(tabControl1.SelectedProfileInfo); // Restore current profile selection
         }
 
         private void btnHit_Click(object sender, EventArgs e) { pi.Hit(+1); }
@@ -464,8 +466,7 @@ namespace HitCounterManager
         private void TabControl1_ProfileTabSelected(object sender, TabControlCancelEventArgs e)
         {
             // Switch UI to interact with selected tab
-            pvc = (ProfileViewControl)sender;
-            pi = pvc.ProfileInfo;
+            pi = tabControl1.SelectedProfileInfo;
             om = new OutModule(pi);
         }
     }
@@ -561,6 +562,14 @@ namespace HitCounterManager
 
         [Browsable(false)] // Hide from designer
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
+        public IProfileInfo SelectedProfileInfo { get; private set; }
+
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
+        public ProfileViewControl SelectedProfileViewControl { get; private set; }
+
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public ProfileViewControl[] ProfileViewControls
         {
             get
@@ -578,9 +587,10 @@ namespace HitCounterManager
         
         public void InitializeProfileTabControl()
         {
-            ProfileViewControl pvc_initial = ProfileViewControls[0]; // the only one created by designer
-            pvc_initial.ProfileInfo.ProfileChanged += PVC_ProfileChangedHandler;
-            pvc_initial.SelectedProfileChanged += PVC_SelectedProfileChangedHandler;
+            SelectedProfileViewControl = ProfileViewControls[0]; // the only one created by designer
+            SelectedProfileInfo = SelectedProfileViewControl.ProfileInfo;
+            SelectedProfileInfo.ProfileChanged += PVC_ProfileChangedHandler;
+            SelectedProfileViewControl.SelectedProfileChanged += PVC_SelectedProfileChangedHandler;
             Selecting += TabSelectingHandler;
         }
         public void LoadProfileTabControl(Profiles profiles) { profs = profiles; }
@@ -649,13 +659,13 @@ namespace HitCounterManager
                 pvc_new.SetProfileList(profs.GetProfileList(), null);
             }
 
-            // Switch UI to interact with selected tab
-            ProfileViewControl pvc_selected = (ProfileViewControl)e.TabPage.Controls["pvc"];
-            IProfileInfo pi_selected = pvc_selected.ProfileInfo;
-            profs.SetProfileInfo(pi_selected);
-            profs.LoadProfile(pi_selected.ProfileName);
+            // Switch interaction to selected tab
+            SelectedProfileViewControl = (ProfileViewControl)e.TabPage.Controls["pvc"];
+            SelectedProfileInfo = SelectedProfileViewControl.ProfileInfo;
+            profs.SetProfileInfo(SelectedProfileInfo);
+            profs.LoadProfile(SelectedProfileInfo.ProfileName);
 
-            if (null != ProfileViewControlSelected) ProfileViewControlSelected(pvc_selected, e); // Fire event
+            if (null != ProfileViewControlSelected) ProfileViewControlSelected(SelectedProfileViewControl, e); // Fire event
         }
 
         public void GetCalculatedSums(out int TotalSplits, out int TotalActiveSplit, out int TotalHits, out int TotalHitsWay, out int TotalPB)
@@ -679,7 +689,7 @@ namespace HitCounterManager
 
                 if (!ActiveProfileFound)
                 {
-                    if (pvc_tab == (ProfileViewControl)SelectedTab.Controls["pvc"]) // Active profile tab found
+                    if (pi_tab == SelectedProfileInfo) // Active profile tab found
                     {
                         TotalActiveSplit += pi_tab.ActiveSplit;
                         ActiveProfileFound = true;
