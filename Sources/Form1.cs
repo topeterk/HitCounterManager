@@ -203,41 +203,10 @@ namespace HitCounterManager
             return false;
         }
 
-        private void GetCalculatedSums(out int TotalSplits, out int TotalActiveSplit, out int TotalHits, out int TotalHitsWay, out int TotalPB)
-        {
-            bool ActiveProfileFound = false;
-
-            TotalSplits = TotalActiveSplit = TotalHits = TotalHitsWay = TotalPB = 0;
-
-            foreach(ProfileViewControl pvc_tab in tabControl1.ProfileViewControls)
-            {
-                IProfileInfo pi_tab = pvc_tab.ProfileInfo;
-                int Splits = pi_tab.SplitCount;
-
-                TotalSplits += Splits;
-                for (int i = 0; i < Splits; i++)
-                {
-                    TotalHits += pi_tab.GetSplitHits(i);
-                    TotalHitsWay += pi_tab.GetSplitWayHits(i);
-                    TotalPB += pi_tab.GetSplitPB(i);
-                }
-
-                if (!ActiveProfileFound)
-                {
-                    if (pvc_tab == pvc) // Active profile tab found
-                    {
-                        TotalActiveSplit += pi.ActiveSplit;
-                        ActiveProfileFound = true;
-                    }
-                    else TotalActiveSplit += Splits; // Add all splits of preceeding profiles
-                }
-            }
-        }
-
         private void UpdateProgressAndTotals(object sender, EventArgs e)
         {
             int TotalSplits, TotalActiveSplit, TotalHits, TotalHitsWay, TotalPB;
-            GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB);
+            tabControl1.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB);
             lbl_progress.Text = "Progress:  " + TotalActiveSplit + " / " + TotalSplits + "  # " + pi.AttemptsCount.ToString("D3");
             lbl_totals.Text = "Total: " + (TotalHits + TotalHitsWay) + " Hits   " + TotalPB + " PB";
 
@@ -687,6 +656,37 @@ namespace HitCounterManager
             profs.LoadProfile(pi_selected.ProfileName);
 
             if (null != ProfileViewControlSelected) ProfileViewControlSelected(pvc_selected, e); // Fire event
+        }
+
+        public void GetCalculatedSums(out int TotalSplits, out int TotalActiveSplit, out int TotalHits, out int TotalHitsWay, out int TotalPB)
+        {
+            bool ActiveProfileFound = false;
+
+            TotalSplits = TotalActiveSplit = TotalHits = TotalHitsWay = TotalPB = 0;
+
+            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+            {
+                IProfileInfo pi_tab = pvc_tab.ProfileInfo;
+                int Splits = pi_tab.SplitCount;
+
+                TotalSplits += Splits;
+                for (int i = 0; i < Splits; i++)
+                {
+                    TotalHits += pi_tab.GetSplitHits(i);
+                    TotalHitsWay += pi_tab.GetSplitWayHits(i);
+                    TotalPB += pi_tab.GetSplitPB(i);
+                }
+
+                if (!ActiveProfileFound)
+                {
+                    if (pvc_tab == (ProfileViewControl)SelectedTab.Controls["pvc"]) // Active profile tab found
+                    {
+                        TotalActiveSplit += pi_tab.ActiveSplit;
+                        ActiveProfileFound = true;
+                    }
+                    else TotalActiveSplit += Splits; // Add all splits of preceeding profiles
+                }
+            }
         }
 
         #endregion
