@@ -150,6 +150,7 @@ namespace HitCounterManager
             if (idx == ComboBox1.SelectedIndex)
             {
                 ComboBox1.SelectedItem = null;
+                pi.ClearSplits();
             }
             ComboBox1.Items.RemoveAt(idx);
 

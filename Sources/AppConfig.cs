@@ -249,11 +249,10 @@ namespace HitCounterManager
 
             // Apply settings..
             sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
-            profs = _settings.Profiles;
-            profs.SetProfileInfo(pi);
+            _settings.Profiles.SetProfileInfo(pi);
 
-            tabControl1.LoadProfileTabControl(profs);
-            tabControl1.SelectedProfileViewControl.SetProfileList(profs.GetProfileList(), _settings.ProfileSelected);
+            tabControl1.LoadProfileTabControl(_settings.Profiles);
+            tabControl1.SelectedProfileViewControl.SetProfileList(_settings.Profiles.GetProfileList(), _settings.ProfileSelected);
 
             if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Reset, _settings.ShortcutResetKeyCode , _settings.ShortcutResetEnable)) isKeyInvalid = true;
             if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Hit, _settings.ShortcutHitKeyCode , _settings.ShortcutHitEnable)) isKeyInvalid = true;
@@ -267,8 +266,8 @@ namespace HitCounterManager
                 MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
 
             pi.SetSessionProgress(0, true);
-            SetSuccession(_settings.SuccessionTitle, _settings.ShowSuccession);
-            SuccessionChanged(null, null);
+            if (null != _settings.SuccessionTitle) txtPredecessorTitle.Text = _settings.SuccessionTitle;
+            cbShowPredecessor.Checked = _settings.ShowSuccession;
 
             if (_settings.MainWidth < this.MinimumSize.Width) _settings.MainWidth = this.MinimumSize.Width;
             if (_settings.MainHeight < this.MinimumSize.Height) _settings.MainHeight = this.MinimumSize.Height;
@@ -391,8 +390,7 @@ namespace HitCounterManager
 
             _settings.ProfileSelected = tabControl1.SelectedProfileViewControl.SelectedProfile;
 
-            profs.SaveProfile(); // Make sure all changes have been saved eventually
-            _settings.Profiles = profs;
+            _settings.Profiles.SaveProfile(); // Make sure all changes have been saved eventually
 
             sm.WriteXML(_settings);
         }

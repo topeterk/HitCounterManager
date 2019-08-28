@@ -37,10 +37,8 @@ namespace HitCounterManager
         public Shortcuts sc;
         public OutModule om;
 
-        private Profiles profs = new Profiles();
         private bool SettingsDialogOpen = false;
         private IProfileInfo pi;
-        private bool gpSuccession_ValueChangedSema = false;
 
         private readonly int gpSuccession_Height;
 
@@ -48,13 +46,8 @@ namespace HitCounterManager
 
         public Form1()
         {
-            // The designer sometimes orders the control creation in an order
-            // that would call event handlers already during initialization.
-            // But not all variables are available yet, so we prevent access to them.
-            gpSuccession_ValueChangedSema = true;
             InitializeComponent();
             tabControl1.InitializeProfileTabControl();
-            gpSuccession_ValueChangedSema = false;
 
             gpSuccession_Height = gpSuccession.Height; // remember expanded size from designer settings
 
@@ -205,7 +198,7 @@ namespace HitCounterManager
         {
             int TotalSplits, TotalActiveSplit, TotalHits, TotalHitsWay, TotalPB;
             tabControl1.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB);
-            lbl_progress.Text = "Progress:  " + TotalActiveSplit + " / " + TotalSplits + "  # " + pi.AttemptsCount.ToString("D3");
+            lbl_progress.Text = "Progress:  " + TotalActiveSplit + " / " + TotalSplits + "  # " + tabControl1.CurrentAttempts.ToString("D3");
             lbl_totals.Text = "Total: " + (TotalHits + TotalHitsWay) + " Hits   " + TotalPB + " PB";
 
             om.Update();
@@ -231,9 +224,7 @@ namespace HitCounterManager
         }
 
         private void btnSave_Click(object sender, EventArgs e) { SaveSettings(); }
-
         private void btnWeb_Click(object sender, EventArgs e) { System.Diagnostics.Process.Start("https://github.com/topeterk/HitCounterManager"); }
-
         private void btnCheckVersion_Click(object sender, EventArgs e)
         {
             try
@@ -264,92 +255,16 @@ namespace HitCounterManager
                 MessageBox.Show("An error occurred during update check!\n\n" + ex.Message.ToString(), "Check for updated failed!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
-
         private void btnAbout_Click(object sender, EventArgs e) { new About().ShowDialog(this); }
 
-        private void btnNew_Click(object sender, EventArgs e)
+        private void btnNew_Click(object sender, EventArgs e) { tabControl1.AddProfile(); }
+        private void btnRename_Click(object sender, EventArgs e) { tabControl1.SelectedProfileRename(); }
+        private void btnCopy_Click(object sender, EventArgs e) { tabControl1.SelectedProfileCopy(); }
+        private void btnDelete_Click(object sender, EventArgs e) { tabControl1.SelectedProfileDelete(); }
+
+        private void btnAttempts_Click(object sender, EventArgs e)
         {
-            string Name = InputBox("Enter name of new profile", "New profile", tabControl1.SelectedProfileViewControl.SelectedProfile);
-            if (Name.Length == 0) return;
-
-            if (tabControl1.SelectedProfileViewControl.HasProfile(Name))
-            {
-                if (DialogResult.OK != MessageBox.Show("A profile with this name already exists. Do you want to create as copy from the currently selected?", "Profile already exists", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
-                    return;
-
-                btnCopy_Click(sender, e);
-                return;
-            }
-
-            profs.SaveProfile(); // save previous selected profile
-
-            // Apply on all tabs
-            foreach(ProfileViewControl pvc_tab in tabControl1.ProfileViewControls)
-            {
-                pvc_tab.CreateNewProfile(Name, (pvc_tab == tabControl1.SelectedProfileViewControl)); // Select only on the current tab
-            }
-        }
-
-        private void btnRename_Click(object sender, EventArgs e)
-        {
-            string NameOld = tabControl1.SelectedProfileViewControl.SelectedProfile;
-            if (null == NameOld) return;
-
-            string NameNew = InputBox("Enter new name for profile \"" + NameOld + "\"!", "Rename profile", NameOld);
-            if (NameNew.Length == 0) return;
-
-            if (tabControl1.SelectedProfileViewControl.HasProfile(NameNew))
-            {
-                MessageBox.Show("A profile with this name already exists!", "Profile already exists", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return;
-            }
-
-            profs.RenameProfile(NameOld, NameNew);
-
-            // Apply on all tabs
-            foreach(ProfileViewControl pvc_tab in tabControl1.ProfileViewControls)
-            {
-                pvc_tab.RenameProfile(NameOld, NameNew);
-            }
-        }
-
-        private void btnCopy_Click(object sender, EventArgs e)
-        {
-            profs.SaveProfile(); // save previous selected profile
-
-            // Apply on all tabs
-            foreach(ProfileViewControl pvc_tab in tabControl1.ProfileViewControls)
-            {
-                if (pvc_tab == tabControl1.SelectedProfileViewControl)
-                    tabControl1.SelectedProfileViewControl.CopySelectedProfile(); // Apply on foreground tab
-                else
-                    pvc_tab.CreateNewProfile(tabControl1.SelectedProfileViewControl.SelectedProfile, false);
-            }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            string Name = tabControl1.SelectedProfileViewControl.SelectedProfile;
-            if (DialogResult.OK == MessageBox.Show("Do you really want to delete profile \"" + Name + "\"?", "Deleting profile", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
-            {
-                profs.DeleteProfile(Name);
-                tabControl1.SelectedProfileViewControl.DeleteSelectedProfile(); // Apply on foreground tab
-
-                // Apply on all background tabs
-                foreach(ProfileViewControl pvc_tab in tabControl1.ProfileViewControls)
-                {
-                    if (pvc_tab == tabControl1.SelectedProfileViewControl) continue; // Skip current tab
-                    pvc_tab.DeleteProfile(Name);
-                }
-
-                // profile was changed by deletion, so try loading the newly selected profile
-                profs.LoadProfile(tabControl1.SelectedProfileViewControl.SelectedProfile);
-            }
-        }
-
-        private void btnAttempts_Click(object sender, EventArgs e) // TODO Succession with tabs
-        {
-            string amount_string = InputBox("Enter amount to be set!", "Set new run number (amount of attempts)", pi.AttemptsCount.ToString());
+            string amount_string = InputBox("Enter amount to be set!", "Set new run number (amount of attempts)", tabControl1.CurrentAttempts.ToString());
             int amount_value;
             if (!int.TryParse(amount_string, out amount_value))
             {
@@ -357,51 +272,22 @@ namespace HitCounterManager
                 MessageBox.Show("Only numbers are allowed!");
                 return;
             }
-            pi.AttemptsCount = amount_value;
+            tabControl1.CurrentAttempts = amount_value;
         }
-
         private void btnUp_Click(object sender, EventArgs e) { pi.PermuteSplit(pi.ActiveSplit, -1); }
         private void btnDown_Click(object sender, EventArgs e) { pi.PermuteSplit(pi.ActiveSplit, +1); }
-
         private void BtnInsertSplit_Click(object sender, EventArgs e) { pi.InsertSplit(); }
 
         private void BtnOnTop_Click(object sender, EventArgs e) { SetAlwaysOnTop(!this.TopMost); }
 
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            // Apply on all tabs
-            foreach (ProfileViewControl pvc_tab in tabControl1.ProfileViewControls)
-            {
-                IProfileInfo pi_tab = pvc_tab.ProfileInfo;
-                profs.SetProfileInfo(pi_tab);
-                pi_tab.ResetRun();
-                profs.SaveProfile(); // save tab's profile
-            }
-        }
-
-        private void btnPB_Click(object sender, EventArgs e)
-        {
-            // Apply on all tabs
-            foreach(ProfileViewControl pvc_tab in tabControl1.ProfileViewControls)
-            {
-                IProfileInfo pi_tab = pvc_tab.ProfileInfo;
-                profs.SetProfileInfo(pi_tab);
-                pi_tab.setPB();
-                profs.SaveProfile(); // save tab's profile
-            }
-
-            profs.SetProfileInfo(tabControl1.SelectedProfileInfo); // Restore current profile selection
-        }
-
+        private void btnReset_Click(object sender, EventArgs e) { tabControl1.SelectedProfilesReset(); }
+        private void btnPB_Click(object sender, EventArgs e) { tabControl1.SelectedProfilesPB(); }
         private void btnHit_Click(object sender, EventArgs e) { pi.Hit(+1); }
         private void btnHitUndo_Click(object sender, EventArgs e) { pi.Hit(-1); }
-
         private void btnWayHit_Click(object sender, EventArgs e) { pi.WayHit(+1); }
         private void btnWayHitUndo_Click(object sender, EventArgs e) { pi.WayHit(-1); }
-
         private void btnSplit_Click(object sender, EventArgs e) { pi.MoveSplits(+1); }
         private void btnSplitPrev_Click(object sender, EventArgs e) { pi.MoveSplits(-1); }
-
         private void btnSuccessionVisibility_Click(object sender, EventArgs e) { ShowSuccessionMenu();  }
 
         /// <summary>
@@ -429,25 +315,11 @@ namespace HitCounterManager
             Height += diff;
         }
 
-        private void SetSuccession(string Title, bool ShowPredecessor)
-        {
-            gpSuccession_ValueChangedSema = true;
-            if (null != Title) txtPredecessorTitle.Text = Title;
-            cbShowPredecessor.Checked = ShowPredecessor;
-            gpSuccession_ValueChangedSema = false;
-        }
-
         private void SuccessionChanged(object sender, EventArgs e)
         {
-            if (gpSuccession_ValueChangedSema) return;
-
             om.ShowSuccession = cbShowPredecessor.Checked;
             om.SuccessionTitle = txtPredecessorTitle.Text;
-
-            if (null != sender) // update on a GUI handler only
-            {
-                UpdateProgressAndTotals(sender, e);
-            }
+            om.Update();
         }
 
         #endregion
@@ -548,6 +420,28 @@ namespace HitCounterManager
         #region Profile related implementation
         
         private Profiles profs;
+        private int SuccessionAttempts = 0;
+
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
+        public int CurrentAttempts
+        {
+            get
+            {
+                return (1 < ProfileViewControls.Length ? SuccessionAttempts : SelectedProfileInfo.AttemptsCount); // Succession active?
+            }
+            set
+            {
+                if (1 < ProfileViewControls.Length) // Succession active?
+                {
+                    SuccessionAttempts = value;
+                    PVC_ProfileChangedHandler(this, null); // Notify about change as there is no profile which will do this for us
+                }
+                else
+                    SelectedProfileInfo.AttemptsCount = value;
+            }
+        }
+
 
         [Browsable(false)] // Hide from designer
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
@@ -557,9 +451,7 @@ namespace HitCounterManager
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public ProfileViewControl SelectedProfileViewControl { get; private set; }
 
-        [Browsable(false)] // Hide from designer
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
-        public ProfileViewControl[] ProfileViewControls
+        private ProfileViewControl[] ProfileViewControls
         {
             get
             {
@@ -573,7 +465,7 @@ namespace HitCounterManager
                 return pvcs;
             }
         }
-        
+
         public void InitializeProfileTabControl()
         {
             SelectedProfileViewControl = ProfileViewControls[0]; // the only one created by designer
@@ -689,6 +581,108 @@ namespace HitCounterManager
                     else TotalActiveSplit += Splits; // Add all splits of preceeding profiles
                 }
             }
+        }
+
+        public void AddProfile()
+        {
+            string Name = Form1.InputBox("Enter name of new profile", "New profile", SelectedProfileViewControl.SelectedProfile);
+            if (Name.Length == 0) return;
+
+            if (SelectedProfileViewControl.HasProfile(Name))
+            {
+                MessageBox.Show("A profile with this name already exists!", "Profile already exists", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
+            profs.SaveProfile(); // save previous selected profile
+
+            // Apply on all tabs
+            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+            {
+                pvc_tab.CreateNewProfile(Name, (pvc_tab == SelectedProfileViewControl)); // Select only for the current tab
+            }
+        }
+
+        public void SelectedProfileCopy()
+        {
+            profs.SaveProfile(); // save previous selected profile
+            SelectedProfileViewControl.CopySelectedProfile(); // Apply on foreground tab
+
+            // Apply on all tabs
+            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+            {
+                if (pvc_tab == SelectedProfileViewControl) continue; // Skip current tab
+                pvc_tab.CreateNewProfile(SelectedProfileViewControl.SelectedProfile, false);
+            }
+        }
+
+        public void SelectedProfileRename()
+        {
+            string NameOld = SelectedProfileViewControl.SelectedProfile;
+            if (null == NameOld) return;
+
+            string NameNew = Form1.InputBox("Enter new name for profile \"" + NameOld + "\"!", "Rename profile", NameOld);
+            if (NameNew.Length == 0) return;
+
+            if (SelectedProfileViewControl.HasProfile(NameNew))
+            {
+                MessageBox.Show("A profile with this name already exists!", "Profile already exists", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
+            profs.RenameProfile(NameOld, NameNew);
+
+            // Apply on all tabs
+            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+            {
+                pvc_tab.RenameProfile(NameOld, NameNew);
+            }
+        }
+
+        public void SelectedProfileDelete()
+        {
+            string Name = SelectedProfileViewControl.SelectedProfile;
+            if (DialogResult.OK == MessageBox.Show("Do you really want to delete profile \"" + Name + "\"?", "Deleting profile", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
+            {
+                profs.DeleteProfile(Name);
+                SelectedProfileViewControl.DeleteSelectedProfile(); // Apply on foreground tab
+
+                // Apply on all background tabs
+                foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+                {
+                    if (pvc_tab == SelectedProfileViewControl) continue; // Skip current tab
+                    pvc_tab.DeleteProfile(Name);
+                }
+
+                // profile was changed by deletion, so try loading the newly selected profile
+                profs.LoadProfile(SelectedProfileViewControl.SelectedProfile);
+            }
+        }
+
+        public void SelectedProfilesReset()
+        {
+            // Apply on all tabs
+            foreach (ProfileViewControl pvc_tab in ProfileViewControls)
+            {
+                IProfileInfo pi_tab = pvc_tab.ProfileInfo;
+                profs.SetProfileInfo(pi_tab);
+                pi_tab.ResetRun();
+                profs.SaveProfile(); // save tab's profile
+            }
+        }
+
+        public void SelectedProfilesPB()
+        {
+            // Apply on all tabs
+            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+            {
+                IProfileInfo pi_tab = pvc_tab.ProfileInfo;
+                profs.SetProfileInfo(pi_tab);
+                pi_tab.setPB();
+                profs.SaveProfile(); // save tab's profile
+            }
+
+            profs.SetProfileInfo(SelectedProfileInfo); // Restore current profile selection
         }
 
         #endregion
