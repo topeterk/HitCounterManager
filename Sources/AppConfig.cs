@@ -252,6 +252,7 @@ namespace HitCounterManager
             profs = _settings.Profiles;
             profs.SetProfileInfo(pi);
 
+            tabControl1.LoadProfileTabControl(profs);
             tabControl1.SelectedProfileViewControl.SetProfileList(profs.GetProfileList(), _settings.ProfileSelected);
 
             if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Reset, _settings.ShortcutResetKeyCode , _settings.ShortcutResetEnable)) isKeyInvalid = true;

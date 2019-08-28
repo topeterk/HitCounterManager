@@ -63,7 +63,6 @@ namespace HitCounterManager
             sc = new Shortcuts(Handle);
 
             tabControl1.ProfileChanged += UpdateProgressAndTotals;
-            tabControl1.SelectedProfileChanged += profileViewControl1_SelectedProfileChanged;
             tabControl1.ProfileViewControlSelected += TabControl1_ProfileTabSelected;
 
             ServicePointManager.Expect100Continue = true;
@@ -77,7 +76,6 @@ namespace HitCounterManager
             btnHit.Select();
             pi.ProfileUpdateBegin();
             LoadSettings();
-            tabControl1.LoadProfileTabControl(profs);
             ShowSuccessionMenu(false); // start collapsed
             pi.ProfileUpdateEnd(); // Write very first output once after application start (fires ProfileChanged with UpdateProgressAndTotals())
         }
@@ -404,15 +402,6 @@ namespace HitCounterManager
         private void btnSplit_Click(object sender, EventArgs e) { pi.MoveSplits(+1); }
         private void btnSplitPrev_Click(object sender, EventArgs e) { pi.MoveSplits(-1); }
 
-        private void profileViewControl1_SelectedProfileChanged(object sender, ProfileViewControl.SelectedProfileChangedCauseType cause)
-        {
-            if (cause != ProfileViewControl.SelectedProfileChangedCauseType.Delete)
-            {
-                profs.SaveProfile(); // save currently selected profile
-            }
-            profs.LoadProfile(((ProfileViewControl)sender).SelectedProfile);
-        }
-
         private void btnSuccessionVisibility_Click(object sender, EventArgs e) { ShowSuccessionMenu();  }
 
         /// <summary>
@@ -595,12 +584,15 @@ namespace HitCounterManager
         }
         public void LoadProfileTabControl(Profiles profiles) { profs = profiles; }
 
-        public event EventHandler<ProfileViewControl.SelectedProfileChangedCauseType> SelectedProfileChanged;
-        public void PVC_SelectedProfileChangedHandler(object sender, ProfileViewControl.SelectedProfileChangedCauseType cause)
+        private void PVC_SelectedProfileChangedHandler(object sender, ProfileViewControl.SelectedProfileChangedCauseType cause)
         {
-            if (null != SelectedProfileChanged) SelectedProfileChanged(sender, cause); // Fire event
+            if (cause != ProfileViewControl.SelectedProfileChangedCauseType.Delete)
+            {
+                profs.SaveProfile(); // save currently selected profile
+            }
+            profs.LoadProfile(((ProfileViewControl)sender).SelectedProfile);
         }
-        
+
         public event EventHandler<EventArgs> ProfileChanged;
         public void PVC_ProfileChangedHandler(object sender, EventArgs e)
         {
