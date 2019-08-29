@@ -248,26 +248,8 @@ namespace HitCounterManager
             }
 
             // Apply settings..
-            sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
 
-            _settings.Profiles.SetProfileInfo(ptc.SelectedProfileInfo);
-            ptc.LoadProfileTabControl(_settings.Profiles);
-            ptc.SelectedProfileViewControl.SetProfileList(_settings.Profiles.GetProfileList(), _settings.ProfileSelected);
-
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Reset, _settings.ShortcutResetKeyCode , _settings.ShortcutResetEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Hit, _settings.ShortcutHitKeyCode , _settings.ShortcutHitEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_HitUndo, _settings.ShortcutHitUndoKeyCode , _settings.ShortcutHitUndoEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHit, _settings.ShortcutWayHitKeyCode , _settings.ShortcutWayHitEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHitUndo, _settings.ShortcutWayHitUndoKeyCode , _settings.ShortcutWayHitUndoEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Split, _settings.ShortcutSplitKeyCode , _settings.ShortcutSplitEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_SplitPrev, _settings.ShortcutSplitPrevKeyCode , _settings.ShortcutSplitPrevEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_PB, _settings.ShortcutPBKeyCode , _settings.ShortcutPBEnable)) isKeyInvalid = true;
-            if (isKeyInvalid)
-                MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
-
-            ptc.SelectedProfileInfo.SetSessionProgress(0, true);
-            profilesControl1.SetSuccessionSettings(_settings.SuccessionTitle, _settings.ShowSuccession);
-
+            // Setup window appearance..
             if (_settings.MainWidth < this.MinimumSize.Width) _settings.MainWidth = this.MinimumSize.Width;
             if (_settings.MainHeight < this.MinimumSize.Height) _settings.MainHeight = this.MinimumSize.Height;
             // set window size and when possible also set location (just make sure window is not outside of screen)
@@ -275,6 +257,11 @@ namespace HitCounterManager
                 IsOnScreen(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth, _settings.MainHeight) ? BoundsSpecified.All : BoundsSpecified.Size);
             SetAlwaysOnTop(_settings.AlwaysOnTop);
 
+            // Load profile data..
+            profCtrl.ProfileTabControl.SelectedProfileInfo.ProfileUpdateBegin();
+            profCtrl.InitializeProfilesControl(_settings.Profiles, _settings.ProfileSelected, _settings.SuccessionTitle, _settings.ShowSuccession);
+
+            // Load customizing..
             om.ShowAttemptsCounter = _settings.ShowAttemptsCounter;
             om.ShowHeadline = _settings.ShowHeadline;
             om.ShowFooter = _settings.ShowFooter;
@@ -307,6 +294,22 @@ namespace HitCounterManager
 
             om.FilePathIn = _settings.Inputfile;
             om.FilePathOut = _settings.OutputFile; // setting output filepath will allow writing output, so keep this line last
+
+            profCtrl.ProfileTabControl.SelectedProfileInfo.ProfileUpdateEnd(); // Will fire event to write first output once after application start
+
+            // Configure hot keys..
+            sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
+
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Reset, _settings.ShortcutResetKeyCode , _settings.ShortcutResetEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Hit, _settings.ShortcutHitKeyCode , _settings.ShortcutHitEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_HitUndo, _settings.ShortcutHitUndoKeyCode , _settings.ShortcutHitUndoEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHit, _settings.ShortcutWayHitKeyCode , _settings.ShortcutWayHitEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHitUndo, _settings.ShortcutWayHitUndoKeyCode , _settings.ShortcutWayHitUndoEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Split, _settings.ShortcutSplitKeyCode , _settings.ShortcutSplitEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_SplitPrev, _settings.ShortcutSplitPrevKeyCode , _settings.ShortcutSplitPrevEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_PB, _settings.ShortcutPBKeyCode , _settings.ShortcutPBEnable)) isKeyInvalid = true;
+            if (isKeyInvalid)
+                MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
         }
 
         /// <summary>
@@ -384,12 +387,12 @@ namespace HitCounterManager
 
             _settings.SuccessionTitle = om.SuccessionTitle;
             int TotalSplits, TotalActiveSplit, SuccessionHits, SuccessionHitsWay, SuccessionHitsPB;
-            ptc.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out SuccessionHits, out SuccessionHitsWay, out SuccessionHitsPB, true);
+            profCtrl.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out SuccessionHits, out SuccessionHitsWay, out SuccessionHitsPB, true);
             _settings.SuccessionHits = SuccessionHits;       // obsolete since version 7 - keep for backwards compatibility
             _settings.SuccessionHitsWay = SuccessionHitsWay; // obsolete since version 7 - keep for backwards compatibility
             _settings.SuccessionHitsPB = SuccessionHitsPB;   // obsolete since version 7 - keep for backwards compatibility
 
-            _settings.ProfileSelected = ptc.SelectedProfileViewControl.SelectedProfile;
+            _settings.ProfileSelected = profCtrl.SelectedProfile;
 
             _settings.Profiles.SaveProfile(); // Make sure all changes have been saved eventually
 

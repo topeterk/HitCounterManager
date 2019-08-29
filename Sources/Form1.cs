@@ -35,19 +35,16 @@ namespace HitCounterManager
 
         public readonly Shortcuts sc;
         public readonly OutModule om;
-        public readonly ProfileTabControl ptc;
 
         private bool SettingsDialogOpen = false;
-
 
         #region Form
 
         public Form1()
         {
             InitializeComponent();
-            ptc = profilesControl1.ProfileTabControl; // for easier access
 
-            om = new OutModule(ptc);
+            om = new OutModule(profCtrl.ProfileTabControl);
             sc = new Shortcuts(Handle);
 
             ServicePointManager.Expect100Continue = true;
@@ -59,9 +56,7 @@ namespace HitCounterManager
         {
             Text = Text + " - v" + Application.ProductVersion + " " + OsLayer.Name;
             btnHit.Select();
-            ptc.SelectedProfileInfo.ProfileUpdateBegin();
             LoadSettings();
-            ptc.SelectedProfileInfo.ProfileUpdateEnd(); // Write very first output once after application start (fires ProfileChanged with UpdateProgressAndTotals())
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -181,7 +176,7 @@ namespace HitCounterManager
         }
 
         #endregion
-        #region UI (GUI)
+        #region UI
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
@@ -225,51 +220,37 @@ namespace HitCounterManager
         }
         private void btnAbout_Click(object sender, EventArgs e) { new About().ShowDialog(this); }
 
-        private void btnNew_Click(object sender, EventArgs e) { ptc.AddProfile(); }
-        private void btnRename_Click(object sender, EventArgs e) { ptc.SelectedProfileRename(); }
-        private void btnCopy_Click(object sender, EventArgs e) { ptc.SelectedProfileCopy(); }
-        private void btnDelete_Click(object sender, EventArgs e) { ptc.SelectedProfileDelete(); }
+        private void btnNew_Click(object sender, EventArgs e) { profCtrl.ProfileNew(); }
+        private void btnRename_Click(object sender, EventArgs e) { profCtrl.ProfileRename(); }
+        private void btnCopy_Click(object sender, EventArgs e) { profCtrl.ProfileCopy(); }
+        private void btnDelete_Click(object sender, EventArgs e) { profCtrl.ProfileDelete(); }
 
-        private void btnAttempts_Click(object sender, EventArgs e)
-        {
-            string amount_string = InputBox("Enter amount to be set!", "Set new run number (amount of attempts)", ptc.CurrentAttempts.ToString());
-            int amount_value;
-            if (!int.TryParse(amount_string, out amount_value))
-            {
-                if (amount_string.Equals("")) return; // Unfortunately this is the Cancel button
-                MessageBox.Show("Only numbers are allowed!");
-                return;
-            }
-            ptc.CurrentAttempts = amount_value;
-        }
-        private void btnUp_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.PermuteSplit(ptc.SelectedProfileInfo.ActiveSplit, -1); }
-        private void btnDown_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.PermuteSplit(ptc.SelectedProfileInfo.ActiveSplit, +1); }
-        private void BtnInsertSplit_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.InsertSplit(); }
+        private void btnAttempts_Click(object sender, EventArgs e) { profCtrl.ProfileSetAttempts(); }
+        private void btnUp_Click(object sender, EventArgs e) { profCtrl.ProfileSplitPermute(-1); }
+        private void btnDown_Click(object sender, EventArgs e) { profCtrl.ProfileSplitPermute(+1); }
+        private void BtnInsertSplit_Click(object sender, EventArgs e) { profCtrl.ProfileSplitInsert(); }
 
         private void BtnOnTop_Click(object sender, EventArgs e) { SetAlwaysOnTop(!this.TopMost); }
 
-        private void btnReset_Click(object sender, EventArgs e) { ptc.SelectedProfilesReset(); }
-        private void btnPB_Click(object sender, EventArgs e) { ptc.SelectedProfilesPB(); }
-        private void btnHit_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.Hit(+1); }
-        private void btnHitUndo_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.Hit(-1); }
-        private void btnWayHit_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.WayHit(+1); }
-        private void btnWayHitUndo_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.WayHit(-1); }
-        private void btnSplit_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.MoveSplits(+1); }
-        private void btnSplitPrev_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.MoveSplits(-1); }
-
-        #endregion
-        #region UI (events)
+        private void btnReset_Click(object sender, EventArgs e) { profCtrl.ProfileReset(); }
+        private void btnPB_Click(object sender, EventArgs e) { profCtrl.ProfilePB(); }
+        private void btnHit_Click(object sender, EventArgs e) { profCtrl.ProfileHit(+1); }
+        private void btnHitUndo_Click(object sender, EventArgs e) { profCtrl.ProfileHit(-1); }
+        private void btnWayHit_Click(object sender, EventArgs e) { profCtrl.ProfileWayHit(+1); }
+        private void btnWayHitUndo_Click(object sender, EventArgs e) { profCtrl.ProfileWayHit(-1); }
+        private void btnSplit_Click(object sender, EventArgs e) { profCtrl.ProfileSplitGo(+1); }
+        private void btnSplitPrev_Click(object sender, EventArgs e) { profCtrl.ProfileSplitGo(-1); }
 
         private void UpdateProgressAndTotals(object sender, EventArgs e)
         {
             int TotalSplits, TotalActiveSplit, TotalHits, TotalHitsWay, TotalPB;
-            ptc.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB, false);
-            lbl_progress.Text = "Progress:  " + TotalActiveSplit + " / " + TotalSplits + "  # " + ptc.CurrentAttempts.ToString("D3");
+            profCtrl.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB, false);
+            lbl_progress.Text = "Progress:  " + TotalActiveSplit + " / " + TotalSplits + "  # " + profCtrl.CurrentAttempts.ToString("D3");
             lbl_totals.Text = "Total: " + (TotalHits + TotalHitsWay) + " Hits   " + TotalPB + " PB";
             
             // TODO: Move into ProfilesControl
-            om.ShowSuccession = profilesControl1.cbShowPredecessor.Checked;
-            om.SuccessionTitle = profilesControl1.txtPredecessorTitle.Text;
+            om.ShowSuccession = profCtrl.cbShowPredecessor.Checked;
+            om.SuccessionTitle = profCtrl.txtPredecessorTitle.Text;
 
             om.Update();
         }

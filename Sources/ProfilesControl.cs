@@ -28,7 +28,9 @@ namespace HitCounterManager
 {
     public partial class ProfilesControl : UserControl
     {
-        public readonly int gpSuccession_Height;
+        private readonly int gpSuccession_Height;
+        private int SuccessionAttempts = 0;
+        private Profiles profs;
 
         public ProfilesControl()
         {
@@ -44,11 +46,7 @@ namespace HitCounterManager
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public ProfileTabControl ProfileTabControl { get { return ptc; } }
 
-        public event EventHandler<EventArgs> ProfileChanged;
-        public void ProfileChangedHandler(object sender, EventArgs e)
-        {
-            if (null != ProfileChanged) ProfileChanged(sender, e); // Fire event
-        }
+        #region Succession related
 
         private void btnSuccessionVisibility_Click(object sender, EventArgs e) { ShowSuccessionMenu();  }
 
@@ -78,10 +76,77 @@ namespace HitCounterManager
             gpSuccession.Top -= diff;
         }
 
-        public void SetSuccessionSettings(string PredecessorTitle, bool ShowPredecessor)
+        #endregion
+        #region Profile related
+        
+        public string SelectedProfile { get { return ptc.SelectedProfileViewControl.SelectedProfile; } }
+
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
+        public int CurrentAttempts
         {
-            if (null != PredecessorTitle) txtPredecessorTitle.Text = PredecessorTitle;
-            cbShowPredecessor.Checked = ShowPredecessor;
+            get
+            {
+                return (1 < ptc.ProfileViewControls.Length ? SuccessionAttempts : ptc.SelectedProfileInfo.AttemptsCount); // Succession active?
+            }
+            set
+            {
+                if (1 < ptc.ProfileViewControls.Length) // Succession active?
+                {
+                    SuccessionAttempts = value;
+                    ProfileChangedHandler(this, null); // Notify about change as there is no profile which will do this for us
+                }
+                else
+                    ptc.SelectedProfileInfo.AttemptsCount = value;
+            }
         }
+ 
+        public void InitializeProfilesControl(Profiles profiles, string ProfileSelected, string SuccessionTitle, bool ShowSuccession)
+        {
+            profs = profiles;
+            ptc.LoadProfilesIntoTabControl(profs, ProfileSelected);
+            if (null != SuccessionTitle) txtPredecessorTitle.Text = SuccessionTitle;
+            cbShowPredecessor.Checked = ShowSuccession;
+        }
+
+        public event EventHandler<EventArgs> ProfileChanged;
+        public void ProfileChangedHandler(object sender, EventArgs e)
+        {
+            if (null != ProfileChanged) ProfileChanged(sender, e); // Fire event
+        }
+
+        public void ProfileNew() { ptc.AddProfile(); }
+        public void ProfileRename() { ptc.SelectedProfileRename(); }
+        public void ProfileCopy() { ptc.SelectedProfileCopy(); }
+        public void ProfileDelete() { ptc.SelectedProfileDelete(); }
+
+        public void ProfileSplitPermute(int Amount) { ptc.SelectedProfileInfo.PermuteSplit(ptc.SelectedProfileInfo.ActiveSplit, Amount); }
+        public void ProfileSplitInsert() { ptc.SelectedProfileInfo.InsertSplit(); }
+
+        public void ProfileReset() { ptc.SelectedProfilesReset(); }
+        public void ProfilePB() { ptc.SelectedProfilesPB(); }
+        public void ProfileHit(int Amount) { ptc.SelectedProfileInfo.Hit(Amount); }
+        public void ProfileWayHit(int Amount) { ptc.SelectedProfileInfo.WayHit(Amount); }
+        public void ProfileSplitGo(int Amount) { ptc.SelectedProfileInfo.GoSplits(Amount); }
+
+        public void ProfileSetAttempts()
+        {
+            string amount_string = Form1.InputBox("Enter amount to be set!", "Set new run number (amount of attempts)", CurrentAttempts.ToString());
+            int amount_value;
+            if (!int.TryParse(amount_string, out amount_value))
+            {
+                if (amount_string.Equals("")) return; // Unfortunately this is the Cancel button
+                MessageBox.Show("Only numbers are allowed!");
+                return;
+            }
+            CurrentAttempts = amount_value;
+        }
+        
+        public void GetCalculatedSums(out int TotalSplits, out int TotalActiveSplit, out int TotalHits, out int TotalHitsWay, out int TotalPB, bool PastOnly)
+        {
+            ptc.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB, PastOnly);
+        }
+
+        #endregion
     }
 }

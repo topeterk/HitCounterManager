@@ -396,7 +396,7 @@ namespace HitCounterManager
             Rows[active].Selected = true; // row is already selected already but we make sure the whole row gets visually selected if user has selected a cell only
             ProfileUpdateEnd();
         }
-        public void MoveSplits(int Amount)
+        public void GoSplits(int Amount)
         {
             int split = ActiveSplit + Amount;
             if ((0 <= split) && (split <= SplitCount))

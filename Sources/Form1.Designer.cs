@@ -55,7 +55,7 @@
             this.Spacer3 = new System.Windows.Forms.Label();
             this.lbl_totals = new System.Windows.Forms.Label();
             this.lbl_progress = new System.Windows.Forms.Label();
-            this.profilesControl1 = new HitCounterManager.ProfilesControl();
+            this.profCtrl = new HitCounterManager.ProfilesControl();
             this.SuspendLayout();
             // 
             // btnSettings
@@ -363,23 +363,23 @@
             this.lbl_progress.Text = "Progress:  ?? / ??  # ???";
             this.lbl_progress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // profilesControl1
+            // profCtrl
             // 
-            this.profilesControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.profCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.profilesControl1.Location = new System.Drawing.Point(14, 96);
-            this.profilesControl1.Name = "profilesControl1";
-            this.profilesControl1.Size = new System.Drawing.Size(677, 367);
-            this.profilesControl1.TabIndex = 43;
-            this.profilesControl1.ProfileChanged += new System.EventHandler<System.EventArgs>(this.UpdateProgressAndTotals);
+            this.profCtrl.Location = new System.Drawing.Point(14, 96);
+            this.profCtrl.Name = "profCtrl";
+            this.profCtrl.Size = new System.Drawing.Size(677, 367);
+            this.profCtrl.TabIndex = 43;
+            this.profCtrl.ProfileChanged += new System.EventHandler<System.EventArgs>(this.UpdateProgressAndTotals);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 475);
-            this.Controls.Add(this.profilesControl1);
+            this.Controls.Add(this.profCtrl);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnWeb);
@@ -442,6 +442,6 @@
         private System.Windows.Forms.Label Spacer3;
         private System.Windows.Forms.Label lbl_totals;
         private System.Windows.Forms.Label lbl_progress;
-        private ProfilesControl profilesControl1;
+        private ProfilesControl profCtrl;
     }
 }

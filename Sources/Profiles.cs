@@ -235,7 +235,7 @@ namespace HitCounterManager
         /// Modifies the currently selected split
         /// </summary>
         /// <param name="Amount">Amount of splits that will be moved forwards/backwards</param>
-        void MoveSplits(int Amount);
+        void GoSplits(int Amount);
         /// <summary>
         /// Interchange of two data rows
         /// </summary>

@@ -114,28 +114,6 @@ namespace HitCounterManager
         #region Profile related implementation
         
         private Profiles profs;
-        private int SuccessionAttempts = 0;
-
-        [Browsable(false)] // Hide from designer
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
-        public int CurrentAttempts
-        {
-            get
-            {
-                return (1 < ProfileViewControls.Length ? SuccessionAttempts : SelectedProfileInfo.AttemptsCount); // Succession active?
-            }
-            set
-            {
-                if (1 < ProfileViewControls.Length) // Succession active?
-                {
-                    SuccessionAttempts = value;
-                    PVC_ProfileChangedHandler(this, null); // Notify about change as there is no profile which will do this for us
-                }
-                else
-                    SelectedProfileInfo.AttemptsCount = value;
-            }
-        }
-
 
         [Browsable(false)] // Hide from designer
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
@@ -145,7 +123,7 @@ namespace HitCounterManager
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public ProfileViewControl SelectedProfileViewControl { get; private set; }
 
-        private ProfileViewControl[] ProfileViewControls
+        public ProfileViewControl[] ProfileViewControls
         {
             get
             {
@@ -168,7 +146,14 @@ namespace HitCounterManager
             SelectedProfileViewControl.SelectedProfileChanged += PVC_SelectedProfileChangedHandler;
             Selecting += TabSelectingHandler;
         }
-        public void LoadProfileTabControl(Profiles profiles) { profs = profiles; }
+
+        public void LoadProfilesIntoTabControl(Profiles profiles, string ProfileSelected)
+        {
+            profs = profiles;
+            profs.SetProfileInfo(SelectedProfileInfo);
+            SelectedProfileViewControl.SetProfileList(profs.GetProfileList(), ProfileSelected);
+            SelectedProfileInfo.SetSessionProgress(0, true);
+        }
 
         private void PVC_SelectedProfileChangedHandler(object sender, ProfileViewControl.SelectedProfileChangedCauseType cause)
         {
