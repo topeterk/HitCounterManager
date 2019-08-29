@@ -54,7 +54,7 @@
             this.btnSuccessionVisibility = new System.Windows.Forms.Button();
             this.txtPredecessorTitle = new System.Windows.Forms.TextBox();
             this.cbShowPredecessor = new System.Windows.Forms.CheckBox();
-            this.tabControl1 = new HitCounterManager.ProfileTabControl();
+            this.ptc = new HitCounterManager.ProfileTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.pvc = new HitCounterManager.ProfileViewControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -65,7 +65,7 @@
             this.lbl_totals = new System.Windows.Forms.Label();
             this.lbl_progress = new System.Windows.Forms.Label();
             this.gpSuccession.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.ptc.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -373,22 +373,24 @@
             this.cbShowPredecessor.UseVisualStyleBackColor = true;
             this.cbShowPredecessor.CheckedChanged += new System.EventHandler(this.SuccessionChanged);
             // 
-            // tabControl1
+            // ptc
             // 
-            this.tabControl1.AllowDrop = true;
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.ptc.AllowDrop = true;
+            this.ptc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(12, 96);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(679, 302);
-            this.tabControl1.TabIndex = 19;
-            this.ToolTip1.SetToolTip(this.tabControl1, "Reorder successive profiles by dragging the tab to the desired position.\r\nAdd new" +
+            this.ptc.Controls.Add(this.tabPage1);
+            this.ptc.Controls.Add(this.tabPage2);
+            this.ptc.Controls.Add(this.tabPage3);
+            this.ptc.Location = new System.Drawing.Point(12, 96);
+            this.ptc.Name = "ptc";
+            this.ptc.SelectedIndex = 0;
+            this.ptc.Size = new System.Drawing.Size(679, 302);
+            this.ptc.TabIndex = 19;
+            this.ToolTip1.SetToolTip(this.ptc, "Reorder successive profiles by dragging the tab to the desired position.\r\nAdd new" +
         " tabs by selecting the \"+\" tab.\r\nDelete a tab by dragging the tab over the \"-\" t" +
         "ab.");
+            this.ptc.ProfileChanged += new System.EventHandler<System.EventArgs>(this.UpdateProgressAndTotals);
+            this.ptc.ProfileViewControlSelected += new System.EventHandler<System.Windows.Forms.TabControlCancelEventArgs>(this.ptc_ProfileTabSelected);
             // 
             // tabPage1
             // 
@@ -512,7 +514,7 @@
             this.Controls.Add(this.lbl_totals);
             this.Controls.Add(this.lbl_progress);
             this.Controls.Add(this.gpSuccession);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.ptc);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(530, 400);
             this.Name = "Form1";
@@ -522,7 +524,7 @@
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.gpSuccession.ResumeLayout(false);
             this.gpSuccession.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
+            this.ptc.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -560,7 +562,7 @@
         private System.Windows.Forms.Button btnSuccessionVisibility;
         private System.Windows.Forms.CheckBox cbShowPredecessor;
         private System.Windows.Forms.TextBox txtPredecessorTitle;
-        private ProfileTabControl tabControl1;
+        private ProfileTabControl ptc;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;

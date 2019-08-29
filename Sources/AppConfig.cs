@@ -250,9 +250,9 @@ namespace HitCounterManager
             // Apply settings..
             sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
 
-            _settings.Profiles.SetProfileInfo(tabControl1.SelectedProfileInfo);
-            tabControl1.LoadProfileTabControl(_settings.Profiles);
-            tabControl1.SelectedProfileViewControl.SetProfileList(_settings.Profiles.GetProfileList(), _settings.ProfileSelected);
+            _settings.Profiles.SetProfileInfo(ptc.SelectedProfileInfo);
+            ptc.LoadProfileTabControl(_settings.Profiles);
+            ptc.SelectedProfileViewControl.SetProfileList(_settings.Profiles.GetProfileList(), _settings.ProfileSelected);
 
             if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Reset, _settings.ShortcutResetKeyCode , _settings.ShortcutResetEnable)) isKeyInvalid = true;
             if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Hit, _settings.ShortcutHitKeyCode , _settings.ShortcutHitEnable)) isKeyInvalid = true;
@@ -265,7 +265,7 @@ namespace HitCounterManager
             if (isKeyInvalid)
                 MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
 
-            tabControl1.SelectedProfileInfo.SetSessionProgress(0, true);
+            ptc.SelectedProfileInfo.SetSessionProgress(0, true);
             if (null != _settings.SuccessionTitle) txtPredecessorTitle.Text = _settings.SuccessionTitle;
             cbShowPredecessor.Checked = _settings.ShowSuccession;
 
@@ -388,7 +388,7 @@ namespace HitCounterManager
             _settings.SuccessionHitsWay = om.SuccessionHitsWay; // obsolete since version 7 - keep for backwards compatibility
             _settings.SuccessionHitsPB = om.SuccessionHitsPB;   // obsolete since version 7 - keep for backwards compatibility
 
-            _settings.ProfileSelected = tabControl1.SelectedProfileViewControl.SelectedProfile;
+            _settings.ProfileSelected = ptc.SelectedProfileViewControl.SelectedProfile;
 
             _settings.Profiles.SaveProfile(); // Make sure all changes have been saved eventually
 

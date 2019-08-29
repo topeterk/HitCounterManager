@@ -45,15 +45,12 @@ namespace HitCounterManager
         public Form1()
         {
             InitializeComponent();
-            tabControl1.InitializeProfileTabControl();
+            ptc.InitializeProfileTabControl();
 
             gpSuccession_Height = gpSuccession.Height; // remember expanded size from designer settings
 
-            om = new OutModule(tabControl1.SelectedProfileInfo);
+            om = new OutModule(ptc.SelectedProfileInfo);
             sc = new Shortcuts(Handle);
-
-            tabControl1.ProfileChanged += UpdateProgressAndTotals;
-            tabControl1.ProfileViewControlSelected += TabControl1_ProfileTabSelected;
 
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -64,10 +61,10 @@ namespace HitCounterManager
         {
             Text = Text + " - v" + Application.ProductVersion + " " + OsLayer.Name;
             btnHit.Select();
-            tabControl1.SelectedProfileInfo.ProfileUpdateBegin();
+            ptc.SelectedProfileInfo.ProfileUpdateBegin();
             LoadSettings();
             ShowSuccessionMenu(false); // start collapsed
-            tabControl1.SelectedProfileInfo.ProfileUpdateEnd(); // Write very first output once after application start (fires ProfileChanged with UpdateProgressAndTotals())
+            ptc.SelectedProfileInfo.ProfileUpdateEnd(); // Write very first output once after application start (fires ProfileChanged with UpdateProgressAndTotals())
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -87,7 +84,7 @@ namespace HitCounterManager
 
             // fill
             gpSuccession.Top = Frame_Height - gpSuccession.Height - Pad_Frame;
-            tabControl1.Height = gpSuccession.Top - tabControl1.Top - Pad_Controls;
+            ptc.Height = gpSuccession.Top - ptc.Top - Pad_Controls;
         }
 
         protected override void WndProc(ref Message m)
@@ -191,16 +188,6 @@ namespace HitCounterManager
             return false;
         }
 
-        private void UpdateProgressAndTotals(object sender, EventArgs e)
-        {
-            int TotalSplits, TotalActiveSplit, TotalHits, TotalHitsWay, TotalPB;
-            tabControl1.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB);
-            lbl_progress.Text = "Progress:  " + TotalActiveSplit + " / " + TotalSplits + "  # " + tabControl1.CurrentAttempts.ToString("D3");
-            lbl_totals.Text = "Total: " + (TotalHits + TotalHitsWay) + " Hits   " + TotalPB + " PB";
-
-            om.Update();
-        }
-
         private void SetAlwaysOnTop(bool AlwaysOnTop)
         {
             if (this.TopMost = AlwaysOnTop)
@@ -209,21 +196,8 @@ namespace HitCounterManager
                 btnOnTop.BackColor = Color.FromKnownColor(KnownColor.Control);
         }
 
-        private void SuccessionChanged(object sender, EventArgs e)
-        {
-            om.ShowSuccession = cbShowPredecessor.Checked;
-            om.SuccessionTitle = txtPredecessorTitle.Text;
-            om.Update();
-        }
-
-        private void TabControl1_ProfileTabSelected(object sender, TabControlCancelEventArgs e)
-        {
-            // Switch Output module to interact with selected tab
-            om = new OutModule(tabControl1.SelectedProfileInfo);
-        }
-
         #endregion
-        #region UI
+        #region UI (GUI)
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
@@ -267,14 +241,14 @@ namespace HitCounterManager
         }
         private void btnAbout_Click(object sender, EventArgs e) { new About().ShowDialog(this); }
 
-        private void btnNew_Click(object sender, EventArgs e) { tabControl1.AddProfile(); }
-        private void btnRename_Click(object sender, EventArgs e) { tabControl1.SelectedProfileRename(); }
-        private void btnCopy_Click(object sender, EventArgs e) { tabControl1.SelectedProfileCopy(); }
-        private void btnDelete_Click(object sender, EventArgs e) { tabControl1.SelectedProfileDelete(); }
+        private void btnNew_Click(object sender, EventArgs e) { ptc.AddProfile(); }
+        private void btnRename_Click(object sender, EventArgs e) { ptc.SelectedProfileRename(); }
+        private void btnCopy_Click(object sender, EventArgs e) { ptc.SelectedProfileCopy(); }
+        private void btnDelete_Click(object sender, EventArgs e) { ptc.SelectedProfileDelete(); }
 
         private void btnAttempts_Click(object sender, EventArgs e)
         {
-            string amount_string = InputBox("Enter amount to be set!", "Set new run number (amount of attempts)", tabControl1.CurrentAttempts.ToString());
+            string amount_string = InputBox("Enter amount to be set!", "Set new run number (amount of attempts)", ptc.CurrentAttempts.ToString());
             int amount_value;
             if (!int.TryParse(amount_string, out amount_value))
             {
@@ -282,22 +256,22 @@ namespace HitCounterManager
                 MessageBox.Show("Only numbers are allowed!");
                 return;
             }
-            tabControl1.CurrentAttempts = amount_value;
+            ptc.CurrentAttempts = amount_value;
         }
-        private void btnUp_Click(object sender, EventArgs e) { tabControl1.SelectedProfileInfo.PermuteSplit(tabControl1.SelectedProfileInfo.ActiveSplit, -1); }
-        private void btnDown_Click(object sender, EventArgs e) { tabControl1.SelectedProfileInfo.PermuteSplit(tabControl1.SelectedProfileInfo.ActiveSplit, +1); }
-        private void BtnInsertSplit_Click(object sender, EventArgs e) { tabControl1.SelectedProfileInfo.InsertSplit(); }
+        private void btnUp_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.PermuteSplit(ptc.SelectedProfileInfo.ActiveSplit, -1); }
+        private void btnDown_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.PermuteSplit(ptc.SelectedProfileInfo.ActiveSplit, +1); }
+        private void BtnInsertSplit_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.InsertSplit(); }
 
         private void BtnOnTop_Click(object sender, EventArgs e) { SetAlwaysOnTop(!this.TopMost); }
 
-        private void btnReset_Click(object sender, EventArgs e) { tabControl1.SelectedProfilesReset(); }
-        private void btnPB_Click(object sender, EventArgs e) { tabControl1.SelectedProfilesPB(); }
-        private void btnHit_Click(object sender, EventArgs e) { tabControl1.SelectedProfileInfo.Hit(+1); }
-        private void btnHitUndo_Click(object sender, EventArgs e) { tabControl1.SelectedProfileInfo.Hit(-1); }
-        private void btnWayHit_Click(object sender, EventArgs e) { tabControl1.SelectedProfileInfo.WayHit(+1); }
-        private void btnWayHitUndo_Click(object sender, EventArgs e) { tabControl1.SelectedProfileInfo.WayHit(-1); }
-        private void btnSplit_Click(object sender, EventArgs e) { tabControl1.SelectedProfileInfo.MoveSplits(+1); }
-        private void btnSplitPrev_Click(object sender, EventArgs e) { tabControl1.SelectedProfileInfo.MoveSplits(-1); }
+        private void btnReset_Click(object sender, EventArgs e) { ptc.SelectedProfilesReset(); }
+        private void btnPB_Click(object sender, EventArgs e) { ptc.SelectedProfilesPB(); }
+        private void btnHit_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.Hit(+1); }
+        private void btnHitUndo_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.Hit(-1); }
+        private void btnWayHit_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.WayHit(+1); }
+        private void btnWayHitUndo_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.WayHit(-1); }
+        private void btnSplit_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.MoveSplits(+1); }
+        private void btnSplitPrev_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.MoveSplits(-1); }
         private void btnSuccessionVisibility_Click(object sender, EventArgs e) { ShowSuccessionMenu();  }
 
         /// <summary>
@@ -323,6 +297,32 @@ namespace HitCounterManager
                 btnSuccessionVisibility.BackgroundImage = Sources.Resources.icons8_double_down_20;
             }
             Height += diff;
+        }
+
+        #endregion
+        #region UI (events)
+
+        private void UpdateProgressAndTotals(object sender, EventArgs e)
+        {
+            int TotalSplits, TotalActiveSplit, TotalHits, TotalHitsWay, TotalPB;
+            ptc.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB);
+            lbl_progress.Text = "Progress:  " + TotalActiveSplit + " / " + TotalSplits + "  # " + ptc.CurrentAttempts.ToString("D3");
+            lbl_totals.Text = "Total: " + (TotalHits + TotalHitsWay) + " Hits   " + TotalPB + " PB";
+
+            om.Update();
+        }
+
+        private void SuccessionChanged(object sender, EventArgs e)
+        {
+            om.ShowSuccession = cbShowPredecessor.Checked;
+            om.SuccessionTitle = txtPredecessorTitle.Text;
+            om.Update();
+        }
+
+        private void ptc_ProfileTabSelected(object sender, TabControlCancelEventArgs e)
+        {
+            // Switch Output module to interact with selected tab
+            om = new OutModule(ptc.SelectedProfileInfo);
         }
 
         #endregion
