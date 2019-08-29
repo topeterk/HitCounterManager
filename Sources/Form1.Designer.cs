@@ -54,16 +54,16 @@
             this.btnSuccessionVisibility = new System.Windows.Forms.Button();
             this.txtPredecessorTitle = new System.Windows.Forms.TextBox();
             this.cbShowPredecessor = new System.Windows.Forms.CheckBox();
+            this.tabControl1 = new HitCounterManager.ProfileTabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pvc = new HitCounterManager.ProfileViewControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.Spacer1 = new System.Windows.Forms.Label();
             this.Spacer2 = new System.Windows.Forms.Label();
             this.Spacer3 = new System.Windows.Forms.Label();
             this.lbl_totals = new System.Windows.Forms.Label();
             this.lbl_progress = new System.Windows.Forms.Label();
-            this.tabControl1 = new HitCounterManager.ProfileTabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.pvc = new HitCounterManager.ProfileViewControl();
             this.gpSuccession.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -259,7 +259,7 @@
             this.btnReset.Location = new System.Drawing.Point(12, 30);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 40);
-            this.btnReset.TabIndex = 15;
+            this.btnReset.TabIndex = 14;
             this.ToolTip1.SetToolTip(this.btnReset, "RESET the current run");
             this.btnReset.UseVisualStyleBackColor = false;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
@@ -272,7 +272,7 @@
             this.btnPB.Location = new System.Drawing.Point(93, 30);
             this.btnPB.Name = "btnPB";
             this.btnPB.Size = new System.Drawing.Size(75, 40);
-            this.btnPB.TabIndex = 16;
+            this.btnPB.TabIndex = 15;
             this.ToolTip1.SetToolTip(this.btnPB, "Record run as PB (personal best)");
             this.btnPB.UseVisualStyleBackColor = false;
             this.btnPB.Click += new System.EventHandler(this.btnPB_Click);
@@ -287,7 +287,7 @@
             this.btnHit.Location = new System.Drawing.Point(174, 30);
             this.btnHit.Name = "btnHit";
             this.btnHit.Size = new System.Drawing.Size(355, 40);
-            this.btnHit.TabIndex = 17;
+            this.btnHit.TabIndex = 16;
             this.ToolTip1.SetToolTip(this.btnHit, "Count a HIT (boss) on the current split");
             this.btnHit.UseVisualStyleBackColor = false;
             this.btnHit.Click += new System.EventHandler(this.btnHit_Click);
@@ -301,7 +301,7 @@
             this.btnWayHit.Location = new System.Drawing.Point(535, 30);
             this.btnWayHit.Name = "btnWayHit";
             this.btnWayHit.Size = new System.Drawing.Size(75, 40);
-            this.btnWayHit.TabIndex = 18;
+            this.btnWayHit.TabIndex = 17;
             this.ToolTip1.SetToolTip(this.btnWayHit, "Count a HIT (way) on the current split");
             this.btnWayHit.UseVisualStyleBackColor = false;
             this.btnWayHit.Click += new System.EventHandler(this.btnWayHit_Click);
@@ -315,7 +315,7 @@
             this.btnSplit.Location = new System.Drawing.Point(616, 30);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(75, 40);
-            this.btnSplit.TabIndex = 19;
+            this.btnSplit.TabIndex = 18;
             this.ToolTip1.SetToolTip(this.btnSplit, "Jump to the next SPLIT");
             this.btnSplit.UseVisualStyleBackColor = false;
             this.btnSplit.Click += new System.EventHandler(this.btnSplit_Click);
@@ -330,7 +330,7 @@
             this.gpSuccession.Location = new System.Drawing.Point(12, 404);
             this.gpSuccession.Name = "gpSuccession";
             this.gpSuccession.Size = new System.Drawing.Size(679, 59);
-            this.gpSuccession.TabIndex = 22;
+            this.gpSuccession.TabIndex = 20;
             this.gpSuccession.TabStop = false;
             this.gpSuccession.Text = "Succession";
             this.ToolTip1.SetToolTip(this.gpSuccession, "E.g. Dark Souls trilogy run");
@@ -344,7 +344,7 @@
             this.btnSuccessionVisibility.Location = new System.Drawing.Point(653, 0);
             this.btnSuccessionVisibility.Name = "btnSuccessionVisibility";
             this.btnSuccessionVisibility.Size = new System.Drawing.Size(20, 20);
-            this.btnSuccessionVisibility.TabIndex = 6;
+            this.btnSuccessionVisibility.TabIndex = 0;
             this.ToolTip1.SetToolTip(this.btnSuccessionVisibility, "Collapse Succession");
             this.btnSuccessionVisibility.UseVisualStyleBackColor = true;
             this.btnSuccessionVisibility.Click += new System.EventHandler(this.btnSuccessionVisibility_Click);
@@ -353,9 +353,9 @@
             // 
             this.txtPredecessorTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPredecessorTitle.Location = new System.Drawing.Point(138, 26);
+            this.txtPredecessorTitle.Location = new System.Drawing.Point(139, 26);
             this.txtPredecessorTitle.Name = "txtPredecessorTitle";
-            this.txtPredecessorTitle.Size = new System.Drawing.Size(535, 20);
+            this.txtPredecessorTitle.Size = new System.Drawing.Size(534, 20);
             this.txtPredecessorTitle.TabIndex = 2;
             this.ToolTip1.SetToolTip(this.txtPredecessorTitle, "Split name for the sums of the previous runs.");
             this.txtPredecessorTitle.TextChanged += new System.EventHandler(this.SuccessionChanged);
@@ -365,13 +365,68 @@
             this.cbShowPredecessor.AutoSize = true;
             this.cbShowPredecessor.Location = new System.Drawing.Point(6, 28);
             this.cbShowPredecessor.Name = "cbShowPredecessor";
-            this.cbShowPredecessor.Size = new System.Drawing.Size(126, 17);
+            this.cbShowPredecessor.Size = new System.Drawing.Size(127, 17);
             this.cbShowPredecessor.TabIndex = 1;
-            this.cbShowPredecessor.Text = "Show previous sums:";
+            this.cbShowPredecessor.Text = "Show previous totals:";
             this.ToolTip1.SetToolTip(this.cbShowPredecessor, "The sum of all previous tabs/profiles will be shown in a leading split of the cur" +
         "rent run.\r\nThe title of the split can be changed in the text box.");
             this.cbShowPredecessor.UseVisualStyleBackColor = true;
             this.cbShowPredecessor.CheckedChanged += new System.EventHandler(this.SuccessionChanged);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.AllowDrop = true;
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Location = new System.Drawing.Point(12, 96);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(679, 302);
+            this.tabControl1.TabIndex = 19;
+            this.ToolTip1.SetToolTip(this.tabControl1, "Reorder successive profiles by dragging the tab to the desired position.\r\nAdd new" +
+        " tabs by selecting the \"+\" tab.\r\nDelete a tab by dragging the tab over the \"-\" t" +
+        "ab.");
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.pvc);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(671, 276);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // pvc
+            // 
+            this.pvc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pvc.Location = new System.Drawing.Point(3, 3);
+            this.pvc.Name = "pvc";
+            this.pvc.Size = new System.Drawing.Size(665, 270);
+            this.pvc.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(671, 276);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "+";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(671, 276);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "-";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // Spacer1
             // 
@@ -426,61 +481,6 @@
             this.lbl_progress.TabIndex = 33;
             this.lbl_progress.Text = "Progress:  ?? / ??  # ???";
             this.lbl_progress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.AllowDrop = true;
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(12, 96);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(679, 302);
-            this.tabControl1.TabIndex = 43;
-            this.ToolTip1.SetToolTip(this.tabControl1, "Reorder successive profiles by dragging the tab to the desired position.\r\nAdd new" +
-        " tabs by selecting the \"+\" tab.\r\nDelete a tab by dragging the tab over the \"-\" t" +
-        "ab.");
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.pvc);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(671, 276);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(671, 276);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "+";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(671, 276);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "-";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // pvc
-            // 
-            this.pvc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pvc.Location = new System.Drawing.Point(3, 3);
-            this.pvc.Name = "pvc";
-            this.pvc.Size = new System.Drawing.Size(665, 270);
-            this.pvc.TabIndex = 0;
             // 
             // Form1
             // 
