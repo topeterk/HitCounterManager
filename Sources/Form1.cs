@@ -49,7 +49,7 @@ namespace HitCounterManager
 
             gpSuccession_Height = gpSuccession.Height; // remember expanded size from designer settings
 
-            om = new OutModule(ptc.SelectedProfileInfo);
+            om = new OutModule(ptc);
             sc = new Shortcuts(Handle);
 
             ServicePointManager.Expect100Continue = true;
@@ -317,12 +317,6 @@ namespace HitCounterManager
             om.ShowSuccession = cbShowPredecessor.Checked;
             om.SuccessionTitle = txtPredecessorTitle.Text;
             om.Update();
-        }
-
-        private void ptc_ProfileTabSelected(object sender, TabControlCancelEventArgs e)
-        {
-            // Switch Output module to interact with selected tab
-            om = new OutModule(ptc.SelectedProfileInfo);
         }
 
         #endregion

@@ -77,15 +77,16 @@ namespace HitCounterManager
         public int SuccessionHitsWay = 0; // TODO: Calculate
         public int SuccessionHitsPB = 0; // TODO: Calculate
 
-        private IProfileInfo pi;
+        private readonly ProfileTabControl ptc;
+        private IProfileInfo pi { get { return ptc.SelectedProfileInfo; } }
 
         /// <summary>
-        /// Bind object to a data grid
+        /// Bind object to a profile tab control
         /// </summary>
-        /// <param name="ProfileInfo">interface of object to set binding</param>
-        public OutModule(IProfileInfo ProfileInfo)
+        /// <param name="ProfileTabControl">interface of object to set binding</param>
+        public OutModule(ProfileTabControl ProfileTabControl)
         {
-            pi = ProfileInfo;
+            ptc = ProfileTabControl;
         }
 
         /// <summary>

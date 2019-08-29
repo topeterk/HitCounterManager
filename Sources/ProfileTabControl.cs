@@ -185,7 +185,6 @@ namespace HitCounterManager
             if (null != ProfileChanged) ProfileChanged(sender, e); // Fire event
         }
 
-        public event EventHandler<TabControlCancelEventArgs> ProfileViewControlSelected;
         private void TabSelectingHandler(object sender, TabControlCancelEventArgs e)
         {
             if (e.TabPage.Text.Equals("-")) // Switch to tab?
@@ -242,8 +241,6 @@ namespace HitCounterManager
             SelectedProfileInfo = SelectedProfileViewControl.ProfileInfo;
             profs.SetProfileInfo(SelectedProfileInfo);
             profs.LoadProfile(SelectedProfileInfo.ProfileName);
-
-            if (null != ProfileViewControlSelected) ProfileViewControlSelected(SelectedProfileViewControl, e); // Fire event
         }
 
         public void GetCalculatedSums(out int TotalSplits, out int TotalActiveSplit, out int TotalHits, out int TotalHitsWay, out int TotalPB)

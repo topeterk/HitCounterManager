@@ -390,7 +390,6 @@
         " tabs by selecting the \"+\" tab.\r\nDelete a tab by dragging the tab over the \"-\" t" +
         "ab.");
             this.ptc.ProfileChanged += new System.EventHandler<System.EventArgs>(this.UpdateProgressAndTotals);
-            this.ptc.ProfileViewControlSelected += new System.EventHandler<System.Windows.Forms.TabControlCancelEventArgs>(this.ptc_ProfileTabSelected);
             // 
             // tabPage1
             // 
