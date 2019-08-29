@@ -384,9 +384,11 @@ namespace HitCounterManager
             _settings.StyleSuperscriptPB = om.StyleSuperscriptPB;
 
             _settings.SuccessionTitle = om.SuccessionTitle;
-            _settings.SuccessionHits = om.SuccessionHits;       // obsolete since version 7 - keep for backwards compatibility
-            _settings.SuccessionHitsWay = om.SuccessionHitsWay; // obsolete since version 7 - keep for backwards compatibility
-            _settings.SuccessionHitsPB = om.SuccessionHitsPB;   // obsolete since version 7 - keep for backwards compatibility
+            int TotalSplits, TotalActiveSplit, SuccessionHits, SuccessionHitsWay, SuccessionHitsPB;
+            ptc.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out SuccessionHits, out SuccessionHitsWay, out SuccessionHitsPB, true);
+            _settings.SuccessionHits = SuccessionHits;       // obsolete since version 7 - keep for backwards compatibility
+            _settings.SuccessionHitsWay = SuccessionHitsWay; // obsolete since version 7 - keep for backwards compatibility
+            _settings.SuccessionHitsPB = SuccessionHitsPB;   // obsolete since version 7 - keep for backwards compatibility
 
             _settings.ProfileSelected = ptc.SelectedProfileViewControl.SelectedProfile;
 

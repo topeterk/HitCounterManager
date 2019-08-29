@@ -73,12 +73,8 @@ namespace HitCounterManager
 
         public bool ShowSuccession = false;
         public string SuccessionTitle = "";
-        public int SuccessionHits = 0; // TODO: Calculate
-        public int SuccessionHitsWay = 0; // TODO: Calculate
-        public int SuccessionHitsPB = 0; // TODO: Calculate
 
         private readonly ProfileTabControl ptc;
-        private IProfileInfo pi { get { return ptc.SelectedProfileInfo; } }
 
         /// <summary>
         /// Bind object to a profile tab control
@@ -155,19 +151,19 @@ namespace HitCounterManager
         {
             //Console.Beep(); // For debugging to check whenever output is beeing generated :)
 
+            if (null == FilePathOut) return;
+
             StreamWriter sr;
             bool IsWritingList = false; // Kept for old designs before version 1.10
             bool IsWritingJson = false;
-
-            if (null == FilePathOut) return;
-
             try
             {
                 sr = new StreamWriter(FilePathOut, false, System.Text.Encoding.Unicode); // UTF16LE
             }
             catch { return; }
-
             sr.NewLine = Environment.NewLine;
+
+            IProfileInfo pi = ptc.SelectedProfileInfo;
 
             foreach (string line in template.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
@@ -181,6 +177,9 @@ namespace HitCounterManager
                 }
                 else if (line.Contains("HITCOUNTER_JSON_START")) // Format data according to RFC 4627 (JSON)
                 {
+                    int TotalSplits, TotalActiveSplit, SuccessionHits, SuccessionHitsWay, SuccessionHitsPB;
+                    ptc.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out SuccessionHits, out SuccessionHitsWay, out SuccessionHitsPB, true);
+
                     int active = pi.ActiveSplit;
                     int iSplitCount = pi.SplitCount;
                     int iSplitFirst;

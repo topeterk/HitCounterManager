@@ -243,7 +243,7 @@ namespace HitCounterManager
             profs.LoadProfile(SelectedProfileInfo.ProfileName);
         }
 
-        public void GetCalculatedSums(out int TotalSplits, out int TotalActiveSplit, out int TotalHits, out int TotalHitsWay, out int TotalPB)
+        public void GetCalculatedSums(out int TotalSplits, out int TotalActiveSplit, out int TotalHits, out int TotalHitsWay, out int TotalPB, bool PastOnly)
         {
             bool ActiveProfileFound = false;
 
@@ -253,6 +253,9 @@ namespace HitCounterManager
             {
                 IProfileInfo pi_tab = pvc_tab.ProfileInfo;
                 int Splits = pi_tab.SplitCount;
+
+                if ((pi_tab == SelectedProfileInfo) && PastOnly) // When the past should be calculated only, stop when active profile tab found
+                    break;
 
                 TotalSplits += Splits;
                 for (int i = 0; i < Splits; i++)
