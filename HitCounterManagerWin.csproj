@@ -56,6 +56,12 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Sources\ProfilesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sources\ProfilesControl.Designer.cs">
+      <DependentUpon>ProfilesControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sources\ProfileTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Sources\ProfilesControl.resx">
+      <DependentUpon>ProfilesControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sources\ProfileViewControl.resx">
       <DependentUpon>ProfileViewControl.cs</DependentUpon>
     </EmbeddedResource>

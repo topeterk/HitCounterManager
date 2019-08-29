@@ -33,21 +33,19 @@ namespace HitCounterManager
     {
         private const int WM_HOTKEY = 0x312;
 
-        public Shortcuts sc;
-        public OutModule om;
+        public readonly Shortcuts sc;
+        public readonly OutModule om;
+        public readonly ProfileTabControl ptc;
 
         private bool SettingsDialogOpen = false;
 
-        private readonly int gpSuccession_Height;
 
         #region Form
 
         public Form1()
         {
             InitializeComponent();
-            ptc.InitializeProfileTabControl();
-
-            gpSuccession_Height = gpSuccession.Height; // remember expanded size from designer settings
+            ptc = profilesControl1.ProfileTabControl; // for easier access
 
             om = new OutModule(ptc);
             sc = new Shortcuts(Handle);
@@ -63,7 +61,6 @@ namespace HitCounterManager
             btnHit.Select();
             ptc.SelectedProfileInfo.ProfileUpdateBegin();
             LoadSettings();
-            ShowSuccessionMenu(false); // start collapsed
             ptc.SelectedProfileInfo.ProfileUpdateEnd(); // Write very first output once after application start (fires ProfileChanged with UpdateProgressAndTotals())
         }
 
@@ -72,19 +69,6 @@ namespace HitCounterManager
             DialogResult result = MessageBox.Show("Do you want to save this session?", this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Yes) SaveSettings();
             else if (result == DialogResult.Cancel) e.Cancel = true;
-        }
-
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            const int Pad_Controls = 6;
-            const int Pad_Frame = 15;
-
-            int Frame_Width = ClientRectangle.Width;
-            int Frame_Height = ClientRectangle.Height;
-
-            // fill
-            gpSuccession.Top = Frame_Height - gpSuccession.Height - Pad_Frame;
-            ptc.Height = gpSuccession.Top - ptc.Top - Pad_Controls;
         }
 
         protected override void WndProc(ref Message m)
@@ -272,32 +256,6 @@ namespace HitCounterManager
         private void btnWayHitUndo_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.WayHit(-1); }
         private void btnSplit_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.MoveSplits(+1); }
         private void btnSplitPrev_Click(object sender, EventArgs e) { ptc.SelectedProfileInfo.MoveSplits(-1); }
-        private void btnSuccessionVisibility_Click(object sender, EventArgs e) { ShowSuccessionMenu();  }
-
-        /// <summary>
-        /// Collapses or expands succession menu
-        /// </summary>
-        /// <param name="expand">TRUE = Expand, FALSE = Collapse, NULL = Toggle</param>
-        private void ShowSuccessionMenu(Nullable<bool> expand = null)
-        {
-            int diff = 0;
-
-            if (!expand.HasValue) expand = gpSuccession.Height != gpSuccession_Height; // Toggle
-
-            if (expand.Value) // Expand..
-            {
-                diff = gpSuccession_Height - gpSuccession.Height;
-                gpSuccession.Height = gpSuccession_Height;
-                btnSuccessionVisibility.BackgroundImage = Sources.Resources.icons8_double_up_20;
-            }
-            else // Collapse..
-            {
-                diff = btnSuccessionVisibility.Height - gpSuccession.Height;
-                gpSuccession.Height = btnSuccessionVisibility.Height;
-                btnSuccessionVisibility.BackgroundImage = Sources.Resources.icons8_double_down_20;
-            }
-            Height += diff;
-        }
 
         #endregion
         #region UI (events)
@@ -308,14 +266,11 @@ namespace HitCounterManager
             ptc.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB, false);
             lbl_progress.Text = "Progress:  " + TotalActiveSplit + " / " + TotalSplits + "  # " + ptc.CurrentAttempts.ToString("D3");
             lbl_totals.Text = "Total: " + (TotalHits + TotalHitsWay) + " Hits   " + TotalPB + " PB";
+            
+            // TODO: Move into ProfilesControl
+            om.ShowSuccession = profilesControl1.cbShowPredecessor.Checked;
+            om.SuccessionTitle = profilesControl1.txtPredecessorTitle.Text;
 
-            om.Update();
-        }
-
-        private void SuccessionChanged(object sender, EventArgs e)
-        {
-            om.ShowSuccession = cbShowPredecessor.Checked;
-            om.SuccessionTitle = txtPredecessorTitle.Text;
             om.Update();
         }
 

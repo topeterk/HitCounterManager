@@ -266,8 +266,7 @@ namespace HitCounterManager
                 MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
 
             ptc.SelectedProfileInfo.SetSessionProgress(0, true);
-            if (null != _settings.SuccessionTitle) txtPredecessorTitle.Text = _settings.SuccessionTitle;
-            cbShowPredecessor.Checked = _settings.ShowSuccession;
+            profilesControl1.SetSuccessionSettings(_settings.SuccessionTitle, _settings.ShowSuccession);
 
             if (_settings.MainWidth < this.MinimumSize.Width) _settings.MainWidth = this.MinimumSize.Width;
             if (_settings.MainHeight < this.MinimumSize.Height) _settings.MainHeight = this.MinimumSize.Height;
@@ -320,7 +319,7 @@ namespace HitCounterManager
             if (this.WindowState == FormWindowState.Normal) // Don't save window size and location when maximized or minimized
             {
                 _settings.MainWidth = this.Width;
-                _settings.MainHeight = this.Height - gpSuccession.Height + gpSuccession_Height; // always save expandend values
+                _settings.MainHeight = this.Height;
                 if (IsOnScreen(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth, _settings.MainHeight))
                 {
                     // remember values when not outside of screen

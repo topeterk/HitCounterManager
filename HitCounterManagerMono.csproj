@@ -76,6 +76,12 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Sources\ProfilesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sources\ProfilesControl.Designer.cs">
+      <DependentUpon>ProfilesControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sources\ProfileTabControl.cs">
       <SubType>Component</SubType>
     </Compile>

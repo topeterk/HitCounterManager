@@ -50,23 +50,12 @@
             this.btnHit = new System.Windows.Forms.Button();
             this.btnWayHit = new System.Windows.Forms.Button();
             this.btnSplit = new System.Windows.Forms.Button();
-            this.gpSuccession = new System.Windows.Forms.GroupBox();
-            this.btnSuccessionVisibility = new System.Windows.Forms.Button();
-            this.txtPredecessorTitle = new System.Windows.Forms.TextBox();
-            this.cbShowPredecessor = new System.Windows.Forms.CheckBox();
-            this.ptc = new HitCounterManager.ProfileTabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.pvc = new HitCounterManager.ProfileViewControl();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.Spacer1 = new System.Windows.Forms.Label();
             this.Spacer2 = new System.Windows.Forms.Label();
             this.Spacer3 = new System.Windows.Forms.Label();
             this.lbl_totals = new System.Windows.Forms.Label();
             this.lbl_progress = new System.Windows.Forms.Label();
-            this.gpSuccession.SuspendLayout();
-            this.ptc.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.profilesControl1 = new HitCounterManager.ProfilesControl();
             this.SuspendLayout();
             // 
             // btnSettings
@@ -320,115 +309,6 @@
             this.btnSplit.UseVisualStyleBackColor = false;
             this.btnSplit.Click += new System.EventHandler(this.btnSplit_Click);
             // 
-            // gpSuccession
-            // 
-            this.gpSuccession.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gpSuccession.Controls.Add(this.btnSuccessionVisibility);
-            this.gpSuccession.Controls.Add(this.txtPredecessorTitle);
-            this.gpSuccession.Controls.Add(this.cbShowPredecessor);
-            this.gpSuccession.Location = new System.Drawing.Point(12, 404);
-            this.gpSuccession.Name = "gpSuccession";
-            this.gpSuccession.Size = new System.Drawing.Size(679, 59);
-            this.gpSuccession.TabIndex = 20;
-            this.gpSuccession.TabStop = false;
-            this.gpSuccession.Text = "Succession";
-            this.ToolTip1.SetToolTip(this.gpSuccession, "E.g. Dark Souls trilogy run");
-            // 
-            // btnSuccessionVisibility
-            // 
-            this.btnSuccessionVisibility.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSuccessionVisibility.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_double_up_20;
-            this.btnSuccessionVisibility.FlatAppearance.BorderSize = 0;
-            this.btnSuccessionVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSuccessionVisibility.Location = new System.Drawing.Point(653, 0);
-            this.btnSuccessionVisibility.Name = "btnSuccessionVisibility";
-            this.btnSuccessionVisibility.Size = new System.Drawing.Size(20, 20);
-            this.btnSuccessionVisibility.TabIndex = 0;
-            this.ToolTip1.SetToolTip(this.btnSuccessionVisibility, "Collapse Succession");
-            this.btnSuccessionVisibility.UseVisualStyleBackColor = true;
-            this.btnSuccessionVisibility.Click += new System.EventHandler(this.btnSuccessionVisibility_Click);
-            // 
-            // txtPredecessorTitle
-            // 
-            this.txtPredecessorTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPredecessorTitle.Location = new System.Drawing.Point(139, 26);
-            this.txtPredecessorTitle.Name = "txtPredecessorTitle";
-            this.txtPredecessorTitle.Size = new System.Drawing.Size(534, 20);
-            this.txtPredecessorTitle.TabIndex = 2;
-            this.ToolTip1.SetToolTip(this.txtPredecessorTitle, "Split name for the sums of the previous runs.");
-            this.txtPredecessorTitle.TextChanged += new System.EventHandler(this.SuccessionChanged);
-            // 
-            // cbShowPredecessor
-            // 
-            this.cbShowPredecessor.AutoSize = true;
-            this.cbShowPredecessor.Location = new System.Drawing.Point(6, 28);
-            this.cbShowPredecessor.Name = "cbShowPredecessor";
-            this.cbShowPredecessor.Size = new System.Drawing.Size(127, 17);
-            this.cbShowPredecessor.TabIndex = 1;
-            this.cbShowPredecessor.Text = "Show previous totals:";
-            this.ToolTip1.SetToolTip(this.cbShowPredecessor, "The sum of all previous tabs/profiles will be shown in a leading split of the cur" +
-        "rent run.\r\nThe title of the split can be changed in the text box.");
-            this.cbShowPredecessor.UseVisualStyleBackColor = true;
-            this.cbShowPredecessor.CheckedChanged += new System.EventHandler(this.SuccessionChanged);
-            // 
-            // ptc
-            // 
-            this.ptc.AllowDrop = true;
-            this.ptc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ptc.Controls.Add(this.tabPage1);
-            this.ptc.Controls.Add(this.tabPage2);
-            this.ptc.Controls.Add(this.tabPage3);
-            this.ptc.Location = new System.Drawing.Point(12, 96);
-            this.ptc.Name = "ptc";
-            this.ptc.SelectedIndex = 0;
-            this.ptc.Size = new System.Drawing.Size(679, 302);
-            this.ptc.TabIndex = 19;
-            this.ToolTip1.SetToolTip(this.ptc, "Reorder successive profiles by dragging the tab to the desired position.\r\nAdd new" +
-        " tabs by selecting the \"+\" tab.\r\nDelete a tab by dragging the tab over the \"-\" t" +
-        "ab.");
-            this.ptc.ProfileChanged += new System.EventHandler<System.EventArgs>(this.UpdateProgressAndTotals);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.pvc);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(671, 276);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // pvc
-            // 
-            this.pvc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pvc.Location = new System.Drawing.Point(3, 3);
-            this.pvc.Name = "pvc";
-            this.pvc.Size = new System.Drawing.Size(665, 270);
-            this.pvc.TabIndex = 0;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(671, 276);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "+";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(671, 276);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "-";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
             // Spacer1
             // 
             this.Spacer1.AutoSize = true;
@@ -483,11 +363,23 @@
             this.lbl_progress.Text = "Progress:  ?? / ??  # ???";
             this.lbl_progress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // profilesControl1
+            // 
+            this.profilesControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.profilesControl1.Location = new System.Drawing.Point(14, 96);
+            this.profilesControl1.Name = "profilesControl1";
+            this.profilesControl1.Size = new System.Drawing.Size(677, 367);
+            this.profilesControl1.TabIndex = 43;
+            this.profilesControl1.ProfileChanged += new System.EventHandler<System.EventArgs>(this.UpdateProgressAndTotals);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 475);
+            this.Controls.Add(this.profilesControl1);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnWeb);
@@ -512,19 +404,12 @@
             this.Controls.Add(this.Spacer3);
             this.Controls.Add(this.lbl_totals);
             this.Controls.Add(this.lbl_progress);
-            this.Controls.Add(this.gpSuccession);
-            this.Controls.Add(this.ptc);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(530, 400);
             this.Name = "Form1";
             this.Text = "HitCounterManager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.Resize += new System.EventHandler(this.Form1_Resize);
-            this.gpSuccession.ResumeLayout(false);
-            this.gpSuccession.PerformLayout();
-            this.ptc.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -557,14 +442,6 @@
         private System.Windows.Forms.Label Spacer3;
         private System.Windows.Forms.Label lbl_totals;
         private System.Windows.Forms.Label lbl_progress;
-        private System.Windows.Forms.GroupBox gpSuccession;
-        private System.Windows.Forms.Button btnSuccessionVisibility;
-        private System.Windows.Forms.CheckBox cbShowPredecessor;
-        private System.Windows.Forms.TextBox txtPredecessorTitle;
-        private ProfileTabControl ptc;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private ProfileViewControl pvc;
+        private ProfilesControl profilesControl1;
     }
 }
