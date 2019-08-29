@@ -249,8 +249,8 @@ namespace HitCounterManager
 
             // Apply settings..
             sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
-            _settings.Profiles.SetProfileInfo(pi);
 
+            _settings.Profiles.SetProfileInfo(tabControl1.SelectedProfileInfo);
             tabControl1.LoadProfileTabControl(_settings.Profiles);
             tabControl1.SelectedProfileViewControl.SetProfileList(_settings.Profiles.GetProfileList(), _settings.ProfileSelected);
 
@@ -265,7 +265,7 @@ namespace HitCounterManager
             if (isKeyInvalid)
                 MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
 
-            pi.SetSessionProgress(0, true);
+            tabControl1.SelectedProfileInfo.SetSessionProgress(0, true);
             if (null != _settings.SuccessionTitle) txtPredecessorTitle.Text = _settings.SuccessionTitle;
             cbShowPredecessor.Checked = _settings.ShowSuccession;
 
