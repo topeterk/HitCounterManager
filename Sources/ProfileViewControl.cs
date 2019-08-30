@@ -70,9 +70,8 @@ namespace HitCounterManager
             ComboBox1.Items.AddRange(ProfileNames);
             if (ComboBox1.Items.Count == 0)
             {
-                SelectProfile = "Unnamed";
-                ComboBox1.Items.Add(SelectProfile);
-                pi.ProfileName = SelectProfile;
+                SelectProfile = null;
+                pi.ClearSplits();
             }
             if (SelectProfile != null) this.SelectedProfile = SelectProfile;
 
@@ -135,8 +134,8 @@ namespace HitCounterManager
 
             if (ComboBox1.Items.Count == 0)
             {
-                ComboBox1.Items.Add("Unnamed");
-                ComboBox1.SelectedIndex = 0;
+                ComboBox1.SelectedItem = null;
+                pi.ClearSplits();
             }
             else ComboBox1.SelectedIndex = (ComboBox1.Items.Count >= idx ? ComboBox1.Items.Count - 1 : idx);
 

@@ -259,6 +259,13 @@ namespace HitCounterManager
 
             // Load profile data..
             profCtrl.SelectedProfileInfo.ProfileUpdateBegin();
+            if (_settings.Profiles.ProfileList.Count == 0)
+            {
+                // There is no profile at all, initially create a clean one
+                Profile unnamed = new Profile();
+                _settings.ProfileSelected = unnamed.Name = "Unnamed";
+                _settings.Profiles.ProfileList.Add(unnamed);
+            }
             profCtrl.InitializeProfilesControl(_settings.Profiles, _settings.ProfileSelected, _settings.SuccessionTitle, _settings.ShowSuccession);
 
             // Load customizing..
