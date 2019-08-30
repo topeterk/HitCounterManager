@@ -167,7 +167,7 @@ namespace HitCounterManager
                     DialogResult result = MessageBox.Show(
                         "Opening further tabs combine multiple profiles into one run. " +
                         "Best known as a trilogy run for Dark Souls 1 to 3.\n\n" +
-                        "There is a separate attempts counter. All profiles' attempts counters are paused.\n\n" + // TODO separate attempts counter
+                        "There is a separate attempts counter. All profiles' attempts counters are paused.\n\n" +
                         "Please BE AWARE the Reset and PB buttons/hotkeys will apply to ALL open profiles! " +
                         "For example, pressing reset will reset all the selected profiles of all available tabs!\n\n" +
                         "OK = I understand, continue using tabs\n" +
