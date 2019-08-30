@@ -123,13 +123,13 @@ namespace HitCounterManager
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public ProfileViewControl SelectedProfileViewControl { get; private set; }
 
-        public ProfileViewControl[] ProfileViewControls
+        private ProfileViewControl[] ProfileViewControls
         {
             get
             {
                 ProfileViewControl[] pvcs = new ProfileViewControl[TabCount-2];
                 int i = 0;
-                foreach(TabPage page in TabPages)
+                foreach (TabPage page in TabPages)
                 {
                     if (page.Text.Equals("+") || page.Text.Equals("-")) continue; // Skip "New"/"Delete" tab
                     pvcs[i++] = (ProfileViewControl)page.Controls["pvc"];
@@ -137,6 +137,10 @@ namespace HitCounterManager
                 return pvcs;
             }
         }
+        
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
+        public bool SuccessionActive { get { return (1 < ProfileViewControls.Length); } }
 
         public void InitializeProfileTabControl()
         {
@@ -150,18 +154,18 @@ namespace HitCounterManager
         public void LoadProfilesIntoTabControl(Profiles profiles, string ProfileSelected)
         {
             profs = profiles;
-            profs.SetProfileInfo(SelectedProfileInfo);
             SelectedProfileViewControl.SetProfileList(profs.GetProfileList(), ProfileSelected);
             SelectedProfileInfo.SetSessionProgress(0, true);
         }
 
         private void PVC_SelectedProfileChangedHandler(object sender, ProfileViewControl.SelectedProfileChangedCauseType cause)
         {
+            ProfileViewControl pvc_sender = (ProfileViewControl)sender;
             if (cause != ProfileViewControl.SelectedProfileChangedCauseType.Delete)
             {
-                profs.SaveProfile(); // save currently selected profile
+                profs.SaveProfile(pvc_sender.ProfileInfo); // save currently selected profile
             }
-            profs.LoadProfile(((ProfileViewControl)sender).SelectedProfile);
+            profs.LoadProfile(pvc_sender.SelectedProfile, pvc_sender.ProfileInfo);
         }
 
         public event EventHandler<EventArgs> ProfileChanged;
@@ -177,12 +181,12 @@ namespace HitCounterManager
                 e.Cancel = true; // "Delete" tab cannot be selected
                 return;
             }
-            
-            profs.SaveProfile(); // save current tab's profile
+
+            profs.SaveProfile(SelectedProfileInfo); // save current tab's profile
 
             if (e.TabPage.Text.Equals("+")) // Create new tab?
             {
-                if (ProfileViewControls.Length == 1) // Warning message only on the first tab creation
+                if (!SuccessionActive) // Show initial warning message only when succession is not already active
                 {
                     DialogResult result = MessageBox.Show(
                         "Opening further tabs combine multiple profiles into one run. " +
@@ -224,8 +228,7 @@ namespace HitCounterManager
             // Switch interaction to selected tab
             SelectedProfileViewControl = (ProfileViewControl)e.TabPage.Controls["pvc"];
             SelectedProfileInfo = SelectedProfileViewControl.ProfileInfo;
-            profs.SetProfileInfo(SelectedProfileInfo);
-            profs.LoadProfile(SelectedProfileInfo.ProfileName);
+            profs.LoadProfile(SelectedProfileInfo.ProfileName, SelectedProfileInfo);
         }
 
         public void GetCalculatedSums(out int TotalSplits, out int TotalActiveSplit, out int TotalHits, out int TotalHitsWay, out int TotalPB, bool PastOnly)
@@ -234,7 +237,7 @@ namespace HitCounterManager
 
             TotalSplits = TotalActiveSplit = TotalHits = TotalHitsWay = TotalPB = 0;
 
-            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+            foreach (ProfileViewControl pvc_tab in ProfileViewControls)
             {
                 IProfileInfo pi_tab = pvc_tab.ProfileInfo;
                 int Splits = pi_tab.SplitCount;
@@ -265,7 +268,7 @@ namespace HitCounterManager
         public void AddAndSelectProfile(string Name)
         {
             // Apply on all tabs
-            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+            foreach (ProfileViewControl pvc_tab in ProfileViewControls)
             {
                 pvc_tab.CreateNewProfile(Name, (pvc_tab == SelectedProfileViewControl)); // Select only for the current tab
             }
@@ -276,7 +279,7 @@ namespace HitCounterManager
             string Name = SelectedProfileViewControl.CopySelectedProfile(); // Apply on foreground tab
 
             // Apply on all tabs
-            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+            foreach (ProfileViewControl pvc_tab in ProfileViewControls)
             {
                 if (pvc_tab == SelectedProfileViewControl) continue; // Skip current tab
                 pvc_tab.CreateNewProfile(Name, false);
@@ -286,7 +289,7 @@ namespace HitCounterManager
         public void SelectedProfileRename(string NameOld, string NameNew)
         {
             // Apply on all tabs
-            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+            foreach (ProfileViewControl pvc_tab in ProfileViewControls)
             {
                 pvc_tab.RenameProfile(NameOld, NameNew);
             }
@@ -297,7 +300,7 @@ namespace HitCounterManager
             string Name = SelectedProfileViewControl.SelectedProfile;
 
             // Apply on all tabs
-            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+            foreach (ProfileViewControl pvc_tab in ProfileViewControls)
             {
                 if (pvc_tab == SelectedProfileViewControl)
                     SelectedProfileViewControl.DeleteSelectedProfile(); // Apply on foreground tab: Remove profile and select next one (if any)
@@ -312,24 +315,20 @@ namespace HitCounterManager
             foreach (ProfileViewControl pvc_tab in ProfileViewControls)
             {
                 IProfileInfo pi_tab = pvc_tab.ProfileInfo;
-                profs.SetProfileInfo(pi_tab);
                 pi_tab.ResetRun();
-                profs.SaveProfile(); // save tab's profile
+                profs.SaveProfile(pi_tab); // save tab's profile
             }
         }
 
         public void SelectedProfilesPB()
         {
             // Apply on all tabs
-            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
+            foreach (ProfileViewControl pvc_tab in ProfileViewControls)
             {
                 IProfileInfo pi_tab = pvc_tab.ProfileInfo;
-                profs.SetProfileInfo(pi_tab);
                 pi_tab.setPB();
-                profs.SaveProfile(); // save tab's profile
+                profs.SaveProfile(pi_tab); // save tab's profile
             }
-
-            profs.SetProfileInfo(SelectedProfileInfo); // Restore current profile selection
         }
 
         #endregion

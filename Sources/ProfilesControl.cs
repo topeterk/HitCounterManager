@@ -85,13 +85,10 @@ namespace HitCounterManager
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public int CurrentAttempts
         {
-            get
-            {
-                return (1 < ptc.ProfileViewControls.Length ? SuccessionAttempts : ptc.SelectedProfileInfo.AttemptsCount); // Succession active?
-            }
+            get { return (ptc.SuccessionActive ? SuccessionAttempts : ptc.SelectedProfileInfo.AttemptsCount); }
             set
             {
-                if (1 < ptc.ProfileViewControls.Length) // Succession active?
+                if (ptc.SuccessionActive)
                 {
                     SuccessionAttempts = value;
                     ProfileChangedHandler(this, null); // Notify about change as there is no profile which will do this for us
@@ -126,7 +123,7 @@ namespace HitCounterManager
                 return;
             }
 
-            profs.SaveProfile(); // save previous selected profile
+            profs.SaveProfile(ptc.SelectedProfileViewControl.ProfileInfo); // save previous selected profile
 
             ptc.AddAndSelectProfile(Name);
         }
@@ -150,7 +147,7 @@ namespace HitCounterManager
         }
         public void ProfileCopy()
         {
-            profs.SaveProfile(); // save previous selected profile
+            profs.SaveProfile(ptc.SelectedProfileViewControl.ProfileInfo); // save previous selected profile
 
             ptc.SelectedProfileCopy();
         }
@@ -164,7 +161,7 @@ namespace HitCounterManager
                 ptc.SelectedProfileDelete();
 
                 // profile was changed by deletion, so we load the newly selected profile
-                profs.LoadProfile(SelectedProfile);
+                profs.LoadProfile(SelectedProfile, ptc.SelectedProfileInfo);
             }
         }
 

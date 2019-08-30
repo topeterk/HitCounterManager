@@ -394,7 +394,7 @@ namespace HitCounterManager
 
             _settings.ProfileSelected = profCtrl.SelectedProfile;
 
-            _settings.Profiles.SaveProfile(); // Make sure all changes have been saved eventually
+            _settings.Profiles.SaveProfile(profCtrl.ProfileTabControl.SelectedProfileInfo); // Make sure all changes have been saved eventually (for safety)
 
             sm.WriteXML(_settings);
         }
