@@ -163,7 +163,7 @@ namespace HitCounterManager
             catch { return; }
             sr.NewLine = Environment.NewLine;
 
-            IProfileInfo pi = profCtrl.ProfileTabControl.SelectedProfileInfo;
+            IProfileInfo pi = profCtrl.SelectedProfileInfo;
 
             foreach (string line in template.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {

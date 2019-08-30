@@ -258,7 +258,7 @@ namespace HitCounterManager
             SetAlwaysOnTop(_settings.AlwaysOnTop);
 
             // Load profile data..
-            profCtrl.ProfileTabControl.SelectedProfileInfo.ProfileUpdateBegin();
+            profCtrl.SelectedProfileInfo.ProfileUpdateBegin();
             profCtrl.InitializeProfilesControl(_settings.Profiles, _settings.ProfileSelected, _settings.SuccessionTitle, _settings.ShowSuccession);
 
             // Load customizing..
@@ -295,7 +295,7 @@ namespace HitCounterManager
             om.FilePathIn = _settings.Inputfile;
             om.FilePathOut = _settings.OutputFile; // setting output filepath will allow writing output, so keep this line last
 
-            profCtrl.ProfileTabControl.SelectedProfileInfo.ProfileUpdateEnd(); // Will fire event to write first output once after application start
+            profCtrl.SelectedProfileInfo.ProfileUpdateEnd(); // Will fire event to write first output once after application start
 
             // Configure hot keys..
             sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
@@ -394,7 +394,7 @@ namespace HitCounterManager
 
             _settings.ProfileSelected = profCtrl.SelectedProfile;
 
-            _settings.Profiles.SaveProfile(profCtrl.ProfileTabControl.SelectedProfileInfo); // Make sure all changes have been saved eventually (for safety)
+            _settings.Profiles.SaveProfile(profCtrl.SelectedProfileInfo); // Make sure all changes have been saved eventually (for safety)
 
             sm.WriteXML(_settings);
         }

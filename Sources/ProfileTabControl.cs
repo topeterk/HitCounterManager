@@ -124,8 +124,7 @@ namespace HitCounterManager
         public void InitializeProfileTabControl()
         {
             SelectedProfileViewControl = ProfileViewControls[0]; // the only one created by designer
-            SelectedProfileInfo = SelectedProfileViewControl.ProfileInfo;
-            SelectedProfileInfo.ProfileChanged += PVC_ProfileChangedHandler;
+            SelectedProfileViewControl.ProfileInfo.ProfileChanged += PVC_ProfileChangedHandler;
             SelectedProfileViewControl.SelectedProfileChanged += PVC_SelectedProfileChangedHandler;
             Selecting += TabSelectingHandler;
         }
@@ -146,10 +145,6 @@ namespace HitCounterManager
         }
 
         public bool SuccessionActive { get { return (1 < ProfileViewControls.Length); } }
-
-        [Browsable(false)] // Hide from designer
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
-        public IProfileInfo SelectedProfileInfo { get; private set; }
 
         [Browsable(false)] // Hide from designer
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
@@ -208,7 +203,6 @@ namespace HitCounterManager
 
             // Switch interaction to selected tab
             SelectedProfileViewControl = (ProfileViewControl)e.TabPage.Controls["pvc"];
-            SelectedProfileInfo = SelectedProfileViewControl.ProfileInfo;
 
             ProfileTabSelectedHandler(SelectedProfileViewControl, ProfileTabSelectAction.Selected);
         }

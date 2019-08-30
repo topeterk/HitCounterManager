@@ -78,14 +78,16 @@ namespace HitCounterManager
 
         #endregion
         #region Profile related
-        
-        public string SelectedProfile { get { return ptc.SelectedProfileViewControl.SelectedProfile; } }
+
+        private ProfileViewControl SelectedProfileViewControl { get { return ptc.SelectedProfileViewControl; } }
+        public IProfileInfo SelectedProfileInfo { get { return SelectedProfileViewControl.ProfileInfo; } }
+        public string SelectedProfile { get { return SelectedProfileViewControl.SelectedProfile; } }
 
         [Browsable(false)] // Hide from designer
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public int CurrentAttempts
         {
-            get { return (ptc.SuccessionActive ? SuccessionAttempts : ptc.SelectedProfileInfo.AttemptsCount); }
+            get { return (ptc.SuccessionActive ? SuccessionAttempts : SelectedProfileInfo.AttemptsCount); }
             set
             {
                 if (ptc.SuccessionActive)
@@ -94,7 +96,7 @@ namespace HitCounterManager
                     ProfileChangedHandler(this, null); // Notify about change as there is no profile which will do this for us
                 }
                 else
-                    ptc.SelectedProfileInfo.AttemptsCount = value;
+                    SelectedProfileInfo.AttemptsCount = value;
             }
         }
  
@@ -102,8 +104,8 @@ namespace HitCounterManager
         {
             profs = profiles;
 
-            ptc.SelectedProfileViewControl.SetProfileList(profs.GetProfileList(), ProfileSelected);
-            ptc.SelectedProfileInfo.SetSessionProgress(0, true);
+            SelectedProfileViewControl.SetProfileList(profs.GetProfileList(), ProfileSelected);
+            SelectedProfileInfo.SetSessionProgress(0, true);
 
             if (null != SuccessionTitle) txtPredecessorTitle.Text = SuccessionTitle;
             cbShowPredecessor.Checked = ShowSuccession;
@@ -131,7 +133,7 @@ namespace HitCounterManager
             switch (action)
             {
                 case ProfileTabControl.ProfileTabSelectAction.Selecting:
-                    profs.SaveProfile(ptc.SelectedProfileInfo); // save current tab's profile
+                    profs.SaveProfile(SelectedProfileInfo); // save current tab's profile
                     break;
                 case ProfileTabControl.ProfileTabSelectAction.Created:
                     pvc_sender.SetProfileList(profs.GetProfileList(), null);
@@ -148,18 +150,18 @@ namespace HitCounterManager
             string Name = VisualBasic.Interaction.InputBox("Enter name of new profile", "New profile", SelectedProfile);
             if (Name.Length == 0) return;
 
-            if (ptc.SelectedProfileViewControl.HasProfile(Name)) // TODO: Check at profs instead?
+            if (SelectedProfileViewControl.HasProfile(Name)) // TODO: Check at profs instead?
             {
                 MessageBox.Show("A profile with this name already exists!", "Profile already exists", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 
-            profs.SaveProfile(ptc.SelectedProfileViewControl.ProfileInfo); // save previous selected profile
+            profs.SaveProfile(SelectedProfileViewControl.ProfileInfo); // save previous selected profile
 
             // Apply on all tabs
             foreach (ProfileViewControl pvc_tab in ptc.ProfileViewControls)
             {
-                pvc_tab.CreateNewProfile(Name, (pvc_tab == ptc.SelectedProfileViewControl)); // Select only for the current tab
+                pvc_tab.CreateNewProfile(Name, (pvc_tab == SelectedProfileViewControl)); // Select only for the current tab
             }
         }
         public void ProfileRename()
@@ -170,7 +172,7 @@ namespace HitCounterManager
             string NameNew = VisualBasic.Interaction.InputBox("Enter new name for profile \"" + NameOld + "\"!", "Rename profile", NameOld);
             if (NameNew.Length == 0) return;
 
-            if (ptc.SelectedProfileViewControl.HasProfile(NameNew)) // TODO: Check at profs instead?
+            if (SelectedProfileViewControl.HasProfile(NameNew)) // TODO: Check at profs instead?
             {
                 MessageBox.Show("A profile with this name already exists!", "Profile already exists", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
@@ -186,14 +188,14 @@ namespace HitCounterManager
         }
         public void ProfileCopy()
         {
-            profs.SaveProfile(ptc.SelectedProfileViewControl.ProfileInfo); // save previous selected profile
+            profs.SaveProfile(SelectedProfileViewControl.ProfileInfo); // save previous selected profile
 
-            string NameNew = ptc.SelectedProfileViewControl.CopySelectedProfile(); // Apply on foreground tab
+            string NameNew = SelectedProfileViewControl.CopySelectedProfile(); // Apply on foreground tab
 
             // Apply on all tabs
             foreach (ProfileViewControl pvc_tab in ptc.ProfileViewControls)
             {
-                if (pvc_tab == ptc.SelectedProfileViewControl) continue; // Skip current tab
+                if (pvc_tab == SelectedProfileViewControl) continue; // Skip current tab
                 pvc_tab.CreateNewProfile(NameNew, false);
             }
         }
@@ -207,19 +209,19 @@ namespace HitCounterManager
                 // Apply on all tabs
                 foreach (ProfileViewControl pvc_tab in ptc.ProfileViewControls)
                 {
-                    if (pvc_tab == ptc.SelectedProfileViewControl)
-                        ptc.SelectedProfileViewControl.DeleteSelectedProfile(); // Apply on foreground tab: Remove profile and select next one (if any)
+                    if (pvc_tab == SelectedProfileViewControl)
+                        SelectedProfileViewControl.DeleteSelectedProfile(); // Apply on foreground tab: Remove profile and select next one (if any)
                     else
                         pvc_tab.DeleteProfile(Name); // background tab: Remove profile and if was selected, unselect
                 }
 
                 // profile was changed by deletion, so we load the newly selected profile
-                profs.LoadProfile(SelectedProfile, ptc.SelectedProfileInfo);
+                profs.LoadProfile(SelectedProfile, SelectedProfileInfo);
             }
         }
 
-        public void ProfileSplitPermute(int Amount) { ptc.SelectedProfileInfo.PermuteSplit(ptc.SelectedProfileInfo.ActiveSplit, Amount); }
-        public void ProfileSplitInsert() { ptc.SelectedProfileInfo.InsertSplit(); }
+        public void ProfileSplitPermute(int Amount) { SelectedProfileInfo.PermuteSplit(SelectedProfileInfo.ActiveSplit, Amount); }
+        public void ProfileSplitInsert() { SelectedProfileInfo.InsertSplit(); }
 
         public void ProfileReset()
         { 
@@ -241,9 +243,9 @@ namespace HitCounterManager
                 profs.SaveProfile(pi_tab); // save tab's profile
             }
         }
-        public void ProfileHit(int Amount) { ptc.SelectedProfileInfo.Hit(Amount); }
-        public void ProfileWayHit(int Amount) { ptc.SelectedProfileInfo.WayHit(Amount); }
-        public void ProfileSplitGo(int Amount) { ptc.SelectedProfileInfo.GoSplits(Amount); }
+        public void ProfileHit(int Amount) { SelectedProfileInfo.Hit(Amount); }
+        public void ProfileWayHit(int Amount) { SelectedProfileInfo.WayHit(Amount); }
+        public void ProfileSplitGo(int Amount) { SelectedProfileInfo.GoSplits(Amount); }
 
         public void ProfileSetAttempts()
         {
@@ -269,7 +271,7 @@ namespace HitCounterManager
                 IProfileInfo pi_tab = pvc_tab.ProfileInfo;
                 int Splits = pi_tab.SplitCount;
 
-                if ((pi_tab == ptc.SelectedProfileInfo) && PastOnly) // When the past should be calculated only, stop when active profile tab found
+                if ((pi_tab == SelectedProfileInfo) && PastOnly) // When the past should be calculated only, stop when active profile tab found
                     break;
 
                 TotalSplits += Splits;
@@ -282,7 +284,7 @@ namespace HitCounterManager
 
                 if (!ActiveProfileFound)
                 {
-                    if (pi_tab == ptc.SelectedProfileInfo) // Active profile tab found
+                    if (pi_tab == SelectedProfileInfo) // Active profile tab found
                     {
                         TotalActiveSplit += pi_tab.ActiveSplit;
                         ActiveProfileFound = true;
