@@ -86,6 +86,15 @@ namespace HitCounterManager
         }
 
         /// <summary>
+        /// Checks if a profile with given name exists
+        /// </summary>
+        public bool HasProfile(string Name)
+        {
+            Profile prof;
+            return _FindProfile(Name, out prof);
+        }
+
+        /// <summary>
         /// Updates profile info based on a specific internally cached profile.
         /// </summary>
         /// <param name="Name">Name of profile that gets loaded</param>

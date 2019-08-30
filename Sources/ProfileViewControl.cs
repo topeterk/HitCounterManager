@@ -158,8 +158,6 @@ namespace HitCounterManager
 
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }
-
-        public bool HasProfile(string Name) { return ComboBox1.Items.Contains(Name); }
     }
 
     public class ProfileDataGridView : DataGridView, IProfileInfo

@@ -150,7 +150,7 @@ namespace HitCounterManager
             string Name = VisualBasic.Interaction.InputBox("Enter name of new profile", "New profile", SelectedProfile);
             if (Name.Length == 0) return;
 
-            if (SelectedProfileViewControl.HasProfile(Name)) // TODO: Check at profs instead?
+            if (profs.HasProfile(Name))
             {
                 MessageBox.Show("A profile with this name already exists!", "Profile already exists", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
@@ -172,7 +172,7 @@ namespace HitCounterManager
             string NameNew = VisualBasic.Interaction.InputBox("Enter new name for profile \"" + NameOld + "\"!", "Rename profile", NameOld);
             if (NameNew.Length == 0) return;
 
-            if (SelectedProfileViewControl.HasProfile(NameNew)) // TODO: Check at profs instead?
+            if (profs.HasProfile(NameNew))
             {
                 MessageBox.Show("A profile with this name already exists!", "Profile already exists", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
