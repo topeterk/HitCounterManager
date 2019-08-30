@@ -97,7 +97,7 @@ namespace HitCounterManager
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }
 
-        public void CopySelectedProfile()
+        public string CopySelectedProfile()
         {
             SelectedProfileChangedCauseType SelectedProfileChangedCausePrev = SelectedProfileChangedCause;
             SelectedProfileChangedCause = SelectedProfileChangedCauseType.Copy;
@@ -111,6 +111,8 @@ namespace HitCounterManager
             SelectedProfile = Name;
 
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
+
+            return Name;
         }
 
         public void RenameProfile(string NameOld, string NameNew)

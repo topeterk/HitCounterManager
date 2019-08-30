@@ -262,19 +262,8 @@ namespace HitCounterManager
             }
         }
 
-        public void AddProfile()
+        public void AddAndSelectProfile(string Name)
         {
-            string Name = Form1.InputBox("Enter name of new profile", "New profile", SelectedProfileViewControl.SelectedProfile);
-            if (Name.Length == 0) return;
-
-            if (SelectedProfileViewControl.HasProfile(Name))
-            {
-                MessageBox.Show("A profile with this name already exists!", "Profile already exists", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return;
-            }
-
-            profs.SaveProfile(); // save previous selected profile
-
             // Apply on all tabs
             foreach(ProfileViewControl pvc_tab in ProfileViewControls)
             {
@@ -284,33 +273,18 @@ namespace HitCounterManager
 
         public void SelectedProfileCopy()
         {
-            profs.SaveProfile(); // save previous selected profile
-            SelectedProfileViewControl.CopySelectedProfile(); // Apply on foreground tab
+            string Name = SelectedProfileViewControl.CopySelectedProfile(); // Apply on foreground tab
 
             // Apply on all tabs
             foreach(ProfileViewControl pvc_tab in ProfileViewControls)
             {
                 if (pvc_tab == SelectedProfileViewControl) continue; // Skip current tab
-                pvc_tab.CreateNewProfile(SelectedProfileViewControl.SelectedProfile, false);
+                pvc_tab.CreateNewProfile(Name, false);
             }
         }
 
-        public void SelectedProfileRename()
+        public void SelectedProfileRename(string NameOld, string NameNew)
         {
-            string NameOld = SelectedProfileViewControl.SelectedProfile;
-            if (null == NameOld) return;
-
-            string NameNew = Form1.InputBox("Enter new name for profile \"" + NameOld + "\"!", "Rename profile", NameOld);
-            if (NameNew.Length == 0) return;
-
-            if (SelectedProfileViewControl.HasProfile(NameNew))
-            {
-                MessageBox.Show("A profile with this name already exists!", "Profile already exists", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return;
-            }
-
-            profs.RenameProfile(NameOld, NameNew);
-
             // Apply on all tabs
             foreach(ProfileViewControl pvc_tab in ProfileViewControls)
             {
@@ -321,20 +295,14 @@ namespace HitCounterManager
         public void SelectedProfileDelete()
         {
             string Name = SelectedProfileViewControl.SelectedProfile;
-            if (DialogResult.OK == MessageBox.Show("Do you really want to delete profile \"" + Name + "\"?", "Deleting profile", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
+
+            // Apply on all tabs
+            foreach(ProfileViewControl pvc_tab in ProfileViewControls)
             {
-                profs.DeleteProfile(Name);
-                SelectedProfileViewControl.DeleteSelectedProfile(); // Apply on foreground tab
-
-                // Apply on all background tabs
-                foreach(ProfileViewControl pvc_tab in ProfileViewControls)
-                {
-                    if (pvc_tab == SelectedProfileViewControl) continue; // Skip current tab
-                    pvc_tab.DeleteProfile(Name);
-                }
-
-                // profile was changed by deletion, so try loading the newly selected profile
-                profs.LoadProfile(SelectedProfileViewControl.SelectedProfile);
+                if (pvc_tab == SelectedProfileViewControl)
+                    SelectedProfileViewControl.DeleteSelectedProfile(); // Apply on foreground tab: Remove profile and select next one (if any)
+                else
+                    pvc_tab.DeleteProfile(Name); // background tab: Remove profile and if was selected, unselect
             }
         }
 

@@ -115,10 +115,58 @@ namespace HitCounterManager
             if (null != ProfileChanged) ProfileChanged(sender, e); // Fire event
         }
 
-        public void ProfileNew() { ptc.AddProfile(); }
-        public void ProfileRename() { ptc.SelectedProfileRename(); }
-        public void ProfileCopy() { ptc.SelectedProfileCopy(); }
-        public void ProfileDelete() { ptc.SelectedProfileDelete(); }
+        public void ProfileNew()
+        {
+            string Name = VisualBasic.Interaction.InputBox("Enter name of new profile", "New profile", SelectedProfile);
+            if (Name.Length == 0) return;
+
+            if (ptc.SelectedProfileViewControl.HasProfile(Name)) // TODO: Check at profs instead?
+            {
+                MessageBox.Show("A profile with this name already exists!", "Profile already exists", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
+            profs.SaveProfile(); // save previous selected profile
+
+            ptc.AddAndSelectProfile(Name);
+        }
+        public void ProfileRename()
+        {
+            string NameOld = SelectedProfile;
+            if (null == NameOld) return;
+
+            string NameNew = VisualBasic.Interaction.InputBox("Enter new name for profile \"" + NameOld + "\"!", "Rename profile", NameOld);
+            if (NameNew.Length == 0) return;
+
+            if (ptc.SelectedProfileViewControl.HasProfile(NameNew)) // TODO: Check at profs instead?
+            {
+                MessageBox.Show("A profile with this name already exists!", "Profile already exists", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
+            profs.RenameProfile(NameOld, NameNew);
+
+            ptc.SelectedProfileRename(NameOld, NameNew);
+        }
+        public void ProfileCopy()
+        {
+            profs.SaveProfile(); // save previous selected profile
+
+            ptc.SelectedProfileCopy();
+        }
+        public void ProfileDelete()
+        {
+            string Name = SelectedProfile;
+            if (DialogResult.OK == MessageBox.Show("Do you really want to delete profile \"" + Name + "\"?", "Deleting profile", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
+            {
+                profs.DeleteProfile(Name);
+
+                ptc.SelectedProfileDelete();
+
+                // profile was changed by deletion, so we load the newly selected profile
+                profs.LoadProfile(SelectedProfile);
+            }
+        }
 
         public void ProfileSplitPermute(int Amount) { ptc.SelectedProfileInfo.PermuteSplit(ptc.SelectedProfileInfo.ActiveSplit, Amount); }
         public void ProfileSplitInsert() { ptc.SelectedProfileInfo.InsertSplit(); }
@@ -131,7 +179,7 @@ namespace HitCounterManager
 
         public void ProfileSetAttempts()
         {
-            string amount_string = Form1.InputBox("Enter amount to be set!", "Set new run number (amount of attempts)", CurrentAttempts.ToString());
+            string amount_string = VisualBasic.Interaction.InputBox("Enter amount to be set!", "Set new run number (amount of attempts)", CurrentAttempts.ToString());
             int amount_value;
             if (!int.TryParse(amount_string, out amount_value))
             {

@@ -254,7 +254,7 @@ namespace HitCounterManager
             if (_settings.MainHeight < this.MinimumSize.Height) _settings.MainHeight = this.MinimumSize.Height;
             // set window size and when possible also set location (just make sure window is not outside of screen)
             this.SetBounds(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth, _settings.MainHeight,
-                IsOnScreen(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth, _settings.MainHeight) ? BoundsSpecified.All : BoundsSpecified.Size);
+                Program.IsOnScreen(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth) ? BoundsSpecified.All : BoundsSpecified.Size);
             SetAlwaysOnTop(_settings.AlwaysOnTop);
 
             // Load profile data..
@@ -323,7 +323,7 @@ namespace HitCounterManager
             {
                 _settings.MainWidth = this.Width;
                 _settings.MainHeight = this.Height;
-                if (IsOnScreen(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth, _settings.MainHeight))
+                if (Program.IsOnScreen(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth))
                 {
                     // remember values when not outside of screen
                     _settings.MainPosX = this.Left;
