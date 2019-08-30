@@ -262,6 +262,7 @@ namespace HitCounterManager
             profCtrl.InitializeProfilesControl(_settings.Profiles, _settings.ProfileSelected, _settings.SuccessionTitle, _settings.ShowSuccession);
 
             // Load customizing..
+            OutModule om = profCtrl.om;
             om.ShowAttemptsCounter = _settings.ShowAttemptsCounter;
             om.ShowHeadline = _settings.ShowHeadline;
             om.ShowFooter = _settings.ShowFooter;
@@ -319,6 +320,7 @@ namespace HitCounterManager
         {
             ShortcutsKey key = new ShortcutsKey();
 
+            // Remember window position and sates
             if (this.WindowState == FormWindowState.Normal) // Don't save window size and location when maximized or minimized
             {
                 _settings.MainWidth = this.Width;
@@ -331,6 +333,8 @@ namespace HitCounterManager
                 }
             }
             _settings.AlwaysOnTop = this.TopMost;
+
+            // Store hot keys..
             _settings.HotKeyMethod = (int)sc.NextStart_Method;
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Reset);
             _settings.ShortcutResetEnable = key.used;
@@ -357,6 +361,8 @@ namespace HitCounterManager
             _settings.ShortcutPBEnable = key.used;
             _settings.ShortcutPBKeyCode = (int)key.key.KeyData;
 
+            // Store customizing..
+            OutModule om = profCtrl.om;
             _settings.Inputfile = om.FilePathIn;
             _settings.OutputFile = om.FilePathOut;
 
@@ -392,8 +398,8 @@ namespace HitCounterManager
             _settings.SuccessionHitsWay = SuccessionHitsWay; // obsolete since version 7 - keep for backwards compatibility
             _settings.SuccessionHitsPB = SuccessionHitsPB;   // obsolete since version 7 - keep for backwards compatibility
 
+            // Store profile data..
             _settings.ProfileSelected = profCtrl.SelectedProfile;
-
             _settings.Profiles.SaveProfile(profCtrl.SelectedProfileInfo); // Make sure all changes have been saved eventually (for safety)
 
             sm.WriteXML(_settings);

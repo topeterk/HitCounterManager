@@ -169,9 +169,9 @@
         private ProfileViewControl pvc;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
-        public System.Windows.Forms.GroupBox gpSuccession;
+        private System.Windows.Forms.GroupBox gpSuccession;
         private System.Windows.Forms.Button btnSuccessionVisibility;
-        public System.Windows.Forms.TextBox txtPredecessorTitle;
-        public System.Windows.Forms.CheckBox cbShowPredecessor;
+        private System.Windows.Forms.TextBox txtPredecessorTitle;
+        private System.Windows.Forms.CheckBox cbShowPredecessor;
     }
 }

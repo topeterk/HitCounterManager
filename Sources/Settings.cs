@@ -42,7 +42,7 @@ namespace HitCounterManager
         private void Settings_Load(object sender, EventArgs e)
         {
             sc = ((Form1)Owner).sc;
-            om = ((Form1)Owner).om;
+            om = ((Form1)Owner).profCtrl.om;
 
             LoadHotKey(Shortcuts.SC_Type.SC_Type_Reset, cbScReset, txtReset);
             LoadHotKey(Shortcuts.SC_Type.SC_Type_Hit, cbScHit, txtHit);

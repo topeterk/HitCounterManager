@@ -34,7 +34,6 @@ namespace HitCounterManager
         private const int WM_HOTKEY = 0x312;
 
         public readonly Shortcuts sc;
-        public readonly OutModule om;
 
         private bool SettingsDialogOpen = false;
 
@@ -44,7 +43,6 @@ namespace HitCounterManager
         {
             InitializeComponent();
 
-            om = new OutModule(profCtrl);
             sc = new Shortcuts(Handle);
 
             ServicePointManager.Expect100Continue = true;
@@ -172,12 +170,6 @@ namespace HitCounterManager
             profCtrl.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB, false);
             lbl_progress.Text = "Progress:  " + TotalActiveSplit + " / " + TotalSplits + "  # " + profCtrl.CurrentAttempts.ToString("D3");
             lbl_totals.Text = "Total: " + (TotalHits + TotalHitsWay) + " Hits   " + TotalPB + " PB";
-            
-            // TODO: Move into ProfilesControl
-            om.ShowSuccession = profCtrl.cbShowPredecessor.Checked;
-            om.SuccessionTitle = profCtrl.txtPredecessorTitle.Text;
-
-            om.Update();
         }
 
         #endregion

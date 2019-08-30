@@ -442,6 +442,6 @@
         private System.Windows.Forms.Label Spacer3;
         private System.Windows.Forms.Label lbl_totals;
         private System.Windows.Forms.Label lbl_progress;
-        private ProfilesControl profCtrl;
+        public ProfilesControl profCtrl;
     }
 }

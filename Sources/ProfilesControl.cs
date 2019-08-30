@@ -31,10 +31,13 @@ namespace HitCounterManager
         private readonly int gpSuccession_Height;
         private int SuccessionAttempts = 0;
         private Profiles profs;
+        public readonly OutModule om;
 
         public ProfilesControl()
         {
             InitializeComponent();
+
+            om = new OutModule(this);
 
             gpSuccession_Height = gpSuccession.Height; // remember expanded size from designer settings
             ShowSuccessionMenu(false); // start collapsed
@@ -114,7 +117,12 @@ namespace HitCounterManager
         public event EventHandler<EventArgs> ProfileChanged;
         public void ProfileChangedHandler(object sender, EventArgs e)
         {
+            om.ShowSuccession = cbShowPredecessor.Checked;
+            om.SuccessionTitle = txtPredecessorTitle.Text;
+
             if (null != ProfileChanged) ProfileChanged(sender, e); // Fire event
+
+            om.Update();
         }
 
         private void SelectedProfileChanged(object sender, ProfileViewControl.SelectedProfileChangedCauseType cause)
