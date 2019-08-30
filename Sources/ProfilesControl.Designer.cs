@@ -56,7 +56,9 @@
             this.ptc.SelectedIndex = 0;
             this.ptc.Size = new System.Drawing.Size(394, 302);
             this.ptc.TabIndex = 20;
+            this.ptc.ProfileTabSelect += new System.EventHandler<HitCounterManager.ProfileTabControl.ProfileTabSelectAction>(this.ProfileTabSelect);
             this.ptc.ProfileChanged += new System.EventHandler<System.EventArgs>(this.ProfileChangedHandler);
+            this.ptc.SelectedProfileChanged += new System.EventHandler<HitCounterManager.ProfileViewControl.SelectedProfileChangedCauseType>(this.SelectedProfileChanged);
             // 
             // tabPage1
             // 

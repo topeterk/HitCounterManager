@@ -44,7 +44,7 @@ namespace HitCounterManager
         {
             InitializeComponent();
 
-            om = new OutModule(profCtrl.ProfileTabControl);
+            om = new OutModule(profCtrl);
             sc = new Shortcuts(Handle);
 
             ServicePointManager.Expect100Continue = true;

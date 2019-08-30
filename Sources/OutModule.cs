@@ -74,15 +74,15 @@ namespace HitCounterManager
         public bool ShowSuccession = false;
         public string SuccessionTitle = "";
 
-        private readonly ProfileTabControl ptc;
+        private readonly ProfilesControl profCtrl;
 
         /// <summary>
         /// Bind object to a profile tab control
         /// </summary>
-        /// <param name="ProfileTabControl">interface of object to set binding</param>
-        public OutModule(ProfileTabControl ProfileTabControl)
+        /// <param name="ProfilesControl">interface of object to set binding</param>
+        public OutModule(ProfilesControl ProfilesControl)
         {
-            ptc = ProfileTabControl;
+            profCtrl = ProfilesControl;
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace HitCounterManager
             catch { return; }
             sr.NewLine = Environment.NewLine;
 
-            IProfileInfo pi = ptc.SelectedProfileInfo;
+            IProfileInfo pi = profCtrl.ProfileTabControl.SelectedProfileInfo;
 
             foreach (string line in template.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
@@ -178,7 +178,7 @@ namespace HitCounterManager
                 else if (line.Contains("HITCOUNTER_JSON_START")) // Format data according to RFC 4627 (JSON)
                 {
                     int TotalSplits, TotalActiveSplit, SuccessionHits, SuccessionHitsWay, SuccessionHitsPB;
-                    ptc.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out SuccessionHits, out SuccessionHitsWay, out SuccessionHitsPB, true);
+                    profCtrl.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out SuccessionHits, out SuccessionHitsWay, out SuccessionHitsPB, true);
 
                     int active = pi.ActiveSplit;
                     int iSplitCount = pi.SplitCount;
