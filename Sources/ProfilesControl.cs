@@ -30,6 +30,7 @@ namespace HitCounterManager
     {
         private readonly int gpSuccession_Height;
         private Profiles profs;
+        private Succession succession;
         public readonly OutModule om;
 
         public ProfilesControl()
@@ -89,12 +90,12 @@ namespace HitCounterManager
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public int CurrentAttempts
         {
-            get { return (ptc.SuccessionActive ? om.Settings.SuccessionAttempts : SelectedProfileInfo.AttemptsCount); }
+            get { return (ptc.SuccessionActive ? succession.Attempts : SelectedProfileInfo.AttemptsCount); }
             set
             {
                 if (ptc.SuccessionActive)
                 {
-                    om.Settings.SuccessionAttempts = value;
+                    succession.Attempts = value;
                     ProfileChangedHandler(this, null); // Notify about change as there is no profile which will do this for us
                 }
                 else
@@ -102,15 +103,16 @@ namespace HitCounterManager
             }
         }
  
-        public void InitializeProfilesControl(Profiles profiles, string ProfileSelected, string SuccessionTitle, bool ShowSuccession)
+        public void InitializeProfilesControl(Profiles profiles, Succession Succession)
         {
             profs = profiles;
+            succession = Succession;
 
-            SelectedProfileViewControl.SetProfileList(profs.GetProfileList(), ProfileSelected);
+            SelectedProfileViewControl.SetProfileList(profs.GetProfileList(), succession.SuccessionList[0].ProfileSelected);
             SelectedProfileInfo.SetSessionProgress(0, true);
 
-            if (null != SuccessionTitle) txtPredecessorTitle.Text = SuccessionTitle;
-            cbShowPredecessor.Checked = ShowSuccession;
+            if (null != succession.HistorySplitTitle) txtPredecessorTitle.Text = succession.HistorySplitTitle;
+            cbShowPredecessor.Checked = succession.HistorySplitVisible;
         }
 
         public event EventHandler<EventArgs> ProfileChanged;
@@ -118,8 +120,8 @@ namespace HitCounterManager
         {
             if (null == om.Settings) return; // nothing to do during init
 
-            om.Settings.ShowSuccession = cbShowPredecessor.Checked;
-            om.Settings.SuccessionTitle = txtPredecessorTitle.Text;
+            succession.HistorySplitVisible = cbShowPredecessor.Checked;
+            succession.HistorySplitTitle = txtPredecessorTitle.Text;
 
             if (null != ProfileChanged) ProfileChanged(sender, e); // Fire event
 

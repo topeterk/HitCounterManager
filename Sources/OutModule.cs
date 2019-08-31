@@ -182,10 +182,10 @@ namespace HitCounterManager
                     sr.WriteLine("{");
 
                     sr.WriteLine("\"list\": [");
-                    if (_settings.ShowSuccession)
+                    if (_settings.Succession.HistorySplitVisible)
                     {
                         InjectedSplitCount++;
-                        sr.Write("[\"" + SimpleHtmlEscape(_settings.SuccessionTitle) + "\", " + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + "]");
+                        sr.Write("[\"" + SimpleHtmlEscape(_settings.Succession.HistorySplitTitle) + "\", " + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + "]");
                         if (0 < iSplitCount) sr.WriteLine(","); // separator
                     }
                     for (int r = 0; r < iSplitCount; r++)

@@ -21,10 +21,32 @@
 //SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace HitCounterManager
 {
+    /// <summary>
+    /// Content of XML stored user data (succession entry)
+    /// </summary>
+    [Serializable]
+    public class SuccessionEntry
+    {
+        public string ProfileSelected;
+    }
+
+    /// <summary>
+    /// Content of XML stored user data (succession)
+    /// </summary>
+    [Serializable]
+    public class Succession
+    {
+        public int Attempts = 0;
+        public string HistorySplitTitle = "Previous";
+        public bool HistorySplitVisible = false;
+        public List<SuccessionEntry> SuccessionList = new List<SuccessionEntry>();
+    }
+
     /// <summary>
     /// Content of XML stored user data (settings)
     /// </summary>
@@ -66,7 +88,7 @@ namespace HitCounterManager
         public bool ShowHitsCombined;
         public bool ShowNumbers;
         public bool ShowPB;
-        public bool ShowSuccession;
+        public bool ShowSuccession; // obsolete since version 7 - keep for backwards compatibility (use Succession.HistorySplitVisible instead)
         public int Purpose;
         public int Severity;
         public bool StyleUseHighContrast;
@@ -79,13 +101,13 @@ namespace HitCounterManager
         public string StyleFontName;
         public int StyleDesiredWidth;
         public bool StyleSuperscriptPB;
-        public string SuccessionTitle;
-        public int SuccessionAttempts;
-        public int SuccessionHits;    // obsolete since version 7 - keep for backwards compatibility
-        public int SuccessionHitsWay; // obsolete since version 7 - keep for backwards compatibility
-        public int SuccessionHitsPB;  // obsolete since version 7 - keep for backwards compatibility
-        public string ProfileSelected;
-        public Profiles Profiles;
+        public string SuccessionTitle; // obsolete since version 7 - keep for backwards compatibility (use Succession.SuccessionTitle instead)
+        public int SuccessionHits;     // obsolete since version 7 - keep for backwards compatibility (will be calculated, now)
+        public int SuccessionHitsWay;  // obsolete since version 7 - keep for backwards compatibility (will be calculated, now)
+        public int SuccessionHitsPB;   // obsolete since version 7 - keep for backwards compatibility (will be calculated, now)
+        public Succession Succession = new Succession();
+        public string ProfileSelected; // obsolete since version 7 - keep for backwards compatibility (use Succession.SuccessionList[0].ProfileSelected instead)
+        public Profiles Profiles = new Profiles();
     }
 
     public partial class Form1 : Form
@@ -148,7 +170,6 @@ namespace HitCounterManager
                 _settings.Inputfile = "HitCounter.template";
                 _settings.OutputFile = "HitCounter.html";
                 _settings.ProfileSelected = "Unnamed";
-                _settings.Profiles = new Profiles();
             }
             if (_settings.Version == 0) // Coming from version 1.9 or older
             {
@@ -238,15 +259,20 @@ namespace HitCounterManager
                 _settings.MainPosX = this.Left;
                 _settings.MainPosY = this.Top;
                 _settings.StyleUseRoman = false;
-                _settings.SuccessionAttempts = 0;
+                // Create succession with only one entry (there was only one available in older versions)
+                SuccessionEntry suc_entry = new SuccessionEntry();
+                suc_entry.ProfileSelected = _settings.ProfileSelected;
+                _settings.Succession.SuccessionList.Add(suc_entry);
                 // Introduced with false in version 6, keep user setting when this version was used
                 _settings.StyleProgressBarColored = (baseVersion == 6 ? false : true);
+            }
 
-                if (baseVersion < 0)
-                {
-                    // Never seen the original default name, so we change it to most commonly used
-                    _settings.SuccessionTitle = "Previous";
-                }
+            // Validate succession
+            for (int i = _settings.Succession.SuccessionList.Count - 1; 0 <= i; i--)
+            {
+                // Remove entries with no selected profile
+                if (null == _settings.Succession.SuccessionList[i].ProfileSelected)
+                    _settings.Succession.SuccessionList.RemoveAt(i);
             }
 
             // Apply settings..
@@ -265,10 +291,17 @@ namespace HitCounterManager
             {
                 // There is no profile at all, initially create a clean one
                 Profile unnamed = new Profile();
-                _settings.ProfileSelected = unnamed.Name = "Unnamed";
+                unnamed.Name = "Unnamed";
                 _settings.Profiles.ProfileList.Add(unnamed);
             }
-            profCtrl.InitializeProfilesControl(_settings.Profiles, _settings.ProfileSelected, _settings.SuccessionTitle, _settings.ShowSuccession);
+            if (_settings.Succession.SuccessionList.Count == 0)
+            {
+                // There is no succession at all create an empty succession
+                SuccessionEntry first = new SuccessionEntry();
+                first.ProfileSelected = _settings.Profiles.ProfileList[0].Name;
+                _settings.Succession.SuccessionList.Add(first);
+            }
+            profCtrl.InitializeProfilesControl(_settings.Profiles, _settings.Succession);
             profCtrl.om.Settings = _settings;
             profCtrl.SelectedProfileInfo.ProfileUpdateEnd(); // Will fire event to write first output once after application start
 
@@ -338,12 +371,14 @@ namespace HitCounterManager
             // Store customizing..
             int TotalSplits, TotalActiveSplit, SuccessionHits, SuccessionHitsWay, SuccessionHitsPB;
             profCtrl.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out SuccessionHits, out SuccessionHitsWay, out SuccessionHitsPB, true);
-            _settings.SuccessionHits = SuccessionHits;       // obsolete since version 7 - keep for backwards compatibility
-            _settings.SuccessionHitsWay = SuccessionHitsWay; // obsolete since version 7 - keep for backwards compatibility
-            _settings.SuccessionHitsPB = SuccessionHitsPB;   // obsolete since version 7 - keep for backwards compatibility
+            _settings.SuccessionHits = SuccessionHits;                                          // obsolete since version 7 - keep for backwards compatibility
+            _settings.SuccessionHitsWay = SuccessionHitsWay;                                    // obsolete since version 7 - keep for backwards compatibility
+            _settings.SuccessionHitsPB = SuccessionHitsPB;                                      // obsolete since version 7 - keep for backwards compatibility
+            _settings.SuccessionTitle = _settings.Succession.HistorySplitTitle;                 // obsolete since version 7 - keep for backwards compatibility
+            _settings.Succession.SuccessionList[0].ProfileSelected = profCtrl.SelectedProfile; // TODO: Save all tab selections
 
             // Store profile data..
-            _settings.ProfileSelected = profCtrl.SelectedProfile;
+            _settings.ProfileSelected = _settings.Succession.SuccessionList[0].ProfileSelected; // obsolete since version 7 - keep for backwards compatibility
             _settings.Profiles.SaveProfile(profCtrl.SelectedProfileInfo); // Make sure all changes have been saved eventually (for safety)
 
             sm.WriteXML(_settings);
