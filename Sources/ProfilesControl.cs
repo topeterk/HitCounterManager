@@ -29,7 +29,6 @@ namespace HitCounterManager
     public partial class ProfilesControl : UserControl
     {
         private readonly int gpSuccession_Height;
-        private int SuccessionAttempts = 0;
         private Profiles profs;
         public readonly OutModule om;
 
@@ -90,12 +89,12 @@ namespace HitCounterManager
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public int CurrentAttempts
         {
-            get { return (ptc.SuccessionActive ? SuccessionAttempts : SelectedProfileInfo.AttemptsCount); }
+            get { return (ptc.SuccessionActive ? om.Settings.SuccessionAttempts : SelectedProfileInfo.AttemptsCount); }
             set
             {
                 if (ptc.SuccessionActive)
                 {
-                    SuccessionAttempts = value;
+                    om.Settings.SuccessionAttempts = value;
                     ProfileChangedHandler(this, null); // Notify about change as there is no profile which will do this for us
                 }
                 else
@@ -117,8 +116,10 @@ namespace HitCounterManager
         public event EventHandler<EventArgs> ProfileChanged;
         public void ProfileChangedHandler(object sender, EventArgs e)
         {
-            om.ShowSuccession = cbShowPredecessor.Checked;
-            om.SuccessionTitle = txtPredecessorTitle.Text;
+            if (null == om.Settings) return; // nothing to do during init
+
+            om.Settings.ShowSuccession = cbShowPredecessor.Checked;
+            om.Settings.SuccessionTitle = txtPredecessorTitle.Text;
 
             if (null != ProfileChanged) ProfileChanged(sender, e); // Fire event
 

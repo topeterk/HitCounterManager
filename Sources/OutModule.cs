@@ -43,38 +43,20 @@ namespace HitCounterManager
             OM_Severity_MAX = 3
         };
 
-        private string template = "";
-        private string _FilePathIn;
-        public string FilePathOut = null;
-
-        public bool ShowAttemptsCounter = true;
-        public bool ShowHeadline = true;
-        public bool ShowFooter = true;
-        public bool ShowSessionProgress = true;
-        public bool ShowProgressBar = true;
-        public int ShowSplitsCountFinished = 999;
-        public int ShowSplitsCountUpcoming = 999;
-        public bool ShowHitsCombined = true;
-        public bool ShowNumbers = true;
-        public bool ShowPB = true;
-        public OM_Purpose Purpose = OM_Purpose.OM_Purpose_SplitCounter;
-        public OM_Severity Severity = OM_Severity.OM_Severity_AnyHitsCritical;
-
-        public bool StyleUseHighContrast = false;
-        public bool StyleUseHighContrastNames = false;
-        public bool StyleUseRoman = false;
-        public bool StyleProgressBarColored = true;
-        public bool StyleUseCustom = false;
-        public string StyleCssUrl = "";
-        public string StyleFontUrl = "";
-        public string StyleFontName = "";
-        public int StyleDesiredWidth = 0;
-        public bool StyleSuperscriptPB = false;
-
-        public bool ShowSuccession = false;
-        public string SuccessionTitle = "";
+        public OM_Purpose Purpose
+        {
+            get { return (_settings.Purpose < (int)OM_Purpose.OM_Purpose_MAX ? (OM_Purpose)_settings.Purpose : OM_Purpose.OM_Purpose_SplitCounter); }
+            set { _settings.Purpose = (int)value; }
+        }
+        public OM_Severity Severity
+        {
+            get { return (_settings.Severity < (int)OM_Severity.OM_Severity_MAX ? (OM_Severity)_settings.Severity : OM_Severity.OM_Severity_AnyHitsCritical); }
+            set { _settings.Severity = (int)value; }
+        }
 
         private readonly ProfilesControl profCtrl;
+        private SettingsRoot _settings = null;
+        private string template = "";
 
         /// <summary>
         /// Bind object to a profile tab control
@@ -86,22 +68,32 @@ namespace HitCounterManager
         }
 
         /// <summary>
-        /// Read a file into buffer
+        /// Object binding to the user settings
         /// </summary>
-        public string FilePathIn
+        public SettingsRoot Settings
         {
-            get { return _FilePathIn; }
+            get { return _settings; }
             set
             {
-                _FilePathIn = value;
-
-                if (File.Exists(_FilePathIn))
-                {
-                    StreamReader sr = new StreamReader(_FilePathIn);
-                    template = sr.ReadToEnd();
-                    sr.Close();
-                }
+                _settings = value;
+                ReloadFileHandles();
             }
+        }
+
+        /// <summary>
+        /// Refreshes the file handles.
+        /// Call when _settings.Inputfile or _settings.OutputFile changes!
+        /// </summary>
+        public void ReloadFileHandles()
+        {
+            // Reload input file handle when possible
+            if (File.Exists(_settings.Inputfile))
+            {
+                StreamReader sr = new StreamReader(_settings.Inputfile);
+                template = sr.ReadToEnd();
+                sr.Close();
+            }
+            // Reload of output file handle not required, as it will be reopened on every read anyway
         }
 
         /// <summary>
@@ -151,14 +143,15 @@ namespace HitCounterManager
         {
             //Console.Beep(); // For debugging to check whenever output is beeing generated :)
 
-            if (null == FilePathOut) return;
+            if (null == _settings) return;
+            if (null == _settings.OutputFile) return;
 
             StreamWriter sr;
             bool IsWritingList = false; // Kept for old designs before version 1.10
             bool IsWritingJson = false;
             try
             {
-                sr = new StreamWriter(FilePathOut, false, System.Text.Encoding.Unicode); // UTF16LE
+                sr = new StreamWriter(_settings.OutputFile, false, System.Text.Encoding.Unicode); // UTF16LE
             }
             catch { return; }
             sr.NewLine = Environment.NewLine;
@@ -189,10 +182,10 @@ namespace HitCounterManager
                     sr.WriteLine("{");
 
                     sr.WriteLine("\"list\": [");
-                    if (ShowSuccession)
+                    if (_settings.ShowSuccession)
                     {
                         InjectedSplitCount++;
-                        sr.Write("[\"" + SimpleHtmlEscape(SuccessionTitle) + "\", " + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + "]");
+                        sr.Write("[\"" + SimpleHtmlEscape(_settings.SuccessionTitle) + "\", " + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + "]");
                         if (0 < iSplitCount) sr.WriteLine(","); // separator
                     }
                     for (int r = 0; r < iSplitCount; r++)
@@ -218,19 +211,19 @@ namespace HitCounterManager
                     //  5   5   5   5   5  <5>  5
                     //                  6   6  <6>
 
-                    if (active < ShowSplitsCountFinished) // A-C: less previous, more upcoming
+                    if (active < _settings.ShowSplitsCountFinished) // A-C: less previous, more upcoming
                     {
                         iSplitFirst = 0;
-                        iSplitLast = ShowSplitsCountUpcoming + ShowSplitsCountFinished;
+                        iSplitLast = _settings.ShowSplitsCountUpcoming + _settings.ShowSplitsCountFinished;
                     }
-                    else if (iSplitCount - active > ShowSplitsCountUpcoming) // D-E: previous and upcoming as it is
+                    else if (iSplitCount - active > _settings.ShowSplitsCountUpcoming) // D-E: previous and upcoming as it is
                     {
-                        iSplitFirst = active - ShowSplitsCountFinished;
-                        iSplitLast = active + ShowSplitsCountUpcoming;
+                        iSplitFirst = active - _settings.ShowSplitsCountFinished;
+                        iSplitLast = active + _settings.ShowSplitsCountUpcoming;
                     }
                     else // F-G: more previous, less upcoming
                     {
-                        iSplitFirst = iSplitCount - 1 - ShowSplitsCountUpcoming - ShowSplitsCountFinished;
+                        iSplitFirst = iSplitCount - 1 - _settings.ShowSplitsCountUpcoming - _settings.ShowSplitsCountFinished;
                         iSplitLast = iSplitCount - 1;
                     }
                     WriteJsonSimpleValue(sr, "split_active", active);
@@ -238,26 +231,26 @@ namespace HitCounterManager
                     WriteJsonSimpleValue(sr, "split_last", (iSplitCount <= iSplitLast ? iSplitCount-1 : iSplitLast));
 
                     WriteJsonSimpleValue(sr, "attempts", pi.AttemptsCount);
-                    WriteJsonSimpleValue(sr, "show_attempts", ShowAttemptsCounter);
-                    WriteJsonSimpleValue(sr, "show_headline", ShowHeadline);
-                    WriteJsonSimpleValue(sr, "show_footer", ShowFooter);
-                    WriteJsonSimpleValue(sr, "show_session_progress", ShowSessionProgress);
-                    WriteJsonSimpleValue(sr, "show_progress_bar", ShowProgressBar);
-                    WriteJsonSimpleValue(sr, "show_hitscombined", ShowHitsCombined);
-                    WriteJsonSimpleValue(sr, "show_numbers", ShowNumbers);
-                    WriteJsonSimpleValue(sr, "show_pb", ShowPB);
+                    WriteJsonSimpleValue(sr, "show_attempts", _settings.ShowAttemptsCounter);
+                    WriteJsonSimpleValue(sr, "show_headline", _settings.ShowHeadline);
+                    WriteJsonSimpleValue(sr, "show_footer", _settings.ShowFooter);
+                    WriteJsonSimpleValue(sr, "show_session_progress", _settings.ShowSessionProgress);
+                    WriteJsonSimpleValue(sr, "show_progress_bar", _settings.ShowProgressBar);
+                    WriteJsonSimpleValue(sr, "show_hitscombined", _settings.ShowHitsCombined);
+                    WriteJsonSimpleValue(sr, "show_numbers", _settings.ShowNumbers);
+                    WriteJsonSimpleValue(sr, "show_pb", _settings.ShowPB);
                     WriteJsonSimpleValue(sr, "purpose", (int)Purpose);
                     WriteJsonSimpleValue(sr, "severity", (int)Severity);
 
-                    WriteJsonSimpleValue(sr, "font_name", (StyleUseCustom ? StyleFontName : null));
-                    WriteJsonSimpleValue(sr, "font_url", (StyleUseCustom ? StyleFontUrl : ""));
-                    WriteJsonSimpleValue(sr, "css_url", (StyleUseCustom ? StyleCssUrl : "stylesheet.css"));
-                    WriteJsonSimpleValue(sr, "high_contrast", StyleUseHighContrast);
-                    WriteJsonSimpleValue(sr, "high_contrast_names", StyleUseHighContrastNames);
-                    WriteJsonSimpleValue(sr, "use_roman", StyleUseRoman);
-                    WriteJsonSimpleValue(sr, "progress_bar_colored", StyleProgressBarColored);
-                    WriteJsonSimpleValue(sr, "width", StyleDesiredWidth);
-                    WriteJsonSimpleValue(sr, "supPB", StyleSuperscriptPB);
+                    WriteJsonSimpleValue(sr, "font_name", (_settings.StyleUseCustom ? _settings.StyleFontName : null));
+                    WriteJsonSimpleValue(sr, "font_url", (_settings.StyleUseCustom ? _settings.StyleFontUrl : ""));
+                    WriteJsonSimpleValue(sr, "css_url", (_settings.StyleUseCustom ? _settings.StyleCssUrl : "stylesheet.css"));
+                    WriteJsonSimpleValue(sr, "high_contrast", _settings.StyleUseHighContrast);
+                    WriteJsonSimpleValue(sr, "high_contrast_names", _settings.StyleUseHighContrastNames);
+                    WriteJsonSimpleValue(sr, "use_roman", _settings.StyleUseRoman);
+                    WriteJsonSimpleValue(sr, "progress_bar_colored", _settings.StyleProgressBarColored);
+                    WriteJsonSimpleValue(sr, "width", _settings.StyleDesiredWidth);
+                    WriteJsonSimpleValue(sr, "supPB", _settings.StyleSuperscriptPB);
 
                     sr.WriteLine("}");
 

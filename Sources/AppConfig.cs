@@ -80,6 +80,7 @@ namespace HitCounterManager
         public int StyleDesiredWidth;
         public bool StyleSuperscriptPB;
         public string SuccessionTitle;
+        public int SuccessionAttempts;
         public int SuccessionHits;    // obsolete since version 7 - keep for backwards compatibility
         public int SuccessionHitsWay; // obsolete since version 7 - keep for backwards compatibility
         public int SuccessionHitsPB;  // obsolete since version 7 - keep for backwards compatibility
@@ -237,6 +238,7 @@ namespace HitCounterManager
                 _settings.MainPosX = this.Left;
                 _settings.MainPosY = this.Top;
                 _settings.StyleUseRoman = false;
+                _settings.SuccessionAttempts = 0;
                 // Introduced with false in version 6, keep user setting when this version was used
                 _settings.StyleProgressBarColored = (baseVersion == 6 ? false : true);
 
@@ -267,42 +269,7 @@ namespace HitCounterManager
                 _settings.Profiles.ProfileList.Add(unnamed);
             }
             profCtrl.InitializeProfilesControl(_settings.Profiles, _settings.ProfileSelected, _settings.SuccessionTitle, _settings.ShowSuccession);
-
-            // Load customizing..
-            OutModule om = profCtrl.om;
-            om.ShowAttemptsCounter = _settings.ShowAttemptsCounter;
-            om.ShowHeadline = _settings.ShowHeadline;
-            om.ShowFooter = _settings.ShowFooter;
-            om.ShowSessionProgress = _settings.ShowSessionProgress;
-            om.ShowProgressBar = _settings.ShowProgressBar;
-            om.ShowSplitsCountFinished = _settings.ShowSplitsCountFinished;
-            om.ShowSplitsCountUpcoming = _settings.ShowSplitsCountUpcoming;
-            om.ShowHitsCombined = _settings.ShowHitsCombined;
-            om.ShowNumbers = _settings.ShowNumbers;
-            om.ShowPB = _settings.ShowPB;
-            if (_settings.Purpose < (int)OutModule.OM_Purpose.OM_Purpose_MAX)
-                om.Purpose = (OutModule.OM_Purpose)_settings.Purpose;
-            else
-                om.Purpose = OutModule.OM_Purpose.OM_Purpose_SplitCounter;
-            if (_settings.Severity < (int)OutModule.OM_Severity.OM_Severity_MAX)
-                om.Severity = (OutModule.OM_Severity)_settings.Severity;
-            else
-                om.Severity = OutModule.OM_Severity.OM_Severity_AnyHitsCritical;
-
-            om.StyleUseHighContrast = _settings.StyleUseHighContrast;
-            om.StyleUseHighContrastNames = _settings.StyleUseHighContrastNames;
-            om.StyleUseRoman = _settings.StyleUseRoman;
-            om.StyleProgressBarColored = _settings.StyleProgressBarColored;
-            om.StyleUseCustom = _settings.StyleUseCustom;
-            om.StyleCssUrl = _settings.StyleCssUrl;
-            om.StyleFontUrl = _settings.StyleFontUrl;
-            om.StyleFontName = _settings.StyleFontName;
-            om.StyleDesiredWidth = _settings.StyleDesiredWidth;
-            om.StyleSuperscriptPB = _settings.StyleSuperscriptPB;
-
-            om.FilePathIn = _settings.Inputfile;
-            om.FilePathOut = _settings.OutputFile; // setting output filepath will allow writing output, so keep this line last
-
+            profCtrl.om.Settings = _settings;
             profCtrl.SelectedProfileInfo.ProfileUpdateEnd(); // Will fire event to write first output once after application start
 
             // Configure hot keys..
@@ -369,36 +336,6 @@ namespace HitCounterManager
             _settings.ShortcutPBKeyCode = (int)key.key.KeyData;
 
             // Store customizing..
-            OutModule om = profCtrl.om;
-            _settings.Inputfile = om.FilePathIn;
-            _settings.OutputFile = om.FilePathOut;
-
-            _settings.ShowAttemptsCounter = om.ShowAttemptsCounter;
-            _settings.ShowHeadline = om.ShowHeadline;
-            _settings.ShowFooter = om.ShowFooter;
-            _settings.ShowSessionProgress = om.ShowSessionProgress;
-            _settings.ShowProgressBar = om.ShowProgressBar;
-            _settings.ShowSplitsCountFinished = om.ShowSplitsCountFinished;
-            _settings.ShowSplitsCountUpcoming = om.ShowSplitsCountUpcoming;
-            _settings.ShowHitsCombined = om.ShowHitsCombined;
-            _settings.ShowNumbers = om.ShowNumbers;
-            _settings.ShowPB = om.ShowPB;
-            _settings.ShowSuccession = om.ShowSuccession;
-            _settings.Purpose = (int)om.Purpose;
-            _settings.Severity = (int)om.Severity;
-
-            _settings.StyleUseHighContrast = om.StyleUseHighContrast;
-            _settings.StyleUseHighContrastNames = om.StyleUseHighContrastNames;
-            _settings.StyleUseRoman = om.StyleUseRoman;
-            _settings.StyleProgressBarColored = om.StyleProgressBarColored;
-            _settings.StyleUseCustom = om.StyleUseCustom;
-            _settings.StyleCssUrl = om.StyleCssUrl;
-            _settings.StyleFontUrl = om.StyleFontUrl;
-            _settings.StyleFontName = om.StyleFontName;
-            _settings.StyleDesiredWidth = om.StyleDesiredWidth;
-            _settings.StyleSuperscriptPB = om.StyleSuperscriptPB;
-
-            _settings.SuccessionTitle = om.SuccessionTitle;
             int TotalSplits, TotalActiveSplit, SuccessionHits, SuccessionHitsWay, SuccessionHitsPB;
             profCtrl.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out SuccessionHits, out SuccessionHitsWay, out SuccessionHitsPB, true);
             _settings.SuccessionHits = SuccessionHits;       // obsolete since version 7 - keep for backwards compatibility
