@@ -173,6 +173,18 @@ namespace HitCounterManager
         /// <returns>Created instance</returns>
         public ProfileViewControl ProfileTabCreate()
         {
+            // Workaround: TabPage size calculation incorrect...
+            //   - first tab when created programmatically during Form init uses wrong TabPage size
+            //   - one can see then halting with debugger at next code line that tab sizes are different
+            //   - selected tab has correct size, info from: https://stackoverflow.com/questions/56242122/c-sharp-winforms-tabpage-size-and-clientsize-wrong
+            //   (same issue:) https://stackoverflow.com/questions/29939232/anchor-failed-with-tab-page
+            //   (same issue:) https://social.msdn.microsoft.com/Forums/en-US/6fa5e92a-8ab1-41cb-a348-23a8f3bad48c/problem-with-anchor-in-a-inherited-user-control?forum=netfxcompact
+            // Solution here: force Size of all tabs to be equal when creating a new one
+            //   (from: https://stackoverflow.com/questions/56242122/c-sharp-winforms-tabpage-size-and-clientsize-wrong )
+            System.Drawing.Size same = SelectedTab.Size;
+            for (int i = TabPages.Count - 1; 0 <= i; i--)
+                TabPages[i].Size = same;
+
             for (int i = TabPages.Count - 1; 0 <= i; i--)
             {
                 if (TabPages[i].Text.Equals("+")) // Search for "New" tab
@@ -193,11 +205,6 @@ namespace HitCounterManager
                     pvc_new.SelectedProfileChanged += PVC_SelectedProfileChangedHandler;
                     TabPages[i].Controls.Add(pvc_new);
                     TabPages.Insert(i + 1, "+");
-
-                    // TODO: when achieved to run, creating a new ProfileViewControl in a new tab sets wrong size for calculating acnchor points
-                    // https://stackoverflow.com/questions/29939232/anchor-failed-with-tab-page
-                    // https://social.msdn.microsoft.com/Forums/en-US/6fa5e92a-8ab1-41cb-a348-23a8f3bad48c/problem-with-anchor-in-a-inherited-user-control?forum=netfxcompact
-                    // Visual Studio Designer bug?
 
                     ProfileTabSelectedHandler(pvc_new, ProfileTabSelectAction.Created);
                     return pvc_new;
