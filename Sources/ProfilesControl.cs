@@ -156,10 +156,10 @@ namespace HitCounterManager
 
         public void ProfileNew()
         {
-            string Name = VisualBasic.Interaction.InputBox("Enter name of new profile", "New profile", SelectedProfile);
-            if (Name.Length == 0) return;
+            string NameNew = VisualBasic.Interaction.InputBox("Enter name of new profile", "New profile", SelectedProfile);
+            if (NameNew.Length == 0) return;
 
-            if (profs.HasProfile(Name))
+            if (profs.HasProfile(NameNew))
             {
                 MessageBox.Show("A profile with this name already exists!", "Profile already exists", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
@@ -170,7 +170,7 @@ namespace HitCounterManager
             // Apply on all tabs
             foreach (ProfileViewControl pvc_tab in ptc.ProfileViewControls)
             {
-                pvc_tab.CreateNewProfile(Name, (pvc_tab == SelectedProfileViewControl)); // Select only for the current tab
+                pvc_tab.CreateNewProfile(NameNew, (pvc_tab == SelectedProfileViewControl), false); // Select only for the current tab
             }
         }
         public void ProfileRename()
@@ -199,13 +199,13 @@ namespace HitCounterManager
         {
             profs.SaveProfile(SelectedProfileViewControl.ProfileInfo); // save previous selected profile
 
-            string NameNew = SelectedProfileViewControl.CopySelectedProfile(); // Apply on foreground tab
+            string NameNew = SelectedProfile;
+            do { NameNew += " COPY"; } while (profs.HasProfile(NameNew)); // extend name till it becomes unique
 
             // Apply on all tabs
             foreach (ProfileViewControl pvc_tab in ptc.ProfileViewControls)
             {
-                if (pvc_tab == SelectedProfileViewControl) continue; // Skip current tab
-                pvc_tab.CreateNewProfile(NameNew, false);
+                pvc_tab.CreateNewProfile(NameNew, (pvc_tab == SelectedProfileViewControl), true); // Select only for the current tab
             }
         }
         public void ProfileDelete()

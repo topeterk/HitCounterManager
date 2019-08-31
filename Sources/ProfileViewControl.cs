@@ -33,7 +33,7 @@ namespace HitCounterManager
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public IProfileInfo ProfileInfo { get { return pi; } }
 
-        public enum SelectedProfileChangedCauseType { Select, Init, Create, Copy, Rename, Delete };
+        public enum SelectedProfileChangedCauseType { Select, Init, Create, Rename, Delete };
 
         private SelectedProfileChangedCauseType SelectedProfileChangedCause = SelectedProfileChangedCauseType.Select;
 
@@ -78,7 +78,7 @@ namespace HitCounterManager
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
         }
 
-        public void CreateNewProfile(string NameNew, bool Select)
+        public void CreateNewProfile(string NameNew, bool Select, bool AsCopy)
         {
             SelectedProfileChangedCauseType SelectedProfileChangedCausePrev = SelectedProfileChangedCause;
             SelectedProfileChangedCause = SelectedProfileChangedCauseType.Create;
@@ -89,29 +89,11 @@ namespace HitCounterManager
             {
                 // Select and reset new profile..
                 pi.ProfileName = NameNew;
-                pi.ClearSplits();
+                if (!AsCopy) pi.ClearSplits(); // Clear profile when it shall not be copied
                 SelectedProfile = NameNew;
             }
 
             SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
-        }
-
-        public string CopySelectedProfile()
-        {
-            SelectedProfileChangedCauseType SelectedProfileChangedCausePrev = SelectedProfileChangedCause;
-            SelectedProfileChangedCause = SelectedProfileChangedCauseType.Copy;
-
-            string Name = SelectedProfile;
-            do { Name += " COPY"; } while (ComboBox1.Items.Contains(Name)); // extend name till it becomes unique
-
-            // create, select and save new profile..
-            ComboBox1.Items.Add(Name);
-            pi.ProfileName = Name;
-            SelectedProfile = Name;
-
-            SelectedProfileChangedCause = SelectedProfileChangedCausePrev;
-
-            return Name;
         }
 
         public void RenameProfile(string NameOld, string NameNew)
