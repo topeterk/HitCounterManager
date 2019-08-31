@@ -76,6 +76,7 @@ namespace HitCounterManager
                         // Remove tab but we still need one regular, the "New" and "Delete tabs.
                         if (3 < TabPages.Count)
                         {
+                            ProfileTabSelectedHandler((ProfileViewControl)TabPageDragDrop.Controls["pvc"], ProfileTabSelectAction.Deleting);
                             TabPages.Remove(TabPageDragDrop);
 
                             for (int i = TabPages.Count - 3; 0 <= i; i--)
@@ -109,6 +110,7 @@ namespace HitCounterManager
                 // Switch tabs but retain numbering
                 int Index1 = TabPages.IndexOf(TabPageDragDrop);
                 int Index2 = TabPages.IndexOf(hover_Tab);
+                ProfileTabPermutingHandler(this, new Tuple<int, int>(Index1, Index2));
                 TabPages[Index1] = hover_Tab;
                 TabPages[Index2] = TabPageDragDrop;
                 hover_Tab.Text = (Index1+1).ToString();
@@ -150,6 +152,61 @@ namespace HitCounterManager
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public ProfileViewControl SelectedProfileViewControl { get; private set; }
 
+        /// <summary>
+        /// Fetches the tab index of the given object
+        /// </summary>
+        /// <param name="pvc">Object to search for</param>
+        /// <returns>-1 on failure, otherwise tab index</returns>
+        public int IndexOf(ProfileViewControl pvc)
+        {
+            for (int i = 0; i < TabPages.Count; i++)
+            {
+                if ((ProfileViewControl)TabPages[i].Controls["pvc"] == pvc)
+                    return i;
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// Creates a new ProfileViewControl in a new tab
+        /// </summary>
+        /// <returns>Created instance</returns>
+        public ProfileViewControl ProfileTabCreate()
+        {
+            for (int i = TabPages.Count - 1; 0 <= i; i--)
+            {
+                if (TabPages[i].Text.Equals("+")) // Search for "New" tab
+                {
+                    Control template = TabPages[i-1].Controls["pvc"];
+
+                    // Reuse the "New" tab for the actual new page and create an new "New" tab (skips tab selection)
+                    TabPages[i].Text = (i + 1).ToString();
+
+                    // Fill controls of the tab
+                    ProfileViewControl pvc_new = new ProfileViewControl();
+                    pvc_new.Anchor = template.Anchor;
+                    pvc_new.Location = template.Location;
+                    pvc_new.Name = "pvc";
+                    pvc_new.Size = template.Size;
+                    pvc_new.TabIndex = 0;
+                    pvc_new.ProfileInfo.ProfileChanged += PVC_ProfileChangedHandler;
+                    pvc_new.SelectedProfileChanged += PVC_SelectedProfileChangedHandler;
+                    TabPages[i].Controls.Add(pvc_new);
+                    TabPages.Insert(i + 1, "+");
+
+                    // TODO: when achieved to run, creating a new ProfileViewControl in a new tab sets wrong size for calculating acnchor points
+                    // https://stackoverflow.com/questions/29939232/anchor-failed-with-tab-page
+                    // https://social.msdn.microsoft.com/Forums/en-US/6fa5e92a-8ab1-41cb-a348-23a8f3bad48c/problem-with-anchor-in-a-inherited-user-control?forum=netfxcompact
+                    // Visual Studio Designer bug?
+
+                    ProfileTabSelectedHandler(pvc_new, ProfileTabSelectAction.Created);
+                    return pvc_new;
+                }
+            }
+
+            return null;
+        }
+
         public void TabSelectingHandler(object sender, TabControlCancelEventArgs e)
         {
             if (e.TabPage.Text.Equals("-")) // Switch to tab?
@@ -180,38 +237,27 @@ namespace HitCounterManager
                     }
                 }
 
-                Control template = TabPages[0].Controls["pvc"];
-                TabPage page = e.TabPage;
-
-                // Reuse the "New" tab for the actual new page and create an new "New" tab
-                page.Text = (e.TabPageIndex + 1).ToString();
-                TabPages.Insert(e.TabPageIndex + 1, "+");
-
-                // Fill controls of the tab
-                ProfileViewControl pvc_new = new ProfileViewControl();
-                pvc_new.Anchor = template.Anchor;
-                pvc_new.Location = template.Location;
-                pvc_new.Name = "pvc";
-                pvc_new.Size = template.Size;
-                pvc_new.TabIndex = 0;
-                pvc_new.ProfileInfo.ProfileChanged += PVC_ProfileChangedHandler;
-                pvc_new.SelectedProfileChanged += PVC_SelectedProfileChangedHandler;
-                page.Controls.Add(pvc_new);
-                
-                ProfileTabSelectedHandler(pvc_new, ProfileTabSelectAction.Created);
+                SelectedProfileViewControl = ProfileTabCreate(); // Create and redirect interaction to selected tab
             }
-
-            // Switch interaction to selected tab
-            SelectedProfileViewControl = (ProfileViewControl)e.TabPage.Controls["pvc"];
+            else SelectedProfileViewControl = (ProfileViewControl)e.TabPage.Controls["pvc"]; // redirect interaction to selected tab
 
             ProfileTabSelectedHandler(SelectedProfileViewControl, ProfileTabSelectAction.Selected);
         }
-        
-        public enum ProfileTabSelectAction { Selecting, Created, Selected };
+
+        public enum ProfileTabSelectAction { Selecting, Created, Selected, Deleting };
         public event EventHandler<ProfileTabSelectAction> ProfileTabSelect;
         public void ProfileTabSelectedHandler(ProfileViewControl sender, ProfileTabSelectAction action)
         {
             if (null != ProfileTabSelect) ProfileTabSelect(sender, action); // Fire event
+        }
+
+        /// <summary>
+        /// When two tabs will change their places.
+        /// </summary>
+        public event EventHandler<Tuple<int, int>> ProfileTabPermuting;
+        public void ProfileTabPermutingHandler(object sender, Tuple<int, int> indices)
+        {
+            if (null != ProfileTabPermuting) ProfileTabPermuting(sender, indices); // Fire event
         }
 
         public event EventHandler<EventArgs> ProfileChanged;

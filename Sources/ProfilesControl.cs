@@ -32,10 +32,18 @@ namespace HitCounterManager
         private Profiles profs;
         private Succession succession;
         public readonly OutModule om;
+        private bool Ready = false;
 
         public ProfilesControl()
         {
             InitializeComponent();
+
+            // Workaround: Should be done by designer but...
+            //   - event is not showing up in the event list
+            //   - when added by hand: changing anything in the designer a non-compileable method gets created (unspecified Tuple):
+            //        public void ProfileTabPermuting(object sender, Tuple e)
+            // Solution here: add event handler after the designer's code manually
+            ptc.ProfileTabPermuting += ProfileTabPermuting;
 
             om = new OutModule(this);
 
@@ -108,17 +116,27 @@ namespace HitCounterManager
             profs = profiles;
             succession = Succession;
 
+            // As the designer is used, we have at least one tab already existing, so just fill it.
+            // All further tabs must be created..
             SelectedProfileViewControl.SetProfileList(profs.GetProfileList(), succession.SuccessionList[0].ProfileSelected);
+            for (int i = 1; i < succession.SuccessionList.Count; i++)
+            {
+                // Load profiles into succession entry and select current profile
+                ptc.ProfileTabCreate().SetProfileList(profs.GetProfileList(), succession.SuccessionList[i].ProfileSelected);
+            }
+            ptc.SelectTab(succession.ActiveIndex);
             SelectedProfileInfo.SetSessionProgress(0, true);
 
             if (null != succession.HistorySplitTitle) txtPredecessorTitle.Text = succession.HistorySplitTitle;
             cbShowPredecessor.Checked = succession.HistorySplitVisible;
+
+            Ready = true;
         }
 
         public event EventHandler<EventArgs> ProfileChanged;
         public void ProfileChangedHandler(object sender, EventArgs e)
         {
-            if (null == om.Settings) return; // nothing to do during init
+            if (!Ready) return;
 
             succession.HistorySplitVisible = cbShowPredecessor.Checked;
             succession.HistorySplitTitle = txtPredecessorTitle.Text;
@@ -136,10 +154,20 @@ namespace HitCounterManager
                 profs.SaveProfile(pvc_sender.ProfileInfo); // save currently selected profile
             }
             profs.LoadProfile(pvc_sender.SelectedProfile, pvc_sender.ProfileInfo);
+            succession.SuccessionList[ptc.IndexOf(pvc_sender)].ProfileSelected = pvc_sender.SelectedProfile;
         }
   
+        public void ProfileTabPermuting(object sender, Tuple<int, int> indices)
+        {
+            SuccessionEntry tmp = succession.SuccessionList[indices.Item1];
+            succession.SuccessionList[indices.Item1] = succession.SuccessionList[indices.Item2];
+            succession.SuccessionList[indices.Item2] = tmp;
+        }
+
         private void ProfileTabSelect(object sender, ProfileTabControl.ProfileTabSelectAction action)
         {
+            if (!Ready) return;
+
             ProfileViewControl pvc_sender = (ProfileViewControl)sender;
             switch (action)
             {
@@ -148,9 +176,15 @@ namespace HitCounterManager
                     break;
                 case ProfileTabControl.ProfileTabSelectAction.Created:
                     pvc_sender.SetProfileList(profs.GetProfileList(), null);
+                    succession.SuccessionList.Add(new SuccessionEntry()); // Adds new succession entry without profile selection
+                    succession.ActiveIndex = ptc.IndexOf(pvc_sender);
                     break;
                 case ProfileTabControl.ProfileTabSelectAction.Selected:
                     profs.LoadProfile(pvc_sender.ProfileInfo.ProfileName, pvc_sender.ProfileInfo);
+                    succession.ActiveIndex = ptc.IndexOf(pvc_sender);
+                    break;
+                case ProfileTabControl.ProfileTabSelectAction.Deleting:
+                    succession.SuccessionList.RemoveAt(ptc.IndexOf(pvc_sender));
                     break;
                 default: break;
             }

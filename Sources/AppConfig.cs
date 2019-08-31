@@ -41,6 +41,7 @@ namespace HitCounterManager
     [Serializable]
     public class Succession
     {
+        public int ActiveIndex = 0;
         public int Attempts = 0;
         public string HistorySplitTitle = "Previous";
         public bool HistorySplitVisible = false;
@@ -267,14 +268,6 @@ namespace HitCounterManager
                 _settings.StyleProgressBarColored = (baseVersion == 6 ? false : true);
             }
 
-            // Validate succession
-            for (int i = _settings.Succession.SuccessionList.Count - 1; 0 <= i; i--)
-            {
-                // Remove entries with no selected profile
-                if (null == _settings.Succession.SuccessionList[i].ProfileSelected)
-                    _settings.Succession.SuccessionList.RemoveAt(i);
-            }
-
             // Apply settings..
 
             // Setup window appearance..
@@ -301,6 +294,7 @@ namespace HitCounterManager
                 first.ProfileSelected = _settings.Profiles.ProfileList[0].Name;
                 _settings.Succession.SuccessionList.Add(first);
             }
+            if (_settings.Succession.SuccessionList.Count <= _settings.Succession.ActiveIndex) _settings.Succession.ActiveIndex = 0;
             profCtrl.InitializeProfilesControl(_settings.Profiles, _settings.Succession);
             profCtrl.om.Settings = _settings;
             profCtrl.SelectedProfileInfo.ProfileUpdateEnd(); // Will fire event to write first output once after application start
@@ -375,10 +369,9 @@ namespace HitCounterManager
             _settings.SuccessionHitsWay = SuccessionHitsWay;                                    // obsolete since version 7 - keep for backwards compatibility
             _settings.SuccessionHitsPB = SuccessionHitsPB;                                      // obsolete since version 7 - keep for backwards compatibility
             _settings.SuccessionTitle = _settings.Succession.HistorySplitTitle;                 // obsolete since version 7 - keep for backwards compatibility
-            _settings.Succession.SuccessionList[0].ProfileSelected = profCtrl.SelectedProfile; // TODO: Save all tab selections
 
             // Store profile data..
-            _settings.ProfileSelected = _settings.Succession.SuccessionList[0].ProfileSelected; // obsolete since version 7 - keep for backwards compatibility
+            _settings.ProfileSelected = profCtrl.SelectedProfile; // obsolete since version 7 - keep for backwards compatibility
             _settings.Profiles.SaveProfile(profCtrl.SelectedProfileInfo); // Make sure all changes have been saved eventually (for safety)
 
             sm.WriteXML(_settings);
