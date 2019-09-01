@@ -67,6 +67,14 @@ namespace HitCounterManager
             SelectedProfileChangedCauseType SelectedProfileChangedCausePrev = SelectedProfileChangedCause;
             SelectedProfileChangedCause = SelectedProfileChangedCauseType.Init;
 
+            // Workaround: Mono's scaling calculation results in wrong size
+            //  - placement off for the PVC that already existed (due to designer initialization)
+            //  - the new PVC copies are ok that were not selected during init
+            //  - the new PVC copies are too small when tab was selected during init
+            // Solution: Overwrite own calculated size again
+            DataGridView1.Width = Width;
+            DataGridView1.Height = Height - DataGridView1.Top;
+
             ComboBox1.Items.AddRange(ProfileNames);
             if (ComboBox1.Items.Count == 0)
             {
