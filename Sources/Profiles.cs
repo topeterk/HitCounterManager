@@ -47,6 +47,10 @@ namespace HitCounterManager
         public int Attempts;
         public int ActiveSplit;
         public List<ProfileRow> Rows = new List<ProfileRow>();
+
+        private int _SessionProgress = 0; // private as it should not be serialized
+        public int GetSessionProgress() { return _SessionProgress; }
+        public void SetSessionProgress(int value) { _SessionProgress = value; }
     }
 
     /// <summary>
@@ -117,7 +121,7 @@ namespace HitCounterManager
                 }
                 pi_dst.ActiveSplit = prof.ActiveSplit;
             }
-            pi_dst.SetSessionProgress(0);
+            pi_dst.SetSessionProgress(prof.GetSessionProgress(), true);
             pi_dst.ProfileUpdateEnd();
         }
 
@@ -154,6 +158,7 @@ namespace HitCounterManager
                 ProfileRow.PB = pi_src.GetSplitPB(r);
                 prof.Rows.Add(ProfileRow);
             }
+            prof.SetSessionProgress(pi_src.GetSessionProgress());
         }
 
         /// <summary>
