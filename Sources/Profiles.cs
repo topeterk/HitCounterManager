@@ -120,8 +120,9 @@ namespace HitCounterManager
                     pi_dst.AddSplit(row.Title, row.Hits, row.WayHits, row.PB);
                 }
                 pi_dst.ActiveSplit = prof.ActiveSplit;
+                pi_dst.SetSessionProgress(prof.GetSessionProgress(), true);
             }
-            pi_dst.SetSessionProgress(prof.GetSessionProgress(), true);
+            else pi_dst.SetSessionProgress(0, true);
             pi_dst.ProfileUpdateEnd();
         }
 

@@ -76,13 +76,23 @@ namespace HitCounterManager
                         // Remove tab but we still need one regular, the "New" and "Delete tabs.
                         if (3 < TabPages.Count)
                         {
+                            // Mono workaround: Selection required otherwise empty tab will be shown after deletion
+                            // Solution: Select last available tab (as it gets shifted due to deletion
+                            //           This way we force TabControl to re-select tab upon deletion
+                            SelectedIndex = TabPages.Count-3;
+
+                            int index = TabPages.IndexOf(TabPageDragDrop);
                             ProfileTabSelectedHandler((ProfileViewControl)TabPageDragDrop.Controls["pvc"], ProfileTabSelectAction.Deleting);
-                            TabPages.Remove(TabPageDragDrop);
+                            TabPages.RemoveAt(index);
 
                             for (int i = TabPages.Count - 3; 0 <= i; i--)
                             {
                                 TabPages[i].Text = (i + 1).ToString(); // Update tab names
                             }
+
+                            // Mono workaround: Selection required otherwise empty tab will be shown after deletion
+                            // Solution: Due to new selection the tab will be loaded properly again and no empty page is shown
+                            SelectedIndex = (index == 0 ? 0 : index-1); 
                         }
                     }
                 }
@@ -111,8 +121,19 @@ namespace HitCounterManager
                 int Index1 = TabPages.IndexOf(TabPageDragDrop);
                 int Index2 = TabPages.IndexOf(hover_Tab);
                 ProfileTabPermutingHandler(this, new Tuple<int, int>(Index1, Index2));
-                TabPages[Index1] = hover_Tab;
-                TabPages[Index2] = TabPageDragDrop;
+
+                // How to swtich tabs...
+                // - Just overwrite the references to the pages at the specific indicies:
+                //   On Windows working solution but will remove entries using Mono.
+                //       TabPages[Index1] = hover_Tab;
+                //       TabPages[Index2] = TabPageDragDrop;
+                // - Modifying index of one to move it around:
+                //   On Mono working solution, but on Windows it seems it does not update order in TabPages
+                //       Controls.SetChildIndex(hover_Tab, Index1);
+                // - Be pragmatic and remove one tab and insert it at the new position again: works..
+                TabPages.RemoveAt(Index1);
+                TabPages.Insert(Index2, TabPageDragDrop);
+
                 hover_Tab.Text = (Index1+1).ToString();
                 TabPageDragDrop.Text = (Index2+1).ToString();
                 SelectedTab = TabPageDragDrop;

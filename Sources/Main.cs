@@ -51,7 +51,7 @@ namespace HitCounterManager
         /// <param name="RectSize">Minimum size of the windows's title bar that must be visible.</param>
         /// <returns>TRUE = Window's title bar is visible on at least one screen.
         ///          FALSE = Window is not visible on any screen.</returns>
-        public static bool IsOnScreen(in int Left, in int Top, in int Width, in int Threshold = 10, in int RectSize = 30)
+        public static bool IsOnScreen(int Left, int Top, int Width, int Threshold = 10, int RectSize = 30)
         {
             System.Drawing.Rectangle rectLeft = new System.Drawing.Rectangle(Left + Threshold, Top + Threshold, RectSize, RectSize); // upper left corner
             System.Drawing.Rectangle rectRight = new System.Drawing.Rectangle(Left + Width - Threshold - RectSize, Top + Threshold, RectSize, RectSize); // upper right corner

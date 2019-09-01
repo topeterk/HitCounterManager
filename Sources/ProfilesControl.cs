@@ -246,10 +246,10 @@ namespace HitCounterManager
         }
         public void ProfileDelete()
         {
-            string Name = SelectedProfile;
-            if (DialogResult.OK == MessageBox.Show("Do you really want to delete profile \"" + Name + "\"?", "Deleting profile", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
+            string NameDel = SelectedProfile;
+            if (DialogResult.OK == MessageBox.Show("Do you really want to delete profile \"" + NameDel + "\"?", "Deleting profile", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
             {
-                profs.DeleteProfile(Name);
+                profs.DeleteProfile(NameDel);
 
                 // Apply on all tabs
                 foreach (ProfileViewControl pvc_tab in ptc.ProfileViewControls)
@@ -257,7 +257,7 @@ namespace HitCounterManager
                     if (pvc_tab == SelectedProfileViewControl)
                         SelectedProfileViewControl.DeleteSelectedProfile(); // Apply on foreground tab: Remove profile and select next one (if any)
                     else
-                        pvc_tab.DeleteProfile(Name); // background tab: Remove profile and if was selected, unselect
+                        pvc_tab.DeleteProfile(NameDel); // background tab: Remove profile and if was selected, unselect
                 }
 
                 // profile was changed by deletion, so we load the newly selected profile
