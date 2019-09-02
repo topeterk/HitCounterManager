@@ -230,7 +230,7 @@ namespace HitCounterManager
                     WriteJsonSimpleValue(sr, "split_first", (iSplitFirst < 0 ? 0 : iSplitFirst));
                     WriteJsonSimpleValue(sr, "split_last", (iSplitCount <= iSplitLast ? iSplitCount-1 : iSplitLast));
 
-                    WriteJsonSimpleValue(sr, "attempts", pi.AttemptsCount);
+                    WriteJsonSimpleValue(sr, "attempts", profCtrl.CurrentAttempts);
                     WriteJsonSimpleValue(sr, "show_attempts", _settings.ShowAttemptsCounter);
                     WriteJsonSimpleValue(sr, "show_headline", _settings.ShowHeadline);
                     WriteJsonSimpleValue(sr, "show_footer", _settings.ShowFooter);
