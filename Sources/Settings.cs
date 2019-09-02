@@ -29,7 +29,8 @@ namespace HitCounterManager
     public partial class Settings : Form
     {
         private Shortcuts sc;
-        private OutModule om = null;
+        private OutModule om;
+        private SettingsRoot _settings;
         private bool IsFormLoaded = false;
 
         #region Form
@@ -42,7 +43,8 @@ namespace HitCounterManager
         private void Settings_Load(object sender, EventArgs e)
         {
             sc = ((Form1)Owner).sc;
-            om = ((Form1)Owner).om;
+            om = ((Form1)Owner).profCtrl.om;
+            _settings = om.Settings;
 
             LoadHotKey(Shortcuts.SC_Type.SC_Type_Reset, cbScReset, txtReset);
             LoadHotKey(Shortcuts.SC_Type.SC_Type_Hit, cbScHit, txtHit);
@@ -63,28 +65,28 @@ namespace HitCounterManager
             }
 
             // Style
-            numStyleDesiredWidth.Value = om.StyleDesiredWidth;
-            cbHighContrast.Checked = om.StyleUseHighContrast;
-            cbHighContrastNames.Checked = om.StyleUseHighContrastNames;
-            cbUseRoman.Checked = om.StyleUseRoman;
-            cbProgressBarColored.Checked = !om.StyleProgressBarColored;
-            cbSuperscriptPB.Checked = om.StyleSuperscriptPB;
-            cbApCustomCss.Checked = om.StyleUseCustom;
-            txtCssUrl.Text = om.StyleCssUrl;
-            txtFontUrl.Text = om.StyleFontUrl;
-            txtFontName.Text = om.StyleFontName;
+            numStyleDesiredWidth.Value = _settings.StyleDesiredWidth;
+            cbHighContrast.Checked = _settings.StyleUseHighContrast;
+            cbHighContrastNames.Checked = _settings.StyleUseHighContrastNames;
+            cbUseRoman.Checked = _settings.StyleUseRoman;
+            cbProgressBarColored.Checked = !_settings.StyleProgressBarColored;
+            cbSuperscriptPB.Checked = _settings.StyleSuperscriptPB;
+            cbApCustomCss.Checked = _settings.StyleUseCustom;
+            txtCssUrl.Text = _settings.StyleCssUrl;
+            txtFontUrl.Text = _settings.StyleFontUrl;
+            txtFontName.Text = _settings.StyleFontName;
 
             // Behavior
-            cbShowAttempts.Checked = om.ShowAttemptsCounter;
-            cbShowHeadline.Checked = om.ShowHeadline;
-            cbShowFooter.Checked = om.ShowFooter;
-            cbShowSessionProgress.Checked = om.ShowSessionProgress;
-            cbShowProgressBar.Checked = om.ShowProgressBar;
-            numShowSplitsCountFinished.Value = om.ShowSplitsCountFinished;
-            numShowSplitsCountUpcoming.Value = om.ShowSplitsCountUpcoming;
-            cbShowHitsCombined.Checked = om.ShowHitsCombined;
-            cbShowNumbers.Checked = om.ShowNumbers;
-            cbShowPB.Checked = om.ShowPB;
+            cbShowAttempts.Checked = _settings.ShowAttemptsCounter;
+            cbShowHeadline.Checked = _settings.ShowHeadline;
+            cbShowFooter.Checked = _settings.ShowFooter;
+            cbShowSessionProgress.Checked = _settings.ShowSessionProgress;
+            cbShowProgressBar.Checked = _settings.ShowProgressBar;
+            numShowSplitsCountFinished.Value = _settings.ShowSplitsCountFinished;
+            numShowSplitsCountUpcoming.Value = _settings.ShowSplitsCountUpcoming;
+            cbShowHitsCombined.Checked = _settings.ShowHitsCombined;
+            cbShowNumbers.Checked = _settings.ShowNumbers;
+            cbShowPB.Checked = _settings.ShowPB;
             radioPurposeChecklist.Checked = (om.Purpose == OutModule.OM_Purpose.OM_Purpose_Checklist);
             radioPurposeDeathCounter.Checked = (om.Purpose == OutModule.OM_Purpose.OM_Purpose_DeathCounter);
             radioPurposeSplitCounter.Checked = (om.Purpose == OutModule.OM_Purpose.OM_Purpose_SplitCounter);
@@ -93,8 +95,8 @@ namespace HitCounterManager
             radioSeverityAnyHitCritical.Checked = (om.Severity == OutModule.OM_Severity.OM_Severity_AnyHitsCritical);
 
             // Filepaths
-            txtInput.Text = om.FilePathIn;
-            txtOutput.Text = om.FilePathOut;
+            txtInput.Text = _settings.Inputfile;
+            txtOutput.Text = _settings.OutputFile;
 
             ApplyAppearance(sender, null);
             IsFormLoaded = true;
@@ -156,24 +158,24 @@ namespace HitCounterManager
             if (!IsFormLoaded) return;
 
             // Style
-            om.StyleUseHighContrast = cbHighContrast.Checked;
-            om.StyleUseHighContrastNames = cbHighContrastNames.Checked;
-            om.StyleUseRoman = cbUseRoman.Checked;
-            om.StyleProgressBarColored = !cbProgressBarColored.Checked;
-            om.StyleSuperscriptPB = cbSuperscriptPB.Checked;
-            om.StyleDesiredWidth = (int)numStyleDesiredWidth.Value;
+            _settings.StyleUseHighContrast = cbHighContrast.Checked;
+            _settings.StyleUseHighContrastNames = cbHighContrastNames.Checked;
+            _settings.StyleUseRoman = cbUseRoman.Checked;
+            _settings.StyleProgressBarColored = !cbProgressBarColored.Checked;
+            _settings.StyleSuperscriptPB = cbSuperscriptPB.Checked;
+            _settings.StyleDesiredWidth = (int)numStyleDesiredWidth.Value;
 
             // Behavior
-            om.ShowAttemptsCounter = cbShowAttempts.Checked;
-            om.ShowHeadline = cbShowHeadline.Checked;
-            om.ShowFooter = cbShowFooter.Checked;
-            om.ShowSessionProgress = cbShowSessionProgress.Checked;
-            om.ShowProgressBar = cbShowProgressBar.Checked;
-            om.ShowSplitsCountFinished = (int)numShowSplitsCountFinished.Value;
-            om.ShowSplitsCountUpcoming = (int)numShowSplitsCountUpcoming.Value;
-            om.ShowHitsCombined = cbShowHitsCombined.Checked;
-            om.ShowNumbers = cbShowNumbers.Checked;
-            om.ShowPB = cbShowPB.Checked;
+            _settings.ShowAttemptsCounter = cbShowAttempts.Checked;
+            _settings.ShowHeadline = cbShowHeadline.Checked;
+            _settings.ShowFooter = cbShowFooter.Checked;
+            _settings.ShowSessionProgress = cbShowSessionProgress.Checked;
+            _settings.ShowProgressBar = cbShowProgressBar.Checked;
+            _settings.ShowSplitsCountFinished = (int)numShowSplitsCountFinished.Value;
+            _settings.ShowSplitsCountUpcoming = (int)numShowSplitsCountUpcoming.Value;
+            _settings.ShowHitsCombined = cbShowHitsCombined.Checked;
+            _settings.ShowNumbers = cbShowNumbers.Checked;
+            _settings.ShowPB = cbShowPB.Checked;
             if (radioPurposeChecklist.Checked)
                 om.Purpose = OutModule.OM_Purpose.OM_Purpose_Checklist;
             else if (radioPurposeDeathCounter.Checked)
@@ -236,7 +238,8 @@ namespace HitCounterManager
             string Filename = AskForFilename(txtInput.Text, "*.template", "Templates (*.template)|*.template|All files (*.*)|*.*");
             if (null != Filename)
             {
-                om.FilePathIn = txtInput.Text = Filename;
+                _settings.Inputfile = txtInput.Text = Filename;
+                om.ReloadFileHandles();
                 om.Update();
             }
         }
@@ -246,7 +249,8 @@ namespace HitCounterManager
             string Filename = AskForFilename(txtOutput.Text, "*.html", "HTML (*.html)|*.html|All files (*.*)|*.*");
             if (null != Filename)
             {
-                om.FilePathOut = txtOutput.Text = Filename;
+                _settings.OutputFile = txtOutput.Text = Filename;
+                om.ReloadFileHandles();
                 om.Update();
             }
         }
@@ -259,10 +263,10 @@ namespace HitCounterManager
 
         private void btnApApply_Click(object sender, EventArgs e)
         {
-            om.StyleUseCustom = cbApCustomCss.Checked;
-            om.StyleCssUrl = txtCssUrl.Text;
-            om.StyleFontUrl = txtFontUrl.Text;
-            om.StyleFontName = txtFontName.Text;
+            _settings.StyleUseCustom = cbApCustomCss.Checked;
+            _settings.StyleCssUrl = txtCssUrl.Text;
+            _settings.StyleFontUrl = txtFontUrl.Text;
+            _settings.StyleFontName = txtFontName.Text;
             ApplyAppearance(sender, e);
         }
 

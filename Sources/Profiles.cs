@@ -47,6 +47,10 @@ namespace HitCounterManager
         public int Attempts;
         public int ActiveSplit;
         public List<ProfileRow> Rows = new List<ProfileRow>();
+
+        private int _SessionProgress = 0; // private as it should not be serialized
+        public int GetSessionProgress() { return _SessionProgress; }
+        public void SetSessionProgress(int value) { _SessionProgress = value; }
     }
 
     /// <summary>
@@ -55,15 +59,8 @@ namespace HitCounterManager
     [Serializable]
     public class Profiles
     {
-        private IProfileInfo _pi = null;
         private List<Profile> _Profiles = new List<Profile>();
         public List<Profile> ProfileList { get { return _Profiles; } } // used by XML serialization!
-
-        /// <summary>
-        /// Set the profile info interface that will be used for all operations
-        /// </summary>
-        /// <param name="pi">Interface to Profile Info</param>
-        public void SetProfileInfo(IProfileInfo pi) { _pi = pi; }
 
         /// <summary>
         /// Checks if a profile with given name exists and gets its instance
@@ -85,7 +82,7 @@ namespace HitCounterManager
         /// <summary>
         /// Returns a list of all available internally cached profile names
         /// </summary>
-        public object[] GetProfileList()
+        public string[] GetProfileList()
         {
             List<string> ret = new List<string>();
             foreach (Profile prof in _Profiles) ret.Add(prof.Name);
@@ -93,66 +90,76 @@ namespace HitCounterManager
         }
 
         /// <summary>
+        /// Checks if a profile with given name exists
+        /// </summary>
+        public bool HasProfile(string Name)
+        {
+            Profile prof;
+            return _FindProfile(Name, out prof);
+        }
+
+        /// <summary>
         /// Updates profile info based on a specific internally cached profile.
         /// </summary>
         /// <param name="Name">Name of profile that gets loaded</param>
-        public void LoadProfile(string Name)
+        /// <param name="pi_dst">Target ProfileInfo interface</param>
+        public void LoadProfile(string Name, IProfileInfo pi_dst)
         {
-            if (null == _pi) return; // just for safety should never happen
+            if (null == pi_dst) return; // just for safety should never happen
 
             Profile prof;
-            _pi.ProfileUpdateBegin();
-            _pi.ProfileName = Name;
-            _pi.AttemptsCount = 0;
-            _pi.ClearSplits();
+            pi_dst.ProfileUpdateBegin();
+            pi_dst.ProfileName = Name;
+            pi_dst.AttemptsCount = 0;
+            pi_dst.ClearSplits();
             if (_FindProfile(Name, out prof))
             {
-                _pi.AttemptsCount = prof.Attempts;
+                pi_dst.AttemptsCount = prof.Attempts;
                 foreach (ProfileRow row in prof.Rows)
                 {
-                    _pi.AddSplit(row.Title, row.Hits, row.WayHits, row.PB);
+                    pi_dst.AddSplit(row.Title, row.Hits, row.WayHits, row.PB);
                 }
-                _pi.ActiveSplit = prof.ActiveSplit;
+                pi_dst.ActiveSplit = prof.ActiveSplit;
+                pi_dst.SetSessionProgress(prof.GetSessionProgress(), true);
             }
-            _pi.SetSessionProgress(0);
-            _pi.ProfileUpdateEnd();
+            else pi_dst.SetSessionProgress(0, true);
+            pi_dst.ProfileUpdateEnd();
         }
 
         /// <summary>
         /// Updates internally cached profile with data from profile info
         /// </summary>
-        /// <param name="AllowCreation">True allows to add a new profile when it does not exist in cache already</param>
-        public void SaveProfile(bool AllowCreation)
+        /// <param name="pi_src">Source ProfileInfo interface</param>
+        public void SaveProfile(IProfileInfo pi_src)
         {
-            if (null == _pi) return; // just for safety should never happen
-            if (null == _pi.ProfileName) return;
+            if (null == pi_src) return; // just for safety should never happen
+            if (null == pi_src.ProfileName) return;
 
             Profile prof;
 
             // look for existing one and create if not exists
-            if (!_FindProfile(_pi.ProfileName, out prof))
+            if (!_FindProfile(pi_src.ProfileName, out prof))
             {
-                if (!AllowCreation) return;
-
                 prof = new Profile();
-                prof.Name = _pi.ProfileName;
+                prof.Name = pi_src.ProfileName;
                 _Profiles.Add(prof);
             }
 
             prof.Rows.Clear();
 
             // collecting data, nom nom nom
-            prof.Attempts = _pi.AttemptsCount;
-            prof.ActiveSplit = _pi.ActiveSplit;
-            for (int r = 0; r < _pi.SplitCount; r++)
+            prof.Attempts = pi_src.AttemptsCount;
+            prof.ActiveSplit = pi_src.ActiveSplit;
+            for (int r = 0; r < pi_src.SplitCount; r++)
             {
                 ProfileRow ProfileRow = new ProfileRow();
-                ProfileRow.Title = _pi.GetSplitTitle(r);
-                ProfileRow.Hits = _pi.GetSplitHits(r);
-                ProfileRow.WayHits = _pi.GetSplitWayHits(r);
-                ProfileRow.PB = _pi.GetSplitPB(r);
+                ProfileRow.Title = pi_src.GetSplitTitle(r);
+                ProfileRow.Hits = pi_src.GetSplitHits(r);
+                ProfileRow.WayHits = pi_src.GetSplitWayHits(r);
+                ProfileRow.PB = pi_src.GetSplitPB(r);
                 prof.Rows.Add(ProfileRow);
             }
+            prof.SetSessionProgress(pi_src.GetSessionProgress());
         }
 
         /// <summary>
@@ -238,7 +245,7 @@ namespace HitCounterManager
         /// Modifies the currently selected split
         /// </summary>
         /// <param name="Amount">Amount of splits that will be moved forwards/backwards</param>
-        void MoveSplits(int Amount);
+        void GoSplits(int Amount);
         /// <summary>
         /// Interchange of two data rows
         /// </summary>

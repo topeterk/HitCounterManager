@@ -21,10 +21,33 @@
 //SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace HitCounterManager
 {
+    /// <summary>
+    /// Content of XML stored user data (succession entry)
+    /// </summary>
+    [Serializable]
+    public class SuccessionEntry
+    {
+        public string ProfileSelected;
+    }
+
+    /// <summary>
+    /// Content of XML stored user data (succession)
+    /// </summary>
+    [Serializable]
+    public class Succession
+    {
+        public int ActiveIndex = 0;
+        public int Attempts = 0;
+        public string HistorySplitTitle = "Previous";
+        public bool HistorySplitVisible = false;
+        public List<SuccessionEntry> SuccessionList = new List<SuccessionEntry>();
+    }
+
     /// <summary>
     /// Content of XML stored user data (settings)
     /// </summary>
@@ -66,7 +89,7 @@ namespace HitCounterManager
         public bool ShowHitsCombined;
         public bool ShowNumbers;
         public bool ShowPB;
-        public bool ShowSuccession;
+        public bool ShowSuccession; // obsolete since version 7 - keep for backwards compatibility (use Succession.HistorySplitVisible instead)
         public int Purpose;
         public int Severity;
         public bool StyleUseHighContrast;
@@ -79,12 +102,13 @@ namespace HitCounterManager
         public string StyleFontName;
         public int StyleDesiredWidth;
         public bool StyleSuperscriptPB;
-        public string SuccessionTitle;
-        public int SuccessionHits;
-        public int SuccessionHitsWay;
-        public int SuccessionHitsPB;
-        public string ProfileSelected;
-        public Profiles Profiles;
+        public string SuccessionTitle; // obsolete since version 7 - keep for backwards compatibility (use Succession.SuccessionTitle instead)
+        public int SuccessionHits;     // obsolete since version 7 - keep for backwards compatibility (will be calculated, now)
+        public int SuccessionHitsWay;  // obsolete since version 7 - keep for backwards compatibility (will be calculated, now)
+        public int SuccessionHitsPB;   // obsolete since version 7 - keep for backwards compatibility (will be calculated, now)
+        public Succession Succession = new Succession();
+        public string ProfileSelected; // obsolete since version 7 - keep for backwards compatibility (use Succession.SuccessionList[0].ProfileSelected instead)
+        public Profiles Profiles = new Profiles();
     }
 
     public partial class Form1 : Form
@@ -147,7 +171,6 @@ namespace HitCounterManager
                 _settings.Inputfile = "HitCounter.template";
                 _settings.OutputFile = "HitCounter.html";
                 _settings.ProfileSelected = "Unnamed";
-                _settings.Profiles = new Profiles();
             }
             if (_settings.Version == 0) // Coming from version 1.9 or older
             {
@@ -232,21 +255,52 @@ namespace HitCounterManager
             if (_settings.Version == 6) // Coming from version 1.18
             {
                 _settings.Version = 7;
+                _settings.MainWidth += 6; // added tabs (6)
+                _settings.MainHeight += 27; // added tabs (27)
                 _settings.MainPosX = this.Left;
                 _settings.MainPosY = this.Top;
                 _settings.StyleUseRoman = false;
+                // Create succession with only one entry (there was only one available in older versions)
+                SuccessionEntry suc_entry = new SuccessionEntry();
+                suc_entry.ProfileSelected = _settings.ProfileSelected;
+                _settings.Succession.SuccessionList.Add(suc_entry);
                 // Introduced with false in version 6, keep user setting when this version was used
                 _settings.StyleProgressBarColored = (baseVersion == 6 ? false : true);
             }
 
             // Apply settings..
-            sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
-            profs = _settings.Profiles;
-            profs.SetProfileInfo(pi);
 
-            this.ComboBox1.Items.AddRange(profs.GetProfileList());
-            if (this.ComboBox1.Items.Count == 0) this.ComboBox1.Items.Add("Unnamed");
-            this.ComboBox1.SelectedItem = _settings.ProfileSelected;
+            // Setup window appearance..
+            if (_settings.MainWidth < this.MinimumSize.Width) _settings.MainWidth = this.MinimumSize.Width;
+            if (_settings.MainHeight < this.MinimumSize.Height) _settings.MainHeight = this.MinimumSize.Height;
+            // set window size and when possible also set location (just make sure window is not outside of screen)
+            this.SetBounds(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth, _settings.MainHeight,
+                Program.IsOnScreen(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth) ? BoundsSpecified.All : BoundsSpecified.Size);
+            SetAlwaysOnTop(_settings.AlwaysOnTop);
+
+            // Load profile data..
+            profCtrl.SelectedProfileInfo.ProfileUpdateBegin();
+            if (_settings.Profiles.ProfileList.Count == 0)
+            {
+                // There is no profile at all, initially create a clean one
+                Profile unnamed = new Profile();
+                unnamed.Name = "Unnamed";
+                _settings.Profiles.ProfileList.Add(unnamed);
+            }
+            if (_settings.Succession.SuccessionList.Count == 0)
+            {
+                // There is no succession at all create an empty succession
+                SuccessionEntry first = new SuccessionEntry();
+                first.ProfileSelected = _settings.Profiles.ProfileList[0].Name;
+                _settings.Succession.SuccessionList.Add(first);
+            }
+            if (_settings.Succession.SuccessionList.Count <= _settings.Succession.ActiveIndex) _settings.Succession.ActiveIndex = 0;
+            profCtrl.InitializeProfilesControl(_settings.Profiles, _settings.Succession);
+            profCtrl.om.Settings = _settings;
+            profCtrl.SelectedProfileInfo.ProfileUpdateEnd(); // Will fire event to write first output once after application start
+
+            // Configure hot keys..
+            sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
 
             if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Reset, _settings.ShortcutResetKeyCode , _settings.ShortcutResetEnable)) isKeyInvalid = true;
             if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Hit, _settings.ShortcutHitKeyCode , _settings.ShortcutHitEnable)) isKeyInvalid = true;
@@ -258,50 +312,6 @@ namespace HitCounterManager
             if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_PB, _settings.ShortcutPBKeyCode , _settings.ShortcutPBEnable)) isKeyInvalid = true;
             if (isKeyInvalid)
                 MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
-
-            pi.SetSessionProgress(0, true);
-            SetSuccession(_settings.SuccessionHits, _settings.SuccessionHitsWay, _settings.SuccessionHitsPB, _settings.SuccessionTitle, _settings.ShowSuccession);
-            SuccessionChanged(null, null);
-
-            if (_settings.MainWidth < this.MinimumSize.Width) _settings.MainWidth = this.MinimumSize.Width;
-            if (_settings.MainHeight < this.MinimumSize.Height) _settings.MainHeight = this.MinimumSize.Height;
-            // set window size and when possible also set location (just make sure window is not outside of screen)
-            this.SetBounds(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth, _settings.MainHeight,
-                IsOnScreen(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth, _settings.MainHeight) ? BoundsSpecified.All : BoundsSpecified.Size);
-            SetAlwaysOnTop(_settings.AlwaysOnTop);
-
-            om.ShowAttemptsCounter = _settings.ShowAttemptsCounter;
-            om.ShowHeadline = _settings.ShowHeadline;
-            om.ShowFooter = _settings.ShowFooter;
-            om.ShowSessionProgress = _settings.ShowSessionProgress;
-            om.ShowProgressBar = _settings.ShowProgressBar;
-            om.ShowSplitsCountFinished = _settings.ShowSplitsCountFinished;
-            om.ShowSplitsCountUpcoming = _settings.ShowSplitsCountUpcoming;
-            om.ShowHitsCombined = _settings.ShowHitsCombined;
-            om.ShowNumbers = _settings.ShowNumbers;
-            om.ShowPB = _settings.ShowPB;
-            if (_settings.Purpose < (int)OutModule.OM_Purpose.OM_Purpose_MAX)
-                om.Purpose = (OutModule.OM_Purpose)_settings.Purpose;
-            else
-                om.Purpose = OutModule.OM_Purpose.OM_Purpose_SplitCounter;
-            if (_settings.Severity < (int)OutModule.OM_Severity.OM_Severity_MAX)
-                om.Severity = (OutModule.OM_Severity)_settings.Severity;
-            else
-                om.Severity = OutModule.OM_Severity.OM_Severity_AnyHitsCritical;
-
-            om.StyleUseHighContrast = _settings.StyleUseHighContrast;
-            om.StyleUseHighContrastNames = _settings.StyleUseHighContrastNames;
-            om.StyleUseRoman = _settings.StyleUseRoman;
-            om.StyleProgressBarColored = _settings.StyleProgressBarColored;
-            om.StyleUseCustom = _settings.StyleUseCustom;
-            om.StyleCssUrl = _settings.StyleCssUrl;
-            om.StyleFontUrl = _settings.StyleFontUrl;
-            om.StyleFontName = _settings.StyleFontName;
-            om.StyleDesiredWidth = _settings.StyleDesiredWidth;
-            om.StyleSuperscriptPB = _settings.StyleSuperscriptPB;
-
-            om.FilePathIn = _settings.Inputfile;
-            om.FilePathOut = _settings.OutputFile; // setting output filepath will allow writing output, so keep this line last
         }
 
         /// <summary>
@@ -311,11 +321,12 @@ namespace HitCounterManager
         {
             ShortcutsKey key = new ShortcutsKey();
 
+            // Remember window position and sates
             if (this.WindowState == FormWindowState.Normal) // Don't save window size and location when maximized or minimized
             {
                 _settings.MainWidth = this.Width;
-                _settings.MainHeight = this.Height - gpSuccession.Height + gpSuccession_Height; // always save expandend values
-                if (IsOnScreen(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth, _settings.MainHeight))
+                _settings.MainHeight = this.Height;
+                if (Program.IsOnScreen(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth))
                 {
                     // remember values when not outside of screen
                     _settings.MainPosX = this.Left;
@@ -323,6 +334,8 @@ namespace HitCounterManager
                 }
             }
             _settings.AlwaysOnTop = this.TopMost;
+
+            // Store hot keys..
             _settings.HotKeyMethod = (int)sc.NextStart_Method;
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Reset);
             _settings.ShortcutResetEnable = key.used;
@@ -349,43 +362,17 @@ namespace HitCounterManager
             _settings.ShortcutPBEnable = key.used;
             _settings.ShortcutPBKeyCode = (int)key.key.KeyData;
 
-            _settings.Inputfile = om.FilePathIn;
-            _settings.OutputFile = om.FilePathOut;
+            // Store customizing..
+            int TotalSplits, TotalActiveSplit, SuccessionHits, SuccessionHitsWay, SuccessionHitsPB;
+            profCtrl.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out SuccessionHits, out SuccessionHitsWay, out SuccessionHitsPB, true);
+            _settings.SuccessionHits = SuccessionHits;                                          // obsolete since version 7 - keep for backwards compatibility
+            _settings.SuccessionHitsWay = SuccessionHitsWay;                                    // obsolete since version 7 - keep for backwards compatibility
+            _settings.SuccessionHitsPB = SuccessionHitsPB;                                      // obsolete since version 7 - keep for backwards compatibility
+            _settings.SuccessionTitle = _settings.Succession.HistorySplitTitle;                 // obsolete since version 7 - keep for backwards compatibility
 
-            _settings.ShowAttemptsCounter = om.ShowAttemptsCounter;
-            _settings.ShowHeadline = om.ShowHeadline;
-            _settings.ShowFooter = om.ShowFooter;
-            _settings.ShowSessionProgress = om.ShowSessionProgress;
-            _settings.ShowProgressBar = om.ShowProgressBar;
-            _settings.ShowSplitsCountFinished = om.ShowSplitsCountFinished;
-            _settings.ShowSplitsCountUpcoming = om.ShowSplitsCountUpcoming;
-            _settings.ShowHitsCombined = om.ShowHitsCombined;
-            _settings.ShowNumbers = om.ShowNumbers;
-            _settings.ShowPB = om.ShowPB;
-            _settings.ShowSuccession = om.ShowSuccession;
-            _settings.Purpose = (int)om.Purpose;
-            _settings.Severity = (int)om.Severity;
-
-            _settings.StyleUseHighContrast = om.StyleUseHighContrast;
-            _settings.StyleUseHighContrastNames = om.StyleUseHighContrastNames;
-            _settings.StyleUseRoman = om.StyleUseRoman;
-            _settings.StyleProgressBarColored = om.StyleProgressBarColored;
-            _settings.StyleUseCustom = om.StyleUseCustom;
-            _settings.StyleCssUrl = om.StyleCssUrl;
-            _settings.StyleFontUrl = om.StyleFontUrl;
-            _settings.StyleFontName = om.StyleFontName;
-            _settings.StyleDesiredWidth = om.StyleDesiredWidth;
-            _settings.StyleSuperscriptPB = om.StyleSuperscriptPB;
-
-            _settings.SuccessionTitle = om.SuccessionTitle;
-            _settings.SuccessionHits = om.SuccessionHits;
-            _settings.SuccessionHitsWay = om.SuccessionHitsWay;
-            _settings.SuccessionHitsPB = om.SuccessionHitsPB;
-
-            _settings.ProfileSelected = (string)ComboBox1.SelectedItem;
-
-            profs.SaveProfile(false); // Make sure all changes have been saved eventually
-            _settings.Profiles = profs;
+            // Store profile data..
+            _settings.ProfileSelected = profCtrl.SelectedProfile; // obsolete since version 7 - keep for backwards compatibility
+            _settings.Profiles.SaveProfile(profCtrl.SelectedProfileInfo); // Make sure all changes have been saved eventually (for safety)
 
             sm.WriteXML(_settings);
         }
