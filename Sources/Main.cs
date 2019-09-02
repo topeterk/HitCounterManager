@@ -27,6 +27,10 @@ namespace HitCounterManager
 {
     static class Program
     {
+        // Debug symbol that can be used in every scope:
+        // Example: ((ProfilesControl)Program.main.Controls["profCtrl"]).ProfileTabControl.ProfileViewControls[2].ProfileInfo.ActiveSplit
+        private static Form main;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -35,7 +39,8 @@ namespace HitCounterManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            main = new Form1();
+            Application.Run(main);
         }
 
         /// <summary>
