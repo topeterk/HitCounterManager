@@ -116,19 +116,20 @@ namespace HitCounterManager
             profs = profiles;
             succession = Succession;
 
-            // As the designer is used, we have at least one tab already existing, so just fill it.
-            // All further tabs must be created..
-            SelectedProfileViewControl.SetProfileList(profs.GetProfileList(), succession.SuccessionList[0].ProfileSelected);
+            // As the designer is used, we have at least one tab already existing, so only further tabs must be created
             for (int i = 1; i < succession.SuccessionList.Count; i++)
-            {
-                // Load profiles into succession entry and select current profile
-                ptc.ProfileTabCreate().SetProfileList(profs.GetProfileList(), succession.SuccessionList[i].ProfileSelected);
-            }
-            ptc.SelectTab(succession.ActiveIndex);
-            SelectedProfileInfo.SetSessionProgress(0, true);
+                ptc.ProfileTabCreate();
 
+            // Load profile lists into all tabs and select previous selected profiles
+            for (int i = 0; i < succession.SuccessionList.Count; i++)
+                ptc.ProfileViewControls[i].SetProfileList(profs.GetProfileList(), succession.SuccessionList[i].ProfileSelected);
+
+            // Initialize succession settings
             if (null != succession.HistorySplitTitle) txtPredecessorTitle.Text = succession.HistorySplitTitle;
             cbShowPredecessor.Checked = succession.HistorySplitVisible;
+
+            // Select the last user selected tab
+            ptc.SelectTab(succession.ActiveIndex);
 
             Ready = true;
         }

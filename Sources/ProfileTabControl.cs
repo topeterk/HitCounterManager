@@ -224,6 +224,14 @@ namespace HitCounterManager
                     pvc_new.TabIndex = 0;
                     pvc_new.ProfileInfo.ProfileChanged += PVC_ProfileChangedHandler;
                     pvc_new.SelectedProfileChanged += PVC_SelectedProfileChangedHandler;
+
+                    // Workaround: Controls contained in a TabPage are not created until the tab page is shown,
+                    //             and any data bindings in these controls are not activated until the tab page is shown.
+                    //             (see: https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.tabpage?redirectedfrom=MSDN&view=netframework-4.8 )
+                    // Solution: Temporarily add the control to an already visible tab in order to properly create the control
+                    TabPages[0].Controls.Add(pvc_new);
+                    TabPages[0].Controls.Remove(pvc_new);
+
                     TabPages[i].Controls.Add(pvc_new);
                     TabPages.Insert(i + 1, "+");
 
