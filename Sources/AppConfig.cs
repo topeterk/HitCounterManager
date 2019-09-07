@@ -248,7 +248,7 @@ namespace HitCounterManager
                 _settings.AlwaysOnTop = false;
 
                 // Only enable progress bar when new settings were created
-                _settings.ShowSessionProgress = (baseVersion < 0 ? true : false);
+                _settings.ShowProgressBar = (baseVersion < 0 ? true : false);
                 // Introduced with true in version 5, keep user setting when this version was used
                 _settings.StyleProgressBarColored = (baseVersion == 5 ? true : false);
             }
