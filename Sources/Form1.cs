@@ -55,6 +55,7 @@ namespace HitCounterManager
             Text = Text + " - v" + Application.ProductVersion + " " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();
+            UpdateProgressAndTotals(sender, e);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
