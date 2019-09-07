@@ -77,6 +77,7 @@
             this.cbShowFooter = new System.Windows.Forms.CheckBox();
             this.cbSuperscriptPB = new System.Windows.Forms.CheckBox();
             this.cbShowProgressBar = new System.Windows.Forms.CheckBox();
+            this.cbSuccessionToProgressBar = new System.Windows.Forms.CheckBox();
             this.cbProgressBarColored = new System.Windows.Forms.CheckBox();
             this.tab_behavior = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -169,7 +170,7 @@
             // Label9
             // 
             this.Label9.AutoSize = true;
-            this.Label9.Location = new System.Drawing.Point(147, 186);
+            this.Label9.Location = new System.Drawing.Point(147, 209);
             this.Label9.Name = "Label9";
             this.Label9.Size = new System.Drawing.Size(82, 13);
             this.Label9.TabIndex = 5;
@@ -177,7 +178,7 @@
             // 
             // numShowSplitsCountUpcoming
             // 
-            this.numShowSplitsCountUpcoming.Location = new System.Drawing.Point(84, 184);
+            this.numShowSplitsCountUpcoming.Location = new System.Drawing.Point(84, 207);
             this.numShowSplitsCountUpcoming.Maximum = new decimal(new int[] {
             999,
             0,
@@ -185,7 +186,7 @@
             0});
             this.numShowSplitsCountUpcoming.Name = "numShowSplitsCountUpcoming";
             this.numShowSplitsCountUpcoming.Size = new System.Drawing.Size(57, 20);
-            this.numShowSplitsCountUpcoming.TabIndex = 9;
+            this.numShowSplitsCountUpcoming.TabIndex = 10;
             this.ToolTip1.SetToolTip(this.numShowSplitsCountUpcoming, "Hide splits that are coming later to spare space");
             this.numShowSplitsCountUpcoming.Value = new decimal(new int[] {
             999,
@@ -197,7 +198,7 @@
             // Label10
             // 
             this.Label10.AutoSize = true;
-            this.Label10.Location = new System.Drawing.Point(3, 186);
+            this.Label10.Location = new System.Drawing.Point(3, 209);
             this.Label10.Name = "Label10";
             this.Label10.Size = new System.Drawing.Size(75, 13);
             this.Label10.TabIndex = 3;
@@ -206,7 +207,7 @@
             // Label8
             // 
             this.Label8.AutoSize = true;
-            this.Label8.Location = new System.Drawing.Point(147, 160);
+            this.Label8.Location = new System.Drawing.Point(147, 183);
             this.Label8.Name = "Label8";
             this.Label8.Size = new System.Drawing.Size(72, 13);
             this.Label8.TabIndex = 2;
@@ -214,7 +215,7 @@
             // 
             // numShowSplitsCountFinished
             // 
-            this.numShowSplitsCountFinished.Location = new System.Drawing.Point(84, 158);
+            this.numShowSplitsCountFinished.Location = new System.Drawing.Point(84, 181);
             this.numShowSplitsCountFinished.Maximum = new decimal(new int[] {
             999,
             0,
@@ -222,7 +223,7 @@
             0});
             this.numShowSplitsCountFinished.Name = "numShowSplitsCountFinished";
             this.numShowSplitsCountFinished.Size = new System.Drawing.Size(57, 20);
-            this.numShowSplitsCountFinished.TabIndex = 8;
+            this.numShowSplitsCountFinished.TabIndex = 9;
             this.ToolTip1.SetToolTip(this.numShowSplitsCountFinished, "Hide splits that are done already to spare space");
             this.numShowSplitsCountFinished.Value = new decimal(new int[] {
             999,
@@ -234,7 +235,7 @@
             // Label3
             // 
             this.Label3.AutoSize = true;
-            this.Label3.Location = new System.Drawing.Point(3, 160);
+            this.Label3.Location = new System.Drawing.Point(3, 183);
             this.Label3.Name = "Label3";
             this.Label3.Size = new System.Drawing.Size(71, 13);
             this.Label3.TabIndex = 0;
@@ -265,7 +266,7 @@
             this.tab_globalshortcuts.Location = new System.Drawing.Point(4, 22);
             this.tab_globalshortcuts.Name = "tab_globalshortcuts";
             this.tab_globalshortcuts.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.tab_globalshortcuts.Size = new System.Drawing.Size(588, 251);
+            this.tab_globalshortcuts.Size = new System.Drawing.Size(588, 274);
             this.tab_globalshortcuts.TabIndex = 0;
             this.tab_globalshortcuts.Text = "Global shortcuts";
             this.tab_globalshortcuts.UseVisualStyleBackColor = true;
@@ -597,10 +598,10 @@
             this.cbShowNumbers.AutoSize = true;
             this.cbShowNumbers.Checked = true;
             this.cbShowNumbers.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowNumbers.Location = new System.Drawing.Point(6, 111);
+            this.cbShowNumbers.Location = new System.Drawing.Point(6, 134);
             this.cbShowNumbers.Name = "cbShowNumbers";
             this.cbShowNumbers.Size = new System.Drawing.Size(247, 17);
-            this.cbShowNumbers.TabIndex = 6;
+            this.cbShowNumbers.TabIndex = 7;
             this.cbShowNumbers.Text = "Show numbers, no images (Numeric vs YesNo)";
             this.ToolTip1.SetToolTip(this.cbShowNumbers, "Show the actual hit count instead of images");
             this.cbShowNumbers.UseVisualStyleBackColor = true;
@@ -611,10 +612,10 @@
             this.cbShowHitsCombined.AutoSize = true;
             this.cbShowHitsCombined.Checked = true;
             this.cbShowHitsCombined.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowHitsCombined.Location = new System.Drawing.Point(6, 88);
+            this.cbShowHitsCombined.Location = new System.Drawing.Point(6, 111);
             this.cbShowHitsCombined.Name = "cbShowHitsCombined";
             this.cbShowHitsCombined.Size = new System.Drawing.Size(214, 17);
-            this.cbShowHitsCombined.TabIndex = 5;
+            this.cbShowHitsCombined.TabIndex = 6;
             this.cbShowHitsCombined.Text = "Show hits combined (boss and way hits)";
             this.ToolTip1.SetToolTip(this.cbShowHitsCombined, "Show boss and way hits either separately or combined");
             this.cbShowHitsCombined.UseVisualStyleBackColor = true;
@@ -701,7 +702,7 @@
             this.cbShowProgressBar.AutoSize = true;
             this.cbShowProgressBar.Checked = true;
             this.cbShowProgressBar.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowProgressBar.Location = new System.Drawing.Point(146, 65);
+            this.cbShowProgressBar.Location = new System.Drawing.Point(6, 88);
             this.cbShowProgressBar.Name = "cbShowProgressBar";
             this.cbShowProgressBar.Size = new System.Drawing.Size(114, 17);
             this.cbShowProgressBar.TabIndex = 4;
@@ -709,6 +710,22 @@
             this.ToolTip1.SetToolTip(this.cbShowProgressBar, "Displays a progress bar to represent the percentage of splits already done\r\n");
             this.cbShowProgressBar.UseVisualStyleBackColor = true;
             this.cbShowProgressBar.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // cbSuccessionToProgressBar
+            // 
+            this.cbSuccessionToProgressBar.AutoSize = true;
+            this.cbSuccessionToProgressBar.Checked = true;
+            this.cbSuccessionToProgressBar.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbSuccessionToProgressBar.Location = new System.Drawing.Point(146, 88);
+            this.cbSuccessionToProgressBar.Name = "cbSuccessionToProgressBar";
+            this.cbSuccessionToProgressBar.Size = new System.Drawing.Size(110, 17);
+            this.cbSuccessionToProgressBar.TabIndex = 5;
+            this.cbSuccessionToProgressBar.Text = "Track succession";
+            this.ToolTip1.SetToolTip(this.cbSuccessionToProgressBar, "When selected the progress bar is based on the succession (all tabs with all sele" +
+        "cted profiles).\r\nNot selected the progress bar shows only the currently selected" +
+        " profile.\r\n");
+            this.cbSuccessionToProgressBar.UseVisualStyleBackColor = true;
+            this.cbSuccessionToProgressBar.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // cbProgressBarColored
             // 
@@ -730,7 +747,7 @@
             this.tab_behavior.Location = new System.Drawing.Point(4, 22);
             this.tab_behavior.Name = "tab_behavior";
             this.tab_behavior.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.tab_behavior.Size = new System.Drawing.Size(588, 251);
+            this.tab_behavior.Size = new System.Drawing.Size(588, 274);
             this.tab_behavior.TabIndex = 1;
             this.tab_behavior.Text = "Behavior";
             this.tab_behavior.UseVisualStyleBackColor = true;
@@ -738,6 +755,7 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.cbShowProgressBar);
+            this.groupBox5.Controls.Add(this.cbSuccessionToProgressBar);
             this.groupBox5.Controls.Add(this.lblShowSplitCount);
             this.groupBox5.Controls.Add(this.cbShowFooter);
             this.groupBox5.Controls.Add(this.cbShowPB);
@@ -754,7 +772,7 @@
             this.groupBox5.Controls.Add(this.numShowSplitsCountFinished);
             this.groupBox5.Location = new System.Drawing.Point(215, 13);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(367, 232);
+            this.groupBox5.Size = new System.Drawing.Size(367, 255);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Features";
@@ -762,7 +780,7 @@
             // lblShowSplitCount
             // 
             this.lblShowSplitCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblShowSplitCount.Location = new System.Drawing.Point(235, 160);
+            this.lblShowSplitCount.Location = new System.Drawing.Point(235, 183);
             this.lblShowSplitCount.Name = "lblShowSplitCount";
             this.lblShowSplitCount.Size = new System.Drawing.Size(126, 44);
             this.lblShowSplitCount.TabIndex = 9;
@@ -774,10 +792,10 @@
             this.cbShowPB.AutoSize = true;
             this.cbShowPB.Checked = true;
             this.cbShowPB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowPB.Location = new System.Drawing.Point(6, 135);
+            this.cbShowPB.Location = new System.Drawing.Point(6, 158);
             this.cbShowPB.Name = "cbShowPB";
             this.cbShowPB.Size = new System.Drawing.Size(142, 17);
-            this.cbShowPB.TabIndex = 7;
+            this.cbShowPB.TabIndex = 8;
             this.cbShowPB.Text = "Show personal best (PB)";
             this.cbShowPB.UseVisualStyleBackColor = true;
             this.cbShowPB.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
@@ -789,7 +807,7 @@
             this.groupBox4.Controls.Add(this.radioPurposeSplitCounter);
             this.groupBox4.Location = new System.Drawing.Point(6, 13);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 114);
+            this.groupBox4.Size = new System.Drawing.Size(200, 124);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Purpose";
@@ -834,9 +852,9 @@
             this.groupBox2.Controls.Add(this.radioSeverityBossHitCritical);
             this.groupBox2.Controls.Add(this.radioSeverityComparePB);
             this.groupBox2.Controls.Add(this.radioSeverityAnyHitCritical);
-            this.groupBox2.Location = new System.Drawing.Point(6, 133);
+            this.groupBox2.Location = new System.Drawing.Point(6, 143);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 112);
+            this.groupBox2.Size = new System.Drawing.Size(200, 125);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Hit severity (color) within a single split";
@@ -854,7 +872,7 @@
             this.tab_filepaths.Location = new System.Drawing.Point(4, 22);
             this.tab_filepaths.Name = "tab_filepaths";
             this.tab_filepaths.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.tab_filepaths.Size = new System.Drawing.Size(588, 251);
+            this.tab_filepaths.Size = new System.Drawing.Size(588, 274);
             this.tab_filepaths.TabIndex = 2;
             this.tab_filepaths.Text = "Filepaths";
             this.tab_filepaths.UseVisualStyleBackColor = true;
@@ -946,7 +964,7 @@
             this.TabControl1.Location = new System.Drawing.Point(12, 12);
             this.TabControl1.Name = "TabControl1";
             this.TabControl1.SelectedIndex = 0;
-            this.TabControl1.Size = new System.Drawing.Size(596, 277);
+            this.TabControl1.Size = new System.Drawing.Size(596, 300);
             this.TabControl1.TabIndex = 10;
             // 
             // tab_style
@@ -959,7 +977,7 @@
             this.tab_style.Controls.Add(this.Label14);
             this.tab_style.Location = new System.Drawing.Point(4, 22);
             this.tab_style.Name = "tab_style";
-            this.tab_style.Size = new System.Drawing.Size(588, 251);
+            this.tab_style.Size = new System.Drawing.Size(588, 274);
             this.tab_style.TabIndex = 3;
             this.tab_style.Text = "Style";
             this.tab_style.UseVisualStyleBackColor = true;
@@ -973,7 +991,7 @@
             this.groupBox3.Controls.Add(this.cbHighContrastNames);
             this.groupBox3.Location = new System.Drawing.Point(6, 13);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(382, 103);
+            this.groupBox3.Size = new System.Drawing.Size(382, 126);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Appearance";
@@ -998,7 +1016,7 @@
             this.GroupBox1.Controls.Add(this.Label11);
             this.GroupBox1.Controls.Add(this.btnApApply);
             this.GroupBox1.Controls.Add(this.Label12);
-            this.GroupBox1.Location = new System.Drawing.Point(6, 122);
+            this.GroupBox1.Location = new System.Drawing.Point(6, 145);
             this.GroupBox1.Name = "GroupBox1";
             this.GroupBox1.Size = new System.Drawing.Size(571, 126);
             this.GroupBox1.TabIndex = 2;
@@ -1066,7 +1084,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(620, 301);
+            this.ClientSize = new System.Drawing.Size(620, 324);
             this.Controls.Add(this.TabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1178,6 +1196,7 @@
         private System.Windows.Forms.Label lblShowSplitCount;
         private System.Windows.Forms.CheckBox cbSuperscriptPB;
         internal System.Windows.Forms.CheckBox cbShowProgressBar;
+        internal System.Windows.Forms.CheckBox cbSuccessionToProgressBar;
         private System.Windows.Forms.CheckBox cbProgressBarColored;
         private System.Windows.Forms.CheckBox cbUseRoman;
     }

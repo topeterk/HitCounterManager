@@ -82,6 +82,7 @@ namespace HitCounterManager
             cbShowFooter.Checked = _settings.ShowFooter;
             cbShowSessionProgress.Checked = _settings.ShowSessionProgress;
             cbShowProgressBar.Checked = _settings.ShowProgressBar;
+            cbSuccessionToProgressBar.Checked = _settings.Succession.IntegrateIntoProgressBar;
             numShowSplitsCountFinished.Value = _settings.ShowSplitsCountFinished;
             numShowSplitsCountUpcoming.Value = _settings.ShowSplitsCountUpcoming;
             cbShowHitsCombined.Checked = _settings.ShowHitsCombined;
@@ -171,6 +172,7 @@ namespace HitCounterManager
             _settings.ShowFooter = cbShowFooter.Checked;
             _settings.ShowSessionProgress = cbShowSessionProgress.Checked;
             _settings.ShowProgressBar = cbShowProgressBar.Checked;
+            _settings.Succession.IntegrateIntoProgressBar = cbSuccessionToProgressBar.Checked;
             _settings.ShowSplitsCountFinished = (int)numShowSplitsCountFinished.Value;
             _settings.ShowSplitsCountUpcoming = (int)numShowSplitsCountUpcoming.Value;
             _settings.ShowHitsCombined = cbShowHitsCombined.Checked;

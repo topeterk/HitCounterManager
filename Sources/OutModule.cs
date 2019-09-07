@@ -30,6 +30,8 @@ namespace HitCounterManager
     /// </summary>
     public class OutModule
     {
+        #region Settings
+
         public enum OM_Purpose {
             OM_Purpose_SplitCounter = 0,
             OM_Purpose_DeathCounter = 1,
@@ -59,15 +61,6 @@ namespace HitCounterManager
         private string template = "";
 
         /// <summary>
-        /// Bind object to a profile tab control
-        /// </summary>
-        /// <param name="ProfilesControl">interface of object to set binding</param>
-        public OutModule(ProfilesControl ProfilesControl)
-        {
-            profCtrl = ProfilesControl;
-        }
-
-        /// <summary>
         /// Object binding to the user settings
         /// </summary>
         public SettingsRoot Settings
@@ -78,6 +71,17 @@ namespace HitCounterManager
                 _settings = value;
                 ReloadFileHandles();
             }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Bind object to a profile tab control
+        /// </summary>
+        /// <param name="ProfilesControl">interface of object to set binding</param>
+        public OutModule(ProfilesControl ProfilesControl)
+        {
+            profCtrl = ProfilesControl;
         }
 
         /// <summary>
@@ -95,6 +99,8 @@ namespace HitCounterManager
             }
             // Reload of output file handle not required, as it will be reopened on every read anyway
         }
+
+        #region JSON helpers
 
         /// <summary>
         /// Escapes special HTML characters
@@ -135,6 +141,8 @@ namespace HitCounterManager
         {
             File.WriteLine("\"" + Name + "\": " + (null != String ? "\"" + String.Replace("\"", "\\\"") + "\"" : "undefined") + ",");
         }
+
+        #endregion
 
         /// <summary>
         /// Use buffer to create outputfile while patching some data
@@ -178,27 +186,68 @@ namespace HitCounterManager
                     int iSplitFirst;
                     int iSplitLast;
                     int InjectedSplitCount = 0;
+                    int HiddenSplitCount = 0;
+                    int RunIndex = 0;
+                    int RunIndexActive;
 
                     sr.WriteLine("{");
 
                     sr.WriteLine("\"list\": [");
+                    if (_settings.Succession.IntegrateIntoProgressBar)
+                    {
+                        // Dump all splits of the (previous) non-visible profiles
+                        foreach(ProfileViewControl pvc in profCtrl.ProfileTabControl.ProfileViewControls)
+                        {
+                            IProfileInfo pi_pvc = pvc.ProfileInfo;
+                            if (pi_pvc == pi) break; // stop at current profile
+
+                            for (int r = 0; r < pi_pvc.SplitCount; r++)
+                            {
+                                if (0 < r + HiddenSplitCount) sr.WriteLine(","); // separator
+                                sr.Write("[\"" + SimpleHtmlEscape(pi_pvc.GetSplitTitle(r)) + "\", " + (pi_pvc.GetSplitHits(r) + pi_pvc.GetSplitWayHits(r)) + ", " + pi_pvc.GetSplitPB(r) + ", " + pi_pvc.GetSplitWayHits(r) + ", " + RunIndex + "]");
+                            }
+                            HiddenSplitCount += pi_pvc.SplitCount;
+                            RunIndex++;
+                        }
+                    }
+                    RunIndexActive = RunIndex;
                     if (_settings.Succession.HistorySplitVisible)
                     {
                         InjectedSplitCount++;
-                        sr.Write("[\"" + SimpleHtmlEscape(_settings.Succession.HistorySplitTitle) + "\", " + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + "]");
-                        if (0 < iSplitCount) sr.WriteLine(","); // separator
+                        if (0 < HiddenSplitCount) sr.WriteLine(","); // separator
+                        sr.Write("[\"" + SimpleHtmlEscape(_settings.Succession.HistorySplitTitle) + "\", " + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + ", " + RunIndex + "]");
                     }
                     for (int r = 0; r < iSplitCount; r++)
                     {
-                        if (r != 0) sr.WriteLine(","); // separator
-                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + (pi.GetSplitHits(r) + pi.GetSplitWayHits(r)) + ", " + pi.GetSplitPB(r) + ", " + pi.GetSplitWayHits(r) + "]");
+                        if (0 < r + HiddenSplitCount + InjectedSplitCount) sr.WriteLine(","); // separator
+                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + (pi.GetSplitHits(r) + pi.GetSplitWayHits(r)) + ", " + pi.GetSplitPB(r) + ", " + pi.GetSplitWayHits(r) + ", " + RunIndex + "]");
+                    }
+                    RunIndex++;
+                    if (_settings.Succession.IntegrateIntoProgressBar)
+                    {
+                        bool found_active = false;
+                        // Dump all splits of the (upcoming) non-visible profiles
+                        foreach(ProfileViewControl pvc in profCtrl.ProfileTabControl.ProfileViewControls)
+                        {
+                            IProfileInfo pi_pvc = pvc.ProfileInfo;
+                            if (found_active) // only walk over upcoming profiles
+                            {
+                                for (int r = 0; r < pi_pvc.SplitCount; r++)
+                                {
+                                    if (0 < r + HiddenSplitCount + InjectedSplitCount + iSplitCount) sr.WriteLine(","); // separator
+                                    sr.Write("[\"" + SimpleHtmlEscape(pi_pvc.GetSplitTitle(r)) + "\", " + (pi_pvc.GetSplitHits(r) + pi_pvc.GetSplitWayHits(r)) + ", " + pi_pvc.GetSplitPB(r) + ", " + pi_pvc.GetSplitWayHits(r) + ", " + RunIndex + "]");
+                                }
+                                RunIndex++;
+                            }
+                            else if (pi_pvc == pi) found_active = true;
+                        }
                     }
                     sr.WriteLine(""); // no trailing separator
                     sr.WriteLine("],");
 
                     active += InjectedSplitCount;
                     iSplitCount += InjectedSplitCount;
-                    WriteJsonSimpleValue(sr, "session_progress", pi.GetSessionProgress() + InjectedSplitCount);
+                    WriteJsonSimpleValue(sr, "session_progress", pi.GetSessionProgress() + InjectedSplitCount + HiddenSplitCount);
 
                     // Calculation to show same amount of splits independent from active split:
                     // Example: ShowSplitsCountFinished = 3 , ShowSplitsCountUpcoming = 2 , iSplitCount = 7 (0-6)
@@ -226,9 +275,18 @@ namespace HitCounterManager
                         iSplitFirst = iSplitCount - 1 - _settings.ShowSplitsCountUpcoming - _settings.ShowSplitsCountFinished;
                         iSplitLast = iSplitCount - 1;
                     }
+
+                    // safety limiters
+                    if (iSplitFirst < 0) iSplitFirst = 0;
+                    if (iSplitCount <= iSplitLast) iSplitLast =  iSplitCount-1;
+
+                    active += HiddenSplitCount;
+                    iSplitFirst += HiddenSplitCount;
+                    iSplitLast += HiddenSplitCount;
+                    WriteJsonSimpleValue(sr, "run_active", RunIndexActive);
                     WriteJsonSimpleValue(sr, "split_active", active);
-                    WriteJsonSimpleValue(sr, "split_first", (iSplitFirst < 0 ? 0 : iSplitFirst));
-                    WriteJsonSimpleValue(sr, "split_last", (iSplitCount <= iSplitLast ? iSplitCount-1 : iSplitLast));
+                    WriteJsonSimpleValue(sr, "split_first", iSplitFirst);
+                    WriteJsonSimpleValue(sr, "split_last", iSplitLast);
 
                     WriteJsonSimpleValue(sr, "attempts", profCtrl.CurrentAttempts);
                     WriteJsonSimpleValue(sr, "show_attempts", _settings.ShowAttemptsCounter);

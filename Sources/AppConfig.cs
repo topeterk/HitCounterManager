@@ -45,6 +45,7 @@ namespace HitCounterManager
         public int Attempts = 0;
         public string HistorySplitTitle = "Previous";
         public bool HistorySplitVisible = false;
+        public bool IntegrateIntoProgressBar = false;
         public List<SuccessionEntry> SuccessionList = new List<SuccessionEntry>();
     }
 
@@ -260,6 +261,8 @@ namespace HitCounterManager
                 _settings.MainPosX = this.Left;
                 _settings.MainPosY = this.Top;
                 _settings.StyleUseRoman = false;
+                // Only enable progress bar integration of succession when new settings were created
+                _settings.Succession.IntegrateIntoProgressBar = (baseVersion < 0 ? true : false);
                 // Create succession with only one entry (there was only one available in older versions)
                 SuccessionEntry suc_entry = new SuccessionEntry();
                 suc_entry.ProfileSelected = _settings.ProfileSelected;
