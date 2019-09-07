@@ -279,7 +279,6 @@ namespace HitCounterManager
             SetAlwaysOnTop(_settings.AlwaysOnTop);
 
             // Load profile data..
-            profCtrl.SelectedProfileInfo.ProfileUpdateBegin();
             if (_settings.Profiles.ProfileList.Count == 0)
             {
                 // There is no profile at all, initially create a clean one
@@ -297,7 +296,7 @@ namespace HitCounterManager
             if (_settings.Succession.SuccessionList.Count <= _settings.Succession.ActiveIndex) _settings.Succession.ActiveIndex = 0;
             profCtrl.InitializeProfilesControl(_settings.Profiles, _settings.Succession);
             profCtrl.om.Settings = _settings;
-            profCtrl.SelectedProfileInfo.ProfileUpdateEnd(); // Will fire event to write first output once after application start
+            profCtrl.om.Update(); // Write first output once after application start
 
             // Configure hot keys..
             sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
