@@ -58,7 +58,7 @@ namespace HitCounterManager
 
         private readonly ProfilesControl profCtrl;
         private SettingsRoot _settings = null;
-        private string template = "";
+        private string template = null;
 
         /// <summary>
         /// Object binding to the user settings
@@ -97,7 +97,7 @@ namespace HitCounterManager
                 template = sr.ReadToEnd();
                 sr.Close();
             }
-            // Reload of output file handle not required, as it will be reopened on every read anyway
+            // Reload of output file handle not required, as it will be reopened on every write anyway
         }
 
         #region JSON helpers
@@ -153,6 +153,11 @@ namespace HitCounterManager
 
             if (null == _settings) return;
             if (null == _settings.OutputFile) return;
+            if (null == template) // no valid template read yet?
+            {
+                ReloadFileHandles(); // try to read template again
+                if (null == template) return; // still invalid, avoid writing empty output file
+            }
 
             StreamWriter sr;
             bool IsWritingList = false; // Kept for old designs before version 1.10
