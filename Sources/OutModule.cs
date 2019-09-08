@@ -192,7 +192,7 @@ namespace HitCounterManager
                     int iSplitLast;
                     int InjectedSplitCount = 0;
                     int HiddenSplitCount = 0;
-                    int RunIndex = 0;
+                    int RunIndex = 1;
                     int RunIndexActive;
 
                     sr.WriteLine("{");
@@ -220,7 +220,7 @@ namespace HitCounterManager
                     {
                         InjectedSplitCount++;
                         if (0 < HiddenSplitCount) sr.WriteLine(","); // separator
-                        sr.Write("[\"" + SimpleHtmlEscape(_settings.Succession.HistorySplitTitle) + "\", " + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + ", " + RunIndex + "]");
+                        sr.Write("[\"" + SimpleHtmlEscape(_settings.Succession.HistorySplitTitle) + "\", " + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + ", " + 0/*RunIndex*/ + "]");
                     }
                     for (int r = 0; r < iSplitCount; r++)
                     {
