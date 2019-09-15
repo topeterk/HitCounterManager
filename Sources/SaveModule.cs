@@ -66,6 +66,9 @@ namespace HitCounterManager
                 file = new StreamReader(Filename);
                 T result = (T)xml.Deserialize(file);
                 file.Close();
+
+                File.Copy(Filename, Filename + ".bak", true); // Create backup on successful read
+
                 return result;
             }
             catch (FileNotFoundException) { } // Exception.HResult == COR_E_FILENOTFOUND only be available since .Net 4.5, use overloading for older frameworks
