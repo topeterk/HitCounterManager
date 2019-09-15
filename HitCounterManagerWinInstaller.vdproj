@@ -105,7 +105,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:FinalFiles\\HitCounterManager_Win_Setup_v1.x.0.0_dbg.msi"
+        "OutputFilename" = "8:FinalFiles\\HitCounterManager_Windows_Setup_v1.x.0.0_dbg.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -137,7 +137,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:FinalFiles\\HitCounterManager_Win_Setup_v1.x.0.0.msi"
+        "OutputFilename" = "8:FinalFiles\\HitCounterManager_Windows_Setup_v1.x.0.0.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -905,7 +905,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_E73481EAB59C480EAACFF94F3334D77E"
             {
-            "SourcePath" = "8:obj\\ReleaseWin\\HitCounterManager.exe"
+            "SourcePath" = "8:obj\\DebugWin\\HitCounterManager.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_DFB6FB4DFF4E4C228DA381CF60E540D8"

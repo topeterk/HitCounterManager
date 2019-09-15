@@ -34,7 +34,7 @@ if not exist %PR_FINAL% mkdir %PR_FINAL%
 echo Packing Windows Portable Release:
 set PR_BASE=bin\ReleaseWin
 set PR_TARGET=%PR_FINAL%\ReleaseWinPortable
-set PR_OUTPUT=%PR_FINAL%\HitCounterManager_Win_Portable_v1.x.y.z.zip
+set PR_OUTPUT=%PR_FINAL%\HitCounterManager_Windows_Portable_v1.x.0.0.zip
 rmdir /S /Q %PR_TARGET% 2>nul
 mkdir %PR_TARGET%
 call PostBuild.bat .\ %PR_BASE%\ %PR_TARGET%\
