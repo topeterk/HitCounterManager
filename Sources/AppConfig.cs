@@ -103,6 +103,7 @@ namespace HitCounterManager
         public string StyleFontName;
         public int StyleDesiredWidth;
         public bool StyleSuperscriptPB;
+        public bool StyleHightlightCurrentSplit;
         public string SuccessionTitle; // obsolete since version 7 - keep for backwards compatibility (use Succession.SuccessionTitle instead)
         public int SuccessionHits;     // obsolete since version 7 - keep for backwards compatibility (will be calculated, now)
         public int SuccessionHitsWay;  // obsolete since version 7 - keep for backwards compatibility (will be calculated, now)
@@ -261,6 +262,7 @@ namespace HitCounterManager
                 _settings.MainPosX = this.Left;
                 _settings.MainPosY = this.Top;
                 _settings.StyleUseRoman = false;
+                _settings.StyleHightlightCurrentSplit = false;
                 // Only enable progress bar integration of succession when new settings were created
                 _settings.Succession.IntegrateIntoProgressBar = (baseVersion < 0 ? true : false);
                 // Create succession with only one entry (there was only one available in older versions)

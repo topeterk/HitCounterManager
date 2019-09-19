@@ -311,6 +311,7 @@ namespace HitCounterManager
                     WriteJsonSimpleValue(sr, "high_contrast", _settings.StyleUseHighContrast);
                     WriteJsonSimpleValue(sr, "high_contrast_names", _settings.StyleUseHighContrastNames);
                     WriteJsonSimpleValue(sr, "use_roman", _settings.StyleUseRoman);
+                    WriteJsonSimpleValue(sr, "highlight_active_split", _settings.StyleHightlightCurrentSplit);
                     WriteJsonSimpleValue(sr, "progress_bar_colored", _settings.StyleProgressBarColored);
                     WriteJsonSimpleValue(sr, "width", _settings.StyleDesiredWidth);
                     WriteJsonSimpleValue(sr, "supPB", _settings.StyleSuperscriptPB);

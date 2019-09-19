@@ -79,6 +79,8 @@
             this.cbShowProgressBar = new System.Windows.Forms.CheckBox();
             this.cbSuccessionToProgressBar = new System.Windows.Forms.CheckBox();
             this.cbProgressBarColored = new System.Windows.Forms.CheckBox();
+            this.cbUseRoman = new System.Windows.Forms.CheckBox();
+            this.cbHighlightCurrentSplit = new System.Windows.Forms.CheckBox();
             this.tab_behavior = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lblShowSplitCount = new System.Windows.Forms.Label();
@@ -108,7 +110,6 @@
             this.Label12 = new System.Windows.Forms.Label();
             this.Label13 = new System.Windows.Forms.Label();
             this.Label14 = new System.Windows.Forms.Label();
-            this.cbUseRoman = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             this.tab_globalshortcuts.SuspendLayout();
@@ -739,6 +740,30 @@
             this.cbProgressBarColored.UseVisualStyleBackColor = true;
             this.cbProgressBarColored.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
+            // cbUseRoman
+            // 
+            this.cbUseRoman.AutoSize = true;
+            this.cbUseRoman.Location = new System.Drawing.Point(186, 45);
+            this.cbUseRoman.Name = "cbUseRoman";
+            this.cbUseRoman.Size = new System.Drawing.Size(105, 17);
+            this.cbUseRoman.TabIndex = 4;
+            this.cbUseRoman.Text = "Roman numerals";
+            this.ToolTip1.SetToolTip(this.cbUseRoman, "Show hits and PB as Roman numerals");
+            this.cbUseRoman.UseVisualStyleBackColor = true;
+            this.cbUseRoman.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // cbHighlightCurrentSplit
+            // 
+            this.cbHighlightCurrentSplit.AutoSize = true;
+            this.cbHighlightCurrentSplit.Location = new System.Drawing.Point(186, 68);
+            this.cbHighlightCurrentSplit.Name = "cbHighlightCurrentSplit";
+            this.cbHighlightCurrentSplit.Size = new System.Drawing.Size(124, 17);
+            this.cbHighlightCurrentSplit.TabIndex = 5;
+            this.cbHighlightCurrentSplit.Text = "Highlight current split";
+            this.ToolTip1.SetToolTip(this.cbHighlightCurrentSplit, "Let the current split stand out");
+            this.cbHighlightCurrentSplit.UseVisualStyleBackColor = true;
+            this.cbHighlightCurrentSplit.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
             // tab_behavior
             // 
             this.tab_behavior.Controls.Add(this.groupBox5);
@@ -984,6 +1009,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.cbHighlightCurrentSplit);
             this.groupBox3.Controls.Add(this.cbUseRoman);
             this.groupBox3.Controls.Add(this.cbProgressBarColored);
             this.groupBox3.Controls.Add(this.cbSuperscriptPB);
@@ -1067,18 +1093,6 @@
             this.Label14.Size = new System.Drawing.Size(74, 13);
             this.Label14.TabIndex = 21;
             this.Label14.Text = "Desired width:";
-            // 
-            // cbUseRoman
-            // 
-            this.cbUseRoman.AutoSize = true;
-            this.cbUseRoman.Location = new System.Drawing.Point(186, 45);
-            this.cbUseRoman.Name = "cbUseRoman";
-            this.cbUseRoman.Size = new System.Drawing.Size(105, 17);
-            this.cbUseRoman.TabIndex = 4;
-            this.cbUseRoman.Text = "Roman numerals";
-            this.ToolTip1.SetToolTip(this.cbUseRoman, "Show hits and PB as Roman numerals");
-            this.cbUseRoman.UseVisualStyleBackColor = true;
-            this.cbUseRoman.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // Settings
             // 
@@ -1199,5 +1213,6 @@
         private System.Windows.Forms.CheckBox cbSuccessionToProgressBar;
         private System.Windows.Forms.CheckBox cbProgressBarColored;
         private System.Windows.Forms.CheckBox cbUseRoman;
+        private System.Windows.Forms.CheckBox cbHighlightCurrentSplit;
     }
 }

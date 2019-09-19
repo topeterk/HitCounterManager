@@ -69,6 +69,7 @@ namespace HitCounterManager
             cbHighContrast.Checked = _settings.StyleUseHighContrast;
             cbHighContrastNames.Checked = _settings.StyleUseHighContrastNames;
             cbUseRoman.Checked = _settings.StyleUseRoman;
+            cbHighlightCurrentSplit.Checked = _settings.StyleHightlightCurrentSplit;
             cbProgressBarColored.Checked = !_settings.StyleProgressBarColored;
             cbSuperscriptPB.Checked = _settings.StyleSuperscriptPB;
             cbApCustomCss.Checked = _settings.StyleUseCustom;
@@ -162,6 +163,7 @@ namespace HitCounterManager
             _settings.StyleUseHighContrast = cbHighContrast.Checked;
             _settings.StyleUseHighContrastNames = cbHighContrastNames.Checked;
             _settings.StyleUseRoman = cbUseRoman.Checked;
+            _settings.StyleHightlightCurrentSplit = cbHighlightCurrentSplit.Checked;
             _settings.StyleProgressBarColored = !cbProgressBarColored.Checked;
             _settings.StyleSuperscriptPB = cbSuperscriptPB.Checked;
             _settings.StyleDesiredWidth = (int)numStyleDesiredWidth.Value;
