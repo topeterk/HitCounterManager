@@ -55,9 +55,10 @@ namespace HitCounterManager
         /// <summary>
         /// Reads the data from the XML file
         /// </summary>
+        /// <param name="EnableBackup">Ture: A backup will be created when read was successful</param>
         /// <param name="Filename">File being read</param>
         /// <returns>Data of data type</returns>
-        public T ReadXML(string Filename = null)
+        public T ReadXML(bool EnableBackup, string Filename = null)
         {
             StreamReader file = null;
             if (null == Filename) Filename = _Filename;
@@ -67,7 +68,7 @@ namespace HitCounterManager
                 T result = (T)xml.Deserialize(file);
                 file.Close();
 
-                File.Copy(Filename, Filename + ".bak", true); // Create backup on successful read
+                if (EnableBackup) File.Copy(Filename, Filename + ".bak", true); // Create backup on successful read only
 
                 return result;
             }

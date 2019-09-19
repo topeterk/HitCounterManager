@@ -146,12 +146,12 @@ namespace HitCounterManager
             bool isKeyInvalid = false;
 
             sm = new SaveModule<SettingsRoot>(Application.ProductName + "Save.xml");
-            _settings = sm.ReadXML();
+            _settings = sm.ReadXML(true);
 
             if (null == _settings)
             {
                 // When no user save file is available, try loading the init file instead to provide predefined profiles and settings
-                _settings = sm.ReadXML(Application.ProductName + "Init.xml");
+                _settings = sm.ReadXML(false, Application.ProductName + "Init.xml");
             }
             if (null != _settings)
                 baseVersion = _settings.Version; // successfully loaded Save or Init file, so remember original version for upgrade
