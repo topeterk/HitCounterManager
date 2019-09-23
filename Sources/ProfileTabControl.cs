@@ -31,6 +31,7 @@ namespace HitCounterManager
         #region TabControl DragAndDrop
 
         private TabPage TabPageDragDrop = null;
+        private bool DragDropEnabled = true;
 
         public ProfileTabControl()
         {
@@ -51,6 +52,8 @@ namespace HitCounterManager
 
         private void MouseDownHandler(object sender, MouseEventArgs e)
         {
+            if (!DragDropEnabled) return;
+
             if (e.Button == MouseButtons.Left)
             {
                 // Start of DragDrop
@@ -171,6 +174,20 @@ namespace HitCounterManager
 
         [Browsable(false)] // Hide from designer
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
+        public bool ReadOnlyMode
+        {
+            get { return !DragDropEnabled; }
+            set
+            {
+                DragDropEnabled = !value;
+
+                foreach (ProfileViewControl pvc_tab in ProfileViewControls)
+                    pvc_tab.ProfileInfo.ReadOnly = value;
+            }
+        }
+
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public ProfileViewControl SelectedProfileViewControl { get; private set; }
 
         /// <summary>
@@ -251,10 +268,14 @@ namespace HitCounterManager
                 return;
             }
 
-            ProfileTabSelectedHandler(null, ProfileTabSelectAction.Selecting);
-
             if (e.TabPage.Text.Equals("+")) // Create new tab?
             {
+                if (ReadOnlyMode)
+                {
+                    e.Cancel = true; // control not editable
+                    return;
+                }
+
                 if (!SuccessionActive) // Show initial warning message only when succession is not already active
                 {
                     DialogResult result = MessageBox.Show(
@@ -273,9 +294,14 @@ namespace HitCounterManager
                     }
                 }
 
+                ProfileTabSelectedHandler(null, ProfileTabSelectAction.Selecting);
                 SelectedProfileViewControl = ProfileTabCreate(); // Create and redirect interaction to selected tab
             }
-            else SelectedProfileViewControl = (ProfileViewControl)e.TabPage.Controls["pvc"]; // redirect interaction to selected tab
+            else
+            {
+                ProfileTabSelectedHandler(null, ProfileTabSelectAction.Selecting);
+                SelectedProfileViewControl = (ProfileViewControl)e.TabPage.Controls["pvc"]; // redirect interaction to selected tab
+            }
 
             ProfileTabSelectedHandler(SelectedProfileViewControl, ProfileTabSelectAction.Selected);
         }

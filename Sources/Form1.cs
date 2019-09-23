@@ -36,6 +36,7 @@ namespace HitCounterManager
         public readonly Shortcuts sc;
 
         private bool SettingsDialogOpen = false;
+        private bool ReadOnlyMode = false;
 
         #region Form
 
@@ -99,6 +100,23 @@ namespace HitCounterManager
                 btnOnTop.BackColor = Color.FromKnownColor(KnownColor.Control);
         }
 
+        private void SetReadOnlyMode(bool IsReadOnly)
+        {
+            if (ReadOnlyMode = IsReadOnly)
+                btnLock.BackColor = Color.Salmon;
+            else
+                btnLock.BackColor = Color.FromKnownColor(KnownColor.Control);
+
+            Color color = Color.FromKnownColor(IsReadOnly ? KnownColor.ControlDark : KnownColor.Control);
+            foreach (Button button in new Button[] { btnUp, btnDown, btnInsertSplit, btnNew, btnRename, btnCopy, btnDelete })
+            {
+                button.Enabled = !IsReadOnly;
+                button.BackColor = color;
+            }
+
+            profCtrl.ReadOnlyMode = ReadOnlyMode;
+        }
+
         #endregion
         #region UI
 
@@ -155,6 +173,7 @@ namespace HitCounterManager
         private void BtnInsertSplit_Click(object sender, EventArgs e) { profCtrl.ProfileSplitInsert(); }
 
         private void BtnOnTop_Click(object sender, EventArgs e) { SetAlwaysOnTop(!this.TopMost); }
+        private void BtnSplitLock_Click(object sender, EventArgs e) { SetReadOnlyMode(!profCtrl.ReadOnlyMode); }
 
         private void btnReset_Click(object sender, EventArgs e) { profCtrl.ProfileReset(); }
         private void btnPB_Click(object sender, EventArgs e) { profCtrl.ProfilePB(); }

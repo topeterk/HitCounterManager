@@ -173,6 +173,8 @@
     <None Include="Images\icons8-double-down-20.png" />
     <None Include="Images\icons8-double-up-20.png" />
     <None Include="Images\icons8-edit-20.png" />
+    <None Include="Images\icons8-lock-20.png" />
+    <None Include="Images\icons8-padlock-20.png" />
     <None Include="Images\icons8-pin-20.png" />
     <None Include="Images\icons8-repeat-one-32.png" />
     <None Include="Images\icons8-save-20.png" />

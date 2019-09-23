@@ -44,6 +44,7 @@
             this.btnUp = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
             this.btnInsertSplit = new System.Windows.Forms.Button();
+            this.btnLock = new System.Windows.Forms.Button();
             this.btnOnTop = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnPB = new System.Windows.Forms.Button();
@@ -227,15 +228,28 @@
             this.btnInsertSplit.UseVisualStyleBackColor = true;
             this.btnInsertSplit.Click += new System.EventHandler(this.BtnInsertSplit_Click);
             // 
+            // btnLock
+            // 
+            this.btnLock.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_padlock_20;
+            this.btnLock.FlatAppearance.BorderSize = 0;
+            this.btnLock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLock.Location = new System.Drawing.Point(396, 4);
+            this.btnLock.Name = "btnLock";
+            this.btnLock.Size = new System.Drawing.Size(20, 20);
+            this.btnLock.TabIndex = 13;
+            this.ToolTip1.SetToolTip(this.btnLock, "(Un)lock split/profile editing");
+            this.btnLock.UseVisualStyleBackColor = true;
+            this.btnLock.Click += new System.EventHandler(this.BtnSplitLock_Click);
+            // 
             // btnOnTop
             // 
             this.btnOnTop.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_pin_20;
             this.btnOnTop.FlatAppearance.BorderSize = 0;
             this.btnOnTop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOnTop.Location = new System.Drawing.Point(396, 4);
+            this.btnOnTop.Location = new System.Drawing.Point(422, 4);
             this.btnOnTop.Name = "btnOnTop";
             this.btnOnTop.Size = new System.Drawing.Size(20, 20);
-            this.btnOnTop.TabIndex = 13;
+            this.btnOnTop.TabIndex = 14;
             this.ToolTip1.SetToolTip(this.btnOnTop, "Set window always on top");
             this.btnOnTop.UseVisualStyleBackColor = true;
             this.btnOnTop.Click += new System.EventHandler(this.BtnOnTop_Click);
@@ -248,7 +262,7 @@
             this.btnReset.Location = new System.Drawing.Point(12, 30);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 40);
-            this.btnReset.TabIndex = 14;
+            this.btnReset.TabIndex = 15;
             this.ToolTip1.SetToolTip(this.btnReset, "RESET the current run");
             this.btnReset.UseVisualStyleBackColor = false;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
@@ -261,7 +275,7 @@
             this.btnPB.Location = new System.Drawing.Point(93, 30);
             this.btnPB.Name = "btnPB";
             this.btnPB.Size = new System.Drawing.Size(75, 40);
-            this.btnPB.TabIndex = 15;
+            this.btnPB.TabIndex = 16;
             this.ToolTip1.SetToolTip(this.btnPB, "Record run as PB (personal best)");
             this.btnPB.UseVisualStyleBackColor = false;
             this.btnPB.Click += new System.EventHandler(this.btnPB_Click);
@@ -276,7 +290,7 @@
             this.btnHit.Location = new System.Drawing.Point(174, 30);
             this.btnHit.Name = "btnHit";
             this.btnHit.Size = new System.Drawing.Size(355, 40);
-            this.btnHit.TabIndex = 16;
+            this.btnHit.TabIndex = 17;
             this.ToolTip1.SetToolTip(this.btnHit, "Count a HIT (boss) on the current split");
             this.btnHit.UseVisualStyleBackColor = false;
             this.btnHit.Click += new System.EventHandler(this.btnHit_Click);
@@ -290,7 +304,7 @@
             this.btnWayHit.Location = new System.Drawing.Point(535, 30);
             this.btnWayHit.Name = "btnWayHit";
             this.btnWayHit.Size = new System.Drawing.Size(75, 40);
-            this.btnWayHit.TabIndex = 17;
+            this.btnWayHit.TabIndex = 18;
             this.ToolTip1.SetToolTip(this.btnWayHit, "Count a HIT (way) on the current split");
             this.btnWayHit.UseVisualStyleBackColor = false;
             this.btnWayHit.Click += new System.EventHandler(this.btnWayHit_Click);
@@ -304,7 +318,7 @@
             this.btnSplit.Location = new System.Drawing.Point(616, 30);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(75, 40);
-            this.btnSplit.TabIndex = 18;
+            this.btnSplit.TabIndex = 19;
             this.ToolTip1.SetToolTip(this.btnSplit, "Jump to the next SPLIT");
             this.btnSplit.UseVisualStyleBackColor = false;
             this.btnSplit.Click += new System.EventHandler(this.btnSplit_Click);
@@ -371,7 +385,7 @@
             this.profCtrl.Location = new System.Drawing.Point(14, 96);
             this.profCtrl.Name = "profCtrl";
             this.profCtrl.Size = new System.Drawing.Size(677, 367);
-            this.profCtrl.TabIndex = 43;
+            this.profCtrl.TabIndex = 20;
             this.profCtrl.ProfileChanged += new System.EventHandler<System.EventArgs>(this.UpdateProgressAndTotals);
             // 
             // Form1
@@ -392,6 +406,7 @@
             this.Controls.Add(this.btnUp);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.btnInsertSplit);
+            this.Controls.Add(this.btnLock);
             this.Controls.Add(this.btnOnTop);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnPB);
@@ -430,6 +445,7 @@
         private System.Windows.Forms.Button btnUp;
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button btnInsertSplit;
+        private System.Windows.Forms.Button btnLock;
         private System.Windows.Forms.Button btnOnTop;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnPB;

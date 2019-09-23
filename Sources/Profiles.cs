@@ -207,6 +207,12 @@ namespace HitCounterManager
         int ActiveSplit { get; set; }
 
         /// <summary>
+        /// Profile data read only or writable (from UI)
+        /// Does not affect programmatic changes
+        /// </summary>
+        bool ReadOnly { get; set; }
+
+        /// <summary>
         /// Removes all splits
         /// </summary>
         void ClearSplits();

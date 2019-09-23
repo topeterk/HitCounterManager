@@ -60,6 +60,7 @@ namespace HitCounterManager
         public int MainHeight;
         public int MainPosX;
         public int MainPosY;
+        public bool ReadOnlyMode;
         public bool AlwaysOnTop;
         public int HotKeyMethod;
         public bool ShortcutResetEnable;
@@ -261,6 +262,7 @@ namespace HitCounterManager
                 _settings.MainHeight += 27; // added tabs (27)
                 _settings.MainPosX = this.Left;
                 _settings.MainPosY = this.Top;
+                _settings.ReadOnlyMode = false;
                 _settings.StyleUseRoman = false;
                 _settings.StyleHightlightCurrentSplit = false;
                 // Only enable progress bar integration of succession when new settings were created
@@ -281,6 +283,7 @@ namespace HitCounterManager
             // set window size and when possible also set location (just make sure window is not outside of screen)
             this.SetBounds(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth, _settings.MainHeight,
                 Program.IsOnScreen(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth) ? BoundsSpecified.All : BoundsSpecified.Size);
+            SetReadOnlyMode(_settings.ReadOnlyMode);
             SetAlwaysOnTop(_settings.AlwaysOnTop);
 
             // Load profile data..
@@ -337,6 +340,7 @@ namespace HitCounterManager
                     _settings.MainPosY = this.Top;
                 }
             }
+            _settings.ReadOnlyMode = this.ReadOnlyMode;
             _settings.AlwaysOnTop = this.TopMost;
 
             // Store hot keys..

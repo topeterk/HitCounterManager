@@ -110,6 +110,14 @@ namespace HitCounterManager
                     SelectedProfileInfo.AttemptsCount = value;
             }
         }
+
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
+        public bool ReadOnlyMode
+        {
+            get { return ptc.ReadOnlyMode; }
+            set { ptc.ReadOnlyMode = value; }
+        }
  
         public void InitializeProfilesControl(Profiles profiles, Succession Succession)
         {
