@@ -117,6 +117,57 @@ namespace HitCounterManager
             profCtrl.ReadOnlyMode = ReadOnlyMode;
         }
 
+        /// <summary>
+        /// Creates a window to show changelog of new available versions
+        /// </summary>
+        /// <param name="Prompt">Prompt text</param>
+        /// <param name="Title">Title</param>
+        /// <param name="Text">Changelog</param>
+        public void NewVersionDialog(string LatestVersionTitle, string Changelog)
+        {
+            const int ClientPad = 15;
+            Form frm = new Form();
+            
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.FormBorderStyle = FormBorderStyle.FixedDialog;
+            frm.Icon = Icon;
+            frm.ShowInTaskbar = false;
+            frm.FormBorderStyle = FormBorderStyle.Sizable;
+            frm.MaximizeBox = true;
+            frm.MinimizeBox = false;
+            frm.ClientSize = new Size(600, 400);
+            frm.MinimumSize = frm.ClientSize;
+            frm.Text = "New version available!";
+
+            Label label = new Label();
+            label.Size = new Size(frm.ClientSize.Width - ClientPad, 20);
+            label.Location = new Point(ClientPad, ClientPad);
+            label.Text = "Latest available version:      " + LatestVersionTitle;
+            frm.Controls.Add(label);
+
+            Button okButton = new Button();
+            okButton.DialogResult = DialogResult.OK;
+            okButton.Name = "okButton";
+            okButton.Location = new Point(frm.ClientSize.Width - okButton.Size.Width - ClientPad, frm.ClientSize.Height - okButton.Size.Height - ClientPad);
+            okButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            okButton.Text = "&OK";
+            frm.Controls.Add(okButton);
+
+            TextBox textBox = new TextBox();
+            textBox.Location = new Point(ClientPad, label.Location.Y + label.Size.Height + 5);
+            textBox.Size = new Size(frm.ClientSize.Width - ClientPad*2, okButton.Location.Y - ClientPad - textBox.Location.Y);
+            textBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            textBox.Multiline = true;
+            textBox.Text = Changelog.Replace("\n", Environment.NewLine);
+            textBox.ReadOnly = true;
+            textBox.ScrollBars = ScrollBars.Both;
+            textBox.BackColor = Color.FromKnownColor(KnownColor.Window);
+            frm.Controls.Add(textBox);
+
+            frm.AcceptButton = okButton;
+            frm.ShowDialog(this);
+        }
+
         #endregion
         #region UI
 
@@ -135,24 +186,46 @@ namespace HitCounterManager
             try
             {
                 WebClient client = new WebClient();
+                client.Encoding = System.Text.Encoding.UTF8;
 
                 // https://developer.github.com/v3/#user-agent-required
                 client.Headers.Add("User-Agent", "HitCounterManager/" + Application.ProductVersion);
                 // https://developer.github.com/v3/media/#request-specific-version
                 client.Headers.Add("Accept", "application/vnd.github.v3.text+json");
                 // https://developer.github.com/v3/repos/releases/#get-a-single-release
-                string response = client.DownloadString("http://api.github.com/repos/topeterk/HitCounterManager/releases/latest");
+                string response = client.DownloadString("http://api.github.com/repos/topeterk/HitCounterManager/releases");
 
-                Dictionary<string, object> json = response.FromJson<Dictionary<string, object>>();
-                if (json["tag_name"].ToString() == Application.ProductVersion.ToString())
+                List<Dictionary<string, object>> json = response.FromJson<List<Dictionary<string, object>>>();
+                Dictionary<string, object> release = json[0]; // latest
+
+                if (release["tag_name"].ToString() == Application.ProductVersion.ToString())
                 {
                     MessageBox.Show("You are using the latest version!", "Up to date!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show("Latest available version:\n\n   " + json["name"].ToString() + "\n\n" +
-                        "Please visit the github project website (WWW button).\n" +
-                        "Then look at the releases to download the new version.", "New version available!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string changelog = "";
+                    int i;
+                    for (i = 0; i < json.Count; i++)
+                    {
+                        release = json[i];
+                        if (release["tag_name"].ToString() == Application.ProductVersion.ToString()) break;
+
+                        changelog += "----------------------------------------------------------------------------------------------------------------------------------------------------------------"
+                            + Environment.NewLine
+                            + release["name"].ToString()
+                            + Environment.NewLine + Environment.NewLine
+                            + release["body_text"].ToString().Replace("\n\n", Environment.NewLine)
+                            + Environment.NewLine + Environment.NewLine;
+                    }
+
+                    changelog = "New version available!" + Environment.NewLine + Environment.NewLine
+                            + "There are " + i + " new version available:" + Environment.NewLine
+                            + "Please visit the github project website (WWW button on main window)." + Environment.NewLine
+                            + "Then look at the \"releases\" to download the new version." + Environment.NewLine
+                            + Environment.NewLine + changelog;
+
+                    NewVersionDialog(json[0]["name"].ToString(), changelog);
                 }
             }
             catch (Exception ex)
