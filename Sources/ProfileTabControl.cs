@@ -262,6 +262,8 @@ namespace HitCounterManager
         /// <param name="Target">The tab that will be removed</param>
         public void ProfileTabRemove(TabPage Target)
         {
+            if (ReadOnlyMode) return; // control not editable
+
             // Remove tab but we still need to keep last regular one, the "New" and "Delete tabs.
             if (TabPages.Count <= 3) return;
 
