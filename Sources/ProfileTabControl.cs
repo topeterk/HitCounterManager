@@ -76,27 +76,7 @@ namespace HitCounterManager
                 {
                     if (hover_Tab.Text.Equals("-"))// Dragged on "Delete" tab?
                     {
-                        // Remove tab but we still need one regular, the "New" and "Delete tabs.
-                        if (3 < TabPages.Count)
-                        {
-                            // Mono workaround: Selection required otherwise empty tab will be shown after deletion
-                            // Solution: Select last available tab (as it gets shifted due to deletion
-                            //           This way we force TabControl to re-select tab upon deletion
-                            SelectedIndex = TabPages.Count-3;
-
-                            int index = TabPages.IndexOf(TabPageDragDrop);
-                            ProfileTabSelectedHandler((ProfileViewControl)TabPageDragDrop.Controls["pvc"], ProfileTabSelectAction.Deleting);
-                            TabPages.RemoveAt(index);
-
-                            for (int i = TabPages.Count - 3; 0 <= i; i--)
-                            {
-                                TabPages[i].Text = (i + 1).ToString(); // Update tab names
-                            }
-
-                            // Mono workaround: Selection required otherwise empty tab will be shown after deletion
-                            // Solution: Due to new selection the tab will be loaded properly again and no empty page is shown
-                            SelectedIndex = (index == 0 ? 0 : index-1); 
-                        }
+                        ProfileTabRemove(TabPageDragDrop);
                     }
                 }
                 TabPageDragDrop = null;
@@ -206,7 +186,8 @@ namespace HitCounterManager
         }
 
         /// <summary>
-        /// Creates a new ProfileViewControl in a new tab
+        /// Creates a new ProfileViewControl in a new tab.
+        /// For user controlled tab creation use ProfileTabCreateAndSelect instead!
         /// </summary>
         /// <returns>Created instance</returns>
         public ProfileViewControl ProfileTabCreate()
@@ -258,6 +239,49 @@ namespace HitCounterManager
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Creates and selects a new ProfileViewControl in a new tab
+        /// </summary>
+        public void ProfileTabCreateAndSelect()
+        {
+            for (int i = TabPages.Count - 1; 0 <= i; i--)
+            {
+                if (TabPages[i].Text.Equals("+")) // Search for "New" tab
+                {
+                    SelectTab(i); // We use the selection handler for creation
+                    return;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Removes a tab
+        /// </summary>
+        /// <param name="Target">The tab that will be removed</param>
+        public void ProfileTabRemove(TabPage Target)
+        {
+            // Remove tab but we still need to keep last regular one, the "New" and "Delete tabs.
+            if (TabPages.Count <= 3) return;
+
+            // Mono workaround: Selection required otherwise empty tab will be shown after deletion
+            // Solution: Select last available tab (as it gets shifted due to deletion
+            //           This way we force TabControl to re-select tab upon deletion
+            SelectedIndex = TabPages.Count-3;
+
+            int index = TabPages.IndexOf(Target);
+            ProfileTabSelectedHandler((ProfileViewControl)Target.Controls["pvc"], ProfileTabSelectAction.Deleting);
+            TabPages.RemoveAt(index);
+
+            for (int i = TabPages.Count - 3; 0 <= i; i--)
+            {
+                TabPages[i].Text = (i + 1).ToString(); // Update tab names
+            }
+
+            // Mono workaround: Selection required otherwise empty tab will be shown after deletion
+            // Solution: Due to new selection the tab will be loaded properly again and no empty page is shown
+            SelectedIndex = (index == 0 ? 0 : index-1); 
         }
 
         public void TabSelectingHandler(object sender, TabControlCancelEventArgs e)

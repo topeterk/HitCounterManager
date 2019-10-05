@@ -28,7 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ptc = new HitCounterManager.ProfileTabControl();
+            this.menu_ptc = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.pvc = new HitCounterManager.ProfileViewControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -38,6 +42,7 @@
             this.txtPredecessorTitle = new System.Windows.Forms.TextBox();
             this.cbShowPredecessor = new System.Windows.Forms.CheckBox();
             this.ptc.SuspendLayout();
+            this.menu_ptc.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.gpSuccession.SuspendLayout();
             this.SuspendLayout();
@@ -48,17 +53,44 @@
             this.ptc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ptc.ContextMenuStrip = this.menu_ptc;
             this.ptc.Controls.Add(this.tabPage1);
             this.ptc.Controls.Add(this.tabPage2);
             this.ptc.Controls.Add(this.tabPage3);
             this.ptc.Location = new System.Drawing.Point(0, 0);
             this.ptc.Name = "ptc";
             this.ptc.SelectedIndex = 0;
+            this.ptc.ShowToolTips = true;
             this.ptc.Size = new System.Drawing.Size(394, 302);
             this.ptc.TabIndex = 20;
             this.ptc.ProfileTabSelect += new System.EventHandler<HitCounterManager.ProfileTabControl.ProfileTabSelectAction>(this.ProfileTabSelect);
             this.ptc.ProfileChanged += new System.EventHandler<System.EventArgs>(this.ProfileChangedHandler);
             this.ptc.SelectedProfileChanged += new System.EventHandler<HitCounterManager.ProfileViewControl.SelectedProfileChangedCauseType>(this.SelectedProfileChanged);
+            // 
+            // menu_ptc
+            // 
+            this.menu_ptc.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addTabToolStripMenuItem,
+            this.removeToolStripMenuItem});
+            this.menu_ptc.Name = "menu_ptc";
+            this.menu_ptc.Size = new System.Drawing.Size(118, 48);
+            this.menu_ptc.Opening += new System.ComponentModel.CancelEventHandler(this.Menu_ptc_Opening);
+            // 
+            // addTabToolStripMenuItem
+            // 
+            this.addTabToolStripMenuItem.Name = "addTabToolStripMenuItem";
+            this.addTabToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.addTabToolStripMenuItem.Text = "Add tab";
+            this.addTabToolStripMenuItem.ToolTipText = "Creates a new tab";
+            this.addTabToolStripMenuItem.Click += new System.EventHandler(this.AddTabToolStripMenuItem_Click);
+            // 
+            // removeToolStripMenuItem
+            // 
+            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.removeToolStripMenuItem.Text = "Remove";
+            this.removeToolStripMenuItem.ToolTipText = "Removes a tab";
+            this.removeToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
             // 
             // tabPage1
             // 
@@ -87,6 +119,7 @@
             this.tabPage2.Size = new System.Drawing.Size(386, 276);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "+";
+            this.tabPage2.ToolTipText = "Click on this tab to create a new one";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage3
@@ -96,6 +129,7 @@
             this.tabPage3.Size = new System.Drawing.Size(386, 276);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "-";
+            this.tabPage3.ToolTipText = "Drag and drop a tab on this tab to remove it";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // gpSuccession
@@ -154,6 +188,7 @@
             this.Name = "ProfilesControl";
             this.Size = new System.Drawing.Size(394, 367);
             this.ptc.ResumeLayout(false);
+            this.menu_ptc.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.gpSuccession.ResumeLayout(false);
             this.gpSuccession.PerformLayout();
@@ -172,5 +207,8 @@
         private System.Windows.Forms.Button btnSuccessionVisibility;
         private System.Windows.Forms.TextBox txtPredecessorTitle;
         private System.Windows.Forms.CheckBox cbShowPredecessor;
+        private System.Windows.Forms.ContextMenuStrip menu_ptc;
+        private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addTabToolStripMenuItem;
     }
 }

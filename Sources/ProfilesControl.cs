@@ -87,7 +87,22 @@ namespace HitCounterManager
             gpSuccession.Top -= diff;
         }
 
+        private void AddTabToolStripMenuItem_Click(object sender, EventArgs e) { ptc.ProfileTabCreateAndSelect(); }
+        private void RemoveToolStripMenuItem_Click(object sender, EventArgs e) { ptc.ProfileTabRemove(ptc.SelectedTab); }
+
+        private void Menu_ptc_Opening(object sender, CancelEventArgs e)
+        {
+            foreach (ToolStripItem item in (sender as ContextMenuStrip).Items)
+            {
+                if (item.Text.Contains("Remove"))
+                {
+                    item.Text = "Remove active tab: " + ptc.SelectedTab.Text;
+                }
+            }
+        }
+
         #endregion
+
         #region Profile related
 
         private ProfileViewControl SelectedProfileViewControl { get { return ptc.SelectedProfileViewControl; } }
