@@ -499,7 +499,7 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:HitCounterManager"
-        "ProductCode" = "8:{CC557C28-4CCC-4BBA-AF04-694CCF47C274}"
+        "ProductCode" = "8:{DC92BC82-D814-490A-A991-572C6E43D418}"
         "PackageCode" = "8:{50C078B6-2223-405F-B9F7-E0A8A9368D11}"
         "UpgradeCode" = "8:{E37C963F-DDC5-4776-80DD-7B583A48415F}"
         "AspNetVersion" = "8:4.0.30319.0"
@@ -507,7 +507,7 @@
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.18.0"
+        "ProductVersion" = "8:1.19.0"
         "Manufacturer" = "8:GunriderProductions"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
