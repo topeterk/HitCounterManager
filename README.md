@@ -37,7 +37,7 @@ To see **how to** use the application watch the **[Tutorial on YouTube](https://
   * Keep track of each profile how many runs/attempts your already started
   * Multiple profiles can be created and switched very easily (e.g. multiple games for Dark Souls trilogy runs)
     * Switching to other profiles will remember the hit counts of the currently selected profile
-* Combine profiles in a succession, e.g. for _Dark Souls Trilogy_ (means: take over hits from last run)
+* Build easy customizable succession, e.g. _Dark Souls Trilogy_
 * Keep track of furthest progress in the current session
 
 ### Pre-defined profiles
@@ -50,6 +50,7 @@ To see **how to** use the application watch the **[Tutorial on YouTube](https://
 * Salt and Sanctuary
 * Sekiro
 * The Surge + A walk in the park
+* The Surge 2
 
 ### Design configurations
 
@@ -82,6 +83,8 @@ The appearance of all designs can be modified via GUI on the fly:
   * Enable/Disable transparency
   * Enable/Disable colored split names
   * Enable/Disable superscripted PB sum
+  * Enable/Disable roman numerals
+  * Enable/Disable highlighting of current split
 * Custom design
   
   * Switch to a different font
@@ -151,6 +154,10 @@ Search for one of your liking and see the embedded font and/or CSS instruction a
     * UniversialAccessFromFilesUrls (Set to **Enabled**, _but should also work when disabled_)
     * WebSecurity (Set to **Disabled**, _but should also work when enabled_)
 
+### Twitch Studio Beta
+* Tested with version v0.74.3: When added an embedded website and configured the *HitCounterGui.html* it shows an error during the loading process. Twitch is looking at this problem as a bug report was issued and also communicated via discord. In future versions this should work as intended without coniguration of any additional settings.
+> Workaround: When the application *(TwitchStudio)* starts the hit counter loads correctly. A refresh or the initial creation seems to have issues only. So, restarting the software may work for now, as long as the configuration/scenes/layers are not beeing modified.
+
 ## Modders and developers
 
 ### Using standalone web browser instead of broadcasting software
@@ -182,7 +189,6 @@ Thanks to (in alphabetical order):
 * [Dinossindgeil](https://www.twitch.tv/dinossindgeil)
 * [DonnyRekt](https://www.twitch.tv/donnyrekt)
 * [FaraazKhan](https://www.twitch.tv/faraazkhan)
-* [GUD_LAK](https://www.twitch.tv/gud_lak)
 * [Kazoodle](https://www.twitch.tv/kazoodle)
 * [Sayvi](https://www.twitch.tv/sayvi)
 * [SlipperySuzie](https://www.twitch.tv/slipperysuzie)
@@ -191,6 +197,7 @@ Thanks to (in alphabetical order):
 * [The_Happy_Hob](https://www.twitch.tv/the_happy_hob)
 * [TigerG92](https://www.twitch.tv/tigerg92)
 * Every member of the [Hitless team on Twitch](https://www.twitch.tv/team/hitless)
+* Every contributor and contestor of the [German No Hit League](https://www.dinossindgeil.de)
 * And also all the other great challenge runners out there that I cannot name here all.
   
 > Praise the sun!  :sunny: . . . :fire: . . .  :running: :dash: 
