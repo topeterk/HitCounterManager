@@ -141,7 +141,7 @@ namespace HitCounterManager
 
             // As the designer is used, we have at least one tab already existing, so only further tabs must be created
             for (int i = 1; i < succession.SuccessionList.Count; i++)
-                ptc.ProfileTabCreate();
+                ptc.ProfileTabCreateAndSelect();
 
             // Load profile lists into all tabs and select previous selected profiles
             for (int i = 0; i < succession.SuccessionList.Count; i++)
@@ -153,6 +153,7 @@ namespace HitCounterManager
 
             // Select the last user selected tab
             ptc.SelectTab(succession.ActiveIndex);
+            ptc.InitDone = true;
 
             Ready = true;
         }

@@ -127,6 +127,8 @@ namespace HitCounterManager
 
         #region Profile related implementation
 
+        public bool InitDone = false;
+
         public void InitializeProfileTabControl()
         {
             SelectedProfileViewControl = ProfileViewControls[0]; // the only one created by designer
@@ -187,7 +189,10 @@ namespace HitCounterManager
 
         /// <summary>
         /// Creates a new ProfileViewControl in a new tab.
-        /// For user controlled tab creation use ProfileTabCreateAndSelect instead!
+        /// Reminder: If the tab is not selected after creation, the control's initialization is postponed!
+        ///           "Controls contained in a TabPage are not created until the tab page is shown,
+        ///           and any data bindings in these controls are not activated until the tab page is shown."
+        ///           Microsoft - https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.tabpage?view=netframework-4.8
         /// </summary>
         /// <returns>Created instance</returns>
         public ProfileViewControl ProfileTabCreate()
@@ -302,7 +307,7 @@ namespace HitCounterManager
                     return;
                 }
 
-                if (!SuccessionActive) // Show initial warning message only when succession is not already active
+                if (!SuccessionActive && InitDone) // Show initial warning message only when succession is not already active (and not during initialization)
                 {
                     DialogResult result = MessageBox.Show(
                         "Opening further tabs combine multiple profiles into one run. " +
