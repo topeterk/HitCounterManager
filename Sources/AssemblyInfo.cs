@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("HitCounterManager")]
-[assembly: AssemblyCopyright("Copyright © Peter Kirmeier 2019")]
+[assembly: AssemblyCopyright("Copyright © Peter Kirmeier 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
