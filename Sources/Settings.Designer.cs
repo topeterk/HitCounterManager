@@ -722,9 +722,9 @@
             this.cbSuccessionToProgressBar.Size = new System.Drawing.Size(110, 17);
             this.cbSuccessionToProgressBar.TabIndex = 5;
             this.cbSuccessionToProgressBar.Text = "Track succession";
-            this.ToolTip1.SetToolTip(this.cbSuccessionToProgressBar, "When selected the progress bar is based on the succession (all tabs with all sele" +
-        "cted profiles).\r\nNot selected the progress bar shows only the currently selected" +
-        " profile.\r\n");
+            this.ToolTip1.SetToolTip(this.cbSuccessionToProgressBar, "When selected, the progress bar is based on the succession (all tabs with all sel" +
+        "ected profiles).\r\nNot selected, the progress bar shows only the currently select" +
+        "ed profile.\r\n");
             this.cbSuccessionToProgressBar.UseVisualStyleBackColor = true;
             this.cbSuccessionToProgressBar.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
