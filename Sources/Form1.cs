@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2019 Peter Kirmeier
+//Copyright (c) 2016-2020 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -181,6 +181,7 @@ namespace HitCounterManager
 
         private void btnSave_Click(object sender, EventArgs e) { SaveSettings(); }
         private void btnWeb_Click(object sender, EventArgs e) { System.Diagnostics.Process.Start("https://github.com/topeterk/HitCounterManager"); }
+        private void btnTeamHitless_Click(object sender, EventArgs e) { System.Diagnostics.Process.Start("https://discord.gg/4E7cSK7"); }
         private void btnCheckVersion_Click(object sender, EventArgs e)
         {
             try
