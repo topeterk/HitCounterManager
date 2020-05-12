@@ -135,19 +135,19 @@ Search for one of your liking and see the embedded font and/or CSS instruction a
 * Add a **Browser Source** to your scene
 * Check the **Local file** checkbox
 * Insert the HTML's filepath of a design file into the **Local File** field.
-> Example: _C:\MyHitCounter\Designs\HitCounterNumeric.html_  
+> Example: _C:\MyHitCounter\Designs\HitCounterGui.html_  
 > Note: It was tested with some beta versions up to 0.11.1, so the instruction _may_ change in newer versions.
 
 ### OBS Studio
 * Add a **Browser Source** to your scene
 * Insert the HTML's filepath of a design file into the **URL** field including this prefix that allows access to local files: **http://absolute/**
-> Example: _http://absolute/C:/MyHitCounter/Designs/HitCounterNumeric.html_
+> Example: _http://absolute/C:/MyHitCounter/Designs/HitCounterGui.html_
 
 ### Open Broadcaster Software (OBS, _not_ OBS Studio!)
 * Add a **CLR Browser** to your scene
 * The opacity can be set to 100% because the background will be rendered transparent, so no color-keying is required.
 * Insert the HTML's filepath of a design file into the **URL** field.
-> Example: _C:\MyHitCounter\Designs\HitCounterNumeric.html_
+> Example: _C:\MyHitCounter\Designs\HitCounterGui.html_
 * If you experience troubles with the rendering of the HTML file (flickering or misplacement), try removing the CSS overrides of the CLR Brower instance.
 * When no data is displayed, there could be a problem with the cross-domain security settings. This is because the HTMLs are rendered via file:// protocol instead of http://, so maybe you need to change some deeper settings of the CLR browser under _OBS -> Settings -> Browser -> Instance -> ..._
     * FileAccessFromFilesUrls (Set to **Enabled**)
@@ -181,6 +181,9 @@ Eventually it means **you are 100% free in the design of your hit counter**.
 
 ## Anything is missing, something is annoying/can be improved or you just found a bug?
 Message me via GitHub / e-mail or simply open an issue and I will try to help you out. Alternatively you can also send me a whipser on Twitch: [GeneralGunrider](https://www.twitch.tv/generalgunrider)
+
+## Community
+There is a great growing community on Discord, called Team Hitless. If you are seeking for help, guidance and just talks about no hit runs, you can get there by this link: [Team Hitless at Discord](https://discord.gg/4E7cSK7)
 
 ## Special thanks
 I would never have created this tool without the inspiration by watching the awesome 0 hit and no death runners...  
