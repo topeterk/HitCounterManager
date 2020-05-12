@@ -89,6 +89,7 @@
             this.radioPurposeChecklist = new System.Windows.Forms.RadioButton();
             this.radioPurposeDeathCounter = new System.Windows.Forms.RadioButton();
             this.radioPurposeSplitCounter = new System.Windows.Forms.RadioButton();
+            this.radioPurposeNoDeath = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tab_filepaths = new System.Windows.Forms.TabPage();
             this.Label7 = new System.Windows.Forms.Label();
@@ -830,6 +831,7 @@
             this.groupBox4.Controls.Add(this.radioPurposeChecklist);
             this.groupBox4.Controls.Add(this.radioPurposeDeathCounter);
             this.groupBox4.Controls.Add(this.radioPurposeSplitCounter);
+            this.groupBox4.Controls.Add(this.radioPurposeNoDeath);
             this.groupBox4.Location = new System.Drawing.Point(6, 13);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(200, 124);
@@ -840,22 +842,24 @@
             // radioPurposeChecklist
             // 
             this.radioPurposeChecklist.AutoSize = true;
-            this.radioPurposeChecklist.Location = new System.Drawing.Point(7, 66);
+            this.radioPurposeChecklist.Location = new System.Drawing.Point(7, 43);
             this.radioPurposeChecklist.Name = "radioPurposeChecklist";
             this.radioPurposeChecklist.Size = new System.Drawing.Size(68, 17);
-            this.radioPurposeChecklist.TabIndex = 2;
+            this.radioPurposeChecklist.TabIndex = 1;
             this.radioPurposeChecklist.Text = "Checklist";
+            this.ToolTip1.SetToolTip(this.radioPurposeChecklist, "Marking splits like on a checklist");
             this.radioPurposeChecklist.UseVisualStyleBackColor = true;
             this.radioPurposeChecklist.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // radioPurposeDeathCounter
             // 
             this.radioPurposeDeathCounter.AutoSize = true;
-            this.radioPurposeDeathCounter.Location = new System.Drawing.Point(7, 43);
+            this.radioPurposeDeathCounter.Location = new System.Drawing.Point(7, 89);
             this.radioPurposeDeathCounter.Name = "radioPurposeDeathCounter";
             this.radioPurposeDeathCounter.Size = new System.Drawing.Size(93, 17);
-            this.radioPurposeDeathCounter.TabIndex = 1;
+            this.radioPurposeDeathCounter.TabIndex = 3;
             this.radioPurposeDeathCounter.Text = "Death counter";
+            this.ToolTip1.SetToolTip(this.radioPurposeDeathCounter, "Very simple death counter");
             this.radioPurposeDeathCounter.UseVisualStyleBackColor = true;
             this.radioPurposeDeathCounter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
@@ -869,8 +873,20 @@
             this.radioPurposeSplitCounter.TabIndex = 0;
             this.radioPurposeSplitCounter.TabStop = true;
             this.radioPurposeSplitCounter.Text = "Split counter";
+            this.ToolTip1.SetToolTip(this.radioPurposeSplitCounter, "Traditional no hit counter");
             this.radioPurposeSplitCounter.UseVisualStyleBackColor = true;
             this.radioPurposeSplitCounter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // radioPurposeNoDeath
+            // 
+            this.radioPurposeNoDeath.AutoSize = true;
+            this.radioPurposeNoDeath.Location = new System.Drawing.Point(7, 66);
+            this.radioPurposeNoDeath.Name = "radioPurposeNoDeath";
+            this.radioPurposeNoDeath.Size = new System.Drawing.Size(71, 17);
+            this.radioPurposeNoDeath.TabIndex = 2;
+            this.radioPurposeNoDeath.Text = "No Death";
+            this.ToolTip1.SetToolTip(this.radioPurposeNoDeath, "Track how far you get without dying");
+            this.radioPurposeNoDeath.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -1201,6 +1217,7 @@
         private System.Windows.Forms.RadioButton radioPurposeChecklist;
         private System.Windows.Forms.RadioButton radioPurposeDeathCounter;
         private System.Windows.Forms.RadioButton radioPurposeSplitCounter;
+        private System.Windows.Forms.RadioButton radioPurposeNoDeath;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.CheckBox cbHighContrastNames;
