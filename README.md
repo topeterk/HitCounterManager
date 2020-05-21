@@ -132,31 +132,16 @@ Search for one of your liking and see the embedded font and/or CSS instruction a
 ## Setting up Broadcasting software
 
 ### Streamlabs OBS (SLOBS)
-* Add a **Browser Source** to your scene
-* Check the **Local file** checkbox
-* Insert the HTML's filepath of a design file into the **Local File** field.
-> Example: _C:\MyHitCounter\Designs\HitCounterGui.html_  
-> Note: It was tested with some beta versions up to 0.11.1, so the instruction _may_ change in newer versions.
+* Moved to the Wiki: **[Setup Guide](../../wiki/SetupGuide#streamlabs-obs)**
 
 ### OBS Studio
-* Add a **Browser Source** to your scene
-* Insert the HTML's filepath of a design file into the **URL** field including this prefix that allows access to local files: **http://absolute/**
-> Example: _http://absolute/C:/MyHitCounter/Designs/HitCounterGui.html_
+* Moved to the Wiki: **[Setup Guide](../../wiki/SetupGuide#obs-studio)**
 
 ### Open Broadcaster Software (OBS, _not_ OBS Studio!)
-* Add a **CLR Browser** to your scene
-* The opacity can be set to 100% because the background will be rendered transparent, so no color-keying is required.
-* Insert the HTML's filepath of a design file into the **URL** field.
-> Example: _C:\MyHitCounter\Designs\HitCounterGui.html_
-* If you experience troubles with the rendering of the HTML file (flickering or misplacement), try removing the CSS overrides of the CLR Brower instance.
-* When no data is displayed, there could be a problem with the cross-domain security settings. This is because the HTMLs are rendered via file:// protocol instead of http://, so maybe you need to change some deeper settings of the CLR browser under _OBS -> Settings -> Browser -> Instance -> ..._
-    * FileAccessFromFilesUrls (Set to **Enabled**)
-    * UniversialAccessFromFilesUrls (Set to **Enabled**, _but should also work when disabled_)
-    * WebSecurity (Set to **Disabled**, _but should also work when enabled_)
+* Moved to the Wiki: **[Setup Guide](../../wiki/SetupGuide#open-broadcaster-software)**
 
 ### Twitch Studio Beta
-* Tested with version v0.74.3: When added an embedded website and configured the *HitCounterGui.html* it shows an error during the loading process. Twitch is looking at this problem as a bug report was issued and also communicated via discord. In future versions this should work as intended without coniguration of any additional settings.
-> Workaround: When the application *(TwitchStudio)* starts the hit counter loads correctly. A refresh or the initial creation seems to have issues only. So, restarting the software may work for now, as long as the configuration/scenes/layers are not beeing modified.
+* Moved to the Wiki: **[Setup Guide](../../wiki/SetupGuide#twitch-studio)**
 
 ## Modders and developers
 
