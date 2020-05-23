@@ -100,7 +100,6 @@
             this.tabPage1.Size = new System.Drawing.Size(386, 276);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "1";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // pvc
             // 
@@ -120,7 +119,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "+";
             this.tabPage2.ToolTipText = "Click on this tab to create a new one";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
@@ -130,7 +128,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "-";
             this.tabPage3.ToolTipText = "Drag and drop a tab on this tab to remove it";
-            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // gpSuccession
             // 

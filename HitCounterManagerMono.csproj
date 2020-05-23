@@ -163,6 +163,7 @@
     <Content Include="Sources\HitCounter.html" />
     <Content Include="Sources\HitCounter.template" />
     <Content Include="Sources\HitCounterManagerInit.xml" />
+    <None Include="Images\20p_logo_black.png" />
     <None Include="Images\icons8-about-20.png" />
     <None Include="Images\icons8-add-20.png" />
     <None Include="Images\icons8-add-list-20.png" />
@@ -182,6 +183,7 @@
     <None Include="Images\icons8-scroll-up-20.png" />
     <None Include="Images\icons8-settings-20.png" />
     <None Include="Images\icons8-staircase-32.png" />
+    <None Include="Images\icons8-taschenlampe-20.png" />
     <None Include="Images\icons8-trash-20.png" />
     <None Include="Images\icons8-trophy-32.png" />
     <None Include="Images\icons8-watch-your-step-32.png" />

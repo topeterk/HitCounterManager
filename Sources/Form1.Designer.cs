@@ -47,6 +47,7 @@
             this.btnInsertSplit = new System.Windows.Forms.Button();
             this.btnLock = new System.Windows.Forms.Button();
             this.btnOnTop = new System.Windows.Forms.Button();
+            this.btnDarkMode = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnPB = new System.Windows.Forms.Button();
             this.btnHit = new System.Windows.Forms.Button();
@@ -62,6 +63,7 @@
             // 
             // btnSettings
             // 
+            this.btnSettings.BackColor = System.Drawing.SystemColors.Control;
             this.btnSettings.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_settings_20;
             this.btnSettings.FlatAppearance.BorderSize = 0;
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -70,11 +72,12 @@
             this.btnSettings.Size = new System.Drawing.Size(20, 20);
             this.btnSettings.TabIndex = 0;
             this.ToolTip1.SetToolTip(this.btnSettings, "Settings");
-            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.UseVisualStyleBackColor = false;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // btnSave
             // 
+            this.btnSave.BackColor = System.Drawing.SystemColors.Control;
             this.btnSave.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_save_20;
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -83,11 +86,12 @@
             this.btnSave.Size = new System.Drawing.Size(20, 20);
             this.btnSave.TabIndex = 1;
             this.ToolTip1.SetToolTip(this.btnSave, "Save");
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnWeb
             // 
+            this.btnWeb.BackColor = System.Drawing.SystemColors.Control;
             this.btnWeb.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_website_20;
             this.btnWeb.FlatAppearance.BorderSize = 0;
             this.btnWeb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -96,11 +100,12 @@
             this.btnWeb.Size = new System.Drawing.Size(20, 20);
             this.btnWeb.TabIndex = 2;
             this.ToolTip1.SetToolTip(this.btnWeb, "Help / Website");
-            this.btnWeb.UseVisualStyleBackColor = true;
+            this.btnWeb.UseVisualStyleBackColor = false;
             this.btnWeb.Click += new System.EventHandler(this.btnWeb_Click);
             // 
             // btnTeamHitless
             // 
+            this.btnTeamHitless.BackColor = System.Drawing.SystemColors.Control;
             this.btnTeamHitless.BackgroundImage = global::HitCounterManager.Sources.Resources._20p_logo_black;
             this.btnTeamHitless.FlatAppearance.BorderSize = 0;
             this.btnTeamHitless.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -109,11 +114,12 @@
             this.btnTeamHitless.Size = new System.Drawing.Size(20, 20);
             this.btnTeamHitless.TabIndex = 3;
             this.ToolTip1.SetToolTip(this.btnTeamHitless, "Team Hitless Discord\r\n(Community all about no hit runs)");
-            this.btnTeamHitless.UseVisualStyleBackColor = true;
+            this.btnTeamHitless.UseVisualStyleBackColor = false;
             this.btnTeamHitless.Click += new System.EventHandler(this.btnTeamHitless_Click);
             // 
             // btnCheckVersion
             // 
+            this.btnCheckVersion.BackColor = System.Drawing.SystemColors.Control;
             this.btnCheckVersion.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_cloud_20;
             this.btnCheckVersion.FlatAppearance.BorderSize = 0;
             this.btnCheckVersion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -122,11 +128,12 @@
             this.btnCheckVersion.Size = new System.Drawing.Size(20, 20);
             this.btnCheckVersion.TabIndex = 4;
             this.ToolTip1.SetToolTip(this.btnCheckVersion, "Check for a new version");
-            this.btnCheckVersion.UseVisualStyleBackColor = true;
+            this.btnCheckVersion.UseVisualStyleBackColor = false;
             this.btnCheckVersion.Click += new System.EventHandler(this.btnCheckVersion_Click);
             // 
             // btnAbout
             // 
+            this.btnAbout.BackColor = System.Drawing.SystemColors.Control;
             this.btnAbout.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_about_20;
             this.btnAbout.FlatAppearance.BorderSize = 0;
             this.btnAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -135,11 +142,12 @@
             this.btnAbout.Size = new System.Drawing.Size(20, 20);
             this.btnAbout.TabIndex = 5;
             this.ToolTip1.SetToolTip(this.btnAbout, "About");
-            this.btnAbout.UseVisualStyleBackColor = true;
+            this.btnAbout.UseVisualStyleBackColor = false;
             this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
             // 
             // btnNew
             // 
+            this.btnNew.BackColor = System.Drawing.SystemColors.Control;
             this.btnNew.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_add_20;
             this.btnNew.FlatAppearance.BorderSize = 0;
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -148,11 +156,12 @@
             this.btnNew.Size = new System.Drawing.Size(20, 20);
             this.btnNew.TabIndex = 6;
             this.ToolTip1.SetToolTip(this.btnNew, "New profile");
-            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.UseVisualStyleBackColor = false;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // btnRename
             // 
+            this.btnRename.BackColor = System.Drawing.SystemColors.Control;
             this.btnRename.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_edit_20;
             this.btnRename.FlatAppearance.BorderSize = 0;
             this.btnRename.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -161,11 +170,12 @@
             this.btnRename.Size = new System.Drawing.Size(20, 20);
             this.btnRename.TabIndex = 7;
             this.ToolTip1.SetToolTip(this.btnRename, "Rename profile");
-            this.btnRename.UseVisualStyleBackColor = true;
+            this.btnRename.UseVisualStyleBackColor = false;
             this.btnRename.Click += new System.EventHandler(this.btnRename_Click);
             // 
             // btnCopy
             // 
+            this.btnCopy.BackColor = System.Drawing.SystemColors.Control;
             this.btnCopy.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_copy_20;
             this.btnCopy.FlatAppearance.BorderSize = 0;
             this.btnCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -174,11 +184,12 @@
             this.btnCopy.Size = new System.Drawing.Size(20, 20);
             this.btnCopy.TabIndex = 8;
             this.ToolTip1.SetToolTip(this.btnCopy, "Copy profile");
-            this.btnCopy.UseVisualStyleBackColor = true;
+            this.btnCopy.UseVisualStyleBackColor = false;
             this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
             // 
             // btnDelete
             // 
+            this.btnDelete.BackColor = System.Drawing.SystemColors.Control;
             this.btnDelete.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_trash_20;
             this.btnDelete.FlatAppearance.BorderSize = 0;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -187,11 +198,12 @@
             this.btnDelete.Size = new System.Drawing.Size(20, 20);
             this.btnDelete.TabIndex = 9;
             this.ToolTip1.SetToolTip(this.btnDelete, "Delete profile");
-            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAttempts
             // 
+            this.btnAttempts.BackColor = System.Drawing.SystemColors.Control;
             this.btnAttempts.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_counter_20;
             this.btnAttempts.FlatAppearance.BorderSize = 0;
             this.btnAttempts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -200,11 +212,12 @@
             this.btnAttempts.Size = new System.Drawing.Size(20, 20);
             this.btnAttempts.TabIndex = 10;
             this.ToolTip1.SetToolTip(this.btnAttempts, "Set run number (amount of attempts) manually");
-            this.btnAttempts.UseVisualStyleBackColor = true;
+            this.btnAttempts.UseVisualStyleBackColor = false;
             this.btnAttempts.Click += new System.EventHandler(this.btnAttempts_Click);
             // 
             // btnUp
             // 
+            this.btnUp.BackColor = System.Drawing.SystemColors.Control;
             this.btnUp.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_scroll_up_20;
             this.btnUp.FlatAppearance.BorderSize = 0;
             this.btnUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -213,11 +226,12 @@
             this.btnUp.Size = new System.Drawing.Size(20, 20);
             this.btnUp.TabIndex = 11;
             this.ToolTip1.SetToolTip(this.btnUp, "Move selected split UP");
-            this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.UseVisualStyleBackColor = false;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
             // btnDown
             // 
+            this.btnDown.BackColor = System.Drawing.SystemColors.Control;
             this.btnDown.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_scroll_down_20;
             this.btnDown.FlatAppearance.BorderSize = 0;
             this.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -226,11 +240,12 @@
             this.btnDown.Size = new System.Drawing.Size(20, 20);
             this.btnDown.TabIndex = 12;
             this.ToolTip1.SetToolTip(this.btnDown, "Move selected split DOWN");
-            this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.UseVisualStyleBackColor = false;
             this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
             // btnInsertSplit
             // 
+            this.btnInsertSplit.BackColor = System.Drawing.SystemColors.Control;
             this.btnInsertSplit.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_add_list_20;
             this.btnInsertSplit.FlatAppearance.BorderSize = 0;
             this.btnInsertSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -239,11 +254,12 @@
             this.btnInsertSplit.Size = new System.Drawing.Size(20, 20);
             this.btnInsertSplit.TabIndex = 13;
             this.ToolTip1.SetToolTip(this.btnInsertSplit, "Insert new split above selected");
-            this.btnInsertSplit.UseVisualStyleBackColor = true;
+            this.btnInsertSplit.UseVisualStyleBackColor = false;
             this.btnInsertSplit.Click += new System.EventHandler(this.BtnInsertSplit_Click);
             // 
             // btnLock
             // 
+            this.btnLock.BackColor = System.Drawing.SystemColors.Control;
             this.btnLock.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_padlock_20;
             this.btnLock.FlatAppearance.BorderSize = 0;
             this.btnLock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -252,11 +268,12 @@
             this.btnLock.Size = new System.Drawing.Size(20, 20);
             this.btnLock.TabIndex = 14;
             this.ToolTip1.SetToolTip(this.btnLock, "(Un)lock split/profile editing");
-            this.btnLock.UseVisualStyleBackColor = true;
+            this.btnLock.UseVisualStyleBackColor = false;
             this.btnLock.Click += new System.EventHandler(this.BtnSplitLock_Click);
             // 
             // btnOnTop
             // 
+            this.btnOnTop.BackColor = System.Drawing.SystemColors.Control;
             this.btnOnTop.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_pin_20;
             this.btnOnTop.FlatAppearance.BorderSize = 0;
             this.btnOnTop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -265,8 +282,22 @@
             this.btnOnTop.Size = new System.Drawing.Size(20, 20);
             this.btnOnTop.TabIndex = 15;
             this.ToolTip1.SetToolTip(this.btnOnTop, "Set window always on top");
-            this.btnOnTop.UseVisualStyleBackColor = true;
+            this.btnOnTop.UseVisualStyleBackColor = false;
             this.btnOnTop.Click += new System.EventHandler(this.BtnOnTop_Click);
+            // 
+            // btnDarkMode
+            // 
+            this.btnDarkMode.BackColor = System.Drawing.SystemColors.Control;
+            this.btnDarkMode.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_taschenlampe_20;
+            this.btnDarkMode.FlatAppearance.BorderSize = 0;
+            this.btnDarkMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDarkMode.Location = new System.Drawing.Point(474, 4);
+            this.btnDarkMode.Name = "btnDarkMode";
+            this.btnDarkMode.Size = new System.Drawing.Size(20, 20);
+            this.btnDarkMode.TabIndex = 16;
+            this.ToolTip1.SetToolTip(this.btnDarkMode, "Dark mode / Light mode");
+            this.btnDarkMode.UseVisualStyleBackColor = false;
+            this.btnDarkMode.Click += new System.EventHandler(this.btnDarkMode_Click);
             // 
             // btnReset
             // 
@@ -276,7 +307,7 @@
             this.btnReset.Location = new System.Drawing.Point(12, 30);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 40);
-            this.btnReset.TabIndex = 16;
+            this.btnReset.TabIndex = 17;
             this.ToolTip1.SetToolTip(this.btnReset, "RESET the current run");
             this.btnReset.UseVisualStyleBackColor = false;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
@@ -289,7 +320,7 @@
             this.btnPB.Location = new System.Drawing.Point(93, 30);
             this.btnPB.Name = "btnPB";
             this.btnPB.Size = new System.Drawing.Size(75, 40);
-            this.btnPB.TabIndex = 17;
+            this.btnPB.TabIndex = 18;
             this.ToolTip1.SetToolTip(this.btnPB, "Record run as PB (personal best)");
             this.btnPB.UseVisualStyleBackColor = false;
             this.btnPB.Click += new System.EventHandler(this.btnPB_Click);
@@ -304,7 +335,7 @@
             this.btnHit.Location = new System.Drawing.Point(174, 30);
             this.btnHit.Name = "btnHit";
             this.btnHit.Size = new System.Drawing.Size(355, 40);
-            this.btnHit.TabIndex = 18;
+            this.btnHit.TabIndex = 19;
             this.ToolTip1.SetToolTip(this.btnHit, "Count a HIT (boss) on the current split");
             this.btnHit.UseVisualStyleBackColor = false;
             this.btnHit.Click += new System.EventHandler(this.btnHit_Click);
@@ -318,7 +349,7 @@
             this.btnWayHit.Location = new System.Drawing.Point(535, 30);
             this.btnWayHit.Name = "btnWayHit";
             this.btnWayHit.Size = new System.Drawing.Size(75, 40);
-            this.btnWayHit.TabIndex = 19;
+            this.btnWayHit.TabIndex = 20;
             this.ToolTip1.SetToolTip(this.btnWayHit, "Count a HIT (way) on the current split");
             this.btnWayHit.UseVisualStyleBackColor = false;
             this.btnWayHit.Click += new System.EventHandler(this.btnWayHit_Click);
@@ -332,7 +363,7 @@
             this.btnSplit.Location = new System.Drawing.Point(616, 30);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(75, 40);
-            this.btnSplit.TabIndex = 20;
+            this.btnSplit.TabIndex = 21;
             this.ToolTip1.SetToolTip(this.btnSplit, "Jump to the next SPLIT");
             this.btnSplit.UseVisualStyleBackColor = false;
             this.btnSplit.Click += new System.EventHandler(this.btnSplit_Click);
@@ -399,7 +430,7 @@
             this.profCtrl.Location = new System.Drawing.Point(14, 96);
             this.profCtrl.Name = "profCtrl";
             this.profCtrl.Size = new System.Drawing.Size(677, 367);
-            this.profCtrl.TabIndex = 21;
+            this.profCtrl.TabIndex = 22;
             this.profCtrl.ProfileChanged += new System.EventHandler<System.EventArgs>(this.UpdateProgressAndTotals);
             // 
             // Form1
@@ -423,6 +454,7 @@
             this.Controls.Add(this.btnInsertSplit);
             this.Controls.Add(this.btnLock);
             this.Controls.Add(this.btnOnTop);
+            this.Controls.Add(this.btnDarkMode);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnPB);
             this.Controls.Add(this.btnHit);
@@ -462,6 +494,7 @@
         private System.Windows.Forms.Button btnInsertSplit;
         private System.Windows.Forms.Button btnLock;
         private System.Windows.Forms.Button btnOnTop;
+        private System.Windows.Forms.Button btnDarkMode;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnPB;
         private System.Windows.Forms.Button btnHit;

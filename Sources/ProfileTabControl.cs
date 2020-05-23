@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2019-2019 Peter Kirmeier
+//Copyright (c) 2019-2020 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -227,6 +227,7 @@ namespace HitCounterManager
                     pvc_new.TabIndex = 0;
                     pvc_new.ProfileInfo.ProfileChanged += PVC_ProfileChangedHandler;
                     pvc_new.SelectedProfileChanged += PVC_SelectedProfileChangedHandler;
+                    pvc_new.UpdateDarkMode();
 
                     TabPages[i].Controls.Add(pvc_new);
                     TabPages.Insert(i + 1, "+");

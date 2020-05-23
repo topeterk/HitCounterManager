@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2019 Peter Kirmeier
+//Copyright (c) 2016-2020 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@
 //SOFTWARE.
 
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace HitCounterManager
@@ -68,6 +69,138 @@ namespace HitCounterManager
             }
             return false;
         }
+
+        #region Dark Mode
+        private static Color Control_Light = Color.FromKnownColor(KnownColor.Control);
+        private static Color Control_Dark = Color.FromArgb(255,40,40,40);
+        private static Color Control_Dark_Button =  Color.FromKnownColor(KnownColor.ControlDark);
+
+        private static Color ControlText_Light = Color.FromKnownColor(KnownColor.ControlText);
+        private static Color ControlText_Dark = Color.FromKnownColor(KnownColor.HighlightText);
+        private static Color ControlText_Light_GroupBox = Color.FromKnownColor(KnownColor.HighlightText);
+        private static Color ControlText_Light_DataGridView_Mono = Color.FromKnownColor(KnownColor.HighlightText);
+
+        private static Color AppWorkspace_Light = Color.FromKnownColor(KnownColor.AppWorkspace);
+        private static Color AppWorkspace_Dark = Control_Dark;
+
+        private static Color Window_Light = Color.FromKnownColor(KnownColor.Window);
+        private static Color Window_Dark = Color.FromKnownColor(KnownColor.WindowText);
+
+        private static bool _DarkMode = false;
+        /// <summary>
+        /// Get/Sets the dark mode state: true = Dark mode; false = Light mode.
+        /// Update controls afterwards to apply effect visually!
+        /// </summary>
+        public static bool DarkMode
+        {
+            get { return _DarkMode; }
+            set
+            {
+                _DarkMode = value;
+
+                // Workaround: Mono loads themes and actual colors later,
+                // so we load it on every dark mode change instead of only once during startup
+                Control_Light = Color.FromKnownColor(KnownColor.Control);
+                Control_Dark = Color.FromArgb(255,40,40,40);
+                Control_Dark_Button =  Color.FromKnownColor(KnownColor.ControlDark);
+
+                ControlText_Light = Color.FromKnownColor(KnownColor.ControlText);
+                ControlText_Light_GroupBox = Color.FromKnownColor(KnownColor.HighlightText);
+                ControlText_Light_DataGridView_Mono = Color.FromKnownColor(KnownColor.HighlightText);
+                ControlText_Dark = Color.FromKnownColor(KnownColor.HighlightText);
+
+                AppWorkspace_Light = Color.FromKnownColor(KnownColor.AppWorkspace);
+                AppWorkspace_Dark = Control_Dark;
+
+                Window_Light = Color.FromKnownColor(KnownColor.Window);
+                Window_Dark = Color.FromKnownColor(KnownColor.WindowText);
+            }
+        }
+
+        /// <summary>
+        /// Updates a Control an its children to apply current dark mode settings
+        /// </summary>
+        /// <param name="ctrl">Root Control like a Form</param>
+        public static void UpdateDarkMode(this Control ctrl)
+        {
+            // Workaround: Mono has several different "KnownColors", so there a two or more "Controls"
+            // Therefore, instead of checkin if the color matches a specific one, we have to check the name.
+            try
+            {
+                if (DarkMode)
+                {
+                    // Background..
+
+                    if (ctrl is Button)
+                    {
+                        if (ctrl.BackColor.Name == Control_Light.Name) ctrl.BackColor = Control_Dark_Button;
+                    }
+                    else if (ctrl is DataGridView)
+                    {
+                        DataGridView dgv = (DataGridView)ctrl;
+                        DataGridViewCellStyle dcs = dgv.DefaultCellStyle;
+                        if (dgv.BackgroundColor.Name == AppWorkspace_Light.Name) dgv.BackgroundColor = AppWorkspace_Dark;
+                        if (dcs.BackColor.Name == Window_Light.Name) dcs.BackColor = Window_Dark;
+                        if (dcs.ForeColor.Name == ControlText_Light.Name) dcs.ForeColor = ControlText_Dark; // for Mono required
+                        if (dcs.SelectionForeColor.Name == ControlText_Light_DataGridView_Mono.Name) dcs.ForeColor = ControlText_Dark; // for Mono required
+                        if (dgv.RowHeadersDefaultCellStyle.BackColor.Name == Control_Light.Name) dgv.RowHeadersDefaultCellStyle.BackColor = Control_Dark;
+                        if (dgv.ColumnHeadersDefaultCellStyle.BackColor.Name == Control_Light.Name) dgv.ColumnHeadersDefaultCellStyle.BackColor = Control_Dark;
+                        if (dgv.ColumnHeadersDefaultCellStyle.ForeColor.Name == Window_Dark.Name) dgv.ColumnHeadersDefaultCellStyle.ForeColor = ControlText_Dark;
+                    }
+                    else
+                    {
+                        if (ctrl.BackColor.Name == Control_Light.Name) ctrl.BackColor = Control_Dark;
+                    }
+
+                    // Foreground..
+
+                    // Workaround: The GroupBox text seems using highlight colors, so we force it back to "normal" colors
+                    if (ctrl is GroupBox) { if (ctrl.ForeColor.Name == ControlText_Light_GroupBox.Name) ctrl.ForeColor = ControlText_Dark; }
+
+                    if (ctrl.ForeColor.Name == ControlText_Light.Name) ctrl.ForeColor = ControlText_Dark;
+                }
+                else
+                {
+                    // Background..
+
+                    if (ctrl is Button)
+                    {
+                        if (ctrl.BackColor.Name == Control_Dark_Button.Name) ctrl.BackColor = Control_Light;
+                    }
+                    else if (ctrl is DataGridView)
+                    {
+                        DataGridView dgv = (DataGridView)ctrl;
+                        DataGridViewCellStyle dcs = dgv.DefaultCellStyle;
+                        if (dgv.BackgroundColor.Name == AppWorkspace_Dark.Name) dgv.BackgroundColor = AppWorkspace_Light;
+                        if (dcs.BackColor.Name == Window_Dark.Name) dcs.BackColor = Window_Light;
+                        if (dcs.ForeColor.Name == ControlText_Dark.Name) dcs.ForeColor = ControlText_Light; // for Mono required
+                        if (dcs.SelectionForeColor.Name == ControlText_Dark.Name) dcs.ForeColor = ControlText_Light_DataGridView_Mono; // for Mono required
+                        if (dgv.RowHeadersDefaultCellStyle.BackColor.Name == Control_Dark.Name) dgv.RowHeadersDefaultCellStyle.BackColor = Control_Light;
+                        if (dgv.ColumnHeadersDefaultCellStyle.BackColor.Name == Control_Dark.Name) dgv.ColumnHeadersDefaultCellStyle.BackColor = Control_Light;
+                        if (dgv.ColumnHeadersDefaultCellStyle.ForeColor.Name == ControlText_Dark.Name) dgv.ColumnHeadersDefaultCellStyle.ForeColor = Window_Dark;
+                    }
+                    else
+                    {
+                        if (ctrl.BackColor.Name == Control_Dark.Name) ctrl.BackColor = Control_Light;
+                    }
+                    
+                    // Foreground..
+
+                    if (ctrl.ForeColor.Name == ControlText_Dark.Name) ctrl.ForeColor = ControlText_Light;
+                }
+
+                // Update all childs..
+                foreach (Control item in ctrl.Controls) item.UpdateDarkMode();
+            }
+            catch { }
+            /* TODO:
+            For Windows 10, the value of the AppsUseLightTheme property in the path
+            HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize
+            of the registry specifies wherever Windows is in dark or light mode.
+            AppsUseLightTheme (REG_DWORD): 0 = Dark mode, 1 = Light mode
+            */
+        }
+        #endregion
     }
 
     #region InputBox (replaceable with Microsoft.​Visual​Basic.Interaction.Input​Box)

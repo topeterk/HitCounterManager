@@ -97,17 +97,23 @@ namespace HitCounterManager
             if (this.TopMost = AlwaysOnTop)
                 btnOnTop.BackColor = Color.LimeGreen;
             else
-                btnOnTop.BackColor = Color.FromKnownColor(KnownColor.Control);
+                btnOnTop.BackColor = Color.FromKnownColor(Program.DarkMode ? KnownColor.ControlDark : KnownColor.Control);
         }
 
         private void SetReadOnlyMode(bool IsReadOnly)
         {
+            Color color;
             if (ReadOnlyMode = IsReadOnly)
+            {
                 btnLock.BackColor = Color.Salmon;
+                color = Color.IndianRed;
+            }
             else
-                btnLock.BackColor = Color.FromKnownColor(KnownColor.Control);
+            {
+                color = Color.FromKnownColor(Program.DarkMode ? KnownColor.ControlDark : KnownColor.Control);
+                btnLock.BackColor = color;
+            }
 
-            Color color = Color.FromKnownColor(IsReadOnly ? KnownColor.ControlDark : KnownColor.Control);
             foreach (Button button in new Button[] { btnUp, btnDown, btnInsertSplit, btnNew, btnRename, btnCopy, btnDelete })
             {
                 button.Enabled = !IsReadOnly;
@@ -248,6 +254,7 @@ namespace HitCounterManager
 
         private void BtnOnTop_Click(object sender, EventArgs e) { SetAlwaysOnTop(!this.TopMost); }
         private void BtnSplitLock_Click(object sender, EventArgs e) { SetReadOnlyMode(!profCtrl.ReadOnlyMode); }
+        private void btnDarkMode_Click(object sender, EventArgs e) { Program.DarkMode = !Program.DarkMode; this.UpdateDarkMode(); }
 
         private void btnReset_Click(object sender, EventArgs e) { profCtrl.ProfileReset(); }
         private void btnPB_Click(object sender, EventArgs e) { profCtrl.ProfilePB(); }
