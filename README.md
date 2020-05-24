@@ -39,6 +39,7 @@ To see **how to** use the application watch the **[Tutorial on YouTube](https://
     * Switching to other profiles will remember the hit counts of the currently selected profile
 * Build easy customizable succession, e.g. _Dark Souls Trilogy_
 * Keep track of furthest progress in the current session
+* Dark Mode
 
 ### Pre-defined profiles
 
@@ -60,9 +61,10 @@ The appearance of all designs can be modified via GUI on the fly:
 
 * Purpose
   
-  * Act as split counter _(traditional no hit runs)_
-  * Death counter _(Very basic death counter)_
-  * Checklist _(Simple boss or split checklist)_
+  * Split counter _(Traditional hit counter)_
+  * Checklist _(Marking splits like on a checklist)_
+  * No death _(Track how far you get without dying)_
+  * Death counter _(Very simple death counter)_
 * Choose severity of hits _(ends up in differnt split colors)_
   
   * Any hit counts as a critical hit

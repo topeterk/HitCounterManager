@@ -147,6 +147,18 @@ namespace HitCounterManager
                         if (dgv.ColumnHeadersDefaultCellStyle.BackColor.Name == Control_Light.Name) dgv.ColumnHeadersDefaultCellStyle.BackColor = Control_Dark;
                         if (dgv.ColumnHeadersDefaultCellStyle.ForeColor.Name == Window_Dark.Name) dgv.ColumnHeadersDefaultCellStyle.ForeColor = ControlText_Dark;
                     }
+                    else if (ctrl is TextBox)
+                    {
+                        TextBox tb = (TextBox)ctrl;
+                        if (tb.ReadOnly)
+                        {
+                            if (ctrl.BackColor.Name == Window_Light.Name) ctrl.BackColor = Window_Dark;
+                        }
+                        else
+                        {
+                            if (ctrl.BackColor.Name == Control_Light.Name) ctrl.BackColor = Control_Dark;
+                        }
+                    }
                     else
                     {
                         if (ctrl.BackColor.Name == Control_Light.Name) ctrl.BackColor = Control_Dark;
@@ -157,7 +169,10 @@ namespace HitCounterManager
                     // Workaround: The GroupBox text seems using highlight colors, so we force it back to "normal" colors
                     if (ctrl is GroupBox) { if (ctrl.ForeColor.Name == ControlText_Light_GroupBox.Name) ctrl.ForeColor = ControlText_Dark; }
 
-                    if (ctrl.ForeColor.Name == ControlText_Light.Name) ctrl.ForeColor = ControlText_Dark;
+                    if (!(ctrl is Button))
+                    {
+                        if (ctrl.ForeColor.Name == ControlText_Light.Name) ctrl.ForeColor = ControlText_Dark;
+                    }
                 }
                 else
                 {
@@ -179,14 +194,29 @@ namespace HitCounterManager
                         if (dgv.ColumnHeadersDefaultCellStyle.BackColor.Name == Control_Dark.Name) dgv.ColumnHeadersDefaultCellStyle.BackColor = Control_Light;
                         if (dgv.ColumnHeadersDefaultCellStyle.ForeColor.Name == ControlText_Dark.Name) dgv.ColumnHeadersDefaultCellStyle.ForeColor = Window_Dark;
                     }
+                    else if (ctrl is TextBox)
+                    {
+                        TextBox tb = (TextBox)ctrl;
+                        if (tb.ReadOnly)
+                        {
+                            if (ctrl.BackColor.Name == Window_Dark.Name) ctrl.BackColor = Window_Light;
+                        }
+                        else
+                        {
+                            if (ctrl.BackColor.Name == Control_Dark.Name) ctrl.BackColor = Control_Light;
+                        }
+                    }
                     else
                     {
                         if (ctrl.BackColor.Name == Control_Dark.Name) ctrl.BackColor = Control_Light;
                     }
-                    
+
                     // Foreground..
 
-                    if (ctrl.ForeColor.Name == ControlText_Dark.Name) ctrl.ForeColor = ControlText_Light;
+                    if (!(ctrl is Button))
+                    {
+                        if (ctrl.ForeColor.Name == ControlText_Dark.Name) ctrl.ForeColor = ControlText_Light;
+                    }
                 }
 
                 // Update all childs..

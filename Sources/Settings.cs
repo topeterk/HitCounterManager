@@ -102,6 +102,7 @@ namespace HitCounterManager
             txtOutput.Text = _settings.OutputFile;
 
             ApplyAppearance(sender, null);
+            this.UpdateDarkMode();
             IsFormLoaded = true;
         }
 

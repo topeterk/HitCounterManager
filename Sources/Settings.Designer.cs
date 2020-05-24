@@ -271,7 +271,6 @@
             this.tab_globalshortcuts.Size = new System.Drawing.Size(588, 274);
             this.tab_globalshortcuts.TabIndex = 0;
             this.tab_globalshortcuts.Text = "Global shortcuts";
-            this.tab_globalshortcuts.UseVisualStyleBackColor = true;
             // 
             // txtPB
             // 
@@ -559,6 +558,7 @@
             // 
             this.btnApApply.BackColor = System.Drawing.Color.LightYellow;
             this.btnApApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnApApply.ForeColor = System.Drawing.Color.Black;
             this.btnApApply.Location = new System.Drawing.Point(502, 42);
             this.btnApApply.Name = "btnApApply";
             this.btnApApply.Size = new System.Drawing.Size(55, 72);
@@ -776,7 +776,6 @@
             this.tab_behavior.Size = new System.Drawing.Size(588, 274);
             this.tab_behavior.TabIndex = 1;
             this.tab_behavior.Text = "Behavior";
-            this.tab_behavior.UseVisualStyleBackColor = true;
             // 
             // groupBox5
             // 
@@ -873,7 +872,7 @@
             this.radioPurposeSplitCounter.TabIndex = 0;
             this.radioPurposeSplitCounter.TabStop = true;
             this.radioPurposeSplitCounter.Text = "Split counter";
-            this.ToolTip1.SetToolTip(this.radioPurposeSplitCounter, "Traditional no hit counter");
+            this.ToolTip1.SetToolTip(this.radioPurposeSplitCounter, "Traditional hit counter");
             this.radioPurposeSplitCounter.UseVisualStyleBackColor = true;
             this.radioPurposeSplitCounter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
@@ -884,7 +883,7 @@
             this.radioPurposeNoDeath.Name = "radioPurposeNoDeath";
             this.radioPurposeNoDeath.Size = new System.Drawing.Size(71, 17);
             this.radioPurposeNoDeath.TabIndex = 2;
-            this.radioPurposeNoDeath.Text = "No Death";
+            this.radioPurposeNoDeath.Text = "No death";
             this.ToolTip1.SetToolTip(this.radioPurposeNoDeath, "Track how far you get without dying");
             this.radioPurposeNoDeath.UseVisualStyleBackColor = true;
             // 
@@ -916,7 +915,6 @@
             this.tab_filepaths.Size = new System.Drawing.Size(588, 274);
             this.tab_filepaths.TabIndex = 2;
             this.tab_filepaths.Text = "Filepaths";
-            this.tab_filepaths.UseVisualStyleBackColor = true;
             // 
             // Label7
             // 
@@ -943,7 +941,6 @@
             this.btnOutput.Size = new System.Drawing.Size(74, 23);
             this.btnOutput.TabIndex = 11;
             this.btnOutput.Text = "Search";
-            this.btnOutput.UseVisualStyleBackColor = true;
             this.btnOutput.Click += new System.EventHandler(this.btnOutput_Click);
             // 
             // txtInput
@@ -989,7 +986,6 @@
             this.btnInput.Size = new System.Drawing.Size(74, 23);
             this.btnInput.TabIndex = 8;
             this.btnInput.Text = "Search";
-            this.btnInput.UseVisualStyleBackColor = true;
             this.btnInput.Click += new System.EventHandler(this.btnInput_Click);
             // 
             // OpenFileDialog1
@@ -1021,7 +1017,6 @@
             this.tab_style.Size = new System.Drawing.Size(588, 274);
             this.tab_style.TabIndex = 3;
             this.tab_style.Text = "Style";
-            this.tab_style.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
