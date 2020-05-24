@@ -141,8 +141,11 @@ namespace HitCounterManager
                         DataGridViewCellStyle dcs = dgv.DefaultCellStyle;
                         if (dgv.BackgroundColor.Name == AppWorkspace_Light.Name) dgv.BackgroundColor = AppWorkspace_Dark;
                         if (dcs.BackColor.Name == Window_Light.Name) dcs.BackColor = Window_Dark;
-                        if (dcs.ForeColor.Name == ControlText_Light.Name) dcs.ForeColor = ControlText_Dark; // for Mono required
-                        if (dcs.SelectionForeColor.Name == ControlText_Light_DataGridView_Mono.Name) dcs.ForeColor = ControlText_Dark; // for Mono required
+                        if (OsLayer.Name != "Win") // required for Mono
+                        {
+                            if (dcs.ForeColor.Name == ControlText_Light.Name) dcs.ForeColor = ControlText_Dark;
+                            if (dcs.SelectionForeColor.Name == ControlText_Light.Name) dcs.SelectionForeColor = ControlText_Dark;
+                        }
                         if (dgv.RowHeadersDefaultCellStyle.BackColor.Name == Control_Light.Name) dgv.RowHeadersDefaultCellStyle.BackColor = Control_Dark;
                         if (dgv.ColumnHeadersDefaultCellStyle.BackColor.Name == Control_Light.Name) dgv.ColumnHeadersDefaultCellStyle.BackColor = Control_Dark;
                         if (dgv.ColumnHeadersDefaultCellStyle.ForeColor.Name == Window_Dark.Name) dgv.ColumnHeadersDefaultCellStyle.ForeColor = ControlText_Dark;
@@ -188,8 +191,11 @@ namespace HitCounterManager
                         DataGridViewCellStyle dcs = dgv.DefaultCellStyle;
                         if (dgv.BackgroundColor.Name == AppWorkspace_Dark.Name) dgv.BackgroundColor = AppWorkspace_Light;
                         if (dcs.BackColor.Name == Window_Dark.Name) dcs.BackColor = Window_Light;
-                        if (dcs.ForeColor.Name == ControlText_Dark.Name) dcs.ForeColor = ControlText_Light; // for Mono required
-                        if (dcs.SelectionForeColor.Name == ControlText_Dark.Name) dcs.ForeColor = ControlText_Light_DataGridView_Mono; // for Mono required
+                        if (OsLayer.Name != "Win") // required for Mono
+                        {
+                            if (dcs.ForeColor.Name == ControlText_Dark.Name) dcs.ForeColor = ControlText_Light;
+                            if (dcs.SelectionForeColor.Name == ControlText_Dark.Name) dcs.SelectionForeColor = ControlText_Light;
+                        }
                         if (dgv.RowHeadersDefaultCellStyle.BackColor.Name == Control_Dark.Name) dgv.RowHeadersDefaultCellStyle.BackColor = Control_Light;
                         if (dgv.ColumnHeadersDefaultCellStyle.BackColor.Name == Control_Dark.Name) dgv.ColumnHeadersDefaultCellStyle.BackColor = Control_Light;
                         if (dgv.ColumnHeadersDefaultCellStyle.ForeColor.Name == ControlText_Dark.Name) dgv.ColumnHeadersDefaultCellStyle.ForeColor = Window_Dark;
@@ -223,12 +229,6 @@ namespace HitCounterManager
                 foreach (Control item in ctrl.Controls) item.UpdateDarkMode();
             }
             catch { }
-            /* TODO:
-            For Windows 10, the value of the AppsUseLightTheme property in the path
-            HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize
-            of the registry specifies wherever Windows is in dark or light mode.
-            AppsUseLightTheme (REG_DWORD): 0 = Dark mode, 1 = Light mode
-            */
         }
         #endregion
     }

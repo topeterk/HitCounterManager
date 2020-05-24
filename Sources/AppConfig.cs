@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2019 Peter Kirmeier
+//Copyright (c) 2016-2020 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -62,6 +62,7 @@ namespace HitCounterManager
         public int MainPosY;
         public bool ReadOnlyMode;
         public bool AlwaysOnTop;
+        public bool DarkMode;
         public int HotKeyMethod;
         public bool ShortcutResetEnable;
         public int ShortcutResetKeyCode;
@@ -274,6 +275,11 @@ namespace HitCounterManager
                 // Introduced with false in version 6, keep user setting when this version was used
                 _settings.StyleProgressBarColored = (baseVersion == 6 ? false : true);
             }
+            if (_settings.Version == 7) // Coming from version 1.19
+            {
+                _settings.Version = 8;
+                _settings.DarkMode = OsLayer.IsDarkModeActive();
+            }
 
             // Apply settings..
 
@@ -285,6 +291,7 @@ namespace HitCounterManager
                 Program.IsOnScreen(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth) ? BoundsSpecified.All : BoundsSpecified.Size);
             SetReadOnlyMode(_settings.ReadOnlyMode);
             SetAlwaysOnTop(_settings.AlwaysOnTop);
+            Program.DarkMode = _settings.DarkMode;
 
             // Load profile data..
             if (_settings.Profiles.ProfileList.Count == 0)
@@ -342,6 +349,7 @@ namespace HitCounterManager
             }
             _settings.ReadOnlyMode = this.ReadOnlyMode;
             _settings.AlwaysOnTop = this.TopMost;
+            _settings.DarkMode = Program.DarkMode;
 
             // Store hot keys..
             _settings.HotKeyMethod = (int)sc.NextStart_Method;

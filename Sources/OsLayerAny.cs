@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2018-2019 Peter Kirmeier
+//Copyright (c) 2018-2020 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -97,6 +97,12 @@ namespace HitCounterManager
         /// <param name="lParam">Parameter 2 of message</param>
         /// <returns>Message result</returns>
         public static IntPtr SendHotKeyMessage(IntPtr WindowHandle, IntPtr wParam, IntPtr lParam) { return (IntPtr)0; }
+
+        /// <summary>
+        /// Read the OS setting whether dark mode is enabled
+        /// </summary>
+        /// <returns>true = Dark mode; false = Light mode</returns>
+        public static bool IsDarkModeActive() { return false; }
 
         /// <summary>
         /// If you know how to use breakpoints in MonoDevelop within

@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2018-2019 Peter Kirmeier
+//Copyright (c) 2018-2020 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@
 //SOFTWARE.
 
 #if OS_WINDOWS
+using Microsoft.Win32;
 using System;
 using System.Runtime.InteropServices;
 
@@ -154,6 +155,17 @@ namespace HitCounterManager
         public static IntPtr SendHotKeyMessage(IntPtr WindowHandle, IntPtr wParam, IntPtr lParam)
         {
             return SendMessage(WindowHandle, WM_HOTKEY, wParam, lParam);
+        }
+
+        /// <summary>
+        /// Read the OS setting whether dark mode is enabled
+        /// </summary>
+        /// <returns>true = Dark mode; false = Light mode</returns>
+        public static bool IsDarkModeActive()
+        {
+            // Check: AppsUseLightTheme (REG_DWORD)
+            // 0 = Dark mode, 1 = Light mode
+            return Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "AppsUseLightTheme", 1).ToString() == "0";
         }
 
         /// <summary>

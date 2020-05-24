@@ -57,6 +57,7 @@ namespace HitCounterManager
             btnHit.Select();
             LoadSettings();
             UpdateProgressAndTotals(sender, e);
+            this.UpdateDarkMode();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
