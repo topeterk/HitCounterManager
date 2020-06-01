@@ -103,14 +103,15 @@ All available releases can be found at the [Releases page](../../releases) on Gi
 * OS: Windows Vista, Windows Server 2003 or newer (32/64 bit)
   * Portable version (ZIP)
     * [.Net Framework 2.0 or newer](https://www.microsoft.com/net)
-    > Note: Version 1.13 and older requires [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
+    > **Note**: Version 1.13 and older requires [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
   * Installer version (Setup)
     * [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
 * OS: Any (32/64 bit)
   * Portable version (ZIP)
     * [Mono](https://www.mono-project.com/) (_tested with 5.14.0_)  
       Run the application in the application's directory with **mono HitCounterManager.exe**  
-      **Note**: The Non-Windows / Mono version does not support global hot keys
+      > **Note**: The Mono version is **not supporting global hot keys**  
+      > **Note**: The Mono version **must be run in 32 bit mode** (cannot be run on OS without 32 bit support)
 
 ### Designs / Fonts
 
