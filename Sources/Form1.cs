@@ -228,7 +228,7 @@ namespace HitCounterManager
                     }
 
                     changelog = "New version available!" + Environment.NewLine + Environment.NewLine
-                            + "There are " + i + " new version available:" + Environment.NewLine
+                            + "There " + (i == 1 ? "is 1 new version" : "are " + i.ToString() + " new versions") + " available:" + Environment.NewLine
                             + "Please visit the github project website (WWW button on main window)." + Environment.NewLine
                             + "Then look at the \"releases\" to download the new version." + Environment.NewLine
                             + Environment.NewLine + changelog;
