@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2019 Peter Kirmeier
+//Copyright (c) 2016-2020 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -124,9 +124,9 @@ namespace HitCounterManager
 
         private void SetHotKeyMethod(Shortcuts.SC_HotKeyMethod Method)
         {
-            if (sc.NextStart_Method == Method) // has setting changed?
+            if (sc.NextStart_Method != Method) // has setting changed?
             {
-                sc.NextStart_Method = Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync;
+                sc.NextStart_Method = Method;
                 MessageBox.Show("Changes only take effect after restarting the application.", "Restart required", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
