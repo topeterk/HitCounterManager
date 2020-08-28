@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2019-2019 Peter Kirmeier
+//Copyright (c) 2019-2020 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -107,7 +107,11 @@ namespace HitCounterManager
             {
                 // Select and reset new profile..
                 pi.ProfileName = NameNew;
-                if (!AsCopy) pi.ClearSplits(); // Clear profile when it shall not be copied
+                if (!AsCopy)
+                {
+                    pi.ClearSplits(); // Clear profile when it shall not be copied
+                    pi.AttemptsCount = 0; // Reset Attempts
+                }
                 SelectedProfile = NameNew;
             }
 
