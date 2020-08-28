@@ -52,6 +52,7 @@ To see **how to** use the application watch the **[Tutorial on YouTube](https://
 * Sekiro
 * The Surge + A walk in the park
 * The Surge 2
+* Mortal Shell
 
 ### Design configurations
 
