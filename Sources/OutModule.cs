@@ -222,12 +222,12 @@ namespace HitCounterManager
 
                     // ----- Splits of the current run:
                     RunIndexActive = RunIndex;
-                    if (_settings.Succession.HistorySplitVisible && (0 < RunIndex))
+                    if (_settings.Succession.HistorySplitVisible && (1 < RunIndex))
                     {
                         // Insert the "history" split
                         InjectedSplitCount++;
                         if (0 < HiddenSplitCount) sr.WriteLine(","); // separator
-                        sr.Write("[\"" + SimpleHtmlEscape(_settings.Succession.HistorySplitTitle) + "\", " + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + ", " + RunIndex + ", " + 0/*NoTime*/ + ", " + 0/*NoPBTime*/ + "]");
+                        sr.Write("[\"" + SimpleHtmlEscape(_settings.Succession.HistorySplitTitle) + "\", " + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + ", " + 0 /*Invalid-RunIndex*/ + ", " + 0/*NoTime*/ + ", " + 0/*NoPBTime*/ + "]");
                     }
                     for (int r = 0; r < iSplitCount; r++)
                     {
