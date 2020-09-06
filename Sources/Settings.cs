@@ -54,6 +54,8 @@ namespace HitCounterManager
             LoadHotKey(Shortcuts.SC_Type.SC_Type_Split, cbScNextSplit, txtNextSplit);
             LoadHotKey(Shortcuts.SC_Type.SC_Type_SplitPrev, cbScPrevSplit, txtPrevSplit);
             LoadHotKey(Shortcuts.SC_Type.SC_Type_PB, cbScPB, txtPB);
+            LoadHotKey(Shortcuts.SC_Type.SC_Type_TimerStart, cbScTimerStart, txtTimerStart);
+            LoadHotKey(Shortcuts.SC_Type.SC_Type_TimerStop, cbScTimerStop, txtTimerStop);
 
             radioHotKeyMethod_sync.Checked = (sc.NextStart_Method == Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync);
             radioHotKeyMethod_async.Checked = (sc.NextStart_Method == Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async);
@@ -89,6 +91,8 @@ namespace HitCounterManager
             cbShowHitsCombined.Checked = _settings.ShowHitsCombined;
             cbShowNumbers.Checked = _settings.ShowNumbers;
             cbShowPB.Checked = _settings.ShowPB;
+            cbShowTimeCurrent.Checked = _settings.ShowTimeCurrent;
+            cbShowTimePB.Checked = _settings.ShowTimePB;
             radioPurposeChecklist.Checked = (om.Purpose == OutModule.OM_Purpose.OM_Purpose_Checklist);
             radioPurposeDeathCounter.Checked = (om.Purpose == OutModule.OM_Purpose.OM_Purpose_DeathCounter);
             radioPurposeSplitCounter.Checked = (om.Purpose == OutModule.OM_Purpose.OM_Purpose_SplitCounter);
@@ -182,6 +186,8 @@ namespace HitCounterManager
             _settings.ShowHitsCombined = cbShowHitsCombined.Checked;
             _settings.ShowNumbers = cbShowNumbers.Checked;
             _settings.ShowPB = cbShowPB.Checked;
+            _settings.ShowTimeCurrent = cbShowTimeCurrent.Checked;
+            _settings.ShowTimePB = cbShowTimePB.Checked;
             if (radioPurposeChecklist.Checked)
                 om.Purpose = OutModule.OM_Purpose.OM_Purpose_Checklist;
             else if (radioPurposeDeathCounter.Checked)
@@ -231,6 +237,8 @@ namespace HitCounterManager
         private void txtNextSplit_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_Split, cbScNextSplit, txtNextSplit, e); }
         private void txtPrevSplit_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_SplitPrev, cbScPrevSplit, txtPrevSplit, e); }
         private void txtPB_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_PB, cbScPB, txtPB, e); }
+        private void txtTimerStart_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_TimerStart, cbScTimerStart, txtTimerStart, e); }
+        private void txtTimerStop_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_TimerStop, cbScTimerStop, txtTimerStop, e); }
 
         private void cbScReset_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Reset, cbScReset.Checked); }
         private void cbScHit_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Hit, cbScHit.Checked); }
@@ -240,6 +248,8 @@ namespace HitCounterManager
         private void cbScNextSplit_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Split, cbScNextSplit.Checked); }
         private void cbScPrevSplit_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_SplitPrev, cbScPrevSplit.Checked); }
         private void cbScPB_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_PB, cbScPB.Checked); }
+        private void cbScTimerStart_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_TimerStart, cbScTimerStart.Checked); }
+        private void cbScTimerStop_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_TimerStop, cbScTimerStop.Checked); }
 
         private void btnInput_Click(object sender, EventArgs e)
         {
@@ -286,6 +296,5 @@ namespace HitCounterManager
         }
 
         #endregion
-
     }
 }

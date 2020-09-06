@@ -41,6 +41,8 @@
             this.btnSuccessionVisibility = new System.Windows.Forms.Button();
             this.txtPredecessorTitle = new System.Windows.Forms.TextBox();
             this.cbShowPredecessor = new System.Windows.Forms.CheckBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.ptc.SuspendLayout();
             this.menu_ptc.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -174,8 +176,22 @@
             this.cbShowPredecessor.Size = new System.Drawing.Size(127, 17);
             this.cbShowPredecessor.TabIndex = 1;
             this.cbShowPredecessor.Text = "Show previous totals:";
+            this.toolTip1.SetToolTip(this.cbShowPredecessor, "Adds a split at the beginning of a run showing the sum of hits taken in all prece" +
+        "eding runs.\r\nDoes not appear on the initial run even when checked as there is no" +
+        " preceeding run.\r\n\r\n");
             this.cbShowPredecessor.UseVisualStyleBackColor = true;
             this.cbShowPredecessor.CheckedChanged += new System.EventHandler(this.ProfileChangedHandler);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 10;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.AutoPopDelay = 15000;
+            this.toolTip1.InitialDelay = 500;
+            this.toolTip1.ReshowDelay = 100;
             // 
             // ProfilesControl
             // 
@@ -207,5 +223,7 @@
         private System.Windows.Forms.ContextMenuStrip menu_ptc;
         private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addTabToolStripMenuItem;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

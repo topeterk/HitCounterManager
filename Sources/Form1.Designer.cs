@@ -50,6 +50,7 @@
             this.btnDarkMode = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnPB = new System.Windows.Forms.Button();
+            this.btnPause = new System.Windows.Forms.Button();
             this.btnHit = new System.Windows.Forms.Button();
             this.btnWayHit = new System.Windows.Forms.Button();
             this.btnSplit = new System.Windows.Forms.Button();
@@ -60,6 +61,12 @@
             this.lbl_progress = new System.Windows.Forms.Label();
             this.profCtrl = new HitCounterManager.ProfilesControl();
             this.SuspendLayout();
+            // 
+            // ToolTip1
+            // 
+            this.ToolTip1.AutoPopDelay = 15000;
+            this.ToolTip1.InitialDelay = 500;
+            this.ToolTip1.ReshowDelay = 100;
             // 
             // btnSettings
             // 
@@ -308,7 +315,7 @@
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 40);
             this.btnReset.TabIndex = 17;
-            this.ToolTip1.SetToolTip(this.btnReset, "RESET the current run");
+            this.ToolTip1.SetToolTip(this.btnReset, "RESET the current run\r\nAlso stops and resets the timer");
             this.btnReset.UseVisualStyleBackColor = false;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
@@ -321,9 +328,23 @@
             this.btnPB.Name = "btnPB";
             this.btnPB.Size = new System.Drawing.Size(75, 40);
             this.btnPB.TabIndex = 18;
-            this.ToolTip1.SetToolTip(this.btnPB, "Record run as PB (personal best)");
+            this.ToolTip1.SetToolTip(this.btnPB, "Record run as PB (personal best)\r\nAlso stops the timer\r\nDoes NOT reset the timer\r" +
+        "\n");
             this.btnPB.UseVisualStyleBackColor = false;
             this.btnPB.Click += new System.EventHandler(this.btnPB_Click);
+            // 
+            // btnPause
+            // 
+            this.btnPause.BackColor = System.Drawing.Color.Gold;
+            this.btnPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPause.Image = global::HitCounterManager.Sources.Resources.icons8_time_32;
+            this.btnPause.Location = new System.Drawing.Point(174, 30);
+            this.btnPause.Name = "btnPause";
+            this.btnPause.Size = new System.Drawing.Size(75, 40);
+            this.btnPause.TabIndex = 19;
+            this.ToolTip1.SetToolTip(this.btnPause, "Start/stop timer\r\nDoes NOT reset the timer");
+            this.btnPause.UseVisualStyleBackColor = false;
+            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // btnHit
             // 
@@ -332,10 +353,10 @@
             this.btnHit.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnHit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHit.Image = global::HitCounterManager.Sources.Resources.icons8_attack_32;
-            this.btnHit.Location = new System.Drawing.Point(174, 30);
+            this.btnHit.Location = new System.Drawing.Point(255, 30);
             this.btnHit.Name = "btnHit";
-            this.btnHit.Size = new System.Drawing.Size(355, 40);
-            this.btnHit.TabIndex = 19;
+            this.btnHit.Size = new System.Drawing.Size(274, 40);
+            this.btnHit.TabIndex = 20;
             this.ToolTip1.SetToolTip(this.btnHit, "Count a HIT (boss) on the current split");
             this.btnHit.UseVisualStyleBackColor = false;
             this.btnHit.Click += new System.EventHandler(this.btnHit_Click);
@@ -349,7 +370,7 @@
             this.btnWayHit.Location = new System.Drawing.Point(535, 30);
             this.btnWayHit.Name = "btnWayHit";
             this.btnWayHit.Size = new System.Drawing.Size(75, 40);
-            this.btnWayHit.TabIndex = 20;
+            this.btnWayHit.TabIndex = 21;
             this.ToolTip1.SetToolTip(this.btnWayHit, "Count a HIT (way) on the current split");
             this.btnWayHit.UseVisualStyleBackColor = false;
             this.btnWayHit.Click += new System.EventHandler(this.btnWayHit_Click);
@@ -363,7 +384,7 @@
             this.btnSplit.Location = new System.Drawing.Point(616, 30);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(75, 40);
-            this.btnSplit.TabIndex = 21;
+            this.btnSplit.TabIndex = 22;
             this.ToolTip1.SetToolTip(this.btnSplit, "Jump to the next SPLIT");
             this.btnSplit.UseVisualStyleBackColor = false;
             this.btnSplit.Click += new System.EventHandler(this.btnSplit_Click);
@@ -430,7 +451,7 @@
             this.profCtrl.Location = new System.Drawing.Point(14, 96);
             this.profCtrl.Name = "profCtrl";
             this.profCtrl.Size = new System.Drawing.Size(677, 367);
-            this.profCtrl.TabIndex = 22;
+            this.profCtrl.TabIndex = 23;
             this.profCtrl.ProfileChanged += new System.EventHandler<System.EventArgs>(this.UpdateProgressAndTotals);
             // 
             // Form1
@@ -457,6 +478,7 @@
             this.Controls.Add(this.btnDarkMode);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnPB);
+            this.Controls.Add(this.btnPause);
             this.Controls.Add(this.btnHit);
             this.Controls.Add(this.btnWayHit);
             this.Controls.Add(this.btnSplit);
@@ -482,6 +504,7 @@
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnWeb;
+        private System.Windows.Forms.Button btnTeamHitless;
         private System.Windows.Forms.Button btnCheckVersion;
         private System.Windows.Forms.Button btnAbout;
         private System.Windows.Forms.Button btnNew;
@@ -497,6 +520,7 @@
         private System.Windows.Forms.Button btnDarkMode;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnPB;
+        private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button btnHit;
         private System.Windows.Forms.Button btnWayHit;
         private System.Windows.Forms.Button btnSplit;
@@ -506,6 +530,5 @@
         private System.Windows.Forms.Label lbl_totals;
         private System.Windows.Forms.Label lbl_progress;
         public ProfilesControl profCtrl;
-        private System.Windows.Forms.Button btnTeamHitless;
     }
 }

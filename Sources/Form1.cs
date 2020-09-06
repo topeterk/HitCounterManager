@@ -83,6 +83,8 @@ namespace HitCounterManager
                         case Shortcuts.SC_Type.SC_Type_WayHit: btnWayHit_Click(null, null); break;
                         case Shortcuts.SC_Type.SC_Type_WayHitUndo: btnWayHitUndo_Click(null, null); break;
                         case Shortcuts.SC_Type.SC_Type_PB: btnPB_Click(null, null); break;
+                        case Shortcuts.SC_Type.SC_Type_TimerStart: StartStopTimer(true); break;
+                        case Shortcuts.SC_Type.SC_Type_TimerStop: StartStopTimer(false); break;
                     }
                 }
             }
@@ -257,8 +259,9 @@ namespace HitCounterManager
         private void BtnSplitLock_Click(object sender, EventArgs e) { SetReadOnlyMode(!profCtrl.ReadOnlyMode); }
         private void btnDarkMode_Click(object sender, EventArgs e) { Program.DarkMode = !Program.DarkMode; this.UpdateDarkMode(); }
 
-        private void btnReset_Click(object sender, EventArgs e) { profCtrl.ProfileReset(); }
-        private void btnPB_Click(object sender, EventArgs e) { profCtrl.ProfilePB(); }
+        private void btnReset_Click(object sender, EventArgs e) { StartStopTimer(false); profCtrl.ProfileReset(); }
+        private void btnPB_Click(object sender, EventArgs e) { StartStopTimer(false); profCtrl.ProfilePB(); }
+        private void btnPause_Click(object sender, EventArgs e) { StartStopTimer(!profCtrl.TimerRunning); }
         private void btnHit_Click(object sender, EventArgs e) { profCtrl.ProfileHit(+1); }
         private void btnHitUndo_Click(object sender, EventArgs e) { profCtrl.ProfileHit(-1); }
         private void btnWayHit_Click(object sender, EventArgs e) { profCtrl.ProfileWayHit(+1); }
@@ -272,6 +275,12 @@ namespace HitCounterManager
             profCtrl.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB, false);
             lbl_progress.Text = "Progress:  " + TotalActiveSplit + " / " + TotalSplits + "  # " + profCtrl.CurrentAttempts.ToString("D3");
             lbl_totals.Text = "Total: " + (TotalHits + TotalHitsWay) + " Hits   " + TotalPB + " PB";
+        }
+
+        private void StartStopTimer(bool Start)
+        {
+            profCtrl.TimerRunning = Start;
+            btnPause.Image = Start ? Sources.Resources.icons8_sleep_32 : Sources.Resources.icons8_time_32;
         }
 
         #endregion

@@ -49,10 +49,14 @@
             this.txtNextSplit = new System.Windows.Forms.TextBox();
             this.txtHit = new System.Windows.Forms.TextBox();
             this.txtReset = new System.Windows.Forms.TextBox();
+            this.txtTimerStart = new System.Windows.Forms.TextBox();
+            this.txtTimerStop = new System.Windows.Forms.TextBox();
             this.cbScWayHitUndo = new System.Windows.Forms.CheckBox();
             this.cbScWayHit = new System.Windows.Forms.CheckBox();
             this.cbScHitUndo = new System.Windows.Forms.CheckBox();
             this.cbScPrevSplit = new System.Windows.Forms.CheckBox();
+            this.cbScTimerStart = new System.Windows.Forms.CheckBox();
+            this.cbScTimerStop = new System.Windows.Forms.CheckBox();
             this.Label6 = new System.Windows.Forms.Label();
             this.radioHotKeyMethod_async = new System.Windows.Forms.RadioButton();
             this.Label1 = new System.Windows.Forms.Label();
@@ -85,6 +89,8 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lblShowSplitCount = new System.Windows.Forms.Label();
             this.cbShowPB = new System.Windows.Forms.CheckBox();
+            this.cbShowTimePB = new System.Windows.Forms.CheckBox();
+            this.cbShowTimeCurrent = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.radioPurposeChecklist = new System.Windows.Forms.RadioButton();
             this.radioPurposeDeathCounter = new System.Windows.Forms.RadioButton();
@@ -172,7 +178,7 @@
             // Label9
             // 
             this.Label9.AutoSize = true;
-            this.Label9.Location = new System.Drawing.Point(147, 209);
+            this.Label9.Location = new System.Drawing.Point(150, 232);
             this.Label9.Name = "Label9";
             this.Label9.Size = new System.Drawing.Size(82, 13);
             this.Label9.TabIndex = 5;
@@ -180,7 +186,7 @@
             // 
             // numShowSplitsCountUpcoming
             // 
-            this.numShowSplitsCountUpcoming.Location = new System.Drawing.Point(84, 207);
+            this.numShowSplitsCountUpcoming.Location = new System.Drawing.Point(87, 230);
             this.numShowSplitsCountUpcoming.Maximum = new decimal(new int[] {
             999,
             0,
@@ -188,7 +194,7 @@
             0});
             this.numShowSplitsCountUpcoming.Name = "numShowSplitsCountUpcoming";
             this.numShowSplitsCountUpcoming.Size = new System.Drawing.Size(57, 20);
-            this.numShowSplitsCountUpcoming.TabIndex = 10;
+            this.numShowSplitsCountUpcoming.TabIndex = 12;
             this.ToolTip1.SetToolTip(this.numShowSplitsCountUpcoming, "Hide splits that are coming later to spare space");
             this.numShowSplitsCountUpcoming.Value = new decimal(new int[] {
             999,
@@ -200,7 +206,7 @@
             // Label10
             // 
             this.Label10.AutoSize = true;
-            this.Label10.Location = new System.Drawing.Point(3, 209);
+            this.Label10.Location = new System.Drawing.Point(6, 232);
             this.Label10.Name = "Label10";
             this.Label10.Size = new System.Drawing.Size(75, 13);
             this.Label10.TabIndex = 3;
@@ -209,7 +215,7 @@
             // Label8
             // 
             this.Label8.AutoSize = true;
-            this.Label8.Location = new System.Drawing.Point(147, 183);
+            this.Label8.Location = new System.Drawing.Point(150, 206);
             this.Label8.Name = "Label8";
             this.Label8.Size = new System.Drawing.Size(72, 13);
             this.Label8.TabIndex = 2;
@@ -217,7 +223,7 @@
             // 
             // numShowSplitsCountFinished
             // 
-            this.numShowSplitsCountFinished.Location = new System.Drawing.Point(84, 181);
+            this.numShowSplitsCountFinished.Location = new System.Drawing.Point(87, 204);
             this.numShowSplitsCountFinished.Maximum = new decimal(new int[] {
             999,
             0,
@@ -225,7 +231,7 @@
             0});
             this.numShowSplitsCountFinished.Name = "numShowSplitsCountFinished";
             this.numShowSplitsCountFinished.Size = new System.Drawing.Size(57, 20);
-            this.numShowSplitsCountFinished.TabIndex = 9;
+            this.numShowSplitsCountFinished.TabIndex = 11;
             this.ToolTip1.SetToolTip(this.numShowSplitsCountFinished, "Hide splits that are done already to spare space");
             this.numShowSplitsCountFinished.Value = new decimal(new int[] {
             999,
@@ -237,7 +243,7 @@
             // Label3
             // 
             this.Label3.AutoSize = true;
-            this.Label3.Location = new System.Drawing.Point(3, 183);
+            this.Label3.Location = new System.Drawing.Point(6, 206);
             this.Label3.Name = "Label3";
             this.Label3.Size = new System.Drawing.Size(71, 13);
             this.Label3.TabIndex = 0;
@@ -254,17 +260,21 @@
             this.tab_globalshortcuts.Controls.Add(this.txtNextSplit);
             this.tab_globalshortcuts.Controls.Add(this.txtHit);
             this.tab_globalshortcuts.Controls.Add(this.txtReset);
+            this.tab_globalshortcuts.Controls.Add(this.txtTimerStop);
+            this.tab_globalshortcuts.Controls.Add(this.txtTimerStart);
             this.tab_globalshortcuts.Controls.Add(this.cbScWayHitUndo);
             this.tab_globalshortcuts.Controls.Add(this.cbScWayHit);
             this.tab_globalshortcuts.Controls.Add(this.cbScHitUndo);
             this.tab_globalshortcuts.Controls.Add(this.cbScPrevSplit);
+            this.tab_globalshortcuts.Controls.Add(this.cbScReset);
+            this.tab_globalshortcuts.Controls.Add(this.cbScHit);
+            this.tab_globalshortcuts.Controls.Add(this.cbScNextSplit);
+            this.tab_globalshortcuts.Controls.Add(this.cbScTimerStop);
+            this.tab_globalshortcuts.Controls.Add(this.cbScTimerStart);
             this.tab_globalshortcuts.Controls.Add(this.Label6);
             this.tab_globalshortcuts.Controls.Add(this.radioHotKeyMethod_async);
             this.tab_globalshortcuts.Controls.Add(this.Label1);
             this.tab_globalshortcuts.Controls.Add(this.radioHotKeyMethod_sync);
-            this.tab_globalshortcuts.Controls.Add(this.cbScReset);
-            this.tab_globalshortcuts.Controls.Add(this.cbScHit);
-            this.tab_globalshortcuts.Controls.Add(this.cbScNextSplit);
             this.tab_globalshortcuts.Location = new System.Drawing.Point(4, 22);
             this.tab_globalshortcuts.Name = "tab_globalshortcuts";
             this.tab_globalshortcuts.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
@@ -380,6 +390,30 @@
             this.ToolTip1.SetToolTip(this.txtReset, "Click into the field and press the hot key you want to use");
             this.txtReset.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtReset_KeyDown);
             // 
+            // txtTimerStart
+            // 
+            this.txtTimerStart.Location = new System.Drawing.Point(85, 134);
+            this.txtTimerStart.Name = "txtTimerStart";
+            this.txtTimerStart.ReadOnly = true;
+            this.txtTimerStart.Size = new System.Drawing.Size(194, 20);
+            this.txtTimerStart.TabIndex = 20;
+            this.txtTimerStart.Text = "None";
+            this.txtTimerStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip1.SetToolTip(this.txtTimerStart, "Click into the field and press the hot key you want to use");
+            this.txtTimerStart.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTimerStart_KeyDown);
+            // 
+            // txtTimerStop
+            // 
+            this.txtTimerStop.Location = new System.Drawing.Point(384, 134);
+            this.txtTimerStop.Name = "txtTimerStop";
+            this.txtTimerStop.ReadOnly = true;
+            this.txtTimerStop.Size = new System.Drawing.Size(194, 20);
+            this.txtTimerStop.TabIndex = 22;
+            this.txtTimerStop.Text = "None";
+            this.txtTimerStop.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip1.SetToolTip(this.txtTimerStop, "Click into the field and press the hot key you want to use");
+            this.txtTimerStop.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTimerStop_KeyDown);
+            // 
             // cbScWayHitUndo
             // 
             this.cbScWayHitUndo.AutoSize = true;
@@ -428,55 +462,6 @@
             this.cbScPrevSplit.UseVisualStyleBackColor = true;
             this.cbScPrevSplit.CheckedChanged += new System.EventHandler(this.cbScPrevSplit_CheckedChanged);
             // 
-            // Label6
-            // 
-            this.Label6.AutoSize = true;
-            this.Label6.Location = new System.Drawing.Point(3, 151);
-            this.Label6.Name = "Label6";
-            this.Label6.Size = new System.Drawing.Size(393, 13);
-            this.Label6.TabIndex = 9;
-            this.Label6.Text = "Select method of global hotkey registration (changing needs restart of applicatio" +
-    "n):";
-            // 
-            // radioHotKeyMethod_async
-            // 
-            this.radioHotKeyMethod_async.AutoSize = true;
-            this.radioHotKeyMethod_async.Checked = true;
-            this.radioHotKeyMethod_async.Location = new System.Drawing.Point(6, 193);
-            this.radioHotKeyMethod_async.Name = "radioHotKeyMethod_async";
-            this.radioHotKeyMethod_async.Size = new System.Drawing.Size(201, 17);
-            this.radioHotKeyMethod_async.TabIndex = 18;
-            this.radioHotKeyMethod_async.TabStop = true;
-            this.radioHotKeyMethod_async.Text = "Asynchronous - *should* always work";
-            this.ToolTip1.SetToolTip(this.radioHotKeyMethod_async, "Method that should always work, however the syncronous is the safer method and sh" +
-        "ould be preferred if possible");
-            this.radioHotKeyMethod_async.UseVisualStyleBackColor = true;
-            this.radioHotKeyMethod_async.CheckedChanged += new System.EventHandler(this.radioHotKeyMethod_CheckedChanged);
-            // 
-            // Label1
-            // 
-            this.Label1.AutoSize = true;
-            this.Label1.Location = new System.Drawing.Point(6, 10);
-            this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(462, 13);
-            this.Label1.TabIndex = 6;
-            this.Label1.Text = "Click into a textbox and press any key combination to setup your hotkey for the r" +
-    "espective event:";
-            // 
-            // radioHotKeyMethod_sync
-            // 
-            this.radioHotKeyMethod_sync.AutoSize = true;
-            this.radioHotKeyMethod_sync.Location = new System.Drawing.Point(6, 170);
-            this.radioHotKeyMethod_sync.Name = "radioHotKeyMethod_sync";
-            this.radioHotKeyMethod_sync.Size = new System.Drawing.Size(477, 17);
-            this.radioHotKeyMethod_sync.TabIndex = 17;
-            this.radioHotKeyMethod_sync.Text = "Synchronous - Safer, but may not always work (recommendation: test and keep it wh" +
-    "en it works)";
-            this.ToolTip1.SetToolTip(this.radioHotKeyMethod_sync, "Safer method, but may not always work (recommendation: test and keep it when it w" +
-        "orks)");
-            this.radioHotKeyMethod_sync.UseVisualStyleBackColor = true;
-            this.radioHotKeyMethod_sync.CheckedChanged += new System.EventHandler(this.radioHotKeyMethod_CheckedChanged);
-            // 
             // cbScReset
             // 
             this.cbScReset.AutoSize = true;
@@ -512,6 +497,85 @@
             this.ToolTip1.SetToolTip(this.cbScNextSplit, "Enable hot key for entering next split");
             this.cbScNextSplit.UseVisualStyleBackColor = true;
             this.cbScNextSplit.CheckedChanged += new System.EventHandler(this.cbScNextSplit_CheckedChanged);
+            // 
+            // cbScTimerStart
+            // 
+            this.cbScTimerStart.AutoSize = true;
+            this.cbScTimerStart.Location = new System.Drawing.Point(6, 136);
+            this.cbScTimerStart.Name = "cbScTimerStart";
+            this.cbScTimerStart.Size = new System.Drawing.Size(76, 17);
+            this.cbScTimerStart.TabIndex = 19;
+            this.cbScTimerStart.Text = "Start timer:";
+            this.ToolTip1.SetToolTip(this.cbScTimerStart, "Start the timer");
+            this.cbScTimerStart.UseVisualStyleBackColor = true;
+            this.cbScTimerStart.CheckedChanged += new System.EventHandler(this.cbScTimerStart_CheckedChanged);
+            // 
+            // cbScTimerStop
+            // 
+            this.cbScTimerStop.AutoSize = true;
+            this.cbScTimerStop.Location = new System.Drawing.Point(285, 136);
+            this.cbScTimerStop.Name = "cbScTimerStop";
+            this.cbScTimerStop.Size = new System.Drawing.Size(76, 17);
+            this.cbScTimerStop.TabIndex = 21;
+            this.cbScTimerStop.Text = "Stop timer:";
+            this.ToolTip1.SetToolTip(this.cbScTimerStop, "Stop the timer");
+            this.cbScTimerStop.UseVisualStyleBackColor = true;
+            this.cbScTimerStop.CheckedChanged += new System.EventHandler(this.cbScTimerStop_CheckedChanged);
+            // 
+            // Label6
+            // 
+            this.Label6.AutoSize = true;
+            this.Label6.Location = new System.Drawing.Point(3, 178);
+            this.Label6.Name = "Label6";
+            this.Label6.Size = new System.Drawing.Size(393, 13);
+            this.Label6.TabIndex = 9;
+            this.Label6.Text = "Select method of global hotkey registration (changing needs restart of applicatio" +
+    "n):";
+            // 
+            // radioHotKeyMethod_async
+            // 
+            this.radioHotKeyMethod_async.AutoSize = true;
+            this.radioHotKeyMethod_async.Checked = true;
+            this.radioHotKeyMethod_async.Location = new System.Drawing.Point(6, 220);
+            this.radioHotKeyMethod_async.Name = "radioHotKeyMethod_async";
+            this.radioHotKeyMethod_async.Size = new System.Drawing.Size(201, 17);
+            this.radioHotKeyMethod_async.TabIndex = 18;
+            this.radioHotKeyMethod_async.TabStop = true;
+            this.radioHotKeyMethod_async.Text = "Asynchronous - *should* always work";
+            this.ToolTip1.SetToolTip(this.radioHotKeyMethod_async, "Method that should always work, however the syncronous is the safer method and sh" +
+        "ould be preferred if possible");
+            this.radioHotKeyMethod_async.UseVisualStyleBackColor = true;
+            this.radioHotKeyMethod_async.CheckedChanged += new System.EventHandler(this.radioHotKeyMethod_CheckedChanged);
+            // 
+            // Label1
+            // 
+            this.Label1.AutoSize = true;
+            this.Label1.Location = new System.Drawing.Point(6, 10);
+            this.Label1.Name = "Label1";
+            this.Label1.Size = new System.Drawing.Size(462, 13);
+            this.Label1.TabIndex = 6;
+            this.Label1.Text = "Click into a textbox and press any key combination to setup your hotkey for the r" +
+    "espective event:";
+            // 
+            // radioHotKeyMethod_sync
+            // 
+            this.radioHotKeyMethod_sync.AutoSize = true;
+            this.radioHotKeyMethod_sync.Location = new System.Drawing.Point(6, 197);
+            this.radioHotKeyMethod_sync.Name = "radioHotKeyMethod_sync";
+            this.radioHotKeyMethod_sync.Size = new System.Drawing.Size(477, 17);
+            this.radioHotKeyMethod_sync.TabIndex = 17;
+            this.radioHotKeyMethod_sync.Text = "Synchronous - Safer, but may not always work (recommendation: test and keep it wh" +
+    "en it works)";
+            this.ToolTip1.SetToolTip(this.radioHotKeyMethod_sync, "Safer method, but may not always work (recommendation: test and keep it when it w" +
+        "orks)");
+            this.radioHotKeyMethod_sync.UseVisualStyleBackColor = true;
+            this.radioHotKeyMethod_sync.CheckedChanged += new System.EventHandler(this.radioHotKeyMethod_CheckedChanged);
+            // 
+            // ToolTip1
+            // 
+            this.ToolTip1.AutoPopDelay = 15000;
+            this.ToolTip1.InitialDelay = 500;
+            this.ToolTip1.ReshowDelay = 100;
             // 
             // txtFontName
             // 
@@ -784,6 +848,8 @@
             this.groupBox5.Controls.Add(this.lblShowSplitCount);
             this.groupBox5.Controls.Add(this.cbShowFooter);
             this.groupBox5.Controls.Add(this.cbShowPB);
+            this.groupBox5.Controls.Add(this.cbShowTimeCurrent);
+            this.groupBox5.Controls.Add(this.cbShowTimePB);
             this.groupBox5.Controls.Add(this.cbShowAttempts);
             this.groupBox5.Controls.Add(this.cbShowHeadline);
             this.groupBox5.Controls.Add(this.cbShowSessionProgress);
@@ -805,9 +871,9 @@
             // lblShowSplitCount
             // 
             this.lblShowSplitCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblShowSplitCount.Location = new System.Drawing.Point(235, 183);
+            this.lblShowSplitCount.Location = new System.Drawing.Point(238, 206);
             this.lblShowSplitCount.Name = "lblShowSplitCount";
-            this.lblShowSplitCount.Size = new System.Drawing.Size(126, 44);
+            this.lblShowSplitCount.Size = new System.Drawing.Size(123, 44);
             this.lblShowSplitCount.TabIndex = 9;
             this.lblShowSplitCount.Text = "Current configuration will show up to ??? splits.";
             this.lblShowSplitCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -822,8 +888,37 @@
             this.cbShowPB.Size = new System.Drawing.Size(142, 17);
             this.cbShowPB.TabIndex = 8;
             this.cbShowPB.Text = "Show personal best (PB)";
+            this.ToolTip1.SetToolTip(this.cbShowPB, "Show personal best hit counts");
             this.cbShowPB.UseVisualStyleBackColor = true;
             this.cbShowPB.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // cbShowTimePB
+            // 
+            this.cbShowTimePB.AutoSize = true;
+            this.cbShowTimePB.Checked = true;
+            this.cbShowTimePB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbShowTimePB.Location = new System.Drawing.Point(6, 181);
+            this.cbShowTimePB.Name = "cbShowTimePB";
+            this.cbShowTimePB.Size = new System.Drawing.Size(98, 17);
+            this.cbShowTimePB.TabIndex = 9;
+            this.cbShowTimePB.Text = "Show time (PB)";
+            this.ToolTip1.SetToolTip(this.cbShowTimePB, "Show personal best time");
+            this.cbShowTimePB.UseVisualStyleBackColor = true;
+            this.cbShowTimePB.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // cbShowTimeCurrent
+            // 
+            this.cbShowTimeCurrent.AutoSize = true;
+            this.cbShowTimeCurrent.Checked = true;
+            this.cbShowTimeCurrent.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbShowTimeCurrent.Location = new System.Drawing.Point(146, 181);
+            this.cbShowTimeCurrent.Name = "cbShowTimeCurrent";
+            this.cbShowTimeCurrent.Size = new System.Drawing.Size(118, 17);
+            this.cbShowTimeCurrent.TabIndex = 10;
+            this.cbShowTimeCurrent.Text = "Show time (Current)";
+            this.ToolTip1.SetToolTip(this.cbShowTimeCurrent, "Show time of the current run");
+            this.cbShowTimeCurrent.UseVisualStyleBackColor = true;
+            this.cbShowTimeCurrent.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // groupBox4
             // 
@@ -881,7 +976,7 @@
             this.radioPurposeNoDeath.AutoSize = true;
             this.radioPurposeNoDeath.Location = new System.Drawing.Point(7, 66);
             this.radioPurposeNoDeath.Name = "radioPurposeNoDeath";
-            this.radioPurposeNoDeath.Size = new System.Drawing.Size(71, 17);
+            this.radioPurposeNoDeath.Size = new System.Drawing.Size(69, 17);
             this.radioPurposeNoDeath.TabIndex = 2;
             this.radioPurposeNoDeath.Text = "No death";
             this.ToolTip1.SetToolTip(this.radioPurposeNoDeath, "Track how far you get without dying");
@@ -1188,6 +1283,10 @@
         private System.Windows.Forms.CheckBox cbScWayHit;
         private System.Windows.Forms.TextBox txtPB;
         private System.Windows.Forms.CheckBox cbScPB;
+        private System.Windows.Forms.TextBox txtTimerStart;
+        private System.Windows.Forms.CheckBox cbScTimerStop;
+        private System.Windows.Forms.TextBox txtTimerStop;
+        private System.Windows.Forms.CheckBox cbScTimerStart;
         private System.Windows.Forms.TabPage tab_style;
         private System.Windows.Forms.GroupBox GroupBox1;
         private System.Windows.Forms.Label label15;
@@ -1218,6 +1317,8 @@
         private System.Windows.Forms.CheckBox cbHighContrastNames;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox cbShowPB;
+        private System.Windows.Forms.CheckBox cbShowTimeCurrent;
+        private System.Windows.Forms.CheckBox cbShowTimePB;
         private System.Windows.Forms.CheckBox cbShowFooter;
         private System.Windows.Forms.Label lblShowSplitCount;
         private System.Windows.Forms.CheckBox cbSuperscriptPB;

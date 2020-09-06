@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2019 Peter Kirmeier
+//Copyright (c) 2016-2020 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -35,6 +35,8 @@ namespace HitCounterManager
         public int Hits = 0;
         public int WayHits = 0;
         public int PB = 0;
+        public long Duration = 0;
+        public long DurationPB = 0;
     }
 
     /// <summary>
@@ -117,7 +119,7 @@ namespace HitCounterManager
                 pi_dst.AttemptsCount = prof.Attempts;
                 foreach (ProfileRow row in prof.Rows)
                 {
-                    pi_dst.AddSplit(row.Title, row.Hits, row.WayHits, row.PB);
+                    pi_dst.AddSplit(row.Title, row.Hits, row.WayHits, row.PB, row.Duration, row.DurationPB);
                 }
                 pi_dst.ActiveSplit = prof.ActiveSplit;
                 pi_dst.SetSessionProgress(prof.GetSessionProgress(), true);
@@ -157,6 +159,8 @@ namespace HitCounterManager
                 ProfileRow.Hits = pi_src.GetSplitHits(r);
                 ProfileRow.WayHits = pi_src.GetSplitWayHits(r);
                 ProfileRow.PB = pi_src.GetSplitPB(r);
+                ProfileRow.Duration = pi_src.GetSplitDuration(r);
+                ProfileRow.DurationPB = pi_src.GetSplitDurationPB(r);
                 prof.Rows.Add(ProfileRow);
             }
             prof.SetSessionProgress(pi_src.GetSessionProgress());
@@ -223,7 +227,9 @@ namespace HitCounterManager
         /// <param name="Hits">Amount of hits at nosses (or all)</param>
         /// <param name="WaysHits">Amount of hits on the way</param>
         /// <param name="PB">Amount of personal best hits</param>
-        void AddSplit(string Title, int Hits, int WayHits, int PB);
+        /// <param name="Duration">Milliseconds of the split's duration</param>
+        /// <param name="DurationPB">Milliseconds of the split's personal best duration</param>
+        void AddSplit(string Title, int Hits, int WayHits, int PB, long Duration, long DurationPB);
         /// <summary>
         /// Insert a new split before the current one
         /// </summary>
@@ -258,6 +264,12 @@ namespace HitCounterManager
         /// <param name="Index">Source row</param>
         /// <param name="Offset">Offset to row that shall be permuted</param>
         void PermuteSplit(int Index, int Offset);
+        /// <summary>
+        /// Adds the duration of a split.
+        /// Negative values will decrease the duration.
+        /// </summary>
+        /// <param name="Duration">Milliseconds to add</param>
+        void AddDuration(long Duration);
 
         /// <summary>
         /// Gets the split index of the session progress
@@ -302,6 +314,18 @@ namespace HitCounterManager
         /// <param name="Index">Index</param>
         /// <returns>Amount of personal best hits</returns>
         int GetSplitPB(int Index);
+        /// <summary>
+        /// Gets the duration of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <returns>Milliseconds of the split's duration</returns>
+        long GetSplitDuration(int Index);
+        /// <summary>
+        /// Gets the personal best duration of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <returns>Milliseconds of the split's duration</returns>
+        long GetSplitDurationPB(int Index);
 
         /// <summary>
         /// Sets the title of a split
@@ -333,6 +357,18 @@ namespace HitCounterManager
         /// <param name="Index">Index</param>
         /// <param name="PBHits">Amount of personal best hits</param>
         void SetSplitPB(int Index, int PBHits);
+        /// <summary>
+        /// Sets the duration of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <param name="Duration">Milliseconds of the split's duration</param>
+        void SetSplitDuration(int Index, long Duration);
+        /// <summary>
+        /// Sets the personal best duration of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <param name="Duration">Milliseconds of the split's duration</param>
+        void SetSplitDurationPB(int Index, long Duration);
 
         /// <summary>
         /// Marks that an update will be performed

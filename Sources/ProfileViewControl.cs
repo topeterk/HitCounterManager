@@ -181,6 +181,7 @@ namespace HitCounterManager
         private void CellValidatingHandler(object sender, DataGridViewCellValidatingEventArgs e)
         {
             if (Rows[e.RowIndex].Cells[e.ColumnIndex].GetType().Name == "DataGridViewCheckBoxCell") return;
+            if (!Rows[0].Cells[e.ColumnIndex].Visible) return;
 
             if (e.ColumnIndex != Rows[0].Cells["cTitle"].ColumnIndex)
             {
@@ -205,6 +206,8 @@ namespace HitCounterManager
 
             if (0 <= e.RowIndex && 0 <= e.ColumnIndex)
             {
+                if (!Rows[e.RowIndex].Cells[e.ColumnIndex].Visible) return;
+
                 ProfileUpdateBegin();
                 SetSplitDiff(e.RowIndex, GetSplitHits(e.RowIndex) + GetSplitWayHits(e.RowIndex) - GetSplitPB(e.RowIndex));
 
@@ -279,6 +282,18 @@ namespace HitCounterManager
 
         #region IProfileInfo implementation
 
+        private class HiddenRowData {
+            public long Duration = 0;
+            public long DurationPB = 0;
+
+            public HiddenRowData() { }
+            public HiddenRowData(long Duration, long DurationPB)
+            {
+                this.Duration = Duration;
+                this.DurationPB = DurationPB;
+            }
+        }
+
         private string _ProfileName = null;
         private int _AttemptsCounter = 0;
         private int LastActiveSplit = -1;
@@ -344,13 +359,19 @@ namespace HitCounterManager
         }
 
         public void ClearSplits() { ProfileUpdateBegin(); Rows.Clear(); ProfileUpdateEnd(); }
-        public void AddSplit(string Title, int Hits, int WayHits, int PB) { ProfileUpdateBegin(); Rows.Add(new object[] { Title, Hits, WayHits, Hits + WayHits - PB, PB, false }); ProfileUpdateEnd(); }
+        public void AddSplit(string Title, int Hits, int WayHits, int PB, long Duration, long DurationPB)
+        {
+            ProfileUpdateBegin();
+            Rows[Rows.Add(new object[] { Title, Hits, WayHits, Hits + WayHits - PB, PB, false })].Tag = new HiddenRowData(Duration, DurationPB);
+            ProfileUpdateEnd();
+        }
         public void InsertSplit()
         {
             int idx = ActiveSplit;
 
             ProfileUpdateBegin();
             Rows.Insert(idx, 1);
+            Rows[idx].Tag = new HiddenRowData();
             // Select new row's title cell that user can directly start typing name of new split
             CurrentCell = Rows[idx].Cells["cTitle"];
             Rows[idx].Selected = true;
@@ -362,7 +383,7 @@ namespace HitCounterManager
         {
             ProfileUpdateBegin();
             AttemptsCount++; // Increase attempts
-            for (int r = 0; r < SplitCount; r++) { SetSplitHits(r, 0); SetSplitWayHits(r, 0); }
+            for (int r = 0; r < SplitCount; r++) { SetSplitHits(r, 0); SetSplitWayHits(r, 0); SetSplitDuration(r, 0); SetSplitDurationPB(r, 0); }
             ActiveSplit = 0;
             ProfileUpdateEnd();
         }
@@ -423,10 +444,24 @@ namespace HitCounterManager
                     Rows[Index].Cells[i].Value = Rows[IndexDst].Cells[i].Value;
                     Rows[IndexDst].Cells[i].Value = cell;
                 }
+                
+                HiddenRowData data = (HiddenRowData)Rows[Index].Tag;
+                Rows[Index].Tag = Rows[IndexDst].Tag;
+                Rows[IndexDst].Tag = data;
 
                 ActiveSplit = IndexDst;
                 ProfileUpdateEnd();
             }
+        }
+        public void AddDuration(long Duration)
+        {
+            int active = ActiveSplit;
+            long duration = GetSplitDuration(active) + Duration;
+            if (duration < 0) duration = 0;
+
+            // We don't mark profile as updated here as this would generate output very very often!
+            SetSplitDuration(active, duration);
+            Rows[active].Selected = true; // row is already selected already but we make sure the whole row gets visually selected if user has selected a cell only
         }
 
         public int GetSessionProgress()
@@ -444,6 +479,8 @@ namespace HitCounterManager
         public int GetSplitWayHits(int Index) { return GetCellValueOfType<int>(Rows[Index].Cells["cWayHits"], 0); }
         public int GetSplitDiff(int Index) { return GetCellValueOfType<int>(Rows[Index].Cells["cDiff"], 0); }
         public int GetSplitPB(int Index) { return GetCellValueOfType<int>(Rows[Index].Cells["cPB"], 0); }
+        public long GetSplitDuration(int Index) { return  (null == Rows[Index].Tag ? 0 : ((HiddenRowData)Rows[Index].Tag).Duration); }
+        public long GetSplitDurationPB(int Index) { return  (null == Rows[Index].Tag ? 0 : ((HiddenRowData)Rows[Index].Tag).DurationPB); }
 
         public void SetSessionProgress(int Index, bool AllowReset = false)
         {
@@ -507,6 +544,18 @@ namespace HitCounterManager
                 Rows[Index].Cells["cPB"].Value = PBHits;
                 ProfileUpdateEnd();
             }
+        }
+        public void SetSplitDuration(int Index, long Duration)
+        {
+            if (null == Rows[Index].Tag) Rows[Index].Tag = new HiddenRowData();
+            // We don't mark profile as updated here as this would generate output very very often!
+            ((HiddenRowData)Rows[Index].Tag).Duration = Duration;
+        }
+        public void SetSplitDurationPB(int Index, long Duration)
+        {
+            if (null == Rows[Index].Tag) Rows[Index].Tag = new HiddenRowData();
+            // We don't mark profile as updated here as this would generate output very very often!
+            ((HiddenRowData)Rows[Index].Tag).DurationPB = Duration;
         }
 
         public void ProfileUpdateBegin() { DataUpdatePending++; }

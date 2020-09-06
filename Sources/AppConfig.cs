@@ -80,6 +80,10 @@ namespace HitCounterManager
         public int ShortcutSplitPrevKeyCode;
         public bool ShortcutPBEnable;
         public int ShortcutPBKeyCode;
+        public bool ShortcutTimerStartEnable;
+        public int ShortcutTimerStartKeyCode;
+        public bool ShortcutTimerStopEnable;
+        public int ShortcutTimerStopKeyCode;
         public string Inputfile;
         public string OutputFile;
         public bool ShowAttemptsCounter;
@@ -92,6 +96,8 @@ namespace HitCounterManager
         public bool ShowHitsCombined;
         public bool ShowNumbers;
         public bool ShowPB;
+        public bool ShowTimeCurrent;
+        public bool ShowTimePB;
         public bool ShowSuccession; // obsolete since version 7 - keep for backwards compatibility (use Succession.HistorySplitVisible instead)
         public int Purpose;
         public int Severity;
@@ -279,6 +285,13 @@ namespace HitCounterManager
             {
                 _settings.Version = 8;
                 _settings.DarkMode = OsLayer.IsDarkModeActive();
+                // Only enable time column when new settings were created
+                _settings.ShowTimeCurrent = (baseVersion < 0 ? true : false);
+                _settings.ShowTimePB = false;
+                _settings.ShortcutTimerStartEnable = false;
+                _settings.ShortcutTimerStartKeyCode = 0x10000 | 0x6B; // Shift Add-Num
+                _settings.ShortcutTimerStopEnable = false;
+                _settings.ShortcutTimerStopKeyCode = 0x10000 | 0x6D; // Shift Subtract-Num
             }
 
             // Apply settings..
@@ -324,6 +337,8 @@ namespace HitCounterManager
             if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Split, _settings.ShortcutSplitKeyCode , _settings.ShortcutSplitEnable)) isKeyInvalid = true;
             if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_SplitPrev, _settings.ShortcutSplitPrevKeyCode , _settings.ShortcutSplitPrevEnable)) isKeyInvalid = true;
             if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_PB, _settings.ShortcutPBKeyCode , _settings.ShortcutPBEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_TimerStart, _settings.ShortcutTimerStartKeyCode , _settings.ShortcutTimerStartEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_TimerStop, _settings.ShortcutTimerStopKeyCode , _settings.ShortcutTimerStopEnable)) isKeyInvalid = true;
             if (isKeyInvalid)
                 MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
         }
@@ -377,6 +392,12 @@ namespace HitCounterManager
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_PB);
             _settings.ShortcutPBEnable = key.used;
             _settings.ShortcutPBKeyCode = (int)key.key.KeyData;
+            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_TimerStart);
+            _settings.ShortcutTimerStartEnable = key.used;
+            _settings.ShortcutTimerStartKeyCode = (int)key.key.KeyData;
+            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_TimerStop);
+            _settings.ShortcutTimerStopEnable = key.used;
+            _settings.ShortcutTimerStopKeyCode = (int)key.key.KeyData;
 
             // Store customizing..
             int TotalSplits, TotalActiveSplit, SuccessionHits, SuccessionHitsWay, SuccessionHitsPB;

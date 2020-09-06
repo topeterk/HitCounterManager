@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2019-2019 Peter Kirmeier
+//Copyright (c) 2019-2020 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -57,6 +57,39 @@ namespace HitCounterManager
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public ProfileTabControl ProfileTabControl { get { return ptc; } }
 
+        #region Timer related
+        
+        private DateTime last_update_time = DateTime.UtcNow;
+
+        private bool _TimerRunning = false;
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
+        public bool TimerRunning
+        {
+            get { return _TimerRunning; }
+            set
+            {
+                last_update_time = DateTime.UtcNow;
+                timer1.Enabled = _TimerRunning = value;
+                UpdateDuration();
+                om.Update();
+            }
+        }
+
+        public void UpdateDuration()
+        {
+            if (_TimerRunning)
+            {
+                DateTime utc_now = DateTime.UtcNow;
+                SelectedProfileInfo.AddDuration((long)(utc_now - last_update_time).TotalMilliseconds);
+                last_update_time = utc_now;
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e) { UpdateDuration(); }
+
+        #endregion
+
         #region Succession related
 
         private void btnSuccessionVisibility_Click(object sender, EventArgs e) { ShowSuccessionMenu();  }
@@ -87,8 +120,8 @@ namespace HitCounterManager
             gpSuccession.Top -= diff;
         }
 
-        private void AddTabToolStripMenuItem_Click(object sender, EventArgs e) { ptc.ProfileTabCreateAndSelect(); }
-        private void RemoveToolStripMenuItem_Click(object sender, EventArgs e) { ptc.ProfileTabRemove(ptc.SelectedTab); }
+        private void AddTabToolStripMenuItem_Click(object sender, EventArgs e) { UpdateDuration(); ptc.ProfileTabCreateAndSelect(); }
+        private void RemoveToolStripMenuItem_Click(object sender, EventArgs e) { UpdateDuration(); ptc.ProfileTabRemove(ptc.SelectedTab); }
 
         private void Menu_ptc_Opening(object sender, CancelEventArgs e)
         {
@@ -163,6 +196,8 @@ namespace HitCounterManager
         {
             if (!Ready) return;
 
+            UpdateDuration();
+
             succession.HistorySplitVisible = cbShowPredecessor.Checked;
             succession.HistorySplitTitle = txtPredecessorTitle.Text;
 
@@ -173,6 +208,8 @@ namespace HitCounterManager
 
         private void SelectedProfileChanged(object sender, ProfileViewControl.SelectedProfileChangedCauseType cause)
         {
+            UpdateDuration();
+
             ProfileViewControl pvc_sender = (ProfileViewControl)sender;
             if (cause != ProfileViewControl.SelectedProfileChangedCauseType.Delete)
             {
@@ -197,6 +234,7 @@ namespace HitCounterManager
             switch (action)
             {
                 case ProfileTabControl.ProfileTabSelectAction.Selecting:
+                    UpdateDuration();
                     profs.SaveProfile(SelectedProfileInfo); // save current tab's profile
                     break;
                 case ProfileTabControl.ProfileTabSelectAction.Created:
@@ -209,6 +247,7 @@ namespace HitCounterManager
                     succession.ActiveIndex = ptc.IndexOf(pvc_sender);
                     break;
                 case ProfileTabControl.ProfileTabSelectAction.Deleting:
+                    UpdateDuration();
                     succession.SuccessionList.RemoveAt(ptc.IndexOf(pvc_sender));
                     break;
                 default: break;
@@ -226,6 +265,7 @@ namespace HitCounterManager
                 return;
             }
 
+            UpdateDuration();
             profs.SaveProfile(SelectedProfileViewControl.ProfileInfo); // save previous selected profile
 
             // Apply on all tabs
@@ -248,6 +288,7 @@ namespace HitCounterManager
                 return;
             }
 
+            UpdateDuration();
             profs.RenameProfile(NameOld, NameNew);
 
             // Apply on all tabs
@@ -258,6 +299,7 @@ namespace HitCounterManager
         }
         public void ProfileCopy()
         {
+            UpdateDuration();
             profs.SaveProfile(SelectedProfileViewControl.ProfileInfo); // save previous selected profile
 
             string NameNew = SelectedProfile;
@@ -274,6 +316,7 @@ namespace HitCounterManager
             string NameDel = SelectedProfile;
             if (DialogResult.OK == MessageBox.Show("Do you really want to delete profile \"" + NameDel + "\"?", "Deleting profile", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
             {
+                UpdateDuration();
                 profs.DeleteProfile(NameDel);
 
                 // Apply on all tabs
@@ -290,11 +333,13 @@ namespace HitCounterManager
             }
         }
 
-        public void ProfileSplitPermute(int Amount) { SelectedProfileInfo.PermuteSplit(SelectedProfileInfo.ActiveSplit, Amount); }
-        public void ProfileSplitInsert() { SelectedProfileInfo.InsertSplit(); }
+        public void ProfileSplitPermute(int Amount) { UpdateDuration(); SelectedProfileInfo.PermuteSplit(SelectedProfileInfo.ActiveSplit, Amount); }
+        public void ProfileSplitInsert() { UpdateDuration(); SelectedProfileInfo.InsertSplit(); }
 
         public void ProfileReset()
-        { 
+        {
+            UpdateDuration();
+
             // Apply on all tabs
             foreach (ProfileViewControl pvc_tab in ptc.ProfileViewControls)
             {
@@ -305,6 +350,8 @@ namespace HitCounterManager
         }
         public void ProfilePB()
         {
+            UpdateDuration();
+
             // Apply on all tabs
             foreach (ProfileViewControl pvc_tab in ptc.ProfileViewControls)
             {
@@ -313,9 +360,9 @@ namespace HitCounterManager
                 profs.SaveProfile(pi_tab); // save tab's profile
             }
         }
-        public void ProfileHit(int Amount) { SelectedProfileInfo.Hit(Amount); }
-        public void ProfileWayHit(int Amount) { SelectedProfileInfo.WayHit(Amount); }
-        public void ProfileSplitGo(int Amount) { SelectedProfileInfo.GoSplits(Amount); }
+        public void ProfileHit(int Amount) { UpdateDuration(); SelectedProfileInfo.Hit(Amount); }
+        public void ProfileWayHit(int Amount) { UpdateDuration(); SelectedProfileInfo.WayHit(Amount); }
+        public void ProfileSplitGo(int Amount) { UpdateDuration(); SelectedProfileInfo.GoSplits(Amount); }
 
         public void ProfileSetAttempts()
         {
@@ -327,6 +374,8 @@ namespace HitCounterManager
                 MessageBox.Show("Only numbers are allowed!");
                 return;
             }
+
+            UpdateDuration();
             CurrentAttempts = amount_value;
         }
         

@@ -131,7 +131,7 @@ namespace HitCounterManager
         /// <summary>
         /// Writes a JSON statement to assign a simple value
         /// </summary>
-        private void WriteJsonSimpleValue(StreamWriter File, string Name, int Integer)
+        private void WriteJsonSimpleValue(StreamWriter File, string Name, long Integer)
         {
             File.WriteLine("\"" + Name + "\": " + Integer.ToString() + ",");
         }
@@ -170,6 +170,7 @@ namespace HitCounterManager
             catch { return; }
             sr.NewLine = Environment.NewLine;
 
+            profCtrl.UpdateDuration();
             IProfileInfo pi = profCtrl.SelectedProfileInfo;
 
             foreach (string line in template.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
@@ -212,7 +213,7 @@ namespace HitCounterManager
                             for (int r = 0; r < pi_pvc.SplitCount; r++)
                             {
                                 if (0 < r + HiddenSplitCount) sr.WriteLine(","); // separator
-                                sr.Write("[\"" + SimpleHtmlEscape(pi_pvc.GetSplitTitle(r)) + "\", " + (pi_pvc.GetSplitHits(r) + pi_pvc.GetSplitWayHits(r)) + ", " + pi_pvc.GetSplitPB(r) + ", " + pi_pvc.GetSplitWayHits(r) + ", " + RunIndex + "]");
+                                sr.Write("[\"" + SimpleHtmlEscape(pi_pvc.GetSplitTitle(r)) + "\", " + (pi_pvc.GetSplitHits(r) + pi_pvc.GetSplitWayHits(r)) + ", " + pi_pvc.GetSplitPB(r) + ", " + pi_pvc.GetSplitWayHits(r) + ", " + RunIndex + ", " + 0/*NoTime*/ + ", " + 0/*NoPBTime*/ + "]");
                             }
                             HiddenSplitCount += pi_pvc.SplitCount;
                             RunIndex++;
@@ -226,13 +227,13 @@ namespace HitCounterManager
                         // Insert the "history" split
                         InjectedSplitCount++;
                         if (0 < HiddenSplitCount) sr.WriteLine(","); // separator
-                        sr.Write("[\"" + SimpleHtmlEscape(_settings.Succession.HistorySplitTitle) + "\", " + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + ", " + RunIndex + "]");
+                        sr.Write("[\"" + SimpleHtmlEscape(_settings.Succession.HistorySplitTitle) + "\", " + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + ", " + RunIndex + ", " + 0/*NoTime*/ + ", " + 0/*NoPBTime*/ + "]");
                     }
                     for (int r = 0; r < iSplitCount; r++)
                     {
                         // Dump all actually visible splits of the current run
                         if (0 < r + HiddenSplitCount + InjectedSplitCount) sr.WriteLine(","); // separator
-                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + (pi.GetSplitHits(r) + pi.GetSplitWayHits(r)) + ", " + pi.GetSplitPB(r) + ", " + pi.GetSplitWayHits(r) + ", " + RunIndex + "]");
+                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + (pi.GetSplitHits(r) + pi.GetSplitWayHits(r)) + ", " + pi.GetSplitPB(r) + ", " + pi.GetSplitWayHits(r) + ", " + RunIndex + ", " + pi.GetSplitDuration(r) + ", " + pi.GetSplitDurationPB(r) + "]");
                     }
 
                     // ----- Splits of the upcoming runs:
@@ -249,7 +250,7 @@ namespace HitCounterManager
                                 for (int r = 0; r < pi_pvc.SplitCount; r++)
                                 {
                                     if (0 < r + HiddenSplitCount + InjectedSplitCount + iSplitCount) sr.WriteLine(","); // separator
-                                    sr.Write("[\"" + SimpleHtmlEscape(pi_pvc.GetSplitTitle(r)) + "\", " + (pi_pvc.GetSplitHits(r) + pi_pvc.GetSplitWayHits(r)) + ", " + pi_pvc.GetSplitPB(r) + ", " + pi_pvc.GetSplitWayHits(r) + ", " + RunIndex + "]");
+                                    sr.Write("[\"" + SimpleHtmlEscape(pi_pvc.GetSplitTitle(r)) + "\", " + (pi_pvc.GetSplitHits(r) + pi_pvc.GetSplitWayHits(r)) + ", " + pi_pvc.GetSplitPB(r) + ", " + pi_pvc.GetSplitWayHits(r) + ", " + RunIndex + ", " + 0/*NoTime*/ + ", " + 0/*NoPBTime*/ + "]");
                                 }
                                 RunIndex++;
                             }
@@ -311,6 +312,8 @@ namespace HitCounterManager
                     WriteJsonSimpleValue(sr, "show_hitscombined", _settings.ShowHitsCombined);
                     WriteJsonSimpleValue(sr, "show_numbers", _settings.ShowNumbers);
                     WriteJsonSimpleValue(sr, "show_pb", _settings.ShowPB);
+                    WriteJsonSimpleValue(sr, "show_time", _settings.ShowTimeCurrent);
+                    WriteJsonSimpleValue(sr, "show_time_pb", _settings.ShowTimePB);
                     WriteJsonSimpleValue(sr, "purpose", (int)Purpose);
                     WriteJsonSimpleValue(sr, "severity", (int)Severity);
 
@@ -324,6 +327,9 @@ namespace HitCounterManager
                     WriteJsonSimpleValue(sr, "progress_bar_colored", _settings.StyleProgressBarColored);
                     WriteJsonSimpleValue(sr, "width", _settings.StyleDesiredWidth);
                     WriteJsonSimpleValue(sr, "supPB", _settings.StyleSuperscriptPB);
+                    
+                    WriteJsonSimpleValue(sr, "update_time", (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds);
+                    WriteJsonSimpleValue(sr, "timer_paused", !profCtrl.TimerRunning);
 
                     sr.WriteLine("}");
 
