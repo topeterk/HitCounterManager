@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2019 Peter Kirmeier
+//Copyright (c) 2016-2020 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -199,6 +199,8 @@ namespace HitCounterManager
                     sr.WriteLine("{");
 
                     sr.WriteLine("\"list\": [");
+
+                    // ----- Splits of all previous runs:
                     if (_settings.Succession.IntegrateIntoProgressBar)
                     {
                         // Dump all splits of the (previous) non-visible profiles
@@ -216,18 +218,24 @@ namespace HitCounterManager
                             RunIndex++;
                         }
                     }
+
+                    // ----- Splits of the current run:
                     RunIndexActive = RunIndex;
-                    if (_settings.Succession.HistorySplitVisible)
+                    if (_settings.Succession.HistorySplitVisible && (0 < RunIndex))
                     {
+                        // Insert the "history" split
                         InjectedSplitCount++;
                         if (0 < HiddenSplitCount) sr.WriteLine(","); // separator
-                        sr.Write("[\"" + SimpleHtmlEscape(_settings.Succession.HistorySplitTitle) + "\", " + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + ", " + 0/*RunIndex*/ + "]");
+                        sr.Write("[\"" + SimpleHtmlEscape(_settings.Succession.HistorySplitTitle) + "\", " + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + ", " + RunIndex + "]");
                     }
                     for (int r = 0; r < iSplitCount; r++)
                     {
+                        // Dump all actually visible splits of the current run
                         if (0 < r + HiddenSplitCount + InjectedSplitCount) sr.WriteLine(","); // separator
                         sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + (pi.GetSplitHits(r) + pi.GetSplitWayHits(r)) + ", " + pi.GetSplitPB(r) + ", " + pi.GetSplitWayHits(r) + ", " + RunIndex + "]");
                     }
+
+                    // ----- Splits of the upcoming runs:
                     RunIndex++;
                     if (_settings.Succession.IntegrateIntoProgressBar)
                     {
