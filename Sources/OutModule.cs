@@ -312,8 +312,10 @@ namespace HitCounterManager
                     WriteJsonSimpleValue(sr, "show_hitscombined", _settings.ShowHitsCombined);
                     WriteJsonSimpleValue(sr, "show_numbers", _settings.ShowNumbers);
                     WriteJsonSimpleValue(sr, "show_pb", _settings.ShowPB);
+                    WriteJsonSimpleValue(sr, "show_diff", _settings.ShowDiff);
                     WriteJsonSimpleValue(sr, "show_time", _settings.ShowTimeCurrent);
                     WriteJsonSimpleValue(sr, "show_time_pb", _settings.ShowTimePB);
+                    WriteJsonSimpleValue(sr, "show_time_diff", _settings.ShowTimeDiff);
                     WriteJsonSimpleValue(sr, "purpose", (int)Purpose);
                     WriteJsonSimpleValue(sr, "severity", (int)Severity);
 

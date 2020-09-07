@@ -117,6 +117,8 @@
             this.Label12 = new System.Windows.Forms.Label();
             this.Label13 = new System.Windows.Forms.Label();
             this.Label14 = new System.Windows.Forms.Label();
+            this.cbShowDiff = new System.Windows.Forms.CheckBox();
+            this.cbShowTimeDiff = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             this.tab_globalshortcuts.SuspendLayout();
@@ -194,7 +196,7 @@
             0});
             this.numShowSplitsCountUpcoming.Name = "numShowSplitsCountUpcoming";
             this.numShowSplitsCountUpcoming.Size = new System.Drawing.Size(57, 20);
-            this.numShowSplitsCountUpcoming.TabIndex = 12;
+            this.numShowSplitsCountUpcoming.TabIndex = 14;
             this.ToolTip1.SetToolTip(this.numShowSplitsCountUpcoming, "Hide splits that are coming later to spare space");
             this.numShowSplitsCountUpcoming.Value = new decimal(new int[] {
             999,
@@ -231,7 +233,7 @@
             0});
             this.numShowSplitsCountFinished.Name = "numShowSplitsCountFinished";
             this.numShowSplitsCountFinished.Size = new System.Drawing.Size(57, 20);
-            this.numShowSplitsCountFinished.TabIndex = 11;
+            this.numShowSplitsCountFinished.TabIndex = 13;
             this.ToolTip1.SetToolTip(this.numShowSplitsCountFinished, "Hide splits that are done already to spare space");
             this.numShowSplitsCountFinished.Value = new decimal(new int[] {
             999,
@@ -667,7 +669,7 @@
             this.cbShowNumbers.Location = new System.Drawing.Point(6, 157);
             this.cbShowNumbers.Name = "cbShowNumbers";
             this.cbShowNumbers.Size = new System.Drawing.Size(247, 17);
-            this.cbShowNumbers.TabIndex = 8;
+            this.cbShowNumbers.TabIndex = 9;
             this.cbShowNumbers.Text = "Show numbers, no images (Numeric vs YesNo)";
             this.ToolTip1.SetToolTip(this.cbShowNumbers, "Show the actual hit count instead of images");
             this.cbShowNumbers.UseVisualStyleBackColor = true;
@@ -742,7 +744,7 @@
             this.cbShowFooter.AutoSize = true;
             this.cbShowFooter.Checked = true;
             this.cbShowFooter.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowFooter.Location = new System.Drawing.Point(146, 42);
+            this.cbShowFooter.Location = new System.Drawing.Point(154, 42);
             this.cbShowFooter.Name = "cbShowFooter";
             this.cbShowFooter.Size = new System.Drawing.Size(83, 17);
             this.cbShowFooter.TabIndex = 2;
@@ -782,7 +784,7 @@
             this.cbSuccessionToProgressBar.AutoSize = true;
             this.cbSuccessionToProgressBar.Checked = true;
             this.cbSuccessionToProgressBar.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbSuccessionToProgressBar.Location = new System.Drawing.Point(146, 88);
+            this.cbSuccessionToProgressBar.Location = new System.Drawing.Point(154, 88);
             this.cbSuccessionToProgressBar.Name = "cbSuccessionToProgressBar";
             this.cbSuccessionToProgressBar.Size = new System.Drawing.Size(110, 17);
             this.cbSuccessionToProgressBar.TabIndex = 5;
@@ -848,10 +850,10 @@
             this.cbShowTimePB.AutoSize = true;
             this.cbShowTimePB.Checked = true;
             this.cbShowTimePB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowTimePB.Location = new System.Drawing.Point(146, 180);
+            this.cbShowTimePB.Location = new System.Drawing.Point(154, 180);
             this.cbShowTimePB.Name = "cbShowTimePB";
             this.cbShowTimePB.Size = new System.Drawing.Size(98, 17);
-            this.cbShowTimePB.TabIndex = 10;
+            this.cbShowTimePB.TabIndex = 11;
             this.cbShowTimePB.Text = "Show time (PB)";
             this.ToolTip1.SetToolTip(this.cbShowTimePB, "Show personal best time");
             this.cbShowTimePB.UseVisualStyleBackColor = true;
@@ -865,7 +867,7 @@
             this.cbShowTimeCurrent.Location = new System.Drawing.Point(6, 180);
             this.cbShowTimeCurrent.Name = "cbShowTimeCurrent";
             this.cbShowTimeCurrent.Size = new System.Drawing.Size(118, 17);
-            this.cbShowTimeCurrent.TabIndex = 9;
+            this.cbShowTimeCurrent.TabIndex = 10;
             this.cbShowTimeCurrent.Text = "Show time (Current)";
             this.ToolTip1.SetToolTip(this.cbShowTimeCurrent, "Show time of the current run");
             this.cbShowTimeCurrent.UseVisualStyleBackColor = true;
@@ -934,6 +936,8 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.cbShowTimeDiff);
+            this.groupBox5.Controls.Add(this.cbShowDiff);
             this.groupBox5.Controls.Add(this.cbShowProgressBar);
             this.groupBox5.Controls.Add(this.cbSuccessionToProgressBar);
             this.groupBox5.Controls.Add(this.lblShowSplitCount);
@@ -1200,6 +1204,34 @@
             this.Label14.TabIndex = 21;
             this.Label14.Text = "Desired width:";
             // 
+            // cbShowDiff
+            // 
+            this.cbShowDiff.AutoSize = true;
+            this.cbShowDiff.Checked = true;
+            this.cbShowDiff.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbShowDiff.Location = new System.Drawing.Point(154, 134);
+            this.cbShowDiff.Name = "cbShowDiff";
+            this.cbShowDiff.Size = new System.Drawing.Size(103, 17);
+            this.cbShowDiff.TabIndex = 8;
+            this.cbShowDiff.Text = "Show difference";
+            this.ToolTip1.SetToolTip(this.cbShowDiff, "Show difference between personal best and current hit counts");
+            this.cbShowDiff.UseVisualStyleBackColor = true;
+            this.cbShowDiff.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // cbShowTimeDiff
+            // 
+            this.cbShowTimeDiff.AutoSize = true;
+            this.cbShowTimeDiff.Checked = true;
+            this.cbShowTimeDiff.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbShowTimeDiff.Location = new System.Drawing.Point(258, 180);
+            this.cbShowTimeDiff.Name = "cbShowTimeDiff";
+            this.cbShowTimeDiff.Size = new System.Drawing.Size(101, 17);
+            this.cbShowTimeDiff.TabIndex = 12;
+            this.cbShowTimeDiff.Text = "Show time delta";
+            this.ToolTip1.SetToolTip(this.cbShowTimeDiff, "Show time delta between personal best and current time");
+            this.cbShowTimeDiff.UseVisualStyleBackColor = true;
+            this.cbShowTimeDiff.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1327,5 +1359,7 @@
         private System.Windows.Forms.CheckBox cbProgressBarColored;
         private System.Windows.Forms.CheckBox cbUseRoman;
         private System.Windows.Forms.CheckBox cbHighlightCurrentSplit;
+        private System.Windows.Forms.CheckBox cbShowTimeDiff;
+        private System.Windows.Forms.CheckBox cbShowDiff;
     }
 }

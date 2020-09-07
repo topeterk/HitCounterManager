@@ -96,8 +96,10 @@ namespace HitCounterManager
         public bool ShowHitsCombined;
         public bool ShowNumbers;
         public bool ShowPB;
+        public bool ShowDiff;
         public bool ShowTimeCurrent;
         public bool ShowTimePB;
+        public bool ShowTimeDiff;
         public bool ShowSuccession; // obsolete since version 7 - keep for backwards compatibility (use Succession.HistorySplitVisible instead)
         public int Purpose;
         public int Severity;
@@ -287,7 +289,9 @@ namespace HitCounterManager
                 _settings.DarkMode = OsLayer.IsDarkModeActive();
                 // Only enable time column when new settings were created
                 _settings.ShowTimeCurrent = (baseVersion < 0 ? true : false);
+                _settings.ShowDiff = _settings.ShowPB; // was combined in previous versions
                 _settings.ShowTimePB = false;
+                _settings.ShowTimeDiff = false;
                 _settings.ShortcutTimerStartEnable = false;
                 _settings.ShortcutTimerStartKeyCode = 0x10000 | 0x6B; // Shift Add-Num
                 _settings.ShortcutTimerStopEnable = false;
