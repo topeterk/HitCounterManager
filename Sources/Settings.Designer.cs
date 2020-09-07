@@ -55,15 +55,15 @@
             this.cbScWayHit = new System.Windows.Forms.CheckBox();
             this.cbScHitUndo = new System.Windows.Forms.CheckBox();
             this.cbScPrevSplit = new System.Windows.Forms.CheckBox();
+            this.cbScReset = new System.Windows.Forms.CheckBox();
+            this.cbScHit = new System.Windows.Forms.CheckBox();
+            this.cbScNextSplit = new System.Windows.Forms.CheckBox();
             this.cbScTimerStart = new System.Windows.Forms.CheckBox();
             this.cbScTimerStop = new System.Windows.Forms.CheckBox();
             this.Label6 = new System.Windows.Forms.Label();
             this.radioHotKeyMethod_async = new System.Windows.Forms.RadioButton();
             this.Label1 = new System.Windows.Forms.Label();
             this.radioHotKeyMethod_sync = new System.Windows.Forms.RadioButton();
-            this.cbScReset = new System.Windows.Forms.CheckBox();
-            this.cbScHit = new System.Windows.Forms.CheckBox();
-            this.cbScNextSplit = new System.Windows.Forms.CheckBox();
             this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txtFontName = new System.Windows.Forms.TextBox();
             this.cbApCustomCss = new System.Windows.Forms.CheckBox();
@@ -85,17 +85,17 @@
             this.cbProgressBarColored = new System.Windows.Forms.CheckBox();
             this.cbUseRoman = new System.Windows.Forms.CheckBox();
             this.cbHighlightCurrentSplit = new System.Windows.Forms.CheckBox();
-            this.tab_behavior = new System.Windows.Forms.TabPage();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.lblShowSplitCount = new System.Windows.Forms.Label();
             this.cbShowPB = new System.Windows.Forms.CheckBox();
             this.cbShowTimePB = new System.Windows.Forms.CheckBox();
             this.cbShowTimeCurrent = new System.Windows.Forms.CheckBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.radioPurposeChecklist = new System.Windows.Forms.RadioButton();
             this.radioPurposeDeathCounter = new System.Windows.Forms.RadioButton();
             this.radioPurposeSplitCounter = new System.Windows.Forms.RadioButton();
             this.radioPurposeNoDeath = new System.Windows.Forms.RadioButton();
+            this.tab_behavior = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.lblShowSplitCount = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tab_filepaths = new System.Windows.Forms.TabPage();
             this.Label7 = new System.Windows.Forms.Label();
@@ -139,9 +139,9 @@
             this.cbShowSessionProgress.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbShowSessionProgress.Location = new System.Drawing.Point(6, 65);
             this.cbShowSessionProgress.Name = "cbShowSessionProgress";
-            this.cbShowSessionProgress.Size = new System.Drawing.Size(134, 17);
+            this.cbShowSessionProgress.Size = new System.Drawing.Size(162, 17);
             this.cbShowSessionProgress.TabIndex = 3;
-            this.cbShowSessionProgress.Text = "Show session progress";
+            this.cbShowSessionProgress.Text = "Show session progress (Star)";
             this.ToolTip1.SetToolTip(this.cbShowSessionProgress, "Displays the icon to represent the farthest split since last time the application" +
         " started");
             this.cbShowSessionProgress.UseVisualStyleBackColor = true;
@@ -260,8 +260,8 @@
             this.tab_globalshortcuts.Controls.Add(this.txtNextSplit);
             this.tab_globalshortcuts.Controls.Add(this.txtHit);
             this.tab_globalshortcuts.Controls.Add(this.txtReset);
-            this.tab_globalshortcuts.Controls.Add(this.txtTimerStop);
             this.tab_globalshortcuts.Controls.Add(this.txtTimerStart);
+            this.tab_globalshortcuts.Controls.Add(this.txtTimerStop);
             this.tab_globalshortcuts.Controls.Add(this.cbScWayHitUndo);
             this.tab_globalshortcuts.Controls.Add(this.cbScWayHit);
             this.tab_globalshortcuts.Controls.Add(this.cbScHitUndo);
@@ -269,8 +269,8 @@
             this.tab_globalshortcuts.Controls.Add(this.cbScReset);
             this.tab_globalshortcuts.Controls.Add(this.cbScHit);
             this.tab_globalshortcuts.Controls.Add(this.cbScNextSplit);
-            this.tab_globalshortcuts.Controls.Add(this.cbScTimerStop);
             this.tab_globalshortcuts.Controls.Add(this.cbScTimerStart);
+            this.tab_globalshortcuts.Controls.Add(this.cbScTimerStop);
             this.tab_globalshortcuts.Controls.Add(this.Label6);
             this.tab_globalshortcuts.Controls.Add(this.radioHotKeyMethod_async);
             this.tab_globalshortcuts.Controls.Add(this.Label1);
@@ -664,10 +664,10 @@
             this.cbShowNumbers.AutoSize = true;
             this.cbShowNumbers.Checked = true;
             this.cbShowNumbers.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowNumbers.Location = new System.Drawing.Point(6, 134);
+            this.cbShowNumbers.Location = new System.Drawing.Point(6, 157);
             this.cbShowNumbers.Name = "cbShowNumbers";
             this.cbShowNumbers.Size = new System.Drawing.Size(247, 17);
-            this.cbShowNumbers.TabIndex = 7;
+            this.cbShowNumbers.TabIndex = 8;
             this.cbShowNumbers.Text = "Show numbers, no images (Numeric vs YesNo)";
             this.ToolTip1.SetToolTip(this.cbShowNumbers, "Show the actual hit count instead of images");
             this.cbShowNumbers.UseVisualStyleBackColor = true;
@@ -829,64 +829,15 @@
             this.cbHighlightCurrentSplit.UseVisualStyleBackColor = true;
             this.cbHighlightCurrentSplit.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
-            // tab_behavior
-            // 
-            this.tab_behavior.Controls.Add(this.groupBox5);
-            this.tab_behavior.Controls.Add(this.groupBox4);
-            this.tab_behavior.Controls.Add(this.groupBox2);
-            this.tab_behavior.Location = new System.Drawing.Point(4, 22);
-            this.tab_behavior.Name = "tab_behavior";
-            this.tab_behavior.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.tab_behavior.Size = new System.Drawing.Size(588, 274);
-            this.tab_behavior.TabIndex = 1;
-            this.tab_behavior.Text = "Behavior";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.cbShowProgressBar);
-            this.groupBox5.Controls.Add(this.cbSuccessionToProgressBar);
-            this.groupBox5.Controls.Add(this.lblShowSplitCount);
-            this.groupBox5.Controls.Add(this.cbShowFooter);
-            this.groupBox5.Controls.Add(this.cbShowPB);
-            this.groupBox5.Controls.Add(this.cbShowTimeCurrent);
-            this.groupBox5.Controls.Add(this.cbShowTimePB);
-            this.groupBox5.Controls.Add(this.cbShowAttempts);
-            this.groupBox5.Controls.Add(this.cbShowHeadline);
-            this.groupBox5.Controls.Add(this.cbShowSessionProgress);
-            this.groupBox5.Controls.Add(this.Label9);
-            this.groupBox5.Controls.Add(this.cbShowHitsCombined);
-            this.groupBox5.Controls.Add(this.numShowSplitsCountUpcoming);
-            this.groupBox5.Controls.Add(this.cbShowNumbers);
-            this.groupBox5.Controls.Add(this.Label10);
-            this.groupBox5.Controls.Add(this.Label8);
-            this.groupBox5.Controls.Add(this.Label3);
-            this.groupBox5.Controls.Add(this.numShowSplitsCountFinished);
-            this.groupBox5.Location = new System.Drawing.Point(215, 13);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(367, 255);
-            this.groupBox5.TabIndex = 3;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Features";
-            // 
-            // lblShowSplitCount
-            // 
-            this.lblShowSplitCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblShowSplitCount.Location = new System.Drawing.Point(238, 206);
-            this.lblShowSplitCount.Name = "lblShowSplitCount";
-            this.lblShowSplitCount.Size = new System.Drawing.Size(123, 44);
-            this.lblShowSplitCount.TabIndex = 9;
-            this.lblShowSplitCount.Text = "Current configuration will show up to ??? splits.";
-            this.lblShowSplitCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // cbShowPB
             // 
             this.cbShowPB.AutoSize = true;
             this.cbShowPB.Checked = true;
             this.cbShowPB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowPB.Location = new System.Drawing.Point(6, 158);
+            this.cbShowPB.Location = new System.Drawing.Point(6, 134);
             this.cbShowPB.Name = "cbShowPB";
             this.cbShowPB.Size = new System.Drawing.Size(142, 17);
-            this.cbShowPB.TabIndex = 8;
+            this.cbShowPB.TabIndex = 7;
             this.cbShowPB.Text = "Show personal best (PB)";
             this.ToolTip1.SetToolTip(this.cbShowPB, "Show personal best hit counts");
             this.cbShowPB.UseVisualStyleBackColor = true;
@@ -897,10 +848,10 @@
             this.cbShowTimePB.AutoSize = true;
             this.cbShowTimePB.Checked = true;
             this.cbShowTimePB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowTimePB.Location = new System.Drawing.Point(6, 181);
+            this.cbShowTimePB.Location = new System.Drawing.Point(146, 180);
             this.cbShowTimePB.Name = "cbShowTimePB";
             this.cbShowTimePB.Size = new System.Drawing.Size(98, 17);
-            this.cbShowTimePB.TabIndex = 9;
+            this.cbShowTimePB.TabIndex = 10;
             this.cbShowTimePB.Text = "Show time (PB)";
             this.ToolTip1.SetToolTip(this.cbShowTimePB, "Show personal best time");
             this.cbShowTimePB.UseVisualStyleBackColor = true;
@@ -911,27 +862,14 @@
             this.cbShowTimeCurrent.AutoSize = true;
             this.cbShowTimeCurrent.Checked = true;
             this.cbShowTimeCurrent.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowTimeCurrent.Location = new System.Drawing.Point(146, 181);
+            this.cbShowTimeCurrent.Location = new System.Drawing.Point(6, 180);
             this.cbShowTimeCurrent.Name = "cbShowTimeCurrent";
             this.cbShowTimeCurrent.Size = new System.Drawing.Size(118, 17);
-            this.cbShowTimeCurrent.TabIndex = 10;
+            this.cbShowTimeCurrent.TabIndex = 9;
             this.cbShowTimeCurrent.Text = "Show time (Current)";
             this.ToolTip1.SetToolTip(this.cbShowTimeCurrent, "Show time of the current run");
             this.cbShowTimeCurrent.UseVisualStyleBackColor = true;
             this.cbShowTimeCurrent.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.radioPurposeChecklist);
-            this.groupBox4.Controls.Add(this.radioPurposeDeathCounter);
-            this.groupBox4.Controls.Add(this.radioPurposeSplitCounter);
-            this.groupBox4.Controls.Add(this.radioPurposeNoDeath);
-            this.groupBox4.Location = new System.Drawing.Point(6, 13);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 124);
-            this.groupBox4.TabIndex = 0;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Purpose";
             // 
             // radioPurposeChecklist
             // 
@@ -981,6 +919,68 @@
             this.radioPurposeNoDeath.Text = "No death";
             this.ToolTip1.SetToolTip(this.radioPurposeNoDeath, "Track how far you get without dying");
             this.radioPurposeNoDeath.UseVisualStyleBackColor = true;
+            // 
+            // tab_behavior
+            // 
+            this.tab_behavior.Controls.Add(this.groupBox5);
+            this.tab_behavior.Controls.Add(this.groupBox4);
+            this.tab_behavior.Controls.Add(this.groupBox2);
+            this.tab_behavior.Location = new System.Drawing.Point(4, 22);
+            this.tab_behavior.Name = "tab_behavior";
+            this.tab_behavior.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.tab_behavior.Size = new System.Drawing.Size(588, 274);
+            this.tab_behavior.TabIndex = 1;
+            this.tab_behavior.Text = "Behavior";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.cbShowProgressBar);
+            this.groupBox5.Controls.Add(this.cbSuccessionToProgressBar);
+            this.groupBox5.Controls.Add(this.lblShowSplitCount);
+            this.groupBox5.Controls.Add(this.cbShowFooter);
+            this.groupBox5.Controls.Add(this.cbShowPB);
+            this.groupBox5.Controls.Add(this.cbShowTimeCurrent);
+            this.groupBox5.Controls.Add(this.cbShowTimePB);
+            this.groupBox5.Controls.Add(this.cbShowAttempts);
+            this.groupBox5.Controls.Add(this.cbShowHeadline);
+            this.groupBox5.Controls.Add(this.cbShowSessionProgress);
+            this.groupBox5.Controls.Add(this.Label9);
+            this.groupBox5.Controls.Add(this.cbShowHitsCombined);
+            this.groupBox5.Controls.Add(this.numShowSplitsCountUpcoming);
+            this.groupBox5.Controls.Add(this.cbShowNumbers);
+            this.groupBox5.Controls.Add(this.Label10);
+            this.groupBox5.Controls.Add(this.Label8);
+            this.groupBox5.Controls.Add(this.Label3);
+            this.groupBox5.Controls.Add(this.numShowSplitsCountFinished);
+            this.groupBox5.Location = new System.Drawing.Point(215, 13);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(367, 255);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Features";
+            // 
+            // lblShowSplitCount
+            // 
+            this.lblShowSplitCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblShowSplitCount.Location = new System.Drawing.Point(238, 206);
+            this.lblShowSplitCount.Name = "lblShowSplitCount";
+            this.lblShowSplitCount.Size = new System.Drawing.Size(123, 44);
+            this.lblShowSplitCount.TabIndex = 9;
+            this.lblShowSplitCount.Text = "Current configuration will show up to ??? splits.";
+            this.lblShowSplitCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.radioPurposeChecklist);
+            this.groupBox4.Controls.Add(this.radioPurposeDeathCounter);
+            this.groupBox4.Controls.Add(this.radioPurposeSplitCounter);
+            this.groupBox4.Controls.Add(this.radioPurposeNoDeath);
+            this.groupBox4.Location = new System.Drawing.Point(6, 13);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(200, 124);
+            this.groupBox4.TabIndex = 0;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Purpose";
             // 
             // groupBox2
             // 
@@ -1284,9 +1284,9 @@
         private System.Windows.Forms.TextBox txtPB;
         private System.Windows.Forms.CheckBox cbScPB;
         private System.Windows.Forms.TextBox txtTimerStart;
-        private System.Windows.Forms.CheckBox cbScTimerStop;
-        private System.Windows.Forms.TextBox txtTimerStop;
         private System.Windows.Forms.CheckBox cbScTimerStart;
+        private System.Windows.Forms.TextBox txtTimerStop;
+        private System.Windows.Forms.CheckBox cbScTimerStop;
         private System.Windows.Forms.TabPage tab_style;
         private System.Windows.Forms.GroupBox GroupBox1;
         private System.Windows.Forms.Label label15;
