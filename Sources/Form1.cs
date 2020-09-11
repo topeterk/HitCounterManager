@@ -129,10 +129,10 @@ namespace HitCounterManager
         /// <summary>
         /// Creates a window to show changelog of new available versions
         /// </summary>
-        /// <param name="Prompt">Prompt text</param>
-        /// <param name="Title">Title</param>
-        /// <param name="Text">Changelog</param>
-        public void NewVersionDialog(string LatestVersionTitle, string Changelog)
+        /// <param name="LatestVersionTitle">Name of latest release</param>
+        /// <param name="Changelog">Pathnotes</param>
+        /// <returns>OK = OK, Yes = Website, else = Cancel</returns>
+        public DialogResult NewVersionDialog(string LatestVersionTitle, string Changelog)
         {
             const int ClientPad = 15;
             Form frm = new Form();
@@ -162,6 +162,14 @@ namespace HitCounterManager
             okButton.Text = "&OK";
             frm.Controls.Add(okButton);
 
+            Button wwwButton = new Button();
+            wwwButton.DialogResult = DialogResult.Yes;
+            wwwButton.Name = "wwwButton";
+            wwwButton.Location = new Point(frm.ClientSize.Width - wwwButton.Size.Width- ClientPad - okButton.Size.Width - ClientPad, frm.ClientSize.Height - wwwButton.Size.Height - ClientPad);
+            wwwButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            wwwButton.Text = "&Website";
+            frm.Controls.Add(wwwButton);
+
             TextBox textBox = new TextBox();
             textBox.Location = new Point(ClientPad, label.Location.Y + label.Size.Height + 5);
             textBox.Size = new Size(frm.ClientSize.Width - ClientPad*2, okButton.Location.Y - ClientPad - textBox.Location.Y);
@@ -174,8 +182,10 @@ namespace HitCounterManager
             frm.Controls.Add(textBox);
 
             frm.AcceptButton = okButton;
-            frm.ShowDialog(this);
+            return frm.ShowDialog(this);
         }
+
+        private void OpenProjectWebsite() { System.Diagnostics.Process.Start("https://github.com/topeterk/HitCounterManager"); }
 
         #endregion
         #region UI
@@ -189,7 +199,7 @@ namespace HitCounterManager
         }
 
         private void btnSave_Click(object sender, EventArgs e) { SaveSettings(); }
-        private void btnWeb_Click(object sender, EventArgs e) { System.Diagnostics.Process.Start("https://github.com/topeterk/HitCounterManager"); }
+        private void btnWeb_Click(object sender, EventArgs e) { OpenProjectWebsite(); }
         private void btnTeamHitless_Click(object sender, EventArgs e) { System.Diagnostics.Process.Start("https://discord.gg/4E7cSK7"); }
         private void btnCheckVersion_Click(object sender, EventArgs e)
         {
@@ -231,11 +241,11 @@ namespace HitCounterManager
 
                     changelog = "New version available!" + Environment.NewLine + Environment.NewLine
                             + "There " + (i == 1 ? "is 1 new version" : "are " + i.ToString() + " new versions") + " available:" + Environment.NewLine
-                            + "Please visit the github project website (WWW button on main window)." + Environment.NewLine
-                            + "Then look at the \"releases\" to download the new version." + Environment.NewLine
+                            + "Please visit the github project website." + Environment.NewLine
+                            + "Look at the \"releases\" section to download the latest version." + Environment.NewLine
                             + Environment.NewLine + changelog;
 
-                    NewVersionDialog(json[0]["name"].ToString(), changelog);
+                    if (NewVersionDialog(json[0]["name"].ToString(), changelog) == DialogResult.Yes) OpenProjectWebsite();
                 }
             }
             catch (Exception ex)
