@@ -95,6 +95,7 @@ namespace HitCounterManager
             cbShowTimeCurrent.Checked = _settings.ShowTimeCurrent;
             cbShowTimePB.Checked = _settings.ShowTimePB;
             cbShowTimeDiff.Checked = _settings.ShowTimeDiff;
+            cbShowTimeFooter.Checked = _settings.ShowTimeFooter;
             radioPurposeChecklist.Checked = (om.Purpose == OutModule.OM_Purpose.OM_Purpose_Checklist);
             radioPurposeDeathCounter.Checked = (om.Purpose == OutModule.OM_Purpose.OM_Purpose_DeathCounter);
             radioPurposeSplitCounter.Checked = (om.Purpose == OutModule.OM_Purpose.OM_Purpose_SplitCounter);
@@ -192,6 +193,7 @@ namespace HitCounterManager
             _settings.ShowTimeCurrent = cbShowTimeCurrent.Checked;
             _settings.ShowTimePB = cbShowTimePB.Checked;
             _settings.ShowTimeDiff = cbShowTimeDiff.Checked;
+            _settings.ShowTimeFooter = cbShowTimeFooter.Checked;
             if (radioPurposeChecklist.Checked)
                 om.Purpose = OutModule.OM_Purpose.OM_Purpose_Checklist;
             else if (radioPurposeDeathCounter.Checked)

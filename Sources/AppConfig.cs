@@ -100,6 +100,7 @@ namespace HitCounterManager
         public bool ShowTimeCurrent;
         public bool ShowTimePB;
         public bool ShowTimeDiff;
+        public bool ShowTimeFooter;
         public bool ShowSuccession; // obsolete since version 7 - keep for backwards compatibility (use Succession.HistorySplitVisible instead)
         public int Purpose;
         public int Severity;
@@ -292,6 +293,7 @@ namespace HitCounterManager
                 _settings.ShowDiff = _settings.ShowPB; // was combined in previous versions
                 _settings.ShowTimePB = false;
                 _settings.ShowTimeDiff = false;
+                _settings.ShowTimeFooter = false;
                 _settings.ShortcutTimerStartEnable = false;
                 _settings.ShortcutTimerStartKeyCode = 0x10000 | 0x6B; // Shift Add-Num
                 _settings.ShortcutTimerStopEnable = false;

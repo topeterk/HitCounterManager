@@ -119,6 +119,7 @@
             this.Label14 = new System.Windows.Forms.Label();
             this.cbShowDiff = new System.Windows.Forms.CheckBox();
             this.cbShowTimeDiff = new System.Windows.Forms.CheckBox();
+            this.cbShowTimeFooter = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             this.tab_globalshortcuts.SuspendLayout();
@@ -180,7 +181,7 @@
             // Label9
             // 
             this.Label9.AutoSize = true;
-            this.Label9.Location = new System.Drawing.Point(150, 232);
+            this.Label9.Location = new System.Drawing.Point(150, 259);
             this.Label9.Name = "Label9";
             this.Label9.Size = new System.Drawing.Size(82, 13);
             this.Label9.TabIndex = 5;
@@ -188,7 +189,7 @@
             // 
             // numShowSplitsCountUpcoming
             // 
-            this.numShowSplitsCountUpcoming.Location = new System.Drawing.Point(87, 230);
+            this.numShowSplitsCountUpcoming.Location = new System.Drawing.Point(87, 257);
             this.numShowSplitsCountUpcoming.Maximum = new decimal(new int[] {
             999,
             0,
@@ -196,7 +197,7 @@
             0});
             this.numShowSplitsCountUpcoming.Name = "numShowSplitsCountUpcoming";
             this.numShowSplitsCountUpcoming.Size = new System.Drawing.Size(57, 20);
-            this.numShowSplitsCountUpcoming.TabIndex = 14;
+            this.numShowSplitsCountUpcoming.TabIndex = 15;
             this.ToolTip1.SetToolTip(this.numShowSplitsCountUpcoming, "Hide splits that are coming later to spare space");
             this.numShowSplitsCountUpcoming.Value = new decimal(new int[] {
             999,
@@ -208,7 +209,7 @@
             // Label10
             // 
             this.Label10.AutoSize = true;
-            this.Label10.Location = new System.Drawing.Point(6, 232);
+            this.Label10.Location = new System.Drawing.Point(6, 259);
             this.Label10.Name = "Label10";
             this.Label10.Size = new System.Drawing.Size(75, 13);
             this.Label10.TabIndex = 3;
@@ -217,7 +218,7 @@
             // Label8
             // 
             this.Label8.AutoSize = true;
-            this.Label8.Location = new System.Drawing.Point(150, 206);
+            this.Label8.Location = new System.Drawing.Point(150, 233);
             this.Label8.Name = "Label8";
             this.Label8.Size = new System.Drawing.Size(72, 13);
             this.Label8.TabIndex = 2;
@@ -225,7 +226,7 @@
             // 
             // numShowSplitsCountFinished
             // 
-            this.numShowSplitsCountFinished.Location = new System.Drawing.Point(87, 204);
+            this.numShowSplitsCountFinished.Location = new System.Drawing.Point(87, 231);
             this.numShowSplitsCountFinished.Maximum = new decimal(new int[] {
             999,
             0,
@@ -233,7 +234,7 @@
             0});
             this.numShowSplitsCountFinished.Name = "numShowSplitsCountFinished";
             this.numShowSplitsCountFinished.Size = new System.Drawing.Size(57, 20);
-            this.numShowSplitsCountFinished.TabIndex = 13;
+            this.numShowSplitsCountFinished.TabIndex = 14;
             this.ToolTip1.SetToolTip(this.numShowSplitsCountFinished, "Hide splits that are done already to spare space");
             this.numShowSplitsCountFinished.Value = new decimal(new int[] {
             999,
@@ -245,7 +246,7 @@
             // Label3
             // 
             this.Label3.AutoSize = true;
-            this.Label3.Location = new System.Drawing.Point(6, 206);
+            this.Label3.Location = new System.Drawing.Point(6, 233);
             this.Label3.Name = "Label3";
             this.Label3.Size = new System.Drawing.Size(71, 13);
             this.Label3.TabIndex = 0;
@@ -280,7 +281,7 @@
             this.tab_globalshortcuts.Location = new System.Drawing.Point(4, 22);
             this.tab_globalshortcuts.Name = "tab_globalshortcuts";
             this.tab_globalshortcuts.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.tab_globalshortcuts.Size = new System.Drawing.Size(588, 274);
+            this.tab_globalshortcuts.Size = new System.Drawing.Size(588, 301);
             this.tab_globalshortcuts.TabIndex = 0;
             this.tab_globalshortcuts.Text = "Global shortcuts";
             // 
@@ -930,12 +931,13 @@
             this.tab_behavior.Location = new System.Drawing.Point(4, 22);
             this.tab_behavior.Name = "tab_behavior";
             this.tab_behavior.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.tab_behavior.Size = new System.Drawing.Size(588, 274);
+            this.tab_behavior.Size = new System.Drawing.Size(588, 301);
             this.tab_behavior.TabIndex = 1;
             this.tab_behavior.Text = "Behavior";
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.cbShowTimeFooter);
             this.groupBox5.Controls.Add(this.cbShowTimeDiff);
             this.groupBox5.Controls.Add(this.cbShowDiff);
             this.groupBox5.Controls.Add(this.cbShowProgressBar);
@@ -958,7 +960,7 @@
             this.groupBox5.Controls.Add(this.numShowSplitsCountFinished);
             this.groupBox5.Location = new System.Drawing.Point(215, 13);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(367, 255);
+            this.groupBox5.Size = new System.Drawing.Size(367, 282);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Features";
@@ -966,7 +968,7 @@
             // lblShowSplitCount
             // 
             this.lblShowSplitCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblShowSplitCount.Location = new System.Drawing.Point(238, 206);
+            this.lblShowSplitCount.Location = new System.Drawing.Point(238, 233);
             this.lblShowSplitCount.Name = "lblShowSplitCount";
             this.lblShowSplitCount.Size = new System.Drawing.Size(123, 44);
             this.lblShowSplitCount.TabIndex = 9;
@@ -981,7 +983,7 @@
             this.groupBox4.Controls.Add(this.radioPurposeNoDeath);
             this.groupBox4.Location = new System.Drawing.Point(6, 13);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 124);
+            this.groupBox4.Size = new System.Drawing.Size(200, 151);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Purpose";
@@ -991,7 +993,7 @@
             this.groupBox2.Controls.Add(this.radioSeverityBossHitCritical);
             this.groupBox2.Controls.Add(this.radioSeverityComparePB);
             this.groupBox2.Controls.Add(this.radioSeverityAnyHitCritical);
-            this.groupBox2.Location = new System.Drawing.Point(6, 143);
+            this.groupBox2.Location = new System.Drawing.Point(6, 170);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 125);
             this.groupBox2.TabIndex = 2;
@@ -1011,7 +1013,7 @@
             this.tab_filepaths.Location = new System.Drawing.Point(4, 22);
             this.tab_filepaths.Name = "tab_filepaths";
             this.tab_filepaths.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.tab_filepaths.Size = new System.Drawing.Size(588, 274);
+            this.tab_filepaths.Size = new System.Drawing.Size(588, 301);
             this.tab_filepaths.TabIndex = 2;
             this.tab_filepaths.Text = "Filepaths";
             // 
@@ -1100,7 +1102,7 @@
             this.TabControl1.Location = new System.Drawing.Point(12, 12);
             this.TabControl1.Name = "TabControl1";
             this.TabControl1.SelectedIndex = 0;
-            this.TabControl1.Size = new System.Drawing.Size(596, 300);
+            this.TabControl1.Size = new System.Drawing.Size(596, 327);
             this.TabControl1.TabIndex = 10;
             // 
             // tab_style
@@ -1113,7 +1115,7 @@
             this.tab_style.Controls.Add(this.Label14);
             this.tab_style.Location = new System.Drawing.Point(4, 22);
             this.tab_style.Name = "tab_style";
-            this.tab_style.Size = new System.Drawing.Size(588, 274);
+            this.tab_style.Size = new System.Drawing.Size(588, 301);
             this.tab_style.TabIndex = 3;
             this.tab_style.Text = "Style";
             // 
@@ -1127,7 +1129,7 @@
             this.groupBox3.Controls.Add(this.cbHighContrastNames);
             this.groupBox3.Location = new System.Drawing.Point(6, 13);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(382, 126);
+            this.groupBox3.Size = new System.Drawing.Size(382, 153);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Appearance";
@@ -1152,7 +1154,7 @@
             this.GroupBox1.Controls.Add(this.Label11);
             this.GroupBox1.Controls.Add(this.btnApApply);
             this.GroupBox1.Controls.Add(this.Label12);
-            this.GroupBox1.Location = new System.Drawing.Point(6, 145);
+            this.GroupBox1.Location = new System.Drawing.Point(6, 172);
             this.GroupBox1.Name = "GroupBox1";
             this.GroupBox1.Size = new System.Drawing.Size(571, 126);
             this.GroupBox1.TabIndex = 2;
@@ -1223,20 +1225,34 @@
             this.cbShowTimeDiff.AutoSize = true;
             this.cbShowTimeDiff.Checked = true;
             this.cbShowTimeDiff.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowTimeDiff.Location = new System.Drawing.Point(258, 180);
+            this.cbShowTimeDiff.Location = new System.Drawing.Point(154, 203);
             this.cbShowTimeDiff.Name = "cbShowTimeDiff";
             this.cbShowTimeDiff.Size = new System.Drawing.Size(101, 17);
-            this.cbShowTimeDiff.TabIndex = 12;
+            this.cbShowTimeDiff.TabIndex = 13;
             this.cbShowTimeDiff.Text = "Show time delta";
             this.ToolTip1.SetToolTip(this.cbShowTimeDiff, "Show time delta between personal best and current time");
             this.cbShowTimeDiff.UseVisualStyleBackColor = true;
             this.cbShowTimeDiff.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
+            // cbShowTimeFooter
+            // 
+            this.cbShowTimeFooter.AutoSize = true;
+            this.cbShowTimeFooter.Checked = true;
+            this.cbShowTimeFooter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbShowTimeFooter.Location = new System.Drawing.Point(6, 203);
+            this.cbShowTimeFooter.Name = "cbShowTimeFooter";
+            this.cbShowTimeFooter.Size = new System.Drawing.Size(114, 17);
+            this.cbShowTimeFooter.TabIndex = 12;
+            this.cbShowTimeFooter.Text = "Show time (Footer)";
+            this.ToolTip1.SetToolTip(this.cbShowTimeFooter, "Show time of the current run in the footer");
+            this.cbShowTimeFooter.UseVisualStyleBackColor = true;
+            this.cbShowTimeFooter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(620, 324);
+            this.ClientSize = new System.Drawing.Size(620, 351);
             this.Controls.Add(this.TabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1361,5 +1377,6 @@
         private System.Windows.Forms.CheckBox cbHighlightCurrentSplit;
         private System.Windows.Forms.CheckBox cbShowTimeDiff;
         private System.Windows.Forms.CheckBox cbShowDiff;
+        private System.Windows.Forms.CheckBox cbShowTimeFooter;
     }
 }
