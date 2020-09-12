@@ -169,10 +169,18 @@ Search for one of your liking and see the embedded font and/or CSS instruction a
     * No issues here so far
 
 ### Changing layout and design
-You can modify or create new custom designs. Simply modify or create a new HTML, CSS or Javascript files based on any of the pre-delivered designs. For example, the style like **background color, font color or sizes can be easily modified in the CSS files**.  
-You can modify the [HitCounter.template](Sources/HitCounter.template) which comes with the installation or you can create an own template file to set custom settings for your designs at a single location.  
-> The application is using JavaScript syntax when writing data into the output file. Therefore the template has to have a line with the text **HITCOUNTER_LIST_START** which is the starting mark. The mark with all further lines will be replaced with the JavaScript equivalent of the application's current data. This replacement is done until the **HITCOUNTER_LIST_END** text mark is reached.  
-Eventually it means **you are 100% free in the design of your hit counter**.  
+**You are completely free in designing the hit counter in the way you like**.  
+To achive this, you can modify or create new custom designs.
+Simply modify or create HTML, CSS or Javascript files based on any of the pre-delivered designs.
+For example, the style like **background color, font color or sizes can be easily modified in the CSS files**.
+
+More advanced modders can replace the design as a whole and create a new medthod of (visual) representation.
+To do this it is also possible to modify the [HitCounter.template](Sources/HitCounter.template) in order to generate a customized output file.
+The application is using JavaScript syntax (JSON) when writing data into the output file based on this template.
+Therefore the template has to have a line with the text **HITCOUNTER_LIST_START** which is the starting mark for the application.
+The mark with all further lines will be replaced with the JavaScript equivalent of the application's current data.
+This replacement is done until the **HITCOUNTER_LIST_END** text mark is reached.  
+> The filenames for the **Inputfile** [HitCounter.template](Sources/HitCounter.template) and the **OutputFile** [HitCounter.html](Sources/HitCounter.html) can be changed in the [HitCounterManagerSave.xml](HitCounterManagerSave.xml).
 
 ## Anything is missing, something is annoying/can be improved or you just found a bug?
 Message me via GitHub / e-mail or simply open an issue and I will try to help you out. Alternatively you can also send me a whipser on Twitch: [GeneralGunrider](https://www.twitch.tv/generalgunrider)

@@ -104,10 +104,6 @@ namespace HitCounterManager
             radioSeverityComparePB.Checked = (om.Severity == OutModule.OM_Severity.OM_Severity_ComparePB);
             radioSeverityAnyHitCritical.Checked = (om.Severity == OutModule.OM_Severity.OM_Severity_AnyHitsCritical);
 
-            // Filepaths
-            txtInput.Text = _settings.Inputfile;
-            txtOutput.Text = _settings.OutputFile;
-
             ApplyAppearance(sender, null);
             this.UpdateDarkMode();
             IsFormLoaded = true;
@@ -212,26 +208,6 @@ namespace HitCounterManager
             om.Update();
         }
 
-        private string AskForFilename(string StartFilename, string StartFilter, string Filter)
-        {
-            string result = null;
-            if (File.Exists(StartFilename))
-            {
-                OpenFileDialog1.InitialDirectory = new FileInfo(StartFilename).Directory.FullName;
-                OpenFileDialog1.FileName = Path.GetFileName(StartFilename);
-            }
-            else
-            {
-                OpenFileDialog1.InitialDirectory = Environment.CurrentDirectory;
-                OpenFileDialog1.FileName = StartFilter;
-            }
-
-            OpenFileDialog1.Filter = Filter;
-            OpenFileDialog1.FilterIndex = 0;
-            if (DialogResult.OK == OpenFileDialog1.ShowDialog(this)) result = OpenFileDialog1.FileName;
-            return result;
-        }
-
         #endregion
         #region UI
 
@@ -256,28 +232,6 @@ namespace HitCounterManager
         private void cbScPB_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_PB, cbScPB.Checked); }
         private void cbScTimerStart_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_TimerStart, cbScTimerStart.Checked); }
         private void cbScTimerStop_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_TimerStop, cbScTimerStop.Checked); }
-
-        private void btnInput_Click(object sender, EventArgs e)
-        {
-            string Filename = AskForFilename(txtInput.Text, "*.template", "Templates (*.template)|*.template|All files (*.*)|*.*");
-            if (null != Filename)
-            {
-                _settings.Inputfile = txtInput.Text = Filename;
-                om.ReloadFileHandles();
-                om.Update();
-            }
-        }
-
-        private void btnOutput_Click(object sender, EventArgs e)
-        {
-            string Filename = AskForFilename(txtOutput.Text, "*.html", "HTML (*.html)|*.html|All files (*.*)|*.*");
-            if (null != Filename)
-            {
-                _settings.OutputFile = txtOutput.Text = Filename;
-                om.ReloadFileHandles();
-                om.Update();
-            }
-        }
 
         private void radioHotKeyMethod_CheckedChanged(object sender, EventArgs e)
         {

@@ -70,7 +70,7 @@ namespace HitCounterManager
             set
             {
                 _settings = value;
-                ReloadFileHandles();
+                ReloadTemplate();
             }
         }
 
@@ -87,9 +87,9 @@ namespace HitCounterManager
 
         /// <summary>
         /// Refreshes the file handles.
-        /// Call when _settings.Inputfile or _settings.OutputFile changes!
+        /// Call when _settings.Inputfile changes!
         /// </summary>
-        public void ReloadFileHandles()
+        public void ReloadTemplate()
         {
             // Reload input file handle when possible
             if (File.Exists(_settings.Inputfile))
@@ -98,7 +98,6 @@ namespace HitCounterManager
                 template = sr.ReadToEnd();
                 sr.Close();
             }
-            // Reload of output file handle not required, as it will be reopened on every write anyway
         }
 
         #region JSON helpers
@@ -156,7 +155,7 @@ namespace HitCounterManager
             if (null == _settings.OutputFile) return;
             if (null == template) // no valid template read yet?
             {
-                ReloadFileHandles(); // try to read template again
+                ReloadTemplate(); // try to read template again
                 if (null == template) return; // still invalid, avoid writing empty output file
             }
 

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>258, 17</value>
+    <value>39, 17</value>
   </metadata>
   <data name="txtFontName.ToolTip" xml:space="preserve">
     <value>Personalize the design by switching to another font.
@@ -131,22 +131,6 @@ When multiple games or profiles are played and the counter should take the same 
 This may help to maintain a single scene source in the streaming software.
 Note: Use value 0 to automatically adjust the size to the smalles possible value</value>
   </data>
-  <data name="Label7.Text" xml:space="preserve">
-    <value>The file "HitCounterManagerSave.xml" contains all the settings of this dialog and all the profiles from the main window.
-You can backup, restore or share this file at any time.
-Saving is done automatically by either closing the application or by hitting the "Save" button at the main window.</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>The input file will be read once when the application starts.
-For the output generation those actions will be taken:
-- search for a line containing the keywork "HITCOUNTER_JSON_START"
-- remove all lines afterwards until a line contains the ending keyword "HITCOUNTER_JSON_END"
-- insert the JSON formatted data at this location
-- save the generated output file</value>
-  </data>
-  <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>357, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
