@@ -2,9 +2,11 @@
 
 **Free Hit Counter** that is running in the background, so you can focus on your stream.  
 No need to keep any windows open for a window capture any more.  
-Initially designed for Dark Souls and similar games but supports any game.  
+Initially designed for Dark Souls but supports any game.  
 Just add the local HTML file to you broadcasting software and the setup is done.  
 **Works completely offline, no account or login required.**
+
+[![Get latest version here](https://img.shields.io/badge/-Get%20latest%20version%20here-brightgreen?longCache=true&style=for-the-badge)](../../releases/latest)
 
 To see some **screenshots** of this application go to the **[Wiki pages](../../wiki)**.  
 To see **how to** use the application watch the **[Tutorial on YouTube](https://www.youtube.com/watch?v=iXGExlS4xeM)**.
@@ -30,6 +32,7 @@ To see **how to** use the application watch the **[Tutorial on YouTube](https://
   * Go to next/previous split
   * Reset the run (sets all hit counts to 0 and selects first split)
   * Save the run as your PB (personal best)
+  * Start/Stop the timer
 * One single save file: **HitCounterManagerSave.xml**
   * Holds all your settings, profiles and is designed to work in newer/upcoming versions, too. Save and restore this file at any time.
 * Create profiles for each challenge or game
@@ -40,6 +43,7 @@ To see **how to** use the application watch the **[Tutorial on YouTube](https://
 * Build easy customizable succession, e.g. _Dark Souls Trilogy_
 * Keep track of furthest progress in the current session
 * Dark Mode
+* Timer
 
 ### Pre-defined profiles
 
@@ -80,6 +84,7 @@ The appearance of all designs can be modified via GUI on the fly:
   * Show the hits separately or as a combination of boss hits and hits on the way
   * Show numbers or images to represent hits
   * Show/Hide the personal best
+  * Show/Hide split/total/personal best time
 * Readability _(e.g. for lower bitrates or mobile devices)_
   
   * Limit the visible splits when you have lots of splits
@@ -96,7 +101,8 @@ The appearance of all designs can be modified via GUI on the fly:
 <p align="center"><a href="Images/SampleDesigns.gif"><img src="Images/SampleDesigns.gif" alt="Designs animation"/></a></p>
 
 ## Get the software
-All available releases can be found at the [Releases page](../../releases) on GitHub.
+All available releases can be found at the [Releases page](../../releases) on GitHub.  
+[![Get latest version here](https://img.shields.io/badge/-Get%20latest%20version%20here-brightgreen?longCache=true&style=for-the-badge)](../../releases/latest)
 
 ## Installation
 
@@ -108,11 +114,11 @@ All available releases can be found at the [Releases page](../../releases) on Gi
   * Installer version (Setup)
     * [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
 * OS: Any (32/64 bit)
-  * Portable version (ZIP)
-    * [Mono](https://www.mono-project.com/) (_tested with 5.14.0_)  
-      Run the application in the application's directory with **mono HitCounterManager.exe**  
-      > **Note**: The Mono version is **not supporting global hot keys**  
-      > **Note**: The Mono version **must be run in 32 bit mode** (cannot be run on OS without 32 bit support)
+  > **Note**: This version is **not supporting global hot keys**  
+  * Portable version (Tar ball)
+    * Running with [Mono](https://www.mono-project.com/) (_tested with 5.14.0_)  
+      Start the application in the application's directory with **mono HitCounterManager.exe**  
+      > **Note**: Mono supports **32 bit mode only** (therefore it cannot be run on OS without 32 bit support!)
 
 ### Designs / Fonts
 
@@ -172,7 +178,9 @@ Eventually it means **you are 100% free in the design of your hit counter**.
 Message me via GitHub / e-mail or simply open an issue and I will try to help you out. Alternatively you can also send me a whipser on Twitch: [GeneralGunrider](https://www.twitch.tv/generalgunrider)
 
 ## Community
-There is a great growing community on Discord, called Team Hitless. If you are seeking for help, guidance and just talks about no hit runs, you can get there by this link: [Team Hitless at Discord](https://discord.gg/4E7cSK7)
+There is a great growing community on Discord called [Team Hitless](https://discord.gg/4E7cSK7).
+If you are seeking for help, guidance or just talk about no hit runs, this is the right place for it.  
+Thanks to everyone for helping other community members!
 
 ## Special thanks
 I would never have created this tool without the inspiration by watching the awesome 0 hit and no death runners...  
