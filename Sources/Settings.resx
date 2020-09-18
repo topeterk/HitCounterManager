@@ -131,6 +131,15 @@ When multiple games or profiles are played and the counter should take the same 
 This may help to maintain a single scene source in the streaming software.
 Note: Use value 0 to automatically adjust the size to the smalles possible value</value>
   </data>
+  <data name="radioHotKeyMethod_sync.ToolTip" xml:space="preserve">
+    <value>Trigger: Windows notifies when a registered hotkey is pressed
+Fullscreen: May not work with every game
+Admin: Run HCM as admin is recommended (otherwise hotkey might not be notified)
+Virtual hot keys: Simulated hot keys by other applications supported
+Performance impact: Least
+
+(Same "Synchronous" method as in the previous HCM versions)</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

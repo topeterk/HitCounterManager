@@ -143,8 +143,10 @@ namespace HitCounterManager
                         if (dcs.BackColor.Name == Window_Light.Name) dcs.BackColor = Window_Dark;
                         if (OsLayer.Name != "Win") // required for Mono
                         {
+#pragma warning disable CS0162 // unreachable code.
                             if (dcs.ForeColor.Name == ControlText_Light.Name) dcs.ForeColor = ControlText_Dark;
                             if (dcs.SelectionForeColor.Name == ControlText_Light.Name) dcs.SelectionForeColor = ControlText_Dark;
+#pragma warning restore CS0162 // unreachable code.
                         }
                         if (dgv.RowHeadersDefaultCellStyle.BackColor.Name == Control_Light.Name) dgv.RowHeadersDefaultCellStyle.BackColor = Control_Dark;
                         if (dgv.ColumnHeadersDefaultCellStyle.BackColor.Name == Control_Light.Name) dgv.ColumnHeadersDefaultCellStyle.BackColor = Control_Dark;
@@ -193,8 +195,10 @@ namespace HitCounterManager
                         if (dcs.BackColor.Name == Window_Dark.Name) dcs.BackColor = Window_Light;
                         if (OsLayer.Name != "Win") // required for Mono
                         {
+#pragma warning disable CS0162 // unreachable code
                             if (dcs.ForeColor.Name == ControlText_Dark.Name) dcs.ForeColor = ControlText_Light;
                             if (dcs.SelectionForeColor.Name == ControlText_Dark.Name) dcs.SelectionForeColor = ControlText_Light;
+#pragma warning restore CS0162 // unreachable code.
                         }
                         if (dgv.RowHeadersDefaultCellStyle.BackColor.Name == Control_Dark.Name) dgv.RowHeadersDefaultCellStyle.BackColor = Control_Light;
                         if (dgv.ColumnHeadersDefaultCellStyle.BackColor.Name == Control_Dark.Name) dgv.ColumnHeadersDefaultCellStyle.BackColor = Control_Light;

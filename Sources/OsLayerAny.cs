@@ -31,6 +31,15 @@ namespace HitCounterManager
         /// Name of this OS implementation
         /// </summary>
         public const string Name = "Any";
+        
+#pragma warning disable CS0067 // never used.
+        /// <summary>
+        /// Fires when a low level keyboard event designates a key state changes.
+        /// Must be enabled/disabled via StartKeyboardLowLevelHook/StopKeyboardLowLevelHook.
+        /// Keep execution time short as possible!
+        /// </summary>
+        public static event EventHandler LowLevelKeyboardEvent;
+#pragma warning restore CS0067 // never used.
 
         public delegate void TimerProc(IntPtr hWnd, uint uMsg, IntPtr nIDEvent, uint dwTime);
 
@@ -40,7 +49,9 @@ namespace HitCounterManager
         public const bool GlobalHotKeySupport = false;
 
         /// <summary>
-        /// Checks if a given key is pressed right now
+        /// Checks if a given key is pressed right now.
+        /// Key state is read at the moment of this call when the low level keybaord events are disabled.
+        /// Gets the key state from internal cache when the low level keybaord events are enabled.
         /// </summary>
         /// <param name="KeyCode">The key to check</param>
         /// <returns>true = pressed, false = released</returns>
@@ -70,6 +81,21 @@ namespace HitCounterManager
         /// <param name="HotKeyID">Custom ID for the hotkey</param>
         /// <returns>Success state</returns>
         public static bool KillHotKey(IntPtr WindowHandle, int HotKeyID) { return false; }
+
+        /// <summary>
+        /// Start using the low level keyboard events.
+        /// This enables the LowLevelKeyboardEvent on the same thread that is calling this function.
+        /// The states for IsKeyPressedAsync will be taken from internal cache.
+        /// </summary>
+        /// <returns>Success state</returns>
+        public static bool StartKeyboardLowLevelHook() { return false; }
+
+        /// <summary>
+        /// Stops using the the low level keyboard events.
+        /// This disables the LowLevelKeyboardEvent
+        /// </summary>
+        /// <returns>Success state</returns>
+        public static bool StopKeyboardLowLevelHook() { return false; }
 
         /// <summary>
         /// Creates a timer repeatedly calling the callback upon timeout

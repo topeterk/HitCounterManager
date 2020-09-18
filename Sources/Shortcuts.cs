@@ -121,6 +121,12 @@ namespace HitCounterManager
         private const int VK_SHIFT = 0x10;
         private const int VK_CONTROL = 0x11;
         private const int VK_MENU = 0x12;
+        private const int VK_LSHIFT = 0xA0;
+        private const int VK_RSHIFT = 0xA1;
+        private const int VK_LCONTROL = 0xA2;
+        private const int VK_RCONTROL = 0xA3;
+        private const int VK_LMENU = 0xA4;
+        private const int VK_RMENU = 0xA5;
 
         private OsLayer.TimerProc TimerProcKeepAliveReference; // prevent garbage collector freeing up the callback without any reason
 
@@ -143,7 +149,8 @@ namespace HitCounterManager
 
         public enum SC_HotKeyMethod {
             SC_HotKeyMethod_Sync = 0, // = RegisterHotKey + UnregisterHotKey
-            SC_HotKeyMethod_Async = 1 // = SetTimer + KillTimer + GetAsyncKeyState + SendMessage
+            SC_HotKeyMethod_Async = 1, // = SetTimer + KillTimer + GetAsyncKeyState + SendMessage
+            SC_HotKeyMethod_LLKb = 2 // = SetWindowsHookEx (low level keyboard hook) + UnhookWindowsHookEx + SendMessage
         };
 
         private IntPtr hwnd;
@@ -168,6 +175,11 @@ namespace HitCounterManager
         ~Shortcuts()
         {
             if (method == SC_HotKeyMethod.SC_HotKeyMethod_Async) OsLayer.KillTimer(hwnd, 0);
+            else if (method == SC_HotKeyMethod.SC_HotKeyMethod_LLKb)
+            {
+                OsLayer.StopKeyboardLowLevelHook();
+                OsLayer.LowLevelKeyboardEvent -= low_level_keyboard_event;
+            }
         }
 
         /// <summary>
@@ -183,6 +195,11 @@ namespace HitCounterManager
             {
                 TimerProcKeepAliveReference = new OsLayer.TimerProc(timer_event); // stupid garbage collection fixup
                 OsLayer.SetTimer(hwnd, 0, 20, TimerProcKeepAliveReference);
+            }
+            else if (method == SC_HotKeyMethod.SC_HotKeyMethod_LLKb)
+            {
+                OsLayer.LowLevelKeyboardEvent += low_level_keyboard_event;
+                OsLayer.StartKeyboardLowLevelHook();
             }
         }
 
@@ -224,7 +241,7 @@ namespace HitCounterManager
                     key.used = false;
                 }
             }
-            else if (method == SC_HotKeyMethod.SC_HotKeyMethod_Async)
+            else if ((method == SC_HotKeyMethod.SC_HotKeyMethod_Async) || (method == SC_HotKeyMethod.SC_HotKeyMethod_LLKb))
             {
                 if (Enable)
                 {
@@ -292,15 +309,20 @@ namespace HitCounterManager
         /// <summary>
         /// Timer message handler to check for async hot keys
         /// </summary>
-        private void timer_event(IntPtr hwnd, uint uMsg, IntPtr nIDEvent, uint dwTime)
+        private void timer_event(IntPtr hwnd, uint uMsg, IntPtr nIDEvent, uint dwTime) { low_level_keyboard_event(null, null); }
+
+        /// <summary>
+        /// Low Level Keyboard message handler to check for hot keys
+        /// </summary>
+        private void low_level_keyboard_event(object sender, EventArgs e)
         {
             bool k_shift;
             bool k_control;
             bool k_alt;
 
-            k_shift = OsLayer.IsKeyPressedAsync(VK_SHIFT);
-            k_control = OsLayer.IsKeyPressedAsync(VK_CONTROL);
-            k_alt = OsLayer.IsKeyPressedAsync(VK_MENU);
+            k_shift = OsLayer.IsKeyPressedAsync(VK_SHIFT) || OsLayer.IsKeyPressedAsync(VK_LSHIFT) || OsLayer.IsKeyPressedAsync(VK_RSHIFT);
+            k_control = OsLayer.IsKeyPressedAsync(VK_CONTROL) || OsLayer.IsKeyPressedAsync(VK_LCONTROL) || OsLayer.IsKeyPressedAsync(VK_RCONTROL);
+            k_alt = OsLayer.IsKeyPressedAsync(VK_MENU) || OsLayer.IsKeyPressedAsync(VK_LMENU) || OsLayer.IsKeyPressedAsync(VK_RMENU);
 
             for (int i = 0; i < (int)SC_Type.SC_Type_MAX; i++)
             {

@@ -85,9 +85,10 @@
             this.cbUseRoman = new System.Windows.Forms.CheckBox();
             this.cbHighlightCurrentSplit = new System.Windows.Forms.CheckBox();
             this.tab_globalshortcuts = new System.Windows.Forms.TabPage();
-            this.radioHotKeyMethod_sync = new System.Windows.Forms.RadioButton();
             this.Label1 = new System.Windows.Forms.Label();
+            this.radioHotKeyMethod_sync = new System.Windows.Forms.RadioButton();
             this.radioHotKeyMethod_async = new System.Windows.Forms.RadioButton();
+            this.radioHotKeyMethod_llkb = new System.Windows.Forms.RadioButton();
             this.Label6 = new System.Windows.Forms.Label();
             this.cbScTimerStop = new System.Windows.Forms.CheckBox();
             this.cbScTimerStart = new System.Windows.Forms.CheckBox();
@@ -833,29 +834,16 @@
             this.tab_globalshortcuts.Controls.Add(this.cbScTimerStart);
             this.tab_globalshortcuts.Controls.Add(this.cbScTimerStop);
             this.tab_globalshortcuts.Controls.Add(this.Label6);
-            this.tab_globalshortcuts.Controls.Add(this.radioHotKeyMethod_async);
             this.tab_globalshortcuts.Controls.Add(this.Label1);
+            this.tab_globalshortcuts.Controls.Add(this.radioHotKeyMethod_async);
             this.tab_globalshortcuts.Controls.Add(this.radioHotKeyMethod_sync);
+            this.tab_globalshortcuts.Controls.Add(this.radioHotKeyMethod_llkb);
             this.tab_globalshortcuts.Location = new System.Drawing.Point(4, 22);
             this.tab_globalshortcuts.Name = "tab_globalshortcuts";
             this.tab_globalshortcuts.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.tab_globalshortcuts.Size = new System.Drawing.Size(588, 301);
             this.tab_globalshortcuts.TabIndex = 0;
             this.tab_globalshortcuts.Text = "Global shortcuts";
-            // 
-            // radioHotKeyMethod_sync
-            // 
-            this.radioHotKeyMethod_sync.AutoSize = true;
-            this.radioHotKeyMethod_sync.Location = new System.Drawing.Point(6, 197);
-            this.radioHotKeyMethod_sync.Name = "radioHotKeyMethod_sync";
-            this.radioHotKeyMethod_sync.Size = new System.Drawing.Size(477, 17);
-            this.radioHotKeyMethod_sync.TabIndex = 17;
-            this.radioHotKeyMethod_sync.Text = "Synchronous - Safer, but may not always work (recommendation: test and keep it wh" +
-    "en it works)";
-            this.ToolTip1.SetToolTip(this.radioHotKeyMethod_sync, "Safer method, but may not always work (recommendation: test and keep it when it w" +
-        "orks)");
-            this.radioHotKeyMethod_sync.UseVisualStyleBackColor = true;
-            this.radioHotKeyMethod_sync.CheckedChanged += new System.EventHandler(this.radioHotKeyMethod_CheckedChanged);
             // 
             // Label1
             // 
@@ -867,20 +855,50 @@
             this.Label1.Text = "Click into a textbox and press any key combination to setup your hotkey for the r" +
     "espective event:";
             // 
+            // radioHotKeyMethod_sync
+            // 
+            this.radioHotKeyMethod_sync.AutoSize = true;
+            this.radioHotKeyMethod_sync.Location = new System.Drawing.Point(6, 197);
+            this.radioHotKeyMethod_sync.Name = "radioHotKeyMethod_sync";
+            this.radioHotKeyMethod_sync.Size = new System.Drawing.Size(451, 17);
+            this.radioHotKeyMethod_sync.TabIndex = 17;
+            this.radioHotKeyMethod_sync.Text = "Synchronous - System hotkey registration (May not always work, least performance " +
+    "impact)";
+            this.ToolTip1.SetToolTip(this.radioHotKeyMethod_sync, resources.GetString("radioHotKeyMethod_sync.ToolTip"));
+            this.radioHotKeyMethod_sync.UseVisualStyleBackColor = true;
+            this.radioHotKeyMethod_sync.CheckedChanged += new System.EventHandler(this.radioHotKeyMethod_CheckedChanged);
+            // 
             // radioHotKeyMethod_async
             // 
             this.radioHotKeyMethod_async.AutoSize = true;
             this.radioHotKeyMethod_async.Checked = true;
             this.radioHotKeyMethod_async.Location = new System.Drawing.Point(6, 220);
             this.radioHotKeyMethod_async.Name = "radioHotKeyMethod_async";
-            this.radioHotKeyMethod_async.Size = new System.Drawing.Size(201, 17);
+            this.radioHotKeyMethod_async.Size = new System.Drawing.Size(459, 17);
             this.radioHotKeyMethod_async.TabIndex = 18;
             this.radioHotKeyMethod_async.TabStop = true;
-            this.radioHotKeyMethod_async.Text = "Asynchronous - *should* always work";
-            this.ToolTip1.SetToolTip(this.radioHotKeyMethod_async, "Method that should always work, however the syncronous is the safer method and sh" +
-        "ould be preferred if possible");
+            this.radioHotKeyMethod_async.Text = "Asynchronous - Polling keyboard keys (Works most of the time, medium performance " +
+    "impact)";
+            this.ToolTip1.SetToolTip(this.radioHotKeyMethod_async, "Trigger: Pressed keys are checked every 20 milliseconds\r\nFullscreen: OK\r\nAdmin: S" +
+        "hould not be required\r\nVirtual hot keys: Simulated hot keys by other application" +
+        "s supported\r\nPerformance impact: Medium");
             this.radioHotKeyMethod_async.UseVisualStyleBackColor = true;
             this.radioHotKeyMethod_async.CheckedChanged += new System.EventHandler(this.radioHotKeyMethod_CheckedChanged);
+            // 
+            // radioHotKeyMethod_llkb
+            // 
+            this.radioHotKeyMethod_llkb.AutoSize = true;
+            this.radioHotKeyMethod_llkb.Location = new System.Drawing.Point(6, 243);
+            this.radioHotKeyMethod_llkb.Name = "radioHotKeyMethod_llkb";
+            this.radioHotKeyMethod_llkb.Size = new System.Drawing.Size(445, 17);
+            this.radioHotKeyMethod_llkb.TabIndex = 19;
+            this.radioHotKeyMethod_llkb.Text = "Synchronous - Low level keyboard hook (Should always work, worst performance impa" +
+    "ct)";
+            this.ToolTip1.SetToolTip(this.radioHotKeyMethod_llkb, "Trigger: Windows notifies every key state change\r\nFullscreen: OK\r\nAdmin: Should n" +
+        "ot be required\r\nVirtual hotkeys: Simulated hot keys by other applications suppor" +
+        "ted\r\nPerformance impact: Most");
+            this.radioHotKeyMethod_llkb.UseVisualStyleBackColor = true;
+            this.radioHotKeyMethod_llkb.CheckedChanged += new System.EventHandler(this.radioHotKeyMethod_CheckedChanged);
             // 
             // Label6
             // 
@@ -1257,9 +1275,10 @@
         private System.Windows.Forms.CheckBox cbScTimerStart;
         private System.Windows.Forms.CheckBox cbScTimerStop;
         private System.Windows.Forms.Label Label6;
-        private System.Windows.Forms.RadioButton radioHotKeyMethod_async;
         private System.Windows.Forms.Label Label1;
+        private System.Windows.Forms.RadioButton radioHotKeyMethod_async;
         private System.Windows.Forms.RadioButton radioHotKeyMethod_sync;
+        private System.Windows.Forms.RadioButton radioHotKeyMethod_llkb;
         private System.Windows.Forms.TabControl TabControl1;
     }
 }

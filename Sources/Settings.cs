@@ -59,6 +59,7 @@ namespace HitCounterManager
 
             radioHotKeyMethod_sync.Checked = (sc.NextStart_Method == Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync);
             radioHotKeyMethod_async.Checked = (sc.NextStart_Method == Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async);
+            radioHotKeyMethod_llkb.Checked = (sc.NextStart_Method == Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb);
 
             if (!sc.IsGlobalHotKeySupported)
             {
@@ -237,6 +238,7 @@ namespace HitCounterManager
         {
             if (radioHotKeyMethod_sync.Checked) SetHotKeyMethod(Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync);
             else if (radioHotKeyMethod_async.Checked) SetHotKeyMethod(Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async);
+            else if (radioHotKeyMethod_llkb.Checked) SetHotKeyMethod(Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb);
         }
 
         private void btnApApply_Click(object sender, EventArgs e)

@@ -34,6 +34,13 @@ namespace HitCounterManager
         /// </summary>
         public const string Name = "Win";
 
+        /// <summary>
+        /// Fires when a low level keyboard event designates a key state changes.
+        /// Must be enabled/disabled via StartKeyboardLowLevelHook/StopKeyboardLowLevelHook.
+        /// Keep execution time short as possible!
+        /// </summary>
+        public static event EventHandler LowLevelKeyboardEvent;
+
         public delegate void TimerProc(IntPtr hWnd, uint uMsg, IntPtr nIDEvent, uint dwTime);
 
         #region Windows API Imports
@@ -54,6 +61,19 @@ namespace HitCounterManager
         private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
 
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern IntPtr GetModuleHandle(string lpModuleName);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern IntPtr SetWindowsHookEx(int idHook, HookProc lpfn, IntPtr hMod, uint dwThreadId);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern bool UnhookWindowsHookEx(IntPtr hhk);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
+
+
         [DllImport("User32.dll")]
         private static extern IntPtr SetTimer(IntPtr hWnd, IntPtr nIDEvent, uint uElapse, TimerProc lpTimerFunc);
 
@@ -72,15 +92,38 @@ namespace HitCounterManager
 
         private const int MAPVK_VK_TO_VSC = 0;
         private const int KEY_PRESSED_NOW = 0x8000;
-        private const int WM_HOTKEY = 0x312;
+        private const int WM_HOTKEY = 0x0312;
+        private const int WM_KEYDOWN = 0x0100;
+        private const int WM_KEYUP = 0x0101;
+        private const int WM_SYSKEYDOWN = 0x0104;
+        private const int WM_SYSKEYUP = 0x0105;
+        private const int WH_KEYBOARD_LL = 13;
+        private const int HC_ACTION = 0;
+        private const int KF_ALTDOWN = 0x2000;
+        private const int KF_UP = 0x8000;
+        private const int LLKHF_ALTDOWN = (KF_ALTDOWN >> 8);
+        private const int LLKHF_UP = (KF_UP >> 8);
+
+        private delegate IntPtr HookProc(int nCode, IntPtr wParam, IntPtr lParam);
+        private static readonly HookProc _HookProc = new HookProc(HookCallback); // prevent garbage collector freeing up the callback
+        private static IntPtr _HookId = IntPtr.Zero;
+        private static bool[] KeyStates = new bool[256];
 
         /// <summary>
-        /// Checks if a given key is pressed right now
+        /// Checks if a given key is pressed right now.
+        /// Key state is read at the moment of this call when the low level keybaord events are disabled.
+        /// Gets the key state from internal cache when the low level keybaord events are enabled.
         /// </summary>
         /// <param name="KeyCode">The key to check</param>
         /// <returns>true = pressed, false = released</returns>
         public static bool IsKeyPressedAsync(int KeyCode)
         {
+            if ((_HookId != IntPtr.Zero) && (KeyStates.Length < KeyCode))
+            {
+                // use the values from the low level keyboard hook instead
+                return KeyStates[KeyCode];
+            }
+
             return (0 != (GetAsyncKeyState(KeyCode) & KEY_PRESSED_NOW));
         }
         /// <summary>
@@ -119,6 +162,63 @@ namespace HitCounterManager
         public static bool KillHotKey(IntPtr WindowHandle, int HotKeyID)
         {
             return UnregisterHotKey(WindowHandle, HotKeyID);
+        }
+
+        private static IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
+        {
+            if (HC_ACTION == nCode)
+            {
+                switch((int)wParam)
+                {
+                    case WM_KEYDOWN:
+                    case WM_KEYUP:
+                    case WM_SYSKEYDOWN:
+                    case WM_SYSKEYUP:
+                        {
+                            int KeyCode = Marshal.ReadInt32(lParam); // KBDLLHOOKSTRUCT.vkCode
+                            int flags = Marshal.ReadInt32(lParam, 8); // KBDLLHOOKSTRUCT.flags
+
+                            if (KeyStates.Length <= KeyCode) break; // Invalid value
+
+                            bool isPressed = ((flags & LLKHF_UP) == 0 ? true : false); //transition state: 0 = pressed, 1 = released
+                            if (KeyStates[KeyCode] != isPressed) // drop this event, we already know this!
+                            {
+                                KeyStates[KeyCode] = isPressed;
+                                if (null != LowLevelKeyboardEvent) LowLevelKeyboardEvent(null, null); // Fire event
+                            }
+                        }
+                        break;
+                    default: break;
+                }
+            }
+            return CallNextHookEx(_HookId, nCode, wParam, lParam);
+        }
+
+        /// <summary>
+        /// Starts using the low level keyboard events.
+        /// This enables the LowLevelKeyboardEvent on the same thread that is calling this function.
+        /// The states for IsKeyPressedAsync will be taken from internal cache.
+        /// </summary>
+        /// <returns>Success state</returns>
+        public static bool StartKeyboardLowLevelHook()
+        {
+            if (_HookId != IntPtr.Zero) return false; // Only one instance supported
+
+            // Reset the keystates, as their correct states are collected on the way
+            for (int i = 0; i < KeyStates.Length; i++) KeyStates[i] = false;
+
+            _HookId = SetWindowsHookEx(WH_KEYBOARD_LL, _HookProc, GetModuleHandle(System.Diagnostics.Process.GetCurrentProcess().MainModule.ModuleName), 0);
+            return (_HookId == IntPtr.Zero ? false : true);
+        }
+
+        /// <summary>
+        /// Stops using the the low level keyboard events.
+        /// This disables the LowLevelKeyboardEvent
+        /// </summary>
+        /// <returns>Success state</returns>
+        public static bool StopKeyboardLowLevelHook()
+        {
+            return _HookId != IntPtr.Zero ? UnhookWindowsHookEx(_HookId) : true;
         }
 
         /// <summary>
