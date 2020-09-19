@@ -120,25 +120,24 @@
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>39, 17</value>
   </metadata>
-  <data name="txtFontName.ToolTip" xml:space="preserve">
-    <value>Personalize the design by switching to another font.
-Enter a font family name that is installed on your computer like sans-serif or courier.
-Or enter the font family name of an external font that is loaded using the "Font: (URL)" field.</value>
-  </data>
   <data name="numStyleDesiredWidth.ToolTip" xml:space="preserve">
     <value>Sets the display width in pixels to maintain a specific size even when different profiles are loaded.
 When multiple games or profiles are played and the counter should take the same space regardless of the available split names, it is recommended to set an appropriate value here.
 This may help to maintain a single scene source in the streaming software.
 Note: Use value 0 to automatically adjust the size to the smalles possible value</value>
   </data>
+  <data name="txtFontName.ToolTip" xml:space="preserve">
+    <value>Personalize the design by switching to another font.
+Enter a font family name that is installed on your computer like sans-serif or courier.
+Or enter the font family name of an external font that is loaded using the "Font: (URL)" field.</value>
+  </data>
   <data name="radioHotKeyMethod_sync.ToolTip" xml:space="preserve">
-    <value>Trigger: Windows notifies when a registered hotkey is pressed
-Fullscreen: May not work with every game
-Admin: Run HCM as admin is recommended (otherwise hotkey might not be notified)
-Virtual hot keys: Simulated hot keys by other applications supported
-Performance impact: Least
+    <value>Pro: Works in most situations like simulated hot keys with least performance impact
+Con: May not work in full screen, starting the application as admin might help
 
-(Same "Synchronous" method as in the previous HCM versions)</value>
+(Same "Synchronous" method as in the previous HCM versions)
+
+</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

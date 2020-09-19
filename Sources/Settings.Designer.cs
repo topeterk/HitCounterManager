@@ -31,25 +31,17 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tab_behavior = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.radioSeverityAnyHitCritical = new System.Windows.Forms.RadioButton();
             this.radioSeverityComparePB = new System.Windows.Forms.RadioButton();
             this.radioSeverityBossHitCritical = new System.Windows.Forms.RadioButton();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.radioPurposeNoDeath = new System.Windows.Forms.RadioButton();
             this.radioPurposeSplitCounter = new System.Windows.Forms.RadioButton();
             this.radioPurposeDeathCounter = new System.Windows.Forms.RadioButton();
             this.radioPurposeChecklist = new System.Windows.Forms.RadioButton();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.numShowSplitsCountFinished = new System.Windows.Forms.NumericUpDown();
-            this.Label3 = new System.Windows.Forms.Label();
-            this.Label8 = new System.Windows.Forms.Label();
-            this.Label10 = new System.Windows.Forms.Label();
             this.cbShowNumbers = new System.Windows.Forms.CheckBox();
             this.numShowSplitsCountUpcoming = new System.Windows.Forms.NumericUpDown();
             this.cbShowHitsCombined = new System.Windows.Forms.CheckBox();
-            this.Label9 = new System.Windows.Forms.Label();
             this.cbShowSessionProgress = new System.Windows.Forms.CheckBox();
             this.cbShowHeadline = new System.Windows.Forms.CheckBox();
             this.cbShowAttempts = new System.Windows.Forms.CheckBox();
@@ -57,39 +49,26 @@
             this.cbShowTimeCurrent = new System.Windows.Forms.CheckBox();
             this.cbShowPB = new System.Windows.Forms.CheckBox();
             this.cbShowFooter = new System.Windows.Forms.CheckBox();
-            this.lblShowSplitCount = new System.Windows.Forms.Label();
             this.cbSuccessionToProgressBar = new System.Windows.Forms.CheckBox();
             this.cbShowProgressBar = new System.Windows.Forms.CheckBox();
             this.cbShowDiff = new System.Windows.Forms.CheckBox();
             this.cbShowTimeDiff = new System.Windows.Forms.CheckBox();
             this.cbShowTimeFooter = new System.Windows.Forms.CheckBox();
-            this.tab_style = new System.Windows.Forms.TabPage();
-            this.Label14 = new System.Windows.Forms.Label();
-            this.Label13 = new System.Windows.Forms.Label();
             this.numStyleDesiredWidth = new System.Windows.Forms.NumericUpDown();
-            this.GroupBox1 = new System.Windows.Forms.GroupBox();
-            this.Label12 = new System.Windows.Forms.Label();
             this.btnApApply = new System.Windows.Forms.Button();
-            this.Label11 = new System.Windows.Forms.Label();
             this.txtFontUrl = new System.Windows.Forms.TextBox();
             this.txtCssUrl = new System.Windows.Forms.TextBox();
             this.cbApCustomCss = new System.Windows.Forms.CheckBox();
             this.txtFontName = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cbHighContrastNames = new System.Windows.Forms.CheckBox();
             this.cbHighContrast = new System.Windows.Forms.CheckBox();
             this.cbSuperscriptPB = new System.Windows.Forms.CheckBox();
             this.cbProgressBarColored = new System.Windows.Forms.CheckBox();
             this.cbUseRoman = new System.Windows.Forms.CheckBox();
             this.cbHighlightCurrentSplit = new System.Windows.Forms.CheckBox();
-            this.tab_globalshortcuts = new System.Windows.Forms.TabPage();
-            this.Label1 = new System.Windows.Forms.Label();
             this.radioHotKeyMethod_sync = new System.Windows.Forms.RadioButton();
             this.radioHotKeyMethod_async = new System.Windows.Forms.RadioButton();
             this.radioHotKeyMethod_llkb = new System.Windows.Forms.RadioButton();
-            this.Label6 = new System.Windows.Forms.Label();
             this.cbScTimerStop = new System.Windows.Forms.CheckBox();
             this.cbScTimerStart = new System.Windows.Forms.CheckBox();
             this.cbScNextSplit = new System.Windows.Forms.CheckBox();
@@ -110,17 +89,38 @@
             this.txtWayHitUndo = new System.Windows.Forms.TextBox();
             this.cbScPB = new System.Windows.Forms.CheckBox();
             this.txtPB = new System.Windows.Forms.TextBox();
+            this.tab_behavior = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.lblShowSplitCount = new System.Windows.Forms.Label();
+            this.Label9 = new System.Windows.Forms.Label();
+            this.Label10 = new System.Windows.Forms.Label();
+            this.Label8 = new System.Windows.Forms.Label();
+            this.Label3 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tab_style = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.GroupBox1 = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.Label11 = new System.Windows.Forms.Label();
+            this.Label12 = new System.Windows.Forms.Label();
+            this.Label13 = new System.Windows.Forms.Label();
+            this.Label14 = new System.Windows.Forms.Label();
+            this.tab_globalshortcuts = new System.Windows.Forms.TabPage();
+            this.Label6 = new System.Windows.Forms.Label();
+            this.Label1 = new System.Windows.Forms.Label();
             this.TabControl1 = new System.Windows.Forms.TabControl();
-            this.tab_behavior.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
-            this.tab_style.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredWidth)).BeginInit();
-            this.GroupBox1.SuspendLayout();
+            this.tab_behavior.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.tab_style.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.GroupBox1.SuspendLayout();
             this.tab_globalshortcuts.SuspendLayout();
             this.TabControl1.SuspendLayout();
             this.SuspendLayout();
@@ -130,30 +130,6 @@
             this.ToolTip1.AutoPopDelay = 15000;
             this.ToolTip1.InitialDelay = 500;
             this.ToolTip1.ReshowDelay = 100;
-            // 
-            // tab_behavior
-            // 
-            this.tab_behavior.Controls.Add(this.groupBox5);
-            this.tab_behavior.Controls.Add(this.groupBox4);
-            this.tab_behavior.Controls.Add(this.groupBox2);
-            this.tab_behavior.Location = new System.Drawing.Point(4, 22);
-            this.tab_behavior.Name = "tab_behavior";
-            this.tab_behavior.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.tab_behavior.Size = new System.Drawing.Size(588, 301);
-            this.tab_behavior.TabIndex = 1;
-            this.tab_behavior.Text = "Behavior";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.radioSeverityBossHitCritical);
-            this.groupBox2.Controls.Add(this.radioSeverityComparePB);
-            this.groupBox2.Controls.Add(this.radioSeverityAnyHitCritical);
-            this.groupBox2.Location = new System.Drawing.Point(6, 170);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 125);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Hit severity (color) within a single split";
             // 
             // radioSeverityAnyHitCritical
             // 
@@ -192,19 +168,6 @@
             this.ToolTip1.SetToolTip(this.radioSeverityBossHitCritical, "Boss hits count as critical hits, hits on the way count as normal hits");
             this.radioSeverityBossHitCritical.UseVisualStyleBackColor = true;
             this.radioSeverityBossHitCritical.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.radioPurposeChecklist);
-            this.groupBox4.Controls.Add(this.radioPurposeDeathCounter);
-            this.groupBox4.Controls.Add(this.radioPurposeSplitCounter);
-            this.groupBox4.Controls.Add(this.radioPurposeNoDeath);
-            this.groupBox4.Location = new System.Drawing.Point(6, 13);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 151);
-            this.groupBox4.TabIndex = 0;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Purpose";
             // 
             // radioPurposeNoDeath
             // 
@@ -255,36 +218,6 @@
             this.radioPurposeChecklist.UseVisualStyleBackColor = true;
             this.radioPurposeChecklist.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.cbShowTimeFooter);
-            this.groupBox5.Controls.Add(this.cbShowTimeDiff);
-            this.groupBox5.Controls.Add(this.cbShowDiff);
-            this.groupBox5.Controls.Add(this.cbShowProgressBar);
-            this.groupBox5.Controls.Add(this.cbSuccessionToProgressBar);
-            this.groupBox5.Controls.Add(this.lblShowSplitCount);
-            this.groupBox5.Controls.Add(this.cbShowFooter);
-            this.groupBox5.Controls.Add(this.cbShowPB);
-            this.groupBox5.Controls.Add(this.cbShowTimeCurrent);
-            this.groupBox5.Controls.Add(this.cbShowTimePB);
-            this.groupBox5.Controls.Add(this.cbShowAttempts);
-            this.groupBox5.Controls.Add(this.cbShowHeadline);
-            this.groupBox5.Controls.Add(this.cbShowSessionProgress);
-            this.groupBox5.Controls.Add(this.Label9);
-            this.groupBox5.Controls.Add(this.cbShowHitsCombined);
-            this.groupBox5.Controls.Add(this.numShowSplitsCountUpcoming);
-            this.groupBox5.Controls.Add(this.cbShowNumbers);
-            this.groupBox5.Controls.Add(this.Label10);
-            this.groupBox5.Controls.Add(this.Label8);
-            this.groupBox5.Controls.Add(this.Label3);
-            this.groupBox5.Controls.Add(this.numShowSplitsCountFinished);
-            this.groupBox5.Location = new System.Drawing.Point(215, 13);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(367, 282);
-            this.groupBox5.TabIndex = 3;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Features";
-            // 
             // numShowSplitsCountFinished
             // 
             this.numShowSplitsCountFinished.Location = new System.Drawing.Point(87, 231);
@@ -303,33 +236,6 @@
             0,
             0});
             this.numShowSplitsCountFinished.ValueChanged += new System.EventHandler(this.ApplyAppearance);
-            // 
-            // Label3
-            // 
-            this.Label3.AutoSize = true;
-            this.Label3.Location = new System.Drawing.Point(6, 233);
-            this.Label3.Name = "Label3";
-            this.Label3.Size = new System.Drawing.Size(71, 13);
-            this.Label3.TabIndex = 0;
-            this.Label3.Text = "Show the last";
-            // 
-            // Label8
-            // 
-            this.Label8.AutoSize = true;
-            this.Label8.Location = new System.Drawing.Point(150, 233);
-            this.Label8.Name = "Label8";
-            this.Label8.Size = new System.Drawing.Size(72, 13);
-            this.Label8.TabIndex = 2;
-            this.Label8.Text = "finished splits.";
-            // 
-            // Label10
-            // 
-            this.Label10.AutoSize = true;
-            this.Label10.Location = new System.Drawing.Point(6, 259);
-            this.Label10.Name = "Label10";
-            this.Label10.Size = new System.Drawing.Size(75, 13);
-            this.Label10.TabIndex = 3;
-            this.Label10.Text = "Show the next";
             // 
             // cbShowNumbers
             // 
@@ -377,15 +283,6 @@
             this.ToolTip1.SetToolTip(this.cbShowHitsCombined, "Show boss and way hits either separately or combined");
             this.cbShowHitsCombined.UseVisualStyleBackColor = true;
             this.cbShowHitsCombined.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
-            // 
-            // Label9
-            // 
-            this.Label9.AutoSize = true;
-            this.Label9.Location = new System.Drawing.Point(150, 259);
-            this.Label9.Name = "Label9";
-            this.Label9.Size = new System.Drawing.Size(82, 13);
-            this.Label9.TabIndex = 5;
-            this.Label9.Text = "upcoming splits.";
             // 
             // cbShowSessionProgress
             // 
@@ -486,16 +383,6 @@
             this.cbShowFooter.UseVisualStyleBackColor = true;
             this.cbShowFooter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
-            // lblShowSplitCount
-            // 
-            this.lblShowSplitCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblShowSplitCount.Location = new System.Drawing.Point(238, 233);
-            this.lblShowSplitCount.Name = "lblShowSplitCount";
-            this.lblShowSplitCount.Size = new System.Drawing.Size(123, 44);
-            this.lblShowSplitCount.TabIndex = 9;
-            this.lblShowSplitCount.Text = "Current configuration will show up to ??? splits.";
-            this.lblShowSplitCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // cbSuccessionToProgressBar
             // 
             this.cbSuccessionToProgressBar.AutoSize = true;
@@ -568,38 +455,6 @@
             this.cbShowTimeFooter.UseVisualStyleBackColor = true;
             this.cbShowTimeFooter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
-            // tab_style
-            // 
-            this.tab_style.Controls.Add(this.groupBox3);
-            this.tab_style.Controls.Add(this.label16);
-            this.tab_style.Controls.Add(this.GroupBox1);
-            this.tab_style.Controls.Add(this.numStyleDesiredWidth);
-            this.tab_style.Controls.Add(this.Label13);
-            this.tab_style.Controls.Add(this.Label14);
-            this.tab_style.Location = new System.Drawing.Point(4, 22);
-            this.tab_style.Name = "tab_style";
-            this.tab_style.Size = new System.Drawing.Size(588, 301);
-            this.tab_style.TabIndex = 3;
-            this.tab_style.Text = "Style";
-            // 
-            // Label14
-            // 
-            this.Label14.AutoSize = true;
-            this.Label14.Location = new System.Drawing.Point(415, 13);
-            this.Label14.Name = "Label14";
-            this.Label14.Size = new System.Drawing.Size(74, 13);
-            this.Label14.TabIndex = 21;
-            this.Label14.Text = "Desired width:";
-            // 
-            // Label13
-            // 
-            this.Label13.AutoSize = true;
-            this.Label13.Location = new System.Drawing.Point(559, 13);
-            this.Label13.Name = "Label13";
-            this.Label13.Size = new System.Drawing.Size(18, 13);
-            this.Label13.TabIndex = 20;
-            this.Label13.Text = "px";
-            // 
             // numStyleDesiredWidth
             // 
             this.numStyleDesiredWidth.Location = new System.Drawing.Point(496, 11);
@@ -613,32 +468,6 @@
             this.numStyleDesiredWidth.TabIndex = 1;
             this.ToolTip1.SetToolTip(this.numStyleDesiredWidth, resources.GetString("numStyleDesiredWidth.ToolTip"));
             this.numStyleDesiredWidth.ValueChanged += new System.EventHandler(this.ApplyAppearance);
-            // 
-            // GroupBox1
-            // 
-            this.GroupBox1.Controls.Add(this.label15);
-            this.GroupBox1.Controls.Add(this.txtFontName);
-            this.GroupBox1.Controls.Add(this.cbApCustomCss);
-            this.GroupBox1.Controls.Add(this.txtCssUrl);
-            this.GroupBox1.Controls.Add(this.txtFontUrl);
-            this.GroupBox1.Controls.Add(this.Label11);
-            this.GroupBox1.Controls.Add(this.btnApApply);
-            this.GroupBox1.Controls.Add(this.Label12);
-            this.GroupBox1.Location = new System.Drawing.Point(6, 172);
-            this.GroupBox1.Name = "GroupBox1";
-            this.GroupBox1.Size = new System.Drawing.Size(571, 126);
-            this.GroupBox1.TabIndex = 2;
-            this.GroupBox1.TabStop = false;
-            this.GroupBox1.Text = "Customization";
-            // 
-            // Label12
-            // 
-            this.Label12.AutoSize = true;
-            this.Label12.Location = new System.Drawing.Point(6, 97);
-            this.Label12.Name = "Label12";
-            this.Label12.Size = new System.Drawing.Size(62, 13);
-            this.Label12.TabIndex = 12;
-            this.Label12.Text = "Font: (URL)";
             // 
             // btnApApply
             // 
@@ -654,15 +483,6 @@
         "ually after editing.");
             this.btnApApply.UseVisualStyleBackColor = false;
             this.btnApApply.Click += new System.EventHandler(this.btnApApply_Click);
-            // 
-            // Label11
-            // 
-            this.Label11.AutoSize = true;
-            this.Label11.Location = new System.Drawing.Point(6, 45);
-            this.Label11.Name = "Label11";
-            this.Label11.Size = new System.Drawing.Size(62, 13);
-            this.Label11.TabIndex = 11;
-            this.Label11.Text = "CSS: (URL)";
             // 
             // txtFontUrl
             // 
@@ -704,40 +524,6 @@
             this.txtFontName.Size = new System.Drawing.Size(222, 20);
             this.txtFontName.TabIndex = 2;
             this.ToolTip1.SetToolTip(this.txtFontName, resources.GetString("txtFontName.ToolTip"));
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 71);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(60, 13);
-            this.label15.TabIndex = 17;
-            this.label15.Text = "Font name:";
-            // 
-            // label16
-            // 
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic);
-            this.label16.Location = new System.Drawing.Point(394, 34);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(183, 35);
-            this.label16.TabIndex = 22;
-            this.label16.Text = "When value is set back to 0, you may have to reload the browser.";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.cbHighlightCurrentSplit);
-            this.groupBox3.Controls.Add(this.cbUseRoman);
-            this.groupBox3.Controls.Add(this.cbProgressBarColored);
-            this.groupBox3.Controls.Add(this.cbSuperscriptPB);
-            this.groupBox3.Controls.Add(this.cbHighContrast);
-            this.groupBox3.Controls.Add(this.cbHighContrastNames);
-            this.groupBox3.Location = new System.Drawing.Point(6, 13);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(382, 153);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Appearance";
             // 
             // cbHighContrastNames
             // 
@@ -811,59 +597,14 @@
             this.cbHighlightCurrentSplit.UseVisualStyleBackColor = true;
             this.cbHighlightCurrentSplit.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
-            // tab_globalshortcuts
-            // 
-            this.tab_globalshortcuts.Controls.Add(this.txtPB);
-            this.tab_globalshortcuts.Controls.Add(this.txtWayHitUndo);
-            this.tab_globalshortcuts.Controls.Add(this.txtWayHit);
-            this.tab_globalshortcuts.Controls.Add(this.txtHitUndo);
-            this.tab_globalshortcuts.Controls.Add(this.txtPrevSplit);
-            this.tab_globalshortcuts.Controls.Add(this.txtNextSplit);
-            this.tab_globalshortcuts.Controls.Add(this.txtHit);
-            this.tab_globalshortcuts.Controls.Add(this.txtReset);
-            this.tab_globalshortcuts.Controls.Add(this.txtTimerStart);
-            this.tab_globalshortcuts.Controls.Add(this.txtTimerStop);
-            this.tab_globalshortcuts.Controls.Add(this.cbScPB);
-            this.tab_globalshortcuts.Controls.Add(this.cbScWayHitUndo);
-            this.tab_globalshortcuts.Controls.Add(this.cbScWayHit);
-            this.tab_globalshortcuts.Controls.Add(this.cbScHitUndo);
-            this.tab_globalshortcuts.Controls.Add(this.cbScPrevSplit);
-            this.tab_globalshortcuts.Controls.Add(this.cbScReset);
-            this.tab_globalshortcuts.Controls.Add(this.cbScHit);
-            this.tab_globalshortcuts.Controls.Add(this.cbScNextSplit);
-            this.tab_globalshortcuts.Controls.Add(this.cbScTimerStart);
-            this.tab_globalshortcuts.Controls.Add(this.cbScTimerStop);
-            this.tab_globalshortcuts.Controls.Add(this.Label6);
-            this.tab_globalshortcuts.Controls.Add(this.Label1);
-            this.tab_globalshortcuts.Controls.Add(this.radioHotKeyMethod_async);
-            this.tab_globalshortcuts.Controls.Add(this.radioHotKeyMethod_sync);
-            this.tab_globalshortcuts.Controls.Add(this.radioHotKeyMethod_llkb);
-            this.tab_globalshortcuts.Location = new System.Drawing.Point(4, 22);
-            this.tab_globalshortcuts.Name = "tab_globalshortcuts";
-            this.tab_globalshortcuts.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.tab_globalshortcuts.Size = new System.Drawing.Size(588, 301);
-            this.tab_globalshortcuts.TabIndex = 0;
-            this.tab_globalshortcuts.Text = "Global shortcuts";
-            // 
-            // Label1
-            // 
-            this.Label1.AutoSize = true;
-            this.Label1.Location = new System.Drawing.Point(6, 10);
-            this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(462, 13);
-            this.Label1.TabIndex = 6;
-            this.Label1.Text = "Click into a textbox and press any key combination to setup your hotkey for the r" +
-    "espective event:";
-            // 
             // radioHotKeyMethod_sync
             // 
             this.radioHotKeyMethod_sync.AutoSize = true;
             this.radioHotKeyMethod_sync.Location = new System.Drawing.Point(6, 197);
             this.radioHotKeyMethod_sync.Name = "radioHotKeyMethod_sync";
-            this.radioHotKeyMethod_sync.Size = new System.Drawing.Size(451, 17);
+            this.radioHotKeyMethod_sync.Size = new System.Drawing.Size(219, 17);
             this.radioHotKeyMethod_sync.TabIndex = 17;
-            this.radioHotKeyMethod_sync.Text = "Synchronous - System hotkey registration (May not always work, least performance " +
-    "impact)";
+            this.radioHotKeyMethod_sync.Text = "Synchronous - System hotkey registration";
             this.ToolTip1.SetToolTip(this.radioHotKeyMethod_sync, resources.GetString("radioHotKeyMethod_sync.ToolTip"));
             this.radioHotKeyMethod_sync.UseVisualStyleBackColor = true;
             this.radioHotKeyMethod_sync.CheckedChanged += new System.EventHandler(this.radioHotKeyMethod_CheckedChanged);
@@ -871,44 +612,30 @@
             // radioHotKeyMethod_async
             // 
             this.radioHotKeyMethod_async.AutoSize = true;
-            this.radioHotKeyMethod_async.Checked = true;
             this.radioHotKeyMethod_async.Location = new System.Drawing.Point(6, 220);
             this.radioHotKeyMethod_async.Name = "radioHotKeyMethod_async";
-            this.radioHotKeyMethod_async.Size = new System.Drawing.Size(459, 17);
+            this.radioHotKeyMethod_async.Size = new System.Drawing.Size(204, 17);
             this.radioHotKeyMethod_async.TabIndex = 18;
-            this.radioHotKeyMethod_async.TabStop = true;
-            this.radioHotKeyMethod_async.Text = "Asynchronous - Polling keyboard keys (Works most of the time, medium performance " +
-    "impact)";
-            this.ToolTip1.SetToolTip(this.radioHotKeyMethod_async, "Trigger: Pressed keys are checked every 20 milliseconds\r\nFullscreen: OK\r\nAdmin: S" +
-        "hould not be required\r\nVirtual hot keys: Simulated hot keys by other application" +
-        "s supported\r\nPerformance impact: Medium");
+            this.radioHotKeyMethod_async.Text = "Asynchronous - Polling keyboard keys";
+            this.ToolTip1.SetToolTip(this.radioHotKeyMethod_async, "Pro: Works in most situations like full screen\r\nCon: May miss simulated hot keys");
             this.radioHotKeyMethod_async.UseVisualStyleBackColor = true;
             this.radioHotKeyMethod_async.CheckedChanged += new System.EventHandler(this.radioHotKeyMethod_CheckedChanged);
             // 
             // radioHotKeyMethod_llkb
             // 
             this.radioHotKeyMethod_llkb.AutoSize = true;
+            this.radioHotKeyMethod_llkb.Checked = true;
             this.radioHotKeyMethod_llkb.Location = new System.Drawing.Point(6, 243);
             this.radioHotKeyMethod_llkb.Name = "radioHotKeyMethod_llkb";
-            this.radioHotKeyMethod_llkb.Size = new System.Drawing.Size(445, 17);
+            this.radioHotKeyMethod_llkb.Size = new System.Drawing.Size(296, 17);
             this.radioHotKeyMethod_llkb.TabIndex = 19;
-            this.radioHotKeyMethod_llkb.Text = "Synchronous - Low level keyboard hook (Should always work, worst performance impa" +
-    "ct)";
-            this.ToolTip1.SetToolTip(this.radioHotKeyMethod_llkb, "Trigger: Windows notifies every key state change\r\nFullscreen: OK\r\nAdmin: Should n" +
-        "ot be required\r\nVirtual hotkeys: Simulated hot keys by other applications suppor" +
-        "ted\r\nPerformance impact: Most");
+            this.radioHotKeyMethod_llkb.TabStop = true;
+            this.radioHotKeyMethod_llkb.Text = "Synchronous - Low level keyboard hook (Recommended)";
+            this.ToolTip1.SetToolTip(this.radioHotKeyMethod_llkb, "Pro: Works in most situations like full screen and simulated hot keys\r\nCon: Don\'t" +
+        " use this option if you cannot handle a few nano seconds input lag on a keyboard" +
+        " key press");
             this.radioHotKeyMethod_llkb.UseVisualStyleBackColor = true;
             this.radioHotKeyMethod_llkb.CheckedChanged += new System.EventHandler(this.radioHotKeyMethod_CheckedChanged);
-            // 
-            // Label6
-            // 
-            this.Label6.AutoSize = true;
-            this.Label6.Location = new System.Drawing.Point(3, 178);
-            this.Label6.Name = "Label6";
-            this.Label6.Size = new System.Drawing.Size(393, 13);
-            this.Label6.TabIndex = 9;
-            this.Label6.Text = "Select method of global hotkey registration (changing needs restart of applicatio" +
-    "n):";
             // 
             // cbScTimerStop
             // 
@@ -1150,6 +877,274 @@
             this.ToolTip1.SetToolTip(this.txtPB, "Click into the field and press the hot key you want to use");
             this.txtPB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPB_KeyDown);
             // 
+            // tab_behavior
+            // 
+            this.tab_behavior.Controls.Add(this.groupBox5);
+            this.tab_behavior.Controls.Add(this.groupBox4);
+            this.tab_behavior.Controls.Add(this.groupBox2);
+            this.tab_behavior.Location = new System.Drawing.Point(4, 22);
+            this.tab_behavior.Name = "tab_behavior";
+            this.tab_behavior.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.tab_behavior.Size = new System.Drawing.Size(588, 301);
+            this.tab_behavior.TabIndex = 1;
+            this.tab_behavior.Text = "Behavior";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.cbShowTimeFooter);
+            this.groupBox5.Controls.Add(this.cbShowTimeDiff);
+            this.groupBox5.Controls.Add(this.cbShowDiff);
+            this.groupBox5.Controls.Add(this.cbShowProgressBar);
+            this.groupBox5.Controls.Add(this.cbSuccessionToProgressBar);
+            this.groupBox5.Controls.Add(this.lblShowSplitCount);
+            this.groupBox5.Controls.Add(this.cbShowFooter);
+            this.groupBox5.Controls.Add(this.cbShowPB);
+            this.groupBox5.Controls.Add(this.cbShowTimeCurrent);
+            this.groupBox5.Controls.Add(this.cbShowTimePB);
+            this.groupBox5.Controls.Add(this.cbShowAttempts);
+            this.groupBox5.Controls.Add(this.cbShowHeadline);
+            this.groupBox5.Controls.Add(this.cbShowSessionProgress);
+            this.groupBox5.Controls.Add(this.Label9);
+            this.groupBox5.Controls.Add(this.cbShowHitsCombined);
+            this.groupBox5.Controls.Add(this.numShowSplitsCountUpcoming);
+            this.groupBox5.Controls.Add(this.cbShowNumbers);
+            this.groupBox5.Controls.Add(this.Label10);
+            this.groupBox5.Controls.Add(this.Label8);
+            this.groupBox5.Controls.Add(this.Label3);
+            this.groupBox5.Controls.Add(this.numShowSplitsCountFinished);
+            this.groupBox5.Location = new System.Drawing.Point(215, 13);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(367, 282);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Features";
+            // 
+            // lblShowSplitCount
+            // 
+            this.lblShowSplitCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblShowSplitCount.Location = new System.Drawing.Point(238, 233);
+            this.lblShowSplitCount.Name = "lblShowSplitCount";
+            this.lblShowSplitCount.Size = new System.Drawing.Size(123, 44);
+            this.lblShowSplitCount.TabIndex = 9;
+            this.lblShowSplitCount.Text = "Current configuration will show up to ??? splits.";
+            this.lblShowSplitCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Label9
+            // 
+            this.Label9.AutoSize = true;
+            this.Label9.Location = new System.Drawing.Point(150, 259);
+            this.Label9.Name = "Label9";
+            this.Label9.Size = new System.Drawing.Size(82, 13);
+            this.Label9.TabIndex = 5;
+            this.Label9.Text = "upcoming splits.";
+            // 
+            // Label10
+            // 
+            this.Label10.AutoSize = true;
+            this.Label10.Location = new System.Drawing.Point(6, 259);
+            this.Label10.Name = "Label10";
+            this.Label10.Size = new System.Drawing.Size(75, 13);
+            this.Label10.TabIndex = 3;
+            this.Label10.Text = "Show the next";
+            // 
+            // Label8
+            // 
+            this.Label8.AutoSize = true;
+            this.Label8.Location = new System.Drawing.Point(150, 233);
+            this.Label8.Name = "Label8";
+            this.Label8.Size = new System.Drawing.Size(72, 13);
+            this.Label8.TabIndex = 2;
+            this.Label8.Text = "finished splits.";
+            // 
+            // Label3
+            // 
+            this.Label3.AutoSize = true;
+            this.Label3.Location = new System.Drawing.Point(6, 233);
+            this.Label3.Name = "Label3";
+            this.Label3.Size = new System.Drawing.Size(71, 13);
+            this.Label3.TabIndex = 0;
+            this.Label3.Text = "Show the last";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.radioPurposeChecklist);
+            this.groupBox4.Controls.Add(this.radioPurposeDeathCounter);
+            this.groupBox4.Controls.Add(this.radioPurposeSplitCounter);
+            this.groupBox4.Controls.Add(this.radioPurposeNoDeath);
+            this.groupBox4.Location = new System.Drawing.Point(6, 13);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(200, 151);
+            this.groupBox4.TabIndex = 0;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Purpose";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.radioSeverityBossHitCritical);
+            this.groupBox2.Controls.Add(this.radioSeverityComparePB);
+            this.groupBox2.Controls.Add(this.radioSeverityAnyHitCritical);
+            this.groupBox2.Location = new System.Drawing.Point(6, 170);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 125);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Hit severity (color) within a single split";
+            // 
+            // tab_style
+            // 
+            this.tab_style.Controls.Add(this.groupBox3);
+            this.tab_style.Controls.Add(this.label16);
+            this.tab_style.Controls.Add(this.GroupBox1);
+            this.tab_style.Controls.Add(this.numStyleDesiredWidth);
+            this.tab_style.Controls.Add(this.Label13);
+            this.tab_style.Controls.Add(this.Label14);
+            this.tab_style.Location = new System.Drawing.Point(4, 22);
+            this.tab_style.Name = "tab_style";
+            this.tab_style.Size = new System.Drawing.Size(588, 301);
+            this.tab_style.TabIndex = 3;
+            this.tab_style.Text = "Style";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cbHighlightCurrentSplit);
+            this.groupBox3.Controls.Add(this.cbUseRoman);
+            this.groupBox3.Controls.Add(this.cbProgressBarColored);
+            this.groupBox3.Controls.Add(this.cbSuperscriptPB);
+            this.groupBox3.Controls.Add(this.cbHighContrast);
+            this.groupBox3.Controls.Add(this.cbHighContrastNames);
+            this.groupBox3.Location = new System.Drawing.Point(6, 13);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(382, 153);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Appearance";
+            // 
+            // label16
+            // 
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic);
+            this.label16.Location = new System.Drawing.Point(394, 34);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(183, 35);
+            this.label16.TabIndex = 22;
+            this.label16.Text = "When value is set back to 0, you may have to reload the browser.";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // GroupBox1
+            // 
+            this.GroupBox1.Controls.Add(this.label15);
+            this.GroupBox1.Controls.Add(this.txtFontName);
+            this.GroupBox1.Controls.Add(this.cbApCustomCss);
+            this.GroupBox1.Controls.Add(this.txtCssUrl);
+            this.GroupBox1.Controls.Add(this.txtFontUrl);
+            this.GroupBox1.Controls.Add(this.Label11);
+            this.GroupBox1.Controls.Add(this.btnApApply);
+            this.GroupBox1.Controls.Add(this.Label12);
+            this.GroupBox1.Location = new System.Drawing.Point(6, 172);
+            this.GroupBox1.Name = "GroupBox1";
+            this.GroupBox1.Size = new System.Drawing.Size(571, 126);
+            this.GroupBox1.TabIndex = 2;
+            this.GroupBox1.TabStop = false;
+            this.GroupBox1.Text = "Customization";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 71);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(60, 13);
+            this.label15.TabIndex = 17;
+            this.label15.Text = "Font name:";
+            // 
+            // Label11
+            // 
+            this.Label11.AutoSize = true;
+            this.Label11.Location = new System.Drawing.Point(6, 45);
+            this.Label11.Name = "Label11";
+            this.Label11.Size = new System.Drawing.Size(62, 13);
+            this.Label11.TabIndex = 11;
+            this.Label11.Text = "CSS: (URL)";
+            // 
+            // Label12
+            // 
+            this.Label12.AutoSize = true;
+            this.Label12.Location = new System.Drawing.Point(6, 97);
+            this.Label12.Name = "Label12";
+            this.Label12.Size = new System.Drawing.Size(62, 13);
+            this.Label12.TabIndex = 12;
+            this.Label12.Text = "Font: (URL)";
+            // 
+            // Label13
+            // 
+            this.Label13.AutoSize = true;
+            this.Label13.Location = new System.Drawing.Point(559, 13);
+            this.Label13.Name = "Label13";
+            this.Label13.Size = new System.Drawing.Size(18, 13);
+            this.Label13.TabIndex = 20;
+            this.Label13.Text = "px";
+            // 
+            // Label14
+            // 
+            this.Label14.AutoSize = true;
+            this.Label14.Location = new System.Drawing.Point(415, 13);
+            this.Label14.Name = "Label14";
+            this.Label14.Size = new System.Drawing.Size(74, 13);
+            this.Label14.TabIndex = 21;
+            this.Label14.Text = "Desired width:";
+            // 
+            // tab_globalshortcuts
+            // 
+            this.tab_globalshortcuts.Controls.Add(this.txtPB);
+            this.tab_globalshortcuts.Controls.Add(this.txtWayHitUndo);
+            this.tab_globalshortcuts.Controls.Add(this.txtWayHit);
+            this.tab_globalshortcuts.Controls.Add(this.txtHitUndo);
+            this.tab_globalshortcuts.Controls.Add(this.txtPrevSplit);
+            this.tab_globalshortcuts.Controls.Add(this.txtNextSplit);
+            this.tab_globalshortcuts.Controls.Add(this.txtHit);
+            this.tab_globalshortcuts.Controls.Add(this.txtReset);
+            this.tab_globalshortcuts.Controls.Add(this.txtTimerStart);
+            this.tab_globalshortcuts.Controls.Add(this.txtTimerStop);
+            this.tab_globalshortcuts.Controls.Add(this.cbScPB);
+            this.tab_globalshortcuts.Controls.Add(this.cbScWayHitUndo);
+            this.tab_globalshortcuts.Controls.Add(this.cbScWayHit);
+            this.tab_globalshortcuts.Controls.Add(this.cbScHitUndo);
+            this.tab_globalshortcuts.Controls.Add(this.cbScPrevSplit);
+            this.tab_globalshortcuts.Controls.Add(this.cbScReset);
+            this.tab_globalshortcuts.Controls.Add(this.cbScHit);
+            this.tab_globalshortcuts.Controls.Add(this.cbScNextSplit);
+            this.tab_globalshortcuts.Controls.Add(this.cbScTimerStart);
+            this.tab_globalshortcuts.Controls.Add(this.cbScTimerStop);
+            this.tab_globalshortcuts.Controls.Add(this.Label6);
+            this.tab_globalshortcuts.Controls.Add(this.Label1);
+            this.tab_globalshortcuts.Controls.Add(this.radioHotKeyMethod_async);
+            this.tab_globalshortcuts.Controls.Add(this.radioHotKeyMethod_sync);
+            this.tab_globalshortcuts.Controls.Add(this.radioHotKeyMethod_llkb);
+            this.tab_globalshortcuts.Location = new System.Drawing.Point(4, 22);
+            this.tab_globalshortcuts.Name = "tab_globalshortcuts";
+            this.tab_globalshortcuts.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.tab_globalshortcuts.Size = new System.Drawing.Size(588, 301);
+            this.tab_globalshortcuts.TabIndex = 0;
+            this.tab_globalshortcuts.Text = "Global shortcuts";
+            // 
+            // Label6
+            // 
+            this.Label6.AutoSize = true;
+            this.Label6.Location = new System.Drawing.Point(3, 178);
+            this.Label6.Name = "Label6";
+            this.Label6.Size = new System.Drawing.Size(393, 13);
+            this.Label6.TabIndex = 9;
+            this.Label6.Text = "Select method of global hotkey registration (changing needs restart of applicatio" +
+    "n):";
+            // 
+            // Label1
+            // 
+            this.Label1.AutoSize = true;
+            this.Label1.Location = new System.Drawing.Point(6, 10);
+            this.Label1.Name = "Label1";
+            this.Label1.Size = new System.Drawing.Size(462, 13);
+            this.Label1.TabIndex = 6;
+            this.Label1.Text = "Click into a textbox and press any key combination to setup your hotkey for the r" +
+    "espective event:";
+            // 
             // TabControl1
             // 
             this.TabControl1.Controls.Add(this.tab_globalshortcuts);
@@ -1175,22 +1170,22 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
             this.Load += new System.EventHandler(this.Settings_Load);
-            this.tab_behavior.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredWidth)).EndInit();
+            this.tab_behavior.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.tab_style.ResumeLayout(false);
             this.tab_style.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredWidth)).EndInit();
-            this.GroupBox1.ResumeLayout(false);
-            this.GroupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.GroupBox1.ResumeLayout(false);
+            this.GroupBox1.PerformLayout();
             this.tab_globalshortcuts.ResumeLayout(false);
             this.tab_globalshortcuts.PerformLayout();
             this.TabControl1.ResumeLayout(false);
