@@ -37,7 +37,8 @@ namespace HitCounterManager
             OM_Purpose_DeathCounter = 1,
             OM_Purpose_Checklist = 2,
             OM_Purpose_NoDeath = 3,
-            OM_Purpose_MAX = 4
+            OM_Purpose_ResetCounter = 4,
+            OM_Purpose_MAX = 5
         };
         public enum OM_Severity {
             OM_Severity_AnyHitsCritical = 0,

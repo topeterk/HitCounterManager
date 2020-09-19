@@ -101,6 +101,7 @@ namespace HitCounterManager
             radioPurposeDeathCounter.Checked = (om.Purpose == OutModule.OM_Purpose.OM_Purpose_DeathCounter);
             radioPurposeSplitCounter.Checked = (om.Purpose == OutModule.OM_Purpose.OM_Purpose_SplitCounter);
             radioPurposeNoDeath.Checked = (om.Purpose == OutModule.OM_Purpose.OM_Purpose_NoDeath);
+            radioPurposeResetCounter.Checked = (om.Purpose == OutModule.OM_Purpose.OM_Purpose_ResetCounter);
             radioSeverityBossHitCritical.Checked = (om.Severity == OutModule.OM_Severity.OM_Severity_BossHitCritical);
             radioSeverityComparePB.Checked = (om.Severity == OutModule.OM_Severity.OM_Severity_ComparePB);
             radioSeverityAnyHitCritical.Checked = (om.Severity == OutModule.OM_Severity.OM_Severity_AnyHitsCritical);
@@ -197,6 +198,8 @@ namespace HitCounterManager
                 om.Purpose = OutModule.OM_Purpose.OM_Purpose_DeathCounter;
             else if (radioPurposeNoDeath.Checked)
                 om.Purpose = OutModule.OM_Purpose.OM_Purpose_NoDeath;
+            else if (radioPurposeResetCounter.Checked)
+                om.Purpose = OutModule.OM_Purpose.OM_Purpose_ResetCounter;
             else
                 om.Purpose = OutModule.OM_Purpose.OM_Purpose_SplitCounter;
             if (radioSeverityBossHitCritical.Checked)

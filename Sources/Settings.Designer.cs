@@ -38,6 +38,7 @@
             this.radioPurposeSplitCounter = new System.Windows.Forms.RadioButton();
             this.radioPurposeDeathCounter = new System.Windows.Forms.RadioButton();
             this.radioPurposeChecklist = new System.Windows.Forms.RadioButton();
+            this.radioPurposeResetCounter = new System.Windows.Forms.RadioButton();
             this.numShowSplitsCountFinished = new System.Windows.Forms.NumericUpDown();
             this.cbShowNumbers = new System.Windows.Forms.CheckBox();
             this.numShowSplitsCountUpcoming = new System.Windows.Forms.NumericUpDown();
@@ -217,6 +218,20 @@
             this.ToolTip1.SetToolTip(this.radioPurposeChecklist, "Marking splits like on a checklist");
             this.radioPurposeChecklist.UseVisualStyleBackColor = true;
             this.radioPurposeChecklist.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // radioPurposeResetCounter
+            // 
+            this.radioPurposeResetCounter.AutoSize = true;
+            this.radioPurposeResetCounter.Location = new System.Drawing.Point(7, 112);
+            this.radioPurposeResetCounter.Name = "radioPurposeResetCounter";
+            this.radioPurposeResetCounter.Size = new System.Drawing.Size(110, 17);
+            this.radioPurposeResetCounter.TabIndex = 4;
+            this.radioPurposeResetCounter.Text = "Run reset counter";
+            this.ToolTip1.SetToolTip(this.radioPurposeResetCounter, "Count a hit every time you reset your run.\r\nJust jump back to the first split to " +
+        "start over (instead of actual resetting).\r\nThis way you can show how often a run" +
+        " died on a certain split.");
+            this.radioPurposeResetCounter.UseVisualStyleBackColor = true;
+            this.radioPurposeResetCounter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // numShowSplitsCountFinished
             // 
@@ -967,6 +982,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.radioPurposeResetCounter);
             this.groupBox4.Controls.Add(this.radioPurposeChecklist);
             this.groupBox4.Controls.Add(this.radioPurposeDeathCounter);
             this.groupBox4.Controls.Add(this.radioPurposeSplitCounter);
@@ -1219,6 +1235,7 @@
         private System.Windows.Forms.Label Label3;
         private System.Windows.Forms.NumericUpDown numShowSplitsCountFinished;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton radioPurposeResetCounter;
         private System.Windows.Forms.RadioButton radioPurposeChecklist;
         private System.Windows.Forms.RadioButton radioPurposeDeathCounter;
         private System.Windows.Forms.RadioButton radioPurposeSplitCounter;
