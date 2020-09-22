@@ -79,6 +79,7 @@ namespace HitCounterManager
             txtCssUrl.Text = _settings.StyleCssUrl;
             txtFontUrl.Text = _settings.StyleFontUrl;
             txtFontName.Text = _settings.StyleFontName;
+            btnApApply.Enabled = cbApCustomCss.Checked;
 
             // Behavior
             cbShowAttempts.Checked = _settings.ShowAttemptsCounter;
@@ -258,6 +259,9 @@ namespace HitCounterManager
             txtCssUrl.Enabled = cbApCustomCss.Checked;
             txtFontUrl.Enabled = cbApCustomCss.Checked;
             txtFontName.Enabled = cbApCustomCss.Checked;
+
+            if (!cbApCustomCss.Checked) btnApApply_Click(sender, e); // Implicitly apply when custom settings are disabled
+            btnApApply.Enabled = cbApCustomCss.Checked;
         }
 
         #endregion
