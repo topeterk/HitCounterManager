@@ -181,6 +181,7 @@
     <None Include="Images\icons8-save-20.png" />
     <None Include="Images\icons8-scroll-down-20.png" />
     <None Include="Images\icons8-scroll-up-20.png" />
+    <None Include="Images\icons8-search-in-browser-20.png" />
     <None Include="Images\icons8-settings-20.png" />
     <None Include="Images\icons8-sleep-32.png" />
     <None Include="Images\icons8-staircase-32.png" />

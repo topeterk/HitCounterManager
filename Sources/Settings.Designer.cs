@@ -58,6 +58,7 @@
             this.numStyleDesiredWidth = new System.Windows.Forms.NumericUpDown();
             this.btnApApply = new System.Windows.Forms.Button();
             this.txtFontUrl = new System.Windows.Forms.TextBox();
+            this.btnFontUrlWeb = new System.Windows.Forms.Button();
             this.txtCssUrl = new System.Windows.Forms.TextBox();
             this.cbApCustomCss = new System.Windows.Forms.CheckBox();
             this.txtFontName = new System.Windows.Forms.TextBox();
@@ -487,12 +488,13 @@
             // btnApApply
             // 
             this.btnApApply.BackColor = System.Drawing.Color.LightYellow;
+            this.btnApApply.Enabled = false;
             this.btnApApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnApApply.ForeColor = System.Drawing.Color.Black;
             this.btnApApply.Location = new System.Drawing.Point(502, 42);
             this.btnApApply.Name = "btnApApply";
             this.btnApApply.Size = new System.Drawing.Size(55, 72);
-            this.btnApApply.TabIndex = 4;
+            this.btnApApply.TabIndex = 5;
             this.btnApApply.Text = "Apply";
             this.ToolTip1.SetToolTip(this.btnApApply, "To prevent issues with loading incomplete URLs, please click the Apply button man" +
         "ually after editing.");
@@ -504,11 +506,27 @@
             this.txtFontUrl.Enabled = false;
             this.txtFontUrl.Location = new System.Drawing.Point(74, 68);
             this.txtFontUrl.Name = "txtFontUrl";
-            this.txtFontUrl.Size = new System.Drawing.Size(422, 20);
+            this.txtFontUrl.Size = new System.Drawing.Size(396, 20);
             this.txtFontUrl.TabIndex = 2;
             this.ToolTip1.SetToolTip(this.txtFontUrl, "Personalize the design by switching to another font.\r\nKeep the field empty if you" +
         " do not use an external font.\r\nOtherwise specify the path to a @font-face ressou" +
         "rce.");
+            // 
+            // btnFontUrlWeb
+            // 
+            this.btnFontUrlWeb.BackColor = System.Drawing.SystemColors.Control;
+            this.btnFontUrlWeb.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_search_in_browser_20;
+            this.btnFontUrlWeb.Enabled = false;
+            this.btnFontUrlWeb.FlatAppearance.BorderSize = 0;
+            this.btnFontUrlWeb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFontUrlWeb.Location = new System.Drawing.Point(476, 67);
+            this.btnFontUrlWeb.Name = "btnFontUrlWeb";
+            this.btnFontUrlWeb.Size = new System.Drawing.Size(20, 20);
+            this.btnFontUrlWeb.TabIndex = 3;
+            this.ToolTip1.SetToolTip(this.btnFontUrlWeb, "Try to find a font at Google Fonts.\r\nJust paste the URL of the embedded @font-fac" +
+        "e ressource.");
+            this.btnFontUrlWeb.UseVisualStyleBackColor = false;
+            this.btnFontUrlWeb.Click += new System.EventHandler(this.btnFontUrlWeb_Click);
             // 
             // txtCssUrl
             // 
@@ -516,7 +534,7 @@
             this.txtCssUrl.Location = new System.Drawing.Point(74, 94);
             this.txtCssUrl.Name = "txtCssUrl";
             this.txtCssUrl.Size = new System.Drawing.Size(422, 20);
-            this.txtCssUrl.TabIndex = 3;
+            this.txtCssUrl.TabIndex = 4;
             this.ToolTip1.SetToolTip(this.txtCssUrl, "Personalize the design by switching to another stylesheet");
             // 
             // cbApCustomCss
@@ -1051,6 +1069,7 @@
             this.GroupBox1.Controls.Add(this.txtFontName);
             this.GroupBox1.Controls.Add(this.cbApCustomCss);
             this.GroupBox1.Controls.Add(this.txtCssUrl);
+            this.GroupBox1.Controls.Add(this.btnFontUrlWeb);
             this.GroupBox1.Controls.Add(this.txtFontUrl);
             this.GroupBox1.Controls.Add(this.Label11);
             this.GroupBox1.Controls.Add(this.btnApApply);
@@ -1259,6 +1278,7 @@
         private System.Windows.Forms.CheckBox cbApCustomCss;
         private System.Windows.Forms.TextBox txtCssUrl;
         private System.Windows.Forms.TextBox txtFontUrl;
+        private System.Windows.Forms.Button btnFontUrlWeb;
         private System.Windows.Forms.Label Label11;
         private System.Windows.Forms.Button btnApApply;
         private System.Windows.Forms.Label Label12;

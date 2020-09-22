@@ -79,7 +79,6 @@ namespace HitCounterManager
             txtCssUrl.Text = _settings.StyleCssUrl;
             txtFontUrl.Text = _settings.StyleFontUrl;
             txtFontName.Text = _settings.StyleFontName;
-            btnApApply.Enabled = cbApCustomCss.Checked;
 
             // Behavior
             cbShowAttempts.Checked = _settings.ShowAttemptsCounter;
@@ -245,6 +244,8 @@ namespace HitCounterManager
             else if (radioHotKeyMethod_llkb.Checked) SetHotKeyMethod(Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb);
         }
 
+        private void btnFontUrlWeb_Click(object sender, EventArgs e) { System.Diagnostics.Process.Start("https://fonts.google.com"); }
+
         private void btnApApply_Click(object sender, EventArgs e)
         {
             _settings.StyleUseCustom = cbApCustomCss.Checked;
@@ -258,8 +259,8 @@ namespace HitCounterManager
         {
             txtCssUrl.Enabled = cbApCustomCss.Checked;
             txtFontUrl.Enabled = cbApCustomCss.Checked;
+            btnFontUrlWeb.Enabled = cbApCustomCss.Checked;
             txtFontName.Enabled = cbApCustomCss.Checked;
-
             if (!cbApCustomCss.Checked) btnApApply_Click(sender, e); // Implicitly apply when custom settings are disabled
             btnApApply.Enabled = cbApCustomCss.Checked;
         }
