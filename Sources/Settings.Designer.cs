@@ -502,10 +502,10 @@
             // txtFontUrl
             // 
             this.txtFontUrl.Enabled = false;
-            this.txtFontUrl.Location = new System.Drawing.Point(74, 94);
+            this.txtFontUrl.Location = new System.Drawing.Point(74, 68);
             this.txtFontUrl.Name = "txtFontUrl";
             this.txtFontUrl.Size = new System.Drawing.Size(422, 20);
-            this.txtFontUrl.TabIndex = 3;
+            this.txtFontUrl.TabIndex = 2;
             this.ToolTip1.SetToolTip(this.txtFontUrl, "Personalize the design by switching to another font.\r\nKeep the field empty if you" +
         " do not use an external font.\r\nOtherwise specify the path to a @font-face ressou" +
         "rce.");
@@ -513,10 +513,10 @@
             // txtCssUrl
             // 
             this.txtCssUrl.Enabled = false;
-            this.txtCssUrl.Location = new System.Drawing.Point(74, 42);
+            this.txtCssUrl.Location = new System.Drawing.Point(74, 94);
             this.txtCssUrl.Name = "txtCssUrl";
             this.txtCssUrl.Size = new System.Drawing.Size(422, 20);
-            this.txtCssUrl.TabIndex = 1;
+            this.txtCssUrl.TabIndex = 3;
             this.ToolTip1.SetToolTip(this.txtCssUrl, "Personalize the design by switching to another stylesheet");
             // 
             // cbApCustomCss
@@ -534,10 +534,10 @@
             // txtFontName
             // 
             this.txtFontName.Enabled = false;
-            this.txtFontName.Location = new System.Drawing.Point(74, 68);
+            this.txtFontName.Location = new System.Drawing.Point(74, 42);
             this.txtFontName.Name = "txtFontName";
             this.txtFontName.Size = new System.Drawing.Size(222, 20);
-            this.txtFontName.TabIndex = 2;
+            this.txtFontName.TabIndex = 1;
             this.ToolTip1.SetToolTip(this.txtFontName, resources.GetString("txtFontName.ToolTip"));
             // 
             // cbHighContrastNames
@@ -1065,7 +1065,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 71);
+            this.label15.Location = new System.Drawing.Point(6, 45);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(60, 13);
             this.label15.TabIndex = 17;
@@ -1074,7 +1074,7 @@
             // Label11
             // 
             this.Label11.AutoSize = true;
-            this.Label11.Location = new System.Drawing.Point(6, 45);
+            this.Label11.Location = new System.Drawing.Point(6, 97);
             this.Label11.Name = "Label11";
             this.Label11.Size = new System.Drawing.Size(62, 13);
             this.Label11.TabIndex = 11;
@@ -1083,7 +1083,7 @@
             // Label12
             // 
             this.Label12.AutoSize = true;
-            this.Label12.Location = new System.Drawing.Point(6, 97);
+            this.Label12.Location = new System.Drawing.Point(6, 71);
             this.Label12.Name = "Label12";
             this.Label12.Size = new System.Drawing.Size(62, 13);
             this.Label12.TabIndex = 12;
