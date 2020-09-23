@@ -120,67 +120,13 @@ All available releases can be found at the [Releases page](../../releases) on Gi
       Start the application in the application's directory with **mono HitCounterManager.exe**  
       > **Note**: Mono supports **32 bit mode only** (therefore it cannot be run on OS without 32 bit support!)
 
-### Designs / Fonts
+### Instructions, Guides, Help
 
-A specific font can be selected at the appearance dialog in two ways:
-* The font is already installed locally on the system
-  * _(Not required but recommended)_ Clear the field for the font URL as no external font must be loaded
-  * Enter your font family name of choice at the font name field and hit Apply
-  > Example: _sans-serif_ or _courier_
-* The font is **not** installed locally and must be loaded from an external _@font-face_ ressource
-  * Enter the URL to the ressource into the font URL field
-  * Enter the matching font family name at the font name field and hit Apply
-  > Example: URL _https://fonts.googleapis.com/css?family=Fontdiner+Swanky_ and name _Fontdiner Swanky_
-
-To find suitable fonts I can recommend Google's font collection: [https://fonts.google.com](https://fonts.google.com).  
-Search for one of your liking and see the embedded font and/or CSS instruction as you can simply copy URL and name from there into the application. For the previous example the instructions looked like this _(the part to copy in bold)_:
-> URL from Embed Font instructions:  
-> _&lt;link href="**https://fonts.googleapis.com/css?family=Fontdiner+Swanky**" rel="stylesheet"&gt;_  
-> Name from CSS instructions:  
-> _font-family: '**Fontdiner Swanky**', cursive;_
-
-## Setting up Broadcasting software
-
-### Streamlabs OBS (SLOBS)
-* Moved to the Wiki: **[Setup Guide](../../wiki/SetupGuide#streamlabs-obs)**
-
-### OBS Studio
-* Moved to the Wiki: **[Setup Guide](../../wiki/SetupGuide#obs-studio)**
-
-### Open Broadcaster Software (OBS, _not_ OBS Studio!)
-* Moved to the Wiki: **[Setup Guide](../../wiki/SetupGuide#open-broadcaster-software)**
-
-### Twitch Studio Beta
-* Moved to the Wiki: **[Setup Guide](../../wiki/SetupGuide#twitch-studio)**
-
-## Modders and developers
-
-### Using standalone web browser instead of broadcasting software
-* When no data is displayed, there could be a problem with cross-domain security settings that can be avoided by allowing acces to local files in general:
-  * **Chrome**
-    * Start with command line option **--allow-file-access-from-files**
-    > Example: _"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files_
-  * **Firefox**
-    * Change the security policy in the browser settings **about:config -> security.fileuri.strict_origin_policy -> false**
-    > Note: This is a global settings, means you should enable this only for offline/trusted websites!
-  * **Internet Explorer 11**
-    * Accepting the initially blocked execution of the script should be sufficient
-  * **Edge**
-    * No issues here so far
-
-### Changing layout and design
-**You are completely free in designing the hit counter in the way you like**.  
-To achive this, you can modify or create new custom designs.
-Simply modify or create HTML, CSS or Javascript files based on any of the pre-delivered designs.
-For example, the style like **background color, font color or sizes can be easily modified in the CSS files**.
-
-More advanced modders can replace the design as a whole and create a new medthod of (visual) representation.
-To do this it is also possible to modify the [HitCounter.template](Sources/HitCounter.template) in order to generate a customized output file.
-The application is using JavaScript syntax (JSON) when writing data into the output file based on this template.
-Therefore the template has to have a line with the text **HITCOUNTER_LIST_START** which is the starting mark for the application.
-The mark with all further lines will be replaced with the JavaScript equivalent of the application's current data.
-This replacement is done until the **HITCOUNTER_LIST_END** text mark is reached.  
-> The filenames for the **Inputfile** [HitCounter.template](Sources/HitCounter.template) and the **OutputFile** [HitCounter.html](Sources/HitCounter.html) can be changed in the [HitCounterManagerSave.xml](HitCounterManagerSave.xml).
+How to setup the application, configure or modify designs and use it with a broadcasting sofware or browser can be found at the Wiki:  
+* [Broadcasting-Software](../../wiki/SetupGuide#Broadcasting-Software)
+* [Customizing designs](../../wiki/SetupGuide#Customizing-designs)
+* [Show designs in a browser](../../wiki/SetupGuide#Show-designs-in-a-browser)
+* [FAQ](#FAQ)
 
 ## Anything is missing, something is annoying/can be improved or you just found a bug?
 Message me via GitHub / e-mail or simply open an issue and I will try to help you out. Alternatively you can also send me a whipser on Twitch: [GeneralGunrider](https://www.twitch.tv/generalgunrider)
