@@ -780,6 +780,7 @@
             // 
             // txtTimerStop
             // 
+            this.txtTimerStop.BackColor = System.Drawing.Color.Gold;
             this.txtTimerStop.Location = new System.Drawing.Point(384, 134);
             this.txtTimerStop.Name = "txtTimerStop";
             this.txtTimerStop.ReadOnly = true;
@@ -792,6 +793,7 @@
             // 
             // txtTimerStart
             // 
+            this.txtTimerStart.BackColor = System.Drawing.Color.Gold;
             this.txtTimerStart.Location = new System.Drawing.Point(85, 134);
             this.txtTimerStart.Name = "txtTimerStart";
             this.txtTimerStart.ReadOnly = true;
@@ -804,6 +806,7 @@
             // 
             // txtReset
             // 
+            this.txtReset.BackColor = System.Drawing.Color.Salmon;
             this.txtReset.Location = new System.Drawing.Point(384, 108);
             this.txtReset.Name = "txtReset";
             this.txtReset.ReadOnly = true;
@@ -816,6 +819,7 @@
             // 
             // txtHit
             // 
+            this.txtHit.BackColor = System.Drawing.Color.LightSkyBlue;
             this.txtHit.Location = new System.Drawing.Point(85, 30);
             this.txtHit.Name = "txtHit";
             this.txtHit.ReadOnly = true;
@@ -828,6 +832,7 @@
             // 
             // txtNextSplit
             // 
+            this.txtNextSplit.BackColor = System.Drawing.Color.LightGreen;
             this.txtNextSplit.Location = new System.Drawing.Point(85, 82);
             this.txtNextSplit.Name = "txtNextSplit";
             this.txtNextSplit.ReadOnly = true;
@@ -840,6 +845,7 @@
             // 
             // txtPrevSplit
             // 
+            this.txtPrevSplit.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtPrevSplit.Location = new System.Drawing.Point(384, 82);
             this.txtPrevSplit.Name = "txtPrevSplit";
             this.txtPrevSplit.ReadOnly = true;
@@ -852,6 +858,7 @@
             // 
             // txtHitUndo
             // 
+            this.txtHitUndo.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtHitUndo.Location = new System.Drawing.Point(384, 30);
             this.txtHitUndo.Name = "txtHitUndo";
             this.txtHitUndo.ReadOnly = true;
@@ -864,6 +871,7 @@
             // 
             // txtWayHit
             // 
+            this.txtWayHit.BackColor = System.Drawing.Color.LightBlue;
             this.txtWayHit.Location = new System.Drawing.Point(85, 56);
             this.txtWayHit.Name = "txtWayHit";
             this.txtWayHit.ReadOnly = true;
@@ -876,6 +884,7 @@
             // 
             // txtWayHitUndo
             // 
+            this.txtWayHitUndo.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtWayHitUndo.Location = new System.Drawing.Point(384, 55);
             this.txtWayHitUndo.Name = "txtWayHitUndo";
             this.txtWayHitUndo.ReadOnly = true;
@@ -900,6 +909,7 @@
             // 
             // txtPB
             // 
+            this.txtPB.BackColor = System.Drawing.Color.LightYellow;
             this.txtPB.Location = new System.Drawing.Point(85, 108);
             this.txtPB.Name = "txtPB";
             this.txtPB.ReadOnly = true;
