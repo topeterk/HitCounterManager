@@ -91,6 +91,8 @@
             this.txtWayHitUndo = new System.Windows.Forms.TextBox();
             this.cbScPB = new System.Windows.Forms.CheckBox();
             this.txtPB = new System.Windows.Forms.TextBox();
+            this.btnCheckVersion = new System.Windows.Forms.Button();
+            this.btnGoToDownloadPage = new System.Windows.Forms.Button();
             this.tab_behavior = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lblShowSplitCount = new System.Windows.Forms.Label();
@@ -113,6 +115,12 @@
             this.Label6 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
             this.TabControl1 = new System.Windows.Forms.TabControl();
+            this.tab_update = new System.Windows.Forms.TabPage();
+            this.lblVersionLatest = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtChangelog = new System.Windows.Forms.TextBox();
+            this.lblVersionCurrent = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredWidth)).BeginInit();
@@ -125,6 +133,7 @@
             this.GroupBox1.SuspendLayout();
             this.tab_globalshortcuts.SuspendLayout();
             this.TabControl1.SuspendLayout();
+            this.tab_update.SuspendLayout();
             this.SuspendLayout();
             // 
             // ToolTip1
@@ -473,7 +482,7 @@
             // 
             // numStyleDesiredWidth
             // 
-            this.numStyleDesiredWidth.Location = new System.Drawing.Point(496, 11);
+            this.numStyleDesiredWidth.Location = new System.Drawing.Point(498, 21);
             this.numStyleDesiredWidth.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -920,6 +929,30 @@
             this.ToolTip1.SetToolTip(this.txtPB, "Click into the field and press the hot key you want to use");
             this.txtPB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPB_KeyDown);
             // 
+            // btnCheckVersion
+            // 
+            this.btnCheckVersion.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnCheckVersion.Location = new System.Drawing.Point(445, 5);
+            this.btnCheckVersion.Name = "btnCheckVersion";
+            this.btnCheckVersion.Size = new System.Drawing.Size(137, 23);
+            this.btnCheckVersion.TabIndex = 0;
+            this.btnCheckVersion.Text = "Check for new version";
+            this.ToolTip1.SetToolTip(this.btnCheckVersion, "Checks if new version are available on GitHub");
+            this.btnCheckVersion.UseVisualStyleBackColor = true;
+            this.btnCheckVersion.Click += new System.EventHandler(this.CheckForUpdates);
+            // 
+            // btnGoToDownloadPage
+            // 
+            this.btnGoToDownloadPage.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnGoToDownloadPage.Location = new System.Drawing.Point(445, 30);
+            this.btnGoToDownloadPage.Name = "btnGoToDownloadPage";
+            this.btnGoToDownloadPage.Size = new System.Drawing.Size(137, 23);
+            this.btnGoToDownloadPage.TabIndex = 1;
+            this.btnGoToDownloadPage.Text = "Go to download page";
+            this.ToolTip1.SetToolTip(this.btnGoToDownloadPage, "Opens the website where new version can be downloaded");
+            this.btnGoToDownloadPage.UseVisualStyleBackColor = true;
+            this.btnGoToDownloadPage.Click += new System.EventHandler(this.btnGoToDownloadPage_Click);
+            // 
             // tab_behavior
             // 
             this.tab_behavior.Controls.Add(this.groupBox5);
@@ -1044,6 +1077,7 @@
             this.tab_style.Controls.Add(this.Label14);
             this.tab_style.Location = new System.Drawing.Point(4, 22);
             this.tab_style.Name = "tab_style";
+            this.tab_style.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.tab_style.Size = new System.Drawing.Size(588, 301);
             this.tab_style.TabIndex = 3;
             this.tab_style.Text = "Style";
@@ -1066,7 +1100,7 @@
             // label16
             // 
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic);
-            this.label16.Location = new System.Drawing.Point(394, 34);
+            this.label16.Location = new System.Drawing.Point(399, 44);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(183, 35);
             this.label16.TabIndex = 22;
@@ -1121,7 +1155,7 @@
             // Label13
             // 
             this.Label13.AutoSize = true;
-            this.Label13.Location = new System.Drawing.Point(559, 13);
+            this.Label13.Location = new System.Drawing.Point(562, 23);
             this.Label13.Name = "Label13";
             this.Label13.Size = new System.Drawing.Size(18, 13);
             this.Label13.TabIndex = 20;
@@ -1130,7 +1164,7 @@
             // Label14
             // 
             this.Label14.AutoSize = true;
-            this.Label14.Location = new System.Drawing.Point(415, 13);
+            this.Label14.Location = new System.Drawing.Point(418, 23);
             this.Label14.Name = "Label14";
             this.Label14.Size = new System.Drawing.Size(74, 13);
             this.Label14.TabIndex = 21;
@@ -1195,11 +1229,77 @@
             this.TabControl1.Controls.Add(this.tab_globalshortcuts);
             this.TabControl1.Controls.Add(this.tab_style);
             this.TabControl1.Controls.Add(this.tab_behavior);
+            this.TabControl1.Controls.Add(this.tab_update);
             this.TabControl1.Location = new System.Drawing.Point(12, 12);
             this.TabControl1.Name = "TabControl1";
             this.TabControl1.SelectedIndex = 0;
             this.TabControl1.Size = new System.Drawing.Size(596, 327);
-            this.TabControl1.TabIndex = 10;
+            this.TabControl1.TabIndex = 0;
+            // 
+            // tab_update
+            // 
+            this.tab_update.BackColor = System.Drawing.SystemColors.Control;
+            this.tab_update.Controls.Add(this.btnGoToDownloadPage);
+            this.tab_update.Controls.Add(this.lblVersionLatest);
+            this.tab_update.Controls.Add(this.label7);
+            this.tab_update.Controls.Add(this.btnCheckVersion);
+            this.tab_update.Controls.Add(this.txtChangelog);
+            this.tab_update.Controls.Add(this.lblVersionCurrent);
+            this.tab_update.Controls.Add(this.label2);
+            this.tab_update.Location = new System.Drawing.Point(4, 22);
+            this.tab_update.Name = "tab_update";
+            this.tab_update.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.tab_update.Size = new System.Drawing.Size(588, 301);
+            this.tab_update.TabIndex = 4;
+            this.tab_update.Text = "Update";
+            // 
+            // lblVersionLatest
+            // 
+            this.lblVersionLatest.AutoSize = true;
+            this.lblVersionLatest.Location = new System.Drawing.Point(151, 35);
+            this.lblVersionLatest.Name = "lblVersionLatest";
+            this.lblVersionLatest.Size = new System.Drawing.Size(53, 13);
+            this.lblVersionLatest.TabIndex = 5;
+            this.lblVersionLatest.Text = "Unknown";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 35);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(139, 13);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "Latest available version:      ";
+            // 
+            // txtChangelog
+            // 
+            this.txtChangelog.BackColor = System.Drawing.SystemColors.Window;
+            this.txtChangelog.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txtChangelog.Location = new System.Drawing.Point(9, 61);
+            this.txtChangelog.Multiline = true;
+            this.txtChangelog.Name = "txtChangelog";
+            this.txtChangelog.ReadOnly = true;
+            this.txtChangelog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtChangelog.Size = new System.Drawing.Size(573, 234);
+            this.txtChangelog.TabIndex = 2;
+            // 
+            // lblVersionCurrent
+            // 
+            this.lblVersionCurrent.AutoSize = true;
+            this.lblVersionCurrent.Location = new System.Drawing.Point(151, 10);
+            this.lblVersionCurrent.Name = "lblVersionCurrent";
+            this.lblVersionCurrent.Size = new System.Drawing.Size(53, 13);
+            this.lblVersionCurrent.TabIndex = 1;
+            this.lblVersionCurrent.Text = "Unknown";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(99, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Current version:      ";
             // 
             // Settings
             // 
@@ -1234,6 +1334,8 @@
             this.tab_globalshortcuts.ResumeLayout(false);
             this.tab_globalshortcuts.PerformLayout();
             this.TabControl1.ResumeLayout(false);
+            this.tab_update.ResumeLayout(false);
+            this.tab_update.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1321,6 +1423,14 @@
         private System.Windows.Forms.RadioButton radioHotKeyMethod_async;
         private System.Windows.Forms.RadioButton radioHotKeyMethod_sync;
         private System.Windows.Forms.RadioButton radioHotKeyMethod_llkb;
+        private System.Windows.Forms.TabPage tab_update;
+        private System.Windows.Forms.Label lblVersionCurrent;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtChangelog;
+        private System.Windows.Forms.Button btnCheckVersion;
+        private System.Windows.Forms.Label lblVersionLatest;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnGoToDownloadPage;
         private System.Windows.Forms.TabControl TabControl1;
     }
 }

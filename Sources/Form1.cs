@@ -21,11 +21,9 @@
 //SOFTWARE.
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Net;
 using System.Windows.Forms;
-using TinyJson;
 
 namespace HitCounterManager
 {
@@ -126,67 +124,6 @@ namespace HitCounterManager
             profCtrl.ReadOnlyMode = ReadOnlyMode;
         }
 
-        /// <summary>
-        /// Creates a window to show changelog of new available versions
-        /// </summary>
-        /// <param name="LatestVersionTitle">Name of latest release</param>
-        /// <param name="Changelog">Pathnotes</param>
-        /// <returns>OK = OK, Yes = Website, else = Cancel</returns>
-        public DialogResult NewVersionDialog(string LatestVersionTitle, string Changelog)
-        {
-            const int ClientPad = 15;
-            Form frm = new Form();
-            
-            frm.StartPosition = FormStartPosition.CenterParent;
-            frm.FormBorderStyle = FormBorderStyle.FixedDialog;
-            frm.Icon = Icon;
-            frm.ShowInTaskbar = false;
-            frm.FormBorderStyle = FormBorderStyle.Sizable;
-            frm.MaximizeBox = true;
-            frm.MinimizeBox = false;
-            frm.ClientSize = new Size(600, 400);
-            frm.MinimumSize = frm.ClientSize;
-            frm.Text = "New version available!";
-
-            Label label = new Label();
-            label.Size = new Size(frm.ClientSize.Width - ClientPad, 20);
-            label.Location = new Point(ClientPad, ClientPad);
-            label.Text = "Latest available version:      " + LatestVersionTitle;
-            frm.Controls.Add(label);
-
-            Button okButton = new Button();
-            okButton.DialogResult = DialogResult.OK;
-            okButton.Name = "okButton";
-            okButton.Location = new Point(frm.ClientSize.Width - okButton.Size.Width - ClientPad, frm.ClientSize.Height - okButton.Size.Height - ClientPad);
-            okButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            okButton.Text = "&OK";
-            frm.Controls.Add(okButton);
-
-            Button wwwButton = new Button();
-            wwwButton.DialogResult = DialogResult.Yes;
-            wwwButton.Name = "wwwButton";
-            wwwButton.Location = new Point(frm.ClientSize.Width - wwwButton.Size.Width- ClientPad - okButton.Size.Width - ClientPad, frm.ClientSize.Height - wwwButton.Size.Height - ClientPad);
-            wwwButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            wwwButton.Text = "&Website";
-            frm.Controls.Add(wwwButton);
-
-            TextBox textBox = new TextBox();
-            textBox.Location = new Point(ClientPad, label.Location.Y + label.Size.Height + 5);
-            textBox.Size = new Size(frm.ClientSize.Width - ClientPad*2, okButton.Location.Y - ClientPad - textBox.Location.Y);
-            textBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBox.Multiline = true;
-            textBox.Text = Changelog.Replace("\n", Environment.NewLine);
-            textBox.ReadOnly = true;
-            textBox.ScrollBars = ScrollBars.Both;
-            textBox.BackColor = Color.FromKnownColor(KnownColor.Window);
-            frm.Controls.Add(textBox);
-
-            frm.AcceptButton = okButton;
-            return frm.ShowDialog(this);
-        }
-
-        private void OpenProjectWebsite() { System.Diagnostics.Process.Start("https://github.com/topeterk/HitCounterManager"); }
-
         #endregion
         #region UI
 
@@ -199,59 +136,15 @@ namespace HitCounterManager
         }
 
         private void btnSave_Click(object sender, EventArgs e) { SaveSettings(); }
-        private void btnWeb_Click(object sender, EventArgs e) { OpenProjectWebsite(); }
+        private void btnWeb_Click(object sender, EventArgs e) { GitHubUpdate.WebOpenLandingPage(); }
         private void btnTeamHitless_Click(object sender, EventArgs e) { System.Diagnostics.Process.Start("https://discord.gg/4E7cSK7"); }
         private void btnCheckVersion_Click(object sender, EventArgs e)
         {
-            try
+            if (!GitHubUpdate.QueryAllReleases())
             {
-                WebClient client = new WebClient();
-                client.Encoding = System.Text.Encoding.UTF8;
-
-                // https://developer.github.com/v3/#user-agent-required
-                client.Headers.Add("User-Agent", "HitCounterManager/" + Application.ProductVersion);
-                // https://developer.github.com/v3/media/#request-specific-version
-                client.Headers.Add("Accept", "application/vnd.github.v3.text+json");
-                // https://developer.github.com/v3/repos/releases/#get-a-single-release
-                string response = client.DownloadString("http://api.github.com/repos/topeterk/HitCounterManager/releases");
-
-                List<Dictionary<string, object>> json = response.FromJson<List<Dictionary<string, object>>>();
-                Dictionary<string, object> release = json[0]; // latest
-
-                if (release["tag_name"].ToString() == Application.ProductVersion.ToString())
-                {
-                    MessageBox.Show("You are using the latest version!", "Up to date!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    string changelog = "";
-                    int i;
-                    for (i = 0; i < json.Count; i++)
-                    {
-                        release = json[i];
-                        if (release["tag_name"].ToString() == Application.ProductVersion.ToString()) break;
-
-                        changelog += "----------------------------------------------------------------------------------------------------------------------------------------------------------------"
-                            + Environment.NewLine
-                            + release["name"].ToString()
-                            + Environment.NewLine + Environment.NewLine
-                            + release["body_text"].ToString().Replace("\n\n", Environment.NewLine)
-                            + Environment.NewLine + Environment.NewLine;
-                    }
-
-                    changelog = "New version available!" + Environment.NewLine + Environment.NewLine
-                            + "There " + (i == 1 ? "is 1 new version" : "are " + i.ToString() + " new versions") + " available:" + Environment.NewLine
-                            + "Please visit the github project website." + Environment.NewLine
-                            + "Look at the \"releases\" section to download the latest version." + Environment.NewLine
-                            + Environment.NewLine + changelog;
-
-                    if (NewVersionDialog(json[0]["name"].ToString(), changelog) == DialogResult.Yes) OpenProjectWebsite();
-                }
+                MessageBox.Show("An error occurred during update check!", "Check for update failed!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred during update check!\n\n" + ex.Message.ToString(), "Check for updated failed!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
+            else if (GitHubUpdate.NewVersionDialog(this) == DialogResult.Yes) GitHubUpdate.WebOpenLatestRelease();
         }
         private void btnAbout_Click(object sender, EventArgs e) { new About().ShowDialog(this); }
 

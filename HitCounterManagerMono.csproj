@@ -124,6 +124,7 @@
     </Compile>
     <Compile Include="Sources\Shortcuts.cs" />
     <Compile Include="Sources\AssemblyInfo.cs" />
+    <Compile Include="Sources\Update.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -21,7 +21,6 @@
 //SOFTWARE.
 
 using System;
-using System.IO;
 using System.Windows.Forms;
 
 namespace HitCounterManager
@@ -105,6 +104,10 @@ namespace HitCounterManager
             radioSeverityBossHitCritical.Checked = (om.Severity == OutModule.OM_Severity.OM_Severity_BossHitCritical);
             radioSeverityComparePB.Checked = (om.Severity == OutModule.OM_Severity.OM_Severity_ComparePB);
             radioSeverityAnyHitCritical.Checked = (om.Severity == OutModule.OM_Severity.OM_Severity_AnyHitsCritical);
+
+            // Update
+            lblVersionCurrent.Text = Application.ProductVersion.ToString();
+            CheckForUpdates(sender, null);
 
             ApplyAppearance(sender, null);
             this.UpdateDarkMode();
@@ -212,6 +215,13 @@ namespace HitCounterManager
             om.Update();
         }
 
+        private void CheckForUpdates(object sender, EventArgs e)
+        {
+            GitHubUpdate.QueryAllReleases();
+            lblVersionLatest.Text = GitHubUpdate.GetLatestVersionName();
+            txtChangelog.Text = GitHubUpdate.GetChangelog();
+        }
+
         #endregion
         #region UI
 
@@ -264,6 +274,8 @@ namespace HitCounterManager
             if (!cbApCustomCss.Checked) btnApApply_Click(sender, e); // Implicitly apply when custom settings are disabled
             btnApApply.Enabled = cbApCustomCss.Checked;
         }
+
+        private void btnGoToDownloadPage_Click(object sender, EventArgs e) { GitHubUpdate.WebOpenLatestRelease(); }
 
         #endregion
     }
