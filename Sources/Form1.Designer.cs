@@ -452,7 +452,7 @@
             this.profCtrl.Name = "profCtrl";
             this.profCtrl.Size = new System.Drawing.Size(677, 367);
             this.profCtrl.TabIndex = 23;
-            this.profCtrl.ProfileChanged += new System.EventHandler<System.EventArgs>(this.UpdateProgressAndTotals);
+            this.profCtrl.ProfileChanged += new System.EventHandler<System.EventArgs>(this.ProfileChangedHandler);
             // 
             // Form1
             // 

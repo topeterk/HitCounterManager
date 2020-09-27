@@ -237,7 +237,7 @@ namespace HitCounterManager
                         if (0 < r + HiddenSplitCount + InjectedSplitCount) sr.WriteLine(","); // separator
                         sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", "
                             + (pi.GetSplitHits(r) + pi.GetSplitWayHits(r)) + ", " + pi.GetSplitPB(r) + ", " + pi.GetSplitWayHits(r) + ", "
-                            + RunIndex + ", " + pi.GetSplitDuration(r) + ", " + pi.GetSplitDurationPB(r) + ", " + 0/*NoGoldTime*/ + "]");
+                            + RunIndex + ", " + pi.GetSplitDuration(r) + ", " + pi.GetSplitDurationPB(r) + ", " + pi.GetSplitDurationGold(r)+ "]");
                     }
 
                     // ----- Splits of the upcoming runs:

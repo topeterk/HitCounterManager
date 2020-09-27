@@ -54,7 +54,7 @@ namespace HitCounterManager
             Text = Text + " - v" + Application.ProductVersion + " " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();
-            UpdateProgressAndTotals(sender, e);
+            ProfileChangedHandler(sender, e);
             this.UpdateDarkMode();
         }
 
@@ -172,12 +172,13 @@ namespace HitCounterManager
         private void btnSplit_Click(object sender, EventArgs e) { profCtrl.ProfileSplitGo(+1); }
         private void btnSplitPrev_Click(object sender, EventArgs e) { profCtrl.ProfileSplitGo(-1); }
 
-        private void UpdateProgressAndTotals(object sender, EventArgs e)
+        private void ProfileChangedHandler(object sender, EventArgs e)
         {
             int TotalSplits, TotalActiveSplit, TotalHits, TotalHitsWay, TotalPB;
             profCtrl.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB, false);
             lbl_progress.Text = "Progress:  " + TotalActiveSplit + " / " + TotalSplits + "  # " + profCtrl.CurrentAttempts.ToString("D3");
             lbl_totals.Text = "Total: " + (TotalHits + TotalHitsWay) + " Hits   " + TotalPB + " PB";
+            btnPause.Image = profCtrl.TimerRunning ? Sources.Resources.icons8_sleep_32 : Sources.Resources.icons8_time_32;
         }
 
         private void StartStopTimer(bool Start)

@@ -354,8 +354,8 @@ namespace HitCounterManager
             if (null != ProfileTabPermuting) ProfileTabPermuting(sender, indices); // Fire event
         }
 
-        public event EventHandler<EventArgs> ProfileChanged;
-        public void PVC_ProfileChangedHandler(object sender, EventArgs e)
+        public event EventHandler<ProfileChangedEventArgs> ProfileChanged;
+        public void PVC_ProfileChangedHandler(object sender, ProfileChangedEventArgs e)
         {
             if (null != ProfileChanged) ProfileChanged(sender, e); // Fire event
         }

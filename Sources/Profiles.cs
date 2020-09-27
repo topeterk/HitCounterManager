@@ -37,6 +37,7 @@ namespace HitCounterManager
         public int PB = 0;
         public long Duration = 0;
         public long DurationPB = 0;
+        public long DurationGold = 0;
     }
 
     /// <summary>
@@ -119,7 +120,7 @@ namespace HitCounterManager
                 pi_dst.AttemptsCount = prof.Attempts;
                 foreach (ProfileRow row in prof.Rows)
                 {
-                    pi_dst.AddSplit(row.Title, row.Hits, row.WayHits, row.PB, row.Duration, row.DurationPB);
+                    pi_dst.AddSplit(row.Title, row.Hits, row.WayHits, row.PB, row.Duration, row.DurationPB, row.DurationGold);
                 }
                 pi_dst.ActiveSplit = prof.ActiveSplit;
                 pi_dst.SetSessionProgress(prof.GetSessionProgress(), true);
@@ -161,6 +162,7 @@ namespace HitCounterManager
                 ProfileRow.PB = pi_src.GetSplitPB(r);
                 ProfileRow.Duration = pi_src.GetSplitDuration(r);
                 ProfileRow.DurationPB = pi_src.GetSplitDurationPB(r);
+                ProfileRow.DurationGold = pi_src.GetSplitDurationGold(r);
                 prof.Rows.Add(ProfileRow);
             }
             prof.SetSessionProgress(pi_src.GetSessionProgress());
@@ -183,6 +185,14 @@ namespace HitCounterManager
             Profile prof;
             if (_FindProfile(NameOld, out prof)) prof.Name = NameNew;
         }
+    }
+
+    /// <summary>
+    /// Event information for IProfileInfo's ProfileChanged event
+    /// </summary>
+    public class ProfileChangedEventArgs : EventArgs
+    {
+        public bool RunCompleted = false;
     }
 
     /// <summary>
@@ -229,7 +239,8 @@ namespace HitCounterManager
         /// <param name="PB">Amount of personal best hits</param>
         /// <param name="Duration">Milliseconds of the split's duration</param>
         /// <param name="DurationPB">Milliseconds of the split's personal best duration</param>
-        void AddSplit(string Title, int Hits, int WayHits, int PB, long Duration, long DurationPB);
+        /// <param name="DurationGold">Milliseconds of the split's all times best duration</param>
+        void AddSplit(string Title, int Hits, int WayHits, int PB, long Duration, long DurationPB, long DurationGold);
         /// <summary>
         /// Insert a new split before the current one
         /// </summary>
@@ -326,6 +337,12 @@ namespace HitCounterManager
         /// <param name="Index">Index</param>
         /// <returns>Milliseconds of the split's duration</returns>
         long GetSplitDurationPB(int Index);
+        /// <summary>
+        /// Gets the all times best duration of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <returns>Milliseconds of the split's duration</returns>
+        long GetSplitDurationGold(int Index);
 
         /// <summary>
         /// Sets the title of a split
@@ -369,9 +386,15 @@ namespace HitCounterManager
         /// <param name="Index">Index</param>
         /// <param name="Duration">Milliseconds of the split's duration</param>
         void SetSplitDurationPB(int Index, long Duration);
+        /// <summary>
+        /// Sets the all times best duration of a split
+        /// </summary>
+        /// <param name="Index">Index</param>
+        /// <param name="Duration">Milliseconds of the split's duration</param>
+        void SetSplitDurationGold(int Index, long Duration);
 
         /// <summary>
-        /// Marks that an update will be performed
+        /// Marks that an update will be performed.
         /// Rises ProfileChanged event after update has completed
         /// </summary>
         void ProfileUpdateBegin();
@@ -384,6 +407,6 @@ namespace HitCounterManager
         /// <summary>
         /// Event that fires when any kind of data changed
         /// </summary>
-        event EventHandler<EventArgs> ProfileChanged;
+        event EventHandler<ProfileChangedEventArgs> ProfileChanged;
     }
 }

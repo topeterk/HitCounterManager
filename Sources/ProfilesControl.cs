@@ -69,10 +69,13 @@ namespace HitCounterManager
             get { return _TimerRunning; }
             set
             {
-                last_update_time = DateTime.UtcNow;
-                timer1.Enabled = _TimerRunning = value;
-                UpdateDuration();
-                om.Update();
+                if (value != _TimerRunning)
+                {
+                    last_update_time = DateTime.UtcNow;
+                    timer1.Enabled = _TimerRunning = value;
+                    UpdateDuration();
+                    om.Update();
+                }
             }
         }
 
@@ -195,6 +198,18 @@ namespace HitCounterManager
         public void ProfileChangedHandler(object sender, EventArgs e)
         {
             if (!Ready) return;
+
+            if (e is ProfileChangedEventArgs)
+            {
+                ProfileChangedEventArgs eventArgs = (ProfileChangedEventArgs)e;
+                if (eventArgs.RunCompleted && _TimerRunning)
+                {
+                    DateTime utc_now = DateTime.UtcNow;
+                    timer1.Enabled = _TimerRunning = false;
+                    SelectedProfileInfo.AddDuration((long)(utc_now - last_update_time).TotalMilliseconds);
+                    last_update_time = utc_now;
+                }
+            }
 
             UpdateDuration();
 
