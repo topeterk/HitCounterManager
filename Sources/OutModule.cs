@@ -227,13 +227,17 @@ namespace HitCounterManager
                         // Insert the "history" split
                         InjectedSplitCount++;
                         if (0 < HiddenSplitCount) sr.WriteLine(","); // separator
-                        sr.Write("[\"" + SimpleHtmlEscape(_settings.Succession.HistorySplitTitle) + "\", " + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + ", " + 0 /*Invalid-RunIndex*/ + ", " + 0/*NoTime*/ + ", " + 0/*NoPBTime*/ + "]");
+                        sr.Write("[\"" + SimpleHtmlEscape(_settings.Succession.HistorySplitTitle) + "\", "
+                            + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + ", "
+                            + 0 /*Invalid-RunIndex*/ + ", " + 0/*NoTime*/ + ", " + 0/*NoPBTime*/ + ", " + 0/*NoGoldTime*/ + "]");
                     }
                     for (int r = 0; r < iSplitCount; r++)
                     {
                         // Dump all actually visible splits of the current run
                         if (0 < r + HiddenSplitCount + InjectedSplitCount) sr.WriteLine(","); // separator
-                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + (pi.GetSplitHits(r) + pi.GetSplitWayHits(r)) + ", " + pi.GetSplitPB(r) + ", " + pi.GetSplitWayHits(r) + ", " + RunIndex + ", " + pi.GetSplitDuration(r) + ", " + pi.GetSplitDurationPB(r) + "]");
+                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", "
+                            + (pi.GetSplitHits(r) + pi.GetSplitWayHits(r)) + ", " + pi.GetSplitPB(r) + ", " + pi.GetSplitWayHits(r) + ", "
+                            + RunIndex + ", " + pi.GetSplitDuration(r) + ", " + pi.GetSplitDurationPB(r) + ", " + 0/*NoGoldTime*/ + "]");
                     }
 
                     // ----- Splits of the upcoming runs:
@@ -250,7 +254,9 @@ namespace HitCounterManager
                                 for (int r = 0; r < pi_pvc.SplitCount; r++)
                                 {
                                     if (0 < r + HiddenSplitCount + InjectedSplitCount + iSplitCount) sr.WriteLine(","); // separator
-                                    sr.Write("[\"" + SimpleHtmlEscape(pi_pvc.GetSplitTitle(r)) + "\", " + (pi_pvc.GetSplitHits(r) + pi_pvc.GetSplitWayHits(r)) + ", " + pi_pvc.GetSplitPB(r) + ", " + pi_pvc.GetSplitWayHits(r) + ", " + RunIndex + ", " + 0/*NoTime*/ + ", " + 0/*NoPBTime*/ + "]");
+                                    sr.Write("[\"" + SimpleHtmlEscape(pi_pvc.GetSplitTitle(r)) + "\", "
+                                        + (pi_pvc.GetSplitHits(r) + pi_pvc.GetSplitWayHits(r)) + ", " + pi_pvc.GetSplitPB(r) + ", " + pi_pvc.GetSplitWayHits(r) + ", "
+                                        + RunIndex + ", " + 0/*NoTime*/ + ", " + 0/*NoPBTime*/ + ", " + 0/*NoGoldTime*/ + "]");
                                 }
                                 RunIndex++;
                             }
