@@ -63,6 +63,7 @@ namespace HitCounterManager
         public bool ReadOnlyMode;
         public bool AlwaysOnTop;
         public bool DarkMode;
+        public bool CheckUpdatesOnStartup;
         public int HotKeyMethod;
         public bool ShortcutResetEnable;
         public int ShortcutResetKeyCode;
@@ -287,6 +288,7 @@ namespace HitCounterManager
             if (_settings.Version == 7) // Coming from version 1.19
             {
                 _settings.Version = 8;
+                _settings.CheckUpdatesOnStartup = false;
                 _settings.DarkMode = OsLayer.IsDarkModeActive();
                 // Only use latest hot key method as default when new settings were created
                 if (baseVersion < 0) _settings.HotKeyMethod = (int)Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb;
@@ -300,6 +302,18 @@ namespace HitCounterManager
                 _settings.ShortcutTimerStartKeyCode = 0x10000 | 0x6B; // Shift Add-Num
                 _settings.ShortcutTimerStopEnable = false;
                 _settings.ShortcutTimerStopKeyCode = 0x10000 | 0x6D; // Shift Subtract-Num
+            }
+
+            // Check for updates..
+            if (_settings.CheckUpdatesOnStartup)
+            {
+                if (GitHubUpdate.QueryAllReleases())
+                {
+                    if (GitHubUpdate.GetLatestVersionName() != Application.ProductVersion.ToString())
+                    {
+                        if (GitHubUpdate.NewVersionDialog(this) == DialogResult.Yes) GitHubUpdate.WebOpenLatestRelease();
+                    }
+                }
             }
 
             // Apply settings..

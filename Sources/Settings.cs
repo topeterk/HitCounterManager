@@ -108,6 +108,7 @@ namespace HitCounterManager
             // Update
             lblVersionCurrent.Text = Application.ProductVersion.ToString();
             CheckForUpdates(sender, null);
+            cbCheckUpdatesOnStartup.Checked = _settings.CheckUpdatesOnStartup;
 
             ApplyAppearance(sender, null);
             this.UpdateDarkMode();
@@ -276,6 +277,7 @@ namespace HitCounterManager
         }
 
         private void btnGoToDownloadPage_Click(object sender, EventArgs e) { GitHubUpdate.WebOpenLatestRelease(); }
+        private void cbCheckUpdatesOnStartup_CheckedChanged(object sender, EventArgs e) { _settings.CheckUpdatesOnStartup = cbCheckUpdatesOnStartup.Checked; }
 
         #endregion
     }

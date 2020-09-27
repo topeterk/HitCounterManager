@@ -121,6 +121,7 @@
             this.txtChangelog = new System.Windows.Forms.TextBox();
             this.lblVersionCurrent = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.cbCheckUpdatesOnStartup = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredWidth)).BeginInit();
@@ -932,7 +933,7 @@
             // btnCheckVersion
             // 
             this.btnCheckVersion.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btnCheckVersion.Location = new System.Drawing.Point(445, 5);
+            this.btnCheckVersion.Location = new System.Drawing.Point(9, 5);
             this.btnCheckVersion.Name = "btnCheckVersion";
             this.btnCheckVersion.Size = new System.Drawing.Size(137, 23);
             this.btnCheckVersion.TabIndex = 0;
@@ -944,7 +945,7 @@
             // btnGoToDownloadPage
             // 
             this.btnGoToDownloadPage.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btnGoToDownloadPage.Location = new System.Drawing.Point(445, 30);
+            this.btnGoToDownloadPage.Location = new System.Drawing.Point(9, 30);
             this.btnGoToDownloadPage.Name = "btnGoToDownloadPage";
             this.btnGoToDownloadPage.Size = new System.Drawing.Size(137, 23);
             this.btnGoToDownloadPage.TabIndex = 1;
@@ -1239,6 +1240,7 @@
             // tab_update
             // 
             this.tab_update.BackColor = System.Drawing.SystemColors.Control;
+            this.tab_update.Controls.Add(this.cbCheckUpdatesOnStartup);
             this.tab_update.Controls.Add(this.btnGoToDownloadPage);
             this.tab_update.Controls.Add(this.lblVersionLatest);
             this.tab_update.Controls.Add(this.label7);
@@ -1256,7 +1258,7 @@
             // lblVersionLatest
             // 
             this.lblVersionLatest.AutoSize = true;
-            this.lblVersionLatest.Location = new System.Drawing.Point(151, 35);
+            this.lblVersionLatest.Location = new System.Drawing.Point(297, 35);
             this.lblVersionLatest.Name = "lblVersionLatest";
             this.lblVersionLatest.Size = new System.Drawing.Size(53, 13);
             this.lblVersionLatest.TabIndex = 5;
@@ -1265,7 +1267,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 35);
+            this.label7.Location = new System.Drawing.Point(152, 35);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(139, 13);
             this.label7.TabIndex = 4;
@@ -1275,18 +1277,18 @@
             // 
             this.txtChangelog.BackColor = System.Drawing.SystemColors.Window;
             this.txtChangelog.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txtChangelog.Location = new System.Drawing.Point(9, 61);
+            this.txtChangelog.Location = new System.Drawing.Point(9, 82);
             this.txtChangelog.Multiline = true;
             this.txtChangelog.Name = "txtChangelog";
             this.txtChangelog.ReadOnly = true;
             this.txtChangelog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtChangelog.Size = new System.Drawing.Size(573, 234);
-            this.txtChangelog.TabIndex = 2;
+            this.txtChangelog.Size = new System.Drawing.Size(573, 213);
+            this.txtChangelog.TabIndex = 3;
             // 
             // lblVersionCurrent
             // 
             this.lblVersionCurrent.AutoSize = true;
-            this.lblVersionCurrent.Location = new System.Drawing.Point(151, 10);
+            this.lblVersionCurrent.Location = new System.Drawing.Point(297, 10);
             this.lblVersionCurrent.Name = "lblVersionCurrent";
             this.lblVersionCurrent.Size = new System.Drawing.Size(53, 13);
             this.lblVersionCurrent.TabIndex = 1;
@@ -1295,11 +1297,25 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 10);
+            this.label2.Location = new System.Drawing.Point(152, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(99, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Current version:      ";
+            // 
+            // cbCheckUpdatesOnStartup
+            // 
+            this.cbCheckUpdatesOnStartup.AutoSize = true;
+            this.cbCheckUpdatesOnStartup.Checked = true;
+            this.cbCheckUpdatesOnStartup.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbCheckUpdatesOnStartup.Location = new System.Drawing.Point(9, 59);
+            this.cbCheckUpdatesOnStartup.Name = "cbCheckUpdatesOnStartup";
+            this.cbCheckUpdatesOnStartup.Size = new System.Drawing.Size(163, 17);
+            this.cbCheckUpdatesOnStartup.TabIndex = 2;
+            this.cbCheckUpdatesOnStartup.Text = "Check for updates on startup";
+            this.ToolTip1.SetToolTip(this.cbCheckUpdatesOnStartup, "When a new version is available you will get notified");
+            this.cbCheckUpdatesOnStartup.UseVisualStyleBackColor = true;
+            this.cbCheckUpdatesOnStartup.CheckedChanged += new System.EventHandler(this.cbCheckUpdatesOnStartup_CheckedChanged);
             // 
             // Settings
             // 
@@ -1431,6 +1447,7 @@
         private System.Windows.Forms.Label lblVersionLatest;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnGoToDownloadPage;
+        private System.Windows.Forms.CheckBox cbCheckUpdatesOnStartup;
         private System.Windows.Forms.TabControl TabControl1;
     }
 }
