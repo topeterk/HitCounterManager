@@ -9,7 +9,7 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 [![Get latest version here](https://img.shields.io/badge/-Get%20latest%20version%20here-brightgreen?longCache=true&style=for-the-badge)](../../releases/latest)
 
 More about the application can be found at the **[Wiki pages](../../wiki)**.  
-You can also have a look at the **[video on YouTube](https://www.youtube.com/watch?v=iXGExlS4xeM)**.
+You can also have a look at the **[video on YouTube](https://www.youtube.com/watch?v=iXGExlS4xeM&list=PLvBCl9o55PB7BYB7vXVxQuP5J27X_XXzm)**.
 
 <p align="center"><a href="Images/Preview.png"><img src="Images/Preview.png" alt="Preview" width="700px"/></a></p>
 
