@@ -394,11 +394,12 @@ namespace HitCounterManager
             CurrentAttempts = amount_value;
         }
         
-        public void GetCalculatedSums(out int TotalSplits, out int TotalActiveSplit, out int TotalHits, out int TotalHitsWay, out int TotalPB, bool PastOnly)
+        public void GetCalculatedSums(out int TotalSplits, out int TotalActiveSplit, out int TotalHits, out int TotalHitsWay, out int TotalPB, out long TotalTime, bool PastOnly)
         {
             bool ActiveProfileFound = false;
 
             TotalSplits = TotalActiveSplit = TotalHits = TotalHitsWay = TotalPB = 0;
+            TotalTime = 0;
 
             foreach (ProfileViewControl pvc_tab in ptc.ProfileViewControls)
             {
@@ -414,6 +415,7 @@ namespace HitCounterManager
                     TotalHits += pi_tab.GetSplitHits(i);
                     TotalHitsWay += pi_tab.GetSplitWayHits(i);
                     TotalPB += pi_tab.GetSplitPB(i);
+                    TotalTime += pi_tab.GetSplitDuration(i);
                 }
 
                 if (!ActiveProfileFound)

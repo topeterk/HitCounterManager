@@ -60,6 +60,8 @@
             this.lbl_totals = new System.Windows.Forms.Label();
             this.lbl_progress = new System.Windows.Forms.Label();
             this.profCtrl = new HitCounterManager.ProfilesControl();
+            this.lbl_time = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // ToolTip1
@@ -424,10 +426,10 @@
             this.lbl_totals.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_totals.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_totals.Location = new System.Drawing.Point(236, 73);
+            this.lbl_totals.Location = new System.Drawing.Point(381, 73);
             this.lbl_totals.Name = "lbl_totals";
             this.lbl_totals.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.lbl_totals.Size = new System.Drawing.Size(455, 20);
+            this.lbl_totals.Size = new System.Drawing.Size(310, 20);
             this.lbl_totals.TabIndex = 34;
             this.lbl_totals.Text = "Total: ??? Hits   ??? PB";
             this.lbl_totals.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -438,7 +440,7 @@
             this.lbl_progress.Location = new System.Drawing.Point(11, 73);
             this.lbl_progress.Name = "lbl_progress";
             this.lbl_progress.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.lbl_progress.Size = new System.Drawing.Size(219, 20);
+            this.lbl_progress.Size = new System.Drawing.Size(193, 20);
             this.lbl_progress.TabIndex = 33;
             this.lbl_progress.Text = "Progress:  ?? / ??  # ???";
             this.lbl_progress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -454,10 +456,27 @@
             this.profCtrl.TabIndex = 23;
             this.profCtrl.ProfileChanged += new System.EventHandler<System.EventArgs>(this.ProfileChangedHandler);
             // 
+            // lbl_time
+            // 
+            this.lbl_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_time.Location = new System.Drawing.Point(210, 73);
+            this.lbl_time.Name = "lbl_time";
+            this.lbl_time.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.lbl_time.Size = new System.Drawing.Size(165, 20);
+            this.lbl_time.TabIndex = 44;
+            this.lbl_time.Text = "Time: ??? : ?? : ??";
+            this.lbl_time.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 300;
+            this.timer1.Tick += new System.EventHandler(this.ProfileChangedHandler);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(703, 475);
+            this.Controls.Add(this.lbl_time);
             this.Controls.Add(this.profCtrl);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.btnSave);
@@ -529,6 +548,8 @@
         private System.Windows.Forms.Label Spacer3;
         private System.Windows.Forms.Label lbl_totals;
         private System.Windows.Forms.Label lbl_progress;
+        private System.Windows.Forms.Label lbl_time;
+        private System.Windows.Forms.Timer timer1;
         public ProfilesControl profCtrl;
     }
 }
