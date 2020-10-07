@@ -269,10 +269,13 @@ namespace HitCounterManager
 
         private void SelectionChangedHandler(object sender, EventArgs e)
         {
+            if (0 < DataUpdatePending) return; // this was no call from user, we can ignore it
+
             if (0 < SelectedCells.Count)
             {
                 // Row could have been deleted ending up at the same index, so we should definitely treat it as usual update
                 ProfileUpdateBegin();
+                CurrentCell = SelectedCells[0]; // must be set that Mono on Linux sets focus simultaneously with selection
                 ActiveSplit = SelectedCells[0].RowIndex;
                 ProfileUpdateEnd();
             }
