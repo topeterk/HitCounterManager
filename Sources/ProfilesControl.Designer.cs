@@ -162,9 +162,9 @@
             // 
             this.txtPredecessorTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPredecessorTitle.Location = new System.Drawing.Point(139, 26);
+            this.txtPredecessorTitle.Location = new System.Drawing.Point(157, 26);
             this.txtPredecessorTitle.Name = "txtPredecessorTitle";
-            this.txtPredecessorTitle.Size = new System.Drawing.Size(249, 20);
+            this.txtPredecessorTitle.Size = new System.Drawing.Size(231, 20);
             this.txtPredecessorTitle.TabIndex = 2;
             this.txtPredecessorTitle.TextChanged += new System.EventHandler(this.ProfileChangedHandler);
             // 
