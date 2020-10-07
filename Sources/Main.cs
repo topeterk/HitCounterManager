@@ -174,7 +174,11 @@ namespace HitCounterManager
                     // Workaround: The GroupBox text seems using highlight colors, so we force it back to "normal" colors
                     if (ctrl is GroupBox) { if (ctrl.ForeColor.Name == ControlText_Light_GroupBox.Name) ctrl.ForeColor = ControlText_Dark; }
 
-                    if (!(ctrl is Button))
+                    if (ctrl is Button)
+                    {
+                        if (ctrl.ForeColor.Name == Window_Dark.Name) ctrl.ForeColor = ControlText_Dark;
+                    }
+                    else
                     {
                         if (ctrl.ForeColor.Name == ControlText_Light.Name) ctrl.ForeColor = ControlText_Dark;
                     }
