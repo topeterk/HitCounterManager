@@ -93,6 +93,7 @@
             this.txtPB = new System.Windows.Forms.TextBox();
             this.btnCheckVersion = new System.Windows.Forms.Button();
             this.btnGoToDownloadPage = new System.Windows.Forms.Button();
+            this.cbCheckUpdatesOnStartup = new System.Windows.Forms.CheckBox();
             this.tab_behavior = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lblShowSplitCount = new System.Windows.Forms.Label();
@@ -121,7 +122,6 @@
             this.txtChangelog = new System.Windows.Forms.TextBox();
             this.lblVersionCurrent = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.cbCheckUpdatesOnStartup = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredWidth)).BeginInit();
@@ -270,9 +270,9 @@
             this.cbShowNumbers.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbShowNumbers.Location = new System.Drawing.Point(6, 157);
             this.cbShowNumbers.Name = "cbShowNumbers";
-            this.cbShowNumbers.Size = new System.Drawing.Size(247, 17);
+            this.cbShowNumbers.Size = new System.Drawing.Size(189, 17);
             this.cbShowNumbers.TabIndex = 9;
-            this.cbShowNumbers.Text = "Show numbers, no images (Numeric vs YesNo)";
+            this.cbShowNumbers.Text = "Show numbers, rather than images";
             this.ToolTip1.SetToolTip(this.cbShowNumbers, "Show the actual hit count instead of images");
             this.cbShowNumbers.UseVisualStyleBackColor = true;
             this.cbShowNumbers.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
@@ -954,6 +954,20 @@
             this.btnGoToDownloadPage.UseVisualStyleBackColor = true;
             this.btnGoToDownloadPage.Click += new System.EventHandler(this.btnGoToDownloadPage_Click);
             // 
+            // cbCheckUpdatesOnStartup
+            // 
+            this.cbCheckUpdatesOnStartup.AutoSize = true;
+            this.cbCheckUpdatesOnStartup.Checked = true;
+            this.cbCheckUpdatesOnStartup.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbCheckUpdatesOnStartup.Location = new System.Drawing.Point(9, 59);
+            this.cbCheckUpdatesOnStartup.Name = "cbCheckUpdatesOnStartup";
+            this.cbCheckUpdatesOnStartup.Size = new System.Drawing.Size(163, 17);
+            this.cbCheckUpdatesOnStartup.TabIndex = 2;
+            this.cbCheckUpdatesOnStartup.Text = "Check for updates on startup";
+            this.ToolTip1.SetToolTip(this.cbCheckUpdatesOnStartup, "When a new version is available you will get notified");
+            this.cbCheckUpdatesOnStartup.UseVisualStyleBackColor = true;
+            this.cbCheckUpdatesOnStartup.CheckedChanged += new System.EventHandler(this.cbCheckUpdatesOnStartup_CheckedChanged);
+            // 
             // tab_behavior
             // 
             this.tab_behavior.Controls.Add(this.groupBox5);
@@ -1302,20 +1316,6 @@
             this.label2.Size = new System.Drawing.Size(99, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Current version:      ";
-            // 
-            // cbCheckUpdatesOnStartup
-            // 
-            this.cbCheckUpdatesOnStartup.AutoSize = true;
-            this.cbCheckUpdatesOnStartup.Checked = true;
-            this.cbCheckUpdatesOnStartup.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbCheckUpdatesOnStartup.Location = new System.Drawing.Point(9, 59);
-            this.cbCheckUpdatesOnStartup.Name = "cbCheckUpdatesOnStartup";
-            this.cbCheckUpdatesOnStartup.Size = new System.Drawing.Size(163, 17);
-            this.cbCheckUpdatesOnStartup.TabIndex = 2;
-            this.cbCheckUpdatesOnStartup.Text = "Check for updates on startup";
-            this.ToolTip1.SetToolTip(this.cbCheckUpdatesOnStartup, "When a new version is available you will get notified");
-            this.cbCheckUpdatesOnStartup.UseVisualStyleBackColor = true;
-            this.cbCheckUpdatesOnStartup.CheckedChanged += new System.EventHandler(this.cbCheckUpdatesOnStartup_CheckedChanged);
             // 
             // Settings
             // 
