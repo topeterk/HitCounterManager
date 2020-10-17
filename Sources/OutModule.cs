@@ -316,6 +316,7 @@ namespace HitCounterManager
                     WriteJsonSimpleValue(sr, "show_footer", _settings.ShowFooter);
                     WriteJsonSimpleValue(sr, "show_session_progress", _settings.ShowSessionProgress);
                     WriteJsonSimpleValue(sr, "show_progress_bar", _settings.ShowProgressBar);
+                    WriteJsonSimpleValue(sr, "show_hits", _settings.ShowHits);
                     WriteJsonSimpleValue(sr, "show_hitscombined", _settings.ShowHitsCombined);
                     WriteJsonSimpleValue(sr, "show_numbers", _settings.ShowNumbers);
                     WriteJsonSimpleValue(sr, "show_pb", _settings.ShowPB);

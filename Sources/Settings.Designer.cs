@@ -42,6 +42,7 @@
             this.numShowSplitsCountFinished = new System.Windows.Forms.NumericUpDown();
             this.cbShowNumbers = new System.Windows.Forms.CheckBox();
             this.numShowSplitsCountUpcoming = new System.Windows.Forms.NumericUpDown();
+            this.cbShowHits = new System.Windows.Forms.CheckBox();
             this.cbShowHitsCombined = new System.Windows.Forms.CheckBox();
             this.cbShowSessionProgress = new System.Windows.Forms.CheckBox();
             this.cbShowHeadline = new System.Windows.Forms.CheckBox();
@@ -254,7 +255,7 @@
             0});
             this.numShowSplitsCountFinished.Name = "numShowSplitsCountFinished";
             this.numShowSplitsCountFinished.Size = new System.Drawing.Size(57, 20);
-            this.numShowSplitsCountFinished.TabIndex = 14;
+            this.numShowSplitsCountFinished.TabIndex = 15;
             this.ToolTip1.SetToolTip(this.numShowSplitsCountFinished, "Hide splits that are done already to spare space");
             this.numShowSplitsCountFinished.Value = new decimal(new int[] {
             999,
@@ -271,7 +272,7 @@
             this.cbShowNumbers.Location = new System.Drawing.Point(6, 157);
             this.cbShowNumbers.Name = "cbShowNumbers";
             this.cbShowNumbers.Size = new System.Drawing.Size(189, 17);
-            this.cbShowNumbers.TabIndex = 9;
+            this.cbShowNumbers.TabIndex = 10;
             this.cbShowNumbers.Text = "Show numbers, rather than images";
             this.ToolTip1.SetToolTip(this.cbShowNumbers, "Show the actual hit count instead of images");
             this.cbShowNumbers.UseVisualStyleBackColor = true;
@@ -287,7 +288,7 @@
             0});
             this.numShowSplitsCountUpcoming.Name = "numShowSplitsCountUpcoming";
             this.numShowSplitsCountUpcoming.Size = new System.Drawing.Size(57, 20);
-            this.numShowSplitsCountUpcoming.TabIndex = 15;
+            this.numShowSplitsCountUpcoming.TabIndex = 16;
             this.ToolTip1.SetToolTip(this.numShowSplitsCountUpcoming, "Hide splits that are coming later to spare space");
             this.numShowSplitsCountUpcoming.Value = new decimal(new int[] {
             999,
@@ -296,16 +297,30 @@
             0});
             this.numShowSplitsCountUpcoming.ValueChanged += new System.EventHandler(this.ApplyAppearance);
             // 
+            // cbShowHits
+            // 
+            this.cbShowHits.AutoSize = true;
+            this.cbShowHits.Checked = true;
+            this.cbShowHits.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbShowHits.Location = new System.Drawing.Point(6, 111);
+            this.cbShowHits.Name = "cbShowHits";
+            this.cbShowHits.Size = new System.Drawing.Size(72, 17);
+            this.cbShowHits.TabIndex = 6;
+            this.cbShowHits.Text = "Show hits";
+            this.ToolTip1.SetToolTip(this.cbShowHits, "Show boss and way hits either separately or combined");
+            this.cbShowHits.UseVisualStyleBackColor = true;
+            this.cbShowHits.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
             // cbShowHitsCombined
             // 
             this.cbShowHitsCombined.AutoSize = true;
             this.cbShowHitsCombined.Checked = true;
             this.cbShowHitsCombined.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowHitsCombined.Location = new System.Drawing.Point(6, 111);
+            this.cbShowHitsCombined.Location = new System.Drawing.Point(154, 111);
             this.cbShowHitsCombined.Name = "cbShowHitsCombined";
-            this.cbShowHitsCombined.Size = new System.Drawing.Size(214, 17);
-            this.cbShowHitsCombined.TabIndex = 6;
-            this.cbShowHitsCombined.Text = "Show hits combined (boss and way hits)";
+            this.cbShowHitsCombined.Size = new System.Drawing.Size(154, 17);
+            this.cbShowHitsCombined.TabIndex = 7;
+            this.cbShowHitsCombined.Text = "Combine boss and way hits";
             this.ToolTip1.SetToolTip(this.cbShowHitsCombined, "Show boss and way hits either separately or combined");
             this.cbShowHitsCombined.UseVisualStyleBackColor = true;
             this.cbShowHitsCombined.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
@@ -361,7 +376,7 @@
             this.cbShowTimePB.Location = new System.Drawing.Point(154, 180);
             this.cbShowTimePB.Name = "cbShowTimePB";
             this.cbShowTimePB.Size = new System.Drawing.Size(98, 17);
-            this.cbShowTimePB.TabIndex = 11;
+            this.cbShowTimePB.TabIndex = 12;
             this.cbShowTimePB.Text = "Show time (PB)";
             this.ToolTip1.SetToolTip(this.cbShowTimePB, "Show personal best time");
             this.cbShowTimePB.UseVisualStyleBackColor = true;
@@ -375,7 +390,7 @@
             this.cbShowTimeCurrent.Location = new System.Drawing.Point(6, 180);
             this.cbShowTimeCurrent.Name = "cbShowTimeCurrent";
             this.cbShowTimeCurrent.Size = new System.Drawing.Size(118, 17);
-            this.cbShowTimeCurrent.TabIndex = 10;
+            this.cbShowTimeCurrent.TabIndex = 11;
             this.cbShowTimeCurrent.Text = "Show time (Current)";
             this.ToolTip1.SetToolTip(this.cbShowTimeCurrent, "Show time of the current run");
             this.cbShowTimeCurrent.UseVisualStyleBackColor = true;
@@ -389,7 +404,7 @@
             this.cbShowPB.Location = new System.Drawing.Point(6, 134);
             this.cbShowPB.Name = "cbShowPB";
             this.cbShowPB.Size = new System.Drawing.Size(142, 17);
-            this.cbShowPB.TabIndex = 7;
+            this.cbShowPB.TabIndex = 8;
             this.cbShowPB.Text = "Show personal best (PB)";
             this.ToolTip1.SetToolTip(this.cbShowPB, "Show personal best hit counts");
             this.cbShowPB.UseVisualStyleBackColor = true;
@@ -447,7 +462,7 @@
             this.cbShowDiff.Location = new System.Drawing.Point(154, 134);
             this.cbShowDiff.Name = "cbShowDiff";
             this.cbShowDiff.Size = new System.Drawing.Size(103, 17);
-            this.cbShowDiff.TabIndex = 8;
+            this.cbShowDiff.TabIndex = 9;
             this.cbShowDiff.Text = "Show difference";
             this.ToolTip1.SetToolTip(this.cbShowDiff, "Show difference between personal best and current hit counts");
             this.cbShowDiff.UseVisualStyleBackColor = true;
@@ -461,7 +476,7 @@
             this.cbShowTimeDiff.Location = new System.Drawing.Point(154, 203);
             this.cbShowTimeDiff.Name = "cbShowTimeDiff";
             this.cbShowTimeDiff.Size = new System.Drawing.Size(101, 17);
-            this.cbShowTimeDiff.TabIndex = 13;
+            this.cbShowTimeDiff.TabIndex = 14;
             this.cbShowTimeDiff.Text = "Show time delta";
             this.ToolTip1.SetToolTip(this.cbShowTimeDiff, "Show time delta between personal best and current time");
             this.cbShowTimeDiff.UseVisualStyleBackColor = true;
@@ -475,7 +490,7 @@
             this.cbShowTimeFooter.Location = new System.Drawing.Point(6, 203);
             this.cbShowTimeFooter.Name = "cbShowTimeFooter";
             this.cbShowTimeFooter.Size = new System.Drawing.Size(114, 17);
-            this.cbShowTimeFooter.TabIndex = 12;
+            this.cbShowTimeFooter.TabIndex = 13;
             this.cbShowTimeFooter.Text = "Show time (Footer)";
             this.ToolTip1.SetToolTip(this.cbShowTimeFooter, "Show time of the current run in the footer");
             this.cbShowTimeFooter.UseVisualStyleBackColor = true;
@@ -996,6 +1011,7 @@
             this.groupBox5.Controls.Add(this.cbShowHeadline);
             this.groupBox5.Controls.Add(this.cbShowSessionProgress);
             this.groupBox5.Controls.Add(this.Label9);
+            this.groupBox5.Controls.Add(this.cbShowHits);
             this.groupBox5.Controls.Add(this.cbShowHitsCombined);
             this.groupBox5.Controls.Add(this.numShowSplitsCountUpcoming);
             this.groupBox5.Controls.Add(this.cbShowNumbers);
@@ -1374,6 +1390,7 @@
         private System.Windows.Forms.CheckBox cbShowHeadline;
         private System.Windows.Forms.CheckBox cbShowSessionProgress;
         private System.Windows.Forms.Label Label9;
+        private System.Windows.Forms.CheckBox cbShowHits;
         private System.Windows.Forms.CheckBox cbShowHitsCombined;
         private System.Windows.Forms.NumericUpDown numShowSplitsCountUpcoming;
         private System.Windows.Forms.CheckBox cbShowNumbers;

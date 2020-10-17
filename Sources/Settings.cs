@@ -88,6 +88,7 @@ namespace HitCounterManager
             cbSuccessionToProgressBar.Checked = _settings.Succession.IntegrateIntoProgressBar;
             numShowSplitsCountFinished.Value = _settings.ShowSplitsCountFinished;
             numShowSplitsCountUpcoming.Value = _settings.ShowSplitsCountUpcoming;
+            cbShowHits.Checked = _settings.ShowHits;
             cbShowHitsCombined.Checked = _settings.ShowHitsCombined;
             cbShowNumbers.Checked = _settings.ShowNumbers;
             cbShowPB.Checked = _settings.ShowPB;
@@ -188,6 +189,7 @@ namespace HitCounterManager
             _settings.Succession.IntegrateIntoProgressBar = cbSuccessionToProgressBar.Checked;
             _settings.ShowSplitsCountFinished = (int)numShowSplitsCountFinished.Value;
             _settings.ShowSplitsCountUpcoming = (int)numShowSplitsCountUpcoming.Value;
+            _settings.ShowHits = cbShowHits.Checked;
             _settings.ShowHitsCombined = cbShowHitsCombined.Checked;
             _settings.ShowNumbers = cbShowNumbers.Checked;
             _settings.ShowPB = cbShowPB.Checked;

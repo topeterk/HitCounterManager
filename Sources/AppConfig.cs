@@ -94,6 +94,7 @@ namespace HitCounterManager
         public bool ShowProgressBar;
         public int ShowSplitsCountFinished;
         public int ShowSplitsCountUpcoming;
+        public bool ShowHits;
         public bool ShowHitsCombined;
         public bool ShowNumbers;
         public bool ShowPB;
@@ -294,6 +295,7 @@ namespace HitCounterManager
                 if (baseVersion < 0) _settings.HotKeyMethod = (int)Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb;
                 // Only enable time column when new settings were created
                 _settings.ShowTimeCurrent = (baseVersion < 0 ? true : false);
+                _settings.ShowHits = true;
                 _settings.ShowDiff = _settings.ShowPB; // was combined in previous versions
                 _settings.ShowTimePB = false;
                 _settings.ShowTimeDiff = false;
