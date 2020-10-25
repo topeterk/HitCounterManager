@@ -476,9 +476,9 @@
             this.cbShowTimeDiff.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbShowTimeDiff.Location = new System.Drawing.Point(154, 203);
             this.cbShowTimeDiff.Name = "cbShowTimeDiff";
-            this.cbShowTimeDiff.Size = new System.Drawing.Size(101, 17);
+            this.cbShowTimeDiff.Size = new System.Drawing.Size(109, 17);
             this.cbShowTimeDiff.TabIndex = 14;
-            this.cbShowTimeDiff.Text = "Show time delta";
+            this.cbShowTimeDiff.Text = "Show time (Delta)";
             this.ToolTip1.SetToolTip(this.cbShowTimeDiff, "Show time delta between personal best and current time");
             this.cbShowTimeDiff.UseVisualStyleBackColor = true;
             this.cbShowTimeDiff.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
