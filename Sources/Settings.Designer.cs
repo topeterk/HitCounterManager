@@ -163,10 +163,11 @@
             this.radioSeverityComparePB.AutoSize = true;
             this.radioSeverityComparePB.Location = new System.Drawing.Point(6, 66);
             this.radioSeverityComparePB.Name = "radioSeverityComparePB";
-            this.radioSeverityComparePB.Size = new System.Drawing.Size(178, 17);
+            this.radioSeverityComparePB.Size = new System.Drawing.Size(106, 17);
             this.radioSeverityComparePB.TabIndex = 2;
-            this.radioSeverityComparePB.Text = "Compare with personal best (PB)";
-            this.ToolTip1.SetToolTip(this.radioSeverityComparePB, "Any hit till PB is reached count as normal hit, any above as critical hits");
+            this.radioSeverityComparePB.Text = "Compare with PB";
+            this.ToolTip1.SetToolTip(this.radioSeverityComparePB, "Any hit till PB (personal best) is reached count as normal hit, any above as crit" +
+        "ical hits");
             this.radioSeverityComparePB.UseVisualStyleBackColor = true;
             this.radioSeverityComparePB.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
@@ -361,9 +362,9 @@
             this.cbShowAttempts.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbShowAttempts.Location = new System.Drawing.Point(6, 19);
             this.cbShowAttempts.Name = "cbShowAttempts";
-            this.cbShowAttempts.Size = new System.Drawing.Size(158, 17);
+            this.cbShowAttempts.Size = new System.Drawing.Size(159, 17);
             this.cbShowAttempts.TabIndex = 0;
-            this.cbShowAttempts.Text = "Show run number (attempts)";
+            this.cbShowAttempts.Text = "Show run number (Attempts)";
             this.ToolTip1.SetToolTip(this.cbShowAttempts, "Displays how many runs have been done yet");
             this.cbShowAttempts.UseVisualStyleBackColor = true;
             this.cbShowAttempts.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
@@ -1096,7 +1097,7 @@
             this.groupBox2.Size = new System.Drawing.Size(200, 125);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Hit severity (color) within a single split";
+            this.groupBox2.Text = "Hit severity (\"Neither nor\" color)";
             // 
             // tab_style
             // 

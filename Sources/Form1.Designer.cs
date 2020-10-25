@@ -59,9 +59,9 @@
             this.Spacer3 = new System.Windows.Forms.Label();
             this.lbl_totals = new System.Windows.Forms.Label();
             this.lbl_progress = new System.Windows.Forms.Label();
-            this.profCtrl = new HitCounterManager.ProfilesControl();
             this.lbl_time = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.profCtrl = new HitCounterManager.ProfilesControl();
             this.SuspendLayout();
             // 
             // ToolTip1
@@ -311,6 +311,8 @@
             // btnReset
             // 
             this.btnReset.BackColor = System.Drawing.Color.Salmon;
+            this.btnReset.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReset.Image = global::HitCounterManager.Sources.Resources.icons8_repeat_one_32;
             this.btnReset.Location = new System.Drawing.Point(12, 30);
@@ -324,6 +326,8 @@
             // btnPB
             // 
             this.btnPB.BackColor = System.Drawing.Color.LightYellow;
+            this.btnPB.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnPB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPB.Image = global::HitCounterManager.Sources.Resources.icons8_trophy_32;
             this.btnPB.Location = new System.Drawing.Point(93, 30);
@@ -338,6 +342,8 @@
             // btnPause
             // 
             this.btnPause.BackColor = System.Drawing.Color.Gold;
+            this.btnPause.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPause.Image = global::HitCounterManager.Sources.Resources.icons8_time_32;
             this.btnPause.Location = new System.Drawing.Point(174, 30);
@@ -353,6 +359,8 @@
             this.btnHit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnHit.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnHit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnHit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHit.Image = global::HitCounterManager.Sources.Resources.icons8_attack_32;
             this.btnHit.Location = new System.Drawing.Point(255, 30);
@@ -367,6 +375,8 @@
             // 
             this.btnWayHit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnWayHit.BackColor = System.Drawing.Color.LightBlue;
+            this.btnWayHit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnWayHit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWayHit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnWayHit.Image = global::HitCounterManager.Sources.Resources.icons8_watch_your_step_32;
             this.btnWayHit.Location = new System.Drawing.Point(535, 30);
@@ -381,6 +391,8 @@
             // 
             this.btnSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSplit.BackColor = System.Drawing.Color.LightGreen;
+            this.btnSplit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSplit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSplit.Image = global::HitCounterManager.Sources.Resources.icons8_staircase_32;
             this.btnSplit.Location = new System.Drawing.Point(616, 30);
@@ -445,17 +457,6 @@
             this.lbl_progress.Text = "Progress:  ?? / ??  # ???";
             this.lbl_progress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // profCtrl
-            // 
-            this.profCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.profCtrl.Location = new System.Drawing.Point(14, 96);
-            this.profCtrl.Name = "profCtrl";
-            this.profCtrl.Size = new System.Drawing.Size(677, 367);
-            this.profCtrl.TabIndex = 23;
-            this.profCtrl.ProfileChanged += new System.EventHandler<System.EventArgs>(this.ProfileChangedHandler);
-            // 
             // lbl_time
             // 
             this.lbl_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -471,6 +472,17 @@
             // 
             this.timer1.Interval = 300;
             this.timer1.Tick += new System.EventHandler(this.ProfileChangedHandler);
+            // 
+            // profCtrl
+            // 
+            this.profCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.profCtrl.Location = new System.Drawing.Point(14, 96);
+            this.profCtrl.Name = "profCtrl";
+            this.profCtrl.Size = new System.Drawing.Size(677, 367);
+            this.profCtrl.TabIndex = 23;
+            this.profCtrl.ProfileChanged += new System.EventHandler<System.EventArgs>(this.ProfileChangedHandler);
             // 
             // Form1
             // 
