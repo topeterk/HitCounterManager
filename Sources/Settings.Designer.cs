@@ -785,9 +785,9 @@
             this.cbScWayHit.AutoSize = true;
             this.cbScWayHit.Location = new System.Drawing.Point(6, 58);
             this.cbScWayHit.Name = "cbScWayHit";
-            this.cbScWayHit.Size = new System.Drawing.Size(73, 17);
+            this.cbScWayHit.Size = new System.Drawing.Size(70, 17);
             this.cbScWayHit.TabIndex = 5;
-            this.cbScWayHit.Text = "Hit (Way):";
+            this.cbScWayHit.Text = "Hit (way):";
             this.ToolTip1.SetToolTip(this.cbScWayHit, "Enable hot key for getting hit (way)");
             this.cbScWayHit.UseVisualStyleBackColor = true;
             this.cbScWayHit.CheckedChanged += new System.EventHandler(this.CbScWayHit_CheckedChanged);
