@@ -198,7 +198,6 @@ namespace HitCounterManager
             frm.Controls.Add(textBox);
 
             frm.AcceptButton = okButton;
-            frm.UpdateDarkMode();
             return frm.ShowDialog(ParentWindow);
         }
     }
