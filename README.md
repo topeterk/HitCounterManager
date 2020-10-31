@@ -30,7 +30,7 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 * Create profiles for each challenge or game or build a sequence of runs (called succession) like for the Dark Souls trilogy
 * Dark Mode (not the best looking but hey: its dark)
 * Timer (including current, PB and gold split times)
-* Customizable designs (Find [some examples](../../Home#Designs) at the [Wiki pages](../../wiki))
+* Customizable designs (Find [some examples](../../wiki/Designs) at the [Wiki pages](../../wiki))
 
 ### Pre-defined profiles
 
@@ -64,7 +64,7 @@ All available releases can be found at the [Releases page](../../releases) on Gi
       > **Note**: Mono supports **32 bit mode only** (therefore it cannot be run on OS without 32 bit support!)
 
 ## Installation, Guides, Help
-Please have a look at the **[Wiki pages](../../wiki)**, the **[Setup Guide](../../SetupGuide)** or the [FAQ](../../SetupGuide#FAQ).
+Please have a look at the **[Wiki pages](../../wiki)**, the **[Setup Guide](../../wiki/SetupGuide)** or the [FAQ](../../wiki/SetupGuide#FAQ).
 
 ## Anything is missing, something is annoying/can be improved or you just found a bug?
 Message me via GitHub / e-mail or simply open an issue and I will try to help you out. Alternatively you can also send me a whipser on Twitch: [GeneralGunrider](https://www.twitch.tv/generalgunrider)
