@@ -513,7 +513,7 @@
         "ARPHELPLINK" = "8:"
         "Title" = "8:HitCounterManager"
         "Subject" = "8:Manages a hit counter"
-        "ARPCONTACT" = "8:Copyright © Peter Kirmeier 2020"
+        "ARPCONTACT" = "8:Copyright © Peter Kirmeier 2021"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Manages a hit counter"
         "ARPURLINFOABOUT" = "8:"
@@ -905,7 +905,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_E73481EAB59C480EAACFF94F3334D77E"
             {
-            "SourcePath" = "8:obj\\DebugWin\\HitCounterManager.exe"
+            "SourcePath" = "8:obj\\ReleaseWin\\HitCounterManager.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_DFB6FB4DFF4E4C228DA381CF60E540D8"
