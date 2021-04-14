@@ -263,9 +263,17 @@ namespace HitCounterManager
         /// <returns>true = Dark mode; false = Light mode</returns>
         public static bool IsDarkModeActive()
         {
-            // Check: AppsUseLightTheme (REG_DWORD)
-            // 0 = Dark mode, 1 = Light mode
-            return Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "AppsUseLightTheme", 1).ToString() == "0";
+            try
+            {
+                // Check: AppsUseLightTheme (REG_DWORD)
+                // 0 = Dark mode, 1 = Light mode
+                return Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "AppsUseLightTheme", 1).ToString() == "0";
+            }
+            catch
+            {
+                // Catch exceptions when key is not working on this system
+                return false;
+            }
         }
 
         /// <summary>
