@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2018-2020 Peter Kirmeier
+//Copyright (c) 2018-2021 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -52,7 +52,7 @@ namespace HitCounterManager
         private static extern int MapVirtualKey(int uCode, int uMapType);
 
         [DllImport("User32.dll", CharSet = CharSet.Unicode)]
-        private static extern int GetKeyNameTextW(long lParam, string lpBuffer, int nSize);
+        private static extern int GetKeyNameTextW(int lParam, string lpBuffer, int nSize);
 
         [DllImport("User32.dll")]
         private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, int vk);
@@ -134,7 +134,7 @@ namespace HitCounterManager
         public static string GetKeyName(int KeyCode)
         {
             string lpKeyNameString = new string('\0', 256);
-            long lParam = MapVirtualKey(KeyCode, MAPVK_VK_TO_VSC) << 16;
+            int lParam = MapVirtualKey(KeyCode, MAPVK_VK_TO_VSC) << 16;
             if (0 == GetKeyNameTextW(lParam, lpKeyNameString, lpKeyNameString.Length))
                 lpKeyNameString = "?";
             return lpKeyNameString;
