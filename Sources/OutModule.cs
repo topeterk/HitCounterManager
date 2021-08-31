@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2020 Peter Kirmeier
+//Copyright (c) 2016-2021 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -116,7 +116,7 @@ namespace HitCounterManager
                 // Keep for compatibility supporting designs up to version 1.15 as they have not used Unicode:
                 Str = Str.Replace("ä", "&auml;").Replace("ö", "&ouml;").Replace("ü", "&uuml;");
                 Str = Str.Replace("Ä", "&Auml;").Replace("Ö", "&Ouml;").Replace("Ü", "&Uuml;");
-                Str = Str.Replace("\"", "\\\"");
+                Str = Str.Replace("\\", "\\\\").Replace("\"", "\\\"");
             }
             return Str;
         }
