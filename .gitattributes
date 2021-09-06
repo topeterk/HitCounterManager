@@ -1,3 +1,5 @@
-*.html diff=html
-*.css  diff=css
-*.js   diff
+*.html     diff=html
+*.css      diff=css
+*.js       diff
+*.template diff
+*.xml      diff
