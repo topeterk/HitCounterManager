@@ -1,5 +1,6 @@
-*.html     diff=html
-*.css      diff=css
-*.js       diff
-*.template diff
-*.xml      diff
+Sources/HitCounter.template       diff      text working-tree-encoding=UTF-16LE-BOM eol=CRLF
+Sources/HitCounterManagerInit.xml diff      text working-tree-encoding=UTF-16LE-BOM eol=CRLF
+*.html                            diff=html text working-tree-encoding=UTF-16LE-BOM eol=CRLF
+*.css                             diff=css  text working-tree-encoding=UTF-16LE-BOM eol=CRLF
+*.js                              diff      text working-tree-encoding=UTF-16LE-BOM eol=CRLF
+*.xml                             diff      text
