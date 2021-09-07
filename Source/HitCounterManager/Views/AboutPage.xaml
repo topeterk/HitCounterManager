@@ -1,4 +1,76 @@
-Licence information:
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+//MIT License
+
+//Copyright (c) 2021-2021 Peter Kirmeier
+
+//Permission is hereby granted, free of charge, to any person obtaining a copy
+//of this software and associated documentation files (the "Software"), to deal
+//in the Software without restriction, including without limitation the rights
+//to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//copies of the Software, and to permit persons to whom the Software is
+//furnished to do so, subject to the following conditions:
+
+//The above copyright notice and this permission notice shall be included in all
+//copies or substantial portions of the Software.
+
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//SOFTWARE.
+-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
+             xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
+             x:Class="HitCounterManager.Views.AboutPage"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"
+             BackgroundColor="{AppThemeBinding Default=BurlyWood, Dark=Red}">
+
+    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Button Clicked="Back_Clicked" WidthRequest="200" Text="Back" BackgroundColor="{AppThemeBinding Dark=DarkBlue, Light=Green}"/>
+        <Label Text="{x:Static common:Statics.ApplicationTitle, Mode=OneWay}" HorizontalOptions="CenterAndExpand"/>
+        <Label Text="{OnPlatform 250, iOS=200, Android=300, UWP=400, GTK=aGTKa, WPF=aWPFa}" HorizontalOptions="CenterAndExpand">
+        </Label>
+        <Label Text="s" HorizontalOptions="CenterAndExpand">
+            <Label.Text>
+                <OnPlatform x:TypeArguments="x:String" Default="default">
+                    <On Platform="Default">
+                        <On.Value>-Default-</On.Value>
+                    </On>
+                    <On Platform="WPF">
+                        <On.Value>-WPF-</On.Value>
+                    </On>
+                </OnPlatform>
+            </Label.Text>
+        </Label>
+        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
+            <Label.Text>
+                <MultiBinding StringFormat="{}{0}{1}">
+                    <Binding Source="OS Layer: " />
+                    <Binding Source="{x:Static common:Statics.CurrentOsLayerName, Mode=OneWay}" />
+                </MultiBinding>
+            </Label.Text>
+        </Label>
+        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
+            <Label.Text>
+                <MultiBinding StringFormat="{}{0}{1}">
+                    <Binding Source="Platform Layer: " />
+                    <Binding Source="{x:Static common:Statics.CurrentPlatformLayerName, Mode=OneWay}" />
+                </MultiBinding>
+            </Label.Text>
+        </Label>
+        <Button Clicked="Back_Clicked" WidthRequest="200" Text="Back"/>
+        <Button Clicked="PopBack_Clicked" WidthRequest="200" Text="Pop"/>
+        <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Label HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span>Licence information:
 
 The software aims to only use licenses that allow commercial and non-commercial use.
 Moreover it aims to use the whole software without any charge.
@@ -9,7 +81,7 @@ DISCLAIMER: Above notice comes without warranty, so please refer to the explicit
 Application
 
 Title: HitCounterManager
-Author: Peter Kirmeier
+Author: Peter Kirmeier t</Span><Span>ope</Span><Span>terk</Span><Span>@</Span><Span>fre</Span><Span>enet.</Span><Span>de
 Source: https://github.com/topeterk/HitCounterManager
 Licence: MIT
 
@@ -20,6 +92,7 @@ Title: Pioneer Camp
 Author: Iconka  http://www.iconka.com
 Source: https://iconka.com/en/269/
 License: Linkware
+Licence information:
 
 ==============================================================================
 Application Button Images
@@ -123,3 +196,10 @@ d.any suggestion that there is an endorsement of products and services by depict
 Please be aware that while all Images and Videos on Pixabay are free to use for commercial and non-commercial purposes, depicted items in the Images or Videos, such as identifiable people, logos, brands, etc. may be subject to additional copyrights, property rights, privacy rights, trademarks etc. and may require the consent of a third party or the license of these rights - particularly for commercial applications. Pixabay does not represent or warrant that such consents or licenses have been obtained, and expressly disclaims any liability in this respect.
 
 URL: https://pixabay.com/de/service/license/
+</Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

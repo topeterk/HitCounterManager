@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+//MIT License
+
+//Copyright (c) 2021-2021 Peter Kirmeier
+
+//Permission is hereby granted, free of charge, to any person obtaining a copy
+//of this software and associated documentation files (the "Software"), to deal
+//in the Software without restriction, including without limitation the rights
+//to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//copies of the Software, and to permit persons to whom the Software is
+//furnished to do so, subject to the following conditions:
+
+//The above copyright notice and this permission notice shall be included in all
+//copies or substantial portions of the Software.
+
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//SOFTWARE.
+-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
+             xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
+             x:Class="HitCounterManager.Views.SettingsPage"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"
+             BackgroundColor="{AppThemeBinding Default=LightSalmon, Dark=Red}">
+
+    <!-- TODO: Tooltips -->
+    <!-- TODO: Actual logic behind all settings (All settings can be changed but they do nothing yet) -->
+
+    <ContentPage.BindingContext>
+        <local:SettingsViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout Margin="10" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Label HorizontalOptions="CenterAndExpand" Text="SETTINGS"/>
+        <ScrollView Padding="10,0,20,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Cornsilk">
+
+                <Label HorizontalOptions="CenterAndExpand" Text="GLOBAL SHORTCUTS" />
+                <Label HorizontalOptions="StartAndExpand" Text="Global hot keys not supported in this version!" TextColor="Red"
+                       IsVisible="{Binding Source={x:Static common:Statics.GlobalHotKeySupport}, Converter={common:NegateBoolConverter}, Mode=OneTime}"/>
+                <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand"
+                      IsEnabled="{x:Static common:Statics.GlobalHotKeySupport, Mode=OneTime}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Switch Grid.Row="0" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutHitEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="0" Grid.Column="1" Margin="0" Text="Hit +1 (boss):" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="0" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_Hit" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutHitRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Entry  Grid.Row="0" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutHitDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="LightSkyBlue" />
+                    <Switch Grid.Row="1" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutHitUndoEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="1" Grid.Column="1" Margin="0" Text="Hit -1 (boss):" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="1" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_HitUndo" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutHitUndoRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Entry  Grid.Row="1" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutHitUndoDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="WhiteSmoke" />
+
+                    <Switch Grid.Row="2" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutWayHitEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="2" Grid.Column="1" Margin="0" Text="Hit +1 (way):" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="2" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_WayHit" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutWayHitRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Entry  Grid.Row="2" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutWayHitDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="LightBlue" />
+                    <Switch Grid.Row="3" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutWayHitUndoEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="3" Grid.Column="1" Margin="0" Text="Hit -1 (way)" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="3" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_WayHitUndo" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutWayHitUndoRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Entry  Grid.Row="3" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutWayHitUndoDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="WhiteSmoke" />
+
+                    <Switch Grid.Row="4" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutSplitEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="4" Grid.Column="1" Margin="0" Text="Next split:" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="4" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_Split" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutSplitRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Entry  Grid.Row="4" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutSplitDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="LightGreen" />
+                    <Switch Grid.Row="5" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutSplitPrevEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="5" Grid.Column="1" Margin="0" Text="Prev split:" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="5" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_SplitPrev" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutSplitPrevRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Entry  Grid.Row="5" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutSplitPrevDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="WhiteSmoke" />
+
+                    <Switch Grid.Row="6" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutPBEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="6" Grid.Column="1" Margin="0" Text="Set PB:" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="6" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_PB" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutPBRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Entry  Grid.Row="6" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutPBDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="LightYellow" />
+                    <Switch Grid.Row="7" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutResetEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="7" Grid.Column="1" Margin="0" Text="Reset:" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="7" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_Reset" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutResetRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Entry  Grid.Row="7" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutResetDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="Salmon" />
+
+                    <Switch Grid.Row="8" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutTimerStartEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="8" Grid.Column="1" Margin="0" Text="Start timer:" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="8" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_TimerStart" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutTimerStartRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Entry  Grid.Row="8" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutTimerStartDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="Gold" />
+                    <Switch Grid.Row="9" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutTimerStopEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="9" Grid.Column="1" Margin="0" Text="Stop timer" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="9" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_TimerStop" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutTimerStopRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Entry  Grid.Row="9" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutTimerStopDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="Gold" />
+                </Grid>
+
+                <Label HorizontalOptions="StartAndExpand" Text="Select method of global hotkey registration (changing needs restart of application):" />
+                <Label HorizontalOptions="StartAndExpand" Text="Global hot keys not supported in this version!" TextColor="Red"
+                       IsVisible="{Binding Source={x:Static common:Statics.GlobalHotKeySupport}, Converter={common:NegateBoolConverter}, Mode=OneTime}"/>
+                <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand"
+                      IsEnabled="{x:Static common:Statics.GlobalHotKeySupport, Mode=OneTime}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Switch Grid.Row="0" Grid.Column="0" Margin="0" IsToggled="{Binding RadioHotKeyMethod_Sync, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="0" Grid.Column="1" Margin="0" Text="Synchronous - System hotkey registration" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="1" Grid.Column="0" Margin="0" IsToggled="{Binding RadioHotKeyMethod_Async, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="1" Grid.Column="1" Margin="0" Text="Asynchronous - Polling keyboard keys" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="2" Grid.Column="0" Margin="0" IsToggled="{Binding RadioHotKeyMethod_LLKb, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="2" Grid.Column="1" Margin="0" Text="Synchronous - Low level keyboard hook (Recommended)" HorizontalOptions="Start" VerticalOptions="Center" />
+                </Grid>
+
+                <Label HorizontalOptions="CenterAndExpand" Text="STYLE"/>
+
+                <Label HorizontalOptions="StartAndExpand" Text="Appearance" />
+                <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Switch Grid.Row="0" Grid.Column="0" Margin="0" IsToggled="{Binding StyleUseHighContrast, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="0" Grid.Column="1" Margin="0" Text="Disable transparency" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="1" Grid.Column="0" Margin="0" IsToggled="{Binding StyleUseHighContrastNames, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="1" Grid.Column="1" Margin="0" Text="Disable coloring of names" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="2" Grid.Column="0" Margin="0" IsToggled="{Binding StyleProgressBarColored, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="2" Grid.Column="1" Margin="0" Text="Disable coloring of progress bar" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="3" Grid.Column="0" Margin="0" IsToggled="{Binding StyleSuperscriptPB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="3" Grid.Column="1" Margin="0" Text="Superscripted PB totals" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="4" Grid.Column="0" Margin="0" IsToggled="{Binding StyleUseRoman, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="4" Grid.Column="1" Margin="0" Text="Roman numerals" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="5" Grid.Column="0" Margin="0" IsToggled="{Binding StyleHightlightCurrentSplit, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="5" Grid.Column="1" Margin="0" Text="Highlight current split" HorizontalOptions="Start" VerticalOptions="Center" />
+                </Grid>
+
+                <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+                    <Label VerticalOptions="Center" HorizontalOptions="Start" Text="Desired width (in px):" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding StyleDesiredWidth, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <common:NaturalNumbersEntryValidationBehavior />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <Label HorizontalOptions="FillAndExpand" Margin="30,0,0,0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Italic">When value is set back to 0, you may have to reload the browser.</Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label HorizontalOptions="StartAndExpand" Text="Customization" />
+                <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+                    <Switch Margin="0" IsToggled="{Binding StyleUseCustom, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Margin="0" Text="Use custom stylesheet and font" HorizontalOptions="Start" VerticalOptions="Center" />
+                </StackLayout>
+                <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                    </Grid.ColumnDefinitions>
+                    <Label  Grid.Row="0" Grid.Column="0" Margin="0" Text="Font name:" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Entry  Grid.Row="0" Grid.Column="1" Margin="0" Grid.ColumnSpan="2" Text="{Binding StyleFontName, Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+                    <Label  Grid.Row="1" Grid.Column="0" Margin="0" Text="Font (URL):" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Entry  Grid.Row="1" Grid.Column="1" Margin="0" Text="{Binding StyleFontUrl, Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+                    <RelativeLayout Grid.Row="1" Grid.Column="2" Margin="0" BackgroundColor="Beige" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-search-in-browser-20.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding WebOpenGoogleFontsUrl}" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Label  Grid.Row="2" Grid.Column="0" Margin="0" Text="CSS (URL):" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Entry  Grid.Row="2" Grid.Column="1" Margin="0" Grid.ColumnSpan="2" Text="{Binding StyleCssUrl, Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+                </Grid>
+                <!-- TODO: port Settings.sc ApplyAppearance (this is not a back button) -->
+                <Button Margin="0" Clicked="PopBack_Clicked" WidthRequest="200" Text="Apply Customization" HorizontalOptions="Start"/>
+
+                <Label HorizontalOptions="CenterAndExpand" Text="BEHAVIOR" />
+
+                <Label HorizontalOptions="StartAndExpand" Text="Purpose" />
+                <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Switch Grid.Row="0" Grid.Column="0" Margin="0" IsToggled="{Binding RadioPurpose_SplitCounter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="0" Grid.Column="1" Margin="0" Text="Split counter" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="1" Grid.Column="0" Margin="0" IsToggled="{Binding RadioPurpose_Checklist, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="1" Grid.Column="1" Margin="0" Text="Checklist" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="2" Grid.Column="0" Margin="0" IsToggled="{Binding RadioPurpose_NoDeath, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="2" Grid.Column="1" Margin="0" Text="No death" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="3" Grid.Column="0" Margin="0" IsToggled="{Binding RadioPurpose_DeathCounter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="3" Grid.Column="1" Margin="0" Text="Death counter" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="4" Grid.Column="0" Margin="0" IsToggled="{Binding RadioPurpose_ResetCounter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="4" Grid.Column="1" Margin="0" Text="Run reset counter" HorizontalOptions="Start" VerticalOptions="Center" />
+                </Grid>
+
+                <Label HorizontalOptions="StartAndExpand" Text='Hit severity ("Neither nor" color)' />
+                <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Switch Grid.Row="0" Grid.Column="0" Margin="0" IsToggled="{Binding RadioHitSeverity_AnyHitCritical, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="0" Grid.Column="1" Margin="0" Text="Any hit as critical" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="1" Grid.Column="0" Margin="0" IsToggled="{Binding RadioHitSeverity_ComparePB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="1" Grid.Column="1" Margin="0" Text="Boss hits critical" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="2" Grid.Column="0" Margin="0" IsToggled="{Binding RadioHitSeverity_BossHitCritical, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="2" Grid.Column="1" Margin="0" Text="Compare with PB" HorizontalOptions="Start" VerticalOptions="Center" />
+                </Grid>
+
+                <Label HorizontalOptions="StartAndExpand" Text="Features" />
+                <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Switch Grid.Row="0" Grid.Column="0" Margin="0" IsToggled="{Binding ShowAttemptsCounter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="0" Grid.Column="1" Margin="0" Grid.ColumnSpan="3" Text="Show run number (Attemps)" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="1" Grid.Column="0" Margin="0" IsToggled="{Binding ShowHeadline, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="1" Grid.Column="1" Margin="0" Text="Show headline" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="1" Grid.Column="2" Margin="0" IsToggled="{Binding ShowFooter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="1" Grid.Column="3" Margin="0" Text="Show footer" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="2" Grid.Column="0" Margin="0" IsToggled="{Binding ShowSessionProgress, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="2" Grid.Column="1" Margin="0" Grid.ColumnSpan="3" Text="Show session progress (Star)" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="3" Grid.Column="0" Margin="0" IsToggled="{Binding ShowProgressBar, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="3" Grid.Column="1" Margin="0" Text="Show progress bar" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="3" Grid.Column="2" Margin="0" IsToggled="{Binding Succession.IntegrateIntoProgressBar, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="3" Grid.Column="3" Margin="0" Text="Track succession" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="4" Grid.Column="0" Margin="0" IsToggled="{Binding ShowHits, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="4" Grid.Column="1" Margin="0" Text="Show hits" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="4" Grid.Column="2" Margin="0" IsToggled="{Binding ShowHitsCombined, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="4" Grid.Column="3" Margin="0" Text="Combine boss and way hits" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="5" Grid.Column="0" Margin="0" IsToggled="{Binding ShowPB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="5" Grid.Column="1" Margin="0" Text="Show personal best (PB)" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="5" Grid.Column="2" Margin="0" IsToggled="{Binding ShowDiff, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="5" Grid.Column="3" Margin="0" Text="Show difference" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="6" Grid.Column="0" Margin="0" IsToggled="{Binding ShowNumbers, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="6" Grid.Column="1" Margin="0" Grid.ColumnSpan="3" Text="Show numbers, rather images" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="7" Grid.Column="0" Margin="0" IsToggled="{Binding ShowTimeCurrent, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="7" Grid.Column="1" Margin="0" Text="Show time (Current)" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="7" Grid.Column="2" Margin="0" IsToggled="{Binding ShowTimePB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="7" Grid.Column="3" Margin="0" Text="Show time (PB)" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="8" Grid.Column="0" Margin="0" IsToggled="{Binding ShowTimeFooter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="8" Grid.Column="1" Margin="0" Text="Show time (Footer)" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="8" Grid.Column="2" Margin="0" IsToggled="{Binding ShowTimeDiff, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="8" Grid.Column="3" Margin="0" Text="Show time (Delta)" HorizontalOptions="Start" VerticalOptions="Center" />
+                </Grid>
+
+                <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Margin="0" VerticalOptions="Center" HorizontalOptions="Start" Text="Maxium previous splits:" />
+                    <Entry Grid.Row="0" Grid.Column="1" Margin="0" HorizontalOptions="FillAndExpand" Text="{Binding ShowSplitsCountFinished, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <common:NaturalNumbersEntryValidationBehavior />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Grid.Row="1" Grid.Column="0" Margin="0" VerticalOptions="Center" HorizontalOptions="Start" Text="Maxium upcoming splits:" />
+                    <Entry Grid.Row="1" Grid.Column="1" Margin="0" HorizontalOptions="FillAndExpand" Text="{Binding ShowSplitsCountUpcoming, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <common:NaturalNumbersEntryValidationBehavior />
+                        </Entry.Behaviors>
+                    </Entry>
+                </Grid>
+                <Label HorizontalOptions="FillAndExpand" Margin="30,0,0,0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Italic" Text="Current configuration will show up to " />
+                            <Span FontAttributes="Italic" Text="{Binding ShowSplitsCountFinished, Mode=OneWay}" />
+                            <Span FontAttributes="Italic" Text=" + " />
+                            <Span FontAttributes="Italic" Text="{Binding ShowSplitsCountUpcoming, Mode=OneWay}" />
+                            <Span FontAttributes="Italic" Text=" splits." />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Button Clicked="PopBack_Clicked" Padding="4" WidthRequest="200" Text="OK" HorizontalOptions="End"/>
+
+                <!-- TESTING STUFF -->
+
+                <Label HorizontalOptions="CenterAndExpand" Text="TESTINGS STUFF"/>
+
+                <!--<Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BorderColor="DarkBlue">
+                    <Label HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="ssss"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Frame>-->
+
+                <!-- examples: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/controls/views -->
+                <Label Text="CheckBox" />
+                <CheckBox Color="Green" VerticalOptions="Center" />
+                <Label Text="Slider" />
+                <Slider Maximum="360" />
+                <Label Text="Stepper" />
+                <Stepper Maximum="360" Increment="30" HorizontalOptions="Center" />
+                <Label Text="Switch" />
+                <Switch x:Name="xamlSwitch" IsToggled="False" OnColor="Orange" ThumbColor="Green" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

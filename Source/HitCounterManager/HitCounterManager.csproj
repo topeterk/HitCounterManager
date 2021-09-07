@@ -1,0 +1,87 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <ApplicationIcon>Resources\FireIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\20p_logo_black.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-about-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-add-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-add-list-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-attack-32.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-cloud-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-copy-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-counter-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-double-down-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-double-up-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-edit-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-lock-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-padlock-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-pin-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-repeat-one-32.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-save-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-scroll-down-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-scroll-up-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-search-in-browser-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-settings-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-sleep-32.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-staircase-32.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-taschenlampe-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-time-32.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-trash-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-trophy-32.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-watch-your-step-32.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-website-20.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ProfileView.xaml.cs">
+      <DependentUpon>ProfileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\InputBoxView.xaml.cs">
+      <DependentUpon>InputBoxView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ProfileAttemptsPage.xaml.cs">
+      <DependentUpon>ProfileAttemptsPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AboutView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\InputBoxView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="echo Deploy Portable Class Library to build projects..&#xD;&#xA;if exist &quot;$(SolutionDir)$(SolutionName).GTK\bin\$(ConfigurationName)&quot; copy /Y &quot;$(OutDir)$(TargetName).*&quot; &quot;$(SolutionDir)$(SolutionName).GTK\bin\$(ConfigurationName)\&quot;&#xD;&#xA;if exist &quot;$(SolutionDir)$(SolutionName).WPF\bin\$(ConfigurationName)&quot; copy /Y &quot;$(OutDir)$(TargetName).*&quot; &quot;$(SolutionDir)$(SolutionName).WPF\bin\$(ConfigurationName)\&quot;&#xD;&#xA;&#xD;&#xA;echo Deploy data files to build projects..&#xD;&#xA;if exist &quot;$(SolutionDir)$(SolutionName).GTK\bin\$(ConfigurationName)&quot; copy /Y &quot;$(SolutionDir)Datafiles\*&quot; &quot;$(SolutionDir)$(SolutionName).GTK\bin\$(ConfigurationName)\&quot;&#xD;&#xA;if exist &quot;$(SolutionDir)$(SolutionName).WPF\bin\$(ConfigurationName)&quot; copy /Y &quot;$(SolutionDir)Datafiles\*&quot; &quot;$(SolutionDir)$(SolutionName).WPF\bin\$(ConfigurationName)\&quot;&#xD;&#xA;if exist &quot;$(SolutionDir)$(SolutionName).GTK\bin\$(ConfigurationName)&quot; mkdir &quot;$(SolutionDir)$(SolutionName).GTK\bin\$(ConfigurationName)\Designs\&quot;&#xD;&#xA;if exist &quot;$(SolutionDir)$(SolutionName).WPF\bin\$(ConfigurationName)&quot; mkdir &quot;$(SolutionDir)$(SolutionName).WPF\bin\$(ConfigurationName)\Designs\&quot;&#xD;&#xA;if exist &quot;$(SolutionDir)$(SolutionName).GTK\bin\$(ConfigurationName)&quot; copy /Y &quot;$(SolutionDir)Designs\*&quot; &quot;$(SolutionDir)$(SolutionName).GTK\bin\$(ConfigurationName)\Designs\&quot;&#xD;&#xA;if exist &quot;$(SolutionDir)$(SolutionName).WPF\bin\$(ConfigurationName)&quot; copy /Y &quot;$(SolutionDir)Designs\*&quot; &quot;$(SolutionDir)$(SolutionName).WPF\bin\$(ConfigurationName)\Designs\&quot;" />
+  </Target>
+</Project>

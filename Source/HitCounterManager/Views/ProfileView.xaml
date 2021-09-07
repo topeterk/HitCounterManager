@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+//MIT License
+
+//Copyright (c) 2021-2021 Peter Kirmeier
+
+//Permission is hereby granted, free of charge, to any person obtaining a copy
+//of this software and associated documentation files (the "Software"), to deal
+//in the Software without restriction, including without limitation the rights
+//to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//copies of the Software, and to permit persons to whom the Software is
+//furnished to do so, subject to the following conditions:
+
+//The above copyright notice and this permission notice shall be included in all
+//copies or substantial portions of the Software.
+
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//SOFTWARE.
+-->
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
+             xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
+             x:Class="HitCounterManager.Views.ProfileView"
+             x:Name="ProfileViewPage">
+
+    <ContentView.BindingContext>
+        <local:ProfileViewModel />
+    </ContentView.BindingContext>
+
+    <StackLayout BackgroundColor="Beige" Padding="10,0,10,10" Margin="0" Spacing="2" HorizontalOptions="FillAndExpand" Orientation="Vertical">
+
+        <StackLayout Orientation="Horizontal" Spacing="8" HorizontalOptions="FillAndExpand" HeightRequest="32">
+            <!-- Font size names: https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/text/fonts#understand-named-font-sizes -->
+            <!-- https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/controls/common-properties#units-of-measurement -->
+            <!-- text size scaling:  GTK: x in pixels  Others: in 160 DPI???                        FontSize="{OnPlatform 14, GTK=10}-->
+            <!-- WPF Named sizes: https://github.com/xamarin/Xamarin.Forms/blob/caab66bcf9614aca0c0805d560a34e176d196e17/Xamarin.Forms.Platform.WPF/WPFResources.xaml -->
+            <!-- GTK Named sizes: https://github.com/xamarin/Xamarin.Forms/blob/caab66bcf9614aca0c0805d560a34e176d196e17/Xamarin.Forms.Platform.GTK/GtkPlatformServices.cs -->
+            <Label Text="{Binding StatsProgress}"  Margin="0" HorizontalOptions="StartAndExpand"  FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" />
+            <Label Text="{Binding StatsTime}"      Margin="0" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" x:Name="StatsTime" />
+            <Label Text="{Binding StatsTotalHits}" Margin="0" HorizontalOptions="EndAndExpand"    FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" />
+        </StackLayout>
+
+        <Picker x:Name="profileSelector" ItemsSource="{Binding ProfileList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding ProfileSelected}" />
+
+        <!-- TODO: Merge this with actual list below to maintain same grid defitions -->
+        <Grid Padding="0,12,0,0" Margin="0" RowSpacing="0" ColumnSpacing="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!--<RowDefinition Height="0.5"/>-->
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="30" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text=" " />
+            <Label Grid.Column="1" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" Text="Title" />
+            <Label Grid.Column="2" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="Boss&#10;Hits" />
+            <Label Grid.Column="3" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="Way&#10;Hits" />
+            <Label Grid.Column="4" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="Diff" />
+            <Label Grid.Column="5" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="PB" />
+            <Label Grid.Column="6" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="SP" />
+            <Label Grid.Column="7" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text=" " />
+        </Grid>
+        <!-- Maybe CollectionView, but seems buggy: https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/collectionview/populate-data -->
+        <StackLayout BackgroundColor="Beige" Padding="0" Margin="0" Spacing="2" x:Name="ProfileList" BindableLayout.ItemsSource="{Binding ProfileSelected.Rows}" HorizontalOptions="FillAndExpand" Orientation="Vertical">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="0" Margin="0" RowSpacing="0" ColumnSpacing="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <!--<RowDefinition Height="0.5"/>-->
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="30" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.Triggers>
+                            <DataTrigger TargetType="Grid" Binding="{Binding Active, Mode=OneWay}" Value="false">
+                                <Setter Property="BackgroundColor" Value="Beige"/>
+                            </DataTrigger>
+                            <DataTrigger TargetType="Grid" Binding="{Binding Active, Mode=OneWay}" Value="true">
+                                <Setter Property="BackgroundColor" Value="Burlywood"/>
+                            </DataTrigger>
+                        </Grid.Triggers>
+                        <Button Grid.Column="0" Margin="2" Text=" " VerticalOptions="Center"
+                        Command="{Binding BindingContext.CmdSetActiveSplit, Source={x:Reference ProfileViewPage}}"
+                        CommandParameter="{Binding .}">>
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding Active, Mode=OneWay}" Value="false">
+                                    <Setter Property="Text" Value=" "/>
+                                </DataTrigger>
+                                <DataTrigger TargetType="Button" Binding="{Binding Active, Mode=OneWay}" Value="true">
+                                    <Setter Property="Text" Value="⇒"/>
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Entry Grid.Column="1" Margin="0" HorizontalTextAlignment="Start" Text="{Binding Title}" Placeholder="       [Empty title]" />
+                        <Entry Grid.Column="2" Margin="0" HorizontalTextAlignment="Center" Text="{Binding Hits}" Placeholder="0">
+                            <Entry.Behaviors>
+                                <common:NaturalNumbersEntryValidationBehavior />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Entry Grid.Column="3" Margin="0" HorizontalTextAlignment="Center" Text="{Binding WayHits}" Placeholder="0">
+                            <Entry.Behaviors>
+                                <common:NaturalNumbersEntryValidationBehavior />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <StackLayout Grid.Column="4" Margin="0" Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                            <!-- Workaround: GTK cannot render a Label correctly after the Control gets created during runtime, so we use Entry instead -->
+                            <Entry VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="{Binding Diff, Mode=OneWay}" IsEnabled="False">
+                                <Entry.IsVisible>
+                                    <OnPlatform x:TypeArguments="x:Boolean" Default="false">
+                                        <On Platform="GTK" Value="true" />
+                                    </OnPlatform>
+                                </Entry.IsVisible>
+                            </Entry>
+                            <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Text="{Binding Diff, Mode=OneWay}">
+                                <Label.IsVisible>
+                                    <OnPlatform x:TypeArguments="x:Boolean" Default="true">
+                                        <On Platform="GTK" Value="false" />
+                                    </OnPlatform>
+                                </Label.IsVisible>
+                            </Label>
+                        </StackLayout>
+                        <Entry Grid.Column="5" Margin="0" HorizontalTextAlignment="Center" Text="{Binding PB}" Placeholder="0">
+                            <Entry.Behaviors>
+                                <common:NaturalNumbersEntryValidationBehavior />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Button Grid.Column="6" Margin="2" Text=" " VerticalOptions="Center"
+                        Command="{Binding BindingContext.CmdSetSessionProgress, Source={x:Reference ProfileViewPage}}"
+                        CommandParameter="{Binding .}">>
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding SP, Mode=OneWay}" Value="false">
+                                    <Setter Property="Text" Value=" "/>
+                                </DataTrigger>
+                                <DataTrigger TargetType="Button" Binding="{Binding SP, Mode=OneWay}" Value="true">
+                                    <Setter Property="Text" Value="☑"/>
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <!-- ·☐🗹🗷☑☒  https://www.compart.com/de/unicode/search?q=Stimmkästchen#characters -->
+                        <Button Grid.Column="7" Margin="2" Text="{OnPlatform 🗑, GTK=Del}" VerticalOptions="Center"
+                        Command="{Binding BindingContext.CmdRemoveSplit, Source={x:Reference ProfileViewPage}}"
+                        CommandParameter="{Binding .}" />
+                    </Grid>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+    </StackLayout>
+</ContentView>
