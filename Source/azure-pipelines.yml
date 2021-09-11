@@ -20,25 +20,35 @@ stages:
       vmImage: 'windows-latest'
 
     steps:
-    - script: echo PLC build goes here
+    - task: NuGetToolInstaller@1
+
+    - task: NuGetCommand@2
+      inputs:
+        restoreSolution: '**/*.sln'
 
   - job: WPF
     dependsOn: PLC
-
+#    strategy:
+#      maxParallel: 3
+#      matrix:
+#        WinWPF:
+#          PlatformLayer: WPF
+#          OSLayer: Windows
+#        WinGTK:
+#          PlatformLayer: GTK
+#          OSLayer: Windows
+#        AnyGTK:
+#          PlatformLayer: GTK
+#          OSLayer: Any
     pool:
       vmImage: 'windows-latest'
 
     steps:
-    - task: NuGetToolInstaller@1
-
-#    - task: NuGetCommand@2
+#    - task: DotNetCoreCLI@2
 #      inputs:
-#        restoreSolution: '**/*.sln'
-    - task: DotNetCoreCLI@2
-      inputs:
-        command: 'restore'
-        projects: '$(projectfile)'
-        feedsToUse: 'select'
+#        command: 'restore'
+#        projects: '$(projectfile)'
+#        feedsToUse: 'select'
 
     - task: MSBuild@1
       inputs:
