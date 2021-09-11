@@ -6,45 +6,58 @@
 trigger:
 - v2.x
 
-jobs:
+variables:
+  projectfile: '**/*.$(Agent.JobName).csproj'
 
-- job: WPF
+stages:
+- stage: Build
 
-  variables:
-    projectfile: '**/*.$(Agent.JobName).csproj'
+  jobs:
 
-  pool:
-    vmImage: 'windows-latest'
+  - job: PLC
 
-  steps:
-  - task: NuGetToolInstaller@1
+    pool:
+      vmImage: 'windows-latest'
 
-#  - task: NuGetCommand@2
-#    inputs:
-#      restoreSolution: '**/*.sln'
-  - task: DotNetCoreCLI@2
-    inputs:
-      command: 'restore'
-      projects: '$(projectfile)'
-      feedsToUse: 'select'
+    steps:
+    - script: echo PLC build goes here
 
-  - task: MSBuild@1
-    inputs:
-      solution: '$(projectfile)'
-      msbuildArchitecture: 'x64'
-      platform: 'Any CPU'
-      configuration: 'Release'
-      clean: true
-      logProjectEvents: true
-      createLogFile: true
-      logFileVerbosity: 'detailed'
-#  - task: VSBuild@1
-#    inputs:
-#      solution: '**\*.sln'
-#      vsVersion: '16.0'
-#      platform: 'Any CPU'
-#      configuration: 'Release'
-#      clean: true
-#      msbuildArchitecture: 'x64'
-#      createLogFile: true
-#      logFileVerbosity: 'detailed'
+  - job: WPF
+    dependsOn: PLC
+
+    pool:
+      vmImage: 'windows-latest'
+
+    steps:
+    - task: NuGetToolInstaller@1
+
+#    - task: NuGetCommand@2
+#      inputs:
+#        restoreSolution: '**/*.sln'
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'restore'
+        projects: '$(projectfile)'
+        feedsToUse: 'select'
+
+    - task: MSBuild@1
+      inputs:
+        solution: '$(projectfile)'
+        msbuildArchitecture: 'x64'
+        platform: 'AnyCPU'
+        configuration: 'Release'
+        clean: true
+        logProjectEvents: true
+        createLogFile: true
+        logFileVerbosity: 'detailed'
+
+#    - task: VSBuild@1
+#      inputs:
+#        solution: '**\*.sln'
+#        vsVersion: '16.0'
+#        platform: 'Any CPU'
+#        configuration: 'Release'
+#        clean: true
+#        msbuildArchitecture: 'x64'
+#        createLogFile: true
+#        logFileVerbosity: 'detailed'
