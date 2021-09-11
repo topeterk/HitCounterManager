@@ -36,18 +36,22 @@ stages:
     steps:
 
     - task: NuGetToolInstaller@1
+      displayName: NuGet Install
 
     - task: NuGetCommand@2
+      displayName: NuGet Restore
       inputs:
         restoreSolution: '**/*.sln'
 
     - task: CmdLine@2
+      displayName: GTK# Install
       condition: eq(variables['PlatformLayer'], 'GTK')
       inputs:
         script: |
           msiexec /i https://xamarin.azureedge.net/GTKforWindows/Windows/gtk-sharp-2.12.45.msi /quiet
 
     - task: MSBuild@1
+      displayName: Compile
       inputs:
         solution: '$(projectfile)'
         msbuildArchitecture: 'x64'
@@ -57,3 +61,6 @@ stages:
         logProjectEvents: true
         createLogFile: true
         logFileVerbosity: 'detailed'
+
+    - task: kherzog.AssemblyInfoReader.assembly-info-reader-build-task.AssembyInfoReader@2
+      displayName: 'Assembly Variables'
