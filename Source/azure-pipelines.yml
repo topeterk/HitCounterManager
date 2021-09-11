@@ -9,50 +9,29 @@ trigger:
 stages:
 - stage: Build
 
-  variables:
-    projectfile: '**/*.$(Agent.JobName).csproj'
+#  variables:
+#    projectfile: '**/*.$(Agent.JobName).csproj'
 
   jobs:
-  - job: PLC
+  - job:
 
-    pool:
-      vmImage: 'windows-latest'
-
-    steps:
-    - task: NuGetToolInstaller@1
-
-    - task: NuGetCommand@2
-      inputs:
-        restoreSolution: '**/*.sln'
-
-    - task: MSBuild@1
-      inputs:
-        solution: 'Source\HitCounterManager\HitCounterManager.csproj'
-        msbuildArchitecture: 'x64'
-        platform: 'AnyCPU'
-        configuration: 'Release'
-        clean: true
-        logProjectEvents: true
-        createLogFile: true
-        logFileVerbosity: 'detailed'
-
-  - job: WPF
-#    dependsOn: PLC
-
-#    strategy:
-#      maxParallel: 3
-#      matrix:
-#        WinWPF:
-#          PlatformLayer: WPF
-#          OSLayer: Windows
+    strategy:
+      maxParallel: 2
+      matrix:
+        WinWPF:
+          PlatformLayer: WPF
+          OSLayer: Windows
 #        WinGTK:
 #          PlatformLayer: GTK
 #          OSLayer: Windows
-#        AnyGTK:
-#          PlatformLayer: GTK
-#          OSLayer: Any
+        AnyGTK:
+          PlatformLayer: GTK
+          OSLayer: Any
     pool:
       vmImage: 'windows-latest'
+
+  variables:
+    projectfile: '**/*.$(PlatformLayer).csproj'
 
     steps:
 
@@ -61,11 +40,6 @@ stages:
     - task: NuGetCommand@2
       inputs:
         restoreSolution: '**/*.sln'
-#    - task: DotNetCoreCLI@2
-#      inputs:
-#        command: 'restore'
-#        projects: '$(projectfile)'
-#        feedsToUse: 'select'
 
     - task: MSBuild@1
       inputs:
@@ -77,14 +51,3 @@ stages:
         logProjectEvents: true
         createLogFile: true
         logFileVerbosity: 'detailed'
-
-#    - task: VSBuild@1
-#      inputs:
-#        solution: '**\*.sln'
-#        vsVersion: '16.0'
-#        platform: 'Any CPU'
-#        configuration: 'Release'
-#        clean: true
-#        msbuildArchitecture: 'x64'
-#        createLogFile: true
-#        logFileVerbosity: 'detailed'
