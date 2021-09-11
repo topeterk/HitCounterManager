@@ -71,3 +71,23 @@ stages:
         rootFolderOrFile: '$(Build.SourcesDirectory)\bin\$(buildConfiguration)\'
         includeRootFolder: false
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)-$(AssemblyInfo.AssemblyVersion)-PreRelease.zip'
+
+#- stage: Deploy
+
+#  jobs:
+  - job:
+    displayName: 'Deploy Artifacts'
+    dependsOn:
+    - WinWPF
+    - AnyGTK
+    pool:
+      vmImage: 'windows-latest'
+
+    steps:
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: PreRelease'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        publishLocation: 'Container'
+        ArtifactName: 'PreRelease'
