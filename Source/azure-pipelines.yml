@@ -77,9 +77,9 @@ stages:
 #  jobs:
   - job: Store
     displayName: 'Deploy Artifacts'
-    dependsOn:
-    - WinWPF
-    - AnyGTK
+#    dependsOn:
+#    - WinWPF
+#    - AnyGTK
     pool:
       vmImage: 'windows-latest'
 
