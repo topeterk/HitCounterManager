@@ -42,7 +42,7 @@ stages:
         restoreSolution: '**/*.sln'
 
     - task: CmdLine@2
-      condition: eq('$(PlatformLayer)', 'GTK')
+      condition: eq(variables['PlatformLayer'], 'GTK')
       inputs:
         script: |
           msiexec /i https://xamarin.azureedge.net/GTKforWindows/Windows/gtk-sharp-2.12.45.msi /quiet
