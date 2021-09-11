@@ -14,7 +14,6 @@ stages:
 
   jobs:
   - job:
-
     strategy:
       maxParallel: 2
       matrix:
@@ -74,12 +73,15 @@ stages:
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)-$(AssemblyInfo.AssemblyVersion)-PreRelease.zip'
 
 - stage: Deploy
+
   jobs:
   - job:
     displayName: 'Deploy Artifacts'
     dependsOn:
-    - WinWPF
-    - AnyGTK
+      - WinWPF
+      - AnyGTK
+    pool:
+      vmImage: 'windows-latest'
 
     steps:
 
