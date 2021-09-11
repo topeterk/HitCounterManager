@@ -12,6 +12,12 @@ pool:
 steps:
 - task: NuGetToolInstaller@1
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
+    feedsToUse: 'select'
+
 - task: VSBuild@1
   inputs:
     solution: '**\*.sln'
