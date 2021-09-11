@@ -6,14 +6,13 @@
 trigger:
 - v2.x
 
-variables:
-  projectfile: '**/*.$(Agent.JobName).csproj'
-
 stages:
 - stage: Build
 
-  jobs:
+  variables:
+    projectfile: '**/*.$(Agent.JobName).csproj'
 
+  jobs:
   - job: PLC
 
     pool:
