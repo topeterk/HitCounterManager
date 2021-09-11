@@ -70,27 +70,22 @@ stages:
       inputs:
         rootFolderOrFile: '$(Build.SourcesDirectory)\Source\$(AssemblyInfo.AssemblyProductAttribute).$(PlatformLayer)\bin\$(buildConfiguration)\'
         includeRootFolder: false
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)-$(AssemblyInfo.AssemblyVersion)-PreRelease.zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(PlatformLayer).$(OSLayer)-$(AssemblyInfo.AssemblyVersionAttribute)-PreRelease.zip'
 
-#- stage: Deploy
+- stage: Deploy
+  dependsOn: Build
 
-#  jobs:
+  jobs:
   - job: Store
     displayName: 'Deploy Artifacts'
-#    dependsOn:
-#    - WinWPF
-#    - AnyGTK
     pool:
       vmImage: 'windows-latest'
 
     steps:
 
-    - task: NuGetToolInstaller@1
-      displayName: NuGet Install
-
-#    - task: PublishBuildArtifacts@1
-#      displayName: 'Publish Artifact: PreRelease'
-#      inputs:
-#        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-#        publishLocation: 'Container'
-#        ArtifactName: 'PreRelease'
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: PreRelease'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        publishLocation: 'Container'
+        ArtifactName: 'PreRelease'
