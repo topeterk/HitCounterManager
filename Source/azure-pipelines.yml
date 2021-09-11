@@ -68,14 +68,14 @@ stages:
     - task: ArchiveFiles@2
       displayName: 'Archive $(Build.ArtifactStagingDirectory)'
       inputs:
-        rootFolderOrFile: '$(Build.SourcesDirectory)\bin\$(buildConfiguration)\'
+        rootFolderOrFile: '$(Build.SourcesDirectory)\Source\$(AssemblyInfo.AssemblyProductAttribute).$(PlatformLayer)\bin\$(buildConfiguration)\'
         includeRootFolder: false
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)-$(AssemblyInfo.AssemblyVersion)-PreRelease.zip'
 
 #- stage: Deploy
 
 #  jobs:
-  - job:
+  - job: Store
     displayName: 'Deploy Artifacts'
     dependsOn:
     - WinWPF
@@ -85,9 +85,12 @@ stages:
 
     steps:
 
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: PreRelease'
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        publishLocation: 'Container'
-        ArtifactName: 'PreRelease'
+    - task: NuGetToolInstaller@1
+      displayName: NuGet Install
+
+#    - task: PublishBuildArtifacts@1
+#      displayName: 'Publish Artifact: PreRelease'
+#      inputs:
+#        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#        publishLocation: 'Container'
+#        ArtifactName: 'PreRelease'
