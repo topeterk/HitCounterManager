@@ -25,8 +25,20 @@ stages:
       inputs:
         restoreSolution: '**/*.sln'
 
+    - task: MSBuild@1
+      inputs:
+        solution: 'Source\HitCounterManager\HitCounterManager.csproj'
+        msbuildArchitecture: 'x64'
+        platform: 'AnyCPU'
+        configuration: 'Release'
+        clean: true
+        logProjectEvents: true
+        createLogFile: true
+        logFileVerbosity: 'detailed'
+
   - job: WPF
-    dependsOn: PLC
+#    dependsOn: PLC
+
 #    strategy:
 #      maxParallel: 3
 #      matrix:
@@ -43,6 +55,12 @@ stages:
       vmImage: 'windows-latest'
 
     steps:
+
+    - task: NuGetToolInstaller@1
+
+    - task: NuGetCommand@2
+      inputs:
+        restoreSolution: '**/*.sln'
 #    - task: DotNetCoreCLI@2
 #      inputs:
 #        command: 'restore'
