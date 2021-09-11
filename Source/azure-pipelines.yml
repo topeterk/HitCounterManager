@@ -41,6 +41,12 @@ stages:
       inputs:
         restoreSolution: '**/*.sln'
 
+    - task: CmdLine@2
+      condition: eq('$(PlatformLayer)', 'GTK')
+      inputs:
+        script: |
+          msiexec /i https://xamarin.azureedge.net/GTKforWindows/Windows/gtk-sharp-2.12.45.msi /quiet
+
     - task: MSBuild@1
       inputs:
         solution: '$(projectfile)'
