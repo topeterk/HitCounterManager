@@ -19,7 +19,7 @@ stages:
       matrix:
         WinWPF:
           PlatformLayer: WPF
-          OSLayer: Windows
+          OSLayer: Win
 #        WinGTK:
 #          PlatformLayer: GTK
 #          OSLayer: Windows
@@ -84,8 +84,8 @@ stages:
 #    steps:
 
     - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: $(OSLayer) $(PlatformLayer) PreRelease'
+      displayName: 'Publish Artifact: PreRelease'
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         publishLocation: 'Container'
-        ArtifactName: '$(OSLayer).$(PlatformLayer).PreRelease'
+        ArtifactName: 'PreRelease'
