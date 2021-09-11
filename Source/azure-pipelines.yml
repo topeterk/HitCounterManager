@@ -30,8 +30,8 @@ stages:
     pool:
       vmImage: 'windows-latest'
 
-  variables:
-    projectfile: '**/*.$(PlatformLayer).csproj'
+    variables:
+      projectfile: '**/*.$(PlatformLayer).csproj'
 
     steps:
 
