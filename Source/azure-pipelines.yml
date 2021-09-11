@@ -70,22 +70,22 @@ stages:
       inputs:
         rootFolderOrFile: '$(Build.SourcesDirectory)\Source\$(AssemblyInfo.AssemblyProductAttribute).$(PlatformLayer)\bin\$(buildConfiguration)\'
         includeRootFolder: false
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(PlatformLayer).$(OSLayer)-$(AssemblyInfo.AssemblyVersionAttribute)-PreRelease.zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(OSLayer).$(PlatformLayer)-$(AssemblyInfo.AssemblyVersionAttribute)-PreRelease.zip'
 
-- stage: Deploy
-  dependsOn: Build
-
-  jobs:
-  - job: Store
-    displayName: 'Deploy Artifacts'
-    pool:
-      vmImage: 'windows-latest'
-
-    steps:
+#- stage: Deploy
+#  dependsOn: Build
+#
+#  jobs:
+#  - job: Store
+#    displayName: 'Deploy Artifacts'
+#    pool:
+#      vmImage: 'windows-latest'
+#
+#    steps:
 
     - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: PreRelease'
+      displayName: 'Publish Artifact: $(OSLayer) $(PlatformLayer) PreRelease'
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         publishLocation: 'Container'
-        ArtifactName: 'PreRelease'
+        ArtifactName: '$(OSLayer).$(PlatformLayer).PreRelease'
