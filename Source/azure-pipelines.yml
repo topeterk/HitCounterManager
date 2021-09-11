@@ -78,8 +78,8 @@ stages:
   - job:
     displayName: 'Deploy Artifacts'
     dependsOn:
-      - WinWPF
-      - AnyGTK
+    - WinWPF
+    - AnyGTK
     pool:
       vmImage: 'windows-latest'
 
