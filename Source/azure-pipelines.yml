@@ -32,6 +32,7 @@ stages:
 
     variables:
       projectfile: '**/*.$(PlatformLayer).csproj'
+      buildConfiguration: 'Release'
 
     steps:
 
@@ -56,7 +57,7 @@ stages:
         solution: '$(projectfile)'
         msbuildArchitecture: 'x64'
         platform: 'AnyCPU'
-        configuration: 'Release'
+        configuration: '$(buildConfiguration)'
         clean: true
         logProjectEvents: true
         createLogFile: true
@@ -64,3 +65,27 @@ stages:
 
     - task: kherzog.AssemblyInfoReader.assembly-info-reader-build-task.AssembyInfoReader@2
       displayName: 'Assembly Variables'
+
+    - task: ArchiveFiles@2
+      displayName: 'Archive $(Build.ArtifactStagingDirectory)'
+      inputs:
+        rootFolderOrFile: '$(Build.SourcesDirectory)\bin\$(buildConfiguration)\'
+        includeRootFolder: false
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)-$(AssemblyInfo.AssemblyVersion)-PreRelease.zip'
+
+- stage: Deploy
+  jobs:
+  - job:
+    displayName: 'Deploy Artifacts'
+    dependsOn:
+    - WinWPF
+    - AnyGTK
+
+    steps:
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: PreRelease'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        publishLocation: 'Container'
+        ArtifactName: 'PreRelease'
