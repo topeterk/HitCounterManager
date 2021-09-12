@@ -32,6 +32,7 @@ stages:
     variables:
       projectfile: '**/*.$(PlatformLayer).csproj'
       buildConfiguration: 'Release'
+      targetDirectory: '$(Build.SourcesDirectory)\Source\$(AssemblyInfo.AssemblyProductAttribute).$(PlatformLayer)\bin\$(buildConfiguration)'
 
     steps:
 
@@ -65,10 +66,24 @@ stages:
     - task: kherzog.AssemblyInfoReader.assembly-info-reader-build-task.AssembyInfoReader@2
       displayName: 'Assembly Variables'
 
+    - task: CopyFiles@2
+      displayName: 'Copy Datafiles'
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)\Source\Datafiles'
+        Contents: '**'
+        TargetFolder: '$(targetDirectory)\'
+
+    - task: CopyFiles@2
+      displayName: 'Copy Designs'
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)\Source\Designs'
+        Contents: '**'
+        TargetFolder: '$(targetDirectory)\Designs'
+
     - task: ArchiveFiles@2
       displayName: 'Archive $(Build.ArtifactStagingDirectory)'
       inputs:
-        rootFolderOrFile: '$(Build.SourcesDirectory)\Source\$(AssemblyInfo.AssemblyProductAttribute).$(PlatformLayer)\bin\$(buildConfiguration)\'
+        rootFolderOrFile: '$(targetDirectory)\'
         includeRootFolder: false
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(OSLayer).$(PlatformLayer)-$(AssemblyInfo.AssemblyVersionAttribute)-PreRelease.zip'
 
