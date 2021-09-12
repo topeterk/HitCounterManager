@@ -63,8 +63,9 @@ stages:
         createLogFile: true
         logFileVerbosity: 'detailed'
 
-    - task: kherzog.AssemblyInfoReader.assembly-info-reader-build-task.AssembyInfoReader@2
-      displayName: 'Assembly Variables'
+    - task: AssembyInfoReader@2
+      inputs:
+        searchPattern: '$(Build.SourcesDirectory)\Source\AssemblyInfo.cs'
 
     - task: CopyFiles@2
       displayName: 'Copy Datafiles'
