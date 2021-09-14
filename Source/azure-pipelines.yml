@@ -15,24 +15,32 @@ stages:
   jobs:
   - job:
     strategy:
-      maxParallel: 2
+      maxParallel: 4
       matrix:
-        WinWPF:
+        WindowsWPF:
           PlatformLayer: WPF
-          OSLayer: Win
-#        WinGTK:
-#          PlatformLayer: GTK
-#          OSLayer: Windows
-        AnyGTK:
+          OSLayer: Windows
+          PoolVmImg: 'windows-latest'
+        WindowsGTK:
+          PlatformLayer: GTK
+          OSLayer: Windows
+          PoolVmImg: 'windows-latest'
+        LinuxGTK:
           PlatformLayer: GTK
           OSLayer: Any
-    pool:
-      vmImage: 'windows-latest'
+          PoolVmImg: 'ubuntu-latest'
+        MacOsGTK:
+          PlatformLayer: GTK
+          OSLayer: Any
+          PoolVmImg: 'macOS-latest'
 
     variables:
       projectfile: '**/*.$(PlatformLayer).csproj'
       buildConfiguration: 'Release'
       targetDirectory: '$(Build.SourcesDirectory)\Source\$(AssemblyInfo.AssemblyProductAttribute).$(PlatformLayer)\bin\$(buildConfiguration)'
+
+    pool:
+      vmImage: '$(PoolVmImg)'
 
     steps:
 
@@ -45,8 +53,8 @@ stages:
         restoreSolution: '**/*.sln'
 
     - task: CmdLine@2
-      displayName: GTK# Install
-      condition: eq(variables['PlatformLayer'], 'GTK')
+      displayName: GTK# Install (Windows)
+      condition: and(eq(variables['OSLayer'], 'Windows'), eq(variables['PlatformLayer'], 'GTK'))
       inputs:
         script: |
           msiexec /i https://xamarin.azureedge.net/GTKforWindows/Windows/gtk-sharp-2.12.45.msi /quiet
@@ -87,7 +95,7 @@ stages:
       inputs:
         rootFolderOrFile: '$(targetDirectory)\'
         includeRootFolder: false
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(OSLayer).$(PlatformLayer)-$(AssemblyInfo.AssemblyVersionAttribute)-PreRelease.zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyInfo.AssemblyVersionAttribute)-PreRelease.zip'
 
 #- stage: Deploy
 #  dependsOn: Build
