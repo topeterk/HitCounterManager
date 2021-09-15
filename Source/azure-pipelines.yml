@@ -68,7 +68,6 @@ stages:
         configuration: '$(buildConfiguration)'
         clean: true
         logProjectEvents: true
-        createLogFile: true
         logFileVerbosity: 'detailed'
 
     - task: AssembyInfoReader@2
