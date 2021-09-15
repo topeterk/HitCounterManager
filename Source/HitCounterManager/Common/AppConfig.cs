@@ -460,7 +460,7 @@ namespace HitCounterManager
             _settings.ProfileSelected = profCtrl.SelectedProfile; // obsolete since version 7 - keep for backwards compatibility
 #endif
 
-            //TODO (working, just disabled for debugging): sm.WriteXML(_settings);
+            sm.WriteXML(_settings);
         }
     }
 }
