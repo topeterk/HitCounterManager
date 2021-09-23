@@ -78,11 +78,6 @@ stages:
         logProjectEvents: true
         logFileVerbosity: 'detailed'
 
-#    - task: AssembyInfoReader@2
-#      displayName: 'Assembly Variables'
-#      inputs:
-#        searchPattern: '$(Build.SourcesDirectory)/Source/AssemblyInfo.cs'
-
     - task: Bash@3
       displayName: 'Assembly Variables'
       env:
@@ -91,8 +86,10 @@ stages:
         targetType: 'inline'
         script: |
           echo "Parsing '$ASSEMBLYFILE' ..."
-          grep AssemblyVersionAttribute "$ASSEMBLYFILE" | tee | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyVersionAttribute]\1,g'
-          grep AssemblyProductAttribute "$ASSEMBLYFILE" | tee | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyProductAttribute]\1,g'
+          grep AssemblyVersionAttribute "$ASSEMBLYFILE" | tee    AssemblyInfoReport.txt | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyVersionAttribute]\1,g'
+          grep AssemblyProductAttribute "$ASSEMBLYFILE" | tee -a AssemblyInfoReport.txt | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyProductAttribute]\1,g'
+          cat AssemblyInfoReport.txt
+          rm -f AssemblyInfoReport.txt
 
     - task: CopyFiles@2
       displayName: 'Copy Datafiles'
