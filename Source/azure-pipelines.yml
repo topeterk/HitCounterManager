@@ -91,10 +91,8 @@ stages:
         targetType: 'inline'
         script: |
           echo "Parsing '$ASSEMBLYFILE' ..."
-          grep AssemblyVersionAttribute "$ASSEMBLYFILE" | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyVersionAttribute]\1,g'
-          echo "AssemblyVersionAttribute = $AssemblyVersionAttribute"
-          grep AssemblyProductAttribute "$ASSEMBLYFILE" | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyProductAttribute]\1,g'
-          echo "AssemblyProductAttribute = $AssemblyProductAttribute"
+          grep AssemblyVersionAttribute "$ASSEMBLYFILE" | tee | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyVersionAttribute]\1,g'
+          grep AssemblyProductAttribute "$ASSEMBLYFILE" | tee | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyProductAttribute]\1,g'
 
     - task: CopyFiles@2
       displayName: 'Copy Datafiles'
