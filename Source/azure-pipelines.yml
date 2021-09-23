@@ -86,11 +86,11 @@ stages:
     - task: Bash@3
       displayName: 'Assembly Variables'
       env:
-        ASSEMBLYFILE: '$(Build.SourcesDirectory)/Source/AssemblyInfo.cs)'
+        ASSEMBLYFILE: '$(Build.SourcesDirectory)/Source/AssemblyInfo.cs'
       inputs:
         targetType: 'inline'
         script: |
-          echo Parsing "$(ASSEMBLYFILE)" ...
+          echo "Parsing '$ASSEMBLYFILE' ..."
           set -x
           VAR=`grep AssemblyVersionAttribute "$ASSEMBLYFILE" | sed -e 's,[^\"]*\"\([^\"]*\)\".*,\1,g'`
           echo "##vso[task.setvariable variable=AssemblyVersionAttribute]$VAR"
