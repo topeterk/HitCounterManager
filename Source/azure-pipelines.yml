@@ -91,11 +91,12 @@ stages:
         targetType: 'inline'
         script: |
           echo "Parsing '$ASSEMBLYFILE' ..."
-          set -x
           VAR=`grep AssemblyVersionAttribute "$ASSEMBLYFILE" | sed -e 's,[^\"]*\"\([^\"]*\)\".*,\1,g'`
+          echo "AssemblyVersionAttribute = $VAR"
           echo "##vso[task.setvariable variable=AssemblyVersionAttribute]$VAR"
           VAR=`grep AssemblyProductAttribute "$ASSEMBLYFILE" | sed -e 's,[^\"]*\"\([^\"]*\)\".*,\1,g'`
-          echo "##vso[task.setvariable variable=AssemblyProductAttribute]$VAR"
+          echo "AssemblyProductAttribute = $VAR"
+          echo '##vso[task.setvariable variable=AssemblyProductAttribute]$VAR'
 
     - task: CopyFiles@2
       displayName: 'Copy Datafiles'
