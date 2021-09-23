@@ -17,14 +17,14 @@ stages:
     strategy:
       maxParallel: 4
       matrix:
-        #WindowsWPF:
-        #  PlatformLayer: WPF
-        #  OSLayer: Windows
-        #  PoolVmImg: 'windows-latest'
-        #WindowsGTK:
-        #  PlatformLayer: GTK
-        #  OSLayer: Windows
-        #  PoolVmImg: 'windows-latest'
+        WindowsWPF:
+          PlatformLayer: WPF
+          OSLayer: Windows
+          PoolVmImg: 'windows-latest'
+        WindowsGTK:
+          PlatformLayer: GTK
+          OSLayer: Windows
+          PoolVmImg: 'windows-latest'
         LinuxGTK:
           PlatformLayer: GTK
           OSLayer: Any
@@ -37,7 +37,7 @@ stages:
     variables:
       projectfile: '**/*.$(PlatformLayer).csproj'
       buildConfiguration: 'Release'
-      targetDirectory: '$(Build.SourcesDirectory)\Source\$(AssemblyInfo.AssemblyProductAttribute).$(PlatformLayer)\bin\$(buildConfiguration)'
+      targetDirectory: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformLayer)/bin/$(buildConfiguration)'
 
     pool:
       vmImage: '$(PoolVmImg)'
@@ -60,23 +60,12 @@ stages:
           msiexec /i https://xamarin.azureedge.net/GTKforWindows/Windows/gtk-sharp-2.12.45.msi /quiet
 
     - task: CmdLine@2
-      displayName: Mono Install (Ubuntu)
+      displayName: GTK# Install (Ubuntu)
       condition: eq(variables['PoolVmImg'], 'ubuntu-latest')
       inputs:
         script: |
           set -x
           sudo apt-get install gtk-sharp2
-
-#    - task: CmdLine@2
-#      displayName: Mono Install (Ubuntu)
-#      condition: eq(variables['PoolVmImg'], 'ubuntu-latest')
-#      inputs:
-#        script: |
-#          sudo apt install gnupg ca-certificates
-#          sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-#          echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
-#          sudo apt update
-#          sudo apt install mono-devel
 
     - task: MSBuild@1
       displayName: Compile
@@ -92,18 +81,19 @@ stages:
 #    - task: AssembyInfoReader@2
 #      displayName: 'Assembly Variables'
 #      inputs:
-#        searchPattern: '$(Build.SourcesDirectory)\Source\AssemblyInfo.cs'
+#        searchPattern: '$(Build.SourcesDirectory)/Source/AssemblyInfo.cs'
 
     - task: Bash@3
       displayName: 'Assembly Variables'
-      #condition: eq(variables['PoolVmImg'], 'macOS-latest')
       inputs:
         targetType: 'inline'
         script: |
           echo Parsing "$(Build.SourcesDirectory)/Source/AssemblyInfo.cs" ...
-          cat "$(Build.SourcesDirectory)/Source/AssemblyInfo.cs"
           set -x
-          grep AssemblyVersionAttribute "$(Build.SourcesDirectory)/Source/AssemblyInfo.cs" | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyVersionAttribute]\1,g'
+          VAR=grep AssemblyVersionAttribute "$(Build.SourcesDirectory)/Source/AssemblyInfo.cs" | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyVersionAttribute]\1,g'
+          echo $VAR
+          VAR=grep AssemblyProductAttribute "$(Build.SourcesDirectory)/Source/AssemblyInfo.cs" | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyProductAttribute]\1,g'
+          echo $VAR
 
     - task: CopyFiles@2
       displayName: 'Copy Datafiles'
