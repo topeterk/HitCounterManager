@@ -60,12 +60,15 @@ stages:
           msiexec /i https://xamarin.azureedge.net/GTKforWindows/Windows/gtk-sharp-2.12.45.msi /quiet
 
     - task: CmdLine@2
-      displayName: Mono MDK Install (MacOS)
-      condition: and(eq(variables['PoolVmImg'], 'macOS-latest'), eq(variables['PlatformLayer'], 'GTK'))
+      displayName: Mono Install (Ubuntu)
+      condition: eq(variables['PoolVmImg'], 'ubuntu-latest')
       inputs:
         script: |
-          sudo installer -pkg https://download.mono-project.com/archive/6.12.0/macos-10-universal/MonoFramework-MDK-6.12.0.122.macos10.xamarin.universal.pkg -target /
-        #/bin/bash -c "$(curl -fsSL https://download.mono-project.com/archive/6.12.0/macos-10-universal/MonoFramework-MDK-6.12.0.122.macos10.xamarin.universal.pkg)"
+          sudo apt install gnupg ca-certificates
+          sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+          echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+          sudo apt update
+          sudo apt install mono-devel
 
     - task: MSBuild@1
       displayName: Compile
@@ -78,10 +81,19 @@ stages:
         logProjectEvents: true
         logFileVerbosity: 'detailed'
 
-    - task: AssembyInfoReader@2
+#    - task: AssembyInfoReader@2
+#      displayName: 'Assembly Variables'
+#      inputs:
+#        searchPattern: '$(Build.SourcesDirectory)\Source\AssemblyInfo.cs'
+
+    - task: Bash@3
       displayName: 'Assembly Variables'
+      #condition: eq(variables['PoolVmImg'], 'macOS-latest')
       inputs:
-        searchPattern: '$(Build.SourcesDirectory)\Source\AssemblyInfo.cs'
+        targetType: 'inline'
+        script: |
+          grep AssemblyVersionAttribute "$(Build.SourcesDirectory)/Source/AssemblyInfo.cs"
+          grep AssemblyVersionAttribute "$(Build.SourcesDirectory)/Source/AssemblyInfo.cs" | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyVersionAttribute]\1,g'
 
     - task: CopyFiles@2
       displayName: 'Copy Datafiles'
@@ -102,7 +114,7 @@ stages:
       inputs:
         rootFolderOrFile: '$(targetDirectory)\'
         includeRootFolder: false
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyInfo.AssemblyVersionAttribute)-PreRelease.zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.zip'
 
 #- stage: Deploy
 #  dependsOn: Build
