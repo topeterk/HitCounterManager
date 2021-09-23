@@ -64,11 +64,19 @@ stages:
       condition: eq(variables['PoolVmImg'], 'ubuntu-latest')
       inputs:
         script: |
-          sudo apt install gnupg ca-certificates
-          sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-          echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
-          sudo apt update
-          sudo apt install mono-devel
+          set -x
+          sudo apt-get install gtk-sharp2
+
+#    - task: CmdLine@2
+#      displayName: Mono Install (Ubuntu)
+#      condition: eq(variables['PoolVmImg'], 'ubuntu-latest')
+#      inputs:
+#        script: |
+#          sudo apt install gnupg ca-certificates
+#          sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+#          echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+#          sudo apt update
+#          sudo apt install mono-devel
 
     - task: MSBuild@1
       displayName: Compile
@@ -92,27 +100,29 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          grep AssemblyVersionAttribute "$(Build.SourcesDirectory)/Source/AssemblyInfo.cs"
+          echo Parsing "$(Build.SourcesDirectory)/Source/AssemblyInfo.cs" ...
+          cat "$(Build.SourcesDirectory)/Source/AssemblyInfo.cs"
+          set -x
           grep AssemblyVersionAttribute "$(Build.SourcesDirectory)/Source/AssemblyInfo.cs" | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyVersionAttribute]\1,g'
 
     - task: CopyFiles@2
       displayName: 'Copy Datafiles'
       inputs:
-        SourceFolder: '$(Build.SourcesDirectory)\Source\Datafiles'
+        SourceFolder: '$(Build.SourcesDirectory)/Source/Datafiles'
         Contents: '**'
-        TargetFolder: '$(targetDirectory)\'
+        TargetFolder: '$(targetDirectory)/'
 
     - task: CopyFiles@2
       displayName: 'Copy Designs'
       inputs:
-        SourceFolder: '$(Build.SourcesDirectory)\Source\Designs'
+        SourceFolder: '$(Build.SourcesDirectory)/Source/Designs'
         Contents: '**'
-        TargetFolder: '$(targetDirectory)\Designs'
+        TargetFolder: '$(targetDirectory)/Designs'
 
     - task: ArchiveFiles@2
       displayName: 'Archive $(Build.ArtifactStagingDirectory)'
       inputs:
-        rootFolderOrFile: '$(targetDirectory)\'
+        rootFolderOrFile: '$(targetDirectory)/'
         includeRootFolder: false
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.zip'
 
