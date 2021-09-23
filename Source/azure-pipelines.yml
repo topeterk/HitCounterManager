@@ -90,9 +90,10 @@ stages:
         script: |
           echo Parsing "$(Build.SourcesDirectory)/Source/AssemblyInfo.cs" ...
           set -x
-          VAR=grep AssemblyVersionAttribute "$(Build.SourcesDirectory)/Source/AssemblyInfo.cs" | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyVersionAttribute]\1,g'
+          ASSEMBLYFILE="$(Build.SourcesDirectory)/Source/AssemblyInfo.cs"
+          VAR=`grep AssemblyVersionAttribute $ASSEMBLYFILE | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyVersionAttribute]\1,g'`
           echo $VAR
-          VAR=grep AssemblyProductAttribute "$(Build.SourcesDirectory)/Source/AssemblyInfo.cs" | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyProductAttribute]\1,g'
+          VAR=`grep AssemblyProductAttribute $ASSEMBLYFILE | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyProductAttribute]\1,g'`
           echo $VAR
 
     - task: CopyFiles@2
