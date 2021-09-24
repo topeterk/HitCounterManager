@@ -32,13 +32,31 @@ namespace HitCounterManager.WPF.PlatformLayer
     public class PlatformLayer : IPlatformLayer
     {
         private readonly MainWindow Window;
+        private bool WindowValid;
+        private Point LastPosition;
+        private Size LastSize;
+        private bool LastTitleBarOnScreen;
 
-        public PlatformLayer(MainWindow window) { Window = window; }
+        public PlatformLayer(MainWindow window)
+        {
+            Window = window;
+            WindowValid = true;
+            Window.Closed += Window_Closed;
+        }
+        ~PlatformLayer() => Window.Closed -= Window_Closed;
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            LastSize = new Size(Window.Width, Window.Height);
+            LastPosition = new Point(Window.Left, Window.Top);
+            LastTitleBarOnScreen = IsTitleBarOnScreen((int)LastPosition.X, (int)LastPosition.Y, (int)LastSize.Width);
+            WindowValid = false;
+        }
 
         public string Name { get => "WPF"; }
         public Point ApplicationWindowPosition
         {
-            get => new Point(Window.Left, Window.Top);
+            get => (WindowValid ? new Point(Window.Left, Window.Top) : LastPosition);
             set
             {
                 Window.Left = value.X;
@@ -47,7 +65,7 @@ namespace HitCounterManager.WPF.PlatformLayer
         }
         public Size ApplicationWindowSize
         {
-            get => new Size(Window.Width, Window.Height);
+            get => (WindowValid ? new Size(Window.Width, Window.Height) : LastSize);
             set
             {
                 Window.Width = value.Width;
@@ -65,8 +83,10 @@ namespace HitCounterManager.WPF.PlatformLayer
         }
 
         public IntPtr ApplicationWindowHandle { get => new WindowInteropHelper(Window).Handle; }
-        public bool IsTitleBarOnScreen(int Left, int Top, int Width, int Threshold, int RectSize)
+        public bool IsTitleBarOnScreen(int Left, int Top, int Width, int Threshold = 10, int RectSize = 30)
         {
+            if (!WindowValid) return LastTitleBarOnScreen; // Workaround: It seems Screen.AllScreens is disappearing all of a sudden after Window was closed!
+
             System.Drawing.Rectangle rectLeft = new System.Drawing.Rectangle(Left + Threshold, Top + Threshold, RectSize, RectSize); // upper left corner
             System.Drawing.Rectangle rectRight = new System.Drawing.Rectangle(Left + Width - Threshold - RectSize, Top + Threshold, RectSize, RectSize); // upper right corner
             foreach (Screen screen in Screen.AllScreens)

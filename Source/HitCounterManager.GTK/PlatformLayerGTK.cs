@@ -70,7 +70,7 @@ namespace HitCounterManager.GTK.PlatformLayer
         private bool _ApplicationWindowTopMost = false;
         public bool ApplicationWindowTopMost { get => _ApplicationWindowTopMost; set => Window.KeepAbove = _ApplicationWindowTopMost = value; }
 
-        public bool IsTitleBarOnScreen(int Left, int Top, int Width, int Threshold, int RectSize)
+        public bool IsTitleBarOnScreen(int Left, int Top, int Width, int Threshold = 10, int RectSize = 30)
         {
             Gdk.Rectangle rectLeft = new Gdk.Rectangle(Left + Threshold, Top + Threshold, RectSize, RectSize); // upper left corner
             Gdk.Rectangle rectRight = new Gdk.Rectangle(Left + Width - Threshold - RectSize, Top + Threshold, RectSize, RectSize); // upper right corner

@@ -393,22 +393,19 @@ namespace HitCounterManager
         public void SaveSettings()
         {
             ShortcutsKey key = new ShortcutsKey();
-#if TODO
+
             // Remember window position and sates
-            if (this.WindowState == FormWindowState.Normal) // Don't save window size and location when maximized or minimized
+            Point position = PlatformLayer.ApplicationWindowPosition;
+            Size size = PlatformLayer.ApplicationWindowSize;
+            _settings.MainWidth = (int)size.Width;
+            _settings.MainHeight = (int)size.Height;
+            if (PlatformLayer.IsTitleBarOnScreen((int)position.X, (int)position.Y, (int)size.Width))
             {
-                _settings.MainWidth = this.Width;
-                _settings.MainHeight = this.Height;
-                if (Program.IsOnScreen(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth))
-                {
-                    // remember values when not outside of screen
-                    _settings.MainPosX = this.Left;
-                    _settings.MainPosY = this.Top;
-                }
+                // remember values when not outside of screen
+                _settings.MainPosX = (int)position.X;
+                _settings.MainPosY = (int)position.Y;
+
             }
-            _settings.ReadOnlyMode = this.ReadOnlyMode;
-            _settings.AlwaysOnTop = this.TopMost;
-#endif
             _settings.DarkMode = (Current.UserAppTheme == OSAppTheme.Dark);
 
             // Store hot keys..
