@@ -24,11 +24,51 @@
 -->
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HitCounterManager.App"
-             >
+             x:Class="HitCounterManager.App">
+
     <Application.Resources>
         <!-- https://www.javaer101.com/en/article/19770490.html -->
         <!-- <local:ViewModel x:Key="sharedViewModel" /> -->
         <!-- DataContext="{StaticResource sharedViewModel}" -->
+
+
+
+        <!-- TODO: ColorThemes, but GTK crashes when changed on the fly (open About, close it, press darkmodetoggle) -->
+        
+        <Color x:Key="TransparentColor">Transparent</Color>
+
+        <!-- Light colors -->
+        <Color x:Key="LightPageBackgroundColor">White</Color>
+        <Color x:Key="LightNavigationBarColor">WhiteSmoke</Color>
+        <Color x:Key="LightPrimaryColor">Red</Color>
+        <Color x:Key="LightSecondaryColor">Black</Color>
+        <Color x:Key="LightPrimaryTextColor">Black</Color>
+        <Color x:Key="LightSecondaryTextColor">White</Color>
+        <Color x:Key="LightTertiaryTextColor">Gray</Color>
+
+        <!-- Dark colors -->
+        <Color x:Key="DarkPageBackgroundColor">Black</Color>
+        <Color x:Key="DarkNavigationBarColor">Teal</Color>
+        <Color x:Key="DarkPrimaryColor">Teal</Color>
+        <Color x:Key="DarkSecondaryColor">White</Color>
+        <Color x:Key="DarkPrimaryTextColor">White</Color>
+        <Color x:Key="DarkSecondaryTextColor">White</Color>
+        <Color x:Key="DarkTertiaryTextColor">WhiteSmoke</Color>
+
+        <!-- Style="{StaticResource ButtonStyle}" -->
+        <Style x:Key="ButtonStyle"
+            TargetType="Button">
+            <Setter Property="BackgroundColor"
+                Value="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" />
+            <Setter Property="TextColor"
+                Value="{AppThemeBinding Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}" />
+            <Setter Property="HeightRequest"
+                Value="45" />
+            <Setter Property="WidthRequest"
+                Value="190" />
+            <Setter Property="CornerRadius"
+                Value="18" />
+        </Style>
+
     </Application.Resources>
 </Application>

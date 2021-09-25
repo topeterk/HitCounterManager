@@ -29,43 +29,12 @@
              x:Class="HitCounterManager.Views.AboutPage"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
-             BackgroundColor="{AppThemeBinding Default=BurlyWood, Dark=Red}">
+             BackgroundColor="{AppThemeBinding Default=BurlyWood, Dark=Gray}">
 
     <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-        <Button Clicked="Back_Clicked" WidthRequest="200" Text="Back" BackgroundColor="{AppThemeBinding Dark=DarkBlue, Light=Green}"/>
+
         <Label Text="{x:Static common:Statics.ApplicationTitle, Mode=OneWay}" HorizontalOptions="CenterAndExpand"/>
-        <Label Text="{OnPlatform 250, iOS=200, Android=300, UWP=400, GTK=aGTKa, WPF=aWPFa}" HorizontalOptions="CenterAndExpand">
-        </Label>
-        <Label Text="s" HorizontalOptions="CenterAndExpand">
-            <Label.Text>
-                <OnPlatform x:TypeArguments="x:String" Default="default">
-                    <On Platform="Default">
-                        <On.Value>-Default-</On.Value>
-                    </On>
-                    <On Platform="WPF">
-                        <On.Value>-WPF-</On.Value>
-                    </On>
-                </OnPlatform>
-            </Label.Text>
-        </Label>
-        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
-            <Label.Text>
-                <MultiBinding StringFormat="{}{0}{1}">
-                    <Binding Source="OS Layer: " />
-                    <Binding Source="{x:Static common:Statics.CurrentOsLayerName, Mode=OneWay}" />
-                </MultiBinding>
-            </Label.Text>
-        </Label>
-        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
-            <Label.Text>
-                <MultiBinding StringFormat="{}{0}{1}">
-                    <Binding Source="Platform Layer: " />
-                    <Binding Source="{x:Static common:Statics.CurrentPlatformLayerName, Mode=OneWay}" />
-                </MultiBinding>
-            </Label.Text>
-        </Label>
-        <Button Clicked="Back_Clicked" WidthRequest="200" Text="Back"/>
-        <Button Clicked="PopBack_Clicked" WidthRequest="200" Text="Pop"/>
+
         <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <Label HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Label.FormattedText>
@@ -201,5 +170,7 @@ URL: https://pixabay.com/de/service/license/
                 </Label.FormattedText>
             </Label>
         </ScrollView>
+
+        <Button Padding="4" Clicked="PopBack_Clicked" WidthRequest="200" Text="OK" HorizontalOptions="End"/>
     </StackLayout>
 </ContentPage>

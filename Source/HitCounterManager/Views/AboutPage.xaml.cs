@@ -32,8 +32,6 @@ namespace HitCounterManager.Views
             InitializeComponent();
         }
 
-        public event EventHandler OnBack;
-        private void Back_Clicked(object sender, EventArgs e) => OnBack?.Invoke(this, new EventArgs());
         private void PopBack_Clicked(object sender, EventArgs e) => Navigation.PopModalAsync();
     }
 }
