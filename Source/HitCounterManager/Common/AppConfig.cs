@@ -406,7 +406,6 @@ namespace HitCounterManager
                 _settings.MainPosY = (int)position.Y;
 
             }
-            _settings.DarkMode = (Current.UserAppTheme == OSAppTheme.Dark);
 
             // Store hot keys..
             if (sc.IsGlobalHotKeySupported)

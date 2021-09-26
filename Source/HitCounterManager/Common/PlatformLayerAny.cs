@@ -119,6 +119,11 @@ namespace HitCounterManager.Common.PlatformLayer
         /// </summary>
         /// <param name="HookHandle">Handle that was returned by HookInstall</param>
         void HookUninstall(HookHandle HookHandle);
+
+        /// <summary>
+        /// Indicates if this platform is capable of changing the app theme on the fly
+        /// </summary>
+        bool AppThemeBindingSupport { get; }
     }
 
     #endregion
@@ -126,15 +131,16 @@ namespace HitCounterManager.Common.PlatformLayer
     #region Default Platform Layer
     public class PlatformLayerDefault : IPlatformLayer
     {
-        public string Name { get => "PCL"; }
+        public string Name => "PCL";
         public Point ApplicationWindowPosition { get; set; }
         public Size ApplicationWindowSize { get; set;}
         public Size ApplicationWindowMinSize { get; set; }
-        public IntPtr ApplicationWindowHandle { get => IntPtr.Zero; }
+        public IntPtr ApplicationWindowHandle => IntPtr.Zero;
         public bool IsTitleBarOnScreen(int Left, int Top, int Width, int Threshold, int RectSize) { return true; }
         public HookHandle HookInstall(HookProc HookProc, IntPtr WindowHandle) { return null; }
         public void HookUninstall(HookHandle HookHandle) { return; }
         public bool ApplicationWindowTopMost { get; set; }
+        public bool AppThemeBindingSupport => true;
     }
     #endregion
 }

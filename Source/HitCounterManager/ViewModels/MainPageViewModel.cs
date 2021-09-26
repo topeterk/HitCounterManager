@@ -42,6 +42,14 @@ namespace HitCounterManager.ViewModels
                 app.Settings.AlwaysOnTop = app.PlatformLayer.ApplicationWindowTopMost = !app.PlatformLayer.ApplicationWindowTopMost;
                 CallPropertyChanged(this, nameof(AlwaysOnTop));
             });
+            ToggleDarkMode = new Command(() => {
+                App app = App.CurrentApp;
+                app.Settings.DarkMode = !app.Settings.DarkMode;
+                if (app.PlatformLayer.AppThemeBindingSupport)
+                    app.UserAppTheme = app.Settings.DarkMode ? OSAppTheme.Dark : OSAppTheme.Light;
+                else
+                    app.MainPage.DisplayAlert("Dark Mode changed", "Please restart the application that changes take effect. Mode will be set to: " + (app.Settings.DarkMode ? "Dark" : "Light") + "!", "OK");
+            });
         }
 
         public bool AlwaysOnTop { get => App.CurrentApp.PlatformLayer.ApplicationWindowTopMost; }
@@ -54,6 +62,6 @@ namespace HitCounterManager.ViewModels
         public ICommand CheckUpdatesOnline { get; } = new Command(() => App.CurrentApp.CheckAndShowUpdates());
 
         public ICommand ToggleAlwaysOnTop { get; }
-        public ICommand ToggleDarkMode { get; } = new Command(() => App.Current.UserAppTheme = (App.Current.UserAppTheme == OSAppTheme.Dark ? OSAppTheme.Light : OSAppTheme.Dark));
+        public ICommand ToggleDarkMode { get; }
     }
 }

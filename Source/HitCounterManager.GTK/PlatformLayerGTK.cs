@@ -84,7 +84,10 @@ namespace HitCounterManager.GTK.PlatformLayer
             }
             return false;
         }
+
         public HookHandle HookInstall(HookProc HookProc, IntPtr WindowHandle) { return null; }
         public void HookUninstall(HookHandle HookHandle) { return; }
+ 
+        public bool AppThemeBindingSupport => false; // Crashes when AppThemeBinding updates color or style properties of already closed but not yet disposed pages.
     }
 }

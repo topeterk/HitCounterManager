@@ -111,5 +111,7 @@ namespace HitCounterManager.WPF.PlatformLayer
             // Most likey window is already destroyed, so remove it just when window is still alive
             HwndSource.FromHwnd(HookHandle.WindowHandle)?.RemoveHook((HwndSourceHook)HookHandle.HookProcObj);
         }
+
+        public bool AppThemeBindingSupport => true;
     }
 }
