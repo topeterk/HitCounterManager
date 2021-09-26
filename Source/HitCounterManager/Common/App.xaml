@@ -31,43 +31,31 @@
         <!-- <local:ViewModel x:Key="sharedViewModel" /> -->
         <!-- DataContext="{StaticResource sharedViewModel}" -->
 
+        <!-- https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/theming/theming -->
+        <!-- https://docs.microsoft.com/de-de/dotnet/api/system.windows.media.colors?view=net-5.0 -->
+        <Color x:Key="AlmostBlack">#FF222222</Color>
+
+        <Color x:Key="ImageButtonBackgroundLight">Transparent</Color>
+        <Color x:Key="ImageButtonBackgroundDark">DimGray</Color>
 
 
-        <!-- TODO: ColorThemes, but GTK crashes when changed on the fly (open About, close it, press darkmodetoggle) -->
-        
-        <Color x:Key="TransparentColor">Transparent</Color>
-
-        <!-- Light colors -->
-        <Color x:Key="LightPageBackgroundColor">White</Color>
-        <Color x:Key="LightNavigationBarColor">WhiteSmoke</Color>
-        <Color x:Key="LightPrimaryColor">Red</Color>
-        <Color x:Key="LightSecondaryColor">Black</Color>
-        <Color x:Key="LightPrimaryTextColor">Black</Color>
-        <Color x:Key="LightSecondaryTextColor">White</Color>
-        <Color x:Key="LightTertiaryTextColor">Gray</Color>
-
-        <!-- Dark colors -->
-        <Color x:Key="DarkPageBackgroundColor">Black</Color>
-        <Color x:Key="DarkNavigationBarColor">Teal</Color>
-        <Color x:Key="DarkPrimaryColor">Teal</Color>
-        <Color x:Key="DarkSecondaryColor">White</Color>
-        <Color x:Key="DarkPrimaryTextColor">White</Color>
-        <Color x:Key="DarkSecondaryTextColor">White</Color>
-        <Color x:Key="DarkTertiaryTextColor">WhiteSmoke</Color>
-
-        <!-- Style="{StaticResource ButtonStyle}" -->
-        <Style x:Key="ButtonStyle"
-            TargetType="Button">
-            <Setter Property="BackgroundColor"
-                Value="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" />
-            <Setter Property="TextColor"
-                Value="{AppThemeBinding Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}" />
-            <Setter Property="HeightRequest"
-                Value="45" />
-            <Setter Property="WidthRequest"
-                Value="190" />
-            <Setter Property="CornerRadius"
-                Value="18" />
+        <Style TargetType="Label" ApplyToDerivedTypes="True">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Default=Transparent, Dark=Transparent}" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Default=Black, Dark=White}" />
+        </Style>
+        <Style TargetType="Button" ApplyToDerivedTypes="True">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Default=DarkGray, Dark=DimGray}" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Default=Black, Dark=Black}" />
+            <Setter Property="BorderColor" Value="{AppThemeBinding Default=Black, Dark=LightGray}" />
+        </Style>
+        <Style TargetType="Entry" ApplyToDerivedTypes="True">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Default=White, Dark=WhiteSmoke}" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Default=Black, Dark=Black}" />
+        </Style>
+        <Style TargetType="Picker" ApplyToDerivedTypes="True">
+            <!-- Workaround: GTK fails setting a background color as a Picker uses ViewRenderer instead of VisualElementRenderer and therefore cannot be set. We ignore that for now -->
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Default=White, Dark=WhiteSmoke}" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Default=Black, Dark=Black}" />
         </Style>
 
     </Application.Resources>

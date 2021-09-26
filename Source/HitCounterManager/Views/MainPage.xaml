@@ -32,7 +32,7 @@
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
              MinWidth="530" MinHeight="400"
-             BackgroundColor="{AppThemeBinding Default=Beige, Dark=Gray}">
+             BackgroundColor="{AppThemeBinding Default=Beige, Dark=Black}">
 
     <!-- TODO: https://social.msdn.microsoft.com/Forums/en-US/c2e32fe8-bd31-4d5d-a386-5a52676d9e4a/appthemebinding-not-working?forum=xamarinforms -->
 
@@ -46,7 +46,7 @@
             <ControlTemplate x:Key="FramedImageButton">
                 <RelativeLayout Margin="0">
                     <!-- https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/imagebutton#imagebutton-appearance -->
-                    <BoxView Color="Silver" CornerRadius="5"
+                    <BoxView Color="{AppThemeBinding Default=DimGray, Dark=WhiteSmoke}" CornerRadius="5"
                          RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=0}" 
                          RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"
                          RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=0}"
@@ -74,7 +74,8 @@
         <local:MainPageViewModel />
     </ContentPage.BindingContext>
 
-    <ScrollView Padding="0,0,20,0" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+    <ScrollView Padding="0,0,30,0" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
         <StackLayout Margin="0,10,0,10" VerticalOptions="StartAndExpand" HorizontalOptions="Center">
 
             <Grid Padding="0" Margin="0" RowSpacing="0" ColumnSpacing="4" HorizontalOptions="FillAndExpand">
@@ -104,42 +105,42 @@
                     <ColumnDefinition Width="20" />
                 </Grid.ColumnDefinitions>
 
-                <RelativeLayout Grid.Column="0" Margin="0" BackgroundColor="Beige" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <RelativeLayout Grid.Column="0" Margin="0" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-settings-20.png}" >
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="NavigateToSettings" NumberOfTapsRequired="1" />
                         </Image.GestureRecognizers>
                     </Image>
                 </RelativeLayout>
-                <RelativeLayout Grid.Column="1" Margin="0" BackgroundColor="Beige" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <RelativeLayout Grid.Column="1" Margin="0" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-save-20.png}" >
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SaveToDisk}" NumberOfTapsRequired="1" />
                         </Image.GestureRecognizers>
                     </Image>
                 </RelativeLayout>
-                <RelativeLayout Grid.Column="2" Margin="0" BackgroundColor="Beige" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <RelativeLayout Grid.Column="2" Margin="0" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-website-20.png}" >
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding OpenWebsiteHome}" NumberOfTapsRequired="1" />
                         </Image.GestureRecognizers>
                     </Image>
                 </RelativeLayout>
-                <RelativeLayout Grid.Column="3" Margin="0" BackgroundColor="Beige" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <RelativeLayout Grid.Column="3" Margin="0" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.20p_logo_black.png}" >
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding OpenWebsiteTeamHitless}" NumberOfTapsRequired="1" />
                         </Image.GestureRecognizers>
                     </Image>
                 </RelativeLayout>
-                <RelativeLayout Grid.Column="4" Margin="0" BackgroundColor="Beige" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <RelativeLayout Grid.Column="4" Margin="0" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-cloud-20.png}" >
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding CheckUpdatesOnline}" NumberOfTapsRequired="1" />
                         </Image.GestureRecognizers>
                     </Image>
                 </RelativeLayout>
-                <RelativeLayout Grid.Column="5" Margin="0" BackgroundColor="Beige" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <RelativeLayout Grid.Column="5" Margin="0" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-about-20.png}" >
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="NavigateToAbout" NumberOfTapsRequired="1" />
@@ -158,7 +159,7 @@
                             <Setter Property="BackgroundColor" Value="IndianRed"/>
                         </DataTrigger>
                         <DataTrigger TargetType="RelativeLayout" Binding="{Binding Source={x:Reference profileView}, Path=BindingContext.IsReadOnly}" Value="false">
-                            <Setter Property="BackgroundColor" Value="Beige"/>
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}"/>
                         </DataTrigger>
                     </RelativeLayout.Triggers>
                 </RelativeLayout>
@@ -173,7 +174,7 @@
                             <Setter Property="BackgroundColor" Value="IndianRed"/>
                         </DataTrigger>
                         <DataTrigger TargetType="RelativeLayout" Binding="{Binding Source={x:Reference profileView}, Path=BindingContext.IsReadOnly}" Value="false">
-                            <Setter Property="BackgroundColor" Value="Beige"/>
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}"/>
                         </DataTrigger>
                     </RelativeLayout.Triggers>
                 </RelativeLayout>
@@ -188,7 +189,7 @@
                             <Setter Property="BackgroundColor" Value="IndianRed"/>
                         </DataTrigger>
                         <DataTrigger TargetType="RelativeLayout" Binding="{Binding Source={x:Reference profileView}, Path=BindingContext.IsReadOnly}" Value="false">
-                            <Setter Property="BackgroundColor" Value="Beige"/>
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}"/>
                         </DataTrigger>
                     </RelativeLayout.Triggers>
                 </RelativeLayout>
@@ -203,12 +204,12 @@
                             <Setter Property="BackgroundColor" Value="IndianRed"/>
                         </DataTrigger>
                         <DataTrigger TargetType="RelativeLayout" Binding="{Binding Source={x:Reference profileView}, Path=BindingContext.IsReadOnly}" Value="false">
-                            <Setter Property="BackgroundColor" Value="Beige"/>
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}"/>
                         </DataTrigger>
                     </RelativeLayout.Triggers>
                 </RelativeLayout>
-                
-                <RelativeLayout Grid.Column="12" Margin="0" BackgroundColor="Beige" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <RelativeLayout Grid.Column="12" Margin="0" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-counter-20.png}" >
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="NavigateToSetAttempts" NumberOfTapsRequired="1" />
@@ -226,7 +227,7 @@
                             <Setter Property="BackgroundColor" Value="IndianRed"/>
                         </DataTrigger>
                         <DataTrigger TargetType="RelativeLayout" Binding="{Binding Source={x:Reference profileView}, Path=BindingContext.IsReadOnly}" Value="false">
-                            <Setter Property="BackgroundColor" Value="Beige"/>
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}"/>
                         </DataTrigger>
                     </RelativeLayout.Triggers>
                 </RelativeLayout>
@@ -241,7 +242,7 @@
                             <Setter Property="BackgroundColor" Value="IndianRed"/>
                         </DataTrigger>
                         <DataTrigger TargetType="RelativeLayout" Binding="{Binding Source={x:Reference profileView}, Path=BindingContext.IsReadOnly}" Value="false">
-                            <Setter Property="BackgroundColor" Value="Beige"/>
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}"/>
                         </DataTrigger>
                     </RelativeLayout.Triggers>
                 </RelativeLayout>
@@ -256,7 +257,7 @@
                             <Setter Property="BackgroundColor" Value="IndianRed"/>
                         </DataTrigger>
                         <DataTrigger TargetType="RelativeLayout" Binding="{Binding Source={x:Reference profileView}, Path=BindingContext.IsReadOnly}" Value="false">
-                            <Setter Property="BackgroundColor" Value="Beige"/>
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}"/>
                         </DataTrigger>
                     </RelativeLayout.Triggers>
                 </RelativeLayout>
@@ -272,7 +273,7 @@
                             <Setter Property="BackgroundColor" Value="Salmon"/>
                         </DataTrigger>
                         <DataTrigger TargetType="RelativeLayout" Binding="{Binding Source={x:Reference profileView}, Path=BindingContext.IsReadOnly}" Value="false">
-                            <Setter Property="BackgroundColor" Value="Beige"/>
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}"/>
                         </DataTrigger>
                     </RelativeLayout.Triggers>
                 </RelativeLayout>
@@ -287,11 +288,11 @@
                             <Setter Property="BackgroundColor" Value="LimeGreen"/>
                         </DataTrigger>
                         <DataTrigger TargetType="RelativeLayout" Binding="{Binding AlwaysOnTop}" Value="false">
-                            <Setter Property="BackgroundColor" Value="Beige"/>
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}"/>
                         </DataTrigger>
                     </RelativeLayout.Triggers>
                 </RelativeLayout>
-                <RelativeLayout Grid.Column="19" Margin="0" BackgroundColor="Beige" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <RelativeLayout Grid.Column="19" Margin="0" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-taschenlampe-20.png}" >
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ToggleDarkMode}" NumberOfTapsRequired="1" />
@@ -314,10 +315,10 @@
                     <ColumnDefinition Width="76" />
                     <ColumnDefinition Width="76" />
                 </Grid.ColumnDefinitions>
-                <views:FramedImageButton Grid.Column="0" ControlTemplate="{StaticResource FramedImageButton}" MainColor="Salmon"
+                <views:FramedImageButton Grid.Column="0" ControlTemplate="{StaticResource FramedImageButton}" MainColor="IndianRed"
                         ImgSrc="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-repeat-one-32.png}"
                         OnClickCommand="{Binding Source={x:Reference profileView}, Path=BindingContext.ProfileReset}" />
-                <views:FramedImageButton Grid.Column="1" ControlTemplate="{StaticResource FramedImageButton}" MainColor="LightYellow"
+                <views:FramedImageButton Grid.Column="1" ControlTemplate="{StaticResource FramedImageButton}" MainColor="Tan"
                         ImgSrc="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-trophy-32.png}"
                         OnClickCommand="{Binding Source={x:Reference profileView}, Path=BindingContext.ProfilePB}" />
                 <views:FramedImageButton Grid.Column="2" ControlTemplate="{StaticResource FramedImageButton}" MainColor="Gold"

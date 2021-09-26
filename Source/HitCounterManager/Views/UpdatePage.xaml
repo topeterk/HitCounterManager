@@ -29,7 +29,7 @@
              x:Class="HitCounterManager.Views.UpdatePage"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
-             BackgroundColor="{AppThemeBinding Default=LightSalmon, Dark=Red}">
+             BackgroundColor="{AppThemeBinding Default=BurlyWood, Dark={StaticResource AlmostBlack}}">
 
     <!-- TODO: Actual Logic behind all elements -->
 
@@ -61,7 +61,8 @@
             <Label  Margin="0" Text="Check for updates on startup" HorizontalOptions="Start" VerticalOptions="Center" />
         </StackLayout>
 
-        <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Cornsilk">
+        <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+        <ScrollView Padding="0,0,30,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
             <Label HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Text="{Binding FullChangeLog, Mode=OneWay}" />
         </ScrollView>
 

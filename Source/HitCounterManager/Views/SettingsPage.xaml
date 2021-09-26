@@ -29,7 +29,7 @@
              x:Class="HitCounterManager.Views.SettingsPage"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
-             BackgroundColor="{AppThemeBinding Default=LightSalmon, Dark=Red}">
+             BackgroundColor="{AppThemeBinding Default=BurlyWood, Dark={StaticResource AlmostBlack}}">
 
     <!-- TODO: Tooltips -->
     <!-- TODO: Actual logic behind all settings (All settings can be changed but they do nothing yet) -->
@@ -38,10 +38,12 @@
         <local:SettingsViewModel />
     </ContentPage.BindingContext>
 
-    <StackLayout Margin="10" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <Label HorizontalOptions="CenterAndExpand" Text="SETTINGS"/>
-        <ScrollView Padding="10,0,20,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Cornsilk">
+        <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+        <ScrollView Padding="0,0,30,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+
+            <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
                 <Label HorizontalOptions="CenterAndExpand" Text="GLOBAL SHORTCUTS" />
                 <Label HorizontalOptions="StartAndExpand" Text="Global hot keys not supported in this version!" TextColor="Red"
@@ -87,11 +89,11 @@
                     <Switch Grid.Row="6" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutPBEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Label  Grid.Row="6" Grid.Column="1" Margin="0" Text="Set PB:" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Button Grid.Row="6" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_PB" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutPBRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Entry  Grid.Row="6" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutPBDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="LightYellow" />
+                    <Entry  Grid.Row="6" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutPBDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="Tan" />
                     <Switch Grid.Row="7" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutResetEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Label  Grid.Row="7" Grid.Column="1" Margin="0" Text="Reset:" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Button Grid.Row="7" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_Reset" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutResetRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Entry  Grid.Row="7" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutResetDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="Salmon" />
+                    <Entry  Grid.Row="7" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutResetDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="IndianRed" />
 
                     <Switch Grid.Row="8" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutTimerStartEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Label  Grid.Row="8" Grid.Column="1" Margin="0" Text="Start timer:" HorizontalOptions="Start" VerticalOptions="Center" />
@@ -191,7 +193,7 @@
                     <Entry  Grid.Row="0" Grid.Column="1" Margin="0" Grid.ColumnSpan="2" Text="{Binding StyleFontName, Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
                     <Label  Grid.Row="1" Grid.Column="0" Margin="0" Text="Font (URL):" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Entry  Grid.Row="1" Grid.Column="1" Margin="0" Text="{Binding StyleFontUrl, Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
-                    <RelativeLayout Grid.Row="1" Grid.Column="2" Margin="0" BackgroundColor="Beige" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                    <RelativeLayout Grid.Row="1" Grid.Column="2" Margin="0" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                         <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-search-in-browser-20.png}" >
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding WebOpenGoogleFontsUrl}" NumberOfTapsRequired="1" />
@@ -335,8 +337,6 @@
                     </Label.FormattedText>
                 </Label>
 
-                <Button Clicked="PopBack_Clicked" Padding="4" WidthRequest="200" Text="OK" HorizontalOptions="End"/>
-
                 <!-- TESTING STUFF -->
 
                 <Label HorizontalOptions="CenterAndExpand" Text="TESTINGS STUFF"/>
@@ -362,5 +362,7 @@
                 <Switch x:Name="xamlSwitch" IsToggled="False" OnColor="Orange" ThumbColor="Green" HorizontalOptions="CenterAndExpand" />
             </StackLayout>
         </ScrollView>
+
+        <Button Padding="4" Clicked="PopBack_Clicked" WidthRequest="200" Text="OK" HorizontalOptions="End"/>
     </StackLayout>
 </ContentPage>

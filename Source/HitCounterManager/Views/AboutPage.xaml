@@ -29,13 +29,14 @@
              x:Class="HitCounterManager.Views.AboutPage"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
-             BackgroundColor="{AppThemeBinding Default=BurlyWood, Dark=Gray}">
+             BackgroundColor="{AppThemeBinding Default=BurlyWood, Dark={StaticResource AlmostBlack}}">
 
     <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
         <Label Text="{x:Static common:Statics.ApplicationTitle, Mode=OneWay}" HorizontalOptions="CenterAndExpand"/>
 
-        <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+        <ScrollView Padding="0,0,30,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
             <Label HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Label.FormattedText>
                     <FormattedString>

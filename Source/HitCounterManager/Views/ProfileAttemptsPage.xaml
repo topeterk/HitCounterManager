@@ -29,7 +29,7 @@
              x:Class="HitCounterManager.Views.ProfileAttemptsPage"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
-             BackgroundColor="{AppThemeBinding Default=LightSalmon, Dark=Red}">
+             BackgroundColor="{AppThemeBinding Default=BurlyWood, Dark={StaticResource AlmostBlack}}">
 
     <ContentPage.BindingContext>
         <local:ProfileAttemptsPageViewModel />
