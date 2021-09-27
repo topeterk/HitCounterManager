@@ -75,8 +75,9 @@
     </ContentPage.BindingContext>
 
     <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
-    <ScrollView Padding="0,0,30,0" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
-        <StackLayout Margin="0,10,0,10" VerticalOptions="StartAndExpand" HorizontalOptions="Center">
+    <ScrollView Padding="0,0,30,0" Margin="6,4,0,0" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"
+        BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+        <StackLayout Margin="0" VerticalOptions="StartAndExpand" HorizontalOptions="Center">
 
             <Grid Padding="0" Margin="0" RowSpacing="0" ColumnSpacing="4" HorizontalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
@@ -303,7 +304,7 @@
 
             <!-- https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/layouts/relativelayout -->
 
-            <Grid Padding="0" Margin="10,0,10,0" RowSpacing="0" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
+            <Grid Padding="0" Margin="0" RowSpacing="0" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
@@ -343,7 +344,7 @@
                         OnClickCommand="{Binding Source={x:Reference profileView}, Path=BindingContext.SplitSelectNext}" />
             </Grid>
             
-            <views:ProfileView x:Name="profileView"/>
+            <views:ProfileView Padding="0" Margin="0" x:Name="profileView"/>
 
         </StackLayout>
     </ScrollView>
