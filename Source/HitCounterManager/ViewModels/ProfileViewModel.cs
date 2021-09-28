@@ -385,10 +385,10 @@ namespace HitCounterManager.ViewModels
         private void GoSplits(int Amount)
         {
             int split = _ProfileSelected.ActiveSplit + Amount;
-            if ((0 <= split) && (split <= _ProfileRowList.Count))
+            if ((0 <= split) && (split < _ProfileRowList.Count))
             {
                 _ProfileRowList[_ProfileSelected.ActiveSplit].Active = false;
-                _ProfileRowList[split].Active = true; // TODO: NEW entry is not available, so this will fail when executed on last split!
+                _ProfileRowList[split].Active = true;
                 if ((0 < Amount) && _ProfileRowList[_ProfileSelected.ActiveSplit].SP) SetSessionProgress(_ProfileRowList[split]);
                 _ProfileSelected.ActiveSplit = split;
             }
