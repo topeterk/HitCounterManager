@@ -18,12 +18,14 @@
     <EmbeddedResource Include="Resources\Images\icons8-add-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-add-list-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-attack-32.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-circled-right-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-cloud-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-copy-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-counter-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-double-down-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-double-up-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-edit-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-inactive-state-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-lock-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-padlock-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-pin-20.png" />
@@ -35,6 +37,8 @@
     <EmbeddedResource Include="Resources\Images\icons8-settings-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-sleep-32.png" />
     <EmbeddedResource Include="Resources\Images\icons8-staircase-32.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-star-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-star-filled-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-taschenlampe-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-time-32.png" />
     <EmbeddedResource Include="Resources\Images\icons8-trash-20.png" />

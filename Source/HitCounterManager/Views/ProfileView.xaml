@@ -90,7 +90,7 @@
                             <ColumnDefinition Width="50" />
                             <ColumnDefinition Width="50" />
                             <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="20" />
                             <ColumnDefinition Width="20" />
                         </Grid.ColumnDefinitions>
                         <Grid.Triggers>
@@ -101,18 +101,23 @@
                                 <Setter Property="BackgroundColor" Value="Goldenrod"/>
                             </DataTrigger>
                         </Grid.Triggers>
-                        <Button Grid.Column="0" Margin="2" Text=" " VerticalOptions="Center"
-                                Command="{Binding BindingContext.CmdSetActiveSplit, Source={x:Reference ProfileViewPage}}"
-                                CommandParameter="{Binding .}">>
-                            <Button.Triggers>
-                                <DataTrigger TargetType="Button" Binding="{Binding Active, Mode=OneWay}" Value="false">
-                                    <Setter Property="Text" Value=" "/>
-                                </DataTrigger>
-                                <DataTrigger TargetType="Button" Binding="{Binding Active, Mode=OneWay}" Value="true">
-                                    <Setter Property="Text" Value="⇒"/>
-                                </DataTrigger>
-                            </Button.Triggers>
-                        </Button>
+                        <RelativeLayout Grid.Column="0" Margin="0" WidthRequest="20" HeightRequest="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                        BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}">
+                            <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-inactive-state-20.png}" >
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.CmdSetActiveSplit, Source={x:Reference ProfileViewPage}}" CommandParameter="{Binding .}" NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                                <!-- TODO: See why GTK sometimes does not update the image when value changes -->
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Active, Mode=OneWay}" Value="false">
+                                        <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-inactive-state-20.png}"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Active, Mode=OneWay}" Value="true">
+                                        <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-circled-right-20.png}"/>
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+                        </RelativeLayout>
                         <Entry Grid.Column="1" Margin="0" HorizontalTextAlignment="Start" Text="{Binding Title}" Placeholder="       [Empty title]" />
                         <Entry Grid.Column="2" Margin="0" HorizontalTextAlignment="Center" Text="{Binding Hits}" Placeholder="0">
                             <Entry.Behaviors>
@@ -146,19 +151,23 @@
                                 <common:NaturalNumbersEntryValidationBehavior />
                             </Entry.Behaviors>
                         </Entry>
-                        <Button Grid.Column="6" Margin="2" Text=" " VerticalOptions="Center"
-                                Command="{Binding BindingContext.CmdSetSessionProgress, Source={x:Reference ProfileViewPage}}"
-                                CommandParameter="{Binding .}">>
-                            <Button.Triggers>
-                                <DataTrigger TargetType="Button" Binding="{Binding SP, Mode=OneWay}" Value="false">
-                                    <Setter Property="Text" Value=" "/>
-                                </DataTrigger>
-                                <DataTrigger TargetType="Button" Binding="{Binding SP, Mode=OneWay}" Value="true">
-                                    <Setter Property="Text" Value="☑"/>
-                                    <!-- ·☐🗹🗷☑☒  https://www.compart.com/de/unicode/search?q=Stimmkästchen#characters -->
-                                </DataTrigger>
-                            </Button.Triggers>
-                        </Button>
+                        <RelativeLayout Grid.Column="6" Margin="0" WidthRequest="20" HeightRequest="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                        BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}">
+                            <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-star-20.png}" >
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.CmdSetSessionProgress, Source={x:Reference ProfileViewPage}}" CommandParameter="{Binding .}" NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                                <!-- TODO: See why GTK sometimes does not update the image when value changes -->
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image" Binding="{Binding SP, Mode=OneWay}" Value="false">
+                                        <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-star-20.png}"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Image" Binding="{Binding SP, Mode=OneWay}" Value="true">
+                                        <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-star-filled-20.png}"/>
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+                        </RelativeLayout>
                         <RelativeLayout Grid.Column="7" Margin="0" WidthRequest="20" HeightRequest="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
                                         BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}">
                             <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-trash-20.png}" >
