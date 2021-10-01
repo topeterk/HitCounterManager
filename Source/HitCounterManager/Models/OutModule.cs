@@ -78,7 +78,7 @@ namespace HitCounterManager.Models
 
         /// <summary>
         /// Refreshes the file handles.
-        /// Call when _settings.Inputfile changes!
+        /// Call when Settings.Inputfile changes!
         /// </summary>
         public void ReloadTemplate()
         {

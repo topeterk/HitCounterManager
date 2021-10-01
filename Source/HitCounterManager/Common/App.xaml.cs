@@ -46,7 +46,7 @@ namespace HitCounterManager
         public readonly ProfileView profileView;
         public readonly OutModule om;
         public readonly Shortcuts sc;
-        public SettingsRoot Settings; // TODO
+        public SettingsRoot Settings { get; internal set; }
         public bool SettingsDialogOpen;
 
         public App(IOsLayer osLayer, IPlatformLayer platformLayer)
@@ -60,8 +60,7 @@ namespace HitCounterManager
             sc = new Shortcuts();
             om = new OutModule();
             LoadSettings();
-            Settings = _settings; // just make it public for now
-            om.Settings = _settings;
+            om.Settings = Settings;
 
             MainPage main = new MainPage();
             profileView = main.ProfileView;

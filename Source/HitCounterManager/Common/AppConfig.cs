@@ -135,7 +135,6 @@ namespace HitCounterManager
     public partial class App
     {
         private SaveModule<SettingsRoot> sm;
-        private SettingsRoot _settings;
 
         /// <summary>
         /// Validates a hotkey and when enabled registers it
@@ -165,18 +164,18 @@ namespace HitCounterManager
 
             if (sc.IsGlobalHotKeySupported)
             {
-                sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod, PlatformLayer.ApplicationWindowHandle);
+                sc.Initialize((Shortcuts.SC_HotKeyMethod)Settings.HotKeyMethod, PlatformLayer.ApplicationWindowHandle);
 
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Reset, _settings.ShortcutResetKeyCode, _settings.ShortcutResetEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Hit, _settings.ShortcutHitKeyCode, _settings.ShortcutHitEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_HitUndo, _settings.ShortcutHitUndoKeyCode, _settings.ShortcutHitUndoEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHit, _settings.ShortcutWayHitKeyCode, _settings.ShortcutWayHitEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHitUndo, _settings.ShortcutWayHitUndoKeyCode, _settings.ShortcutWayHitUndoEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Split, _settings.ShortcutSplitKeyCode, _settings.ShortcutSplitEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_SplitPrev, _settings.ShortcutSplitPrevKeyCode, _settings.ShortcutSplitPrevEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_PB, _settings.ShortcutPBKeyCode, _settings.ShortcutPBEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_TimerStart, _settings.ShortcutTimerStartKeyCode, _settings.ShortcutTimerStartEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_TimerStop, _settings.ShortcutTimerStopKeyCode, _settings.ShortcutTimerStopEnable)) isKeyInvalid = true;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Reset, Settings.ShortcutResetKeyCode, Settings.ShortcutResetEnable)) isKeyInvalid = true;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Hit, Settings.ShortcutHitKeyCode, Settings.ShortcutHitEnable)) isKeyInvalid = true;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_HitUndo, Settings.ShortcutHitUndoKeyCode, Settings.ShortcutHitUndoEnable)) isKeyInvalid = true;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHit, Settings.ShortcutWayHitKeyCode, Settings.ShortcutWayHitEnable)) isKeyInvalid = true;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHitUndo, Settings.ShortcutWayHitUndoKeyCode, Settings.ShortcutWayHitUndoEnable)) isKeyInvalid = true;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Split, Settings.ShortcutSplitKeyCode, Settings.ShortcutSplitEnable)) isKeyInvalid = true;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_SplitPrev, Settings.ShortcutSplitPrevKeyCode, Settings.ShortcutSplitPrevEnable)) isKeyInvalid = true;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_PB, Settings.ShortcutPBKeyCode, Settings.ShortcutPBEnable)) isKeyInvalid = true;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_TimerStart, Settings.ShortcutTimerStartKeyCode, Settings.ShortcutTimerStartEnable)) isKeyInvalid = true;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_TimerStop, Settings.ShortcutTimerStopKeyCode, Settings.ShortcutTimerStopEnable)) isKeyInvalid = true;
 #if TODO
                 if (isKeyInvalid)
                     MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
@@ -196,189 +195,189 @@ namespace HitCounterManager
             int baseVersion = -1;
 
             sm = new SaveModule<SettingsRoot>(Statics.ApplicationName + "Save.xml");
-            _settings = sm.ReadXML(true);
-            if (null != _settings)
+            Settings = sm.ReadXML(true);
+            if (null != Settings)
                 cleanStart = false;
             else
             {
                 // When no user save file is available, try loading the init file instead to provide predefined profiles and settings
-                _settings = sm.ReadXML(false, Statics.ApplicationName + "Init.xml");
+                Settings = sm.ReadXML(false, Statics.ApplicationName + "Init.xml");
             }
-            if (null != _settings)
-                baseVersion = _settings.Version; // successfully loaded Save or Init file, so remember original version for upgrade
+            if (null != Settings)
+                baseVersion = Settings.Version; // successfully loaded Save or Init file, so remember original version for upgrade
             else
             {
-                _settings = new SettingsRoot();
+                Settings = new SettingsRoot();
 
                 // prepare defaults..
-                _settings.Version = 0;
-                _settings.MainWidth = 559;
-                _settings.MainHeight = 723;
-                _settings.HotKeyMethod = (int)Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async;
-                _settings.ShortcutResetEnable = false;
-                _settings.ShortcutResetKeyCode = 0x10000 | 0x75; // Shift F6
-                _settings.ShortcutHitEnable = false;
-                _settings.ShortcutHitKeyCode = 0x10000 | 0x76; // Shift F7
-                _settings.ShortcutSplitEnable = false;
-                _settings.ShortcutSplitKeyCode = 0x10000 | 0x77; // Shift F8
-                _settings.Inputfile = "HitCounter.template";
-                _settings.OutputFile = "HitCounter.html";
-                _settings.ProfileSelected = "Unnamed";
+                Settings.Version = 0;
+                Settings.MainWidth = 559;
+                Settings.MainHeight = 723;
+                Settings.HotKeyMethod = (int)Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async;
+                Settings.ShortcutResetEnable = false;
+                Settings.ShortcutResetKeyCode = 0x10000 | 0x75; // Shift F6
+                Settings.ShortcutHitEnable = false;
+                Settings.ShortcutHitKeyCode = 0x10000 | 0x76; // Shift F7
+                Settings.ShortcutSplitEnable = false;
+                Settings.ShortcutSplitKeyCode = 0x10000 | 0x77; // Shift F8
+                Settings.Inputfile = "HitCounter.template";
+                Settings.OutputFile = "HitCounter.html";
+                Settings.ProfileSelected = "Unnamed";
             }
-            if (_settings.Version == 0) // Coming from version 1.9 or older
+            if (Settings.Version == 0) // Coming from version 1.9 or older
             {
-                _settings.Version = 1;
-                _settings.ShowAttemptsCounter = true;
-                _settings.ShowHeadline = true;
-                _settings.ShowSplitsCountFinished = 999;
-                _settings.ShowSplitsCountUpcoming = 999;
-                _settings.StyleUseHighContrast = false;
-                _settings.StyleUseCustom = false;
-                _settings.StyleCssUrl = "stylesheet_pink.css";
-                _settings.StyleFontUrl = "https://fonts.googleapis.com/css?family=Fontdiner%20Swanky";
+                Settings.Version = 1;
+                Settings.ShowAttemptsCounter = true;
+                Settings.ShowHeadline = true;
+                Settings.ShowSplitsCountFinished = 999;
+                Settings.ShowSplitsCountUpcoming = 999;
+                Settings.StyleUseHighContrast = false;
+                Settings.StyleUseCustom = false;
+                Settings.StyleCssUrl = "stylesheet_pink.css";
+                Settings.StyleFontUrl = "https://fonts.googleapis.com/css?family=Fontdiner%20Swanky";
             }
-            if (_settings.Version == 1) // Coming from version 1.10
+            if (Settings.Version == 1) // Coming from version 1.10
             {
-                _settings.Version = 2;
-                _settings.MainWidth += 31; // added "SP" checkbox to datagrid
-                _settings.ShowSessionProgress = true;
-                _settings.StyleDesiredWidth = 0;
+                Settings.Version = 2;
+                Settings.MainWidth += 31; // added "SP" checkbox to datagrid
+                Settings.ShowSessionProgress = true;
+                Settings.StyleDesiredWidth = 0;
             }
-            if (_settings.Version == 2) // Coming from version 1.11 - 1.14
+            if (Settings.Version == 2) // Coming from version 1.11 - 1.14
             {
-                _settings.Version = 3;
-                _settings.ShortcutHitUndoEnable = false;
-                _settings.ShortcutHitUndoKeyCode = 0x10000 | 0x78; // Shift F9
-                _settings.ShortcutSplitPrevEnable = false;
-                _settings.ShortcutSplitPrevKeyCode = 0x10000 | 0x79; // Shift F10
+                Settings.Version = 3;
+                Settings.ShortcutHitUndoEnable = false;
+                Settings.ShortcutHitUndoKeyCode = 0x10000 | 0x78; // Shift F9
+                Settings.ShortcutSplitPrevEnable = false;
+                Settings.ShortcutSplitPrevKeyCode = 0x10000 | 0x79; // Shift F10
             }
-            if (_settings.Version == 3) // Coming from version 1.15
+            if (Settings.Version == 3) // Coming from version 1.15
             {
-                _settings.Version = 4;
-                _settings.StyleFontName = "Fontdiner Swanky";
+                Settings.Version = 4;
+                Settings.StyleFontName = "Fontdiner Swanky";
             }
-            if (_settings.Version == 4) // Coming from version 1.16
+            if (Settings.Version == 4) // Coming from version 1.16
             {
-                _settings.Version = 5;
-                _settings.MainWidth += 50; // added "WayHits" textbox to datagrid (50)
-                _settings.MainHeight += 13 + 70; // added second line to datagrid column header(13) and "Succession" group box
-                _settings.ShortcutWayHitEnable = false;
-                _settings.ShortcutWayHitKeyCode = 0x10000 | 0x74; // Shift F5
-                _settings.ShortcutWayHitUndoEnable = false;
-                _settings.ShortcutWayHitUndoKeyCode = 0x10000 | 0x7A; // Shift F11
-                _settings.ShortcutPBEnable = false;
-                _settings.ShortcutPBKeyCode = 0x10000 | 0x73; // Shift F4
-                _settings.ShowFooter = true;
-                _settings.ShowHitsCombined = true;
-                _settings.ShowNumbers = true;
-                _settings.ShowPB = true;
-                _settings.Purpose = (int)OutModule.OM_Purpose.OM_Purpose_SplitCounter;
-                _settings.Severity = (int)OutModule.OM_Severity.OM_Severity_AnyHitsCritical;
-                _settings.StyleUseHighContrastNames = false;
-                _settings.SuccessionTitle = "Predecessors";
-                _settings.SuccessionHits = 0;
-                _settings.SuccessionHitsWay = 0;
-                _settings.SuccessionHitsPB = 0;
+                Settings.Version = 5;
+                Settings.MainWidth += 50; // added "WayHits" textbox to datagrid (50)
+                Settings.MainHeight += 13 + 70; // added second line to datagrid column header(13) and "Succession" group box
+                Settings.ShortcutWayHitEnable = false;
+                Settings.ShortcutWayHitKeyCode = 0x10000 | 0x74; // Shift F5
+                Settings.ShortcutWayHitUndoEnable = false;
+                Settings.ShortcutWayHitUndoKeyCode = 0x10000 | 0x7A; // Shift F11
+                Settings.ShortcutPBEnable = false;
+                Settings.ShortcutPBKeyCode = 0x10000 | 0x73; // Shift F4
+                Settings.ShowFooter = true;
+                Settings.ShowHitsCombined = true;
+                Settings.ShowNumbers = true;
+                Settings.ShowPB = true;
+                Settings.Purpose = (int)OutModule.OM_Purpose.OM_Purpose_SplitCounter;
+                Settings.Severity = (int)OutModule.OM_Severity.OM_Severity_AnyHitsCritical;
+                Settings.StyleUseHighContrastNames = false;
+                Settings.SuccessionTitle = "Predecessors";
+                Settings.SuccessionHits = 0;
+                Settings.SuccessionHitsWay = 0;
+                Settings.SuccessionHitsPB = 0;
 
                 if (baseVersion < 0)
                 {
                     // Use different hot keys when loaded without any previous settings
                     // (we don't have to take care of previous user/default settings)
-                    _settings.ShortcutHitKeyCode = 0x10000 | 0x70; // Shift F1
-                    _settings.ShortcutWayHitKeyCode = 0x10000 | 0x71; // Shift F2
-                    _settings.ShortcutSplitKeyCode = 0x10000 | 0x72; // Shift F3
-                    _settings.ShortcutPBKeyCode = 0x10000 | 0x73; // Shift F4
-                    _settings.ShortcutHitUndoKeyCode = 0x10000 | 0x74; // Shift F5
-                    _settings.ShortcutWayHitUndoKeyCode = 0x10000 | 0x75; // Shift F6
-                    _settings.ShortcutSplitPrevKeyCode = 0x10000 | 0x76; // Shift F7
-                    _settings.ShortcutResetKeyCode = 0x10000 | 0x77; // Shift F8
+                    Settings.ShortcutHitKeyCode = 0x10000 | 0x70; // Shift F1
+                    Settings.ShortcutWayHitKeyCode = 0x10000 | 0x71; // Shift F2
+                    Settings.ShortcutSplitKeyCode = 0x10000 | 0x72; // Shift F3
+                    Settings.ShortcutPBKeyCode = 0x10000 | 0x73; // Shift F4
+                    Settings.ShortcutHitUndoKeyCode = 0x10000 | 0x74; // Shift F5
+                    Settings.ShortcutWayHitUndoKeyCode = 0x10000 | 0x75; // Shift F6
+                    Settings.ShortcutSplitPrevKeyCode = 0x10000 | 0x76; // Shift F7
+                    Settings.ShortcutResetKeyCode = 0x10000 | 0x77; // Shift F8
                 }
             }
-            if (_settings.Version == 5) // Coming from version 1.17
+            if (Settings.Version == 5) // Coming from version 1.17
             {
-                _settings.Version = 6;
-                _settings.MainHeight -= 59; // "Succession" group box starts collapsed
-                _settings.AlwaysOnTop = false;
+                Settings.Version = 6;
+                Settings.MainHeight -= 59; // "Succession" group box starts collapsed
+                Settings.AlwaysOnTop = false;
 
                 // Only enable progress bar when new settings were created
-                _settings.ShowProgressBar = (baseVersion < 0 ? true : false);
+                Settings.ShowProgressBar = (baseVersion < 0 ? true : false);
                 // Introduced with true in version 5, keep user setting when this version was used
-                _settings.StyleProgressBarColored = (baseVersion == 5 ? true : false);
+                Settings.StyleProgressBarColored = (baseVersion == 5 ? true : false);
             }
-            if (_settings.Version == 6) // Coming from version 1.18
+            if (Settings.Version == 6) // Coming from version 1.18
             {
-                _settings.Version = 7;
-                _settings.MainWidth += 6; // added tabs (6)
-                _settings.MainHeight += 27; // added tabs (27)
-                _settings.MainPosX = (int)PlatformLayer.ApplicationWindowPosition.X;
-                _settings.MainPosY = (int)PlatformLayer.ApplicationWindowPosition.Y;
-                _settings.ReadOnlyMode = false;
-                _settings.StyleUseRoman = false;
-                _settings.StyleHightlightCurrentSplit = false;
+                Settings.Version = 7;
+                Settings.MainWidth += 6; // added tabs (6)
+                Settings.MainHeight += 27; // added tabs (27)
+                Settings.MainPosX = (int)PlatformLayer.ApplicationWindowPosition.X;
+                Settings.MainPosY = (int)PlatformLayer.ApplicationWindowPosition.Y;
+                Settings.ReadOnlyMode = false;
+                Settings.StyleUseRoman = false;
+                Settings.StyleHightlightCurrentSplit = false;
                 // Only enable progress bar integration of succession when new settings were created
-                _settings.Succession.IntegrateIntoProgressBar = (baseVersion < 0 ? true : false);
+                Settings.Succession.IntegrateIntoProgressBar = (baseVersion < 0 ? true : false);
                 // Create succession with only one entry (there was only one available in older versions)
                 SuccessionEntry suc_entry = new SuccessionEntry();
-                suc_entry.ProfileSelected = _settings.ProfileSelected;
-                _settings.Succession.SuccessionList.Add(suc_entry);
+                suc_entry.ProfileSelected = Settings.ProfileSelected;
+                Settings.Succession.SuccessionList.Add(suc_entry);
                 // Introduced with false in version 6, keep user setting when this version was used
-                _settings.StyleProgressBarColored = (baseVersion == 6 ? false : true);
+                Settings.StyleProgressBarColored = (baseVersion == 6 ? false : true);
             }
-            if (_settings.Version == 7) // Coming from version 1.19
+            if (Settings.Version == 7) // Coming from version 1.19
             {
-                _settings.Version = 8;
-                _settings.CheckUpdatesOnStartup = false;
+                Settings.Version = 8;
+                Settings.CheckUpdatesOnStartup = false;
 
-                _settings.DarkMode = OsLayer.IsDarkModeActive();
+                Settings.DarkMode = OsLayer.IsDarkModeActive();
                 // Only use latest hot key method as default when new settings were created
-                if (baseVersion < 0) _settings.HotKeyMethod = (int)Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb;
+                if (baseVersion < 0) Settings.HotKeyMethod = (int)Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb;
 
                 // Only enable time column when new settings were created
-                _settings.ShowTimeCurrent = (baseVersion < 0 ? true : false);
-                _settings.ShowHits = true;
-                _settings.ShowDiff = _settings.ShowPB; // was combined in previous versions
-                _settings.ShowTimePB = false;
-                _settings.ShowTimeDiff = false;
-                _settings.ShowTimeFooter = false;
-                _settings.ShortcutTimerStartEnable = false;
-                _settings.ShortcutTimerStartKeyCode = 0x10000 | 0x6B; // Shift Add-Num
-                _settings.ShortcutTimerStopEnable = false;
-                _settings.ShortcutTimerStopKeyCode = 0x10000 | 0x6D; // Shift Subtract-Num
+                Settings.ShowTimeCurrent = (baseVersion < 0 ? true : false);
+                Settings.ShowHits = true;
+                Settings.ShowDiff = Settings.ShowPB; // was combined in previous versions
+                Settings.ShowTimePB = false;
+                Settings.ShowTimeDiff = false;
+                Settings.ShowTimeFooter = false;
+                Settings.ShortcutTimerStartEnable = false;
+                Settings.ShortcutTimerStartKeyCode = 0x10000 | 0x6B; // Shift Add-Num
+                Settings.ShortcutTimerStopEnable = false;
+                Settings.ShortcutTimerStopKeyCode = 0x10000 | 0x6D; // Shift Subtract-Num
             }
-            /*if (_settings.Version == 8) // Coming from version 1.20
+            /*if (Settings.Version == 8) // Coming from version 1.20
             {
-                _settings.Version = 9;
+                Settings.Version = 9;
 
             }*/
 
             // Apply settings..
-            if (!cleanStart && PlatformLayer.IsTitleBarOnScreen(_settings.MainPosX, _settings.MainPosY, _settings.MainWidth))
+            if (!cleanStart && PlatformLayer.IsTitleBarOnScreen(Settings.MainPosX, Settings.MainPosY, Settings.MainWidth))
             {
                 // Set window position when application is not started the first time and window would not end up outside of all screens
-                PlatformLayer.ApplicationWindowPosition = new Point(_settings.MainPosX, _settings.MainPosY);
+                PlatformLayer.ApplicationWindowPosition = new Point(Settings.MainPosX, Settings.MainPosY);
             }
-            PlatformLayer.ApplicationWindowSize = new Size(_settings.MainWidth, _settings.MainHeight);
-            PlatformLayer.ApplicationWindowTopMost = _settings.AlwaysOnTop;
+            PlatformLayer.ApplicationWindowSize = new Size(Settings.MainWidth, Settings.MainHeight);
+            PlatformLayer.ApplicationWindowTopMost = Settings.AlwaysOnTop;
 
-            Current.UserAppTheme = _settings.DarkMode ? OSAppTheme.Dark : OSAppTheme.Light; // Controls the XAML binding: {AppThemeBinding Dark=xx, Light=xx}
+            Current.UserAppTheme = Settings.DarkMode ? OSAppTheme.Dark : OSAppTheme.Light; // Controls the XAML binding: {AppThemeBinding Dark=xx, Light=xx}
 
             // Load profile data..
-            if (_settings.Profiles.ProfileList.Count == 0)
+            if (Settings.Profiles.ProfileList.Count == 0)
             {
                 // There is no profile at all, initially create a clean one
                 Profile unnamed = new Profile();
                 unnamed.Name = "Unnamed";
-                _settings.Profiles.ProfileList.Add(unnamed);
+                Settings.Profiles.ProfileList.Add(unnamed);
             }
-            else _settings.Profiles.ProfileList.Sort((a, b) => a.Name.CompareTo(b.Name)); // Sort by name
-            if (_settings.Succession.SuccessionList.Count == 0)
+            else Settings.Profiles.ProfileList.Sort((a, b) => a.Name.CompareTo(b.Name)); // Sort by name
+            if (Settings.Succession.SuccessionList.Count == 0)
             {
                 // There is no succession at all create an empty succession
                 SuccessionEntry first = new SuccessionEntry();
-                first.ProfileSelected = _settings.Profiles.ProfileList[0].Name;
-                _settings.Succession.SuccessionList.Add(first);
+                first.ProfileSelected = Settings.Profiles.ProfileList[0].Name;
+                Settings.Succession.SuccessionList.Add(first);
             }
-            if (_settings.Succession.SuccessionList.Count <= _settings.Succession.ActiveIndex) _settings.Succession.ActiveIndex = 0;
+            if (Settings.Succession.SuccessionList.Count <= Settings.Succession.ActiveIndex) Settings.Succession.ActiveIndex = 0;
 
 #if TODO
             profCtrl.InitializeProfilesControl(_settings.Profiles, _settings.Succession);
@@ -397,13 +396,13 @@ namespace HitCounterManager
             // Remember window position and sates
             Point position = PlatformLayer.ApplicationWindowPosition;
             Size size = PlatformLayer.ApplicationWindowSize;
-            _settings.MainWidth = (int)size.Width;
-            _settings.MainHeight = (int)size.Height;
+            Settings.MainWidth = (int)size.Width;
+            Settings.MainHeight = (int)size.Height;
             if (PlatformLayer.IsTitleBarOnScreen((int)position.X, (int)position.Y, (int)size.Width))
             {
                 // remember values when not outside of screen
-                _settings.MainPosX = (int)position.X;
-                _settings.MainPosY = (int)position.Y;
+                Settings.MainPosX = (int)position.X;
+                Settings.MainPosY = (int)position.Y;
 
             }
 
@@ -411,35 +410,35 @@ namespace HitCounterManager
             if (sc.IsGlobalHotKeySupported)
             {
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Reset);
-                _settings.ShortcutResetEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
-                _settings.ShortcutResetKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutResetEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
+                Settings.ShortcutResetKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Hit);
-                _settings.ShortcutHitEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
-                _settings.ShortcutHitKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutHitEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
+                Settings.ShortcutHitKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_HitUndo);
-                _settings.ShortcutHitUndoEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
-                _settings.ShortcutHitUndoKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutHitUndoEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
+                Settings.ShortcutHitUndoKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_WayHit);
-                _settings.ShortcutWayHitEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
-                _settings.ShortcutWayHitKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutWayHitEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
+                Settings.ShortcutWayHitKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_WayHitUndo);
-                _settings.ShortcutWayHitUndoEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
-                _settings.ShortcutWayHitUndoKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutWayHitUndoEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
+                Settings.ShortcutWayHitUndoKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Split);
-                _settings.ShortcutSplitEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
-                _settings.ShortcutSplitKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutSplitEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
+                Settings.ShortcutSplitKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_SplitPrev);
-                _settings.ShortcutSplitPrevEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
-                _settings.ShortcutSplitPrevKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutSplitPrevEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
+                Settings.ShortcutSplitPrevKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_PB);
-                _settings.ShortcutPBEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
-                _settings.ShortcutPBKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutPBEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
+                Settings.ShortcutPBKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_TimerStart);
-                _settings.ShortcutTimerStartEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
-                _settings.ShortcutTimerStartKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutTimerStartEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
+                Settings.ShortcutTimerStartKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_TimerStop);
-                _settings.ShortcutTimerStopEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
-                _settings.ShortcutTimerStopKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutTimerStopEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
+                Settings.ShortcutTimerStopKeyCode = (int)key.key.KeyData;
             }
 #if TODO
             // Store customizing..
@@ -456,7 +455,7 @@ namespace HitCounterManager
             _settings.ProfileSelected = profCtrl.SelectedProfile; // obsolete since version 7 - keep for backwards compatibility
 #endif
 
-            sm.WriteXML(_settings);
+            sm.WriteXML(Settings);
         }
     }
 }
