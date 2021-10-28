@@ -37,6 +37,7 @@ namespace HitCounterManager.Views
         protected override void OnAppearing() => ((SettingsViewModel)BindingContext).OnAppearing();
 
         private void PopBack_Clicked(object sender, EventArgs e) => Navigation.PopModalAsync();
+        private void ApplyAppearance_Clicked(object sender, EventArgs e) => ((SettingsViewModel)BindingContext).ApplyCssAndFont.Execute(null);
 
         private void Capture_Clicked(object sender, EventArgs e)
         {

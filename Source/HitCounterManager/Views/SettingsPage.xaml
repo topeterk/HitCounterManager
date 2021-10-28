@@ -110,6 +110,7 @@
                        IsVisible="{Binding Source={x:Static common:Statics.GlobalHotKeySupport}, Converter={common:NegateBoolConverter}, Mode=OneTime}"/>
                 <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand"
                       IsEnabled="{x:Static common:Statics.GlobalHotKeySupport, Mode=OneTime}">
+                    <!-- TODO: IsEnabled is barely visible with WPF! -->
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -203,8 +204,10 @@
                     <Label  Grid.Row="2" Grid.Column="0" Margin="0" Text="CSS (URL):" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Entry  Grid.Row="2" Grid.Column="1" Margin="0" Grid.ColumnSpan="2" Text="{Binding StyleCssUrl, Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
                 </Grid>
-                <!-- TODO: port Settings.sc ApplyAppearance (this is not a back button) -->
-                <Button Margin="0" Clicked="PopBack_Clicked" WidthRequest="200" Text="Apply Customization" HorizontalOptions="Start"/>
+                <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+                    <Label HorizontalOptions="StartAndExpand" Text="Please hit apply to save and use the custom settings:" />
+                    <Button Margin="0" Clicked="ApplyAppearance_Clicked" WidthRequest="200" Text="Apply" HorizontalOptions="End"/>
+                </StackLayout>
 
                 <Label HorizontalOptions="CenterAndExpand" Text="BEHAVIOR" />
 
@@ -328,6 +331,7 @@
                 <Label HorizontalOptions="FillAndExpand" Margin="30,0,0,0">
                     <Label.FormattedText>
                         <FormattedString>
+                            <!-- TODO: Show values combined instead of mathematics term -->
                             <Span FontAttributes="Italic" Text="Current configuration will show up to " />
                             <Span FontAttributes="Italic" Text="{Binding ShowSplitsCountFinished, Mode=OneWay}" />
                             <Span FontAttributes="Italic" Text=" + " />

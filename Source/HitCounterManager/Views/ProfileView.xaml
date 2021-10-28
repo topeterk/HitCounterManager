@@ -62,8 +62,8 @@
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="50" />
-                <ColumnDefinition Width="30" />
-                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="20" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text=" " />
             <Label Grid.Column="1" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" Text="Title" />

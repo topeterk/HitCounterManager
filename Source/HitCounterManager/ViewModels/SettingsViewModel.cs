@@ -47,6 +47,10 @@ namespace HitCounterManager.ViewModels
 
         public SettingsViewModel()
         {
+            _StyleFontName = Settings.StyleFontName;
+            _StyleFontUrl = Settings.StyleFontUrl;
+            _StyleCssUrl = Settings.StyleCssUrl;
+
             Capture = new Command<Shortcuts.SC_Type>((type) =>
             {
                 Shortcuts.SC_Type CapturingIdPrev = CapturingId;
@@ -69,6 +73,18 @@ namespace HitCounterManager.ViewModels
                     App.StartApplicationTimer(TimerIDs.ShortcutsCapture, 20, CaptureKeysTick);
                     RecordActionChanged(CapturingId);
                 }
+            });
+
+            ApplyCssAndFont = new Command(() =>
+            {
+                Settings.StyleFontName = _StyleFontName;
+                Settings.StyleFontUrl = _StyleFontUrl;
+                Settings.StyleCssUrl = _StyleCssUrl;
+
+                // Implicitly enable custom settings
+                SetAndNotifyWhenChanged(this, ref Settings.StyleUseCustom, true, nameof(StyleUseCustom));
+
+                CallPropertyChanged(this, nameof(ApplyCssAndFont));
             });
 
             PropertyChanged += SettingDataChangedHandler;
@@ -94,7 +110,15 @@ namespace HitCounterManager.ViewModels
         }
 
         // Move this into a event handler of Settings itself, so we can run Update depending on the whole Settings from anywhere
-        private void SettingDataChangedHandler(object sender, PropertyChangedEventArgs e) => App.CurrentApp.profileViewModel.OutputDataChangedHandler(sender, e);
+        private void SettingDataChangedHandler(object sender, PropertyChangedEventArgs e)
+        {
+            // Do not propagate local variables
+            if (e.PropertyName.Equals(nameof(StyleFontName)) ||
+                e.PropertyName.Equals(nameof(StyleFontUrl)) ||
+                e.PropertyName.Equals(nameof(StyleCssUrl))) return;
+
+            App.CurrentApp.profileViewModel.OutputDataChangedHandler(sender, e);
+        }
 
         public ICommand Capture { get; }
 
@@ -458,28 +482,31 @@ namespace HitCounterManager.ViewModels
             get => Settings.StyleDesiredWidth;
             set => SetAndNotifyWhenNaturalNumberChanged(this, ref Settings.StyleDesiredWidth, value, nameof(StyleDesiredWidth));
         }
-        
-        // TODO: Custom font block not updated in atomic manner -> Move in separate View? (Check if possible to open model page within modal page?
+
         public bool StyleUseCustom
         {
             get => Settings.StyleUseCustom;
             set => SetAndNotifyWhenChanged(this, ref Settings.StyleUseCustom, value, nameof(StyleUseCustom));
         }
+        private string _StyleFontName;
         public string StyleFontName
         {
-            get => Settings.StyleFontName;
-            set => SetAndNotifyWhenChanged(this, ref Settings.StyleFontName, value, nameof(StyleFontName));
+            get => _StyleFontName;
+            set => SetAndNotifyWhenChanged(this, ref _StyleFontName, value, nameof(StyleFontName));
         }
+        private string _StyleFontUrl;
         public string StyleFontUrl
         {
-            get => Settings.StyleFontUrl;
-            set => SetAndNotifyWhenChanged(this, ref Settings.StyleFontUrl, value, nameof(StyleFontUrl));
+            get => _StyleFontUrl;
+            set => SetAndNotifyWhenChanged(this, ref _StyleFontUrl, value, nameof(StyleFontUrl));
         }
+        private string _StyleCssUrl;
         public string StyleCssUrl
         {
-            get => Settings.StyleCssUrl;
-            set => SetAndNotifyWhenChanged(this, ref Settings.StyleCssUrl, value, nameof(StyleCssUrl));
+            get => _StyleCssUrl;
+            set => SetAndNotifyWhenChanged(this, ref _StyleCssUrl, value, nameof(StyleCssUrl));
         }
+        public ICommand ApplyCssAndFont { get; }
 
 #pragma warning disable CS0618 // Ignore deprecated (but without replacement, sure it is Launcher.OpenAsync in Xamarin.Essentials but requires additianal references
         public ICommand WebOpenGoogleFontsUrl { get; } = new Command(() => Device.OpenUri(new Uri("https://fonts.google.com")));
@@ -663,75 +690,3 @@ namespace HitCounterManager.ViewModels
 #endregion
     }
 }
-
-
-#if TODO   // Content from Settings.cs
-
-    public partial class Settings : Form
-    {
-        private Shortcuts sc;
-        private OutModule om;
-        private SettingsRoot _settings;
-
-        private void Settings_Load(object sender, EventArgs e)
-        {
-            sc = ((Form1)Owner).sc;
-            om = ((Form1)Owner).profCtrl.om;
-            _settings = om.Settings;
-
-            ApplyAppearance(sender, null);
-        }
-
-        private void ApplyAppearance(object sender, EventArgs e)
-        {
-            lblShowSplitCount.Text = "Current configuration will show up to " + (1 + numShowSplitsCountFinished.Value + numShowSplitsCountUpcoming.Value) + " splits.";
-
-            // Behavior
-            _settings.ShowAttemptsCounter = cbShowAttempts.Checked;
-            _settings.ShowHeadline = cbShowHeadline.Checked;
-            _settings.ShowFooter = cbShowFooter.Checked;
-            _settings.ShowSessionProgress = cbShowSessionProgress.Checked;
-            _settings.ShowProgressBar = cbShowProgressBar.Checked;
-            _settings.Succession.IntegrateIntoProgressBar = cbSuccessionToProgressBar.Checked;
-            _settings.ShowSplitsCountFinished = (int)numShowSplitsCountFinished.Value;
-            _settings.ShowSplitsCountUpcoming = (int)numShowSplitsCountUpcoming.Value;
-            _settings.ShowHits = cbShowHits.Checked;
-            _settings.ShowHitsCombined = cbShowHitsCombined.Checked;
-            _settings.ShowNumbers = cbShowNumbers.Checked;
-            _settings.ShowPB = cbShowPB.Checked;
-            _settings.ShowDiff = cbShowDiff.Checked;
-            _settings.ShowTimeCurrent = cbShowTimeCurrent.Checked;
-            _settings.ShowTimePB = cbShowTimePB.Checked;
-            _settings.ShowTimeDiff = cbShowTimeDiff.Checked;
-            _settings.ShowTimeFooter = cbShowTimeFooter.Checked;
-            if (radioSeverityBossHitCritical.Checked)
-                om.Severity = OutModule.OM_Severity.OM_Severity_BossHitCritical;
-            else if (radioSeverityComparePB.Checked)
-                om.Severity = OutModule.OM_Severity.OM_Severity_ComparePB;
-            else
-                om.Severity = OutModule.OM_Severity.OM_Severity_AnyHitsCritical;
-
-            om.Update();
-        }
-
-        private void btnApApply_Click(object sender, EventArgs e)
-        {
-            _settings.StyleUseCustom = cbApCustomCss.Checked;
-            _settings.StyleCssUrl = txtCssUrl.Text;
-            _settings.StyleFontUrl = txtFontUrl.Text;
-            _settings.StyleFontName = txtFontName.Text;
-            ApplyAppearance(sender, e);
-        }
-
-        private void cbApCustomCss_CheckedChanged(object sender, EventArgs e)
-        {
-            txtCssUrl.Enabled = cbApCustomCss.Checked;
-            txtFontUrl.Enabled = cbApCustomCss.Checked;
-            btnFontUrlWeb.Enabled = cbApCustomCss.Checked;
-            txtFontName.Enabled = cbApCustomCss.Checked;
-            if (!cbApCustomCss.Checked) btnApApply_Click(sender, e); // Implicitly apply when custom settings are disabled
-            btnApApply.Enabled = cbApCustomCss.Checked;
-        }
-    }
-
-#endif
