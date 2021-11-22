@@ -48,9 +48,15 @@
     <Content Include="..\HitCounterManager\Resources\FireIcon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="Xamarin.Forms.Platform.GTK">
       <Version>5.0.0.2244</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.256001">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="OpenTK" Version="3.3.2" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
   </ItemGroup>
 </Project>
