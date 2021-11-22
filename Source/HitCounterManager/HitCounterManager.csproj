@@ -5,6 +5,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
     <ApplicationIcon>Resources\FireIcon.ico</ApplicationIcon>
+    <IsPublishable>False</IsPublishable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
