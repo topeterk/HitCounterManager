@@ -49,7 +49,7 @@
 
         <Picker x:Name="profileSelector" ItemsSource="{Binding ProfileList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding ProfileSelected}" />
 
-        <!-- TODO: Merge this with actual list below to maintain same grid defitions -->
+        <!-- TODO: Merge this with actual list below to maintain same grid definitions -->
         <Grid Padding="0,8,0,0" Margin="0" RowSpacing="0" ColumnSpacing="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

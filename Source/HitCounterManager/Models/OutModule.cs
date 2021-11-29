@@ -168,98 +168,23 @@ namespace HitCounterManager.Models
                 }
                 else if (line.Contains("HITCOUNTER_JSON_START")) // Format data according to RFC 4627 (JSON)
                 {
-#if TODO
-                    int TotalSplits, TotalActiveSplit, SuccessionHits, SuccessionHitsWay, SuccessionHitsPB;
-                    long TotalTime;
-                    profCtrl.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out SuccessionHits, out SuccessionHitsWay, out SuccessionHitsPB, out TotalTime, true);
-#if TODO
-        public void GetCalculatedSums(out int TotalSplits, out int TotalActiveSplit, out int TotalHits, out int TotalHitsWay, out int TotalPB, out long TotalTime, bool PastOnly)
-        {
-            bool ActiveProfileFound = false;
-
-            TotalSplits = TotalActiveSplit = TotalHits = TotalHitsWay = TotalPB = 0;
-            TotalTime = 0;
-
-            foreach (ProfileViewControl pvc_tab in ptc.ProfileViewControls)
-            {
-                IProfileInfo pi_tab = pvc_tab.ProfileInfo;
-                int Splits = pi_tab.SplitCount;
-
-                if ((pi_tab == SelectedProfileInfo) && PastOnly) // When the past should be calculated only, stop when active profile tab found
-                    break;
-
-                TotalSplits += Splits;
-                for (int i = 0; i < Splits; i++)
-                {
-                    TotalHits += pi_tab.GetSplitHits(i);
-                    TotalHitsWay += pi_tab.GetSplitWayHits(i);
-                    TotalPB += pi_tab.GetSplitPB(i);
-                    TotalTime += pi_tab.GetSplitDuration(i);
-                }
-
-                if (!ActiveProfileFound)
-                {
-                    if (pi_tab == SelectedProfileInfo) // Active profile tab found
-                    {
-                        TotalActiveSplit += pi_tab.ActiveSplit;
-                        ActiveProfileFound = true;
-                    }
-                    else TotalActiveSplit += Splits; // Add all splits of preceeding profiles
-                }
-            }
-        }
-#endif
-#endif
                     int active = pi.ActiveSplit;
                     int iSplitCount = pi.Rows.Count;
                     int iSplitFirst;
                     int iSplitLast;
-                    int InjectedSplitCount = 0;
-                    int HiddenSplitCount = 0;
                     int RunIndex = 1;
                     int RunIndexActive;
 
                     sr.WriteLine("{");
 
                     sr.WriteLine("\"list\": [");
-#if TODO
-                    // ----- Splits of all previous runs:
-                    if (_settings.Succession.IntegrateIntoProgressBar)
-                    {
-                        // Dump all splits of the (previous) non-visible profiles
-                        foreach(ProfileViewControl pvc in profCtrl.ProfileTabControl.ProfileViewControls)
-                        {
-                            IProfileInfo pi_pvc = pvc.ProfileInfo;
-                            if (pi_pvc == pi) break; // stop at current profile
-
-                            for (int r = 0; r < pi_pvc.SplitCount; r++)
-                            {
-                                if (0 < r + HiddenSplitCount) sr.WriteLine(","); // separator
-                                sr.Write("[\"" + SimpleHtmlEscape(pi_pvc.GetSplitTitle(r)) + "\", " + (pi_pvc.GetSplitHits(r) + pi_pvc.GetSplitWayHits(r)) + ", " + pi_pvc.GetSplitPB(r) + ", " + pi_pvc.GetSplitWayHits(r) + ", " + RunIndex + ", " + 0/*NoTime*/ + ", " + 0/*NoPBTime*/ + "]");
-                            }
-                            HiddenSplitCount += pi_pvc.SplitCount;
-                            RunIndex++;
-                        }
-                    }
-#endif
 
                     // ----- Splits of the current run:
                     RunIndexActive = RunIndex;
-#if TODO
-                    if (_settings.Succession.HistorySplitVisible && (1 < RunIndex))
-                    {
-                        // Insert the "history" split
-                        InjectedSplitCount++;
-                        if (0 < HiddenSplitCount) sr.WriteLine(","); // separator
-                        sr.Write("[\"" + SimpleHtmlEscape(_settings.Succession.HistorySplitTitle) + "\", "
-                            + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + ", "
-                            + 0 /*Invalid-RunIndex*/ + ", " + 0/*NoTime*/ + ", " + 0/*NoPBTime*/ + ", " + 0/*NoGoldTime*/ + "]");
-                    }
-#endif
                     for (int r = 0; r < iSplitCount; r++)
                     {
                         // Dump all actually visible splits of the current run
-                        if (0 < r + HiddenSplitCount + InjectedSplitCount) sr.WriteLine(","); // separator
+                        if (0 < r) sr.WriteLine(","); // separator
                         sr.Write("[\"" + SimpleHtmlEscape(pi.Rows[r].Title) + "\", "
                             + (pi.Rows[r].Hits + pi.Rows[r].WayHits) + ", " + pi.Rows[r].PB + ", " + pi.Rows[r].WayHits + ", " // TODO: Rework Hits/WayHits/PB combinations
                             + RunIndex + ", " + pi.Rows[r].Duration + ", " + pi.Rows[r].DurationPB + ", " + pi.Rows[r].DurationGold + "]");
@@ -267,35 +192,10 @@ namespace HitCounterManager.Models
 
                     // ----- Splits of the upcoming runs:
                     RunIndex++;
-#if TODO
-                    if (_settings.Succession.IntegrateIntoProgressBar)
-                    {
-                        bool found_active = false;
-                        // Dump all splits of the (upcoming) non-visible profiles
-                        foreach(ProfileViewControl pvc in profCtrl.ProfileTabControl.ProfileViewControls)
-                        {
-                            IProfileInfo pi_pvc = pvc.ProfileInfo;
-                            if (found_active) // only walk over upcoming profiles
-                            {
-                                for (int r = 0; r < pi_pvc.SplitCount; r++)
-                                {
-                                    if (0 < r + HiddenSplitCount + InjectedSplitCount + iSplitCount) sr.WriteLine(","); // separator
-                                    sr.Write("[\"" + SimpleHtmlEscape(pi_pvc.GetSplitTitle(r)) + "\", "
-                                        + (pi_pvc.GetSplitHits(r) + pi_pvc.GetSplitWayHits(r)) + ", " + pi_pvc.GetSplitPB(r) + ", " + pi_pvc.GetSplitWayHits(r) + ", "
-                                        + RunIndex + ", " + 0/*NoTime*/ + ", " + 0/*NoPBTime*/ + ", " + 0/*NoGoldTime*/ + "]");
-                                }
-                                RunIndex++;
-                            }
-                            else if (pi_pvc == pi) found_active = true;
-                        }
-                    }
-#endif
                     sr.WriteLine(""); // no trailing separator
                     sr.WriteLine("],");
 
-                    active += InjectedSplitCount;
-                    iSplitCount += InjectedSplitCount;
-                    WriteJsonSimpleValue(sr, "session_progress", pi.SessionProgress + InjectedSplitCount + HiddenSplitCount);
+                    WriteJsonSimpleValue(sr, "session_progress", pi.SessionProgress);
 
                     // Calculation to show same amount of splits independent from active split:
                     // Example: ShowSplitsCountFinished = 3 , ShowSplitsCountUpcoming = 2 , iSplitCount = 7 (0-6)
@@ -307,7 +207,6 @@ namespace HitCounterManager.Models
                     //  4   4   4   4  <4>  4   4
                     //  5   5   5   5   5  <5>  5
                     //                  6   6  <6>
-// TODO: Fix calculation (set min =2 and max=999, it will show all) - same issue on old HCM!!
                     if (active < _settings.ShowSplitsCountFinished) // A-C: less previous, more upcoming
                     {
                         iSplitFirst = 0;
@@ -328,9 +227,6 @@ namespace HitCounterManager.Models
                     if (iSplitFirst < 0) iSplitFirst = 0;
                     if (iSplitCount <= iSplitLast) iSplitLast =  iSplitCount-1;
 
-                    active += HiddenSplitCount;
-                    iSplitFirst += HiddenSplitCount;
-                    iSplitLast += HiddenSplitCount;
                     WriteJsonSimpleValue(sr, "run_active", RunIndexActive);
                     WriteJsonSimpleValue(sr, "split_active", active);
                     WriteJsonSimpleValue(sr, "split_first", iSplitFirst);

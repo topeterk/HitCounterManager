@@ -31,8 +31,6 @@
              NavigationPage.HasBackButton="False"
              BackgroundColor="{AppThemeBinding Default=BurlyWood, Dark={StaticResource AlmostBlack}}">
 
-    <!-- TODO: Actual Logic behind all elements -->
-
     <ContentPage.BindingContext>
         <local:UpdateViewModel />
     </ContentPage.BindingContext>

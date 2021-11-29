@@ -45,11 +45,6 @@ namespace HitCounterManager
     [Serializable]
     public class Succession
     {
-        public int ActiveIndex = 0;
-        public int Attempts = 0;
-        public string HistorySplitTitle = "Previous";
-        public bool HistorySplitVisible = false;
-        public bool IntegrateIntoProgressBar = false;
         public List<SuccessionEntry> SuccessionList = new List<SuccessionEntry>();
     }
 
@@ -107,7 +102,6 @@ namespace HitCounterManager
         public bool ShowTimePB;
         public bool ShowTimeDiff;
         public bool ShowTimeFooter;
-        public bool ShowSuccession; // obsolete since version 7 - keep for backwards compatibility (use Succession.HistorySplitVisible instead)
         public int Purpose;
         public int Severity;
         public bool StyleUseHighContrast;
@@ -121,10 +115,6 @@ namespace HitCounterManager
         public int StyleDesiredWidth;
         public bool StyleSuperscriptPB;
         public bool StyleHightlightCurrentSplit;
-        public string SuccessionTitle; // obsolete since version 7 - keep for backwards compatibility (use Succession.SuccessionTitle instead)
-        public int SuccessionHits;     // obsolete since version 7 - keep for backwards compatibility (will be calculated, now)
-        public int SuccessionHitsWay;  // obsolete since version 7 - keep for backwards compatibility (will be calculated, now)
-        public int SuccessionHitsPB;   // obsolete since version 7 - keep for backwards compatibility (will be calculated, now)
         public Succession Succession { get; set; } = new Succession();
         public string ProfileSelected; // obsolete since version 7 - keep for backwards compatibility (use Succession.SuccessionList[0].ProfileSelected instead)
         public Profiles Profiles = new Profiles();
@@ -158,33 +148,29 @@ namespace HitCounterManager
         /// <summary>
         /// Registers all configured hot keys
         /// </summary>
-        private void LoadAllHotKeySettings()
+        /// <returns>true = success, false = error occurred</returns>
+        private bool LoadAllHotKeySettings()
         {
-            bool isKeyInvalid = false;
+            bool Success = true;
 
             if (sc.IsGlobalHotKeySupported)
             {
                 sc.Initialize((Shortcuts.SC_HotKeyMethod)Settings.HotKeyMethod, PlatformLayer.ApplicationWindowHandle);
 
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Reset, Settings.ShortcutResetKeyCode, Settings.ShortcutResetEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Hit, Settings.ShortcutHitKeyCode, Settings.ShortcutHitEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_HitUndo, Settings.ShortcutHitUndoKeyCode, Settings.ShortcutHitUndoEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHit, Settings.ShortcutWayHitKeyCode, Settings.ShortcutWayHitEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHitUndo, Settings.ShortcutWayHitUndoKeyCode, Settings.ShortcutWayHitUndoEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Split, Settings.ShortcutSplitKeyCode, Settings.ShortcutSplitEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_SplitPrev, Settings.ShortcutSplitPrevKeyCode, Settings.ShortcutSplitPrevEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_PB, Settings.ShortcutPBKeyCode, Settings.ShortcutPBEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_TimerStart, Settings.ShortcutTimerStartKeyCode, Settings.ShortcutTimerStartEnable)) isKeyInvalid = true;
-                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_TimerStop, Settings.ShortcutTimerStopKeyCode, Settings.ShortcutTimerStopEnable)) isKeyInvalid = true;
-#if TODO
-                if (isKeyInvalid)
-                    MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
-#else
-                isKeyInvalid = !isKeyInvalid; // just to avoid compiler warning about (yet) unused variable
-#endif
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Reset, Settings.ShortcutResetKeyCode, Settings.ShortcutResetEnable)) Success = false;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Hit, Settings.ShortcutHitKeyCode, Settings.ShortcutHitEnable)) Success = false;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_HitUndo, Settings.ShortcutHitUndoKeyCode, Settings.ShortcutHitUndoEnable)) Success = false;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHit, Settings.ShortcutWayHitKeyCode, Settings.ShortcutWayHitEnable)) Success = false;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHitUndo, Settings.ShortcutWayHitUndoKeyCode, Settings.ShortcutWayHitUndoEnable)) Success = false;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Split, Settings.ShortcutSplitKeyCode, Settings.ShortcutSplitEnable)) Success = false;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_SplitPrev, Settings.ShortcutSplitPrevKeyCode, Settings.ShortcutSplitPrevEnable)) Success = false;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_PB, Settings.ShortcutPBKeyCode, Settings.ShortcutPBEnable)) Success = false;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_TimerStart, Settings.ShortcutTimerStartKeyCode, Settings.ShortcutTimerStartEnable)) Success = false;
+                if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_TimerStop, Settings.ShortcutTimerStopKeyCode, Settings.ShortcutTimerStopEnable)) Success = false;
             }
-        }
 
+            return Success;
+        }
 
         /// <summary>
         /// Loads user data from XML
@@ -274,10 +260,6 @@ namespace HitCounterManager
                 Settings.Purpose = (int)OutModule.OM_Purpose.OM_Purpose_SplitCounter;
                 Settings.Severity = (int)OutModule.OM_Severity.OM_Severity_AnyHitsCritical;
                 Settings.StyleUseHighContrastNames = false;
-                Settings.SuccessionTitle = "Predecessors";
-                Settings.SuccessionHits = 0;
-                Settings.SuccessionHitsWay = 0;
-                Settings.SuccessionHitsPB = 0;
 
                 if (baseVersion < 0)
                 {
@@ -314,8 +296,6 @@ namespace HitCounterManager
                 Settings.ReadOnlyMode = false;
                 Settings.StyleUseRoman = false;
                 Settings.StyleHightlightCurrentSplit = false;
-                // Only enable progress bar integration of succession when new settings were created
-                Settings.Succession.IntegrateIntoProgressBar = (baseVersion < 0 ? true : false);
                 // Create succession with only one entry (there was only one available in older versions)
                 SuccessionEntry suc_entry = new SuccessionEntry();
                 suc_entry.ProfileSelected = Settings.ProfileSelected;
@@ -377,13 +357,6 @@ namespace HitCounterManager
                 first.ProfileSelected = Settings.Profiles.ProfileList[0].Name;
                 Settings.Succession.SuccessionList.Add(first);
             }
-            if (Settings.Succession.SuccessionList.Count <= Settings.Succession.ActiveIndex) Settings.Succession.ActiveIndex = 0;
-
-#if TODO
-            profCtrl.InitializeProfilesControl(_settings.Profiles, _settings.Succession);
-            profCtrl.om.Settings = _settings;
-            profCtrl.om.Update(); // Write first output once after application start
-#endif
         }
 
         /// <summary>
@@ -410,47 +383,27 @@ namespace HitCounterManager
             if (sc.IsGlobalHotKeySupported)
             {
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Reset);
-                Settings.ShortcutResetEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
                 Settings.ShortcutResetKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Hit);
-                Settings.ShortcutHitEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
                 Settings.ShortcutHitKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_HitUndo);
-                Settings.ShortcutHitUndoEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
                 Settings.ShortcutHitUndoKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_WayHit);
-                Settings.ShortcutWayHitEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
                 Settings.ShortcutWayHitKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_WayHitUndo);
-                Settings.ShortcutWayHitUndoEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
                 Settings.ShortcutWayHitUndoKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Split);
-                Settings.ShortcutSplitEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
                 Settings.ShortcutSplitKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_SplitPrev);
-                Settings.ShortcutSplitPrevEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
                 Settings.ShortcutSplitPrevKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_PB);
-                Settings.ShortcutPBEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
                 Settings.ShortcutPBKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_TimerStart);
-                Settings.ShortcutTimerStartEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
                 Settings.ShortcutTimerStartKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_TimerStop);
-                Settings.ShortcutTimerStopEnable = key.used; // TODO: Remove as Option is directly accessed by GUI!
                 Settings.ShortcutTimerStopKeyCode = (int)key.key.KeyData;
             }
-#if TODO
-            // Store customizing..
-            int TotalSplits, TotalActiveSplit, SuccessionHits, SuccessionHitsWay, SuccessionHitsPB;
-            long TotalTime;
-// TODO: Succession will be removed!
-            profCtrl.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out SuccessionHits, out SuccessionHitsWay, out SuccessionHitsPB, out TotalTime, true);
-            _settings.SuccessionHits = SuccessionHits;                                          // obsolete since version 7 - keep for backwards compatibility
-            _settings.SuccessionHitsWay = SuccessionHitsWay;                                    // obsolete since version 7 - keep for backwards compatibility
-            _settings.SuccessionHitsPB = SuccessionHitsPB;                                      // obsolete since version 7 - keep for backwards compatibility
-            _settings.SuccessionTitle = _settings.Succession.HistorySplitTitle;                 // obsolete since version 7 - keep for backwards compatibility
-
+#if TODO // Succession will be removed!
             // Store profile data..
             _settings.ProfileSelected = profCtrl.SelectedProfile; // obsolete since version 7 - keep for backwards compatibility
 #endif

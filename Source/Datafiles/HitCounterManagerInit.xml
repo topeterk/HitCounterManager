@@ -62,16 +62,7 @@
   <StyleDesiredWidth>0</StyleDesiredWidth>
   <StyleSuperscriptPB>false</StyleSuperscriptPB>
   <StyleHightlightCurrentSplit>false</StyleHightlightCurrentSplit>
-  <SuccessionTitle>Previous</SuccessionTitle>
-  <SuccessionHits>0</SuccessionHits>
-  <SuccessionHitsWay>0</SuccessionHitsWay>
-  <SuccessionHitsPB>0</SuccessionHitsPB>
   <Succession>
-    <ActiveIndex>0</ActiveIndex>
-    <Attempts>0</Attempts>
-    <HistorySplitTitle>Previous</HistorySplitTitle>
-    <HistorySplitVisible>false</HistorySplitVisible>
-    <IntegrateIntoProgressBar>false</IntegrateIntoProgressBar>
     <SuccessionList>
       <SuccessionEntry>
         <ProfileSelected>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE</ProfileSelected>

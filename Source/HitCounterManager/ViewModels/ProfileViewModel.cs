@@ -38,7 +38,6 @@ namespace HitCounterManager.ViewModels
 
         public ProfileViewModel()
         {
-            // TODO check done by AppConfig already?
             string Name = Settings.Succession.SuccessionList[0].ProfileSelected; // TODO: Update of this field is missing
 
             _ProfileList = new ObservableCollection<ProfileModel>();
@@ -50,7 +49,6 @@ namespace HitCounterManager.ViewModels
             }
             _ProfileList.CollectionChanged += CollectionChangedHandler;
 
-            // TODO: same as Profiles::_FindProfile ?
             foreach (ProfileModel prof in _ProfileList)
             {
                 if (prof.Name == Name)
@@ -117,7 +115,7 @@ namespace HitCounterManager.ViewModels
                 UpdateDuration();
 
                 // Create profile
-                Profile profile = ProfileSelected.DeepCopyOrigin(); // <-- TODO: Copy this one
+                Profile profile = ProfileSelected.DeepCopyOrigin();
                 profile.Name = NewName;
                 ProfileModel profileModel = new ProfileModel(profile);
                 profileModel.ProfileDataChanged += OutputDataChangedHandler;
@@ -456,7 +454,6 @@ namespace HitCounterManager.ViewModels
         }
 
         private readonly object TimerUpdateLock = new object();
-        // TODO: This may be called from different threads, we need locking!
         public bool UpdateDuration()
         {
             // Early cancellation point

@@ -67,6 +67,8 @@ namespace HitCounterManager
             profileViewModel = (ProfileViewModel)main.ProfileView.BindingContext;
             PlatformLayer.ApplicationWindowMinSize = new Size(main.MinWidth, main.MinHeight);
 
+            // om.Update(); // TODO: Force write of first output once after application start (maybe implicitly by MainPage?)
+
             // GTK Issue: Navigationbar is always visible when root page is a NavigationPage
             // Known Bug: https://github.com/xamarin/Xamarin.Forms/issues/7492
             // Workaround: Do not use NavigationBar on GTK platform (Push/Pop works even without it)
@@ -106,7 +108,17 @@ namespace HitCounterManager
             // Check for updates..
             if (Settings.CheckUpdatesOnStartup)
             {
-                //Device.StartTimer(TimeSpan.FromMilliseconds(2000), () => { CheckAndShowUpdates(); return false; }) ; // TODO: Wait a bit before checking and printing Update dialog?
+#if TODO // Wait a bit before checking and printing Update dialog?
+                Device.StartTimer(TimeSpan.FromMilliseconds(2000), () => { CheckAndShowUpdates(); return false; }); 
+                // --or--
+                MessagingCenter.Send(this, "UpdateAvailable");
+                MessagingCenter.Subscribe<App>(this, "UpdateAvailable", (sender) =>
+                {
+                    // Do something whenever the message is received
+                });
+                // https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/messaging-center
+
+#endif
                 CheckAndShowUpdates();
             }
 
@@ -115,7 +127,13 @@ namespace HitCounterManager
             {
                 // Register the hook function and hot keys
                 WindowHookHandle = PlatformLayer.HookInstall(WndProc, PlatformLayer.ApplicationWindowHandle);
-                LoadAllHotKeySettings();
+                bool Success = LoadAllHotKeySettings();
+#if TODO // Call DisplayAlert or anything like that?
+                if (!Success)
+                    MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
+#else
+                Success = !Success; // just to avoid compiler warning about (yet) unused variable
+#endif
             }
         }
         
@@ -141,7 +159,7 @@ namespace HitCounterManager
             {
                 if (!app.SettingsDialogOpen)
                 {
-                    Console.WriteLine("WinProc: " + ((Shortcuts.SC_Type)wParam).ToString() +"!"); // TODO: Remove
+                    // Console.WriteLine("WinProc: " + ((Shortcuts.SC_Type)wParam).ToString() +"!");
                     switch ((Shortcuts.SC_Type)wParam)
                     {
                         case Shortcuts.SC_Type.SC_Type_Reset: app.profileViewModel.ProfileReset.Execute(null); break;
@@ -157,8 +175,7 @@ namespace HitCounterManager
                         default: break;
                     }
                 }
-                else
-                    Console.WriteLine("WinProc: Settings open!"); // TODO: Remove
+                // else Console.WriteLine("WinProc: Settings open!");
             }
 
             return IntPtr.Zero;
@@ -204,12 +221,3 @@ namespace HitCounterManager
         }
     }
 }
-
-#if TODO
-        MessagingCenter.Send(this, "UpdateAvailable");
-
-        MessagingCenter.Subscribe<App>(this, "UpdateAvailable", (sender) =>
-        {
-            // Do something whenever the "Hi" message is received
-        });
-#endif

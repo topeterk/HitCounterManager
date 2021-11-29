@@ -30,13 +30,6 @@ using HitCounterManager.Models;
 
 namespace HitCounterManager.ViewModels
 {
-    public class SettingsHotkeyContext
-    {
-        public bool Enabled { get; set; }
-        // TODO: ?? public Keys KeyData { get; set; }
-        public string DescriptionString { get; set; }
-    }
-
     public class SettingsViewModel : NotifyPropertyChangedImpl, IDisposable
     {
         public SettingsRoot Settings => App.CurrentApp.Settings;
@@ -136,7 +129,7 @@ namespace HitCounterManager.ViewModels
             if (null == PressedKeys) return (Shortcuts.SC_Type.SC_Type_MAX != CapturingId);
 
             KeyEventArgs key = new KeyEventArgs(Keys.None);
-            foreach (int KeyCode in PressedKeys) // TODO: What happens with foreach when PressedKeys is null?
+            foreach (int KeyCode in PressedKeys)
             {
                 if (((Keys)KeyCode < Keys.Back) || (Keys.OemClear <= (Keys)KeyCode)) continue; // Ignore mouse keys
 
@@ -423,8 +416,7 @@ namespace HitCounterManager.ViewModels
                 case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb: CallPropertyChanged(this, nameof(RadioHotKeyMethod_LLKb)); break;
                 default: break;
             }
-#if TODO
-            //TODO: Make sure this can only happen after the OnAppearing event!
+#if TODO // Make sure this can only happen after the OnAppearing event! Maybe DisplayAlert?
             MessageBox.Show("Changes only take effect after restarting the application.", "Restart required", MessageBoxButtons.OK, MessageBoxIcon.Information);
 #endif
         }
@@ -625,11 +617,6 @@ namespace HitCounterManager.ViewModels
         {
             get => Settings.ShowProgressBar;
             set => SetAndNotifyWhenChanged(this, ref Settings.ShowProgressBar, value, nameof(ShowProgressBar));
-        }
-        public bool IntegrateIntoProgressBar
-        {
-            get => Settings.Succession.IntegrateIntoProgressBar;
-            set => SetAndNotifyWhenChanged(this, ref Settings.Succession.IntegrateIntoProgressBar, value, nameof(IntegrateIntoProgressBar));
         }
         public bool ShowHits
         {
