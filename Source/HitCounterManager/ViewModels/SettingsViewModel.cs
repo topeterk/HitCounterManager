@@ -416,9 +416,7 @@ namespace HitCounterManager.ViewModels
                 case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb: CallPropertyChanged(this, nameof(RadioHotKeyMethod_LLKb)); break;
                 default: break;
             }
-#if TODO // Make sure this can only happen after the OnAppearing event! Maybe DisplayAlert?
-            MessageBox.Show("Changes only take effect after restarting the application.", "Restart required", MessageBoxButtons.OK, MessageBoxIcon.Information);
-#endif
+            App.CurrentApp.DisplayAlert("Restart required", "Changes only take effect after restarting the application.", "OK");
         }
         public bool RadioHotKeyMethod_Sync
         {

@@ -75,7 +75,7 @@ namespace HitCounterManager.Models
             catch (FileNotFoundException) { } // Exception.HResult == COR_E_FILENOTFOUND only be available since .Net 4.5, use overloading for older frameworks
             catch (Exception ex)
             {
-                Application.Current.MainPage.DisplayAlert("Error loading settings!", ex.Message + Environment.NewLine + "==> Using defaults", "OK");
+                App.CurrentApp.DisplayAlert("Error loading settings!", ex.Message + Environment.NewLine + "==> Using defaults", "OK");
             }
             finally
             {
@@ -102,7 +102,7 @@ namespace HitCounterManager.Models
             catch (Exception ex)
             {
                 if (null != file) file.Close();
-                Application.Current.MainPage.DisplayAlert("Error writing settings!", ex.Message, "OK");
+                App.CurrentApp.DisplayAlert("Error writing settings!", ex.Message, "OK");
             }
             return false;
         }

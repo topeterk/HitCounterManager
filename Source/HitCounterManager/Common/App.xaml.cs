@@ -21,6 +21,7 @@
 //SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using HitCounterManager.Common.OsLayer;
 using HitCounterManager.Common.PlatformLayer;
@@ -39,6 +40,7 @@ namespace HitCounterManager
 
     public partial class App : Application
     {
+        private bool StartupDone = false;
         public readonly IOsLayer OsLayer;
         public readonly IPlatformLayer PlatformLayer;
         private HookHandle WindowHookHandle;
@@ -78,8 +80,49 @@ namespace HitCounterManager
                 MainPage = new NavigationPage(main);
 
             MainPage.Appearing += MainPage_Appearing;
+            PageAppearing += App_PageAppearing;
 
             ModalPopped += App_ModalPopped;
+        }
+
+        private struct PostponedAlert
+        {
+            public string Title;
+            public string Message;
+            public string Cancel;
+
+            public PostponedAlert(string Title, string Message, string Cancel)
+            {
+                this.Title = Title;
+                this.Message = Message;
+                this.Cancel = Cancel;
+            }
+        }
+        private List<PostponedAlert> PostponedAlerts = new List<PostponedAlert>();
+
+        /// <summary>
+        /// Page.DisplayAlert but when no appeared yet, it will be postponed until MainPage has appeared
+        /// </summary>
+        /// <param name="Title"></param>
+        /// <param name="Message"></param>
+        /// <param name="Cancel"></param>
+        public void DisplayAlert(string Title, string Message, string Cancel)
+        {
+            if (StartupDone)
+                MainPage.DisplayAlert(Title, Message, Cancel);
+            else
+                PostponedAlerts.Add(new PostponedAlert(Title, Message, Cancel));
+        }
+
+        private void App_PageAppearing(object sender, Page e)
+        {
+            if (!StartupDone)
+            {
+                StartupDone = true;
+                foreach(var Alert in PostponedAlerts) MainPage.DisplayAlert(Alert.Title, Alert.Message, Alert.Cancel);
+                PostponedAlerts.Clear();
+                PostponedAlerts = null;
+            }
         }
 
         private void App_ModalPopped(object sender, ModalPoppedEventArgs e)
@@ -128,12 +171,7 @@ namespace HitCounterManager
                 // Register the hook function and hot keys
                 WindowHookHandle = PlatformLayer.HookInstall(WndProc, PlatformLayer.ApplicationWindowHandle);
                 bool Success = LoadAllHotKeySettings();
-#if TODO // Call DisplayAlert or anything like that?
-                if (!Success)
-                    MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
-#else
-                Success = !Success; // just to avoid compiler warning about (yet) unused variable
-#endif
+                if (!Success) DisplayAlert("Error setting up hot keys!", "Not all enabled hot keys could be registered successfully!", "OK");
             }
         }
         
@@ -187,6 +225,11 @@ namespace HitCounterManager
             SaveSettings();
         }
 
+        /// <summary>
+        /// By definition ????:
+        /// GTK: After MainPage_Appearing
+        /// WPF: Before MainPage_Appearing
+        /// </summary>
         protected override void OnStart() { }
 
         /// <summary>
