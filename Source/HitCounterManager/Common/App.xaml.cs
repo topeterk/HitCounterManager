@@ -69,8 +69,6 @@ namespace HitCounterManager
             profileViewModel = (ProfileViewModel)main.ProfileView.BindingContext;
             PlatformLayer.ApplicationWindowMinSize = new Size(main.MinWidth, main.MinHeight);
 
-            // om.Update(); // TODO: Force write of first output once after application start (maybe implicitly by MainPage?)
-
             // GTK Issue: Navigationbar is always visible when root page is a NavigationPage
             // Known Bug: https://github.com/xamarin/Xamarin.Forms/issues/7492
             // Workaround: Do not use NavigationBar on GTK platform (Push/Pop works even without it)
@@ -127,17 +125,14 @@ namespace HitCounterManager
 
         private void App_ModalPopped(object sender, ModalPoppedEventArgs e)
         {
-            IDisposable bindingContext = e.Modal.BindingContext as IDisposable;
-            if (null != bindingContext) { bindingContext.Dispose(); }
-
-            // TODO: Handle Dispose correctly - It works for now but this is kind of ugly
-            // (xamarin doesn't seem to allow to keep pages alive all the time in the background, it favors creating and destroing the same stuff all over again and again)
-            // https://social.msdn.microsoft.com/Forums/en-US/f3a2b48c-96ce-4e03-9f7b-1f57ff3f81b2/viewmodels-not-disposing-on-navigationpop?forum=xamarinforms
-            // https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/app-lifecycle
-            // "Solution" from here, by removing binding on popping modal in order to release all bindings immediately
-            //     (instead of waiting for garbage collector to remove it as changing any value will notify a non-existing [already disposed] control to update its values)
-            //     https://social.msdn.microsoft.com/Forums/en-US/f3a2b48c-96ce-4e03-9f7b-1f57ff3f81b2/viewmodels-not-disposing-on-navigationpop?forum=xamarinforms
-
+            // Xamarin Issue: Framework seems to keep pages alive all the time in the background, it favors creating and destroing the same stuff all over again,
+            //                instead of maintain a page and simply reusing it to spare memory and processor load.
+            // See: https://social.msdn.microsoft.com/Forums/en-US/f3a2b48c-96ce-4e03-9f7b-1f57ff3f81b2/viewmodels-not-disposing-on-navigationpop?forum=xamarinforms
+            //      https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/app-lifecycle
+            // Workaround: Manually remove binding on disposal when modal popps in order to release all bindings immediately.
+            //             It will ensure binding removal before before garbage collector disposal,
+            //             otherwise any notification about a changed value might notify a [already disposed] no longer existing control
+            (e.Modal.BindingContext as IDisposable)?.Dispose();
             e.Modal.BindingContext = null;
         }
 
