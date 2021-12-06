@@ -167,11 +167,8 @@ namespace HitCounterManager.ViewModels
                     row.Hits = 0;
                     row.WayHits = 0;
                     row.Duration = 0;
-                    row.Active = false;
                 }
-                // TODO: Combine active states? (see multiple places [ACTIVESPLIT])
-                _ProfileSelected.Rows[0].Active = true; // <- temporariy for the view
-                _ProfileSelected.ActiveSplit = 0;       // <- saved value in xml
+                _ProfileSelected.ActiveSplit = 0;
             });
 
             ProfilePB = new Command(() =>
@@ -183,11 +180,8 @@ namespace HitCounterManager.ViewModels
                     row.PB = row.Hits + row.WayHits;
                     if ((0 < row.Duration) && (row.Duration < row.DurationGold)) row.DurationGold = row.Duration;
                     row.DurationPB = row.Duration;
-                    row.Active = false;
                     row.SP = false;
                 }
-                // TODO: Combine active states? (see multiple places [ACTIVESPLIT])
-                _ProfileSelected.Rows[_ProfileSelected.Rows.Count - 1].Active = true;
                 _ProfileSelected.ActiveSplit = _ProfileSelected.Rows.Count - 1;
                 _ProfileSelected.Rows[_ProfileSelected.Rows.Count - 1].SP = true;
                 _ProfileSelected.SessionProgress = _ProfileSelected.Rows.Count - 1;
@@ -270,11 +264,6 @@ namespace HitCounterManager.ViewModels
         private void SetActiveSplit(ProfileRowModel item)
         {
             if (item.Active) return;
-
-            foreach(ProfileRowModel entry in _ProfileRowList) entry.Active = false;
-            item.Active = true;
-
-            // TODO: Combine active states? (see multiple places [ACTIVESPLIT])
             _ProfileSelected.ActiveSplit = _ProfileRowList.IndexOf(item);
         }
 
@@ -385,8 +374,7 @@ namespace HitCounterManager.ViewModels
             int split = _ProfileSelected.ActiveSplit + Amount;
             if ((0 <= split) && (split < _ProfileRowList.Count))
             {
-                _ProfileRowList[_ProfileSelected.ActiveSplit].Active = false;
-                _ProfileRowList[split].Active = true;
+                // TODO: Allow no split to be active by out of range values?
                 if ((0 < Amount) && _ProfileRowList[_ProfileSelected.ActiveSplit].SP) SetSessionProgress(_ProfileRowList[split]);
                 _ProfileSelected.ActiveSplit = split;
             }

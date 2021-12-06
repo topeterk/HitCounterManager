@@ -27,10 +27,12 @@ namespace HitCounterManager.Models
     public  class ProfileRowModel : NotifyPropertyChangedImpl
     {
         private readonly ProfileRow _origin;
+        private readonly ProfileModel _parent;
 
-        public ProfileRowModel(ProfileRow origin)
+        public ProfileRowModel(ProfileRow origin, ProfileModel parent)
         {
             _origin = origin;
+            _parent = parent;
         }
 
         public string Title
@@ -76,11 +78,7 @@ namespace HitCounterManager.Models
             get => _origin.DurationGold;
             set => SetAndNotifyWhenChanged(this, ref _origin.DurationGold, value, nameof(DurationGold));
         }
-        private bool _Active = false;
-        public bool Active
-        {
-            get => _Active;
-            set => SetAndNotifyWhenChanged(this, ref _Active, value, nameof(Active));
-        }
+        public bool Active => this == _parent.ActiveSplitModel;
+        public void ActiveChanged() => CallPropertyChanged(this, nameof(Active));
     }
 }

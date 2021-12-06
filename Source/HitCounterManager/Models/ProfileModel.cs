@@ -39,8 +39,7 @@ namespace HitCounterManager.Models
             Rows = new ObservableCollection<ProfileRowModel>();
             for (int i = 0; i < _origin.Rows.Count; i++)
             {
-                ProfileRowModel rowModel = new ProfileRowModel(_origin.Rows[i]);
-                rowModel.Active = ActiveSplit == i;
+                ProfileRowModel rowModel = new ProfileRowModel(_origin.Rows[i], this);
                 rowModel.PropertyChanged += PropertyChangedHandler;
                 Rows.Add(rowModel);
             }
@@ -62,8 +61,44 @@ namespace HitCounterManager.Models
         public int ActiveSplit
         {
             get { return _origin.ActiveSplit; }
-            set { SetAndNotifyWhenChanged(this, ref _origin.ActiveSplit, value, nameof(ActiveSplit)); } // TODO: Update Rows?
+            set
+            {
+                if (value == _origin.ActiveSplit) return; // Nothing to do when nothing has changed
+
+                int prevActiveSplit = _origin.ActiveSplit;
+                _origin.ActiveSplit = value;
+                if (prevActiveSplit < Rows.Count) Rows[prevActiveSplit].ActiveChanged();
+                if (value < Rows.Count) Rows[value].ActiveChanged();
+                CallPropertyChanged(this, nameof(ActiveSplit));
+#if TODO // Don't know if we need this event any more?
+        private bool RunCompleted = false;
+        
+        public event EventHandler<ProfileChangedEventArgs> ProfileChanged;
+
+        public int ActiveSplit
+        {
+            set
+            {
+                if ((LastActiveSplit != value) || (0 == SelectedCells.Count))
+                {
+                    if (value == Rows.Count - 1) RunCompleted = true;
+
+                    if (null != ProfileChanged)
+                    {
+                        ProfileChangedEventArgs args = new ProfileChangedEventArgs();
+                        args.RunCompleted = RunCompleted;
+                        RunCompleted = false;
+                        ProfileChanged(this, args);
+                    }
+                }
+            }
         }
+#endif
+            }
+        }
+
+        public ProfileRowModel ActiveSplitModel => (_origin.ActiveSplit < Rows.Count ? Rows[_origin.ActiveSplit] : null);
+
         public ObservableCollection<ProfileRowModel> Rows { get; private set; }
         private int _SessionProgress = 0;
         public int SessionProgress
@@ -92,11 +127,14 @@ namespace HitCounterManager.Models
         public void InsertNewRow()
         {
             ProfileRow row = new ProfileRow();
-            ProfileRowModel rowModel = new ProfileRowModel(row);
+            ProfileRowModel rowModel = new ProfileRowModel(row, this);
             rowModel.PropertyChanged += PropertyChangedHandler;
 
             _origin.Rows.Insert(ActiveSplit, row);
-            Rows.Insert(ActiveSplit, new ProfileRowModel(row));
+            Rows.Insert(ActiveSplit, new ProfileRowModel(row, this));
+
+            Rows[ActiveSplit].ActiveChanged();
+            Rows[ActiveSplit+1].ActiveChanged();
         }
 
         public void DeleteRow(ProfileRowModel row)
@@ -112,7 +150,6 @@ namespace HitCounterManager.Models
                 int Index = rowIndex + 1;
                 if (Rows.Count <= Index) Index = Rows.Count - 2; // in case last row is deleted, choose previous one
                 ActiveSplit = Index;
-                Rows[Index].Active = true;
             }
             if (row.SP)
             {
@@ -134,30 +171,5 @@ namespace HitCounterManager.Models
         {
             return _origin.DeepCopy(); // TODO: What happens with events on copy?
         }
-
-#if TODO // Don't know if we need this event any more?
-        private bool RunCompleted = false;
-        
-        public event EventHandler<ProfileChangedEventArgs> ProfileChanged;
-
-        public int ActiveSplit
-        {
-            set
-            {
-                if ((LastActiveSplit != value) || (0 == SelectedCells.Count))
-                {
-                    if (value == Rows.Count - 1) RunCompleted = true;
-
-                    if (null != ProfileChanged)
-                    {
-                        ProfileChangedEventArgs args = new ProfileChangedEventArgs();
-                        args.RunCompleted = RunCompleted;
-                        RunCompleted = false;
-                        ProfileChanged(this, args);
-                    }
-                }
-            }
-        }
-#endif
     }
 }
