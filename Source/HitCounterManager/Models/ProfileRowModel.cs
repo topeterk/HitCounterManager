@@ -57,12 +57,8 @@ namespace HitCounterManager.Models
             get => _origin.PB;
             set { if (SetAndNotifyWhenNaturalNumberChanged(this, ref _origin.PB, value, nameof(PB))) CallPropertyChanged(this, nameof(Diff)); }
         }
-        private bool _SP = false;
-        public bool SP
-        {
-            get => _SP;
-            set => SetAndNotifyWhenChanged(this, ref _SP, value, nameof(SP));
-        }
+        public bool SP => this == _parent.SessionProgressModel;
+        public void SPChanged() => CallPropertyChanged(this, nameof(SP));
         public long Duration
         {
             get => _origin.Duration;

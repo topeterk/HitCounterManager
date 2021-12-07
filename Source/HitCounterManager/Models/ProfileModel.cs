@@ -43,7 +43,6 @@ namespace HitCounterManager.Models
                 rowModel.PropertyChanged += PropertyChangedHandler;
                 Rows.Add(rowModel);
             }
-            if (1 <= Rows.Count) Rows[0].SP = true; // TODO: Use SessionProgress member?
             PropertyChanged += PropertyChangedHandler;
             Rows.CollectionChanged += CollectionChangedHandler;
         }
@@ -65,9 +64,9 @@ namespace HitCounterManager.Models
             {
                 if (value == _origin.ActiveSplit) return; // Nothing to do when nothing has changed
 
-                int prevActiveSplit = _origin.ActiveSplit;
+                int prevValue = _origin.ActiveSplit;
                 _origin.ActiveSplit = value;
-                if (prevActiveSplit < Rows.Count) Rows[prevActiveSplit].ActiveChanged();
+                if (prevValue < Rows.Count) Rows[prevValue].ActiveChanged();
                 if (value < Rows.Count) Rows[value].ActiveChanged();
                 CallPropertyChanged(this, nameof(ActiveSplit));
 #if TODO // Don't know if we need this event any more?
@@ -104,8 +103,18 @@ namespace HitCounterManager.Models
         public int SessionProgress
         {
             get { return _SessionProgress; }
-            set { _SessionProgress = value; CallPropertyChanged(this, nameof(SessionProgress)); } // TODO: Update Rows?
+            set
+            {
+                if (value == _SessionProgress) return; // Nothing to do when nothing has changed
+
+                int prevValue = _SessionProgress;
+                _SessionProgress = value;
+                if (prevValue < Rows.Count) Rows[prevValue].SPChanged();
+                if (value < Rows.Count) Rows[value].SPChanged();
+                CallPropertyChanged(this, nameof(SessionProgress));
+            }
         }
+        public ProfileRowModel SessionProgressModel => (_SessionProgress < Rows.Count ? Rows[_SessionProgress] : null);
 
         public void PermuteActiveSplit(int Offset)
         {
@@ -156,7 +165,6 @@ namespace HitCounterManager.Models
                 int Index = rowIndex + 1;
                 if (Rows.Count <= Index) Index = Rows.Count - 2; // in case last row is deleted, choose previous one
                 SessionProgress = Index;
-                Rows[Index].SP = true;
             }
 
             _origin.Rows.RemoveAt(rowIndex);

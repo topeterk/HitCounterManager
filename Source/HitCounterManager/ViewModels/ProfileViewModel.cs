@@ -180,10 +180,8 @@ namespace HitCounterManager.ViewModels
                     row.PB = row.Hits + row.WayHits;
                     if ((0 < row.Duration) && (row.Duration < row.DurationGold)) row.DurationGold = row.Duration;
                     row.DurationPB = row.Duration;
-                    row.SP = false;
                 }
                 _ProfileSelected.ActiveSplit = _ProfileSelected.Rows.Count - 1;
-                _ProfileSelected.Rows[_ProfileSelected.Rows.Count - 1].SP = true;
                 _ProfileSelected.SessionProgress = _ProfileSelected.Rows.Count - 1;
             });
 
@@ -271,10 +269,6 @@ namespace HitCounterManager.ViewModels
         private void SetSessionProgress(ProfileRowModel item)
         {
             if (item.SP) return;
-
-            foreach(ProfileRowModel entry in _ProfileRowList) entry.SP = false;
-            item.SP = true;
-
             _ProfileSelected.SessionProgress = _ProfileRowList.IndexOf(item);
         }
 
