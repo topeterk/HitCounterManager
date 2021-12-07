@@ -108,6 +108,8 @@
                                     <TapGestureRecognizer Command="{Binding BindingContext.CmdSetActiveSplit, Source={x:Reference ProfileViewPage}}" CommandParameter="{Binding .}" NumberOfTapsRequired="1" />
                                 </Image.GestureRecognizers>
                                 <!-- TODO: See why GTK sometimes does not update the image when value changes -->
+                                <!--       IT seems that icon is not properly loading the first time and update doesn't take effect. -->
+                                <!--       After it worked once, it starts working every time -->
                                 <Image.Triggers>
                                     <DataTrigger TargetType="Image" Binding="{Binding Active, Mode=OneWay}" Value="false">
                                         <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-inactive-state-20.png}"/>
@@ -158,6 +160,8 @@
                                     <TapGestureRecognizer Command="{Binding BindingContext.CmdSetSessionProgress, Source={x:Reference ProfileViewPage}}" CommandParameter="{Binding .}" NumberOfTapsRequired="1" />
                                 </Image.GestureRecognizers>
                                 <!-- TODO: See why GTK sometimes does not update the image when value changes -->
+                                <!--       IT seems that icon is not properly loading the first time and update doesn't take effect. -->
+                                <!--       After it worked once, it starts working every time -->
                                 <Image.Triggers>
                                     <DataTrigger TargetType="Image" Binding="{Binding SP, Mode=OneWay}" Value="false">
                                         <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-star-20.png}"/>

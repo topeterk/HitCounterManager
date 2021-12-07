@@ -105,7 +105,6 @@ namespace HitCounterManager.Models
                 _origin.Rows[IndexDst] = tmp;
                 Rows.Move(Index, IndexDst);
                 ActiveSplit = IndexDst;
-                //CallPropertyChanged(this, nameof(Rows)); // TODO: Check if required?
             }
         }
 
