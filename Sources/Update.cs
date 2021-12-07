@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2020-2020 Peter Kirmeier
+//Copyright (c) 2020-2021 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Net;
+using System.Reflection;
 using System.Windows.Forms;
 using TinyJson;
 
@@ -64,6 +65,16 @@ namespace HitCounterManager
                 string response = client.DownloadString("http://api.github.com/repos/topeterk/HitCounterManager/releases");
 
                 Releases = response.FromJson<List<Dictionary<string, object>>>();
+
+                // Only keep newer releases of own major version
+                int i = Releases.Count;
+                string MajorVersionString = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + ".";
+                while (0 < i--)
+                {
+                    string tag_name = Releases[i]["tag_name"].ToString();
+                    if (!tag_name.StartsWith(MajorVersionString)) Releases.RemoveAt(i);
+                }
+
                 result = true;
             }
             catch (Exception) { };
