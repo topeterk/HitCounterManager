@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Reflection;
 using TinyJson;
 using Xamarin.Forms;
 
@@ -73,6 +74,16 @@ namespace HitCounterManager.Common
                 string response = client.DownloadString("http://api.github.com/repos/topeterk/HitCounterManager/releases");
 
                 Releases = response.FromJson<List<Dictionary<string, object>>>();
+
+                // Only keep newer releases of own major version
+                int i = Releases.Count;
+                string MajorVersionString = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + ".";
+                while (0 < i--)
+                {
+                    string tag_name = Releases[i]["tag_name"].ToString();
+                    if (!tag_name.StartsWith(MajorVersionString)) Releases.RemoveAt(i);
+                }
+
                 result = true;
             }
             catch (Exception) { };
