@@ -69,30 +69,6 @@ namespace HitCounterManager.Models
                 if (prevValue < Rows.Count) Rows[prevValue].ActiveChanged();
                 if (value < Rows.Count) Rows[value].ActiveChanged();
                 CallPropertyChanged(this, nameof(ActiveSplit));
-#if TODO // Don't know if we need this event any more?
-        private bool RunCompleted = false;
-        
-        public event EventHandler<ProfileChangedEventArgs> ProfileChanged;
-
-        public int ActiveSplit
-        {
-            set
-            {
-                if ((LastActiveSplit != value) || (0 == SelectedCells.Count))
-                {
-                    if (value == Rows.Count - 1) RunCompleted = true;
-
-                    if (null != ProfileChanged)
-                    {
-                        ProfileChangedEventArgs args = new ProfileChangedEventArgs();
-                        args.RunCompleted = RunCompleted;
-                        RunCompleted = false;
-                        ProfileChanged(this, args);
-                    }
-                }
-            }
-        }
-#endif
             }
         }
 

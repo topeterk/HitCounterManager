@@ -24,6 +24,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Threading;
 using System.Windows.Input;
 using Xamarin.Forms;
 using HitCounterManager.Common;
@@ -302,26 +303,9 @@ namespace HitCounterManager.ViewModels
                     {
                         UpdateDuration();
 
-#if TODO // Stopping timer on RunCompleted - Still needed?
-        public event EventHandler<EventArgs> ProfileChanged;
-        public void ProfileChangedHandler(object sender, EventArgs e)
-        {
-            if (!Ready) return;
-            
-            if (e is ProfileChangedEventArgs)
-            {
-                ProfileChangedEventArgs eventArgs = (ProfileChangedEventArgs)e;
-                if (eventArgs.RunCompleted && _TimerRunning)                                <--- TODO: Event to stop timer on RunCompleted!
-                {
-                    DateTime utc_now = DateTime.UtcNow;
-                    timer1.Enabled = _TimerRunning = false;
-                    SelectedProfileInfo.AddDuration((long)(utc_now - last_update_time).TotalMilliseconds);
-                    last_update_time = utc_now;
-                }
-            }
-        }
-#endif
+                        Monitor.Enter(TimerUpdateLock);
                         _ProfileSelected = value;
+                        Monitor.Exit(TimerUpdateLock);
 
                         //SetAndNotifyWhenChanged(this, ref _ProfileSelected, value, nameof(ProfileSelected)); // TODO: Use this?
                         CallPropertyChanged(this, nameof(ProfileSelected));
@@ -372,6 +356,11 @@ namespace HitCounterManager.ViewModels
                 if ((0 < Amount) && _ProfileRowList[_ProfileSelected.ActiveSplit].SP) SetSessionProgress(_ProfileRowList[split]);
                 _ProfileSelected.ActiveSplit = split;
             }
+            else if (split <= _ProfileRowList.Count)
+            {
+                // Run completed as last split was finished
+                TimerRunning = false;
+            }
         }
 
         public string StatsProgress => "Progress:  " + _ProfileSelected.ActiveSplit.ToString() + " / " + _ProfileSelected.Rows.Count.ToString() + "  # " + _ProfileSelected.Attempts.ToString("D3");
@@ -421,14 +410,16 @@ namespace HitCounterManager.ViewModels
                 if (_TimerRunning = value) // Set and prepare..
                 {
                     // Starting the timer
+                    last_update_time = DateTime.UtcNow;
                     App.StartApplicationTimer(TimerIDs.GameTime, 10, UpdateDuration);
-                    App.StartApplicationTimer(TimerIDs.GameTimeGui, 150, () => { CallPropertyChanged(this, nameof(StatsTime)); return _TimerRunning; });
+                    App.StartApplicationTimer(TimerIDs.GameTimeGui, 300, () => { CallPropertyChanged(this, nameof(StatsTime)); return _TimerRunning; });
                 }
                 else
                 {
                     // Stopping the timer
                     last_update_time = DateTime.UtcNow;
                     UpdateDuration();
+                    CallPropertyChanged(this, nameof(StatsTime));
                 }
                 CallPropertyChanged(this, nameof(TimerRunning));
                 OutputDataChangedHandler(this, new PropertyChangedEventArgs(nameof(TimerRunning)));
@@ -446,18 +437,15 @@ namespace HitCounterManager.ViewModels
             bool GotLock = false;
             try
             {
-                System.Threading.Monitor.Enter(TimerUpdateLock, ref GotLock);
+                Monitor.Enter(TimerUpdateLock, ref GotLock);
 
                 DateTime utc_now = DateTime.UtcNow;
-                
                 _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Duration += (long)(utc_now - last_update_time).TotalMilliseconds;
-                CallPropertyChanged(this, nameof(StatsTime));
-
                 last_update_time = utc_now;
             }
             finally
             {
-                if (GotLock) System.Threading.Monitor.Exit(TimerUpdateLock);
+                if (GotLock) Monitor.Exit(TimerUpdateLock);
             }
 
             return _TimerRunning;
