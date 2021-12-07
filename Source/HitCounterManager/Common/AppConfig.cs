@@ -20,33 +20,14 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
+using System;
+using Xamarin.Forms;
 using HitCounterManager.Common;
 using HitCounterManager.Models;
-using System;
-using System.Collections.Generic;
-using Xamarin.Forms;
 
 namespace HitCounterManager
 {
     #region Settings types
-
-    /// <summary>
-    /// Content of XML stored user data (succession entry)
-    /// </summary>
-    [Serializable]
-    public class SuccessionEntry
-    {
-        public string ProfileSelected;
-    }
-
-    /// <summary>
-    /// Content of XML stored user data (succession)
-    /// </summary>
-    [Serializable]
-    public class Succession
-    {
-        public List<SuccessionEntry> SuccessionList = new List<SuccessionEntry>();
-    }
 
     /// <summary>
     /// Content of XML stored user data (settings)
@@ -115,8 +96,7 @@ namespace HitCounterManager
         public int StyleDesiredWidth;
         public bool StyleSuperscriptPB;
         public bool StyleHightlightCurrentSplit;
-        public Succession Succession { get; set; } = new Succession();
-        public string ProfileSelected; // obsolete since version 7 - keep for backwards compatibility (use Succession.SuccessionList[0].ProfileSelected instead)
+        public string ProfileSelected;
         public Profiles Profiles = new Profiles();
     }
 
@@ -296,10 +276,6 @@ namespace HitCounterManager
                 Settings.ReadOnlyMode = false;
                 Settings.StyleUseRoman = false;
                 Settings.StyleHightlightCurrentSplit = false;
-                // Create succession with only one entry (there was only one available in older versions)
-                SuccessionEntry suc_entry = new SuccessionEntry();
-                suc_entry.ProfileSelected = Settings.ProfileSelected;
-                Settings.Succession.SuccessionList.Add(suc_entry);
                 // Introduced with false in version 6, keep user setting when this version was used
                 Settings.StyleProgressBarColored = (baseVersion == 6 ? false : true);
             }
@@ -350,13 +326,6 @@ namespace HitCounterManager
                 Settings.Profiles.ProfileList.Add(unnamed);
             }
             else Settings.Profiles.ProfileList.Sort((a, b) => a.Name.CompareTo(b.Name)); // Sort by name
-            if (Settings.Succession.SuccessionList.Count == 0)
-            {
-                // There is no succession at all create an empty succession
-                SuccessionEntry first = new SuccessionEntry();
-                first.ProfileSelected = Settings.Profiles.ProfileList[0].Name;
-                Settings.Succession.SuccessionList.Add(first);
-            }
         }
 
         /// <summary>
@@ -364,8 +333,6 @@ namespace HitCounterManager
         /// </summary>
         public void SaveSettings()
         {
-            ShortcutsKey key = new ShortcutsKey();
-
             // Remember window position and sates
             Point position = PlatformLayer.ApplicationWindowPosition;
             Size size = PlatformLayer.ApplicationWindowSize;
@@ -376,12 +343,12 @@ namespace HitCounterManager
                 // remember values when not outside of screen
                 Settings.MainPosX = (int)position.X;
                 Settings.MainPosY = (int)position.Y;
-
             }
 
             // Store hot keys..
             if (sc.IsGlobalHotKeySupported)
             {
+                ShortcutsKey key;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Reset);
                 Settings.ShortcutResetKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Hit);
@@ -403,10 +370,6 @@ namespace HitCounterManager
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_TimerStop);
                 Settings.ShortcutTimerStopKeyCode = (int)key.key.KeyData;
             }
-#if TODO // Succession will be removed!
-            // Store profile data..
-            _settings.ProfileSelected = profCtrl.SelectedProfile; // obsolete since version 7 - keep for backwards compatibility
-#endif
 
             sm.WriteXML(Settings);
         }

@@ -38,7 +38,7 @@ namespace HitCounterManager.ViewModels
 
         public ProfileViewModel()
         {
-            string Name = Settings.Succession.SuccessionList[0].ProfileSelected; // TODO: Update of this field is missing
+            string Name = Settings.ProfileSelected; // TODO: Update of this field is missing
 
             _ProfileList = new ObservableCollection<ProfileModel>();
             foreach (Profile prof in Settings.Profiles.ProfileList)
