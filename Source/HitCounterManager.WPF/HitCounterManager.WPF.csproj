@@ -6,11 +6,12 @@
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
-  </PropertyGroup>
-  <PropertyGroup>
     <ApplicationIcon>..\HitCounterManager\Resources\FireIcon.ico</ApplicationIcon>
     <StartupObject>HitCounterManager.WPF.App</StartupObject>
     <IsPublishable>False</IsPublishable>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <WarningLevel>5</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\HitCounterManager\HitCounterManager.csproj" />
