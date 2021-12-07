@@ -146,18 +146,12 @@ namespace HitCounterManager
             // Check for updates..
             if (Settings.CheckUpdatesOnStartup)
             {
-#if TODO // Wait a bit before checking and printing Update dialog?
-                Device.StartTimer(TimeSpan.FromMilliseconds(2000), () => { CheckAndShowUpdates(); return false; }); 
-                // --or--
-                MessagingCenter.Send(this, "UpdateAvailable");
-                MessagingCenter.Subscribe<App>(this, "UpdateAvailable", (sender) =>
+                // Run check later in the background, so offline startup can proceed faster
+                Device.StartTimer(TimeSpan.FromSeconds(2), () =>
                 {
-                    // Do something whenever the message is received
+                    Device.BeginInvokeOnMainThread(() => CheckAndShowUpdates());
+                    return false; // only once
                 });
-                // https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/messaging-center
-
-#endif
-                CheckAndShowUpdates();
             }
 
             // just in case, do this only once
