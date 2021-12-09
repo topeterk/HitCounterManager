@@ -26,7 +26,7 @@ using HitCounterManager.Common.OsLayer;
 namespace HitCounterManager.Models
 {
     // Shrinked support wrapper for .Net Framework's System.Windows.Forms.KeyEventArgs
-    public class KeyEventArgs /* : EventArgs   TODO ?!!?*/
+    public class KeyEventArgs
     {
         public KeyEventArgs(Keys keyData) { KeyData = keyData; }
 
@@ -128,7 +128,6 @@ namespace HitCounterManager.Models
         /// </summary>
         Alt = 262144
     }
-    // TODO <<< !!!!!!!!!!!!!!!!!!!!!!!!!
 
     /// <summary>
     /// Holds data about a hotkey
@@ -262,7 +261,7 @@ namespace HitCounterManager.Models
 
         private IOsLayer OsLayer { get => App.CurrentApp.OsLayer; }
 
-        public IntPtr hwnd; // TODO: private!  public only for testing
+        private IntPtr hwnd;
         private ShortcutsKey[] sc_list = new ShortcutsKey[(int)SC_Type.SC_Type_MAX];
         private SC_HotKeyMethod method;
 

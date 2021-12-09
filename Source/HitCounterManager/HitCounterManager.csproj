@@ -6,6 +6,7 @@
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
     <ApplicationIcon>Resources\FireIcon.ico</ApplicationIcon>
     <IsPublishable>False</IsPublishable>
+    <WarningLevel>5</WarningLevel>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

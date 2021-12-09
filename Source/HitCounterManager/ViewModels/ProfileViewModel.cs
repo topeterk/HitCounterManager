@@ -39,18 +39,17 @@ namespace HitCounterManager.ViewModels
 
         public ProfileViewModel()
         {
-            string Name = Settings.ProfileSelected; // TODO: Update of this field is missing
-
-            _ProfileList = new ObservableCollection<ProfileModel>();
+            ProfileList = new ObservableCollection<ProfileModel>();
             foreach (Profile prof in Settings.Profiles.ProfileList)
             {
                 ProfileModel profileModel = new ProfileModel(prof);
                 profileModel.ProfileDataChanged += OutputDataChangedHandler;
-                _ProfileList.Add(profileModel);
+                ProfileList.Add(profileModel);
             }
-            _ProfileList.CollectionChanged += CollectionChangedHandler;
+            ProfileList.CollectionChanged += CollectionChangedHandler;
 
-            foreach (ProfileModel prof in _ProfileList)
+            string Name = Settings.ProfileSelected;
+            foreach (ProfileModel prof in ProfileList)
             {
                 if (prof.Name == Name)
                 {
@@ -59,11 +58,19 @@ namespace HitCounterManager.ViewModels
                 }
             }
             // when no matching profile is found, we start with the first one
-            if (null == ProfileSelected) ProfileSelected = _ProfileList[0];
+            if (null == ProfileSelected) ProfileSelected = ProfileList[0];
 
-            CmdRemoveSplit = new Command<ProfileRowModel>(RemoveSplit);
-            CmdSetActiveSplit = new Command<ProfileRowModel>(SetActiveSplit);
-            CmdSetSessionProgress = new Command<ProfileRowModel>(SetSessionProgress);
+            CmdRemoveSplit = new Command<ProfileRowModel>((ProfileRowModel item) => _ProfileSelected.DeleteRow(item));
+            CmdSetActiveSplit = new Command<ProfileRowModel>((ProfileRowModel item) =>
+            {
+                if (item.Active) return;
+                _ProfileSelected.ActiveSplit = _ProfileRowList.IndexOf(item);
+            });
+            CmdSetSessionProgress = new Command<ProfileRowModel>((ProfileRowModel item) =>
+            {
+                if (item.SP) return;
+                _ProfileSelected.SessionProgress = _ProfileRowList.IndexOf(item);
+            });
 
             ProfileNew = new Command<string>((string NewName) =>
             {
@@ -86,7 +93,7 @@ namespace HitCounterManager.ViewModels
                 Settings.Profiles.ProfileList.Add(profile);
                 Settings.Profiles.ProfileList.Sort((a, b) => a.Name.CompareTo(b.Name)); // Sort by name
                 int profileIndex = Settings.Profiles.ProfileList.IndexOf(profile);
-                _ProfileList.Insert(profileIndex, profileModel);
+                ProfileList.Insert(profileIndex, profileModel);
                 ProfileSelected = profileModel;
 
                 // TODO: [PICKER] Test and rework code if a ObservableCollection can be used for the picker instead!
@@ -125,7 +132,7 @@ namespace HitCounterManager.ViewModels
                 Settings.Profiles.ProfileList.Add(profile);
                 Settings.Profiles.ProfileList.Sort((a, b) => a.Name.CompareTo(b.Name)); // Sort by name
                 int profileIndex = Settings.Profiles.ProfileList.IndexOf(profile);
-                _ProfileList.Insert(profileIndex, profileModel);
+                ProfileList.Insert(profileIndex, profileModel);
                 ProfileSelected = profileModel;
 
                 // TODO: [PICKER] Test and rework code if a ObservableCollection can be used for the picker instead!
@@ -135,25 +142,26 @@ namespace HitCounterManager.ViewModels
             {
                 if (App.CurrentApp.Settings.ReadOnlyMode) return;
 
-                if (_ProfileList.Count <= 1) return; // do not delete the only last remaining profile
+                if (ProfileList.Count <= 1) return; // do not delete the only last remaining profile
 
                 TimerRunning = false;
 
-                int profileIndex = _ProfileList.IndexOf(_ProfileSelected);
+                int profileIndex = ProfileList.IndexOf(_ProfileSelected);
 
                 // Change to next/previous profile before removing
                 int Index = profileIndex + 1;
-                if (_ProfileList.Count <= Index) Index = _ProfileList.Count - 2; // in case last profile is deleted, choose previous one
-                ProfileSelected = _ProfileList[Index];
+                if (ProfileList.Count <= Index) Index = ProfileList.Count - 2; // in case last profile is deleted, choose previous one
+                ProfileSelected = ProfileList[Index];
 
                 // Removing
                 Settings.Profiles.ProfileList.RemoveAt(profileIndex);
-                _ProfileList.RemoveAt(profileIndex);
+                ProfileList.RemoveAt(profileIndex);
+
+                OutputDataChangedHandler(this, new PropertyChangedEventArgs(nameof(ProfileSelected)));
 
                 // TODO: [PICKER] Test and rework code if a ObservableCollection can be used for the picker instead!
                 ProfileSelector?.ForceUpdate(); // Workaround as this should not be required!
             });
-
             ProfileReset = new Command(() =>
             {
                 TimerRunning = false;
@@ -171,7 +179,6 @@ namespace HitCounterManager.ViewModels
                 }
                 _ProfileSelected.ActiveSplit = 0;
             });
-
             ProfilePB = new Command(() =>
             {
                 TimerRunning = false;
@@ -185,62 +192,30 @@ namespace HitCounterManager.ViewModels
                 _ProfileSelected.ActiveSplit = _ProfileSelected.Rows.Count - 1;
                 _ProfileSelected.SessionProgress = _ProfileSelected.Rows.Count - 1;
             });
-
-            ProfileSetAttempts = new Command<int>((int NewAttempts) =>
-            {
-                _ProfileSelected.Attempts = NewAttempts;
-                CallPropertyChanged(this, nameof(StatsProgress)); // TODO: Check if we need to update the 3 stats in any other command as well? (Done by OutputDataChangedHandler?)
-            });
+            ProfileSetAttempts = new Command<int>((int NewAttempts) => _ProfileSelected.Attempts = NewAttempts);
 
             ToggleTimerPause = new Command(() => TimerRunning = !TimerRunning);
-
             ToggleReadOnlyMode = new Command(() => IsReadOnly = !IsReadOnly);
 
             ProfileSplitMoveUp = new Command(() => {
                 if (App.CurrentApp.Settings.ReadOnlyMode) return;
-
-                UpdateDuration();
                 _ProfileSelected.PermuteActiveSplit(-1);
             });
             ProfileSplitMoveDown = new Command(() => {
                 if (App.CurrentApp.Settings.ReadOnlyMode) return;
-
-                UpdateDuration();
                 _ProfileSelected.PermuteActiveSplit(+1);
             });
             ProfileSplitInsert = new Command(() => {
                 if (App.CurrentApp.Settings.ReadOnlyMode) return;
-
-                UpdateDuration();
                 _ProfileSelected.InsertNewRow();
             });
 
-            HitIncrease = new Command(() => {
-                UpdateDuration();
-                _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Hits++;
-            });
-            HitDecrease = new Command(() => {
-                UpdateDuration();
-                _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Hits--;
-            });
-            HitWayIncrease = new Command(() => {
-                UpdateDuration();
-                _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].WayHits++;
-            });
-            HitWayDecrease = new Command(() => {
-                UpdateDuration();
-                _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].WayHits--;
-            });
-            SplitSelectNext = new Command(() =>
-            {
-                UpdateDuration();
-                GoSplits(+1);
-            });
-            SplitSelectPrev = new Command(() =>
-            {
-                UpdateDuration();
-                GoSplits(-1);
-            });
+            HitIncrease = new Command(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Hits++);
+            HitDecrease = new Command(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Hits--);
+            HitWayIncrease = new Command(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].WayHits++);
+            HitWayDecrease = new Command(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].WayHits--);
+            SplitSelectNext = new Command(() => GoSplits(+1));
+            SplitSelectPrev = new Command(() => GoSplits(-1));
         }
 
         public void OutputDataChangedHandler(object sender, PropertyChangedEventArgs e)
@@ -251,40 +226,21 @@ namespace HitCounterManager.ViewModels
             CallPropertyChanged(this, nameof(StatsTotalHits));
             App.CurrentApp.om.Update(_ProfileSelected, TimerRunning);
         }
-        private void CollectionChangedHandler(object sender, NotifyCollectionChangedEventArgs e) => OutputDataChangedHandler(sender, new PropertyChangedEventArgs(nameof(_ProfileList)));
+        private void CollectionChangedHandler(object sender, NotifyCollectionChangedEventArgs e) => OutputDataChangedHandler(sender, new PropertyChangedEventArgs(nameof(ProfileList)));
 
         public ICommand CmdRemoveSplit { get; }
-        private void RemoveSplit(ProfileRowModel item)
-        {
-            _ProfileSelected.DeleteRow(item);
-        }
-
         public ICommand CmdSetActiveSplit { get; }
-        private void SetActiveSplit(ProfileRowModel item)
-        {
-            if (item.Active) return;
-            _ProfileSelected.ActiveSplit = _ProfileRowList.IndexOf(item);
-        }
-
         public ICommand CmdSetSessionProgress { get; }
-        private void SetSessionProgress(ProfileRowModel item)
-        {
-            if (item.SP) return;
-            _ProfileSelected.SessionProgress = _ProfileRowList.IndexOf(item);
-        }
-
-        // https://stackoverflow.com/questions/4500729/how-to-use-binding-in-the-listbox-s-items-to-the-viewmodel-s-properties
 
         private ObservableCollection<ProfileRowModel> _ProfileRowList => _ProfileSelected.Rows;
 
         // https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/picker/populating-itemssource
 
-        public static ObservableCollection<ProfileModel> _ProfileList { get; private set; }
-        public ObservableCollection<ProfileModel> ProfileList { get => _ProfileList; } // TODO: Merge _ProfileList and ProfileList?
+        public ObservableCollection<ProfileModel> ProfileList { get; private set; }
 
         public bool IsProfileExisting(string Name)
         {
-            foreach (ProfileModel profileModel in _ProfileList)
+            foreach (ProfileModel profileModel in ProfileList)
             {
                 if (profileModel.Name == Name) return true;
             }
@@ -299,15 +255,15 @@ namespace HitCounterManager.ViewModels
             {
                 if (_ProfileSelected != value)
                 {
-                    if (_ProfileList.Contains(value))
+                    if (ProfileList.Contains(value))
                     {
                         UpdateDuration();
 
                         Monitor.Enter(TimerUpdateLock);
                         _ProfileSelected = value;
                         Monitor.Exit(TimerUpdateLock);
+                        Settings.ProfileSelected = _ProfileSelected.Name;
 
-                        //SetAndNotifyWhenChanged(this, ref _ProfileSelected, value, nameof(ProfileSelected)); // TODO: Use this?
                         CallPropertyChanged(this, nameof(ProfileSelected));
                         OutputDataChangedHandler(this, new PropertyChangedEventArgs(nameof(ProfileSelected)));
                     }
@@ -352,13 +308,12 @@ namespace HitCounterManager.ViewModels
             int split = _ProfileSelected.ActiveSplit + Amount;
             if ((0 <= split) && (split < _ProfileRowList.Count))
             {
-                // TODO: Allow no split to be active by out of range values?
-                if ((0 < Amount) && _ProfileRowList[_ProfileSelected.ActiveSplit].SP) SetSessionProgress(_ProfileRowList[split]);
+                if ((0 < Amount) && _ProfileRowList[_ProfileSelected.ActiveSplit].SP) CmdSetSessionProgress.Execute(_ProfileRowList[split]);
                 _ProfileSelected.ActiveSplit = split;
             }
             else if (split <= _ProfileRowList.Count)
             {
-                // Run completed as last split was finished
+                // Stop timer when run completes (when last split is finished)
                 TimerRunning = false;
             }
         }
@@ -407,19 +362,20 @@ namespace HitCounterManager.ViewModels
             set
             {
                 if (value == _TimerRunning) return;
-                if (_TimerRunning = value) // Set and prepare..
+
+                if (!_TimerRunning)
                 {
                     // Starting the timer
                     last_update_time = DateTime.UtcNow;
+                    _TimerRunning = true;
                     App.StartApplicationTimer(TimerIDs.GameTime, 10, UpdateDuration);
                     App.StartApplicationTimer(TimerIDs.GameTimeGui, 300, () => { CallPropertyChanged(this, nameof(StatsTime)); return _TimerRunning; });
                 }
                 else
                 {
-                    // Stopping the timer
-                    last_update_time = DateTime.UtcNow;
+                    // STOP THE COUNT!
                     UpdateDuration();
-                    CallPropertyChanged(this, nameof(StatsTime));
+                    _TimerRunning = false;
                 }
                 CallPropertyChanged(this, nameof(TimerRunning));
                 OutputDataChangedHandler(this, new PropertyChangedEventArgs(nameof(TimerRunning)));

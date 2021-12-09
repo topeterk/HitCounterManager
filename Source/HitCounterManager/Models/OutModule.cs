@@ -186,7 +186,7 @@ namespace HitCounterManager.Models
                         // Dump all actually visible splits of the current run
                         if (0 < r) sr.WriteLine(","); // separator
                         sr.Write("[\"" + SimpleHtmlEscape(pi.Rows[r].Title) + "\", "
-                            + (pi.Rows[r].Hits + pi.Rows[r].WayHits) + ", " + pi.Rows[r].PB + ", " + pi.Rows[r].WayHits + ", " // TODO: Rework Hits/WayHits/PB combinations
+                            + (pi.Rows[r].Hits + pi.Rows[r].WayHits) + ", " + pi.Rows[r].PB + ", " + pi.Rows[r].WayHits + ", "
                             + RunIndex + ", " + pi.Rows[r].Duration + ", " + pi.Rows[r].DurationPB + ", " + pi.Rows[r].DurationGold + "]");
                     }
 

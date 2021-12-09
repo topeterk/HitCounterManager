@@ -62,7 +62,7 @@ namespace HitCounterManager.Models
         public long Duration
         {
             get => _origin.Duration;
-            set => _origin.Duration = value; // We don't implicitly mark it as updated here as this would generate output very very often! // TODO: Maybe filter later (respondable UI!)?
+            set => _origin.Duration = value; // We don't notify about updates here as this would fire very very often while the timer is running!
         }
         public long DurationPB
         {
