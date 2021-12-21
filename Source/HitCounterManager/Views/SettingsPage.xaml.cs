@@ -22,31 +22,16 @@
 
 using System;
 using Xamarin.Forms;
-using HitCounterManager.Models;
 using HitCounterManager.ViewModels;
 
 namespace HitCounterManager.Views
 {
     public partial class SettingsPage : ContentPage
     {
-        public SettingsPage()
-        {
-            InitializeComponent();
-        }
+        public SettingsPage() => InitializeComponent();
 
         protected override void OnAppearing() => ((SettingsViewModel)BindingContext).OnAppearing();
 
         private void PopBack_Clicked(object sender, EventArgs e) => Navigation.PopModalAsync();
-        private void ApplyAppearance_Clicked(object sender, EventArgs e) => ((SettingsViewModel)BindingContext).ApplyCssAndFont.Execute(null);
-
-        private void Capture_Clicked(object sender, EventArgs e)
-        {
-            // TODO: Replace with Command?
-            Shortcuts.SC_Type type;
-            if (Enum.TryParse<Shortcuts.SC_Type>((string)((Button)sender).BindingContext, out type))
-            {
-                ((SettingsViewModel)BindingContext).Capture.Execute(type);
-            }
-        }
     }
 }

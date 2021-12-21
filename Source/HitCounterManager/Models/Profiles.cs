@@ -40,6 +40,7 @@ namespace HitCounterManager.Models
         public long DurationGold = 0;
 
         public ProfileRow ShallowCopy() => (ProfileRow)MemberwiseClone();
+        public ProfileRow DeepCopy() => ShallowCopy();
     }
 
     /// <summary>
@@ -58,7 +59,7 @@ namespace HitCounterManager.Models
         {
             Profile copy = ShallowCopy();
             copy.Rows = new List<ProfileRow>(Rows.Count);
-            foreach (ProfileRow row in Rows) copy.Rows.Add(row.ShallowCopy());
+            foreach (ProfileRow row in Rows) copy.Rows.Add(row.DeepCopy());
             return copy;
         }
     }

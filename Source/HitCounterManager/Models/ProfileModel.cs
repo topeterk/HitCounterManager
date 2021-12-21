@@ -150,9 +150,6 @@ namespace HitCounterManager.Models
 
         private void CollectionChangedHandler(object sender, NotifyCollectionChangedEventArgs e) => PropertyChangedHandler(sender, new PropertyChangedEventArgs(nameof(Rows)));
 
-        public Profile DeepCopyOrigin()
-        {
-            return _origin.DeepCopy(); // TODO: What happens with events on copy?
-        }
+        public Profile DeepCopyOrigin() => _origin.DeepCopy();
     }
 }

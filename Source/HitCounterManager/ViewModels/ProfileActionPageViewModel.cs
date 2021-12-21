@@ -98,16 +98,23 @@ namespace HitCounterManager.ViewModels
 
         public bool Submit()
         {
-            switch (Action)
+            try
             {
-                case ProfileAction.Create: _Origin.ProfileNew.Execute(UserInput); break;
-                case ProfileAction.Rename: _Origin.ProfileRename.Execute(UserInput); break;
-                case ProfileAction.Copy: _Origin.ProfileCopy.Execute(UserInput); break;
-                case ProfileAction.Delete: _Origin.ProfileDelete.Execute(null); break;
-                default: break;
+                switch (Action)
+                {
+                    case ProfileAction.Create: _Origin.ProfileNew(UserInput); break;
+                    case ProfileAction.Rename: _Origin.ProfileRename(UserInput); break;
+                    case ProfileAction.Copy: _Origin.ProfileCopy(UserInput); break;
+                    case ProfileAction.Delete: _Origin.ProfileDelete(); break;
+                    default: throw new ProfileViewModel.ProfileActionException("Unknown action");
+                }
+            }
+            catch (ProfileViewModel.ProfileActionException ex)
+            {
+                App.CurrentApp.DisplayAlert("Profile action failed!", ex.Message, "OK");
+                return false; // Error
             }
 
-            // TODO: Return false when action fails
             return true; // Success
         }
     }

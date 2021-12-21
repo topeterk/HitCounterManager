@@ -26,6 +26,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
              xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
+             xmlns:models="clr-namespace:HitCounterManager.Models;assembly=HitCounterManager"
              x:Class="HitCounterManager.Views.SettingsPage"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
@@ -60,47 +61,47 @@
                     </Grid.ColumnDefinitions>
                     <Switch Grid.Row="0" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutHitEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Label  Grid.Row="0" Grid.Column="1" Margin="0" Text="Hit +1 (boss):" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Button Grid.Row="0" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_Hit" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutHitRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="0" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:Shortcuts+SC_Type.SC_Type_Hit}" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutHitRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Entry  Grid.Row="0" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutHitDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="LightSkyBlue" />
                     <Switch Grid.Row="1" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutHitUndoEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Label  Grid.Row="1" Grid.Column="1" Margin="0" Text="Hit -1 (boss):" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Button Grid.Row="1" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_HitUndo" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutHitUndoRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="1" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:Shortcuts+SC_Type.SC_Type_HitUndo}" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutHitUndoRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Entry  Grid.Row="1" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutHitUndoDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="WhiteSmoke" />
 
                     <Switch Grid.Row="2" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutWayHitEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Label  Grid.Row="2" Grid.Column="1" Margin="0" Text="Hit +1 (way):" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Button Grid.Row="2" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_WayHit" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutWayHitRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="2" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:Shortcuts+SC_Type.SC_Type_WayHit}" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutWayHitRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Entry  Grid.Row="2" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutWayHitDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="LightBlue" />
                     <Switch Grid.Row="3" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutWayHitUndoEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Label  Grid.Row="3" Grid.Column="1" Margin="0" Text="Hit -1 (way)" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Button Grid.Row="3" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_WayHitUndo" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutWayHitUndoRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="3" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:Shortcuts+SC_Type.SC_Type_WayHitUndo}" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutWayHitUndoRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Entry  Grid.Row="3" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutWayHitUndoDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="WhiteSmoke" />
 
                     <Switch Grid.Row="4" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutSplitEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Label  Grid.Row="4" Grid.Column="1" Margin="0" Text="Next split:" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Button Grid.Row="4" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_Split" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutSplitRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="4" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:Shortcuts+SC_Type.SC_Type_Split}" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutSplitRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Entry  Grid.Row="4" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutSplitDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="LightGreen" />
                     <Switch Grid.Row="5" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutSplitPrevEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Label  Grid.Row="5" Grid.Column="1" Margin="0" Text="Prev split:" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Button Grid.Row="5" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_SplitPrev" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutSplitPrevRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="5" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:Shortcuts+SC_Type.SC_Type_SplitPrev}" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutSplitPrevRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Entry  Grid.Row="5" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutSplitPrevDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="WhiteSmoke" />
 
                     <Switch Grid.Row="6" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutPBEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Label  Grid.Row="6" Grid.Column="1" Margin="0" Text="Set PB:" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Button Grid.Row="6" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_PB" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutPBRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="6" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:Shortcuts+SC_Type.SC_Type_PB}" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutPBRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Entry  Grid.Row="6" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutPBDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="Tan" />
                     <Switch Grid.Row="7" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutResetEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Label  Grid.Row="7" Grid.Column="1" Margin="0" Text="Reset:" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Button Grid.Row="7" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_Reset" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutResetRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="7" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:Shortcuts+SC_Type.SC_Type_Reset}" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutResetRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Entry  Grid.Row="7" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutResetDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="IndianRed" />
 
                     <Switch Grid.Row="8" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutTimerStartEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Label  Grid.Row="8" Grid.Column="1" Margin="0" Text="Start timer:" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Button Grid.Row="8" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_TimerStart" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutTimerStartRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="8" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:Shortcuts+SC_Type.SC_Type_TimerStart}" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutTimerStartRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Entry  Grid.Row="8" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutTimerStartDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="Gold" />
                     <Switch Grid.Row="9" Grid.Column="0" Margin="0" IsToggled="{Binding ShortcutTimerStopEnable, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Label  Grid.Row="9" Grid.Column="1" Margin="0" Text="Stop timer" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Button Grid.Row="9" Grid.Column="2" Margin="0" Padding="4" Clicked="Capture_Clicked" BindingContext="SC_Type_TimerStop" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutTimerStopRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Button Grid.Row="9" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:Shortcuts+SC_Type.SC_Type_TimerStop}" Text="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}},Path=ShortcutTimerStopRecordAction, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Entry  Grid.Row="9" Grid.Column="3" Margin="0" IsEnabled="False" Text="{Binding ShortcutTimerStopDescription, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BackgroundColor="Gold" />
                 </Grid>
 
@@ -205,7 +206,7 @@
                 </Grid>
                 <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
                     <Label HorizontalOptions="StartAndExpand" Text="Please hit apply to save and use the custom settings:" />
-                    <Button Margin="0" Clicked="ApplyAppearance_Clicked" WidthRequest="200" Text="Apply" HorizontalOptions="End"/>
+                    <Button Margin="0" Command="{Binding ApplyCssAndFont}" WidthRequest="200" Text="Apply" HorizontalOptions="End"/>
                 </StackLayout>
 
                 <Label HorizontalOptions="CenterAndExpand" Text="BEHAVIOR" />

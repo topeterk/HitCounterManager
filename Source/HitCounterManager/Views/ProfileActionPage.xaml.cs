@@ -40,10 +40,6 @@ namespace HitCounterManager.Views
         protected override void OnAppearing() => vm.OnAppearing();
 
         private void PopBack_Dismiss_Clicked(object sender, EventArgs e) => Navigation.PopModalAsync();
-        private void PopBack_OK_Clicked(object sender, EventArgs e)
-        {
-            // TODO: Move this to a Command that the button can be enabled/disabled when action is possible/implossibles (e.g. overwriting an existing entry)
-            if (vm.Submit()) Navigation.PopModalAsync();
-        }
+        private void PopBack_OK_Clicked(object sender, EventArgs e) { if (vm.Submit()) Navigation.PopModalAsync(); }
     }
 }

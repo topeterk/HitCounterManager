@@ -72,96 +72,6 @@ namespace HitCounterManager.ViewModels
                 _ProfileSelected.SessionProgress = _ProfileRowList.IndexOf(item);
             });
 
-            ProfileNew = new Command<string>((string NewName) =>
-            {
-                if (App.CurrentApp.Settings.ReadOnlyMode) return;
-
-                if (null == NewName) return;
-                if (NewName.Length == 0) return;
-                if (IsProfileExisting(NewName)) return;
-
-                TimerRunning = false;
-
-                // Create profile
-                Profile profile = new Profile();
-                profile.Name = NewName;
-                ProfileModel profileModel = new ProfileModel(profile);
-                profileModel.InsertNewRow();
-                profileModel.ProfileDataChanged += OutputDataChangedHandler;
-
-                // Add and select profile
-                Settings.Profiles.ProfileList.Add(profile);
-                Settings.Profiles.ProfileList.Sort((a, b) => a.Name.CompareTo(b.Name)); // Sort by name
-                int profileIndex = Settings.Profiles.ProfileList.IndexOf(profile);
-                ProfileList.Insert(profileIndex, profileModel);
-                ProfileSelected = profileModel;
-
-                // TODO: [PICKER] Test and rework code if a ObservableCollection can be used for the picker instead!
-                ProfileSelector?.ForceUpdate(); // Workaround as this should not be required!
-            });
-            ProfileRename = new Command<string>((string NewName) =>
-            {
-                if (App.CurrentApp.Settings.ReadOnlyMode) return;
-
-                if (null == NewName) return;
-                if (NewName.Length == 0) return;
-                if (IsProfileExisting(NewName)) return;
-
-                _ProfileSelected.Name = NewName;
-
-                // TODO: [PICKER] Test and rework code if a ObservableCollection can be used for the picker instead!
-                ProfileSelector?.ForceUpdate(); // Workaround as this should not be required!
-            });
-            ProfileCopy = new Command<string>((string NewName) =>
-            {
-                if (App.CurrentApp.Settings.ReadOnlyMode) return;
-
-                if (null == NewName) return;
-                if (NewName.Length == 0) return;
-                if (IsProfileExisting(NewName)) return;
-
-                UpdateDuration();
-
-                // Create profile
-                Profile profile = ProfileSelected.DeepCopyOrigin();
-                profile.Name = NewName;
-                ProfileModel profileModel = new ProfileModel(profile);
-                profileModel.ProfileDataChanged += OutputDataChangedHandler;
-
-                // Add and select profile
-                Settings.Profiles.ProfileList.Add(profile);
-                Settings.Profiles.ProfileList.Sort((a, b) => a.Name.CompareTo(b.Name)); // Sort by name
-                int profileIndex = Settings.Profiles.ProfileList.IndexOf(profile);
-                ProfileList.Insert(profileIndex, profileModel);
-                ProfileSelected = profileModel;
-
-                // TODO: [PICKER] Test and rework code if a ObservableCollection can be used for the picker instead!
-                ProfileSelector?.ForceUpdate(); // Workaround as this should not be required!
-            });
-            ProfileDelete = new Command(() =>
-            {
-                if (App.CurrentApp.Settings.ReadOnlyMode) return;
-
-                if (ProfileList.Count <= 1) return; // do not delete the only last remaining profile
-
-                TimerRunning = false;
-
-                int profileIndex = ProfileList.IndexOf(_ProfileSelected);
-
-                // Change to next/previous profile before removing
-                int Index = profileIndex + 1;
-                if (ProfileList.Count <= Index) Index = ProfileList.Count - 2; // in case last profile is deleted, choose previous one
-                ProfileSelected = ProfileList[Index];
-
-                // Removing
-                Settings.Profiles.ProfileList.RemoveAt(profileIndex);
-                ProfileList.RemoveAt(profileIndex);
-
-                OutputDataChangedHandler(this, new PropertyChangedEventArgs(nameof(ProfileSelected)));
-
-                // TODO: [PICKER] Test and rework code if a ObservableCollection can be used for the picker instead!
-                ProfileSelector?.ForceUpdate(); // Workaround as this should not be required!
-            });
             ProfileReset = new Command(() =>
             {
                 TimerRunning = false;
@@ -281,10 +191,101 @@ namespace HitCounterManager.ViewModels
             }
         }
 
-        public ICommand ProfileNew { get; } 
-        public ICommand ProfileRename { get; }
-        public ICommand ProfileCopy { get; }
-        public ICommand ProfileDelete { get; }
+        public class ProfileActionException : Exception
+        {
+            public ProfileActionException(string message) : base(message) { }
+        }
+
+        public void ProfileNew(string NewName)
+        {
+            if (App.CurrentApp.Settings.ReadOnlyMode) throw new ProfileActionException("Profile marked as read-only.");
+
+            if (null == NewName) throw new ProfileActionException("The name is invalid.");
+            if (NewName.Length == 0) throw new ProfileActionException("Empty name is not allowed.");
+            if (IsProfileExisting(NewName)) throw new ProfileActionException("Profile already exists.");
+
+            TimerRunning = false;
+
+            // Create profile
+            Profile profile = new Profile();
+            profile.Name = NewName;
+            ProfileModel profileModel = new ProfileModel(profile);
+            profileModel.InsertNewRow();
+            profileModel.ProfileDataChanged += OutputDataChangedHandler;
+
+            // Add and select profile
+            Settings.Profiles.ProfileList.Add(profile);
+            Settings.Profiles.ProfileList.Sort((a, b) => a.Name.CompareTo(b.Name)); // Sort by name
+            int profileIndex = Settings.Profiles.ProfileList.IndexOf(profile);
+            ProfileList.Insert(profileIndex, profileModel);
+            ProfileSelected = profileModel;
+
+            // TODO: [PICKER] Test and rework code if a ObservableCollection can be used for the picker instead!
+            ProfileSelector?.ForceUpdate(); // Workaround as this should not be required!
+        }
+        public void ProfileRename(string NewName)
+        {
+            if (App.CurrentApp.Settings.ReadOnlyMode) throw new ProfileActionException("Profile marked as read-only.");
+
+            if (null == NewName) throw new ProfileActionException("The name is invalid.");
+            if (NewName.Length == 0) throw new ProfileActionException("Empty name is not allowed.");
+            if (IsProfileExisting(NewName)) throw new ProfileActionException("Profile already exists.");
+
+            _ProfileSelected.Name = NewName;
+
+            // TODO: [PICKER] Test and rework code if a ObservableCollection can be used for the picker instead!
+            ProfileSelector?.ForceUpdate(); // Workaround as this should not be required!
+        }
+        public void ProfileCopy(string NewName)
+        {
+            if (App.CurrentApp.Settings.ReadOnlyMode) throw new ProfileActionException("Profile marked as read-only.");
+
+            if (null == NewName) throw new ProfileActionException("The name is invalid.");
+            if (NewName.Length == 0) throw new ProfileActionException("Empty name is not allowed.");
+            if (IsProfileExisting(NewName)) throw new ProfileActionException("Profile already exists.");
+
+            UpdateDuration();
+
+            // Create profile
+            Profile profile = ProfileSelected.DeepCopyOrigin();
+            profile.Name = NewName;
+            ProfileModel profileModel = new ProfileModel(profile);
+            profileModel.ProfileDataChanged += OutputDataChangedHandler;
+
+            // Add and select profile
+            Settings.Profiles.ProfileList.Add(profile);
+            Settings.Profiles.ProfileList.Sort((a, b) => a.Name.CompareTo(b.Name)); // Sort by name
+            int profileIndex = Settings.Profiles.ProfileList.IndexOf(profile);
+            ProfileList.Insert(profileIndex, profileModel);
+            ProfileSelected = profileModel;
+
+            // TODO: [PICKER] Test and rework code if a ObservableCollection can be used for the picker instead!
+            ProfileSelector?.ForceUpdate(); // Workaround as this should not be required!
+        }
+        public void ProfileDelete()
+        {
+            if (App.CurrentApp.Settings.ReadOnlyMode) throw new ProfileActionException("Profile marked as read-only.");
+
+            if (ProfileList.Count <= 1) throw new ProfileActionException("Cannot delete last profile.");
+
+            TimerRunning = false;
+
+            int profileIndex = ProfileList.IndexOf(_ProfileSelected);
+
+            // Change to next/previous profile before removing
+            int Index = profileIndex + 1;
+            if (ProfileList.Count <= Index) Index = ProfileList.Count - 2; // in case last profile is deleted, choose previous one
+            ProfileSelected = ProfileList[Index];
+
+            // Removing
+            Settings.Profiles.ProfileList.RemoveAt(profileIndex);
+            ProfileList.RemoveAt(profileIndex);
+
+            OutputDataChangedHandler(this, new PropertyChangedEventArgs(nameof(ProfileSelected)));
+
+            // TODO: [PICKER] Test and rework code if a ObservableCollection can be used for the picker instead!
+            ProfileSelector?.ForceUpdate(); // Workaround as this should not be required!
+        }
 
         public ICommand ProfileReset { get; }
         public ICommand ProfilePB { get; }
