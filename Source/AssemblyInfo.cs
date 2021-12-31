@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@ using Xamarin.Forms.Xaml;
 
 [assembly: AssemblyCompanyAttribute("")]
 [assembly: AssemblyConfigurationAttribute("")]
-[assembly: AssemblyCopyrightAttribute("Copyright © Peter Kirmeier 2021")]
+[assembly: AssemblyCopyrightAttribute("Copyright © Peter Kirmeier 2022")]
 [assembly: AssemblyDescriptionAttribute("Manages a hit counter")]
 [assembly: AssemblyFileVersionAttribute("2.0.0.0")]
 [assembly: AssemblyInformationalVersionAttribute("2.0.0.0")]
