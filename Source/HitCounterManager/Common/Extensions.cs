@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@
 //SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
@@ -37,12 +38,19 @@ namespace HitCounterManager.Common
     [ContentProperty(nameof(Resource))]
     public class ImageFromResource : IMarkupExtension
     {
+        // On GTK: Do not remove this image cache (e.g. with loading on demand) as images may not load properly
+        static Dictionary<string, ImageSource> LoadedImageSources = new Dictionary<string, ImageSource>();
+
         public string Resource { get; set; }
 
         public object ProvideValue(IServiceProvider serviceProvider)
         {
             if (Resource == null) return null;
-            return ImageSource.FromResource(Resource, typeof(ImageFromResource).GetTypeInfo().Assembly);
+            if (LoadedImageSources.ContainsKey(Resource)) return LoadedImageSources[Resource];
+
+            ImageSource result = ImageSource.FromResource(Resource, typeof(ImageFromResource).GetTypeInfo().Assembly);
+            LoadedImageSources.Add(Resource, result);
+            return result;
         }
     }
 
