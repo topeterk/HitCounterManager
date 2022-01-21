@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,19 @@
     </ContentPage.BindingContext>
 
     <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-        <Label HorizontalOptions="CenterAndExpand" Text="SETTINGS"/>
+
+        <Grid Padding="0,0,30,0" Margin="0" RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="60" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" Grid.Column="0" Margin="0" Padding="4" Clicked="PopBack_Clicked" WidthRequest="50" Text="Back" HorizontalOptions="Start"/>
+            <Label  Grid.Row="0" Grid.Column="1" Margin="0" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="Center" Text="SETTINGS" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 16, GTK=14}"/>
+        </Grid>
         <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
         <ScrollView Padding="0,0,30,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
 
@@ -236,7 +248,7 @@
                     <Label  Grid.Row="4" Grid.Column="1" Margin="0" Text="Run reset counter" HorizontalOptions="Start" VerticalOptions="Center" />
                 </Grid>
 
-                <Label HorizontalOptions="StartAndExpand" Text='Hit severity ("Neither nor" color)' />
+                <Label HorizontalOptions="StartAndExpand" Text="Hit severity (color of Neither nor)" />
                 <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -365,6 +377,6 @@
             </StackLayout>
         </ScrollView>
 
-        <Button Padding="4" Clicked="PopBack_Clicked" WidthRequest="200" Text="OK" HorizontalOptions="End"/>
+        <Button Padding="4" Clicked="PopBack_Clicked" WidthRequest="50" Text="Back" HorizontalOptions="Start"/>
     </StackLayout>
 </ContentPage>
