@@ -370,6 +370,7 @@
             this.ToolTip1.SetToolTip(this.btnHit, "Count a HIT (boss) on the current split");
             this.btnHit.UseVisualStyleBackColor = false;
             this.btnHit.Click += new System.EventHandler(this.btnHit_Click);
+            this.btnHit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnHit_MouseDown);
             // 
             // btnWayHit
             // 
@@ -386,6 +387,7 @@
             this.ToolTip1.SetToolTip(this.btnWayHit, "Count a HIT (way) on the current split");
             this.btnWayHit.UseVisualStyleBackColor = false;
             this.btnWayHit.Click += new System.EventHandler(this.btnWayHit_Click);
+            this.btnWayHit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnWayHit_MouseDown);
             // 
             // btnSplit
             // 
@@ -402,6 +404,7 @@
             this.ToolTip1.SetToolTip(this.btnSplit, "Jump to the next SPLIT");
             this.btnSplit.UseVisualStyleBackColor = false;
             this.btnSplit.Click += new System.EventHandler(this.btnSplit_Click);
+            this.btnSplit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnSplit_MouseDown);
             // 
             // Spacer1
             // 
