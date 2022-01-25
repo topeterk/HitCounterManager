@@ -369,7 +369,8 @@
             this.btnHit.TabIndex = 20;
             this.ToolTip1.SetToolTip(this.btnHit, "Count a HIT (boss) on the current split");
             this.btnHit.UseVisualStyleBackColor = false;
-            this.btnHit.Click += new System.EventHandler(this.btnHit_Click);
+            this.btnHit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnHit_MouseDown);
+
             // 
             // btnWayHit
             // 
@@ -385,7 +386,7 @@
             this.btnWayHit.TabIndex = 21;
             this.ToolTip1.SetToolTip(this.btnWayHit, "Count a HIT (way) on the current split");
             this.btnWayHit.UseVisualStyleBackColor = false;
-            this.btnWayHit.Click += new System.EventHandler(this.btnWayHit_Click);
+            this.btnWayHit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnWayHit_MouseDown);
             // 
             // btnSplit
             // 

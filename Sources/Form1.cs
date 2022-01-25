@@ -74,11 +74,11 @@ namespace HitCounterManager
                     switch ((Shortcuts.SC_Type)m.WParam)
                     {
                         case Shortcuts.SC_Type.SC_Type_Reset: btnReset_Click(null, null); break;
-                        case Shortcuts.SC_Type.SC_Type_Hit: btnHit_Click(null, null); break;
+                        case Shortcuts.SC_Type.SC_Type_Hit: btnHit_MouseDown(null, null); break;
                         case Shortcuts.SC_Type.SC_Type_Split: btnSplit_Click(null, null); break;
                         case Shortcuts.SC_Type.SC_Type_HitUndo: btnHitUndo_Click(null, null); break;
                         case Shortcuts.SC_Type.SC_Type_SplitPrev: btnSplitPrev_Click(null, null); break;
-                        case Shortcuts.SC_Type.SC_Type_WayHit: btnWayHit_Click(null, null); break;
+                        case Shortcuts.SC_Type.SC_Type_WayHit: btnWayHit_MouseDown(null, null); break;
                         case Shortcuts.SC_Type.SC_Type_WayHitUndo: btnWayHitUndo_Click(null, null); break;
                         case Shortcuts.SC_Type.SC_Type_PB: btnPB_Click(null, null); break;
                         case Shortcuts.SC_Type.SC_Type_TimerStart: StartStopTimer(true); break;
@@ -165,9 +165,15 @@ namespace HitCounterManager
         private void btnReset_Click(object sender, EventArgs e) { StartStopTimer(false); profCtrl.ProfileReset(); }
         private void btnPB_Click(object sender, EventArgs e) { StartStopTimer(false); profCtrl.ProfilePB(); }
         private void btnPause_Click(object sender, EventArgs e) { StartStopTimer(!profCtrl.TimerRunning); }
-        private void btnHit_Click(object sender, EventArgs e) { profCtrl.ProfileHit(+1); }
+        private void btnHit_MouseDown(object sender, MouseEventArgs e) {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left) { profCtrl.ProfileHit(+1); }
+            if (e.Button == System.Windows.Forms.MouseButtons.Right) { profCtrl.ProfileHit(-1); }
+        }
         private void btnHitUndo_Click(object sender, EventArgs e) { profCtrl.ProfileHit(-1); }
-        private void btnWayHit_Click(object sender, EventArgs e) { profCtrl.ProfileWayHit(+1); }
+        private void btnWayHit_MouseDown(object sender, MouseEventArgs e) {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left) { profCtrl.ProfileWayHit(+1); }
+            if (e.Button == System.Windows.Forms.MouseButtons.Right) { profCtrl.ProfileWayHit(-1); }
+        }
         private void btnWayHitUndo_Click(object sender, EventArgs e) { profCtrl.ProfileWayHit(-1); }
         private void btnSplit_Click(object sender, EventArgs e) { profCtrl.ProfileSplitGo(+1); }
         private void btnSplitPrev_Click(object sender, EventArgs e) { profCtrl.ProfileSplitGo(-1); }
