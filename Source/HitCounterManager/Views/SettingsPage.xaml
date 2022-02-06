@@ -127,17 +127,86 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="18" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Switch Grid.Row="0" Grid.Column="0" Margin="0" IsToggled="{Binding RadioHotKeyMethod_Sync, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="0" Grid.Column="1" Margin="0" Text="Synchronous - System hotkey registration" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="1" Grid.Column="0" Margin="0" IsToggled="{Binding RadioHotKeyMethod_Async, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="1" Grid.Column="1" Margin="0" Text="Asynchronous - Polling keyboard keys" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="2" Grid.Column="0" Margin="0" IsToggled="{Binding RadioHotKeyMethod_LLKb, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="2" Grid.Column="1" Margin="0" Text="Synchronous - Low level keyboard hook (Recommended)" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <RelativeLayout Grid.Row="0" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="RadioHotKeyMethod_Sync" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="0" Grid.Column="1" Margin="0" IsToggled="{Binding RadioHotKeyMethod_Sync, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="0" Grid.Column="2" Margin="0" Text="Synchronous - System hotkey registration" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[RadioHotKeyMethod_Sync].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span>* This is a synchronous method as it uses the RegisterHotKey function (Windows API).
+* Only when Windows detects a hotkey, a notification to the application is sent, therefore the performance impact is at its minimum.
+* The privilege level must at least be on the same level as the application that is sending the notification. This means if you run the game as administratior you most likely have to run the HitCounterManager as administrator, too.
+* Downside: It may happen that an applications can "eat" the keys presses and therefore no notification will be sent.</Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
+                    <RelativeLayout Grid.Row="2" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="RadioHotKeyMethod_Async" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="2" Grid.Column="1" Margin="0" IsToggled="{Binding RadioHotKeyMethod_Async, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="2" Grid.Column="2" Margin="0" Text="Asynchronous - Polling keyboard keys" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[RadioHotKeyMethod_Async].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span>* This is an asynchronous method as it periodically checks the keyboard key presses using the GetAsyncKeyState function (Windows API).
+* This means the application has to check all the relevant keys in around every 20 milliseconds. This brings a slight performance drawback.
+* This method checks a key directly, so another application cannot interfere a hotkey detection.
+* Downside: Very short software generated hotkey events may be missed due to the polling interval.</Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
+                    <RelativeLayout Grid.Row="4" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="RadioHotKeyMethod_LLKb" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="4" Grid.Column="1" Margin="0" IsToggled="{Binding RadioHotKeyMethod_LLKb, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="4" Grid.Column="2" Margin="0" Text="Synchronous - Low level keyboard hook (Recommended)" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[RadioHotKeyMethod_LLKb].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span>* This is a synchronous method as it uses the WH_KEYBOARD_LL hook via SetWindowsHookEx function (Windows API).
+* Even a software generated key that is set and released at the same time (yes, at the exact same time due to message buffering) can be detected this way.
+* Downside: Windows will notify the application for every single key state change, which brings a slight performance impact. But more importantly this detection is based on a global hook chain, so before the key press reaches the actual game, the key will also be processed by the HitCounterManager. Therefore you will get an input lag of probably a few nano seconds (depending on the processor). This is why Microsoft stated that this method should be used for debugging but not for productive environments.</Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
                 </Grid>
 
                 <Label HorizontalOptions="CenterAndExpand" Text="STYLE"/>
@@ -176,7 +245,7 @@
                     <Frame  Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
                             IsVisible="{Binding ShowInfo[StyleUseHighContrast].Value, Mode=OneWay}"
                             BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
-                        <Label Padding="{OnPlatform 0, WPF=8}" Text="Adds a solid background color that the text can be read clearly no matter what is shown behind" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="Adds a solid background color that the text can be read clearly no matter what is shown behind." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
                     </Frame>
                     <RelativeLayout Grid.Row="2" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
                         <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
@@ -191,7 +260,7 @@
                     <Frame  Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
                             IsVisible="{Binding ShowInfo[StyleUseHighContrastNames].Value, Mode=OneWay}"
                             BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
-                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The split names will have no color" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The split names will have no color." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
                     </Frame>
                     <RelativeLayout Grid.Row="4" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
                         <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
@@ -206,7 +275,7 @@
                     <Frame  Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
                             IsVisible="{Binding ShowInfo[StyleProgressBarColored].Value, Mode=OneWay}"
                             BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
-                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The progress bar will not take hit counts into account and just shows progress with one color" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The progress bar will not take hit counts into account and just shows progress with one color." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
                     </Frame>
                     <RelativeLayout Grid.Row="6" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
                         <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
@@ -221,7 +290,7 @@
                     <Frame  Grid.Row="7" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
                             IsVisible="{Binding ShowInfo[StyleSuperscriptPB].Value, Mode=OneWay}"
                             BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
-                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The totals of the PB shown for each split will be sown smaller and a bit lower for better readability" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The totals of the PB shown for each split will be sown smaller and a bit lower for better readability." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
                     </Frame>
                     <RelativeLayout Grid.Row="8" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
                         <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
@@ -236,7 +305,7 @@
                     <Frame  Grid.Row="9" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
                             IsVisible="{Binding ShowInfo[StyleUseRoman].Value, Mode=OneWay}"
                             BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
-                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The hit counts will be shown with Roman numerals" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The hit counts will be shown with Roman numerals." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
                     </Frame>
                     <RelativeLayout Grid.Row="10" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
                         <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
@@ -251,7 +320,7 @@
                     <Frame  Grid.Row="11" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
                             IsVisible="{Binding ShowInfo[StyleHightlightCurrentSplit].Value, Mode=OneWay}"
                             BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
-                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The row with the current split will stand out a little bit" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The row with the current split will stand out a little bit." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
                     </Frame>
                 </Grid>
 
@@ -266,7 +335,7 @@
                 <Label HorizontalOptions="FillAndExpand" Margin="30,0,0,0">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span FontAttributes="Italic">When value is set back to 0, you may have to reload the browser.</Span>
+                            <Span FontAttributes="Italic" FontSize="Body">When value is set back to 0, you may have to reload the browser.</Span>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -427,11 +496,11 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <!-- TODO: Show values combined instead of mathematics term -->
-                            <Span FontAttributes="Italic" Text="Current configuration will show up to " />
-                            <Span FontAttributes="Italic" Text="{Binding ShowSplitsCountFinished, Mode=OneWay}" />
-                            <Span FontAttributes="Italic" Text=" + " />
-                            <Span FontAttributes="Italic" Text="{Binding ShowSplitsCountUpcoming, Mode=OneWay}" />
-                            <Span FontAttributes="Italic" Text=" splits." />
+                            <Span FontAttributes="Italic" FontSize="Body" Text="Current configuration will show up to " />
+                            <Span FontAttributes="Italic" FontSize="Body" Text="{Binding ShowSplitsCountFinished, Mode=OneWay}" />
+                            <Span FontAttributes="Italic" FontSize="Body" Text=" + " />
+                            <Span FontAttributes="Italic" FontSize="Body" Text="{Binding ShowSplitsCountUpcoming, Mode=OneWay}" />
+                            <Span FontAttributes="Italic" FontSize="Body" Text=" splits." />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>

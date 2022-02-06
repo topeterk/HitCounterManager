@@ -126,6 +126,9 @@ namespace HitCounterManager.ViewModels
         }
 
         private Dictionary<string, ShowInfoBool> _ShowInfo = new Dictionary<string, ShowInfoBool>(){
+            {"RadioHotKeyMethod_Sync", new ShowInfoBool()},
+            {"RadioHotKeyMethod_Async", new ShowInfoBool()},
+            {"RadioHotKeyMethod_LLKb", new ShowInfoBool()},
             {"StyleUseHighContrast", new ShowInfoBool()},
             {"StyleUseHighContrastNames", new ShowInfoBool()},
             {"StyleProgressBarColored", new ShowInfoBool()},
