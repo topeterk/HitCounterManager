@@ -151,23 +151,108 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="18" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Switch Grid.Row="0" Grid.Column="0" Margin="0" IsToggled="{Binding StyleUseHighContrast, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="0" Grid.Column="1" Margin="0" Text="Disable transparency" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="1" Grid.Column="0" Margin="0" IsToggled="{Binding StyleUseHighContrastNames, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="1" Grid.Column="1" Margin="0" Text="Disable coloring of names" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="2" Grid.Column="0" Margin="0" IsToggled="{Binding StyleProgressBarColored, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="2" Grid.Column="1" Margin="0" Text="Disable coloring of progress bar" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="3" Grid.Column="0" Margin="0" IsToggled="{Binding StyleSuperscriptPB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="3" Grid.Column="1" Margin="0" Text="Superscripted PB totals" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="4" Grid.Column="0" Margin="0" IsToggled="{Binding StyleUseRoman, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="4" Grid.Column="1" Margin="0" Text="Roman numerals" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="5" Grid.Column="0" Margin="0" IsToggled="{Binding StyleHightlightCurrentSplit, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="5" Grid.Column="1" Margin="0" Text="Highlight current split" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <RelativeLayout Grid.Row="0" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="StyleUseHighContrast" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="0" Grid.Column="1" Margin="0" IsToggled="{Binding StyleUseHighContrast, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="0" Grid.Column="2" Margin="0" Text="Disable transparency" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[StyleUseHighContrast].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="Adds a solid background color that the text can be read clearly no matter what is shown behind" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                    </Frame>
+                    <RelativeLayout Grid.Row="2" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="StyleUseHighContrastNames" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="2" Grid.Column="1" Margin="0" IsToggled="{Binding StyleUseHighContrastNames, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="2" Grid.Column="2" Margin="0" Text="Disable coloring of names" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[StyleUseHighContrastNames].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The split names will have no color" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                    </Frame>
+                    <RelativeLayout Grid.Row="4" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="StyleProgressBarColored" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="4" Grid.Column="1" Margin="0" IsToggled="{Binding StyleProgressBarColored, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="4" Grid.Column="2" Margin="0" Text="Disable coloring of progress bar" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[StyleProgressBarColored].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The progress bar will not take hit counts into account and just shows progress with one color" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                    </Frame>
+                    <RelativeLayout Grid.Row="6" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="StyleSuperscriptPB" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="6" Grid.Column="1" Margin="0" IsToggled="{Binding StyleSuperscriptPB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="6" Grid.Column="2" Margin="0" Text="Superscripted PB totals" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="7" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[StyleSuperscriptPB].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The totals of the PB shown for each split will be sown smaller and a bit lower for better readability" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                    </Frame>
+                    <RelativeLayout Grid.Row="8" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="StyleUseRoman" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="8" Grid.Column="1" Margin="0" IsToggled="{Binding StyleUseRoman, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="8" Grid.Column="2" Margin="0" Text="Roman numerals" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="9" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[StyleUseRoman].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The hit counts will be shown with Roman numerals" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                    </Frame>
+                    <RelativeLayout Grid.Row="10" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="StyleHightlightCurrentSplit" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="10" Grid.Column="1" Margin="0" IsToggled="{Binding StyleHightlightCurrentSplit, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="10" Grid.Column="2" Margin="0" Text="Highlight current split" HorizontalTextAlignment="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="11" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[StyleHightlightCurrentSplit].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The row with the current split will stand out a little bit" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                    </Frame>
                 </Grid>
 
                 <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">

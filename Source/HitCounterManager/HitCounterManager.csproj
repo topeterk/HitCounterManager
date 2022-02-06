@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -28,6 +28,7 @@
     <EmbeddedResource Include="Resources\Images\icons8-double-up-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-edit-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-inactive-state-20.png" />
+    <EmbeddedResource Include="Resources\Images\icons8-information-18.png" />
     <EmbeddedResource Include="Resources\Images\icons8-lock-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-padlock-20.png" />
     <EmbeddedResource Include="Resources\Images\icons8-pin-20.png" />

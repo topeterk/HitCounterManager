@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -43,6 +43,8 @@ namespace HitCounterManager.ViewModels
             _StyleFontName = Settings.StyleFontName;
             _StyleFontUrl = Settings.StyleFontUrl;
             _StyleCssUrl = Settings.StyleCssUrl;
+
+            ToggleShowInfo = new Command<string>((string name) => { ShowInfo[name].Value = !ShowInfo[name].Value; });
 
             Capture = new Command<Shortcuts.SC_Type>((type) =>
             {
@@ -94,10 +96,10 @@ namespace HitCounterManager.ViewModels
                 /*if (disposing) // called manually (true) or from destructor (false)
                 {
                 }*/
- 
+
                 Capture.Execute(Shortcuts.SC_Type.SC_Type_MAX); // Stop any running capture
                 App.CurrentApp.SettingsDialogOpen = false; // Re-Enable hotkeys (for main application)
- 
+
                 _Disposed = true;
             }
         }
@@ -112,6 +114,28 @@ namespace HitCounterManager.ViewModels
 
             App.CurrentApp.profileViewModel.OutputDataChangedHandler(sender, e);
         }
+
+        public class ShowInfoBool : NotifyPropertyChangedImpl
+        {
+            private bool _Value = false;
+            public bool Value
+            {
+                get => _Value;
+                set => SetAndNotifyWhenChanged(this, ref _Value, value, nameof(Value));
+            }
+        }
+
+        private Dictionary<string, ShowInfoBool> _ShowInfo = new Dictionary<string, ShowInfoBool>(){
+            {"StyleUseHighContrast", new ShowInfoBool()},
+            {"StyleUseHighContrastNames", new ShowInfoBool()},
+            {"StyleProgressBarColored", new ShowInfoBool()},
+            {"StyleSuperscriptPB", new ShowInfoBool()},
+            {"StyleUseRoman", new ShowInfoBool()},
+            {"StyleHightlightCurrentSplit", new ShowInfoBool()},
+        };
+        public Dictionary<string, ShowInfoBool> ShowInfo { get => _ShowInfo; }
+
+        public ICommand ToggleShowInfo { get; }
 
         public ICommand Capture { get; }
 
@@ -147,7 +171,7 @@ namespace HitCounterManager.ViewModels
                     case Keys.ShiftKey: key.KeyData |= Keys.Shift; break;
                     case Keys.ControlKey: key.KeyData |= Keys.Control; break;
                     case Keys.Menu: key.KeyData |= Keys.Alt; break;
- 
+
                     // Assign key code
                     default:
                         if (key.KeyCode != Keys.None) return (Shortcuts.SC_Type.SC_Type_MAX != CapturingId); // Only a single key can be captured
@@ -168,7 +192,7 @@ namespace HitCounterManager.ViewModels
         {
             ShortcutsKey key = new ShortcutsKey();
             Shortcuts.SC_Type Id = CapturingId;
-            
+
             if (e.KeyCode == Keys.None) return;
             if (e.KeyCode == Keys.ShiftKey) return;
             if (e.KeyCode == Keys.ControlKey) return;
@@ -179,7 +203,7 @@ namespace HitCounterManager.ViewModels
             key.key = e;
             sc.Key_Set(Id, key);
 
-            switch(Id)
+            switch (Id)
             {
                 case Shortcuts.SC_Type.SC_Type_Hit:
                     CallPropertyChanged(this, nameof(ShortcutHitDescription));
