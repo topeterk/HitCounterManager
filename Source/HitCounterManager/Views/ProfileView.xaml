@@ -65,7 +65,13 @@
                 <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="20" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text=" " />
+            <RelativeLayout Grid.Row="0" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Center" VerticalOptions="Center">
+                <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="MainColumnHeaders" NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </RelativeLayout>
             <Label Grid.Column="1" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" Text="Title" />
             <Label Grid.Column="2" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="Boss&#10;Hits" />
             <Label Grid.Column="3" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="Way&#10;Hits" />
@@ -74,6 +80,23 @@
             <Label Grid.Column="6" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="SP" />
             <Label Grid.Column="7" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text=" " />
         </Grid>
+        <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+        <Frame OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+               IsVisible="{Binding ShowInfo[MainColumnHeaders].Value, Mode=OneWay}"
+               BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+            <Label Padding="{OnPlatform 0, WPF=8}" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span>* Titel: The name of the split.
+* Boss Hits: Amount of hits taken by anything or bosses or just a marker that a boss has been defeated (depends on the configured behavior).
+* Way Hits: Amount of hits taken on the way to a boss or not used at all (depends on the configured behavior). E.g. track if a boss or the way through a slit should be trained more.
+* Diff: The difference between the hits taken (sum of Boss Hits and Way Hits) and the personal best hits taken.
+* SP (Session Progress): Marks the furthest reached split since the application has been started. E.g. furthest reached split during a single stream.
+* Trash: Removes the split from the list.</Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </Frame>
         <!-- Maybe CollectionView, but seems buggy: https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/collectionview/populate-data -->
         <!-- https://www.jerriepelser.com/blog/3-ways-dynamic-data-templates/ (Use option 3?) -->
         <StackLayout Padding="0" Margin="0" Spacing="0" x:Name="ProfileList" BindableLayout.ItemsSource="{Binding ProfileSelected.Rows}" HorizontalOptions="FillAndExpand" Orientation="Vertical">

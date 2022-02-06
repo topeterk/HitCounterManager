@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@
 //SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -39,6 +40,9 @@ namespace HitCounterManager.ViewModels
 
         public ProfileViewModel()
         {
+
+            ToggleShowInfo = new Command<string>((string name) => { ShowInfo[name].Value = !ShowInfo[name].Value; });
+
             ProfileList = new ObservableCollection<ProfileModel>();
             foreach (Profile prof in Settings.Profiles.ProfileList)
             {
@@ -127,6 +131,23 @@ namespace HitCounterManager.ViewModels
             SplitSelectNext = new Command(() => GoSplits(+1));
             SplitSelectPrev = new Command(() => GoSplits(-1));
         }
+
+        public class ShowInfoBool : NotifyPropertyChangedImpl
+        {
+            private bool _Value = false;
+            public bool Value
+            {
+                get => _Value;
+                set => SetAndNotifyWhenChanged(this, ref _Value, value, nameof(Value));
+            }
+        }
+
+        private Dictionary<string, ShowInfoBool> _ShowInfo = new Dictionary<string, ShowInfoBool>(){
+            {"MainColumnHeaders", new ShowInfoBool()},
+        };
+        public Dictionary<string, ShowInfoBool> ShowInfo { get => _ShowInfo; }
+
+        public ICommand ToggleShowInfo { get; }
 
         public void OutputDataChangedHandler(object sender, PropertyChangedEventArgs e)
         {
