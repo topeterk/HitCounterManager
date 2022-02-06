@@ -38,7 +38,7 @@
         <local:SettingsViewModel />
     </ContentPage.BindingContext>
 
-    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+    <StackLayout Padding="2" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
         <Grid Padding="0,0,30,0" Margin="0" RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand">
             <Grid.RowDefinitions>
@@ -53,11 +53,19 @@
             <Label  Grid.Row="0" Grid.Column="1" Margin="0" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="Center" Text="SETTINGS" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 16, GTK=14}"/>
         </Grid>
         <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
-        <ScrollView Padding="0,0,30,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+        <ScrollView Padding="0,0,30,0" Margin="6,0,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
 
             <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
-                <Label HorizontalOptions="CenterAndExpand" Text="GLOBAL SHORTCUTS" />
+                <!-- ================== -->
+                <!-- ================== -->
+                <!-- ================== -->
+
+                <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                <Frame BackgroundColor="#CC6600" OutlineColor="#CC6600" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                    <Label Padding="{OnPlatform 0, WPF=8}" HorizontalOptions="CenterAndExpand" Text="GLOBAL SHORTCUTS" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=12}" />
+                </Frame>
+
                 <Label HorizontalOptions="StartAndExpand" Text="Global hot keys not supported in this version!" TextColor="Red"
                        IsVisible="{Binding Source={x:Static common:Statics.GlobalHotKeySupport}, Converter={common:NegateBoolConverter}, Mode=OneTime}"/>
                 <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand"
@@ -209,7 +217,14 @@
                     </Frame>
                 </Grid>
 
-                <Label HorizontalOptions="CenterAndExpand" Text="STYLE"/>
+                <!-- ================== -->
+                <!-- ================== -->
+                <!-- ================== -->
+
+                <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                <Frame BackgroundColor="#CC6600" OutlineColor="#CC6600" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                    <Label Padding="{OnPlatform 0, WPF=8}" HorizontalOptions="CenterAndExpand" Text="STYLE" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=12}" />
+                </Frame>
 
                 <Label HorizontalOptions="StartAndExpand" Text="Appearance" />
                 <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
@@ -375,7 +390,14 @@
                     <Button Margin="0" Command="{Binding ApplyCssAndFont}" WidthRequest="200" Text="Apply" HorizontalOptions="End"/>
                 </StackLayout>
 
-                <Label HorizontalOptions="CenterAndExpand" Text="BEHAVIOR" />
+                <!-- ================== -->
+                <!-- ================== -->
+                <!-- ================== -->
+
+                <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                <Frame BackgroundColor="#CC6600" OutlineColor="#CC6600" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                    <Label Padding="{OnPlatform 0, WPF=8}" HorizontalOptions="CenterAndExpand" Text="BEHAVIOR" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=12}" />
+                </Frame>
 
                 <Label HorizontalOptions="StartAndExpand" Text="Purpose" />
                 <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
@@ -505,19 +527,14 @@
                     </Label.FormattedText>
                 </Label>
 
-                <!-- TESTING STUFF -->
+                <!-- ================== -->
+                <!-- ================== -->
+                <!-- ================== -->
 
-                <Label HorizontalOptions="CenterAndExpand" Text="TESTINGS STUFF"/>
-
-                <!--<Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BorderColor="DarkBlue">
-                    <Label HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="ssss"></Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                </Frame>-->
+                <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                <Frame BackgroundColor="#CC6600" OutlineColor="#CC6600" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                    <Label Padding="{OnPlatform 0, WPF=8}" HorizontalOptions="CenterAndExpand" Text="TESTINGS STUFF" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=12}" />
+                </Frame>
 
                 <!-- examples: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/controls/views -->
                 <Label Text="CheckBox" />
