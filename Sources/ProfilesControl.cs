@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2019-2020 Peter Kirmeier
+//Copyright (c) 2019-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -350,6 +350,7 @@ namespace HitCounterManager
 
         public void ProfileSplitPermute(int Amount) { UpdateDuration(); SelectedProfileInfo.PermuteSplit(SelectedProfileInfo.ActiveSplit, Amount); }
         public void ProfileSplitInsert() { UpdateDuration(); SelectedProfileInfo.InsertSplit(); }
+        public void ProfileSplitDelete() { UpdateDuration(); SelectedProfileInfo.DeleteSplit(); }
 
         public void ProfileReset()
         {

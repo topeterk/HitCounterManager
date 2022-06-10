@@ -45,6 +45,7 @@
             this.btnUp = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
             this.btnInsertSplit = new System.Windows.Forms.Button();
+            this.btnDeleteSplit = new System.Windows.Forms.Button();
             this.btnLock = new System.Windows.Forms.Button();
             this.btnOnTop = new System.Windows.Forms.Button();
             this.btnDarkMode = new System.Windows.Forms.Button();
@@ -216,7 +217,7 @@
             this.btnAttempts.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_counter_20;
             this.btnAttempts.FlatAppearance.BorderSize = 0;
             this.btnAttempts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAttempts.Location = new System.Drawing.Point(303, 4);
+            this.btnAttempts.Location = new System.Drawing.Point(288, 4);
             this.btnAttempts.Name = "btnAttempts";
             this.btnAttempts.Size = new System.Drawing.Size(20, 20);
             this.btnAttempts.TabIndex = 10;
@@ -266,16 +267,30 @@
             this.btnInsertSplit.UseVisualStyleBackColor = false;
             this.btnInsertSplit.Click += new System.EventHandler(this.BtnInsertSplit_Click);
             // 
+            // btnDeleteSplit
+            // 
+            this.btnDeleteSplit.BackColor = System.Drawing.SystemColors.Control;
+            this.btnDeleteSplit.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_trash_20;
+            this.btnDeleteSplit.FlatAppearance.BorderSize = 0;
+            this.btnDeleteSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteSplit.Location = new System.Drawing.Point(407, 4);
+            this.btnDeleteSplit.Name = "btnDeleteSplit";
+            this.btnDeleteSplit.Size = new System.Drawing.Size(20, 20);
+            this.btnDeleteSplit.TabIndex = 14;
+            this.ToolTip1.SetToolTip(this.btnDeleteSplit, "Delete current split");
+            this.btnDeleteSplit.UseVisualStyleBackColor = false;
+            this.btnDeleteSplit.Click += new System.EventHandler(this.btnDeleteSplit_Click);
+            // 
             // btnLock
             // 
             this.btnLock.BackColor = System.Drawing.SystemColors.Control;
             this.btnLock.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_padlock_20;
             this.btnLock.FlatAppearance.BorderSize = 0;
             this.btnLock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLock.Location = new System.Drawing.Point(422, 4);
+            this.btnLock.Location = new System.Drawing.Point(448, 4);
             this.btnLock.Name = "btnLock";
             this.btnLock.Size = new System.Drawing.Size(20, 20);
-            this.btnLock.TabIndex = 14;
+            this.btnLock.TabIndex = 15;
             this.ToolTip1.SetToolTip(this.btnLock, "(Un)lock split/profile editing");
             this.btnLock.UseVisualStyleBackColor = false;
             this.btnLock.Click += new System.EventHandler(this.BtnSplitLock_Click);
@@ -286,10 +301,10 @@
             this.btnOnTop.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_pin_20;
             this.btnOnTop.FlatAppearance.BorderSize = 0;
             this.btnOnTop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOnTop.Location = new System.Drawing.Point(448, 4);
+            this.btnOnTop.Location = new System.Drawing.Point(474, 4);
             this.btnOnTop.Name = "btnOnTop";
             this.btnOnTop.Size = new System.Drawing.Size(20, 20);
-            this.btnOnTop.TabIndex = 15;
+            this.btnOnTop.TabIndex = 16;
             this.ToolTip1.SetToolTip(this.btnOnTop, "Set window always on top");
             this.btnOnTop.UseVisualStyleBackColor = false;
             this.btnOnTop.Click += new System.EventHandler(this.BtnOnTop_Click);
@@ -300,10 +315,10 @@
             this.btnDarkMode.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_taschenlampe_20;
             this.btnDarkMode.FlatAppearance.BorderSize = 0;
             this.btnDarkMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDarkMode.Location = new System.Drawing.Point(474, 4);
+            this.btnDarkMode.Location = new System.Drawing.Point(500, 4);
             this.btnDarkMode.Name = "btnDarkMode";
             this.btnDarkMode.Size = new System.Drawing.Size(20, 20);
-            this.btnDarkMode.TabIndex = 16;
+            this.btnDarkMode.TabIndex = 17;
             this.ToolTip1.SetToolTip(this.btnDarkMode, "Dark mode / Light mode");
             this.btnDarkMode.UseVisualStyleBackColor = false;
             this.btnDarkMode.Click += new System.EventHandler(this.btnDarkMode_Click);
@@ -318,7 +333,7 @@
             this.btnReset.Location = new System.Drawing.Point(12, 30);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 40);
-            this.btnReset.TabIndex = 17;
+            this.btnReset.TabIndex = 18;
             this.ToolTip1.SetToolTip(this.btnReset, "RESET the current run\r\nAlso stops and resets the timer");
             this.btnReset.UseVisualStyleBackColor = false;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
@@ -333,7 +348,7 @@
             this.btnPB.Location = new System.Drawing.Point(93, 30);
             this.btnPB.Name = "btnPB";
             this.btnPB.Size = new System.Drawing.Size(75, 40);
-            this.btnPB.TabIndex = 18;
+            this.btnPB.TabIndex = 19;
             this.ToolTip1.SetToolTip(this.btnPB, "Record run as PB (personal best)\r\nAlso stops the timer\r\nDoes NOT reset the timer\r" +
         "\n");
             this.btnPB.UseVisualStyleBackColor = false;
@@ -349,7 +364,7 @@
             this.btnPause.Location = new System.Drawing.Point(174, 30);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(75, 40);
-            this.btnPause.TabIndex = 19;
+            this.btnPause.TabIndex = 20;
             this.ToolTip1.SetToolTip(this.btnPause, "Start/stop timer\r\nDoes NOT reset the timer");
             this.btnPause.UseVisualStyleBackColor = false;
             this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
@@ -366,7 +381,7 @@
             this.btnHit.Location = new System.Drawing.Point(255, 30);
             this.btnHit.Name = "btnHit";
             this.btnHit.Size = new System.Drawing.Size(274, 40);
-            this.btnHit.TabIndex = 20;
+            this.btnHit.TabIndex = 21;
             this.ToolTip1.SetToolTip(this.btnHit, "Count a HIT (boss) on the current split");
             this.btnHit.UseVisualStyleBackColor = false;
             this.btnHit.Click += new System.EventHandler(this.btnHit_Click);
@@ -383,7 +398,7 @@
             this.btnWayHit.Location = new System.Drawing.Point(535, 30);
             this.btnWayHit.Name = "btnWayHit";
             this.btnWayHit.Size = new System.Drawing.Size(75, 40);
-            this.btnWayHit.TabIndex = 21;
+            this.btnWayHit.TabIndex = 22;
             this.ToolTip1.SetToolTip(this.btnWayHit, "Count a HIT (way) on the current split");
             this.btnWayHit.UseVisualStyleBackColor = false;
             this.btnWayHit.Click += new System.EventHandler(this.btnWayHit_Click);
@@ -400,7 +415,7 @@
             this.btnSplit.Location = new System.Drawing.Point(616, 30);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(75, 40);
-            this.btnSplit.TabIndex = 22;
+            this.btnSplit.TabIndex = 23;
             this.ToolTip1.SetToolTip(this.btnSplit, "Jump to the next SPLIT");
             this.btnSplit.UseVisualStyleBackColor = false;
             this.btnSplit.Click += new System.EventHandler(this.btnSplit_Click);
@@ -420,7 +435,7 @@
             // 
             this.Spacer2.AutoSize = true;
             this.Spacer2.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.Spacer2.Location = new System.Drawing.Point(288, 8);
+            this.Spacer2.Location = new System.Drawing.Point(314, 8);
             this.Spacer2.Name = "Spacer2";
             this.Spacer2.Size = new System.Drawing.Size(9, 13);
             this.Spacer2.TabIndex = 41;
@@ -430,7 +445,7 @@
             // 
             this.Spacer3.AutoSize = true;
             this.Spacer3.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.Spacer3.Location = new System.Drawing.Point(407, 8);
+            this.Spacer3.Location = new System.Drawing.Point(433, 8);
             this.Spacer3.Name = "Spacer3";
             this.Spacer3.Size = new System.Drawing.Size(9, 13);
             this.Spacer3.TabIndex = 42;
@@ -484,7 +499,7 @@
             this.profCtrl.Location = new System.Drawing.Point(14, 96);
             this.profCtrl.Name = "profCtrl";
             this.profCtrl.Size = new System.Drawing.Size(677, 367);
-            this.profCtrl.TabIndex = 23;
+            this.profCtrl.TabIndex = 24;
             this.profCtrl.ProfileChanged += new System.EventHandler<System.EventArgs>(this.ProfileChangedHandler);
             // 
             // Form1
@@ -507,6 +522,7 @@
             this.Controls.Add(this.btnUp);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.btnInsertSplit);
+            this.Controls.Add(this.btnDeleteSplit);
             this.Controls.Add(this.btnLock);
             this.Controls.Add(this.btnOnTop);
             this.Controls.Add(this.btnDarkMode);
@@ -522,7 +538,7 @@
             this.Controls.Add(this.lbl_totals);
             this.Controls.Add(this.lbl_progress);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(530, 400);
+            this.MinimumSize = new System.Drawing.Size(550, 400);
             this.Name = "Form1";
             this.Text = "HitCounterManager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -549,6 +565,7 @@
         private System.Windows.Forms.Button btnUp;
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button btnInsertSplit;
+        private System.Windows.Forms.Button btnDeleteSplit;
         private System.Windows.Forms.Button btnLock;
         private System.Windows.Forms.Button btnOnTop;
         private System.Windows.Forms.Button btnDarkMode;

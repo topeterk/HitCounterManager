@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2020 Peter Kirmeier
+//Copyright (c) 2016-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -245,6 +245,10 @@ namespace HitCounterManager
         /// Insert a new split before the current one
         /// </summary>
         void InsertSplit();
+        /// <summary>
+        /// Deletes the active split
+        /// </summary>
+        void DeleteSplit();
 
         /// <summary>
         /// Clear all hits, increase attempts counter and select first split

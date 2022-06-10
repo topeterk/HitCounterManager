@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2019-2020 Peter Kirmeier
+//Copyright (c) 2019-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -385,6 +385,30 @@ namespace HitCounterManager
             // Select new row's title cell that user can directly start typing name of new split
             CurrentCell = Rows[active].Cells["cTitle"];
             Rows[active].Selected = true;
+            Focus();
+            ProfileUpdateEnd();
+        }
+        public void DeleteSplit()
+        {
+            if (SplitCount < 1) return; // do not delete the "new line"
+
+            int active = ActiveSplit;
+            int Index = active + 1;
+
+            ProfileUpdateBegin();
+            if (SplitCount == 1)
+            {
+                // select "new line" and delete the last remaining row
+                Rows[Index].Selected = true;
+            }
+            else
+            {
+                // select next or previouse row (and merge durations) and then delete the row
+                if (SplitCount <= Index) Index = SplitCount - 2; // in case last row is deleted, choose previous one
+                SetSplitDuration(Index, GetSplitDuration(Index) + GetSplitDuration(active));
+                Rows[Index].Selected = true;
+            }
+            Rows.RemoveAt(active);
             Focus();
             ProfileUpdateEnd();
         }

@@ -115,7 +115,7 @@ namespace HitCounterManager
                 btnLock.BackColor = color;
             }
 
-            foreach (Button button in new Button[] { btnUp, btnDown, btnInsertSplit, btnNew, btnRename, btnCopy, btnDelete })
+            foreach (Button button in new Button[] { btnUp, btnDown, btnInsertSplit, btnDeleteSplit, btnNew, btnRename, btnCopy, btnDelete })
             {
                 button.Enabled = !IsReadOnly;
                 button.BackColor = color;
@@ -157,6 +157,7 @@ namespace HitCounterManager
         private void btnUp_Click(object sender, EventArgs e) { profCtrl.ProfileSplitPermute(-1); }
         private void btnDown_Click(object sender, EventArgs e) { profCtrl.ProfileSplitPermute(+1); }
         private void BtnInsertSplit_Click(object sender, EventArgs e) { profCtrl.ProfileSplitInsert(); }
+        private void btnDeleteSplit_Click(object sender, EventArgs e) { profCtrl.ProfileSplitDelete(); }
 
         private void BtnOnTop_Click(object sender, EventArgs e) { SetAlwaysOnTop(!this.TopMost); }
         private void BtnSplitLock_Click(object sender, EventArgs e) { SetReadOnlyMode(!profCtrl.ReadOnlyMode); }
