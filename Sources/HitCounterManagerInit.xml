@@ -3035,6 +3035,148 @@
           </ProfileRow>
         </Rows>
       </Profile>
+      <Profile>
+        <Name>Elden Ring (All Remembrances) [EN]</Name>
+        <Attempts>0</Attempts>
+        <ActiveSplit>0</ActiveSplit>
+        <Rows>
+          <ProfileRow>
+            <Title>Godrick the Grafted</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Rennala, Queen of the Full Moon</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Starscourge Radahn</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Regal Ancestor Spirit</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Rykard, Lord of Blasphemy</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Morgott the Omen King</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Malenia, Blade of Miquella</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Fire Giant</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Mohg, Lord of Blood</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Lichdragon Fortissax</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Astel, Naturalborn of the Void</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Dragonlord Placidusax</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Maliketh, the Black Blade</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Hoarah Loux, Warrior</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Elden Beast</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+        </Rows>
+      </Profile>
     </ProfileList>
   </Profiles>
 </SettingsRoot>
