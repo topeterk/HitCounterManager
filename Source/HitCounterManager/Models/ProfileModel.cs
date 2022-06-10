@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -124,23 +124,20 @@ namespace HitCounterManager.Models
         public void DeleteRow(ProfileRowModel row)
         {
             int rowIndex;
+            int nextIndex;
 
             if (Rows.Count <= 1) return; // do not delete the only last remaining row
 
             rowIndex = Rows.IndexOf(row);
+            nextIndex = rowIndex + 1;
+            if (Rows.Count <= nextIndex) nextIndex = Rows.Count - 2; // in case last row is deleted, choose previous one
 
-            if (row.Active)
-            {
-                int Index = rowIndex + 1;
-                if (Rows.Count <= Index) Index = Rows.Count - 2; // in case last row is deleted, choose previous one
-                ActiveSplit = Index;
-            }
-            if (row.SP)
-            {
-                int Index = rowIndex + 1;
-                if (Rows.Count <= Index) Index = Rows.Count - 2; // in case last row is deleted, choose previous one
-                SessionProgress = Index;
-            }
+            // Merge duration with next row
+            Rows[nextIndex].Duration += Rows[rowIndex].Duration;
+
+            // Move active and session progress flags to next index
+            if (row.Active) ActiveSplit = nextIndex;
+            if (row.SP) SessionProgress = nextIndex;
 
             _origin.Rows.RemoveAt(rowIndex);
             Rows.RemoveAt(rowIndex);

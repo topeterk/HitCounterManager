@@ -64,7 +64,23 @@ namespace HitCounterManager.ViewModels
             // when no matching profile is found, we start with the first one
             if (null == ProfileSelected) ProfileSelected = ProfileList[0];
 
-            CmdRemoveSplit = new Command<ProfileRowModel>((ProfileRowModel item) => _ProfileSelected.DeleteRow(item));
+            CmdRemoveSplit = new Command<ProfileRowModel>((ProfileRowModel item) =>
+            {
+                // sad there is no try-lock, so we use the "precise equivalent" of lock(){}
+                // from: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/lock-statement
+                bool GotLock = false;
+                try
+                {
+                    Monitor.Enter(TimerUpdateLock, ref GotLock);
+
+                    // It has to merge Duration values of the deleted row, so run run it within timer lock
+                    _ProfileSelected.DeleteRow(item);
+                }
+                finally
+                {
+                    if (GotLock) Monitor.Exit(TimerUpdateLock);
+                }
+            });
             CmdSetActiveSplit = new Command<ProfileRowModel>((ProfileRowModel item) =>
             {
                 if (item.Active) return;
@@ -420,6 +436,12 @@ namespace HitCounterManager.ViewModels
                 DateTime utc_now = DateTime.UtcNow;
                 _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Duration += (long)(utc_now - last_update_time).TotalMilliseconds;
                 last_update_time = utc_now;
+            }
+            catch
+            {
+                // May happen during deletion when GUI updates are postponed and/or excetued out of order.
+                // Try to fix it by selecting last split (when we are out of range the last split should be fine)
+                _ProfileSelected.ActiveSplit = _ProfileSelected.Rows.Count - 1;
             }
             finally
             {
