@@ -39,6 +39,7 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 * Dark Souls 2
 * Dark Souls 3 + Ashes of Ariandel + The Ringed City
 * Demon's Souls
+* Elden Ring
 * Salt and Sanctuary
 * Sekiro
 * The Surge + A walk in the park
@@ -55,13 +56,18 @@ All available releases can be found at the [Releases page](../../releases) on Gi
     * [.Net Framework 2.0 or newer](https://www.microsoft.com/net)
     > **Note**: Version 1.13 and older requires [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
   * Installer version (Setup)
-    * [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
+    * [.Net Framework 4.8 or newer](https://www.microsoft.com/net)
+    > **Note**: Version 1.20 and older requires [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
 * OS: Any (32/64 bit)
   > **Note**: This version is **not supporting global hot keys**  
   * Portable version (Tar ball)
     * Running with [Mono](https://www.mono-project.com/) (_tested with 5.14.0_)  
       Start the application in the application's directory with **mono HitCounterManager.exe**  
       > **Note**: Mono supports **32 bit mode only** (therefore it cannot be run on OS without 32 bit support!)
+
+In case your non-Windows OS is no longer supporting 32 bit Mono then this application will not run!  
+However, there is a new HitCounterManager in development (version 2.x) that can be used instead.  
+Please have a look at the _v2.x_ branch or find *pre-compiled development builds* [here](../../issues/21).
 
 ## Installation, Guides, Help
 Please have a look at the **[Wiki pages](../../wiki)**, the **[Setup Guide](../../wiki/SetupGuide)** or the [FAQ](../../wiki/SetupGuide#FAQ).
