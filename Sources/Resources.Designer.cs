@@ -143,6 +143,16 @@ namespace HitCounterManager.Sources {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_delete_list_20 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_delete_list_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_double_down_20 {
             get {
                 object obj = ResourceManager.GetObject("icons8-double-down-20", resourceCulture);

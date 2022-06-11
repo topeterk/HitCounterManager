@@ -270,7 +270,7 @@
             // btnDeleteSplit
             // 
             this.btnDeleteSplit.BackColor = System.Drawing.SystemColors.Control;
-            this.btnDeleteSplit.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_trash_20;
+            this.btnDeleteSplit.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_delete_list_20;
             this.btnDeleteSplit.FlatAppearance.BorderSize = 0;
             this.btnDeleteSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteSplit.Location = new System.Drawing.Point(407, 4);
