@@ -21,7 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms.Platform.WPF">
-      <Version>5.0.0.2244</Version>
+      <Version>5.0.0.2478</Version>
     </PackageReference>
     <PackageReference Include="OpenTK" Version="3.3.2" />
   </ItemGroup>
