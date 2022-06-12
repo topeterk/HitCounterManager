@@ -1,7 +1,9 @@
 # HitCounterManager - A Dark Souls inspired Hit Counter
 
 ** :bangbang: THIS IS A DEVELOPMENT BRANCH, ANYTHING MAY CHANGE AT ANY TIME :bangbang: **  
-** :bangbang: THE STABLE BRANCH IS `master` :bangbang:
+** :bangbang: THE STABLE BRANCH IS `master` :bangbang: **  
+** :bangbang: [![Azure Pipeline](https://dev.azure.com/topeterk/HitCounterManager/_apis/build/status/HitCounterManager?branchName=v2.x)](https://dev.azure.com/topeterk/HitCounterManager/_build) :bangbang: **
+
 
 **Free Hit Counter** that is running in the background, so you can focus on your stream.  
 No need to keep any windows open for a window capture any more.  
@@ -13,7 +15,7 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 [![Setup Guide / Wiki](https://img.shields.io/badge/-Setup%20Guide%20%2F%20Wiki-blue?longCache=true&style=for-the-badge)](../../wiki)
 [![Tutorial on YouTube](https://img.shields.io/badge/-Tutorial%20on%20YouTube-red?longCache=true&style=for-the-badge)](https://www.youtube.com/watch?v=iXGExlS4xeM&list=PLvBCl9o55PB7BYB7vXVxQuP5J27X_XXzm)
 
-<p align="center"><a href="Images/Preview.png"><img src="Images/Preview.png" alt="Preview" width="700px"/></a></p>
+<p align="center"><a href="Source/Images/Preview.png"><img src="Source/Images/Preview.png" alt="Preview" width="700px"/></a></p>
 
 [![Releases](https://img.shields.io/github/release/topeterk/HitCounterManager.svg?label=Latest%20release:&longCache=true&style=for-the-badge&colorB=0088FF)](../../releases/latest)
 [![GitHub Releases](https://img.shields.io/github/downloads/topeterk/HitCounterManager/total.svg?label=Downloads:&longCache=true&style=for-the-badge&colorB=0088FF)](../../releases)
