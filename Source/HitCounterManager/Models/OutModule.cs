@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2021 Peter Kirmeier
+//Copyright (c) 2016-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -242,6 +242,7 @@ namespace HitCounterManager.Models
                     WriteJsonSimpleValue(sr, "show_hitscombined", _settings.ShowHitsCombined);
                     WriteJsonSimpleValue(sr, "show_numbers", _settings.ShowNumbers);
                     WriteJsonSimpleValue(sr, "show_pb", _settings.ShowPB);
+                    WriteJsonSimpleValue(sr, "show_pb_totals", _settings.ShowPBTotals);
                     WriteJsonSimpleValue(sr, "show_diff", _settings.ShowDiff);
                     WriteJsonSimpleValue(sr, "show_time", _settings.ShowTimeCurrent);
                     WriteJsonSimpleValue(sr, "show_time_pb", _settings.ShowTimePB);
@@ -259,7 +260,7 @@ namespace HitCounterManager.Models
                     WriteJsonSimpleValue(sr, "highlight_active_split", _settings.StyleHightlightCurrentSplit);
                     WriteJsonSimpleValue(sr, "progress_bar_colored", _settings.StyleProgressBarColored);
                     WriteJsonSimpleValue(sr, "width", _settings.StyleDesiredWidth);
-                    WriteJsonSimpleValue(sr, "supPB", _settings.StyleSuperscriptPB);
+                    WriteJsonSimpleValue(sr, "subPB", _settings.StyleSubscriptPB);
                     
                     WriteJsonSimpleValue(sr, "update_time", (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds);
                     WriteJsonSimpleValue(sr, "timer_paused", !TimerRunning);

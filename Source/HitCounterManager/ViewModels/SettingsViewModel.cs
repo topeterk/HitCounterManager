@@ -132,7 +132,7 @@ namespace HitCounterManager.ViewModels
             {"StyleUseHighContrast", new ShowInfoBool()},
             {"StyleUseHighContrastNames", new ShowInfoBool()},
             {"StyleProgressBarColored", new ShowInfoBool()},
-            {"StyleSuperscriptPB", new ShowInfoBool()},
+            {"StyleSubscriptPB", new ShowInfoBool()},
             {"StyleUseRoman", new ShowInfoBool()},
             {"StyleHightlightCurrentSplit", new ShowInfoBool()},
         };
@@ -478,10 +478,10 @@ namespace HitCounterManager.ViewModels
             get => Settings.StyleProgressBarColored;
             set => SetAndNotifyWhenChanged(this, ref Settings.StyleProgressBarColored, value, nameof(StyleProgressBarColored));
         }
-        public bool StyleSuperscriptPB
+        public bool StyleSubscriptPB
         {
-            get => Settings.StyleSuperscriptPB;
-            set => SetAndNotifyWhenChanged(this, ref Settings.StyleSuperscriptPB, value, nameof(StyleSuperscriptPB));
+            get => Settings.StyleSubscriptPB;
+            set => SetAndNotifyWhenChanged(this, ref Settings.StyleSubscriptPB, value, nameof(StyleSubscriptPB));
         }
         public bool StyleUseRoman
         {
@@ -657,6 +657,11 @@ namespace HitCounterManager.ViewModels
         {
             get => Settings.ShowPB;
             set => SetAndNotifyWhenChanged(this, ref Settings.ShowPB, value, nameof(ShowPB));
+        }
+        public bool ShowPBTotals
+        {
+            get => Settings.ShowPBTotals;
+            set => SetAndNotifyWhenChanged(this, ref Settings.ShowPBTotals, value, nameof(ShowPBTotals));
         }
         public bool ShowDiff
         {

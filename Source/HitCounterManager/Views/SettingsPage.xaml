@@ -295,17 +295,17 @@
                     <RelativeLayout Grid.Row="6" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
                         <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
                             <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="StyleSuperscriptPB" NumberOfTapsRequired="1" />
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="StyleSubscriptPB" NumberOfTapsRequired="1" />
                             </Image.GestureRecognizers>
                         </Image>
                     </RelativeLayout>
-                    <Switch Grid.Row="6" Grid.Column="1" Margin="0" IsToggled="{Binding StyleSuperscriptPB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="6" Grid.Column="2" Margin="0" Text="Superscripted PB totals" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="6" Grid.Column="1" Margin="0" IsToggled="{Binding StyleSubscriptPB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="6" Grid.Column="2" Margin="0" Text="Subscripted PB totals" HorizontalOptions="Start" VerticalOptions="Center" />
                     <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
                     <Frame  Grid.Row="7" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
-                            IsVisible="{Binding ShowInfo[StyleSuperscriptPB].Value, Mode=OneWay}"
+                            IsVisible="{Binding ShowInfo[StyleSubscriptPB].Value, Mode=OneWay}"
                             BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
-                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The totals of the PB shown for each split will be sown smaller and a bit lower for better readability." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The PB totals shown for each split will be displayed smaller and lower." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
                     </Frame>
                     <RelativeLayout Grid.Row="8" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
                         <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
@@ -470,16 +470,18 @@
                     <Label  Grid.Row="1" Grid.Column="3" Margin="0" Text="Show footer" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Switch Grid.Row="2" Grid.Column="0" Margin="0" IsToggled="{Binding ShowSessionProgress, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Label  Grid.Row="2" Grid.Column="1" Margin="0" Grid.ColumnSpan="3" Text="Show session progress (Star)" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="3" Grid.Column="0" Margin="0" IsToggled="{Binding ShowProgressBar, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="3" Grid.Column="1" Margin="0" Text="Show progress bar" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="4" Grid.Column="0" Margin="0" IsToggled="{Binding ShowHits, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="4" Grid.Column="1" Margin="0" Text="Show hits" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="4" Grid.Column="2" Margin="0" IsToggled="{Binding ShowHitsCombined, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="4" Grid.Column="3" Margin="0" Text="Combine boss and way hits" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="5" Grid.Column="0" Margin="0" IsToggled="{Binding ShowPB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="5" Grid.Column="1" Margin="0" Text="Show personal best (PB)" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="5" Grid.Column="2" Margin="0" IsToggled="{Binding ShowDiff, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="5" Grid.Column="3" Margin="0" Text="Show difference" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="3" Grid.Column="0" Margin="0" IsToggled="{Binding ShowHits, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="3" Grid.Column="1" Margin="0" Text="Show hits" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="3" Grid.Column="2" Margin="0" IsToggled="{Binding ShowProgressBar, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="3" Grid.Column="3" Margin="0" Text="Show progress bar" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="4" Grid.Column="0" Margin="0" IsToggled="{Binding ShowHitsCombined, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="4" Grid.Column="1" Margin="0" Text="Combine boss and way hits" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="4" Grid.Column="2" Margin="0" IsToggled="{Binding ShowPB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="4" Grid.Column="3" Margin="0" Text="Show PB (personal best)" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="5" Grid.Column="0" Margin="0" IsToggled="{Binding ShowDiff, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="5" Grid.Column="1" Margin="0" Text="Show difference" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="5" Grid.Column="2" Margin="0" IsToggled="{Binding ShowPBTotals, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="5" Grid.Column="3" Margin="0" Text="Show PB totals (sum)" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Switch Grid.Row="6" Grid.Column="0" Margin="0" IsToggled="{Binding ShowNumbers, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Label  Grid.Row="6" Grid.Column="1" Margin="0" Grid.ColumnSpan="3" Text="Show numbers, rather images" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Switch Grid.Row="7" Grid.Column="0" Margin="0" IsToggled="{Binding ShowTimeCurrent, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
