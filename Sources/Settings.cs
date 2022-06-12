@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2020 Peter Kirmeier
+//Copyright (c) 2016-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -73,7 +73,7 @@ namespace HitCounterManager
             cbUseRoman.Checked = _settings.StyleUseRoman;
             cbHighlightCurrentSplit.Checked = _settings.StyleHightlightCurrentSplit;
             cbProgressBarColored.Checked = !_settings.StyleProgressBarColored;
-            cbSuperscriptPB.Checked = _settings.StyleSuperscriptPB;
+            cbSubscriptPB.Checked = _settings.StyleSubscriptPB;
             cbApCustomCss.Checked = _settings.StyleUseCustom;
             txtCssUrl.Text = _settings.StyleCssUrl;
             txtFontUrl.Text = _settings.StyleFontUrl;
@@ -92,6 +92,7 @@ namespace HitCounterManager
             cbShowHitsCombined.Checked = _settings.ShowHitsCombined;
             cbShowNumbers.Checked = _settings.ShowNumbers;
             cbShowPB.Checked = _settings.ShowPB;
+            cbShowPBTotals.Checked = _settings.ShowPBTotals;
             cbShowDiff.Checked = _settings.ShowDiff;
             cbShowTimeCurrent.Checked = _settings.ShowTimeCurrent;
             cbShowTimePB.Checked = _settings.ShowTimePB;
@@ -177,7 +178,7 @@ namespace HitCounterManager
             _settings.StyleUseRoman = cbUseRoman.Checked;
             _settings.StyleHightlightCurrentSplit = cbHighlightCurrentSplit.Checked;
             _settings.StyleProgressBarColored = !cbProgressBarColored.Checked;
-            _settings.StyleSuperscriptPB = cbSuperscriptPB.Checked;
+            _settings.StyleSubscriptPB = cbSubscriptPB.Checked;
             _settings.StyleDesiredWidth = (int)numStyleDesiredWidth.Value;
 
             // Behavior
@@ -193,6 +194,7 @@ namespace HitCounterManager
             _settings.ShowHitsCombined = cbShowHitsCombined.Checked;
             _settings.ShowNumbers = cbShowNumbers.Checked;
             _settings.ShowPB = cbShowPB.Checked;
+            _settings.ShowPBTotals = cbShowPBTotals.Checked;
             _settings.ShowDiff = cbShowDiff.Checked;
             _settings.ShowTimeCurrent = cbShowTimeCurrent.Checked;
             _settings.ShowTimePB = cbShowTimePB.Checked;

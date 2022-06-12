@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2020 Peter Kirmeier
+//Copyright (c) 2016-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -98,6 +98,7 @@ namespace HitCounterManager
         public bool ShowHitsCombined;
         public bool ShowNumbers;
         public bool ShowPB;
+        public bool ShowPBTotals;
         public bool ShowDiff;
         public bool ShowTimeCurrent;
         public bool ShowTimePB;
@@ -115,7 +116,8 @@ namespace HitCounterManager
         public string StyleFontUrl;
         public string StyleFontName;
         public int StyleDesiredWidth;
-        public bool StyleSuperscriptPB;
+        public bool StyleSuperscriptPB; // obsolete since version 9 - keep for backwards compatibility (use StyleSubscriptPB instead)
+        public bool StyleSubscriptPB;
         public bool StyleHightlightCurrentSplit;
         public string SuccessionTitle; // obsolete since version 7 - keep for backwards compatibility (use Succession.SuccessionTitle instead)
         public int SuccessionHits;     // obsolete since version 7 - keep for backwards compatibility (will be calculated, now)
@@ -304,6 +306,12 @@ namespace HitCounterManager
                 _settings.ShortcutTimerStartKeyCode = 0x10000 | 0x6B; // Shift Add-Num
                 _settings.ShortcutTimerStopEnable = false;
                 _settings.ShortcutTimerStopKeyCode = 0x10000 | 0x6D; // Shift Subtract-Num
+            }
+            if (_settings.Version == 8) // Coming from version 1.20
+            {
+                _settings.Version = 9;
+                _settings.ShowPBTotals = true;
+                _settings.StyleSubscriptPB = _settings.StyleSuperscriptPB;
             }
 
             // Check for updates..

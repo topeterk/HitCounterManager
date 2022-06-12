@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <SettingsRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Version>8</Version>
+  <Version>9</Version>
   <MainWidth>652</MainWidth>
   <MainHeight>875</MainHeight>
   <MainPosX>77</MainPosX>
@@ -43,6 +43,7 @@
   <ShowHitsCombined>true</ShowHitsCombined>
   <ShowNumbers>true</ShowNumbers>
   <ShowPB>true</ShowPB>
+  <ShowPBTotals>true</ShowPBTotals>
   <ShowDiff>true</ShowDiff>
   <ShowTimeCurrent>true</ShowTimeCurrent>
   <ShowTimePB>false</ShowTimePB>
@@ -61,6 +62,7 @@
   <StyleFontName>Fontdiner Swanky</StyleFontName>
   <StyleDesiredWidth>0</StyleDesiredWidth>
   <StyleSuperscriptPB>false</StyleSuperscriptPB>
+  <StyleSubscriptPB>false</StyleSubscriptPB>
   <StyleHightlightCurrentSplit>false</StyleHightlightCurrentSplit>
   <SuccessionTitle>Previous</SuccessionTitle>
   <SuccessionHits>0</SuccessionHits>

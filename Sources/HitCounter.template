@@ -57,6 +57,7 @@ var data =
 "show_hitscombined": true,
 "show_numbers": true,
 "show_pb": true,
+"show_pb_totals": true,
 "show_diff": true,
 "show_time": true,
 "show_time_pb": true,
@@ -73,7 +74,7 @@ var data =
 "highlight_active_split": false,
 "progress_bar_colored": true,
 "width": 0,
-"supPB": false,
+"supPB": false, // false = normal, true = subscripted (supPB name will be fixed with version 2.x but is kept for compatibility)
 "update_time": 1598986122000,
 "timer_paused": false,
 }
