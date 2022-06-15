@@ -339,14 +339,28 @@
                     </Frame>
                 </Grid>
 
-                <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
-                    <Label VerticalOptions="Center" HorizontalOptions="Start" Text="Desired width (in px):" />
-                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding StyleDesiredWidth, Mode=TwoWay}">
+                <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Margin="0" VerticalOptions="Center" HorizontalOptions="Start" Text="Desired width (in px):" />
+                    <Entry Grid.Row="0" Grid.Column="1" Margin="0" HorizontalOptions="FillAndExpand" Text="{Binding StyleDesiredWidth, Mode=TwoWay}">
                         <Entry.Behaviors>
                             <common:NaturalNumbersEntryValidationBehavior />
                         </Entry.Behaviors>
                     </Entry>
-                </StackLayout>
+                    <Label Grid.Row="1" Grid.Column="0" Margin="0" VerticalOptions="Center" HorizontalOptions="Start" Text="Desired height (in px)" />
+                    <Entry Grid.Row="1" Grid.Column="1" Margin="0" HorizontalOptions="FillAndExpand" Text="{Binding StyleDesiredHeight, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <common:NaturalNumbersEntryValidationBehavior />
+                        </Entry.Behaviors>
+                    </Entry>
+                </Grid>
                 <Label HorizontalOptions="FillAndExpand" Margin="30,0,0,0">
                     <Label.FormattedText>
                         <FormattedString>

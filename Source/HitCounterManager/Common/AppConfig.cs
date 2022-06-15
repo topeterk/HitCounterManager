@@ -94,6 +94,7 @@ namespace HitCounterManager
         public string StyleCssUrl;
         public string StyleFontUrl;
         public string StyleFontName;
+        public int StyleDesiredHeight;
         public int StyleDesiredWidth;
         public bool StyleSubscriptPB;
         public bool StyleHightlightCurrentSplit;
@@ -305,6 +306,7 @@ namespace HitCounterManager
             {
                 Settings.Version = 9;
                 Settings.ShowPBTotals = true;
+                Settings.StyleDesiredHeight = 0;
                 // In version 1.x value taken from StyleSuperscriptPB but got removed, so we reset to default
                 Settings.StyleSubscriptPB = false;
             }

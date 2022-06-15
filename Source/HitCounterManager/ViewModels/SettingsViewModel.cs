@@ -494,6 +494,11 @@ namespace HitCounterManager.ViewModels
             set => SetAndNotifyWhenChanged(this, ref Settings.StyleHightlightCurrentSplit, value, nameof(StyleHightlightCurrentSplit));
         }
 
+        public int StyleDesiredHeight
+        {
+            get => Settings.StyleDesiredHeight;
+            set => SetAndNotifyWhenNaturalNumberChanged(this, ref Settings.StyleDesiredHeight, value, nameof(StyleDesiredHeight));
+        }
         public int StyleDesiredWidth
         {
             get => Settings.StyleDesiredWidth;

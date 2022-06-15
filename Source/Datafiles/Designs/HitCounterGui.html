@@ -365,7 +365,9 @@ function DoVisualUpdate(d /*data*/)
 
 	// ------------------------------------------------------------------------------------
 
-	if (0 < d.width) tbl.style.width = d.width + "px"; else tbl.style = ""
+	tbl.style = "";
+	if (0 < d.width) tbl.style.width = d.width + "px";
+	if (0 < d.height) tbl.style.height = d.height + "px";
 	tbl.innerHTML = new_tbl; // update DOM in one shot
 }
 
