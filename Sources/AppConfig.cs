@@ -115,6 +115,7 @@ namespace HitCounterManager
         public string StyleCssUrl;
         public string StyleFontUrl;
         public string StyleFontName;
+        public int StyleDesiredHeight;
         public int StyleDesiredWidth;
         public bool StyleSuperscriptPB; // obsolete since version 9 - keep for backwards compatibility (use StyleSubscriptPB instead)
         public bool StyleSubscriptPB;
@@ -311,6 +312,7 @@ namespace HitCounterManager
             {
                 _settings.Version = 9;
                 _settings.ShowPBTotals = true;
+                _settings.StyleDesiredHeight = 0;
                 _settings.StyleSubscriptPB = _settings.StyleSuperscriptPB;
             }
 

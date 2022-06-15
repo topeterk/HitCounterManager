@@ -57,6 +57,7 @@
             this.cbShowDiff = new System.Windows.Forms.CheckBox();
             this.cbShowTimeDiff = new System.Windows.Forms.CheckBox();
             this.cbShowTimeFooter = new System.Windows.Forms.CheckBox();
+            this.numStyleDesiredHeight = new System.Windows.Forms.NumericUpDown();
             this.numStyleDesiredWidth = new System.Windows.Forms.NumericUpDown();
             this.btnApApply = new System.Windows.Forms.Button();
             this.txtFontUrl = new System.Windows.Forms.TextBox();
@@ -112,6 +113,8 @@
             this.label15 = new System.Windows.Forms.Label();
             this.Label11 = new System.Windows.Forms.Label();
             this.Label12 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.Label13 = new System.Windows.Forms.Label();
             this.Label14 = new System.Windows.Forms.Label();
             this.tab_globalshortcuts = new System.Windows.Forms.TabPage();
@@ -126,6 +129,7 @@
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredWidth)).BeginInit();
             this.tab_behavior.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -511,6 +515,20 @@
             this.ToolTip1.SetToolTip(this.cbShowTimeFooter, "Show time of the current run in the footer");
             this.cbShowTimeFooter.UseVisualStyleBackColor = true;
             this.cbShowTimeFooter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // numStyleDesiredHeight
+            // 
+            this.numStyleDesiredHeight.Location = new System.Drawing.Point(498, 47);
+            this.numStyleDesiredHeight.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numStyleDesiredHeight.Name = "numStyleDesiredHeight";
+            this.numStyleDesiredHeight.Size = new System.Drawing.Size(57, 20);
+            this.numStyleDesiredHeight.TabIndex = 2;
+            this.ToolTip1.SetToolTip(this.numStyleDesiredHeight, resources.GetString("numStyleDesiredHeight.ToolTip"));
+            this.numStyleDesiredHeight.ValueChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // numStyleDesiredWidth
             // 
@@ -1120,6 +1138,9 @@
             this.tab_style.Controls.Add(this.groupBox3);
             this.tab_style.Controls.Add(this.label16);
             this.tab_style.Controls.Add(this.GroupBox1);
+            this.tab_style.Controls.Add(this.numStyleDesiredHeight);
+            this.tab_style.Controls.Add(this.label5);
+            this.tab_style.Controls.Add(this.label17);
             this.tab_style.Controls.Add(this.numStyleDesiredWidth);
             this.tab_style.Controls.Add(this.Label13);
             this.tab_style.Controls.Add(this.Label14);
@@ -1148,7 +1169,7 @@
             // label16
             // 
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic);
-            this.label16.Location = new System.Drawing.Point(399, 44);
+            this.label16.Location = new System.Drawing.Point(399, 70);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(183, 35);
             this.label16.TabIndex = 22;
@@ -1169,7 +1190,7 @@
             this.GroupBox1.Location = new System.Drawing.Point(6, 172);
             this.GroupBox1.Name = "GroupBox1";
             this.GroupBox1.Size = new System.Drawing.Size(571, 126);
-            this.GroupBox1.TabIndex = 2;
+            this.GroupBox1.TabIndex = 3;
             this.GroupBox1.TabStop = false;
             this.GroupBox1.Text = "Customization";
             // 
@@ -1199,6 +1220,24 @@
             this.Label12.Size = new System.Drawing.Size(62, 13);
             this.Label12.TabIndex = 12;
             this.Label12.Text = "Font: (URL)";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(562, 49);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(18, 13);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "px";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(418, 49);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(78, 13);
+            this.label17.TabIndex = 25;
+            this.label17.Text = "Desired height:";
             // 
             // Label13
             // 
@@ -1366,6 +1405,7 @@
             this.Load += new System.EventHandler(this.Settings_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredWidth)).EndInit();
             this.tab_behavior.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
@@ -1444,6 +1484,9 @@
         private System.Windows.Forms.Label Label11;
         private System.Windows.Forms.Button btnApApply;
         private System.Windows.Forms.Label Label12;
+        private System.Windows.Forms.NumericUpDown numStyleDesiredHeight;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.NumericUpDown numStyleDesiredWidth;
         private System.Windows.Forms.Label Label13;
         private System.Windows.Forms.Label Label14;

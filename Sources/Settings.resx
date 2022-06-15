@@ -120,11 +120,17 @@
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>39, 17</value>
   </metadata>
+  <data name="numStyleDesiredHeight.ToolTip" xml:space="preserve">
+    <value>Sets the display height in pixels to maintain a specific size even when different profiles are loaded.
+When multiple games or profiles are played and the counter should take the same space regardless of the available split names, it is recommended to set an appropriate value here.
+This may help to maintain a single scene source in the streaming software.
+Note: Use value 0 to automatically adjust the size (usually the smalles size)</value>
+  </data>
   <data name="numStyleDesiredWidth.ToolTip" xml:space="preserve">
     <value>Sets the display width in pixels to maintain a specific size even when different profiles are loaded.
 When multiple games or profiles are played and the counter should take the same space regardless of the available split names, it is recommended to set an appropriate value here.
 This may help to maintain a single scene source in the streaming software.
-Note: Use value 0 to automatically adjust the size to the smalles possible value</value>
+Note: Use value 0 to automatically adjust the size (usually the smalles size)</value>
   </data>
   <data name="txtFontName.ToolTip" xml:space="preserve">
     <value>Personalize the design by switching to another font.

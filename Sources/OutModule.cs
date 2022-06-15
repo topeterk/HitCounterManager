@@ -337,6 +337,7 @@ namespace HitCounterManager
                     WriteJsonSimpleValue(sr, "use_roman", _settings.StyleUseRoman);
                     WriteJsonSimpleValue(sr, "highlight_active_split", _settings.StyleHightlightCurrentSplit);
                     WriteJsonSimpleValue(sr, "progress_bar_colored", _settings.StyleProgressBarColored);
+                    WriteJsonSimpleValue(sr, "height", _settings.StyleDesiredHeight);
                     WriteJsonSimpleValue(sr, "width", _settings.StyleDesiredWidth);
                     WriteJsonSimpleValue(sr, "supPB", _settings.StyleSubscriptPB); // subPB - wrong name kept for backwards compatibility in version 1.x
 

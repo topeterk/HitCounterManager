@@ -60,6 +60,7 @@
   <StyleCssUrl>stylesheet_pink.css</StyleCssUrl>
   <StyleFontUrl>https://fonts.googleapis.com/css?family=Fontdiner%20Swanky</StyleFontUrl>
   <StyleFontName>Fontdiner Swanky</StyleFontName>
+  <StyleDesiredHeight>0</StyleDesiredHeight>
   <StyleDesiredWidth>0</StyleDesiredWidth>
   <StyleSuperscriptPB>false</StyleSuperscriptPB>
   <StyleSubscriptPB>false</StyleSubscriptPB>

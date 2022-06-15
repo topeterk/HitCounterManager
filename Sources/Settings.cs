@@ -67,6 +67,7 @@ namespace HitCounterManager
             }
 
             // Style
+            numStyleDesiredHeight.Value = _settings.StyleDesiredHeight;
             numStyleDesiredWidth.Value = _settings.StyleDesiredWidth;
             cbHighContrast.Checked = _settings.StyleUseHighContrast;
             cbHighContrastNames.Checked = _settings.StyleUseHighContrastNames;
@@ -179,6 +180,7 @@ namespace HitCounterManager
             _settings.StyleHightlightCurrentSplit = cbHighlightCurrentSplit.Checked;
             _settings.StyleProgressBarColored = !cbProgressBarColored.Checked;
             _settings.StyleSubscriptPB = cbSubscriptPB.Checked;
+            _settings.StyleDesiredHeight = (int)numStyleDesiredHeight.Value;
             _settings.StyleDesiredWidth = (int)numStyleDesiredWidth.Value;
 
             // Behavior
