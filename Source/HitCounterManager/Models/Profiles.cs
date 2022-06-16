@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2021 Peter Kirmeier
+//Copyright (c) 2016-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -52,6 +52,7 @@ namespace HitCounterManager.Models
         public string Name = "Unnamed";
         public int Attempts = 0;
         public int ActiveSplit = 0;
+        public int BestProgress = 0;
         public List<ProfileRow> Rows = new List<ProfileRow>();
 
         public Profile ShallowCopy() => (Profile)MemberwiseClone();

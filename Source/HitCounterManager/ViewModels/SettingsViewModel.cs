@@ -129,6 +129,7 @@ namespace HitCounterManager.ViewModels
             {"RadioHotKeyMethod_Sync", new ShowInfoBool()},
             {"RadioHotKeyMethod_Async", new ShowInfoBool()},
             {"RadioHotKeyMethod_LLKb", new ShowInfoBool()},
+            {"ShowNumbers", new ShowInfoBool()},
             {"StyleUseHighContrast", new ShowInfoBool()},
             {"StyleUseHighContrastNames", new ShowInfoBool()},
             {"StyleProgressBarColored", new ShowInfoBool()},

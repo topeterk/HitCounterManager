@@ -196,6 +196,7 @@ namespace HitCounterManager.Models
                     sr.WriteLine("],");
 
                     WriteJsonSimpleValue(sr, "session_progress", pi.SessionProgress);
+                    WriteJsonSimpleValue(sr, "best_progress", pi.BestProgress);
 
                     // Calculation to show same amount of splits independent from active split:
                     // Example: ShowSplitsCountFinished = 3 , ShowSplitsCountUpcoming = 2 , iSplitCount = 7 (0-6)

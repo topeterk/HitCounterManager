@@ -1176,7 +1176,8 @@
       <Profile>
         <Name>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE</Name>
         <Attempts>42</Attempts>
-        <ActiveSplit>18</ActiveSplit>
+          <ActiveSplit>18</ActiveSplit>
+          <BestProgress>5</BestProgress>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>

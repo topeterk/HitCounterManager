@@ -74,6 +74,22 @@ namespace HitCounterManager.Models
 
         public ProfileRowModel ActiveSplitModel => (_origin.ActiveSplit < Rows.Count ? Rows[_origin.ActiveSplit] : null);
 
+        public int BestProgress
+        {
+            get { return _origin.BestProgress; }
+            set
+            {
+                if (value == _origin.BestProgress) return; // Nothing to do when nothing has changed
+
+                int prevValue = _origin.BestProgress;
+                _origin.BestProgress = value;
+                if (prevValue < Rows.Count) Rows[prevValue].BPChanged();
+                if (value < Rows.Count) Rows[value].BPChanged();
+                CallPropertyChanged(this, nameof(BestProgress));
+            }
+        }
+        public ProfileRowModel BestProgressModel => (_origin.BestProgress < Rows.Count ? Rows[_origin.BestProgress] : null);
+
         public ObservableCollection<ProfileRowModel> Rows { get; private set; }
         private int _SessionProgress = 0;
         public int SessionProgress

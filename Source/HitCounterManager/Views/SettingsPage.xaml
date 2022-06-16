@@ -226,9 +226,73 @@
                     <Label Padding="{OnPlatform 0, WPF=8}" HorizontalOptions="CenterAndExpand" Text="STYLE" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=12}" />
                 </Frame>
 
+                <Label HorizontalOptions="StartAndExpand" Text="Sections" />
+                <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Switch Grid.Row="0" Grid.Column="0" Margin="0" IsToggled="{Binding ShowAttemptsCounter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="0" Grid.Column="1" Margin="0" Text="Run number" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="1" Grid.Column="0" Margin="0" IsToggled="{Binding ShowHeadline, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="1" Grid.Column="1" Margin="0" Text="Column heading" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="2" Grid.Column="0" Margin="0" IsToggled="{Binding ShowProgressBar, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="2" Grid.Column="1" Margin="0" Text="Progress bar" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="3" Grid.Column="0" Margin="0" IsToggled="{Binding ShowFooter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="3" Grid.Column="1" Margin="0" Text="Totals" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="4" Grid.Column="0" Margin="0" IsToggled="{Binding ShowTimeFooter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="4" Grid.Column="1" Margin="0" Text="Time" HorizontalOptions="Start" VerticalOptions="Center" />
+                </Grid>
+
+                <Label HorizontalOptions="StartAndExpand" Text="Columns" />
+                <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Switch Grid.Row="0" Grid.Column="0" Margin="0" IsToggled="{Binding ShowHits, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="0" Grid.Column="1" Margin="0" Text="Hits" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="1" Grid.Column="0" Margin="0" IsToggled="{Binding ShowHitsCombined, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="1" Grid.Column="1" Margin="0" Text="+ combine boss and way hits" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="2" Grid.Column="0" Margin="0" IsToggled="{Binding ShowDiff, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="2" Grid.Column="1" Margin="0" Text="Difference" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="3" Grid.Column="0" Margin="0" IsToggled="{Binding ShowPB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="3" Grid.Column="1" Margin="0" Text="PB (personal best)" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="4" Grid.Column="0" Margin="0" IsToggled="{Binding ShowPBTotals, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="4" Grid.Column="1" Margin="0" Text="+ show cumulative totals" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="5" Grid.Column="0" Margin="0" IsToggled="{Binding ShowTimeCurrent, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="5" Grid.Column="1" Margin="0" Text="Split time" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="6" Grid.Column="0" Margin="0" IsToggled="{Binding ShowTimeDiff, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="6" Grid.Column="1" Margin="0" Text="Delta time" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="7" Grid.Column="0" Margin="0" IsToggled="{Binding ShowTimePB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="7" Grid.Column="1" Margin="0" Text="PB time" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="8" Grid.Column="0" Margin="0" IsToggled="{Binding ShowSessionProgress, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="8" Grid.Column="1" Margin="0" Text="SP and BP (session progress and best progress)" HorizontalOptions="Start" VerticalOptions="Center" />
+                </Grid>
+
                 <Label HorizontalOptions="StartAndExpand" Text="Appearance" />
                 <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -250,89 +314,104 @@
                     <RelativeLayout Grid.Row="0" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
                         <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
                             <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="ShowNumbers" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="0" Grid.Column="1" Margin="0" IsToggled="{Binding ShowNumbers, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="0" Grid.Column="2" Margin="0" Text="Numeric hits (shows images when unchecked)" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[ShowNumbers].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="Show either numeric values (usually during training or routing) or simple images like the check mark and cross." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                    </Frame>
+                    <RelativeLayout Grid.Row="2" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="StyleUseHighContrast" NumberOfTapsRequired="1" />
                             </Image.GestureRecognizers>
                         </Image>
                     </RelativeLayout>
-                    <Switch Grid.Row="0" Grid.Column="1" Margin="0" IsToggled="{Binding StyleUseHighContrast, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="0" Grid.Column="2" Margin="0" Text="Disable transparency" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="2" Grid.Column="1" Margin="0" IsToggled="{Binding StyleUseHighContrast, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="2" Grid.Column="2" Margin="0" Text="Solid background (transparent when unchecked)" HorizontalOptions="Start" VerticalOptions="Center" />
                     <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
-                    <Frame  Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                    <Frame  Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
                             IsVisible="{Binding ShowInfo[StyleUseHighContrast].Value, Mode=OneWay}"
                             BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
                         <Label Padding="{OnPlatform 0, WPF=8}" Text="Adds a solid background color that the text can be read clearly no matter what is shown behind." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
                     </Frame>
-                    <RelativeLayout Grid.Row="2" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                    <RelativeLayout Grid.Row="4" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
                         <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="StyleUseHighContrastNames" NumberOfTapsRequired="1" />
                             </Image.GestureRecognizers>
                         </Image>
                     </RelativeLayout>
-                    <Switch Grid.Row="2" Grid.Column="1" Margin="0" IsToggled="{Binding StyleUseHighContrastNames, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="2" Grid.Column="2" Margin="0" Text="Disable coloring of names" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="4" Grid.Column="1" Margin="0" IsToggled="{Binding StyleUseHighContrastNames, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="4" Grid.Column="2" Margin="0" Text="Single-color split names" HorizontalOptions="Start" VerticalOptions="Center" />
                     <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
-                    <Frame  Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                    <Frame  Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
                             IsVisible="{Binding ShowInfo[StyleUseHighContrastNames].Value, Mode=OneWay}"
                             BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
-                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The split names will have no color." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="All split names have the same color." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
                     </Frame>
-                    <RelativeLayout Grid.Row="4" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                    <RelativeLayout Grid.Row="6" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
                         <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="StyleProgressBarColored" NumberOfTapsRequired="1" />
                             </Image.GestureRecognizers>
                         </Image>
                     </RelativeLayout>
-                    <Switch Grid.Row="4" Grid.Column="1" Margin="0" IsToggled="{Binding StyleProgressBarColored, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="4" Grid.Column="2" Margin="0" Text="Disable coloring of progress bar" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="6" Grid.Column="1" Margin="0" IsToggled="{Binding StyleProgressBarColored, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="6" Grid.Column="2" Margin="0" Text="Multicolor progress bar" HorizontalOptions="Start" VerticalOptions="Center" />
                     <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
-                    <Frame  Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                    <Frame  Grid.Row="7" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
                             IsVisible="{Binding ShowInfo[StyleProgressBarColored].Value, Mode=OneWay}"
                             BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
-                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The progress bar will not take hit counts into account and just shows progress with one color." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="The splits will be represented with their current colors on the progress bar." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
                     </Frame>
-                    <RelativeLayout Grid.Row="6" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                    <RelativeLayout Grid.Row="8" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
                         <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="StyleSubscriptPB" NumberOfTapsRequired="1" />
                             </Image.GestureRecognizers>
                         </Image>
                     </RelativeLayout>
-                    <Switch Grid.Row="6" Grid.Column="1" Margin="0" IsToggled="{Binding StyleSubscriptPB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="6" Grid.Column="2" Margin="0" Text="Subscripted PB totals" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="8" Grid.Column="1" Margin="0" IsToggled="{Binding StyleSubscriptPB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="8" Grid.Column="2" Margin="0" Text="Subscripted PB totals" HorizontalOptions="Start" VerticalOptions="Center" />
                     <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
-                    <Frame  Grid.Row="7" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                    <Frame  Grid.Row="9" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
                             IsVisible="{Binding ShowInfo[StyleSubscriptPB].Value, Mode=OneWay}"
                             BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
                         <Label Padding="{OnPlatform 0, WPF=8}" Text="The PB totals shown for each split will be displayed smaller and lower." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
                     </Frame>
-                    <RelativeLayout Grid.Row="8" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                    <RelativeLayout Grid.Row="10" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
                         <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="StyleUseRoman" NumberOfTapsRequired="1" />
                             </Image.GestureRecognizers>
                         </Image>
                     </RelativeLayout>
-                    <Switch Grid.Row="8" Grid.Column="1" Margin="0" IsToggled="{Binding StyleUseRoman, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="8" Grid.Column="2" Margin="0" Text="Roman numerals" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="10" Grid.Column="1" Margin="0" IsToggled="{Binding StyleUseRoman, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="10" Grid.Column="2" Margin="0" Text="Roman numerals" HorizontalOptions="Start" VerticalOptions="Center" />
                     <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
-                    <Frame  Grid.Row="9" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                    <Frame  Grid.Row="11" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
                             IsVisible="{Binding ShowInfo[StyleUseRoman].Value, Mode=OneWay}"
                             BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
                         <Label Padding="{OnPlatform 0, WPF=8}" Text="The hit counts will be shown with Roman numerals." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
                     </Frame>
-                    <RelativeLayout Grid.Row="10" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                    <RelativeLayout Grid.Row="12" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
                         <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="StyleHightlightCurrentSplit" NumberOfTapsRequired="1" />
                             </Image.GestureRecognizers>
                         </Image>
                     </RelativeLayout>
-                    <Switch Grid.Row="10" Grid.Column="1" Margin="0" IsToggled="{Binding StyleHightlightCurrentSplit, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="10" Grid.Column="2" Margin="0" Text="Highlight current split" HorizontalTextAlignment="Start" VerticalOptions="Center" />
+                    <Switch Grid.Row="12" Grid.Column="1" Margin="0" IsToggled="{Binding StyleHightlightCurrentSplit, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="12" Grid.Column="2" Margin="0" Text="Highlight current split" HorizontalTextAlignment="Start" VerticalOptions="Center" />
                     <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
-                    <Frame  Grid.Row="11" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                    <Frame  Grid.Row="13" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
                             IsVisible="{Binding ShowInfo[StyleHightlightCurrentSplit].Value, Mode=OneWay}"
                             BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
                         <Label Padding="{OnPlatform 0, WPF=8}" Text="The row with the current split will stand out a little bit." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
@@ -455,57 +534,6 @@
                     <Label  Grid.Row="1" Grid.Column="1" Margin="0" Text="Boss hits critical" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Switch Grid.Row="2" Grid.Column="0" Margin="0" IsToggled="{Binding RadioHitSeverity_BossHitCritical, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
                     <Label  Grid.Row="2" Grid.Column="1" Margin="0" Text="Compare with PB" HorizontalOptions="Start" VerticalOptions="Center" />
-                </Grid>
-
-                <Label HorizontalOptions="StartAndExpand" Text="Features" />
-                <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Switch Grid.Row="0" Grid.Column="0" Margin="0" IsToggled="{Binding ShowAttemptsCounter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="0" Grid.Column="1" Margin="0" Grid.ColumnSpan="3" Text="Show run number (Attemps)" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="1" Grid.Column="0" Margin="0" IsToggled="{Binding ShowHeadline, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="1" Grid.Column="1" Margin="0" Text="Show headline" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="1" Grid.Column="2" Margin="0" IsToggled="{Binding ShowFooter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="1" Grid.Column="3" Margin="0" Text="Show footer" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="2" Grid.Column="0" Margin="0" IsToggled="{Binding ShowSessionProgress, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="2" Grid.Column="1" Margin="0" Grid.ColumnSpan="3" Text="Show session progress (Star)" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="3" Grid.Column="0" Margin="0" IsToggled="{Binding ShowHits, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="3" Grid.Column="1" Margin="0" Text="Show hits" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="3" Grid.Column="2" Margin="0" IsToggled="{Binding ShowProgressBar, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="3" Grid.Column="3" Margin="0" Text="Show progress bar" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="4" Grid.Column="0" Margin="0" IsToggled="{Binding ShowHitsCombined, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="4" Grid.Column="1" Margin="0" Text="Combine boss and way hits" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="4" Grid.Column="2" Margin="0" IsToggled="{Binding ShowPB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="4" Grid.Column="3" Margin="0" Text="Show PB (personal best)" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="5" Grid.Column="0" Margin="0" IsToggled="{Binding ShowDiff, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="5" Grid.Column="1" Margin="0" Text="Show difference" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="5" Grid.Column="2" Margin="0" IsToggled="{Binding ShowPBTotals, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="5" Grid.Column="3" Margin="0" Text="Show PB totals (sum)" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="6" Grid.Column="0" Margin="0" IsToggled="{Binding ShowNumbers, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="6" Grid.Column="1" Margin="0" Grid.ColumnSpan="3" Text="Show numbers, rather images" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="7" Grid.Column="0" Margin="0" IsToggled="{Binding ShowTimeCurrent, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="7" Grid.Column="1" Margin="0" Text="Show time (Current)" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="7" Grid.Column="2" Margin="0" IsToggled="{Binding ShowTimePB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="7" Grid.Column="3" Margin="0" Text="Show time (PB)" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="8" Grid.Column="0" Margin="0" IsToggled="{Binding ShowTimeFooter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="8" Grid.Column="1" Margin="0" Text="Show time (Footer)" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="8" Grid.Column="2" Margin="0" IsToggled="{Binding ShowTimeDiff, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="8" Grid.Column="3" Margin="0" Text="Show time (Delta)" HorizontalOptions="Start" VerticalOptions="Center" />
                 </Grid>
 
                 <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand">

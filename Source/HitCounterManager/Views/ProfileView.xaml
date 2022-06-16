@@ -64,6 +64,7 @@
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="20" />
             </Grid.ColumnDefinitions>
             <RelativeLayout Grid.Row="0" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Center" VerticalOptions="Center">
                 <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
@@ -78,7 +79,8 @@
             <Label Grid.Column="4" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="Diff" />
             <Label Grid.Column="5" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="PB" />
             <Label Grid.Column="6" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="SP" />
-            <Label Grid.Column="7" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text=" " />
+            <Label Grid.Column="7" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="BP" />
+            <Label Grid.Column="8" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text=" " />
         </Grid>
         <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
         <Frame OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
@@ -92,6 +94,7 @@
 * Way Hits: Amount of hits taken on the way to a boss or not used at all (depends on the configured behavior). E.g. track if a boss or the way through a slit should be trained more.
 * Diff: The difference between the hits taken (sum of Boss Hits and Way Hits) and the personal best hits taken.
 * SP (Session Progress): Marks the furthest reached split since the application has been started. E.g. furthest reached split during a single stream.
+* BP (Best Progress / Distance PB): Marks the furthest reached split on a flawless run. E.g. furthest reached split ever without any hits taken in previous splits.
 * Trash: Removes the split from the list.</Span>
                     </FormattedString>
                 </Label.FormattedText>
@@ -114,6 +117,7 @@
                             <ColumnDefinition Width="50" />
                             <ColumnDefinition Width="50" />
                             <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="20" />
                             <ColumnDefinition Width="20" />
                             <ColumnDefinition Width="20" />
                         </Grid.ColumnDefinitions>
@@ -176,21 +180,37 @@
                         </Entry>
                         <RelativeLayout Grid.Column="6" Margin="0" WidthRequest="20" HeightRequest="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
                                         BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}">
-                            <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-star-20.png}" >
+                            <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-inactive-state-20.png}" >
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding BindingContext.CmdSetSessionProgress, Source={x:Reference ProfileViewPage}}" CommandParameter="{Binding .}" NumberOfTapsRequired="1" />
                                 </Image.GestureRecognizers>
                                 <Image.Triggers>
                                     <DataTrigger TargetType="Image" Binding="{Binding SP, Mode=OneWay}" Value="false">
-                                        <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-star-20.png}"/>
+                                        <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-inactive-state-20.png}"/>
                                     </DataTrigger>
                                     <DataTrigger TargetType="Image" Binding="{Binding SP, Mode=OneWay}" Value="true">
-                                        <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-star-filled-20.png}"/>
+                                        <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-last-24-hours-20.png}"/>
                                     </DataTrigger>
                                 </Image.Triggers>
                             </Image>
                         </RelativeLayout>
                         <RelativeLayout Grid.Column="7" Margin="0" WidthRequest="20" HeightRequest="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                        BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}">
+                            <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-empty-flag-20.png}" >
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.CmdSetBestProgress, Source={x:Reference ProfileViewPage}}" CommandParameter="{Binding .}" NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image" Binding="{Binding BP, Mode=OneWay}" Value="false">
+                                        <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-empty-flag-20.png}"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Image" Binding="{Binding BP, Mode=OneWay}" Value="true">
+                                        <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-flag-filled-20.png}"/>
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+                        </RelativeLayout>
+                        <RelativeLayout Grid.Column="8" Margin="0" WidthRequest="20" HeightRequest="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
                                         BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}">
                             <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-trash-20.png}" >
                                 <Image.GestureRecognizers>

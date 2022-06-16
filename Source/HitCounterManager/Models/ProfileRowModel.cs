@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -59,6 +59,8 @@ namespace HitCounterManager.Models
         }
         public bool SP => this == _parent.SessionProgressModel;
         public void SPChanged() => CallPropertyChanged(this, nameof(SP));
+        public bool BP => this == _parent.BestProgressModel;
+        public void BPChanged() => CallPropertyChanged(this, nameof(BP));
         public long Duration
         {
             get => _origin.Duration;

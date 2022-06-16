@@ -91,6 +91,11 @@ namespace HitCounterManager.ViewModels
                 if (item.SP) return;
                 _ProfileSelected.SessionProgress = _ProfileRowList.IndexOf(item);
             });
+            CmdSetBestProgress = new Command<ProfileRowModel>((ProfileRowModel item) =>
+            {
+                if (item.BP) return;
+                _ProfileSelected.BestProgress = _ProfileRowList.IndexOf(item);
+            });
 
             ProfileReset = new Command(() =>
             {
@@ -178,6 +183,7 @@ namespace HitCounterManager.ViewModels
         public ICommand CmdRemoveSplit { get; }
         public ICommand CmdSetActiveSplit { get; }
         public ICommand CmdSetSessionProgress { get; }
+        public ICommand CmdSetBestProgress { get; }
 
         private ObservableCollection<ProfileRowModel> _ProfileRowList => _ProfileSelected.Rows;
 
@@ -346,7 +352,23 @@ namespace HitCounterManager.ViewModels
             int split = _ProfileSelected.ActiveSplit + Amount;
             if ((0 <= split) && (split < _ProfileRowList.Count))
             {
-                if ((0 < Amount) && _ProfileRowList[_ProfileSelected.ActiveSplit].SP) CmdSetSessionProgress.Execute(_ProfileRowList[split]);
+                if (0 < Amount) // going forward?
+                {
+                    if (_ProfileRowList[_ProfileSelected.ActiveSplit].SP) CmdSetSessionProgress.Execute(_ProfileRowList[split]);
+                    if (_ProfileSelected.ActiveSplit == _ProfileSelected.BestProgress)
+                    {
+                        bool IsFlawless = true;
+                        for (int i = 0; i < split; i++)
+                        {
+                            if ((0 != _ProfileRowList[i].Hits) || (0 != _ProfileRowList[i].WayHits))
+                            {
+                                IsFlawless = false;
+                                break;
+                            }
+                        }
+                        if (IsFlawless) CmdSetBestProgress.Execute(_ProfileRowList[split]);
+                    }
+                }
                 _ProfileSelected.ActiveSplit = split;
             }
             else if (split <= _ProfileRowList.Count)
