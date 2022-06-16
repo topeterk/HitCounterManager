@@ -71,6 +71,7 @@
         <Name>Dark Souls 3 (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
+        <BestProgress>0</BestProgress>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>
@@ -249,6 +250,7 @@
         <Name>Dark Souls 2 (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
+        <BestProgress>0</BestProgress>
         <Rows>
           <ProfileRow>
             <Title>Last Giant</Title>
@@ -544,6 +546,7 @@
         <Name>Dark Souls 2 (Any%) [DE]</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
+        <BestProgress>0</BestProgress>
         <Rows>
           <ProfileRow>
             <Title>Letzer Riese</Title>
@@ -740,6 +743,7 @@
         <Name>Dark Souls 1 Prepair to Die Edition (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
+        <BestProgress>0</BestProgress>
         <Rows>
           <ProfileRow>
             <Title>Asylum Demon</Title>
@@ -981,6 +985,7 @@
         <Name>Dark Souls 3 Ashes of Ariandel (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
+        <BestProgress>0</BestProgress>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>
@@ -1176,8 +1181,8 @@
       <Profile>
         <Name>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE</Name>
         <Attempts>42</Attempts>
-          <ActiveSplit>18</ActiveSplit>
-          <BestProgress>5</BestProgress>
+        <ActiveSplit>18</ActiveSplit>
+        <BestProgress>5</BestProgress>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>
@@ -1410,6 +1415,7 @@
         <Name>Dark Souls 3 The Ringed City (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
+        <BestProgress>0</BestProgress>
         <Rows>
           <ProfileRow>
             <Title>Gundyr</Title>
@@ -1642,6 +1648,7 @@
         <Name>The Surge [EN]</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
+        <BestProgress>0</BestProgress>
         <Rows>
           <ProfileRow>
             <Title>P.A.X.</Title>
@@ -1694,6 +1701,7 @@
         <Name>Bloodborne The old hunters (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
+        <BestProgress>0</BestProgress>
         <Rows>
           <ProfileRow>
             <Title>Father Gascoigne</Title>
@@ -1899,6 +1907,7 @@
         <Name>Bloodborne (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
+        <BestProgress>0</BestProgress>
         <Rows>
           <ProfileRow>
             <Title>Father Gascoigne</Title>
@@ -2059,6 +2068,7 @@
         <Name>The Surge A walk in the park (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
+        <BestProgress>0</BestProgress>
         <Rows>
           <ProfileRow>
             <Title>P.A.X.</Title>
@@ -2129,6 +2139,7 @@
         <Name>Demon's Souls (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
+        <BestProgress>0</BestProgress>
         <Rows>
           <ProfileRow>
             <Title>Vanguard</Title>
@@ -2298,6 +2309,7 @@
         <Name>Salt &amp; Sanctuary (All Bosses)</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
+        <BestProgress>0</BestProgress>
         <Rows>
           <ProfileRow>
             <Title>Unspeakable Deep</Title>
@@ -2512,6 +2524,7 @@
         <Name>Sekiro (All Main Bosses) [EN]</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
+        <BestProgress>0</BestProgress>
         <Rows>
           <ProfileRow>
             <Title>Genichiro Ashina</Title>
@@ -2938,6 +2951,7 @@
         <Name>Mortal Shell (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
+        <BestProgress>0</BestProgress>
         <Rows>
           <ProfileRow>
             <Title>Hadern</Title>
@@ -3026,6 +3040,7 @@
         <Name>Elden Ring (All Remembrances) [EN]</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
+        <BestProgress>0</BestProgress>
         <Rows>
           <ProfileRow>
             <Title>Godrick the Grafted</Title>
