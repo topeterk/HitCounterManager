@@ -176,7 +176,7 @@ namespace HitCounterManager.ViewModels
             CallPropertyChanged(this, nameof(StatsProgress));
             CallPropertyChanged(this, nameof(StatsTime));
             CallPropertyChanged(this, nameof(StatsTotalHits));
-            App.CurrentApp.om.Update(_ProfileSelected, TimerRunning);
+            OutputDataQueueUpdate();
         }
         private void CollectionChangedHandler(object sender, NotifyCollectionChangedEventArgs e) => OutputDataChangedHandler(sender, new PropertyChangedEventArgs(nameof(ProfileList)));
 
@@ -411,7 +411,45 @@ namespace HitCounterManager.ViewModels
             }
         }
 
-#region Game Timer
+        #region Output Update Queue
+
+        private readonly object OutputUpdateLock = new object();
+        private bool IsOutputUpdatePending = false;
+        private bool IsOutputUpdateStable = true;
+
+        /// <summary>
+        /// When data has changed, call this function to write the output.
+        /// The output will be delayed and only written when values are no longer changing.
+        /// </summary>
+        private void OutputDataQueueUpdate()
+        {
+            lock (OutputUpdateLock)
+            {
+                IsOutputUpdateStable = false;
+
+                if (!IsOutputUpdatePending)
+                {
+                    IsOutputUpdatePending = true;
+                    Device.StartTimer(TimeSpan.FromMilliseconds(300), () =>
+                    {
+                        lock (OutputUpdateLock)
+                        {
+                            // Continue waiting as long as data is not stable
+                            IsOutputUpdatePending = !IsOutputUpdateStable;
+                            IsOutputUpdateStable = true;
+                        }
+
+                        // When update is no longer pending, write output and stop timer
+                        if (!IsOutputUpdatePending) Device.BeginInvokeOnMainThread(() => App.CurrentApp.om.Update(_ProfileSelected, TimerRunning));
+                        return IsOutputUpdatePending;
+                    });
+                }
+            }
+        }
+
+        #endregion
+
+        #region Game Timer
 
         private DateTime last_update_time = DateTime.UtcNow;
 
@@ -472,6 +510,7 @@ namespace HitCounterManager.ViewModels
 
             return _TimerRunning;
         }
-#endregion
+
+        #endregion
     }
 }
