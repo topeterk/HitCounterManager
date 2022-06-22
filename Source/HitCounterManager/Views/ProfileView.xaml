@@ -93,8 +93,8 @@
 * Boss Hits: Amount of hits taken by anything or bosses or just a marker that a boss has been defeated (depends on the configured behavior).
 * Way Hits: Amount of hits taken on the way to a boss or not used at all (depends on the configured behavior). E.g. track if a boss or the way through a slit should be trained more.
 * Diff: The difference between the hits taken (sum of Boss Hits and Way Hits) and the personal best hits taken.
-* SP (Session Progress): Marks the furthest reached split since the application has been started. E.g. furthest reached split during a single stream.
-* BP (Best Progress / Distance PB): Marks the furthest reached split on a flawless run. E.g. furthest reached split ever without any hits taken in previous splits.
+* SP (Session Progress): Marks the farthest reached split per stream session and resets on application start. Represented by a 24 hour clock symbol.
+* BP (Best Progress / Distance PB): Marks the furthest reached split of the best flawless run ever. Represented by a flag symbol.
 * Trash: Removes the split from the list.</Span>
                     </FormattedString>
                 </Label.FormattedText>
