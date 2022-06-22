@@ -379,12 +379,12 @@
             this.cbShowTimePB.AutoSize = true;
             this.cbShowTimePB.Checked = true;
             this.cbShowTimePB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowTimePB.Location = new System.Drawing.Point(174, 180);
+            this.cbShowTimePB.Location = new System.Drawing.Point(187, 180);
             this.cbShowTimePB.Name = "cbShowTimePB";
             this.cbShowTimePB.Size = new System.Drawing.Size(98, 17);
             this.cbShowTimePB.TabIndex = 13;
             this.cbShowTimePB.Text = "Show time (PB)";
-            this.ToolTip1.SetToolTip(this.cbShowTimePB, "Show personal best time");
+            this.ToolTip1.SetToolTip(this.cbShowTimePB, "Show personal best times");
             this.cbShowTimePB.UseVisualStyleBackColor = true;
             this.cbShowTimePB.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
@@ -395,10 +395,10 @@
             this.cbShowTimeCurrent.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbShowTimeCurrent.Location = new System.Drawing.Point(6, 180);
             this.cbShowTimeCurrent.Name = "cbShowTimeCurrent";
-            this.cbShowTimeCurrent.Size = new System.Drawing.Size(118, 17);
+            this.cbShowTimeCurrent.Size = new System.Drawing.Size(109, 17);
             this.cbShowTimeCurrent.TabIndex = 12;
-            this.cbShowTimeCurrent.Text = "Show time (Current)";
-            this.ToolTip1.SetToolTip(this.cbShowTimeCurrent, "Show time of the current run");
+            this.cbShowTimeCurrent.Text = "Show time (Splits)";
+            this.ToolTip1.SetToolTip(this.cbShowTimeCurrent, "Show current split times");
             this.cbShowTimeCurrent.UseVisualStyleBackColor = true;
             this.cbShowTimeCurrent.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
@@ -407,7 +407,7 @@
             this.cbShowPB.AutoSize = true;
             this.cbShowPB.Checked = true;
             this.cbShowPB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowPB.Location = new System.Drawing.Point(174, 111);
+            this.cbShowPB.Location = new System.Drawing.Point(187, 111);
             this.cbShowPB.Name = "cbShowPB";
             this.cbShowPB.Size = new System.Drawing.Size(142, 17);
             this.cbShowPB.TabIndex = 8;
@@ -421,7 +421,7 @@
             this.cbShowPBTotals.AutoSize = true;
             this.cbShowPBTotals.Checked = true;
             this.cbShowPBTotals.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowPBTotals.Location = new System.Drawing.Point(174, 134);
+            this.cbShowPBTotals.Location = new System.Drawing.Point(187, 134);
             this.cbShowPBTotals.Name = "cbShowPBTotals";
             this.cbShowPBTotals.Size = new System.Drawing.Size(126, 17);
             this.cbShowPBTotals.TabIndex = 10;
@@ -435,7 +435,7 @@
             this.cbShowFooter.AutoSize = true;
             this.cbShowFooter.Checked = true;
             this.cbShowFooter.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowFooter.Location = new System.Drawing.Point(174, 42);
+            this.cbShowFooter.Location = new System.Drawing.Point(187, 42);
             this.cbShowFooter.Name = "cbShowFooter";
             this.cbShowFooter.Size = new System.Drawing.Size(83, 17);
             this.cbShowFooter.TabIndex = 2;
@@ -449,7 +449,7 @@
             this.cbSuccessionToProgressBar.AutoSize = true;
             this.cbSuccessionToProgressBar.Checked = true;
             this.cbSuccessionToProgressBar.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbSuccessionToProgressBar.Location = new System.Drawing.Point(174, 65);
+            this.cbSuccessionToProgressBar.Location = new System.Drawing.Point(187, 65);
             this.cbSuccessionToProgressBar.Name = "cbSuccessionToProgressBar";
             this.cbSuccessionToProgressBar.Size = new System.Drawing.Size(110, 17);
             this.cbSuccessionToProgressBar.TabIndex = 4;
@@ -465,7 +465,7 @@
             this.cbShowProgressBar.AutoSize = true;
             this.cbShowProgressBar.Checked = true;
             this.cbShowProgressBar.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowProgressBar.Location = new System.Drawing.Point(174, 88);
+            this.cbShowProgressBar.Location = new System.Drawing.Point(187, 88);
             this.cbShowProgressBar.Name = "cbShowProgressBar";
             this.cbShowProgressBar.Size = new System.Drawing.Size(114, 17);
             this.cbShowProgressBar.TabIndex = 6;
@@ -493,7 +493,7 @@
             this.cbShowTimeDiff.AutoSize = true;
             this.cbShowTimeDiff.Checked = true;
             this.cbShowTimeDiff.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowTimeDiff.Location = new System.Drawing.Point(174, 203);
+            this.cbShowTimeDiff.Location = new System.Drawing.Point(187, 203);
             this.cbShowTimeDiff.Name = "cbShowTimeDiff";
             this.cbShowTimeDiff.Size = new System.Drawing.Size(109, 17);
             this.cbShowTimeDiff.TabIndex = 15;
@@ -509,9 +509,9 @@
             this.cbShowTimeFooter.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbShowTimeFooter.Location = new System.Drawing.Point(6, 203);
             this.cbShowTimeFooter.Name = "cbShowTimeFooter";
-            this.cbShowTimeFooter.Size = new System.Drawing.Size(114, 17);
+            this.cbShowTimeFooter.Size = new System.Drawing.Size(142, 17);
             this.cbShowTimeFooter.TabIndex = 14;
-            this.cbShowTimeFooter.Text = "Show time (Footer)";
+            this.cbShowTimeFooter.Text = "Show time totals (Footer)";
             this.ToolTip1.SetToolTip(this.cbShowTimeFooter, "Show time of the current run in the footer");
             this.cbShowTimeFooter.UseVisualStyleBackColor = true;
             this.cbShowTimeFooter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
