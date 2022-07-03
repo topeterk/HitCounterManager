@@ -234,21 +234,122 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="18" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Switch Grid.Row="0" Grid.Column="0" Margin="0" IsToggled="{Binding ShowAttemptsCounter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="0" Grid.Column="1" Margin="0" Text="Run number" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="1" Grid.Column="0" Margin="0" IsToggled="{Binding ShowHeadline, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="1" Grid.Column="1" Margin="0" Text="Column heading" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="2" Grid.Column="0" Margin="0" IsToggled="{Binding ShowProgressBar, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="2" Grid.Column="1" Margin="0" Text="Progress bar" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="3" Grid.Column="0" Margin="0" IsToggled="{Binding ShowFooter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="3" Grid.Column="1" Margin="0" Text="Totals" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="4" Grid.Column="0" Margin="0" IsToggled="{Binding ShowTimeFooter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="4" Grid.Column="1" Margin="0" Text="Time" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <RelativeLayout Grid.Row="0" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="ShowAttemptsCounter" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="0" Grid.Column="1" Margin="0" IsToggled="{Binding ShowAttemptsCounter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="0" Grid.Column="2" Margin="0" Text="Run number" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[ShowAttemptsCounter].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="Show/Hide hits column (either boss and way hits combined or separate)" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span>Show/Hide how many runs have been started yet</Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
+                    <RelativeLayout Grid.Row="2" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="ShowHeadline" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="2" Grid.Column="1" Margin="0" IsToggled="{Binding ShowHeadline, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="2" Grid.Column="2" Margin="0" Text="Column heading" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[ShowHeadline].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="Show/Hide hits column (either boss and way hits combined or separate)" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span>Show/Hide the headlines of the columns</Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
+                    <RelativeLayout Grid.Row="4" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="ShowProgressBar" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="4" Grid.Column="1" Margin="0" IsToggled="{Binding ShowProgressBar, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="4" Grid.Column="2" Margin="0" Text="Progress bar" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[ShowProgressBar].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="Show/Hide hits column (either boss and way hits combined or separate)" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span>Show/Hide the progress bar to graphically represent the run's progress</Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
+                    <RelativeLayout Grid.Row="6" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="ShowFooter" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="6" Grid.Column="1" Margin="0" IsToggled="{Binding ShowFooter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="6" Grid.Column="2" Margin="0" Text="Totals" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="7" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[ShowFooter].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="Show/Hide hits column (either boss and way hits combined or separate)" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span>Show/Hide the totals for each column (in the footer)</Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
+                    <RelativeLayout Grid.Row="8" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="ShowTimeFooter" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="8" Grid.Column="1" Margin="0" IsToggled="{Binding ShowTimeFooter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="8" Grid.Column="2" Margin="0" Text="Time" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="9" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[ShowTimeFooter].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="Show/Hide hits column (either boss and way hits combined or separate)" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span>Show/Hide full time of the current run (in the footer)</Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
                 </Grid>
 
                 <Label HorizontalOptions="StartAndExpand" Text="Columns" />
@@ -665,21 +766,92 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="18" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Switch Grid.Row="0" Grid.Column="0" Margin="0" IsToggled="{Binding RadioPurpose_SplitCounter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="0" Grid.Column="1" Margin="0" Text="Split counter" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="1" Grid.Column="0" Margin="0" IsToggled="{Binding RadioPurpose_Checklist, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="1" Grid.Column="1" Margin="0" Text="Checklist" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="2" Grid.Column="0" Margin="0" IsToggled="{Binding RadioPurpose_NoDeath, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="2" Grid.Column="1" Margin="0" Text="No death" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="3" Grid.Column="0" Margin="0" IsToggled="{Binding RadioPurpose_DeathCounter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="3" Grid.Column="1" Margin="0" Text="Death counter" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="4" Grid.Column="0" Margin="0" IsToggled="{Binding RadioPurpose_ResetCounter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="4" Grid.Column="1" Margin="0" Text="Run reset counter" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <RelativeLayout Grid.Row="0" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_SplitCounter" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="0" Grid.Column="1" Margin="0" IsToggled="{Binding RadioPurpose_SplitCounter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="0" Grid.Column="2" Margin="0" Text="Split counter" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[RadioPurpose_SplitCounter].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="This is the most commonly used counter to keep track of hits. As long as the hit count of a split is 0 it is considered a good split." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                    </Frame>
+                    <RelativeLayout Grid.Row="2" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_Checklist" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="2" Grid.Column="1" Margin="0" IsToggled="{Binding RadioPurpose_Checklist, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="2" Grid.Column="2" Margin="0" Text="Checklist" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[RadioPurpose_Checklist].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="If you do not have a fixed order, this option can be used to keep track of different events (doing random boss runs oder collecting achievements). When a hit is registered a split, it means the split is done." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                    </Frame>
+                    <RelativeLayout Grid.Row="4" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_NoDeath" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="4" Grid.Column="1" Margin="0" IsToggled="{Binding RadioPurpose_NoDeath, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="4" Grid.Column="2" Margin="0" Text="No death" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[RadioPurpose_NoDeath].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="Similar to the Split counter option but with one the major difference. From the first split that has at least one hit, all further splits are considered bad splits." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                    </Frame>
+                    <RelativeLayout Grid.Row="6" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_DeathCounter" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="6" Grid.Column="1" Margin="0" IsToggled="{Binding RadioPurpose_DeathCounter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="6" Grid.Column="2" Margin="0" Text="Death counter" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="7" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[RadioPurpose_DeathCounter].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="A very simplistic counter that does not show any splits but the total hit count as deaths. It can still be combined with the progress bar and a timer." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                    </Frame>
+                    <RelativeLayout Grid.Row="8" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_ResetCounter" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="8" Grid.Column="1" Margin="0" IsToggled="{Binding RadioPurpose_ResetCounter, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="8" Grid.Column="2" Margin="0" Text="Run reset counter" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="9" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[RadioPurpose_ResetCounter].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="Instead of counting hits, this options can be used to COUNT RESETS instead. Keep in mind that PB is not used and the run shall never be reset. Resetting a run means just incrementing the hit count on the split when the reset happens and select the first split using the main window. This will keep your reset counts (hits) alive and you can later see how many runs have died on certain splits." HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                    </Frame>
                 </Grid>
 
                 <Label HorizontalOptions="StartAndExpand" Text="Hit severity (color of Neither nor)" />
@@ -688,17 +860,86 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="18" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Switch Grid.Row="0" Grid.Column="0" Margin="0" IsToggled="{Binding RadioHitSeverity_AnyHitCritical, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="0" Grid.Column="1" Margin="0" Text="Any hit as critical" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="1" Grid.Column="0" Margin="0" IsToggled="{Binding RadioHitSeverity_ComparePB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="1" Grid.Column="1" Margin="0" Text="Boss hits critical" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Switch Grid.Row="2" Grid.Column="0" Margin="0" IsToggled="{Binding RadioHitSeverity_BossHitCritical, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-                    <Label  Grid.Row="2" Grid.Column="1" Margin="0" Text="Compare with PB" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <RelativeLayout Grid.Row="0" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="RadioHitSeverity_AnyHitCritical" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="0" Grid.Column="1" Margin="0" IsToggled="{Binding RadioHitSeverity_AnyHitCritical, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="0" Grid.Column="2" Margin="0" Text="Any hit is critical" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[RadioHitSeverity_AnyHitCritical].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span>Counting independently of the hit type (boss or way)
+GOOD splits have a hit count of 0
+BAD splits have at least one hit</Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
+                    <RelativeLayout Grid.Row="2" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="RadioHitSeverity_ComparePB" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="2" Grid.Column="1" Margin="0" IsToggled="{Binding RadioHitSeverity_ComparePB, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="2" Grid.Column="2" Margin="0" Text="Only boss hits are critical" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[RadioHitSeverity_ComparePB].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span>Marks hits during boss fight more severe than hits on the way.
+GOOD splits have a hit count of 0
+EVEN splits have at least one hit counted for the way but have 0 hits for bosses
+BAD splits have at least one hit counted for bosses</Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
+                    <RelativeLayout Grid.Row="4" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="RadioHitSeverity_BossHitCritical" NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </RelativeLayout>
+                    <Switch Grid.Row="4" Grid.Column="1" Margin="0" IsToggled="{Binding RadioHitSeverity_BossHitCritical, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label  Grid.Row="4" Grid.Column="2" Margin="0" Text="Compare with PB" HorizontalOptions="Start" VerticalOptions="Center" />
+                    <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
+                    <Frame  Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                            IsVisible="{Binding ShowInfo[RadioHitSeverity_BossHitCritical].Value, Mode=OneWay}"
+                            BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
+                        <Label Padding="{OnPlatform 0, WPF=8}" Text="" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span>Marks hit counts beyond the PB hit counts more severe.
+GOOD splits have a hit count of 0
+EVEN splits have at least one hit counted but still have even or less hits than on the PB run
+BAD splits have more hits than on the PB run</Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
                 </Grid>
 
                 <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
@@ -740,12 +981,7 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                 <!-- ================== -->
                 <!-- ================== -->
 
-                <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
-                <Frame BackgroundColor="#CC6600" OutlineColor="#CC6600" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
-                    <Label Padding="{OnPlatform 0, WPF=8}" HorizontalOptions="CenterAndExpand" Text="TESTINGS STUFF" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=12}" />
-                </Frame>
-
-                <!-- examples: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/controls/views -->
+                <!-- examples: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/controls/views
                 <Label Text="CheckBox" />
                 <CheckBox Color="Green" VerticalOptions="Center" />
                 <Label Text="Slider" />
@@ -753,7 +989,7 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                 <Label Text="Stepper" />
                 <Stepper Maximum="360" Increment="30" HorizontalOptions="Center" />
                 <Label Text="Switch" />
-                <Switch x:Name="xamlSwitch" IsToggled="False" OnColor="Orange" ThumbColor="Green" HorizontalOptions="CenterAndExpand" />
+                <Switch x:Name="xamlSwitch" IsToggled="False" OnColor="Orange" ThumbColor="Green" HorizontalOptions="CenterAndExpand" /> -->
             </StackLayout>
         </ScrollView>
 

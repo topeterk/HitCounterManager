@@ -129,6 +129,11 @@ namespace HitCounterManager.ViewModels
             {"RadioHotKeyMethod_Sync", new ShowInfoBool()},
             {"RadioHotKeyMethod_Async", new ShowInfoBool()},
             {"RadioHotKeyMethod_LLKb", new ShowInfoBool()},
+            {"ShowAttemptsCounter", new ShowInfoBool()},
+            {"ShowHeadline", new ShowInfoBool()},
+            {"ShowProgressBar", new ShowInfoBool()},
+            {"ShowFooter", new ShowInfoBool()},
+            {"ShowTimeFooter", new ShowInfoBool()},
             {"ShowHits", new ShowInfoBool()},
             {"ShowHitsCombined", new ShowInfoBool()},
             {"ShowDiff", new ShowInfoBool()},
@@ -145,6 +150,14 @@ namespace HitCounterManager.ViewModels
             {"StyleSubscriptPB", new ShowInfoBool()},
             {"StyleUseRoman", new ShowInfoBool()},
             {"StyleHightlightCurrentSplit", new ShowInfoBool()},
+            {"RadioPurpose_SplitCounter", new ShowInfoBool()},
+            {"RadioPurpose_Checklist", new ShowInfoBool()},
+            {"RadioPurpose_NoDeath", new ShowInfoBool()},
+            {"RadioPurpose_DeathCounter", new ShowInfoBool()},
+            {"RadioPurpose_ResetCounter", new ShowInfoBool()},
+            {"RadioHitSeverity_AnyHitCritical", new ShowInfoBool()},
+            {"RadioHitSeverity_ComparePB", new ShowInfoBool()},
+            {"RadioHitSeverity_BossHitCritical", new ShowInfoBool()},
         };
         public Dictionary<string, ShowInfoBool> ShowInfo { get => _ShowInfo; }
 
