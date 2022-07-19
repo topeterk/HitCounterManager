@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2022 Peter Kirmeier
+//Copyright (c) 2016-2022 Peter Kirmeier and Ezequiel Medina
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,8 @@ using System;
 using System.Drawing;
 using System.Net;
 using System.Windows.Forms;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace HitCounterManager
 {
@@ -51,17 +53,31 @@ namespace HitCounterManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = Text + " - v" + Application.ProductVersion + " " + OsLayer.Name;
+            Text = Text + " - v" + Application.ProductVersion + " Beta 1 - Rev.1 " + OsLayer.Name;
             btnHit.Select();
-            LoadSettings();
+            LoadSettings();  
             ProfileChangedHandler(sender, e);
+            LoadAutoSplitterSettings(profCtrl);
+            profCtrl.setSplittersPointers(sekiroSplitter);
+            var task1 = new Task(() =>
+            {
+                waitGamesTimer();
+            });
+            task1.Start();
+
+
+
             this.UpdateDarkMode();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult result = MessageBox.Show("Do you want to save this session?", this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes) SaveSettings();
+            if (result == DialogResult.Yes)
+            {
+                SaveSettings();
+                SaveAutoSplitterSettings();
+            }
             else if (result == DialogResult.Cancel) e.Cancel = true;
         }
 
@@ -138,6 +154,7 @@ namespace HitCounterManager
         private void btnSave_Click(object sender, EventArgs e) { SaveSettings(); }
         private void btnWeb_Click(object sender, EventArgs e) { GitHubUpdate.WebOpenLandingPage(); }
         private void btnTeamHitless_Click(object sender, EventArgs e) { System.Diagnostics.Process.Start("https://discord.gg/4E7cSK7"); }
+        private void btnTeamHitlessHispano_Click(object sender, EventArgs e) { System.Diagnostics.Process.Start("https://discord.gg/ntygnch"); }
         private void btnCheckVersion_Click(object sender, EventArgs e)
         {
             if (!GitHubUpdate.QueryAllReleases())
@@ -176,6 +193,8 @@ namespace HitCounterManager
         private void btnSplit_MouseDown(object sender, MouseEventArgs e) { if (e.Button == MouseButtons.Right) profCtrl.ProfileSplitGo(-1); }
         private void btnSplitPrev_Click(object sender, EventArgs e) { profCtrl.ProfileSplitGo(-1); }
 
+        private void btnSplitter_Click(object sender, EventArgs e) { Form form = new AutoSplitter(getSekiroIntance()); form.ShowDialog(this);}
+
         private void ProfileChangedHandler(object sender, EventArgs e)
         {
             int TotalSplits, TotalActiveSplit, TotalHits, TotalHitsWay, TotalPB;
@@ -195,6 +214,23 @@ namespace HitCounterManager
             btnPause.Image = Start ? Sources.Resources.icons8_sleep_32 : Sources.Resources.icons8_time_32;
         }
 
+        private void waitGamesTimer()
+        {
+
+            while (true)
+            {
+                if (sekiroSplitter.initTimer())
+                {
+                    StartStopTimer(true);
+                    sekiroSplitter._runStarted = true;
+                }
+        
+            }
+        }
+
+
         #endregion
+
+       
     }
 }

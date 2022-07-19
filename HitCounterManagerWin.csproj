@@ -13,9 +13,24 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -56,6 +71,14 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Sources\DTSekiro.cs" />
+    <Compile Include="Sources\AutoSplitter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sources\AutoSplitter.Designer.cs">
+      <DependentUpon>AutoSplitter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\SekiroSplitter.cs" />
     <Compile Include="Sources\ProfilesControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -107,6 +130,10 @@
     <Compile Include="Sources\Update.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="SoulMemory, Version=1.0.38.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\SoulMemory.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -114,6 +141,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Sources\AutoSplitter.resx">
+      <DependentUpon>AutoSplitter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sources\ProfilesControl.resx">
       <DependentUpon>ProfilesControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -144,6 +174,10 @@
     <Content Include="Designs\javascript.js" />
     <Content Include="Designs\stylesheet.css" />
     <Content Include="Designs\stylesheet_pink.css" />
+    <None Include="Images\icons8-autosplitter-32.png" />
+    <None Include="Images\icons8-Timersettings-20.png" />
+    <None Include="Images\20p_logo_black_THH.png" />
+    <Content Include="SoulMemory.dll" />
     <Content Include="Sources\HitCounter.html" />
     <Content Include="Sources\HitCounter.template" />
     <Content Include="Sources\HitCounterManagerInit.xml" />
@@ -177,6 +211,18 @@
     <None Include="Images\icons8-watch-your-step-32.png" />
     <None Include="Images\icons8-website-20.png" />
     <None Include="Sources\App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

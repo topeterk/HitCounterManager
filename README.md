@@ -45,6 +45,14 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 * The Surge + A walk in the park
 * The Surge 2
 * Mortal Shell
+* Celeste
+* Crash Bandicut 1 
+* Crash Bandicut 2
+* Crash Bandicut 3
+* Crash Bandicut 4
+* Cuphead
+* Hades
+* Hollow Knight
 
 ## Get the software
 All available releases can be found at the [Releases page](../../releases) on GitHub.  
@@ -57,8 +65,9 @@ All available releases can be found at the [Releases page](../../releases) on Gi
     > **Note**: Version 1.13 and older requires [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
   * Installer version (Setup)
     * [.Net Framework 4.8 or newer](https://www.microsoft.com/net)
-    > **Note**: Version 1.20 and older requires [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
+    > **Note**: Version 1.21 and older requires [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
 * OS: Any (32/64 bit)
+  > **Note**: in 32bit OS **not supporting autosplitting**  
   > **Note**: This version is **not supporting global hot keys**  
   * Portable version (Tar ball)
     * Running with [Mono](https://www.mono-project.com/) (_tested with 5.14.0_)  
@@ -94,6 +103,10 @@ Thanks to (in alphabetical order):
 * [SquillaKilla](https://www.twitch.tv/squillakilla)
 * [The_Happy_Hob](https://www.twitch.tv/the_happy_hob)
 * [TigerG92](https://www.twitch.tv/tigerg92)
+Thanks to Beta Testers of AutoSplit(in alphabetical order):
+
+
+
 * Every member of the [Hitless team on Twitch](https://www.twitch.tv/team/hitless)
 * And also all the other great challenge runners out there that I cannot name here all.
   

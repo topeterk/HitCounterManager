@@ -2,7 +2,7 @@
 
 REM MIT License
 
-REM Copyright(c) 2016-2018 Peter Kirmeier
+REM Copyright(c) 2016-2022 Peter Kirmeier and Ezequiel Medina
 
 REM Permission Is hereby granted, free Of charge, to any person obtaining a copy
 REM of this software And associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@ mkdir %DIR_DEST%
 
 echo Creating portable package:
 echo ^ ^ Copy files from %DIR_OUTPUT%
-FOR %%G IN (HitCounterManager.exe HitCounterManager.exe.config) DO copy %DIR_OUTPUT%\%%G %DIR_DEST%
+FOR %%G IN (HitCounterManager.exe HitCounterManager.exe.config SoulMemory.dll) DO copy %DIR_OUTPUT%\%%G %DIR_DEST%
 echo ^ ^ Copy files from %DIR_SRC%
 FOR %%G IN (Sources\HitCounterManagerInit.xml Sources\HitCounter.html Sources\HitCounter.template) DO copy %DIR_SRC%\%%G %DIR_DEST%
 echo ^ ^ Copy files from %DIR_SRC%\Designs

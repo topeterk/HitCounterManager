@@ -2,7 +2,7 @@
 #
 # MIT License
 #
-# Copyright(c) 2018-2018 Peter Kirmeier
+# Copyright(c) 2018-2022 Peter Kirmeier and Ezequiel Medina
 #
 # Permission Is hereby granted, free Of charge, to any person obtaining a copy
 # of this software And associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@ rm -rf $DIR_DEST 2>/dev/null
 mkdir $DIR_DEST
 echo Creating portable package:
 echo "  Copy files from Output"
-cp $DIR_OUTPUT/{HitCounterManager.exe,HitCounterManager.exe.config} $DIR_DEST
+cp $DIR_OUTPUT/{HitCounterManager.exe,HitCounterManager.exe.config SoulMemory.dll} $DIR_DEST
 echo "  Copy files from Sources"
 cp $DIR_SRC/Sources/{HitCounterManagerInit.xml,HitCounter.html,HitCounter.template,HitCounterManagerMono.sh} $DIR_DEST
 echo "  Copy files from Designs"

@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2019-2022 Peter Kirmeier
+//Copyright (c) 2019-2022 Peter Kirmeier and Ezequiel Medina
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -33,6 +33,7 @@ namespace HitCounterManager
         private Succession succession;
         public readonly OutModule om;
         private bool Ready = false;
+        private SekiroSplitter sekiroSplitter;
 
         public ProfilesControl()
         {
@@ -52,6 +53,12 @@ namespace HitCounterManager
 
             ptc.InitializeProfileTabControl();
         }
+
+        public void setSplittersPointers(SekiroSplitter sekiroSplitter)
+        {
+            this.sekiroSplitter = sekiroSplitter;
+        }
+
 
         [Browsable(false)] // Hide from designer
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
@@ -86,6 +93,27 @@ namespace HitCounterManager
                 DateTime utc_now = DateTime.UtcNow;
                 SelectedProfileInfo.AddDuration((long)(utc_now - last_update_time).TotalMilliseconds);
                 last_update_time = utc_now;
+
+
+                /* if (sekiroSplitter.getDataSekiro().gameTimer && sekiroSplitter.getSekiroStatusProcess(out Exception exec)) 
+                {
+                bool gameToGetTime = false;
+                    SelectedProfileInfo.AddDuration(sekiroSplitter.getGameTime());
+                    gameToGetTime = true;
+                }
+                else
+                {
+                    //Check others games
+                if (!gameToGetTime)
+                {
+                   
+
+                }
+                }*/
+
+
+
+
             }
         }
 
@@ -363,6 +391,7 @@ namespace HitCounterManager
                 pi_tab.ResetRun();
                 profs.SaveProfile(pi_tab); // save tab's profile
             }
+            sekiroSplitter.resetSplited();
         }
         public void ProfilePB()
         {

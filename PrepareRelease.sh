@@ -2,7 +2,7 @@
 #
 # MIT License
 #
-# Copyright(c) 2018-2018 Peter Kirmeier
+# Copyright(c) 2018-2022 Peter Kirmeier and Ezequiel Medina
 #
 # Permission Is hereby granted, free Of charge, to any person obtaining a copy
 # of this software And associated documentation files (the "Software"), to deal

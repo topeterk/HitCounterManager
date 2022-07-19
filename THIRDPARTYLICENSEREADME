@@ -14,6 +14,19 @@ Source: https://github.com/topeterk/HitCounterManager
 Licence: MIT
 
 ==============================================================================
+Addons
+
+Title: AutoSplitter
+Author: Ezequiel Medina (Neimex23)
+Contact: <ezequielmedina23@gmail.com>
+Licence: MIT
+    - Dll SoulsMemory from:
+           Title: SoulSplitter
+           Author:  FrankvdStam
+           Source:  https://github.com/FrankvdStam/SoulSplitter.git
+           Licence: GNU
+
+==============================================================================
 Application Icon
 
 Title: Pioneer Camp
@@ -34,6 +47,14 @@ Team Hitless Button Image
 
 Title: -
 Author: AronTheBaron
+Source: Provided by the Discord user for this project
+Licence: MIT
+
+==============================================================================
+No Hit Hispano Button Image
+
+Title: -
+Author: ParaBellum 
 Source: Provided by the Discord user for this project
 Licence: MIT
 

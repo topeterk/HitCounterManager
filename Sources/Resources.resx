@@ -118,59 +118,38 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="20p_logo_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\20p_logo_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8-padlock-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-padlock-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8_about_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-about-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8_add_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-add-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8_add_list_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-add-list-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8_attack_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-attack-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-cloud-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-cloud-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8_copy_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-copy-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8_staircase_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-staircase-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8_counter_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8-counter-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8_delete_list_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\icons8-delete-list-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8_repeat_one_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-repeat-one-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8-double-down-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-double-down-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8-taschenlampe-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-taschenlampe-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8-double-up-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-double-up-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8_edit_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-edit-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8_settings_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-settings-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8-lock-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8-lock-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8-padlock-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-padlock-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8_about_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-about-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8-pin-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-pin-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8_delete_list_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\icons8-delete-list-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8_repeat_one_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-repeat-one-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8_trash_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-trash-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8_save_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-save-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8_scroll_down_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-scroll-down-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="20p_logo_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\20p_logo_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8_scroll_up_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8-scroll-up-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,31 +157,58 @@
   <data name="icons8-search-in-browser-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8-search-in-browser-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8_settings_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-settings-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8_scroll_down_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-scroll-down-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_website_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-website-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-autosplitter-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-autosplitter-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-pin-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-pin-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-cloud-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-cloud-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_add_list_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-add-list-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-double-up-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-double-up-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-double-down-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-double-down-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8-sleep-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8-sleep-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8_staircase_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-staircase-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-taschenlampe-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-taschenlampe-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icons8-time-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8-time-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8_trash_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-trash-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8_save_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-save-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8_trophy_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-trophy-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8_add_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-add-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_copy_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-copy-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_attack_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-attack-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8-watch-your-step-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8-watch-your-step-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8_website_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-website-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8_trophy_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-trophy-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_edit_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-edit-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="20p_logo_black_THH" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\20p_logo_black_THH.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

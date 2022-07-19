@@ -1,0 +1,15 @@
+Maintain update the dll "Souls Memory" of Souls Splitter for last updates fixes of readEventsFlags or others things
+
+Notes:
+===========================================
+AutoSplitting:
+-Depends on Configurable Autosplit, the addons autosplitting a split (+1 in the actually position), 
+regardless of what is written on them
+
+- When a event of autosplit happen, an internal variable is set, for evit that event is repit. 
+Use "Reset Run" button or Shortcut, for reset this state.
+
+===========================================
+AutoTimers;
+- Start the timer when games is loaded, this
+cause that internal timer doesn't work, but in HTML file to OBS its work.

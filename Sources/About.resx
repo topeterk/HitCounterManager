@@ -134,6 +134,20 @@ Source: https://github.com/topeterk/HitCounterManager
 Licence: MIT
 
 ==============================================================================
+Addons
+
+Title: AutoSplitter
+Author: Ezequiel Medina (Neimex23)
+Contact: &lt;ezequielmedina23@gmail.com&gt;
+Licence: MIT
+    - Dll SoulsMemory from:
+           Title: SoulSplitter
+           Author:  FrankvdStam
+           Source:  https://github.com/FrankvdStam/SoulSplitter.git
+           Licence: GNU
+
+==============================================================================
+
 Application Icon
 
 Title: Pioneer Camp
@@ -167,6 +181,9 @@ Source: https://pixabay.com/p-1292787/
 Licence: Pixabay License
 
 ==============================================================================
+Title: 
+Author
+
 Cross Image
 
 Title: -

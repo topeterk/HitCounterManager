@@ -2,7 +2,7 @@
 
 REM MIT License
 
-REM Copyright(c) 2018-2019 Peter Kirmeier
+REM Copyright(c) 2018-2022 Peter Kirmeier and Ezequiel Medina
 
 REM Permission Is hereby granted, free Of charge, to any person obtaining a copy
 REM of this software And associated documentation files (the "Software"), to deal
