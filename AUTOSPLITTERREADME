@@ -3,6 +3,8 @@ Maintain update the dll "Souls Memory" of Souls Splitter for last updates fixes 
 Notes:
 ===========================================
 AutoSplitting:
+- Is recommended to configure everything before setting the game to spliter, to avoid autosplitting
+
 -Depends on Configurable Autosplit, the addons autosplitting a split (+1 in the actually position), 
 regardless of what is written on them
 
@@ -10,6 +12,6 @@ regardless of what is written on them
 Use "Reset Run" button or Shortcut, for reset this state.
 
 ===========================================
-AutoTimers;
-- Start the timer when games is loaded, this
-cause that internal timer doesn't work, but in HTML file to OBS its work.
+Sekiro Features:
+- No Intro
+- No Tutorials

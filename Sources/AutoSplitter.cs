@@ -52,29 +52,17 @@ namespace HitCounterManager
         public void refreshForm()
         {
             #region SekiroTab       
-            this.panel1.Hide();
-            this.panel2.Hide();
-            this.panel3.Hide();
-            this.sekiroRunning.Hide();
-            this.checkBossSekiro.Hide();
-            this.zoneSelectSekiro.Hide();
-            this.label_Zone1.Hide();
-            this.listBoxAshinaOutskirts.Hide();
-            this.listBoxHirataEstate.Hide();
-            this.listBoxAshinaCastle.Hide();
-            this.listBoxAbandonedDungeon.Hide();
-            this.listBoxSenpouTemple.Hide();
-            this.listBoxSunkenValley.Hide();
-            this.listBoxAshinaDepths.Hide();
-            this.listBoxFountainheadPalace.Hide();
-            this.labelCoordinates.Hide();
-            this.comboBoxMargin.Hide();
-            this.btnGetPotition.Hide();
-            this.textBoxX.Hide();
-            this.textBoxY.Hide();
-            this.textBoxZ.Hide();
-            this.listBoxPositions.Hide();
-            this.groupBoxEnablersSekiro.Hide();
+            panelPosition.Hide();
+            panelBoss.Hide();
+            panelIdols.Hide();
+            groupBoxAshinaOutskirts.Hide();
+            groupBoxHirataEstate.Hide();
+            groupBoxAshinaCastle.Hide();
+            groupBoxAbandonedDungeon.Hide();
+            groupBoxSenpouTemple.Hide();
+            groupBoxSunkenValley.Hide();
+            groupBoxAshinaDepths.Hide();
+            groupBoxFountainhead.Hide();
 
             #endregion
             checkStatusGames();
@@ -83,107 +71,85 @@ namespace HitCounterManager
         private void AutoSplitter_Load(object sender, EventArgs e)
         {
             DTSekiro sekiroData = sekiroSplitter.getDataSekiro();
-            #region SekiroLoad.Propierties
-            if (sekiroData.enableSplitting)
+            #region SekiroLoad.Bosses
+            foreach (DefinitionsSekiro.Boss boss in sekiroData.getBossToSplit())
             {
-                checkBoxESekiroSplitting.Checked = true;
-            }
-
-            if (sekiroData.enableTimer)
-            {
-                checkBoxSekiroTimer.Checked = true;
-            }
-
-
-
-            #endregion
-            #region SekiroLoad.Boss
-
-            List<DefinitionsSekiro.Boss> bossesToSplit = sekiroData.getBossToSplit();
-            foreach (DefinitionsSekiro.Boss bs in bossesToSplit)
-            {
-                for (int i = 0; i < checkBossSekiro.Items.Count; i++)
-                {
-                    if (bs.Title == checkBossSekiro.Items[i].ToString())
-                    {
-                        checkBossSekiro.SetItemChecked(i, true);
-                    }
-                }
+                listBoxBosses.Items.Add(boss.Title + " - " + boss.Mode);
             }
             #endregion
-            #region SekiroLoad.Idol
-            List<DefinitionsSekiro.Idol> idolsTosplit = sekiroData.getidolsTosplit();
-            foreach (DefinitionsSekiro.Idol idol in idolsTosplit)
+            #region SekiroLoad.Idols
+            foreach (DefinitionsSekiro.Idol idols in sekiroData.getidolsTosplit())
             {
-                for (int i = 0; i < listBoxAshinaOutskirts.Items.Count; i++)
+                for (int i = 0; i < checkedListBoxAshina.Items.Count; i++)
                 {
-                    if (idol.Title == listBoxAshinaOutskirts.Items[i].ToString())
+                    if (idols.Title == checkedListBoxAshina.Items[i].ToString())
                     {
-                        listBoxAshinaOutskirts.SetItemChecked(i, true);
+                        checkedListBoxAshina.SetItemChecked(i, true);
                     }
                 }
 
-                for (int i = 0; i < listBoxHirataEstate.Items.Count; i++)
+                for (int i = 0; i < checkedListBoxHirataEstate.Items.Count; i++)
                 {
-                    if (idol.Title == listBoxHirataEstate.Items[i].ToString())
+                    if (idols.Title == checkedListBoxHirataEstate.Items[i].ToString())
                     {
-                        listBoxHirataEstate.SetItemChecked(i, true);
+                        checkedListBoxHirataEstate.SetItemChecked(i, true);
                     }
                 }
 
-                for (int i = 0; i < listBoxAshinaCastle.Items.Count; i++)
+                for (int i = 0; i < checkedListBoxAshinaCastle.Items.Count; i++)
                 {
-                    if (idol.Title == listBoxAshinaCastle.Items[i].ToString())
+                    if (idols.Title == checkedListBoxAshinaCastle.Items[i].ToString())
                     {
-                        listBoxAshinaCastle.SetItemChecked(i, true);
+                        checkedListBoxAshinaCastle.SetItemChecked(i, true);
                     }
                 }
 
-                for (int i = 0; i < listBoxAbandonedDungeon.Items.Count; i++)
+                for (int i = 0; i < checkedListBoxAbandonedDungeon.Items.Count; i++)
                 {
-                    if (idol.Title == listBoxAbandonedDungeon.Items[i].ToString())
+                    if (idols.Title == checkedListBoxAbandonedDungeon.Items[i].ToString())
                     {
-                        listBoxAbandonedDungeon.SetItemChecked(i, true);
+                        checkedListBoxAbandonedDungeon.SetItemChecked(i, true);
                     }
                 }
 
-                for (int i = 0; i < listBoxSenpouTemple.Items.Count; i++)
+                for (int i = 0; i < checkedListBoxSenpouTemple.Items.Count; i++)
                 {
-                    if (idol.Title == listBoxSenpouTemple.Items[i].ToString())
+                    if (idols.Title == checkedListBoxSenpouTemple.Items[i].ToString())
                     {
-                        listBoxSenpouTemple.SetItemChecked(i, true);
+                        checkedListBoxSenpouTemple.SetItemChecked(i, true);
                     }
                 }
 
-                for (int i = 0; i < listBoxSunkenValley.Items.Count; i++)
+                for (int i = 0; i < checkedListBoxSunkenValley.Items.Count; i++)
                 {
-                    if (idol.Title == listBoxSunkenValley.Items[i].ToString())
+                    if (idols.Title == checkedListBoxSunkenValley.Items[i].ToString())
                     {
-                        listBoxSunkenValley.SetItemChecked(i, true);
+                        checkedListBoxSunkenValley.SetItemChecked(i, true);
                     }
                 }
 
-                for (int i = 0; i < listBoxAshinaDepths.Items.Count; i++)
+                for (int i = 0; i < checkedListBoxAshinaDepths.Items.Count; i++)
                 {
-                    if (idol.Title == listBoxAshinaDepths.Items[i].ToString())
+                    if (idols.Title == checkedListBoxAshinaDepths.Items[i].ToString())
                     {
-                        listBoxAshinaDepths.SetItemChecked(i, true);
+                        checkedListBoxAshinaDepths.SetItemChecked(i, true);
                     }
                 }
 
-                for (int i = 0; i < listBoxFountainheadPalace.Items.Count; i++)
+                for (int i = 0; i < checkedListBoxFountainhead.Items.Count; i++)
                 {
-                    if (idol.Title == listBoxFountainheadPalace.Items[i].ToString())
+                    if (idols.Title == checkedListBoxFountainhead.Items[i].ToString())
                     {
-                        listBoxFountainheadPalace.SetItemChecked(i, true);
+                        checkedListBoxFountainhead.SetItemChecked(i, true);
                     }
                 }
+
             }
             #endregion
             #region SekiroLoad.Position
             foreach (DefinitionsSekiro.Position position in sekiroData.getPositionsToSplit())
             {
-                listBoxPositions.Items.Add(position.vector);            
+                listBoxPositions.Items.Add(position.vector + " - " + position.mode);            
             }
             comboBoxMargin.SelectedIndex = sekiroData.positionMargin;
             #endregion
@@ -216,336 +182,29 @@ namespace HitCounterManager
         }
 
         #region Sekiro.UI
-        private void btn_applySekiro_Click(object sender, EventArgs e)
-        {
-            #region Split.Boss
-            foreach (object itemChecked in checkBossSekiro.CheckedItems)
-            {
-                string boss = itemChecked.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.AddBoss(boss);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-
-
-            IEnumerable<object> notCheckedB = (from object item in checkBossSekiro.Items
-                                              where !checkBossSekiro.CheckedItems.Contains(item)
-                                              select item);
-
-            foreach (object itemUnchecked in notCheckedB)
-            {
-                string boss = itemUnchecked.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.RemoveBoss(boss);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-            #endregion
-            #region Split.Idol
-            //Asshina Outskirts
-            foreach (object itemCheckedAO in listBoxAshinaOutskirts.CheckedItems)
-            {
-                string idol = itemCheckedAO.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.AddIdol(idol);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-
-
-            IEnumerable<object> notCheckedI_AO = (from object item in this.listBoxAshinaOutskirts.Items
-                                              where !this.listBoxAshinaOutskirts.CheckedItems.Contains(item)
-                                              select item);
-
-            foreach (object itemUncheckedAO in notCheckedI_AO)
-            {
-                string idol = itemUncheckedAO.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.RemoveIdol(idol);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-            //Hirata Estate
-           
-            foreach (object itemChecked in listBoxHirataEstate.CheckedItems)
-            {
-                string idol = itemChecked.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.AddIdol(idol);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-
-
-            IEnumerable<object> notCheckedI_HE = (from object item in listBoxHirataEstate.Items
-                                                  where !listBoxHirataEstate.CheckedItems.Contains(item)
-                                                  select item);
-
-            foreach (object itemUnchecked in notCheckedI_HE)
-            {
-                string idol = itemUnchecked.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.RemoveIdol(idol);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-            
-            //Ashina Castle
-
-            foreach (object itemChecked in listBoxAshinaCastle.CheckedItems)
-            {
-                string idol = itemChecked.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.AddIdol(idol);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-
-
-            IEnumerable<object> notCheckedI_AC = (from object item in listBoxAshinaCastle.Items
-                                                  where !listBoxAshinaCastle.CheckedItems.Contains(item)
-                                                  select item);
-
-            foreach (object itemUnchecked in notCheckedI_AC)
-            {
-                string idol = itemUnchecked.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.RemoveIdol(idol);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-            //Abandoned Dungeon
-            foreach (object itemChecked in listBoxAbandonedDungeon.CheckedItems)
-            {
-                string idol = itemChecked.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.AddIdol(idol);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-
-
-            IEnumerable<object> notCheckedI_AD = (from object item in listBoxAbandonedDungeon.Items
-                                                  where !listBoxAbandonedDungeon.CheckedItems.Contains(item)
-                                                  select item);
-
-            foreach (object itemUnchecked in notCheckedI_AD)
-            {
-                string idol = itemUnchecked.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.RemoveIdol(idol);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-            // Senpou Temple
-
-            foreach (object itemChecked in listBoxSenpouTemple.CheckedItems)
-            {
-                string idol = itemChecked.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.AddIdol(idol);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-
-
-            IEnumerable<object> notCheckedI_ST = (from object item in listBoxSenpouTemple.Items
-                                                    where !listBoxSenpouTemple.CheckedItems.Contains(item)
-                                                    select item);
-
-            foreach (object itemUnchecked in notCheckedI_ST)
-            {
-                string idol = itemUnchecked.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.RemoveIdol(idol);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-
-            //Sunkey Valley
-            foreach (object itemChecked in listBoxSunkenValley.CheckedItems)
-            {
-                string idol = itemChecked.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.AddIdol(idol);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-
-
-            IEnumerable<object> notCheckedI_SV = (from object item in listBoxSunkenValley.Items
-                                                  where !listBoxSunkenValley.CheckedItems.Contains(item)
-                                                  select item);
-
-            foreach (object itemUnchecked in notCheckedI_SV)
-            {
-                string idol = itemUnchecked.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.RemoveIdol(idol);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-
-            // Asshina Depths
-            foreach (object itemChecked in listBoxAshinaDepths.CheckedItems)
-            {
-                string idol = itemChecked.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.AddIdol(idol);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-
-
-            IEnumerable<object> notCheckedI_ASD = (from object item in listBoxAshinaDepths.Items
-                                                  where !listBoxAshinaDepths.CheckedItems.Contains(item)
-                                                  select item);
-
-            foreach (object itemUnchecked in notCheckedI_ASD)
-            {
-                string idol = itemUnchecked.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.RemoveIdol(idol);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-
-            //Fountainhead Palace
-
-            foreach (object itemChecked in listBoxFountainheadPalace.CheckedItems)
-            {
-                string idol = itemChecked.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.AddIdol(idol);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-
-
-            IEnumerable<object> notCheckedI_FP = (from object item in listBoxFountainheadPalace.Items
-                                                   where !listBoxFountainheadPalace.CheckedItems.Contains(item)
-                                                   select item);
-
-            foreach (object itemUnchecked in notCheckedI_FP)
-            {
-                string idol = itemUnchecked.ToString();
-                sekiroSplitter.setProcedure(false);
-                sekiroSplitter.RemoveIdol(idol);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-            }
-            #endregion
-            //Split.Position is added automatically in btnAddPosition_Click and remove in listBoxPositions_MouseDoubleClick
-            #region Propierties
-            if (checkBoxESekiroSplitting.Checked)
-            {
-                sekiroSplitter.setStatusSplitting(true);
-            }
-            else
-            {
-                sekiroSplitter.setStatusSplitting(false);
-            }
-
-
-            if (checkBoxSekiroTimer.Checked)
-            {
-                sekiroSplitter.setStatusTimer(true);
-            }
-            else
-            {
-                sekiroSplitter.setStatusTimer(false);
-            }
-            
-
-            #endregion
-
-        }
 
         private void toSplitSelectSekiro_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.checkBossSekiro.Hide();
-            this.zoneSelectSekiro.Hide();
-            this.label_Zone1.Hide();
-            this.panel1.Hide();
-            this.panel2.Hide();
-            this.panel3.Hide();
-            this.labelCoordinates.Hide();
-            this.btnGetPotition.Hide();
-            this.textBoxX.Hide();
-            this.textBoxY.Hide();
-            this.textBoxZ.Hide();
-            this.listBoxPositions.Hide();
-            this.comboBoxMargin.Hide();
-            this.groupBoxEnablersSekiro.Hide();
+            this.panelPosition.Hide();
+            this.panelBoss.Hide();
+            this.panelIdols.Hide();
+
 
             switch (toSplitSelectSekiro.SelectedIndex)
             {
-                case 0: //Propierties
-                    this.panel3.Show();
-                    this.groupBoxEnablersSekiro.Show();
-
+                case 0: //Kill a Boss
+                    this.panelBoss.Show();
                     break;
-                case 1: //Kill a Boss
-                    this.panel3.Hide();
-                    this.checkBossSekiro.Show();
+                case 1: // Is Activated a Idol
+                    this.panelIdols.Show();
                     break;
-                case 2: // Is Activated a Idol
-                    this.zoneSelectSekiro.Show();
-                    this.label_Zone1.Show();
-                    this.panel1.Show();
-                    break;
-                case 3: //Target Position
-                    this.panel2.Show();
-                    this.labelCoordinates.Show();
-                    this.btnGetPotition.Show();
-                    this.textBoxX.Show();
-                    this.textBoxY.Show();
-                    this.textBoxZ.Show();
-                    this.listBoxPositions.Show();
-                    this.comboBoxMargin.Show();
+                case 2: //Target Position
+                    this.panelPosition.Show();
                     break;
             }
         }
 
-        private void zoneSelectSekiro_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.listBoxAshinaOutskirts.Hide();
-            this.listBoxHirataEstate.Hide();
-            this.listBoxAshinaCastle.Hide();
-            this.listBoxAbandonedDungeon.Hide();
-            this.listBoxSenpouTemple.Hide();
-            this.listBoxSunkenValley.Hide();
-            this.listBoxAshinaDepths.Hide();
-            this.listBoxFountainheadPalace.Hide();
-            switch (zoneSelectSekiro.SelectedIndex)
-            {
-                case 0: //Ashina Outskirts
-                    this.listBoxAshinaOutskirts.Show();
-                    break;
-                case 1: // Hirata Estate
-                    this.listBoxHirataEstate.Show();
-                    break;
-                case 2: //Ashina Castle
-                    this.listBoxAshinaCastle.Show();
-                    break;
-                case 3: //Abandoned Dungeon
-                    this.listBoxAbandonedDungeon.Show();
-                    break;
-                case 4: //Senpou Temple, Mt. Kongo
-                    this.listBoxSenpouTemple.Show();
-                    break;
-                case 5: //Sunken Valley
-                    this.listBoxSunkenValley.Show();
-                    break;
-                case 6: // Ashina Depths
-                    this.listBoxAshinaDepths.Show();
-                    break;
-                case 7: //Fountainhead Palace
-                    this.listBoxFountainheadPalace.Show();
-                    break;
-            }
-        }
+       
 
         
         private void btnGetPotition_Click(object sender, EventArgs e)
@@ -563,37 +222,589 @@ namespace HitCounterManager
 
         private void btnAddPosition_Click(object sender, EventArgs e)
         {
-            if (!this.listBoxPositions.Items.Contains(this.Vector)) 
-            { 
-                sekiroSplitter.setProcedure(false);
-                DialogResult result = MessageBox.Show("Move your charapter to evit autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.listBoxPositions.Items.Add(this.Vector);
-                sekiroSplitter.AddPosition(this.Vector);
-                sekiroSplitter.setProcedure(true);
-                sekiroSplitter.LoadAutoSplitterProcedure();
-
+            DialogResult error;
+            if (this.Vector != null)
+            {
+                var contains1 = !listBoxPositions.Items.Contains(this.Vector + " - " + "Inmediatly");
+                var contains2= !listBoxPositions.Items.Contains(this.Vector + " - " + "Loading game after");          
+                if (contains1 && contains2)
+                {
+                    sekiroSplitter.setProcedure(false);
+                    if (comboBoxHowPosition.SelectedIndex == -1)
+                    {
+                        error = MessageBox.Show("Select 'How' do you want split ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        if (this.Vector.X == 0 && this.Vector.Y == 0 && this.Vector.Z == 0)
+                        {
+                            error = MessageBox.Show("Dont use cords 0,0,0", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            listBoxPositions.Items.Add(this.Vector + " - " + comboBoxHowPosition.Text.ToString());
+                            error = MessageBox.Show("Move your charapter to evit autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            sekiroSplitter.AddPosition(this.Vector, comboBoxHowPosition.Text.ToString());
+                            sekiroSplitter.setProcedure(true);
+                            sekiroSplitter.LoadAutoSplitterProcedure();
+                        }
+                    }
+                }
+                else
+                {
+                    error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                DialogResult result = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = MessageBox.Show("Plase get a position ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
         }
 
         private void listBoxPositions_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            int i = listBoxPositions.Items.IndexOf(this.listBoxPositions.SelectedItem);
-            sekiroSplitter.setProcedure(false);
-            sekiroSplitter.RemovePosition(i);
-            sekiroSplitter.setProcedure(true);
-            sekiroSplitter.LoadAutoSplitterProcedure();
-            this.listBoxPositions.Items.Remove(this.listBoxPositions.SelectedItem);
-
+            
+            if (this.listBoxPositions.SelectedItem != null)
+            {
+                int i = listBoxPositions.Items.IndexOf(listBoxPositions.SelectedItem);
+                sekiroSplitter.setProcedure(false);
+                sekiroSplitter.RemovePosition(i);
+                sekiroSplitter.setProcedure(true);
+                listBoxPositions.Items.Remove(listBoxPositions.SelectedItem);
+            }
         }
 
         private void comboBoxMargin_SelectedIndexChanged(object sender, EventArgs e)
         {
             int select = comboBoxMargin.SelectedIndex;
             sekiroSplitter.setPositionMargin(select);
+        }
+
+        private void btn_AddBoss_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (comboBoxBoss.SelectedIndex == -1 || comboBoxHowBoss.SelectedIndex == -1)
+            {
+                error = MessageBox.Show("Plase select boss and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                var contains1 = listBoxPositions.Items.Contains(comboBoxBoss.Text.ToString() + " - " + "Inmediatly");
+                var contains2 = listBoxPositions.Items.Contains(comboBoxBoss.Text.ToString() + " - " + "Loading game after");
+                if (contains1 || contains2)
+                {
+                    error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {                 
+                    sekiroSplitter.setProcedure(false);
+                    sekiroSplitter.AddBoss(comboBoxBoss.Text.ToString(), comboBoxHowBoss.Text.ToString());
+                    listBoxBosses.Items.Add(comboBoxBoss.Text.ToString() + " - " + comboBoxHowBoss.Text.ToString());
+                    sekiroSplitter.setProcedure(true);
+                }              
+            }
+        }
+
+        private void listBoxBosses_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (this.listBoxBosses.SelectedItem != null)
+            {
+                int i = listBoxBosses.Items.IndexOf(listBoxBosses.SelectedItem);
+                sekiroSplitter.setProcedure(false);
+                sekiroSplitter.RemoveBoss(i);
+                sekiroSplitter.setProcedure(true);
+                listBoxBosses.Items.Remove(listBoxBosses.SelectedItem);
+            }
+        }
+
+        private void comboBoxZoneSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            groupBoxAshinaOutskirts.Hide();
+            groupBoxHirataEstate.Hide();
+            groupBoxAshinaCastle.Hide();
+            groupBoxAbandonedDungeon.Hide();
+            groupBoxSenpouTemple.Hide();
+            groupBoxSunkenValley.Hide();
+            groupBoxAshinaDepths.Hide();
+            groupBoxFountainhead.Hide();
+
+            switch (comboBoxZoneSelect.SelectedIndex)
+            {
+                case 0: //Ashina Outskirts
+                    groupBoxAshinaOutskirts.Show();
+                    break;
+                case 1: //Hirata Estate
+                    groupBoxHirataEstate.Show();
+                    break;
+                case 2: //Ashina Castle
+                    groupBoxAshinaCastle.Show();
+                    break;
+                case 3: //Abandoned Dungeon
+                    groupBoxAbandonedDungeon.Show();
+                    break;
+                case 4: //Senpou Temple
+                    groupBoxSenpouTemple.Show();
+                    break;
+                case 5: //Sunken Valley
+                    groupBoxSunkenValley.Show();
+                    break;
+                case 6: //Ashina Depths
+                    groupBoxAshinaDepths.Show();
+                    break;
+                case 7: //Fountainhead Palace
+                    groupBoxFountainhead.Show();
+                    break;
+            }
+        }
+
+        private void listBoxAshinaOutskirts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxAshinaOutskirts.SelectedIndex != -1)
+            {
+                labelIdolSelectedAO.Text = listBoxAshinaOutskirts.SelectedItem.ToString();
+                string mode = sekiroSplitter.FindIdol(listBoxAshinaOutskirts.SelectedItem.ToString());
+                if (mode == "Loading game after")
+                {
+                    radioImmAO.Checked = false;
+                    radioLagAO.Checked = true;
+
+                }
+                else
+                {
+                    radioImmAO.Checked = true;
+                    radioLagAO.Checked = false;
+                }
+            }
+        }
+
+        private void listBoxHirataEstate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxHirataEstate.SelectedIndex != -1)
+            {
+                labelIdolSelectedHE.Text = listBoxHirataEstate.SelectedItem.ToString();
+                string mode = sekiroSplitter.FindIdol(listBoxHirataEstate.SelectedItem.ToString());
+                if (mode == "Loading game after")
+                {
+                    radioImmHE.Checked = false;
+                    radioLagHE.Checked = true;
+
+                }
+                else
+                {
+                    radioImmHE.Checked = true;
+                    radioLagHE.Checked = false;
+                }
+            }
+
+        }
+
+        private void listBoxAshinaCastle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxAshinaCastle.SelectedIndex != -1)
+            {
+                labelIdolSelectedAC.Text = listBoxAshinaCastle.SelectedItem.ToString();
+                string mode = sekiroSplitter.FindIdol(listBoxAshinaCastle.SelectedItem.ToString());
+                if (mode == "Loading game after")
+                {
+                    radioImmAC.Checked = false;
+                    radioLagAC.Checked = true;
+
+                }
+                else
+                {
+                    radioImmAC.Checked = true;
+                    radioLagAC.Checked = false;
+                }
+            }
+        }
+
+        private void listBoxAbandonedDungeon_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxAbandonedDungeon.SelectedIndex != -1)
+            {
+                labelIdolSelectedAD.Text = listBoxAbandonedDungeon.SelectedItem.ToString();
+                string mode = sekiroSplitter.FindIdol(listBoxAbandonedDungeon.SelectedItem.ToString());
+                if (mode == "Loading game after")
+                {
+                    radioImmAD.Checked = false;
+                    radioLagAD.Checked = true;
+
+                }
+                else
+                {
+                    radioImmAD.Checked = true;
+                    radioLagAD.Checked = false;
+                }
+            }
+        }
+
+        private void listBoxSunkenValley_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxSunkenValley.SelectedIndex != -1)
+            {
+                labelIdolSelectedSV.Text = listBoxSunkenValley.SelectedItem.ToString();
+                string mode = sekiroSplitter.FindIdol(listBoxSunkenValley.SelectedItem.ToString());
+                if (mode == "Loading game after")
+                {
+                    radioImmSV.Checked = false;
+                    radioLagSV.Checked = true;
+
+                }
+                else
+                {
+                    radioImmSV.Checked = true;
+                    radioLagSV.Checked = false;
+                }
+            }
+        }
+
+        private void listBoxAshinaDepths_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxAshinaDepths.SelectedIndex != -1)
+            {
+                labelIdolSelectedADe.Text = listBoxAshinaDepths.SelectedItem.ToString();
+                string mode = sekiroSplitter.FindIdol(listBoxAshinaDepths.SelectedItem.ToString());
+                if (mode == "Loading game after")
+                {
+                    radioImmADe.Checked = false;
+                    radioLagADe.Checked = true;
+
+                }
+                else
+                {
+                    radioImmADe.Checked = true;
+                    radioLagADe.Checked = false;
+                }
+            }
+        }
+
+        private void listBoxSenpouTemple_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxSenpouTemple.SelectedIndex != -1)
+            {
+                labelIdolSelectedTS.Text = listBoxSenpouTemple.SelectedItem.ToString();
+                string mode = sekiroSplitter.FindIdol(listBoxSenpouTemple.SelectedItem.ToString());
+                if (mode == "Loading game after")
+                {
+                    radioImmTS.Checked = false;
+                    radioLagTS.Checked = true;
+
+                }
+                else
+                {
+                    radioImmTS.Checked = true;
+                    radioLagTS.Checked = false;
+                }
+            }
+        }
+
+        private void listBoxFountainhead_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxFountainhead.SelectedIndex != -1)
+            {
+                labelIdolSelectedF.Text = listBoxFountainhead.SelectedItem.ToString();
+                string mode = sekiroSplitter.FindIdol(listBoxFountainhead.SelectedItem.ToString());
+                if (mode == "Loading game after")
+                {
+                    radioImmF.Checked = false;
+                    radioLagF.Checked = true;
+
+                }
+                else
+                {
+                    radioImmF.Checked = true;
+                    radioLagF.Checked = false;
+                }
+            }
+        }
+
+        private void btnAddAshinaOutskirts_Click(object sender, EventArgs e)
+        {
+            string mode;
+            if (listBoxAshinaOutskirts.SelectedIndex != -1)
+            {
+                if (!checkedListBoxAshina.GetItemChecked(listBoxAshinaOutskirts.SelectedIndex))
+                {
+                    checkedListBoxAshina.SetItemChecked(listBoxAshinaOutskirts.SelectedIndex, true);
+                    sekiroSplitter.setProcedure(false);
+                    if (radioImmAO.Checked)
+                    {
+                        mode = "Inmediatly";
+                    }
+                    else
+                    {
+                        mode = "Loading game after";
+                    }
+                    sekiroSplitter.AddIdol(listBoxAshinaOutskirts.SelectedItem.ToString(), mode);
+                    sekiroSplitter.setProcedure(true);
+                }
+                else
+                {
+                    checkedListBoxAshina.SetItemChecked(listBoxAshinaOutskirts.SelectedIndex, false);
+                    sekiroSplitter.setProcedure(false);
+                    sekiroSplitter.RemoveIdol(listBoxAshinaOutskirts.SelectedItem.ToString());
+                    sekiroSplitter.setProcedure(true);
+                    radioImmAO.Checked = true;
+                    radioLagAO.Checked = false;
+                }
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Select a item before to add?", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnAddHirata_Click(object sender, EventArgs e)
+        {
+            string mode;
+            if (listBoxHirataEstate.SelectedIndex != -1)
+            {
+                if (!checkedListBoxHirataEstate.GetItemChecked(listBoxHirataEstate.SelectedIndex))
+                {
+                    checkedListBoxHirataEstate.SetItemChecked(listBoxHirataEstate.SelectedIndex, true);
+                    sekiroSplitter.setProcedure(false);
+                    if (radioImmHE.Checked)
+                    {
+                        mode = "Inmediatly";
+                    }
+                    else
+                    {
+                        mode = "Loading game after";
+                    }
+                    sekiroSplitter.AddIdol(listBoxHirataEstate.SelectedItem.ToString(), mode);
+                    sekiroSplitter.setProcedure(true);
+                }
+                else
+                {
+                    checkedListBoxHirataEstate.SetItemChecked(listBoxHirataEstate.SelectedIndex, false);
+                    sekiroSplitter.setProcedure(false);
+                    sekiroSplitter.RemoveIdol(listBoxHirataEstate.SelectedItem.ToString());
+                    sekiroSplitter.setProcedure(true);
+                    radioImmHE.Checked = true;
+                    radioLagHE.Checked = false;
+                }
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Select a item before to add?", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btn_AddAC_Click(object sender, EventArgs e)
+        {
+            string mode;
+            if (listBoxAshinaCastle.SelectedIndex != -1)
+            {
+                if (!checkedListBoxAshinaCastle.GetItemChecked(listBoxAshinaCastle.SelectedIndex))
+                {
+                    checkedListBoxAshinaCastle.SetItemChecked(listBoxAshinaCastle.SelectedIndex, true);
+                    sekiroSplitter.setProcedure(false);
+                    if (radioImmAC.Checked)
+                    {
+                        mode = "Inmediatly";
+                    }
+                    else
+                    {
+                        mode = "Loading game after";
+                    }
+                    sekiroSplitter.AddIdol(listBoxAshinaCastle.SelectedItem.ToString(), mode);
+                    sekiroSplitter.setProcedure(true);
+                }
+                else
+                {
+                    checkedListBoxAshinaCastle.SetItemChecked(listBoxAshinaCastle.SelectedIndex, false);
+                    sekiroSplitter.setProcedure(false);
+                    sekiroSplitter.RemoveIdol(listBoxAshinaCastle.SelectedItem.ToString());
+                    sekiroSplitter.setProcedure(true);
+                    radioImmAC.Checked = true;
+                    radioLagAC.Checked = false;
+                }
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Select a item before to add?", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btn_AddAD_Click(object sender, EventArgs e)
+        {
+            string mode;
+            if (listBoxAbandonedDungeon.SelectedIndex != -1)
+            {
+                if (!checkedListBoxAbandonedDungeon.GetItemChecked(listBoxAbandonedDungeon.SelectedIndex))
+                {
+                    checkedListBoxAbandonedDungeon.SetItemChecked(listBoxAbandonedDungeon.SelectedIndex, true);
+                    sekiroSplitter.setProcedure(false);
+                    if (radioImmAC.Checked)
+                    {
+                        mode = "Inmediatly";
+                    }
+                    else
+                    {
+                        mode = "Loading game after";
+                    }
+                    sekiroSplitter.AddIdol(listBoxAbandonedDungeon.SelectedItem.ToString(), mode);
+                    sekiroSplitter.setProcedure(true);
+                }
+                else
+                {
+                    checkedListBoxAbandonedDungeon.SetItemChecked(listBoxAbandonedDungeon.SelectedIndex, false);
+                    sekiroSplitter.setProcedure(false);
+                    sekiroSplitter.RemoveIdol(listBoxAbandonedDungeon.SelectedItem.ToString());
+                    sekiroSplitter.setProcedure(true);
+                    radioImmAC.Checked = true;
+                    radioLagAC.Checked = false;
+                }
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Select a item before to add?", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btn_AddTS_Click(object sender, EventArgs e)
+        {
+            string mode;
+            if (listBoxSenpouTemple.SelectedIndex != -1)
+            {
+                if (!checkedListBoxSenpouTemple.GetItemChecked(listBoxSenpouTemple.SelectedIndex))
+                {
+                    checkedListBoxSenpouTemple.SetItemChecked(listBoxSenpouTemple.SelectedIndex, true);
+                    sekiroSplitter.setProcedure(false);
+                    if (radioImmTS.Checked)
+                    {
+                        mode = "Inmediatly";
+                    }
+                    else
+                    {
+                        mode = "Loading game after";
+                    }
+                    sekiroSplitter.AddIdol(listBoxSenpouTemple.SelectedItem.ToString(), mode);
+                    sekiroSplitter.setProcedure(true);
+                }
+                else
+                {
+                    checkedListBoxSenpouTemple.SetItemChecked(listBoxSenpouTemple.SelectedIndex, false);
+                    sekiroSplitter.setProcedure(false);
+                    sekiroSplitter.RemoveIdol(listBoxSenpouTemple.SelectedItem.ToString());
+                    sekiroSplitter.setProcedure(true);
+                    radioImmTS.Checked = true;
+                    radioLagTS.Checked = false;
+                }
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Select a item before to add?", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btn_AddSV_Click(object sender, EventArgs e)
+        {
+            string mode;
+            if (listBoxSunkenValley.SelectedIndex != -1)
+            {
+                if (!checkedListBoxSunkenValley.GetItemChecked(listBoxSunkenValley.SelectedIndex))
+                {
+                    checkedListBoxSunkenValley.SetItemChecked(listBoxSunkenValley.SelectedIndex, true);
+                    sekiroSplitter.setProcedure(false);
+                    if (radioImmTS.Checked)
+                    {
+                        mode = "Inmediatly";
+                    }
+                    else
+                    {
+                        mode = "Loading game after";
+                    }
+                    sekiroSplitter.AddIdol(listBoxSunkenValley.SelectedItem.ToString(), mode);
+                    sekiroSplitter.setProcedure(true);
+                }
+                else
+                {
+                    checkedListBoxSunkenValley.SetItemChecked(listBoxSunkenValley.SelectedIndex, false);
+                    sekiroSplitter.setProcedure(false);
+                    sekiroSplitter.RemoveIdol(listBoxSunkenValley.SelectedItem.ToString());
+                    sekiroSplitter.setProcedure(true);
+                    radioImmTS.Checked = true;
+                    radioLagTS.Checked = false;
+                }
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Select a item before to add?", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btn_AddADe_Click(object sender, EventArgs e)
+        {
+            string mode;
+            if (listBoxAshinaDepths.SelectedIndex != -1)
+            {
+                if (!checkedListBoxAshinaDepths.GetItemChecked(listBoxAshinaDepths.SelectedIndex))
+                {
+                    checkedListBoxAshinaDepths.SetItemChecked(listBoxAshinaDepths.SelectedIndex, true);
+                    sekiroSplitter.setProcedure(false);
+                    if (radioImmTS.Checked)
+                    {
+                        mode = "Inmediatly";
+                    }
+                    else
+                    {
+                        mode = "Loading game after";
+                    }
+                    sekiroSplitter.AddIdol(listBoxAshinaDepths.SelectedItem.ToString(), mode);
+                    sekiroSplitter.setProcedure(true);
+                }
+                else
+                {
+                    checkedListBoxAshinaDepths.SetItemChecked(listBoxAshinaDepths.SelectedIndex, false);
+                    sekiroSplitter.setProcedure(false);
+                    sekiroSplitter.RemoveIdol(listBoxAshinaDepths.SelectedItem.ToString());
+                    sekiroSplitter.setProcedure(true);
+                    radioImmTS.Checked = true;
+                    radioLagTS.Checked = false;
+                }
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Select a item before to add?", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btn_AddF_Click(object sender, EventArgs e)
+        {
+            string mode;
+            if (listBoxFountainhead.SelectedIndex != -1)
+            {
+                if (!checkedListBoxFountainhead.GetItemChecked(listBoxFountainhead.SelectedIndex))
+                {
+                    checkedListBoxFountainhead.SetItemChecked(listBoxFountainhead.SelectedIndex, true);
+                    sekiroSplitter.setProcedure(false);
+                    if (radioImmF.Checked)
+                    {
+                        mode = "Inmediatly";
+                    }
+                    else
+                    {
+                        mode = "Loading game after";
+                    }
+                    sekiroSplitter.AddIdol(listBoxFountainhead.SelectedItem.ToString(), mode);
+                    sekiroSplitter.setProcedure(true);
+                }
+                else
+                {
+                    checkedListBoxFountainhead.SetItemChecked(listBoxFountainhead.SelectedIndex, false);
+                    sekiroSplitter.setProcedure(false);
+                    sekiroSplitter.RemoveIdol(listBoxFountainhead.SelectedItem.ToString());
+                    sekiroSplitter.setProcedure(true);
+                    radioImmF.Checked = true;
+                    radioLagF.Checked = false;
+                }
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Select a item before to add?", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnDesactiveSekiro_Click(object sender, EventArgs e)
@@ -607,11 +818,10 @@ namespace HitCounterManager
                 this.Controls.Clear();
                 this.InitializeComponent();
                 refreshForm();
-                this.AutoSplitter_Load(null,null);//Load Others Games Settings
+                this.AutoSplitter_Load(null, null);//Load Others Games Settings
             }
-            
-        }
 
+        }
 
         #endregion
 
@@ -619,5 +829,7 @@ namespace HitCounterManager
         {
             System.Diagnostics.Process.Start("https://github.com/FrankvdStam/SoulSplitter/releases");
         }
+
+       
     }
 }

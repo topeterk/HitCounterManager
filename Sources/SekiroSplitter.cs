@@ -44,8 +44,7 @@ namespace HitCounterManager
         public DTSekiro dataSekiro;
         public DefinitionsSekiro defS = new DefinitionsSekiro();
         public ProfilesControl _profile;
-        public bool _runStarted = false;
-
+        private bool _writeMemory = false;
 
 
         public DTSekiro getDataSekiro()
@@ -59,84 +58,67 @@ namespace HitCounterManager
             this._profile = profile;
         }
 
-        public void AddIdol(string idol)
+        public void AddIdol(string idol,string mode)
         {
             DefinitionsSekiro.Idol cIdol = defS.idolToEnum(idol);
-            bool exist = false;
-            foreach (DefinitionsSekiro.Idol b in dataSekiro.getidolsTosplit())
-            {
-                if (b.Id == cIdol.Id)
-                {
-                    exist = true;
-                    break;
-                }
-            }
-
-            if (!exist)
-            {
-                dataSekiro.DTAddIdol(cIdol);
-            }
+            cIdol.Mode = mode;
+            dataSekiro.idolsTosplit.Add(cIdol);
         }
             
-        public void RemoveIdol(string idol)
-        {
-            DefinitionsSekiro.Idol cIdol = defS.idolToEnum(idol);
-            foreach (DefinitionsSekiro.Idol b in dataSekiro.getidolsTosplit())
-            {
-                if (b.Id == cIdol.Id)
-                {
-                    dataSekiro.DTRemoveIdol(b);
-                    break;
-                }
-            }
-        }
 
-        public void AddBoss(string boss)
+        public void AddBoss(string boss,string mode)
         {
             DefinitionsSekiro.Boss cBoss = defS.BossToEnum(boss);
-            bool exist = false;
-
-
-            foreach (DefinitionsSekiro.Boss b in dataSekiro.getBossToSplit())
-            {
-                if (b.Id== cBoss.Id)
-                {
-                    exist = true;
-                    break;
-                }
-            }
-
-            if (!exist)
-            {
-                dataSekiro.DTAddBoss(cBoss);
-            }
+            cBoss.Mode = mode;
+            dataSekiro.bossToSplit.Add(cBoss);
         }
 
-        public void RemoveBoss(string boss)
-        {
-            DefinitionsSekiro.Boss cBoss = defS.BossToEnum(boss);
-            foreach (DefinitionsSekiro.Boss b in dataSekiro.getBossToSplit())
-            {
-                if (b.Id == cBoss.Id)
-                {
-                    dataSekiro.DTRemoveBoss(b);
-                    break;
-                }
-            }  
-        }
-
-        public void AddPosition(Vector3f vector) //Exception: is Repited yet controlled in AutoSplitter
+        public void AddPosition(Vector3f vector, string mode) //Exception: is Repited yet controlled in AutoSplitter
         {
             var position = new DefinitionsSekiro.Position();
             position.setVector(vector);
-            dataSekiro.DTAddPosition(position);
+            position.mode = mode;
+            dataSekiro.positionsToSplit.Add(position);
         }
+
+        public void RemoveBoss(int position)
+        {
+            dataSekiro.bossToSplit.RemoveAt(position);
+        }
+
 
         public void RemovePosition(int position)
         {
-            dataSekiro.DTRemovePosition(position);
+            dataSekiro.positionsToSplit.RemoveAt(position);
         }
         
+        public void RemoveIdol (string idol)
+        {
+            DefinitionsSekiro.Idol cIdol = defS.idolToEnum(idol);
+            foreach (var b in dataSekiro.idolsTosplit)
+            {
+                if (b.Id == cIdol.Id)
+                {
+                    dataSekiro.idolsTosplit.Remove(b);
+                    break;
+                }
+            }
+           
+        }
+
+        public string FindIdol(string idol)
+        {
+            DefinitionsSekiro.Idol cIdol = defS.idolToEnum(idol);
+            foreach (var b in dataSekiro.idolsTosplit)
+            {
+                if (b.Id == cIdol.Id)
+                {
+                    return b.Mode;
+                }
+            }
+            return null;
+
+        }
         public void setPositionMargin(int select)
         {
             dataSekiro.positionMargin = select;
@@ -148,10 +130,6 @@ namespace HitCounterManager
             if (status) { LoadAutoSplitterProcedure(); }
         }
 
-        public void setStatusTimer(bool status)
-        {
-            dataSekiro.enableTimer = status;
-        }
 
 
         public void clearData()
@@ -161,7 +139,7 @@ namespace HitCounterManager
             dataSekiro.positionMargin = 3;
             dataSekiro.positionsToSplit.Clear();
             dataSekiro.enableSplitting = false;
-            dataSekiro.enableTimer = false;
+            
         }
 
         public Vector3f getCurrentPosition()
@@ -169,21 +147,18 @@ namespace HitCounterManager
             return sekiro.GetPlayerPosition();
         }
 
-        public int getGameTime()
-        {
-            return sekiro.GetInGameTimeMilliseconds();
-        }
 
         public void setProcedure(bool procedure)
         {
             this._StatusProcedure = procedure;
+            if (procedure) { LoadAutoSplitterProcedure(); }
         }
 
         
         public bool getSekiroStatusProcess(out Exception exception, int delay) //Use Delay 0 only for first Starts
         {
             Thread.Sleep(delay);
-            return _StatusSekiro = sekiro.Refresh(out exception) == true;
+            return _StatusSekiro = sekiro.Refresh(out exception);
         }
 
         public void resetSplited()
@@ -211,31 +186,18 @@ namespace HitCounterManager
                     p.IsSplited = false;
                 }
             }
-            _runStarted = false;
         }
 
-        public bool initTimer()
-        {
-            _StatusSekiro = getSekiroStatusProcess(out Exception exception,0);
-            if (dataSekiro.enableTimer && !_runStarted)
-            {
-                if (_StatusSekiro)
-                {
-                    sekiro.WriteInGameTimeMilliseconds(0);
-                }
-                if (sekiro.GetInGameTimeMilliseconds() > 0)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
 
         public void LoadAutoSplitterProcedure()
         {
             var taskRefresh = new Task(() =>
             {
                 RefreshSekiro();
+            });
+            var taskCheckload = new Task(() =>
+            {
+                checkLoad();
             });
             var task1 = new Task(() =>
             {
@@ -250,6 +212,7 @@ namespace HitCounterManager
                 PositionSplit();
             });
             taskRefresh.Start();
+            taskCheckload.Start();
             task1.Start();
             task2.Start();
             task3.Start();
@@ -261,29 +224,110 @@ namespace HitCounterManager
         public void RefreshSekiro()
         {
             _StatusSekiro = getSekiroStatusProcess(out Exception exception,0);
-            while (_StatusProcedure)
-                if (_StatusSekiro)
+            while (!_StatusProcedure)
+            {
+                _StatusSekiro = getSekiroStatusProcess(out exception, 45000);
+               if (!_StatusSekiro)
+               {
+                    _writeMemory = false;
+               }
+                
+                if (!_writeMemory)
                 {
-                    _StatusSekiro = getSekiroStatusProcess(out exception, 120000);//Wait 120s to optimize cpu usage
+                    sekiro.WriteInGameTimeMilliseconds(0);
+                    _writeMemory = true;
                 }
-                else
-                {
-                    _StatusSekiro = getSekiroStatusProcess(out exception, 10000);//Wait 10s
-                }
+            }
+
             
+        }
+
+        List<DefinitionsSekiro.Position> listPendingP = new List<DefinitionsSekiro.Position>();
+        List<DefinitionsSekiro.Boss> listPendingB = new List<DefinitionsSekiro.Boss>();
+        List<DefinitionsSekiro.Idol> listPendingI = new List<DefinitionsSekiro.Idol>();
+
+        private void checkLoad()
+        {
+            while (dataSekiro.enableSplitting && _StatusProcedure)
+            {
+                Thread.Sleep(200);
+                if (listPendingI.Count > 0 || listPendingB.Count > 0 || listPendingP.Count > 0)
+                {
+                    if (!sekiro.IsPlayerLoaded())
+                    {
+                        foreach (var idol in listPendingI)
+                        {
+                            _profile.ProfileSplitGo(+1);
+                            foreach (var idol2 in dataSekiro.getidolsTosplit())
+                            {
+                                if (idol2.Id == idol.Id)
+                                {
+                                    idol2.IsSplited = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        foreach (var boss in listPendingB)
+                        {
+                            _profile.ProfileSplitGo(+1);
+                            foreach (var boss2 in dataSekiro.getBossToSplit())
+                            {
+                                if (boss.Id == boss2.Id)
+                                {
+                                    boss2.IsSplited = true;
+                                    break;
+                                }
+                            }
+
+                        }
+
+                        foreach (var position in listPendingP)
+                        {
+                            _profile.ProfileSplitGo(+1);
+                            foreach (var position2 in dataSekiro.getPositionsToSplit())
+                            {
+                                if (position.vector == position2.vector)
+                                {
+                                    position2.IsSplited = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        listPendingB.Clear();
+                        listPendingI.Clear();
+                        listPendingP.Clear();
+
+
+                    }
+                }
+            }
         }
 
         private void BossSplit()
         {
             while (dataSekiro.enableSplitting && _StatusProcedure)
             {
+                Thread.Sleep(5000);
                 foreach (var b in dataSekiro.getBossToSplit())
                 {
-                    if (sekiro.ReadEventFlag(b.Id) == true && b.IsSplited != true)
+                    if (!b.IsSplited && sekiro.ReadEventFlag(b.Id))
                     {
-                        b.IsSplited = true;
-                        _profile.ProfileSplitGo(+1);
+                        if (b.Mode == "Loading game after")
+                        {
+                            if (!listPendingB.Contains(b))
+                            {
+                                listPendingB.Add(b);
+                            }
+                        }
+                        else
+                        {
+                            b.IsSplited = true;
+                            _profile.ProfileSplitGo(+1);
+                        }
                     }
+                       
                 }
             }
         }
@@ -292,30 +336,60 @@ namespace HitCounterManager
         {
             while (dataSekiro.enableSplitting && _StatusProcedure)
             {
+                Thread.Sleep(5000);
                 foreach (var i in dataSekiro.getidolsTosplit())
                 {
-                    if (sekiro.ReadEventFlag(i.Id) == true && i.IsSplited != true)
+
+                    if (!i.IsSplited && sekiro.ReadEventFlag(i.Id))
                     {
-                        i.IsSplited = true;
-                        _profile.ProfileSplitGo(+1);
+                        if (i.Mode == "Loading game after")
+                        {
+                            if (!listPendingI.Contains(i))
+                            {
+                                listPendingI.Add(i);
+                            }
+                        }
+                        else
+                        {
+                            i.IsSplited = true;
+                            _profile.ProfileSplitGo(+1);
+                        }
                     }
                 }
             }
         }
 
         private void PositionSplit() {
+            
             while (dataSekiro.enableSplitting && _StatusProcedure)
-            {
+            {              
+                Thread.Sleep(100);
                 foreach (var p in dataSekiro.getPositionsToSplit())
                 {
-                    var currentlyPosition = sekiro.GetPlayerPosition();
-                    var rangeX = ((currentlyPosition.X - p.vector.X) <= dataSekiro.positionMargin) && ((currentlyPosition.X - p.vector.X) >= -dataSekiro.positionMargin);
-                    var rangeY = ((currentlyPosition.Y - p.vector.Y) <= dataSekiro.positionMargin) && ((currentlyPosition.Y - p.vector.Y) >= -dataSekiro.positionMargin);
-                    var rangeZ = ((currentlyPosition.Z - p.vector.Z) <= dataSekiro.positionMargin) && ((currentlyPosition.Z - p.vector.Z) >= -dataSekiro.positionMargin);
-                    if (rangeX && rangeY & rangeZ && p.IsSplited != true)
+                    if (!p.IsSplited)
                     {
-                        p.IsSplited = true;
-                        _profile.ProfileSplitGo(+1);
+                        var currentlyPosition = sekiro.GetPlayerPosition();
+                        var rangeX = ((currentlyPosition.X - p.vector.X) <= dataSekiro.positionMargin) && ((currentlyPosition.X - p.vector.X) >= -dataSekiro.positionMargin);
+                        var rangeY = ((currentlyPosition.Y - p.vector.Y) <= dataSekiro.positionMargin) && ((currentlyPosition.Y - p.vector.Y) >= -dataSekiro.positionMargin);
+                        var rangeZ = ((currentlyPosition.Z - p.vector.Z) <= dataSekiro.positionMargin) && ((currentlyPosition.Z - p.vector.Z) >= -dataSekiro.positionMargin);
+                        if (rangeX && rangeY && rangeZ)
+                        {
+                            if (p.mode == "Loading game after")
+                            {
+                                
+                                if (!listPendingP.Contains(p))
+                                {
+                                    listPendingP.Add(p);
+                                }
+                                
+                            }
+                            else
+                            {
+                                p.IsSplited = true;
+                                _profile.ProfileSplitGo(+1);
+                            }                                                       
+                        }
+                        
                     }
                 }
             }

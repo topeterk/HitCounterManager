@@ -123,19 +123,18 @@
 Notes:
 ===========================================
 AutoSplitting:
--Depends on Configurable Autosplit, the addons autosplitting a split (+1 in the actually position), 
-regardless of what is written on them. 
+- Is recommended to configure everything before setting the game to spliter, to avoid autosplitting
 
-- Split change may take a few seconds depending on how many flags were set 
+-Depends on Configurable Autosplit, the addons autosplitting a split (+1 in the actually position), 
+regardless of what is written on them
 
 - When a event of autosplit happen, an internal variable is set, for evit that event is repit. 
 Use "Reset Run" button or Shortcut, for reset this state.
 
 ===========================================
-AutoTimers;
-- Start the timer when the game loaded, this
-cause that internal timer doesn't work, but in HTML file to OBS its work.
-</value>
+Sekiro Features:
+- No Intro
+- No Tutorials</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

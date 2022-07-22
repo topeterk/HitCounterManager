@@ -53,20 +53,23 @@ namespace HitCounterManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = Text + " - v" + Application.ProductVersion + " Beta 1 - Rev.1 " + OsLayer.Name;
+            Text = Text + " - v" + Application.ProductVersion + " Beta 1 - Rev.2 " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();  
             ProfileChangedHandler(sender, e);
             LoadAutoSplitterSettings(profCtrl);
             profCtrl.setSplittersPointers(sekiroSplitter);
-            var task1 = new Task(() =>
+            #region ComboBoxSet
+            if (sekiroSplitter.dataSekiro.enableSplitting)
             {
-                waitGamesTimer();
-            });
-            task1.Start();
+                comboBoxGame.SelectedIndex = 1;
+            }
+            else
+            {
+                comboBoxGame.SelectedIndex = 0;
+            }
 
-
-
+            #endregion
             this.UpdateDarkMode();
         }
 
@@ -214,23 +217,20 @@ namespace HitCounterManager
             btnPause.Image = Start ? Sources.Resources.icons8_sleep_32 : Sources.Resources.icons8_time_32;
         }
 
-        private void waitGamesTimer()
-        {
-
-            while (true)
-            {
-                if (sekiroSplitter.initTimer())
-                {
-                    StartStopTimer(true);
-                    sekiroSplitter._runStarted = true;
-                }
-        
-            }
-        }
-
 
         #endregion
 
-       
+        private void comboBoxGame_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Disable all games
+            sekiroSplitter.setStatusSplitting(false);
+
+            //Ask Selected index
+            if (comboBoxGame.SelectedIndex == 1)
+            {
+                sekiroSplitter.setStatusSplitting(true);
+            }
+           
+        }
     }
 }

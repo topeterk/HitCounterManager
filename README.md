@@ -59,24 +59,15 @@ All available releases can be found at the [Releases page](../../releases) on Gi
 [![Get latest version here](https://img.shields.io/badge/-Get%20latest%20version%20here-brightgreen?longCache=true&style=for-the-badge)](../../releases/latest)
 
 ## Systemrequirements
-* OS: Windows Vista, Windows Server 2003 or newer (32/64 bit)
+* OS: Windows Vista, Windows Server 2003 or newer (64 bit)
   * Portable version (ZIP)
     * [.Net Framework 2.0 or newer](https://www.microsoft.com/net)
     > **Note**: Version 1.13 and older requires [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
   * Installer version (Setup)
     * [.Net Framework 4.8 or newer](https://www.microsoft.com/net)
     > **Note**: Version 1.21 and older requires [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
-* OS: Any (32/64 bit)
-  > **Note**: in 32bit OS **not supporting autosplitting**  
-  > **Note**: This version is **not supporting global hot keys**  
-  * Portable version (Tar ball)
-    * Running with [Mono](https://www.mono-project.com/) (_tested with 5.14.0_)  
-      Start the application in the application's directory with **mono HitCounterManager.exe**  
-      > **Note**: Mono supports **32 bit mode only** (therefore it cannot be run on OS without 32 bit support!)
-
-In case your non-Windows OS is no longer supporting 32 bit Mono then this application will not run!  
-However, there is a new HitCounterManager in development (version 2.x) that can be used instead.  
-Please have a look at the _v2.x_ branch or find *pre-compiled development builds* [here](../../issues/21).
+* OS: 64 bits
+ 
 
 ## Installation, Guides, Help
 Please have a look at the **[Wiki pages](../../wiki)**, the **[Setup Guide](../../wiki/SetupGuide)** or the [FAQ](../../wiki/SetupGuide#FAQ).
@@ -104,7 +95,9 @@ Thanks to (in alphabetical order):
 * [The_Happy_Hob](https://www.twitch.tv/the_happy_hob)
 * [TigerG92](https://www.twitch.tv/tigerg92)
 Thanks to Beta Testers of AutoSplit(in alphabetical order):
-
+* [DanielloPiuBello](https://www.twitch.tv/daniellopiubello)
+* [OlallaZ2](https://www.twitch.tv/olallaz2)
+* [Bajamuten](https://www.twitch.tv/bajamuten)
 
 
 * Every member of the [Hitless team on Twitch](https://www.twitch.tv/team/hitless)

@@ -64,6 +64,8 @@
             this.lbl_progress = new System.Windows.Forms.Label();
             this.lbl_time = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxGame = new System.Windows.Forms.ComboBox();
             this.profCtrl = new HitCounterManager.ProfilesControl();
             this.SuspendLayout();
             // 
@@ -523,21 +525,53 @@
             this.timer1.Interval = 300;
             this.timer1.Tick += new System.EventHandler(this.ProfileChangedHandler);
             // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(17, 95);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.label1.Size = new System.Drawing.Size(97, 25);
+            this.label1.TabIndex = 48;
+            this.label1.Text = "Game to Split:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // comboBoxGame
+            // 
+            this.comboBoxGame.BackColor = System.Drawing.SystemColors.Control;
+            this.comboBoxGame.FormattingEnabled = true;
+            this.comboBoxGame.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.comboBoxGame.Items.AddRange(new object[] {
+            "None",
+            "Sekiro",
+            "Dark Souls 1",
+            "Dark Souls 2",
+            "Dark Souls 3",
+            "Elden Ring",
+            "Hollow Knight"});
+            this.comboBoxGame.Location = new System.Drawing.Point(112, 97);
+            this.comboBoxGame.Name = "comboBoxGame";
+            this.comboBoxGame.Size = new System.Drawing.Size(95, 21);
+            this.comboBoxGame.TabIndex = 49;
+            this.comboBoxGame.SelectedIndexChanged += new System.EventHandler(this.comboBoxGame_SelectedIndexChanged);
+            // 
             // profCtrl
             // 
             this.profCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.profCtrl.Location = new System.Drawing.Point(14, 96);
+            this.profCtrl.Location = new System.Drawing.Point(14, 123);
             this.profCtrl.Name = "profCtrl";
-            this.profCtrl.Size = new System.Drawing.Size(677, 367);
+            this.profCtrl.Size = new System.Drawing.Size(677, 376);
             this.profCtrl.TabIndex = 24;
             this.profCtrl.ProfileChanged += new System.EventHandler<System.EventArgs>(this.ProfileChangedHandler);
             // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-            this.ClientSize = new System.Drawing.Size(703, 475);
+            this.ClientSize = new System.Drawing.Size(703, 511);
+            this.Controls.Add(this.comboBoxGame);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnTeamHitlessHispano);
             this.Controls.Add(this.btnSplitter);
             this.Controls.Add(this.lbl_time);
@@ -619,6 +653,7 @@
         public ProfilesControl profCtrl;
         private System.Windows.Forms.Button btnSplitter;
         private System.Windows.Forms.Button btnTeamHitlessHispano;
-
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBoxGame;
     }
 }

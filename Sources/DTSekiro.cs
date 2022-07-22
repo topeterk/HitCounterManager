@@ -33,6 +33,7 @@ namespace HitCounterManager
 {
     public class DefinitionsSekiro
     {
+
         #region Boss.Sekiro
         [Serializable]
         public class Boss
@@ -40,6 +41,7 @@ namespace HitCounterManager
             public string Title;
             public uint Id;
             public bool IsSplited;
+            public string Mode;
 
             public void BossDate(string title, uint id)
             {
@@ -112,6 +114,7 @@ namespace HitCounterManager
             public string Location;
             public uint Id;
             public bool IsSplited;
+            public string Mode;
             public void IdolDate(string Title, string Location, uint Id)
             {
                 this.Title = Title;
@@ -158,16 +161,16 @@ namespace HitCounterManager
                     idol.IdolDate("Estate Path", "Hirata Estate", 11000001);
                     break;
                 case "Bamboo Thicket Slope":
-                    idol.IdolDate("Estate Path", "Hirata Estate", 11000002);
+                    idol.IdolDate("Bamboo Thicket Slope", "Hirata Estate", 11000002);
                     break;
                 case "Hirata Estate - Main Hal":
                     idol.IdolDate("Hirata Estate - Main Hal", "Hirata Estate", 11000003);
                     break;
-                case "Hirata Estate -Hidden Temple":
-                    idol.IdolDate("Hirata Estate -Hidden Temple", "Hirata Estate", 11000004);
+                case "Hirata Estate - Hidden Temple":
+                    idol.IdolDate("Hirata Estate - Hidden Temple", "Hirata Estate", 11000004);
                     break;
                 case "Hirata Audience Chamber":
-                    idol.IdolDate("Hirata Audience Chambe", "Hirata Estate", 11000005);
+                    idol.IdolDate("Hirata Audience Chamber", "Hirata Estate", 11000005);
                     break;
                 //Ashina Castle
                 case "Ashina Castle":
@@ -192,7 +195,7 @@ namespace HitCounterManager
                     idol.IdolDate("Great Serpent Shrine", "Ashina Castle", 11110004);
                     break;
                 case "Abandoned Dungeon Entrance":
-                    idol.IdolDate("Great Serpent Shrine", "Ashina Castle", 11110005);
+                    idol.IdolDate("Abandoned Dungeon Entrance", "Ashina Castle", 11110005);
                     break;
                 case "Ashina Reservoir":
                     idol.IdolDate("Ashina Reservoir", "Ashina Castle", 11120001);
@@ -308,6 +311,7 @@ namespace HitCounterManager
         {
             public Vector3f vector = new Vector3f();
             public bool IsSplited = false;
+            public string mode;
             public void setVector(Vector3f vector)
             {
                 this.vector = vector;
@@ -324,40 +328,11 @@ namespace HitCounterManager
     {
         //Settings Vars
         public bool enableSplitting = false;
-        public bool enableTimer = false;
         //Flags to Split
         public List<DefinitionsSekiro.Boss> bossToSplit = new List<DefinitionsSekiro.Boss>();
         public List<DefinitionsSekiro.Idol> idolsTosplit = new List<DefinitionsSekiro.Idol>();
         public List<DefinitionsSekiro.Position> positionsToSplit = new List<DefinitionsSekiro.Position>();
         public int positionMargin = 3;
-
-        public void DTAddBoss(DefinitionsSekiro.Boss boss)
-        {
-            this.bossToSplit.Add(boss);
-        }
-        public void DTRemoveBoss(DefinitionsSekiro.Boss boss)
-        {
-            this.bossToSplit.Remove(boss);
-        }
-
-        public void DTAddIdol(DefinitionsSekiro.Idol idol)
-        {
-            this.idolsTosplit.Add(idol);
-        }
-        public void DTRemoveIdol(DefinitionsSekiro.Idol idol)
-        {
-            this.idolsTosplit.Remove(idol);
-        }
-
-        public void DTAddPosition(DefinitionsSekiro.Position vector)
-        {
-            this.positionsToSplit.Add(vector);
-        }
-
-        public void DTRemovePosition(int position)
-        {
-            this.positionsToSplit.RemoveAt(position);
-        }
 
 
         public List<DefinitionsSekiro.Boss> getBossToSplit()
