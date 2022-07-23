@@ -245,7 +245,7 @@ function DoVisualUpdate(d /*data*/)
 			{
 				percentage_sum += percentage;
 				new_tbl +=
-     '<td class="progress_' + (d.progress_bar_colored ? s.class_hits_color : 'better') +'" width="' + percentage + '%"></td>';
+     '<td class="progress_' + (d.progress_bar_colored ? s.class_hits_color : 'better') +'" style="width: ' + percentage + '%; width: calc(100% / ' + splits.length + ');"></td>';
 			}
 		}
 
