@@ -36,6 +36,23 @@ namespace HitCounterManager
     }
 
     /// <summary>
+    /// Content of XML stored user data (any key pair)
+    /// </summary>
+    [Serializable]
+    public class SerializableKeyPair<Tkey, TValue>
+    {
+        public Tkey Key;
+        public TValue Value;
+
+        public SerializableKeyPair() { }
+        public SerializableKeyPair(Tkey key, TValue value)
+        {
+            Key = key;
+            Value = value;
+        }
+    }
+
+    /// <summary>
     /// Content of XML stored user data (succession)
     /// </summary>
     [Serializable]
@@ -60,6 +77,7 @@ namespace HitCounterManager
         public int MainHeight;
         public int MainPosX;
         public int MainPosY;
+        public List<SerializableKeyPair<string, int>> ColWidths = new List<SerializableKeyPair<string, int>>();
         public bool ReadOnlyMode;
         public bool AlwaysOnTop;
         public bool DarkMode;
@@ -314,6 +332,7 @@ namespace HitCounterManager
                 _settings.ShowPBTotals = true;
                 _settings.StyleDesiredHeight = 0;
                 _settings.StyleSubscriptPB = _settings.StyleSuperscriptPB;
+                //_settings.ColWidths added but no default is needed
             }
 
             // Check for updates..
@@ -339,6 +358,10 @@ namespace HitCounterManager
             SetReadOnlyMode(_settings.ReadOnlyMode);
             SetAlwaysOnTop(_settings.AlwaysOnTop);
             Program.DarkMode = _settings.DarkMode;
+            foreach (SerializableKeyPair<string, int> entry in _settings.ColWidths)
+            {
+                ProfileDataGridViewSettings.ColumnWidths[entry.Key] = entry.Value;
+            }
 
             // Load profile data..
             if (_settings.Profiles.ProfileList.Count == 0)
@@ -399,6 +422,11 @@ namespace HitCounterManager
             _settings.ReadOnlyMode = this.ReadOnlyMode;
             _settings.AlwaysOnTop = this.TopMost;
             _settings.DarkMode = Program.DarkMode;
+            _settings.ColWidths.Clear();
+            foreach (KeyValuePair<string, int> entry in ProfileDataGridViewSettings.ColumnWidths)
+            {
+                _settings.ColWidths.Add(new SerializableKeyPair<string, int>(entry.Key, entry.Value));
+            }
 
             // Store hot keys..
             _settings.HotKeyMethod = (int)sc.NextStart_Method;
