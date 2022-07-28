@@ -98,9 +98,11 @@ Thanks to Beta Testers of AutoSplit(in alphabetical order):
 * [DanielloPiuBello](https://www.twitch.tv/daniellopiubello)
 * [OlallaZ2](https://www.twitch.tv/olallaz2)
 * [Bajamuten](https://www.twitch.tv/bajamuten)
+* [Zirob21](https://www.twitch.tv/zirob21)
+* [Empaventuras](https://www.twitch.tv/empaventuras)
 
 
-* Every member of the [Hitless team on Twitch](https://www.twitch.tv/team/hitless)
+* Every member of the [Hitless team on Twitch](https://www.twitch.tv/team/hitless) and [No Hit Hispano on Twitch](https://www.twitch.tv/nohithispano)
 * And also all the other great challenge runners out there that I cannot name here all.
   
 > Praise the sun!  :sunny: . . . :fire: . . .  :running: :dash: 
