@@ -21,6 +21,7 @@
 //SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -39,7 +40,17 @@ namespace HitCounterManager
 
         public ProfileViewControl()
         {
+            ProfileDataGridViewSettings.ColumnWidthsChangeEnabled = false;
             InitializeComponent();
+            foreach (DataGridViewColumn col in DataGridView1.Columns)
+            {
+                if (ProfileDataGridViewSettings.ColumnWidths.ContainsKey(col.Name))
+                {
+                    col.Width = ProfileDataGridViewSettings.ColumnWidths[col.Name];
+                }
+            }
+            ProfileDataGridViewSettings.ColumnWidthsChangeEnabled = true;
+
             pi = DataGridView1; // for better encapsulation
         }
 
@@ -84,6 +95,16 @@ namespace HitCounterManager
             // Solution: Overwrite own calculated size again
             DataGridView1.Width = Width;
             DataGridView1.Height = Height - DataGridView1.Top;
+
+            ProfileDataGridViewSettings.ColumnWidthsChangeEnabled = false;
+            foreach (DataGridViewColumn col in DataGridView1.Columns)
+            {
+                if (ProfileDataGridViewSettings.ColumnWidths.ContainsKey(col.Name))
+                {
+                    col.Width = ProfileDataGridViewSettings.ColumnWidths[col.Name];
+                }
+            }
+            ProfileDataGridViewSettings.ColumnWidthsChangeEnabled = true;
 
             ComboBox1.Items.AddRange(ProfileNames);
             if (ComboBox1.Items.Count == 0)
@@ -163,6 +184,19 @@ namespace HitCounterManager
         }
     }
 
+    public static class ProfileDataGridViewSettings
+    {
+        public static bool ColumnWidthsChangeEnabled = true;
+        public static Dictionary<string, int> ColumnWidths = new Dictionary<string, int>(){
+            { "cTitle", 300 },
+            { "cHits", 50 },
+            { "cWayHits", 50 },
+            { "cDiff", 50 },
+            { "cPB", 50 },
+            { "cSP", 30 },
+            };
+    }
+
     public class ProfileDataGridView : DataGridView, IProfileInfo
     {
         #region DataGridView event handlers
@@ -171,11 +205,22 @@ namespace HitCounterManager
 
         public ProfileDataGridView()
         {
+            this.ColumnWidthChanged += new DataGridViewColumnEventHandler(this.ColumnWidthChangedHandler);
             this.CellValidating += new DataGridViewCellValidatingEventHandler(this.CellValidatingHandler);
             this.CellValueChanged += new DataGridViewCellEventHandler(this.CellValueChangedHandler);
             this.CellMouseUp += new DataGridViewCellMouseEventHandler(this.CellMouseUpEventHandler);
             this.KeyUp += new KeyEventHandler(this.KeyUpEventHandler);
             this.SelectionChanged += new EventHandler(this.SelectionChangedHandler);
+        }
+
+        private void ColumnWidthChangedHandler(object sender, DataGridViewColumnEventArgs e)
+        {
+            if (!ProfileDataGridViewSettings.ColumnWidthsChangeEnabled) return;
+
+            if (ProfileDataGridViewSettings.ColumnWidths.ContainsKey(e.Column.Name))
+            {
+                ProfileDataGridViewSettings.ColumnWidths[e.Column.Name] = e.Column.Width;
+            }
         }
 
         private void CellValidatingHandler(object sender, DataGridViewCellValidatingEventArgs e)

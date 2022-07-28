@@ -3,8 +3,34 @@
   <Version>9</Version>
   <MainWidth>652</MainWidth>
   <MainHeight>875</MainHeight>
-  <MainPosX>207</MainPosX>
-  <MainPosY>161</MainPosY>
+  <MainPosX>77</MainPosX>
+  <MainPosY>64</MainPosY>
+  <ColWidths>
+    <SerializableKeyPairOfStringInt32>
+      <Key>cTitle</Key>
+      <Value>300</Value>
+    </SerializableKeyPairOfStringInt32>
+    <SerializableKeyPairOfStringInt32>
+      <Key>cHits</Key>
+      <Value>50</Value>
+    </SerializableKeyPairOfStringInt32>
+    <SerializableKeyPairOfStringInt32>
+      <Key>cWayHits</Key>
+      <Value>50</Value>
+    </SerializableKeyPairOfStringInt32>
+    <SerializableKeyPairOfStringInt32>
+      <Key>cDiff</Key>
+      <Value>50</Value>
+    </SerializableKeyPairOfStringInt32>
+    <SerializableKeyPairOfStringInt32>
+      <Key>cPB</Key>
+      <Value>50</Value>
+    </SerializableKeyPairOfStringInt32>
+    <SerializableKeyPairOfStringInt32>
+      <Key>cSP</Key>
+      <Value>30</Value>
+    </SerializableKeyPairOfStringInt32>
+  </ColWidths>
   <ReadOnlyMode>false</ReadOnlyMode>
   <AlwaysOnTop>false</AlwaysOnTop>
   <DarkMode>false</DarkMode>
