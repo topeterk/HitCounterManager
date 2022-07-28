@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lbl_warning.Text" xml:space="preserve">
+    <value>If you want auto reset internal flags to split all Pantheon bosses.
+If you want play P1+P2+P3+P4 to play P5 after, or P5 to play P1....P4 after 
+You should check if you run have "Grey Prince Zote" or not.
+(Turn on/off depending the case)</value>
+  </data>
   <data name="TextBox1.Text" xml:space="preserve">
     <value>Maintain update the dll "Souls Memory" of Souls Splitter for last updates fixes of readEventsFlags or others things
 
@@ -131,6 +137,13 @@ regardless of what is written on them
 - When a event of autosplit happen, an internal variable is set, for evit that event is repit. 
 Use "Reset Run" button or Shortcut, for reset this state.
 
+- In difference of souls memory for souls games, Hollow Knight use a dll that is completely integrate with livesplit core
+ so is impossible separation of them
+
+-If you want auto reset internal flags to split all Pantheon bosses in hollow autosplitter.
+If you want play P1+P2+P3+P4 to play P5 after, or P5 to play P1....P4 after 
+You should check "Grey Prince Zote" if you run, have this boss or not.
+(Turn on/off depending the case)
 ===========================================
 Sekiro Features:
 - No Intro

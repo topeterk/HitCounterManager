@@ -89,14 +89,17 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Sources\DTSekiro.cs" />
-    <Compile Include="Sources\AutoSplitter.cs">
+    <Compile Include="Splitters\DataAutoSplitter.cs" />
+    <Compile Include="Splitters\DTHollow.cs" />
+    <Compile Include="Splitters\DTSekiro.cs" />
+    <Compile Include="Splitters\AutoSplitter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sources\AutoSplitter.Designer.cs">
+    <Compile Include="Splitters\AutoSplitter.Designer.cs">
       <DependentUpon>AutoSplitter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sources\SekiroSplitter.cs" />
+    <Compile Include="Splitters\HollowSplitter.cs" />
+    <Compile Include="Splitters\SekiroSplitter.cs" />
     <Compile Include="Sources\ProfilesControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -148,18 +151,24 @@
     <Compile Include="Sources\Update.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="LiveSplit.HollowKnight, Version=3.1.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>Sources\LiveSplit.HollowKnight.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SoulMemory, Version=1.0.38.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\SoulMemory.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Sources\AutoSplitter.resx">
+    <EmbeddedResource Include="Splitters\AutoSplitter.resx">
       <DependentUpon>AutoSplitter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sources\ProfilesControl.resx">

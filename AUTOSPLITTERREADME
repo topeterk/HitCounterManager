@@ -11,6 +11,8 @@ regardless of what is written on them
 - When a event of autosplit happen, an internal variable is set, for evit that event is repit. 
 Use "Reset Run" button or Shortcut, for reset this state.
 
+- In difference of souls memory for souls games, Hollow Knight use a dll that is completely integrate with livesplit core so is impossible separation of them
+
 ===========================================
 Sekiro Features:
 - No Intro

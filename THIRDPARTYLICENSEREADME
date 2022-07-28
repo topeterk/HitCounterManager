@@ -20,11 +20,23 @@ Title: AutoSplitter
 Author: Ezequiel Medina (Neimex23)
 Contact: <ezequielmedina23@gmail.com>
 Licence: MIT
-    - Dll SoulsMemory from:
-           Title: SoulSplitter
+    - DLL SoulsMemory from:
+    [-]    Title: SoulSplitter
            Author:  FrankvdStam
            Source:  https://github.com/FrankvdStam/SoulSplitter.git
            Licence: GNU
+
+    - DLL LiveSplit.HollowKnight
+    [-]    Title: LiveSplit.HollowKnight
+           Author: ShootMe
+           Source: https://github.com/ShootMe/LiveSplit.HollowKnight.git
+           Licence: MIT
+
+    - DLL LiveSplit.Core
+    [-]    Title: LiveSplit
+           Author: LiveSplit
+           Source: https://github.com/LiveSplit/LiveSplit
+           Licence: MIT
 
 ==============================================================================
 Application Icon

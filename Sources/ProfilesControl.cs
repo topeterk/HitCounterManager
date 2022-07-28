@@ -34,6 +34,7 @@ namespace HitCounterManager
         public readonly OutModule om;
         private bool Ready = false;
         private SekiroSplitter sekiroSplitter;
+        private HollowSplitter hollowSplitter;
 
         public ProfilesControl()
         {
@@ -54,9 +55,10 @@ namespace HitCounterManager
             ptc.InitializeProfileTabControl();
         }
 
-        public void setSplittersPointers(SekiroSplitter sekiroSplitter)
+        public void setSplittersPointers(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter)
         {
             this.sekiroSplitter = sekiroSplitter;
+            this.hollowSplitter = hollowSplitter;
         }
 
 
@@ -95,20 +97,9 @@ namespace HitCounterManager
                 last_update_time = utc_now;
 
 
-                /* if (sekiroSplitter.getDataSekiro().gameTimer && sekiroSplitter.getSekiroStatusProcess(out Exception exec)) 
-                {
-                bool gameToGetTime = false;
-                    SelectedProfileInfo.AddDuration(sekiroSplitter.getGameTime());
-                    gameToGetTime = true;
-                }
-                else
-                {
-                    //Check others games
-                if (!gameToGetTime)
-                {
-                   
-
-                }
+                /* To any that understand OutModule and all related to Timer, the nexts functions return a full duration of a run in ms
+                 * sekiroSplitter.getTimeInGame();
+                 * 
                 }*/
 
 
@@ -392,6 +383,7 @@ namespace HitCounterManager
                 profs.SaveProfile(pi_tab); // save tab's profile
             }
             sekiroSplitter.resetSplited();
+            hollowSplitter.resetSplited();
         }
         public void ProfilePB()
         {

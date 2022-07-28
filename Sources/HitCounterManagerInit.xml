@@ -3,8 +3,8 @@
   <Version>9</Version>
   <MainWidth>652</MainWidth>
   <MainHeight>875</MainHeight>
-  <MainPosX>1222</MainPosX>
-  <MainPosY>147</MainPosY>
+  <MainPosX>207</MainPosX>
+  <MainPosY>161</MainPosY>
   <ReadOnlyMode>false</ReadOnlyMode>
   <AlwaysOnTop>false</AlwaysOnTop>
   <DarkMode>false</DarkMode>
@@ -5268,6 +5268,391 @@
           </ProfileRow>
           <ProfileRow>
             <Title>The Devil</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+        </Rows>
+      </Profile>
+      <Profile>
+        <Name>Hollow Knight (Phanteon 5) [EN]</Name>
+        <Attempts>0</Attempts>
+        <ActiveSplit>0</ActiveSplit>
+        <Rows>
+          <ProfileRow>
+            <Title>Vengefly King</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Gruz Mother</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>False Knight </Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Massive Moss Charger</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Hornet (Protector)</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Gorb</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Dung Defender</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Soul Warrior</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Brooding Mawlek</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Oro &amp; Mato Nail Bros</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Xero</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Crystal Guardian</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Soul Master</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Oblobbles</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Sisters of Battle</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Marmu</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Flukemarm</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Broken Vessel</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Galien</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Paintmaster Sheo</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Hive Knight</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Elder Hu</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>The Collector</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>God Tamer</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Troupe Master Grim</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Watcher Knights</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Uumuu</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Winged Nosk</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Great Nailsage Slay</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Hornet (Sentinel) </Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Enraged Guardian</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Lost Kin</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>No Eyes</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Traitor Lord</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>White Defender</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Soul Tyrant</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Markoth</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Grey Prince Zote</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Failed Champion</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Nightmare King Grimm</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Pure Vessel</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Absolute Radiance</Title>
             <Hits>0</Hits>
             <WayHits>0</WayHits>
             <PB>0</PB>

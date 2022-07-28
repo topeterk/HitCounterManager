@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
 using System.Xml.Serialization;
+using System.Text;
 
 namespace HitCounterManager
 {
@@ -136,7 +137,8 @@ namespace HitCounterManager
     {
         private SaveModule<SettingsRoot> sm;
         private SettingsRoot _settings;
-        private SekiroSplitter sekiroSplitter = new SekiroSplitter();
+
+
         /// <summary>
         /// Validates a hotkey and when enabled registers it
         /// </summary>
@@ -455,37 +457,65 @@ namespace HitCounterManager
         /// <summary>
         /// Stores user data in new XML for AutoSplitter
         /// </summary>
+        /// 
+        DataAutoSplitter dataAS = new DataAutoSplitter();
+        private SekiroSplitter sekiroSplitter = new SekiroSplitter();
+        private HollowSplitter hollowSplitter = new HollowSplitter();
         private void SaveAutoSplitterSettings() {
-            XmlSerializer formatter = new XmlSerializer(typeof(DTSekiro), new Type[] { typeof(DefinitionsSekiro.Boss),typeof(DefinitionsSekiro.Idol) });
-            Stream myStream = new FileStream("HitCounterManagerSaveAutoSplitter.xml", FileMode.Create, FileAccess.Write, FileShare.None);
-            formatter.Serialize(myStream, sekiroSplitter.getDataSekiro());
+            Stream myStream;
+            try
+            {
+                myStream = new FileStream("HitCounterManagerSaveAutoSplitter.xml", FileMode.Open, FileAccess.Write, FileShare.None);
+            }
+            catch (Exception)
+            {
+                myStream = new FileStream("HitCounterManagerSaveAutoSplitter.xml", FileMode.Create, FileAccess.Write, FileShare.None);
+            }
+
+            XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro), typeof(DTHollow) });
+            dataAS.DataSekiro = sekiroSplitter.getDataSekiro();
+            dataAS.DataHollow = hollowSplitter.getDataHollow();            
+            formatter.Serialize(myStream, dataAS);
+
             myStream.Close();
         }
 
         /// <summary>
         /// Load user data in XML for AutoSplitter
         /// </summary>
-        private void LoadAutoSplitterSettings(ProfilesControl profiles) {
-            XmlSerializer formatter = new XmlSerializer(typeof(DTSekiro), new Type[] { typeof(DefinitionsSekiro.Boss), typeof(DefinitionsSekiro.Idol) });
-            DTSekiro dataSekiro;
-            try
-            {
+        private void LoadAutoSplitterSettings(ProfilesControl profiles) {           
+            DTSekiro dataSekiro = new DTSekiro();
+            DTHollow dataHollow = new DTHollow();
+             try
+             {
                 Stream myStream = new FileStream("HitCounterManagerSaveAutoSplitter.xml", FileMode.Open, FileAccess.Read, FileShare.None);
-                dataSekiro = (DTSekiro)formatter.Deserialize(myStream);
-                
+                XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro),typeof(DTHollow) });
+                dataAS = (DataAutoSplitter)formatter.Deserialize(myStream);
+                dataSekiro = dataAS.DataSekiro;
+                dataHollow = dataAS.DataHollow;
+                myStream.Close();
             }
-            catch (Exception) //Not Exist File, is Corrupt or Nothing in Them
-            {
-                dataSekiro = new DTSekiro();
-            }
-            sekiroSplitter.setDataSekiro(dataSekiro,profiles);
+            catch (Exception){}
+
+            sekiroSplitter.setDataSekiro(dataSekiro, profiles);
             sekiroSplitter.LoadAutoSplitterProcedure();
 
+            hollowSplitter.setDataHollow(dataHollow, profiles);
+            hollowSplitter.LoadAutoSplitterProcedure();
+
+
+           
         }
 
-        public SekiroSplitter getSekiroIntance()
+
+        public SekiroSplitter getSekiroInstance()
         {
             return this.sekiroSplitter;
+        }
+
+        public HollowSplitter getHollowInstance()
+        {
+            return this.hollowSplitter;
         }
 
 

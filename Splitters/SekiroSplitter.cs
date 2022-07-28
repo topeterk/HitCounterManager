@@ -38,7 +38,7 @@ namespace HitCounterManager
     public class SekiroSplitter
     {
         
-        public Sekiro sekiro = new Sekiro();
+        public static Sekiro sekiro = new Sekiro();
         public bool _StatusProcedure = true;
         public bool _StatusSekiro = false;
         public DTSekiro dataSekiro;
@@ -138,7 +138,6 @@ namespace HitCounterManager
             dataSekiro.idolsTosplit.Clear();
             dataSekiro.positionMargin = 3;
             dataSekiro.positionsToSplit.Clear();
-            dataSekiro.enableSplitting = false;
             
         }
 
@@ -159,6 +158,11 @@ namespace HitCounterManager
         {
             Thread.Sleep(delay);
             return _StatusSekiro = sekiro.Refresh(out exception);
+        }
+
+        public int getTimeInGame()
+        {
+            return sekiro.GetInGameTimeMilliseconds();
         }
 
         public void resetSplited()
@@ -257,7 +261,7 @@ namespace HitCounterManager
                     {
                         foreach (var idol in listPendingI)
                         {
-                            _profile.ProfileSplitGo(+1);
+                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
                             foreach (var idol2 in dataSekiro.getidolsTosplit())
                             {
                                 if (idol2.Id == idol.Id)
@@ -270,7 +274,7 @@ namespace HitCounterManager
 
                         foreach (var boss in listPendingB)
                         {
-                            _profile.ProfileSplitGo(+1);
+                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
                             foreach (var boss2 in dataSekiro.getBossToSplit())
                             {
                                 if (boss.Id == boss2.Id)
@@ -284,7 +288,7 @@ namespace HitCounterManager
 
                         foreach (var position in listPendingP)
                         {
-                            _profile.ProfileSplitGo(+1);
+                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
                             foreach (var position2 in dataSekiro.getPositionsToSplit())
                             {
                                 if (position.vector == position2.vector)
@@ -324,7 +328,7 @@ namespace HitCounterManager
                         else
                         {
                             b.IsSplited = true;
-                            _profile.ProfileSplitGo(+1);
+                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
                         }
                     }
                        
@@ -352,7 +356,7 @@ namespace HitCounterManager
                         else
                         {
                             i.IsSplited = true;
-                            _profile.ProfileSplitGo(+1);
+                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
                         }
                     }
                 }
@@ -386,7 +390,7 @@ namespace HitCounterManager
                             else
                             {
                                 p.IsSplited = true;
-                                _profile.ProfileSplitGo(+1);
+                                try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
                             }                                                       
                         }
                         

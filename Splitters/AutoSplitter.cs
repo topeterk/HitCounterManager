@@ -38,23 +38,26 @@ namespace HitCounterManager
     public partial class AutoSplitter : Form
     {
         SekiroSplitter sekiroSplitter;
-        Vector3f Vector;
+        HollowSplitter hollowSplitter;
+        
+        
 
         public Exception Exception { get; set; }
 
-        public AutoSplitter(SekiroSplitter sekiroSplitter)
+        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter)
         {
             InitializeComponent();
             this.sekiroSplitter = sekiroSplitter;
+            this.hollowSplitter = hollowSplitter;
             refreshForm();
         }
 
         public void refreshForm()
         {
             #region SekiroTab       
-            panelPosition.Hide();
-            panelBoss.Hide();
-            panelIdols.Hide();
+            panelPositionS.Hide();
+            panelBossS.Hide();
+            panelIdolsS.Hide();
             groupBoxAshinaOutskirts.Hide();
             groupBoxHirataEstate.Hide();
             groupBoxAshinaCastle.Hide();
@@ -63,6 +66,20 @@ namespace HitCounterManager
             groupBoxSunkenValley.Hide();
             groupBoxAshinaDepths.Hide();
             groupBoxFountainhead.Hide();
+
+            #endregion
+            #region HollowTab
+            panelBossH.Hide();
+            panelItemH.Hide();
+            groupBossH.Hide();
+            groupBoxMBH.Hide();
+            groupBoxPantheon.Hide();
+            checkedListBoxPantheon.Hide();
+            checkedListBoxPp.Hide();
+            lbl_warning.Hide();
+            groupBoxCharms.Hide();
+            groupBoxSkillsH.Hide();
+            panelPositionH.Hide();
 
             #endregion
             checkStatusGames();
@@ -149,16 +166,93 @@ namespace HitCounterManager
             #region SekiroLoad.Position
             foreach (DefinitionsSekiro.Position position in sekiroData.getPositionsToSplit())
             {
-                listBoxPositions.Items.Add(position.vector + " - " + position.mode);            
+                listBoxPositionsS.Items.Add(position.vector + " - " + position.mode);
             }
-            comboBoxMargin.SelectedIndex = sekiroData.positionMargin;
+            comboBoxMarginS.SelectedIndex = sekiroData.positionMargin;
             #endregion
             #region UpdateLoad
             string fullPath = Path.GetFullPath("SoulMemory.dll");
             this.lblVersionCurrent.Text = System.Reflection.Assembly.LoadFile(fullPath).GetName().Version.ToString();
             #endregion
+            DTHollow hollowData = hollowSplitter.getDataHollow();
+            #region HollowLoad.Boss
+            foreach (var b in hollowData.getBosstoSplit())
+            {
+                for (int i = 0; i < checkedListBoxBossH.Items.Count; i++)
+                {
+                    if (b.Title == checkedListBoxBossH.Items[i].ToString())
+                    {
+                        checkedListBoxBossH.SetItemChecked(i, true);
+                    }
+                }
+            }
+            #endregion
+            #region HollowLoad.MiniBoss
+            foreach (var mb in hollowData.getMiniBossToSplit())
+            {
+                for (int i = 0; i < checkedListBoxHMB.Items.Count; i++)
+                {
+                    if (mb.Title == checkedListBoxHMB.Items[i].ToString())
+                    {
+                        checkedListBoxHMB.SetItemChecked(i, true);
+                    }
+                }
+            }
+            #endregion
+            #region HollowLoad.Pantheon
+            foreach (var p in hollowData.getPhanteonToSplit())
+            {
+                for (int i = 0; i < checkedListBoxPantheon.Items.Count; i++)
+                {
+                    if (p.Title == checkedListBoxPantheon.Items[i].ToString())
+                    {
+                        checkedListBoxPantheon.SetItemChecked(i, true);
+                    }
+                }
 
+                for (int i = 0; i < checkedListBoxPp.Items.Count; i++)
+                {
+                    if (p.Title == checkedListBoxPp.Items[i].ToString())
+                    {
+                        checkedListBoxPp.SetItemChecked(i, true);
+                    }
+                }
 
+            }
+            comboBoxHowP.SelectedIndex = hollowData.PantheonMode;
+
+            #endregion
+            #region HollowLoad.Charm
+            foreach (var c in hollowData.getCharmToSplit())
+            {
+                for (int i = 0; i < checkedListBoxCharms.Items.Count; i++)
+                {
+                    if (c.Title == checkedListBoxCharms.Items[i].ToString())
+                    {
+                        checkedListBoxCharms.SetItemChecked(i, true);
+                    }
+                }
+            }
+            #endregion
+            #region HollowLoad.Skill
+            foreach (var c in hollowData.getSkillsToSplit())
+            {
+                for (int i = 0; i < checkedListBoxSkillsH.Items.Count; i++)
+                {
+                    if (c.Title == checkedListBoxSkillsH.Items[i].ToString())
+                    {
+                        checkedListBoxSkillsH.SetItemChecked(i, true);
+                    }
+                }
+            }
+            #endregion
+            #region HollowLoad.Position
+            foreach (var p in hollowData.getPositionToSplit())
+            {
+                listBoxPositionH.Items.Add(p.position + p.sceneName);
+            }
+            comboBoxMarginH.SelectedIndex = hollowData.positionMargin;
+            #endregion
         }
 
         private void refresh_Btn(object sender, EventArgs e)
@@ -169,44 +263,56 @@ namespace HitCounterManager
         public void checkStatusGames()
         {
             Exception excS = null;
-            if (sekiroSplitter.getSekiroStatusProcess(out excS,0))
+            if (sekiroSplitter.getSekiroStatusProcess(out excS, 0))
             {
-                this.sekiroRunning.Show();
-                this.SekiroNotRunning.Hide();
+                sekiroRunning.Show();
+                SekiroNotRunning.Hide();
             }
             else
             {
-                this.SekiroNotRunning.Show();
-                this.sekiroRunning.Hide();
+                SekiroNotRunning.Show();
+                sekiroRunning.Hide();
             }
+            if (hollowSplitter.getHollowStatusProcess(0))
+            {
+                HollowRunning.Show();
+                HollowNotRunning.Hide();
+            }
+            else
+            {
+                HollowRunning.Hide();
+                HollowNotRunning.Show();
+            }
+
+
         }
 
         #region Sekiro.UI
-
+        Vector3f Vector;
         private void toSplitSelectSekiro_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.panelPosition.Hide();
-            this.panelBoss.Hide();
-            this.panelIdols.Hide();
+            this.panelPositionS.Hide();
+            this.panelBossS.Hide();
+            this.panelIdolsS.Hide();
 
 
             switch (toSplitSelectSekiro.SelectedIndex)
             {
                 case 0: //Kill a Boss
-                    this.panelBoss.Show();
+                    this.panelBossS.Show();
                     break;
                 case 1: // Is Activated a Idol
-                    this.panelIdols.Show();
+                    this.panelIdolsS.Show();
                     break;
                 case 2: //Target Position
-                    this.panelPosition.Show();
+                    this.panelPositionS.Show();
                     break;
             }
         }
 
-       
 
-        
+
+
         private void btnGetPotition_Click(object sender, EventArgs e)
         {
             var Vector = sekiroSplitter.getCurrentPosition();
@@ -225,11 +331,11 @@ namespace HitCounterManager
             DialogResult error;
             if (this.Vector != null)
             {
-                var contains1 = !listBoxPositions.Items.Contains(this.Vector + " - " + "Inmediatly");
-                var contains2= !listBoxPositions.Items.Contains(this.Vector + " - " + "Loading game after");          
+                var contains1 = !listBoxPositionsS.Items.Contains(this.Vector + " - " + "Inmediatly");
+                var contains2 = !listBoxPositionsS.Items.Contains(this.Vector + " - " + "Loading game after");
                 if (contains1 && contains2)
                 {
-                    sekiroSplitter.setProcedure(false);
+                    
                     if (comboBoxHowPosition.SelectedIndex == -1)
                     {
                         error = MessageBox.Show("Select 'How' do you want split ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -242,11 +348,11 @@ namespace HitCounterManager
                         }
                         else
                         {
-                            listBoxPositions.Items.Add(this.Vector + " - " + comboBoxHowPosition.Text.ToString());
+                            sekiroSplitter.setProcedure(false);
+                            listBoxPositionsS.Items.Add(this.Vector + " - " + comboBoxHowPosition.Text.ToString());
                             error = MessageBox.Show("Move your charapter to evit autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                             sekiroSplitter.AddPosition(this.Vector, comboBoxHowPosition.Text.ToString());
                             sekiroSplitter.setProcedure(true);
-                            sekiroSplitter.LoadAutoSplitterProcedure();
                         }
                     }
                 }
@@ -259,25 +365,25 @@ namespace HitCounterManager
             {
                 error = MessageBox.Show("Plase get a position ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
 
         private void listBoxPositions_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            
-            if (this.listBoxPositions.SelectedItem != null)
+
+            if (this.listBoxPositionsS.SelectedItem != null)
             {
-                int i = listBoxPositions.Items.IndexOf(listBoxPositions.SelectedItem);
+                int i = listBoxPositionsS.Items.IndexOf(listBoxPositionsS.SelectedItem);
                 sekiroSplitter.setProcedure(false);
                 sekiroSplitter.RemovePosition(i);
                 sekiroSplitter.setProcedure(true);
-                listBoxPositions.Items.Remove(listBoxPositions.SelectedItem);
+                listBoxPositionsS.Items.Remove(listBoxPositionsS.SelectedItem);
             }
         }
 
         private void comboBoxMargin_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int select = comboBoxMargin.SelectedIndex;
+            int select = comboBoxMarginS.SelectedIndex;
             sekiroSplitter.setPositionMargin(select);
         }
 
@@ -290,19 +396,19 @@ namespace HitCounterManager
             }
             else
             {
-                var contains1 = listBoxPositions.Items.Contains(comboBoxBoss.Text.ToString() + " - " + "Inmediatly");
-                var contains2 = listBoxPositions.Items.Contains(comboBoxBoss.Text.ToString() + " - " + "Loading game after");
-                if (contains1 || contains2)
+                var contains1 = !listBoxPositionsS.Items.Contains(comboBoxBoss.Text.ToString() + " - " + "Inmediatly");
+                var contains2 = !listBoxPositionsS.Items.Contains(comboBoxBoss.Text.ToString() + " - " + "Loading game after");
+                if (contains1 && contains2)
                 {
-                    error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {                 
                     sekiroSplitter.setProcedure(false);
                     sekiroSplitter.AddBoss(comboBoxBoss.Text.ToString(), comboBoxHowBoss.Text.ToString());
                     listBoxBosses.Items.Add(comboBoxBoss.Text.ToString() + " - " + comboBoxHowBoss.Text.ToString());
                     sekiroSplitter.setProcedure(true);
-                }              
+                }
+                else
+                {
+                    error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -824,12 +930,295 @@ namespace HitCounterManager
         }
 
         #endregion
-
+        #region Update.UI
         private void btnCheckVersion_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/FrankvdStam/SoulSplitter/releases");
         }
+        #endregion
+        #region Hollow UI
+        private void toSplitSelectHollow_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            panelBossH.Hide();
+            panelItemH.Hide();
+            panelPositionH.Hide();
+            
+            switch (toSplitSelectHollow.SelectedIndex)
+            {
+                case 0: //Kill a enemy
+                    panelBossH.Show();
+                    break;
+                case 1: //Obtain a item
+                    panelItemH.Show();
+                    break;
+                case 2: //Get Position
+                    panelPositionH.Show();
+                    break;
+
+            }
+        }
+
+        private void comboBoxSelectKindBoss_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            groupBossH.Hide();
+            groupBoxMBH.Hide();
+            groupBoxPantheon.Hide();
+
+            switch (comboBoxSelectKindBoss.SelectedIndex)
+            {
+                case 0: //Boss
+                    groupBossH.Show();
+                    break;
+                case 1: //Phanteom
+                    groupBoxPantheon.Show();
+                    break;
+                case 2: //MiniBoss - Dreamers- Coliseum and Others
+                    groupBoxMBH.Show();
+                    break;
+
+            }
+        }
+
+        private void checkedListBoxBossH_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (checkedListBoxBossH.SelectedIndex != -1)
+            {
+                if (checkedListBoxBossH.GetItemChecked(checkedListBoxBossH.SelectedIndex) == false)
+                {
+                    hollowSplitter.setProcedure(false);
+                    hollowSplitter.AddBoss(checkedListBoxBossH.SelectedItem.ToString());
+                    hollowSplitter.setProcedure(true);
+                }
+                else
+                {
+                    hollowSplitter.setProcedure(false);
+                    hollowSplitter.RemoveBoss(checkedListBoxBossH.SelectedItem.ToString());
+                    hollowSplitter.setProcedure(true);
+                }
+            }
+        }
+
+        private void checkedListBoxMBH_ItemCheck_1(object sender, ItemCheckEventArgs e)
+        {
+            if (checkedListBoxHMB.SelectedIndex != -1)
+            {
+                if (checkedListBoxHMB.GetItemChecked(checkedListBoxHMB.SelectedIndex) == false)
+                {
+                    hollowSplitter.setProcedure(false);
+                    hollowSplitter.AddMiniBoss(checkedListBoxHMB.SelectedItem.ToString());
+                    hollowSplitter.setProcedure(true);
+                }
+                else
+                {
+                    hollowSplitter.setProcedure(false);
+                    hollowSplitter.RemoveMiniBoss(checkedListBoxHMB.SelectedItem.ToString());
+                    hollowSplitter.setProcedure(true);
+                }
+            }
+        }
+
+        private void checkedListBoxPantheon_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (checkedListBoxPantheon.SelectedIndex != -1)
+            {
+                if (checkedListBoxPantheon.GetItemChecked(checkedListBoxPantheon.SelectedIndex) == false)
+                {
+                    hollowSplitter.setProcedure(false);
+                    hollowSplitter.AddPantheon(checkedListBoxPantheon.SelectedItem.ToString());
+                    hollowSplitter.setProcedure(true);
+                }
+                else
+                {
+                    hollowSplitter.setProcedure(false);
+                    hollowSplitter.RemovePantheon(checkedListBoxPantheon.SelectedItem.ToString());
+                    hollowSplitter.setProcedure(true);
+                }
+            }
+        }
+
+        private void checkedListBoxPp_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (checkedListBoxPp.SelectedIndex != -1)
+            {
+                if (checkedListBoxPp.GetItemChecked(checkedListBoxPp.SelectedIndex) == false)
+                {
+                    hollowSplitter.setProcedure(false);
+                    hollowSplitter.AddPantheon(checkedListBoxPp.SelectedItem.ToString());
+                    hollowSplitter.setProcedure(true);
+                }
+                else
+                {
+                    hollowSplitter.setProcedure(false);
+                    hollowSplitter.RemovePantheon(checkedListBoxPp.SelectedItem.ToString());
+                    hollowSplitter.setProcedure(true);
+                }
+            }
+        }
+
+
+        private void checkedListBoxCharms_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (checkedListBoxCharms.SelectedIndex != -1)
+            {
+                if (checkedListBoxCharms.GetItemChecked(checkedListBoxCharms.SelectedIndex) == false)
+                {
+                    hollowSplitter.setProcedure(false);
+                    hollowSplitter.AddCharm(checkedListBoxCharms.SelectedItem.ToString());
+                    hollowSplitter.setProcedure(true);
+                }
+                else
+                {
+                    hollowSplitter.setProcedure(false);
+                    hollowSplitter.RemoveCharm(checkedListBoxCharms.SelectedItem.ToString());
+                    hollowSplitter.setProcedure(true);
+                }
+            }
+        }
+
+
+        private void checkedListBoxSkillsH_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (checkedListBoxSkillsH.SelectedIndex != -1)
+            {
+                if (checkedListBoxSkillsH.GetItemChecked(checkedListBoxSkillsH.SelectedIndex) == false)
+                {
+                    hollowSplitter.setProcedure(false);
+                    hollowSplitter.AddSkill(checkedListBoxSkillsH.SelectedItem.ToString());
+                    hollowSplitter.setProcedure(true);
+                }
+                else
+                {
+                    hollowSplitter.setProcedure(false);
+                    hollowSplitter.RemoveSkill(checkedListBoxSkillsH.SelectedItem.ToString());
+                    hollowSplitter.setProcedure(true);
+                }
+            }
+        }
+        private void comboBoxHowP_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            checkedListBoxPantheon.Hide();
+            checkedListBoxPp.Hide();
+            lbl_warning.Hide();
+
+            if (comboBoxHowP.SelectedIndex != -1)
+            {
+                switch (comboBoxHowP.SelectedIndex)
+                {
+                    case 0: //P1+P2+P3+P4 or P5                       
+                        checkedListBoxPantheon.Show();
+                        lbl_warning.Show();
+                        hollowSplitter.dataHollow.PantheonMode = 0;
+                        break;
+                    case 1: //Split one per Pantheon
+                        checkedListBoxPp.Show();
+                        hollowSplitter.dataHollow.PantheonMode = 1;
+                        break;
+
+                }
+            }
+        }
 
        
+
+        private void comboBoxItemSelectH_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxItemSelectH.SelectedIndex != -1)
+            {
+                groupBoxCharms.Hide();
+                groupBoxSkillsH.Hide();
+                switch (comboBoxItemSelectH.SelectedIndex)
+                {
+                    case 0: //Skills                     
+                        groupBoxSkillsH.Show();
+                        break;
+                    case 1: //Charms
+                        groupBoxCharms.Show();
+                        break;
+
+                }
+            }
+        }
+
+        PointF VectorH;
+        private void btn_getPositionH_Click(object sender, EventArgs e)
+        {
+
+            var Vector = hollowSplitter.getCurrentPosition();
+            this.VectorH = Vector;
+            this.textBoxXh.Clear();
+            this.textBoxYh.Clear();
+            this.textBoxSh.Clear();
+            this.textBoxXh.Paste(Vector.X.ToString("0.00"));
+            this.textBoxYh.Paste(Vector.Y.ToString("0.00"));
+            this.textBoxSh.Paste(hollowSplitter.currentPosition.sceneName);
+        }
+
+        private void comboBoxMarginH_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int select = comboBoxMarginH.SelectedIndex;
+            hollowSplitter.dataHollow.positionMargin = select;
+        }
+
+        private void btn_AddPositionH_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (this.VectorH != null)
+            {
+                var contains1 = !listBoxPositionH.Items.Contains(this.VectorH + textBoxSh.Text);
+                if (contains1)
+                {
+                    
+                    if (this.VectorH.X == 0 && this.VectorH.Y == 0)
+                    {
+                        error = MessageBox.Show("Dont use cords 0,0", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        listBoxPositionH.Items.Add(this.VectorH + textBoxSh.Text);
+                        error = MessageBox.Show("Move your charapter to evit autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        hollowSplitter.setProcedure(false);
+                        hollowSplitter.AddPosition(this.VectorH, textBoxSh.Text);
+                        hollowSplitter.setProcedure(true);
+                    }
+                }
+                else
+                {
+                    error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                error = MessageBox.Show("Plase get a position ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void listBoxPositionH_DoubleClick(object sender, EventArgs e)
+        {
+            if (listBoxPositionH.SelectedItem != null)
+            {
+                int i = listBoxPositionH.Items.IndexOf(listBoxPositionH.SelectedItem);
+                hollowSplitter.setProcedure(false);
+                hollowSplitter.RemovePosition(i);
+                hollowSplitter.setProcedure(true);
+                listBoxPositionH.Items.Remove(listBoxPositionH.SelectedItem);
+            }
+        }
+
+        private void btn_DesactiveAllH_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to disable everything?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                hollowSplitter.setProcedure(false);
+                hollowSplitter.clearData();
+                hollowSplitter.setProcedure(true);
+                this.Controls.Clear();
+                this.InitializeComponent();
+                refreshForm();
+                this.AutoSplitter_Load(null, null);//Load Others Games Settings
+            }
+        }
+        #endregion
     }
 }

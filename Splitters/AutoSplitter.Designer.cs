@@ -31,7 +31,20 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AutoSplitter));
             this.TabControl2 = new HitCounterManager.ProfileTabControl();
             this.tabSekiro = new System.Windows.Forms.TabPage();
-            this.panelIdols = new System.Windows.Forms.Panel();
+            this.panelPositionS = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.comboBoxHowPosition = new System.Windows.Forms.ComboBox();
+            this.comboBoxMarginS = new System.Windows.Forms.ComboBox();
+            this.listBoxPositionsS = new System.Windows.Forms.ListBox();
+            this.btnAddPosition = new System.Windows.Forms.Button();
+            this.btnGetPotition = new System.Windows.Forms.Button();
+            this.textBoxZ = new System.Windows.Forms.TextBox();
+            this.textBoxY = new System.Windows.Forms.TextBox();
+            this.textBoxX = new System.Windows.Forms.TextBox();
+            this.panelIdolsS = new System.Windows.Forms.Panel();
             this.groupBoxAshinaCastle = new System.Windows.Forms.GroupBox();
             this.listBoxAshinaCastle = new System.Windows.Forms.ListBox();
             this.checkedListBoxAshinaCastle = new System.Windows.Forms.CheckedListBox();
@@ -106,26 +119,13 @@
             this.radioImmAO = new System.Windows.Forms.RadioButton();
             this.comboBoxZoneSelect = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.panelBoss = new System.Windows.Forms.Panel();
+            this.panelBossS = new System.Windows.Forms.Panel();
             this.btn_AddBoss = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.comboBoxBoss = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.comboBoxHowBoss = new System.Windows.Forms.ComboBox();
             this.listBoxBosses = new System.Windows.Forms.ListBox();
-            this.panelPosition = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.comboBoxHowPosition = new System.Windows.Forms.ComboBox();
-            this.comboBoxMargin = new System.Windows.Forms.ComboBox();
-            this.listBoxPositions = new System.Windows.Forms.ListBox();
-            this.btnAddPosition = new System.Windows.Forms.Button();
-            this.btnGetPotition = new System.Windows.Forms.Button();
-            this.textBoxZ = new System.Windows.Forms.TextBox();
-            this.textBoxY = new System.Windows.Forms.TextBox();
-            this.textBoxX = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.btnDesactiveSekiro = new System.Windows.Forms.Button();
             this.sekiroRunning = new System.Windows.Forms.Label();
@@ -141,7 +141,43 @@
             this.tabElden = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.tabHollow = new System.Windows.Forms.TabPage();
+            this.panelPositionH = new System.Windows.Forms.Panel();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.comboBoxMarginH = new System.Windows.Forms.ComboBox();
+            this.listBoxPositionH = new System.Windows.Forms.ListBox();
+            this.btn_AddPositionH = new System.Windows.Forms.Button();
+            this.btn_getPositionH = new System.Windows.Forms.Button();
+            this.textBoxXh = new System.Windows.Forms.TextBox();
+            this.textBoxYh = new System.Windows.Forms.TextBox();
+            this.textBoxSh = new System.Windows.Forms.TextBox();
+            this.panelItemH = new System.Windows.Forms.Panel();
+            this.groupBoxSkillsH = new System.Windows.Forms.GroupBox();
+            this.checkedListBoxSkillsH = new System.Windows.Forms.CheckedListBox();
+            this.groupBoxCharms = new System.Windows.Forms.GroupBox();
+            this.checkedListBoxCharms = new System.Windows.Forms.CheckedListBox();
+            this.comboBoxItemSelectH = new System.Windows.Forms.ComboBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.panelBossH = new System.Windows.Forms.Panel();
+            this.groupBoxMBH = new System.Windows.Forms.GroupBox();
+            this.checkedListBoxHMB = new System.Windows.Forms.CheckedListBox();
+            this.groupBoxPantheon = new System.Windows.Forms.GroupBox();
+            this.lbl_warning = new System.Windows.Forms.Label();
+            this.checkedListBoxPp = new System.Windows.Forms.CheckedListBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.comboBoxHowP = new System.Windows.Forms.ComboBox();
+            this.checkedListBoxPantheon = new System.Windows.Forms.CheckedListBox();
+            this.groupBossH = new System.Windows.Forms.GroupBox();
+            this.checkedListBoxBossH = new System.Windows.Forms.CheckedListBox();
+            this.comboBoxSelectKindBoss = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.refreshHollow = new System.Windows.Forms.Button();
+            this.btn_DesactiveAllH = new System.Windows.Forms.Button();
+            this.HollowRunning = new System.Windows.Forms.Label();
+            this.HollowNotRunning = new System.Windows.Forms.Label();
+            this.toSplitSelectHollow = new System.Windows.Forms.ComboBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.tabUpdate = new System.Windows.Forms.TabPage();
             this.lblVersionCurrent = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -149,7 +185,8 @@
             this.TextBox1 = new System.Windows.Forms.TextBox();
             this.TabControl2.SuspendLayout();
             this.tabSekiro.SuspendLayout();
-            this.panelIdols.SuspendLayout();
+            this.panelPositionS.SuspendLayout();
+            this.panelIdolsS.SuspendLayout();
             this.groupBoxAshinaCastle.SuspendLayout();
             this.groupBoxRadioAshinaCastle.SuspendLayout();
             this.groupBoxHirataEstate.SuspendLayout();
@@ -166,13 +203,20 @@
             this.groupBoxRadioFountainhead.SuspendLayout();
             this.groupBoxAshinaOutskirts.SuspendLayout();
             this.groupBoxRadiosAshinaOutskirts.SuspendLayout();
-            this.panelBoss.SuspendLayout();
-            this.panelPosition.SuspendLayout();
+            this.panelBossS.SuspendLayout();
             this.tabDs1.SuspendLayout();
             this.tabDs2.SuspendLayout();
             this.tabDs3.SuspendLayout();
             this.tabElden.SuspendLayout();
             this.tabHollow.SuspendLayout();
+            this.panelPositionH.SuspendLayout();
+            this.panelItemH.SuspendLayout();
+            this.groupBoxSkillsH.SuspendLayout();
+            this.groupBoxCharms.SuspendLayout();
+            this.panelBossH.SuspendLayout();
+            this.groupBoxMBH.SuspendLayout();
+            this.groupBoxPantheon.SuspendLayout();
+            this.groupBossH.SuspendLayout();
             this.tabUpdate.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -194,9 +238,9 @@
             // tabSekiro
             // 
             this.tabSekiro.BackColor = System.Drawing.SystemColors.Control;
-            this.tabSekiro.Controls.Add(this.panelIdols);
-            this.tabSekiro.Controls.Add(this.panelBoss);
-            this.tabSekiro.Controls.Add(this.panelPosition);
+            this.tabSekiro.Controls.Add(this.panelPositionS);
+            this.tabSekiro.Controls.Add(this.panelIdolsS);
+            this.tabSekiro.Controls.Add(this.panelBossS);
             this.tabSekiro.Controls.Add(this.button1);
             this.tabSekiro.Controls.Add(this.btnDesactiveSekiro);
             this.tabSekiro.Controls.Add(this.sekiroRunning);
@@ -210,22 +254,164 @@
             this.tabSekiro.TabIndex = 2;
             this.tabSekiro.Text = "Sekiro";
             // 
-            // panelIdols
+            // panelPositionS
             // 
-            this.panelIdols.Controls.Add(this.groupBoxAshinaCastle);
-            this.panelIdols.Controls.Add(this.groupBoxHirataEstate);
-            this.panelIdols.Controls.Add(this.groupBoxSunkenValley);
-            this.panelIdols.Controls.Add(this.groupBoxSenpouTemple);
-            this.panelIdols.Controls.Add(this.groupBoxAshinaDepths);
-            this.panelIdols.Controls.Add(this.groupBoxAbandonedDungeon);
-            this.panelIdols.Controls.Add(this.groupBoxFountainhead);
-            this.panelIdols.Controls.Add(this.groupBoxAshinaOutskirts);
-            this.panelIdols.Controls.Add(this.comboBoxZoneSelect);
-            this.panelIdols.Controls.Add(this.label14);
-            this.panelIdols.Location = new System.Drawing.Point(44, 81);
-            this.panelIdols.Name = "panelIdols";
-            this.panelIdols.Size = new System.Drawing.Size(505, 245);
-            this.panelIdols.TabIndex = 15;
+            this.panelPositionS.Controls.Add(this.label11);
+            this.panelPositionS.Controls.Add(this.label10);
+            this.panelPositionS.Controls.Add(this.label9);
+            this.panelPositionS.Controls.Add(this.label8);
+            this.panelPositionS.Controls.Add(this.comboBoxHowPosition);
+            this.panelPositionS.Controls.Add(this.comboBoxMarginS);
+            this.panelPositionS.Controls.Add(this.listBoxPositionsS);
+            this.panelPositionS.Controls.Add(this.btnAddPosition);
+            this.panelPositionS.Controls.Add(this.btnGetPotition);
+            this.panelPositionS.Controls.Add(this.textBoxZ);
+            this.panelPositionS.Controls.Add(this.textBoxY);
+            this.panelPositionS.Controls.Add(this.textBoxX);
+            this.panelPositionS.Location = new System.Drawing.Point(44, 82);
+            this.panelPositionS.Name = "panelPositionS";
+            this.panelPositionS.Size = new System.Drawing.Size(505, 244);
+            this.panelPositionS.TabIndex = 13;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(219, 1);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(66, 13);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "Coordinates:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(383, 19);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(39, 13);
+            this.label10.TabIndex = 11;
+            this.label10.Text = "Margin";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(185, 19);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(130, 13);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "X                 Y                 Z";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(77, 19);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(32, 13);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "How:";
+            // 
+            // comboBoxHowPosition
+            // 
+            this.comboBoxHowPosition.BackColor = System.Drawing.SystemColors.Control;
+            this.comboBoxHowPosition.FormattingEnabled = true;
+            this.comboBoxHowPosition.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowPosition.Location = new System.Drawing.Point(36, 34);
+            this.comboBoxHowPosition.Name = "comboBoxHowPosition";
+            this.comboBoxHowPosition.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxHowPosition.TabIndex = 8;
+            // 
+            // comboBoxMarginS
+            // 
+            this.comboBoxMarginS.BackColor = System.Drawing.SystemColors.Control;
+            this.comboBoxMarginS.FormattingEnabled = true;
+            this.comboBoxMarginS.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3 (R)",
+            "4 (R)",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.comboBoxMarginS.Location = new System.Drawing.Point(351, 35);
+            this.comboBoxMarginS.Name = "comboBoxMarginS";
+            this.comboBoxMarginS.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxMarginS.TabIndex = 7;
+            this.comboBoxMarginS.SelectedIndexChanged += new System.EventHandler(this.comboBoxMargin_SelectedIndexChanged);
+            // 
+            // listBoxPositionsS
+            // 
+            this.listBoxPositionsS.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxPositionsS.FormattingEnabled = true;
+            this.listBoxPositionsS.Location = new System.Drawing.Point(3, 90);
+            this.listBoxPositionsS.Name = "listBoxPositionsS";
+            this.listBoxPositionsS.Size = new System.Drawing.Size(495, 147);
+            this.listBoxPositionsS.TabIndex = 6;
+            this.listBoxPositionsS.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxPositions_MouseDoubleClick);
+            // 
+            // btnAddPosition
+            // 
+            this.btnAddPosition.Location = new System.Drawing.Point(248, 63);
+            this.btnAddPosition.Name = "btnAddPosition";
+            this.btnAddPosition.Size = new System.Drawing.Size(100, 21);
+            this.btnAddPosition.TabIndex = 5;
+            this.btnAddPosition.Text = "Add";
+            this.btnAddPosition.UseVisualStyleBackColor = true;
+            this.btnAddPosition.Click += new System.EventHandler(this.btnAddPosition_Click);
+            // 
+            // btnGetPotition
+            // 
+            this.btnGetPotition.Location = new System.Drawing.Point(142, 63);
+            this.btnGetPotition.Name = "btnGetPotition";
+            this.btnGetPotition.Size = new System.Drawing.Size(100, 21);
+            this.btnGetPotition.TabIndex = 4;
+            this.btnGetPotition.Text = "Get Potition";
+            this.btnGetPotition.UseVisualStyleBackColor = true;
+            this.btnGetPotition.Click += new System.EventHandler(this.btnGetPotition_Click);
+            // 
+            // textBoxZ
+            // 
+            this.textBoxZ.Location = new System.Drawing.Point(280, 35);
+            this.textBoxZ.Name = "textBoxZ";
+            this.textBoxZ.ReadOnly = true;
+            this.textBoxZ.Size = new System.Drawing.Size(52, 20);
+            this.textBoxZ.TabIndex = 3;
+            // 
+            // textBoxY
+            // 
+            this.textBoxY.Location = new System.Drawing.Point(222, 35);
+            this.textBoxY.Name = "textBoxY";
+            this.textBoxY.ReadOnly = true;
+            this.textBoxY.Size = new System.Drawing.Size(52, 20);
+            this.textBoxY.TabIndex = 2;
+            // 
+            // textBoxX
+            // 
+            this.textBoxX.Location = new System.Drawing.Point(164, 35);
+            this.textBoxX.Name = "textBoxX";
+            this.textBoxX.ReadOnly = true;
+            this.textBoxX.Size = new System.Drawing.Size(52, 20);
+            this.textBoxX.TabIndex = 0;
+            // 
+            // panelIdolsS
+            // 
+            this.panelIdolsS.Controls.Add(this.groupBoxAshinaCastle);
+            this.panelIdolsS.Controls.Add(this.groupBoxHirataEstate);
+            this.panelIdolsS.Controls.Add(this.groupBoxSunkenValley);
+            this.panelIdolsS.Controls.Add(this.groupBoxSenpouTemple);
+            this.panelIdolsS.Controls.Add(this.groupBoxAshinaDepths);
+            this.panelIdolsS.Controls.Add(this.groupBoxAbandonedDungeon);
+            this.panelIdolsS.Controls.Add(this.groupBoxFountainhead);
+            this.panelIdolsS.Controls.Add(this.groupBoxAshinaOutskirts);
+            this.panelIdolsS.Controls.Add(this.comboBoxZoneSelect);
+            this.panelIdolsS.Controls.Add(this.label14);
+            this.panelIdolsS.Location = new System.Drawing.Point(44, 81);
+            this.panelIdolsS.Name = "panelIdolsS";
+            this.panelIdolsS.Size = new System.Drawing.Size(505, 245);
+            this.panelIdolsS.TabIndex = 15;
             // 
             // groupBoxAshinaCastle
             // 
@@ -1165,18 +1351,18 @@
             this.label14.TabIndex = 4;
             this.label14.Text = "where";
             // 
-            // panelBoss
+            // panelBossS
             // 
-            this.panelBoss.Controls.Add(this.btn_AddBoss);
-            this.panelBoss.Controls.Add(this.label13);
-            this.panelBoss.Controls.Add(this.comboBoxBoss);
-            this.panelBoss.Controls.Add(this.label12);
-            this.panelBoss.Controls.Add(this.comboBoxHowBoss);
-            this.panelBoss.Controls.Add(this.listBoxBosses);
-            this.panelBoss.Location = new System.Drawing.Point(44, 83);
-            this.panelBoss.Name = "panelBoss";
-            this.panelBoss.Size = new System.Drawing.Size(505, 240);
-            this.panelBoss.TabIndex = 14;
+            this.panelBossS.Controls.Add(this.btn_AddBoss);
+            this.panelBossS.Controls.Add(this.label13);
+            this.panelBossS.Controls.Add(this.comboBoxBoss);
+            this.panelBossS.Controls.Add(this.label12);
+            this.panelBossS.Controls.Add(this.comboBoxHowBoss);
+            this.panelBossS.Controls.Add(this.listBoxBosses);
+            this.panelBossS.Location = new System.Drawing.Point(44, 83);
+            this.panelBossS.Name = "panelBossS";
+            this.panelBossS.Size = new System.Drawing.Size(505, 240);
+            this.panelBossS.TabIndex = 14;
             // 
             // btn_AddBoss
             // 
@@ -1252,148 +1438,6 @@
             this.listBoxBosses.Size = new System.Drawing.Size(489, 147);
             this.listBoxBosses.TabIndex = 7;
             this.listBoxBosses.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxBosses_MouseDoubleClick);
-            // 
-            // panelPosition
-            // 
-            this.panelPosition.Controls.Add(this.label11);
-            this.panelPosition.Controls.Add(this.label10);
-            this.panelPosition.Controls.Add(this.label9);
-            this.panelPosition.Controls.Add(this.label8);
-            this.panelPosition.Controls.Add(this.comboBoxHowPosition);
-            this.panelPosition.Controls.Add(this.comboBoxMargin);
-            this.panelPosition.Controls.Add(this.listBoxPositions);
-            this.panelPosition.Controls.Add(this.btnAddPosition);
-            this.panelPosition.Controls.Add(this.btnGetPotition);
-            this.panelPosition.Controls.Add(this.textBoxZ);
-            this.panelPosition.Controls.Add(this.textBoxY);
-            this.panelPosition.Controls.Add(this.textBoxX);
-            this.panelPosition.Location = new System.Drawing.Point(44, 82);
-            this.panelPosition.Name = "panelPosition";
-            this.panelPosition.Size = new System.Drawing.Size(505, 244);
-            this.panelPosition.TabIndex = 13;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(219, 1);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(66, 13);
-            this.label11.TabIndex = 12;
-            this.label11.Text = "Coordinates:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(383, 19);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(39, 13);
-            this.label10.TabIndex = 11;
-            this.label10.Text = "Margin";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(185, 19);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(130, 13);
-            this.label9.TabIndex = 10;
-            this.label9.Text = "X                 Y                 Z";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(77, 19);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(32, 13);
-            this.label8.TabIndex = 9;
-            this.label8.Text = "How:";
-            // 
-            // comboBoxHowPosition
-            // 
-            this.comboBoxHowPosition.BackColor = System.Drawing.SystemColors.Control;
-            this.comboBoxHowPosition.FormattingEnabled = true;
-            this.comboBoxHowPosition.Items.AddRange(new object[] {
-            "Inmediatly",
-            "Loading game after"});
-            this.comboBoxHowPosition.Location = new System.Drawing.Point(36, 34);
-            this.comboBoxHowPosition.Name = "comboBoxHowPosition";
-            this.comboBoxHowPosition.Size = new System.Drawing.Size(110, 21);
-            this.comboBoxHowPosition.TabIndex = 8;
-            // 
-            // comboBoxMargin
-            // 
-            this.comboBoxMargin.BackColor = System.Drawing.SystemColors.Control;
-            this.comboBoxMargin.FormattingEnabled = true;
-            this.comboBoxMargin.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3 (R)",
-            "4 (R)",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10"});
-            this.comboBoxMargin.Location = new System.Drawing.Point(351, 35);
-            this.comboBoxMargin.Name = "comboBoxMargin";
-            this.comboBoxMargin.Size = new System.Drawing.Size(110, 21);
-            this.comboBoxMargin.TabIndex = 7;
-            this.comboBoxMargin.SelectedIndexChanged += new System.EventHandler(this.comboBoxMargin_SelectedIndexChanged);
-            // 
-            // listBoxPositions
-            // 
-            this.listBoxPositions.BackColor = System.Drawing.SystemColors.Control;
-            this.listBoxPositions.FormattingEnabled = true;
-            this.listBoxPositions.Location = new System.Drawing.Point(3, 90);
-            this.listBoxPositions.Name = "listBoxPositions";
-            this.listBoxPositions.Size = new System.Drawing.Size(495, 147);
-            this.listBoxPositions.TabIndex = 6;
-            this.listBoxPositions.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxPositions_MouseDoubleClick);
-            // 
-            // btnAddPosition
-            // 
-            this.btnAddPosition.Location = new System.Drawing.Point(248, 63);
-            this.btnAddPosition.Name = "btnAddPosition";
-            this.btnAddPosition.Size = new System.Drawing.Size(100, 21);
-            this.btnAddPosition.TabIndex = 5;
-            this.btnAddPosition.Text = "Add";
-            this.btnAddPosition.UseVisualStyleBackColor = true;
-            this.btnAddPosition.Click += new System.EventHandler(this.btnAddPosition_Click);
-            // 
-            // btnGetPotition
-            // 
-            this.btnGetPotition.Location = new System.Drawing.Point(142, 63);
-            this.btnGetPotition.Name = "btnGetPotition";
-            this.btnGetPotition.Size = new System.Drawing.Size(100, 21);
-            this.btnGetPotition.TabIndex = 4;
-            this.btnGetPotition.Text = "Get Potition";
-            this.btnGetPotition.UseVisualStyleBackColor = true;
-            this.btnGetPotition.Click += new System.EventHandler(this.btnGetPotition_Click);
-            // 
-            // textBoxZ
-            // 
-            this.textBoxZ.Location = new System.Drawing.Point(280, 35);
-            this.textBoxZ.Name = "textBoxZ";
-            this.textBoxZ.ReadOnly = true;
-            this.textBoxZ.Size = new System.Drawing.Size(52, 20);
-            this.textBoxZ.TabIndex = 3;
-            // 
-            // textBoxY
-            // 
-            this.textBoxY.Location = new System.Drawing.Point(222, 35);
-            this.textBoxY.Name = "textBoxY";
-            this.textBoxY.ReadOnly = true;
-            this.textBoxY.Size = new System.Drawing.Size(52, 20);
-            this.textBoxY.TabIndex = 2;
-            // 
-            // textBoxX
-            // 
-            this.textBoxX.Location = new System.Drawing.Point(164, 35);
-            this.textBoxX.Name = "textBoxX";
-            this.textBoxX.ReadOnly = true;
-            this.textBoxX.Size = new System.Drawing.Size(52, 20);
-            this.textBoxX.TabIndex = 0;
             // 
             // button1
             // 
@@ -1543,23 +1587,617 @@
             // 
             // tabHollow
             // 
-            this.tabHollow.Controls.Add(this.label6);
+            this.tabHollow.BackColor = System.Drawing.SystemColors.Control;
+            this.tabHollow.Controls.Add(this.panelBossH);
+            this.tabHollow.Controls.Add(this.panelPositionH);
+            this.tabHollow.Controls.Add(this.panelItemH);
+            this.tabHollow.Controls.Add(this.refreshHollow);
+            this.tabHollow.Controls.Add(this.btn_DesactiveAllH);
+            this.tabHollow.Controls.Add(this.HollowRunning);
+            this.tabHollow.Controls.Add(this.HollowNotRunning);
+            this.tabHollow.Controls.Add(this.toSplitSelectHollow);
+            this.tabHollow.Controls.Add(this.label24);
             this.tabHollow.Location = new System.Drawing.Point(4, 22);
             this.tabHollow.Name = "tabHollow";
             this.tabHollow.Size = new System.Drawing.Size(587, 351);
             this.tabHollow.TabIndex = 5;
             this.tabHollow.Text = "Hollow Knight";
-            this.tabHollow.UseVisualStyleBackColor = true;
+            // 
+            // panelPositionH
+            // 
+            this.panelPositionH.Controls.Add(this.label29);
+            this.panelPositionH.Controls.Add(this.label26);
+            this.panelPositionH.Controls.Add(this.label27);
+            this.panelPositionH.Controls.Add(this.comboBoxMarginH);
+            this.panelPositionH.Controls.Add(this.listBoxPositionH);
+            this.panelPositionH.Controls.Add(this.btn_AddPositionH);
+            this.panelPositionH.Controls.Add(this.btn_getPositionH);
+            this.panelPositionH.Controls.Add(this.textBoxXh);
+            this.panelPositionH.Controls.Add(this.textBoxYh);
+            this.panelPositionH.Controls.Add(this.textBoxSh);
+            this.panelPositionH.Location = new System.Drawing.Point(43, 82);
+            this.panelPositionH.Name = "panelPositionH";
+            this.panelPositionH.Size = new System.Drawing.Size(506, 255);
+            this.panelPositionH.TabIndex = 20;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(136, 26);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(238, 13);
+            this.label29.TabIndex = 24;
+            this.label29.Text = "X                                 Y                             Scene";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(222, 9);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(66, 13);
+            this.label26.TabIndex = 23;
+            this.label26.Text = "Coordinates:";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(440, 49);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(39, 13);
+            this.label27.TabIndex = 22;
+            this.label27.Text = "Margin";
+            // 
+            // comboBoxMarginH
+            // 
+            this.comboBoxMarginH.BackColor = System.Drawing.SystemColors.Control;
+            this.comboBoxMarginH.FormattingEnabled = true;
+            this.comboBoxMarginH.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3 (R)",
+            "4 (R)",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.comboBoxMarginH.Location = new System.Drawing.Point(425, 70);
+            this.comboBoxMarginH.Name = "comboBoxMarginH";
+            this.comboBoxMarginH.Size = new System.Drawing.Size(68, 21);
+            this.comboBoxMarginH.TabIndex = 19;
+            this.comboBoxMarginH.SelectedIndexChanged += new System.EventHandler(this.comboBoxMarginH_SelectedIndexChanged);
+            // 
+            // listBoxPositionH
+            // 
+            this.listBoxPositionH.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxPositionH.FormattingEnabled = true;
+            this.listBoxPositionH.Location = new System.Drawing.Point(6, 98);
+            this.listBoxPositionH.Name = "listBoxPositionH";
+            this.listBoxPositionH.Size = new System.Drawing.Size(495, 147);
+            this.listBoxPositionH.TabIndex = 18;
+            this.listBoxPositionH.DoubleClick += new System.EventHandler(this.listBoxPositionH_DoubleClick);
+            // 
+            // btn_AddPositionH
+            // 
+            this.btn_AddPositionH.Location = new System.Drawing.Point(251, 71);
+            this.btn_AddPositionH.Name = "btn_AddPositionH";
+            this.btn_AddPositionH.Size = new System.Drawing.Size(100, 21);
+            this.btn_AddPositionH.TabIndex = 17;
+            this.btn_AddPositionH.Text = "Add";
+            this.btn_AddPositionH.UseVisualStyleBackColor = true;
+            this.btn_AddPositionH.Click += new System.EventHandler(this.btn_AddPositionH_Click);
+            // 
+            // btn_getPositionH
+            // 
+            this.btn_getPositionH.Location = new System.Drawing.Point(145, 71);
+            this.btn_getPositionH.Name = "btn_getPositionH";
+            this.btn_getPositionH.Size = new System.Drawing.Size(100, 21);
+            this.btn_getPositionH.TabIndex = 16;
+            this.btn_getPositionH.Text = "Get Potition";
+            this.btn_getPositionH.UseVisualStyleBackColor = true;
+            this.btn_getPositionH.Click += new System.EventHandler(this.btn_getPositionH_Click);
+            // 
+            // textBoxXh
+            // 
+            this.textBoxXh.Location = new System.Drawing.Point(93, 44);
+            this.textBoxXh.Name = "textBoxXh";
+            this.textBoxXh.ReadOnly = true;
+            this.textBoxXh.Size = new System.Drawing.Size(100, 20);
+            this.textBoxXh.TabIndex = 15;
+            // 
+            // textBoxYh
+            // 
+            this.textBoxYh.Location = new System.Drawing.Point(199, 44);
+            this.textBoxYh.Name = "textBoxYh";
+            this.textBoxYh.ReadOnly = true;
+            this.textBoxYh.Size = new System.Drawing.Size(100, 20);
+            this.textBoxYh.TabIndex = 14;
+            // 
+            // textBoxSh
+            // 
+            this.textBoxSh.Location = new System.Drawing.Point(305, 44);
+            this.textBoxSh.Name = "textBoxSh";
+            this.textBoxSh.ReadOnly = true;
+            this.textBoxSh.Size = new System.Drawing.Size(100, 20);
+            this.textBoxSh.TabIndex = 13;
+            // 
+            // panelItemH
+            // 
+            this.panelItemH.Controls.Add(this.groupBoxSkillsH);
+            this.panelItemH.Controls.Add(this.groupBoxCharms);
+            this.panelItemH.Controls.Add(this.comboBoxItemSelectH);
+            this.panelItemH.Controls.Add(this.label25);
+            this.panelItemH.Location = new System.Drawing.Point(44, 82);
+            this.panelItemH.Name = "panelItemH";
+            this.panelItemH.Size = new System.Drawing.Size(505, 254);
+            this.panelItemH.TabIndex = 19;
+            // 
+            // groupBoxSkillsH
+            // 
+            this.groupBoxSkillsH.Controls.Add(this.checkedListBoxSkillsH);
+            this.groupBoxSkillsH.Location = new System.Drawing.Point(5, 36);
+            this.groupBoxSkillsH.Name = "groupBoxSkillsH";
+            this.groupBoxSkillsH.Size = new System.Drawing.Size(499, 212);
+            this.groupBoxSkillsH.TabIndex = 11;
+            this.groupBoxSkillsH.TabStop = false;
+            this.groupBoxSkillsH.Text = "Skills";
+            // 
+            // checkedListBoxSkillsH
+            // 
+            this.checkedListBoxSkillsH.BackColor = System.Drawing.SystemColors.Control;
+            this.checkedListBoxSkillsH.CheckOnClick = true;
+            this.checkedListBoxSkillsH.FormattingEnabled = true;
+            this.checkedListBoxSkillsH.Items.AddRange(new object[] {
+            "Abyss Shriek",
+            "Crystal Heart",
+            "Cyclone Slash",
+            "Dash Slash",
+            "Descending Dark",
+            "Desolate Dive",
+            "Dream Nail",
+            "Dream Nail - Awoken",
+            "Dream Gate",
+            "Great Slash",
+            "Howling Wraiths",
+            "Isma\'s Tear",
+            "Mantis Claw",
+            "Monarch Wings",
+            "Mothwing Cloak",
+            "Shade Cloak",
+            "Shade Soul",
+            "Vengeful Spirit"});
+            this.checkedListBoxSkillsH.Location = new System.Drawing.Point(19, 28);
+            this.checkedListBoxSkillsH.Name = "checkedListBoxSkillsH";
+            this.checkedListBoxSkillsH.Size = new System.Drawing.Size(470, 169);
+            this.checkedListBoxSkillsH.TabIndex = 0;
+            this.checkedListBoxSkillsH.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxSkillsH_ItemCheck);
+            // 
+            // groupBoxCharms
+            // 
+            this.groupBoxCharms.Controls.Add(this.checkedListBoxCharms);
+            this.groupBoxCharms.Location = new System.Drawing.Point(3, 35);
+            this.groupBoxCharms.Name = "groupBoxCharms";
+            this.groupBoxCharms.Size = new System.Drawing.Size(499, 212);
+            this.groupBoxCharms.TabIndex = 10;
+            this.groupBoxCharms.TabStop = false;
+            this.groupBoxCharms.Text = "Charms";
+            // 
+            // checkedListBoxCharms
+            // 
+            this.checkedListBoxCharms.BackColor = System.Drawing.SystemColors.Control;
+            this.checkedListBoxCharms.CheckOnClick = true;
+            this.checkedListBoxCharms.FormattingEnabled = true;
+            this.checkedListBoxCharms.Items.AddRange(new object[] {
+            "Baldur Shell",
+            "Dashmaster",
+            "Deep Focus",
+            "Defenders Crest",
+            "Dreamshield",
+            "Dream Wielder",
+            "Flukenest",
+            "Fragile Greed",
+            "Fragile Heart",
+            "Fragile Strength",
+            "Fury of the Fallen",
+            "Gathering Swarm",
+            "Glowing Womb",
+            "Grimmchild",
+            "Grimmchild Lvl 2",
+            "Grimmchild Lvl 3",
+            "Grimmchild Lvl 4",
+            "Grubberfly\'s Elegy",
+            "Grubsong",
+            "Heavy Blow",
+            "Hiveblood",
+            "Joni\'s Blessing",
+            "White Fragment - Queen\'s",
+            "White Fragment - King\'s",
+            "Kingsoul",
+            "Lifeblood Core",
+            "Lifeblood Heart",
+            "Longnail",
+            "Mark of Pride",
+            "Nailmaster\'s Glory",
+            "Quick Focus",
+            "Quick Slash",
+            "Shaman Stone",
+            "Shape of Unn",
+            "Sharp Shadow",
+            "Soul Catcher",
+            "Soul Eater",
+            "Spell Twister",
+            "Spore Shroom",
+            "Sprintmaster",
+            "Stalwart Shell",
+            "Steady Body",
+            "Thorns of Agony",
+            "Unbreakable Greed",
+            "Unbreakable Heart",
+            "Unbreakable Strength",
+            "Void Heart",
+            "Wayward Compass",
+            "Weaversong",
+            "Shrumal Ogres (Charm)",
+            "Fog Canyon",
+            "Salubra 1",
+            "Salubra 2",
+            "Salubra 3",
+            "Salubra 4"});
+            this.checkedListBoxCharms.Location = new System.Drawing.Point(19, 28);
+            this.checkedListBoxCharms.Name = "checkedListBoxCharms";
+            this.checkedListBoxCharms.Size = new System.Drawing.Size(470, 169);
+            this.checkedListBoxCharms.TabIndex = 0;
+            this.checkedListBoxCharms.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxCharms_ItemCheck);
+            // 
+            // comboBoxItemSelectH
+            // 
+            this.comboBoxItemSelectH.BackColor = System.Drawing.SystemColors.GrayText;
+            this.comboBoxItemSelectH.FormattingEnabled = true;
+            this.comboBoxItemSelectH.Items.AddRange(new object[] {
+            "Skills",
+            "Charms"});
+            this.comboBoxItemSelectH.Location = new System.Drawing.Point(78, 3);
+            this.comboBoxItemSelectH.Name = "comboBoxItemSelectH";
+            this.comboBoxItemSelectH.Size = new System.Drawing.Size(361, 21);
+            this.comboBoxItemSelectH.TabIndex = 9;
+            this.comboBoxItemSelectH.SelectedIndexChanged += new System.EventHandler(this.comboBoxItemSelectH_SelectedIndexChanged);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(33, 6);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(35, 13);
+            this.label25.TabIndex = 8;
+            this.label25.Text = "select";
+            // 
+            // panelBossH
+            // 
+            this.panelBossH.Controls.Add(this.groupBoxMBH);
+            this.panelBossH.Controls.Add(this.groupBoxPantheon);
+            this.panelBossH.Controls.Add(this.groupBossH);
+            this.panelBossH.Controls.Add(this.comboBoxSelectKindBoss);
+            this.panelBossH.Controls.Add(this.label6);
+            this.panelBossH.Location = new System.Drawing.Point(44, 81);
+            this.panelBossH.Name = "panelBossH";
+            this.panelBossH.Size = new System.Drawing.Size(505, 256);
+            this.panelBossH.TabIndex = 18;
+            // 
+            // groupBoxMBH
+            // 
+            this.groupBoxMBH.Controls.Add(this.checkedListBoxHMB);
+            this.groupBoxMBH.Location = new System.Drawing.Point(4, 30);
+            this.groupBoxMBH.Name = "groupBoxMBH";
+            this.groupBoxMBH.Size = new System.Drawing.Size(499, 212);
+            this.groupBoxMBH.TabIndex = 9;
+            this.groupBoxMBH.TabStop = false;
+            this.groupBoxMBH.Text = "Mini Boss - Colosseum - Dreamers - Others";
+            // 
+            // checkedListBoxHMB
+            // 
+            this.checkedListBoxHMB.BackColor = System.Drawing.SystemColors.Control;
+            this.checkedListBoxHMB.CheckOnClick = true;
+            this.checkedListBoxHMB.FormattingEnabled = true;
+            this.checkedListBoxHMB.Items.AddRange(new object[] {
+            "Enraged Guardian",
+            "Oblobbles",
+            "Soul Warrior",
+            "Soul Twister",
+            "Aspid Hunter",
+            "Moss Knight",
+            "Shrumal Ogres",
+            "Zote Rescued - Vengefly King",
+            "Zote Rescued - Deepnest",
+            "Zote Defeated - Colosseum",
+            "First Dreamer",
+            "Second Dreamer",
+            "Third Dreamer",
+            "Colosseum Warrior Completed",
+            "Colosseum Conqueror Completed",
+            "Colosseum Fool Completed",
+            "Aluba",
+            "Great Hopper",
+            "Gorgeous Husk",
+            "Menderbug",
+            "Mimic 1",
+            "Mimic 2",
+            "Mimic 3",
+            "Mimic 4",
+            "Mimic 5",
+            "Path of Pain - Completed",
+            "Flower Quest - Completed"});
+            this.checkedListBoxHMB.Location = new System.Drawing.Point(19, 28);
+            this.checkedListBoxHMB.Name = "checkedListBoxHMB";
+            this.checkedListBoxHMB.Size = new System.Drawing.Size(470, 169);
+            this.checkedListBoxHMB.TabIndex = 0;
+            this.checkedListBoxHMB.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxMBH_ItemCheck_1);
+            // 
+            // groupBoxPantheon
+            // 
+            this.groupBoxPantheon.Controls.Add(this.lbl_warning);
+            this.groupBoxPantheon.Controls.Add(this.checkedListBoxPp);
+            this.groupBoxPantheon.Controls.Add(this.label16);
+            this.groupBoxPantheon.Controls.Add(this.comboBoxHowP);
+            this.groupBoxPantheon.Controls.Add(this.checkedListBoxPantheon);
+            this.groupBoxPantheon.Location = new System.Drawing.Point(6, 30);
+            this.groupBoxPantheon.Name = "groupBoxPantheon";
+            this.groupBoxPantheon.Size = new System.Drawing.Size(499, 224);
+            this.groupBoxPantheon.TabIndex = 10;
+            this.groupBoxPantheon.TabStop = false;
+            this.groupBoxPantheon.Text = "Pantheon";
+            // 
+            // lbl_warning
+            // 
+            this.lbl_warning.AutoSize = true;
+            this.lbl_warning.ForeColor = System.Drawing.Color.Red;
+            this.lbl_warning.Location = new System.Drawing.Point(69, 170);
+            this.lbl_warning.Name = "lbl_warning";
+            this.lbl_warning.Size = new System.Drawing.Size(361, 52);
+            this.lbl_warning.TabIndex = 14;
+            this.lbl_warning.Text = resources.GetString("lbl_warning.Text");
+            this.lbl_warning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // checkedListBoxPp
+            // 
+            this.checkedListBoxPp.BackColor = System.Drawing.SystemColors.Control;
+            this.checkedListBoxPp.CheckOnClick = true;
+            this.checkedListBoxPp.FormattingEnabled = true;
+            this.checkedListBoxPp.Items.AddRange(new object[] {
+            "Pantheon of the Master",
+            "Pantheon of the Artist",
+            "Pantheon of the Sage",
+            "Pantheon of the Knight",
+            "Pantheon of Hallownest"});
+            this.checkedListBoxPp.Location = new System.Drawing.Point(19, 44);
+            this.checkedListBoxPp.Name = "checkedListBoxPp";
+            this.checkedListBoxPp.Size = new System.Drawing.Size(470, 124);
+            this.checkedListBoxPp.TabIndex = 13;
+            this.checkedListBoxPp.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxPp_ItemCheck);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(45, 20);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(27, 13);
+            this.label16.TabIndex = 12;
+            this.label16.Text = "how";
+            // 
+            // comboBoxHowP
+            // 
+            this.comboBoxHowP.BackColor = System.Drawing.SystemColors.GrayText;
+            this.comboBoxHowP.FormattingEnabled = true;
+            this.comboBoxHowP.Items.AddRange(new object[] {
+            "Split on all selected bosses",
+            "Split one per Pantheon"});
+            this.comboBoxHowP.Location = new System.Drawing.Point(82, 15);
+            this.comboBoxHowP.Name = "comboBoxHowP";
+            this.comboBoxHowP.Size = new System.Drawing.Size(361, 21);
+            this.comboBoxHowP.TabIndex = 11;
+            this.comboBoxHowP.SelectedIndexChanged += new System.EventHandler(this.comboBoxHowP_SelectedIndexChanged);
+            // 
+            // checkedListBoxPantheon
+            // 
+            this.checkedListBoxPantheon.BackColor = System.Drawing.SystemColors.Control;
+            this.checkedListBoxPantheon.CheckOnClick = true;
+            this.checkedListBoxPantheon.FormattingEnabled = true;
+            this.checkedListBoxPantheon.Items.AddRange(new object[] {
+            "Grey Prince Zote",
+            "Vengefly King",
+            "Gruz Mother",
+            "False Knight",
+            "Massive Moss Charger",
+            "Hornet (Protector)",
+            "Gorb",
+            "Dung Defender",
+            "Soul Warrior",
+            "Brooding Mawlek",
+            "Oro & Mato Nail Bros",
+            "Xero",
+            "Crystal Guardian",
+            "Soul Master",
+            "Oblobbles",
+            "Sisters of Battle",
+            "Marmu",
+            "Flukemarm",
+            "Broken Vessel",
+            "Galien",
+            "Paintmaster Sheo",
+            "Hive Knight",
+            "Elder Hu",
+            "The Collector",
+            "God Tamer",
+            "Troupe Master Grim",
+            "Watcher Knights",
+            "Uumuu",
+            "Nosk",
+            "Winged Nosk",
+            "Great Nailsage Slay",
+            "Hornet (Sentinel)",
+            "Enraged Guardian",
+            "Lost Kin",
+            "No Eyes",
+            "Traitor Lord",
+            "White Defender",
+            "Soul Tyrant",
+            "Markoth",
+            "Failed Champion",
+            "Nightmare King Grimm",
+            "Pure Vessel",
+            "Absolute Radiance"});
+            this.checkedListBoxPantheon.Location = new System.Drawing.Point(19, 43);
+            this.checkedListBoxPantheon.Name = "checkedListBoxPantheon";
+            this.checkedListBoxPantheon.Size = new System.Drawing.Size(470, 124);
+            this.checkedListBoxPantheon.TabIndex = 0;
+            this.checkedListBoxPantheon.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxPantheon_ItemCheck);
+            // 
+            // groupBossH
+            // 
+            this.groupBossH.Controls.Add(this.checkedListBoxBossH);
+            this.groupBossH.Location = new System.Drawing.Point(3, 30);
+            this.groupBossH.Name = "groupBossH";
+            this.groupBossH.Size = new System.Drawing.Size(499, 212);
+            this.groupBossH.TabIndex = 8;
+            this.groupBossH.TabStop = false;
+            this.groupBossH.Text = "Bosses";
+            // 
+            // checkedListBoxBossH
+            // 
+            this.checkedListBoxBossH.BackColor = System.Drawing.SystemColors.Control;
+            this.checkedListBoxBossH.CheckOnClick = true;
+            this.checkedListBoxBossH.FormattingEnabled = true;
+            this.checkedListBoxBossH.Items.AddRange(new object[] {
+            "Broken Vessel",
+            "Brooding Mawlek",
+            "Collector",
+            "Crystal Guardian",
+            "Dung Defender",
+            "Elder Hu",
+            "False Knight",
+            "Failed Champion",
+            "Flukemarm",
+            "Galien",
+            "God Tamer",
+            "Gorb",
+            "Grey Prince Zote",
+            "Gruz Mother",
+            "Hive Knight",
+            "Hornet (Greenpath)",
+            "Hornet (Kingdom\'s Edge)",
+            "Lost Kin",
+            "Mantis Lords",
+            "Markoth",
+            "Marmu",
+            "Massive Moss Charger",
+            "Nightmare King Grimm",
+            "No Eyes",
+            "Nosk",
+            "Oro & Mato Nail Bros",
+            "Pure Vessel",
+            "Radiance",
+            "The Hollow Knight",
+            "Paintmaster Sheo",
+            "Great Nailsage Sly",
+            "Soul Master",
+            "Soul Tyrant",
+            "Traitor Lord",
+            "Troupe Master Grimm",
+            "Uumuu",
+            "Watcher Knight",
+            "White Defender",
+            "Xero"});
+            this.checkedListBoxBossH.Location = new System.Drawing.Point(19, 28);
+            this.checkedListBoxBossH.Name = "checkedListBoxBossH";
+            this.checkedListBoxBossH.Size = new System.Drawing.Size(470, 169);
+            this.checkedListBoxBossH.TabIndex = 0;
+            this.checkedListBoxBossH.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxBossH_ItemCheck);
+            // 
+            // comboBoxSelectKindBoss
+            // 
+            this.comboBoxSelectKindBoss.BackColor = System.Drawing.SystemColors.GrayText;
+            this.comboBoxSelectKindBoss.FormattingEnabled = true;
+            this.comboBoxSelectKindBoss.Items.AddRange(new object[] {
+            "Boss",
+            "Pantheon",
+            "Mini Boss - Coliseum -Dreamers - Others"});
+            this.comboBoxSelectKindBoss.Location = new System.Drawing.Point(78, 3);
+            this.comboBoxSelectKindBoss.Name = "comboBoxSelectKindBoss";
+            this.comboBoxSelectKindBoss.Size = new System.Drawing.Size(361, 21);
+            this.comboBoxSelectKindBoss.TabIndex = 7;
+            this.comboBoxSelectKindBoss.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectKindBoss_SelectedIndexChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(143, 157);
+            this.label6.Location = new System.Drawing.Point(33, 6);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(301, 37);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Not Yet Developed";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "select";
+            // 
+            // refreshHollow
+            // 
+            this.refreshHollow.Location = new System.Drawing.Point(474, 17);
+            this.refreshHollow.Name = "refreshHollow";
+            this.refreshHollow.Size = new System.Drawing.Size(62, 23);
+            this.refreshHollow.TabIndex = 17;
+            this.refreshHollow.Text = "Refresh";
+            this.refreshHollow.UseVisualStyleBackColor = true;
+            this.refreshHollow.Click += new System.EventHandler(this.refresh_Btn);
+            // 
+            // btn_DesactiveAllH
+            // 
+            this.btn_DesactiveAllH.Location = new System.Drawing.Point(27, 17);
+            this.btn_DesactiveAllH.Name = "btn_DesactiveAllH";
+            this.btn_DesactiveAllH.Size = new System.Drawing.Size(100, 23);
+            this.btn_DesactiveAllH.TabIndex = 16;
+            this.btn_DesactiveAllH.Text = "Desactive All";
+            this.btn_DesactiveAllH.UseVisualStyleBackColor = true;
+            this.btn_DesactiveAllH.Click += new System.EventHandler(this.btn_DesactiveAllH_Click);
+            // 
+            // HollowRunning
+            // 
+            this.HollowRunning.AutoSize = true;
+            this.HollowRunning.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.HollowRunning.Location = new System.Drawing.Point(323, 22);
+            this.HollowRunning.Name = "HollowRunning";
+            this.HollowRunning.Size = new System.Drawing.Size(125, 13);
+            this.HollowRunning.TabIndex = 15;
+            this.HollowRunning.Text = "Hollow Knight is Running";
+            // 
+            // HollowNotRunning
+            // 
+            this.HollowNotRunning.AutoSize = true;
+            this.HollowNotRunning.ForeColor = System.Drawing.Color.Red;
+            this.HollowNotRunning.Location = new System.Drawing.Point(323, 22);
+            this.HollowNotRunning.Name = "HollowNotRunning";
+            this.HollowNotRunning.Size = new System.Drawing.Size(145, 13);
+            this.HollowNotRunning.TabIndex = 14;
+            this.HollowNotRunning.Text = "Hollow Knight is Not Running";
+            // 
+            // toSplitSelectHollow
+            // 
+            this.toSplitSelectHollow.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.toSplitSelectHollow.FormattingEnabled = true;
+            this.toSplitSelectHollow.Items.AddRange(new object[] {
+            "Kill a enemy",
+            "Obtein a Item",
+            "Target a Position"});
+            this.toSplitSelectHollow.Location = new System.Drawing.Point(80, 54);
+            this.toSplitSelectHollow.Name = "toSplitSelectHollow";
+            this.toSplitSelectHollow.Size = new System.Drawing.Size(444, 21);
+            this.toSplitSelectHollow.TabIndex = 13;
+            this.toSplitSelectHollow.SelectedIndexChanged += new System.EventHandler(this.toSplitSelectHollow_SelectedIndexChanged);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(41, 57);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(33, 13);
+            this.label24.TabIndex = 12;
+            this.label24.Text = "when";
             // 
             // tabUpdate
             // 
@@ -1632,8 +2270,10 @@
             this.TabControl2.ResumeLayout(false);
             this.tabSekiro.ResumeLayout(false);
             this.tabSekiro.PerformLayout();
-            this.panelIdols.ResumeLayout(false);
-            this.panelIdols.PerformLayout();
+            this.panelPositionS.ResumeLayout(false);
+            this.panelPositionS.PerformLayout();
+            this.panelIdolsS.ResumeLayout(false);
+            this.panelIdolsS.PerformLayout();
             this.groupBoxAshinaCastle.ResumeLayout(false);
             this.groupBoxRadioAshinaCastle.ResumeLayout(false);
             this.groupBoxRadioAshinaCastle.PerformLayout();
@@ -1658,10 +2298,8 @@
             this.groupBoxAshinaOutskirts.ResumeLayout(false);
             this.groupBoxRadiosAshinaOutskirts.ResumeLayout(false);
             this.groupBoxRadiosAshinaOutskirts.PerformLayout();
-            this.panelBoss.ResumeLayout(false);
-            this.panelBoss.PerformLayout();
-            this.panelPosition.ResumeLayout(false);
-            this.panelPosition.PerformLayout();
+            this.panelBossS.ResumeLayout(false);
+            this.panelBossS.PerformLayout();
             this.tabDs1.ResumeLayout(false);
             this.tabDs1.PerformLayout();
             this.tabDs2.ResumeLayout(false);
@@ -1672,6 +2310,18 @@
             this.tabElden.PerformLayout();
             this.tabHollow.ResumeLayout(false);
             this.tabHollow.PerformLayout();
+            this.panelPositionH.ResumeLayout(false);
+            this.panelPositionH.PerformLayout();
+            this.panelItemH.ResumeLayout(false);
+            this.panelItemH.PerformLayout();
+            this.groupBoxSkillsH.ResumeLayout(false);
+            this.groupBoxCharms.ResumeLayout(false);
+            this.panelBossH.ResumeLayout(false);
+            this.panelBossH.PerformLayout();
+            this.groupBoxMBH.ResumeLayout(false);
+            this.groupBoxPantheon.ResumeLayout(false);
+            this.groupBoxPantheon.PerformLayout();
+            this.groupBossH.ResumeLayout(false);
             this.tabUpdate.ResumeLayout(false);
             this.tabUpdate.PerformLayout();
             this.ResumeLayout(false);
@@ -1697,22 +2347,21 @@
         private System.Windows.Forms.TabPage tabDs1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TabPage tabHollow;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Panel panelPosition;
+        private System.Windows.Forms.Panel panelPositionS;
         private System.Windows.Forms.Button btnAddPosition;
         private System.Windows.Forms.Button btnGetPotition;
         private System.Windows.Forms.TextBox textBoxZ;
         private System.Windows.Forms.TextBox textBoxY;
         private System.Windows.Forms.TextBox textBoxX;
-        private System.Windows.Forms.ComboBox comboBoxMargin;
+        private System.Windows.Forms.ComboBox comboBoxMarginS;
         private System.Windows.Forms.TabPage tabUpdate;
         internal System.Windows.Forms.TextBox TextBox1;
         private System.Windows.Forms.Button btnCheckVersion;
         private System.Windows.Forms.Label lblVersionCurrent;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBoxHowPosition;
-        private System.Windows.Forms.ListBox listBoxPositions;
-        private System.Windows.Forms.Panel panelBoss;
+        private System.Windows.Forms.ListBox listBoxPositionsS;
+        private System.Windows.Forms.Panel panelBossS;
         private System.Windows.Forms.ListBox listBoxBosses;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
@@ -1723,7 +2372,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox comboBoxHowBoss;
         private System.Windows.Forms.Button btn_AddBoss;
-        private System.Windows.Forms.Panel panelIdols;
+        private System.Windows.Forms.Panel panelIdolsS;
         private System.Windows.Forms.ComboBox comboBoxZoneSelect;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.GroupBox groupBoxAshinaOutskirts;
@@ -1798,5 +2447,42 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.RadioButton radioLagF;
         private System.Windows.Forms.RadioButton radioImmF;
+        private System.Windows.Forms.Button refreshHollow;
+        private System.Windows.Forms.Button btn_DesactiveAllH;
+        private System.Windows.Forms.Label HollowRunning;
+        private System.Windows.Forms.Label HollowNotRunning;
+        private System.Windows.Forms.ComboBox toSplitSelectHollow;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Panel panelBossH;
+        private System.Windows.Forms.GroupBox groupBossH;
+        private System.Windows.Forms.CheckedListBox checkedListBoxBossH;
+        private System.Windows.Forms.ComboBox comboBoxSelectKindBoss;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBoxMBH;
+        private System.Windows.Forms.CheckedListBox checkedListBoxHMB;
+        private System.Windows.Forms.GroupBox groupBoxPantheon;
+        private System.Windows.Forms.CheckedListBox checkedListBoxPantheon;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox comboBoxHowP;
+        private System.Windows.Forms.CheckedListBox checkedListBoxPp;
+        private System.Windows.Forms.Label lbl_warning;
+        private System.Windows.Forms.Panel panelItemH;
+        private System.Windows.Forms.GroupBox groupBoxCharms;
+        private System.Windows.Forms.CheckedListBox checkedListBoxCharms;
+        private System.Windows.Forms.ComboBox comboBoxItemSelectH;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.GroupBox groupBoxSkillsH;
+        private System.Windows.Forms.CheckedListBox checkedListBoxSkillsH;
+        private System.Windows.Forms.Panel panelPositionH;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.ComboBox comboBoxMarginH;
+        private System.Windows.Forms.ListBox listBoxPositionH;
+        private System.Windows.Forms.Button btn_AddPositionH;
+        private System.Windows.Forms.Button btn_getPositionH;
+        private System.Windows.Forms.TextBox textBoxXh;
+        private System.Windows.Forms.TextBox textBoxYh;
+        private System.Windows.Forms.TextBox textBoxSh;
+        private System.Windows.Forms.Label label29;
     }
 }

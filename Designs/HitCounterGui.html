@@ -209,10 +209,10 @@ function DoVisualUpdate(d /*data*/)
 		else if (d.purpose == 2) // Checklist
 		{
 			new_tbl +=
-	 '<tr>' +
-	  '<td class="' + majorclass + ' left">Boss</td>' +
-	  '<td class="' + majorclass + '" width="30px">Done</td>' +
-	 '</tr>';
+ '<tr>' +
+  '<td class="' + majorclass + ' left">Boss</td>' +
+  '<td class="' + majorclass + '" width="30px">Done</td>' +
+ '</tr>';
 		}
 	}
 
@@ -225,29 +225,34 @@ function DoVisualUpdate(d /*data*/)
 
 		// fill start
 		if (0 < splits.length) percentage = 100 / splits.length;
-		new_tbl += '<tr><td class="' + majorclass + ' progress_cell" colspan="' + max_cols + '">' +
-				'<table class="progress"><tr>';
+		new_tbl +=
+ '<tr>' + 
+  '<td class="' + majorclass + ' progress_cell" colspan="' + max_cols + '">' +
+   '<table class="progress"><tr>';
 
 		// fill splits
-		for ( i = 0 ; (i < splits.length) && (i <= d.split_last) ; i = i + 1 )
+		for ( i = 0 ; i < splits.length ; i = i + 1 )
 		{
 			s = splits[i];
-
-			if (d.split_active == i) // place a spacer for the current split
+			if (!s.reached) // place a spacer for the upcoming splits and fill rest
 			{
-				new_tbl += '<td class="progress_spacer"> </td>';
+				new_tbl +=
+     '<td class="progress_spacer"> </td>' +
+     '<td class="progress_open"> </td>';
+				break;
 			}
-			else if (s.reached && (s.run_id != 0)) // display only up to reached split and skip history split (run_id=0)
+			else if (s.run_id != 0) // skip history split (run_id=0)
 			{
 				percentage_sum += percentage;
-				new_tbl += '<td class="progress_' + (d.progress_bar_colored ? s.class_hits_color : 'better') +'" width="' + percentage + '%"></td>';
+				new_tbl +=
+     '<td class="progress_' + (d.progress_bar_colored ? s.class_hits_color : 'better') +'" style="width: ' + percentage + '%; width: calc(100% / ' + splits.length + ');"></td>';
 			}
 		}
 
 		// fill end
-		new_tbl += (percentage_sum < 99 ? '<td class="progress_open"></td>' : '') +
-					'</tr></table>' +
-		'</td></tr>';
+		new_tbl +=
+   '</tr></table></td>' +
+ '</tr>';
 	}
 
 	// ------------------------------------------------------------------------------------
