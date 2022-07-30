@@ -53,12 +53,12 @@ namespace HitCounterManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = Text + " - v" + Application.ProductVersion + " Beta 2 - Rev.1 " + OsLayer.Name;
+            Text = Text + " - v" + Application.ProductVersion + " Beta 3 - Rev.1 " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();  
             ProfileChangedHandler(sender, e);
             LoadAutoSplitterSettings(profCtrl);
-            profCtrl.setSplittersPointers(sekiroSplitter,hollowSplitter);
+            profCtrl.setSplittersPointers(sekiroSplitter,hollowSplitter,eldenSplitter);
             #region ComboBoxSet
             if (sekiroSplitter.dataSekiro.enableSplitting)
             {
@@ -72,7 +72,15 @@ namespace HitCounterManager
                 }
                 else
                 {
-                    comboBoxGame.SelectedIndex = 0;
+                    if (eldenSplitter.dataElden.enableSplitting)
+                    {
+                        comboBoxGame.SelectedIndex = 5;
+                    }
+                    else
+                    {
+                        comboBoxGame.SelectedIndex = 0;
+                    }
+                    
                 }
                 
             }
@@ -204,7 +212,7 @@ namespace HitCounterManager
         private void btnSplit_MouseDown(object sender, MouseEventArgs e) { if (e.Button == MouseButtons.Right) profCtrl.ProfileSplitGo(-1); }
         private void btnSplitPrev_Click(object sender, EventArgs e) { profCtrl.ProfileSplitGo(-1); }
 
-        private void btnSplitter_Click(object sender, EventArgs e) { Form form = new AutoSplitter(getSekiroInstance(),getHollowInstance()); form.ShowDialog(this);}
+        private void btnSplitter_Click(object sender, EventArgs e) { Form form = new AutoSplitter(getSekiroInstance(),getHollowInstance(),getEldenInstance()); form.ShowDialog(this);}
 
         private void ProfileChangedHandler(object sender, EventArgs e)
         {
@@ -233,6 +241,7 @@ namespace HitCounterManager
             //Disable all games
             sekiroSplitter.setStatusSplitting(false);
             hollowSplitter.setStatusSplitting(false);
+            eldenSplitter.setStatusSplitting(false);
 
 
 
@@ -240,15 +249,16 @@ namespace HitCounterManager
             if (comboBoxGame.SelectedIndex == 1)
             {
                 sekiroSplitter.setStatusSplitting(true);
-            } else
-            {
-                if (comboBoxGame.SelectedIndex == 6)
-                {
-                    hollowSplitter.setStatusSplitting(true);
-                    
-                    
-                }
             }
+            if (comboBoxGame.SelectedIndex == 6)
+            {
+                hollowSplitter.setStatusSplitting(true);
+            }
+            if(comboBoxGame.SelectedIndex == 5)
+            {
+                eldenSplitter.setStatusSplitting(true);
+            }
+
            
         }
 

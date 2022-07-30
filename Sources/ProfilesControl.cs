@@ -35,6 +35,7 @@ namespace HitCounterManager
         private bool Ready = false;
         private SekiroSplitter sekiroSplitter;
         private HollowSplitter hollowSplitter;
+        private EldenSplitter eldenSplitter;
 
         public ProfilesControl()
         {
@@ -55,10 +56,11 @@ namespace HitCounterManager
             ptc.InitializeProfileTabControl();
         }
 
-        public void setSplittersPointers(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter)
+        public void setSplittersPointers(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter,EldenSplitter eldenSplitter)
         {
             this.sekiroSplitter = sekiroSplitter;
             this.hollowSplitter = hollowSplitter;
+            this.eldenSplitter = eldenSplitter;
         }
 
 
@@ -384,6 +386,7 @@ namespace HitCounterManager
             }
             sekiroSplitter.resetSplited();
             hollowSplitter.resetSplited();
+            eldenSplitter.resetSplited();
         }
         public void ProfilePB()
         {

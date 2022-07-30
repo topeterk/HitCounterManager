@@ -90,6 +90,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Splitters\DataAutoSplitter.cs" />
+    <Compile Include="Splitters\DTElden.cs" />
     <Compile Include="Splitters\DTHollow.cs" />
     <Compile Include="Splitters\DTSekiro.cs" />
     <Compile Include="Splitters\AutoSplitter.cs">
@@ -98,6 +99,7 @@
     <Compile Include="Splitters\AutoSplitter.Designer.cs">
       <DependentUpon>AutoSplitter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Splitters\EldenSplitter.cs" />
     <Compile Include="Splitters\HollowSplitter.cs" />
     <Compile Include="Splitters\SekiroSplitter.cs" />
     <Compile Include="Sources\ProfilesControl.cs">

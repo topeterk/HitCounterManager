@@ -36,7 +36,7 @@ namespace HitCounterManager
 
         #region Boss.Sekiro
         [Serializable]
-        public class Boss
+        public class BossS
         {
             public string Title;
             public uint Id;
@@ -52,9 +52,9 @@ namespace HitCounterManager
 
         }
 
-        public Boss BossToEnum(string Nboss)
+        public BossS BossToEnum(string Nboss)
         {
-            Boss boss = new Boss();
+            BossS boss = new BossS();
             switch (Nboss)
             {
                 case "Gyoubu Masataka Oniwa":
@@ -307,7 +307,7 @@ namespace HitCounterManager
         #endregion
         #region Position.Sekiro
         [Serializable]
-        public class Position
+        public class PositionS
         {
             public Vector3f vector = new Vector3f();
             public bool IsSplited = false;
@@ -329,13 +329,13 @@ namespace HitCounterManager
         //Settings Vars
         public bool enableSplitting = false;
         //Flags to Split
-        public List<DefinitionsSekiro.Boss> bossToSplit = new List<DefinitionsSekiro.Boss>();
+        public List<DefinitionsSekiro.BossS> bossToSplit = new List<DefinitionsSekiro.BossS>();
         public List<DefinitionsSekiro.Idol> idolsTosplit = new List<DefinitionsSekiro.Idol>();
-        public List<DefinitionsSekiro.Position> positionsToSplit = new List<DefinitionsSekiro.Position>();
+        public List<DefinitionsSekiro.PositionS> positionsToSplit = new List<DefinitionsSekiro.PositionS>();
         public int positionMargin = 3;
 
 
-        public List<DefinitionsSekiro.Boss> getBossToSplit()
+        public List<DefinitionsSekiro.BossS> getBossToSplit()
         {
             return this.bossToSplit;
         }
@@ -345,7 +345,7 @@ namespace HitCounterManager
             return this.idolsTosplit;
         }
 
-        public List<DefinitionsSekiro.Position> getPositionsToSplit()
+        public List<DefinitionsSekiro.PositionS> getPositionsToSplit()
         {
             return this.positionsToSplit;
         }

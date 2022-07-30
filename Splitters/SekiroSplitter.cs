@@ -68,14 +68,14 @@ namespace HitCounterManager
 
         public void AddBoss(string boss,string mode)
         {
-            DefinitionsSekiro.Boss cBoss = defS.BossToEnum(boss);
+            DefinitionsSekiro.BossS cBoss = defS.BossToEnum(boss);
             cBoss.Mode = mode;
             dataSekiro.bossToSplit.Add(cBoss);
         }
 
         public void AddPosition(Vector3f vector, string mode) //Exception: is Repited yet controlled in AutoSplitter
         {
-            var position = new DefinitionsSekiro.Position();
+            var position = new DefinitionsSekiro.PositionS();
             position.setVector(vector);
             position.mode = mode;
             dataSekiro.positionsToSplit.Add(position);
@@ -83,40 +83,36 @@ namespace HitCounterManager
 
         public void RemoveBoss(int position)
         {
+            listPendingB.RemoveAll(iboss => iboss.Id == dataSekiro.bossToSplit[position].Id);
             dataSekiro.bossToSplit.RemoveAt(position);
+            
         }
 
 
         public void RemovePosition(int position)
         {
+            listPendingP.RemoveAll(iposition => iposition.vector == dataSekiro.positionsToSplit[position].vector);
             dataSekiro.positionsToSplit.RemoveAt(position);
         }
         
-        public void RemoveIdol (string idol)
+        public void RemoveIdol (string fidol)
         {
-            DefinitionsSekiro.Idol cIdol = defS.idolToEnum(idol);
-            foreach (var b in dataSekiro.idolsTosplit)
-            {
-                if (b.Id == cIdol.Id)
-                {
-                    dataSekiro.idolsTosplit.Remove(b);
-                    break;
-                }
-            }
-           
+            DefinitionsSekiro.Idol cIdol = defS.idolToEnum(fidol);
+            listPendingI.RemoveAll(idol => idol.Id == cIdol.Id);
+            dataSekiro.idolsTosplit.RemoveAll(idol => idol.Id == cIdol.Id);
+                      
         }
 
-        public string FindIdol(string idol)
+        public string FindIdol(string fidol)
         {
-            DefinitionsSekiro.Idol cIdol = defS.idolToEnum(idol);
-            foreach (var b in dataSekiro.idolsTosplit)
+            DefinitionsSekiro.Idol cIdol = defS.idolToEnum(fidol);
+            var idolReturn = dataSekiro.idolsTosplit.Find(idol => idol.Id == cIdol.Id);
+            if (idolReturn == null)
             {
-                if (b.Id == cIdol.Id)
-                {
-                    return b.Mode;
-                }
+                return "";
             }
-            return null;
+            else { return idolReturn.Mode; }
+            
 
         }
         public void setPositionMargin(int select)
@@ -241,13 +237,11 @@ namespace HitCounterManager
                     sekiro.WriteInGameTimeMilliseconds(0);
                     _writeMemory = true;
                 }
-            }
-
-            
+            }           
         }
 
-        List<DefinitionsSekiro.Position> listPendingP = new List<DefinitionsSekiro.Position>();
-        List<DefinitionsSekiro.Boss> listPendingB = new List<DefinitionsSekiro.Boss>();
+        List<DefinitionsSekiro.PositionS> listPendingP = new List<DefinitionsSekiro.PositionS>();
+        List<DefinitionsSekiro.BossS> listPendingB = new List<DefinitionsSekiro.BossS>();
         List<DefinitionsSekiro.Idol> listPendingI = new List<DefinitionsSekiro.Idol>();
 
         private void checkLoad()
@@ -262,41 +256,24 @@ namespace HitCounterManager
                         foreach (var idol in listPendingI)
                         {
                             try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
-                            foreach (var idol2 in dataSekiro.getidolsTosplit())
-                            {
-                                if (idol2.Id == idol.Id)
-                                {
-                                    idol2.IsSplited = true;
-                                    break;
-                                }
-                            }
+                            var i = dataSekiro.idolsTosplit.FindIndex(fidol => fidol.Id == idol.Id);
+                            dataSekiro.idolsTosplit[i].IsSplited = true;
+                            
                         }
 
                         foreach (var boss in listPendingB)
                         {
                             try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
-                            foreach (var boss2 in dataSekiro.getBossToSplit())
-                            {
-                                if (boss.Id == boss2.Id)
-                                {
-                                    boss2.IsSplited = true;
-                                    break;
-                                }
-                            }
+                            var b = dataSekiro.bossToSplit.FindIndex(fboss => fboss.Id == boss.Id);
+                            dataSekiro.bossToSplit[b].IsSplited = true;
 
                         }
 
                         foreach (var position in listPendingP)
                         {
                             try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
-                            foreach (var position2 in dataSekiro.getPositionsToSplit())
-                            {
-                                if (position.vector == position2.vector)
-                                {
-                                    position2.IsSplited = true;
-                                    break;
-                                }
-                            }
+                            var p = dataSekiro.positionsToSplit.FindIndex(fposition => fposition.vector == position.vector);
+                            dataSekiro.positionsToSplit[p].IsSplited = true;
                         }
 
                         listPendingB.Clear();

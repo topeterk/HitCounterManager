@@ -40,10 +40,17 @@
             this.comboBoxMarginS = new System.Windows.Forms.ComboBox();
             this.listBoxPositionsS = new System.Windows.Forms.ListBox();
             this.btnAddPosition = new System.Windows.Forms.Button();
-            this.btnGetPotition = new System.Windows.Forms.Button();
+            this.btnGetPositionS = new System.Windows.Forms.Button();
             this.textBoxZ = new System.Windows.Forms.TextBox();
             this.textBoxY = new System.Windows.Forms.TextBox();
             this.textBoxX = new System.Windows.Forms.TextBox();
+            this.panelBossS = new System.Windows.Forms.Panel();
+            this.btn_AddBoss = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.comboBoxBoss = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.comboBoxHowBoss = new System.Windows.Forms.ComboBox();
+            this.listBoxBosses = new System.Windows.Forms.ListBox();
             this.panelIdolsS = new System.Windows.Forms.Panel();
             this.groupBoxAshinaCastle = new System.Windows.Forms.GroupBox();
             this.listBoxAshinaCastle = new System.Windows.Forms.ListBox();
@@ -117,15 +124,8 @@
             this.label15 = new System.Windows.Forms.Label();
             this.radioLagAO = new System.Windows.Forms.RadioButton();
             this.radioImmAO = new System.Windows.Forms.RadioButton();
-            this.comboBoxZoneSelect = new System.Windows.Forms.ComboBox();
+            this.comboBoxZoneSelectS = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.panelBossS = new System.Windows.Forms.Panel();
-            this.btn_AddBoss = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.comboBoxBoss = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.comboBoxHowBoss = new System.Windows.Forms.ComboBox();
-            this.listBoxBosses = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.btnDesactiveSekiro = new System.Windows.Forms.Button();
             this.sekiroRunning = new System.Windows.Forms.Label();
@@ -139,7 +139,39 @@
             this.tabDs3 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
             this.tabElden = new System.Windows.Forms.TabPage();
+            this.panelPositionsER = new System.Windows.Forms.Panel();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.comboBoxHowPositionsER = new System.Windows.Forms.ComboBox();
+            this.comboBoxMarginER = new System.Windows.Forms.ComboBox();
+            this.listBoxPositionsER = new System.Windows.Forms.ListBox();
+            this.btnAddPositionER = new System.Windows.Forms.Button();
+            this.btnGetPosition = new System.Windows.Forms.Button();
+            this.textBoxZEr = new System.Windows.Forms.TextBox();
+            this.textBoxYEr = new System.Windows.Forms.TextBox();
+            this.textBoxXEr = new System.Windows.Forms.TextBox();
+            this.panelGraceER = new System.Windows.Forms.Panel();
+            this.listBoxGrace = new System.Windows.Forms.ListBox();
+            this.btnAddGraceER = new System.Windows.Forms.Button();
+            this.label31 = new System.Windows.Forms.Label();
+            this.comboBoxHowGraceER = new System.Windows.Forms.ComboBox();
+            this.comboBoxZoneSelectER = new System.Windows.Forms.ComboBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.panelBossER = new System.Windows.Forms.Panel();
+            this.btnAddBossER = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.comboBoxBossER = new System.Windows.Forms.ComboBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.comboBoxHowBossER = new System.Windows.Forms.ComboBox();
+            this.listBoxBossER = new System.Windows.Forms.ListBox();
+            this.EldenRingRunning = new System.Windows.Forms.Label();
+            this.EldenRingNotRunning = new System.Windows.Forms.Label();
+            this.btnRefreshE = new System.Windows.Forms.Button();
+            this.btn_DesactiveAllElden = new System.Windows.Forms.Button();
+            this.comboBoxToSplitEldenRing = new System.Windows.Forms.ComboBox();
+            this.label30 = new System.Windows.Forms.Label();
             this.tabHollow = new System.Windows.Forms.TabPage();
             this.panelPositionH = new System.Windows.Forms.Panel();
             this.label29 = new System.Windows.Forms.Label();
@@ -152,13 +184,6 @@
             this.textBoxXh = new System.Windows.Forms.TextBox();
             this.textBoxYh = new System.Windows.Forms.TextBox();
             this.textBoxSh = new System.Windows.Forms.TextBox();
-            this.panelItemH = new System.Windows.Forms.Panel();
-            this.groupBoxSkillsH = new System.Windows.Forms.GroupBox();
-            this.checkedListBoxSkillsH = new System.Windows.Forms.CheckedListBox();
-            this.groupBoxCharms = new System.Windows.Forms.GroupBox();
-            this.checkedListBoxCharms = new System.Windows.Forms.CheckedListBox();
-            this.comboBoxItemSelectH = new System.Windows.Forms.ComboBox();
-            this.label25 = new System.Windows.Forms.Label();
             this.panelBossH = new System.Windows.Forms.Panel();
             this.groupBoxMBH = new System.Windows.Forms.GroupBox();
             this.checkedListBoxHMB = new System.Windows.Forms.CheckedListBox();
@@ -172,6 +197,13 @@
             this.checkedListBoxBossH = new System.Windows.Forms.CheckedListBox();
             this.comboBoxSelectKindBoss = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.panelItemH = new System.Windows.Forms.Panel();
+            this.groupBoxSkillsH = new System.Windows.Forms.GroupBox();
+            this.checkedListBoxSkillsH = new System.Windows.Forms.CheckedListBox();
+            this.groupBoxCharms = new System.Windows.Forms.GroupBox();
+            this.checkedListBoxCharms = new System.Windows.Forms.CheckedListBox();
+            this.comboBoxItemSelectH = new System.Windows.Forms.ComboBox();
+            this.label25 = new System.Windows.Forms.Label();
             this.refreshHollow = new System.Windows.Forms.Button();
             this.btn_DesactiveAllH = new System.Windows.Forms.Button();
             this.HollowRunning = new System.Windows.Forms.Label();
@@ -186,6 +218,7 @@
             this.TabControl2.SuspendLayout();
             this.tabSekiro.SuspendLayout();
             this.panelPositionS.SuspendLayout();
+            this.panelBossS.SuspendLayout();
             this.panelIdolsS.SuspendLayout();
             this.groupBoxAshinaCastle.SuspendLayout();
             this.groupBoxRadioAshinaCastle.SuspendLayout();
@@ -203,20 +236,22 @@
             this.groupBoxRadioFountainhead.SuspendLayout();
             this.groupBoxAshinaOutskirts.SuspendLayout();
             this.groupBoxRadiosAshinaOutskirts.SuspendLayout();
-            this.panelBossS.SuspendLayout();
             this.tabDs1.SuspendLayout();
             this.tabDs2.SuspendLayout();
             this.tabDs3.SuspendLayout();
             this.tabElden.SuspendLayout();
+            this.panelPositionsER.SuspendLayout();
+            this.panelGraceER.SuspendLayout();
+            this.panelBossER.SuspendLayout();
             this.tabHollow.SuspendLayout();
             this.panelPositionH.SuspendLayout();
-            this.panelItemH.SuspendLayout();
-            this.groupBoxSkillsH.SuspendLayout();
-            this.groupBoxCharms.SuspendLayout();
             this.panelBossH.SuspendLayout();
             this.groupBoxMBH.SuspendLayout();
             this.groupBoxPantheon.SuspendLayout();
             this.groupBossH.SuspendLayout();
+            this.panelItemH.SuspendLayout();
+            this.groupBoxSkillsH.SuspendLayout();
+            this.groupBoxCharms.SuspendLayout();
             this.tabUpdate.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -239,8 +274,8 @@
             // 
             this.tabSekiro.BackColor = System.Drawing.SystemColors.Control;
             this.tabSekiro.Controls.Add(this.panelPositionS);
-            this.tabSekiro.Controls.Add(this.panelIdolsS);
             this.tabSekiro.Controls.Add(this.panelBossS);
+            this.tabSekiro.Controls.Add(this.panelIdolsS);
             this.tabSekiro.Controls.Add(this.button1);
             this.tabSekiro.Controls.Add(this.btnDesactiveSekiro);
             this.tabSekiro.Controls.Add(this.sekiroRunning);
@@ -264,7 +299,7 @@
             this.panelPositionS.Controls.Add(this.comboBoxMarginS);
             this.panelPositionS.Controls.Add(this.listBoxPositionsS);
             this.panelPositionS.Controls.Add(this.btnAddPosition);
-            this.panelPositionS.Controls.Add(this.btnGetPotition);
+            this.panelPositionS.Controls.Add(this.btnGetPositionS);
             this.panelPositionS.Controls.Add(this.textBoxZ);
             this.panelPositionS.Controls.Add(this.textBoxY);
             this.panelPositionS.Controls.Add(this.textBoxX);
@@ -362,15 +397,15 @@
             this.btnAddPosition.UseVisualStyleBackColor = true;
             this.btnAddPosition.Click += new System.EventHandler(this.btnAddPosition_Click);
             // 
-            // btnGetPotition
+            // btnGetPositionS
             // 
-            this.btnGetPotition.Location = new System.Drawing.Point(142, 63);
-            this.btnGetPotition.Name = "btnGetPotition";
-            this.btnGetPotition.Size = new System.Drawing.Size(100, 21);
-            this.btnGetPotition.TabIndex = 4;
-            this.btnGetPotition.Text = "Get Potition";
-            this.btnGetPotition.UseVisualStyleBackColor = true;
-            this.btnGetPotition.Click += new System.EventHandler(this.btnGetPotition_Click);
+            this.btnGetPositionS.Location = new System.Drawing.Point(142, 63);
+            this.btnGetPositionS.Name = "btnGetPositionS";
+            this.btnGetPositionS.Size = new System.Drawing.Size(100, 21);
+            this.btnGetPositionS.TabIndex = 4;
+            this.btnGetPositionS.Text = "Get Position";
+            this.btnGetPositionS.UseVisualStyleBackColor = true;
+            this.btnGetPositionS.Click += new System.EventHandler(this.btnGetPosition_Click);
             // 
             // textBoxZ
             // 
@@ -396,6 +431,95 @@
             this.textBoxX.Size = new System.Drawing.Size(52, 20);
             this.textBoxX.TabIndex = 0;
             // 
+            // panelBossS
+            // 
+            this.panelBossS.Controls.Add(this.btn_AddBoss);
+            this.panelBossS.Controls.Add(this.label13);
+            this.panelBossS.Controls.Add(this.comboBoxBoss);
+            this.panelBossS.Controls.Add(this.label12);
+            this.panelBossS.Controls.Add(this.comboBoxHowBoss);
+            this.panelBossS.Controls.Add(this.listBoxBosses);
+            this.panelBossS.Location = new System.Drawing.Point(44, 83);
+            this.panelBossS.Name = "panelBossS";
+            this.panelBossS.Size = new System.Drawing.Size(505, 240);
+            this.panelBossS.TabIndex = 14;
+            // 
+            // btn_AddBoss
+            // 
+            this.btn_AddBoss.Location = new System.Drawing.Point(204, 48);
+            this.btn_AddBoss.Name = "btn_AddBoss";
+            this.btn_AddBoss.Size = new System.Drawing.Size(100, 21);
+            this.btn_AddBoss.TabIndex = 14;
+            this.btn_AddBoss.Text = "Add";
+            this.btn_AddBoss.UseVisualStyleBackColor = true;
+            this.btn_AddBoss.Click += new System.EventHandler(this.btn_AddBoss_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(295, 3);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(33, 13);
+            this.label13.TabIndex = 13;
+            this.label13.Text = "Boss:";
+            // 
+            // comboBoxBoss
+            // 
+            this.comboBoxBoss.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxBoss.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.comboBoxBoss.FormattingEnabled = true;
+            this.comboBoxBoss.Items.AddRange(new object[] {
+            "Gyoubu Masataka Oniwa",
+            "Lady Butterfly",
+            "Genichiro Ashina",
+            "Folding Screen Monkeys",
+            "Guardian Ape",
+            "Headless Ape",
+            "Corrupted Monk (ghost)",
+            "Emma, the Gentle Blade",
+            "Isshin Ashina",
+            "Great Shinobi Owl",
+            "True Corrupted Monk",
+            "Divine Dragon",
+            "Owl (Father)",
+            "Demon of Hatred",
+            "Isshin, the Sword Saint"});
+            this.comboBoxBoss.Location = new System.Drawing.Point(184, 18);
+            this.comboBoxBoss.Name = "comboBoxBoss";
+            this.comboBoxBoss.Size = new System.Drawing.Size(292, 21);
+            this.comboBoxBoss.TabIndex = 12;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(87, 3);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(32, 13);
+            this.label12.TabIndex = 11;
+            this.label12.Text = "How:";
+            // 
+            // comboBoxHowBoss
+            // 
+            this.comboBoxHowBoss.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.comboBoxHowBoss.FormattingEnabled = true;
+            this.comboBoxHowBoss.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowBoss.Location = new System.Drawing.Point(46, 18);
+            this.comboBoxHowBoss.Name = "comboBoxHowBoss";
+            this.comboBoxHowBoss.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxHowBoss.TabIndex = 10;
+            // 
+            // listBoxBosses
+            // 
+            this.listBoxBosses.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxBosses.FormattingEnabled = true;
+            this.listBoxBosses.Location = new System.Drawing.Point(9, 82);
+            this.listBoxBosses.Name = "listBoxBosses";
+            this.listBoxBosses.Size = new System.Drawing.Size(489, 147);
+            this.listBoxBosses.TabIndex = 7;
+            this.listBoxBosses.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxBosses_MouseDoubleClick);
+            // 
             // panelIdolsS
             // 
             this.panelIdolsS.Controls.Add(this.groupBoxAshinaCastle);
@@ -406,7 +530,7 @@
             this.panelIdolsS.Controls.Add(this.groupBoxAbandonedDungeon);
             this.panelIdolsS.Controls.Add(this.groupBoxFountainhead);
             this.panelIdolsS.Controls.Add(this.groupBoxAshinaOutskirts);
-            this.panelIdolsS.Controls.Add(this.comboBoxZoneSelect);
+            this.panelIdolsS.Controls.Add(this.comboBoxZoneSelectS);
             this.panelIdolsS.Controls.Add(this.label14);
             this.panelIdolsS.Location = new System.Drawing.Point(44, 81);
             this.panelIdolsS.Name = "panelIdolsS";
@@ -1323,11 +1447,12 @@
             this.radioImmAO.Text = "Inmediatly";
             this.radioImmAO.UseVisualStyleBackColor = true;
             // 
-            // comboBoxZoneSelect
+            // comboBoxZoneSelectS
             // 
-            this.comboBoxZoneSelect.BackColor = System.Drawing.SystemColors.GrayText;
-            this.comboBoxZoneSelect.FormattingEnabled = true;
-            this.comboBoxZoneSelect.Items.AddRange(new object[] {
+            this.comboBoxZoneSelectS.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBoxZoneSelectS.BackColor = System.Drawing.SystemColors.GrayText;
+            this.comboBoxZoneSelectS.FormattingEnabled = true;
+            this.comboBoxZoneSelectS.Items.AddRange(new object[] {
             "Ashina Outskirts",
             "Hirata Estate",
             "Ashina Castle",
@@ -1336,11 +1461,11 @@
             "Sunken Valley",
             "Ashina Depths",
             "Fountainhead Palace"});
-            this.comboBoxZoneSelect.Location = new System.Drawing.Point(80, 4);
-            this.comboBoxZoneSelect.Name = "comboBoxZoneSelect";
-            this.comboBoxZoneSelect.Size = new System.Drawing.Size(361, 21);
-            this.comboBoxZoneSelect.TabIndex = 5;
-            this.comboBoxZoneSelect.SelectedIndexChanged += new System.EventHandler(this.comboBoxZoneSelect_SelectedIndexChanged);
+            this.comboBoxZoneSelectS.Location = new System.Drawing.Point(80, 4);
+            this.comboBoxZoneSelectS.Name = "comboBoxZoneSelectS";
+            this.comboBoxZoneSelectS.Size = new System.Drawing.Size(361, 21);
+            this.comboBoxZoneSelectS.TabIndex = 5;
+            this.comboBoxZoneSelectS.SelectedIndexChanged += new System.EventHandler(this.comboBoxZoneSelect_SelectedIndexChanged);
             // 
             // label14
             // 
@@ -1350,94 +1475,6 @@
             this.label14.Size = new System.Drawing.Size(36, 13);
             this.label14.TabIndex = 4;
             this.label14.Text = "where";
-            // 
-            // panelBossS
-            // 
-            this.panelBossS.Controls.Add(this.btn_AddBoss);
-            this.panelBossS.Controls.Add(this.label13);
-            this.panelBossS.Controls.Add(this.comboBoxBoss);
-            this.panelBossS.Controls.Add(this.label12);
-            this.panelBossS.Controls.Add(this.comboBoxHowBoss);
-            this.panelBossS.Controls.Add(this.listBoxBosses);
-            this.panelBossS.Location = new System.Drawing.Point(44, 83);
-            this.panelBossS.Name = "panelBossS";
-            this.panelBossS.Size = new System.Drawing.Size(505, 240);
-            this.panelBossS.TabIndex = 14;
-            // 
-            // btn_AddBoss
-            // 
-            this.btn_AddBoss.Location = new System.Drawing.Point(204, 48);
-            this.btn_AddBoss.Name = "btn_AddBoss";
-            this.btn_AddBoss.Size = new System.Drawing.Size(100, 21);
-            this.btn_AddBoss.TabIndex = 14;
-            this.btn_AddBoss.Text = "Add";
-            this.btn_AddBoss.UseVisualStyleBackColor = true;
-            this.btn_AddBoss.Click += new System.EventHandler(this.btn_AddBoss_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(295, 3);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(33, 13);
-            this.label13.TabIndex = 13;
-            this.label13.Text = "Boss:";
-            // 
-            // comboBoxBoss
-            // 
-            this.comboBoxBoss.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.comboBoxBoss.FormattingEnabled = true;
-            this.comboBoxBoss.Items.AddRange(new object[] {
-            "Gyoubu Masataka Oniwa",
-            "Lady Butterfly",
-            "Genichiro Ashina",
-            "Folding Screen Monkeys",
-            "Guardian Ape",
-            "Headless Ape",
-            "Corrupted Monk (ghost)",
-            "Emma, the Gentle Blade",
-            "Isshin Ashina",
-            "Great Shinobi Owl",
-            "True Corrupted Monk",
-            "Divine Dragon",
-            "Owl (Father)",
-            "Demon of Hatred",
-            "Isshin, the Sword Saint"});
-            this.comboBoxBoss.Location = new System.Drawing.Point(184, 18);
-            this.comboBoxBoss.Name = "comboBoxBoss";
-            this.comboBoxBoss.Size = new System.Drawing.Size(292, 21);
-            this.comboBoxBoss.TabIndex = 12;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(87, 3);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(32, 13);
-            this.label12.TabIndex = 11;
-            this.label12.Text = "How:";
-            // 
-            // comboBoxHowBoss
-            // 
-            this.comboBoxHowBoss.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.comboBoxHowBoss.FormattingEnabled = true;
-            this.comboBoxHowBoss.Items.AddRange(new object[] {
-            "Inmediatly",
-            "Loading game after"});
-            this.comboBoxHowBoss.Location = new System.Drawing.Point(46, 18);
-            this.comboBoxHowBoss.Name = "comboBoxHowBoss";
-            this.comboBoxHowBoss.Size = new System.Drawing.Size(110, 21);
-            this.comboBoxHowBoss.TabIndex = 10;
-            // 
-            // listBoxBosses
-            // 
-            this.listBoxBosses.BackColor = System.Drawing.SystemColors.Control;
-            this.listBoxBosses.FormattingEnabled = true;
-            this.listBoxBosses.Location = new System.Drawing.Point(9, 82);
-            this.listBoxBosses.Name = "listBoxBosses";
-            this.listBoxBosses.Size = new System.Drawing.Size(489, 147);
-            this.listBoxBosses.TabIndex = 7;
-            this.listBoxBosses.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxBosses_MouseDoubleClick);
             // 
             // button1
             // 
@@ -1566,30 +1603,868 @@
             // 
             // tabElden
             // 
-            this.tabElden.Controls.Add(this.label4);
+            this.tabElden.BackColor = System.Drawing.SystemColors.Control;
+            this.tabElden.Controls.Add(this.panelPositionsER);
+            this.tabElden.Controls.Add(this.panelGraceER);
+            this.tabElden.Controls.Add(this.panelBossER);
+            this.tabElden.Controls.Add(this.EldenRingRunning);
+            this.tabElden.Controls.Add(this.EldenRingNotRunning);
+            this.tabElden.Controls.Add(this.btnRefreshE);
+            this.tabElden.Controls.Add(this.btn_DesactiveAllElden);
+            this.tabElden.Controls.Add(this.comboBoxToSplitEldenRing);
+            this.tabElden.Controls.Add(this.label30);
             this.tabElden.Location = new System.Drawing.Point(4, 22);
             this.tabElden.Name = "tabElden";
             this.tabElden.Padding = new System.Windows.Forms.Padding(3);
             this.tabElden.Size = new System.Drawing.Size(587, 351);
             this.tabElden.TabIndex = 3;
             this.tabElden.Text = "Elden Ring";
-            this.tabElden.UseVisualStyleBackColor = true;
+            // 
+            // panelPositionsER
+            // 
+            this.panelPositionsER.Controls.Add(this.label32);
+            this.panelPositionsER.Controls.Add(this.label34);
+            this.panelPositionsER.Controls.Add(this.label35);
+            this.panelPositionsER.Controls.Add(this.label36);
+            this.panelPositionsER.Controls.Add(this.comboBoxHowPositionsER);
+            this.panelPositionsER.Controls.Add(this.comboBoxMarginER);
+            this.panelPositionsER.Controls.Add(this.listBoxPositionsER);
+            this.panelPositionsER.Controls.Add(this.btnAddPositionER);
+            this.panelPositionsER.Controls.Add(this.btnGetPosition);
+            this.panelPositionsER.Controls.Add(this.textBoxZEr);
+            this.panelPositionsER.Controls.Add(this.textBoxYEr);
+            this.panelPositionsER.Controls.Add(this.textBoxXEr);
+            this.panelPositionsER.Location = new System.Drawing.Point(38, 82);
+            this.panelPositionsER.Name = "panelPositionsER";
+            this.panelPositionsER.Size = new System.Drawing.Size(505, 244);
+            this.panelPositionsER.TabIndex = 22;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(219, 1);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(66, 13);
+            this.label32.TabIndex = 12;
+            this.label32.Text = "Coordinates:";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(383, 19);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(39, 13);
+            this.label34.TabIndex = 11;
+            this.label34.Text = "Margin";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(185, 19);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(130, 13);
+            this.label35.TabIndex = 10;
+            this.label35.Text = "X                 Y                 Z";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(77, 19);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(32, 13);
+            this.label36.TabIndex = 9;
+            this.label36.Text = "How:";
+            // 
+            // comboBoxHowPositionsER
+            // 
+            this.comboBoxHowPositionsER.BackColor = System.Drawing.Color.LightGray;
+            this.comboBoxHowPositionsER.FormattingEnabled = true;
+            this.comboBoxHowPositionsER.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowPositionsER.Location = new System.Drawing.Point(36, 34);
+            this.comboBoxHowPositionsER.Name = "comboBoxHowPositionsER";
+            this.comboBoxHowPositionsER.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxHowPositionsER.TabIndex = 8;
+            // 
+            // comboBoxMarginER
+            // 
+            this.comboBoxMarginER.BackColor = System.Drawing.Color.LightGray;
+            this.comboBoxMarginER.FormattingEnabled = true;
+            this.comboBoxMarginER.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3 (R)",
+            "4 (R)",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.comboBoxMarginER.Location = new System.Drawing.Point(351, 35);
+            this.comboBoxMarginER.Name = "comboBoxMarginER";
+            this.comboBoxMarginER.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxMarginER.TabIndex = 7;
+            this.comboBoxMarginER.SelectedIndexChanged += new System.EventHandler(this.comboBoxMarginER_SelectedIndexChanged);
+            // 
+            // listBoxPositionsER
+            // 
+            this.listBoxPositionsER.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxPositionsER.FormattingEnabled = true;
+            this.listBoxPositionsER.Location = new System.Drawing.Point(3, 90);
+            this.listBoxPositionsER.Name = "listBoxPositionsER";
+            this.listBoxPositionsER.Size = new System.Drawing.Size(495, 147);
+            this.listBoxPositionsER.TabIndex = 6;
+            this.listBoxPositionsER.DoubleClick += new System.EventHandler(this.listBoxPositionsER_DoubleClick);
+            // 
+            // btnAddPositionER
+            // 
+            this.btnAddPositionER.Location = new System.Drawing.Point(248, 63);
+            this.btnAddPositionER.Name = "btnAddPositionER";
+            this.btnAddPositionER.Size = new System.Drawing.Size(100, 21);
+            this.btnAddPositionER.TabIndex = 5;
+            this.btnAddPositionER.Text = "Add";
+            this.btnAddPositionER.UseVisualStyleBackColor = true;
+            this.btnAddPositionER.Click += new System.EventHandler(this.btnAddPositionER_Click);
+            // 
+            // btnGetPosition
+            // 
+            this.btnGetPosition.Location = new System.Drawing.Point(142, 63);
+            this.btnGetPosition.Name = "btnGetPosition";
+            this.btnGetPosition.Size = new System.Drawing.Size(100, 21);
+            this.btnGetPosition.TabIndex = 4;
+            this.btnGetPosition.Text = "Get Position";
+            this.btnGetPosition.UseVisualStyleBackColor = true;
+            this.btnGetPosition.Click += new System.EventHandler(this.btnGetPosition_Click_1);
+            // 
+            // textBoxZEr
+            // 
+            this.textBoxZEr.BackColor = System.Drawing.Color.LightGray;
+            this.textBoxZEr.Location = new System.Drawing.Point(280, 35);
+            this.textBoxZEr.Name = "textBoxZEr";
+            this.textBoxZEr.ReadOnly = true;
+            this.textBoxZEr.Size = new System.Drawing.Size(52, 20);
+            this.textBoxZEr.TabIndex = 3;
+            // 
+            // textBoxYEr
+            // 
+            this.textBoxYEr.BackColor = System.Drawing.Color.LightGray;
+            this.textBoxYEr.Location = new System.Drawing.Point(222, 35);
+            this.textBoxYEr.Name = "textBoxYEr";
+            this.textBoxYEr.ReadOnly = true;
+            this.textBoxYEr.Size = new System.Drawing.Size(52, 20);
+            this.textBoxYEr.TabIndex = 2;
+            // 
+            // textBoxXEr
+            // 
+            this.textBoxXEr.BackColor = System.Drawing.Color.LightGray;
+            this.textBoxXEr.Location = new System.Drawing.Point(164, 35);
+            this.textBoxXEr.Name = "textBoxXEr";
+            this.textBoxXEr.ReadOnly = true;
+            this.textBoxXEr.Size = new System.Drawing.Size(52, 20);
+            this.textBoxXEr.TabIndex = 0;
+            // 
+            // panelGraceER
+            // 
+            this.panelGraceER.Controls.Add(this.listBoxGrace);
+            this.panelGraceER.Controls.Add(this.btnAddGraceER);
+            this.panelGraceER.Controls.Add(this.label31);
+            this.panelGraceER.Controls.Add(this.comboBoxHowGraceER);
+            this.panelGraceER.Controls.Add(this.comboBoxZoneSelectER);
+            this.panelGraceER.Controls.Add(this.label33);
+            this.panelGraceER.Location = new System.Drawing.Point(40, 85);
+            this.panelGraceER.Name = "panelGraceER";
+            this.panelGraceER.Size = new System.Drawing.Size(504, 240);
+            this.panelGraceER.TabIndex = 21;
+            // 
+            // listBoxGrace
+            // 
+            this.listBoxGrace.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxGrace.FormattingEnabled = true;
+            this.listBoxGrace.Location = new System.Drawing.Point(8, 88);
+            this.listBoxGrace.Name = "listBoxGrace";
+            this.listBoxGrace.Size = new System.Drawing.Size(489, 147);
+            this.listBoxGrace.TabIndex = 16;
+            this.listBoxGrace.DoubleClick += new System.EventHandler(this.listBoxGrace_DoubleClick);
+            // 
+            // btnAddGraceER
+            // 
+            this.btnAddGraceER.Location = new System.Drawing.Point(213, 61);
+            this.btnAddGraceER.Name = "btnAddGraceER";
+            this.btnAddGraceER.Size = new System.Drawing.Size(100, 21);
+            this.btnAddGraceER.TabIndex = 15;
+            this.btnAddGraceER.Text = "Add";
+            this.btnAddGraceER.UseVisualStyleBackColor = true;
+            this.btnAddGraceER.Click += new System.EventHandler(this.btnAddGraceER_Click);
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(125, 37);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(27, 13);
+            this.label31.TabIndex = 13;
+            this.label31.Text = "how";
+            // 
+            // comboBoxHowGraceER
+            // 
+            this.comboBoxHowGraceER.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.comboBoxHowGraceER.FormattingEnabled = true;
+            this.comboBoxHowGraceER.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowGraceER.Location = new System.Drawing.Point(170, 34);
+            this.comboBoxHowGraceER.Name = "comboBoxHowGraceER";
+            this.comboBoxHowGraceER.Size = new System.Drawing.Size(187, 21);
+            this.comboBoxHowGraceER.TabIndex = 12;
+            // 
+            // comboBoxZoneSelectER
+            // 
+            this.comboBoxZoneSelectER.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxZoneSelectER.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.comboBoxZoneSelectER.FormattingEnabled = true;
+            this.comboBoxZoneSelectER.Items.AddRange(new object[] {
+            "Raya Lucaria Grand Library",
+            "Debate Parlor",
+            "Church of the Cuckoo",
+            "Schoolhouse Classroom",
+            "Dragonkin Soldier of Nokstella",
+            "Ainsel River Well Depths",
+            "Ainsel River Sluice Gate",
+            "Ainsel River Downstream",
+            "Astel, Naturalborn of the Void",
+            "Ainsel River Main",
+            "Nokstella, Eternal City",
+            "Nokstella Waterfall Basin",
+            "Sainted Hero\'s Grave",
+            "Unsightly Catacombs",
+            "Perfumer\'s Grotto",
+            "Sage\'s Cave",
+            "Old Altus Tunnel",
+            "Altus Tunnel",
+            "Abandoned Coffin",
+            "Altus Plateau",
+            "Erdtree-Gazing Hill",
+            "Altus Highway Junction",
+            "Forest-Spanning Greatbridge",
+            "Rampartside Path",
+            "Bower of Bounty",
+            "Road of Iniquity Side Path",
+            "Windmill Village",
+            "Windmill Heights",
+            "Shaded Castle Ramparts",
+            "Shaded Castle Inner Gate",
+            "Castellan\'s Hall",
+            "East Raya Lucaria Gate",
+            "Bellum Church",
+            "Frenzied Flame Village Outskirts",
+            "Church of Inhibition",
+            "Minor Erdtree Catacombs",
+            "Caelid Catacombs",
+            "War-Dead Catacombs",
+            "Abandoned Cave",
+            "Gaol Cave",
+            "Gael Tunnel",
+            "Rear Gael Tunnel Entrance",
+            "Sellia Crystal Tunnel",
+            "Smoldering Church",
+            "Rotview Balcony",
+            "Fort Gael North",
+            "Caelem Ruins",
+            "Cathedral of Dragon Communion",
+            "Caelid Highway South",
+            "Smoldering Wall",
+            "Deep Siofra Well",
+            "Southern Aeonia Swamp Bank",
+            "Sellia Backstreets",
+            "Chair-Crypt of Sellia",
+            "Sellia Under-Stair",
+            "Impassable Greatbridge",
+            "Church of the Plague",
+            "Redmane Castle Plaza",
+            "Chamber Outside the Plaza",
+            "Starscourge Radahn",
+            "Auriza Hero\'s Grave",
+            "Auriza Side Tomb",
+            "Divine Tower of West Altus",
+            "Sealed Tunnel",
+            "Divine Tower of West Altus: Gate",
+            "Outer Wall Phantom Tree",
+            "Minor Erdtree Church",
+            "Hermit Merchant\'s Shack",
+            "Outer Wall Battleground",
+            "Capital Rampart",
+            "Consecrated Snowfield Catacombs",
+            "Cave of the Forlorn",
+            "Yelough Anix Tunnel",
+            "Consecrated Snowfield",
+            "Inner Consecrated Snowfield",
+            "Ordina, Liturgical Town",
+            "Apostate Derelict",
+            "Maliketh, the Black Blade",
+            "Dragonlord Placidusax",
+            "Dragon Temple Altar",
+            "Crumbling Beast Grave",
+            "Crumbling Beast Grave Depths",
+            "Tempest-Facing Balcony",
+            "Dragon Temple",
+            "Dragon Temple Transept",
+            "Dragon Temple Lift",
+            "Dragon Temple Rooftop",
+            "Beside the Great Bridge",
+            "Prince of Death\'s Throne",
+            "Root-Facing Cliffs",
+            "Great Waterfall Crest",
+            "Deeproot Depths",
+            "The Nameless Eternal City",
+            "Across the Roots",
+            "Fractured Marika",
+            "Malenia, Goddess of Rot",
+            "Prayer Room",
+            "Elphael Inner Wall",
+            "Drainage Channel",
+            "Haligtree Roots",
+            "Giant-Conquering Hero\'s Grave",
+            "Giants\' Mountaintop Catacombs",
+            "Giants\' Gravepost",
+            "Church of Repose",
+            "Foot of the Forge",
+            "Fire Giant",
+            "Forge of the Giants",
+            "Hidden Path to the Haligtree",
+            "Divine Tower of East Altus: Gate",
+            "Divine Tower of East Altus",
+            "Forbidden Lands",
+            "Grand Lift of Rold",
+            "Dragonbarrow Cave",
+            "Sellia Hideaway",
+            "Divine Tower of Caelid",
+            "Divine Tower of Caelid: Center",
+            "Isolated Divine Tower",
+            "Dragonbarrow West",
+            "Isolated Merchant\'s Shack (Greyoll\'s Dragonbarrow)",
+            "Dragonbarrow Fork",
+            "Fort Faroth",
+            "Bestial Sanctum",
+            "Lenne\'s Rise",
+            "Farum Greatbridge",
+            "Lake of Rot Shoreside",
+            "Grand Cloister",
+            "Elden Throne (Leyndell, Ashen Capital)",
+            "Erdtree Sanctuary (Leyndell, Ashen Capital)",
+            "East Capital Rampart (Leyndell, Ashen Capital)",
+            "Leyndell, Capital of Ash",
+            "Queen\'s Bedchamber (Leyndell, Ashen Capital)",
+            "Divine Bridge (Leyndell, Ashen Capital)",
+            "Elden Throne (Leyndell, Royal Capital)",
+            "Erdtree Sanctuary (Leyndell, Royal Capital)",
+            "East Capital Rampart (Leyndell, Royal Capital)",
+            "Lower Capital Church",
+            "Avenue Balcony",
+            "West Capital Rampart",
+            "Queen\'s Bedchamber (Leyndell, Royal Capital)",
+            "Fortified Manor, First Floor",
+            "Divine Bridge (Leyndell, Royal Capital)",
+            "Stormfoot Catacombs",
+            "Murkwater Catacombs",
+            "Murkwater Cave",
+            "Groveside Cave",
+            "Coastal Cave",
+            "Highroad Cave",
+            "Limgrave Tunnels",
+            "Church of Elleh",
+            "The First Step",
+            "Artist\'s Shack (Limgrave)",
+            "Third Church of Marika",
+            "Fort Haight West",
+            "Agheel Lake South",
+            "Agheel Lake North",
+            "Church of Dragon Communion",
+            "Gatefront",
+            "Seaside Ruins",
+            "Mistwood Outskirts",
+            "Murkwater Coast",
+            "Summonwater Village Outskirts",
+            "Waypoint Ruins Cellar",
+            "Road\'s End Catacombs",
+            "Black Knife Catacombs",
+            "Cliffbottom Catacombs",
+            "Stillwater Cave",
+            "Lakeside Crystal Cave",
+            "Academy Crystal Cave",
+            "Raya Lucaria Crystal Tunnel",
+            "Study Hall Entrance",
+            "Liurnia Tower Bridge",
+            "Divine Tower of Liurnia",
+            "Uld Palace Ruins",
+            "Liurnia Lake Shore",
+            "Laskyar Ruins",
+            "Scenic Isle",
+            "Academy Gate Town",
+            "South Raya Lucaria Gate",
+            "Main Academy Gate",
+            "Grand Lift of Dectus",
+            "Foot of the Four Belfries",
+            "Sorcerer\'s Isle",
+            "Northern Liurnia Lake Shore",
+            "Road to the Manor",
+            "Main Caria Manor Gate",
+            "Slumbering Wolf\'s Shack",
+            "Boilprawn Shack",
+            "Artist\'s Shack (Liurnia of the Lakes)",
+            "Revenger\'s Shack",
+            "Folly on the Lake",
+            "Village of the Albinaurics",
+            "Liurnia Highway North",
+            "Gate Town Bridge",
+            "Eastern Liurnia Lake Shore",
+            "Church of Vows",
+            "Ruined Labyrinth",
+            "Mausoleum Compound",
+            "The Four Belfries",
+            "Ranni\'s Rise",
+            "Ravine-Veiled Village",
+            "Manor Upper Level",
+            "Manor Lower Level",
+            "Royal Moongazing Grounds",
+            "Gate Town North",
+            "Eastern Tableland",
+            "The Ravine",
+            "Fallen Ruins of the Lake",
+            "Converted Tower",
+            "Behind Caria Manor",
+            "Temple Quarter",
+            "East Gate Bridge Trestle",
+            "Crystalline Woods",
+            "Liurnia Highway South",
+            "Jarburg",
+            "Ranni\'s Chamber",
+            "Haligtree Promenade",
+            "Haligtree Canopy",
+            "Haligtree Town",
+            "Haligtree Town Plaza",
+            "Cocoon of the Empyrean",
+            "Palace Approach Ledge-Road",
+            "Dynasty Mausoleum Entrance",
+            "Dynasty Mausoleum Midpoint",
+            "Moonlight Altar",
+            "Cathedral of Manus Celes",
+            "Altar South",
+            "Spiritcaller\'s Cave",
+            "Zamor Ruins",
+            "Ancient Snow Valley Ruins",
+            "Freezing Lake",
+            "First Church of Marika",
+            "Whiteridge Road",
+            "Snow Valley Ruins Overlook",
+            "Castle Sol Main Gate",
+            "Church of the Eclipse",
+            "Castle Sol Rooftop",
+            "Wyndham Catacombs",
+            "Gelmir Hero\'s Grave",
+            "Seethewater Cave",
+            "Volcano Cave",
+            "Bridge of Iniquity",
+            "First Mt. Gelmir Campsite",
+            "Ninth Mt. Gelmir Campsite",
+            "Road of Iniquity",
+            "Seethewater River",
+            "Seethewater Terminus",
+            "Craftsman\'s Shack",
+            "Primeval Sorcerer Azur",
+            "Great Waterfall Basin",
+            "Mimic Tear",
+            "Ancestral Woods",
+            "Aqueduct-Facing Cliffs",
+            "Night\'s Sacred Ground",
+            "Nokron, Eternal City",
+            "Table of Lost Grace",
+            "Magma Wyrm",
+            "Ruin-Strewn Precipice",
+            "Ruin-Strewn Precipice Overlook",
+            "Siofra River Bank",
+            "Worshippers\' Woods",
+            "Below the Well",
+            "Siofra River Well Depths",
+            "Deathtouched Catacombs",
+            "Limgrave Tower Bridge",
+            "Divine Tower of Limgrave",
+            "Stormhill Shack",
+            "Saintsbridge",
+            "Warmaster\'s Shack",
+            "Godrick the Grafted",
+            "Margit, the Fell Omen",
+            "Castleward Tunnel",
+            "Gateside Chamber",
+            "Stormveil Cliffside",
+            "Rampart Tower",
+            "Liftside Chamber",
+            "Secluded Cell",
+            "Stormveil Main Gate",
+            "Cave of Knowledge",
+            "Stranded Graveyard",
+            "Cathedral of the Forsaken",
+            "Underground Roadside",
+            "Forsaken Depths",
+            "Leyndell Catacombs",
+            "Frenzied Flame Proscription",
+            "Aeonia Swamp Shore",
+            "Astray from Caelid Highway North",
+            "Heart of Aeonia",
+            "Inner Aeonia",
+            "Rykard, Lord of Blasphemy",
+            "Temple of Eiglay",
+            "Volcano Manor",
+            "Prison Town Church",
+            "Guest Hall",
+            "Audience Pathway",
+            "Abductor Virgin",
+            "Subterranean Inquisition Chamber",
+            "Tombsward Catacombs",
+            "Impaler\'s Catacombs",
+            "Earthbore Cave",
+            "Tombsward Cave",
+            "Morne Tunnel",
+            "Church of Pilgrimage",
+            "Castle Morne Rampart",
+            "Tombsward",
+            "South of the Lookout Tower",
+            "Ailing Village Outskirts",
+            "Beside the Crater-Pocked Glade",
+            "Isolated Merchant\'s Shack (Weeping Peninsula)",
+            "Bridge of Sacrifice",
+            "Castle Morne Lift",
+            "Behind the Castle",
+            "Beside the Rampart Gaol",
+            "Morne Moangrave",
+            "Fourth Church of Marika"});
+            this.comboBoxZoneSelectER.Location = new System.Drawing.Point(83, 7);
+            this.comboBoxZoneSelectER.Name = "comboBoxZoneSelectER";
+            this.comboBoxZoneSelectER.Size = new System.Drawing.Size(361, 21);
+            this.comboBoxZoneSelectER.TabIndex = 9;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(38, 10);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(36, 13);
+            this.label33.TabIndex = 8;
+            this.label33.Text = "where";
+            // 
+            // panelBossER
+            // 
+            this.panelBossER.Controls.Add(this.btnAddBossER);
+            this.panelBossER.Controls.Add(this.label4);
+            this.panelBossER.Controls.Add(this.comboBoxBossER);
+            this.panelBossER.Controls.Add(this.label28);
+            this.panelBossER.Controls.Add(this.comboBoxHowBossER);
+            this.panelBossER.Controls.Add(this.listBoxBossER);
+            this.panelBossER.Location = new System.Drawing.Point(39, 85);
+            this.panelBossER.Name = "panelBossER";
+            this.panelBossER.Size = new System.Drawing.Size(505, 240);
+            this.panelBossER.TabIndex = 20;
+            // 
+            // btnAddBossER
+            // 
+            this.btnAddBossER.Location = new System.Drawing.Point(204, 48);
+            this.btnAddBossER.Name = "btnAddBossER";
+            this.btnAddBossER.Size = new System.Drawing.Size(100, 21);
+            this.btnAddBossER.TabIndex = 14;
+            this.btnAddBossER.Text = "Add";
+            this.btnAddBossER.UseVisualStyleBackColor = true;
+            this.btnAddBossER.Click += new System.EventHandler(this.btnAddBossER_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(143, 157);
+            this.label4.Location = new System.Drawing.Point(295, 3);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(301, 37);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Not Yet Developed";
+            this.label4.Size = new System.Drawing.Size(33, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Boss:";
+            // 
+            // comboBoxBossER
+            // 
+            this.comboBoxBossER.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxBossER.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.comboBoxBossER.FormattingEnabled = true;
+            this.comboBoxBossER.Items.AddRange(new object[] {
+            "Godrick the Grafted - Stormveil Castle",
+            "Margit, the Fell Omen - Stormveil Castle",
+            "Grafted Scion - Chapel of Anticipation",
+            "Morgott, the Omen King - Leyndell",
+            "Godfrey, First Elden Lord - Leyndell",
+            "Hoarah Loux - Leyndell",
+            "Sir Gideon Ofnir, the All-Knowing - Leyndell",
+            "Dragonkin Soldier of Nokstella - Ainsel River",
+            "Dragonkin Soldier - Lake of Rot",
+            "Valiant Gargoyles - Siofra River",
+            "Dragonkin Soldier - Siofra River",
+            "Mimic Tear - Siofra River",
+            "Crucible Knight Sirulia - Deeproot Depths",
+            "Fia\'s Champion - Deeproot Depths",
+            "Lichdragon Fortissax - Deeproot Depths",
+            "Astel, Naturalborn of the Void - Lake of Rot",
+            "Mohg, Lord of Blood - Mohgwyn Palace",
+            "Ancestor Spirit - Siofra River",
+            "Regal Ancestor Spirit - Nokron, Eternal City",
+            "Maliketh, The Black Blade - Crumbling Farum Azula",
+            "Dragonlord Placidusax - Crumbling Farum Azula",
+            "Godskin Duo - Crumbling Farum Azula",
+            "Rennala, Queen of the Full Moon - Academy of Raya Lucaria",
+            "Red Wolf of Radagon - Academy of Raya Lucaria",
+            "Malenia, Blade of Miquella - Miquella\'s Haligtree",
+            "Loretta, Knight of the Haligtree - Miquella\'s Haligtree",
+            "Rykard, Lord of Blasphemy - Volcano Manor",
+            "Godskin Noble - Volcano Manor",
+            "Abductor Virgins - Volcano Manor",
+            "Ulcerated Tree Spirit - Stranded Graveyard",
+            "Soldier of Godrick - Stranded Graveyard",
+            "Elden Beast - Elden Throne",
+            "Mohg, The Omen - Subterranean Shunning-Grounds (Leyndell)",
+            "Esgar, Priest of Blood - Subterranean Shunning-Grounds (Leyndell)",
+            "Magma Wyrm Makar - Ruin-Strewn Precipice (Liurnia)",
+            "Cemetery Shade - Tombsward Catacombs (Limgrave)",
+            "Erdtree Burial Watchdog - Impaler\'s Catacombs (Weeping Penisula)",
+            "Erdtree Burial Watchdog - Stormfoot Catacombs (Limgrave)",
+            "Black Knife Assassin - Deathtouched Catacombs (Limgrave)",
+            "Grave Warden Duelist - Murkwater Catacombs (Limgrave)",
+            "Cemetery Shade - Black Knife Catacombs (Liurnia)",
+            "Black Knife Assassin - Black Knife Catacombs (Liurnia)",
+            "Spirit-Caller Snail - Road\'s End Catacombs (Liurnia)",
+            "Erdtree Burial Watchdog - Cliffbottom Catacombs (Liurnia)",
+            "Ancient Hero of Zamor - Sainted Hero\'s Grave (Altus Plateau)",
+            "Red Wolf of the Champion - Gelmir Hero\'s Grave (Mt. Gelmir)",
+            "Crucible Knight Ordovis - Auriza Hero\'s Grave (Altus Plateau)",
+            "Crucible Knight (Tree Spear) - Auriza Hero\'s Grave (Altus Plateau)",
+            "Misbegotten Warrior - Unsightly Catacombs (Mt. Gelmir)",
+            "Perfumer Tricia - Unsightly Catacombs (Mt. Gelmir)",
+            "Erdtree Burial Watchdog - Wyndham Catacombs (Altus Plateau)",
+            "Grave Warden Duelist - Auriza Side Tomb (Altus Plateau)",
+            "Erdtree Burial Watchdog - Minor Erdtree Catacombs (Caelid)",
+            "Cemetery Shade - Caelid Catacombs (Caelid)",
+            "Putrid Tree Spirit - War-Dead Catacombs (Caelid)",
+            "Ancient Hero of Zamor - Giant-Conquering Hero\'s Grave (Mountaintops)",
+            "Ulcerated Tree Sprit - Giants\' Mountaintop Catacombs (Mountaintops)",
+            "Putrid Grave Warden Duelist - Consecrated Snowfield Catacombs (Snowfield)",
+            "Stray Mimic Tear - Hidden Path to the Haligtree",
+            "Patches - Murkwater Cave (Limgrave)",
+            "Runebear - Earthbore Cave (Weeping Penisula)",
+            "Miranda the Blighted Bloom - Tombsward Cave (Limgrave)",
+            "Beastman of Farum Azula - Groveside Cave (Limgrave)",
+            "Demi-Human Chief - Coastal Cave (Limgrave)",
+            "Guardian Golem - Highroad Cave (Limgrave)",
+            "Cleanrot Knight - Stillwater Cave (Liurnia)",
+            "Bloodhound Knight - Lakeside Crystal Cave (Liurnia)",
+            "Crystalians - Academy Crystal Cave (Liurnia)",
+            "Kindred of Rot - Seethewater Cave (Mt. Gelmir)",
+            "Demi-Human Queen Margot - Volcano Cave (Mt. Gelmir)",
+            "Miranda the Blighted Bloom - Perfumer\'s Grotto (Altus Plateau)",
+            "Black Knife Assassin - Sage\'s Cave (Altus Plateau)",
+            "Necromancer Garris - Sage\'s Cave (Altus Plateau)",
+            "Frenzied Duelist - Gaol Cave (Caelid)",
+            "Beastman of Farum Azula - Dragonbarrow Cave (Dragonbarrow)",
+            "Cleanrot Knight - Abandoned Cave (Caelid)",
+            "Putrid Crystalians - Sellia Hideaway (Caelid)",
+            "Misbegotten Crusader - Cave of the Forlorn (Mountaintops)",
+            "Spirit-Caller Snail - Spiritcaller\'s Cave (Mountaintops)",
+            "Scaly Misbegotten - Morne Tunnel (Weeping Penisula)",
+            "Stonedigger Troll - Limgrave Tunnels (Limgrave)",
+            "Crystalian (Ringblade) - Raya Lucaria Crystal Tunnel (Liurnia)",
+            "Stonedigger Troll - Old Altus Tunnel (Altus Plateau)",
+            "Onyx Lord - Divine Tower of West Altus (Altus Plateau)",
+            "Crystalian (Ringblade) - Altus Tunnel (Altus Plateau)",
+            "Crystalian (Spear) - Altus Tunnel (Altus Plateau)",
+            "Magma Wyrm - Gael Tunnel (Caelid)",
+            "Fallingstar Beast - Sellia Crystal Tunnel (Caelid)",
+            "Astel, Stars of Darkness - Yelough Anix Tunnel (Snowfield)",
+            "Godskin Apostle - Divine Tower of Caelid (Caelid)",
+            "Fell Twins - Divine Tower of East Altus (Capital Outskirts)",
+            "Mad Pumpkin Head - Waypoint Ruins (Limgrave)",
+            "Night\'s Cavalry - Agheel Lake North (Limgrave)",
+            "Death Rite Bird - Stormgate (Limgrave)",
+            "Ball-Bearing Hunter - Warmaster\'s Shack (Limgrave)",
+            "Ancient Hero of Zamor - Weeping Evergaol (Weeping Penisula)",
+            "Bloodhound Knight Darriwill - Forlorn Hound Evergaol (Limgrave)",
+            "Crucible Knight - Stormhill Evergaol (Limgrave)",
+            "Erdtree Avatar - Minor Erdtree (Weeping Penisula)",
+            "Night\'s Cavalry - Castle Morne Approach (Weeping Penisula)",
+            "Death Rite Bird - Castle Morne Approach (Weeping Penisula)",
+            "Leonine Misbegotten - Castle Morne (Weeping Penisula)",
+            "Tree Sentinel - Church of Elleh (Limgrave)",
+            "Flying Dragon Agheel - Dragon-Burnt Ruins (Limgrave)",
+            "Tibia Mariner - Summonwater Village (Limgrave)",
+            "Royal Revenant - Kingsrealm Ruins (Liurnia)",
+            "Adan, Thief of Fire - Malefactor\'s Evergaol (Liurnia)",
+            "Bols, Carian Knight - Cuckoo\'s Evergaol (Liurnia)",
+            "Onyx Lord - Royal Grave Evergaol (Liurnia)",
+            "Alecto, Black Knife Ringleader - Moonlight Altar (Liurnia)",
+            "Erdtree Avatar - Revenger\'s Shack (Liurnia)",
+            "Erdtree Avatar - Minor Erdtree (Liurnia)",
+            "Royal Knight Loretta - Carian Manor (Liurnia)",
+            "Ball-Bearing Hunter - Church of Vows (Liurnia)",
+            "Night\'s Cavalry - Liurnia Highway Far North (Liurnia)",
+            "Night\'s Cavalry - East Raya Lucaria Gate (Liurnia)",
+            "Deathbird - Laskyar Ruins (Liurnia)",
+            "Death Rite Bird - Gate Town Northwest (Liurnia)",
+            "Glintstone Dragon Smarag - Meeting Place (Liurnia)",
+            "Glintstone Dragon Adula - Ranni\'s Rise (Liurnia)",
+            "Glintstone Dragon Adula - Moonfolk Ruins (Liurnia)",
+            "Omenkiller - Village of the Albinaurics (Liurnia)",
+            "Tibia Mariner - Jarburg (Liurnia)",
+            "Ancient Dragon Lansseax - Abandoned Coffin (Altus Plateau)",
+            "Ancient Dragon Lansseax - Rampartside Path (Altus Plateau)",
+            "Demi-Human Queen - Lux Ruins (Altus Plateau)",
+            "Fallingstar Beast - South of Tree Sentinel Duo (Altus Plateau)",
+            "Sanguine Noble - Writheblood Ruins (Altus Plateau)",
+            "Tree Sentinel - Tree Sentinel Duo (Altus Plateau)",
+            "Godskin Apostle - Windmill Heights (Altus Plateau)",
+            "Black Knife Assassin - Sainted Hero\'s Grave Entrance (Altus Plateau)",
+            "Draconic Tree Sentinel - Capital Rampart (Capital Outskirts)",
+            "Godefroy the Grafted - Golden Lineage Evergaol (Altus Plateau)",
+            "Wormface - Woodfolk Ruins (Altus Plateau)",
+            "Night\'s Cavalry - Altus Highway Junction (Altus Plateau)",
+            "Death Rite Bird - Minor Erdtree (Capital Outskirts)",
+            "Ball-Bearing Hunter - Hermit Merchant\'s Shack (Capital Outskirts)",
+            "Demi-Human Queen - Primeval Sorcerer Azur (Mt. Gelmir)",
+            "Magma Wyrm - Seethewater Terminus (Mt. Gelmir)",
+            "Full-Grown Fallingstar Beast - Crater (Mt. Gelmir)",
+            "Elemer of the Briar - Shaded Castle (Altus Plateau)",
+            "Ulcerated Tree Spirit - Minor Erdtree (Mt. Gelmir)",
+            "Tibia Mariner - Wyndham Ruins (Altus Plateau)",
+            "Putrid Avatar - Minor Erdtree (Caelid)",
+            "Decaying Ekzykes - Caelid Highway South (Caelid)",
+            "Monstrous Dog - Southwest of Caelid Highway South (Caelid)",
+            "Night\'s Cavalry - Southern Aeonia Swamp Bank (Caelid)",
+            "Death Rite Bird - Southern Aeonia Swamp Bank (Caelid)",
+            "Commander O\'Neil - East Aeonia Swamp (Caelid)",
+            "Crucible Knight - Redmane Castle (Caelid)",
+            "Starscourge Radahn - Battlefield (Caelid)",
+            "Nox Priest - West Sellia (Caelid)",
+            "Bell-Bearing Hunter - Isolated Merchant\'s Shack (Dragonbarrow)",
+            "Battlemage Hugues - Sellia Crystal Tunnel Entrance (Caelid)",
+            "Putrid Avatar - Dragonbarrow Fork (Caelid)",
+            "Flying Dragon Greyll - Dragonbarrow (Caelid)",
+            "Night\'s Cavalry - Dragonbarrow (Caelid)",
+            "Black Blade Kindred - Bestial Sanctum (Caelid)",
+            "Night\'s Cavalry - Forbidden Lands (Mountaintops)",
+            "Black Blade Kindred - Before Grand Lift of Rold (Mountaintops)",
+            "Borealis the Freezing Fog - Freezing Fields (Mountaintops)",
+            "Roundtable Knight Vyke - Lord Contender\'s Evergaol (Mountaintops)",
+            "Fire Giant - Giant\'s Forge (Mountaintops)",
+            "Erdtree Avatar - Minor Erdtree (Mountaintops)",
+            "Death Rite Bird - West of Castle So (Mountaintops)",
+            "Putrid Avatar - Minor Erdtree (Snowfield)",
+            "Commander Niall - Castle Soul (Mountaintops)",
+            "Great Wyrm Theodorix - Albinauric Rise (Mountaintops)",
+            "Night\'s Cavalry - Sourthwest (Mountaintops)",
+            "Death Rite Bird - Ordina, Liturgical Town (Snowfield)"});
+            this.comboBoxBossER.Location = new System.Drawing.Point(184, 18);
+            this.comboBoxBossER.Name = "comboBoxBossER";
+            this.comboBoxBossER.Size = new System.Drawing.Size(292, 21);
+            this.comboBoxBossER.TabIndex = 12;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(87, 3);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(32, 13);
+            this.label28.TabIndex = 11;
+            this.label28.Text = "How:";
+            // 
+            // comboBoxHowBossER
+            // 
+            this.comboBoxHowBossER.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.comboBoxHowBossER.FormattingEnabled = true;
+            this.comboBoxHowBossER.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowBossER.Location = new System.Drawing.Point(46, 18);
+            this.comboBoxHowBossER.Name = "comboBoxHowBossER";
+            this.comboBoxHowBossER.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxHowBossER.TabIndex = 10;
+            // 
+            // listBoxBossER
+            // 
+            this.listBoxBossER.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxBossER.FormattingEnabled = true;
+            this.listBoxBossER.Location = new System.Drawing.Point(9, 82);
+            this.listBoxBossER.Name = "listBoxBossER";
+            this.listBoxBossER.Size = new System.Drawing.Size(489, 147);
+            this.listBoxBossER.TabIndex = 7;
+            this.listBoxBossER.DoubleClick += new System.EventHandler(this.listBoxBossER_DoubleClick);
+            // 
+            // EldenRingRunning
+            // 
+            this.EldenRingRunning.AutoSize = true;
+            this.EldenRingRunning.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.EldenRingRunning.Location = new System.Drawing.Point(335, 22);
+            this.EldenRingRunning.Name = "EldenRingRunning";
+            this.EldenRingRunning.Size = new System.Drawing.Size(112, 13);
+            this.EldenRingRunning.TabIndex = 19;
+            this.EldenRingRunning.Text = "Elden Ring is Running";
+            // 
+            // EldenRingNotRunning
+            // 
+            this.EldenRingNotRunning.AutoSize = true;
+            this.EldenRingNotRunning.ForeColor = System.Drawing.Color.Red;
+            this.EldenRingNotRunning.Location = new System.Drawing.Point(329, 22);
+            this.EldenRingNotRunning.Name = "EldenRingNotRunning";
+            this.EldenRingNotRunning.Size = new System.Drawing.Size(132, 13);
+            this.EldenRingNotRunning.TabIndex = 18;
+            this.EldenRingNotRunning.Text = "Elden Ring is Not Running";
+            // 
+            // btnRefreshE
+            // 
+            this.btnRefreshE.Location = new System.Drawing.Point(474, 17);
+            this.btnRefreshE.Name = "btnRefreshE";
+            this.btnRefreshE.Size = new System.Drawing.Size(62, 23);
+            this.btnRefreshE.TabIndex = 17;
+            this.btnRefreshE.Text = "Refresh";
+            this.btnRefreshE.UseVisualStyleBackColor = true;
+            this.btnRefreshE.Click += new System.EventHandler(this.refresh_Btn);
+            // 
+            // btn_DesactiveAllElden
+            // 
+            this.btn_DesactiveAllElden.Location = new System.Drawing.Point(27, 17);
+            this.btn_DesactiveAllElden.Name = "btn_DesactiveAllElden";
+            this.btn_DesactiveAllElden.Size = new System.Drawing.Size(100, 23);
+            this.btn_DesactiveAllElden.TabIndex = 16;
+            this.btn_DesactiveAllElden.Text = "Desactive All";
+            this.btn_DesactiveAllElden.UseVisualStyleBackColor = true;
+            this.btn_DesactiveAllElden.Click += new System.EventHandler(this.btn_DesactiveAllElden_Click);
+            // 
+            // comboBoxToSplitEldenRing
+            // 
+            this.comboBoxToSplitEldenRing.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.comboBoxToSplitEldenRing.FormattingEnabled = true;
+            this.comboBoxToSplitEldenRing.Items.AddRange(new object[] {
+            "Kill a Boss",
+            "Light a Grace",
+            "Target a Position"});
+            this.comboBoxToSplitEldenRing.Location = new System.Drawing.Point(80, 54);
+            this.comboBoxToSplitEldenRing.Name = "comboBoxToSplitEldenRing";
+            this.comboBoxToSplitEldenRing.Size = new System.Drawing.Size(444, 21);
+            this.comboBoxToSplitEldenRing.TabIndex = 13;
+            this.comboBoxToSplitEldenRing.SelectedIndexChanged += new System.EventHandler(this.comboBoxToSplitEldenRing_SelectedIndexChanged);
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(41, 57);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(33, 13);
+            this.label30.TabIndex = 12;
+            this.label30.Text = "when";
             // 
             // tabHollow
             // 
             this.tabHollow.BackColor = System.Drawing.SystemColors.Control;
-            this.tabHollow.Controls.Add(this.panelBossH);
             this.tabHollow.Controls.Add(this.panelPositionH);
+            this.tabHollow.Controls.Add(this.panelBossH);
             this.tabHollow.Controls.Add(this.panelItemH);
             this.tabHollow.Controls.Add(this.refreshHollow);
             this.tabHollow.Controls.Add(this.btn_DesactiveAllH);
@@ -1694,7 +2569,7 @@
             this.btn_getPositionH.Name = "btn_getPositionH";
             this.btn_getPositionH.Size = new System.Drawing.Size(100, 21);
             this.btn_getPositionH.TabIndex = 16;
-            this.btn_getPositionH.Text = "Get Potition";
+            this.btn_getPositionH.Text = "Get Position";
             this.btn_getPositionH.UseVisualStyleBackColor = true;
             this.btn_getPositionH.Click += new System.EventHandler(this.btn_getPositionH_Click);
             // 
@@ -1721,156 +2596,6 @@
             this.textBoxSh.ReadOnly = true;
             this.textBoxSh.Size = new System.Drawing.Size(100, 20);
             this.textBoxSh.TabIndex = 13;
-            // 
-            // panelItemH
-            // 
-            this.panelItemH.Controls.Add(this.groupBoxSkillsH);
-            this.panelItemH.Controls.Add(this.groupBoxCharms);
-            this.panelItemH.Controls.Add(this.comboBoxItemSelectH);
-            this.panelItemH.Controls.Add(this.label25);
-            this.panelItemH.Location = new System.Drawing.Point(44, 82);
-            this.panelItemH.Name = "panelItemH";
-            this.panelItemH.Size = new System.Drawing.Size(505, 254);
-            this.panelItemH.TabIndex = 19;
-            // 
-            // groupBoxSkillsH
-            // 
-            this.groupBoxSkillsH.Controls.Add(this.checkedListBoxSkillsH);
-            this.groupBoxSkillsH.Location = new System.Drawing.Point(5, 36);
-            this.groupBoxSkillsH.Name = "groupBoxSkillsH";
-            this.groupBoxSkillsH.Size = new System.Drawing.Size(499, 212);
-            this.groupBoxSkillsH.TabIndex = 11;
-            this.groupBoxSkillsH.TabStop = false;
-            this.groupBoxSkillsH.Text = "Skills";
-            // 
-            // checkedListBoxSkillsH
-            // 
-            this.checkedListBoxSkillsH.BackColor = System.Drawing.SystemColors.Control;
-            this.checkedListBoxSkillsH.CheckOnClick = true;
-            this.checkedListBoxSkillsH.FormattingEnabled = true;
-            this.checkedListBoxSkillsH.Items.AddRange(new object[] {
-            "Abyss Shriek",
-            "Crystal Heart",
-            "Cyclone Slash",
-            "Dash Slash",
-            "Descending Dark",
-            "Desolate Dive",
-            "Dream Nail",
-            "Dream Nail - Awoken",
-            "Dream Gate",
-            "Great Slash",
-            "Howling Wraiths",
-            "Isma\'s Tear",
-            "Mantis Claw",
-            "Monarch Wings",
-            "Mothwing Cloak",
-            "Shade Cloak",
-            "Shade Soul",
-            "Vengeful Spirit"});
-            this.checkedListBoxSkillsH.Location = new System.Drawing.Point(19, 28);
-            this.checkedListBoxSkillsH.Name = "checkedListBoxSkillsH";
-            this.checkedListBoxSkillsH.Size = new System.Drawing.Size(470, 169);
-            this.checkedListBoxSkillsH.TabIndex = 0;
-            this.checkedListBoxSkillsH.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxSkillsH_ItemCheck);
-            // 
-            // groupBoxCharms
-            // 
-            this.groupBoxCharms.Controls.Add(this.checkedListBoxCharms);
-            this.groupBoxCharms.Location = new System.Drawing.Point(3, 35);
-            this.groupBoxCharms.Name = "groupBoxCharms";
-            this.groupBoxCharms.Size = new System.Drawing.Size(499, 212);
-            this.groupBoxCharms.TabIndex = 10;
-            this.groupBoxCharms.TabStop = false;
-            this.groupBoxCharms.Text = "Charms";
-            // 
-            // checkedListBoxCharms
-            // 
-            this.checkedListBoxCharms.BackColor = System.Drawing.SystemColors.Control;
-            this.checkedListBoxCharms.CheckOnClick = true;
-            this.checkedListBoxCharms.FormattingEnabled = true;
-            this.checkedListBoxCharms.Items.AddRange(new object[] {
-            "Baldur Shell",
-            "Dashmaster",
-            "Deep Focus",
-            "Defenders Crest",
-            "Dreamshield",
-            "Dream Wielder",
-            "Flukenest",
-            "Fragile Greed",
-            "Fragile Heart",
-            "Fragile Strength",
-            "Fury of the Fallen",
-            "Gathering Swarm",
-            "Glowing Womb",
-            "Grimmchild",
-            "Grimmchild Lvl 2",
-            "Grimmchild Lvl 3",
-            "Grimmchild Lvl 4",
-            "Grubberfly\'s Elegy",
-            "Grubsong",
-            "Heavy Blow",
-            "Hiveblood",
-            "Joni\'s Blessing",
-            "White Fragment - Queen\'s",
-            "White Fragment - King\'s",
-            "Kingsoul",
-            "Lifeblood Core",
-            "Lifeblood Heart",
-            "Longnail",
-            "Mark of Pride",
-            "Nailmaster\'s Glory",
-            "Quick Focus",
-            "Quick Slash",
-            "Shaman Stone",
-            "Shape of Unn",
-            "Sharp Shadow",
-            "Soul Catcher",
-            "Soul Eater",
-            "Spell Twister",
-            "Spore Shroom",
-            "Sprintmaster",
-            "Stalwart Shell",
-            "Steady Body",
-            "Thorns of Agony",
-            "Unbreakable Greed",
-            "Unbreakable Heart",
-            "Unbreakable Strength",
-            "Void Heart",
-            "Wayward Compass",
-            "Weaversong",
-            "Shrumal Ogres (Charm)",
-            "Fog Canyon",
-            "Salubra 1",
-            "Salubra 2",
-            "Salubra 3",
-            "Salubra 4"});
-            this.checkedListBoxCharms.Location = new System.Drawing.Point(19, 28);
-            this.checkedListBoxCharms.Name = "checkedListBoxCharms";
-            this.checkedListBoxCharms.Size = new System.Drawing.Size(470, 169);
-            this.checkedListBoxCharms.TabIndex = 0;
-            this.checkedListBoxCharms.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxCharms_ItemCheck);
-            // 
-            // comboBoxItemSelectH
-            // 
-            this.comboBoxItemSelectH.BackColor = System.Drawing.SystemColors.GrayText;
-            this.comboBoxItemSelectH.FormattingEnabled = true;
-            this.comboBoxItemSelectH.Items.AddRange(new object[] {
-            "Skills",
-            "Charms"});
-            this.comboBoxItemSelectH.Location = new System.Drawing.Point(78, 3);
-            this.comboBoxItemSelectH.Name = "comboBoxItemSelectH";
-            this.comboBoxItemSelectH.Size = new System.Drawing.Size(361, 21);
-            this.comboBoxItemSelectH.TabIndex = 9;
-            this.comboBoxItemSelectH.SelectedIndexChanged += new System.EventHandler(this.comboBoxItemSelectH_SelectedIndexChanged);
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(33, 6);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(35, 13);
-            this.label25.TabIndex = 8;
-            this.label25.Text = "select";
             // 
             // panelBossH
             // 
@@ -2136,6 +2861,156 @@
             this.label6.TabIndex = 6;
             this.label6.Text = "select";
             // 
+            // panelItemH
+            // 
+            this.panelItemH.Controls.Add(this.groupBoxSkillsH);
+            this.panelItemH.Controls.Add(this.groupBoxCharms);
+            this.panelItemH.Controls.Add(this.comboBoxItemSelectH);
+            this.panelItemH.Controls.Add(this.label25);
+            this.panelItemH.Location = new System.Drawing.Point(44, 82);
+            this.panelItemH.Name = "panelItemH";
+            this.panelItemH.Size = new System.Drawing.Size(505, 254);
+            this.panelItemH.TabIndex = 19;
+            // 
+            // groupBoxSkillsH
+            // 
+            this.groupBoxSkillsH.Controls.Add(this.checkedListBoxSkillsH);
+            this.groupBoxSkillsH.Location = new System.Drawing.Point(5, 36);
+            this.groupBoxSkillsH.Name = "groupBoxSkillsH";
+            this.groupBoxSkillsH.Size = new System.Drawing.Size(499, 212);
+            this.groupBoxSkillsH.TabIndex = 11;
+            this.groupBoxSkillsH.TabStop = false;
+            this.groupBoxSkillsH.Text = "Skills";
+            // 
+            // checkedListBoxSkillsH
+            // 
+            this.checkedListBoxSkillsH.BackColor = System.Drawing.SystemColors.Control;
+            this.checkedListBoxSkillsH.CheckOnClick = true;
+            this.checkedListBoxSkillsH.FormattingEnabled = true;
+            this.checkedListBoxSkillsH.Items.AddRange(new object[] {
+            "Abyss Shriek",
+            "Crystal Heart",
+            "Cyclone Slash",
+            "Dash Slash",
+            "Descending Dark",
+            "Desolate Dive",
+            "Dream Nail",
+            "Dream Nail - Awoken",
+            "Dream Gate",
+            "Great Slash",
+            "Howling Wraiths",
+            "Isma\'s Tear",
+            "Mantis Claw",
+            "Monarch Wings",
+            "Mothwing Cloak",
+            "Shade Cloak",
+            "Shade Soul",
+            "Vengeful Spirit"});
+            this.checkedListBoxSkillsH.Location = new System.Drawing.Point(19, 28);
+            this.checkedListBoxSkillsH.Name = "checkedListBoxSkillsH";
+            this.checkedListBoxSkillsH.Size = new System.Drawing.Size(470, 169);
+            this.checkedListBoxSkillsH.TabIndex = 0;
+            this.checkedListBoxSkillsH.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxSkillsH_ItemCheck);
+            // 
+            // groupBoxCharms
+            // 
+            this.groupBoxCharms.Controls.Add(this.checkedListBoxCharms);
+            this.groupBoxCharms.Location = new System.Drawing.Point(3, 35);
+            this.groupBoxCharms.Name = "groupBoxCharms";
+            this.groupBoxCharms.Size = new System.Drawing.Size(499, 212);
+            this.groupBoxCharms.TabIndex = 10;
+            this.groupBoxCharms.TabStop = false;
+            this.groupBoxCharms.Text = "Charms";
+            // 
+            // checkedListBoxCharms
+            // 
+            this.checkedListBoxCharms.BackColor = System.Drawing.SystemColors.Control;
+            this.checkedListBoxCharms.CheckOnClick = true;
+            this.checkedListBoxCharms.FormattingEnabled = true;
+            this.checkedListBoxCharms.Items.AddRange(new object[] {
+            "Baldur Shell",
+            "Dashmaster",
+            "Deep Focus",
+            "Defenders Crest",
+            "Dreamshield",
+            "Dream Wielder",
+            "Flukenest",
+            "Fragile Greed",
+            "Fragile Heart",
+            "Fragile Strength",
+            "Fury of the Fallen",
+            "Gathering Swarm",
+            "Glowing Womb",
+            "Grimmchild",
+            "Grimmchild Lvl 2",
+            "Grimmchild Lvl 3",
+            "Grimmchild Lvl 4",
+            "Grubberfly\'s Elegy",
+            "Grubsong",
+            "Heavy Blow",
+            "Hiveblood",
+            "Joni\'s Blessing",
+            "White Fragment - Queen\'s",
+            "White Fragment - King\'s",
+            "Kingsoul",
+            "Lifeblood Core",
+            "Lifeblood Heart",
+            "Longnail",
+            "Mark of Pride",
+            "Nailmaster\'s Glory",
+            "Quick Focus",
+            "Quick Slash",
+            "Shaman Stone",
+            "Shape of Unn",
+            "Sharp Shadow",
+            "Soul Catcher",
+            "Soul Eater",
+            "Spell Twister",
+            "Spore Shroom",
+            "Sprintmaster",
+            "Stalwart Shell",
+            "Steady Body",
+            "Thorns of Agony",
+            "Unbreakable Greed",
+            "Unbreakable Heart",
+            "Unbreakable Strength",
+            "Void Heart",
+            "Wayward Compass",
+            "Weaversong",
+            "Shrumal Ogres (Charm)",
+            "Fog Canyon",
+            "Salubra 1",
+            "Salubra 2",
+            "Salubra 3",
+            "Salubra 4"});
+            this.checkedListBoxCharms.Location = new System.Drawing.Point(19, 28);
+            this.checkedListBoxCharms.Name = "checkedListBoxCharms";
+            this.checkedListBoxCharms.Size = new System.Drawing.Size(470, 169);
+            this.checkedListBoxCharms.TabIndex = 0;
+            this.checkedListBoxCharms.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxCharms_ItemCheck);
+            // 
+            // comboBoxItemSelectH
+            // 
+            this.comboBoxItemSelectH.BackColor = System.Drawing.SystemColors.GrayText;
+            this.comboBoxItemSelectH.FormattingEnabled = true;
+            this.comboBoxItemSelectH.Items.AddRange(new object[] {
+            "Skills",
+            "Charms"});
+            this.comboBoxItemSelectH.Location = new System.Drawing.Point(78, 3);
+            this.comboBoxItemSelectH.Name = "comboBoxItemSelectH";
+            this.comboBoxItemSelectH.Size = new System.Drawing.Size(361, 21);
+            this.comboBoxItemSelectH.TabIndex = 9;
+            this.comboBoxItemSelectH.SelectedIndexChanged += new System.EventHandler(this.comboBoxItemSelectH_SelectedIndexChanged);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(33, 6);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(35, 13);
+            this.label25.TabIndex = 8;
+            this.label25.Text = "select";
+            // 
             // refreshHollow
             // 
             this.refreshHollow.Location = new System.Drawing.Point(474, 17);
@@ -2272,6 +3147,8 @@
             this.tabSekiro.PerformLayout();
             this.panelPositionS.ResumeLayout(false);
             this.panelPositionS.PerformLayout();
+            this.panelBossS.ResumeLayout(false);
+            this.panelBossS.PerformLayout();
             this.panelIdolsS.ResumeLayout(false);
             this.panelIdolsS.PerformLayout();
             this.groupBoxAshinaCastle.ResumeLayout(false);
@@ -2298,8 +3175,6 @@
             this.groupBoxAshinaOutskirts.ResumeLayout(false);
             this.groupBoxRadiosAshinaOutskirts.ResumeLayout(false);
             this.groupBoxRadiosAshinaOutskirts.PerformLayout();
-            this.panelBossS.ResumeLayout(false);
-            this.panelBossS.PerformLayout();
             this.tabDs1.ResumeLayout(false);
             this.tabDs1.PerformLayout();
             this.tabDs2.ResumeLayout(false);
@@ -2308,20 +3183,26 @@
             this.tabDs3.PerformLayout();
             this.tabElden.ResumeLayout(false);
             this.tabElden.PerformLayout();
+            this.panelPositionsER.ResumeLayout(false);
+            this.panelPositionsER.PerformLayout();
+            this.panelGraceER.ResumeLayout(false);
+            this.panelGraceER.PerformLayout();
+            this.panelBossER.ResumeLayout(false);
+            this.panelBossER.PerformLayout();
             this.tabHollow.ResumeLayout(false);
             this.tabHollow.PerformLayout();
             this.panelPositionH.ResumeLayout(false);
             this.panelPositionH.PerformLayout();
-            this.panelItemH.ResumeLayout(false);
-            this.panelItemH.PerformLayout();
-            this.groupBoxSkillsH.ResumeLayout(false);
-            this.groupBoxCharms.ResumeLayout(false);
             this.panelBossH.ResumeLayout(false);
             this.panelBossH.PerformLayout();
             this.groupBoxMBH.ResumeLayout(false);
             this.groupBoxPantheon.ResumeLayout(false);
             this.groupBoxPantheon.PerformLayout();
             this.groupBossH.ResumeLayout(false);
+            this.panelItemH.ResumeLayout(false);
+            this.panelItemH.PerformLayout();
+            this.groupBoxSkillsH.ResumeLayout(false);
+            this.groupBoxCharms.ResumeLayout(false);
             this.tabUpdate.ResumeLayout(false);
             this.tabUpdate.PerformLayout();
             this.ResumeLayout(false);
@@ -2331,7 +3212,6 @@
         #endregion
 
         private System.Windows.Forms.TabPage tabElden;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TabPage tabDs3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TabPage tabDs2;
@@ -2349,7 +3229,7 @@
         private System.Windows.Forms.TabPage tabHollow;
         private System.Windows.Forms.Panel panelPositionS;
         private System.Windows.Forms.Button btnAddPosition;
-        private System.Windows.Forms.Button btnGetPotition;
+        private System.Windows.Forms.Button btnGetPositionS;
         private System.Windows.Forms.TextBox textBoxZ;
         private System.Windows.Forms.TextBox textBoxY;
         private System.Windows.Forms.TextBox textBoxX;
@@ -2373,7 +3253,7 @@
         private System.Windows.Forms.ComboBox comboBoxHowBoss;
         private System.Windows.Forms.Button btn_AddBoss;
         private System.Windows.Forms.Panel panelIdolsS;
-        private System.Windows.Forms.ComboBox comboBoxZoneSelect;
+        private System.Windows.Forms.ComboBox comboBoxZoneSelectS;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.GroupBox groupBoxAshinaOutskirts;
         private System.Windows.Forms.GroupBox groupBoxRadiosAshinaOutskirts;
@@ -2484,5 +3364,38 @@
         private System.Windows.Forms.TextBox textBoxYh;
         private System.Windows.Forms.TextBox textBoxSh;
         private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label EldenRingRunning;
+        private System.Windows.Forms.Label EldenRingNotRunning;
+        private System.Windows.Forms.Button btnRefreshE;
+        private System.Windows.Forms.Button btn_DesactiveAllElden;
+        private System.Windows.Forms.ComboBox comboBoxToSplitEldenRing;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Panel panelBossER;
+        private System.Windows.Forms.Button btnAddBossER;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBoxBossER;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.ComboBox comboBoxHowBossER;
+        private System.Windows.Forms.ListBox listBoxBossER;
+        private System.Windows.Forms.Panel panelGraceER;
+        private System.Windows.Forms.ComboBox comboBoxZoneSelectER;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.ListBox listBoxGrace;
+        private System.Windows.Forms.Button btnAddGraceER;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.ComboBox comboBoxHowGraceER;
+        private System.Windows.Forms.Panel panelPositionsER;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.ComboBox comboBoxHowPositionsER;
+        private System.Windows.Forms.ComboBox comboBoxMarginER;
+        private System.Windows.Forms.ListBox listBoxPositionsER;
+        private System.Windows.Forms.Button btnAddPositionER;
+        private System.Windows.Forms.Button btnGetPosition;
+        private System.Windows.Forms.TextBox textBoxZEr;
+        private System.Windows.Forms.TextBox textBoxYEr;
+        private System.Windows.Forms.TextBox textBoxXEr;
     }
 }

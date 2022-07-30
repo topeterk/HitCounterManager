@@ -39,16 +39,18 @@ namespace HitCounterManager
     {
         SekiroSplitter sekiroSplitter;
         HollowSplitter hollowSplitter;
+        EldenSplitter eldenSplitter;
         
         
 
         public Exception Exception { get; set; }
 
-        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter)
+        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter,EldenSplitter eldenSplitter)
         {
             InitializeComponent();
             this.sekiroSplitter = sekiroSplitter;
             this.hollowSplitter = hollowSplitter;
+            this.eldenSplitter = eldenSplitter;
             refreshForm();
         }
 
@@ -82,6 +84,11 @@ namespace HitCounterManager
             panelPositionH.Hide();
 
             #endregion
+            #region EldenTab
+            panelBossER.Hide();
+            panelGraceER.Hide();
+            panelPositionsER.Hide();
+            #endregion
             checkStatusGames();
         }
 
@@ -89,7 +96,7 @@ namespace HitCounterManager
         {
             DTSekiro sekiroData = sekiroSplitter.getDataSekiro();
             #region SekiroLoad.Bosses
-            foreach (DefinitionsSekiro.Boss boss in sekiroData.getBossToSplit())
+            foreach (DefinitionsSekiro.BossS boss in sekiroData.getBossToSplit())
             {
                 listBoxBosses.Items.Add(boss.Title + " - " + boss.Mode);
             }
@@ -164,7 +171,7 @@ namespace HitCounterManager
             }
             #endregion
             #region SekiroLoad.Position
-            foreach (DefinitionsSekiro.Position position in sekiroData.getPositionsToSplit())
+            foreach (DefinitionsSekiro.PositionS position in sekiroData.getPositionsToSplit())
             {
                 listBoxPositionsS.Items.Add(position.vector + " - " + position.mode);
             }
@@ -253,6 +260,26 @@ namespace HitCounterManager
             }
             comboBoxMarginH.SelectedIndex = hollowData.positionMargin;
             #endregion
+            DTElden eldenData = eldenSplitter.getDataElden();
+            #region EldenLoad.Boss
+            foreach (DefinitionsElden.BossER boss in eldenData.getBossToSplit())
+            {
+                listBoxBossER.Items.Add(boss.Title + " - " + boss.Mode);
+            }
+            #endregion
+            #region EldenLoad.Grace
+            foreach (DefinitionsElden.Grace grace in eldenData.getGraceToSplit())
+            {
+                listBoxGrace.Items.Add(grace.Title + " - " + grace.Mode);
+            }
+            #endregion
+            #region EldenLoad.Positions
+            foreach (DefinitionsElden.PositionER position in eldenData.getPositionToSplit())
+            {
+                listBoxPositionsER.Items.Add(position.vector + " - " + position.mode);
+            }
+            comboBoxMarginER.SelectedIndex = eldenData.positionMargin;
+            #endregion
         }
 
         private void refresh_Btn(object sender, EventArgs e)
@@ -283,7 +310,16 @@ namespace HitCounterManager
                 HollowRunning.Hide();
                 HollowNotRunning.Show();
             }
-
+            if (eldenSplitter.getEldenStatusProcess(out excS, 0))
+            {
+                EldenRingRunning.Show();
+                EldenRingNotRunning.Hide();
+            }
+            else
+            {
+                EldenRingRunning.Hide();
+                EldenRingNotRunning.Show();
+            }
 
         }
 
@@ -313,7 +349,7 @@ namespace HitCounterManager
 
 
 
-        private void btnGetPotition_Click(object sender, EventArgs e)
+        private void btnGetPosition_Click(object sender, EventArgs e)
         {
             var Vector = sekiroSplitter.getCurrentPosition();
             this.Vector = Vector;
@@ -396,8 +432,8 @@ namespace HitCounterManager
             }
             else
             {
-                var contains1 = !listBoxPositionsS.Items.Contains(comboBoxBoss.Text.ToString() + " - " + "Inmediatly");
-                var contains2 = !listBoxPositionsS.Items.Contains(comboBoxBoss.Text.ToString() + " - " + "Loading game after");
+                var contains1 = !listBoxBosses.Items.Contains(comboBoxBoss.Text.ToString() + " - " + "Inmediatly");
+                var contains2 = !listBoxBosses.Items.Contains(comboBoxBoss.Text.ToString() + " - " + "Loading game after");
                 if (contains1 && contains2)
                 {
                     sekiroSplitter.setProcedure(false);
@@ -435,7 +471,7 @@ namespace HitCounterManager
             groupBoxAshinaDepths.Hide();
             groupBoxFountainhead.Hide();
 
-            switch (comboBoxZoneSelect.SelectedIndex)
+            switch (comboBoxZoneSelectS.SelectedIndex)
             {
                 case 0: //Ashina Outskirts
                     groupBoxAshinaOutskirts.Show();
@@ -1213,6 +1249,186 @@ namespace HitCounterManager
                 hollowSplitter.setProcedure(false);
                 hollowSplitter.clearData();
                 hollowSplitter.setProcedure(true);
+                this.Controls.Clear();
+                this.InitializeComponent();
+                refreshForm();
+                this.AutoSplitter_Load(null, null);//Load Others Games Settings
+            }
+        }
+
+        #endregion
+        #region Elden UI
+        private void comboBoxToSplitEldenRing_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            panelBossER.Hide();
+            panelGraceER.Hide();
+            panelPositionsER.Hide();
+
+            switch (comboBoxToSplitEldenRing.SelectedIndex)
+            {
+                case 0:
+                    panelBossER.Show(); break;
+                case 1:
+                    panelGraceER.Show(); break;
+                case 2:
+                    panelPositionsER.Show(); break;
+            }
+        }
+
+        private void btnAddBossER_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (comboBoxBossER.SelectedIndex == -1 || comboBoxHowBossER.SelectedIndex == -1)
+            {
+                error = MessageBox.Show("Plase select boss and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                var contains1 = !listBoxBossER.Items.Contains(comboBoxBossER.Text.ToString() + " - " + "Inmediatly");
+                var contains2 = !listBoxBossER.Items.Contains(comboBoxBossER.Text.ToString() + " - " + "Loading game after");
+                if (contains1 && contains2)
+                {
+                    eldenSplitter.setProcedure(false);
+                    eldenSplitter.AddBoss(comboBoxBossER.Text.ToString(), comboBoxHowBossER.Text.ToString());
+                    listBoxBossER.Items.Add(comboBoxBossER.Text.ToString() + " - " + comboBoxHowBossER.Text.ToString());
+                    eldenSplitter.setProcedure(true);
+                }
+                else
+                {
+                    error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void listBoxBossER_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.listBoxBossER.SelectedItem != null)
+            {
+                int i = listBoxBossER.Items.IndexOf(listBoxBossER.SelectedItem);
+                eldenSplitter.setProcedure(false);
+                eldenSplitter.RemoveBoss(i);
+                eldenSplitter.setProcedure(true);
+                listBoxBossER.Items.Remove(listBoxBossER.SelectedItem);
+            }
+        }
+
+        private void btnAddGraceER_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (comboBoxZoneSelectER.SelectedIndex == -1 || comboBoxHowGraceER.SelectedIndex == -1)
+            {
+                error = MessageBox.Show("Plase select grace and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                var contains1 = !listBoxGrace.Items.Contains(comboBoxZoneSelectER.Text.ToString() + " - " + "Inmediatly");
+                var contains2 = !listBoxGrace.Items.Contains(comboBoxZoneSelectER.Text.ToString() + " - " + "Loading game after");
+                if (contains1 && contains2)
+                {
+                    eldenSplitter.setProcedure(false);
+                    eldenSplitter.AddGrace(comboBoxZoneSelectER.Text.ToString(), comboBoxHowGraceER.Text.ToString());
+                    listBoxGrace.Items.Add(comboBoxZoneSelectER.Text.ToString() + " - " + comboBoxHowGraceER.Text.ToString());
+                    eldenSplitter.setProcedure(true);
+                }
+                else
+                {
+                    error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void listBoxGrace_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.listBoxGrace.SelectedItem != null)
+            {
+                int i = listBoxGrace.Items.IndexOf(listBoxGrace.SelectedItem);
+                eldenSplitter.setProcedure(false);
+                eldenSplitter.RemoveGrace(i);
+                eldenSplitter.setProcedure(true);
+                listBoxBossER.Items.Remove(listBoxGrace.SelectedItem);
+            }
+        }
+
+        SoulMemory.EldenRing.Position VectorER;
+        private void comboBoxMarginER_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            eldenSplitter.dataElden.positionMargin = comboBoxMarginER.SelectedIndex; ;
+        }
+
+        private void btnGetPosition_Click_1(object sender, EventArgs e)
+        {
+            var Vector = eldenSplitter.getCurrentPosition();
+            this.VectorER = Vector;
+            this.textBoxXEr.Clear();
+            this.textBoxYEr.Clear();
+            this.textBoxZEr.Clear();
+            this.textBoxXEr.Paste(Vector.X.ToString("0.00"));
+            this.textBoxYEr.Paste(Vector.Y.ToString("0.00"));
+            this.textBoxZEr.Paste(Vector.Z.ToString("0.00"));
+        }
+
+        private void btnAddPositionER_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (this.VectorER != null)
+            {
+                var contains1 = !listBoxPositionsER.Items.Contains(this.Vector + " - " + "Inmediatly");
+                var contains2 = !listBoxPositionsER.Items.Contains(this.Vector + " - " + "Loading game after");
+                if (contains1 && contains2)
+                {
+
+                    if (comboBoxHowPositionsER.SelectedIndex == -1)
+                    {
+                        error = MessageBox.Show("Select 'How' do you want split ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        if (this.VectorER.X == 0 && this.VectorER.Y == 0 && this.VectorER.Z == 0)
+                        {
+                            error = MessageBox.Show("Dont use cords 0,0,0", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            eldenSplitter.setProcedure(false);
+                            listBoxPositionsER.Items.Add(this.VectorER + " - " + comboBoxHowPositionsER.Text.ToString());
+                            error = MessageBox.Show("Move your charapter to evit autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            eldenSplitter.AddPosition(this.VectorER, comboBoxHowPositionsER.Text.ToString());
+                            eldenSplitter.setProcedure(true);
+                        }
+                    }
+                }
+                else
+                {
+                    error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                error = MessageBox.Show("Plase get a position ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void listBoxPositionsER_DoubleClick(object sender, EventArgs e)
+        {
+            if (listBoxPositionsER.SelectedItem != null)
+            {
+                int i = listBoxPositionsER.Items.IndexOf(listBoxPositionsER.SelectedItem);
+                eldenSplitter.setProcedure(false);
+                eldenSplitter.RemovePosition(i);
+                eldenSplitter.setProcedure(true);
+                listBoxPositionsER.Items.Remove(listBoxPositionsER.SelectedItem);
+            }
+        }
+        
+
+        private void btn_DesactiveAllElden_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to disable everything?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                eldenSplitter.setProcedure(false);
+                eldenSplitter.clearData();
+                eldenSplitter.setProcedure(true);
                 this.Controls.Clear();
                 this.InitializeComponent();
                 refreshForm();

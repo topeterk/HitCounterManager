@@ -118,13 +118,13 @@ namespace HitCounterManager
 
         public void AddBoss(string boss)
         {
-            DefinitionHollow.ElementToSplit element = defH.stringToEnum(boss);
+            DefinitionHollow.ElementToSplitH element = defH.stringToEnum(boss);
             dataHollow.bossToSplit.Add(element);
 
         }
         public void AddMiniBoss(string boss)
         {
-            DefinitionHollow.ElementToSplit element = defH.stringToEnum(boss);
+            DefinitionHollow.ElementToSplitH element = defH.stringToEnum(boss);
             dataHollow.miniBossToSplit.Add(element);
         }
 
@@ -137,14 +137,14 @@ namespace HitCounterManager
 
         public void AddCharm(string charm)
         {
-            DefinitionHollow.ElementToSplit element = defH.stringToEnum(charm);
+            DefinitionHollow.ElementToSplitH element = defH.stringToEnum(charm);
             dataHollow.charmToSplit.Add(element);
 
         }
 
         public void AddSkill(string skill)
         {
-            DefinitionHollow.ElementToSplit element = defH.stringToEnum(skill);
+            DefinitionHollow.ElementToSplitH element = defH.stringToEnum(skill);
             dataHollow.skillsToSplit.Add(element);
 
         }
@@ -161,62 +161,30 @@ namespace HitCounterManager
 
         public void RemoveBoss(string boss)
         {
-            foreach (var element in dataHollow.getBosstoSplit())
-            {
-                if (element.Title == boss)
-                {
-                    dataHollow.bossToSplit.Remove(element);
-                    break;
-                }
-            }
+            dataHollow.bossToSplit.RemoveAll(i=> i.Title == boss);
         }
 
         public void RemoveMiniBoss(string boss)
         {
-            foreach (var element in dataHollow.getMiniBossToSplit())
-            {
-                if (element.Title == boss)
-                {
-                    dataHollow.bossToSplit.Remove(element);
-                    break;
-                }
-            }
+            dataHollow.miniBossToSplit.RemoveAll(i => i.Title == boss);
+            
         }
 
         public void RemovePantheon(string Pantheon)
         {
-            foreach (var element in dataHollow.getPhanteonToSplit())
-            {
-                if (element.Title == Pantheon)
-                {
-                    dataHollow.phanteonToSplit.Remove(element);
-                    break;
-                }
-            }
+            dataHollow.phanteonToSplit.RemoveAll(i => i.Title == Pantheon);
         }
+        
 
         public void RemoveCharm(string charm)
         {
-            foreach (var element in dataHollow.getCharmToSplit())
-            {
-                if (element.Title == charm)
-                {
-                    dataHollow.charmToSplit.Remove(element);
-                    break;
-                }
-            }
+            dataHollow.charmToSplit.RemoveAll(i => i.Title == charm);
         }
 
         public void RemoveSkill(string skill)
         {
-            foreach (var element in dataHollow.getSkillsToSplit())
-            {
-                if (element.Title == skill)
-                {
-                    dataHollow.skillsToSplit.Remove(element);
-                    break;
-                }
-            }
+            dataHollow.skillsToSplit.RemoveAll(i => i.Title == skill);
+            
         }
 
         public void RemovePosition(int position)

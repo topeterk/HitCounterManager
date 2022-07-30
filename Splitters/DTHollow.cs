@@ -11,7 +11,7 @@ namespace HitCounterManager
     public class DefinitionHollow
     {
         [Serializable]
-        public class ElementToSplit
+        public class ElementToSplitH
         {
             public string Title;
             public Offset Offset = new Offset();
@@ -38,9 +38,9 @@ namespace HitCounterManager
             }
         }
 
-        public ElementToSplit stringToEnum(string element)
+        public ElementToSplitH stringToEnum(string element)
         {
-            ElementToSplit elem = new ElementToSplit();
+            ElementToSplitH elem = new ElementToSplitH();
             switch (element)
             {
                 #region Boss
@@ -536,19 +536,19 @@ namespace HitCounterManager
         public int PantheonMode = 0;
         public int positionMargin = 3;
         //Flags to Split
-        public List<DefinitionHollow.ElementToSplit> bossToSplit = new List<DefinitionHollow.ElementToSplit>();
-        public List<DefinitionHollow.ElementToSplit> miniBossToSplit = new List<DefinitionHollow.ElementToSplit>();
-        public List<DefinitionHollow.ElementToSplit> charmToSplit = new List<DefinitionHollow.ElementToSplit>();
-        public List<DefinitionHollow.ElementToSplit> skillsToSplit = new List<DefinitionHollow.ElementToSplit>();
+        public List<DefinitionHollow.ElementToSplitH> bossToSplit = new List<DefinitionHollow.ElementToSplitH>();
+        public List<DefinitionHollow.ElementToSplitH> miniBossToSplit = new List<DefinitionHollow.ElementToSplitH>();
+        public List<DefinitionHollow.ElementToSplitH> charmToSplit = new List<DefinitionHollow.ElementToSplitH>();
+        public List<DefinitionHollow.ElementToSplitH> skillsToSplit = new List<DefinitionHollow.ElementToSplitH>();
         public List<DefinitionHollow.Pantheon> phanteonToSplit = new List<DefinitionHollow.Pantheon>();
         public List<DefinitionHollow.Vector3F> positionToSplit = new List<DefinitionHollow.Vector3F>();
 
-        public List<DefinitionHollow.ElementToSplit> getBosstoSplit()
+        public List<DefinitionHollow.ElementToSplitH> getBosstoSplit()
         {
             return this.bossToSplit;
         }
 
-        public List<DefinitionHollow.ElementToSplit> getMiniBossToSplit()
+        public List<DefinitionHollow.ElementToSplitH> getMiniBossToSplit()
         {
             return this.miniBossToSplit;
         }
@@ -558,12 +558,12 @@ namespace HitCounterManager
             return this.phanteonToSplit;
         }
 
-        public List<DefinitionHollow.ElementToSplit> getCharmToSplit()
+        public List<DefinitionHollow.ElementToSplitH> getCharmToSplit()
         {
             return this.charmToSplit;
         }
 
-        public List<DefinitionHollow.ElementToSplit> getSkillsToSplit()
+        public List<DefinitionHollow.ElementToSplitH> getSkillsToSplit()
         {
             return this.skillsToSplit;
         }
