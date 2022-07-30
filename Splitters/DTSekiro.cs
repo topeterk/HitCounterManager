@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2019-2022 Ezequiel Medina
+//Copyright (c) 2022 Ezequiel Medina
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -22,10 +22,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using SoulMemory;
 
 

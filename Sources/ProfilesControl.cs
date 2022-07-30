@@ -101,7 +101,7 @@ namespace HitCounterManager
 
                 /* To any that understand OutModule and all related to Timer, the nexts functions return a full duration of a run in ms
                  * sekiroSplitter.getTimeInGame();
-                 * 
+                 * eldenSplitter.getTimeInGame(); //Reset 0 in IGT
                 }*/
 
 
