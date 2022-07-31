@@ -102,6 +102,7 @@ Thanks to Beta Testers of AutoSplit(in alphabetical order):
 * [Zirob21](https://www.twitch.tv/zirob21)
 * [Empaventuras](https://www.twitch.tv/empaventuras)
 * [Slash15](https://www.twitch.tv/slash15_)
+* [Duuruk]
 
 
 * Every member of the [Hitless team on Twitch](https://www.twitch.tv/team/hitless) and [No Hit Hispano on Twitch](https://www.twitch.tv/nohithispano)
