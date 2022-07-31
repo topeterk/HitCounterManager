@@ -94,6 +94,7 @@ Thanks to (in alphabetical order):
 * [SquillaKilla](https://www.twitch.tv/squillakilla)
 * [The_Happy_Hob](https://www.twitch.tv/the_happy_hob)
 * [TigerG92](https://www.twitch.tv/tigerg92)
+
 Thanks to Beta Testers of AutoSplit(in alphabetical order):
 * [DanielloPiuBello](https://www.twitch.tv/daniellopiubello)
 * [OlallaZ2](https://www.twitch.tv/olallaz2)
@@ -101,6 +102,7 @@ Thanks to Beta Testers of AutoSplit(in alphabetical order):
 * [Zirob21](https://www.twitch.tv/zirob21)
 * [Empaventuras](https://www.twitch.tv/empaventuras)
 * [Slash15](https://www.twitch.tv/slash15_)
+* [Duuruk](https://www.twitch.tv/disabled_dogs)
 
 
 * Every member of the [Hitless team on Twitch](https://www.twitch.tv/team/hitless) and [No Hit Hispano on Twitch](https://www.twitch.tv/nohithispano)
