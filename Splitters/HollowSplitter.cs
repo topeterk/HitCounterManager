@@ -554,89 +554,89 @@ namespace HitCounterManager
             switch (title)
             {
                 case "Vengefly King":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Vengefly") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Vengefly") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")) ; break;
                 case "Gruz Mother":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Gruz_Mother") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Gruz_Mother") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "False Knight":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_False_Knight") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_False_Knight") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Massive Moss Charger":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Mega_Moss_Charger") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Mega_Moss_Charger") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Hornet (Protector)":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Hornet_1") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Hornet_1") && !(!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Gorb":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Ghost_Gorb") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Ghost_Gorb") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Dung Defender":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Dung_Defender") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Dung_Defender") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Soul Warrior":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Mage_Knight") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Mage_Knight") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Brooding Mawlek":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Brooding_Mawlek") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Brooding_Mawlek") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Oro & Mato Nail Bros":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Nailmasters") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Nailmasters") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Xero":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Ghost_Xero") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Ghost_Xero") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Crystal Guardian":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Crystal_Guardian") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Crystal_Guardian") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Soul Master":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Soul_Master") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Soul_Master") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Oblobbles":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Oblobble") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Oblobble") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Sisters of Battle":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Mantis_Lord") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Mantis_Lord") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Marmu":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Ghost_Marmu") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Ghost_Marmu") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Flukemarm":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Flukemarm") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Flukemarm") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Broken Vessel":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Broken_Vessel") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Broken_Vessel") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Galien":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Ghost_Galien") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Ghost_Galien") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Paintmaster Sheo":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Painter") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Painter") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Hive Knight":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Hive_Knight") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Hive_Knight") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Elder Hu":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Ghost_Hu") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Ghost_Hu") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "The Collector":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Collector") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Collector") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "God Tamer":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_God_Tamer") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_God_Tamer") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Troupe Master Grim":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Grimm") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Grimm") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Watcher Knights":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Watcher_Knights") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Watcher_Knights") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Uumuu":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Uumuu") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Uumuu") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Nosk":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Nosk") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Nosk") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Winged Nosk":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Nosk_Hornet") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Nosk_Hornet") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Great Nailsage Slay":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Sly") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Sly") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Hornet (Sentinel)":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Hornet_2") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Hornet_2") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Enraged Guardian":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Crystal_Guardian_2") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Crystal_Guardian_2") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Lost Kin":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Lost_Kin") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Lost_Kin") && !(!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "No Eyes":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Ghost_No_Eyes") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Ghost_No_Eyes") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Traitor Lord":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Traitor_Lord") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Traitor_Lord") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "White Defender":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_White_Defender") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_White_Defender") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Soul Tyrant":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Soul_Tyrant") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Soul_Tyrant") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Markoth":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Ghost_Markoth") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Ghost_Markoth") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Grey Prince Zote":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Grey_Prince_Zote") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Grey_Prince_Zote") && !(!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Failed Champion":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Failed_Champion") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Failed_Champion") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Nightmare King Grimm":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Grimm_Nightmare") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Grimm_Nightmare") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Pure Vessel":
-                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Hollow_Knight") && !currentPosition.sceneName.StartsWith("GG_Atrium"); break;
+                    shouldSplit = currentPosition.previousScene.StartsWith("GG_Hollow_Knight") && (!currentPosition.sceneName.StartsWith("GG_Atrium") && !currentPosition.sceneName.StartsWith("Quit_To_Menu")); break;
                 case "Absolute Radiance":
                     shouldSplit = currentPosition.sceneName.StartsWith("Cinematic_Ending_E"); break;
                 default: shouldSplit = false; break;
