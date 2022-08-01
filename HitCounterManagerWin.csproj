@@ -90,6 +90,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Splitters\DataAutoSplitter.cs" />
+    <Compile Include="Splitters\Ds3Splitter.cs" />
+    <Compile Include="Splitters\DTDs3.cs" />
     <Compile Include="Splitters\DTElden.cs" />
     <Compile Include="Splitters\DTHollow.cs" />
     <Compile Include="Splitters\DTSekiro.cs" />
@@ -158,9 +160,8 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SoulMemory, Version=1.0.38.0, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\SoulMemory.dll</HintPath>
+    <Reference Include="SoulMemory">
+      <HintPath>Sources\SoulMemory.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -206,7 +207,6 @@
     <None Include="Images\icons8-autosplitter-32.png" />
     <None Include="Images\icons8-Timersettings-20.png" />
     <None Include="Images\20p_logo_black_THH.png" />
-    <Content Include="SoulMemory.dll" />
     <Content Include="Sources\HitCounter.html" />
     <Content Include="Sources\HitCounter.template" />
     <Content Include="Sources\HitCounterManagerInit.xml" />

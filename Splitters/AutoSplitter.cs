@@ -40,17 +40,19 @@ namespace HitCounterManager
         SekiroSplitter sekiroSplitter;
         HollowSplitter hollowSplitter;
         EldenSplitter eldenSplitter;
+        Ds3Splitter ds3Splitter;
         
         
 
         public Exception Exception { get; set; }
 
-        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter,EldenSplitter eldenSplitter)
+        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter,EldenSplitter eldenSplitter,Ds3Splitter ds3Splitter)
         {
             InitializeComponent();
             this.sekiroSplitter = sekiroSplitter;
             this.hollowSplitter = hollowSplitter;
             this.eldenSplitter = eldenSplitter;
+            this.ds3Splitter = ds3Splitter;
             refreshForm();
         }
 
@@ -88,6 +90,13 @@ namespace HitCounterManager
             panelBossER.Hide();
             panelGraceER.Hide();
             panelPositionsER.Hide();
+            panelCfER.Hide();
+            #endregion
+            #region Ds3Tab
+            panelBossDs3.Hide();
+            panelBonfireDs3.Hide();
+            panelLvlDs3.Hide();
+            panelCfDs3.Hide();
             #endregion
             checkStatusGames();
         }
@@ -280,6 +289,37 @@ namespace HitCounterManager
             }
             comboBoxMarginER.SelectedIndex = eldenData.positionMargin;
             #endregion
+            #region EldenLoad.CustomFlags
+            foreach (DefinitionsElden.CustomFlagER cf in eldenData.getFlagsToSplit())
+            {
+                listBoxCfER.Items.Add(cf.Id + " - " + cf.Mode);
+            }
+            #endregion
+            DTDs3 ds3Data = ds3Splitter.getDataDs3();
+            #region Ds3Load.Boss
+            foreach (DefinitionsDs3.BossDs3 boss in ds3Data.getBossToSplit())
+            {
+                listBoxBossDs3.Items.Add(boss.Title + " - " + boss.Mode);
+            }
+            #endregion
+            #region Ds3Load.Bonfire
+            foreach (DefinitionsDs3.BonfireDs3 bon in ds3Data.getBonfireToSplit())
+            {
+                listBoxBonfireDs3.Items.Add(bon.Title + " - " + bon.Mode);
+            }
+            #endregion
+            #region Ds3Load.Lvl
+            foreach (DefinitionsDs3.LvlDs3 lvl in ds3Data.getLvlToSplit())
+            {
+                listBoxAttributesDs3.Items.Add(lvl.Attribute + ": " + lvl.Value + " - " + lvl.Mode);
+            }
+            #endregion
+            #region Ds3Load.CustomFlags
+            foreach (DefinitionsDs3.CfDs3 cf in ds3Data.getFlagToSplit())
+            {
+                listBoxCfDs3.Items.Add(cf.Id + " - " + cf.Mode);
+            }
+            #endregion
         }
 
         private void refresh_Btn(object sender, EventArgs e)
@@ -319,6 +359,16 @@ namespace HitCounterManager
             {
                 EldenRingRunning.Hide();
                 EldenRingNotRunning.Show();
+            }
+            if (ds3Splitter.getEldenStatusProcess(0))
+            {
+                Ds3Running.Show();
+                Ds3NotRunning.Hide();
+            }
+            else
+            {
+                Ds3Running.Hide();
+                Ds3NotRunning.Show();
             }
 
         }
@@ -1263,6 +1313,7 @@ namespace HitCounterManager
             panelBossER.Hide();
             panelGraceER.Hide();
             panelPositionsER.Hide();
+            panelCfER.Hide();
 
             switch (comboBoxToSplitEldenRing.SelectedIndex)
             {
@@ -1272,6 +1323,8 @@ namespace HitCounterManager
                     panelGraceER.Show(); break;
                 case 2:
                     panelPositionsER.Show(); break;
+                case 3:
+                    panelCfER.Show(); break;
             }
         }
 
@@ -1419,8 +1472,56 @@ namespace HitCounterManager
                 listBoxPositionsER.Items.Remove(listBoxPositionsER.SelectedItem);
             }
         }
-        
 
+        private void btnGetListER_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://pastebin.com/p8gByAgU");
+        }
+
+        private void btnAddCfER_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (textBoxIdER.Text == null || comboBoxHowCfER.SelectedIndex == -1)
+            {
+                error = MessageBox.Show("Plase set a ID and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                try
+                {
+                    var id = uint.Parse(textBoxIdER.Text);
+                    var contains1 = !listBoxCfER.Items.Contains(id + " - " + "Inmediatly");
+                    var contains2 = !listBoxCfER.Items.Contains(id + " - " + "Loading game after");
+                    if (contains1 && contains2)
+                    {
+                        eldenSplitter.setProcedure(false);
+                        eldenSplitter.AddCustomFlag(id, comboBoxHowCfER.Text.ToString());
+                        listBoxCfER.Items.Add(id + " - " + comboBoxHowCfER.Text.ToString());
+                        eldenSplitter.setProcedure(true);
+                    }
+                    else
+                    {
+                        error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }catch (Exception)
+                {
+                    error = MessageBox.Show("Wrong ID", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
+            }
+        }
+
+        private void listBoxCfER_DoubleClick(object sender, EventArgs e)
+        {
+            if (listBoxCfER.SelectedItem != null)
+            {
+                int i = listBoxCfER.Items.IndexOf(listBoxCfER.SelectedItem);
+                eldenSplitter.setProcedure(false);
+                eldenSplitter.RemoveCustomFlag(i);
+                eldenSplitter.setProcedure(true);
+                listBoxCfER.Items.Remove(listBoxCfER.SelectedItem);
+            }
+        }
         private void btn_DesactiveAllElden_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Are you sure you want to disable everything?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -1435,6 +1536,225 @@ namespace HitCounterManager
                 this.AutoSplitter_Load(null, null);//Load Others Games Settings
             }
         }
+
+        #endregion
+        #region Ds3 UI
+
+        private void comboBoxToSplitSelectDs3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            panelBossDs3.Hide();
+            panelBonfireDs3.Hide();
+            panelLvlDs3.Hide();
+            panelCfDs3.Hide();
+
+
+            switch (comboBoxToSplitSelectDs3.SelectedIndex)
+            {
+                case 0:
+                    panelBossDs3.Show();
+                    break;
+                case 1:
+                    panelBonfireDs3.Show();
+                    break;
+                case 2: 
+                    panelLvlDs3.Show();
+                    break;
+                case 3:
+                    panelCfDs3.Show();
+                    break;
+
+
+            }
+        }
+
+        private void btnAddBossDs3_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (comboBoxBossDs3.SelectedIndex == -1 || comboBoxHowBossDs3.SelectedIndex == -1)
+            {
+                error = MessageBox.Show("Plase select boss and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                var contains1 = !listBoxBossDs3.Items.Contains(comboBoxBossDs3.Text.ToString() + " - " + "Inmediatly");
+                var contains2 = !listBoxBossDs3.Items.Contains(comboBoxBossDs3.Text.ToString() + " - " + "Loading game after");
+                if (contains1 && contains2)
+                {
+                    ds3Splitter.setProcedure(false);
+                    ds3Splitter.AddBoss(comboBoxBossDs3.Text.ToString(), comboBoxHowBossDs3.Text.ToString());
+                    listBoxBossDs3.Items.Add(comboBoxBossDs3.Text.ToString() + " - " + comboBoxHowBossDs3.Text.ToString());
+                    ds3Splitter.setProcedure(true);
+                }
+                else
+                {
+                    error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void listBoxBossDs3_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.listBoxBossDs3.SelectedItem != null)
+            {
+                int i = listBoxBossDs3.Items.IndexOf(listBoxBossDs3.SelectedItem);
+                ds3Splitter.setProcedure(false);
+                ds3Splitter.RemoveBoss(i);
+                ds3Splitter.setProcedure(true);
+                listBoxBossDs3.Items.Remove(listBoxBossDs3.SelectedItem);
+            }
+        }
+
+        private void btnAddBonfire_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (comboBoxBonfireDs3.SelectedIndex == -1 || comboBoxHowBonfireDs3.SelectedIndex == -1)
+            {
+                error = MessageBox.Show("Plase select bonefire and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                var contains1 = !listBoxBonfireDs3.Items.Contains(comboBoxBonfireDs3.Text.ToString() + " - " + "Inmediatly");
+                var contains2 = !listBoxBonfireDs3.Items.Contains(comboBoxBonfireDs3.Text.ToString() + " - " + "Loading game after");
+                if (contains1 && contains2)
+                {
+                    ds3Splitter.setProcedure(false);
+                    ds3Splitter.AddBonfire(comboBoxBonfireDs3.Text.ToString(), comboBoxHowBonfireDs3.Text.ToString());
+                    listBoxBonfireDs3.Items.Add(comboBoxBonfireDs3.Text.ToString() + " - " + comboBoxHowBonfireDs3.Text.ToString());
+                    ds3Splitter.setProcedure(true);
+                }
+                else
+                {
+                    error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void listBoxBonfireDs3_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.listBoxBonfireDs3.SelectedItem != null)
+            {
+                int i = listBoxBonfireDs3.Items.IndexOf(listBoxBonfireDs3.SelectedItem);
+                ds3Splitter.setProcedure(false);
+                ds3Splitter.RemoveBonfire(i);
+                ds3Splitter.setProcedure(true);
+                listBoxBonfireDs3.Items.Remove(listBoxBonfireDs3.SelectedItem);
+            }
+        }
+
+
+        private void btnAddAttributeDs3_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (comboBoxAttributeDs3.SelectedIndex == -1 || comboBoxHowAttributeDs3.SelectedIndex == -1 || textBoxValueDs3.Text == null)
+            {
+                error = MessageBox.Show("Plase select Attribute, Value and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                try
+                {
+                    var value = uint.Parse(textBoxValueDs3.Text);
+                    var contains1 = !listBoxAttributesDs3.Items.Contains(comboBoxAttributeDs3.Text.ToString() + ": " + value + " - " + "Inmediatly");
+                    var contains2 = !listBoxAttributesDs3.Items.Contains(comboBoxAttributeDs3.Text.ToString() + ": " + value + " - " + "Loading game after");
+                    if (contains1 && contains2)
+                    {
+                        ds3Splitter.setProcedure(false);
+                        ds3Splitter.AddAttribute(comboBoxAttributeDs3.Text.ToString(), comboBoxHowAttributeDs3.Text.ToString(),value);
+                        listBoxAttributesDs3.Items.Add(comboBoxAttributeDs3.Text.ToString() + ": " + value + " - " + comboBoxHowAttributeDs3.Text.ToString());
+                        ds3Splitter.setProcedure(true);
+                    }
+                    else
+                    {
+                        error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }catch (Exception)
+                {
+                    error = MessageBox.Show("Check Value and try again", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
+            }
+        }
+
+        private void listBoxAttributesDs3_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.listBoxAttributesDs3.SelectedItem != null)
+            {
+                int i = listBoxAttributesDs3.Items.IndexOf(listBoxAttributesDs3.SelectedItem);
+                ds3Splitter.setProcedure(false);
+                ds3Splitter.RemoveAttribute(i);
+                ds3Splitter.setProcedure(true);
+                listBoxAttributesDs3.Items.Remove(listBoxAttributesDs3.SelectedItem);
+            }
+        }
+
+        private void btnGetListFlagDs3_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://pastebin.com/3DyjrgUN");
+        }
+
+        private void btnAddCfeDs3_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (textBoxIdDs3.Text == null || comboBoxHowCfDs3.SelectedIndex == -1)
+            {
+               error = MessageBox.Show("Plase set a ID and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                try
+                {
+                    var id = uint.Parse(textBoxIdDs3.Text);
+                    var contains1 = !listBoxCfDs3.Items.Contains(id + " - " + "Inmediatly");
+                    var contains2 = !listBoxCfDs3.Items.Contains(id + " - " + "Loading game after");
+                    if (contains1 && contains2)
+                    {
+                        ds3Splitter.setProcedure(false);
+                        ds3Splitter.AddCustomFlag(id, comboBoxHowCfDs3.Text.ToString());
+                        listBoxCfDs3.Items.Add(id + " - " + comboBoxHowCfDs3.Text.ToString());
+                        ds3Splitter.setProcedure(true);
+                    }
+                    else
+                    {
+                        error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception)
+                {
+                    error = MessageBox.Show("Wrong ID", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+        }
+
+        private void listBoxCfDs3_DoubleClick(object sender, EventArgs e)
+        {
+            if (listBoxCfDs3.SelectedItem != null)
+            {
+                int i = listBoxCfDs3.Items.IndexOf(listBoxCfDs3.SelectedItem);
+                ds3Splitter.setProcedure(false);
+                ds3Splitter.RemoveCustomFlag(i);
+                ds3Splitter.setProcedure(true);
+                listBoxCfDs3.Items.Remove(listBoxCfDs3.SelectedItem);
+            }
+        }
+
+        private void btnDesactiveAllDs3_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to disable everything?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                ds3Splitter.setProcedure(false);
+                ds3Splitter.clearData();
+                ds3Splitter.setProcedure(true);
+                this.Controls.Clear();
+                this.InitializeComponent();
+                refreshForm();
+                this.AutoSplitter_Load(null, null);//Load Others Games Settings
+            }
+        }
+
+
+
         #endregion
     }
 }

@@ -32,6 +32,12 @@ Licence: MIT
            Source: https://github.com/ShootMe/LiveSplit.HollowKnight.git
            Licence: MIT
 
+    - DLL LiveSplit.Celeste
+           Title: LiveSplit.HollowKnight
+           Author: ShootMe
+           Source: https://github.com/ShootMe/LiveSplit.Celeste.git
+           Licence: MIT
+
     - DLL LiveSplit.Core
     [-]    Title: LiveSplit
            Author: LiveSplit

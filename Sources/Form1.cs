@@ -53,12 +53,12 @@ namespace HitCounterManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = Text + " - v" + Application.ProductVersion + " Beta 3 - Rev.2 " + OsLayer.Name;
+            Text = Text + " - v" + Application.ProductVersion + " Beta 4 - Rev.1 " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();  
             ProfileChangedHandler(sender, e);
             LoadAutoSplitterSettings(profCtrl);
-            profCtrl.setSplittersPointers(sekiroSplitter,hollowSplitter,eldenSplitter);
+            profCtrl.setSplittersPointers(sekiroSplitter,hollowSplitter,eldenSplitter,ds3Splitter);
             #region ComboBoxSet
             if (sekiroSplitter.dataSekiro.enableSplitting)
             {
@@ -78,7 +78,15 @@ namespace HitCounterManager
                     }
                     else
                     {
-                        comboBoxGame.SelectedIndex = 0;
+                        if (ds3Splitter.dataDs3.enableSplitting)
+                        {
+                            comboBoxGame.SelectedIndex = 4;
+                        }
+                        else
+                        {
+                            comboBoxGame.SelectedIndex = 0;
+                        }
+                        
                     }
                     
                 }
@@ -212,7 +220,8 @@ namespace HitCounterManager
         private void btnSplit_MouseDown(object sender, MouseEventArgs e) { if (e.Button == MouseButtons.Right) profCtrl.ProfileSplitGo(-1); }
         private void btnSplitPrev_Click(object sender, EventArgs e) { profCtrl.ProfileSplitGo(-1); }
 
-        private void btnSplitter_Click(object sender, EventArgs e) { Form form = new AutoSplitter(getSekiroInstance(),getHollowInstance(),getEldenInstance()); form.ShowDialog(this);}
+        private void btnSplitter_Click(object sender, EventArgs e) 
+        { Form form = new AutoSplitter(getSekiroInstance(),getHollowInstance(),getEldenInstance(),getDs3Instance()); form.ShowDialog(this);}
 
         private void ProfileChangedHandler(object sender, EventArgs e)
         {
@@ -242,6 +251,7 @@ namespace HitCounterManager
             sekiroSplitter.setStatusSplitting(false);
             hollowSplitter.setStatusSplitting(false);
             eldenSplitter.setStatusSplitting(false);
+            ds3Splitter.setStatusSplitting(false);
 
 
 
@@ -257,6 +267,10 @@ namespace HitCounterManager
             if(comboBoxGame.SelectedIndex == 5)
             {
                 eldenSplitter.setStatusSplitting(true);
+            }
+            if(comboBoxGame.SelectedIndex == 4)
+            {
+                ds3Splitter.setStatusSplitting(true);
             }
 
            

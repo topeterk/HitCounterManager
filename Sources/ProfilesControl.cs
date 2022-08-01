@@ -36,6 +36,7 @@ namespace HitCounterManager
         private SekiroSplitter sekiroSplitter;
         private HollowSplitter hollowSplitter;
         private EldenSplitter eldenSplitter;
+        private Ds3Splitter ds3Splitter;
 
         public ProfilesControl()
         {
@@ -56,11 +57,12 @@ namespace HitCounterManager
             ptc.InitializeProfileTabControl();
         }
 
-        public void setSplittersPointers(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter,EldenSplitter eldenSplitter)
+        public void setSplittersPointers(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter,EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter)
         {
             this.sekiroSplitter = sekiroSplitter;
             this.hollowSplitter = hollowSplitter;
             this.eldenSplitter = eldenSplitter;
+            this.ds3Splitter = ds3Splitter;
         }
 
 
@@ -102,6 +104,7 @@ namespace HitCounterManager
                 /* To any that understand OutModule and all related to Timer, the nexts functions return a full duration of a run in ms
                  * sekiroSplitter.getTimeInGame();
                  * eldenSplitter.getTimeInGame(); //Reset 0 in IGT
+                 * ds3Splitter.getTimeInGame();
                 }*/
 
 
@@ -387,6 +390,8 @@ namespace HitCounterManager
             sekiroSplitter.resetSplited();
             hollowSplitter.resetSplited();
             eldenSplitter.resetSplited();
+            ds3Splitter.resetSplited();
+
         }
         public void ProfilePB()
         {

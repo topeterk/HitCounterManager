@@ -137,25 +137,22 @@ regardless of what is written on them
 - When a event of autosplit happen, an internal variable is set, for evit that event is repit. 
 Use "Reset Run" button or Shortcut, for reset this state.
 
-- In difference of souls memory for souls games, Hollow Knight use a dll that is completely integrate with livesplit core
- so is impossible separation of them
-
--If you want auto reset internal flags to split all Pantheon bosses in hollow autosplitter.
+- If you want auto reset internal flags to split all Pantheon bosses in hollow autosplitter.
 If you want play P1+P2+P3+P4 to play P5 after, or P5 to play P1....P4 after 
 You should check "Grey Prince Zote" if you run, have this boss or not.
 (Turn on/off depending the case)
 
 - Currently Elden Ring is only supported with Easy Anti-Cheat disabled.
-To disable Easy Anti-Cheat, navigate to "Steam\steamapps\common\ELDEN RING\Game" and create a new text file called "steam_appid.txt" without quotes, and set it's contents to "1245620" without quotes. 
-Launching the game from "Steam\steamapps\common\ELDEN RING\Game\eldenring.exe" will run elden ring without EAC, launching the game from steam will have EAC enabled. 
+To disable Easy Anti-Cheat, navigate to "Steam\steamapps\common\ELDEN RING\Game"
+Launching the game from "Steam\steamapps\common\ELDEN RING\Game\eldenring.exe" will run elden ring without EAC, 
+launching the game from steam will have EAC enabled. 
+
+- Split by Attributes and some custom flags in DS3 dont work on versions previous to 1.15
 
 ===========================================
 Sekiro Features:
 - No Intro
-- No Tutorials
-
-Elden Ring Features:
-- IGT Fix</value>
+- No Tutorials</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

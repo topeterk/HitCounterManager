@@ -529,10 +529,10 @@ namespace HitCounterManager
         [Serializable]
         public class Vector3F
         {
-            public string title ="";
+            public string title ="None";
             public PointF position = new PointF(0,0);
-            public string sceneName = "";
-            public string previousScene = "";
+            public string sceneName = "None";
+            public string previousScene = "None";
             public bool IsSplited = false;
         }
         #endregion

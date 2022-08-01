@@ -135,23 +135,53 @@
             this.tabDs1 = new System.Windows.Forms.TabPage();
             this.label5 = new System.Windows.Forms.Label();
             this.tabDs2 = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
             this.tabDs3 = new System.Windows.Forms.TabPage();
+            this.panelCfDs3 = new System.Windows.Forms.Panel();
+            this.label46 = new System.Windows.Forms.Label();
+            this.comboBoxHowCfDs3 = new System.Windows.Forms.ComboBox();
+            this.listBoxCfDs3 = new System.Windows.Forms.ListBox();
+            this.btnAddCfeDs3 = new System.Windows.Forms.Button();
+            this.btnGetListFlagDs3 = new System.Windows.Forms.Button();
+            this.label47 = new System.Windows.Forms.Label();
+            this.textBoxIdDs3 = new System.Windows.Forms.TextBox();
+            this.panelLvlDs3 = new System.Windows.Forms.Panel();
+            this.label45 = new System.Windows.Forms.Label();
+            this.textBoxValueDs3 = new System.Windows.Forms.TextBox();
+            this.listBoxAttributesDs3 = new System.Windows.Forms.ListBox();
+            this.btnAddAttributeDs3 = new System.Windows.Forms.Button();
+            this.label43 = new System.Windows.Forms.Label();
+            this.comboBoxHowAttributeDs3 = new System.Windows.Forms.ComboBox();
+            this.comboBoxAttributeDs3 = new System.Windows.Forms.ComboBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.panelBonfireDs3 = new System.Windows.Forms.Panel();
+            this.listBoxBonfireDs3 = new System.Windows.Forms.ListBox();
+            this.btnAddBonfire = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.comboBoxHowBonfireDs3 = new System.Windows.Forms.ComboBox();
+            this.comboBoxBonfireDs3 = new System.Windows.Forms.ComboBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.panelBossDs3 = new System.Windows.Forms.Panel();
+            this.btnAddBossDs3 = new System.Windows.Forms.Button();
+            this.label39 = new System.Windows.Forms.Label();
+            this.comboBoxBossDs3 = new System.Windows.Forms.ComboBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.comboBoxHowBossDs3 = new System.Windows.Forms.ComboBox();
+            this.listBoxBossDs3 = new System.Windows.Forms.ListBox();
+            this.btnRefreshDS3 = new System.Windows.Forms.Button();
+            this.btnDesactiveAllDs3 = new System.Windows.Forms.Button();
+            this.Ds3Running = new System.Windows.Forms.Label();
+            this.Ds3NotRunning = new System.Windows.Forms.Label();
+            this.comboBoxToSplitSelectDs3 = new System.Windows.Forms.ComboBox();
+            this.label38 = new System.Windows.Forms.Label();
             this.tabElden = new System.Windows.Forms.TabPage();
-            this.panelPositionsER = new System.Windows.Forms.Panel();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.comboBoxHowPositionsER = new System.Windows.Forms.ComboBox();
-            this.comboBoxMarginER = new System.Windows.Forms.ComboBox();
-            this.listBoxPositionsER = new System.Windows.Forms.ListBox();
-            this.btnAddPositionER = new System.Windows.Forms.Button();
-            this.btnGetPosition = new System.Windows.Forms.Button();
-            this.textBoxZEr = new System.Windows.Forms.TextBox();
-            this.textBoxYEr = new System.Windows.Forms.TextBox();
-            this.textBoxXEr = new System.Windows.Forms.TextBox();
+            this.panelCfER = new System.Windows.Forms.Panel();
+            this.label42 = new System.Windows.Forms.Label();
+            this.comboBoxHowCfER = new System.Windows.Forms.ComboBox();
+            this.listBoxCfER = new System.Windows.Forms.ListBox();
+            this.btnAddCfER = new System.Windows.Forms.Button();
+            this.btnGetListER = new System.Windows.Forms.Button();
+            this.label41 = new System.Windows.Forms.Label();
+            this.textBoxIdER = new System.Windows.Forms.TextBox();
             this.panelGraceER = new System.Windows.Forms.Panel();
             this.listBoxGrace = new System.Windows.Forms.ListBox();
             this.btnAddGraceER = new System.Windows.Forms.Button();
@@ -166,6 +196,19 @@
             this.label28 = new System.Windows.Forms.Label();
             this.comboBoxHowBossER = new System.Windows.Forms.ComboBox();
             this.listBoxBossER = new System.Windows.Forms.ListBox();
+            this.panelPositionsER = new System.Windows.Forms.Panel();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.comboBoxHowPositionsER = new System.Windows.Forms.ComboBox();
+            this.comboBoxMarginER = new System.Windows.Forms.ComboBox();
+            this.listBoxPositionsER = new System.Windows.Forms.ListBox();
+            this.btnAddPositionER = new System.Windows.Forms.Button();
+            this.btnGetPosition = new System.Windows.Forms.Button();
+            this.textBoxZEr = new System.Windows.Forms.TextBox();
+            this.textBoxYEr = new System.Windows.Forms.TextBox();
+            this.textBoxXEr = new System.Windows.Forms.TextBox();
             this.EldenRingRunning = new System.Windows.Forms.Label();
             this.EldenRingNotRunning = new System.Windows.Forms.Label();
             this.btnRefreshE = new System.Windows.Forms.Button();
@@ -215,6 +258,13 @@
             this.label7 = new System.Windows.Forms.Label();
             this.btnCheckVersion = new System.Windows.Forms.Button();
             this.TextBox1 = new System.Windows.Forms.TextBox();
+            this.tabCeleste = new System.Windows.Forms.TabPage();
+            this.tabCuphead = new System.Windows.Forms.TabPage();
+            this.tabRe2R = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
+            this.label49 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
             this.TabControl2.SuspendLayout();
             this.tabSekiro.SuspendLayout();
             this.panelPositionS.SuspendLayout();
@@ -239,10 +289,15 @@
             this.tabDs1.SuspendLayout();
             this.tabDs2.SuspendLayout();
             this.tabDs3.SuspendLayout();
+            this.panelCfDs3.SuspendLayout();
+            this.panelLvlDs3.SuspendLayout();
+            this.panelBonfireDs3.SuspendLayout();
+            this.panelBossDs3.SuspendLayout();
             this.tabElden.SuspendLayout();
-            this.panelPositionsER.SuspendLayout();
+            this.panelCfER.SuspendLayout();
             this.panelGraceER.SuspendLayout();
             this.panelBossER.SuspendLayout();
+            this.panelPositionsER.SuspendLayout();
             this.tabHollow.SuspendLayout();
             this.panelPositionH.SuspendLayout();
             this.panelBossH.SuspendLayout();
@@ -253,6 +308,9 @@
             this.groupBoxSkillsH.SuspendLayout();
             this.groupBoxCharms.SuspendLayout();
             this.tabUpdate.SuspendLayout();
+            this.tabCeleste.SuspendLayout();
+            this.tabCuphead.SuspendLayout();
+            this.tabRe2R.SuspendLayout();
             this.SuspendLayout();
             // 
             // TabControl2
@@ -263,6 +321,9 @@
             this.TabControl2.Controls.Add(this.tabDs3);
             this.TabControl2.Controls.Add(this.tabElden);
             this.TabControl2.Controls.Add(this.tabHollow);
+            this.TabControl2.Controls.Add(this.tabCeleste);
+            this.TabControl2.Controls.Add(this.tabCuphead);
+            this.TabControl2.Controls.Add(this.tabRe2R);
             this.TabControl2.Controls.Add(this.tabUpdate);
             this.TabControl2.Location = new System.Drawing.Point(13, 13);
             this.TabControl2.Name = "TabControl2";
@@ -1570,43 +1631,533 @@
             this.tabDs2.Text = "Dark Souls 2";
             this.tabDs2.UseVisualStyleBackColor = true;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(137, 145);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(301, 37);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Not Yet Developed";
-            // 
             // tabDs3
             // 
-            this.tabDs3.Controls.Add(this.label3);
+            this.tabDs3.BackColor = System.Drawing.SystemColors.Control;
+            this.tabDs3.Controls.Add(this.panelCfDs3);
+            this.tabDs3.Controls.Add(this.panelLvlDs3);
+            this.tabDs3.Controls.Add(this.panelBonfireDs3);
+            this.tabDs3.Controls.Add(this.panelBossDs3);
+            this.tabDs3.Controls.Add(this.btnRefreshDS3);
+            this.tabDs3.Controls.Add(this.btnDesactiveAllDs3);
+            this.tabDs3.Controls.Add(this.Ds3Running);
+            this.tabDs3.Controls.Add(this.Ds3NotRunning);
+            this.tabDs3.Controls.Add(this.comboBoxToSplitSelectDs3);
+            this.tabDs3.Controls.Add(this.label38);
             this.tabDs3.Location = new System.Drawing.Point(4, 22);
             this.tabDs3.Name = "tabDs3";
             this.tabDs3.Padding = new System.Windows.Forms.Padding(3);
             this.tabDs3.Size = new System.Drawing.Size(587, 351);
             this.tabDs3.TabIndex = 1;
             this.tabDs3.Text = "Dark Souls 3";
-            this.tabDs3.UseVisualStyleBackColor = true;
+            // 
+            // panelCfDs3
+            // 
+            this.panelCfDs3.Controls.Add(this.label46);
+            this.panelCfDs3.Controls.Add(this.comboBoxHowCfDs3);
+            this.panelCfDs3.Controls.Add(this.listBoxCfDs3);
+            this.panelCfDs3.Controls.Add(this.btnAddCfeDs3);
+            this.panelCfDs3.Controls.Add(this.btnGetListFlagDs3);
+            this.panelCfDs3.Controls.Add(this.label47);
+            this.panelCfDs3.Controls.Add(this.textBoxIdDs3);
+            this.panelCfDs3.Location = new System.Drawing.Point(40, 85);
+            this.panelCfDs3.Name = "panelCfDs3";
+            this.panelCfDs3.Size = new System.Drawing.Size(504, 242);
+            this.panelCfDs3.TabIndex = 24;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(392, 53);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(32, 13);
+            this.label46.TabIndex = 21;
+            this.label46.Text = "How:";
+            // 
+            // comboBoxHowCfDs3
+            // 
+            this.comboBoxHowCfDs3.BackColor = System.Drawing.SystemColors.Control;
+            this.comboBoxHowCfDs3.FormattingEnabled = true;
+            this.comboBoxHowCfDs3.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowCfDs3.Location = new System.Drawing.Point(276, 50);
+            this.comboBoxHowCfDs3.Name = "comboBoxHowCfDs3";
+            this.comboBoxHowCfDs3.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxHowCfDs3.TabIndex = 20;
+            // 
+            // listBoxCfDs3
+            // 
+            this.listBoxCfDs3.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxCfDs3.FormattingEnabled = true;
+            this.listBoxCfDs3.Location = new System.Drawing.Point(9, 116);
+            this.listBoxCfDs3.Name = "listBoxCfDs3";
+            this.listBoxCfDs3.Size = new System.Drawing.Size(488, 121);
+            this.listBoxCfDs3.TabIndex = 19;
+            this.listBoxCfDs3.DoubleClick += new System.EventHandler(this.listBoxCfDs3_DoubleClick);
+            // 
+            // btnAddCfeDs3
+            // 
+            this.btnAddCfeDs3.Location = new System.Drawing.Point(211, 82);
+            this.btnAddCfeDs3.Name = "btnAddCfeDs3";
+            this.btnAddCfeDs3.Size = new System.Drawing.Size(100, 21);
+            this.btnAddCfeDs3.TabIndex = 18;
+            this.btnAddCfeDs3.Text = "Add";
+            this.btnAddCfeDs3.UseVisualStyleBackColor = true;
+            this.btnAddCfeDs3.Click += new System.EventHandler(this.btnAddCfeDs3_Click);
+            // 
+            // btnGetListFlagDs3
+            // 
+            this.btnGetListFlagDs3.Location = new System.Drawing.Point(201, 9);
+            this.btnGetListFlagDs3.Name = "btnGetListFlagDs3";
+            this.btnGetListFlagDs3.Size = new System.Drawing.Size(127, 23);
+            this.btnGetListFlagDs3.TabIndex = 2;
+            this.btnGetListFlagDs3.Text = "Get List Flags";
+            this.btnGetListFlagDs3.UseVisualStyleBackColor = true;
+            this.btnGetListFlagDs3.Click += new System.EventHandler(this.btnGetListFlagDs3_Click);
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(120, 53);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(21, 13);
+            this.label47.TabIndex = 1;
+            this.label47.Text = "ID:";
+            // 
+            // textBoxIdDs3
+            // 
+            this.textBoxIdDs3.BackColor = System.Drawing.SystemColors.Control;
+            this.textBoxIdDs3.Location = new System.Drawing.Point(151, 50);
+            this.textBoxIdDs3.Name = "textBoxIdDs3";
+            this.textBoxIdDs3.Size = new System.Drawing.Size(100, 20);
+            this.textBoxIdDs3.TabIndex = 0;
+            // 
+            // panelLvlDs3
+            // 
+            this.panelLvlDs3.Controls.Add(this.label45);
+            this.panelLvlDs3.Controls.Add(this.textBoxValueDs3);
+            this.panelLvlDs3.Controls.Add(this.listBoxAttributesDs3);
+            this.panelLvlDs3.Controls.Add(this.btnAddAttributeDs3);
+            this.panelLvlDs3.Controls.Add(this.label43);
+            this.panelLvlDs3.Controls.Add(this.comboBoxHowAttributeDs3);
+            this.panelLvlDs3.Controls.Add(this.comboBoxAttributeDs3);
+            this.panelLvlDs3.Controls.Add(this.label44);
+            this.panelLvlDs3.Location = new System.Drawing.Point(44, 89);
+            this.panelLvlDs3.Name = "panelLvlDs3";
+            this.panelLvlDs3.Size = new System.Drawing.Size(503, 239);
+            this.panelLvlDs3.TabIndex = 23;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(108, 34);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(33, 13);
+            this.label45.TabIndex = 24;
+            this.label45.Text = "value";
+            // 
+            // textBoxValueDs3
+            // 
+            this.textBoxValueDs3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.textBoxValueDs3.Location = new System.Drawing.Point(150, 31);
+            this.textBoxValueDs3.Name = "textBoxValueDs3";
+            this.textBoxValueDs3.Size = new System.Drawing.Size(100, 20);
+            this.textBoxValueDs3.TabIndex = 23;
+            // 
+            // listBoxAttributesDs3
+            // 
+            this.listBoxAttributesDs3.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxAttributesDs3.FormattingEnabled = true;
+            this.listBoxAttributesDs3.Location = new System.Drawing.Point(7, 86);
+            this.listBoxAttributesDs3.Name = "listBoxAttributesDs3";
+            this.listBoxAttributesDs3.Size = new System.Drawing.Size(489, 147);
+            this.listBoxAttributesDs3.TabIndex = 22;
+            this.listBoxAttributesDs3.DoubleClick += new System.EventHandler(this.listBoxAttributesDs3_DoubleClick);
+            // 
+            // btnAddAttributeDs3
+            // 
+            this.btnAddAttributeDs3.Location = new System.Drawing.Point(212, 59);
+            this.btnAddAttributeDs3.Name = "btnAddAttributeDs3";
+            this.btnAddAttributeDs3.Size = new System.Drawing.Size(100, 21);
+            this.btnAddAttributeDs3.TabIndex = 21;
+            this.btnAddAttributeDs3.Text = "Add";
+            this.btnAddAttributeDs3.UseVisualStyleBackColor = true;
+            this.btnAddAttributeDs3.Click += new System.EventHandler(this.btnAddAttributeDs3_Click);
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(385, 33);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(27, 13);
+            this.label43.TabIndex = 20;
+            this.label43.Text = "how";
+            // 
+            // comboBoxHowAttributeDs3
+            // 
+            this.comboBoxHowAttributeDs3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.comboBoxHowAttributeDs3.FormattingEnabled = true;
+            this.comboBoxHowAttributeDs3.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowAttributeDs3.Location = new System.Drawing.Point(256, 30);
+            this.comboBoxHowAttributeDs3.Name = "comboBoxHowAttributeDs3";
+            this.comboBoxHowAttributeDs3.Size = new System.Drawing.Size(117, 21);
+            this.comboBoxHowAttributeDs3.TabIndex = 19;
+            // 
+            // comboBoxAttributeDs3
+            // 
+            this.comboBoxAttributeDs3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxAttributeDs3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.comboBoxAttributeDs3.FormattingEnabled = true;
+            this.comboBoxAttributeDs3.Items.AddRange(new object[] {
+            "Vigor",
+            "Attunement",
+            "Endurance",
+            "Vitality",
+            "Strength",
+            "Dexterity",
+            "Intelligence",
+            "Faith",
+            "Luck ",
+            "SoulLevel",
+            "Humanity"});
+            this.comboBoxAttributeDs3.Location = new System.Drawing.Point(82, 5);
+            this.comboBoxAttributeDs3.Name = "comboBoxAttributeDs3";
+            this.comboBoxAttributeDs3.Size = new System.Drawing.Size(361, 21);
+            this.comboBoxAttributeDs3.TabIndex = 18;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(35, 9);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(45, 13);
+            this.label44.TabIndex = 17;
+            this.label44.Text = "attribute";
+            // 
+            // panelBonfireDs3
+            // 
+            this.panelBonfireDs3.Controls.Add(this.listBoxBonfireDs3);
+            this.panelBonfireDs3.Controls.Add(this.btnAddBonfire);
+            this.panelBonfireDs3.Controls.Add(this.label3);
+            this.panelBonfireDs3.Controls.Add(this.comboBoxHowBonfireDs3);
+            this.panelBonfireDs3.Controls.Add(this.comboBoxBonfireDs3);
+            this.panelBonfireDs3.Controls.Add(this.label37);
+            this.panelBonfireDs3.Location = new System.Drawing.Point(43, 88);
+            this.panelBonfireDs3.Name = "panelBonfireDs3";
+            this.panelBonfireDs3.Size = new System.Drawing.Size(504, 240);
+            this.panelBonfireDs3.TabIndex = 22;
+            // 
+            // listBoxBonfireDs3
+            // 
+            this.listBoxBonfireDs3.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxBonfireDs3.FormattingEnabled = true;
+            this.listBoxBonfireDs3.Location = new System.Drawing.Point(8, 88);
+            this.listBoxBonfireDs3.Name = "listBoxBonfireDs3";
+            this.listBoxBonfireDs3.Size = new System.Drawing.Size(489, 147);
+            this.listBoxBonfireDs3.TabIndex = 16;
+            this.listBoxBonfireDs3.DoubleClick += new System.EventHandler(this.listBoxBonfireDs3_DoubleClick);
+            // 
+            // btnAddBonfire
+            // 
+            this.btnAddBonfire.Location = new System.Drawing.Point(213, 61);
+            this.btnAddBonfire.Name = "btnAddBonfire";
+            this.btnAddBonfire.Size = new System.Drawing.Size(100, 21);
+            this.btnAddBonfire.TabIndex = 15;
+            this.btnAddBonfire.Text = "Add";
+            this.btnAddBonfire.UseVisualStyleBackColor = true;
+            this.btnAddBonfire.Click += new System.EventHandler(this.btnAddBonfire_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(143, 157);
+            this.label3.Location = new System.Drawing.Point(125, 37);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(301, 37);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Not Yet Developed";
+            this.label3.Size = new System.Drawing.Size(27, 13);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "how";
+            // 
+            // comboBoxHowBonfireDs3
+            // 
+            this.comboBoxHowBonfireDs3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.comboBoxHowBonfireDs3.FormattingEnabled = true;
+            this.comboBoxHowBonfireDs3.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowBonfireDs3.Location = new System.Drawing.Point(170, 34);
+            this.comboBoxHowBonfireDs3.Name = "comboBoxHowBonfireDs3";
+            this.comboBoxHowBonfireDs3.Size = new System.Drawing.Size(187, 21);
+            this.comboBoxHowBonfireDs3.TabIndex = 12;
+            // 
+            // comboBoxBonfireDs3
+            // 
+            this.comboBoxBonfireDs3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxBonfireDs3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.comboBoxBonfireDs3.FormattingEnabled = true;
+            this.comboBoxBonfireDs3.Items.AddRange(new object[] {
+            "Firelink Shrine",
+            "Cemetery of Ash",
+            "Iudex Gundyr",
+            "Untended Graves",
+            "Champion Gundyr",
+            "High Wall of Lothric",
+            "Tower on the Wall",
+            "Vordt of the Boreal Valley",
+            "Dancer of the Boreal Valley",
+            "Oceiros, the Consumed King",
+            "Foot of the High Wall",
+            "Undead Settlement",
+            "Cliff Underside",
+            "Dilapidated Bridge",
+            "Pit of Hollows",
+            "Road of Sacrifices",
+            "Halfway Fortress",
+            "Crucifixion Woods",
+            "Crystal Sage",
+            "Farron Keep",
+            "Keep Ruins",
+            "Farron Keep Perimeter",
+            "Old Wolf of Farron",
+            "Abyss Watchers",
+            "Cathedral of the Deep",
+            "Cleansing Chapel",
+            "Rosaria\'s Bed Chamber",
+            "Deacons of the Deep",
+            "Catacombs of Carthus",
+            "High Lord Wolnir",
+            "Abandoned Tomb",
+            "Old King\'s Antechamber",
+            "Demon Ruins",
+            "Old Demon King",
+            "Irithyll of the Boreal Valley",
+            "Central Irithyll",
+            "Church of Yorshka",
+            "Distant Manor",
+            "Pontiff Sulyvahn",
+            "Water Reserve",
+            "Anor Londo",
+            "Prison Tower",
+            "Aldrich, Devourer of Gods",
+            "Irithyll Dungeon",
+            "Profaned Capital",
+            "Yhorm the Giant",
+            "Lothric Castle",
+            "Dragon Barracks",
+            "Dragonslayer Armour",
+            "Grand Archives",
+            "Twin Princes",
+            "Archdragon Peak",
+            "Dragon-Kin Mausoleum",
+            "Great Belfry",
+            "Nameless King",
+            "Flameless Shrine",
+            "Kiln of the First Flame",
+            "Snowfield",
+            "Rope Bridge Cave",
+            "Corvian Settlement",
+            "Snowy Mountain Pass",
+            "Ariandel Chapel",
+            "Sister Friede",
+            "Depths of the Painting",
+            "Champion\'s Gravetender",
+            "The Dreg Heap",
+            "Earthen Peak Ruins",
+            "Within the Earthen Peak Ruins",
+            "The Demon Prince",
+            "Mausoleum Lookout",
+            "Ringed Inner Wall",
+            "Ringed City Streets",
+            "Shared Grave",
+            "Church of Filianore",
+            "Darkeater Midir",
+            "Filianore\'s Rest",
+            "Slave Knight Gael"});
+            this.comboBoxBonfireDs3.Location = new System.Drawing.Point(83, 7);
+            this.comboBoxBonfireDs3.Name = "comboBoxBonfireDs3";
+            this.comboBoxBonfireDs3.Size = new System.Drawing.Size(361, 21);
+            this.comboBoxBonfireDs3.TabIndex = 9;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(36, 11);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(39, 13);
+            this.label37.TabIndex = 8;
+            this.label37.Text = "bonfire";
+            // 
+            // panelBossDs3
+            // 
+            this.panelBossDs3.Controls.Add(this.btnAddBossDs3);
+            this.panelBossDs3.Controls.Add(this.label39);
+            this.panelBossDs3.Controls.Add(this.comboBoxBossDs3);
+            this.panelBossDs3.Controls.Add(this.label40);
+            this.panelBossDs3.Controls.Add(this.comboBoxHowBossDs3);
+            this.panelBossDs3.Controls.Add(this.listBoxBossDs3);
+            this.panelBossDs3.Location = new System.Drawing.Point(42, 89);
+            this.panelBossDs3.Name = "panelBossDs3";
+            this.panelBossDs3.Size = new System.Drawing.Size(505, 240);
+            this.panelBossDs3.TabIndex = 21;
+            // 
+            // btnAddBossDs3
+            // 
+            this.btnAddBossDs3.Location = new System.Drawing.Point(204, 48);
+            this.btnAddBossDs3.Name = "btnAddBossDs3";
+            this.btnAddBossDs3.Size = new System.Drawing.Size(100, 21);
+            this.btnAddBossDs3.TabIndex = 14;
+            this.btnAddBossDs3.Text = "Add";
+            this.btnAddBossDs3.UseVisualStyleBackColor = true;
+            this.btnAddBossDs3.Click += new System.EventHandler(this.btnAddBossDs3_Click);
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(295, 3);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(33, 13);
+            this.label39.TabIndex = 13;
+            this.label39.Text = "Boss:";
+            // 
+            // comboBoxBossDs3
+            // 
+            this.comboBoxBossDs3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxBossDs3.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.comboBoxBossDs3.FormattingEnabled = true;
+            this.comboBoxBossDs3.Items.AddRange(new object[] {
+            "Iudex Gundyr",
+            "Vordt of the Boreal Valley",
+            "Curse-Rotted Greatwood",
+            "Crystal Sage",
+            "Abyss Watchers",
+            "Deacons of the Deep",
+            "High Lord Wolnir",
+            "Old Demon King",
+            "Pontiff Sulyvahn",
+            "Yhorm the Giant",
+            "Aldrich, Devourer of Gods",
+            "Dancer of the Boreal Valley",
+            "Dragonslayer Armour",
+            "Oceiros, the Consumed King",
+            "Champion Gundyr",
+            "Lothric, Younger Prince",
+            "Ancient Wyvern",
+            "Nameless King",
+            "Soul of Cinder",
+            "Sister Friede",
+            "Champion\'s Gravetender & Gravetender Greatwolf",
+            "Demon in Pain & Demon From Below / Demon Prince",
+            "Halflight, Spear of the Church",
+            "Darkeater Midir",
+            "Slave Knight Gael"});
+            this.comboBoxBossDs3.Location = new System.Drawing.Point(184, 18);
+            this.comboBoxBossDs3.Name = "comboBoxBossDs3";
+            this.comboBoxBossDs3.Size = new System.Drawing.Size(292, 21);
+            this.comboBoxBossDs3.TabIndex = 12;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(87, 3);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(32, 13);
+            this.label40.TabIndex = 11;
+            this.label40.Text = "How:";
+            // 
+            // comboBoxHowBossDs3
+            // 
+            this.comboBoxHowBossDs3.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.comboBoxHowBossDs3.FormattingEnabled = true;
+            this.comboBoxHowBossDs3.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowBossDs3.Location = new System.Drawing.Point(46, 18);
+            this.comboBoxHowBossDs3.Name = "comboBoxHowBossDs3";
+            this.comboBoxHowBossDs3.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxHowBossDs3.TabIndex = 10;
+            // 
+            // listBoxBossDs3
+            // 
+            this.listBoxBossDs3.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxBossDs3.FormattingEnabled = true;
+            this.listBoxBossDs3.Location = new System.Drawing.Point(9, 82);
+            this.listBoxBossDs3.Name = "listBoxBossDs3";
+            this.listBoxBossDs3.Size = new System.Drawing.Size(489, 147);
+            this.listBoxBossDs3.TabIndex = 7;
+            this.listBoxBossDs3.DoubleClick += new System.EventHandler(this.listBoxBossDs3_DoubleClick);
+            // 
+            // btnRefreshDS3
+            // 
+            this.btnRefreshDS3.Location = new System.Drawing.Point(474, 17);
+            this.btnRefreshDS3.Name = "btnRefreshDS3";
+            this.btnRefreshDS3.Size = new System.Drawing.Size(62, 23);
+            this.btnRefreshDS3.TabIndex = 17;
+            this.btnRefreshDS3.Text = "Refresh";
+            this.btnRefreshDS3.UseVisualStyleBackColor = true;
+            this.btnRefreshDS3.Click += new System.EventHandler(this.refresh_Btn);
+            // 
+            // btnDesactiveAllDs3
+            // 
+            this.btnDesactiveAllDs3.Location = new System.Drawing.Point(27, 17);
+            this.btnDesactiveAllDs3.Name = "btnDesactiveAllDs3";
+            this.btnDesactiveAllDs3.Size = new System.Drawing.Size(100, 23);
+            this.btnDesactiveAllDs3.TabIndex = 16;
+            this.btnDesactiveAllDs3.Text = "Desactive All";
+            this.btnDesactiveAllDs3.UseVisualStyleBackColor = true;
+            this.btnDesactiveAllDs3.Click += new System.EventHandler(this.btnDesactiveAllDs3_Click);
+            // 
+            // Ds3Running
+            // 
+            this.Ds3Running.AutoSize = true;
+            this.Ds3Running.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.Ds3Running.Location = new System.Drawing.Point(335, 22);
+            this.Ds3Running.Name = "Ds3Running";
+            this.Ds3Running.Size = new System.Drawing.Size(121, 13);
+            this.Ds3Running.TabIndex = 15;
+            this.Ds3Running.Text = "Dark Souls 3 is Running";
+            // 
+            // Ds3NotRunning
+            // 
+            this.Ds3NotRunning.AutoSize = true;
+            this.Ds3NotRunning.ForeColor = System.Drawing.Color.Red;
+            this.Ds3NotRunning.Location = new System.Drawing.Point(327, 22);
+            this.Ds3NotRunning.Name = "Ds3NotRunning";
+            this.Ds3NotRunning.Size = new System.Drawing.Size(141, 13);
+            this.Ds3NotRunning.TabIndex = 14;
+            this.Ds3NotRunning.Text = "Dark Souls 3 is Not Running";
+            // 
+            // comboBoxToSplitSelectDs3
+            // 
+            this.comboBoxToSplitSelectDs3.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.comboBoxToSplitSelectDs3.FormattingEnabled = true;
+            this.comboBoxToSplitSelectDs3.Items.AddRange(new object[] {
+            "Kill a Boss",
+            "Is Activated a Bonefire",
+            "Level the Charapter",
+            "Custom Flag"});
+            this.comboBoxToSplitSelectDs3.Location = new System.Drawing.Point(80, 54);
+            this.comboBoxToSplitSelectDs3.Name = "comboBoxToSplitSelectDs3";
+            this.comboBoxToSplitSelectDs3.Size = new System.Drawing.Size(444, 21);
+            this.comboBoxToSplitSelectDs3.TabIndex = 13;
+            this.comboBoxToSplitSelectDs3.SelectedIndexChanged += new System.EventHandler(this.comboBoxToSplitSelectDs3_SelectedIndexChanged);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(41, 57);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(33, 13);
+            this.label38.TabIndex = 12;
+            this.label38.Text = "when";
             // 
             // tabElden
             // 
             this.tabElden.BackColor = System.Drawing.SystemColors.Control;
-            this.tabElden.Controls.Add(this.panelPositionsER);
+            this.tabElden.Controls.Add(this.panelCfER);
             this.tabElden.Controls.Add(this.panelGraceER);
             this.tabElden.Controls.Add(this.panelBossER);
+            this.tabElden.Controls.Add(this.panelPositionsER);
             this.tabElden.Controls.Add(this.EldenRingRunning);
             this.tabElden.Controls.Add(this.EldenRingNotRunning);
             this.tabElden.Controls.Add(this.btnRefreshE);
@@ -1620,150 +2171,87 @@
             this.tabElden.TabIndex = 3;
             this.tabElden.Text = "Elden Ring";
             // 
-            // panelPositionsER
+            // panelCfER
             // 
-            this.panelPositionsER.Controls.Add(this.label32);
-            this.panelPositionsER.Controls.Add(this.label34);
-            this.panelPositionsER.Controls.Add(this.label35);
-            this.panelPositionsER.Controls.Add(this.label36);
-            this.panelPositionsER.Controls.Add(this.comboBoxHowPositionsER);
-            this.panelPositionsER.Controls.Add(this.comboBoxMarginER);
-            this.panelPositionsER.Controls.Add(this.listBoxPositionsER);
-            this.panelPositionsER.Controls.Add(this.btnAddPositionER);
-            this.panelPositionsER.Controls.Add(this.btnGetPosition);
-            this.panelPositionsER.Controls.Add(this.textBoxZEr);
-            this.panelPositionsER.Controls.Add(this.textBoxYEr);
-            this.panelPositionsER.Controls.Add(this.textBoxXEr);
-            this.panelPositionsER.Location = new System.Drawing.Point(38, 82);
-            this.panelPositionsER.Name = "panelPositionsER";
-            this.panelPositionsER.Size = new System.Drawing.Size(505, 244);
-            this.panelPositionsER.TabIndex = 22;
+            this.panelCfER.Controls.Add(this.label42);
+            this.panelCfER.Controls.Add(this.comboBoxHowCfER);
+            this.panelCfER.Controls.Add(this.listBoxCfER);
+            this.panelCfER.Controls.Add(this.btnAddCfER);
+            this.panelCfER.Controls.Add(this.btnGetListER);
+            this.panelCfER.Controls.Add(this.label41);
+            this.panelCfER.Controls.Add(this.textBoxIdER);
+            this.panelCfER.Location = new System.Drawing.Point(40, 84);
+            this.panelCfER.Name = "panelCfER";
+            this.panelCfER.Size = new System.Drawing.Size(504, 242);
+            this.panelCfER.TabIndex = 23;
             // 
-            // label32
+            // label42
             // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(219, 1);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(66, 13);
-            this.label32.TabIndex = 12;
-            this.label32.Text = "Coordinates:";
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(392, 53);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(32, 13);
+            this.label42.TabIndex = 21;
+            this.label42.Text = "How:";
             // 
-            // label34
+            // comboBoxHowCfER
             // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(383, 19);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(39, 13);
-            this.label34.TabIndex = 11;
-            this.label34.Text = "Margin";
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(185, 19);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(130, 13);
-            this.label35.TabIndex = 10;
-            this.label35.Text = "X                 Y                 Z";
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(77, 19);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(32, 13);
-            this.label36.TabIndex = 9;
-            this.label36.Text = "How:";
-            // 
-            // comboBoxHowPositionsER
-            // 
-            this.comboBoxHowPositionsER.BackColor = System.Drawing.Color.LightGray;
-            this.comboBoxHowPositionsER.FormattingEnabled = true;
-            this.comboBoxHowPositionsER.Items.AddRange(new object[] {
+            this.comboBoxHowCfER.BackColor = System.Drawing.SystemColors.Control;
+            this.comboBoxHowCfER.FormattingEnabled = true;
+            this.comboBoxHowCfER.Items.AddRange(new object[] {
             "Inmediatly",
             "Loading game after"});
-            this.comboBoxHowPositionsER.Location = new System.Drawing.Point(36, 34);
-            this.comboBoxHowPositionsER.Name = "comboBoxHowPositionsER";
-            this.comboBoxHowPositionsER.Size = new System.Drawing.Size(110, 21);
-            this.comboBoxHowPositionsER.TabIndex = 8;
+            this.comboBoxHowCfER.Location = new System.Drawing.Point(276, 50);
+            this.comboBoxHowCfER.Name = "comboBoxHowCfER";
+            this.comboBoxHowCfER.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxHowCfER.TabIndex = 20;
             // 
-            // comboBoxMarginER
+            // listBoxCfER
             // 
-            this.comboBoxMarginER.BackColor = System.Drawing.Color.LightGray;
-            this.comboBoxMarginER.FormattingEnabled = true;
-            this.comboBoxMarginER.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3 (R)",
-            "4 (R)",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10"});
-            this.comboBoxMarginER.Location = new System.Drawing.Point(351, 35);
-            this.comboBoxMarginER.Name = "comboBoxMarginER";
-            this.comboBoxMarginER.Size = new System.Drawing.Size(110, 21);
-            this.comboBoxMarginER.TabIndex = 7;
-            this.comboBoxMarginER.SelectedIndexChanged += new System.EventHandler(this.comboBoxMarginER_SelectedIndexChanged);
+            this.listBoxCfER.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxCfER.FormattingEnabled = true;
+            this.listBoxCfER.Location = new System.Drawing.Point(9, 116);
+            this.listBoxCfER.Name = "listBoxCfER";
+            this.listBoxCfER.Size = new System.Drawing.Size(488, 121);
+            this.listBoxCfER.TabIndex = 19;
+            this.listBoxCfER.DoubleClick += new System.EventHandler(this.listBoxCfER_DoubleClick);
             // 
-            // listBoxPositionsER
+            // btnAddCfER
             // 
-            this.listBoxPositionsER.BackColor = System.Drawing.SystemColors.Control;
-            this.listBoxPositionsER.FormattingEnabled = true;
-            this.listBoxPositionsER.Location = new System.Drawing.Point(3, 90);
-            this.listBoxPositionsER.Name = "listBoxPositionsER";
-            this.listBoxPositionsER.Size = new System.Drawing.Size(495, 147);
-            this.listBoxPositionsER.TabIndex = 6;
-            this.listBoxPositionsER.DoubleClick += new System.EventHandler(this.listBoxPositionsER_DoubleClick);
+            this.btnAddCfER.Location = new System.Drawing.Point(211, 82);
+            this.btnAddCfER.Name = "btnAddCfER";
+            this.btnAddCfER.Size = new System.Drawing.Size(100, 21);
+            this.btnAddCfER.TabIndex = 18;
+            this.btnAddCfER.Text = "Add";
+            this.btnAddCfER.UseVisualStyleBackColor = true;
+            this.btnAddCfER.Click += new System.EventHandler(this.btnAddCfER_Click);
             // 
-            // btnAddPositionER
+            // btnGetListER
             // 
-            this.btnAddPositionER.Location = new System.Drawing.Point(248, 63);
-            this.btnAddPositionER.Name = "btnAddPositionER";
-            this.btnAddPositionER.Size = new System.Drawing.Size(100, 21);
-            this.btnAddPositionER.TabIndex = 5;
-            this.btnAddPositionER.Text = "Add";
-            this.btnAddPositionER.UseVisualStyleBackColor = true;
-            this.btnAddPositionER.Click += new System.EventHandler(this.btnAddPositionER_Click);
+            this.btnGetListER.Location = new System.Drawing.Point(201, 9);
+            this.btnGetListER.Name = "btnGetListER";
+            this.btnGetListER.Size = new System.Drawing.Size(127, 23);
+            this.btnGetListER.TabIndex = 2;
+            this.btnGetListER.Text = "Get List Flags";
+            this.btnGetListER.UseVisualStyleBackColor = true;
+            this.btnGetListER.Click += new System.EventHandler(this.btnGetListER_Click);
             // 
-            // btnGetPosition
+            // label41
             // 
-            this.btnGetPosition.Location = new System.Drawing.Point(142, 63);
-            this.btnGetPosition.Name = "btnGetPosition";
-            this.btnGetPosition.Size = new System.Drawing.Size(100, 21);
-            this.btnGetPosition.TabIndex = 4;
-            this.btnGetPosition.Text = "Get Position";
-            this.btnGetPosition.UseVisualStyleBackColor = true;
-            this.btnGetPosition.Click += new System.EventHandler(this.btnGetPosition_Click_1);
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(120, 53);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(21, 13);
+            this.label41.TabIndex = 1;
+            this.label41.Text = "ID:";
             // 
-            // textBoxZEr
+            // textBoxIdER
             // 
-            this.textBoxZEr.BackColor = System.Drawing.Color.LightGray;
-            this.textBoxZEr.Location = new System.Drawing.Point(280, 35);
-            this.textBoxZEr.Name = "textBoxZEr";
-            this.textBoxZEr.ReadOnly = true;
-            this.textBoxZEr.Size = new System.Drawing.Size(52, 20);
-            this.textBoxZEr.TabIndex = 3;
-            // 
-            // textBoxYEr
-            // 
-            this.textBoxYEr.BackColor = System.Drawing.Color.LightGray;
-            this.textBoxYEr.Location = new System.Drawing.Point(222, 35);
-            this.textBoxYEr.Name = "textBoxYEr";
-            this.textBoxYEr.ReadOnly = true;
-            this.textBoxYEr.Size = new System.Drawing.Size(52, 20);
-            this.textBoxYEr.TabIndex = 2;
-            // 
-            // textBoxXEr
-            // 
-            this.textBoxXEr.BackColor = System.Drawing.Color.LightGray;
-            this.textBoxXEr.Location = new System.Drawing.Point(164, 35);
-            this.textBoxXEr.Name = "textBoxXEr";
-            this.textBoxXEr.ReadOnly = true;
-            this.textBoxXEr.Size = new System.Drawing.Size(52, 20);
-            this.textBoxXEr.TabIndex = 0;
+            this.textBoxIdER.BackColor = System.Drawing.SystemColors.Control;
+            this.textBoxIdER.Location = new System.Drawing.Point(151, 50);
+            this.textBoxIdER.Name = "textBoxIdER";
+            this.textBoxIdER.Size = new System.Drawing.Size(100, 20);
+            this.textBoxIdER.TabIndex = 0;
             // 
             // panelGraceER
             // 
@@ -2149,9 +2637,9 @@
             this.label33.AutoSize = true;
             this.label33.Location = new System.Drawing.Point(38, 10);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(36, 13);
+            this.label33.Size = new System.Drawing.Size(34, 13);
             this.label33.TabIndex = 8;
-            this.label33.Text = "where";
+            this.label33.Text = "grace";
             // 
             // panelBossER
             // 
@@ -2397,6 +2885,151 @@
             this.listBoxBossER.TabIndex = 7;
             this.listBoxBossER.DoubleClick += new System.EventHandler(this.listBoxBossER_DoubleClick);
             // 
+            // panelPositionsER
+            // 
+            this.panelPositionsER.Controls.Add(this.label32);
+            this.panelPositionsER.Controls.Add(this.label34);
+            this.panelPositionsER.Controls.Add(this.label35);
+            this.panelPositionsER.Controls.Add(this.label36);
+            this.panelPositionsER.Controls.Add(this.comboBoxHowPositionsER);
+            this.panelPositionsER.Controls.Add(this.comboBoxMarginER);
+            this.panelPositionsER.Controls.Add(this.listBoxPositionsER);
+            this.panelPositionsER.Controls.Add(this.btnAddPositionER);
+            this.panelPositionsER.Controls.Add(this.btnGetPosition);
+            this.panelPositionsER.Controls.Add(this.textBoxZEr);
+            this.panelPositionsER.Controls.Add(this.textBoxYEr);
+            this.panelPositionsER.Controls.Add(this.textBoxXEr);
+            this.panelPositionsER.Location = new System.Drawing.Point(38, 82);
+            this.panelPositionsER.Name = "panelPositionsER";
+            this.panelPositionsER.Size = new System.Drawing.Size(505, 244);
+            this.panelPositionsER.TabIndex = 22;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(219, 1);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(66, 13);
+            this.label32.TabIndex = 12;
+            this.label32.Text = "Coordinates:";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(383, 19);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(39, 13);
+            this.label34.TabIndex = 11;
+            this.label34.Text = "Margin";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(185, 19);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(130, 13);
+            this.label35.TabIndex = 10;
+            this.label35.Text = "X                 Y                 Z";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(77, 19);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(32, 13);
+            this.label36.TabIndex = 9;
+            this.label36.Text = "How:";
+            // 
+            // comboBoxHowPositionsER
+            // 
+            this.comboBoxHowPositionsER.BackColor = System.Drawing.Color.LightGray;
+            this.comboBoxHowPositionsER.FormattingEnabled = true;
+            this.comboBoxHowPositionsER.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowPositionsER.Location = new System.Drawing.Point(36, 34);
+            this.comboBoxHowPositionsER.Name = "comboBoxHowPositionsER";
+            this.comboBoxHowPositionsER.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxHowPositionsER.TabIndex = 8;
+            // 
+            // comboBoxMarginER
+            // 
+            this.comboBoxMarginER.BackColor = System.Drawing.Color.LightGray;
+            this.comboBoxMarginER.FormattingEnabled = true;
+            this.comboBoxMarginER.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3 (R)",
+            "4 (R)",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.comboBoxMarginER.Location = new System.Drawing.Point(351, 35);
+            this.comboBoxMarginER.Name = "comboBoxMarginER";
+            this.comboBoxMarginER.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxMarginER.TabIndex = 7;
+            this.comboBoxMarginER.SelectedIndexChanged += new System.EventHandler(this.comboBoxMarginER_SelectedIndexChanged);
+            // 
+            // listBoxPositionsER
+            // 
+            this.listBoxPositionsER.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxPositionsER.FormattingEnabled = true;
+            this.listBoxPositionsER.Location = new System.Drawing.Point(3, 90);
+            this.listBoxPositionsER.Name = "listBoxPositionsER";
+            this.listBoxPositionsER.Size = new System.Drawing.Size(495, 147);
+            this.listBoxPositionsER.TabIndex = 6;
+            this.listBoxPositionsER.DoubleClick += new System.EventHandler(this.listBoxPositionsER_DoubleClick);
+            // 
+            // btnAddPositionER
+            // 
+            this.btnAddPositionER.Location = new System.Drawing.Point(248, 63);
+            this.btnAddPositionER.Name = "btnAddPositionER";
+            this.btnAddPositionER.Size = new System.Drawing.Size(100, 21);
+            this.btnAddPositionER.TabIndex = 5;
+            this.btnAddPositionER.Text = "Add";
+            this.btnAddPositionER.UseVisualStyleBackColor = true;
+            this.btnAddPositionER.Click += new System.EventHandler(this.btnAddPositionER_Click);
+            // 
+            // btnGetPosition
+            // 
+            this.btnGetPosition.Location = new System.Drawing.Point(142, 63);
+            this.btnGetPosition.Name = "btnGetPosition";
+            this.btnGetPosition.Size = new System.Drawing.Size(100, 21);
+            this.btnGetPosition.TabIndex = 4;
+            this.btnGetPosition.Text = "Get Position";
+            this.btnGetPosition.UseVisualStyleBackColor = true;
+            this.btnGetPosition.Click += new System.EventHandler(this.btnGetPosition_Click_1);
+            // 
+            // textBoxZEr
+            // 
+            this.textBoxZEr.BackColor = System.Drawing.Color.LightGray;
+            this.textBoxZEr.Location = new System.Drawing.Point(280, 35);
+            this.textBoxZEr.Name = "textBoxZEr";
+            this.textBoxZEr.ReadOnly = true;
+            this.textBoxZEr.Size = new System.Drawing.Size(52, 20);
+            this.textBoxZEr.TabIndex = 3;
+            // 
+            // textBoxYEr
+            // 
+            this.textBoxYEr.BackColor = System.Drawing.Color.LightGray;
+            this.textBoxYEr.Location = new System.Drawing.Point(222, 35);
+            this.textBoxYEr.Name = "textBoxYEr";
+            this.textBoxYEr.ReadOnly = true;
+            this.textBoxYEr.Size = new System.Drawing.Size(52, 20);
+            this.textBoxYEr.TabIndex = 2;
+            // 
+            // textBoxXEr
+            // 
+            this.textBoxXEr.BackColor = System.Drawing.Color.LightGray;
+            this.textBoxXEr.Location = new System.Drawing.Point(164, 35);
+            this.textBoxXEr.Name = "textBoxXEr";
+            this.textBoxXEr.ReadOnly = true;
+            this.textBoxXEr.Size = new System.Drawing.Size(52, 20);
+            this.textBoxXEr.TabIndex = 0;
+            // 
             // EldenRingRunning
             // 
             this.EldenRingRunning.AutoSize = true;
@@ -2444,7 +3077,8 @@
             this.comboBoxToSplitEldenRing.Items.AddRange(new object[] {
             "Kill a Boss",
             "Light a Grace",
-            "Target a Position"});
+            "Target a Position",
+            "Custom Flag"});
             this.comboBoxToSplitEldenRing.Location = new System.Drawing.Point(80, 54);
             this.comboBoxToSplitEldenRing.Name = "comboBoxToSplitEldenRing";
             this.comboBoxToSplitEldenRing.Size = new System.Drawing.Size(444, 21);
@@ -3132,6 +3766,76 @@
             this.TextBox1.TabStop = false;
             this.TextBox1.Text = resources.GetString("TextBox1.Text");
             // 
+            // tabCeleste
+            // 
+            this.tabCeleste.Controls.Add(this.label49);
+            this.tabCeleste.Location = new System.Drawing.Point(4, 22);
+            this.tabCeleste.Name = "tabCeleste";
+            this.tabCeleste.Size = new System.Drawing.Size(587, 351);
+            this.tabCeleste.TabIndex = 7;
+            this.tabCeleste.Text = "Celeste";
+            this.tabCeleste.UseVisualStyleBackColor = true;
+            // 
+            // tabCuphead
+            // 
+            this.tabCuphead.Controls.Add(this.label48);
+            this.tabCuphead.Location = new System.Drawing.Point(4, 22);
+            this.tabCuphead.Name = "tabCuphead";
+            this.tabCuphead.Size = new System.Drawing.Size(587, 351);
+            this.tabCuphead.TabIndex = 8;
+            this.tabCuphead.Text = "Cuphead";
+            this.tabCuphead.UseVisualStyleBackColor = true;
+            // 
+            // tabRe2R
+            // 
+            this.tabRe2R.Controls.Add(this.label50);
+            this.tabRe2R.Location = new System.Drawing.Point(4, 22);
+            this.tabRe2R.Name = "tabRe2R";
+            this.tabRe2R.Size = new System.Drawing.Size(587, 351);
+            this.tabRe2R.TabIndex = 9;
+            this.tabRe2R.Text = "Resident Evil 2 Re";
+            this.tabRe2R.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(143, 157);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(301, 37);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Not Yet Developed";
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label48.Location = new System.Drawing.Point(143, 157);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(301, 37);
+            this.label48.TabIndex = 1;
+            this.label48.Text = "Not Yet Developed";
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label49.Location = new System.Drawing.Point(143, 157);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(301, 37);
+            this.label49.TabIndex = 1;
+            this.label49.Text = "Not Yet Developed";
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label50.Location = new System.Drawing.Point(143, 157);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(301, 37);
+            this.label50.TabIndex = 1;
+            this.label50.Text = "Not Yet Developed";
+            // 
             // AutoSplitter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3181,14 +3885,24 @@
             this.tabDs2.PerformLayout();
             this.tabDs3.ResumeLayout(false);
             this.tabDs3.PerformLayout();
+            this.panelCfDs3.ResumeLayout(false);
+            this.panelCfDs3.PerformLayout();
+            this.panelLvlDs3.ResumeLayout(false);
+            this.panelLvlDs3.PerformLayout();
+            this.panelBonfireDs3.ResumeLayout(false);
+            this.panelBonfireDs3.PerformLayout();
+            this.panelBossDs3.ResumeLayout(false);
+            this.panelBossDs3.PerformLayout();
             this.tabElden.ResumeLayout(false);
             this.tabElden.PerformLayout();
-            this.panelPositionsER.ResumeLayout(false);
-            this.panelPositionsER.PerformLayout();
+            this.panelCfER.ResumeLayout(false);
+            this.panelCfER.PerformLayout();
             this.panelGraceER.ResumeLayout(false);
             this.panelGraceER.PerformLayout();
             this.panelBossER.ResumeLayout(false);
             this.panelBossER.PerformLayout();
+            this.panelPositionsER.ResumeLayout(false);
+            this.panelPositionsER.PerformLayout();
             this.tabHollow.ResumeLayout(false);
             this.tabHollow.PerformLayout();
             this.panelPositionH.ResumeLayout(false);
@@ -3205,6 +3919,12 @@
             this.groupBoxCharms.ResumeLayout(false);
             this.tabUpdate.ResumeLayout(false);
             this.tabUpdate.PerformLayout();
+            this.tabCeleste.ResumeLayout(false);
+            this.tabCeleste.PerformLayout();
+            this.tabCuphead.ResumeLayout(false);
+            this.tabCuphead.PerformLayout();
+            this.tabRe2R.ResumeLayout(false);
+            this.tabRe2R.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3213,9 +3933,7 @@
 
         private System.Windows.Forms.TabPage tabElden;
         private System.Windows.Forms.TabPage tabDs3;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TabPage tabDs2;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabSekiro;
         private System.Windows.Forms.ComboBox toSplitSelectSekiro;
         private System.Windows.Forms.Label label1;
@@ -3397,5 +4115,57 @@
         private System.Windows.Forms.TextBox textBoxZEr;
         private System.Windows.Forms.TextBox textBoxYEr;
         private System.Windows.Forms.TextBox textBoxXEr;
+        private System.Windows.Forms.Panel panelBossDs3;
+        private System.Windows.Forms.Button btnAddBossDs3;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.ComboBox comboBoxBossDs3;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.ComboBox comboBoxHowBossDs3;
+        private System.Windows.Forms.ListBox listBoxBossDs3;
+        private System.Windows.Forms.Button btnRefreshDS3;
+        private System.Windows.Forms.Button btnDesactiveAllDs3;
+        private System.Windows.Forms.Label Ds3Running;
+        private System.Windows.Forms.Label Ds3NotRunning;
+        private System.Windows.Forms.ComboBox comboBoxToSplitSelectDs3;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Panel panelBonfireDs3;
+        private System.Windows.Forms.ListBox listBoxBonfireDs3;
+        private System.Windows.Forms.Button btnAddBonfire;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboBoxHowBonfireDs3;
+        private System.Windows.Forms.ComboBox comboBoxBonfireDs3;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Panel panelLvlDs3;
+        private System.Windows.Forms.Panel panelCfER;
+        private System.Windows.Forms.ListBox listBoxCfER;
+        private System.Windows.Forms.Button btnAddCfER;
+        private System.Windows.Forms.Button btnGetListER;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.TextBox textBoxIdER;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.ComboBox comboBoxHowCfER;
+        private System.Windows.Forms.ListBox listBoxAttributesDs3;
+        private System.Windows.Forms.Button btnAddAttributeDs3;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.ComboBox comboBoxHowAttributeDs3;
+        private System.Windows.Forms.ComboBox comboBoxAttributeDs3;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.TextBox textBoxValueDs3;
+        private System.Windows.Forms.Panel panelCfDs3;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.ComboBox comboBoxHowCfDs3;
+        private System.Windows.Forms.ListBox listBoxCfDs3;
+        private System.Windows.Forms.Button btnAddCfeDs3;
+        private System.Windows.Forms.Button btnGetListFlagDs3;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.TextBox textBoxIdDs3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TabPage tabCeleste;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.TabPage tabCuphead;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.TabPage tabRe2R;
+        private System.Windows.Forms.Label label50;
     }
 }

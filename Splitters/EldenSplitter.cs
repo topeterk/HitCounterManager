@@ -88,6 +88,7 @@ namespace HitCounterManager
             dataElden.bossToSplit.Clear();
             dataElden.graceToSplit.Clear();
             dataElden.positionToSplit.Clear();
+            dataElden.flagsToSplit.Clear();
 
         }
 
@@ -116,6 +117,14 @@ namespace HitCounterManager
                     p.IsSplited = false;
                 }
             }
+
+            if (dataElden.getFlagsToSplit().Count != 0)
+            {
+                foreach (var cf in dataElden.getFlagsToSplit())
+                {
+                    cf.IsSplited = false;
+                }
+            }
         }
 
 
@@ -142,11 +151,17 @@ namespace HitCounterManager
             {
                 positionToSplit();
             });
+            var task4 = new Task(() =>
+            {
+                flagsToSplit();
+            });
+            
             taskRefresh.Start();
             taskCheckload.Start();
             task1.Start();
             task2.Start();
             task3.Start();
+            task4.Start();
            
 
 
@@ -173,6 +188,13 @@ namespace HitCounterManager
             dataElden.positionToSplit.Add(cPosition);   
         }
 
+        public void AddCustomFlag(uint id, string mode)
+        {
+            DefinitionsElden.CustomFlagER cf = new DefinitionsElden.CustomFlagER()
+            { Id = id, Mode = mode };
+            dataElden.flagsToSplit.Add(cf);
+        }
+
         public void RemoveBoss(int position)
         {
             dataElden.bossToSplit.RemoveAt(position);
@@ -185,6 +207,11 @@ namespace HitCounterManager
         public void RemovePosition(int position)
         {
             dataElden.positionToSplit.RemoveAt(position);
+        }
+
+        public void RemoveCustomFlag(int position)
+        {
+            dataElden.flagsToSplit.RemoveAt(position);
         }
 
         #region init()
@@ -208,9 +235,10 @@ namespace HitCounterManager
         }
 
        
-        List<DefinitionsElden.BossER> listPendingB_LD = new List<DefinitionsElden.BossER>();
-        List<DefinitionsElden.Grace> listPendingG_LD = new List<DefinitionsElden.Grace>();
-        List<DefinitionsElden.PositionER> listPendingP_LD = new List<DefinitionsElden.PositionER>();
+        List<DefinitionsElden.BossER> listPendingB = new List<DefinitionsElden.BossER>();
+        List<DefinitionsElden.Grace> listPendingG = new List<DefinitionsElden.Grace>();
+        List<DefinitionsElden.PositionER> listPendingP = new List<DefinitionsElden.PositionER>();
+        List<DefinitionsElden.CustomFlagER> listPendingCf = new List<DefinitionsElden.CustomFlagER>();
 
       
         private void checkLoad()
@@ -218,34 +246,42 @@ namespace HitCounterManager
             while (dataElden.enableSplitting && _StatusProcedure)
             {
                 Thread.Sleep(200);
-                if (listPendingB_LD.Count > 0 || listPendingG_LD.Count > 0 || listPendingP_LD.Count > 0)
+                if (listPendingB.Count > 0 || listPendingG.Count > 0 || listPendingP.Count > 0)
                 {
                     if (!elden.IsPlayerLoaded())
                     {                      
-                        foreach (var boss in listPendingB_LD)
+                        foreach (var boss in listPendingB)
                         {
                             try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
                             var b = dataElden.bossToSplit.FindIndex(iboss => iboss.Id == boss.Id);
                             dataElden.bossToSplit[b].IsSplited = true;
                         }
 
-                        foreach (var grace in listPendingG_LD)
+                        foreach (var grace in listPendingG)
                         {
                             try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
                             var g = dataElden.graceToSplit.FindIndex(igrace => igrace.Id == grace.Id);
                             dataElden.graceToSplit[g].IsSplited = true;
                         }
 
-                        foreach (var position in listPendingP_LD)
+                        foreach (var position in listPendingP)
                         {
                             try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
                             var p = dataElden.positionToSplit.FindIndex(iposition => iposition.vector == position.vector);
                             dataElden.graceToSplit[p].IsSplited = true;
                         }
 
-                        listPendingB_LD.Clear();
-                        listPendingG_LD.Clear();
-                        listPendingP_LD.Clear();
+                        foreach (var cf in listPendingCf)
+                        {
+                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            var c = dataElden.flagsToSplit.FindIndex(iflag => iflag.Id == cf.Id);
+                            dataElden.flagsToSplit[c].IsSplited = true;
+                        }
+
+                        listPendingB.Clear();
+                        listPendingG.Clear();
+                        listPendingP.Clear();
+                        listPendingCf.Clear();
 
 
                     }
@@ -264,9 +300,9 @@ namespace HitCounterManager
                     {
                         if (b.Mode == "Loading game after")
                         {
-                            if (!listPendingB_LD.Contains(b))
+                            if (!listPendingB.Contains(b))
                             {
-                                listPendingB_LD.Add(b);
+                                listPendingB.Add(b);
                             }
                         }
                         else
@@ -293,14 +329,41 @@ namespace HitCounterManager
                     {
                         if (i.Mode == "Loading game after")
                         {
-                            if (!listPendingG_LD.Contains(i))
+                            if (!listPendingG.Contains(i))
                             {
-                                listPendingG_LD.Add(i);
+                                listPendingG.Add(i);
                             }
                         }
                         else
                         {
                             i.IsSplited = true;
+                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                        }
+                    }
+                }
+            }
+        }
+
+        private void flagsToSplit()
+        {
+            while (dataElden.enableSplitting && _StatusProcedure)
+            {
+                Thread.Sleep(5000);
+                foreach (var cf in dataElden.getFlagsToSplit())
+                {
+
+                    if (!cf.IsSplited && elden.ReadEventFlag(cf.Id))
+                    {
+                        if (cf.Mode == "Loading game after")
+                        {
+                            if (!listPendingCf.Contains(cf))
+                            {
+                                listPendingCf.Add(cf);
+                            }
+                        }
+                        else
+                        {
+                            cf.IsSplited = true;
                             try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
                         }
                     }
@@ -326,9 +389,9 @@ namespace HitCounterManager
                             if (p.mode == "Loading game after")
                             {
 
-                                if (!listPendingP_LD.Contains(p))
+                                if (!listPendingP.Contains(p))
                                 {
-                                    listPendingP_LD.Add(p);
+                                    listPendingP.Add(p);
                                 }
 
                             }
@@ -343,6 +406,8 @@ namespace HitCounterManager
                 }
             }
         }
+
+        
     }
     #endregion
 }

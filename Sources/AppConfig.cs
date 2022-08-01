@@ -490,6 +490,7 @@ namespace HitCounterManager
         private SekiroSplitter sekiroSplitter = new SekiroSplitter();
         private HollowSplitter hollowSplitter = new HollowSplitter();
         private EldenSplitter eldenSplitter = new EldenSplitter();
+        private Ds3Splitter ds3Splitter = new Ds3Splitter();
         private void SaveAutoSplitterSettings() {
             Stream myStream;
             try
@@ -501,10 +502,11 @@ namespace HitCounterManager
                 myStream = new FileStream("HitCounterManagerSaveAutoSplitter.xml", FileMode.Create, FileAccess.Write, FileShare.None);
             }
 
-            XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro), typeof(DTHollow),typeof(DTElden) });
+            XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro), typeof(DTHollow),typeof(DTElden),typeof(DTDs3) });
             dataAS.DataSekiro = sekiroSplitter.getDataSekiro();
             dataAS.DataHollow = hollowSplitter.getDataHollow();
             dataAS.DataElden = eldenSplitter.getDataElden();
+            dataAS.DataDs3 = ds3Splitter.getDataDs3();
             formatter.Serialize(myStream, dataAS);
 
             myStream.Close();
@@ -517,14 +519,16 @@ namespace HitCounterManager
             DTSekiro dataSekiro = new DTSekiro();
             DTHollow dataHollow = new DTHollow();
             DTElden dataElden = new DTElden();
+            DTDs3 dataDs3 = new DTDs3();
              try
              {
                 Stream myStream = new FileStream("HitCounterManagerSaveAutoSplitter.xml", FileMode.Open, FileAccess.Read, FileShare.None);
-                XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro),typeof(DTHollow), typeof(DTElden) });
+                XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro),typeof(DTHollow), typeof(DTElden),typeof(DTDs3) });
                 dataAS = (DataAutoSplitter)formatter.Deserialize(myStream);
                 dataSekiro = dataAS.DataSekiro;
                 dataHollow = dataAS.DataHollow;
                 dataElden = dataAS.DataElden;
+                dataDs3 = dataAS.DataDs3;
                 myStream.Close();
             }
             catch (Exception){}
@@ -537,6 +541,9 @@ namespace HitCounterManager
 
             eldenSplitter.setDataElden(dataElden, profiles);
             eldenSplitter.LoadAutoSplitterProcedure();
+
+            ds3Splitter.setDataDs3(dataDs3, profiles);
+            ds3Splitter.LoadAutoSplitterProcedure();
 
 
         }
@@ -557,6 +564,9 @@ namespace HitCounterManager
             return this.eldenSplitter;
         }
 
-
+        public Ds3Splitter getDs3Instance()
+        {
+            return this.ds3Splitter;
+        }
     }
 }

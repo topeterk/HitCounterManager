@@ -564,6 +564,15 @@ namespace HitCounterManager
             public string mode;
         }
         #endregion
+        #region CustomFlag.Elden
+        public class CustomFlagER
+        {
+            public uint Id;
+            public bool IsSplited = false;
+            public string Mode;
+
+        }
+        #endregion
     }
 
     [Serializable]
@@ -573,9 +582,10 @@ namespace HitCounterManager
         public bool enableSplitting = false;
         public int positionMargin = 3;
         //Flags to Split
-        public List<DefinitionsElden.BossER> bossToSplit = new List<DefinitionsElden.BossER> ();      
+        public List<DefinitionsElden.BossER> bossToSplit = new List<DefinitionsElden.BossER>();
         public List<DefinitionsElden.Grace> graceToSplit = new List<DefinitionsElden.Grace>();
         public List<DefinitionsElden.PositionER> positionToSplit = new List<DefinitionsElden.PositionER>();
+        public List<DefinitionsElden.CustomFlagER> flagsToSplit = new List<DefinitionsElden.CustomFlagER>();
 
 
         public List<DefinitionsElden.BossER> getBossToSplit()
@@ -591,6 +601,11 @@ namespace HitCounterManager
         public List<DefinitionsElden.PositionER> getPositionToSplit()
         {
             return this.positionToSplit;
+        }
+
+        public List<DefinitionsElden.CustomFlagER> getFlagsToSplit()
+        {
+            return this.flagsToSplit;
         }
     }
 }
