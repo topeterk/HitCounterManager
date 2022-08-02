@@ -32,7 +32,6 @@
             this.TabControl2 = new HitCounterManager.ProfileTabControl();
             this.tabConfig = new System.Windows.Forms.TabPage();
             this.groupBoxSplitters = new System.Windows.Forms.GroupBox();
-            this.btnRe2 = new System.Windows.Forms.Button();
             this.btnCuphead = new System.Windows.Forms.Button();
             this.btnCeleste = new System.Windows.Forms.Button();
             this.btnHollow = new System.Windows.Forms.Button();
@@ -368,7 +367,6 @@
             // 
             // groupBoxSplitters
             // 
-            this.groupBoxSplitters.Controls.Add(this.btnRe2);
             this.groupBoxSplitters.Controls.Add(this.btnCuphead);
             this.groupBoxSplitters.Controls.Add(this.btnCeleste);
             this.groupBoxSplitters.Controls.Add(this.btnHollow);
@@ -379,20 +377,10 @@
             this.groupBoxSplitters.Controls.Add(this.btnSekiro);
             this.groupBoxSplitters.Location = new System.Drawing.Point(13, 12);
             this.groupBoxSplitters.Name = "groupBoxSplitters";
-            this.groupBoxSplitters.Size = new System.Drawing.Size(301, 233);
+            this.groupBoxSplitters.Size = new System.Drawing.Size(301, 204);
             this.groupBoxSplitters.TabIndex = 0;
             this.groupBoxSplitters.TabStop = false;
             this.groupBoxSplitters.Text = "Splitters";
-            // 
-            // btnRe2
-            // 
-            this.btnRe2.Location = new System.Drawing.Point(100, 175);
-            this.btnRe2.Name = "btnRe2";
-            this.btnRe2.Size = new System.Drawing.Size(89, 43);
-            this.btnRe2.TabIndex = 8;
-            this.btnRe2.Text = "Resident Evil 2 Remake";
-            this.btnRe2.UseVisualStyleBackColor = true;
-            this.btnRe2.Click += new System.EventHandler(this.btnRe2_Click);
             // 
             // btnCuphead
             // 
@@ -477,8 +465,8 @@
             // tabSekiro
             // 
             this.tabSekiro.BackColor = System.Drawing.SystemColors.Control;
-            this.tabSekiro.Controls.Add(this.panelPositionS);
             this.tabSekiro.Controls.Add(this.panelBossS);
+            this.tabSekiro.Controls.Add(this.panelPositionS);
             this.tabSekiro.Controls.Add(this.panelIdolsS);
             this.tabSekiro.Controls.Add(this.button1);
             this.tabSekiro.Controls.Add(this.btnDesactiveSekiro);
@@ -4472,7 +4460,6 @@
         private System.Windows.Forms.CheckedListBox checkedListBoxCheckpointsCeleste;
         private System.Windows.Forms.TabPage tabConfig;
         private System.Windows.Forms.GroupBox groupBoxSplitters;
-        private System.Windows.Forms.Button btnRe2;
         private System.Windows.Forms.Button btnCuphead;
         private System.Windows.Forms.Button btnCeleste;
         private System.Windows.Forms.Button btnHollow;

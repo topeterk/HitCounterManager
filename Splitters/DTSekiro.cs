@@ -72,7 +72,7 @@ namespace HitCounterManager
                     boss.BossDate("Headless Ape", 9307);
                     break;
                 case "Corrupted Monk (ghost)":
-                    boss.BossDate("Corrupted Monk (ghost)", 9308);
+                    boss.BossDate("Corrupted Monk (ghost)", 9306);
                     break;
                 case "Emma, the Gentle Blade":
                     boss.BossDate("Emma, the Gentle Blade", 9315);
