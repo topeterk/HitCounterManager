@@ -41,18 +41,20 @@ namespace HitCounterManager
         HollowSplitter hollowSplitter;
         EldenSplitter eldenSplitter;
         Ds3Splitter ds3Splitter;
+        CelesteSplitter celesteSplitter;
         
         
 
         public Exception Exception { get; set; }
 
-        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter,EldenSplitter eldenSplitter,Ds3Splitter ds3Splitter)
+        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter,EldenSplitter eldenSplitter,Ds3Splitter ds3Splitter,CelesteSplitter celesteSplitter)
         {
             InitializeComponent();
             this.sekiroSplitter = sekiroSplitter;
             this.hollowSplitter = hollowSplitter;
             this.eldenSplitter = eldenSplitter;
             this.ds3Splitter = ds3Splitter;
+            this.celesteSplitter = celesteSplitter;
             refreshForm();
         }
 
@@ -97,6 +99,10 @@ namespace HitCounterManager
             panelBonfireDs3.Hide();
             panelLvlDs3.Hide();
             panelCfDs3.Hide();
+            #endregion
+            #region CelesteTab
+            panelChapterCeleste.Hide();
+            panelCheckpointsCeleste.Hide();
             #endregion
             checkStatusGames();
         }
@@ -320,6 +326,31 @@ namespace HitCounterManager
                 listBoxCfDs3.Items.Add(cf.Id + " - " + cf.Mode);
             }
             #endregion
+            DTCeleste celesteData = celesteSplitter.getDataCeleste();
+            #region CelesteLoad.Chapters
+            foreach (var c in celesteData.getChapterToSplit())
+            {
+                for (int i = 0; i < checkedListBoxChapterCeleste.Items.Count; i++)
+                {
+                    if (c.Title == checkedListBoxChapterCeleste.Items[i].ToString())
+                    {
+                        checkedListBoxChapterCeleste.SetItemChecked(i, true);
+                    }
+                }
+            }
+            #endregion
+            #region CelesteLoad.Checkpoints
+            foreach (var c in celesteData.getChapterToSplit())
+            {
+                for (int i = 0; i < checkedListBoxCheckpointsCeleste.Items.Count; i++)
+                {
+                    if (c.Title == checkedListBoxCheckpointsCeleste.Items[i].ToString())
+                    {
+                        checkedListBoxCheckpointsCeleste.SetItemChecked(i, true);
+                    }
+                }
+            }
+            #endregion
         }
 
         private void refresh_Btn(object sender, EventArgs e)
@@ -369,6 +400,16 @@ namespace HitCounterManager
             {
                 Ds3Running.Hide();
                 Ds3NotRunning.Show();
+            }
+            if (celesteSplitter.getHollowStatusProcess(0))
+            {
+                CelesteRunning.Show();
+                CelesteNotRunning.Hide();
+            }
+            else
+            {
+                CelesteNotRunning.Show();
+                CelesteRunning.Hide();
             }
 
         }
@@ -1756,5 +1797,59 @@ namespace HitCounterManager
 
 
         #endregion
+
+        private void comboBoxToSplitCeleste_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            panelChapterCeleste.Hide();
+            panelCheckpointsCeleste.Hide();
+
+            switch (comboBoxToSplitCeleste.SelectedIndex)
+            {
+                case 0:
+                    panelChapterCeleste.Show(); break;
+                case 1:
+                    panelCheckpointsCeleste.Show(); break;
+
+            }
+
+        }
+        private void checkedListBoxCeleste_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (checkedListBoxChapterCeleste.SelectedIndex != -1)
+            {
+                if (checkedListBoxChapterCeleste.GetItemChecked(checkedListBoxChapterCeleste.SelectedIndex) == false)
+                {
+                    celesteSplitter.setProcedure(false);
+                    celesteSplitter.AddChapter(checkedListBoxChapterCeleste.SelectedItem.ToString());
+                    celesteSplitter.setProcedure(true);
+                }
+                else
+                {
+                    celesteSplitter.setProcedure(false);
+                    celesteSplitter.RemoveChapter(checkedListBoxChapterCeleste.SelectedItem.ToString());
+                    celesteSplitter.setProcedure(true);
+                }
+            }
+        }
+
+      
+        private void checkedListBoxCheckpointsCeleste_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (checkedListBoxCheckpointsCeleste.SelectedIndex != -1)
+            {
+                if (checkedListBoxCheckpointsCeleste.GetItemChecked(checkedListBoxCheckpointsCeleste.SelectedIndex) == false)
+                {
+                    celesteSplitter.setProcedure(false);
+                    celesteSplitter.AddChapter(checkedListBoxCheckpointsCeleste.SelectedItem.ToString());
+                    celesteSplitter.setProcedure(true);
+                }
+                else
+                {
+                    celesteSplitter.setProcedure(false);
+                    celesteSplitter.RemoveChapter(checkedListBoxCheckpointsCeleste.SelectedItem.ToString());
+                    celesteSplitter.setProcedure(true);
+                }
+            }
+        }
     }
 }

@@ -77,7 +77,8 @@ Message me via GitHub / e-mail or simply open an issue and I will try to help yo
 
 ## Community
 There is a great growing community on Discord called [Team Hitless](https://discord.gg/4E7cSK7).
-If you are seeking for help, guidance or just talk about no hit runs, this is the right place for it.  
+If you are seeking for help, guidance or just talk about no hit runs, this is the right place for it.
+And If you English is low level you can visit spanish community on [No Hit Hispano](https://discord.gg/ntygnch)  
 Thanks to everyone for helping other community members!
 
 ## Special thanks
@@ -96,13 +97,15 @@ Thanks to (in alphabetical order):
 * [TigerG92](https://www.twitch.tv/tigerg92)
 
 Thanks to Beta Testers of AutoSplit(in alphabetical order):
-* [DanielloPiuBello](https://www.twitch.tv/daniellopiubello)
-* [OlallaZ2](https://www.twitch.tv/olallaz2)
+* [AvegaX](https://www.twitch.tv/avegax)
 * [Bajamuten](https://www.twitch.tv/bajamuten)
-* [Zirob21](https://www.twitch.tv/zirob21)
-* [Empaventuras](https://www.twitch.tv/empaventuras)
-* [Slash15](https://www.twitch.tv/slash15_)
+* [DanielloPiuBello](https://www.twitch.tv/daniellopiubello)
 * [Duuruk](https://www.twitch.tv/disabled_dogs)
+* [Empaventuras](https://www.twitch.tv/empaventuras)
+* [Keinon](https://www.twitch.tv/soykeinon)
+* [Slash15](https://www.twitch.tv/slash15_)
+* [OlallaZ2](https://www.twitch.tv/olallaz2)
+* [Zirob21](https://www.twitch.tv/zirob21)
 
 
 * Every member of the [Hitless team on Twitch](https://www.twitch.tv/team/hitless) and [No Hit Hispano on Twitch](https://www.twitch.tv/nohithispano)

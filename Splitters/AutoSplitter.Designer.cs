@@ -135,6 +135,7 @@
             this.tabDs1 = new System.Windows.Forms.TabPage();
             this.label5 = new System.Windows.Forms.Label();
             this.tabDs2 = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabDs3 = new System.Windows.Forms.TabPage();
             this.panelCfDs3 = new System.Windows.Forms.Panel();
             this.label46 = new System.Windows.Forms.Label();
@@ -253,18 +254,26 @@
             this.HollowNotRunning = new System.Windows.Forms.Label();
             this.toSplitSelectHollow = new System.Windows.Forms.ComboBox();
             this.label24 = new System.Windows.Forms.Label();
+            this.tabCeleste = new System.Windows.Forms.TabPage();
+            this.panelCheckpointsCeleste = new System.Windows.Forms.Panel();
+            this.checkedListBoxCheckpointsCeleste = new System.Windows.Forms.CheckedListBox();
+            this.panelChapterCeleste = new System.Windows.Forms.Panel();
+            this.checkedListBoxChapterCeleste = new System.Windows.Forms.CheckedListBox();
+            this.comboBoxToSplitCeleste = new System.Windows.Forms.ComboBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnRemoveAllCeleste = new System.Windows.Forms.Button();
+            this.CelesteRunning = new System.Windows.Forms.Label();
+            this.CelesteNotRunning = new System.Windows.Forms.Label();
+            this.tabCuphead = new System.Windows.Forms.TabPage();
+            this.label48 = new System.Windows.Forms.Label();
+            this.tabRe2R = new System.Windows.Forms.TabPage();
+            this.label50 = new System.Windows.Forms.Label();
             this.tabUpdate = new System.Windows.Forms.TabPage();
             this.lblVersionCurrent = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btnCheckVersion = new System.Windows.Forms.Button();
             this.TextBox1 = new System.Windows.Forms.TextBox();
-            this.tabCeleste = new System.Windows.Forms.TabPage();
-            this.tabCuphead = new System.Windows.Forms.TabPage();
-            this.tabRe2R = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label48 = new System.Windows.Forms.Label();
-            this.label49 = new System.Windows.Forms.Label();
-            this.label50 = new System.Windows.Forms.Label();
             this.TabControl2.SuspendLayout();
             this.tabSekiro.SuspendLayout();
             this.panelPositionS.SuspendLayout();
@@ -307,10 +316,12 @@
             this.panelItemH.SuspendLayout();
             this.groupBoxSkillsH.SuspendLayout();
             this.groupBoxCharms.SuspendLayout();
-            this.tabUpdate.SuspendLayout();
             this.tabCeleste.SuspendLayout();
+            this.panelCheckpointsCeleste.SuspendLayout();
+            this.panelChapterCeleste.SuspendLayout();
             this.tabCuphead.SuspendLayout();
             this.tabRe2R.SuspendLayout();
+            this.tabUpdate.SuspendLayout();
             this.SuspendLayout();
             // 
             // TabControl2
@@ -1630,6 +1641,16 @@
             this.tabDs2.TabIndex = 0;
             this.tabDs2.Text = "Dark Souls 2";
             this.tabDs2.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(143, 157);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(301, 37);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Not Yet Developed";
             // 
             // tabDs3
             // 
@@ -3708,6 +3729,211 @@
             this.label24.TabIndex = 12;
             this.label24.Text = "when";
             // 
+            // tabCeleste
+            // 
+            this.tabCeleste.BackColor = System.Drawing.SystemColors.Control;
+            this.tabCeleste.Controls.Add(this.panelCheckpointsCeleste);
+            this.tabCeleste.Controls.Add(this.panelChapterCeleste);
+            this.tabCeleste.Controls.Add(this.comboBoxToSplitCeleste);
+            this.tabCeleste.Controls.Add(this.label49);
+            this.tabCeleste.Controls.Add(this.button2);
+            this.tabCeleste.Controls.Add(this.btnRemoveAllCeleste);
+            this.tabCeleste.Controls.Add(this.CelesteRunning);
+            this.tabCeleste.Controls.Add(this.CelesteNotRunning);
+            this.tabCeleste.Location = new System.Drawing.Point(4, 22);
+            this.tabCeleste.Name = "tabCeleste";
+            this.tabCeleste.Size = new System.Drawing.Size(587, 351);
+            this.tabCeleste.TabIndex = 7;
+            this.tabCeleste.Text = "Celeste";
+            // 
+            // panelCheckpointsCeleste
+            // 
+            this.panelCheckpointsCeleste.Controls.Add(this.checkedListBoxCheckpointsCeleste);
+            this.panelCheckpointsCeleste.Location = new System.Drawing.Point(14, 72);
+            this.panelCheckpointsCeleste.Name = "panelCheckpointsCeleste";
+            this.panelCheckpointsCeleste.Size = new System.Drawing.Size(557, 261);
+            this.panelCheckpointsCeleste.TabIndex = 23;
+            // 
+            // checkedListBoxCheckpointsCeleste
+            // 
+            this.checkedListBoxCheckpointsCeleste.BackColor = System.Drawing.SystemColors.Control;
+            this.checkedListBoxCheckpointsCeleste.CheckOnClick = true;
+            this.checkedListBoxCheckpointsCeleste.FormattingEnabled = true;
+            this.checkedListBoxCheckpointsCeleste.Items.AddRange(new object[] {
+            "Chapter 1 - Crossing (A) / Contraption (B) (CP 1)",
+            "Chapter 1 - Chasm (A) / Scrap Pit (B) (CP 2)",
+            "Chapter 2 - Intervention (A) / Combination Lock (B) (CP 1)",
+            "Chapter 2 - Awake (A) / Dream Altar (B) (CP 2)",
+            "Chapter 3 - Huge Mess (A) / Staff Quarters (B) (CP 1)",
+            "Chapter 3 - Elevator Shaft (A) / Library (B) (CP 2)",
+            "Chapter 3 - Presidential Suite (A) / Rooftop (B) (CP 3)",
+            "Chapter 4 - Shrine (A) / Stepping Stones (B) (CP 1)",
+            "Chapter 4 - Old Trail (A) / Gusty Canyon (B) (CP 2)",
+            "Chapter 4 - Cliff Face (A) / Eye Of The Storm (B) (CP 3)",
+            "Chapter 5 - Depths (A) / Central Chamber (B) (CP 1)",
+            "Chapter 5 - Unravelling (A) / Through The Mirror (B) (CP 2)",
+            "Chapter 5 - Search (A) / Mix Master (B) (CP 3)",
+            "Chapter 5 - Rescue (A) (CP 4)",
+            "Chapter 6 - Lake (A) / Reflection (B) (CP 1)",
+            "Chapter 6 - Hollows (A) / Rock Bottom (B) (CP 2)",
+            "Chapter 6 - Reflection (A) / Reprieve (B) (CP 3)",
+            "Chapter 6 - Rock Bottom (A) (CP 4)",
+            "Chapter 6 - Resolution (A) (CP 5)",
+            "Chapter 7 - 500M (A) / 500M (B) (CP 1)",
+            "Chapter 7 - 1000M (A) / 1000M (B) (CP 2)",
+            "Chapter 7 - 1500M (A) / 1500M (B) (CP 3)",
+            "Chapter 7 - 2000M (A) / 2000M (B) (CP 4)",
+            "Chapter 7 - 2500M (A) / 2500M (B) (CP 5)",
+            "Chapter 7 - 3000M (A) / 3000M (B) (CP 6)",
+            "Chapter 8 - Into The Core (A) / Into The Core (B) (CP 1)",
+            "Chapter 8 - Hot And Cold (A) / Burning Or Freezing (B) (CP 2)",
+            "Chapter 8 - Heart Of The Mountain (A) / Heartbeat (B) (CP 3)",
+            "Chapter 9 - Singular (CP 1)",
+            "Chapter 9 - Power Source (CP 2)",
+            "Chapter 9 - Remembered (CP 3)",
+            "Chapter 9 - Event Horizon (CP 4)",
+            "Chapter 9 - Determination (CP 5)",
+            "Chapter 9 - Stubbornness (CP 6)",
+            "Chapter 9 - Reconciliation (CP 7)",
+            "Chapter 9 - Farewell (CP 8)"});
+            this.checkedListBoxCheckpointsCeleste.Location = new System.Drawing.Point(25, 14);
+            this.checkedListBoxCheckpointsCeleste.Name = "checkedListBoxCheckpointsCeleste";
+            this.checkedListBoxCheckpointsCeleste.Size = new System.Drawing.Size(515, 229);
+            this.checkedListBoxCheckpointsCeleste.TabIndex = 0;
+            this.checkedListBoxCheckpointsCeleste.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxCheckpointsCeleste_ItemCheck);
+            // 
+            // panelChapterCeleste
+            // 
+            this.panelChapterCeleste.Controls.Add(this.checkedListBoxChapterCeleste);
+            this.panelChapterCeleste.Location = new System.Drawing.Point(15, 73);
+            this.panelChapterCeleste.Name = "panelChapterCeleste";
+            this.panelChapterCeleste.Size = new System.Drawing.Size(557, 261);
+            this.panelChapterCeleste.TabIndex = 22;
+            // 
+            // checkedListBoxChapterCeleste
+            // 
+            this.checkedListBoxChapterCeleste.BackColor = System.Drawing.SystemColors.Control;
+            this.checkedListBoxChapterCeleste.CheckOnClick = true;
+            this.checkedListBoxChapterCeleste.FormattingEnabled = true;
+            this.checkedListBoxChapterCeleste.Items.AddRange(new object[] {
+            "Prologue (Complete)",
+            "Chapter 1 - Forsaken City A/B/C (Complete)",
+            "Chapter 2 - Old Site A/B/C (Complete)",
+            "Chapter 3 - Celestial Resort A/B/C (Complete)",
+            "Chapter 4 - Golden Ridge A/B/C (Complete)",
+            "Chapter 5 - Mirror Temple A/B/C (Complete)",
+            "Chapter 6 - Reflection A/B/C (Complete)",
+            "Chapter 7 - The Summit A/B/C (Complete)",
+            "Epilogue (Complete)",
+            "Chapter 8 - Core A/B/C (Complete)",
+            "Chapter 9 - Farewell (Complete)"});
+            this.checkedListBoxChapterCeleste.Location = new System.Drawing.Point(25, 14);
+            this.checkedListBoxChapterCeleste.Name = "checkedListBoxChapterCeleste";
+            this.checkedListBoxChapterCeleste.Size = new System.Drawing.Size(515, 229);
+            this.checkedListBoxChapterCeleste.TabIndex = 0;
+            this.checkedListBoxChapterCeleste.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxCeleste_ItemCheck);
+            // 
+            // comboBoxToSplitCeleste
+            // 
+            this.comboBoxToSplitCeleste.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.comboBoxToSplitCeleste.FormattingEnabled = true;
+            this.comboBoxToSplitCeleste.Items.AddRange(new object[] {
+            "Chapter",
+            "Checkpoints"});
+            this.comboBoxToSplitCeleste.Location = new System.Drawing.Point(89, 46);
+            this.comboBoxToSplitCeleste.Name = "comboBoxToSplitCeleste";
+            this.comboBoxToSplitCeleste.Size = new System.Drawing.Size(444, 21);
+            this.comboBoxToSplitCeleste.TabIndex = 24;
+            this.comboBoxToSplitCeleste.SelectedIndexChanged += new System.EventHandler(this.comboBoxToSplitCeleste_SelectedIndexChanged);
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(50, 49);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(33, 13);
+            this.label49.TabIndex = 23;
+            this.label49.Text = "when";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(471, 17);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(62, 23);
+            this.button2.TabIndex = 21;
+            this.button2.Text = "Refresh";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.refresh_Btn);
+            // 
+            // btnRemoveAllCeleste
+            // 
+            this.btnRemoveAllCeleste.Location = new System.Drawing.Point(24, 17);
+            this.btnRemoveAllCeleste.Name = "btnRemoveAllCeleste";
+            this.btnRemoveAllCeleste.Size = new System.Drawing.Size(100, 23);
+            this.btnRemoveAllCeleste.TabIndex = 20;
+            this.btnRemoveAllCeleste.Text = "Desactive All";
+            this.btnRemoveAllCeleste.UseVisualStyleBackColor = true;
+            // 
+            // CelesteRunning
+            // 
+            this.CelesteRunning.AutoSize = true;
+            this.CelesteRunning.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.CelesteRunning.Location = new System.Drawing.Point(356, 22);
+            this.CelesteRunning.Name = "CelesteRunning";
+            this.CelesteRunning.Size = new System.Drawing.Size(95, 13);
+            this.CelesteRunning.TabIndex = 19;
+            this.CelesteRunning.Text = "Celeste is Running";
+            // 
+            // CelesteNotRunning
+            // 
+            this.CelesteNotRunning.AutoSize = true;
+            this.CelesteNotRunning.ForeColor = System.Drawing.Color.Red;
+            this.CelesteNotRunning.Location = new System.Drawing.Point(346, 22);
+            this.CelesteNotRunning.Name = "CelesteNotRunning";
+            this.CelesteNotRunning.Size = new System.Drawing.Size(115, 13);
+            this.CelesteNotRunning.TabIndex = 18;
+            this.CelesteNotRunning.Text = "Celeste is Not Running";
+            // 
+            // tabCuphead
+            // 
+            this.tabCuphead.Controls.Add(this.label48);
+            this.tabCuphead.Location = new System.Drawing.Point(4, 22);
+            this.tabCuphead.Name = "tabCuphead";
+            this.tabCuphead.Size = new System.Drawing.Size(587, 351);
+            this.tabCuphead.TabIndex = 8;
+            this.tabCuphead.Text = "Cuphead";
+            this.tabCuphead.UseVisualStyleBackColor = true;
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label48.Location = new System.Drawing.Point(143, 157);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(301, 37);
+            this.label48.TabIndex = 1;
+            this.label48.Text = "Not Yet Developed";
+            // 
+            // tabRe2R
+            // 
+            this.tabRe2R.Controls.Add(this.label50);
+            this.tabRe2R.Location = new System.Drawing.Point(4, 22);
+            this.tabRe2R.Name = "tabRe2R";
+            this.tabRe2R.Size = new System.Drawing.Size(587, 351);
+            this.tabRe2R.TabIndex = 9;
+            this.tabRe2R.Text = "Resident Evil 2 Re";
+            this.tabRe2R.UseVisualStyleBackColor = true;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label50.Location = new System.Drawing.Point(143, 157);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(301, 37);
+            this.label50.TabIndex = 1;
+            this.label50.Text = "Not Yet Developed";
+            // 
             // tabUpdate
             // 
             this.tabUpdate.BackColor = System.Drawing.SystemColors.Control;
@@ -3765,76 +3991,6 @@
             this.TextBox1.TabIndex = 2;
             this.TextBox1.TabStop = false;
             this.TextBox1.Text = resources.GetString("TextBox1.Text");
-            // 
-            // tabCeleste
-            // 
-            this.tabCeleste.Controls.Add(this.label49);
-            this.tabCeleste.Location = new System.Drawing.Point(4, 22);
-            this.tabCeleste.Name = "tabCeleste";
-            this.tabCeleste.Size = new System.Drawing.Size(587, 351);
-            this.tabCeleste.TabIndex = 7;
-            this.tabCeleste.Text = "Celeste";
-            this.tabCeleste.UseVisualStyleBackColor = true;
-            // 
-            // tabCuphead
-            // 
-            this.tabCuphead.Controls.Add(this.label48);
-            this.tabCuphead.Location = new System.Drawing.Point(4, 22);
-            this.tabCuphead.Name = "tabCuphead";
-            this.tabCuphead.Size = new System.Drawing.Size(587, 351);
-            this.tabCuphead.TabIndex = 8;
-            this.tabCuphead.Text = "Cuphead";
-            this.tabCuphead.UseVisualStyleBackColor = true;
-            // 
-            // tabRe2R
-            // 
-            this.tabRe2R.Controls.Add(this.label50);
-            this.tabRe2R.Location = new System.Drawing.Point(4, 22);
-            this.tabRe2R.Name = "tabRe2R";
-            this.tabRe2R.Size = new System.Drawing.Size(587, 351);
-            this.tabRe2R.TabIndex = 9;
-            this.tabRe2R.Text = "Resident Evil 2 Re";
-            this.tabRe2R.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(143, 157);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(301, 37);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Not Yet Developed";
-            // 
-            // label48
-            // 
-            this.label48.AutoSize = true;
-            this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label48.Location = new System.Drawing.Point(143, 157);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(301, 37);
-            this.label48.TabIndex = 1;
-            this.label48.Text = "Not Yet Developed";
-            // 
-            // label49
-            // 
-            this.label49.AutoSize = true;
-            this.label49.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label49.Location = new System.Drawing.Point(143, 157);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(301, 37);
-            this.label49.TabIndex = 1;
-            this.label49.Text = "Not Yet Developed";
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label50.Location = new System.Drawing.Point(143, 157);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(301, 37);
-            this.label50.TabIndex = 1;
-            this.label50.Text = "Not Yet Developed";
             // 
             // AutoSplitter
             // 
@@ -3917,14 +4073,16 @@
             this.panelItemH.PerformLayout();
             this.groupBoxSkillsH.ResumeLayout(false);
             this.groupBoxCharms.ResumeLayout(false);
-            this.tabUpdate.ResumeLayout(false);
-            this.tabUpdate.PerformLayout();
             this.tabCeleste.ResumeLayout(false);
             this.tabCeleste.PerformLayout();
+            this.panelCheckpointsCeleste.ResumeLayout(false);
+            this.panelChapterCeleste.ResumeLayout(false);
             this.tabCuphead.ResumeLayout(false);
             this.tabCuphead.PerformLayout();
             this.tabRe2R.ResumeLayout(false);
             this.tabRe2R.PerformLayout();
+            this.tabUpdate.ResumeLayout(false);
+            this.tabUpdate.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -4162,10 +4320,19 @@
         private System.Windows.Forms.TextBox textBoxIdDs3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabCeleste;
-        private System.Windows.Forms.Label label49;
         private System.Windows.Forms.TabPage tabCuphead;
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.TabPage tabRe2R;
         private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnRemoveAllCeleste;
+        private System.Windows.Forms.Label CelesteRunning;
+        private System.Windows.Forms.Label CelesteNotRunning;
+        private System.Windows.Forms.ComboBox comboBoxToSplitCeleste;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.Panel panelChapterCeleste;
+        private System.Windows.Forms.CheckedListBox checkedListBoxChapterCeleste;
+        private System.Windows.Forms.Panel panelCheckpointsCeleste;
+        private System.Windows.Forms.CheckedListBox checkedListBoxCheckpointsCeleste;
     }
 }

@@ -37,6 +37,7 @@ namespace HitCounterManager
         private HollowSplitter hollowSplitter;
         private EldenSplitter eldenSplitter;
         private Ds3Splitter ds3Splitter;
+        private CelesteSplitter celesteSplitter;
 
         public ProfilesControl()
         {
@@ -57,12 +58,14 @@ namespace HitCounterManager
             ptc.InitializeProfileTabControl();
         }
 
-        public void setSplittersPointers(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter,EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter)
+        public void setSplittersPointers(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter,EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter)
         {
             this.sekiroSplitter = sekiroSplitter;
             this.hollowSplitter = hollowSplitter;
             this.eldenSplitter = eldenSplitter;
             this.ds3Splitter = ds3Splitter;
+            this.celesteSplitter = celesteSplitter;
+
         }
 
 
@@ -105,6 +108,7 @@ namespace HitCounterManager
                  * sekiroSplitter.getTimeInGame();
                  * eldenSplitter.getTimeInGame(); //Reset 0 in IGT
                  * ds3Splitter.getTimeInGame();
+                 * celesteSplitter.getTimeInGame();
                 }*/
 
 
@@ -391,6 +395,7 @@ namespace HitCounterManager
             hollowSplitter.resetSplited();
             eldenSplitter.resetSplited();
             ds3Splitter.resetSplited();
+            celesteSplitter.resetSplited();
 
         }
         public void ProfilePB()
