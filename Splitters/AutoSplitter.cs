@@ -60,6 +60,11 @@ namespace HitCounterManager
 
         public void refreshForm()
         {
+            #region ControlTab
+            TabControl2.TabPages.Clear();
+            TabControl2.TabPages.Add(tabConfig);
+            TabControl2.TabPages.Add(tabUpdate);
+            #endregion
             #region SekiroTab       
             panelPositionS.Hide();
             panelBossS.Hide();
@@ -413,6 +418,92 @@ namespace HitCounterManager
             }
 
         }
+
+        #region Config UI
+        private void btnSekiro_Click(object sender, EventArgs e)
+        {
+            if (!TabControl2.TabPages.Contains(tabSekiro))
+            {
+                TabControl2.TabPages.Add(tabSekiro);                
+            }
+            TabControl2.SelectTab(tabSekiro);
+
+        }
+
+        private void btnDs1_Click(object sender, EventArgs e)
+        {
+            if (!TabControl2.TabPages.Contains(tabDs1))
+            {
+                TabControl2.TabPages.Add(tabDs1);
+            }
+            TabControl2.SelectTab(tabDs1);
+        }
+
+        private void btnDs2_Click(object sender, EventArgs e)
+        {
+            if (!TabControl2.TabPages.Contains(tabDs2))
+            {
+                TabControl2.TabPages.Add(tabDs2);
+            }
+            TabControl2.SelectTab(tabDs2);
+        }
+
+        private void btnDs3_Click(object sender, EventArgs e)
+        {
+            if (!TabControl2.TabPages.Contains(tabDs3))
+            {
+                TabControl2.TabPages.Add(tabDs3);
+            }
+            TabControl2.SelectTab(tabDs3);
+        }
+
+        private void btnHollow_Click(object sender, EventArgs e)
+        {
+            if (!TabControl2.TabPages.Contains(tabHollow))
+            {
+                TabControl2.TabPages.Add(tabHollow);
+            }
+            TabControl2.SelectTab(tabHollow);
+            
+        }
+
+        private void btnCeleste_Click(object sender, EventArgs e)
+        {
+            if (!TabControl2.TabPages.Contains(tabCeleste))
+            {
+                TabControl2.TabPages.Add(tabCeleste);
+            }
+            TabControl2.SelectTab(tabCeleste);
+        }
+
+        private void btnCuphead_Click(object sender, EventArgs e)
+        {
+            if (!TabControl2.TabPages.Contains(tabCuphead))
+            {
+                TabControl2.TabPages.Add(tabCuphead);
+            }
+            TabControl2.SelectTab(tabCuphead);
+        }
+
+        private void btnElden_Click(object sender, EventArgs e)
+        {
+            if (!TabControl2.TabPages.Contains(tabElden))
+            {
+                TabControl2.TabPages.Add(tabElden);
+            }
+            TabControl2.SelectTab(tabElden);
+        }
+
+        private void btnRe2_Click(object sender, EventArgs e)
+        {
+            if (!TabControl2.TabPages.Contains(tabRe2R))
+            {
+                TabControl2.TabPages.Add(tabRe2R);
+            }
+            TabControl2.SelectTab(tabRe2R);
+        }
+
+        #endregion
 
         #region Sekiro.UI
         Vector3f Vector;
@@ -1052,6 +1143,8 @@ namespace HitCounterManager
                 this.InitializeComponent();
                 refreshForm();
                 this.AutoSplitter_Load(null, null);//Load Others Games Settings
+                TabControl2.TabPages.Add(tabSekiro);
+                TabControl2.SelectTab(tabSekiro);
             }
 
         }
@@ -1344,6 +1437,8 @@ namespace HitCounterManager
                 this.InitializeComponent();
                 refreshForm();
                 this.AutoSplitter_Load(null, null);//Load Others Games Settings
+                TabControl2.TabPages.Add(tabHollow);
+                TabControl2.SelectTab(tabHollow);
             }
         }
 
@@ -1575,6 +1670,8 @@ namespace HitCounterManager
                 this.InitializeComponent();
                 refreshForm();
                 this.AutoSplitter_Load(null, null);//Load Others Games Settings
+                TabControl2.TabPages.Add(tabElden);
+                TabControl2.SelectTab(tabElden);
             }
         }
 
@@ -1791,13 +1888,15 @@ namespace HitCounterManager
                 this.InitializeComponent();
                 refreshForm();
                 this.AutoSplitter_Load(null, null);//Load Others Games Settings
+                TabControl2.TabPages.Add(tabDs3);
+                TabControl2.SelectTab(tabDs3);
             }
         }
 
 
 
         #endregion
-
+        #region Celeste UI
         private void comboBoxToSplitCeleste_SelectedIndexChanged(object sender, EventArgs e)
         {
             panelChapterCeleste.Hide();
@@ -1851,5 +1950,27 @@ namespace HitCounterManager
                 }
             }
         }
+
+        private void btnRemoveAllCeleste_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to disable everything?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                celesteSplitter.setProcedure(false);
+                celesteSplitter.clearData();
+                celesteSplitter.setProcedure(true);
+                this.Controls.Clear();
+                this.InitializeComponent();
+                refreshForm();
+                this.AutoSplitter_Load(null, null);//Load Others Games Settings
+                TabControl2.TabPages.Add(tabCeleste);
+                TabControl2.SelectTab(tabCeleste);
+            }
+        }
+
+
+        #endregion
+
+
     }
 }

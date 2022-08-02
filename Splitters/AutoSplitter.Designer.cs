@@ -30,6 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AutoSplitter));
             this.TabControl2 = new HitCounterManager.ProfileTabControl();
+            this.tabConfig = new System.Windows.Forms.TabPage();
+            this.groupBoxSplitters = new System.Windows.Forms.GroupBox();
+            this.btnRe2 = new System.Windows.Forms.Button();
+            this.btnCuphead = new System.Windows.Forms.Button();
+            this.btnCeleste = new System.Windows.Forms.Button();
+            this.btnHollow = new System.Windows.Forms.Button();
+            this.btnElden = new System.Windows.Forms.Button();
+            this.btnDs3 = new System.Windows.Forms.Button();
+            this.btnDs2 = new System.Windows.Forms.Button();
+            this.btnDs1 = new System.Windows.Forms.Button();
+            this.btnSekiro = new System.Windows.Forms.Button();
             this.tabSekiro = new System.Windows.Forms.TabPage();
             this.panelPositionS = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
@@ -275,6 +286,8 @@
             this.btnCheckVersion = new System.Windows.Forms.Button();
             this.TextBox1 = new System.Windows.Forms.TextBox();
             this.TabControl2.SuspendLayout();
+            this.tabConfig.SuspendLayout();
+            this.groupBoxSplitters.SuspendLayout();
             this.tabSekiro.SuspendLayout();
             this.panelPositionS.SuspendLayout();
             this.panelBossS.SuspendLayout();
@@ -326,6 +339,7 @@
             // 
             // TabControl2
             // 
+            this.TabControl2.Controls.Add(this.tabConfig);
             this.TabControl2.Controls.Add(this.tabSekiro);
             this.TabControl2.Controls.Add(this.tabDs1);
             this.TabControl2.Controls.Add(this.tabDs2);
@@ -341,6 +355,124 @@
             this.TabControl2.SelectedIndex = 0;
             this.TabControl2.Size = new System.Drawing.Size(595, 377);
             this.TabControl2.TabIndex = 0;
+            // 
+            // tabConfig
+            // 
+            this.tabConfig.BackColor = System.Drawing.SystemColors.Control;
+            this.tabConfig.Controls.Add(this.groupBoxSplitters);
+            this.tabConfig.Location = new System.Drawing.Point(4, 22);
+            this.tabConfig.Name = "tabConfig";
+            this.tabConfig.Size = new System.Drawing.Size(587, 351);
+            this.tabConfig.TabIndex = 10;
+            this.tabConfig.Text = "Configuration";
+            // 
+            // groupBoxSplitters
+            // 
+            this.groupBoxSplitters.Controls.Add(this.btnRe2);
+            this.groupBoxSplitters.Controls.Add(this.btnCuphead);
+            this.groupBoxSplitters.Controls.Add(this.btnCeleste);
+            this.groupBoxSplitters.Controls.Add(this.btnHollow);
+            this.groupBoxSplitters.Controls.Add(this.btnElden);
+            this.groupBoxSplitters.Controls.Add(this.btnDs3);
+            this.groupBoxSplitters.Controls.Add(this.btnDs2);
+            this.groupBoxSplitters.Controls.Add(this.btnDs1);
+            this.groupBoxSplitters.Controls.Add(this.btnSekiro);
+            this.groupBoxSplitters.Location = new System.Drawing.Point(13, 12);
+            this.groupBoxSplitters.Name = "groupBoxSplitters";
+            this.groupBoxSplitters.Size = new System.Drawing.Size(301, 233);
+            this.groupBoxSplitters.TabIndex = 0;
+            this.groupBoxSplitters.TabStop = false;
+            this.groupBoxSplitters.Text = "Splitters";
+            // 
+            // btnRe2
+            // 
+            this.btnRe2.Location = new System.Drawing.Point(100, 175);
+            this.btnRe2.Name = "btnRe2";
+            this.btnRe2.Size = new System.Drawing.Size(89, 43);
+            this.btnRe2.TabIndex = 8;
+            this.btnRe2.Text = "Resident Evil 2 Remake";
+            this.btnRe2.UseVisualStyleBackColor = true;
+            this.btnRe2.Click += new System.EventHandler(this.btnRe2_Click);
+            // 
+            // btnCuphead
+            // 
+            this.btnCuphead.Location = new System.Drawing.Point(165, 107);
+            this.btnCuphead.Name = "btnCuphead";
+            this.btnCuphead.Size = new System.Drawing.Size(89, 28);
+            this.btnCuphead.TabIndex = 7;
+            this.btnCuphead.Text = "Cuphead";
+            this.btnCuphead.UseVisualStyleBackColor = true;
+            this.btnCuphead.Click += new System.EventHandler(this.btnCuphead_Click);
+            // 
+            // btnCeleste
+            // 
+            this.btnCeleste.Location = new System.Drawing.Point(165, 72);
+            this.btnCeleste.Name = "btnCeleste";
+            this.btnCeleste.Size = new System.Drawing.Size(89, 28);
+            this.btnCeleste.TabIndex = 6;
+            this.btnCeleste.Text = "Celeste";
+            this.btnCeleste.UseVisualStyleBackColor = true;
+            this.btnCeleste.Click += new System.EventHandler(this.btnCeleste_Click);
+            // 
+            // btnHollow
+            // 
+            this.btnHollow.Location = new System.Drawing.Point(165, 37);
+            this.btnHollow.Name = "btnHollow";
+            this.btnHollow.Size = new System.Drawing.Size(89, 28);
+            this.btnHollow.TabIndex = 5;
+            this.btnHollow.Text = "Hollow Knight";
+            this.btnHollow.UseVisualStyleBackColor = true;
+            this.btnHollow.Click += new System.EventHandler(this.btnHollow_Click);
+            // 
+            // btnElden
+            // 
+            this.btnElden.Location = new System.Drawing.Point(165, 141);
+            this.btnElden.Name = "btnElden";
+            this.btnElden.Size = new System.Drawing.Size(89, 28);
+            this.btnElden.TabIndex = 4;
+            this.btnElden.Text = "Elden Ring";
+            this.btnElden.UseVisualStyleBackColor = true;
+            this.btnElden.Click += new System.EventHandler(this.btnElden_Click);
+            // 
+            // btnDs3
+            // 
+            this.btnDs3.Location = new System.Drawing.Point(36, 141);
+            this.btnDs3.Name = "btnDs3";
+            this.btnDs3.Size = new System.Drawing.Size(89, 28);
+            this.btnDs3.TabIndex = 3;
+            this.btnDs3.Text = "Dark Souls 3";
+            this.btnDs3.UseVisualStyleBackColor = true;
+            this.btnDs3.Click += new System.EventHandler(this.btnDs3_Click);
+            // 
+            // btnDs2
+            // 
+            this.btnDs2.Location = new System.Drawing.Point(36, 107);
+            this.btnDs2.Name = "btnDs2";
+            this.btnDs2.Size = new System.Drawing.Size(89, 28);
+            this.btnDs2.TabIndex = 2;
+            this.btnDs2.Text = "Dark Souls 2";
+            this.btnDs2.UseVisualStyleBackColor = true;
+            this.btnDs2.Click += new System.EventHandler(this.btnDs2_Click);
+            // 
+            // btnDs1
+            // 
+            this.btnDs1.Location = new System.Drawing.Point(36, 72);
+            this.btnDs1.Name = "btnDs1";
+            this.btnDs1.Size = new System.Drawing.Size(89, 28);
+            this.btnDs1.TabIndex = 1;
+            this.btnDs1.Text = "Dark Souls 1";
+            this.btnDs1.UseVisualStyleBackColor = true;
+            this.btnDs1.Click += new System.EventHandler(this.btnDs1_Click);
+            // 
+            // btnSekiro
+            // 
+            this.btnSekiro.Location = new System.Drawing.Point(36, 37);
+            this.btnSekiro.Name = "btnSekiro";
+            this.btnSekiro.Size = new System.Drawing.Size(89, 28);
+            this.btnSekiro.TabIndex = 0;
+            this.btnSekiro.Text = "Sekiro";
+            this.btnSekiro.UseVisualStyleBackColor = true;
+            this.btnSekiro.Click += new System.EventHandler(this.btnSekiro_Click);
             // 
             // tabSekiro
             // 
@@ -3873,6 +4005,7 @@
             this.btnRemoveAllCeleste.TabIndex = 20;
             this.btnRemoveAllCeleste.Text = "Desactive All";
             this.btnRemoveAllCeleste.UseVisualStyleBackColor = true;
+            this.btnRemoveAllCeleste.Click += new System.EventHandler(this.btnRemoveAllCeleste_Click);
             // 
             // CelesteRunning
             // 
@@ -3996,13 +4129,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 398);
+            this.ClientSize = new System.Drawing.Size(619, 401);
             this.Controls.Add(this.TabControl2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(635, 440);
             this.Name = "AutoSplitter";
             this.Text = "AutoSplitter";
             this.Load += new System.EventHandler(this.AutoSplitter_Load);
             this.TabControl2.ResumeLayout(false);
+            this.tabConfig.ResumeLayout(false);
+            this.groupBoxSplitters.ResumeLayout(false);
             this.tabSekiro.ResumeLayout(false);
             this.tabSekiro.PerformLayout();
             this.panelPositionS.ResumeLayout(false);
@@ -4334,5 +4470,16 @@
         private System.Windows.Forms.CheckedListBox checkedListBoxChapterCeleste;
         private System.Windows.Forms.Panel panelCheckpointsCeleste;
         private System.Windows.Forms.CheckedListBox checkedListBoxCheckpointsCeleste;
+        private System.Windows.Forms.TabPage tabConfig;
+        private System.Windows.Forms.GroupBox groupBoxSplitters;
+        private System.Windows.Forms.Button btnRe2;
+        private System.Windows.Forms.Button btnCuphead;
+        private System.Windows.Forms.Button btnCeleste;
+        private System.Windows.Forms.Button btnHollow;
+        private System.Windows.Forms.Button btnElden;
+        private System.Windows.Forms.Button btnDs3;
+        private System.Windows.Forms.Button btnDs2;
+        private System.Windows.Forms.Button btnDs1;
+        private System.Windows.Forms.Button btnSekiro;
     }
 }
