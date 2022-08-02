@@ -504,7 +504,6 @@ namespace HitCounterManager
         }
 
         #endregion
-
         #region Sekiro.UI
         Vector3f Vector;
         private void toSplitSelectSekiro_SelectedIndexChanged(object sender, EventArgs e)

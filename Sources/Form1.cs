@@ -53,7 +53,7 @@ namespace HitCounterManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = Text + " - v" + Application.ProductVersion + " Beta 5 - Rev.2 " + OsLayer.Name;
+            Text = Text + " - v" + Application.ProductVersion + " Beta 5 - Rev.3 " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();  
             ProfileChangedHandler(sender, e);
