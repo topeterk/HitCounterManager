@@ -46,7 +46,7 @@ namespace HitCounterManager
             this._profile = profile;
         }
 
-        public bool getHollowStatusProcess(int delay) //Use Delay 0 only for first Starts
+        public bool getCelesteStatusProcess(int delay) //Use Delay 0 only for first Starts
         {
             Thread.Sleep(delay);
             return _StatusCeleste = celeste.HookProcess();
@@ -68,7 +68,7 @@ namespace HitCounterManager
         {
             var taskRefresh = new Task(() =>
             {
-                RefreshHollow();
+                RefreshCeleste();
             });
             var taskRefreshInfo = new Task(() =>
             {
@@ -120,13 +120,12 @@ namespace HitCounterManager
 
         #region init()
 
-        public void RefreshHollow()
+        public void RefreshCeleste()
         {
-            _StatusCeleste = getHollowStatusProcess(0);
+            _StatusCeleste = getCelesteStatusProcess(0);
             while (!_StatusProcedure)
             {
-                _StatusCeleste = getHollowStatusProcess(45000);
-
+                _StatusCeleste = getCelesteStatusProcess(45000);
             }
         }
 
@@ -137,25 +136,18 @@ namespace HitCounterManager
                 Thread.Sleep(10);
                 infoPlayer.elapsed = celeste.GameTime();
                 infoPlayer.completed = celeste.ChapterCompleted();
-                infoPlayer.areaID = celeste.AreaID();
-                infoPlayer.levelName = celeste.LevelName();
+                infoPlayer.areaID = celeste.AreaID();   
+                infoPlayer.levelName = celeste.LevelName();              
             }
         }
 
 
-        private bool ChapterSplit(Area areaID, Area chapterArea, string level, bool completed)
-        {
-            string levelName = chapterArea == Area.TheSummit ? level : null;
-            return areaID == chapterArea && completed && (chapterArea != Area.TheSummit || (!string.IsNullOrEmpty(levelName) && !levelName.StartsWith("credits", StringComparison.OrdinalIgnoreCase)));
-        }
-
         private void chapterToSplit()
         {
-            bool shouldSplit = false;   
-            while (dataCeleste.enableSplitting && _StatusProcedure && _StatusCeleste)
+            bool shouldSplit = false;
+            while (dataCeleste.enableSplitting && _StatusProcedure)
             {
                 Thread.Sleep(10);
-     
                 foreach (var element in dataCeleste.getChapterToSplit())
                 {
                     if (!element.IsSplited)
@@ -164,27 +156,27 @@ namespace HitCounterManager
                         switch (element.Title)
                         {
                             case "Prologue (Complete)": 
-                                shouldSplit = ChapterSplit(infoPlayer.areaID, Area.Prologue, infoPlayer.levelName, infoPlayer.completed); break;
+                                shouldSplit = infoPlayer.areaID == Area.Prologue && infoPlayer.completed; break;
                             case "Chapter 1 - Forsaken City A/B/C (Complete)":
-                                shouldSplit = ChapterSplit(infoPlayer.areaID, Area.ForsakenCity, infoPlayer.levelName, infoPlayer.completed); break;
+                                shouldSplit = infoPlayer.areaID == Area.ForsakenCity && infoPlayer.completed; break;
                             case "Chapter 2 - Old Site A/B/C (Complete)":
-                                shouldSplit = ChapterSplit(infoPlayer.areaID, Area.OldSite, infoPlayer.levelName, infoPlayer.completed); break;
+                                shouldSplit = infoPlayer.areaID == Area.OldSite && infoPlayer.completed; break;
                             case "Chapter 3 - Celestial Resort A/B/C (Complete)":
-                                shouldSplit = ChapterSplit(infoPlayer.areaID, Area.CelestialResort, infoPlayer.levelName, infoPlayer.completed); break;
+                                shouldSplit = infoPlayer.areaID == Area.CelestialResort && infoPlayer.completed; break;
                             case "Chapter 4 - Golden Ridge A/B/C (Complete)":
-                                shouldSplit = ChapterSplit(infoPlayer.areaID, Area.GoldenRidge, infoPlayer.levelName, infoPlayer.completed); break;
+                                shouldSplit = infoPlayer.areaID == Area.GoldenRidge && infoPlayer.completed; break;
                             case "Chapter 5 - Mirror Temple A/B/C (Complete)":
-                                shouldSplit = ChapterSplit(infoPlayer.areaID, Area.MirrorTemple, infoPlayer.levelName, infoPlayer.completed); break;
+                                shouldSplit = infoPlayer.areaID == Area.MirrorTemple && infoPlayer.completed; break;
                             case "Chapter 6 - Reflection A/B/C (Complete)":
-                                shouldSplit = ChapterSplit(infoPlayer.areaID, Area.Reflection, infoPlayer.levelName, infoPlayer.completed); break;
+                                shouldSplit = infoPlayer.areaID == Area.Reflection && infoPlayer.completed; break;
                             case "Chapter 7 - The Summit A/B/C (Complete)":
-                                shouldSplit = ChapterSplit(infoPlayer.areaID, Area.TheSummit, infoPlayer.levelName, infoPlayer.completed); break;
+                                shouldSplit = infoPlayer.areaID == Area.TheSummit && infoPlayer.completed; break;
                             case "Epilogue (Complete)":
-                                shouldSplit = ChapterSplit(infoPlayer.areaID, Area.Epilogue, infoPlayer.levelName, infoPlayer.completed); break;
+                                shouldSplit = infoPlayer.areaID == Area.Epilogue && infoPlayer.completed; break;
                             case "Chapter 8 - Core A/B/C (Complete)":
-                                shouldSplit = ChapterSplit(infoPlayer.areaID, Area.Core, infoPlayer.levelName, infoPlayer.completed); break;
+                                shouldSplit = infoPlayer.areaID == Area.Core && infoPlayer.completed; break;
                             case "Chapter 9 - Farewell (Complete)":
-                                shouldSplit = ChapterSplit(infoPlayer.areaID, Area.Farewell, infoPlayer.levelName, infoPlayer.completed); break;
+                                shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.completed; break;
 
                             case "Chapter 1 - Crossing (A) / Contraption (B) (CP 1)":
                                 shouldSplit = infoPlayer.areaID == Area.ForsakenCity && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "6" : "04"); break;

@@ -1,8 +1,8 @@
-Maintain update the dll "Souls Memory" of Souls Splitter for last updates fixes of readEventsFlags or others things
-
 Notes:
 ===========================================
 AutoSplitting:
+-To activate any autosplitting you should select in main program "Game to Split".
+
 - Is recommended to configure everything before setting the game to spliter, to avoid autosplitting
 
 -Depends on Configurable Autosplit, the addons autosplitting a split (+1 in the actually position), 
@@ -18,8 +18,7 @@ You should check "Grey Prince Zote" if you run, have this boss or not.
 
 - Currently Elden Ring is only supported with Easy Anti-Cheat disabled.
 To disable Easy Anti-Cheat, navigate to "Steam\steamapps\common\ELDEN RING\Game"
-Launching the game from "Steam\steamapps\common\ELDEN RING\Game\eldenring.exe" will run elden ring without EAC, 
-launching the game from steam will have EAC enabled. 
+Launching the game from "Steam\steamapps\common\ELDEN RING\Game\eldenring.exe" will run elden ring without EAC.
 
 - Split by Attributes and some custom flags in DS3 dont work on versions previous to 1.15
 

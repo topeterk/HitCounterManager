@@ -424,7 +424,7 @@ namespace HitCounterManager
                 Ds3Running.Hide();
                 Ds3NotRunning.Show();
             }
-            if (celesteSplitter.getHollowStatusProcess(0))
+            if (celesteSplitter.getCelesteStatusProcess(0))
             {
                 CelesteRunning.Show();
                 CelesteNotRunning.Hide();
@@ -1920,7 +1920,6 @@ namespace HitCounterManager
                     panelChapterCeleste.Show(); break;
                 case 1:
                     panelCheckpointsCeleste.Show(); break;
-
             }
 
         }
@@ -2168,8 +2167,9 @@ namespace HitCounterManager
             }
         }
 
+
         #endregion
 
-
+       
     }
 }

@@ -21,8 +21,7 @@ namespace HitCounterManager
             public Area areaID;
             public string levelName;
             public double elapsed;
-            public bool completed;
-           
+            public bool completed;        
         }
     }
     public class DTCeleste

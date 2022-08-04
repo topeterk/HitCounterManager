@@ -53,7 +53,7 @@ namespace HitCounterManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = Text + " - v" + Application.ProductVersion + " Beta 6 - Rev.1 " + OsLayer.Name;
+            Text = Text + " - v" + Application.ProductVersion + " Beta 6 - Rev.2 " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();  
             ProfileChangedHandler(sender, e);
@@ -269,9 +269,6 @@ namespace HitCounterManager
 
         }
 
-
-        #endregion
-
         private void comboBoxGame_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Disable all games
@@ -308,9 +305,9 @@ namespace HitCounterManager
             if(comboBoxGame.SelectedIndex == 3)
             {
                 ds2Splitter.setStatusSplitting(true);
-            }
-           
+            }           
         }
 
+        #endregion
     }
 }

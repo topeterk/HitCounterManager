@@ -1771,7 +1771,7 @@
             this.toSplitSelectSekiro.Items.AddRange(new object[] {
             "Kill a Boss",
             "Is Activated a Idol",
-            "Target a Position"});
+            "Trigger a Position"});
             this.toSplitSelectSekiro.Location = new System.Drawing.Point(80, 54);
             this.toSplitSelectSekiro.Name = "toSplitSelectSekiro";
             this.toSplitSelectSekiro.Size = new System.Drawing.Size(444, 21);
@@ -2235,7 +2235,7 @@
             this.comboBoxToSplitDs2.Items.AddRange(new object[] {
             "Kill a Boss",
             "Level the Charapter",
-            "Target a position"});
+            "Trigger a position"});
             this.comboBoxToSplitDs2.Location = new System.Drawing.Point(80, 54);
             this.comboBoxToSplitDs2.Name = "comboBoxToSplitDs2";
             this.comboBoxToSplitDs2.Size = new System.Drawing.Size(444, 21);
@@ -2753,7 +2753,7 @@
             this.comboBoxToSplitSelectDs3.FormattingEnabled = true;
             this.comboBoxToSplitSelectDs3.Items.AddRange(new object[] {
             "Kill a Boss",
-            "Is Activated a Bonefire",
+            "Is Activated a Bonfire",
             "Level the Charapter",
             "Custom Flag"});
             this.comboBoxToSplitSelectDs3.Location = new System.Drawing.Point(80, 54);
@@ -3696,8 +3696,8 @@
             this.comboBoxToSplitEldenRing.FormattingEnabled = true;
             this.comboBoxToSplitEldenRing.Items.AddRange(new object[] {
             "Kill a Boss",
-            "Light a Grace",
-            "Target a Position",
+            "Is Activated a Grace",
+            "Trigger a Position",
             "Custom Flag"});
             this.comboBoxToSplitEldenRing.Location = new System.Drawing.Point(80, 54);
             this.comboBoxToSplitEldenRing.Name = "comboBoxToSplitEldenRing";
@@ -4312,7 +4312,7 @@
             this.toSplitSelectHollow.Items.AddRange(new object[] {
             "Kill a enemy",
             "Obtein a Item",
-            "Target a Position"});
+            "Trigger a Position"});
             this.toSplitSelectHollow.Location = new System.Drawing.Point(80, 54);
             this.toSplitSelectHollow.Name = "toSplitSelectHollow";
             this.toSplitSelectHollow.Size = new System.Drawing.Size(444, 21);

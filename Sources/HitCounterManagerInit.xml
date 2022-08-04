@@ -3678,6 +3678,15 @@
         <ActiveSplit>0</ActiveSplit>
         <Rows>
           <ProfileRow>
+            <Title>Prologue</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
             <Title>Chapter 1: Forseaken City</Title>
             <Hits>0</Hits>
             <WayHits>0</WayHits>
