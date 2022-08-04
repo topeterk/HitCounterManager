@@ -72,7 +72,7 @@ namespace HitCounterManager
         {
             var position = new DefinitionsSekiro.PositionS();
             position.setVector(vector);
-            position.mode = mode;
+            position.Mode = mode;
             dataSekiro.positionsToSplit.Add(position);
         }
 
@@ -104,7 +104,7 @@ namespace HitCounterManager
             var idolReturn = dataSekiro.idolsTosplit.Find(idol => idol.Id == cIdol.Id);
             if (idolReturn == null)
             {
-                return "";
+                return "None";
             }
             else { return idolReturn.Mode; }
             
@@ -134,6 +134,11 @@ namespace HitCounterManager
 
         public Vector3f getCurrentPosition()
         {
+            if (!_StatusSekiro)
+            {
+                _StatusSekiro = getSekiroStatusProcess(0);
+            }
+           
             return sekiro.GetPlayerPosition();
         }
 
@@ -145,10 +150,10 @@ namespace HitCounterManager
         }
 
         
-        public bool getSekiroStatusProcess(out Exception exception, int delay) //Use Delay 0 only for first Starts
+        public bool getSekiroStatusProcess(int delay) //Use Delay 0 only for first Starts
         {
             Thread.Sleep(delay);
-            return _StatusSekiro = sekiro.Refresh(out exception);
+            return _StatusSekiro = sekiro.Refresh(out Exception exc);
         }
 
         public int getTimeInGame()
@@ -218,10 +223,10 @@ namespace HitCounterManager
         #region init()    
         public void RefreshSekiro()
         {
-            _StatusSekiro = getSekiroStatusProcess(out Exception exception,0);
+            _StatusSekiro = getSekiroStatusProcess(0);
             while (!_StatusProcedure)
             {
-                _StatusSekiro = getSekiroStatusProcess(out exception, 45000);
+                _StatusSekiro = getSekiroStatusProcess(45000);
                if (!_StatusSekiro)
                {
                     _writeMemory = false;
@@ -350,7 +355,7 @@ namespace HitCounterManager
                         var rangeZ = ((currentlyPosition.Z - p.vector.Z) <= dataSekiro.positionMargin) && ((currentlyPosition.Z - p.vector.Z) >= -dataSekiro.positionMargin);
                         if (rangeX && rangeY && rangeZ)
                         {
-                            if (p.mode == "Loading game after")
+                            if (p.Mode == "Loading game after")
                             {
                                 
                                 if (!listPendingP.Contains(p))

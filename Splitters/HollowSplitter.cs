@@ -37,7 +37,7 @@ namespace HitCounterManager
         public bool _StatusProcedure = true;
         public bool _StatusHollow = false;
         public ProfilesControl _profile;
-        public DefinitionHollow.Vector3F currentPosition = new DefinitionHollow.Vector3F { title = "Current Position" };
+        public DefinitionHollow.Vector3F currentPosition = new DefinitionHollow.Vector3F();
         public DTHollow getDataHollow()
         {
             return this.dataHollow;
@@ -172,7 +172,7 @@ namespace HitCounterManager
         public void AddPosition(PointF position, string scene) 
         {
             DefinitionHollow.Vector3F vector = new DefinitionHollow.Vector3F() 
-            {title= "Trigger: "+ dataHollow.positionToSplit.Count.ToString(), position = position, sceneName = scene,previousScene = null };
+            {position = position, sceneName = scene,previousScene = null };
             dataHollow.positionToSplit.Add(vector);
         
         }

@@ -53,12 +53,11 @@ namespace HitCounterManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = Text + " - v" + Application.ProductVersion + " Beta 5 - Rev.4 " + OsLayer.Name;
+            Text = Text + " - v" + Application.ProductVersion + " Beta 6 - Rev.1 " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();  
             ProfileChangedHandler(sender, e);
             LoadAutoSplitterSettings(profCtrl);
-            profCtrl.setSplittersPointers(sekiroSplitter,hollowSplitter,eldenSplitter,ds3Splitter,celesteSplitter);
             #region ComboBoxSet
             if (sekiroSplitter.dataSekiro.enableSplitting)
             {
@@ -90,15 +89,18 @@ namespace HitCounterManager
                             }
                             else
                             {
-                                comboBoxGame.SelectedIndex = 0;
+                                if (ds2Splitter.dataDs2.enableSplitting)
+                                {
+                                    comboBoxGame.SelectedIndex = 3;
+                                }
+                                else
+                                {
+                                    comboBoxGame.SelectedIndex = 0;
+                                }
                             }
-                            
                         }
-                        
-                    }
-                    
-                }
-                
+                    }                    
+                }               
             }
 
             #endregion
@@ -215,7 +217,16 @@ namespace HitCounterManager
         private void BtnSplitLock_Click(object sender, EventArgs e) { SetReadOnlyMode(!profCtrl.ReadOnlyMode); }
         private void btnDarkMode_Click(object sender, EventArgs e) { Program.DarkMode = !Program.DarkMode; this.UpdateDarkMode(); }
 
-        private void btnReset_Click(object sender, EventArgs e) { StartStopTimer(false); profCtrl.ProfileReset(); }
+        private void btnReset_Click(object sender, EventArgs e) 
+        { StartStopTimer(false); 
+          profCtrl.ProfileReset();
+          sekiroSplitter.resetSplited();
+          hollowSplitter.resetSplited();
+          eldenSplitter.resetSplited();
+          ds3Splitter.resetSplited();
+          celesteSplitter.resetSplited();
+          ds2Splitter.resetSplited();
+        }
         private void btnPB_Click(object sender, EventArgs e) { StartStopTimer(false); profCtrl.ProfilePB(); }
         private void btnPause_Click(object sender, EventArgs e) { StartStopTimer(!profCtrl.TimerRunning); }
         private void btnHit_Click(object sender, EventArgs e) { profCtrl.ProfileHit(+1); }
@@ -229,7 +240,7 @@ namespace HitCounterManager
         private void btnSplitPrev_Click(object sender, EventArgs e) { profCtrl.ProfileSplitGo(-1); }
 
         private void btnSplitter_Click(object sender, EventArgs e) 
-        { Form form = new AutoSplitter(getSekiroInstance(),getHollowInstance(),getEldenInstance(),getDs3Instance(),getCelesteInstance()); form.ShowDialog(this);}
+        { Form form = new AutoSplitter(getSekiroInstance(),getHollowInstance(),getEldenInstance(),getDs3Instance(),getCelesteInstance(),getDs2Instance()); form.ShowDialog(this);}
 
         private void ProfileChangedHandler(object sender, EventArgs e)
         {
@@ -248,6 +259,14 @@ namespace HitCounterManager
         {
             timer1.Enabled = profCtrl.TimerRunning = Start;
             btnPause.Image = Start ? Sources.Resources.icons8_sleep_32 : Sources.Resources.icons8_time_32;
+
+            /* To any that understand OutModule and all related to Timer, the nexts functions return a full duration of a run in ms
+             * sekiroSplitter.getTimeInGame();
+             * eldenSplitter.getTimeInGame(); //Reset 0 in IGT
+             * ds3Splitter.getTimeInGame();
+             * celesteSplitter.getTimeInGame();
+            }*/
+
         }
 
 
@@ -261,6 +280,7 @@ namespace HitCounterManager
             eldenSplitter.setStatusSplitting(false);
             ds3Splitter.setStatusSplitting(false);
             celesteSplitter.setStatusSplitting(false);
+            ds2Splitter.setStatusSplitting(false);
 
 
 
@@ -284,6 +304,10 @@ namespace HitCounterManager
             if(comboBoxGame.SelectedIndex == 7)
             {
                 celesteSplitter.setStatusSplitting(true);
+            }
+            if(comboBoxGame.SelectedIndex == 3)
+            {
+                ds2Splitter.setStatusSplitting(true);
             }
            
         }

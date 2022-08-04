@@ -486,12 +486,13 @@ namespace HitCounterManager
         /// Stores user data in new XML for AutoSplitter
         /// </summary>
         /// 
-        DataAutoSplitter dataAS = new DataAutoSplitter();
+        public DataAutoSplitter dataAS = new DataAutoSplitter();
         private SekiroSplitter sekiroSplitter = new SekiroSplitter();
         private HollowSplitter hollowSplitter = new HollowSplitter();
         private EldenSplitter eldenSplitter = new EldenSplitter();
         private Ds3Splitter ds3Splitter = new Ds3Splitter();
         private CelesteSplitter celesteSplitter = new CelesteSplitter();
+        private Ds2Splitter ds2Splitter = new Ds2Splitter();
         private void SaveAutoSplitterSettings() {
             Stream myStream;
             try
@@ -503,11 +504,12 @@ namespace HitCounterManager
                 myStream = new FileStream("HitCounterManagerSaveAutoSplitter.xml", FileMode.Create, FileAccess.Write, FileShare.None);
             }
 
-            XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro), typeof(DTHollow),typeof(DTElden),typeof(DTDs3),typeof(DTCeleste) });
+            XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro), typeof(DTHollow),typeof(DTElden),typeof(DTDs3),typeof(DTDs2),typeof(DTCeleste) });
             dataAS.DataSekiro = sekiroSplitter.getDataSekiro();
             dataAS.DataHollow = hollowSplitter.getDataHollow();
             dataAS.DataElden = eldenSplitter.getDataElden();
             dataAS.DataDs3 = ds3Splitter.getDataDs3();
+            dataAS.DataDs2 = ds2Splitter.getDataDs2();
             dataAS.DataCeleste = celesteSplitter.getDataCeleste();
             formatter.Serialize(myStream, dataAS);
 
@@ -522,42 +524,31 @@ namespace HitCounterManager
             DTHollow dataHollow = new DTHollow();
             DTElden dataElden = new DTElden();
             DTDs3 dataDs3 = new DTDs3();
+            DTDs2 dataDs2 = new DTDs2();
             DTCeleste dataCeleste = new DTCeleste();
+            
              try
              {
                 Stream myStream = new FileStream("HitCounterManagerSaveAutoSplitter.xml", FileMode.Open, FileAccess.Read, FileShare.None);
-                XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro),typeof(DTHollow), typeof(DTElden),typeof(DTDs3),typeof(DTCeleste) });
+                XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro),typeof(DTHollow), typeof(DTElden),typeof(DTDs3),typeof(DTDs2),typeof(DTCeleste) });
                 dataAS = (DataAutoSplitter)formatter.Deserialize(myStream);
                 dataSekiro = dataAS.DataSekiro;
                 dataHollow = dataAS.DataHollow;
                 dataElden = dataAS.DataElden;
                 dataDs3 = dataAS.DataDs3;
+                dataDs2 = dataAS.DataDs2;
                 dataCeleste = dataAS.DataCeleste;
                 myStream.Close();
             }
             catch (Exception){}
 
-            //Case old Savefile return null
-            if (dataSekiro == null)
-            {
-                dataSekiro = new DTSekiro();
-            }
-            if (dataHollow == null)
-            {
-                dataHollow = new DTHollow();
-            }
-            if (dataElden == null)
-            {
-                dataElden = new DTElden();
-            }
-            if (dataDs3 == null)
-            {
-                dataDs3 = new DTDs3();
-            }
-            if(dataCeleste == null)
-            {
-                dataCeleste = new DTCeleste();
-            }
+            //Case Old Savefile return null
+            if (dataSekiro == null) { dataSekiro = new DTSekiro(); }
+            if (dataHollow == null) { dataHollow = new DTHollow(); }
+            if (dataElden == null){ dataElden = new DTElden(); }
+            if (dataDs3 == null) { dataDs3 = new DTDs3(); }
+            if(dataDs2 == null) { dataDs2 = new DTDs2(); }
+            if(dataCeleste == null) { dataCeleste = new DTCeleste(); }
 
             sekiroSplitter.setDataSekiro(dataSekiro, profiles);
             sekiroSplitter.LoadAutoSplitterProcedure();
@@ -570,6 +561,9 @@ namespace HitCounterManager
 
             ds3Splitter.setDataDs3(dataDs3, profiles);
             ds3Splitter.LoadAutoSplitterProcedure();
+
+            ds2Splitter.setDataDs2(dataDs2, profiles);
+            ds2Splitter.LoadAutoSplitterProcedure();
 
             celesteSplitter.setDataCeleste(dataCeleste, profiles);
             celesteSplitter.LoadAutoSplitterProcedure();
@@ -596,6 +590,11 @@ namespace HitCounterManager
         public Ds3Splitter getDs3Instance()
         {
             return this.ds3Splitter;
+        }
+
+        public Ds2Splitter getDs2Instance()
+        {
+            return this.ds2Splitter;
         }
         
         public CelesteSplitter getCelesteInstance()

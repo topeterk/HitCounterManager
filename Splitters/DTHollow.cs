@@ -529,7 +529,6 @@ namespace HitCounterManager
         [Serializable]
         public class Vector3F
         {
-            public string title ="None";
             public PointF position = new PointF(0,0);
             public string sceneName = "None";
             public string previousScene = "None";

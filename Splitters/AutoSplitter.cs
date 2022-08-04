@@ -41,21 +41,19 @@ namespace HitCounterManager
         HollowSplitter hollowSplitter;
         EldenSplitter eldenSplitter;
         Ds3Splitter ds3Splitter;
+        Ds2Splitter ds2Splitter;
         CelesteSplitter celesteSplitter;
-        
-        
-
-        public Exception Exception { get; set; }
-
-        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter,EldenSplitter eldenSplitter,Ds3Splitter ds3Splitter,CelesteSplitter celesteSplitter)
+        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter, EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter, Ds2Splitter ds2Splitter)
         {
             InitializeComponent();
             this.sekiroSplitter = sekiroSplitter;
             this.hollowSplitter = hollowSplitter;
             this.eldenSplitter = eldenSplitter;
-            this.ds3Splitter = ds3Splitter;
+            this.ds3Splitter = ds3Splitter;           
+            this.ds2Splitter = ds2Splitter;
             this.celesteSplitter = celesteSplitter;
             refreshForm();
+            
         }
 
         public void refreshForm()
@@ -63,7 +61,7 @@ namespace HitCounterManager
             #region ControlTab
             TabControl2.TabPages.Clear();
             TabControl2.TabPages.Add(tabConfig);
-            TabControl2.TabPages.Add(tabUpdate);
+            TabControl2.TabPages.Add(tabManual);
             #endregion
             #region SekiroTab       
             panelPositionS.Hide();
@@ -108,6 +106,11 @@ namespace HitCounterManager
             #region CelesteTab
             panelChapterCeleste.Hide();
             panelCheckpointsCeleste.Hide();
+            #endregion
+            #region Ds2Tab
+            panelBossDS2.Hide();
+            panelAttributeDs2.Hide();
+            panelPositionDs2.Hide();
             #endregion
             checkStatusGames();
         }
@@ -193,13 +196,9 @@ namespace HitCounterManager
             #region SekiroLoad.Position
             foreach (DefinitionsSekiro.PositionS position in sekiroData.getPositionsToSplit())
             {
-                listBoxPositionsS.Items.Add(position.vector + " - " + position.mode);
+                listBoxPositionsS.Items.Add(position.vector + " - " + position.Mode);
             }
             comboBoxMarginS.SelectedIndex = sekiroData.positionMargin;
-            #endregion
-            #region UpdateLoad
-            string fullPath = Path.GetFullPath("SoulMemory.dll");
-            this.lblVersionCurrent.Text = System.Reflection.Assembly.LoadFile(fullPath).GetName().Version.ToString();
             #endregion
             DTHollow hollowData = hollowSplitter.getDataHollow();
             #region HollowLoad.Boss
@@ -296,7 +295,7 @@ namespace HitCounterManager
             #region EldenLoad.Positions
             foreach (DefinitionsElden.PositionER position in eldenData.getPositionToSplit())
             {
-                listBoxPositionsER.Items.Add(position.vector + " - " + position.mode);
+                listBoxPositionsER.Items.Add(position.vector + " - " + position.Mode);
             }
             comboBoxMarginER.SelectedIndex = eldenData.positionMargin;
             #endregion
@@ -356,6 +355,26 @@ namespace HitCounterManager
                 }
             }
             #endregion
+            DTDs2 ds2Data = ds2Splitter.getDataDs2();
+            #region Ds2Load.Boss
+            foreach (DefinitionsDs2.BossDs2 boss in ds2Data.getBossToSplit())
+            {
+                listBoxBossDs2.Items.Add(boss.Title + " - " + boss.Mode);
+            }
+            #endregion
+            #region Ds2Load.Lvl
+            foreach (DefinitionsDs2.LvlDs2 lvl in ds2Data.getLvlToSplit())
+            {
+                listBoxAttributeDs2.Items.Add(lvl.Attribute + ": " + lvl.Value + " - " + lvl.Mode);
+            }
+            #endregion
+            #region Ds2Load.Position
+            foreach (DefinitionsDs2.PositionDs2 position in ds2Data.getPositionsToSplit())
+            {
+                listBoxPositionsDs2.Items.Add(position.vector + " - " + position.Mode);
+            }
+            comboBoxMarginDs2.SelectedIndex = ds2Data.positionMargin;
+            #endregion
         }
 
         private void refresh_Btn(object sender, EventArgs e)
@@ -365,8 +384,7 @@ namespace HitCounterManager
 
         public void checkStatusGames()
         {
-            Exception excS = null;
-            if (sekiroSplitter.getSekiroStatusProcess(out excS, 0))
+            if (sekiroSplitter.getSekiroStatusProcess(0))
             {
                 sekiroRunning.Show();
                 SekiroNotRunning.Hide();
@@ -386,7 +404,7 @@ namespace HitCounterManager
                 HollowRunning.Hide();
                 HollowNotRunning.Show();
             }
-            if (eldenSplitter.getEldenStatusProcess(out excS, 0))
+            if (eldenSplitter.getEldenStatusProcess(0))
             {
                 EldenRingRunning.Show();
                 EldenRingNotRunning.Hide();
@@ -415,6 +433,16 @@ namespace HitCounterManager
             {
                 CelesteNotRunning.Show();
                 CelesteRunning.Hide();
+            }
+            if (ds2Splitter.getDs2StatusProcess(0))
+            {
+                Ds2Running.Show();
+                Ds2NotRunning.Hide();
+            }
+            else
+            {
+                Ds2NotRunning.Show();
+                Ds2Running.Hide();
             }
 
         }
@@ -492,15 +520,6 @@ namespace HitCounterManager
                 TabControl2.TabPages.Add(tabElden);
             }
             TabControl2.SelectTab(tabElden);
-        }
-
-        private void btnRe2_Click(object sender, EventArgs e)
-        {
-            if (!TabControl2.TabPages.Contains(tabRe2R))
-            {
-                TabControl2.TabPages.Add(tabRe2R);
-            }
-            TabControl2.SelectTab(tabRe2R);
         }
 
         #endregion
@@ -1148,12 +1167,6 @@ namespace HitCounterManager
 
         }
 
-        #endregion
-        #region Update.UI
-        private void btnCheckVersion_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/FrankvdStam/SoulSplitter/releases");
-        }
         #endregion
         #region Hollow UI
         private void toSplitSelectHollow_SelectedIndexChanged(object sender, EventArgs e)
@@ -1967,6 +1980,193 @@ namespace HitCounterManager
             }
         }
 
+
+
+        #endregion
+        #region Ds2 UI
+        private void comboBoxToSplitDs2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            panelBossDS2.Hide();
+            panelAttributeDs2.Hide();
+            panelPositionDs2.Hide();
+
+
+            switch (comboBoxToSplitDs2.SelectedIndex)
+            {
+                case 0: panelBossDS2.Show(); break;
+                case 1: panelAttributeDs2.Show(); break;
+                case 2: panelPositionDs2.Show(); break;
+            }
+        }
+
+        private void btnAddBossDS2_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (comboBoxBossDs2.SelectedIndex == -1 || comboBoxHowBossDs2.SelectedIndex == -1)
+            {
+                error = MessageBox.Show("Plase select boss and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                var contains1 = !listBoxBossDs2.Items.Contains(comboBoxBossDs2.Text.ToString() + " - " + "Inmediatly");
+                var contains2 = !listBoxBossDs2.Items.Contains(comboBoxBossDs2.Text.ToString() + " - " + "Loading game after");
+                if (contains1 && contains2)
+                {
+                    ds2Splitter.setProcedure(false);
+                    ds2Splitter.AddBoss(comboBoxBossDs2.Text.ToString(), comboBoxHowBossDs2.Text.ToString());
+                    listBoxBossDs2.Items.Add(comboBoxBossDs2.Text.ToString() + " - " + comboBoxHowBossDs2.Text.ToString());
+                    ds2Splitter.setProcedure(true);
+                }
+                else
+                {
+                    error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void listBoxBossDs2_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.listBoxBossDs2.SelectedItem != null)
+            {
+                int i = listBoxBossDs2.Items.IndexOf(listBoxBossDs2.SelectedItem);
+                ds2Splitter.setProcedure(false);
+                ds2Splitter.RemoveBoss(i);
+                ds2Splitter.setProcedure(true);
+                listBoxBossDs2.Items.Remove(listBoxBossDs2.SelectedItem);
+            }
+        }
+        private void btnAddAttributeDs2_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (comboBoxAttributeDs2.SelectedIndex == -1 || comboBoxHowAttributeDs2.SelectedIndex == -1 || textBoxValueDs2.Text == null)
+            {
+                error = MessageBox.Show("Plase select Attribute, Value and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                try
+                {
+                    var value = uint.Parse(textBoxValueDs2.Text);
+                    var contains1 = !listBoxAttributeDs2.Items.Contains(comboBoxAttributeDs2.Text.ToString() + ": " + value + " - " + "Inmediatly");
+                    var contains2 = !listBoxAttributeDs2.Items.Contains(comboBoxAttributeDs2.Text.ToString() + ": " + value + " - " + "Loading game after");
+                    if (contains1 && contains2)
+                    {
+                        ds2Splitter.setProcedure(false);
+                        ds2Splitter.AddAttribute(comboBoxAttributeDs2.Text.ToString(), comboBoxHowAttributeDs2.Text.ToString(), value);
+                        listBoxAttributeDs2.Items.Add(comboBoxAttributeDs2.Text.ToString() + ": " + value + " - " + comboBoxHowAttributeDs2.Text.ToString());
+                        ds2Splitter.setProcedure(true);
+                    }
+                    else
+                    {
+                        error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception)
+                {
+                    error = MessageBox.Show("Check Value and try again", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void listBoxAttributeDs2_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.listBoxAttributeDs2.SelectedItem != null)
+            {
+                int i = listBoxAttributeDs2.Items.IndexOf(listBoxAttributeDs2.SelectedItem);
+                ds2Splitter.setProcedure(false);
+                ds2Splitter.RemoveAttribute(i);
+                ds2Splitter.setProcedure(true);
+                listBoxAttributeDs2.Items.Remove(listBoxAttributeDs2.SelectedItem);
+            }
+        }
+
+        Vector3f VectorDs2;
+        private void btnGetPositionDs2_Click(object sender, EventArgs e)
+        {
+            var Vector = ds2Splitter.getCurrentPosition();
+            this.VectorDs2 = Vector;
+            this.textBoxXDs2.Clear();
+            this.textBoxYDs2.Clear();
+            this.textBoxZDs2.Clear();
+            this.textBoxXDs2.Paste(Vector.X.ToString("0.00"));
+            this.textBoxYDs2.Paste(Vector.Y.ToString("0.00"));
+            this.textBoxZDs2.Paste(Vector.Z.ToString("0.00"));
+        }
+
+        private void comboBoxMarginDs2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ds2Splitter.dataDs2.positionMargin = comboBoxMarginDs2.SelectedIndex; 
+        }
+
+        private void btnAddPositionDs2_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (this.VectorDs2 != null)
+            {
+                var contains1 = !listBoxPositionsDs2.Items.Contains(this.VectorDs2 + " - " + "Inmediatly");
+                var contains2 = !listBoxPositionsDs2.Items.Contains(this.VectorDs2 + " - " + "Loading game after");
+                if (contains1 && contains2)
+                {
+
+                    if (comboBoxHowPositionsDs2.SelectedIndex == -1)
+                    {
+                        error = MessageBox.Show("Select 'How' do you want split ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        if (this.VectorDs2.X == 0 && this.VectorDs2.Y == 0 && this.VectorDs2.Z == 0)
+                        {
+                            error = MessageBox.Show("Dont use cords 0,0,0", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            ds2Splitter.setProcedure(false);
+                            listBoxPositionsDs2.Items.Add(this.VectorDs2 + " - " + comboBoxHowPositionsDs2.Text.ToString());
+                            error = MessageBox.Show("Move your charapter to evit autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ds2Splitter.AddPosition(this.VectorDs2, comboBoxHowPositionsDs2.Text.ToString());
+                            ds2Splitter.setProcedure(true);
+                        }
+                    }
+                }
+                else
+                {
+                    error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                error = MessageBox.Show("Plase get a position ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void listBoxPositionsDs2_DoubleClick(object sender, EventArgs e)
+        {
+            if (listBoxPositionsDs2.SelectedItem != null)
+            {
+                int i = listBoxPositionsDs2.Items.IndexOf(listBoxPositionsDs2.SelectedItem);
+                ds2Splitter.setProcedure(false);
+                ds2Splitter.RemovePosition(i);
+                ds2Splitter.setProcedure(true);
+                listBoxPositionsDs2.Items.Remove(listBoxPositionsDs2.SelectedItem);
+            }
+        }
+
+        private void btnDesactiveAllDs2_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to disable everything?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                ds2Splitter.setProcedure(false);
+                ds2Splitter.clearData();
+                ds2Splitter.setProcedure(true);
+                this.Controls.Clear();
+                this.InitializeComponent();
+                refreshForm();
+                this.AutoSplitter_Load(null, null);//Load Others Games Settings
+                TabControl2.TabPages.Add(tabDs2);
+                TabControl2.SelectTab(tabDs2);
+            }
+        }
 
         #endregion
 

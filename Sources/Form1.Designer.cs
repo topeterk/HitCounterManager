@@ -550,8 +550,7 @@
             "Elden Ring",
             "Hollow Knight",
             "Celeste",
-            "Cuphead",
-            "Resident Evil 2 Re"});
+            "Cuphead"});
             this.comboBoxGame.Location = new System.Drawing.Point(112, 97);
             this.comboBoxGame.Name = "comboBoxGame";
             this.comboBoxGame.Size = new System.Drawing.Size(95, 21);

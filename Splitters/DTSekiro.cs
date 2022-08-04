@@ -109,7 +109,7 @@ namespace HitCounterManager
             public string Title;
             public string Location;
             public uint Id;
-            public bool IsSplited;
+            public bool IsSplited = false;
             public string Mode;
             public void IdolDate(string Title, string Location, uint Id)
             {
@@ -307,7 +307,7 @@ namespace HitCounterManager
         {
             public Vector3f vector = new Vector3f();
             public bool IsSplited = false;
-            public string mode;
+            public string Mode;
             public void setVector(Vector3f vector)
             {
                 this.vector = vector;

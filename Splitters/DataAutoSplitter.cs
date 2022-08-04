@@ -31,6 +31,7 @@ namespace HitCounterManager
         public DTHollow DataHollow;
         public DTElden DataElden;
         public DTDs3 DataDs3;
-        public DTCeleste DataCeleste;
+        public DTDs2 DataDs2;
+        public DTCeleste DataCeleste;       
     }
 }

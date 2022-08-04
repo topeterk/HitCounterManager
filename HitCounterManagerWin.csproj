@@ -91,8 +91,10 @@
   <ItemGroup>
     <Compile Include="Splitters\CelesteSplitter.cs" />
     <Compile Include="Splitters\DataAutoSplitter.cs" />
+    <Compile Include="Splitters\Ds2Splitter.cs" />
     <Compile Include="Splitters\Ds3Splitter.cs" />
     <Compile Include="Splitters\DTCeleste.cs" />
+    <Compile Include="Splitters\DTDs2.cs" />
     <Compile Include="Splitters\DTDs3.cs" />
     <Compile Include="Splitters\DTElden.cs" />
     <Compile Include="Splitters\DTHollow.cs" />

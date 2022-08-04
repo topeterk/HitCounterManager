@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2019-2022 Peter Kirmeier and Ezequiel Medina
+//Copyright (c) 2019-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -33,11 +33,6 @@ namespace HitCounterManager
         private Succession succession;
         public readonly OutModule om;
         private bool Ready = false;
-        private SekiroSplitter sekiroSplitter;
-        private HollowSplitter hollowSplitter;
-        private EldenSplitter eldenSplitter;
-        private Ds3Splitter ds3Splitter;
-        private CelesteSplitter celesteSplitter;
 
         public ProfilesControl()
         {
@@ -57,17 +52,6 @@ namespace HitCounterManager
 
             ptc.InitializeProfileTabControl();
         }
-
-        public void setSplittersPointers(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter,EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter)
-        {
-            this.sekiroSplitter = sekiroSplitter;
-            this.hollowSplitter = hollowSplitter;
-            this.eldenSplitter = eldenSplitter;
-            this.ds3Splitter = ds3Splitter;
-            this.celesteSplitter = celesteSplitter;
-
-        }
-
 
         [Browsable(false)] // Hide from designer
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
@@ -102,18 +86,6 @@ namespace HitCounterManager
                 DateTime utc_now = DateTime.UtcNow;
                 SelectedProfileInfo.AddDuration((long)(utc_now - last_update_time).TotalMilliseconds);
                 last_update_time = utc_now;
-
-
-                /* To any that understand OutModule and all related to Timer, the nexts functions return a full duration of a run in ms
-                 * sekiroSplitter.getTimeInGame();
-                 * eldenSplitter.getTimeInGame(); //Reset 0 in IGT
-                 * ds3Splitter.getTimeInGame();
-                 * celesteSplitter.getTimeInGame();
-                }*/
-
-
-
-
             }
         }
 
@@ -391,12 +363,6 @@ namespace HitCounterManager
                 pi_tab.ResetRun();
                 profs.SaveProfile(pi_tab); // save tab's profile
             }
-            sekiroSplitter.resetSplited();
-            hollowSplitter.resetSplited();
-            eldenSplitter.resetSplited();
-            ds3Splitter.resetSplited();
-            celesteSplitter.resetSplited();
-
         }
         public void ProfilePB()
         {

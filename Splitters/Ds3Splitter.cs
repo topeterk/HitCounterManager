@@ -142,6 +142,7 @@ namespace HitCounterManager
 
         public void RemoveBoss(int position)
         {
+            listPendingB.RemoveAll(iboss => iboss.Id == dataDs3.bossToSplit[position].Id);
             dataDs3.bossToSplit.RemoveAt(position);
         }
 
@@ -154,6 +155,7 @@ namespace HitCounterManager
 
         public void RemoveBonfire(int position)
         {
+            listPendingBon.RemoveAll(iposition => iposition.Id == dataDs3.bonfireToSplit[position].Id);
             dataDs3.bonfireToSplit.RemoveAt(position);
         }
 
@@ -170,6 +172,7 @@ namespace HitCounterManager
 
         public void RemoveAttribute(int position)
         {
+            listPendingLvl.RemoveAll(ilvl => ilvl.Attribute == dataDs3.lvlToSplit[position].Attribute && ilvl.Value == dataDs3.lvlToSplit[position].Value);
             dataDs3.lvlToSplit.RemoveAt(position);
         }
 
@@ -182,6 +185,7 @@ namespace HitCounterManager
 
         public void RemoveCustomFlag(int position)
         {
+            listPendingCf.RemoveAll(iflag => iflag.Id == dataDs3.flagToSplit[position].Id);
             dataDs3.flagToSplit.RemoveAt(position);
         }
 
@@ -239,7 +243,7 @@ namespace HitCounterManager
                         {
                             try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
                             var l = dataDs3.lvlToSplit.FindIndex(Ilvl => Ilvl.Attribute == lvl.Attribute && Ilvl.Value == lvl.Value);
-                            dataDs3.bonfireToSplit[l].IsSplited = true;
+                            dataDs3.lvlToSplit[l].IsSplited = true;
                         }
 
                         foreach (var cf in listPendingCf)
@@ -324,7 +328,7 @@ namespace HitCounterManager
                 Thread.Sleep(5000);
                 foreach (var lvl in dataDs3.getLvlToSplit())
                 {
-                    if (!lvl.IsSplited && Ds3.ReadAttribute(lvl.Attribute) == lvl.Value)
+                    if (!lvl.IsSplited && Ds3.ReadAttribute(lvl.Attribute) >= lvl.Value)
                     {
                         if (lvl.Mode == "Loading game after")
                         {

@@ -561,7 +561,7 @@ namespace HitCounterManager
         {
             public SoulMemory.EldenRing.Position vector = new SoulMemory.EldenRing.Position();
             public bool IsSplited = false;
-            public string mode;
+            public string Mode;
         }
         #endregion
         #region CustomFlag.Elden

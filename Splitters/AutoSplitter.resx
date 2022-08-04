@@ -117,16 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lbl_warning.Text" xml:space="preserve">
-    <value>If you want auto reset internal flags to split all Pantheon bosses.
-If you want play P1+P2+P3+P4 to play P5 after, or P5 to play P1....P4 after 
-You should check if you run have "Grey Prince Zote" or not.
-(Turn on/off depending the case)</value>
-  </data>
   <data name="TextBox1.Text" xml:space="preserve">
-    <value>Maintain update the dll "Souls Memory" of Souls Splitter for last updates fixes of readEventsFlags or others things
-
-Notes:
+    <value>Notes:
 ===========================================
 AutoSplitting:
 - Is recommended to configure everything before setting the game to spliter, to avoid autosplitting
@@ -153,6 +145,12 @@ launching the game from steam will have EAC enabled.
 Sekiro Features:
 - No Intro
 - No Tutorials</value>
+  </data>
+  <data name="lbl_warning.Text" xml:space="preserve">
+    <value>If you want auto reset internal flags to split all Pantheon bosses.
+If you want play P1+P2+P3+P4 to play P5 after, or P5 to play P1....P4 after 
+You should check if you run have "Grey Prince Zote" or not.
+(Turn on/off depending the case)</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

@@ -62,10 +62,10 @@ namespace HitCounterManager
         }
 
 
-        public bool getEldenStatusProcess(out Exception exception, int delay) //Use Delay 0 only for first Starts
+        public bool getEldenStatusProcess(int delay) //Use Delay 0 only for first Starts
         {
             Thread.Sleep(delay);
-            return _StatusElden = elden.Refresh(out exception);
+            return _StatusElden = elden.Refresh(out Exception exc);
         }
 
         public void setPositionMargin(int select)
@@ -184,7 +184,7 @@ namespace HitCounterManager
         public void AddPosition(SoulMemory.EldenRing.Position vector, string mode)
         {
             DefinitionsElden.PositionER cPosition = new DefinitionsElden.PositionER()
-            { vector = vector, mode = mode };
+            { vector = vector, Mode = mode };
             dataElden.positionToSplit.Add(cPosition);   
         }
 
@@ -197,30 +197,34 @@ namespace HitCounterManager
 
         public void RemoveBoss(int position)
         {
+            listPendingB.RemoveAll(iboss => iboss.Id == dataElden.bossToSplit[position].Id);
             dataElden.bossToSplit.RemoveAt(position);
         }
         public void RemoveGrace(int position)
         {
+            listPendingG.RemoveAll(igrace => igrace.Id == dataElden.graceToSplit[position].Id);
             dataElden.graceToSplit.RemoveAt(position);
         }
 
         public void RemovePosition(int position)
         {
+            listPendingP.RemoveAll(iposition => iposition.vector == dataElden.positionToSplit[position].vector);
             dataElden.positionToSplit.RemoveAt(position);
         }
 
         public void RemoveCustomFlag(int position)
         {
+            listPendingCf.RemoveAll(iCf => iCf.Id == dataElden.flagsToSplit[position].Id);
             dataElden.flagsToSplit.RemoveAt(position);
         }
 
         #region init()
         public void RefreshElden()
         {
-            _StatusElden = getEldenStatusProcess(out Exception exception, 0);
+            _StatusElden = getEldenStatusProcess(0);
             while (!_StatusProcedure)
             {
-                _StatusElden = getEldenStatusProcess(out exception, 45000);
+                _StatusElden = getEldenStatusProcess(45000);
                 if (!_StatusElden)
                 {
                     _writeMemory = false;
@@ -268,7 +272,7 @@ namespace HitCounterManager
                         {
                             try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
                             var p = dataElden.positionToSplit.FindIndex(iposition => iposition.vector == position.vector);
-                            dataElden.graceToSplit[p].IsSplited = true;
+                            dataElden.positionToSplit[p].IsSplited = true;
                         }
 
                         foreach (var cf in listPendingCf)
@@ -386,7 +390,7 @@ namespace HitCounterManager
                         var rangeZ = ((currentlyPosition.Z - p.vector.Z) <= dataElden.positionMargin) && ((currentlyPosition.Z - p.vector.Z) >= -dataElden.positionMargin);
                         if (rangeX && rangeY && rangeZ)
                         {
-                            if (p.mode == "Loading game after")
+                            if (p.Mode == "Loading game after")
                             {
 
                                 if (!listPendingP.Contains(p))
