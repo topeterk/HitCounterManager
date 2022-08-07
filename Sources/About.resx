@@ -142,19 +142,19 @@ Contact: &lt;ezequielmedina23@gmail.com&gt;
 Licence: MIT
     - DLL SoulsMemory from:
     [-]    Title: SoulSplitter
-           Author:  FrankvdStam
+           Author:  F.stam
            Source:  https://github.com/FrankvdStam/SoulSplitter.git
            Licence: GNU
 
     - DLL LiveSplit.HollowKnight
     [-]    Title: LiveSplit.HollowKnight
-           Author: ShootMe
+           Author: DevilSquirrel
            Source: https://github.com/ShootMe/LiveSplit.HollowKnight.git
            Licence: MIT
 
     - DLL LiveSplit.Celeste
            Title: LiveSplit.HollowKnight
-           Author: ShootMe
+           Author: DevilSquirrel
            Source: https://github.com/ShootMe/LiveSplit.Celeste.git
            Licence: MIT
 
@@ -162,6 +162,12 @@ Licence: MIT
     [-]    Title: LiveSplit
            Author: LiveSplit
            Source: https://github.com/LiveSplit/LiveSplit
+           Licence: MIT
+
+    - DLL LiveSplit.ScriptableAutoSplit (Modified)
+           Title: ScriptableAutoSplit
+           Author: LiveSplit
+           Source: https://github.com/LiveSplit/LiveSplit.ScriptableAutoSplit.git
            Licence: MIT
 
 ==============================================================================

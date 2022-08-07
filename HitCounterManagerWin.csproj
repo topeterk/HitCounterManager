@@ -70,25 +70,14 @@
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;OS_WINDOWS</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE;OS_WINDOWS</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Splitters\AslConfigurator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Splitters\AslConfigurator.Designer.cs">
+      <DependentUpon>AslConfigurator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Splitters\AslSplitter.cs" />
     <Compile Include="Splitters\CelesteSplitter.cs" />
     <Compile Include="Splitters\DataAutoSplitter.cs" />
     <Compile Include="Splitters\Ds2Splitter.cs" />
@@ -162,10 +151,18 @@
     <Reference Include="LiveSplit.Celeste">
       <HintPath>Sources\LiveSplit.Celeste.dll</HintPath>
     </Reference>
+    <Reference Include="LiveSplit.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Sources\LiveSplit.Core.dll</HintPath>
+    </Reference>
     <Reference Include="LiveSplit.HollowKnight, Version=3.1.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>Sources\LiveSplit.HollowKnight.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="LiveSplit.ScriptableAutoSplit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Sources\LiveSplit.ScriptableAutoSplit.dll</HintPath>
     </Reference>
     <Reference Include="SoulMemory">
       <HintPath>Sources\SoulMemory.dll</HintPath>
@@ -178,6 +175,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Splitters\AslConfigurator.resx">
+      <DependentUpon>AslConfigurator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Splitters\AutoSplitter.resx">
       <DependentUpon>AutoSplitter.cs</DependentUpon>
     </EmbeddedResource>

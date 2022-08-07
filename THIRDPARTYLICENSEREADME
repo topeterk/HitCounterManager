@@ -44,6 +44,12 @@ Licence: MIT
            Source: https://github.com/LiveSplit/LiveSplit
            Licence: MIT
 
+    - DLL LiveSplit.ScriptableAutoSplit (Modified)
+           Title: ScriptableAutoSplit
+           Author: LiveSplit
+           Source: https://github.com/LiveSplit/LiveSplit.ScriptableAutoSplit.git
+           Licence: MIT
+
 ==============================================================================
 Application Icon
 

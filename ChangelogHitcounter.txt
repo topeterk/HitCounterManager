@@ -1,0 +1,66 @@
+Changelog:
+
+Version 1.21.0.0 (Split of Placer Update)
+
+New Features:
+AutoSplitter for:
+ Sekiro: 
+	[Instantaly/Loading After]
+		Kill a Boss
+	    Is Activated a Idol
+             Trigger a position
+
+Elden Ring:
+	  [Instantaly/Loading After]
+		  Kill a Boss
+	       Is Activated a Grace 
+        	Trigger a position
+
+DarkSouls 1:[DEV]
+
+DarkSouls 2:
+		 [Instantaly/Loading After]
+	 	        Kill a Boss
+		     Level the Charapter
+		     Trigger a position
+
+DarkSouls 3:
+		[Instantaly/Loading After]
+		        Kill a Boss
+		  Is Activated a Bonfire
+		   Level the Charapter
+			Custom Flag
+
+Hollow Knight:
+		Kill a Boss/Minibosses
+		Dreamers/Kills Events
+		Colosseum
+		Pantheons
+		Charms/Skills
+		Trigger a position
+
+Celeste:
+	  	    Chapter
+		  Checkpoints
+
+ASL:
+	Any ASL with Split (AutoSplitter Language for LiveSplit)
+
+AutoMods Features:
+Sekiro: 
+No Logos Intro
+No Tutorials 
+
+
+
+
+Added New Pre-Profiles:
+- Sekiro (All Bosses and Minibosses) [EN]
+- Celeste (Any%) [EN]
+- Hollow Knight (Any%) [EN] 
+- Hades (Any%) [EN] 
+- Crash Bandicut 1 (Any%) [EN] 
+- Crash Bandicut 2 (Any%) [EN] 
+- Crash Bandicut 3 (Any%) [EN] 
+- Crash Bandicut 4 (Any%) [EN] 
+- Cuphead (Any%) [EN] 

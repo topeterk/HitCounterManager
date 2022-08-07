@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
+using System.Xml;
 using System.Xml.Serialization;
 using System.Text;
 
@@ -493,44 +494,45 @@ namespace HitCounterManager
         private Ds3Splitter ds3Splitter = new Ds3Splitter();
         private CelesteSplitter celesteSplitter = new CelesteSplitter();
         private Ds2Splitter ds2Splitter = new Ds2Splitter();
+        private AslSplitter aslSplitter = new AslSplitter();
         private void SaveAutoSplitterSettings() {
-            Stream myStream;
-            try
-            {
-                myStream = new FileStream("HitCounterManagerSaveAutoSplitter.xml", FileMode.Open, FileAccess.Write, FileShare.None);
-            }
-            catch (Exception)
-            {
-                myStream = new FileStream("HitCounterManagerSaveAutoSplitter.xml", FileMode.Create, FileAccess.Write, FileShare.None);
-            }
-
-            XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro), typeof(DTHollow),typeof(DTElden),typeof(DTDs3),typeof(DTDs2),typeof(DTCeleste) });
+            string savePath = Path.GetFullPath("HitCounterManagerSaveAutoSplitter.xml");
+            File.Delete(savePath);
+            Stream myStream = new FileStream("HitCounterManagerSaveAutoSplitter.xml", FileMode.Create, FileAccess.Write, FileShare.None);
+            XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro), typeof(DTHollow),typeof(DTElden),typeof(DTDs3),typeof(DTDs2),typeof(DTCeleste)});
             dataAS.DataSekiro = sekiroSplitter.getDataSekiro();
             dataAS.DataHollow = hollowSplitter.getDataHollow();
             dataAS.DataElden = eldenSplitter.getDataElden();
             dataAS.DataDs3 = ds3Splitter.getDataDs3();
             dataAS.DataDs2 = ds2Splitter.getDataDs2();
             dataAS.DataCeleste = celesteSplitter.getDataCeleste();
+            dataAS.ASLMethod = aslSplitter.enableSplitting;
             formatter.Serialize(myStream, dataAS);
-
             myStream.Close();
+            XmlDocument Save = new XmlDocument();
+            Save.Load(savePath);
+            XmlNode Asl = Save.CreateElement("DataASL");
+            XmlNode AslData = aslSplitter.getData(Save);
+            Asl.AppendChild(AslData);
+            Save.DocumentElement.AppendChild(Asl);
+            Save.Save(savePath);
         }
 
         /// <summary>
         /// Load user data in XML for AutoSplitter
         /// </summary>
-        private void LoadAutoSplitterSettings(ProfilesControl profiles) {           
-            DTSekiro dataSekiro = new DTSekiro();
-            DTHollow dataHollow = new DTHollow();
-            DTElden dataElden = new DTElden();
-            DTDs3 dataDs3 = new DTDs3();
-            DTDs2 dataDs2 = new DTDs2();
-            DTCeleste dataCeleste = new DTCeleste();
+        private void LoadAutoSplitterSettings(ProfilesControl profiles) {
+            DTSekiro dataSekiro = null;
+            DTHollow dataHollow = null;
+            DTElden dataElden = null;
+            DTDs3 dataDs3 = null;
+            DTDs2 dataDs2 = null;
+            DTCeleste dataCeleste = null;
             
              try
              {
                 Stream myStream = new FileStream("HitCounterManagerSaveAutoSplitter.xml", FileMode.Open, FileAccess.Read, FileShare.None);
-                XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro),typeof(DTHollow), typeof(DTElden),typeof(DTDs3),typeof(DTDs2),typeof(DTCeleste) });
+                XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro),typeof(DTHollow), typeof(DTElden),typeof(DTDs3),typeof(DTDs2),typeof(DTCeleste)});
                 dataAS = (DataAutoSplitter)formatter.Deserialize(myStream);
                 dataSekiro = dataAS.DataSekiro;
                 dataHollow = dataAS.DataHollow;
@@ -538,11 +540,12 @@ namespace HitCounterManager
                 dataDs3 = dataAS.DataDs3;
                 dataDs2 = dataAS.DataDs2;
                 dataCeleste = dataAS.DataCeleste;
+                aslSplitter.enableSplitting = dataAS.ASLMethod;
                 myStream.Close();
             }
             catch (Exception){}
 
-            //Case Old Savefile return null
+            //Case Old Savefile or New file;
             if (dataSekiro == null) { dataSekiro = new DTSekiro(); }
             if (dataHollow == null) { dataHollow = new DTHollow(); }
             if (dataElden == null){ dataElden = new DTElden(); }
@@ -567,6 +570,28 @@ namespace HitCounterManager
 
             celesteSplitter.setDataCeleste(dataCeleste, profiles);
             celesteSplitter.LoadAutoSplitterProcedure();
+
+            
+            
+
+
+            try
+            {
+                string savePath = Path.GetFullPath("HitCounterManagerSaveAutoSplitter.xml");
+                XmlDocument doc = new XmlDocument();
+                doc.Load(savePath);
+
+                XmlElement docElements = doc.DocumentElement;
+                XmlNodeList nodeList = docElements.SelectNodes("//DataASL");
+               
+                foreach (XmlNode node in nodeList)
+                {
+                     aslSplitter.setData(node.FirstChild, profiles);
+                }
+
+            }
+            catch (Exception) { aslSplitter.setData(null, profiles); }
+            aslSplitter.LoadAutoSplitterProcedure();
 
 
         }
@@ -601,6 +626,10 @@ namespace HitCounterManager
         {
             return this.celesteSplitter;
         }
-
+        
+        public AslSplitter getAslInstance()
+        {
+            return this.aslSplitter;
+        }
     }
 }

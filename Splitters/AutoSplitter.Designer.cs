@@ -32,6 +32,7 @@
             this.TabControl2 = new HitCounterManager.ProfileTabControl();
             this.tabConfig = new System.Windows.Forms.TabPage();
             this.groupBoxSplitters = new System.Windows.Forms.GroupBox();
+            this.btnASL = new System.Windows.Forms.Button();
             this.btnCuphead = new System.Windows.Forms.Button();
             this.btnCeleste = new System.Windows.Forms.Button();
             this.btnHollow = new System.Windows.Forms.Button();
@@ -397,6 +398,7 @@
             // 
             // groupBoxSplitters
             // 
+            this.groupBoxSplitters.Controls.Add(this.btnASL);
             this.groupBoxSplitters.Controls.Add(this.btnCuphead);
             this.groupBoxSplitters.Controls.Add(this.btnCeleste);
             this.groupBoxSplitters.Controls.Add(this.btnHollow);
@@ -407,10 +409,20 @@
             this.groupBoxSplitters.Controls.Add(this.btnSekiro);
             this.groupBoxSplitters.Location = new System.Drawing.Point(13, 12);
             this.groupBoxSplitters.Name = "groupBoxSplitters";
-            this.groupBoxSplitters.Size = new System.Drawing.Size(301, 204);
+            this.groupBoxSplitters.Size = new System.Drawing.Size(408, 204);
             this.groupBoxSplitters.TabIndex = 0;
             this.groupBoxSplitters.TabStop = false;
             this.groupBoxSplitters.Text = "Splitters";
+            // 
+            // btnASL
+            // 
+            this.btnASL.Location = new System.Drawing.Point(294, 91);
+            this.btnASL.Name = "btnASL";
+            this.btnASL.Size = new System.Drawing.Size(75, 23);
+            this.btnASL.TabIndex = 1;
+            this.btnASL.Text = "ASL";
+            this.btnASL.UseVisualStyleBackColor = true;
+            this.btnASL.Click += new System.EventHandler(this.btnASL_Click);
             // 
             // btnCuphead
             // 
@@ -4902,5 +4914,6 @@
         private System.Windows.Forms.TextBox textBoxZDs2;
         private System.Windows.Forms.TextBox textBoxYDs2;
         private System.Windows.Forms.TextBox textBoxXDs2;
+        private System.Windows.Forms.Button btnASL;
     }
 }

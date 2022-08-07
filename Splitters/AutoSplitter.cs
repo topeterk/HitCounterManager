@@ -43,7 +43,8 @@ namespace HitCounterManager
         Ds3Splitter ds3Splitter;
         Ds2Splitter ds2Splitter;
         CelesteSplitter celesteSplitter;
-        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter, EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter, Ds2Splitter ds2Splitter)
+        AslSplitter aslSplitter;
+        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter, EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter, Ds2Splitter ds2Splitter,AslSplitter aslSplitter)
         {
             InitializeComponent();
             this.sekiroSplitter = sekiroSplitter;
@@ -52,6 +53,7 @@ namespace HitCounterManager
             this.ds3Splitter = ds3Splitter;           
             this.ds2Splitter = ds2Splitter;
             this.celesteSplitter = celesteSplitter;
+            this.aslSplitter = aslSplitter;
             refreshForm();
             
         }
@@ -521,6 +523,13 @@ namespace HitCounterManager
             }
             TabControl2.SelectTab(tabElden);
         }
+
+        private void btnASL_Click(object sender, EventArgs e)
+        {
+            Form form = new AslConfigurator(aslSplitter);
+            form.ShowDialog();
+        }
+
 
         #endregion
         #region Sekiro.UI
@@ -2166,6 +2175,7 @@ namespace HitCounterManager
                 TabControl2.SelectTab(tabDs2);
             }
         }
+
 
 
         #endregion

@@ -53,7 +53,7 @@ namespace HitCounterManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = Text + " - v" + Application.ProductVersion + " Beta 6 - Rev.2 " + OsLayer.Name;
+            Text = Text + " - v" + Application.ProductVersion + " Beta 7 - Rev.1 " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();  
             ProfileChangedHandler(sender, e);
@@ -95,7 +95,14 @@ namespace HitCounterManager
                                 }
                                 else
                                 {
-                                    comboBoxGame.SelectedIndex = 0;
+                                    if (aslSplitter.enableSplitting)
+                                    {
+                                        comboBoxGame.SelectedIndex = 9;
+                                    }
+                                    else
+                                    {
+                                        comboBoxGame.SelectedIndex = 0;
+                                    }                                    
                                 }
                             }
                         }
@@ -240,7 +247,7 @@ namespace HitCounterManager
         private void btnSplitPrev_Click(object sender, EventArgs e) { profCtrl.ProfileSplitGo(-1); }
 
         private void btnSplitter_Click(object sender, EventArgs e) 
-        { Form form = new AutoSplitter(getSekiroInstance(),getHollowInstance(),getEldenInstance(),getDs3Instance(),getCelesteInstance(),getDs2Instance()); form.ShowDialog(this);}
+        { Form form = new AutoSplitter(getSekiroInstance(),getHollowInstance(),getEldenInstance(),getDs3Instance(),getCelesteInstance(),getDs2Instance(),getAslInstance()); form.ShowDialog(this);}
 
         private void ProfileChangedHandler(object sender, EventArgs e)
         {
@@ -278,7 +285,7 @@ namespace HitCounterManager
             ds3Splitter.setStatusSplitting(false);
             celesteSplitter.setStatusSplitting(false);
             ds2Splitter.setStatusSplitting(false);
-
+            aslSplitter.setStatusSplitting(false);
 
 
             //Ask Selected index
@@ -305,7 +312,11 @@ namespace HitCounterManager
             if(comboBoxGame.SelectedIndex == 3)
             {
                 ds2Splitter.setStatusSplitting(true);
-            }           
+            }   
+            if(comboBoxGame.SelectedIndex == 9)
+            {
+                aslSplitter.setStatusSplitting(true);
+            }
         }
 
         #endregion
