@@ -37,7 +37,7 @@ namespace HitCounterManager
         public Control control = asl.GetSettingsControl(LiveSplit.UI.LayoutMode.Vertical);
         public ProfilesControl _profile;
         public bool enableSplitting = false;
-        System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 2000 };
+        System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1500 };
 
         public void setData(XmlNode node, ProfilesControl profile)
         {

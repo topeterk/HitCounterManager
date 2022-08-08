@@ -416,7 +416,7 @@ namespace HitCounterManager
                 EldenRingRunning.Hide();
                 EldenRingNotRunning.Show();
             }
-            if (ds3Splitter.getEldenStatusProcess(0))
+            if (ds3Splitter.getDs3StatusProcess(0))
             {
                 Ds3Running.Show();
                 Ds3NotRunning.Hide();

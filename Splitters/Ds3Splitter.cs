@@ -42,7 +42,7 @@ namespace HitCounterManager
             if (procedure) { LoadAutoSplitterProcedure(); }
         }
 
-        public bool getEldenStatusProcess(int delay) //Use Delay 0 only for first Starts
+        public bool getDs3StatusProcess(int delay) //Use Delay 0 only for first Starts
         {
             Thread.Sleep(delay);
             return _StatusDs3 = Ds3.Refresh();
@@ -100,7 +100,7 @@ namespace HitCounterManager
         {
             var taskRefresh = new Task(() =>
             {
-                RefreshElden();
+                RefreshDs3();
             });
             var taskCheckload = new Task(() =>
             {
@@ -191,12 +191,12 @@ namespace HitCounterManager
 
 
         #region init()
-        public void RefreshElden()
+        public void RefreshDs3()
         {
-            _StatusDs3 = getEldenStatusProcess(0);
+            _StatusDs3 = getDs3StatusProcess(0);
             while (!_StatusProcedure)
             {
-                _StatusDs3 = getEldenStatusProcess(45000);
+                _StatusDs3 = getDs3StatusProcess(45000);
                 if (!_StatusDs3)
                 {
                     _writeMemory = false;

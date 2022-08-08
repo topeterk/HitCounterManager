@@ -25,8 +25,7 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 * On the fly configurable design
 * Configurable keyboard hot keys that can easily be used while playing
 * One single save file for all settings and profiles: **HitCounterManagerSave.xml**
-  > Note: The settings will be kept when upgrading on newer versions.
-  > I try my best keeping it backwards compatible that you can still load an upgraded save file on older versions.
+* One single save file for all settings of AutoSplit: **HitCounterManagerSaveAutoSplitter.xml**
 * Create profiles for each challenge or game or build a sequence of runs (called succession) like for the Dark Souls trilogy
 * Dark Mode (not the best looking but hey: its dark)
 * Timer (including current, PB and gold split times)
@@ -67,6 +66,7 @@ All available releases can be found at the [Releases page](../../releases) on Gi
     * [.Net Framework 4.8 or newer](https://www.microsoft.com/net)
     > **Note**: Version 1.21 and older requires [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
 * OS: 64 bits
+* Execute the program as Administrator
  
 
 ## Installation, Guides, Help
@@ -109,6 +109,8 @@ Thanks to Beta Testers of AutoSplit(in alphabetical order):
 * [Slash15](https://www.twitch.tv/slash15_)
 * [OlallaZ2](https://www.twitch.tv/olallaz2)
 * [Zirob21](https://www.twitch.tv/zirob21)
+
+[-]..And All that participate in the Pre-Release.
 
 
 * Every member of the [Hitless team on Twitch](https://www.twitch.tv/team/hitless) and [No Hit Hispano on Twitch](https://www.twitch.tv/nohithispano)
