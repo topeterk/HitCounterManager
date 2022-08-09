@@ -34,7 +34,8 @@ namespace HitCounterManager
                 case "Lost Sinner": cBoss.Title = "Lost Sinner"; cBoss.Id = BossType.LostSinner; break;
                 case "Belfry Gargoyles": cBoss.Title = "Belfry Gargoyles"; cBoss.Id = BossType.BelfryGargoyles; break;
                 case "Ruin Sentinels": cBoss.Title = "Ruin Sentinels"; cBoss.Id = BossType.RuinSentinels; break;
-                case "Royal Rat Vanguard": cBoss.Title = "Royal Rat Vanguard"; cBoss.Id = BossType.RoyalRatAuthority; break;
+                case "Royal Rat Vanguard": cBoss.Title = "Royal Rat Vanguard"; cBoss.Id = BossType.RoyalRatVanguard; break;
+                case "Royal Rat Authority": cBoss.Title = "Royal Rat Authority"; cBoss.Id = BossType.RoyalRatAuthority; break;
                 case "Scorpioness Najka": cBoss.Title = "Scorpioness Najka"; cBoss.Id = BossType.ScorpionessNajka; break;
                 case "The Duke's Dear Freja": cBoss.Title = "The Duke's Dear Freja"; cBoss.Id = BossType.TheDukesDearFreja; break;
                 case "Mytha, the Baneful Queen": cBoss.Title = "Mytha, the Baneful Queen"; cBoss.Id = BossType.MythaTheBanefulQueen; break;

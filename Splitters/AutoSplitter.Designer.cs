@@ -1822,9 +1822,9 @@
             // tabDs2
             // 
             this.tabDs2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabDs2.Controls.Add(this.panelBossDS2);
             this.tabDs2.Controls.Add(this.panelPositionDs2);
             this.tabDs2.Controls.Add(this.panelAttributeDs2);
-            this.tabDs2.Controls.Add(this.panelBossDS2);
             this.tabDs2.Controls.Add(this.btnRefreshDs2);
             this.tabDs2.Controls.Add(this.btnDesactiveAllDs2);
             this.tabDs2.Controls.Add(this.Ds2Running);
@@ -2134,6 +2134,7 @@
             "Belfry Gargoyles",
             "Ruin Sentinels",
             "Royal Rat Vanguard",
+            "Royal Rat Authority",
             "Scorpioness Najka",
             "The Duke\'s Dear Freja",
             "Mytha, the Baneful Queen",
@@ -2266,10 +2267,10 @@
             // tabDs3
             // 
             this.tabDs3.BackColor = System.Drawing.SystemColors.Control;
+            this.tabDs3.Controls.Add(this.panelBossDs3);
             this.tabDs3.Controls.Add(this.panelLvlDs3);
             this.tabDs3.Controls.Add(this.panelCfDs3);
             this.tabDs3.Controls.Add(this.panelBonfireDs3);
-            this.tabDs3.Controls.Add(this.panelBossDs3);
             this.tabDs3.Controls.Add(this.btnRefreshDS3);
             this.tabDs3.Controls.Add(this.btnDesactiveAllDs3);
             this.tabDs3.Controls.Add(this.Ds3Running);
