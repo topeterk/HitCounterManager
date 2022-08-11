@@ -33,7 +33,7 @@ mkdir %DIR_DEST%
 
 echo Creating portable package:
 echo ^ ^ Copy files from %DIR_OUTPUT%
-FOR %%G IN (HitCounterManager.exe HitCounterManager.exe.config SoulMemory.dll LiveSplit.HollowKnight.dll LiveSplit.Celeste.dll LiveSplit.Core.dll Irony.dll LiveSplit.ScriptableAutoSplit.dll) DO copy %DIR_OUTPUT%\%%G %DIR_DEST%
+FOR %%G IN (HitCounterManager.exe HitCounterManager.exe.config SoulMemory.dll LiveSplit.HollowKnight.dll LiveSplit.Celeste.dll LiveSplit.Core.dll Irony.dll LiveSplit.ScriptableAutoSplit.dll LiveSplit.Cuphead.dll) DO copy %DIR_OUTPUT%\%%G %DIR_DEST%
 echo ^ ^ Copy files from %DIR_SRC%
 FOR %%G IN (Sources\HitCounterManagerInit.xml Sources\HitCounter.html Sources\HitCounter.template) DO copy %DIR_SRC%\%%G %DIR_DEST%
 echo ^ ^ Copy files from %DIR_SRC%\ASLScripts

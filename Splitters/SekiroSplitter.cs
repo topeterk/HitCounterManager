@@ -68,12 +68,28 @@ namespace HitCounterManager
             dataSekiro.bossToSplit.Add(cBoss);
         }
 
-        public void AddPosition(Vector3f vector, string mode) //Exception: is Repited yet controlled in AutoSplitter
+        public void AddPosition(float X, float Y, float Z , string mode) //Exception: is Repited yet controlled in AutoSplitter
         {
             var position = new DefinitionsSekiro.PositionS();
-            position.setVector(vector);
+            position.setVector(new Vector3f(X,Y,Z));
             position.Mode = mode;
             dataSekiro.positionsToSplit.Add(position);
+        }
+
+        public void AddCustomFlag(uint id,string mode)
+        {
+            DefinitionsSekiro.CfSk cFlag = new DefinitionsSekiro.CfSk()
+            {
+                Id = id,
+                Mode = mode
+            };
+            dataSekiro.flagToSplit.Add(cFlag);
+        }
+
+        public void RemoveCustomFlag(int position)
+        {
+            listPendingCf.RemoveAll(iflag => iflag.Id == dataSekiro.flagToSplit[position].Id);
+            dataSekiro.flagToSplit.RemoveAt(position);
         }
 
         public void RemoveBoss(int position)
@@ -186,6 +202,14 @@ namespace HitCounterManager
                     p.IsSplited = false;
                 }
             }
+
+            if(dataSekiro.getFlagToSplit().Count > 0)
+            {
+                foreach (var cf in dataSekiro.getFlagToSplit())
+                {
+                    cf.IsSplited = false;
+                }
+            }
         }
 
 
@@ -211,12 +235,16 @@ namespace HitCounterManager
             {
                 PositionSplit();
             });
+            var task4 = new Task(() =>
+            {
+                customFlagToSplit();
+            });
             taskRefresh.Start();
             taskCheckload.Start();
             task1.Start();
             task2.Start();
             task3.Start();
-
+            task4.Start();
 
         }
 
@@ -250,6 +278,8 @@ namespace HitCounterManager
         List<DefinitionsSekiro.PositionS> listPendingP = new List<DefinitionsSekiro.PositionS>();
         List<DefinitionsSekiro.BossS> listPendingB = new List<DefinitionsSekiro.BossS>();
         List<DefinitionsSekiro.Idol> listPendingI = new List<DefinitionsSekiro.Idol>();
+        List<DefinitionsSekiro.CfSk> listPendingCf = new List<DefinitionsSekiro.CfSk>();
+
 
         private void checkLoad()
         {
@@ -283,9 +313,17 @@ namespace HitCounterManager
                             dataSekiro.positionsToSplit[p].IsSplited = true;
                         }
 
+                        foreach (var cf in listPendingCf)
+                        {
+                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            var c = dataSekiro.flagToSplit.FindIndex(icf => icf.Id == cf.Id);
+                            dataSekiro.flagToSplit[c].IsSplited = true;
+                        }
+
                         listPendingB.Clear();
                         listPendingI.Clear();
                         listPendingP.Clear();
+                        listPendingCf.Clear();
 
 
                     }
@@ -379,6 +417,34 @@ namespace HitCounterManager
                         }
                         
                     }
+                }
+            }
+        }
+
+        private void customFlagToSplit()
+        {
+            while (dataSekiro.enableSplitting && _StatusProcedure)
+            {
+                Thread.Sleep(5000);
+                foreach (var cf in dataSekiro.getFlagToSplit())
+                {
+                    if (!cf.IsSplited && sekiro.ReadEventFlag(cf.Id))
+                    {
+                        if (cf.Mode == "Loading game after")
+                        {
+                            if (!listPendingCf.Contains(cf))
+                            {
+                                listPendingCf.Add(cf);
+                            }
+                        }
+                        else
+                        {
+                            cf.IsSplited = true;
+                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+
+                        }
+                    }
+
                 }
             }
         }

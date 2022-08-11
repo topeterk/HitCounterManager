@@ -22,11 +22,12 @@ Launching the game from "Steam\steamapps\common\ELDEN RING\Game\eldenring.exe" w
 
 - Split by Attributes and some custom flags in DS3 dont work on versions previous to 1.15
 
-- AutoSplitter of Cuphed only work on versions pre-dlc like v1.2.4
-
 - ASL Method can read whateaver ASL file (AutoSplit Language to Livesplit) and split with them. Dont use ASL that no have autospliting and 
 if the game is into this plugin Sekiro,ds1,ds2,etc.
 Browse the file with .asl extencion and clic on "Update Script" if this dont show configuration after 5 seconds.
+Special Case: Cuphead; This is controlled by dll file but this is outdate, only works in versions previous to 
+The Delicious Last Course, and community livesplit made a asl that work with the dll, here dont work so, we waiting
+to creator update the dll.
 
 ===========================================
 Sekiro Features:

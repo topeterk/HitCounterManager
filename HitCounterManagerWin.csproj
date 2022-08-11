@@ -79,10 +79,12 @@
     </Compile>
     <Compile Include="Splitters\AslSplitter.cs" />
     <Compile Include="Splitters\CelesteSplitter.cs" />
+    <Compile Include="Splitters\CupheadSplitter.cs" />
     <Compile Include="Splitters\DataAutoSplitter.cs" />
     <Compile Include="Splitters\Ds2Splitter.cs" />
     <Compile Include="Splitters\Ds3Splitter.cs" />
     <Compile Include="Splitters\DTCeleste.cs" />
+    <Compile Include="Splitters\DTCuphead.cs" />
     <Compile Include="Splitters\DTDs2.cs" />
     <Compile Include="Splitters\DTDs3.cs" />
     <Compile Include="Splitters\DTElden.cs" />
@@ -154,6 +156,9 @@
     <Reference Include="LiveSplit.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Sources\LiveSplit.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveSplit.Cuphead">
+      <HintPath>Sources\LiveSplit.Cuphead.dll</HintPath>
     </Reference>
     <Reference Include="LiveSplit.HollowKnight, Version=3.1.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>Sources\LiveSplit.HollowKnight.dll</HintPath>

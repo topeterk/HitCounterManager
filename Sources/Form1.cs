@@ -53,7 +53,7 @@ namespace HitCounterManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = Text + " - v" + Application.ProductVersion + " Pre-Release 1.2 " + OsLayer.Name;
+            Text = Text + " - v" + Application.ProductVersion + " Pre-Release 2.0 " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();  
             ProfileChangedHandler(sender, e);
@@ -95,14 +95,21 @@ namespace HitCounterManager
                                 }
                                 else
                                 {
-                                    if (aslSplitter.enableSplitting)
+                                    if (cupSplitter.dataCuphead.enableSplitting)
                                     {
-                                        comboBoxGame.SelectedIndex = 9;
+                                        comboBoxGame.SelectedIndex = 8;
                                     }
                                     else
                                     {
-                                        comboBoxGame.SelectedIndex = 0;
-                                    }                                    
+                                        if (aslSplitter.enableSplitting)
+                                        {
+                                            comboBoxGame.SelectedIndex = 9;
+                                        }
+                                        else
+                                        {
+                                            comboBoxGame.SelectedIndex = 0;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -247,7 +254,7 @@ namespace HitCounterManager
         private void btnSplitPrev_Click(object sender, EventArgs e) { profCtrl.ProfileSplitGo(-1); }
 
         private void btnSplitter_Click(object sender, EventArgs e) 
-        { Form form = new AutoSplitter(getSekiroInstance(),getHollowInstance(),getEldenInstance(),getDs3Instance(),getCelesteInstance(),getDs2Instance(),getAslInstance(), Program.DarkMode); form.ShowDialog(this);}
+        { Form form = new AutoSplitter(getSekiroInstance(),getHollowInstance(),getEldenInstance(),getDs3Instance(),getCelesteInstance(),getDs2Instance(),getAslInstance(),getCupheadInstance(), Program.DarkMode); form.ShowDialog(this);}
 
         private void ProfileChangedHandler(object sender, EventArgs e)
         {
@@ -286,6 +293,7 @@ namespace HitCounterManager
             celesteSplitter.setStatusSplitting(false);
             ds2Splitter.setStatusSplitting(false);
             aslSplitter.setStatusSplitting(false);
+            cupSplitter.setStatusSplitting(false);
 
 
             //Ask Selected index
@@ -316,6 +324,10 @@ namespace HitCounterManager
             if(comboBoxGame.SelectedIndex == 9)
             {
                 aslSplitter.setStatusSplitting(true);
+            }
+            if(comboBoxGame.SelectedIndex == 8)
+            {
+                cupSplitter.setStatusSplitting(true);
             }
         }
 

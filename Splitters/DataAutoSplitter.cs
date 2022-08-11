@@ -33,6 +33,7 @@ namespace HitCounterManager
         public DTDs3 DataDs3;
         public DTDs2 DataDs2;
         public DTCeleste DataCeleste;
+        public DTCuphead DataCuphead;
         public bool ASLMethod = false;
     }
 }

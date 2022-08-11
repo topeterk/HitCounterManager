@@ -37,7 +37,8 @@ namespace HitCounterManager
         Ds2Splitter ds2Splitter;
         CelesteSplitter celesteSplitter;
         AslSplitter aslSplitter;
-        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter, EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter, Ds2Splitter ds2Splitter,AslSplitter aslSplitter,bool darkMode)
+        CupheadSplitter cupSplitter;
+        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter, EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter, Ds2Splitter ds2Splitter,AslSplitter aslSplitter,CupheadSplitter cupSplitter, bool darkMode)
         {
             InitializeComponent();
             this.sekiroSplitter = sekiroSplitter;
@@ -47,12 +48,11 @@ namespace HitCounterManager
             this.ds2Splitter = ds2Splitter;
             this.celesteSplitter = celesteSplitter;
             this.aslSplitter = aslSplitter;
+            this.cupSplitter = cupSplitter;
             this.darkMode = darkMode;
             refreshForm();
             
-            
-
-
+           
         }
 
         public void refreshForm()
@@ -71,6 +71,7 @@ namespace HitCounterManager
             #region SekiroTab       
             panelPositionS.Hide();
             panelBossS.Hide();
+            panelCfSekiro.Hide();
             panelIdolsS.Hide();
             groupBoxAshinaOutskirts.Hide();
             groupBoxHirataEstate.Hide();
@@ -80,7 +81,7 @@ namespace HitCounterManager
             groupBoxSunkenValley.Hide();
             groupBoxAshinaDepths.Hide();
             groupBoxFountainhead.Hide();
-
+           
             #endregion
             #region HollowTab
             panelBossH.Hide();
@@ -116,6 +117,10 @@ namespace HitCounterManager
             panelBossDS2.Hide();
             panelAttributeDs2.Hide();
             panelPositionDs2.Hide();
+            #endregion
+            #region CupheadTab
+            panelBossCuphead.Hide();
+            panelLevelCuphead.Hide();
             #endregion
             checkStatusGames();
         }
@@ -215,9 +220,15 @@ namespace HitCounterManager
             #region SekiroLoad.Position
             foreach (DefinitionsSekiro.PositionS position in sekiroData.getPositionsToSplit())
             {
-                listBoxPositionsS.Items.Add(position.vector + " - " + position.Mode);
+                listBoxPositionsS.Items.Add(position.vector.X + "; " + position.vector.Y + "; " + position.vector.Z + " - " + position.Mode);
             }
             comboBoxMarginS.SelectedIndex = sekiroData.positionMargin;
+            #endregion
+            #region SekiroLoad.CustomFlag
+            foreach (DefinitionsSekiro.CfSk cf in sekiroData.getFlagToSplit())
+            {
+                listBoxCfS.Items.Add(cf.Id + " - " + cf.Mode);
+            }
             #endregion
             DTHollow hollowData = hollowSplitter.getDataHollow();
             #region HollowLoad.Boss
@@ -394,6 +405,26 @@ namespace HitCounterManager
             }
             comboBoxMarginDs2.SelectedIndex = ds2Data.positionMargin;
             #endregion
+            DTCuphead cupData = cupSplitter.getDataCuphead();
+            #region CupheadLoad.Boss&Level
+            foreach (var c in cupData.getElementToSplit())
+            {
+                for (int i = 0; i < checkedListBoxBossCuphead.Items.Count; i++)
+                {
+                    if (c.Title == checkedListBoxBossCuphead.Items[i].ToString())
+                    {
+                        checkedListBoxBossCuphead.SetItemChecked(i, true);
+                    }
+                }
+                for (int i = 0; i < checkedListLevelCuphead.Items.Count; i++)
+                {
+                    if (c.Title == checkedListLevelCuphead.Items[i].ToString())
+                    {
+                        checkedListLevelCuphead.SetItemChecked(i, true);
+                    }
+                }
+            }
+            #endregion
         }
 
         private void refresh_Btn(object sender, EventArgs e)
@@ -462,6 +493,16 @@ namespace HitCounterManager
             {
                 Ds2NotRunning.Show();
                 Ds2Running.Hide();
+            }
+            if (cupSplitter.getCupheadStatusProcess(0))
+            {
+                CupheadRunning.Show();
+                CupheadNotRunning.Hide();
+            }
+            else
+            {
+                CupheadNotRunning.Show();
+                CupheadRunning.Hide();
             }
 
         }
@@ -550,12 +591,12 @@ namespace HitCounterManager
 
         #endregion
         #region Sekiro.UI
-        Vector3f Vector;
         private void toSplitSelectSekiro_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.panelPositionS.Hide();
             this.panelBossS.Hide();
             this.panelIdolsS.Hide();
+            this.panelCfSekiro.Hide();
 
 
             switch (toSplitSelectSekiro.SelectedIndex)
@@ -569,16 +610,15 @@ namespace HitCounterManager
                 case 2: //Target Position
                     this.panelPositionS.Show();
                     break;
+                case 3: //CustomFlags
+                    this.panelCfSekiro.Show(); break;
             }
         }
-
-
 
 
         private void btnGetPosition_Click(object sender, EventArgs e)
         {
             var Vector = sekiroSplitter.getCurrentPosition();
-            this.Vector = Vector;
             this.textBoxX.Clear();
             this.textBoxY.Clear();
             this.textBoxZ.Clear();
@@ -591,10 +631,10 @@ namespace HitCounterManager
         private void btnAddPosition_Click(object sender, EventArgs e)
         {
             DialogResult error;
-            if (this.Vector != null)
+            if (textBoxX.Text != null || textBoxY.Text != null || textBoxZ.Text != null)
             {
-                var contains1 = !listBoxPositionsS.Items.Contains(this.Vector + " - " + "Inmediatly");
-                var contains2 = !listBoxPositionsS.Items.Contains(this.Vector + " - " + "Loading game after");
+                var contains1 = !listBoxPositionsS.Items.Contains(textBoxX.Text + "; " + textBoxY.Text + "; " + textBoxZ.Text + " - " + "Inmediatly");
+                var contains2 = !listBoxPositionsS.Items.Contains(textBoxX.Text + "; " + textBoxY.Text + "; " + textBoxZ.Text + " - " + "Loading game after");
                 if (contains1 && contains2)
                 {
                     
@@ -604,17 +644,26 @@ namespace HitCounterManager
                     }
                     else
                     {
-                        if (this.Vector.X == 0 && this.Vector.Y == 0 && this.Vector.Z == 0)
+                        if ((textBoxX.Text == "0" && textBoxY.Text == "0" && textBoxZ.Text == "0") || (textBoxX.Text == "0.00" && textBoxY.Text == "0.00" && textBoxZ.Text == "0.00"))
                         {
                             error = MessageBox.Show("Dont use cords 0,0,0", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         else
                         {
-                            sekiroSplitter.setProcedure(false);
-                            listBoxPositionsS.Items.Add(this.Vector + " - " + comboBoxHowPosition.Text.ToString());
-                            error = MessageBox.Show("Move your charapter to evit autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            sekiroSplitter.AddPosition(this.Vector, comboBoxHowPosition.Text.ToString());
-                            sekiroSplitter.setProcedure(true);
+                            try
+                            {
+                                var X = float.Parse(textBoxX.Text);
+                                var Y = float.Parse(textBoxY.Text);
+                                var Z = float.Parse(textBoxZ.Text);
+                                sekiroSplitter.setProcedure(false);
+                                listBoxPositionsS.Items.Add(X + "; " + Y + "; " + Z + " - " + comboBoxHowPosition.Text.ToString());
+                                error = MessageBox.Show("Move your charapter to evit autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                sekiroSplitter.AddPosition(X,Y,Z, comboBoxHowPosition.Text.ToString());
+                                sekiroSplitter.setProcedure(true);
+                            }catch (Exception) 
+                            {
+                                error = MessageBox.Show("Check Coordinates and try again", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                     }
                 }
@@ -625,7 +674,7 @@ namespace HitCounterManager
             }
             else
             {
-                error = MessageBox.Show("Plase get a position ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = MessageBox.Show("Plase get/set a position ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -1175,6 +1224,56 @@ namespace HitCounterManager
             }
         }
 
+        private void btnGetListFlagsSekiro_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://docs.google.com/spreadsheets/d/1Nwp6XwURGksUu-_jCVhcyXh4KH7hTCXYsJTCHbw87JQ/edit?usp=sharing");
+        }
+
+        private void btnAddCfS_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (textBoxCfIdS.Text == null || comboBoxHowCfS.SelectedIndex == -1)
+            {
+                error = MessageBox.Show("Plase set a ID and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                try
+                {
+                    var id = uint.Parse(textBoxCfIdS.Text);
+                    var contains1 = !listBoxCfS.Items.Contains(id + " - " + "Inmediatly");
+                    var contains2 = !listBoxCfS.Items.Contains(id + " - " + "Loading game after");
+                    if (contains1 && contains2)
+                    {
+                        sekiroSplitter.setProcedure(false);
+                        sekiroSplitter.AddCustomFlag(id, comboBoxHowCfS.Text.ToString());
+                        listBoxCfS.Items.Add(id + " - " + comboBoxHowCfS.Text.ToString());
+                        sekiroSplitter.setProcedure(true);
+                    }
+                    else
+                    {
+                        error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception)
+                {
+                    error = MessageBox.Show("Wrong ID", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+        }
+
+        private void listBoxCfS_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.listBoxCfS.SelectedItem != null)
+            {
+                int i = listBoxCfS.Items.IndexOf(listBoxCfS.SelectedItem);
+                sekiroSplitter.setProcedure(false);
+                sekiroSplitter.RemoveCustomFlag(i);
+                sekiroSplitter.setProcedure(true);
+                listBoxCfS.Items.Remove(listBoxCfS.SelectedItem);
+            }
+        }
         private void btnDesactiveSekiro_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Are you sure you want to disable everything?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -1599,8 +1698,8 @@ namespace HitCounterManager
             DialogResult error;
             if (this.VectorER != null)
             {
-                var contains1 = !listBoxPositionsER.Items.Contains(this.Vector + " - " + "Inmediatly");
-                var contains2 = !listBoxPositionsER.Items.Contains(this.Vector + " - " + "Loading game after");
+                var contains1 = !listBoxPositionsER.Items.Contains(this.VectorER + " - " + "Inmediatly");
+                var contains2 = !listBoxPositionsER.Items.Contains(this.VectorER + " - " + "Loading game after");
                 if (contains1 && contains2)
                 {
 
@@ -2195,8 +2294,77 @@ namespace HitCounterManager
 
 
 
-        #endregion
 
-       
+
+        #endregion
+        #region Cuphead UI
+        private void comboBoxToSplitCuphead_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            panelBossCuphead.Hide();
+            panelLevelCuphead.Hide();
+            switch (comboBoxToSplitCuphead.SelectedIndex)
+            {
+                case 0:
+                    panelBossCuphead.Show(); break;
+                case 1:
+                    panelLevelCuphead.Show(); break;
+            }
+        }
+
+        private void checkedListBoxBossCuphead_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (checkedListBoxBossCuphead.SelectedIndex != -1)
+            {
+                if (checkedListBoxBossCuphead.GetItemChecked(checkedListBoxBossCuphead.SelectedIndex) == false)
+                {
+                    cupSplitter.setProcedure(false);
+                    cupSplitter.AddElement(checkedListBoxBossCuphead.SelectedItem.ToString());
+                    cupSplitter.setProcedure(true);
+                }
+                else
+                {
+                    cupSplitter.setProcedure(false);
+                    cupSplitter.RemoveElement(checkedListBoxBossCuphead.SelectedItem.ToString());
+                    cupSplitter.setProcedure(true);
+                }
+            }
+        }
+
+        private void checkedListLevelCuphead_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (checkedListLevelCuphead.SelectedIndex != -1)
+            {
+                if (checkedListLevelCuphead.GetItemChecked(checkedListLevelCuphead.SelectedIndex) == false)
+                {
+                    cupSplitter.setProcedure(false);
+                    cupSplitter.AddElement(checkedListLevelCuphead.SelectedItem.ToString());
+                    cupSplitter.setProcedure(true);
+                }
+                else
+                {
+                    cupSplitter.setProcedure(false);
+                    cupSplitter.RemoveElement(checkedListLevelCuphead.SelectedItem.ToString());
+                    cupSplitter.setProcedure(true);
+                }
+            }
+        }
+
+        private void btnRemoveAllCuphead_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to disable everything?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                cupSplitter.setProcedure(false);
+                cupSplitter.clearData();
+                cupSplitter.setProcedure(true);
+                this.Controls.Clear();
+                this.InitializeComponent();
+                refreshForm();
+                this.AutoSplitter_Load(null, null);//Load Others Games Settings
+                TabControl2.TabPages.Add(tabCuphead);
+                TabControl2.SelectTab(tabCuphead);
+            }
+        }
+#endregion
     }
 }

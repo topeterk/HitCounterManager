@@ -314,7 +314,17 @@ namespace HitCounterManager
             }
         }
 
-        
+
+        #endregion
+        #region CustomFlag.Sekiro
+        [Serializable]
+        public class CfSk
+        {
+            public uint Id;
+            public bool IsSplited = false;
+            public string Mode;
+        }
+
         #endregion
     }
 
@@ -328,6 +338,7 @@ namespace HitCounterManager
         public List<DefinitionsSekiro.BossS> bossToSplit = new List<DefinitionsSekiro.BossS>();
         public List<DefinitionsSekiro.Idol> idolsTosplit = new List<DefinitionsSekiro.Idol>();
         public List<DefinitionsSekiro.PositionS> positionsToSplit = new List<DefinitionsSekiro.PositionS>();
+        public List<DefinitionsSekiro.CfSk> flagToSplit = new List<DefinitionsSekiro.CfSk>();
         public int positionMargin = 3;
 
 
@@ -344,6 +355,11 @@ namespace HitCounterManager
         public List<DefinitionsSekiro.PositionS> getPositionsToSplit()
         {
             return this.positionsToSplit;
+        }
+
+        public List<DefinitionsSekiro.CfSk> getFlagToSplit()
+        {
+            return this.flagToSplit;
         }
     }
 }

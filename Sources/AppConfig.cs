@@ -494,6 +494,7 @@ namespace HitCounterManager
         private Ds3Splitter ds3Splitter = new Ds3Splitter();
         private CelesteSplitter celesteSplitter = new CelesteSplitter();
         private Ds2Splitter ds2Splitter = new Ds2Splitter();
+        private CupheadSplitter cupSplitter = new CupheadSplitter();
         private AslSplitter aslSplitter = new AslSplitter();
         private void SaveAutoSplitterSettings() {
             string savePath = Path.GetFullPath("HitCounterManagerSaveAutoSplitter.xml");
@@ -506,6 +507,7 @@ namespace HitCounterManager
             dataAS.DataDs3 = ds3Splitter.getDataDs3();
             dataAS.DataDs2 = ds2Splitter.getDataDs2();
             dataAS.DataCeleste = celesteSplitter.getDataCeleste();
+            dataAS.DataCuphead = cupSplitter.getDataCuphead();
             dataAS.ASLMethod = aslSplitter.enableSplitting;
             formatter.Serialize(myStream, dataAS);
             myStream.Close();
@@ -528,6 +530,7 @@ namespace HitCounterManager
             DTDs3 dataDs3 = null;
             DTDs2 dataDs2 = null;
             DTCeleste dataCeleste = null;
+            DTCuphead dataCuphead = null;
             
              try
              {
@@ -540,6 +543,7 @@ namespace HitCounterManager
                 dataDs3 = dataAS.DataDs3;
                 dataDs2 = dataAS.DataDs2;
                 dataCeleste = dataAS.DataCeleste;
+                dataCuphead = dataAS.DataCuphead;
                 aslSplitter.enableSplitting = dataAS.ASLMethod;
                 myStream.Close();
             }
@@ -552,13 +556,15 @@ namespace HitCounterManager
             if (dataDs3 == null) { dataDs3 = new DTDs3(); }
             if(dataDs2 == null) { dataDs2 = new DTDs2(); }
             if(dataCeleste == null) { dataCeleste = new DTCeleste(); }
+            if(dataCuphead == null) { dataCuphead = new DTCuphead(); }
 
             sekiroSplitter.setDataSekiro(dataSekiro, profiles);            
             hollowSplitter.setDataHollow(dataHollow, profiles);          
             eldenSplitter.setDataElden(dataElden, profiles);            
             ds3Splitter.setDataDs3(dataDs3, profiles);           
             ds2Splitter.setDataDs2(dataDs2, profiles);          
-            celesteSplitter.setDataCeleste(dataCeleste, profiles);          
+            celesteSplitter.setDataCeleste(dataCeleste, profiles);
+            cupSplitter.setDataCuphead(dataCuphead, profiles);
             try
             {
                 string savePath = Path.GetFullPath("HitCounterManagerSaveAutoSplitter.xml");
@@ -614,6 +620,11 @@ namespace HitCounterManager
         public CelesteSplitter getCelesteInstance()
         {
             return this.celesteSplitter;
+        }
+
+        public CupheadSplitter getCupheadInstance()
+        {
+            return this.cupSplitter;
         }
         
         public AslSplitter getAslInstance()

@@ -41,7 +41,6 @@ namespace HitCounterManager
         public DTHollow getDataHollow()
         {
             return this.dataHollow;
-
         }
 
         public void setDataHollow(DTHollow data, ProfilesControl profile)
