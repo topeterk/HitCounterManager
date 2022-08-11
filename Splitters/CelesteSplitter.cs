@@ -85,7 +85,7 @@ namespace HitCounterManager
 
         public void resetSplited()
         {
-            if (dataCeleste.getChapterToSplit().Count != 0)
+            if (dataCeleste.getChapterToSplit().Count > 0)
             {
                 foreach (var c in dataCeleste.getChapterToSplit())
                 {
@@ -122,10 +122,13 @@ namespace HitCounterManager
 
         public void RefreshCeleste()
         {
-            _StatusCeleste = getCelesteStatusProcess(0);
-            while (!_StatusProcedure)
+            int delay = 2000;
+            _StatusCeleste = getCelesteStatusProcess(delay);
+            while (_StatusProcedure && dataCeleste.enableSplitting)
             {
-                _StatusCeleste = getCelesteStatusProcess(45000);
+                Thread.Sleep(10);
+                _StatusCeleste = getCelesteStatusProcess(delay);
+                if (!_StatusCeleste) { delay = 2000; } else { delay = 20000; }
             }
         }
 

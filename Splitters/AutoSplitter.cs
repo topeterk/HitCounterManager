@@ -21,22 +21,15 @@
 //SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 using SoulMemory;
 
 namespace HitCounterManager
 {
     public partial class AutoSplitter : Form
     {
+        bool darkMode = false;
         SekiroSplitter sekiroSplitter;
         HollowSplitter hollowSplitter;
         EldenSplitter eldenSplitter;
@@ -44,7 +37,7 @@ namespace HitCounterManager
         Ds2Splitter ds2Splitter;
         CelesteSplitter celesteSplitter;
         AslSplitter aslSplitter;
-        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter, EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter, Ds2Splitter ds2Splitter,AslSplitter aslSplitter)
+        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter, EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter, Ds2Splitter ds2Splitter,AslSplitter aslSplitter,bool darkMode)
         {
             InitializeComponent();
             this.sekiroSplitter = sekiroSplitter;
@@ -54,12 +47,22 @@ namespace HitCounterManager
             this.ds2Splitter = ds2Splitter;
             this.celesteSplitter = celesteSplitter;
             this.aslSplitter = aslSplitter;
+            this.darkMode = darkMode;
             refreshForm();
             
+            
+
+
         }
 
         public void refreshForm()
         {
+            #region GeneralUI
+            if (darkMode)
+            {
+                DarkMode();
+            }
+            #endregion
             #region ControlTab
             TabControl2.TabPages.Clear();
             TabControl2.TabPages.Add(tabConfig);
@@ -115,6 +118,20 @@ namespace HitCounterManager
             panelPositionDs2.Hide();
             #endregion
             checkStatusGames();
+        }
+
+        public void DarkMode() //Is horrible but is accuareate that dark mode in main Form KEKW
+        {
+            this.BackColor = Color.FromArgb(40, 40, 40);
+            this.tabConfig.BackColor = Color.FromArgb(40,40,40);
+            this.tabManual.BackColor = Color.FromArgb(40, 40, 40);
+            this.TextBoxManual.BackColor = Color.DarkSlateGray;
+            this.tabDs2.BackColor = Color.FromArgb(40, 40, 40);
+            this.tabDs3.BackColor = Color.FromArgb(40, 40, 40);
+            this.tabElden.BackColor = Color.FromArgb(40, 40, 40);
+            this.tabHollow.BackColor = Color.FromArgb(40, 40, 40);
+            this.tabSekiro.BackColor = Color.FromArgb(40, 40, 40);
+            this.tabCeleste.BackColor = Color.FromArgb(40, 40, 40);
         }
 
         private void AutoSplitter_Load(object sender, EventArgs e)
@@ -526,7 +543,7 @@ namespace HitCounterManager
 
         private void btnASL_Click(object sender, EventArgs e)
         {
-            Form form = new AslConfigurator(aslSplitter);
+            Form form = new AslConfigurator(aslSplitter,darkMode);
             form.ShowDialog();
         }
 

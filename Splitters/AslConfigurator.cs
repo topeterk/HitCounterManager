@@ -22,17 +22,22 @@
 
 using System;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace HitCounterManager
 {
     public partial class AslConfigurator : Form
     {
         AslSplitter aslSplitter;
-        public AslConfigurator(AslSplitter aslSplitter)
+        public AslConfigurator(AslSplitter aslSplitter,bool darkMode)
         {
             InitializeComponent();
             this.aslSplitter = aslSplitter;
             panelReference.Hide();
+            if (darkMode)
+            {
+                DarkMode();
+            }
         }
 
         private void AslConfigurator_Load(object sender, EventArgs e)
@@ -111,6 +116,12 @@ namespace HitCounterManager
         private void btnUpdateScript_Click(object sender, EventArgs e)
         {
             aslSplitter.UpdateScript();
+        }
+
+        public void DarkMode()
+        {
+            this.BackColor = Color.FromArgb(40, 40, 40);
+            this.tabAsl.BackColor = Color.FromArgb(40, 40, 40);
         }
     }
 }

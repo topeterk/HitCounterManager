@@ -94,7 +94,7 @@ namespace HitCounterManager
 
         public void resetSplited() 
         {
-            if (dataElden.getBossToSplit().Count != 0)
+            if (dataElden.getBossToSplit().Count > 0)
             {
                 foreach (var b in dataElden.getBossToSplit())
                 {
@@ -102,7 +102,7 @@ namespace HitCounterManager
                 }
             }
 
-            if (dataElden.getGraceToSplit().Count != 0)
+            if (dataElden.getGraceToSplit().Count > 0)
             {
                 foreach (var g in dataElden.getGraceToSplit())
                 {
@@ -110,7 +110,7 @@ namespace HitCounterManager
                 }
             }
 
-            if (dataElden.getPositionToSplit().Count != 0)
+            if (dataElden.getPositionToSplit().Count > 0)
             {
                 foreach (var p in dataElden.getPositionToSplit())
                 {
@@ -118,7 +118,7 @@ namespace HitCounterManager
                 }
             }
 
-            if (dataElden.getFlagsToSplit().Count != 0)
+            if (dataElden.getFlagsToSplit().Count > 0)
             {
                 foreach (var cf in dataElden.getFlagsToSplit())
                 {
@@ -221,13 +221,20 @@ namespace HitCounterManager
         #region init()
         public void RefreshElden()
         {
-            _StatusElden = getEldenStatusProcess(0);
-            while (!_StatusProcedure)
+            int delay = 2000;
+            _StatusElden = getEldenStatusProcess(delay);
+            while (_StatusProcedure && dataElden.enableSplitting)
             {
-                _StatusElden = getEldenStatusProcess(45000);
+                Thread.Sleep(10);
+                _StatusElden = getEldenStatusProcess(20000);
                 if (!_StatusElden)
                 {
                     _writeMemory = false;
+                    delay = 2000;
+                }
+                else
+                {
+                    delay = 20000;
                 }
 
                 if (!_writeMemory)

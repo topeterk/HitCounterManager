@@ -163,7 +163,7 @@ namespace HitCounterManager
 
         public void resetSplited()
         {
-            if (dataSekiro.getBossToSplit().Count != 0)
+            if (dataSekiro.getBossToSplit().Count > 0)
             {
                 foreach (var b in dataSekiro.getBossToSplit())
                 {
@@ -171,7 +171,7 @@ namespace HitCounterManager
                 }  
             }
 
-            if (dataSekiro.getidolsTosplit().Count != 0)
+            if (dataSekiro.getidolsTosplit().Count > 0)
             {
                 foreach (var b in dataSekiro.getidolsTosplit())
                 {
@@ -179,7 +179,7 @@ namespace HitCounterManager
                 }
             }
 
-            if (dataSekiro.getPositionsToSplit().Count != 0)
+            if (dataSekiro.getPositionsToSplit().Count > 0)
             {
                 foreach (var p in dataSekiro.getPositionsToSplit())
                 {
@@ -223,14 +223,21 @@ namespace HitCounterManager
         #region init()    
         public void RefreshSekiro()
         {
-            _StatusSekiro = getSekiroStatusProcess(0);
-            while (!_StatusProcedure)
+            int delay = 2000;
+            _StatusSekiro = getSekiroStatusProcess(delay);
+            while (_StatusProcedure && dataSekiro.enableSplitting)
             {
-                _StatusSekiro = getSekiroStatusProcess(45000);
+                Thread.Sleep(10);
+                _StatusSekiro = getSekiroStatusProcess(delay);
                if (!_StatusSekiro)
                {
                     _writeMemory = false;
-               }
+                    delay = 2000;
+                }
+                else
+                {
+                    delay = 20000;
+                }
                 
                 if (!_writeMemory)
                 {

@@ -63,7 +63,7 @@ namespace HitCounterManager
 
         public void resetSplited()
         {
-            if (dataDs3.getBossToSplit().Count != 0)
+            if (dataDs3.getBossToSplit().Count > 0)
             {
                 foreach (var b in dataDs3.getBossToSplit())
                 {
@@ -71,7 +71,7 @@ namespace HitCounterManager
                 }
             }
 
-            if (dataDs3.getBonfireToSplit().Count != 0)
+            if (dataDs3.getBonfireToSplit().Count > 0)
             {
                 foreach (var bf in dataDs3.getBonfireToSplit())
                 {
@@ -79,7 +79,7 @@ namespace HitCounterManager
                 }
             }
 
-            if (dataDs3.getLvlToSplit().Count != 0)
+            if (dataDs3.getLvlToSplit().Count > 0)
             {
                 foreach (var l in dataDs3.getLvlToSplit())
                 {
@@ -87,7 +87,7 @@ namespace HitCounterManager
                 }
             }
 
-            if (dataDs3.getFlagToSplit().Count != 0)
+            if (dataDs3.getFlagToSplit().Count > 0)
             {
                 foreach (var cf in dataDs3.getFlagToSplit())
                 {
@@ -125,7 +125,7 @@ namespace HitCounterManager
                 customFlagToSplit();
             });
 
-                taskRefresh.Start();
+            taskRefresh.Start();
             taskCheckload.Start();
             task1.Start();
             task2.Start();
@@ -192,14 +192,21 @@ namespace HitCounterManager
 
         #region init()
         public void RefreshDs3()
-        {
-            _StatusDs3 = getDs3StatusProcess(0);
-            while (!_StatusProcedure)
+        {           
+            int delay = 2000;
+            _StatusDs3 = getDs3StatusProcess(delay);
+            while (_StatusProcedure && dataDs3.enableSplitting)
             {
-                _StatusDs3 = getDs3StatusProcess(45000);
+                Thread.Sleep(10);
+                try { _StatusDs3 = getDs3StatusProcess(delay); }catch (Exception) { };
                 if (!_StatusDs3)
                 {
                     _writeMemory = false;
+                    delay = 2000;
+                }
+                else
+                {
+                    delay = 20000;
                 }
 
                 if (!_writeMemory)

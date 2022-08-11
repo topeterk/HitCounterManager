@@ -42,7 +42,7 @@
             this.btnDs1 = new System.Windows.Forms.Button();
             this.btnSekiro = new System.Windows.Forms.Button();
             this.tabManual = new System.Windows.Forms.TabPage();
-            this.TextBox1 = new System.Windows.Forms.TextBox();
+            this.TextBoxManual = new System.Windows.Forms.TextBox();
             this.tabSekiro = new System.Windows.Forms.TabPage();
             this.panelPositionS = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
@@ -148,6 +148,13 @@
             this.tabDs1 = new System.Windows.Forms.TabPage();
             this.label5 = new System.Windows.Forms.Label();
             this.tabDs2 = new System.Windows.Forms.TabPage();
+            this.panelBossDS2 = new System.Windows.Forms.Panel();
+            this.btnAddBossDS2 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBoxBossDs2 = new System.Windows.Forms.ComboBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.comboBoxHowBossDs2 = new System.Windows.Forms.ComboBox();
+            this.listBoxBossDs2 = new System.Windows.Forms.ListBox();
             this.panelPositionDs2 = new System.Windows.Forms.Panel();
             this.label55 = new System.Windows.Forms.Label();
             this.label56 = new System.Windows.Forms.Label();
@@ -170,13 +177,6 @@
             this.comboBoxHowAttributeDs2 = new System.Windows.Forms.ComboBox();
             this.comboBoxAttributeDs2 = new System.Windows.Forms.ComboBox();
             this.label54 = new System.Windows.Forms.Label();
-            this.panelBossDS2 = new System.Windows.Forms.Panel();
-            this.btnAddBossDS2 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBoxBossDs2 = new System.Windows.Forms.ComboBox();
-            this.label50 = new System.Windows.Forms.Label();
-            this.comboBoxHowBossDs2 = new System.Windows.Forms.ComboBox();
-            this.listBoxBossDs2 = new System.Windows.Forms.ListBox();
             this.btnRefreshDs2 = new System.Windows.Forms.Button();
             this.btnDesactiveAllDs2 = new System.Windows.Forms.Button();
             this.Ds2Running = new System.Windows.Forms.Label();
@@ -184,6 +184,13 @@
             this.comboBoxToSplitDs2 = new System.Windows.Forms.ComboBox();
             this.label51 = new System.Windows.Forms.Label();
             this.tabDs3 = new System.Windows.Forms.TabPage();
+            this.panelBossDs3 = new System.Windows.Forms.Panel();
+            this.btnAddBossDs3 = new System.Windows.Forms.Button();
+            this.label39 = new System.Windows.Forms.Label();
+            this.comboBoxBossDs3 = new System.Windows.Forms.ComboBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.comboBoxHowBossDs3 = new System.Windows.Forms.ComboBox();
+            this.listBoxBossDs3 = new System.Windows.Forms.ListBox();
             this.panelLvlDs3 = new System.Windows.Forms.Panel();
             this.label45 = new System.Windows.Forms.Label();
             this.textBoxValueDs3 = new System.Windows.Forms.TextBox();
@@ -208,13 +215,6 @@
             this.comboBoxHowBonfireDs3 = new System.Windows.Forms.ComboBox();
             this.comboBoxBonfireDs3 = new System.Windows.Forms.ComboBox();
             this.label37 = new System.Windows.Forms.Label();
-            this.panelBossDs3 = new System.Windows.Forms.Panel();
-            this.btnAddBossDs3 = new System.Windows.Forms.Button();
-            this.label39 = new System.Windows.Forms.Label();
-            this.comboBoxBossDs3 = new System.Windows.Forms.ComboBox();
-            this.label40 = new System.Windows.Forms.Label();
-            this.comboBoxHowBossDs3 = new System.Windows.Forms.ComboBox();
-            this.listBoxBossDs3 = new System.Windows.Forms.ListBox();
             this.btnRefreshDS3 = new System.Windows.Forms.Button();
             this.btnDesactiveAllDs3 = new System.Windows.Forms.Button();
             this.Ds3Running = new System.Windows.Forms.Label();
@@ -340,14 +340,14 @@
             this.groupBoxRadiosAshinaOutskirts.SuspendLayout();
             this.tabDs1.SuspendLayout();
             this.tabDs2.SuspendLayout();
+            this.panelBossDS2.SuspendLayout();
             this.panelPositionDs2.SuspendLayout();
             this.panelAttributeDs2.SuspendLayout();
-            this.panelBossDS2.SuspendLayout();
             this.tabDs3.SuspendLayout();
+            this.panelBossDs3.SuspendLayout();
             this.panelLvlDs3.SuspendLayout();
             this.panelCfDs3.SuspendLayout();
             this.panelBonfireDs3.SuspendLayout();
-            this.panelBossDs3.SuspendLayout();
             this.tabElden.SuspendLayout();
             this.panelCfER.SuspendLayout();
             this.panelPositionsER.SuspendLayout();
@@ -407,6 +407,7 @@
             this.groupBoxSplitters.Controls.Add(this.btnDs2);
             this.groupBoxSplitters.Controls.Add(this.btnDs1);
             this.groupBoxSplitters.Controls.Add(this.btnSekiro);
+            this.groupBoxSplitters.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBoxSplitters.Location = new System.Drawing.Point(13, 12);
             this.groupBoxSplitters.Name = "groupBoxSplitters";
             this.groupBoxSplitters.Size = new System.Drawing.Size(408, 204);
@@ -507,7 +508,7 @@
             // tabManual
             // 
             this.tabManual.BackColor = System.Drawing.SystemColors.Control;
-            this.tabManual.Controls.Add(this.TextBox1);
+            this.tabManual.Controls.Add(this.TextBoxManual);
             this.tabManual.Location = new System.Drawing.Point(4, 22);
             this.tabManual.Name = "tabManual";
             this.tabManual.Padding = new System.Windows.Forms.Padding(3);
@@ -515,20 +516,20 @@
             this.tabManual.TabIndex = 6;
             this.tabManual.Text = "Instrucctions";
             // 
-            // TextBox1
+            // TextBoxManual
             // 
-            this.TextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.TextBoxManual.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TextBox1.Location = new System.Drawing.Point(6, 6);
-            this.TextBox1.Multiline = true;
-            this.TextBox1.Name = "TextBox1";
-            this.TextBox1.ReadOnly = true;
-            this.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TextBox1.Size = new System.Drawing.Size(575, 339);
-            this.TextBox1.TabIndex = 2;
-            this.TextBox1.TabStop = false;
-            this.TextBox1.Text = resources.GetString("TextBox1.Text");
+            this.TextBoxManual.Location = new System.Drawing.Point(6, 6);
+            this.TextBoxManual.Multiline = true;
+            this.TextBoxManual.Name = "TextBoxManual";
+            this.TextBoxManual.ReadOnly = true;
+            this.TextBoxManual.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TextBoxManual.Size = new System.Drawing.Size(575, 339);
+            this.TextBoxManual.TabIndex = 2;
+            this.TextBoxManual.TabStop = false;
+            this.TextBoxManual.Text = resources.GetString("TextBoxManual.Text");
             // 
             // tabSekiro
             // 
@@ -1838,6 +1839,121 @@
             this.tabDs2.TabIndex = 0;
             this.tabDs2.Text = "Dark Souls 2";
             // 
+            // panelBossDS2
+            // 
+            this.panelBossDS2.Controls.Add(this.btnAddBossDS2);
+            this.panelBossDS2.Controls.Add(this.label2);
+            this.panelBossDS2.Controls.Add(this.comboBoxBossDs2);
+            this.panelBossDS2.Controls.Add(this.label50);
+            this.panelBossDS2.Controls.Add(this.comboBoxHowBossDs2);
+            this.panelBossDS2.Controls.Add(this.listBoxBossDs2);
+            this.panelBossDS2.Location = new System.Drawing.Point(38, 89);
+            this.panelBossDS2.Name = "panelBossDS2";
+            this.panelBossDS2.Size = new System.Drawing.Size(505, 240);
+            this.panelBossDS2.TabIndex = 24;
+            // 
+            // btnAddBossDS2
+            // 
+            this.btnAddBossDS2.Location = new System.Drawing.Point(204, 48);
+            this.btnAddBossDS2.Name = "btnAddBossDS2";
+            this.btnAddBossDS2.Size = new System.Drawing.Size(100, 21);
+            this.btnAddBossDS2.TabIndex = 14;
+            this.btnAddBossDS2.Text = "Add";
+            this.btnAddBossDS2.UseVisualStyleBackColor = true;
+            this.btnAddBossDS2.Click += new System.EventHandler(this.btnAddBossDS2_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(295, 3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(33, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Boss:";
+            // 
+            // comboBoxBossDs2
+            // 
+            this.comboBoxBossDs2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxBossDs2.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.comboBoxBossDs2.FormattingEnabled = true;
+            this.comboBoxBossDs2.Items.AddRange(new object[] {
+            "The Last Giant",
+            "The Pursuer",
+            "Executioners Chariot",
+            "Looking Glass Knight",
+            "The Skeleton Lords",
+            "Flexile Sentry",
+            "Lost Sinner",
+            "Belfry Gargoyles",
+            "Ruin Sentinels",
+            "Royal Rat Vanguard",
+            "Royal Rat Authority",
+            "Scorpioness Najka",
+            "The Duke\'s Dear Freja",
+            "Mytha, the Baneful Queen",
+            "The Rotten",
+            "Old DragonSlayer",
+            "Covetous Demon",
+            "Smelter Demon",
+            "Old Iron King",
+            "Guardian Dragon",
+            "Demon of Song",
+            "Velstadt, The Royal Aegis",
+            "Vendrick",
+            "Darklurker",
+            "Dragonrider",
+            "Twin Dragonriders",
+            "Prowling Magnus and Congregation",
+            "Giant Lord",
+            "Ancient Dragon",
+            "Throne Watcher and Throne Defender",
+            "Nashandra",
+            "Aldia, Scholar of the First Sin",
+            "Elana, Squalid Queen",
+            "Sinh, the Slumbering Dragon",
+            "Afflicted Graverobber, Ancient Soldier Varg, and Cerah the Old Explorer",
+            "Blue Smelter Demon",
+            "Fume knight",
+            "Sir Alonne",
+            "Burnt Ivory King",
+            "Aava, the King\'s Pet",
+            "Lud and Zallen, the King\'s Pets"});
+            this.comboBoxBossDs2.Location = new System.Drawing.Point(184, 18);
+            this.comboBoxBossDs2.Name = "comboBoxBossDs2";
+            this.comboBoxBossDs2.Size = new System.Drawing.Size(292, 21);
+            this.comboBoxBossDs2.TabIndex = 12;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(87, 3);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(32, 13);
+            this.label50.TabIndex = 11;
+            this.label50.Text = "How:";
+            // 
+            // comboBoxHowBossDs2
+            // 
+            this.comboBoxHowBossDs2.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.comboBoxHowBossDs2.FormattingEnabled = true;
+            this.comboBoxHowBossDs2.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowBossDs2.Location = new System.Drawing.Point(46, 18);
+            this.comboBoxHowBossDs2.Name = "comboBoxHowBossDs2";
+            this.comboBoxHowBossDs2.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxHowBossDs2.TabIndex = 10;
+            // 
+            // listBoxBossDs2
+            // 
+            this.listBoxBossDs2.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxBossDs2.FormattingEnabled = true;
+            this.listBoxBossDs2.Location = new System.Drawing.Point(9, 82);
+            this.listBoxBossDs2.Name = "listBoxBossDs2";
+            this.listBoxBossDs2.Size = new System.Drawing.Size(489, 147);
+            this.listBoxBossDs2.TabIndex = 7;
+            this.listBoxBossDs2.DoubleClick += new System.EventHandler(this.listBoxBossDs2_DoubleClick);
+            // 
             // panelPositionDs2
             // 
             this.panelPositionDs2.Controls.Add(this.label55);
@@ -2086,121 +2202,6 @@
             this.label54.TabIndex = 17;
             this.label54.Text = "attribute";
             // 
-            // panelBossDS2
-            // 
-            this.panelBossDS2.Controls.Add(this.btnAddBossDS2);
-            this.panelBossDS2.Controls.Add(this.label2);
-            this.panelBossDS2.Controls.Add(this.comboBoxBossDs2);
-            this.panelBossDS2.Controls.Add(this.label50);
-            this.panelBossDS2.Controls.Add(this.comboBoxHowBossDs2);
-            this.panelBossDS2.Controls.Add(this.listBoxBossDs2);
-            this.panelBossDS2.Location = new System.Drawing.Point(38, 89);
-            this.panelBossDS2.Name = "panelBossDS2";
-            this.panelBossDS2.Size = new System.Drawing.Size(505, 240);
-            this.panelBossDS2.TabIndex = 24;
-            // 
-            // btnAddBossDS2
-            // 
-            this.btnAddBossDS2.Location = new System.Drawing.Point(204, 48);
-            this.btnAddBossDS2.Name = "btnAddBossDS2";
-            this.btnAddBossDS2.Size = new System.Drawing.Size(100, 21);
-            this.btnAddBossDS2.TabIndex = 14;
-            this.btnAddBossDS2.Text = "Add";
-            this.btnAddBossDS2.UseVisualStyleBackColor = true;
-            this.btnAddBossDS2.Click += new System.EventHandler(this.btnAddBossDS2_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(295, 3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Boss:";
-            // 
-            // comboBoxBossDs2
-            // 
-            this.comboBoxBossDs2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxBossDs2.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.comboBoxBossDs2.FormattingEnabled = true;
-            this.comboBoxBossDs2.Items.AddRange(new object[] {
-            "The Last Giant",
-            "The Pursuer",
-            "Executioners Chariot",
-            "Looking Glass Knight",
-            "The Skeleton Lords",
-            "Flexile Sentry",
-            "Lost Sinner",
-            "Belfry Gargoyles",
-            "Ruin Sentinels",
-            "Royal Rat Vanguard",
-            "Royal Rat Authority",
-            "Scorpioness Najka",
-            "The Duke\'s Dear Freja",
-            "Mytha, the Baneful Queen",
-            "The Rotten",
-            "Old DragonSlayer",
-            "Covetous Demon",
-            "Smelter Demon",
-            "Old Iron King",
-            "Guardian Dragon",
-            "Demon of Song",
-            "Velstadt, The Royal Aegis",
-            "Vendrick",
-            "Darklurker",
-            "Dragonrider",
-            "Twin Dragonriders",
-            "Prowling Magnus and Congregation",
-            "Giant Lord",
-            "Ancient Dragon",
-            "Throne Watcher and Throne Defender",
-            "Nashandra",
-            "Aldia, Scholar of the First Sin",
-            "Elana, Squalid Queen",
-            "Sinh, the Slumbering Dragon",
-            "Afflicted Graverobber, Ancient Soldier Varg, and Cerah the Old Explorer",
-            "Blue Smelter Demon",
-            "Fume knight",
-            "Sir Alonne",
-            "Burnt Ivory King",
-            "Aava, the King\'s Pet",
-            "Lud and Zallen, the King\'s Pets"});
-            this.comboBoxBossDs2.Location = new System.Drawing.Point(184, 18);
-            this.comboBoxBossDs2.Name = "comboBoxBossDs2";
-            this.comboBoxBossDs2.Size = new System.Drawing.Size(292, 21);
-            this.comboBoxBossDs2.TabIndex = 12;
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(87, 3);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(32, 13);
-            this.label50.TabIndex = 11;
-            this.label50.Text = "How:";
-            // 
-            // comboBoxHowBossDs2
-            // 
-            this.comboBoxHowBossDs2.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.comboBoxHowBossDs2.FormattingEnabled = true;
-            this.comboBoxHowBossDs2.Items.AddRange(new object[] {
-            "Inmediatly",
-            "Loading game after"});
-            this.comboBoxHowBossDs2.Location = new System.Drawing.Point(46, 18);
-            this.comboBoxHowBossDs2.Name = "comboBoxHowBossDs2";
-            this.comboBoxHowBossDs2.Size = new System.Drawing.Size(110, 21);
-            this.comboBoxHowBossDs2.TabIndex = 10;
-            // 
-            // listBoxBossDs2
-            // 
-            this.listBoxBossDs2.BackColor = System.Drawing.SystemColors.Control;
-            this.listBoxBossDs2.FormattingEnabled = true;
-            this.listBoxBossDs2.Location = new System.Drawing.Point(9, 82);
-            this.listBoxBossDs2.Name = "listBoxBossDs2";
-            this.listBoxBossDs2.Size = new System.Drawing.Size(489, 147);
-            this.listBoxBossDs2.TabIndex = 7;
-            this.listBoxBossDs2.DoubleClick += new System.EventHandler(this.listBoxBossDs2_DoubleClick);
-            // 
             // btnRefreshDs2
             // 
             this.btnRefreshDs2.Location = new System.Drawing.Point(474, 17);
@@ -2283,6 +2284,105 @@
             this.tabDs3.Size = new System.Drawing.Size(587, 351);
             this.tabDs3.TabIndex = 1;
             this.tabDs3.Text = "Dark Souls 3";
+            // 
+            // panelBossDs3
+            // 
+            this.panelBossDs3.Controls.Add(this.btnAddBossDs3);
+            this.panelBossDs3.Controls.Add(this.label39);
+            this.panelBossDs3.Controls.Add(this.comboBoxBossDs3);
+            this.panelBossDs3.Controls.Add(this.label40);
+            this.panelBossDs3.Controls.Add(this.comboBoxHowBossDs3);
+            this.panelBossDs3.Controls.Add(this.listBoxBossDs3);
+            this.panelBossDs3.Location = new System.Drawing.Point(42, 89);
+            this.panelBossDs3.Name = "panelBossDs3";
+            this.panelBossDs3.Size = new System.Drawing.Size(505, 240);
+            this.panelBossDs3.TabIndex = 21;
+            // 
+            // btnAddBossDs3
+            // 
+            this.btnAddBossDs3.Location = new System.Drawing.Point(204, 48);
+            this.btnAddBossDs3.Name = "btnAddBossDs3";
+            this.btnAddBossDs3.Size = new System.Drawing.Size(100, 21);
+            this.btnAddBossDs3.TabIndex = 14;
+            this.btnAddBossDs3.Text = "Add";
+            this.btnAddBossDs3.UseVisualStyleBackColor = true;
+            this.btnAddBossDs3.Click += new System.EventHandler(this.btnAddBossDs3_Click);
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(295, 3);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(33, 13);
+            this.label39.TabIndex = 13;
+            this.label39.Text = "Boss:";
+            // 
+            // comboBoxBossDs3
+            // 
+            this.comboBoxBossDs3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxBossDs3.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.comboBoxBossDs3.FormattingEnabled = true;
+            this.comboBoxBossDs3.Items.AddRange(new object[] {
+            "Iudex Gundyr",
+            "Vordt of the Boreal Valley",
+            "Curse-Rotted Greatwood",
+            "Crystal Sage",
+            "Abyss Watchers",
+            "Deacons of the Deep",
+            "High Lord Wolnir",
+            "Old Demon King",
+            "Pontiff Sulyvahn",
+            "Yhorm the Giant",
+            "Aldrich, Devourer of Gods",
+            "Dancer of the Boreal Valley",
+            "Dragonslayer Armour",
+            "Oceiros, the Consumed King",
+            "Champion Gundyr",
+            "Lothric, Younger Prince",
+            "Ancient Wyvern",
+            "Nameless King",
+            "Soul of Cinder",
+            "Sister Friede",
+            "Champion\'s Gravetender & Gravetender Greatwolf",
+            "Demon in Pain & Demon From Below / Demon Prince",
+            "Halflight, Spear of the Church",
+            "Darkeater Midir",
+            "Slave Knight Gael"});
+            this.comboBoxBossDs3.Location = new System.Drawing.Point(184, 18);
+            this.comboBoxBossDs3.Name = "comboBoxBossDs3";
+            this.comboBoxBossDs3.Size = new System.Drawing.Size(292, 21);
+            this.comboBoxBossDs3.TabIndex = 12;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(87, 3);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(32, 13);
+            this.label40.TabIndex = 11;
+            this.label40.Text = "How:";
+            // 
+            // comboBoxHowBossDs3
+            // 
+            this.comboBoxHowBossDs3.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.comboBoxHowBossDs3.FormattingEnabled = true;
+            this.comboBoxHowBossDs3.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowBossDs3.Location = new System.Drawing.Point(46, 18);
+            this.comboBoxHowBossDs3.Name = "comboBoxHowBossDs3";
+            this.comboBoxHowBossDs3.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxHowBossDs3.TabIndex = 10;
+            // 
+            // listBoxBossDs3
+            // 
+            this.listBoxBossDs3.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxBossDs3.FormattingEnabled = true;
+            this.listBoxBossDs3.Location = new System.Drawing.Point(9, 82);
+            this.listBoxBossDs3.Name = "listBoxBossDs3";
+            this.listBoxBossDs3.Size = new System.Drawing.Size(489, 147);
+            this.listBoxBossDs3.TabIndex = 7;
+            this.listBoxBossDs3.DoubleClick += new System.EventHandler(this.listBoxBossDs3_DoubleClick);
             // 
             // panelLvlDs3
             // 
@@ -2620,105 +2720,6 @@
             this.label37.Size = new System.Drawing.Size(39, 13);
             this.label37.TabIndex = 8;
             this.label37.Text = "bonfire";
-            // 
-            // panelBossDs3
-            // 
-            this.panelBossDs3.Controls.Add(this.btnAddBossDs3);
-            this.panelBossDs3.Controls.Add(this.label39);
-            this.panelBossDs3.Controls.Add(this.comboBoxBossDs3);
-            this.panelBossDs3.Controls.Add(this.label40);
-            this.panelBossDs3.Controls.Add(this.comboBoxHowBossDs3);
-            this.panelBossDs3.Controls.Add(this.listBoxBossDs3);
-            this.panelBossDs3.Location = new System.Drawing.Point(42, 89);
-            this.panelBossDs3.Name = "panelBossDs3";
-            this.panelBossDs3.Size = new System.Drawing.Size(505, 240);
-            this.panelBossDs3.TabIndex = 21;
-            // 
-            // btnAddBossDs3
-            // 
-            this.btnAddBossDs3.Location = new System.Drawing.Point(204, 48);
-            this.btnAddBossDs3.Name = "btnAddBossDs3";
-            this.btnAddBossDs3.Size = new System.Drawing.Size(100, 21);
-            this.btnAddBossDs3.TabIndex = 14;
-            this.btnAddBossDs3.Text = "Add";
-            this.btnAddBossDs3.UseVisualStyleBackColor = true;
-            this.btnAddBossDs3.Click += new System.EventHandler(this.btnAddBossDs3_Click);
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(295, 3);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(33, 13);
-            this.label39.TabIndex = 13;
-            this.label39.Text = "Boss:";
-            // 
-            // comboBoxBossDs3
-            // 
-            this.comboBoxBossDs3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxBossDs3.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.comboBoxBossDs3.FormattingEnabled = true;
-            this.comboBoxBossDs3.Items.AddRange(new object[] {
-            "Iudex Gundyr",
-            "Vordt of the Boreal Valley",
-            "Curse-Rotted Greatwood",
-            "Crystal Sage",
-            "Abyss Watchers",
-            "Deacons of the Deep",
-            "High Lord Wolnir",
-            "Old Demon King",
-            "Pontiff Sulyvahn",
-            "Yhorm the Giant",
-            "Aldrich, Devourer of Gods",
-            "Dancer of the Boreal Valley",
-            "Dragonslayer Armour",
-            "Oceiros, the Consumed King",
-            "Champion Gundyr",
-            "Lothric, Younger Prince",
-            "Ancient Wyvern",
-            "Nameless King",
-            "Soul of Cinder",
-            "Sister Friede",
-            "Champion\'s Gravetender & Gravetender Greatwolf",
-            "Demon in Pain & Demon From Below / Demon Prince",
-            "Halflight, Spear of the Church",
-            "Darkeater Midir",
-            "Slave Knight Gael"});
-            this.comboBoxBossDs3.Location = new System.Drawing.Point(184, 18);
-            this.comboBoxBossDs3.Name = "comboBoxBossDs3";
-            this.comboBoxBossDs3.Size = new System.Drawing.Size(292, 21);
-            this.comboBoxBossDs3.TabIndex = 12;
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(87, 3);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(32, 13);
-            this.label40.TabIndex = 11;
-            this.label40.Text = "How:";
-            // 
-            // comboBoxHowBossDs3
-            // 
-            this.comboBoxHowBossDs3.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.comboBoxHowBossDs3.FormattingEnabled = true;
-            this.comboBoxHowBossDs3.Items.AddRange(new object[] {
-            "Inmediatly",
-            "Loading game after"});
-            this.comboBoxHowBossDs3.Location = new System.Drawing.Point(46, 18);
-            this.comboBoxHowBossDs3.Name = "comboBoxHowBossDs3";
-            this.comboBoxHowBossDs3.Size = new System.Drawing.Size(110, 21);
-            this.comboBoxHowBossDs3.TabIndex = 10;
-            // 
-            // listBoxBossDs3
-            // 
-            this.listBoxBossDs3.BackColor = System.Drawing.SystemColors.Control;
-            this.listBoxBossDs3.FormattingEnabled = true;
-            this.listBoxBossDs3.Location = new System.Drawing.Point(9, 82);
-            this.listBoxBossDs3.Name = "listBoxBossDs3";
-            this.listBoxBossDs3.Size = new System.Drawing.Size(489, 147);
-            this.listBoxBossDs3.TabIndex = 7;
-            this.listBoxBossDs3.DoubleClick += new System.EventHandler(this.listBoxBossDs3_DoubleClick);
             // 
             // btnRefreshDS3
             // 
@@ -4531,6 +4532,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(619, 401);
             this.Controls.Add(this.TabControl2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -4579,22 +4581,22 @@
             this.tabDs1.PerformLayout();
             this.tabDs2.ResumeLayout(false);
             this.tabDs2.PerformLayout();
+            this.panelBossDS2.ResumeLayout(false);
+            this.panelBossDS2.PerformLayout();
             this.panelPositionDs2.ResumeLayout(false);
             this.panelPositionDs2.PerformLayout();
             this.panelAttributeDs2.ResumeLayout(false);
             this.panelAttributeDs2.PerformLayout();
-            this.panelBossDS2.ResumeLayout(false);
-            this.panelBossDS2.PerformLayout();
             this.tabDs3.ResumeLayout(false);
             this.tabDs3.PerformLayout();
+            this.panelBossDs3.ResumeLayout(false);
+            this.panelBossDs3.PerformLayout();
             this.panelLvlDs3.ResumeLayout(false);
             this.panelLvlDs3.PerformLayout();
             this.panelCfDs3.ResumeLayout(false);
             this.panelCfDs3.PerformLayout();
             this.panelBonfireDs3.ResumeLayout(false);
             this.panelBonfireDs3.PerformLayout();
-            this.panelBossDs3.ResumeLayout(false);
-            this.panelBossDs3.PerformLayout();
             this.tabElden.ResumeLayout(false);
             this.tabElden.PerformLayout();
             this.panelCfER.ResumeLayout(false);
@@ -4653,7 +4655,7 @@
         private System.Windows.Forms.TextBox textBoxX;
         private System.Windows.Forms.ComboBox comboBoxMarginS;
         private System.Windows.Forms.TabPage tabManual;
-        internal System.Windows.Forms.TextBox TextBox1;
+        internal System.Windows.Forms.TextBox TextBoxManual;
         private System.Windows.Forms.ComboBox comboBoxHowPosition;
         private System.Windows.Forms.ListBox listBoxPositionsS;
         private System.Windows.Forms.Panel panelBossS;

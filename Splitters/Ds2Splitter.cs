@@ -56,7 +56,7 @@ namespace HitCounterManager
 
         public void resetSplited()
         {
-            if (dataDs2.getBossToSplit().Count != 0)
+            if (dataDs2.getBossToSplit().Count > 0)
             {
                 foreach (var b in dataDs2.getBossToSplit())
                 {
@@ -64,7 +64,7 @@ namespace HitCounterManager
                 }
             }
 
-            if (dataDs2.getLvlToSplit().Count != 0)
+            if (dataDs2.getLvlToSplit().Count > 0)
             {
                 foreach (var l in dataDs2.getLvlToSplit())
                 {
@@ -162,10 +162,13 @@ namespace HitCounterManager
         #region Init()
         public void RefreshDs2()
         {
-            _StatusDs2 = getDs2StatusProcess(0);
-            while (!_StatusProcedure)
+            int delay = 2000;
+            _StatusDs2 = getDs2StatusProcess(delay);
+            while (_StatusProcedure && dataDs2.enableSplitting)
             {
-                _StatusDs2 = getDs2StatusProcess(45000);               
+                Thread.Sleep(10);
+                _StatusDs2 = getDs2StatusProcess(delay);
+                if (!_StatusDs2) { delay = 2000; }else { delay = 20000; }
             }
         }
 

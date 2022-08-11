@@ -553,28 +553,12 @@ namespace HitCounterManager
             if(dataDs2 == null) { dataDs2 = new DTDs2(); }
             if(dataCeleste == null) { dataCeleste = new DTCeleste(); }
 
-            sekiroSplitter.setDataSekiro(dataSekiro, profiles);
-            sekiroSplitter.LoadAutoSplitterProcedure();
-
-            hollowSplitter.setDataHollow(dataHollow, profiles);
-            hollowSplitter.LoadAutoSplitterProcedure();
-
-            eldenSplitter.setDataElden(dataElden, profiles);
-            eldenSplitter.LoadAutoSplitterProcedure();
-
-            ds3Splitter.setDataDs3(dataDs3, profiles);
-            ds3Splitter.LoadAutoSplitterProcedure();
-
-            ds2Splitter.setDataDs2(dataDs2, profiles);
-            ds2Splitter.LoadAutoSplitterProcedure();
-
-            celesteSplitter.setDataCeleste(dataCeleste, profiles);
-            celesteSplitter.LoadAutoSplitterProcedure();
-
-            
-            
-
-
+            sekiroSplitter.setDataSekiro(dataSekiro, profiles);            
+            hollowSplitter.setDataHollow(dataHollow, profiles);          
+            eldenSplitter.setDataElden(dataElden, profiles);            
+            ds3Splitter.setDataDs3(dataDs3, profiles);           
+            ds2Splitter.setDataDs2(dataDs2, profiles);          
+            celesteSplitter.setDataCeleste(dataCeleste, profiles);          
             try
             {
                 string savePath = Path.GetFullPath("HitCounterManagerSaveAutoSplitter.xml");
@@ -588,14 +572,19 @@ namespace HitCounterManager
                 {
                      aslSplitter.setData(node.FirstChild, profiles);
                 }
-
             }
             catch (Exception) { aslSplitter.setData(null, profiles); }
+
+            /* LoadProcedures are covered by SelectedIndexChanged
+            sekiroSplitter.LoadAutoSplitterProcedure();
+            hollowSplitter.LoadAutoSplitterProcedure();
+            eldenSplitter.LoadAutoSplitterProcedure();
+            ds3Splitter.LoadAutoSplitterProcedure();
+            ds2Splitter.LoadAutoSplitterProcedure();
+            celesteSplitter.LoadAutoSplitterProcedure();
             aslSplitter.LoadAutoSplitterProcedure();
-
-
+            */
         }
-
 
         public SekiroSplitter getSekiroInstance()
         {

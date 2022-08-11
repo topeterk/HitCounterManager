@@ -119,11 +119,6 @@ namespace HitCounterManager
             {
                 positionToSplit();
             });
-            
-
-
-
-
             taskRefresh.Start();
             taskRefreshPosition.Start();
             task1.Start();
@@ -214,7 +209,7 @@ namespace HitCounterManager
 
         public void resetSplited()
         {
-            if (dataHollow.getBosstoSplit().Count != 0)
+            if (dataHollow.getBosstoSplit().Count > 0)
             {
                 foreach (var b in dataHollow.getBosstoSplit())
                 {
@@ -222,7 +217,7 @@ namespace HitCounterManager
                 }
             }
 
-            if (dataHollow.getMiniBossToSplit().Count != 0)
+            if (dataHollow.getMiniBossToSplit().Count > 0)
             {
                 foreach (var mb in dataHollow.getMiniBossToSplit())
                 {
@@ -230,7 +225,7 @@ namespace HitCounterManager
                 }
             }
 
-            if (dataHollow.getPhanteonToSplit().Count != 0)
+            if (dataHollow.getPhanteonToSplit().Count > 0)
             {
                 foreach (var p in dataHollow.getPhanteonToSplit())
                 {
@@ -238,7 +233,7 @@ namespace HitCounterManager
                 }
             }
 
-            if (dataHollow.getCharmToSplit().Count != 0)
+            if (dataHollow.getCharmToSplit().Count > 0)
             {
                 foreach (var c in dataHollow.getCharmToSplit())
                 {
@@ -246,7 +241,7 @@ namespace HitCounterManager
                 }
             }
 
-            if (dataHollow.getSkillsToSplit().Count != 0)
+            if (dataHollow.getSkillsToSplit().Count > 0)
             {
                 foreach (var s in dataHollow.getSkillsToSplit())
                 {
@@ -254,7 +249,7 @@ namespace HitCounterManager
                 }
             }
 
-            if (dataHollow.getPositionToSplit().Count != 0)
+            if (dataHollow.getPositionToSplit().Count > 0)
             {
                 foreach (var p in dataHollow.getPositionToSplit())
                 {
@@ -281,10 +276,13 @@ namespace HitCounterManager
 
         public void RefreshHollow()
         {
+            int delay = 2000;
             _StatusHollow = getHollowStatusProcess(0);
-            while (!_StatusProcedure)
+            while (_StatusProcedure && dataHollow.enableSplitting)
             {
-                _StatusHollow = getHollowStatusProcess(45000);
+                Thread.Sleep(10);
+                _StatusHollow = getHollowStatusProcess(delay);
+                if (!_StatusHollow) { delay = 2000; } else { delay = 20000; }
             }
         }
 
