@@ -43,6 +43,10 @@ Celeste:
 	  	    Chapter
 		  Checkpoints
 
+Cuphead v1.2.4:
+		   Kill a Boss
+		   Complete a Level		  
+
 ASL:
 	Any ASL with Split (AutoSplitter Language for LiveSplit)
 

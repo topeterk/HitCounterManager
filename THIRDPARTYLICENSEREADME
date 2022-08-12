@@ -37,6 +37,13 @@ Licence: MIT
            Author: DevilSquirrel
            Source: https://github.com/ShootMe/LiveSplit.Celeste.git
            Licence: MIT
+	
+	- DLL LiveSplit.Cuphead
+           Title: LiveSplit.Cuphead
+           Author: DevilSquirrel
+           Source: https://github.com/ShootMe/LiveSplit.Cuphead.git
+           Licence: MIT	
+		   
 
     - DLL LiveSplit.Core
     [-]    Title: LiveSplit
