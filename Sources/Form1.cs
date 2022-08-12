@@ -240,6 +240,7 @@ namespace HitCounterManager
           ds3Splitter.resetSplited();
           celesteSplitter.resetSplited();
           ds2Splitter.resetSplited();
+          cupSplitter.resetSplited();
         }
         private void btnPB_Click(object sender, EventArgs e) { StartStopTimer(false); profCtrl.ProfilePB(); }
         private void btnPause_Click(object sender, EventArgs e) { StartStopTimer(!profCtrl.TimerRunning); }
