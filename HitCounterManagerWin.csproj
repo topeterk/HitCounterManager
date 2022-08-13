@@ -71,6 +71,11 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Sources\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Splitters\AslConfigurator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,11 +138,6 @@
     <Compile Include="Sources\OsLayerWindows.cs" />
     <Compile Include="Sources\OutModule.cs" />
     <Compile Include="Sources\Profiles.cs" />
-    <Compile Include="Sources\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Sources\SaveModule.cs" />
     <Compile Include="Sources\Settings.cs">
       <SubType>Form</SubType>
@@ -216,9 +216,9 @@
     <Content Include="Designs\javascript.js" />
     <Content Include="Designs\stylesheet.css" />
     <Content Include="Designs\stylesheet_pink.css" />
-    <None Include="Images\icons8-autosplitter-32.png" />
-    <None Include="Images\icons8-Timersettings-20.png" />
     <None Include="Images\20p_logo_black_THH.png" />
+    <None Include="Images\icon-autosplitter-32.png" />
+    <None Include="Images\icons8-copy-20.png" />
     <Content Include="Sources\HitCounter.html" />
     <Content Include="Sources\HitCounter.template" />
     <Content Include="Sources\HitCounterManagerInit.xml" />
@@ -228,7 +228,6 @@
     <None Include="Images\icons8-add-list-20.png" />
     <None Include="Images\icons8-attack-32.png" />
     <None Include="Images\icons8-cloud-20.png" />
-    <None Include="Images\icons8-copy-20.png" />
     <None Include="Images\icons8-counter-20.png" />
     <None Include="Images\icons8-delete-list-20.png" />
     <None Include="Images\icons8-double-down-20.png" />

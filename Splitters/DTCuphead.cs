@@ -43,6 +43,7 @@ namespace HitCounterManager
     {
         //Settings Vars
         public bool enableSplitting = false;
+        public bool autoTimer = false;
         //Flags to Split
         public List<DefinitionCuphead.ElementsToSplitCup> elementToSplit = new List<DefinitionCuphead.ElementsToSplitCup>();
 

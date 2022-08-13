@@ -37,6 +37,7 @@ namespace HitCounterManager
         public bool _StatusProcedure = true;
         public bool _StatusHollow = false;
         public ProfilesControl _profile;
+        public bool _runStarted = false;
         public DefinitionHollow.Vector3F currentPosition = new DefinitionHollow.Vector3F();
         public DTHollow getDataHollow()
         {
@@ -89,6 +90,11 @@ namespace HitCounterManager
                 RefreshPosition();
             });
 
+            var taskCheckStart = new Task(() =>
+            {
+                checkStart();
+            });
+
             var task1 = new Task(() =>
             {
                 bossToSplit();
@@ -120,6 +126,7 @@ namespace HitCounterManager
             });
             taskRefresh.Start();
             taskRefreshPosition.Start();
+            taskCheckStart.Start();
             task1.Start();
             task2.Start();
             task3.Start();
@@ -255,9 +262,8 @@ namespace HitCounterManager
                     p.IsSplited = false;
                 }
             }
-
+            _runStarted = false;
         }
-
 
         public void clearData()
         {
@@ -268,6 +274,7 @@ namespace HitCounterManager
             dataHollow.skillsToSplit.Clear();
             dataHollow.positionToSplit.Clear();
             dataHollow.positionMargin = 3;
+            _runStarted = false;
         }
 
 
@@ -282,6 +289,24 @@ namespace HitCounterManager
                 Thread.Sleep(10);
                 _StatusHollow = getHollowStatusProcess(delay);
                 if (!_StatusHollow) { delay = 2000; } else { delay = 20000; }
+            }
+        }
+
+        private void checkStart()
+        {
+            while (dataHollow.enableSplitting && dataHollow.autoTimer)
+            {
+                Thread.Sleep(2000);
+                PointF p = new PointF(35, 14);
+                var rangeX = ((currentPosition.position.X - p.X) <= dataHollow.positionMargin) && ((currentPosition.position.X - p.X) >= -dataHollow.positionMargin);
+                var rangeY = ((currentPosition.position.Y - p.Y) <= dataHollow.positionMargin) && ((currentPosition.position.Y - p.Y) >= -dataHollow.positionMargin);
+                if (rangeX && rangeY && currentPosition.sceneName.StartsWith("Tutorial"))
+                {
+                    _runStarted = true;
+                }else if (currentPosition.sceneName.StartsWith("Quit_To_Menu") || currentPosition.sceneName.StartsWith("Menu_Title"))
+                {
+                    _runStarted=false;
+                }
             }
         }
 

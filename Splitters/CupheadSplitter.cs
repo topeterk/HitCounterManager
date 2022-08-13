@@ -35,6 +35,7 @@ namespace HitCounterManager
         public bool _StatusProcedure = true;
         public bool _StatusCuphead = false;
         public ProfilesControl _profile;
+        public bool _runStarted = false;
 
         public DTCuphead getDataCuphead()
         {
@@ -77,7 +78,11 @@ namespace HitCounterManager
             taskRefresh.Start();
             task1.Start();
         }
-
+        
+        public int getTimeInGame()
+        {
+            return (int)cup.LevelTime() * 1000;
+        }
         public void resetSplited()
         {
             if (dataCuphead.getElementToSplit().Count > 0)
@@ -87,11 +92,13 @@ namespace HitCounterManager
                     b.IsSplited = false;
                 }
             }
+            _runStarted = false;
         }
 
         public void clearData()
         {
             dataCuphead.elementToSplit.Clear();
+            _runStarted = false;
         }
 
 

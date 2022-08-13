@@ -96,7 +96,7 @@
             this.btnSplitter.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnSplitter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSplitter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSplitter.Image = global::HitCounterManager.Sources.Resources.icons8_autosplitter_32;
+            this.btnSplitter.Image = global::HitCounterManager.Sources.Resources.icon_autosplitter_32;
             this.btnSplitter.Location = new System.Drawing.Point(607, 30);
             this.btnSplitter.Name = "btnSplitter";
             this.btnSplitter.Size = new System.Drawing.Size(75, 40);

@@ -83,6 +83,16 @@ namespace HitCounterManager.Sources {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_autosplitter_32 {
+            get {
+                object obj = ResourceManager.GetObject("icon_autosplitter_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_about_20 {
             get {
                 object obj = ResourceManager.GetObject("icons8_about_20", resourceCulture);
@@ -116,16 +126,6 @@ namespace HitCounterManager.Sources {
         internal static System.Drawing.Bitmap icons8_attack_32 {
             get {
                 object obj = ResourceManager.GetObject("icons8_attack_32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_autosplitter_32 {
-            get {
-                object obj = ResourceManager.GetObject("icons8-autosplitter-32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

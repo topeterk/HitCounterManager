@@ -24,8 +24,6 @@ using System;
 using System.Drawing;
 using System.Net;
 using System.Windows.Forms;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace HitCounterManager
 {
@@ -37,6 +35,8 @@ namespace HitCounterManager
 
         private bool SettingsDialogOpen = false;
         private bool ReadOnlyMode = false;
+
+        private System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1500 };
 
         #region Form
 
@@ -53,7 +53,7 @@ namespace HitCounterManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = Text + " - v" + Application.ProductVersion + " Pre-Release 2.0 " + OsLayer.Name;
+            Text = Text + " - v" + Application.ProductVersion + " Pre-Release 2.1 " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();  
             ProfileChangedHandler(sender, e);
@@ -118,6 +118,8 @@ namespace HitCounterManager
             }
 
             #endregion
+            _update_timer.Tick += (senderT, args) => CheckAutoTimers();
+            _update_timer.Enabled = true;
             this.UpdateDarkMode();
         }
 
@@ -276,12 +278,119 @@ namespace HitCounterManager
             btnPause.Image = Start ? Sources.Resources.icons8_sleep_32 : Sources.Resources.icons8_time_32;
 
             /* To any that understand OutModule and all related to Timer, the nexts functions return a full duration of a run in ms
-             * sekiroSplitter.getTimeInGame();
-             * eldenSplitter.getTimeInGame(); //Reset 0 in IGT
-             * ds3Splitter.getTimeInGame();
-             * celesteSplitter.getTimeInGame();
+             * sekiroSplitter.getTimeInGame(); Sekiro
+             * eldenSplitter.getTimeInGame(); //Reset 0 in IGT EldenRing
+             * ds3Splitter.getTimeInGame(); Ds3
+             * celesteSplitter.getTimeInGame(); Celeste
+             * cup.getTimeInGame(); Cuphead
+             * 
+             * Ds2 Dont Have getTimeInGame() because the motor of game dont track time, livsplit follow the time with real time timming, pausing on loading screens
+             * ds2Splitter.getIsLoading() => return bool
+             * 
+             * Hollow Knight i dont found the function.
             }*/
 
+        }
+
+        private int gameActive = 0;
+        private void CheckAutoTimers()
+        {
+            switch (gameActive)
+            {            
+                case 1: //Sekiro
+                    if (sekiroSplitter.dataSekiro.autoTimer && !sekiroSplitter._runStarted && sekiroSplitter.getTimeInGame() > 0)
+                    {
+                        StartStopTimer(true);
+                        sekiroSplitter._runStarted = true;                       
+                    }else
+                    if (sekiroSplitter.dataSekiro.autoTimer && sekiroSplitter._runStarted && sekiroSplitter.getTimeInGame() == 0)
+                    {
+                        StartStopTimer(false);
+                        sekiroSplitter._runStarted = false;
+                    }
+                    break;
+                case 4: //Ds3
+                    if (ds3Splitter.dataDs3.autoTimer && !ds3Splitter._runStarted && ds3Splitter.getTimeInGame() > 0)
+                    {
+                        StartStopTimer(true);
+                        ds3Splitter._runStarted = true;
+                    } else if (ds3Splitter.dataDs3.enableSplitting && ds3Splitter.dataDs3.autoTimer && ds3Splitter._runStarted && ds3Splitter.getTimeInGame() == 0)
+                    {
+                        StartStopTimer(false);
+                        ds3Splitter._runStarted = false;
+                    }
+                    break;
+                case 5: //Elden
+                    if (eldenSplitter.dataElden.autoTimer && !eldenSplitter._runStarted && eldenSplitter.getTimeInGame() > 0)
+                    {
+                        StartStopTimer(true);
+                        eldenSplitter._runStarted = true;
+                    }
+                    else if (eldenSplitter.dataElden.autoTimer && eldenSplitter._runStarted && eldenSplitter.getTimeInGame() == 0)
+                    {
+                        StartStopTimer(false);
+                        eldenSplitter._runStarted = false;
+                    }
+                    break;
+                case 7: //Celeste
+                    if (celesteSplitter.dataCeleste.autoTimer && !celesteSplitter._runStarted && celesteSplitter.getTimeInGame() > 0)
+                    {
+                        StartStopTimer(true);
+                        celesteSplitter._runStarted = true;
+                    }
+                    else if (celesteSplitter.dataCeleste.autoTimer && celesteSplitter._runStarted && celesteSplitter.getTimeInGame() == 0)
+                    {
+                        StartStopTimer(false);
+                        celesteSplitter._runStarted = false;
+                    }
+                    break;
+                case 8: //Cuphead
+                    if (cupSplitter.dataCuphead.autoTimer && !cupSplitter._runStarted && cupSplitter.getTimeInGame() > 0)
+                    {
+                        StartStopTimer(true);
+                        cupSplitter._runStarted = true;
+                    }
+                    else if (cupSplitter.dataCuphead.autoTimer && cupSplitter._runStarted && cupSplitter.getTimeInGame() == 0)
+                    {
+                        StartStopTimer(false);
+                        cupSplitter._runStarted = false;
+                    }
+                    break;
+             
+                case 3: //DS2
+                    if (ds2Splitter.dataDs2.autoTimer && ds2Splitter._runStarted)
+                    {
+                        StartStopTimer(true);
+                    }
+                    else
+                    {
+                        if (ds2Splitter.dataDs2.autoTimer && !ds2Splitter._runStarted)
+                        {
+                            StartStopTimer(false);
+                        }
+                    }
+                    break;
+                case 6: //Hollow
+                    if (hollowSplitter.dataHollow.autoTimer && hollowSplitter._runStarted)
+                    {
+                        StartStopTimer(true);
+                    }
+                    else
+                    {
+                        if (hollowSplitter.dataHollow.autoTimer && !hollowSplitter._runStarted)
+                        {
+                            StartStopTimer(false);
+                        }
+                    }
+                    break;
+                
+                case 2: //DS1
+                case 0:
+                case 9:
+                default: break;
+            }
+            
+        
         }
 
         private void comboBoxGame_SelectedIndexChanged(object sender, EventArgs e)
@@ -295,40 +404,49 @@ namespace HitCounterManager
             ds2Splitter.setStatusSplitting(false);
             aslSplitter.setStatusSplitting(false);
             cupSplitter.setStatusSplitting(false);
+            gameActive = 0;
 
 
             //Ask Selected index
             if (comboBoxGame.SelectedIndex == 1)
             {
                 sekiroSplitter.setStatusSplitting(true);
+                gameActive = 1;
             }
             if (comboBoxGame.SelectedIndex == 6)
             {
                 hollowSplitter.setStatusSplitting(true);
+                gameActive = 6;
             }
             if(comboBoxGame.SelectedIndex == 5)
             {
                 eldenSplitter.setStatusSplitting(true);
+                gameActive = 5;
             }
             if(comboBoxGame.SelectedIndex == 4)
             {
                 ds3Splitter.setStatusSplitting(true);
+                gameActive = 4;
             }
             if(comboBoxGame.SelectedIndex == 7)
             {
                 celesteSplitter.setStatusSplitting(true);
+                gameActive = 7;
             }
             if(comboBoxGame.SelectedIndex == 3)
             {
                 ds2Splitter.setStatusSplitting(true);
+                gameActive = 3;
             }   
             if(comboBoxGame.SelectedIndex == 9)
             {
                 aslSplitter.setStatusSplitting(true);
+                gameActive = 9;
             }
             if(comboBoxGame.SelectedIndex == 8)
             {
                 cupSplitter.setStatusSplitting(true);
+                gameActive = 8;
             }
         }
 

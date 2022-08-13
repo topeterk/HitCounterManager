@@ -40,6 +40,7 @@ namespace HitCounterManager
         public DefinitionsSekiro defS = new DefinitionsSekiro();
         public ProfilesControl _profile;
         private bool _writeMemory = false;
+        public bool _runStarted = false;
 
 
         public DTSekiro getDataSekiro()
@@ -145,7 +146,8 @@ namespace HitCounterManager
             dataSekiro.idolsTosplit.Clear();
             dataSekiro.positionMargin = 3;
             dataSekiro.positionsToSplit.Clear();
-            
+            _runStarted = false;
+
         }
 
         public Vector3f getCurrentPosition()
@@ -210,6 +212,7 @@ namespace HitCounterManager
                     cf.IsSplited = false;
                 }
             }
+            _runStarted = false;
         }
 
 
@@ -272,6 +275,7 @@ namespace HitCounterManager
                     sekiro.WriteInGameTimeMilliseconds(0);
                     _writeMemory = true;
                 }
+
             }           
         }
 

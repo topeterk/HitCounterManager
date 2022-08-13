@@ -38,21 +38,21 @@ namespace HitCounterManager
         CelesteSplitter celesteSplitter;
         AslSplitter aslSplitter;
         CupheadSplitter cupSplitter;
-        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter, EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter, Ds2Splitter ds2Splitter,AslSplitter aslSplitter,CupheadSplitter cupSplitter, bool darkMode)
+        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter, EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter, Ds2Splitter ds2Splitter, AslSplitter aslSplitter, CupheadSplitter cupSplitter, bool darkMode)
         {
             InitializeComponent();
             this.sekiroSplitter = sekiroSplitter;
             this.hollowSplitter = hollowSplitter;
             this.eldenSplitter = eldenSplitter;
-            this.ds3Splitter = ds3Splitter;           
+            this.ds3Splitter = ds3Splitter;
             this.ds2Splitter = ds2Splitter;
             this.celesteSplitter = celesteSplitter;
             this.aslSplitter = aslSplitter;
             this.cupSplitter = cupSplitter;
             this.darkMode = darkMode;
             refreshForm();
-            
-           
+
+
         }
 
         public void refreshForm()
@@ -81,7 +81,7 @@ namespace HitCounterManager
             groupBoxSunkenValley.Hide();
             groupBoxAshinaDepths.Hide();
             groupBoxFountainhead.Hide();
-           
+
             #endregion
             #region HollowTab
             panelBossH.Hide();
@@ -127,16 +127,16 @@ namespace HitCounterManager
 
         public void DarkMode() //Is horrible but is accuareate that dark mode in main Form KEKW
         {
-            this.BackColor = Color.FromArgb(40, 40, 40);
-            this.tabConfig.BackColor = Color.FromArgb(40,40,40);
-            this.tabManual.BackColor = Color.FromArgb(40, 40, 40);
+            this.BackColor = Color.FromArgb(50, 50, 50);
+            this.tabConfig.BackColor = Color.FromArgb(50, 50, 50);
+            this.tabManual.BackColor = Color.FromArgb(50, 50, 50);
             this.TextBoxManual.BackColor = Color.DarkSlateGray;
-            this.tabDs2.BackColor = Color.FromArgb(40, 40, 40);
-            this.tabDs3.BackColor = Color.FromArgb(40, 40, 40);
-            this.tabElden.BackColor = Color.FromArgb(40, 40, 40);
-            this.tabHollow.BackColor = Color.FromArgb(40, 40, 40);
-            this.tabSekiro.BackColor = Color.FromArgb(40, 40, 40);
-            this.tabCeleste.BackColor = Color.FromArgb(40, 40, 40);
+            this.tabDs2.BackColor = Color.FromArgb(50, 50, 50);
+            this.tabDs3.BackColor = Color.FromArgb(50, 50, 50);
+            this.tabElden.BackColor = Color.FromArgb(50, 50, 50);
+            this.tabHollow.BackColor = Color.FromArgb(50, 50, 50);
+            this.tabSekiro.BackColor = Color.FromArgb(50, 50, 50);
+            this.tabCeleste.BackColor = Color.FromArgb(50, 50, 50);
         }
 
         private void AutoSplitter_Load(object sender, EventArgs e)
@@ -425,6 +425,48 @@ namespace HitCounterManager
                 }
             }
             #endregion
+
+            #region General
+            if (sekiroData.autoTimer)
+            {
+                checkBoxATS.Checked = true;
+            }
+            else
+            {
+                checkBoxATS.Checked = false;
+            }
+            if (ds2Data.autoTimer)
+            {
+                checkBoxATDs2.Checked = true;
+            }
+            else { checkBoxATDs2.Checked = false; }
+            if (ds3Data.autoTimer)
+            {
+                checkBoxATDS3.Checked = true;
+            }
+            else { checkBoxATDS3.Checked = false; }
+            if (eldenData.autoTimer)
+            {
+                checkBoxATEr.Checked = true;
+            }
+            else { checkBoxATEr.Checked = false; }
+            if (hollowData.autoTimer)
+            {
+                checkBoxATHollow.Checked = true;
+            }
+            else { checkBoxATHollow.Checked = false; }
+            if (celesteData.autoTimer)
+            {
+                checkBoxATCeleste.Checked = true;
+            }
+            else { checkBoxATCeleste.Checked = false; }
+            if (cupData.autoTimer)
+            {
+                checkBoxATCuphead.Checked = true;
+            }
+            else { checkBoxATCuphead.Checked = false; }
+            #endregion
+
         }
 
         private void refresh_Btn(object sender, EventArgs e)
@@ -508,11 +550,57 @@ namespace HitCounterManager
         }
 
         #region Config UI
+
+        private void checkBoxATS_CheckedChanged(object sender, EventArgs e)
+        {         
+            var check = checkBoxATS.Checked == true ? sekiroSplitter.dataSekiro.autoTimer = true : sekiroSplitter.dataSekiro.autoTimer = false;
+        }
+
+        private void checkBoxATDs1_CheckedChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show("Dark Souls 1 Not Yet Developed", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            checkBoxATDs1.Checked = false;
+        }
+
+        private void checkBoxATDs2_CheckedChanged(object sender, EventArgs e)
+        {
+            ds2Splitter.setProcedure(false);
+            var check = checkBoxATDs2.Checked == true ? ds2Splitter.dataDs2.autoTimer = true : ds2Splitter.dataDs2.autoTimer = false;
+            ds2Splitter.setProcedure(true);
+        }
+
+        private void checkBoxATDS3_CheckedChanged(object sender, EventArgs e)
+        {
+            var check = checkBoxATDS3.Checked == true ? ds3Splitter.dataDs3.autoTimer = true : ds3Splitter.dataDs3.autoTimer = false;
+        }
+
+        private void checkBoxATEr_CheckedChanged(object sender, EventArgs e)
+        {
+            var check = checkBoxATEr.Checked == true ? eldenSplitter.dataElden.autoTimer = true : eldenSplitter.dataElden.autoTimer = false;
+        }
+
+        private void checkBoxATHollow_CheckedChanged(object sender, EventArgs e)
+        {
+            hollowSplitter.setProcedure(false);
+            var check = checkBoxATHollow.Checked == true ? hollowSplitter.dataHollow.autoTimer = true : hollowSplitter.dataHollow.autoTimer = false;
+            hollowSplitter.setProcedure(true);
+        }
+
+        private void checkBoxATCeleste_CheckedChanged(object sender, EventArgs e)
+        {
+            var check = checkBoxATCeleste.Checked == true ? celesteSplitter.dataCeleste.autoTimer = true : celesteSplitter.dataCeleste.autoTimer = false;
+        }
+
+        private void checkBoxATCuphead_CheckedChanged(object sender, EventArgs e)
+        {
+            var check = checkBoxATCuphead.Checked == true ? cupSplitter.dataCuphead.autoTimer = true : cupSplitter.dataCuphead.autoTimer = false;
+        }
+
         private void btnSekiro_Click(object sender, EventArgs e)
         {
             if (!TabControl2.TabPages.Contains(tabSekiro))
             {
-                TabControl2.TabPages.Add(tabSekiro);                
+                TabControl2.TabPages.Add(tabSekiro);
             }
             TabControl2.SelectTab(tabSekiro);
 
@@ -552,7 +640,7 @@ namespace HitCounterManager
                 TabControl2.TabPages.Add(tabHollow);
             }
             TabControl2.SelectTab(tabHollow);
-            
+
         }
 
         private void btnCeleste_Click(object sender, EventArgs e)
@@ -584,7 +672,7 @@ namespace HitCounterManager
 
         private void btnASL_Click(object sender, EventArgs e)
         {
-            Form form = new AslConfigurator(aslSplitter,darkMode);
+            Form form = new AslConfigurator(aslSplitter, darkMode);
             form.ShowDialog();
         }
 
@@ -637,33 +725,37 @@ namespace HitCounterManager
                 var contains2 = !listBoxPositionsS.Items.Contains(textBoxX.Text + "; " + textBoxY.Text + "; " + textBoxZ.Text + " - " + "Loading game after");
                 if (contains1 && contains2)
                 {
-                    
+
                     if (comboBoxHowPosition.SelectedIndex == -1)
                     {
                         error = MessageBox.Show("Select 'How' do you want split ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
                     {
-                        if ((textBoxX.Text == "0" && textBoxY.Text == "0" && textBoxZ.Text == "0") || (textBoxX.Text == "0.00" && textBoxY.Text == "0.00" && textBoxZ.Text == "0.00"))
+                        try
                         {
-                            error = MessageBox.Show("Dont use cords 0,0,0", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        else
-                        {
-                            try
+                            textBoxX.Text = String.Format("{0:N2}", decimal.Parse(textBoxX.Text));
+                            textBoxY.Text = String.Format("{0:N2}", decimal.Parse(textBoxY.Text));
+                            textBoxZ.Text = String.Format("{0:N2}", decimal.Parse(textBoxZ.Text));
+                            var X = float.Parse(textBoxX.Text);
+                            var Y = float.Parse(textBoxY.Text);
+                            var Z = float.Parse(textBoxZ.Text);
+                            if (X == 0.00 && Y == 0.00 && Z == 0.00)
                             {
-                                var X = float.Parse(textBoxX.Text);
-                                var Y = float.Parse(textBoxY.Text);
-                                var Z = float.Parse(textBoxZ.Text);
+                                error = MessageBox.Show("Dont use cords 0,0,0", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            else
+                            {
                                 sekiroSplitter.setProcedure(false);
                                 listBoxPositionsS.Items.Add(X + "; " + Y + "; " + Z + " - " + comboBoxHowPosition.Text.ToString());
-                                error = MessageBox.Show("Move your charapter to evit autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                sekiroSplitter.AddPosition(X,Y,Z, comboBoxHowPosition.Text.ToString());
+                                error = MessageBox.Show("Move your character to avoid autosplitting", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                sekiroSplitter.AddPosition(X, Y, Z, comboBoxHowPosition.Text.ToString());
                                 sekiroSplitter.setProcedure(true);
-                            }catch (Exception) 
-                            {
-                                error = MessageBox.Show("Check Coordinates and try again", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
+                        }
+                        catch (Exception)
+                        {
+                            error = MessageBox.Show("Check Coordinates and try again", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
@@ -1299,7 +1391,7 @@ namespace HitCounterManager
             panelBossH.Hide();
             panelItemH.Hide();
             panelPositionH.Hide();
-            
+
             switch (toSplitSelectHollow.SelectedIndex)
             {
                 case 0: //Kill a enemy
@@ -1475,7 +1567,7 @@ namespace HitCounterManager
             }
         }
 
-       
+
 
         private void comboBoxItemSelectH_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1524,7 +1616,7 @@ namespace HitCounterManager
                 var contains1 = !listBoxPositionH.Items.Contains(this.VectorH + textBoxSh.Text);
                 if (contains1)
                 {
-                    
+
                     if (this.VectorH.X == 0 && this.VectorH.Y == 0)
                     {
                         error = MessageBox.Show("Dont use cords 0,0", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1532,7 +1624,7 @@ namespace HitCounterManager
                     else
                     {
                         listBoxPositionH.Items.Add(this.VectorH + textBoxSh.Text);
-                        error = MessageBox.Show("Move your charapter to evit autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        error = MessageBox.Show("Move your character to avoid autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         hollowSplitter.setProcedure(false);
                         hollowSplitter.AddPosition(this.VectorH, textBoxSh.Text);
                         hollowSplitter.setProcedure(true);
@@ -1717,7 +1809,7 @@ namespace HitCounterManager
                         {
                             eldenSplitter.setProcedure(false);
                             listBoxPositionsER.Items.Add(this.VectorER + " - " + comboBoxHowPositionsER.Text.ToString());
-                            error = MessageBox.Show("Move your charapter to evit autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            error = MessageBox.Show("Move your character to avoid autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                             eldenSplitter.AddPosition(this.VectorER, comboBoxHowPositionsER.Text.ToString());
                             eldenSplitter.setProcedure(true);
                         }
@@ -1776,11 +1868,12 @@ namespace HitCounterManager
                     {
                         error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                }catch (Exception)
+                }
+                catch (Exception)
                 {
                     error = MessageBox.Show("Wrong ID", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
+
             }
         }
 
@@ -1831,7 +1924,7 @@ namespace HitCounterManager
                 case 1:
                     panelBonfireDs3.Show();
                     break;
-                case 2: 
+                case 2:
                     panelLvlDs3.Show();
                     break;
                 case 3:
@@ -1934,7 +2027,7 @@ namespace HitCounterManager
                     if (contains1 && contains2)
                     {
                         ds3Splitter.setProcedure(false);
-                        ds3Splitter.AddAttribute(comboBoxAttributeDs3.Text.ToString(), comboBoxHowAttributeDs3.Text.ToString(),value);
+                        ds3Splitter.AddAttribute(comboBoxAttributeDs3.Text.ToString(), comboBoxHowAttributeDs3.Text.ToString(), value);
                         listBoxAttributesDs3.Items.Add(comboBoxAttributeDs3.Text.ToString() + ": " + value + " - " + comboBoxHowAttributeDs3.Text.ToString());
                         ds3Splitter.setProcedure(true);
                     }
@@ -1942,11 +2035,12 @@ namespace HitCounterManager
                     {
                         error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                }catch (Exception)
+                }
+                catch (Exception)
                 {
                     error = MessageBox.Show("Check Value and try again", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
+
             }
         }
 
@@ -1972,7 +2066,7 @@ namespace HitCounterManager
             DialogResult error;
             if (textBoxIdDs3.Text == null || comboBoxHowCfDs3.SelectedIndex == -1)
             {
-               error = MessageBox.Show("Plase set a ID and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = MessageBox.Show("Plase set a ID and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -2067,7 +2161,7 @@ namespace HitCounterManager
             }
         }
 
-      
+
         private void checkedListBoxCheckpointsCeleste_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (checkedListBoxCheckpointsCeleste.SelectedIndex != -1)
@@ -2219,7 +2313,7 @@ namespace HitCounterManager
 
         private void comboBoxMarginDs2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ds2Splitter.dataDs2.positionMargin = comboBoxMarginDs2.SelectedIndex; 
+            ds2Splitter.dataDs2.positionMargin = comboBoxMarginDs2.SelectedIndex;
         }
 
         private void btnAddPositionDs2_Click(object sender, EventArgs e)
@@ -2246,7 +2340,7 @@ namespace HitCounterManager
                         {
                             ds2Splitter.setProcedure(false);
                             listBoxPositionsDs2.Items.Add(this.VectorDs2 + " - " + comboBoxHowPositionsDs2.Text.ToString());
-                            error = MessageBox.Show("Move your charapter to evit autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            error = MessageBox.Show("Move your character to avoid autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                             ds2Splitter.AddPosition(this.VectorDs2, comboBoxHowPositionsDs2.Text.ToString());
                             ds2Splitter.setProcedure(true);
                         }
@@ -2365,6 +2459,9 @@ namespace HitCounterManager
                 TabControl2.SelectTab(tabCuphead);
             }
         }
-#endregion
-    }
+
+        #endregion
+
+
+    }      
 }

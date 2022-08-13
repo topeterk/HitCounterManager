@@ -35,6 +35,7 @@ namespace HitCounterManager
         public bool _StatusCeleste = false;
         public ProfilesControl _profile;
         public DefinitionsCeleste.InfoPlayerCeleste infoPlayer = new DefinitionsCeleste.InfoPlayerCeleste();
+        public bool _runStarted = false;
 
         public DTCeleste getDataCeleste()
         {
@@ -92,11 +93,13 @@ namespace HitCounterManager
                     c.IsSplited = false;
                 }
             }
+            _runStarted = false;
         }
 
         public void clearData()
         {
             dataCeleste.chapterToSplit.Clear();
+            _runStarted = false;
         }
 
         public int getTimeInGame()

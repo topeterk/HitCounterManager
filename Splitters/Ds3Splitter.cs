@@ -36,6 +36,7 @@ namespace HitCounterManager
         public DTDs3 dataDs3;
         public DefinitionsDs3 defD3 = new DefinitionsDs3();
         public ProfilesControl _profile;
+        public bool _runStarted = false;
         private bool _writeMemory = false;
 
 
@@ -79,6 +80,7 @@ namespace HitCounterManager
             dataDs3.bonfireToSplit.Clear();
             dataDs3.lvlToSplit.Clear();
             dataDs3.flagToSplit.Clear();
+            _runStarted = false;
         }
 
         public void resetSplited()
@@ -114,6 +116,7 @@ namespace HitCounterManager
                     cf.IsSplited = false;
                 }
             }
+            _runStarted = false;
         }
 
         public void LoadAutoSplitterProcedure()

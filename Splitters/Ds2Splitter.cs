@@ -39,6 +39,7 @@ namespace HitCounterManager
         public DTDs2 dataDs2;
         public DefinitionsDs2 defD2 = new DefinitionsDs2();
         public ProfilesControl _profile;
+        public bool _runStarted = false;
 
         public DTDs2 getDataDs2()
         {
@@ -74,6 +75,7 @@ namespace HitCounterManager
             dataDs2.positionsToSplit.Clear();
             dataDs2.lvlToSplit.Clear();
             dataDs2.positionMargin = 3;
+            _runStarted = false;
         }
 
         public void resetSplited()
@@ -93,9 +95,9 @@ namespace HitCounterManager
                     l.IsSplited = false;
                 }
             }
-
+            _runStarted = false;
         }
-
+        
         public void LoadAutoSplitterProcedure()
         {
             var taskRefresh = new Task(() =>
@@ -180,6 +182,10 @@ namespace HitCounterManager
             return Ds2.GetPosition();
         }
 
+        public bool getIsLoading()
+        {
+            return Ds2.IsLoading();
+        }
 
         #region Init()
         public void RefreshDs2()
@@ -191,6 +197,31 @@ namespace HitCounterManager
                 Thread.Sleep(10);
                 _StatusDs2 = getDs2StatusProcess(delay);
                 if (!_StatusDs2) { delay = 2000; }else { delay = 20000; }
+            }
+        }
+
+        private void checkStart()
+        {
+            while (dataDs2.enableSplitting && dataDs2.autoTimer)
+            {
+                Thread.Sleep(2000);
+                Vector3f p = new Vector3f() { X = -210,Y=-320, Z =6};
+                var currentlyPosition = Ds2.GetPosition();
+                var rangeX = ((currentlyPosition.X - p.X) <= dataDs2.positionMargin) && ((currentlyPosition.X - p.X) >= -dataDs2.positionMargin);
+                var rangeY = ((currentlyPosition.Y - p.Y) <= dataDs2.positionMargin) && ((currentlyPosition.Y - p.Y) >= -dataDs2.positionMargin);
+                var rangeZ = ((currentlyPosition.Z - p.Z) <= dataDs2.positionMargin) && ((currentlyPosition.Z - p.Z) >= -dataDs2.positionMargin);
+                if (rangeX && rangeY && rangeZ)
+                {
+                    _runStarted = true;
+                }
+                else
+                {                 
+                    if (currentlyPosition.X == 0.00 && currentlyPosition.Y == 0.00 && currentlyPosition.Z == 0.00)
+                    {
+                        _runStarted = false;
+                    }
+                }
+                              
             }
         }
 

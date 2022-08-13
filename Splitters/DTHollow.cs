@@ -551,6 +551,7 @@ namespace HitCounterManager
     {
         //Settings Vars
         public bool enableSplitting = false;
+        public bool autoTimer = false;
         public int PantheonMode = 0;
         public int positionMargin = 3;
         //Flags to Split

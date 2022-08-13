@@ -36,6 +36,7 @@ namespace HitCounterManager
         public DTElden dataElden;
         public DefinitionsElden defE = new DefinitionsElden();
         public ProfilesControl _profile;
+        public bool _runStarted = false;
         private bool _writeMemory = false;
 
         public DTElden getDataElden()
@@ -89,7 +90,7 @@ namespace HitCounterManager
             dataElden.graceToSplit.Clear();
             dataElden.positionToSplit.Clear();
             dataElden.flagsToSplit.Clear();
-
+            _runStarted = false;
         }
 
         public void resetSplited() 
@@ -125,6 +126,7 @@ namespace HitCounterManager
                     cf.IsSplited = false;
                 }
             }
+            _runStarted = false;
         }
 
 
