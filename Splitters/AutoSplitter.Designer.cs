@@ -671,10 +671,10 @@
             // tabSekiro
             // 
             this.tabSekiro.BackColor = System.Drawing.SystemColors.Control;
+            this.tabSekiro.Controls.Add(this.panelBossS);
             this.tabSekiro.Controls.Add(this.panelPositionS);
             this.tabSekiro.Controls.Add(this.panelIdolsS);
             this.tabSekiro.Controls.Add(this.panelCfSekiro);
-            this.tabSekiro.Controls.Add(this.panelBossS);
             this.tabSekiro.Controls.Add(this.btnRefreshSekiro);
             this.tabSekiro.Controls.Add(this.btnDesactiveSekiro);
             this.tabSekiro.Controls.Add(this.sekiroRunning);
@@ -1903,6 +1903,7 @@
             this.comboBoxBoss.BackColor = System.Drawing.SystemColors.ControlDark;
             this.comboBoxBoss.FormattingEnabled = true;
             this.comboBoxBoss.Items.AddRange(new object[] {
+            "Genichiro Ashina - Tutorial",
             "Gyoubu Masataka Oniwa",
             "Lady Butterfly",
             "Genichiro Ashina",

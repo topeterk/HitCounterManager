@@ -24,6 +24,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using SoulMemory;
+using System.Globalization;
 
 namespace HitCounterManager
 {
@@ -734,12 +735,9 @@ namespace HitCounterManager
                     {
                         try
                         {
-                            textBoxX.Text = String.Format("{0:N2}", decimal.Parse(textBoxX.Text));
-                            textBoxY.Text = String.Format("{0:N2}", decimal.Parse(textBoxY.Text));
-                            textBoxZ.Text = String.Format("{0:N2}", decimal.Parse(textBoxZ.Text));
-                            var X = float.Parse(textBoxX.Text);
-                            var Y = float.Parse(textBoxY.Text);
-                            var Z = float.Parse(textBoxZ.Text);
+                            var X = float.Parse(textBoxX.Text, new CultureInfo("en-US").NumberFormat);
+                            var Y = float.Parse(textBoxY.Text, new CultureInfo("en-US").NumberFormat);
+                            var Z = float.Parse(textBoxZ.Text, new CultureInfo("en-US").NumberFormat);
                             if (X == 0.00 && Y == 0.00 && Z == 0.00)
                             {
                                 error = MessageBox.Show("Dont use cords 0,0,0", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);

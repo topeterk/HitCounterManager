@@ -53,6 +53,8 @@ namespace HitCounterManager
             BossS boss = new BossS();
             switch (Nboss)
             {
+                case "Genichiro Ashina - Tutorial":
+                    boss.BossDate("Genichiro Ashina - Tutorial", 11120803); break;
                 case "Gyoubu Masataka Oniwa":
                       boss.BossDate("Gyoubu Masataka Oniwa", 9301);
                     break;

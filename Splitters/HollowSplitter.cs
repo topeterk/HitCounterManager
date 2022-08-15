@@ -334,7 +334,7 @@ namespace HitCounterManager
         {
             while (dataHollow.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(10000);
+                Thread.Sleep(5000);
                 foreach (var element in dataHollow.getBosstoSplit())
                 {
                     if (!element.IsSplited && hollow.Memory.PlayerData<bool>(element.Offset))
@@ -350,7 +350,7 @@ namespace HitCounterManager
         {
             while (dataHollow.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(10000);
+                Thread.Sleep(5000);
                 foreach (var element in dataHollow.getMiniBossToSplit())
                 {
                     if (!element.IsSplited)
@@ -380,7 +380,7 @@ namespace HitCounterManager
         {
             while (dataHollow.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(10000);
+                Thread.Sleep(5000);
                 foreach (var element in dataHollow.getCharmToSplit())
                 {
                     if (!element.IsSplited)
@@ -418,7 +418,7 @@ namespace HitCounterManager
         {
             while (dataHollow.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(10000);
+                Thread.Sleep(5000);
                 foreach (var element in dataHollow.getSkillsToSplit())
                 {
                     if (!element.IsSplited)

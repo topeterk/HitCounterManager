@@ -211,6 +211,7 @@ namespace HitCounterManager
         {
             while (dataCuphead.enableSplitting && _StatusProcedure)
             {
+                Thread.Sleep(1000);
                 foreach (var element in dataCuphead.getElementToSplit())
                 {
                     if (!element.IsSplited && ElementCase(element.Title))
