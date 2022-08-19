@@ -272,7 +272,10 @@ namespace HitCounterManager
                 
                 if (!_writeMemory)
                 {
-                    sekiro.WriteInGameTimeMilliseconds(0);
+                    if (sekiro.GetInGameTimeMilliseconds() < 1)
+                    {
+                        sekiro.WriteInGameTimeMilliseconds(0);
+                    }                   
                     _writeMemory = true;
                 }
 

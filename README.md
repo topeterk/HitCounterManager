@@ -99,6 +99,7 @@ Thanks to (in alphabetical order):
 Thanks to Beta Testers of AutoSplit(in alphabetical order):
 * [AvegaX](https://www.twitch.tv/avegax)
 * [Bajamuten](https://www.twitch.tv/bajamuten)
+* [Bender](https://www.twitch.tv/BenderzGreat)
 * [Cursedwind](https://www.twitch.tv/cursedwind)
 * [DanielloPiuBello](https://www.twitch.tv/daniellopiubello)
 * [Duuruk](https://www.twitch.tv/disabled_dogs)

@@ -221,7 +221,7 @@ namespace HitCounterManager
             while (_StatusProcedure && dataDs3.enableSplitting)
             {
                 Thread.Sleep(10);
-                try { _StatusDs3 = getDs3StatusProcess(delay); }catch (Exception) { };
+                _StatusDs3 = getDs3StatusProcess(delay);
                 if (!_StatusDs3)
                 {
                     _writeMemory = false;
@@ -234,7 +234,10 @@ namespace HitCounterManager
 
                 if (!_writeMemory)
                 {
-                    Ds3.WriteInGameTimeMilliseconds(0);
+                    if (Ds3.GetInGameTimeMilliseconds() < 1)
+                    {
+                        Ds3.WriteInGameTimeMilliseconds(0);                      
+                    }
                     _writeMemory = true;
                 }
             }

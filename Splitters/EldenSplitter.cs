@@ -241,7 +241,7 @@ namespace HitCounterManager
 
                 if (!_writeMemory)
                 {
-                    elden.WriteInGameTimeMilliseconds(0);
+                    if (elden.GetInGameTimeMilliseconds() < 1) { elden.WriteInGameTimeMilliseconds(0); }                   
                     _writeMemory = true;
                 }
             }
