@@ -26,9 +26,11 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 * Configurable keyboard hot keys that can easily be used while playing
 * One single save file for all settings and profiles: **HitCounterManagerSave.xml**
 * One single save file for all settings of AutoSplit: **HitCounterManagerSaveAutoSplitter.xml**
-* Create profiles for each challenge or game or build a sequence of runs (called succession) like for the Dark Souls trilogy
+* Create profiles for each challenge or game or build a sequence of runs (called succession) like for the Dark Souls trilogy 
+* Posibility to AutoSplit for: 
+ Dark Souls 1, Dark Souls 2, Dark Souls 3, Sekiro Shadow Die Twice, Elden Ring, Hollow Knight, Celeste, Cuphead and Others
 * Dark Mode (not the best looking but hey: its dark)
-* Timer (including current, PB and gold split times)
+* Timer (including current, autotimers, PB and gold split times)
 * Customizable designs (Find [some examples](../../wiki/Designs) at the [Wiki pages](../../wiki))
 
 ### Pre-defined profiles
@@ -73,7 +75,7 @@ All available releases can be found at the [Releases page](../../releases) on Gi
 Please have a look at the **[Wiki pages](../../wiki)**, the **[Setup Guide](../../wiki/SetupGuide)** or the [FAQ](../../wiki/SetupGuide#FAQ).
 
 ## Anything is missing, something is annoying/can be improved or you just found a bug?
-Message me via GitHub / e-mail or simply open an issue and I will try to help you out. Alternatively you can also send me a whipser on Twitch: [GeneralGunrider](https://www.twitch.tv/generalgunrider)
+Message me via GitHub / e-mail or simply open an issue and I will try to help you out. Alternatively you can also send me a whipser on Twitch: [GeneralGunrider](https://www.twitch.tv/generalgunrider).
 For AutoSplitter Issues Contact to <ezequielmedina23@gmail.com> or Twitch: [Neimex23](https://www.twitch.tv/neimex23)
 
 ## Community
