@@ -74,6 +74,7 @@ Please have a look at the **[Wiki pages](../../wiki)**, the **[Setup Guide](../.
 
 ## Anything is missing, something is annoying/can be improved or you just found a bug?
 Message me via GitHub / e-mail or simply open an issue and I will try to help you out. Alternatively you can also send me a whipser on Twitch: [GeneralGunrider](https://www.twitch.tv/generalgunrider)
+For AutoSplitter Issues Contact to <ezequielmedina23@gmail.com> or Twitch: [Neimex23](https://www.twitch.tv/neimex23)
 
 ## Community
 There is a great growing community on Discord called [Team Hitless](https://discord.gg/4E7cSK7).
