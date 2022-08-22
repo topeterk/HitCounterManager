@@ -120,8 +120,8 @@ namespace HitCounterManager
 
         public void DarkMode()
         {
-            this.BackColor = Color.FromArgb(40, 40, 40);
-            this.tabAsl.BackColor = Color.FromArgb(40, 40, 40);
+            this.BackColor = Color.FromArgb(50, 50, 50);
+            this.tabAsl.BackColor = Color.FromArgb(50, 50, 50);
         }
     }
 }

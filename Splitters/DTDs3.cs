@@ -173,7 +173,6 @@ namespace HitCounterManager
         [Serializable]
         public class LvlDs3
         {
-            public string Title;
             public SoulMemory.DarkSouls3.Attribute Attribute;
             public uint Value;
             public bool IsSplited = false;

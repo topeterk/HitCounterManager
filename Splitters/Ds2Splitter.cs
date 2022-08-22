@@ -71,6 +71,9 @@ namespace HitCounterManager
 
         public void clearData()
         {
+            listPendingB.Clear();
+            listPendingP.Clear();
+            listPendingLvl.Clear();
             dataDs2.bossToSplit.Clear();
             dataDs2.positionsToSplit.Clear();
             dataDs2.lvlToSplit.Clear();
@@ -80,6 +83,9 @@ namespace HitCounterManager
 
         public void resetSplited()
         {
+            listPendingB.Clear();
+            listPendingP.Clear();
+            listPendingLvl.Clear();
             if (dataDs2.getBossToSplit().Count > 0)
             {
                 foreach (var b in dataDs2.getBossToSplit())
@@ -141,7 +147,7 @@ namespace HitCounterManager
             dataDs2.bossToSplit.RemoveAt(position);
         }
 
-        public void AddPosition(Vector3f vector, string mode) //Exception: is Repited yet controlled in AutoSplitter
+        public void AddPosition(Vector3f vector, string mode)
         {
             var position = new DefinitionsDs2.PositionDs2()
             {

@@ -76,6 +76,10 @@ namespace HitCounterManager
 
         public void clearData()
         {
+            listPendingB.Clear();
+            listPendingBon.Clear();
+            listPendingLvl.Clear();
+            listPendingCf.Clear();
             dataDs3.bossToSplit.Clear();
             dataDs3.bonfireToSplit.Clear();
             dataDs3.lvlToSplit.Clear();
@@ -85,6 +89,10 @@ namespace HitCounterManager
 
         public void resetSplited()
         {
+            listPendingB.Clear();
+            listPendingBon.Clear();
+            listPendingLvl.Clear();
+            listPendingCf.Clear();
             if (dataDs3.getBossToSplit().Count > 0)
             {
                 foreach (var b in dataDs3.getBossToSplit())
@@ -254,7 +262,7 @@ namespace HitCounterManager
             while (dataDs3.enableSplitting && _StatusProcedure)
             {
                 Thread.Sleep(200);
-                if (listPendingB.Count > 0 || listPendingBon.Count > 0 || listPendingLvl.Count > 0)
+                if (listPendingB.Count > 0 || listPendingBon.Count > 0 || listPendingLvl.Count > 0 || listPendingCf.Count >0)
                 {
                     if (!Ds3.IsPlayerLoaded())
                     {
@@ -331,20 +339,20 @@ namespace HitCounterManager
             while (dataDs3.enableSplitting && _StatusProcedure)
             {
                 Thread.Sleep(5000);
-                foreach (var bonefire in dataDs3.getBonfireToSplit())
+                foreach (var bonfire in dataDs3.getBonfireToSplit())
                 {
-                    if (!bonefire.IsSplited && Ds3.ReadEventFlag(bonefire.Id))
+                    if (!bonfire.IsSplited && Ds3.ReadEventFlag(bonfire.Id))
                     {
-                        if (bonefire.Mode == "Loading game after")
+                        if (bonfire.Mode == "Loading game after")
                         {
-                            if (!listPendingBon.Contains(bonefire))
+                            if (!listPendingBon.Contains(bonfire))
                             {
-                                listPendingBon.Add(bonefire);
+                                listPendingBon.Add(bonfire);
                             }
                         }
                         else
                         {
-                            bonefire.IsSplited = true;
+                            bonfire.IsSplited = true;
                             try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
 
                         }

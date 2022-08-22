@@ -36,10 +36,11 @@ namespace HitCounterManager
         EldenSplitter eldenSplitter;
         Ds3Splitter ds3Splitter;
         Ds2Splitter ds2Splitter;
+        Ds1Splitter ds1Splitter;
         CelesteSplitter celesteSplitter;
         AslSplitter aslSplitter;
         CupheadSplitter cupSplitter;
-        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter, EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter, Ds2Splitter ds2Splitter, AslSplitter aslSplitter, CupheadSplitter cupSplitter, bool darkMode)
+        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter, EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter, Ds2Splitter ds2Splitter, AslSplitter aslSplitter, CupheadSplitter cupSplitter,Ds1Splitter ds1Splitter, bool darkMode)
         {
             InitializeComponent();
             this.sekiroSplitter = sekiroSplitter;
@@ -47,13 +48,12 @@ namespace HitCounterManager
             this.eldenSplitter = eldenSplitter;
             this.ds3Splitter = ds3Splitter;
             this.ds2Splitter = ds2Splitter;
+            this.ds1Splitter = ds1Splitter;
             this.celesteSplitter = celesteSplitter;
             this.aslSplitter = aslSplitter;
-            this.cupSplitter = cupSplitter;
+            this.cupSplitter = cupSplitter;          
             this.darkMode = darkMode;
             refreshForm();
-
-
         }
 
         public void refreshForm()
@@ -123,6 +123,13 @@ namespace HitCounterManager
             panelBossCuphead.Hide();
             panelLevelCuphead.Hide();
             #endregion
+            #region Ds1Tab
+            panelBossDs1.Hide();
+            panelBonfireDs1.Hide();
+            panelLvlDs1.Hide();
+            panelPositionDs1.Hide();
+            panelItemDs1.Hide();
+            #endregion
             checkStatusGames();
         }
 
@@ -132,6 +139,7 @@ namespace HitCounterManager
             this.tabConfig.BackColor = Color.FromArgb(50, 50, 50);
             this.tabManual.BackColor = Color.FromArgb(50, 50, 50);
             this.TextBoxManual.BackColor = Color.DarkSlateGray;
+            this.tabDs1.BackColor = Color.FromArgb(50, 50, 50);
             this.tabDs2.BackColor = Color.FromArgb(50, 50, 50);
             this.tabDs3.BackColor = Color.FromArgb(50, 50, 50);
             this.tabElden.BackColor = Color.FromArgb(50, 50, 50);
@@ -426,7 +434,38 @@ namespace HitCounterManager
                 }
             }
             #endregion
-
+            DTDs1 ds1Data = ds1Splitter.getDataDs1();
+            #region Ds1Load.Boss
+            foreach (DefinitionsDs1.BossDs1 boss in ds1Data.getBossToSplit())
+            {
+                listBoxBossDs1.Items.Add(boss.Title + " - " + boss.Mode);
+            }
+            #endregion
+            #region Ds1Load.Bonfire
+            foreach (DefinitionsDs1.BonfireDs1 bon in ds1Data.getBonfireToSplit())
+            {
+                listBoxBonfireDs1.Items.Add(bon.Title + " - " + bon.Value + " - " + bon.Mode);
+            }
+            #endregion
+            #region Ds1Load.Lvl
+            foreach (DefinitionsDs1.LvlDs1 lvl in ds1Data.getLvlToSplit())
+            {
+                listBoxAttributesDs1.Items.Add(lvl.Attribute + ": " + lvl.Value + " - " + lvl.Mode);
+            }
+            #endregion
+            #region Ds1Load.Position
+            foreach (DefinitionsDs1.PositionDs1 position in ds1Data.getPositionsToSplit())
+            {
+                listBoxPositionsDs1.Items.Add(position.vector + " - " + position.Mode);
+            }
+            comboBoxMarginDs1.SelectedIndex = ds1Data.positionMargin;
+            #endregion
+            #region Ds1Load.Items
+            foreach (DefinitionsDs1.ItemDs1 Item in ds1Data.getItemsToSplit())
+            {
+                listBoxItemDs1.Items.Add(Item.Title + " - " + Item.Mode);
+            }
+            #endregion
             #region General
             if (sekiroData.autoTimer)
             {
@@ -547,7 +586,16 @@ namespace HitCounterManager
                 CupheadNotRunning.Show();
                 CupheadRunning.Hide();
             }
-
+            if (ds1Splitter.getDs1StatusProcess(0))
+            {
+                Ds1Running.Show();
+                Ds1NotRunning.Hide();
+            }
+            else
+            {
+                Ds1NotRunning.Show();
+                Ds1Running.Hide();
+            }
         }
 
         #region Config UI
@@ -559,8 +607,9 @@ namespace HitCounterManager
 
         private void checkBoxATDs1_CheckedChanged(object sender, EventArgs e)
         {
-            MessageBox.Show("Dark Souls 1 Not Yet Developed", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            checkBoxATDs1.Checked = false;
+            ds1Splitter.setProcedure(false);
+            var check = checkBoxATDs1.Checked == true ? ds1Splitter.dataDs1.autoTimer = true : ds1Splitter.dataDs1.autoTimer = false;
+            ds1Splitter.setProcedure(true);
         }
 
         private void checkBoxATDs2_CheckedChanged(object sender, EventArgs e)
@@ -2038,7 +2087,6 @@ namespace HitCounterManager
                 {
                     error = MessageBox.Show("Check Value and try again", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
             }
         }
 
@@ -2458,8 +2506,277 @@ namespace HitCounterManager
             }
         }
 
+
         #endregion
+        #region Ds1 UI
+        private void comboBoxToSplitDs1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            panelBossDs1.Hide();
+            panelBonfireDs1.Hide();
+            panelLvlDs1.Hide();
+            panelPositionDs1.Hide();
+            panelItemDs1.Hide();
+
+            switch (comboBoxToSplitDs1.SelectedIndex)
+            {
+                case 0: panelBossDs1.Show(); break;
+                case 1: panelBonfireDs1.Show(); break;
+                case 2: panelLvlDs1.Show(); break;
+                case 3: panelPositionDs1.Show(); break;
+                case 4: panelItemDs1.Show(); break;
+            }
+        }
+
+        private void btnAddBossDs1_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (comboBoxBossDs1.SelectedIndex == -1 || comboBoxHowBossDs1.SelectedIndex == -1)
+            {
+                error = MessageBox.Show("Plase select boss and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                var contains1 = !listBoxBossDs1.Items.Contains(comboBoxBossDs1.Text.ToString() + " - " + "Inmediatly");
+                var contains2 = !listBoxBossDs1.Items.Contains(comboBoxBossDs1.Text.ToString() + " - " + "Loading game after");
+                var contains3 = !listBoxBossDs1.Items.Contains(comboBoxBossDs1.Text.ToString() + " - " + "Warping after");
+                if (contains1 && contains2 && contains3)
+                {
+                    ds1Splitter.setProcedure(false);
+                    ds1Splitter.AddBoss(comboBoxBossDs1.Text.ToString(), comboBoxHowBossDs1.Text.ToString());
+                    listBoxBossDs1.Items.Add(comboBoxBossDs1.Text.ToString() + " - " + comboBoxHowBossDs1.Text.ToString());
+                    ds1Splitter.setProcedure(true);
+                }
+                else
+                {
+                    error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void listBoxBossDs1_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.listBoxBossDs1.SelectedItem != null)
+            {
+                int i = listBoxBossDs1.Items.IndexOf(listBoxBossDs1.SelectedItem);
+                ds1Splitter.setProcedure(false);
+                ds1Splitter.RemoveBoss(i);
+                ds1Splitter.setProcedure(true);
+                listBoxBossDs1.Items.Remove(listBoxBossDs1.SelectedItem);
+            }
+        }
+
+        private void btnAddBonfireDs1_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (comboBoxBonfireDs1.SelectedIndex == -1 || comboBoxHowBonfireDs1.SelectedIndex == -1 || comboBoxStateDs1.SelectedIndex ==-1)
+            {
+                error = MessageBox.Show("Plase select state, bonefire and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                var contains1 = !listBoxBonfireDs1.Items.Contains(comboBoxBonfireDs1.Text.ToString() + " - " + "Inmediatly");
+                var contains2 = !listBoxBonfireDs1.Items.Contains(comboBoxBonfireDs1.Text.ToString() + " - " + "Loading game after");
+                var contains3 = !listBoxBonfireDs1.Items.Contains(comboBoxBonfireDs1.Text.ToString() + " - " + "Warping after");
+
+                if (contains1 && contains2 && contains3)
+                {
+                    ds1Splitter.setProcedure(false);
+                    ds1Splitter.AddBonfire(comboBoxBonfireDs1.Text.ToString(), comboBoxHowBonfireDs1.Text.ToString(), comboBoxStateDs1.Text.ToString());
+                    listBoxBonfireDs1.Items.Add(comboBoxBonfireDs1.Text.ToString() + " - " + ds1Splitter.convertStringToState(comboBoxStateDs1.Text.ToString()) + " - " + comboBoxHowBonfireDs1.Text.ToString());
+                    ds1Splitter.setProcedure(true);
+                }
+                else
+                {
+                    error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void listBoxBonfireDs1_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.listBoxBonfireDs1.SelectedItem != null)
+            {
+                int i = listBoxBonfireDs1.Items.IndexOf(listBoxBonfireDs1.SelectedItem);
+                ds1Splitter.setProcedure(false);
+                ds1Splitter.RemoveBonfire(i);
+                ds1Splitter.setProcedure(true);
+                listBoxBonfireDs1.Items.Remove(listBoxBonfireDs1.SelectedItem);
+            }
+        }
+
+        private void btnAddAttributeDs1_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (comboBoxAttributesDs1.SelectedIndex == -1 || comboBoxHowAttributesDs1.SelectedIndex == -1 || textBoxValueDs1.Text == null)
+            {
+                error = MessageBox.Show("Plase select Attribute, Value and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                try
+                {
+                    var value = uint.Parse(textBoxValueDs1.Text);
+                    var contains1 = !listBoxAttributesDs1.Items.Contains(comboBoxAttributesDs1.Text.ToString() + ": " + value + " - " + "Inmediatly");
+                    var contains2 = !listBoxAttributesDs1.Items.Contains(comboBoxAttributesDs1.Text.ToString() + ": " + value + " - " + "Loading game after");
+                    var contains3 = !listBoxAttributesDs1.Items.Contains(comboBoxAttributesDs1.Text.ToString() + ": " + value + " - " + "Warping after");
+                    if (contains1 && contains2 && contains3)
+                    {
+                        ds1Splitter.setProcedure(false);
+                        ds1Splitter.AddAttribute(comboBoxAttributesDs1.Text.ToString(), comboBoxHowAttributesDs1.Text.ToString(), value);
+                        listBoxAttributesDs1.Items.Add(comboBoxAttributesDs1.Text.ToString() + ": " + value + " - " + comboBoxHowAttributesDs1.Text.ToString());
+                        ds1Splitter.setProcedure(true);
+                    }
+                    else
+                    {
+                        error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception)
+                {
+                    error = MessageBox.Show("Check Value and try again", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void listBoxAttributeDs1_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.listBoxAttributesDs1.SelectedItem != null)
+            {
+                int i = listBoxAttributesDs1.Items.IndexOf(listBoxAttributesDs1.SelectedItem);
+                ds1Splitter.setProcedure(false);
+                ds1Splitter.RemoveAttribute(i);
+                ds1Splitter.setProcedure(true);
+                listBoxAttributesDs1.Items.Remove(listBoxAttributesDs1.SelectedItem);
+            }
+        }
+
+        Vector3f VectorDs1;
+        private void btnGetPositionDs1_Click(object sender, EventArgs e)
+        {
+            var Vector = ds1Splitter.getCurrentPosition();
+            this.VectorDs1 = Vector;
+            this.textBoxXDs1.Clear();
+            this.textBoxYDs1.Clear();
+            this.textBoxZDs1.Clear();
+            this.textBoxXDs1.Paste(Vector.X.ToString("0.00"));
+            this.textBoxYDs1.Paste(Vector.Y.ToString("0.00"));
+            this.textBoxZDs1.Paste(Vector.Z.ToString("0.00"));
+        }
+
+        private void listBoxPositionDs1_DoubleClick(object sender, EventArgs e)
+        {
+            if (listBoxPositionsDs1.SelectedItem != null)
+            {
+                int i = listBoxPositionsDs1.Items.IndexOf(listBoxPositionsDs1.SelectedItem);
+                ds1Splitter.setProcedure(false);
+                ds1Splitter.RemovePosition(i);
+                ds1Splitter.setProcedure(true);
+                listBoxPositionsDs1.Items.Remove(listBoxPositionsDs1.SelectedItem);
+            }
+        }
+
+        private void comboBoxMarginDs1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ds1Splitter.dataDs1.positionMargin = comboBoxMarginDs1.SelectedIndex;
+        }
+
+        private void btnAddPositionDs1_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (this.VectorDs1 != null)
+            {
+                var contains1 = !listBoxPositionsDs1.Items.Contains(this.VectorDs1 + " - " + "Inmediatly");
+                var contains2 = !listBoxPositionsDs1.Items.Contains(this.VectorDs1 + " - " + "Loading game after");
+                var contains3 = !listBoxPositionsDs1.Items.Contains(this.VectorDs1 + " - " + "Warping after");
+                if (contains1 && contains2 && contains3)
+                {
+
+                    if (comboBoxHowPositionsDs1.SelectedIndex == -1)
+                    {
+                        error = MessageBox.Show("Select 'How' do you want split ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        if (this.VectorDs1.X == 0 && this.VectorDs1.Y == 0 && this.VectorDs1.Z == 0)
+                        {
+                            error = MessageBox.Show("Dont use cords 0,0,0", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            ds1Splitter.setProcedure(false);
+                            listBoxPositionsDs1.Items.Add(this.VectorDs1 + " - " + comboBoxHowPositionsDs1.Text.ToString());
+                            error = MessageBox.Show("Move your character to avoid autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ds1Splitter.AddPosition(this.VectorDs1, comboBoxHowPositionsDs1.Text.ToString());
+                            ds1Splitter.setProcedure(true);
+                        }
+                    }
+                }
+                else
+                {
+                    error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                error = MessageBox.Show("Plase get a position ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
 
-    }      
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            DialogResult error;
+            if (comboBoxItemDs1.SelectedIndex == -1 || comboBoxHowItemDs1.SelectedIndex == -1)
+            {
+                error = MessageBox.Show("Plase select Item and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                var contains1 = !listBoxItemDs1.Items.Contains(comboBoxItemDs1.Text.ToString() + " - " + "Inmediatly");
+                var contains2 = !listBoxItemDs1.Items.Contains(comboBoxItemDs1.Text.ToString() + " - " + "Loading game after");
+                var contains3 = !listBoxItemDs1.Items.Contains(comboBoxItemDs1.Text.ToString() + " - " + "Warping after");
+                if (contains1 && contains2 && contains3)
+                {
+                    ds1Splitter.setProcedure(false);
+                    ds1Splitter.AddItem(comboBoxItemDs1.Text.ToString(), comboBoxHowItemDs1.Text.ToString());
+                    listBoxItemDs1.Items.Add(comboBoxItemDs1.Text.ToString() + " - " + comboBoxHowItemDs1.Text.ToString());
+                    ds1Splitter.setProcedure(true);
+                }
+                else
+                {
+                    error = MessageBox.Show("You have already added this trigger", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void listBoxItemDs1_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.listBoxItemDs1.SelectedItem != null)
+            {
+                int i = listBoxItemDs1.Items.IndexOf(listBoxItemDs1.SelectedItem);
+                ds1Splitter.setProcedure(false);
+                ds1Splitter.RemoveItem(i);
+                ds1Splitter.setProcedure(true);
+                listBoxItemDs1.Items.Remove(listBoxItemDs1.SelectedItem);
+            }
+        }
+
+        private void btnDesactiveAllDs1_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to disable everything?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                ds1Splitter.setProcedure(false);
+                ds1Splitter.clearData();
+                ds1Splitter.setProcedure(true);
+                this.Controls.Clear();
+                this.InitializeComponent();
+                refreshForm();
+                this.AutoSplitter_Load(null, null);//Load Others Games Settings
+                TabControl2.TabPages.Add(tabDs1);
+                TabControl2.SelectTab(tabDs1);
+            }
+        }
+        #endregion
+    }
 }

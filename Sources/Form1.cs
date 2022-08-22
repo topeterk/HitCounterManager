@@ -53,7 +53,7 @@ namespace HitCounterManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = Text + " - v" + Application.ProductVersion + " Pre-Release 2.3 " + OsLayer.Name;
+            Text = Text + " - v" + Application.ProductVersion + " Pre-Release 3.0 " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();  
             ProfileChangedHandler(sender, e);
@@ -107,7 +107,14 @@ namespace HitCounterManager
                                         }
                                         else
                                         {
-                                            comboBoxGame.SelectedIndex = 0;
+                                            if (ds1Splitter.dataDs1.enableSplitting)
+                                            {
+                                                comboBoxGame.SelectedIndex = 2;
+                                            }
+                                            else
+                                            {
+                                                comboBoxGame.SelectedIndex = 0;
+                                            }                                       
                                         }
                                     }
                                 }
@@ -204,7 +211,7 @@ namespace HitCounterManager
             SettingsDialogOpen = false;
         }
 
-        private void btnSave_Click(object sender, EventArgs e) { SaveSettings(); }
+        private void btnSave_Click(object sender, EventArgs e) { SaveSettings(); SaveAutoSplitterSettings(); }
         private void btnWeb_Click(object sender, EventArgs e) { GitHubUpdate.WebOpenLandingPage(); }
         private void btnTeamHitless_Click(object sender, EventArgs e) { System.Diagnostics.Process.Start("https://discord.gg/4E7cSK7"); }
         private void btnTeamHitlessHispano_Click(object sender, EventArgs e) { System.Diagnostics.Process.Start("https://discord.gg/ntygnch"); }
@@ -243,6 +250,7 @@ namespace HitCounterManager
           celesteSplitter.resetSplited();
           ds2Splitter.resetSplited();
           cupSplitter.resetSplited();
+          ds1Splitter.resetSplited();
         }
         private void btnPB_Click(object sender, EventArgs e) { StartStopTimer(false); profCtrl.ProfilePB(); }
         private void btnPause_Click(object sender, EventArgs e) { StartStopTimer(!profCtrl.TimerRunning); }
@@ -257,7 +265,7 @@ namespace HitCounterManager
         private void btnSplitPrev_Click(object sender, EventArgs e) { profCtrl.ProfileSplitGo(-1); }
 
         private void btnSplitter_Click(object sender, EventArgs e) 
-        { Form form = new AutoSplitter(getSekiroInstance(),getHollowInstance(),getEldenInstance(),getDs3Instance(),getCelesteInstance(),getDs2Instance(),getAslInstance(),getCupheadInstance(), Program.DarkMode); form.ShowDialog(this);}
+        { Form form = new AutoSplitter(getSekiroInstance(),getHollowInstance(),getEldenInstance(),getDs3Instance(),getCelesteInstance(),getDs2Instance(),getAslInstance(),getCupheadInstance(),getDs1Instance(), Program.DarkMode); form.ShowDialog(this);}
 
         private void ProfileChangedHandler(object sender, EventArgs e)
         {
@@ -281,6 +289,7 @@ namespace HitCounterManager
              * sekiroSplitter.getTimeInGame(); Sekiro
              * eldenSplitter.getTimeInGame(); //Reset 0 in IGT EldenRing
              * ds3Splitter.getTimeInGame(); Ds3
+             * ds1Splitter.getTimeInGame(); Ds1
              * celesteSplitter.getTimeInGame(); Celeste
              * cup.getTimeInGame(); Cuphead
              * 
@@ -304,6 +313,19 @@ namespace HitCounterManager
                         sekiroSplitter._runStarted = true;                       
                     }else
                     if (sekiroSplitter.dataSekiro.autoTimer && sekiroSplitter._runStarted && sekiroSplitter.getTimeInGame() == 0)
+                    {
+                        StartStopTimer(false);
+                        sekiroSplitter._runStarted = false;
+                    }
+                    break;
+                case 2: //DS1
+                    if (ds1Splitter.dataDs1.autoTimer && !ds1Splitter._runStarted && ds1Splitter.getTimeInGame() > 0)
+                    {
+                        StartStopTimer(true);
+                        sekiroSplitter._runStarted = true;
+                    }
+                    else
+                   if (ds1Splitter.dataDs1.autoTimer && ds1Splitter._runStarted && ds1Splitter.getTimeInGame() == 0)
                     {
                         StartStopTimer(false);
                         sekiroSplitter._runStarted = false;
@@ -384,7 +406,7 @@ namespace HitCounterManager
                     }
                     break;
                 
-                case 2: //DS1
+                
                 case 0:
                 case 9:
                 default: break;
@@ -404,6 +426,7 @@ namespace HitCounterManager
             ds2Splitter.setStatusSplitting(false);
             aslSplitter.setStatusSplitting(false);
             cupSplitter.setStatusSplitting(false);
+            ds1Splitter.setStatusSplitting(false);
             gameActive = 0;
 
 
@@ -447,6 +470,11 @@ namespace HitCounterManager
             {
                 cupSplitter.setStatusSplitting(true);
                 gameActive = 8;
+            }
+            if(comboBoxGame.SelectedIndex == 2)
+            {
+                ds1Splitter.setStatusSplitting(true);
+                gameActive = 2;
             }
         }
 

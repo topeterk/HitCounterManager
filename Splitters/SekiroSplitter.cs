@@ -142,6 +142,11 @@ namespace HitCounterManager
 
         public void clearData()
         {
+
+            listPendingB.Clear();
+            listPendingI.Clear();
+            listPendingP.Clear();
+            listPendingCf.Clear();
             dataSekiro.bossToSplit.Clear();
             dataSekiro.idolsTosplit.Clear();
             dataSekiro.positionMargin = 3;
@@ -181,6 +186,11 @@ namespace HitCounterManager
 
         public void resetSplited()
         {
+
+            listPendingB.Clear();
+            listPendingI.Clear();
+            listPendingP.Clear();
+            listPendingCf.Clear();
             if (dataSekiro.getBossToSplit().Count > 0)
             {
                 foreach (var b in dataSekiro.getBossToSplit())
@@ -293,7 +303,7 @@ namespace HitCounterManager
             while (dataSekiro.enableSplitting && _StatusProcedure)
             {
                 Thread.Sleep(200);
-                if (listPendingI.Count > 0 || listPendingB.Count > 0 || listPendingP.Count > 0)
+                if (listPendingI.Count > 0 || listPendingB.Count > 0 || listPendingP.Count > 0 || listPendingCf.Count >0)
                 {
                     if (!sekiro.IsPlayerLoaded())
                     {

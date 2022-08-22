@@ -32,6 +32,7 @@ namespace HitCounterManager
         public DTElden DataElden;
         public DTDs3 DataDs3;
         public DTDs2 DataDs2;
+        public DTDs1 DataDs1;
         public DTCeleste DataCeleste;
         public DTCuphead DataCuphead;
         public bool ASLMethod = false;

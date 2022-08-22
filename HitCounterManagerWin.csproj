@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,7 +26,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -36,10 +36,12 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\DebugWin\</OutputPath>
     <IntermediateOutputPath>obj\DebugWin\</IntermediateOutputPath>
-    <DefineConstants>TRACE;DEBUG;OS_WINDOWS</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;OS_WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -49,8 +51,9 @@
     <IntermediateOutputPath>obj\ReleaseWin\</IntermediateOutputPath>
     <DefineConstants>TRACE;OS_WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>0</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>HitCounterManager.Program</StartupObject>
@@ -86,10 +89,12 @@
     <Compile Include="Splitters\CelesteSplitter.cs" />
     <Compile Include="Splitters\CupheadSplitter.cs" />
     <Compile Include="Splitters\DataAutoSplitter.cs" />
+    <Compile Include="Splitters\Ds1Splitter.cs" />
     <Compile Include="Splitters\Ds2Splitter.cs" />
     <Compile Include="Splitters\Ds3Splitter.cs" />
     <Compile Include="Splitters\DTCeleste.cs" />
     <Compile Include="Splitters\DTCuphead.cs" />
+    <Compile Include="Splitters\DTDs1.cs" />
     <Compile Include="Splitters\DTDs2.cs" />
     <Compile Include="Splitters\DTDs3.cs" />
     <Compile Include="Splitters\DTElden.cs" />

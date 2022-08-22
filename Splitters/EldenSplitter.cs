@@ -85,6 +85,10 @@ namespace HitCounterManager
         }
         public void clearData()
         {
+            listPendingB.Clear();
+            listPendingG.Clear();
+            listPendingP.Clear();
+            listPendingCf.Clear();
             dataElden.positionMargin = 3;
             dataElden.bossToSplit.Clear();
             dataElden.graceToSplit.Clear();
@@ -95,6 +99,10 @@ namespace HitCounterManager
 
         public void resetSplited() 
         {
+            listPendingB.Clear();
+            listPendingG.Clear();
+            listPendingP.Clear();
+            listPendingCf.Clear();
             if (dataElden.getBossToSplit().Count > 0)
             {
                 foreach (var b in dataElden.getBossToSplit())
@@ -259,7 +267,7 @@ namespace HitCounterManager
             while (dataElden.enableSplitting && _StatusProcedure)
             {
                 Thread.Sleep(200);
-                if (listPendingB.Count > 0 || listPendingG.Count > 0 || listPendingP.Count > 0)
+                if (listPendingB.Count > 0 || listPendingG.Count > 0 || listPendingP.Count > 0 || listPendingCf.Count >0)
                 {
                     if (!elden.IsPlayerLoaded())
                     {                      

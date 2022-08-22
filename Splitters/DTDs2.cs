@@ -140,8 +140,6 @@ namespace HitCounterManager
             public string Mode;
         }
         #endregion
-
-
     }
 
     [Serializable]
