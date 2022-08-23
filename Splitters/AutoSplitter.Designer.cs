@@ -163,6 +163,13 @@
             this.toSplitSelectSekiro = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabDs1 = new System.Windows.Forms.TabPage();
+            this.panelItemDs1 = new System.Windows.Forms.Panel();
+            this.btnAddItem = new System.Windows.Forms.Button();
+            this.label72 = new System.Windows.Forms.Label();
+            this.comboBoxItemDs1 = new System.Windows.Forms.ComboBox();
+            this.label73 = new System.Windows.Forms.Label();
+            this.comboBoxHowItemDs1 = new System.Windows.Forms.ComboBox();
+            this.listBoxItemDs1 = new System.Windows.Forms.ListBox();
             this.panelBonfireDs1 = new System.Windows.Forms.Panel();
             this.label74 = new System.Windows.Forms.Label();
             this.comboBoxStateDs1 = new System.Windows.Forms.ComboBox();
@@ -172,20 +179,6 @@
             this.comboBoxHowBonfireDs1 = new System.Windows.Forms.ComboBox();
             this.comboBoxBonfireDs1 = new System.Windows.Forms.ComboBox();
             this.label64 = new System.Windows.Forms.Label();
-            this.panelItemDs1 = new System.Windows.Forms.Panel();
-            this.btnAddItem = new System.Windows.Forms.Button();
-            this.label72 = new System.Windows.Forms.Label();
-            this.comboBoxItemDs1 = new System.Windows.Forms.ComboBox();
-            this.label73 = new System.Windows.Forms.Label();
-            this.comboBoxHowItemDs1 = new System.Windows.Forms.ComboBox();
-            this.listBoxItemDs1 = new System.Windows.Forms.ListBox();
-            this.panelBossDs1 = new System.Windows.Forms.Panel();
-            this.btnAddBossDs1 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboBoxBossDs1 = new System.Windows.Forms.ComboBox();
-            this.label61 = new System.Windows.Forms.Label();
-            this.comboBoxHowBossDs1 = new System.Windows.Forms.ComboBox();
-            this.listBoxBossDs1 = new System.Windows.Forms.ListBox();
             this.panelPositionDs1 = new System.Windows.Forms.Panel();
             this.label68 = new System.Windows.Forms.Label();
             this.label69 = new System.Windows.Forms.Label();
@@ -208,6 +201,13 @@
             this.comboBoxHowAttributesDs1 = new System.Windows.Forms.ComboBox();
             this.comboBoxAttributesDs1 = new System.Windows.Forms.ComboBox();
             this.label67 = new System.Windows.Forms.Label();
+            this.panelBossDs1 = new System.Windows.Forms.Panel();
+            this.btnAddBossDs1 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBoxBossDs1 = new System.Windows.Forms.ComboBox();
+            this.label61 = new System.Windows.Forms.Label();
+            this.comboBoxHowBossDs1 = new System.Windows.Forms.ComboBox();
+            this.listBoxBossDs1 = new System.Windows.Forms.ListBox();
             this.btnRefreshDs1 = new System.Windows.Forms.Button();
             this.btnDesactiveAllDs1 = new System.Windows.Forms.Button();
             this.Ds1Running = new System.Windows.Forms.Label();
@@ -418,11 +418,11 @@
             this.groupBoxRadiosAshinaOutskirts.SuspendLayout();
             this.panelCfSekiro.SuspendLayout();
             this.tabDs1.SuspendLayout();
-            this.panelBonfireDs1.SuspendLayout();
             this.panelItemDs1.SuspendLayout();
-            this.panelBossDs1.SuspendLayout();
+            this.panelBonfireDs1.SuspendLayout();
             this.panelPositionDs1.SuspendLayout();
             this.panelLvlDs1.SuspendLayout();
+            this.panelBossDs1.SuspendLayout();
             this.tabDs2.SuspendLayout();
             this.panelAttributeDs2.SuspendLayout();
             this.panelPositionDs2.SuspendLayout();
@@ -2094,149 +2094,6 @@
             this.tabDs1.TabIndex = 4;
             this.tabDs1.Text = "Dark Souls 1";
             // 
-            // panelBonfireDs1
-            // 
-            this.panelBonfireDs1.Controls.Add(this.label74);
-            this.panelBonfireDs1.Controls.Add(this.comboBoxStateDs1);
-            this.panelBonfireDs1.Controls.Add(this.listBoxBonfireDs1);
-            this.panelBonfireDs1.Controls.Add(this.btnAddBonfireDs1);
-            this.panelBonfireDs1.Controls.Add(this.label63);
-            this.panelBonfireDs1.Controls.Add(this.comboBoxHowBonfireDs1);
-            this.panelBonfireDs1.Controls.Add(this.comboBoxBonfireDs1);
-            this.panelBonfireDs1.Controls.Add(this.label64);
-            this.panelBonfireDs1.Location = new System.Drawing.Point(42, 90);
-            this.panelBonfireDs1.Name = "panelBonfireDs1";
-            this.panelBonfireDs1.Size = new System.Drawing.Size(504, 240);
-            this.panelBonfireDs1.TabIndex = 25;
-            // 
-            // label74
-            // 
-            this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(125, 37);
-            this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(30, 13);
-            this.label74.TabIndex = 18;
-            this.label74.Text = "state";
-            // 
-            // comboBoxStateDs1
-            // 
-            this.comboBoxStateDs1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.comboBoxStateDs1.FormattingEnabled = true;
-            this.comboBoxStateDs1.Items.AddRange(new object[] {
-            "Discovered",
-            "Unlocked (R)",
-            "Kindled 1",
-            "Kindled 2",
-            "Kindled 3"});
-            this.comboBoxStateDs1.Location = new System.Drawing.Point(165, 34);
-            this.comboBoxStateDs1.Name = "comboBoxStateDs1";
-            this.comboBoxStateDs1.Size = new System.Drawing.Size(99, 21);
-            this.comboBoxStateDs1.TabIndex = 17;
-            // 
-            // listBoxBonfireDs1
-            // 
-            this.listBoxBonfireDs1.BackColor = System.Drawing.SystemColors.Control;
-            this.listBoxBonfireDs1.FormattingEnabled = true;
-            this.listBoxBonfireDs1.Location = new System.Drawing.Point(8, 88);
-            this.listBoxBonfireDs1.Name = "listBoxBonfireDs1";
-            this.listBoxBonfireDs1.Size = new System.Drawing.Size(489, 147);
-            this.listBoxBonfireDs1.TabIndex = 16;
-            this.listBoxBonfireDs1.DoubleClick += new System.EventHandler(this.listBoxBonfireDs1_DoubleClick);
-            // 
-            // btnAddBonfireDs1
-            // 
-            this.btnAddBonfireDs1.Location = new System.Drawing.Point(213, 61);
-            this.btnAddBonfireDs1.Name = "btnAddBonfireDs1";
-            this.btnAddBonfireDs1.Size = new System.Drawing.Size(100, 21);
-            this.btnAddBonfireDs1.TabIndex = 15;
-            this.btnAddBonfireDs1.Text = "Add";
-            this.btnAddBonfireDs1.UseVisualStyleBackColor = true;
-            this.btnAddBonfireDs1.Click += new System.EventHandler(this.btnAddBonfireDs1_Click);
-            // 
-            // label63
-            // 
-            this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(387, 37);
-            this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(27, 13);
-            this.label63.TabIndex = 13;
-            this.label63.Text = "how";
-            // 
-            // comboBoxHowBonfireDs1
-            // 
-            this.comboBoxHowBonfireDs1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.comboBoxHowBonfireDs1.FormattingEnabled = true;
-            this.comboBoxHowBonfireDs1.Items.AddRange(new object[] {
-            "Inmediatly",
-            "Loading game after"});
-            this.comboBoxHowBonfireDs1.Location = new System.Drawing.Point(270, 34);
-            this.comboBoxHowBonfireDs1.Name = "comboBoxHowBonfireDs1";
-            this.comboBoxHowBonfireDs1.Size = new System.Drawing.Size(110, 21);
-            this.comboBoxHowBonfireDs1.TabIndex = 12;
-            // 
-            // comboBoxBonfireDs1
-            // 
-            this.comboBoxBonfireDs1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxBonfireDs1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.comboBoxBonfireDs1.FormattingEnabled = true;
-            this.comboBoxBonfireDs1.Items.AddRange(new object[] {
-            "Undead Asylum - Courtyard",
-            "Undead Asylum - Interior",
-            "Firelink Shrine",
-            "Firelink Altar - Lordvessel",
-            "Undead Burg",
-            "Undead Burg - Sunlight Altar",
-            "Undead Parish",
-            "Darkroot Garden",
-            "Darkroot Basin",
-            "Depths",
-            "Blighttown Catwalk",
-            "Blighttown Swap",
-            "Quelaag\'s Domain - DaughterOfChaos",
-            "The Great Hollow",
-            "Ash Lake",
-            "Ash Lake - Stone Dragon",
-            "Demon Ruins - Entrance",
-            "Demon Ruins - Staircase",
-            "Demon Ruins - Catacombs",
-            "Lost Izalith - Lava Pits",
-            "Lost Izalith - 2 (illusory wall)",
-            "Lost Izalith Heart of Chaos",
-            "Sen\'s Fortress",
-            "Anor Londo",
-            "Anor Londo Darkmoon Tomb",
-            "Anor Londo Residence",
-            "Anor Londo Chamber of the Princess",
-            "Painted World of Ariamis",
-            "The Duke\'s Archives 1 (entrance)",
-            "The Duke\'s Archives 2 (prison cell)",
-            "The Duke\'s Archives 3 (balcony)",
-            "Crystal Cave",
-            "Catacombs 1 (necromancer)",
-            "Catacombs 2 (illusory wall)",
-            "Tomb of the Giants - 1 (patches)",
-            "Tomb of the Giants - 2",
-            "Tomb of the Giants - Altar of the Gravelord",
-            "The Abyss",
-            "Oolacile - Sanctuary Garden",
-            "Oolacile - Sanctuary",
-            "Oolacile - Township",
-            "Oolacile - Township Dungeon",
-            "Chasm of the Abyss"});
-            this.comboBoxBonfireDs1.Location = new System.Drawing.Point(83, 7);
-            this.comboBoxBonfireDs1.Name = "comboBoxBonfireDs1";
-            this.comboBoxBonfireDs1.Size = new System.Drawing.Size(361, 21);
-            this.comboBoxBonfireDs1.TabIndex = 9;
-            // 
-            // label64
-            // 
-            this.label64.AutoSize = true;
-            this.label64.Location = new System.Drawing.Point(36, 11);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(39, 13);
-            this.label64.TabIndex = 8;
-            this.label64.Text = "bonfire";
-            // 
             // panelItemDs1
             // 
             this.panelItemDs1.Controls.Add(this.btnAddItem);
@@ -2996,105 +2853,148 @@
             this.listBoxItemDs1.TabIndex = 7;
             this.listBoxItemDs1.DoubleClick += new System.EventHandler(this.listBoxItemDs1_DoubleClick);
             // 
-            // panelBossDs1
+            // panelBonfireDs1
             // 
-            this.panelBossDs1.Controls.Add(this.btnAddBossDs1);
-            this.panelBossDs1.Controls.Add(this.label5);
-            this.panelBossDs1.Controls.Add(this.comboBoxBossDs1);
-            this.panelBossDs1.Controls.Add(this.label61);
-            this.panelBossDs1.Controls.Add(this.comboBoxHowBossDs1);
-            this.panelBossDs1.Controls.Add(this.listBoxBossDs1);
-            this.panelBossDs1.Location = new System.Drawing.Point(41, 89);
-            this.panelBossDs1.Name = "panelBossDs1";
-            this.panelBossDs1.Size = new System.Drawing.Size(505, 240);
-            this.panelBossDs1.TabIndex = 24;
+            this.panelBonfireDs1.Controls.Add(this.label74);
+            this.panelBonfireDs1.Controls.Add(this.comboBoxStateDs1);
+            this.panelBonfireDs1.Controls.Add(this.listBoxBonfireDs1);
+            this.panelBonfireDs1.Controls.Add(this.btnAddBonfireDs1);
+            this.panelBonfireDs1.Controls.Add(this.label63);
+            this.panelBonfireDs1.Controls.Add(this.comboBoxHowBonfireDs1);
+            this.panelBonfireDs1.Controls.Add(this.comboBoxBonfireDs1);
+            this.panelBonfireDs1.Controls.Add(this.label64);
+            this.panelBonfireDs1.Location = new System.Drawing.Point(42, 90);
+            this.panelBonfireDs1.Name = "panelBonfireDs1";
+            this.panelBonfireDs1.Size = new System.Drawing.Size(504, 240);
+            this.panelBonfireDs1.TabIndex = 25;
             // 
-            // btnAddBossDs1
+            // label74
             // 
-            this.btnAddBossDs1.Location = new System.Drawing.Point(204, 48);
-            this.btnAddBossDs1.Name = "btnAddBossDs1";
-            this.btnAddBossDs1.Size = new System.Drawing.Size(100, 21);
-            this.btnAddBossDs1.TabIndex = 14;
-            this.btnAddBossDs1.Text = "Add";
-            this.btnAddBossDs1.UseVisualStyleBackColor = true;
-            this.btnAddBossDs1.Click += new System.EventHandler(this.btnAddBossDs1_Click);
+            this.label74.AutoSize = true;
+            this.label74.Location = new System.Drawing.Point(125, 37);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(30, 13);
+            this.label74.TabIndex = 18;
+            this.label74.Text = "state";
             // 
-            // label5
+            // comboBoxStateDs1
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(295, 3);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(33, 13);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Boss:";
+            this.comboBoxStateDs1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.comboBoxStateDs1.FormattingEnabled = true;
+            this.comboBoxStateDs1.Items.AddRange(new object[] {
+            "Discovered",
+            "Unlocked (R)",
+            "Kindled 1",
+            "Kindled 2",
+            "Kindled 3"});
+            this.comboBoxStateDs1.Location = new System.Drawing.Point(165, 34);
+            this.comboBoxStateDs1.Name = "comboBoxStateDs1";
+            this.comboBoxStateDs1.Size = new System.Drawing.Size(99, 21);
+            this.comboBoxStateDs1.TabIndex = 17;
             // 
-            // comboBoxBossDs1
+            // listBoxBonfireDs1
             // 
-            this.comboBoxBossDs1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxBossDs1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.comboBoxBossDs1.FormattingEnabled = true;
-            this.comboBoxBossDs1.Items.AddRange(new object[] {
-            "Asylum Demon",
-            "Bell Gargoyle",
-            "Capra Demon",
-            "Ceaseless Discharge",
-            "Centipede Demon",
-            "Chaos Witch Quelaag",
-            "Crossbreed Priscilla",
-            "Dark Sun Gwyndolin",
-            "Demon Firesage",
-            "Four Kings",
-            "Gaping Dragon",
-            "Great Grey Wolf Sif",
-            "Gwyn Lord of Cinder",
-            "Iron Golem",
-            "Moonlight Butterfly",
-            "Nito",
-            "Ornstein And Smough",
-            "Pinwheel",
-            "Seath the Scaleless",
-            "Stray Demon",
-            "Taurus Demon",
-            "The Bed of Chaos",
-            "Artorias the Abysswalker",
-            "Black Dragon Kalameet",
-            "Manus, Father of the Abyss",
-            "Sanctuary Guardian"});
-            this.comboBoxBossDs1.Location = new System.Drawing.Point(184, 18);
-            this.comboBoxBossDs1.Name = "comboBoxBossDs1";
-            this.comboBoxBossDs1.Size = new System.Drawing.Size(292, 21);
-            this.comboBoxBossDs1.TabIndex = 12;
+            this.listBoxBonfireDs1.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxBonfireDs1.FormattingEnabled = true;
+            this.listBoxBonfireDs1.Location = new System.Drawing.Point(8, 88);
+            this.listBoxBonfireDs1.Name = "listBoxBonfireDs1";
+            this.listBoxBonfireDs1.Size = new System.Drawing.Size(489, 147);
+            this.listBoxBonfireDs1.TabIndex = 16;
+            this.listBoxBonfireDs1.DoubleClick += new System.EventHandler(this.listBoxBonfireDs1_DoubleClick);
             // 
-            // label61
+            // btnAddBonfireDs1
             // 
-            this.label61.AutoSize = true;
-            this.label61.Location = new System.Drawing.Point(87, 3);
-            this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(32, 13);
-            this.label61.TabIndex = 11;
-            this.label61.Text = "How:";
+            this.btnAddBonfireDs1.Location = new System.Drawing.Point(213, 61);
+            this.btnAddBonfireDs1.Name = "btnAddBonfireDs1";
+            this.btnAddBonfireDs1.Size = new System.Drawing.Size(100, 21);
+            this.btnAddBonfireDs1.TabIndex = 15;
+            this.btnAddBonfireDs1.Text = "Add";
+            this.btnAddBonfireDs1.UseVisualStyleBackColor = true;
+            this.btnAddBonfireDs1.Click += new System.EventHandler(this.btnAddBonfireDs1_Click);
             // 
-            // comboBoxHowBossDs1
+            // label63
             // 
-            this.comboBoxHowBossDs1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.comboBoxHowBossDs1.FormattingEnabled = true;
-            this.comboBoxHowBossDs1.Items.AddRange(new object[] {
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(387, 37);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(27, 13);
+            this.label63.TabIndex = 13;
+            this.label63.Text = "how";
+            // 
+            // comboBoxHowBonfireDs1
+            // 
+            this.comboBoxHowBonfireDs1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.comboBoxHowBonfireDs1.FormattingEnabled = true;
+            this.comboBoxHowBonfireDs1.Items.AddRange(new object[] {
             "Inmediatly",
             "Loading game after"});
-            this.comboBoxHowBossDs1.Location = new System.Drawing.Point(46, 18);
-            this.comboBoxHowBossDs1.Name = "comboBoxHowBossDs1";
-            this.comboBoxHowBossDs1.Size = new System.Drawing.Size(110, 21);
-            this.comboBoxHowBossDs1.TabIndex = 10;
+            this.comboBoxHowBonfireDs1.Location = new System.Drawing.Point(270, 34);
+            this.comboBoxHowBonfireDs1.Name = "comboBoxHowBonfireDs1";
+            this.comboBoxHowBonfireDs1.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxHowBonfireDs1.TabIndex = 12;
             // 
-            // listBoxBossDs1
+            // comboBoxBonfireDs1
             // 
-            this.listBoxBossDs1.BackColor = System.Drawing.SystemColors.Control;
-            this.listBoxBossDs1.FormattingEnabled = true;
-            this.listBoxBossDs1.Location = new System.Drawing.Point(9, 82);
-            this.listBoxBossDs1.Name = "listBoxBossDs1";
-            this.listBoxBossDs1.Size = new System.Drawing.Size(489, 147);
-            this.listBoxBossDs1.TabIndex = 7;
-            this.listBoxBossDs1.DoubleClick += new System.EventHandler(this.listBoxBossDs1_DoubleClick);
+            this.comboBoxBonfireDs1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxBonfireDs1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.comboBoxBonfireDs1.FormattingEnabled = true;
+            this.comboBoxBonfireDs1.Items.AddRange(new object[] {
+            "Undead Asylum - Courtyard",
+            "Undead Asylum - Interior",
+            "Firelink Shrine",
+            "Firelink Altar - Lordvessel",
+            "Undead Burg",
+            "Undead Burg - Sunlight Altar",
+            "Undead Parish",
+            "Darkroot Garden",
+            "Darkroot Basin",
+            "Depths",
+            "Blighttown Catwalk",
+            "Blighttown Swap",
+            "Quelaag\'s Domain - DaughterOfChaos",
+            "The Great Hollow",
+            "Ash Lake",
+            "Ash Lake - Stone Dragon",
+            "Demon Ruins - Entrance",
+            "Demon Ruins - Staircase",
+            "Demon Ruins - Catacombs",
+            "Lost Izalith - Lava Pits",
+            "Lost Izalith - 2 (illusory wall)",
+            "Lost Izalith Heart of Chaos",
+            "Sen\'s Fortress",
+            "Anor Londo",
+            "Anor Londo Darkmoon Tomb",
+            "Anor Londo Residence",
+            "Anor Londo Chamber of the Princess",
+            "Painted World of Ariamis",
+            "The Duke\'s Archives 1 (entrance)",
+            "The Duke\'s Archives 2 (prison cell)",
+            "The Duke\'s Archives 3 (balcony)",
+            "Crystal Cave",
+            "Catacombs 1 (necromancer)",
+            "Catacombs 2 (illusory wall)",
+            "Tomb of the Giants - 1 (patches)",
+            "Tomb of the Giants - 2",
+            "Tomb of the Giants - Altar of the Gravelord",
+            "The Abyss",
+            "Oolacile - Sanctuary Garden",
+            "Oolacile - Sanctuary",
+            "Oolacile - Township",
+            "Oolacile - Township Dungeon",
+            "Chasm of the Abyss"});
+            this.comboBoxBonfireDs1.Location = new System.Drawing.Point(83, 7);
+            this.comboBoxBonfireDs1.Name = "comboBoxBonfireDs1";
+            this.comboBoxBonfireDs1.Size = new System.Drawing.Size(361, 21);
+            this.comboBoxBonfireDs1.TabIndex = 9;
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(36, 11);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(39, 13);
+            this.label64.TabIndex = 8;
+            this.label64.Text = "bonfire";
             // 
             // panelPositionDs1
             // 
@@ -3343,6 +3243,106 @@
             this.label67.Size = new System.Drawing.Size(45, 13);
             this.label67.TabIndex = 17;
             this.label67.Text = "attribute";
+            // 
+            // panelBossDs1
+            // 
+            this.panelBossDs1.Controls.Add(this.btnAddBossDs1);
+            this.panelBossDs1.Controls.Add(this.label5);
+            this.panelBossDs1.Controls.Add(this.comboBoxBossDs1);
+            this.panelBossDs1.Controls.Add(this.label61);
+            this.panelBossDs1.Controls.Add(this.comboBoxHowBossDs1);
+            this.panelBossDs1.Controls.Add(this.listBoxBossDs1);
+            this.panelBossDs1.Location = new System.Drawing.Point(41, 89);
+            this.panelBossDs1.Name = "panelBossDs1";
+            this.panelBossDs1.Size = new System.Drawing.Size(505, 240);
+            this.panelBossDs1.TabIndex = 24;
+            // 
+            // btnAddBossDs1
+            // 
+            this.btnAddBossDs1.Location = new System.Drawing.Point(204, 48);
+            this.btnAddBossDs1.Name = "btnAddBossDs1";
+            this.btnAddBossDs1.Size = new System.Drawing.Size(100, 21);
+            this.btnAddBossDs1.TabIndex = 14;
+            this.btnAddBossDs1.Text = "Add";
+            this.btnAddBossDs1.UseVisualStyleBackColor = true;
+            this.btnAddBossDs1.Click += new System.EventHandler(this.btnAddBossDs1_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(295, 3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(33, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Boss:";
+            // 
+            // comboBoxBossDs1
+            // 
+            this.comboBoxBossDs1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxBossDs1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.comboBoxBossDs1.FormattingEnabled = true;
+            this.comboBoxBossDs1.Items.AddRange(new object[] {
+            "Asylum Demon",
+            "Bell Gargoyle",
+            "Capra Demon",
+            "Ceaseless Discharge",
+            "Centipede Demon",
+            "Chaos Witch Quelaag",
+            "Crossbreed Priscilla",
+            "Dark Sun Gwyndolin",
+            "Demon Firesage",
+            "Four Kings",
+            "Gaping Dragon",
+            "Great Grey Wolf Sif",
+            "Gwyn Lord of Cinder",
+            "Iron Golem",
+            "Moonlight Butterfly",
+            "Nito",
+            "Ornstein And Smough",
+            "Pinwheel",
+            "Seath the Scaleless",
+            "Stray Demon",
+            "Taurus Demon",
+            "The Bed of Chaos",
+            "Artorias the Abysswalker",
+            "Black Dragon Kalameet",
+            "Manus, Father of the Abyss",
+            "Sanctuary Guardian"});
+            this.comboBoxBossDs1.Location = new System.Drawing.Point(184, 18);
+            this.comboBoxBossDs1.Name = "comboBoxBossDs1";
+            this.comboBoxBossDs1.Size = new System.Drawing.Size(292, 21);
+            this.comboBoxBossDs1.TabIndex = 12;
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(87, 3);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(32, 13);
+            this.label61.TabIndex = 11;
+            this.label61.Text = "How:";
+            // 
+            // comboBoxHowBossDs1
+            // 
+            this.comboBoxHowBossDs1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.comboBoxHowBossDs1.FormattingEnabled = true;
+            this.comboBoxHowBossDs1.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowBossDs1.Location = new System.Drawing.Point(46, 18);
+            this.comboBoxHowBossDs1.Name = "comboBoxHowBossDs1";
+            this.comboBoxHowBossDs1.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxHowBossDs1.TabIndex = 10;
+            // 
+            // listBoxBossDs1
+            // 
+            this.listBoxBossDs1.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxBossDs1.FormattingEnabled = true;
+            this.listBoxBossDs1.Location = new System.Drawing.Point(9, 82);
+            this.listBoxBossDs1.Name = "listBoxBossDs1";
+            this.listBoxBossDs1.Size = new System.Drawing.Size(489, 147);
+            this.listBoxBossDs1.TabIndex = 7;
+            this.listBoxBossDs1.DoubleClick += new System.EventHandler(this.listBoxBossDs1_DoubleClick);
             // 
             // btnRefreshDs1
             // 
@@ -6314,16 +6314,16 @@
             this.panelCfSekiro.PerformLayout();
             this.tabDs1.ResumeLayout(false);
             this.tabDs1.PerformLayout();
-            this.panelBonfireDs1.ResumeLayout(false);
-            this.panelBonfireDs1.PerformLayout();
             this.panelItemDs1.ResumeLayout(false);
             this.panelItemDs1.PerformLayout();
-            this.panelBossDs1.ResumeLayout(false);
-            this.panelBossDs1.PerformLayout();
+            this.panelBonfireDs1.ResumeLayout(false);
+            this.panelBonfireDs1.PerformLayout();
             this.panelPositionDs1.ResumeLayout(false);
             this.panelPositionDs1.PerformLayout();
             this.panelLvlDs1.ResumeLayout(false);
             this.panelLvlDs1.PerformLayout();
+            this.panelBossDs1.ResumeLayout(false);
+            this.panelBossDs1.PerformLayout();
             this.tabDs2.ResumeLayout(false);
             this.tabDs2.PerformLayout();
             this.panelAttributeDs2.ResumeLayout(false);

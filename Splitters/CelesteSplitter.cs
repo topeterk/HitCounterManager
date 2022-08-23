@@ -23,6 +23,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Windows.Forms;
 using LiveSplit.Celeste;
 
 namespace HitCounterManager
@@ -30,12 +31,13 @@ namespace HitCounterManager
     public class CelesteSplitter
     {
         public static SplitterMemory celeste = new SplitterMemory();
-        public DTCeleste dataCeleste;
         public bool _StatusProcedure = true;
         public bool _StatusCeleste = false;
+        public bool _runStarted = false;
+        public DTCeleste dataCeleste;
         public ProfilesControl _profile;
         public DefinitionsCeleste.InfoPlayerCeleste infoPlayer = new DefinitionsCeleste.InfoPlayerCeleste();
-        public bool _runStarted = false;
+        private static readonly object _object = new object();
 
         public DTCeleste getDataCeleste()
         {
@@ -147,6 +149,15 @@ namespace HitCounterManager
             }
         }
 
+        private void SplitGo()
+        {
+            Thread.Sleep(1000);
+            lock (_object)
+            {
+                MethodInvoker method = delegate { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } };
+                method.Invoke();
+            }
+        }
 
         private void chapterToSplit()
         {
@@ -263,7 +274,7 @@ namespace HitCounterManager
                         if (shouldSplit)
                         {
                             element.IsSplited = true;
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                         }
                     }
                 }

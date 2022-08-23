@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using SoulMemory.EldenRing;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace HitCounterManager
 {
@@ -38,6 +39,7 @@ namespace HitCounterManager
         public ProfilesControl _profile;
         public bool _runStarted = false;
         private bool _writeMemory = false;
+        private static readonly object _object = new object();
 
         public DTElden getDataElden()
         {
@@ -103,6 +105,7 @@ namespace HitCounterManager
             listPendingG.Clear();
             listPendingP.Clear();
             listPendingCf.Clear();
+
             if (dataElden.getBossToSplit().Count > 0)
             {
                 foreach (var b in dataElden.getBossToSplit())
@@ -172,9 +175,6 @@ namespace HitCounterManager
             task2.Start();
             task3.Start();
             task4.Start();
-           
-
-
         }
 
         public void AddBoss(string boss, string mode)
@@ -273,28 +273,28 @@ namespace HitCounterManager
                     {                      
                         foreach (var boss in listPendingB)
                         {
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                             var b = dataElden.bossToSplit.FindIndex(iboss => iboss.Id == boss.Id);
                             dataElden.bossToSplit[b].IsSplited = true;
                         }
 
                         foreach (var grace in listPendingG)
                         {
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                             var g = dataElden.graceToSplit.FindIndex(igrace => igrace.Id == grace.Id);
                             dataElden.graceToSplit[g].IsSplited = true;
                         }
 
                         foreach (var position in listPendingP)
                         {
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                             var p = dataElden.positionToSplit.FindIndex(iposition => iposition.vector == position.vector);
                             dataElden.positionToSplit[p].IsSplited = true;
                         }
 
                         foreach (var cf in listPendingCf)
                         {
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                             var c = dataElden.flagsToSplit.FindIndex(iflag => iflag.Id == cf.Id);
                             dataElden.flagsToSplit[c].IsSplited = true;
                         }
@@ -307,6 +307,16 @@ namespace HitCounterManager
 
                     }
                 }
+            }
+        }
+
+        private void SplitGo()
+        {
+            Thread.Sleep(1000);
+            lock (_object)
+            {
+                MethodInvoker method = delegate { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } };
+                method.Invoke();
             }
         }
 
@@ -329,11 +339,9 @@ namespace HitCounterManager
                         else
                         {
                             b.IsSplited = true;
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
-                                                       
+                            SplitGo();                                                    
                         }
                     }
-
                 }
             }
         }
@@ -358,7 +366,7 @@ namespace HitCounterManager
                         else
                         {
                             i.IsSplited = true;
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                         }
                     }
                 }
@@ -385,7 +393,7 @@ namespace HitCounterManager
                         else
                         {
                             cf.IsSplited = true;
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                         }
                     }
                 }
@@ -419,7 +427,7 @@ namespace HitCounterManager
                             else
                             {
                                 p.IsSplited = true;
-                                try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                                SplitGo();
                             }
                         }
 

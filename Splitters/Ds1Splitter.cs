@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Windows.Forms;
 using SoulMemory.DarkSouls1;
 using SoulMemory;
 
@@ -34,11 +35,12 @@ namespace HitCounterManager
         public static DarkSouls1 Ds1 = new DarkSouls1();
         public bool _StatusProcedure = true;
         public bool _StatusDs1 = false;
+        public bool _runStarted = false;
         public DTDs1 dataDs1;
         public DefinitionsDs1 defDs1 = new DefinitionsDs1();
-        public ProfilesControl _profile;
-        public bool _runStarted = false;
+        public ProfilesControl _profile;       
         private List<Item> inventory = null;
+        private static readonly object _object = new object();
 
         public DTDs1 getDataDs1()
         {
@@ -322,35 +324,35 @@ namespace HitCounterManager
                     {
                         foreach (var boss in listPendingB)
                         {
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                             var b = dataDs1.bossToSplit.FindIndex(iboss => iboss.Id == boss.Id);
                             dataDs1.bossToSplit[b].IsSplited = true;
                         }
 
                         foreach (var bone in listPendingBon)
                         {
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                             var bo = dataDs1.bonfireToSplit.FindIndex(Ibone => Ibone.Id == bone.Id);
                             dataDs1.bonfireToSplit[bo].IsSplited = true;
                         }
 
                         foreach (var lvl in listPendingLvl)
                         {
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                             var l = dataDs1.lvlToSplit.FindIndex(Ilvl => Ilvl.Attribute == lvl.Attribute && Ilvl.Value == lvl.Value);
                             dataDs1.lvlToSplit[l].IsSplited = true;
                         }
 
                         foreach (var position in listPendingP)
                         {
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                             var p = dataDs1.positionsToSplit.FindIndex(fposition => fposition.vector == position.vector);
                             dataDs1.positionsToSplit[p].IsSplited = true;
                         }
 
                         foreach (var cf in listPendingItem)
                         {
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                             var c = dataDs1.itemToSplit.FindIndex(icf => icf.Id == cf.Id);
                             dataDs1.itemToSplit[c].IsSplited = true;
                         }
@@ -364,7 +366,17 @@ namespace HitCounterManager
                     }
                 }
             }
-        }  
+        }
+
+        private void SplitGo()
+        {
+            Thread.Sleep(1000);
+            lock (_object)
+            {
+                MethodInvoker method = delegate { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } };
+                method.Invoke();
+            }
+        }
 
         private void bossToSplit()
         {
@@ -385,7 +397,7 @@ namespace HitCounterManager
                         else
                         {
                             b.IsSplited = true;
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };                          
+                            SplitGo();                          
                         }
                     }
 
@@ -413,7 +425,7 @@ namespace HitCounterManager
                         else
                         {
                             bonfire.IsSplited = true;
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                         }
                     }
                 }
@@ -439,7 +451,7 @@ namespace HitCounterManager
                         else
                         {
                             lvl.IsSplited = true;
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                         }
                     }
                 }
@@ -471,7 +483,7 @@ namespace HitCounterManager
                             else
                             {
                                 p.IsSplited = true;
-                                try { _profile.ProfileSplitGo(+1); } catch (Exception) { };                         
+                                SplitGo();                         
                             }
                         }
                     }
@@ -500,7 +512,7 @@ namespace HitCounterManager
                         else
                         {
                             item.IsSplited = true;
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                         }
                     }
                 }

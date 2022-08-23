@@ -498,10 +498,23 @@ namespace HitCounterManager
         private AslSplitter aslSplitter = new AslSplitter();
         private Ds1Splitter ds1Splitter = new Ds1Splitter();
         private void SaveAutoSplitterSettings() {
+            bool newSave = false;
             string savePath = Path.GetFullPath("HitCounterManagerSaveAutoSplitter.xml");
+            string saveBakPath = Path.GetFullPath("HitCounterManagerSaveAutoSplitter.xml.bak");
+            if (!File.Exists(savePath))
+            {
+                newSave = true;
+            }
+            
+            if (File.Exists(saveBakPath))
+            {
+                File.Delete(saveBakPath);
+            }
+            
+            if (!newSave) { File.Move(savePath, saveBakPath); }
             File.Delete(savePath);
             Stream myStream = new FileStream("HitCounterManagerSaveAutoSplitter.xml", FileMode.Create, FileAccess.Write, FileShare.None);
-            XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro), typeof(DTHollow),typeof(DTElden),typeof(DTDs3),typeof(DTDs2),typeof(DTCeleste)});
+            XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro), typeof(DTHollow),typeof(DTElden),typeof(DTDs3),typeof(DTDs2), typeof(DTDs1), typeof(DTCeleste), typeof(DTCuphead)});
             dataAS.DataSekiro = sekiroSplitter.getDataSekiro();
             dataAS.DataHollow = hollowSplitter.getDataHollow();
             dataAS.DataElden = eldenSplitter.getDataElden();
@@ -538,7 +551,7 @@ namespace HitCounterManager
              try
              {
                 Stream myStream = new FileStream("HitCounterManagerSaveAutoSplitter.xml", FileMode.Open, FileAccess.Read, FileShare.None);
-                XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro),typeof(DTHollow), typeof(DTElden),typeof(DTDs3),typeof(DTDs2),typeof(DTCeleste)});
+                XmlSerializer formatter = new XmlSerializer(typeof(DataAutoSplitter), new Type[] { typeof(DTSekiro), typeof(DTHollow), typeof(DTElden), typeof(DTDs3), typeof(DTDs2), typeof(DTDs1), typeof(DTCeleste), typeof(DTCuphead)});
                 dataAS = (DataAutoSplitter)formatter.Deserialize(myStream);
                 dataSekiro = dataAS.DataSekiro;
                 dataHollow = dataAS.DataHollow;

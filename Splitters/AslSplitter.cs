@@ -37,6 +37,7 @@ namespace HitCounterManager
         public Control control = asl.GetSettingsControl(LiveSplit.UI.LayoutMode.Vertical);
         public ProfilesControl _profile;
         public bool enableSplitting = false;
+        private static readonly object _object = new object();
         System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1500 };
 
         public void setData(XmlNode node, ProfilesControl profile)
@@ -75,7 +76,16 @@ namespace HitCounterManager
 
         #region init()
 
-         private void Split()
+        private void SplitGo()
+        {
+            Thread.Sleep(1000);
+            lock (_object)
+            {
+                MethodInvoker method = delegate { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } };
+                method.Invoke();
+            }
+        }
+        private void Split()
          {
              while (enableSplitting)
              {
@@ -84,8 +94,8 @@ namespace HitCounterManager
                  {
                      if (asl.Script.shouldSplit)
                      {
-                         try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
-                         asl.Script.shouldSplit = false;
+                        SplitGo();
+                        asl.Script.shouldSplit = false;
                      }
                  }
              }

@@ -26,19 +26,22 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Threading;
 using LiveSplit.HollowKnight;
+using System.Windows.Forms;
 
 namespace HitCounterManager
 {
     public class HollowSplitter
     {
         public static HollowKnightInfo hollow = new HollowKnightInfo();
-        public DefinitionHollow defH = new DefinitionHollow();
-        public DTHollow dataHollow;
+        public DefinitionHollow defH = new DefinitionHollow();      
         public bool _StatusProcedure = true;
         public bool _StatusHollow = false;
-        public ProfilesControl _profile;
         public bool _runStarted = false;
+        public DTHollow dataHollow;
+        public ProfilesControl _profile;    
         public DefinitionHollow.Vector3F currentPosition = new DefinitionHollow.Vector3F();
+        private static readonly object _object = new object();
+
         public DTHollow getDataHollow()
         {
             return this.dataHollow;
@@ -133,7 +136,6 @@ namespace HitCounterManager
             task4.Start();
             task5.Start();
             task6.Start();
-
         }
 
 
@@ -330,6 +332,16 @@ namespace HitCounterManager
             currentPosition.sceneName = hollow.Memory.SceneName();
         }
 
+        private void SplitGo()
+        {
+            Thread.Sleep(1000);
+            lock (_object)
+            {
+                MethodInvoker method = delegate { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } };
+                method.Invoke();
+            }
+        }
+
         private void bossToSplit()
         {
             while (dataHollow.enableSplitting && _StatusProcedure)
@@ -340,7 +352,7 @@ namespace HitCounterManager
                     if (!element.IsSplited && hollow.Memory.PlayerData<bool>(element.Offset))
                     {
                         element.IsSplited = true;
-                        try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                        SplitGo();
                     }
                 }
             }
@@ -360,7 +372,7 @@ namespace HitCounterManager
                             if (_StatusHollow && hollow.Memory.PlayerData<int>(element.Offset) == element.intCompare)
                             {
                                 element.IsSplited = true;
-                                try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                                SplitGo();
                             }
                         }
                         else
@@ -368,7 +380,7 @@ namespace HitCounterManager
                             if (hollow.Memory.PlayerData<bool>(element.Offset))
                             {
                                 element.IsSplited = true;
-                                try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                                SplitGo();
                             }
                         }
                     }
@@ -390,7 +402,7 @@ namespace HitCounterManager
                             if (_StatusHollow && hollow.Memory.PlayerData<int>(element.Offset) == element.intCompare)
                             {
                                 element.IsSplited = true;
-                                try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                                SplitGo();
                             }
                         }
                         else
@@ -398,14 +410,14 @@ namespace HitCounterManager
                             if (hollow.Memory.PlayerData<bool>(element.Offset) && !element.kingSoulsCase)
                             {
                                 element.IsSplited = true;
-                                try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                                SplitGo();
                             }
                             else
                             {
                                 if(hollow.Memory.PlayerData<int>(Offset.charmCost_36) == 5 && hollow.Memory.PlayerData<int>(Offset.royalCharmState) == 3)
                                 {
                                     element.IsSplited = true;
-                                    try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                                    SplitGo();
                                 }
                             }
                         }
@@ -428,7 +440,7 @@ namespace HitCounterManager
                             if (_StatusHollow && hollow.Memory.PlayerData<int>(element.Offset) == element.intCompare)
                             {
                                 element.IsSplited = true;
-                                try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                                SplitGo();
                             }
                         }
                         else
@@ -436,7 +448,7 @@ namespace HitCounterManager
                             if (hollow.Memory.PlayerData<bool>(element.Offset))
                             {
                                 element.IsSplited = true;
-                                try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                                SplitGo();
                             }
                         }
                     }
@@ -460,7 +472,7 @@ namespace HitCounterManager
                         if (rangeX && rangeY && rangeZ)
                         {                    
                             p.IsSplited = true;
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                         }
                     }
                 }
@@ -702,8 +714,7 @@ namespace HitCounterManager
                         if (!element.IsSplited && PantheonCase(element.Title))
                         {
                             element.IsSplited = true;
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
-                            
+                            SplitGo();
                             nSplit++;
                         }
                     }
@@ -720,7 +731,7 @@ namespace HitCounterManager
                         {
                             if (currentPosition.previousScene.StartsWith("GG_Nailmasters") && !currentPosition.sceneName.StartsWith("GG_Atrium"))
                             {
-                                try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                                SplitGo();
                                 element.IsSplited = true;
                             }
                         }
@@ -730,7 +741,7 @@ namespace HitCounterManager
                         {
                             if (currentPosition.previousScene.StartsWith("GG_Painter") && !currentPosition.sceneName.StartsWith("GG_Atrium"))
                             {
-                                try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                                SplitGo();
                                 element.IsSplited = true;
                             }
                         }
@@ -739,7 +750,7 @@ namespace HitCounterManager
                         {
                             if (currentPosition.previousScene.StartsWith("GG_Sly") && !currentPosition.sceneName.StartsWith("GG_Atrium"))
                             {
-                                try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                                SplitGo();
                                 element.IsSplited = true;
                             }
                             
@@ -749,7 +760,7 @@ namespace HitCounterManager
                         {
                             if (currentPosition.previousScene.StartsWith("GG_Hollow_Knight") && !currentPosition.sceneName.StartsWith("GG_Atrium"))
                             {
-                                try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                                SplitGo();
                                 element.IsSplited = true;
                             }
                         }
@@ -758,7 +769,7 @@ namespace HitCounterManager
                         {
                             if (currentPosition.sceneName.StartsWith("Cinematic_Ending_E"))
                             {
-                                try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                                SplitGo();
                                 element.IsSplited = true;
                             }
                         }

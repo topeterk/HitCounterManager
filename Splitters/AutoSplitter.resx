@@ -153,7 +153,10 @@ Browse the file with .asl extencion and clic on "Update Script" if this dont sho
 ===========================================
 Sekiro Features:
 - No Intro
-- No Tutorials</value>
+- No Tutorials
+
+Elden Ring Features:
+- No Intro</value>
   </data>
   <data name="lbl_warning.Text" xml:space="preserve">
     <value>If you want auto reset internal flags to split all Pantheon bosses.

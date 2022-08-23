@@ -51,7 +51,7 @@
     <IntermediateOutputPath>obj\ReleaseWin\</IntermediateOutputPath>
     <DefineConstants>TRACE;OS_WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>0</WarningLevel>
+    <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>

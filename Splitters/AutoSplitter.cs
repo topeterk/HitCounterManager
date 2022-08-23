@@ -43,6 +43,7 @@ namespace HitCounterManager
         public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter, EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter, Ds2Splitter ds2Splitter, AslSplitter aslSplitter, CupheadSplitter cupSplitter,Ds1Splitter ds1Splitter, bool darkMode)
         {
             InitializeComponent();
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
             this.sekiroSplitter = sekiroSplitter;
             this.hollowSplitter = hollowSplitter;
             this.eldenSplitter = eldenSplitter;
@@ -784,9 +785,9 @@ namespace HitCounterManager
                     {
                         try
                         {
-                            var X = float.Parse(textBoxX.Text, new CultureInfo("en-US").NumberFormat);
-                            var Y = float.Parse(textBoxY.Text, new CultureInfo("en-US").NumberFormat);
-                            var Z = float.Parse(textBoxZ.Text, new CultureInfo("en-US").NumberFormat);
+                            var X = float.Parse(textBoxX.Text, new CultureInfo("en-US"));
+                            var Y = float.Parse(textBoxY.Text, new CultureInfo("en-US"));
+                            var Z = float.Parse(textBoxZ.Text, new CultureInfo("en-US"));
                             if (X == 0.00 && Y == 0.00 && Z == 0.00)
                             {
                                 error = MessageBox.Show("Dont use cords 0,0,0", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);

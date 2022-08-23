@@ -23,6 +23,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Windows.Forms;
 using LiveSplit.Cuphead;
 
 
@@ -34,8 +35,9 @@ namespace HitCounterManager
         public DTCuphead dataCuphead;
         public bool _StatusProcedure = true;
         public bool _StatusCuphead = false;
-        public ProfilesControl _profile;
         public bool _runStarted = false;
+        public ProfilesControl _profile;       
+        private static readonly object _object = new object();
 
         public DTCuphead getDataCuphead()
         {
@@ -129,6 +131,15 @@ namespace HitCounterManager
             }
         }
 
+        private void SplitGo()
+        {
+            Thread.Sleep(1000);
+            lock (_object)
+            {
+                MethodInvoker method = delegate { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } };
+                method.Invoke();
+            }
+        }
 
         private bool ElementCase(string Title)
         {
@@ -217,7 +228,7 @@ namespace HitCounterManager
                     if (!element.IsSplited && ElementCase(element.Title))
                     {
                         element.IsSplited = true;
-                        try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                        SplitGo();
                     }
                 }
             }

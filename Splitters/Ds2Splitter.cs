@@ -22,8 +22,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Windows.Forms;
 using System.Threading.Tasks;
 using SoulMemory.DarkSouls2;
 using SoulMemory;
@@ -36,10 +35,11 @@ namespace HitCounterManager
         public static DarkSouls2 Ds2 = new DarkSouls2();
         public bool _StatusProcedure = true;
         public bool _StatusDs2 = false;
+        public bool _runStarted = false;
         public DTDs2 dataDs2;
         public DefinitionsDs2 defD2 = new DefinitionsDs2();
         public ProfilesControl _profile;
-        public bool _runStarted = false;
+        private static readonly object _object = new object();
 
         public DTDs2 getDataDs2()
         {
@@ -114,6 +114,11 @@ namespace HitCounterManager
             {
                 checkLoad();
             });
+            var taskCheckStart= new Task(() =>
+            {
+                checkStart();
+            });
+            
             var task1 = new Task(() =>
             {
                 bossToSplit();
@@ -130,6 +135,7 @@ namespace HitCounterManager
 
             taskRefresh.Start();
             taskCheckload.Start();
+            taskCheckStart.Start();
             task1.Start();
             task2.Start();
             task3.Start();
@@ -246,21 +252,21 @@ namespace HitCounterManager
                     {
                         foreach (var boss in listPendingB)
                         {
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                             var b = dataDs2.bossToSplit.FindIndex(iboss => iboss.Id == boss.Id);
                             dataDs2.bossToSplit[b].IsSplited = true;
                         }
 
                         foreach (var position in listPendingP)
                         {
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                             var p = dataDs2.positionsToSplit.FindIndex(fposition => fposition.vector == position.vector);
                             dataDs2.positionsToSplit[p].IsSplited = true;
                         }
 
                         foreach (var lvl in listPendingLvl)
                         {
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                             var l = dataDs2.lvlToSplit.FindIndex(Ilvl => Ilvl.Attribute == lvl.Attribute && Ilvl.Value == lvl.Value);
                             dataDs2.lvlToSplit[l].IsSplited = true;
                         }
@@ -270,6 +276,16 @@ namespace HitCounterManager
                         listPendingLvl.Clear();
                     }
                 }
+            }
+        }
+
+        private void SplitGo()
+        {
+            Thread.Sleep(1000);
+            lock (_object)
+            {
+                MethodInvoker method = delegate { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } };
+                method.Invoke();
             }
         }
 
@@ -292,7 +308,7 @@ namespace HitCounterManager
                         else
                         {
                             b.IsSplited = true;
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
 
                         }
                     }
@@ -320,7 +336,7 @@ namespace HitCounterManager
                         else
                         {
                             lvl.IsSplited = true;
-                            try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                            SplitGo();
                         }
                     }
                 }
@@ -350,15 +366,13 @@ namespace HitCounterManager
                                 {
                                     listPendingP.Add(p);
                                 }
-
                             }
                             else
                             {
                                 p.IsSplited = true;
-                                try { _profile.ProfileSplitGo(+1); } catch (Exception) { };
+                                SplitGo();
                             }
                         }
-
                     }
                 }
             }
