@@ -30,18 +30,20 @@ using System.Windows.Forms;
 
 namespace HitCounterManager
 {
-    
+
     public class SekiroSplitter
-    {        
+    {
         public static Sekiro sekiro = new Sekiro();
         public bool _StatusProcedure = true;
         public bool _StatusSekiro = false;
-        public bool _runStarted = false;      
+        public bool _runStarted = false;
         public DTSekiro dataSekiro;
         public DefinitionsSekiro defS = new DefinitionsSekiro();
         public ProfilesControl _profile;
         private bool _writeMemory = false;
+        private bool _SplitGo = false;
         private static readonly object _object = new object();
+        System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
 
 
         public DTSekiro getDataSekiro()
@@ -49,10 +51,29 @@ namespace HitCounterManager
             return this.dataSekiro;
         }
 
-        public void setDataSekiro(DTSekiro data,ProfilesControl profile)
+        public void setDataSekiro(DTSekiro data, ProfilesControl profile)
         {
             this.dataSekiro = data;
             this._profile = profile;
+            _update_timer.Tick += (sender, args) => SplitGo();
+        }
+
+        public void SplitGo()
+        {
+            if (_SplitGo)
+            {
+                try { _profile.ProfileSplitGo(+1); } catch (Exception) { }
+                _SplitGo = false;
+            }
+        }
+
+        private void SplitCheck()
+        {
+            lock (_object)
+            {
+                if (!_SplitGo) { Thread.Sleep(2000); }
+                _SplitGo = true;
+            }
         }
 
         public void AddIdol(string idol,string mode)
@@ -134,9 +155,14 @@ namespace HitCounterManager
         public void setStatusSplitting(bool status)
         {
             dataSekiro.enableSplitting = status;
-            if (status) { LoadAutoSplitterProcedure(); }
+            if (status) { LoadAutoSplitterProcedure(); _update_timer.Enabled = true; } else { _update_timer.Enabled = false; }
         }
 
+        public void setProcedure(bool procedure)
+        {
+            this._StatusProcedure = procedure;
+            if (procedure) { LoadAutoSplitterProcedure(); _update_timer.Enabled = true; } else { _update_timer.Enabled = false; }
+        }
 
 
         public void clearData()
@@ -163,12 +189,7 @@ namespace HitCounterManager
         }
 
 
-        public void setProcedure(bool procedure)
-        {
-            this._StatusProcedure = procedure;
-            if (procedure) { LoadAutoSplitterProcedure(); }
-        }
-
+       
         
         public bool getSekiroStatusProcess(int delay) //Use Delay 0 only for first Starts
         {
@@ -306,7 +327,7 @@ namespace HitCounterManager
                     {
                         foreach (var idol in listPendingI)
                         {
-                            SplitGo();
+                            SplitCheck();
                             var i = dataSekiro.idolsTosplit.FindIndex(fidol => fidol.Id == idol.Id);
                             dataSekiro.idolsTosplit[i].IsSplited = true;
                             
@@ -314,7 +335,7 @@ namespace HitCounterManager
 
                         foreach (var boss in listPendingB)
                         {
-                            SplitGo();
+                            SplitCheck();
                             var b = dataSekiro.bossToSplit.FindIndex(fboss => fboss.Id == boss.Id);
                             dataSekiro.bossToSplit[b].IsSplited = true;
 
@@ -322,14 +343,14 @@ namespace HitCounterManager
 
                         foreach (var position in listPendingP)
                         {
-                            SplitGo();
+                            SplitCheck();
                             var p = dataSekiro.positionsToSplit.FindIndex(fposition => fposition.vector == position.vector);
                             dataSekiro.positionsToSplit[p].IsSplited = true;
                         }
 
                         foreach (var cf in listPendingCf)
                         {
-                            SplitGo();
+                            SplitCheck();
                             var c = dataSekiro.flagToSplit.FindIndex(icf => icf.Id == cf.Id);
                             dataSekiro.flagToSplit[c].IsSplited = true;
                         }
@@ -342,16 +363,6 @@ namespace HitCounterManager
 
                     }
                 }
-            }
-        }
-
-        private void SplitGo()
-        {
-            Thread.Sleep(1000);
-            lock (_object)
-            {
-                MethodInvoker method = delegate { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } };
-                method.Invoke();                   
             }
         }
 
@@ -374,7 +385,7 @@ namespace HitCounterManager
                         else
                         {
                             b.IsSplited = true;
-                            SplitGo();
+                            SplitCheck();
                         }
                     }
                        
@@ -402,7 +413,7 @@ namespace HitCounterManager
                         else
                         {
                             i.IsSplited = true;
-                            SplitGo();
+                            SplitCheck();
                         }
                     }
                 }
@@ -436,7 +447,7 @@ namespace HitCounterManager
                             else
                             {
                                 p.IsSplited = true;
-                                SplitGo();
+                                SplitCheck();
                             }                                                       
                         }
                         
@@ -464,7 +475,7 @@ namespace HitCounterManager
                         else
                         {
                             cf.IsSplited = true;
-                            SplitGo();
+                            SplitCheck();
                         }
                     }
                 }

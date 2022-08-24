@@ -38,13 +38,16 @@ namespace HitCounterManager
         public ProfilesControl _profile;
         public bool enableSplitting = false;
         private static readonly object _object = new object();
-        System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1500 };
+        private bool _SplitGo = false;
+        System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1500 };      
+        System.Windows.Forms.Timer _update_timer2 = new System.Windows.Forms.Timer() { Interval = 1000 };
 
         public void setData(XmlNode node, ProfilesControl profile)
         {
             this._profile = profile;
             if (node != null) { asl.SetSettings(node); asl.UpdateScript(); }
             _update_timer.Tick += (sender, args) => asl.UpdateScript();
+            _update_timer2.Tick += (sender, args) => SplitGo();
             _update_timer.Enabled = true;                    
         }
 
@@ -66,7 +69,7 @@ namespace HitCounterManager
         public void setStatusSplitting(bool status)
         {
             enableSplitting = status;
-            if (status) { LoadAutoSplitterProcedure();}
+            if (status) { LoadAutoSplitterProcedure(); _update_timer2.Enabled = true; } else { _update_timer2.Enabled = false; }
         }
 
         public void UpdateScript()
@@ -76,13 +79,21 @@ namespace HitCounterManager
 
         #region init()
 
-        private void SplitGo()
+        public void SplitGo()
         {
-            Thread.Sleep(1000);
+            if (_SplitGo)
+            {
+                try { _profile.ProfileSplitGo(+1); } catch (Exception) { }
+                _SplitGo = false;
+            }
+        }
+
+        private void SplitCheck()
+        {
             lock (_object)
             {
-                MethodInvoker method = delegate { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } };
-                method.Invoke();
+                if (!_SplitGo) { Thread.Sleep(2000); }
+                _SplitGo = true;
             }
         }
         private void Split()
@@ -94,7 +105,7 @@ namespace HitCounterManager
                  {
                      if (asl.Script.shouldSplit)
                      {
-                        SplitGo();
+                        SplitCheck();
                         asl.Script.shouldSplit = false;
                      }
                  }

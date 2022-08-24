@@ -39,7 +39,10 @@ namespace HitCounterManager
         public DTDs2 dataDs2;
         public DefinitionsDs2 defD2 = new DefinitionsDs2();
         public ProfilesControl _profile;
+        private bool _SplitGo = false;
         private static readonly object _object = new object();
+        System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
+
 
         public DTDs2 getDataDs2()
         {
@@ -50,17 +53,36 @@ namespace HitCounterManager
         {
             this.dataDs2 = data;
             this._profile = profile;
+            _update_timer.Tick += (sender, args) => SplitGo();
+        }
+
+        public void SplitGo()
+        {
+            if (_SplitGo)
+            {
+                try { _profile.ProfileSplitGo(+1); } catch (Exception) { }
+                _SplitGo = false;
+            }
+        }
+
+        private void SplitCheck()
+        {
+            lock (_object)
+            {
+                if (!_SplitGo) { Thread.Sleep(2000); }
+                _SplitGo = true;
+            }
         }
 
         public void setStatusSplitting(bool status)
         {
             dataDs2.enableSplitting = status;
-            if (status) { LoadAutoSplitterProcedure(); }
+            if (status) { LoadAutoSplitterProcedure(); _update_timer.Enabled = true; } else { _update_timer.Enabled = false; }
         }
         public void setProcedure(bool procedure)
         {
             this._StatusProcedure = procedure;
-            if (procedure) { LoadAutoSplitterProcedure(); }
+            if (procedure) { LoadAutoSplitterProcedure(); _update_timer.Enabled = true; } else { _update_timer.Enabled = false; }
         }
 
         public bool getDs2StatusProcess(int delay) //Use Delay 0 only for first Starts
@@ -252,21 +274,21 @@ namespace HitCounterManager
                     {
                         foreach (var boss in listPendingB)
                         {
-                            SplitGo();
+                            SplitCheck();
                             var b = dataDs2.bossToSplit.FindIndex(iboss => iboss.Id == boss.Id);
                             dataDs2.bossToSplit[b].IsSplited = true;
                         }
 
                         foreach (var position in listPendingP)
                         {
-                            SplitGo();
+                            SplitCheck();
                             var p = dataDs2.positionsToSplit.FindIndex(fposition => fposition.vector == position.vector);
                             dataDs2.positionsToSplit[p].IsSplited = true;
                         }
 
                         foreach (var lvl in listPendingLvl)
                         {
-                            SplitGo();
+                            SplitCheck();
                             var l = dataDs2.lvlToSplit.FindIndex(Ilvl => Ilvl.Attribute == lvl.Attribute && Ilvl.Value == lvl.Value);
                             dataDs2.lvlToSplit[l].IsSplited = true;
                         }
@@ -276,16 +298,6 @@ namespace HitCounterManager
                         listPendingLvl.Clear();
                     }
                 }
-            }
-        }
-
-        private void SplitGo()
-        {
-            Thread.Sleep(1000);
-            lock (_object)
-            {
-                MethodInvoker method = delegate { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } };
-                method.Invoke();
             }
         }
 
@@ -308,7 +320,7 @@ namespace HitCounterManager
                         else
                         {
                             b.IsSplited = true;
-                            SplitGo();
+                            SplitCheck();
 
                         }
                     }
@@ -336,7 +348,7 @@ namespace HitCounterManager
                         else
                         {
                             lvl.IsSplited = true;
-                            SplitGo();
+                            SplitCheck();
                         }
                     }
                 }
@@ -370,7 +382,7 @@ namespace HitCounterManager
                             else
                             {
                                 p.IsSplited = true;
-                                SplitGo();
+                                SplitCheck();
                             }
                         }
                     }
