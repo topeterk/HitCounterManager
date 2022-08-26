@@ -118,11 +118,27 @@ stages:
           rm -f Vars.txt
 
     - task: ArchiveFiles@2
+      condition: startsWith(variables['PoolVmImg'], 'windows')
       displayName: 'Archive $(Build.ArtifactStagingDirectory)'
       inputs:
         rootFolderOrFile: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/publish/'
         includeRootFolder: false
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.zip'
+        archiveType: 'zip'
+        replaceExistingArchive: true
+        verbose: true
+
+    - task: ArchiveFiles@2
+      condition: not(startsWith(variables['PoolVmImg'], 'windows'))
+      displayName: 'Archive $(Build.ArtifactStagingDirectory)'
+      inputs:
+        rootFolderOrFile: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/publish/'
+        includeRootFolder: false
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.tar.gz'
+        archiveType: 'tar'
+        tarCompression: 'gz'
+        replaceExistingArchive: true
+        verbose: true
 
 #https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/build/dotnet-core-cli?view=azure-devops
 
