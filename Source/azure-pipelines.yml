@@ -95,25 +95,11 @@ stages:
 
     steps:
 
-# seems to be done implicitly by publish:
-# the commented part was never tested and might not work
-#    - task: DotNetCoreCLI@2
-#      inputs:
-#        command: 'restore'
-#        projects: '**/*.csproj'
-#        feedsToUse: 'select'
-#
-#    - task: DotNetCoreCLI@2
-#      inputs:
-#        command: 'build'
-#        arguments: '-c $(buildConfiguration) --no-restore'
-#        projects: '**/*.csproj'
-
     - task: DotNetCoreCLI@2
       condition: eq(variables['PoolVmImg'], 'windows-latest')
       inputs:
         command: 'publish'
-        arguments: '--runtime $(RuntimeRID) --no-self-contained'
+        arguments: '--configuration $(buildConfiguration) --runtime $(RuntimeRID) --no-self-contained'
         publishWebProjects: false
         projects: '**/*.csproj'
 
