@@ -37,10 +37,17 @@ stages:
     strategy:
       maxParallel: 4
       matrix:
-# Windows
+# Most Used
         win-x64:
           PoolVmImg: 'windows-latest'
           RuntimeRID: 'win-x64'
+        linux-x64:
+          PoolVmImg: 'ubuntu-latest'
+          RuntimeRID: 'linux-x64'
+        osx-x64:
+          PoolVmImg: 'macOS-latest'
+          RuntimeRID: 'osx-x64'
+# Windows
         win-x86:
           PoolVmImg: 'windows-latest'
           RuntimeRID: 'win-x86'
@@ -64,9 +71,6 @@ stages:
           PoolVmImg: 'windows-latest'
           RuntimeRID: 'win7-arm64'
 # Linux
-        linux-x64:
-          PoolVmImg: 'ubuntu-latest'
-          RuntimeRID: 'linux-x64'
         linux-musl-x64:
           PoolVmImg: 'ubuntu-latest'
           RuntimeRID: 'linux-musl-x64'
@@ -76,10 +80,6 @@ stages:
         linux-arm64:
           PoolVmImg: 'ubuntu-latest'
           RuntimeRID: 'linux-arm64'
-# MacOS
-        osx-x64:
-          PoolVmImg: 'macOS-latest'
-          RuntimeRID: 'osx-x64'
 # iOS
 #   building using Xcode? https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/xcode?view=azure-devops
 #   ios-arm64
@@ -116,6 +116,14 @@ stages:
           echo "Read into variables:"
           cat Vars.txt
           rm -f Vars.txt
+
+    - task: Bash@3
+      displayName: 'Dump file tree'
+      inputs:
+        targetType: 'inline'
+        script: |
+          echo "Listing '$(Build.SourcesDirectory)' ..."
+          find -L . -type f
 
     - task: ArchiveFiles@2
       condition: startsWith(variables['PoolVmImg'], 'windows')
