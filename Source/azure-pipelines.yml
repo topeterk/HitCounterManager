@@ -97,8 +97,6 @@ stages:
 
 # https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/package/nuget-authenticate?view=azure-devops
     - task: NuGetAuthenticate@1
-      inputs:
-        nuGetServiceConnections: OtherOrganizationFeedConnection, ThirdPartyRepositoryConnection
     - task: UseDotNet@2
       displayName: Use .NET 6 SDK
       inputs:
