@@ -48,6 +48,7 @@ namespace HitCounterManager
         //var Settings
         public bool enableSplitting = false;
         public bool autoTimer = false;
+        public bool gameTimer = false;
         //Flags to Split
         public List<DefinitionsCeleste.ElementToSplitCeleste> chapterToSplit = new List<DefinitionsCeleste.ElementToSplitCeleste>();
 

@@ -40,7 +40,7 @@ namespace HitCounterManager
         CelesteSplitter celesteSplitter;
         AslSplitter aslSplitter;
         CupheadSplitter cupSplitter;
-        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter, EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter, Ds2Splitter ds2Splitter, AslSplitter aslSplitter, CupheadSplitter cupSplitter,Ds1Splitter ds1Splitter, bool darkMode)
+        public AutoSplitter(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter, EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter, Ds2Splitter ds2Splitter, AslSplitter aslSplitter, CupheadSplitter cupSplitter, Ds1Splitter ds1Splitter, bool darkMode)
         {
             InitializeComponent();
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
@@ -52,7 +52,7 @@ namespace HitCounterManager
             this.ds1Splitter = ds1Splitter;
             this.celesteSplitter = celesteSplitter;
             this.aslSplitter = aslSplitter;
-            this.cupSplitter = cupSplitter;          
+            this.cupSplitter = cupSplitter;
             this.darkMode = darkMode;
             refreshForm();
         }
@@ -131,6 +131,16 @@ namespace HitCounterManager
             panelPositionDs1.Hide();
             panelItemDs1.Hide();
             #endregion
+            #region Timing
+            groupBoxTSekiro.Hide();
+            groupBoxTDs1.Hide();
+            groupBoxTDs2.Hide();
+            groupBoxTDs3.Hide();
+            groupBoxTEr.Hide();
+            groupBoxTHK.Hide();
+            groupBoxTCeleste.Hide();
+            groupBoxTCuphead.Hide();
+            #endregion
             checkStatusGames();
         }
 
@@ -140,6 +150,7 @@ namespace HitCounterManager
             this.tabConfig.BackColor = Color.FromArgb(50, 50, 50);
             this.tabManual.BackColor = Color.FromArgb(50, 50, 50);
             this.TextBoxManual.BackColor = Color.DarkSlateGray;
+            this.tabTiming.BackColor = Color.FromArgb(50, 50, 50);
             this.tabDs1.BackColor = Color.FromArgb(50, 50, 50);
             this.tabDs2.BackColor = Color.FromArgb(50, 50, 50);
             this.tabDs3.BackColor = Color.FromArgb(50, 50, 50);
@@ -471,41 +482,179 @@ namespace HitCounterManager
             if (sekiroData.autoTimer)
             {
                 checkBoxATS.Checked = true;
+                groupBoxTMS.Enabled = true;
             }
             else
             {
                 checkBoxATS.Checked = false;
+                groupBoxTMS.Enabled = false;
             }
+            if (sekiroData.gameTimer)
+            {
+                radioIGTSTimer.Checked = true;
+                radioRealTimerS.Checked = false;
+            }
+            else
+            {
+                radioIGTSTimer.Checked = false;
+                radioRealTimerS.Checked = true;
+            }
+
+            if (ds1Data.autoTimer)
+            {
+                checkBoxATDs1.Checked = true;
+                groupBoxTMDs1.Enabled = true;
+            }
+            else
+            {
+                checkBoxATDs1.Checked = false;
+                groupBoxTMDs1.Enabled = false;
+            }
+
+            if (ds1Data.gameTimer)
+            {
+                radioIGTDs1.Checked = true;
+                radioRealTimerDs1.Checked = false;
+            }
+            else
+            {
+                radioIGTDs1.Checked = false;
+                radioRealTimerDs1.Checked = true;
+            }
+
             if (ds2Data.autoTimer)
             {
                 checkBoxATDs2.Checked = true;
+                groupBoxTMDs2.Enabled = true;
             }
-            else { checkBoxATDs2.Checked = false; }
+            else
+            {
+                checkBoxATDs2.Checked = false;
+                groupBoxTMDs2.Enabled = false;
+            }
+
+            if (ds2Data.gameTimer)
+            {
+                radioIGTDs2.Checked = true;
+                radioRealTimerDs2.Checked = false;
+            }
+            else
+            {
+                radioIGTDs2.Checked = false;
+                radioRealTimerDs2.Checked = true;
+            }
+
             if (ds3Data.autoTimer)
             {
-                checkBoxATDS3.Checked = true;
+                checkBoxATDs3.Checked = true;
+                groupBoxTMDs3.Enabled = true;
             }
-            else { checkBoxATDS3.Checked = false; }
+            else
+            {
+                checkBoxATDs3.Checked = false;
+                groupBoxTMDs3.Enabled = false;
+            }
+
+            if (ds3Data.gameTimer)
+            {
+                radioIGTDs3.Checked = true;
+                radioRealTimerDs3.Checked = false;
+            }
+            else
+            {
+                radioIGTDs3.Checked = false;
+                radioRealTimerDs3.Checked = true;
+            }
+
+
             if (eldenData.autoTimer)
             {
                 checkBoxATEr.Checked = true;
+                groupBoxTMEr.Enabled = true;
             }
-            else { checkBoxATEr.Checked = false; }
+            else
+            {
+                checkBoxATEr.Checked = false;
+                groupBoxTMEr.Enabled = false;
+            }
+
+            if (eldenData.gameTimer)
+            {
+                radioIGTEr.Checked = true;
+                radioRealTimerEr.Checked = false;
+            }
+            else
+            {
+                radioIGTEr.Checked = false;
+                radioRealTimerEr.Checked = true;
+            }
+
             if (hollowData.autoTimer)
             {
                 checkBoxATHollow.Checked = true;
+                groupBoxTMHollow.Enabled = true;
             }
-            else { checkBoxATHollow.Checked = false; }
+            else
+            {
+                checkBoxATHollow.Checked = false;
+                groupBoxTMHollow.Enabled = false;
+            }
+
+            if (hollowData.gameTimer)
+            {
+                radioIGTHollow.Checked = true;
+                radioRealTimerHollow.Checked = false;
+            }
+            else
+            {
+                radioIGTHollow.Checked = false;
+                radioRealTimerHollow.Checked = true;
+            }
+
             if (celesteData.autoTimer)
             {
                 checkBoxATCeleste.Checked = true;
+                groupBoxTMCeleste.Enabled = true;
             }
-            else { checkBoxATCeleste.Checked = false; }
+            else
+            {
+                checkBoxATCeleste.Checked = false;
+                groupBoxTMCeleste.Enabled = false;
+            }
+
+            if (celesteData.gameTimer)
+            {
+                radioIGTCeleste.Checked = true;
+                radioRealTimerCeleste.Checked = false;
+            }
+            else
+            {
+                radioIGTCeleste.Checked = false;
+                radioRealTimerCeleste.Checked = true;
+            }
+
             if (cupData.autoTimer)
             {
                 checkBoxATCuphead.Checked = true;
+                groupBoxTMCuphead.Enabled = true;
             }
-            else { checkBoxATCuphead.Checked = false; }
+            else
+            {
+                checkBoxATCuphead.Checked = false;
+                groupBoxTMCuphead.Enabled = false;
+            }
+
+            if (cupData.gameTimer)
+            {
+                radioIGTCuphead.Checked = true;
+                radioRealTimerCuphead.Checked = false;
+            }
+            else
+            {
+                radioIGTCuphead.Checked = false;
+                radioRealTimerCuphead.Checked = true;
+            }
+
             #endregion
 
         }
@@ -601,50 +750,125 @@ namespace HitCounterManager
 
         #region Config UI
 
+        private void comboBoxTGame_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            groupBoxTSekiro.Hide();
+            groupBoxTDs1.Hide();
+            groupBoxTDs2.Hide();
+            groupBoxTDs3.Hide();
+            groupBoxTEr.Hide();
+            groupBoxTHK.Hide();
+            groupBoxTCeleste.Hide();
+            groupBoxTCuphead.Hide();
+
+            switch (comboBoxTGame.SelectedIndex)
+            {
+                case 0: groupBoxTSekiro.Show(); break;
+                case 1: groupBoxTDs1.Show(); break;
+                case 2: groupBoxTDs2.Show(); break;
+                case 3: groupBoxTDs3.Show(); break;
+                case 4: groupBoxTEr.Show(); break;
+                case 5: groupBoxTHK.Show(); break;
+                case 6: groupBoxTCeleste.Show(); break;
+                case 7: groupBoxTCuphead.Show(); break;
+            }
+        }
+
+        private void radioIGTSTimer_CheckedChanged(object sender, EventArgs e)
+        {
+            var check = radioIGTSTimer.Checked == true ? sekiroSplitter.dataSekiro.gameTimer = true : sekiroSplitter.dataSekiro.gameTimer = false;
+        }
+
         private void checkBoxATS_CheckedChanged(object sender, EventArgs e)
-        {         
-            var check = checkBoxATS.Checked == true ? sekiroSplitter.dataSekiro.autoTimer = true : sekiroSplitter.dataSekiro.autoTimer = false;
+        {
+            var check1 = checkBoxATS.Checked ? sekiroSplitter.dataSekiro.autoTimer = true : sekiroSplitter.dataSekiro.autoTimer = false;
+            var check2 = checkBoxATS.Checked ? groupBoxTMS.Enabled = true : groupBoxTMS.Enabled = false;
+            if (!checkBoxATS.Checked) { sekiroSplitter.dataSekiro.gameTimer = false; radioIGTSTimer.Checked = false; radioRealTimerS.Checked = true; }
         }
 
-        private void checkBoxATDs1_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxATDs1_CheckedChanged_1(object sender, EventArgs e)
         {
-            ds1Splitter.setProcedure(false);
-            var check = checkBoxATDs1.Checked == true ? ds1Splitter.dataDs1.autoTimer = true : ds1Splitter.dataDs1.autoTimer = false;
-            ds1Splitter.setProcedure(true);
+            var check1 = checkBoxATDs1.Checked ? ds1Splitter.dataDs1.autoTimer = true : ds1Splitter.dataDs1.autoTimer = false;
+            var check2 = checkBoxATDs1.Checked ? groupBoxTMDs1.Enabled = true : groupBoxTMDs1.Enabled = false;
+            if (!checkBoxATDs1.Checked) { ds1Splitter.dataDs1.gameTimer = false; radioIGTDs1.Checked = false; radioRealTimerDs1.Checked = true; }
         }
 
-        private void checkBoxATDs2_CheckedChanged(object sender, EventArgs e)
+        private void radioIGTDs1_CheckedChanged(object sender, EventArgs e)
         {
-            ds2Splitter.setProcedure(false);
-            var check = checkBoxATDs2.Checked == true ? ds2Splitter.dataDs2.autoTimer = true : ds2Splitter.dataDs2.autoTimer = false;
-            ds2Splitter.setProcedure(true);
+            var check = radioIGTDs1.Checked == true ? ds1Splitter.dataDs1.gameTimer = true : ds1Splitter.dataDs1.gameTimer = false;
         }
 
-        private void checkBoxATDS3_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxATDs2_CheckedChanged_1(object sender, EventArgs e)
         {
-            var check = checkBoxATDS3.Checked == true ? ds3Splitter.dataDs3.autoTimer = true : ds3Splitter.dataDs3.autoTimer = false;
+            var check1 = checkBoxATDs2.Checked ? ds2Splitter.dataDs2.autoTimer = true : ds2Splitter.dataDs2.autoTimer = false;
+            var check2 = checkBoxATDs2.Checked ? groupBoxTMDs2.Enabled = true : groupBoxTMDs2.Enabled = false;
+            if (!checkBoxATDs2.Checked) { ds2Splitter.dataDs2.gameTimer = false; radioIGTDs2.Checked = false; radioRealTimerDs2.Checked = true; }
         }
 
-        private void checkBoxATEr_CheckedChanged(object sender, EventArgs e)
+        private void radioIGTDs2_CheckedChanged(object sender, EventArgs e)
         {
-            var check = checkBoxATEr.Checked == true ? eldenSplitter.dataElden.autoTimer = true : eldenSplitter.dataElden.autoTimer = false;
+            var check = radioIGTDs2.Checked == true ? ds2Splitter.dataDs2.gameTimer = true : ds2Splitter.dataDs2.gameTimer = false;
+        }
+
+        private void checkBoxATDs3_CheckedChanged_1(object sender, EventArgs e)
+        {
+            var check1 = checkBoxATDs3.Checked ? ds3Splitter.dataDs3.autoTimer = true : ds3Splitter.dataDs3.autoTimer = false;
+            var check2 = checkBoxATDs3.Checked ? groupBoxTMDs3.Enabled = true : groupBoxTMDs3.Enabled = false;
+            if (!checkBoxATDs3.Checked) { ds3Splitter.dataDs3.gameTimer = false; radioIGTDs3.Checked = false; radioRealTimerDs3.Checked = true; }
+        }
+
+
+        private void radioIGTDs3_CheckedChanged(object sender, EventArgs e)
+        {
+            var check = radioIGTDs3.Checked == true ? ds3Splitter.dataDs3.gameTimer = true : ds3Splitter.dataDs3.gameTimer = false;
+        }
+
+        private void checkBoxATEr_CheckedChanged_1(object sender, EventArgs e)
+        {
+            var check1 = checkBoxATEr.Checked ? eldenSplitter.dataElden.autoTimer = true : eldenSplitter.dataElden.autoTimer = false;
+            var check2 = checkBoxATEr.Checked ? groupBoxTMEr.Enabled = true : groupBoxTMEr.Enabled = false;
+            if (!checkBoxATEr.Checked) { eldenSplitter.dataElden.gameTimer = false; radioIGTEr.Checked = false; radioRealTimerEr.Checked = true; }
+        }
+
+        private void radioIGTEr_CheckedChanged(object sender, EventArgs e)
+        {
+            var check = radioIGTEr.Checked == true ? eldenSplitter.dataElden.gameTimer = true : eldenSplitter.dataElden.gameTimer = false;
+        }
+
+        private void checkBoxATCeleste_CheckedChanged_1(object sender, EventArgs e)
+        {
+            var check1 = checkBoxATCeleste.Checked ? celesteSplitter.dataCeleste.autoTimer = true : celesteSplitter.dataCeleste.autoTimer = false;
+            var check2 = checkBoxATCeleste.Checked ? groupBoxTMCeleste.Enabled = true : groupBoxTMCeleste.Enabled = false;
+            if (!checkBoxATCeleste.Checked) { celesteSplitter.dataCeleste.gameTimer = false; radioIGTCeleste.Checked = false; radioRealTimerCeleste.Checked = true; }
+        }
+
+        private void radioIGTCeleste_CheckedChanged(object sender, EventArgs e)
+        {
+            var check = radioIGTEr.Checked == true ? celesteSplitter.dataCeleste.gameTimer = true : celesteSplitter.dataCeleste.gameTimer = false;
+        }
+
+        private void checkBoxATCuphead_CheckedChanged_1(object sender, EventArgs e)
+        {
+            var check1 = checkBoxATCuphead.Checked ? cupSplitter.dataCuphead.autoTimer = true : cupSplitter.dataCuphead.autoTimer = false;
+            var check2 = checkBoxATCuphead.Checked ? groupBoxTMCuphead.Enabled = true : groupBoxTMCuphead.Enabled = false;
+            if (!checkBoxATCuphead.Checked) { cupSplitter.dataCuphead.gameTimer = false; radioIGTCuphead.Checked = false; radioRealTimerCuphead.Checked = true; }
+        }
+
+        private void radioIGTCuphead_CheckedChanged(object sender, EventArgs e)
+        {
+            var check = radioIGTEr.Checked == true ? cupSplitter.dataCuphead.gameTimer = true : cupSplitter.dataCuphead.gameTimer = false;
         }
 
         private void checkBoxATHollow_CheckedChanged(object sender, EventArgs e)
         {
-            hollowSplitter.setProcedure(false);
-            var check = checkBoxATHollow.Checked == true ? hollowSplitter.dataHollow.autoTimer = true : hollowSplitter.dataHollow.autoTimer = false;
-            hollowSplitter.setProcedure(true);
+            var check1 = checkBoxATHollow.Checked ? hollowSplitter.dataHollow.autoTimer = true : hollowSplitter.dataHollow.autoTimer = false;
+            var check2 = checkBoxATHollow.Checked ? groupBoxTMHollow.Enabled = true : groupBoxTMHollow.Enabled = false;
+            if (!checkBoxATHollow.Checked) { hollowSplitter.dataHollow.gameTimer = false; radioIGTHollow.Checked = false; radioRealTimerHollow.Checked = true; }
         }
 
-        private void checkBoxATCeleste_CheckedChanged(object sender, EventArgs e)
+        private void radioIGTHollow_CheckedChanged(object sender, EventArgs e)
         {
-            var check = checkBoxATCeleste.Checked == true ? celesteSplitter.dataCeleste.autoTimer = true : celesteSplitter.dataCeleste.autoTimer = false;
-        }
-
-        private void checkBoxATCuphead_CheckedChanged(object sender, EventArgs e)
-        {
-            var check = checkBoxATCuphead.Checked == true ? cupSplitter.dataCuphead.autoTimer = true : cupSplitter.dataCuphead.autoTimer = false;
+            var check = radioIGTHollow.Checked == true ? hollowSplitter.dataHollow.gameTimer = true : hollowSplitter.dataHollow.gameTimer = false;
         }
 
         private void btnSekiro_Click(object sender, EventArgs e)
@@ -720,7 +944,14 @@ namespace HitCounterManager
             }
             TabControl2.SelectTab(tabElden);
         }
-
+        private void btnTiming_Click(object sender, EventArgs e)
+        {
+            if (!TabControl2.TabPages.Contains(tabTiming))
+            {
+                TabControl2.TabPages.Add(tabTiming);
+            }
+            TabControl2.SelectTab(tabTiming);
+        }
         private void btnASL_Click(object sender, EventArgs e)
         {
             Form form = new AslConfigurator(aslSplitter, darkMode);
@@ -2569,7 +2800,7 @@ namespace HitCounterManager
         private void btnAddBonfireDs1_Click(object sender, EventArgs e)
         {
             DialogResult error;
-            if (comboBoxBonfireDs1.SelectedIndex == -1 || comboBoxHowBonfireDs1.SelectedIndex == -1 || comboBoxStateDs1.SelectedIndex ==-1)
+            if (comboBoxBonfireDs1.SelectedIndex == -1 || comboBoxHowBonfireDs1.SelectedIndex == -1 || comboBoxStateDs1.SelectedIndex == -1)
             {
                 error = MessageBox.Show("Plase select state, bonefire and 'How' do you want split  ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -2778,6 +3009,9 @@ namespace HitCounterManager
                 TabControl2.SelectTab(tabDs1);
             }
         }
+
         #endregion
+
+       
     }
 }

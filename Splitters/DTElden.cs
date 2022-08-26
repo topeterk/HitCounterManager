@@ -581,6 +581,7 @@ namespace HitCounterManager
         //var Settings
         public bool enableSplitting = false;
         public bool autoTimer = false;
+        public bool gameTimer = false;
         public int positionMargin = 3;
         //Flags to Split
         public List<DefinitionsElden.BossER> bossToSplit = new List<DefinitionsElden.BossER>();

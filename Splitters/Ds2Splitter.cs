@@ -69,7 +69,7 @@ namespace HitCounterManager
         {
             lock (_object)
             {
-                if (!_SplitGo) { Thread.Sleep(2000); }
+                if (_SplitGo) { Thread.Sleep(2000); }
                 _SplitGo = true;
             }
         }
@@ -236,26 +236,28 @@ namespace HitCounterManager
 
         private void checkStart()
         {
-            while (dataDs2.enableSplitting && dataDs2.autoTimer)
+            while (dataDs2.enableSplitting)
             {
-                Thread.Sleep(2000);
-                Vector3f p = new Vector3f() { X = -210,Y=-320, Z =6};
-                var currentlyPosition = Ds2.GetPosition();
-                var rangeX = ((currentlyPosition.X - p.X) <= dataDs2.positionMargin) && ((currentlyPosition.X - p.X) >= -dataDs2.positionMargin);
-                var rangeY = ((currentlyPosition.Y - p.Y) <= dataDs2.positionMargin) && ((currentlyPosition.Y - p.Y) >= -dataDs2.positionMargin);
-                var rangeZ = ((currentlyPosition.Z - p.Z) <= dataDs2.positionMargin) && ((currentlyPosition.Z - p.Z) >= -dataDs2.positionMargin);
-                if (rangeX && rangeY && rangeZ)
+                Thread.Sleep(500);
+                var position = Ds2.GetPosition();
+                if (
+                    position.Y < -322.0f && position.Y > -323.0f &&
+                    position.X < -213.0f && position.X > -214.0f)
                 {
                     _runStarted = true;
                 }
-                else
-                {                 
-                    if (currentlyPosition.X == 0.00 && currentlyPosition.Y == 0.00 && currentlyPosition.Z == 0.00)
+                if (position.X == 0.00 && position.Y == 0.00 && position.Z == 0.00)
+                {
+                    _runStarted = false;
+                }
+                if (Ds2.IsLoading() && dataDs2.gameTimer)
+                {               
+                    do
                     {
                         _runStarted = false;
-                    }
-                }
-                              
+                    } while (Ds2.IsLoading());
+                    _runStarted = true;
+                }                                                 
             }
         }
 

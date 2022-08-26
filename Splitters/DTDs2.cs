@@ -148,6 +148,7 @@ namespace HitCounterManager
         //var Settings
         public bool enableSplitting = false;
         public bool autoTimer = false;
+        public bool gameTimer = false;
         public int positionMargin = 3;
         //Flags to Split
         public List<DefinitionsDs2.BossDs2> bossToSplit = new List<DefinitionsDs2.BossDs2>();

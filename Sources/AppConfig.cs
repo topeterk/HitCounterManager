@@ -489,14 +489,15 @@ namespace HitCounterManager
         /// 
         public DataAutoSplitter dataAS = new DataAutoSplitter();
         private SekiroSplitter sekiroSplitter = new SekiroSplitter();
-        private HollowSplitter hollowSplitter = new HollowSplitter();
-        private EldenSplitter eldenSplitter = new EldenSplitter();
-        private Ds3Splitter ds3Splitter = new Ds3Splitter();
-        private CelesteSplitter celesteSplitter = new CelesteSplitter();
-        private Ds2Splitter ds2Splitter = new Ds2Splitter();
-        private CupheadSplitter cupSplitter = new CupheadSplitter();
-        private AslSplitter aslSplitter = new AslSplitter();
         private Ds1Splitter ds1Splitter = new Ds1Splitter();
+        private Ds2Splitter ds2Splitter = new Ds2Splitter();
+        private Ds3Splitter ds3Splitter = new Ds3Splitter();
+        private EldenSplitter eldenSplitter = new EldenSplitter();
+        private HollowSplitter hollowSplitter = new HollowSplitter();        
+        private CelesteSplitter celesteSplitter = new CelesteSplitter();       
+        private CupheadSplitter cupSplitter = new CupheadSplitter();
+        private AslSplitter aslSplitter = new AslSplitter();        
+        private IGTModule IgtModule = new IGTModule();
         private void SaveAutoSplitterSettings() {
             bool newSave = false;
             string savePath = Path.GetFullPath("HitCounterManagerSaveAutoSplitter.xml");
@@ -599,6 +600,8 @@ namespace HitCounterManager
                 }
             }
             catch (Exception) { aslSplitter.setData(null, profiles); }
+            
+            IgtModule.setSplitterPointers(getSekiroInstance(), getHollowInstance(), getEldenInstance(), getDs3Instance(), getCelesteInstance(), getCupheadInstance(), getDs1Instance());
 
             /* LoadProcedures are covered by SelectedIndexChanged
             sekiroSplitter.LoadAutoSplitterProcedure();

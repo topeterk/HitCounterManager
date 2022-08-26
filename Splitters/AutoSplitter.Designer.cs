@@ -31,16 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AutoSplitter));
             this.TabControl2 = new HitCounterManager.ProfileTabControl();
             this.tabConfig = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBoxATDS3 = new System.Windows.Forms.CheckBox();
-            this.checkBoxATCuphead = new System.Windows.Forms.CheckBox();
-            this.checkBoxATCeleste = new System.Windows.Forms.CheckBox();
-            this.checkBoxATHollow = new System.Windows.Forms.CheckBox();
-            this.checkBoxATEr = new System.Windows.Forms.CheckBox();
-            this.checkBoxATDs2 = new System.Windows.Forms.CheckBox();
-            this.checkBoxATDs1 = new System.Windows.Forms.CheckBox();
-            this.checkBoxATS = new System.Windows.Forms.CheckBox();
             this.groupBoxSplitters = new System.Windows.Forms.GroupBox();
+            this.btnTiming = new System.Windows.Forms.Button();
             this.btnASL = new System.Windows.Forms.Button();
             this.btnCuphead = new System.Windows.Forms.Button();
             this.btnCeleste = new System.Windows.Forms.Button();
@@ -52,6 +44,15 @@
             this.btnSekiro = new System.Windows.Forms.Button();
             this.tabManual = new System.Windows.Forms.TabPage();
             this.TextBoxManual = new System.Windows.Forms.TextBox();
+            this.tabTiming = new System.Windows.Forms.TabPage();
+            this.groupBoxTSekiro = new System.Windows.Forms.GroupBox();
+            this.groupBoxATS = new System.Windows.Forms.GroupBox();
+            this.checkBoxATS = new System.Windows.Forms.CheckBox();
+            this.groupBoxTMS = new System.Windows.Forms.GroupBox();
+            this.radioIGTSTimer = new System.Windows.Forms.RadioButton();
+            this.radioRealTimerS = new System.Windows.Forms.RadioButton();
+            this.comboBoxTGame = new System.Windows.Forms.ComboBox();
+            this.label75 = new System.Windows.Forms.Label();
             this.tabSekiro = new System.Windows.Forms.TabPage();
             this.panelBossS = new System.Windows.Forms.Panel();
             this.btn_AddBoss = new System.Windows.Forms.Button();
@@ -391,11 +392,56 @@
             this.btnRemoveAllCuphead = new System.Windows.Forms.Button();
             this.CupheadRunning = new System.Windows.Forms.Label();
             this.CupheadNotRunning = new System.Windows.Forms.Label();
+            this.groupBoxTDs1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxATDs1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxATDs1 = new System.Windows.Forms.CheckBox();
+            this.groupBoxTMDs1 = new System.Windows.Forms.GroupBox();
+            this.radioIGTDs1 = new System.Windows.Forms.RadioButton();
+            this.radioRealTimerDs1 = new System.Windows.Forms.RadioButton();
+            this.groupBoxTDs2 = new System.Windows.Forms.GroupBox();
+            this.groupBoxATDs2 = new System.Windows.Forms.GroupBox();
+            this.checkBoxATDs2 = new System.Windows.Forms.CheckBox();
+            this.groupBoxTMDs2 = new System.Windows.Forms.GroupBox();
+            this.radioIGTDs2 = new System.Windows.Forms.RadioButton();
+            this.radioRealTimerDs2 = new System.Windows.Forms.RadioButton();
+            this.groupBoxTDs3 = new System.Windows.Forms.GroupBox();
+            this.groupBoxATDs3 = new System.Windows.Forms.GroupBox();
+            this.checkBoxATDs3 = new System.Windows.Forms.CheckBox();
+            this.groupBoxTMDs3 = new System.Windows.Forms.GroupBox();
+            this.radioIGTDs3 = new System.Windows.Forms.RadioButton();
+            this.radioRealTimerDs3 = new System.Windows.Forms.RadioButton();
+            this.groupBoxTEr = new System.Windows.Forms.GroupBox();
+            this.groupBoxATEr = new System.Windows.Forms.GroupBox();
+            this.checkBoxATEr = new System.Windows.Forms.CheckBox();
+            this.groupBoxTMEr = new System.Windows.Forms.GroupBox();
+            this.radioIGTEr = new System.Windows.Forms.RadioButton();
+            this.radioRealTimerEr = new System.Windows.Forms.RadioButton();
+            this.groupBoxTCeleste = new System.Windows.Forms.GroupBox();
+            this.groupBoxATCeleste = new System.Windows.Forms.GroupBox();
+            this.checkBoxATCeleste = new System.Windows.Forms.CheckBox();
+            this.groupBoxTMCeleste = new System.Windows.Forms.GroupBox();
+            this.radioIGTCeleste = new System.Windows.Forms.RadioButton();
+            this.radioRealTimerCeleste = new System.Windows.Forms.RadioButton();
+            this.groupBoxTCuphead = new System.Windows.Forms.GroupBox();
+            this.groupBoxATCuphead = new System.Windows.Forms.GroupBox();
+            this.checkBoxATCuphead = new System.Windows.Forms.CheckBox();
+            this.groupBoxTMCuphead = new System.Windows.Forms.GroupBox();
+            this.radioIGTCuphead = new System.Windows.Forms.RadioButton();
+            this.radioRealTimerCuphead = new System.Windows.Forms.RadioButton();
+            this.groupBoxTHK = new System.Windows.Forms.GroupBox();
+            this.groupBoxATHk = new System.Windows.Forms.GroupBox();
+            this.checkBoxATHollow = new System.Windows.Forms.CheckBox();
+            this.groupBoxTMHollow = new System.Windows.Forms.GroupBox();
+            this.radioIGTHollow = new System.Windows.Forms.RadioButton();
+            this.radioRealTimerHollow = new System.Windows.Forms.RadioButton();
             this.TabControl2.SuspendLayout();
             this.tabConfig.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBoxSplitters.SuspendLayout();
             this.tabManual.SuspendLayout();
+            this.tabTiming.SuspendLayout();
+            this.groupBoxTSekiro.SuspendLayout();
+            this.groupBoxATS.SuspendLayout();
+            this.groupBoxTMS.SuspendLayout();
             this.tabSekiro.SuspendLayout();
             this.panelBossS.SuspendLayout();
             this.panelPositionS.SuspendLayout();
@@ -452,12 +498,34 @@
             this.tabCuphead.SuspendLayout();
             this.panelBossCuphead.SuspendLayout();
             this.panelLevelCuphead.SuspendLayout();
+            this.groupBoxTDs1.SuspendLayout();
+            this.groupBoxATDs1.SuspendLayout();
+            this.groupBoxTMDs1.SuspendLayout();
+            this.groupBoxTDs2.SuspendLayout();
+            this.groupBoxATDs2.SuspendLayout();
+            this.groupBoxTMDs2.SuspendLayout();
+            this.groupBoxTDs3.SuspendLayout();
+            this.groupBoxATDs3.SuspendLayout();
+            this.groupBoxTMDs3.SuspendLayout();
+            this.groupBoxTEr.SuspendLayout();
+            this.groupBoxATEr.SuspendLayout();
+            this.groupBoxTMEr.SuspendLayout();
+            this.groupBoxTCeleste.SuspendLayout();
+            this.groupBoxATCeleste.SuspendLayout();
+            this.groupBoxTMCeleste.SuspendLayout();
+            this.groupBoxTCuphead.SuspendLayout();
+            this.groupBoxATCuphead.SuspendLayout();
+            this.groupBoxTMCuphead.SuspendLayout();
+            this.groupBoxTHK.SuspendLayout();
+            this.groupBoxATHk.SuspendLayout();
+            this.groupBoxTMHollow.SuspendLayout();
             this.SuspendLayout();
             // 
             // TabControl2
             // 
             this.TabControl2.Controls.Add(this.tabConfig);
             this.TabControl2.Controls.Add(this.tabManual);
+            this.TabControl2.Controls.Add(this.tabTiming);
             this.TabControl2.Controls.Add(this.tabSekiro);
             this.TabControl2.Controls.Add(this.tabDs1);
             this.TabControl2.Controls.Add(this.tabDs2);
@@ -475,7 +543,6 @@
             // tabConfig
             // 
             this.tabConfig.BackColor = System.Drawing.SystemColors.Control;
-            this.tabConfig.Controls.Add(this.groupBox1);
             this.tabConfig.Controls.Add(this.groupBoxSplitters);
             this.tabConfig.Location = new System.Drawing.Point(4, 22);
             this.tabConfig.Name = "tabConfig";
@@ -483,113 +550,9 @@
             this.tabConfig.TabIndex = 10;
             this.tabConfig.Text = "Configuration";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.checkBoxATDS3);
-            this.groupBox1.Controls.Add(this.checkBoxATCuphead);
-            this.groupBox1.Controls.Add(this.checkBoxATCeleste);
-            this.groupBox1.Controls.Add(this.checkBoxATHollow);
-            this.groupBox1.Controls.Add(this.checkBoxATEr);
-            this.groupBox1.Controls.Add(this.checkBoxATDs2);
-            this.groupBox1.Controls.Add(this.checkBoxATDs1);
-            this.groupBox1.Controls.Add(this.checkBoxATS);
-            this.groupBox1.Location = new System.Drawing.Point(16, 13);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(408, 123);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "AutoTimers";
-            // 
-            // checkBoxATDS3
-            // 
-            this.checkBoxATDS3.AutoSize = true;
-            this.checkBoxATDS3.Location = new System.Drawing.Point(46, 90);
-            this.checkBoxATDS3.Name = "checkBoxATDS3";
-            this.checkBoxATDS3.Size = new System.Drawing.Size(87, 17);
-            this.checkBoxATDS3.TabIndex = 3;
-            this.checkBoxATDS3.Text = "Dark Souls 3";
-            this.checkBoxATDS3.UseVisualStyleBackColor = true;
-            this.checkBoxATDS3.CheckedChanged += new System.EventHandler(this.checkBoxATDS3_CheckedChanged);
-            // 
-            // checkBoxATCuphead
-            // 
-            this.checkBoxATCuphead.AutoSize = true;
-            this.checkBoxATCuphead.Location = new System.Drawing.Point(174, 69);
-            this.checkBoxATCuphead.Name = "checkBoxATCuphead";
-            this.checkBoxATCuphead.Size = new System.Drawing.Size(69, 17);
-            this.checkBoxATCuphead.TabIndex = 6;
-            this.checkBoxATCuphead.Text = "Cuphead";
-            this.checkBoxATCuphead.UseVisualStyleBackColor = true;
-            this.checkBoxATCuphead.CheckedChanged += new System.EventHandler(this.checkBoxATCuphead_CheckedChanged);
-            // 
-            // checkBoxATCeleste
-            // 
-            this.checkBoxATCeleste.AutoSize = true;
-            this.checkBoxATCeleste.Location = new System.Drawing.Point(174, 44);
-            this.checkBoxATCeleste.Name = "checkBoxATCeleste";
-            this.checkBoxATCeleste.Size = new System.Drawing.Size(61, 17);
-            this.checkBoxATCeleste.TabIndex = 5;
-            this.checkBoxATCeleste.Text = "Celeste";
-            this.checkBoxATCeleste.UseVisualStyleBackColor = true;
-            this.checkBoxATCeleste.CheckedChanged += new System.EventHandler(this.checkBoxATCeleste_CheckedChanged);
-            // 
-            // checkBoxATHollow
-            // 
-            this.checkBoxATHollow.AutoSize = true;
-            this.checkBoxATHollow.Location = new System.Drawing.Point(174, 21);
-            this.checkBoxATHollow.Name = "checkBoxATHollow";
-            this.checkBoxATHollow.Size = new System.Drawing.Size(91, 17);
-            this.checkBoxATHollow.TabIndex = 4;
-            this.checkBoxATHollow.Text = "Hollow Knight";
-            this.checkBoxATHollow.UseVisualStyleBackColor = true;
-            this.checkBoxATHollow.CheckedChanged += new System.EventHandler(this.checkBoxATHollow_CheckedChanged);
-            // 
-            // checkBoxATEr
-            // 
-            this.checkBoxATEr.AutoSize = true;
-            this.checkBoxATEr.Location = new System.Drawing.Point(174, 92);
-            this.checkBoxATEr.Name = "checkBoxATEr";
-            this.checkBoxATEr.Size = new System.Drawing.Size(78, 17);
-            this.checkBoxATEr.TabIndex = 3;
-            this.checkBoxATEr.Text = "Elden Ring";
-            this.checkBoxATEr.UseVisualStyleBackColor = true;
-            this.checkBoxATEr.CheckedChanged += new System.EventHandler(this.checkBoxATEr_CheckedChanged);
-            // 
-            // checkBoxATDs2
-            // 
-            this.checkBoxATDs2.AutoSize = true;
-            this.checkBoxATDs2.Location = new System.Drawing.Point(46, 67);
-            this.checkBoxATDs2.Name = "checkBoxATDs2";
-            this.checkBoxATDs2.Size = new System.Drawing.Size(87, 17);
-            this.checkBoxATDs2.TabIndex = 2;
-            this.checkBoxATDs2.Text = "Dark Souls 2";
-            this.checkBoxATDs2.UseVisualStyleBackColor = true;
-            this.checkBoxATDs2.CheckedChanged += new System.EventHandler(this.checkBoxATDs2_CheckedChanged);
-            // 
-            // checkBoxATDs1
-            // 
-            this.checkBoxATDs1.AutoSize = true;
-            this.checkBoxATDs1.Location = new System.Drawing.Point(46, 44);
-            this.checkBoxATDs1.Name = "checkBoxATDs1";
-            this.checkBoxATDs1.Size = new System.Drawing.Size(87, 17);
-            this.checkBoxATDs1.TabIndex = 1;
-            this.checkBoxATDs1.Text = "Dark Souls 1";
-            this.checkBoxATDs1.UseVisualStyleBackColor = true;
-            this.checkBoxATDs1.CheckedChanged += new System.EventHandler(this.checkBoxATDs1_CheckedChanged);
-            // 
-            // checkBoxATS
-            // 
-            this.checkBoxATS.AutoSize = true;
-            this.checkBoxATS.Location = new System.Drawing.Point(46, 21);
-            this.checkBoxATS.Name = "checkBoxATS";
-            this.checkBoxATS.Size = new System.Drawing.Size(56, 17);
-            this.checkBoxATS.TabIndex = 0;
-            this.checkBoxATS.Text = "Sekiro";
-            this.checkBoxATS.UseVisualStyleBackColor = true;
-            this.checkBoxATS.CheckedChanged += new System.EventHandler(this.checkBoxATS_CheckedChanged);
-            // 
             // groupBoxSplitters
             // 
+            this.groupBoxSplitters.Controls.Add(this.btnTiming);
             this.groupBoxSplitters.Controls.Add(this.btnASL);
             this.groupBoxSplitters.Controls.Add(this.btnCuphead);
             this.groupBoxSplitters.Controls.Add(this.btnCeleste);
@@ -600,18 +563,28 @@
             this.groupBoxSplitters.Controls.Add(this.btnDs1);
             this.groupBoxSplitters.Controls.Add(this.btnSekiro);
             this.groupBoxSplitters.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupBoxSplitters.Location = new System.Drawing.Point(16, 143);
+            this.groupBoxSplitters.Location = new System.Drawing.Point(14, 13);
             this.groupBoxSplitters.Name = "groupBoxSplitters";
             this.groupBoxSplitters.Size = new System.Drawing.Size(408, 188);
             this.groupBoxSplitters.TabIndex = 0;
             this.groupBoxSplitters.TabStop = false;
             this.groupBoxSplitters.Text = "Splitters";
             // 
+            // btnTiming
+            // 
+            this.btnTiming.Location = new System.Drawing.Point(291, 107);
+            this.btnTiming.Name = "btnTiming";
+            this.btnTiming.Size = new System.Drawing.Size(89, 28);
+            this.btnTiming.TabIndex = 8;
+            this.btnTiming.Text = "Timing";
+            this.btnTiming.UseVisualStyleBackColor = true;
+            this.btnTiming.Click += new System.EventHandler(this.btnTiming_Click);
+            // 
             // btnASL
             // 
-            this.btnASL.Location = new System.Drawing.Point(294, 91);
+            this.btnASL.Location = new System.Drawing.Point(291, 75);
             this.btnASL.Name = "btnASL";
-            this.btnASL.Size = new System.Drawing.Size(75, 23);
+            this.btnASL.Size = new System.Drawing.Size(89, 28);
             this.btnASL.TabIndex = 1;
             this.btnASL.Text = "ASL";
             this.btnASL.UseVisualStyleBackColor = true;
@@ -722,6 +695,120 @@
             this.TextBoxManual.TabIndex = 2;
             this.TextBoxManual.TabStop = false;
             this.TextBoxManual.Text = resources.GetString("TextBoxManual.Text");
+            // 
+            // tabTiming
+            // 
+            this.tabTiming.BackColor = System.Drawing.SystemColors.Control;
+            this.tabTiming.Controls.Add(this.groupBoxTHK);
+            this.tabTiming.Controls.Add(this.groupBoxTCuphead);
+            this.tabTiming.Controls.Add(this.groupBoxTCeleste);
+            this.tabTiming.Controls.Add(this.groupBoxTEr);
+            this.tabTiming.Controls.Add(this.groupBoxTDs3);
+            this.tabTiming.Controls.Add(this.groupBoxTDs2);
+            this.tabTiming.Controls.Add(this.groupBoxTDs1);
+            this.tabTiming.Controls.Add(this.groupBoxTSekiro);
+            this.tabTiming.Controls.Add(this.comboBoxTGame);
+            this.tabTiming.Controls.Add(this.label75);
+            this.tabTiming.Location = new System.Drawing.Point(4, 22);
+            this.tabTiming.Name = "tabTiming";
+            this.tabTiming.Size = new System.Drawing.Size(587, 351);
+            this.tabTiming.TabIndex = 11;
+            this.tabTiming.Text = "Timing";
+            // 
+            // groupBoxTSekiro
+            // 
+            this.groupBoxTSekiro.Controls.Add(this.groupBoxATS);
+            this.groupBoxTSekiro.Controls.Add(this.groupBoxTMS);
+            this.groupBoxTSekiro.Location = new System.Drawing.Point(127, 68);
+            this.groupBoxTSekiro.Name = "groupBoxTSekiro";
+            this.groupBoxTSekiro.Size = new System.Drawing.Size(361, 158);
+            this.groupBoxTSekiro.TabIndex = 7;
+            this.groupBoxTSekiro.TabStop = false;
+            this.groupBoxTSekiro.Text = "Sekiro Timing";
+            // 
+            // groupBoxATS
+            // 
+            this.groupBoxATS.Controls.Add(this.checkBoxATS);
+            this.groupBoxATS.Location = new System.Drawing.Point(15, 30);
+            this.groupBoxATS.Name = "groupBoxATS";
+            this.groupBoxATS.Size = new System.Drawing.Size(153, 108);
+            this.groupBoxATS.TabIndex = 4;
+            this.groupBoxATS.TabStop = false;
+            this.groupBoxATS.Text = "AutoTimer";
+            // 
+            // checkBoxATS
+            // 
+            this.checkBoxATS.AutoSize = true;
+            this.checkBoxATS.Location = new System.Drawing.Point(46, 49);
+            this.checkBoxATS.Name = "checkBoxATS";
+            this.checkBoxATS.Size = new System.Drawing.Size(59, 17);
+            this.checkBoxATS.TabIndex = 1;
+            this.checkBoxATS.Text = "Enable";
+            this.checkBoxATS.UseVisualStyleBackColor = true;
+            this.checkBoxATS.CheckedChanged += new System.EventHandler(this.checkBoxATS_CheckedChanged);
+            // 
+            // groupBoxTMS
+            // 
+            this.groupBoxTMS.Controls.Add(this.radioIGTSTimer);
+            this.groupBoxTMS.Controls.Add(this.radioRealTimerS);
+            this.groupBoxTMS.Location = new System.Drawing.Point(185, 30);
+            this.groupBoxTMS.Name = "groupBoxTMS";
+            this.groupBoxTMS.Size = new System.Drawing.Size(157, 108);
+            this.groupBoxTMS.TabIndex = 3;
+            this.groupBoxTMS.TabStop = false;
+            this.groupBoxTMS.Text = "Timing Method";
+            // 
+            // radioIGTSTimer
+            // 
+            this.radioIGTSTimer.AutoSize = true;
+            this.radioIGTSTimer.Location = new System.Drawing.Point(39, 58);
+            this.radioIGTSTimer.Name = "radioIGTSTimer";
+            this.radioIGTSTimer.Size = new System.Drawing.Size(79, 17);
+            this.radioIGTSTimer.TabIndex = 1;
+            this.radioIGTSTimer.Text = "Game Time";
+            this.radioIGTSTimer.UseVisualStyleBackColor = true;
+            this.radioIGTSTimer.CheckedChanged += new System.EventHandler(this.radioIGTSTimer_CheckedChanged);
+            // 
+            // radioRealTimerS
+            // 
+            this.radioRealTimerS.AutoSize = true;
+            this.radioRealTimerS.Checked = true;
+            this.radioRealTimerS.Location = new System.Drawing.Point(40, 34);
+            this.radioRealTimerS.Name = "radioRealTimerS";
+            this.radioRealTimerS.Size = new System.Drawing.Size(73, 17);
+            this.radioRealTimerS.TabIndex = 0;
+            this.radioRealTimerS.TabStop = true;
+            this.radioRealTimerS.Text = "Real Time";
+            this.radioRealTimerS.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxTGame
+            // 
+            this.comboBoxTGame.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.comboBoxTGame.FormattingEnabled = true;
+            this.comboBoxTGame.Items.AddRange(new object[] {
+            "Sekiro Shadow Die Twice",
+            "Dark Souls 1",
+            "Dark Souls 2",
+            "Dark Souls 3",
+            "Elden Ring",
+            "Hollow Knight",
+            "Celeste",
+            "Cuphead"});
+            this.comboBoxTGame.Location = new System.Drawing.Point(89, 25);
+            this.comboBoxTGame.Name = "comboBoxTGame";
+            this.comboBoxTGame.Size = new System.Drawing.Size(444, 21);
+            this.comboBoxTGame.TabIndex = 6;
+            this.comboBoxTGame.SelectedIndexChanged += new System.EventHandler(this.comboBoxTGame_SelectedIndexChanged);
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(50, 28);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(33, 13);
+            this.label75.TabIndex = 5;
+            this.label75.Text = "game";
+            this.label75.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // tabSekiro
             // 
@@ -6259,6 +6346,468 @@
             this.CupheadNotRunning.TabIndex = 25;
             this.CupheadNotRunning.Text = "Cuphead is Not Running";
             // 
+            // groupBoxTDs1
+            // 
+            this.groupBoxTDs1.Controls.Add(this.groupBoxATDs1);
+            this.groupBoxTDs1.Controls.Add(this.groupBoxTMDs1);
+            this.groupBoxTDs1.Location = new System.Drawing.Point(125, 68);
+            this.groupBoxTDs1.Name = "groupBoxTDs1";
+            this.groupBoxTDs1.Size = new System.Drawing.Size(361, 158);
+            this.groupBoxTDs1.TabIndex = 8;
+            this.groupBoxTDs1.TabStop = false;
+            this.groupBoxTDs1.Text = "Ds1 Timing";
+            // 
+            // groupBoxATDs1
+            // 
+            this.groupBoxATDs1.Controls.Add(this.checkBoxATDs1);
+            this.groupBoxATDs1.Location = new System.Drawing.Point(15, 30);
+            this.groupBoxATDs1.Name = "groupBoxATDs1";
+            this.groupBoxATDs1.Size = new System.Drawing.Size(153, 108);
+            this.groupBoxATDs1.TabIndex = 4;
+            this.groupBoxATDs1.TabStop = false;
+            this.groupBoxATDs1.Text = "AutoTimer";
+            // 
+            // checkBoxATDs1
+            // 
+            this.checkBoxATDs1.AutoSize = true;
+            this.checkBoxATDs1.Location = new System.Drawing.Point(46, 49);
+            this.checkBoxATDs1.Name = "checkBoxATDs1";
+            this.checkBoxATDs1.Size = new System.Drawing.Size(59, 17);
+            this.checkBoxATDs1.TabIndex = 1;
+            this.checkBoxATDs1.Text = "Enable";
+            this.checkBoxATDs1.UseVisualStyleBackColor = true;
+            this.checkBoxATDs1.CheckedChanged += new System.EventHandler(this.checkBoxATDs1_CheckedChanged_1);
+            // 
+            // groupBoxTMDs1
+            // 
+            this.groupBoxTMDs1.Controls.Add(this.radioIGTDs1);
+            this.groupBoxTMDs1.Controls.Add(this.radioRealTimerDs1);
+            this.groupBoxTMDs1.Location = new System.Drawing.Point(185, 30);
+            this.groupBoxTMDs1.Name = "groupBoxTMDs1";
+            this.groupBoxTMDs1.Size = new System.Drawing.Size(157, 108);
+            this.groupBoxTMDs1.TabIndex = 3;
+            this.groupBoxTMDs1.TabStop = false;
+            this.groupBoxTMDs1.Text = "Timing Method";
+            // 
+            // radioIGTDs1
+            // 
+            this.radioIGTDs1.AutoSize = true;
+            this.radioIGTDs1.Location = new System.Drawing.Point(39, 58);
+            this.radioIGTDs1.Name = "radioIGTDs1";
+            this.radioIGTDs1.Size = new System.Drawing.Size(79, 17);
+            this.radioIGTDs1.TabIndex = 1;
+            this.radioIGTDs1.Text = "Game Time";
+            this.radioIGTDs1.UseVisualStyleBackColor = true;
+            this.radioIGTDs1.CheckedChanged += new System.EventHandler(this.radioIGTDs1_CheckedChanged);
+            // 
+            // radioRealTimerDs1
+            // 
+            this.radioRealTimerDs1.AutoSize = true;
+            this.radioRealTimerDs1.Checked = true;
+            this.radioRealTimerDs1.Location = new System.Drawing.Point(40, 34);
+            this.radioRealTimerDs1.Name = "radioRealTimerDs1";
+            this.radioRealTimerDs1.Size = new System.Drawing.Size(73, 17);
+            this.radioRealTimerDs1.TabIndex = 0;
+            this.radioRealTimerDs1.TabStop = true;
+            this.radioRealTimerDs1.Text = "Real Time";
+            this.radioRealTimerDs1.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxTDs2
+            // 
+            this.groupBoxTDs2.Controls.Add(this.groupBoxATDs2);
+            this.groupBoxTDs2.Controls.Add(this.groupBoxTMDs2);
+            this.groupBoxTDs2.Location = new System.Drawing.Point(126, 68);
+            this.groupBoxTDs2.Name = "groupBoxTDs2";
+            this.groupBoxTDs2.Size = new System.Drawing.Size(361, 158);
+            this.groupBoxTDs2.TabIndex = 9;
+            this.groupBoxTDs2.TabStop = false;
+            this.groupBoxTDs2.Text = "Ds2 Timing";
+            // 
+            // groupBoxATDs2
+            // 
+            this.groupBoxATDs2.Controls.Add(this.checkBoxATDs2);
+            this.groupBoxATDs2.Location = new System.Drawing.Point(15, 30);
+            this.groupBoxATDs2.Name = "groupBoxATDs2";
+            this.groupBoxATDs2.Size = new System.Drawing.Size(153, 108);
+            this.groupBoxATDs2.TabIndex = 4;
+            this.groupBoxATDs2.TabStop = false;
+            this.groupBoxATDs2.Text = "AutoTimer";
+            // 
+            // checkBoxATDs2
+            // 
+            this.checkBoxATDs2.AutoSize = true;
+            this.checkBoxATDs2.Location = new System.Drawing.Point(46, 49);
+            this.checkBoxATDs2.Name = "checkBoxATDs2";
+            this.checkBoxATDs2.Size = new System.Drawing.Size(59, 17);
+            this.checkBoxATDs2.TabIndex = 1;
+            this.checkBoxATDs2.Text = "Enable";
+            this.checkBoxATDs2.UseVisualStyleBackColor = true;
+            this.checkBoxATDs2.CheckedChanged += new System.EventHandler(this.checkBoxATDs2_CheckedChanged_1);
+            // 
+            // groupBoxTMDs2
+            // 
+            this.groupBoxTMDs2.Controls.Add(this.radioIGTDs2);
+            this.groupBoxTMDs2.Controls.Add(this.radioRealTimerDs2);
+            this.groupBoxTMDs2.Location = new System.Drawing.Point(185, 30);
+            this.groupBoxTMDs2.Name = "groupBoxTMDs2";
+            this.groupBoxTMDs2.Size = new System.Drawing.Size(157, 108);
+            this.groupBoxTMDs2.TabIndex = 3;
+            this.groupBoxTMDs2.TabStop = false;
+            this.groupBoxTMDs2.Text = "Timing Method";
+            // 
+            // radioIGTDs2
+            // 
+            this.radioIGTDs2.AutoSize = true;
+            this.radioIGTDs2.Location = new System.Drawing.Point(39, 58);
+            this.radioIGTDs2.Name = "radioIGTDs2";
+            this.radioIGTDs2.Size = new System.Drawing.Size(79, 17);
+            this.radioIGTDs2.TabIndex = 1;
+            this.radioIGTDs2.Text = "Game Time";
+            this.radioIGTDs2.UseVisualStyleBackColor = true;
+            this.radioIGTDs2.CheckedChanged += new System.EventHandler(this.radioIGTDs2_CheckedChanged);
+            // 
+            // radioRealTimerDs2
+            // 
+            this.radioRealTimerDs2.AutoSize = true;
+            this.radioRealTimerDs2.Checked = true;
+            this.radioRealTimerDs2.Location = new System.Drawing.Point(40, 34);
+            this.radioRealTimerDs2.Name = "radioRealTimerDs2";
+            this.radioRealTimerDs2.Size = new System.Drawing.Size(73, 17);
+            this.radioRealTimerDs2.TabIndex = 0;
+            this.radioRealTimerDs2.TabStop = true;
+            this.radioRealTimerDs2.Text = "Real Time";
+            this.radioRealTimerDs2.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxTDs3
+            // 
+            this.groupBoxTDs3.Controls.Add(this.groupBoxATDs3);
+            this.groupBoxTDs3.Controls.Add(this.groupBoxTMDs3);
+            this.groupBoxTDs3.Location = new System.Drawing.Point(125, 68);
+            this.groupBoxTDs3.Name = "groupBoxTDs3";
+            this.groupBoxTDs3.Size = new System.Drawing.Size(361, 158);
+            this.groupBoxTDs3.TabIndex = 10;
+            this.groupBoxTDs3.TabStop = false;
+            this.groupBoxTDs3.Text = "Ds3 Timing";
+            // 
+            // groupBoxATDs3
+            // 
+            this.groupBoxATDs3.Controls.Add(this.checkBoxATDs3);
+            this.groupBoxATDs3.Location = new System.Drawing.Point(15, 30);
+            this.groupBoxATDs3.Name = "groupBoxATDs3";
+            this.groupBoxATDs3.Size = new System.Drawing.Size(153, 108);
+            this.groupBoxATDs3.TabIndex = 4;
+            this.groupBoxATDs3.TabStop = false;
+            this.groupBoxATDs3.Text = "AutoTimer";
+            // 
+            // checkBoxATDs3
+            // 
+            this.checkBoxATDs3.AutoSize = true;
+            this.checkBoxATDs3.Location = new System.Drawing.Point(46, 49);
+            this.checkBoxATDs3.Name = "checkBoxATDs3";
+            this.checkBoxATDs3.Size = new System.Drawing.Size(59, 17);
+            this.checkBoxATDs3.TabIndex = 1;
+            this.checkBoxATDs3.Text = "Enable";
+            this.checkBoxATDs3.UseVisualStyleBackColor = true;
+            this.checkBoxATDs3.CheckedChanged += new System.EventHandler(this.checkBoxATDs3_CheckedChanged_1);
+            // 
+            // groupBoxTMDs3
+            // 
+            this.groupBoxTMDs3.Controls.Add(this.radioIGTDs3);
+            this.groupBoxTMDs3.Controls.Add(this.radioRealTimerDs3);
+            this.groupBoxTMDs3.Location = new System.Drawing.Point(185, 30);
+            this.groupBoxTMDs3.Name = "groupBoxTMDs3";
+            this.groupBoxTMDs3.Size = new System.Drawing.Size(157, 108);
+            this.groupBoxTMDs3.TabIndex = 3;
+            this.groupBoxTMDs3.TabStop = false;
+            this.groupBoxTMDs3.Text = "Timing Method";
+            // 
+            // radioIGTDs3
+            // 
+            this.radioIGTDs3.AutoSize = true;
+            this.radioIGTDs3.Location = new System.Drawing.Point(39, 58);
+            this.radioIGTDs3.Name = "radioIGTDs3";
+            this.radioIGTDs3.Size = new System.Drawing.Size(79, 17);
+            this.radioIGTDs3.TabIndex = 1;
+            this.radioIGTDs3.Text = "Game Time";
+            this.radioIGTDs3.UseVisualStyleBackColor = true;
+            this.radioIGTDs3.CheckedChanged += new System.EventHandler(this.radioIGTDs3_CheckedChanged);
+            // 
+            // radioRealTimerDs3
+            // 
+            this.radioRealTimerDs3.AutoSize = true;
+            this.radioRealTimerDs3.Checked = true;
+            this.radioRealTimerDs3.Location = new System.Drawing.Point(40, 34);
+            this.radioRealTimerDs3.Name = "radioRealTimerDs3";
+            this.radioRealTimerDs3.Size = new System.Drawing.Size(73, 17);
+            this.radioRealTimerDs3.TabIndex = 0;
+            this.radioRealTimerDs3.TabStop = true;
+            this.radioRealTimerDs3.Text = "Real Time";
+            this.radioRealTimerDs3.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxTEr
+            // 
+            this.groupBoxTEr.Controls.Add(this.groupBoxATEr);
+            this.groupBoxTEr.Controls.Add(this.groupBoxTMEr);
+            this.groupBoxTEr.Location = new System.Drawing.Point(124, 68);
+            this.groupBoxTEr.Name = "groupBoxTEr";
+            this.groupBoxTEr.Size = new System.Drawing.Size(361, 158);
+            this.groupBoxTEr.TabIndex = 11;
+            this.groupBoxTEr.TabStop = false;
+            this.groupBoxTEr.Text = "Elden Timing";
+            // 
+            // groupBoxATEr
+            // 
+            this.groupBoxATEr.Controls.Add(this.checkBoxATEr);
+            this.groupBoxATEr.Location = new System.Drawing.Point(15, 30);
+            this.groupBoxATEr.Name = "groupBoxATEr";
+            this.groupBoxATEr.Size = new System.Drawing.Size(153, 108);
+            this.groupBoxATEr.TabIndex = 4;
+            this.groupBoxATEr.TabStop = false;
+            this.groupBoxATEr.Text = "AutoTimer";
+            // 
+            // checkBoxATEr
+            // 
+            this.checkBoxATEr.AutoSize = true;
+            this.checkBoxATEr.Location = new System.Drawing.Point(46, 49);
+            this.checkBoxATEr.Name = "checkBoxATEr";
+            this.checkBoxATEr.Size = new System.Drawing.Size(59, 17);
+            this.checkBoxATEr.TabIndex = 1;
+            this.checkBoxATEr.Text = "Enable";
+            this.checkBoxATEr.UseVisualStyleBackColor = true;
+            this.checkBoxATEr.CheckedChanged += new System.EventHandler(this.checkBoxATEr_CheckedChanged_1);
+            // 
+            // groupBoxTMEr
+            // 
+            this.groupBoxTMEr.Controls.Add(this.radioIGTEr);
+            this.groupBoxTMEr.Controls.Add(this.radioRealTimerEr);
+            this.groupBoxTMEr.Location = new System.Drawing.Point(185, 30);
+            this.groupBoxTMEr.Name = "groupBoxTMEr";
+            this.groupBoxTMEr.Size = new System.Drawing.Size(157, 108);
+            this.groupBoxTMEr.TabIndex = 3;
+            this.groupBoxTMEr.TabStop = false;
+            this.groupBoxTMEr.Text = "Timing Method";
+            // 
+            // radioIGTEr
+            // 
+            this.radioIGTEr.AutoSize = true;
+            this.radioIGTEr.Location = new System.Drawing.Point(39, 58);
+            this.radioIGTEr.Name = "radioIGTEr";
+            this.radioIGTEr.Size = new System.Drawing.Size(79, 17);
+            this.radioIGTEr.TabIndex = 1;
+            this.radioIGTEr.Text = "Game Time";
+            this.radioIGTEr.UseVisualStyleBackColor = true;
+            this.radioIGTEr.CheckedChanged += new System.EventHandler(this.radioIGTEr_CheckedChanged);
+            // 
+            // radioRealTimerEr
+            // 
+            this.radioRealTimerEr.AutoSize = true;
+            this.radioRealTimerEr.Checked = true;
+            this.radioRealTimerEr.Location = new System.Drawing.Point(40, 34);
+            this.radioRealTimerEr.Name = "radioRealTimerEr";
+            this.radioRealTimerEr.Size = new System.Drawing.Size(73, 17);
+            this.radioRealTimerEr.TabIndex = 0;
+            this.radioRealTimerEr.TabStop = true;
+            this.radioRealTimerEr.Text = "Real Time";
+            this.radioRealTimerEr.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxTCeleste
+            // 
+            this.groupBoxTCeleste.Controls.Add(this.groupBoxATCeleste);
+            this.groupBoxTCeleste.Controls.Add(this.groupBoxTMCeleste);
+            this.groupBoxTCeleste.Location = new System.Drawing.Point(125, 68);
+            this.groupBoxTCeleste.Name = "groupBoxTCeleste";
+            this.groupBoxTCeleste.Size = new System.Drawing.Size(361, 158);
+            this.groupBoxTCeleste.TabIndex = 12;
+            this.groupBoxTCeleste.TabStop = false;
+            this.groupBoxTCeleste.Text = "Celeste Timing";
+            // 
+            // groupBoxATCeleste
+            // 
+            this.groupBoxATCeleste.Controls.Add(this.checkBoxATCeleste);
+            this.groupBoxATCeleste.Location = new System.Drawing.Point(15, 30);
+            this.groupBoxATCeleste.Name = "groupBoxATCeleste";
+            this.groupBoxATCeleste.Size = new System.Drawing.Size(153, 108);
+            this.groupBoxATCeleste.TabIndex = 4;
+            this.groupBoxATCeleste.TabStop = false;
+            this.groupBoxATCeleste.Text = "AutoTimer";
+            // 
+            // checkBoxATCeleste
+            // 
+            this.checkBoxATCeleste.AutoSize = true;
+            this.checkBoxATCeleste.Location = new System.Drawing.Point(46, 49);
+            this.checkBoxATCeleste.Name = "checkBoxATCeleste";
+            this.checkBoxATCeleste.Size = new System.Drawing.Size(59, 17);
+            this.checkBoxATCeleste.TabIndex = 1;
+            this.checkBoxATCeleste.Text = "Enable";
+            this.checkBoxATCeleste.UseVisualStyleBackColor = true;
+            this.checkBoxATCeleste.CheckedChanged += new System.EventHandler(this.checkBoxATCeleste_CheckedChanged_1);
+            // 
+            // groupBoxTMCeleste
+            // 
+            this.groupBoxTMCeleste.Controls.Add(this.radioIGTCeleste);
+            this.groupBoxTMCeleste.Controls.Add(this.radioRealTimerCeleste);
+            this.groupBoxTMCeleste.Location = new System.Drawing.Point(185, 30);
+            this.groupBoxTMCeleste.Name = "groupBoxTMCeleste";
+            this.groupBoxTMCeleste.Size = new System.Drawing.Size(157, 108);
+            this.groupBoxTMCeleste.TabIndex = 3;
+            this.groupBoxTMCeleste.TabStop = false;
+            this.groupBoxTMCeleste.Text = "Timing Method";
+            // 
+            // radioIGTCeleste
+            // 
+            this.radioIGTCeleste.AutoSize = true;
+            this.radioIGTCeleste.Location = new System.Drawing.Point(39, 58);
+            this.radioIGTCeleste.Name = "radioIGTCeleste";
+            this.radioIGTCeleste.Size = new System.Drawing.Size(79, 17);
+            this.radioIGTCeleste.TabIndex = 1;
+            this.radioIGTCeleste.Text = "Game Time";
+            this.radioIGTCeleste.UseVisualStyleBackColor = true;
+            this.radioIGTCeleste.CheckedChanged += new System.EventHandler(this.radioIGTCeleste_CheckedChanged);
+            // 
+            // radioRealTimerCeleste
+            // 
+            this.radioRealTimerCeleste.AutoSize = true;
+            this.radioRealTimerCeleste.Checked = true;
+            this.radioRealTimerCeleste.Location = new System.Drawing.Point(40, 34);
+            this.radioRealTimerCeleste.Name = "radioRealTimerCeleste";
+            this.radioRealTimerCeleste.Size = new System.Drawing.Size(73, 17);
+            this.radioRealTimerCeleste.TabIndex = 0;
+            this.radioRealTimerCeleste.TabStop = true;
+            this.radioRealTimerCeleste.Text = "Real Time";
+            this.radioRealTimerCeleste.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxTCuphead
+            // 
+            this.groupBoxTCuphead.Controls.Add(this.groupBoxATCuphead);
+            this.groupBoxTCuphead.Controls.Add(this.groupBoxTMCuphead);
+            this.groupBoxTCuphead.Location = new System.Drawing.Point(126, 68);
+            this.groupBoxTCuphead.Name = "groupBoxTCuphead";
+            this.groupBoxTCuphead.Size = new System.Drawing.Size(361, 158);
+            this.groupBoxTCuphead.TabIndex = 13;
+            this.groupBoxTCuphead.TabStop = false;
+            this.groupBoxTCuphead.Text = "Cuphead Timing";
+            // 
+            // groupBoxATCuphead
+            // 
+            this.groupBoxATCuphead.Controls.Add(this.checkBoxATCuphead);
+            this.groupBoxATCuphead.Location = new System.Drawing.Point(15, 30);
+            this.groupBoxATCuphead.Name = "groupBoxATCuphead";
+            this.groupBoxATCuphead.Size = new System.Drawing.Size(153, 108);
+            this.groupBoxATCuphead.TabIndex = 4;
+            this.groupBoxATCuphead.TabStop = false;
+            this.groupBoxATCuphead.Text = "AutoTimer";
+            // 
+            // checkBoxATCuphead
+            // 
+            this.checkBoxATCuphead.AutoSize = true;
+            this.checkBoxATCuphead.Location = new System.Drawing.Point(46, 49);
+            this.checkBoxATCuphead.Name = "checkBoxATCuphead";
+            this.checkBoxATCuphead.Size = new System.Drawing.Size(59, 17);
+            this.checkBoxATCuphead.TabIndex = 1;
+            this.checkBoxATCuphead.Text = "Enable";
+            this.checkBoxATCuphead.UseVisualStyleBackColor = true;
+            this.checkBoxATCuphead.CheckedChanged += new System.EventHandler(this.checkBoxATCuphead_CheckedChanged_1);
+            // 
+            // groupBoxTMCuphead
+            // 
+            this.groupBoxTMCuphead.Controls.Add(this.radioIGTCuphead);
+            this.groupBoxTMCuphead.Controls.Add(this.radioRealTimerCuphead);
+            this.groupBoxTMCuphead.Location = new System.Drawing.Point(185, 30);
+            this.groupBoxTMCuphead.Name = "groupBoxTMCuphead";
+            this.groupBoxTMCuphead.Size = new System.Drawing.Size(157, 108);
+            this.groupBoxTMCuphead.TabIndex = 3;
+            this.groupBoxTMCuphead.TabStop = false;
+            this.groupBoxTMCuphead.Text = "Timing Method";
+            // 
+            // radioIGTCuphead
+            // 
+            this.radioIGTCuphead.AutoSize = true;
+            this.radioIGTCuphead.Location = new System.Drawing.Point(39, 58);
+            this.radioIGTCuphead.Name = "radioIGTCuphead";
+            this.radioIGTCuphead.Size = new System.Drawing.Size(79, 17);
+            this.radioIGTCuphead.TabIndex = 1;
+            this.radioIGTCuphead.Text = "Game Time";
+            this.radioIGTCuphead.UseVisualStyleBackColor = true;
+            this.radioIGTCuphead.CheckedChanged += new System.EventHandler(this.radioIGTCuphead_CheckedChanged);
+            // 
+            // radioRealTimerCuphead
+            // 
+            this.radioRealTimerCuphead.AutoSize = true;
+            this.radioRealTimerCuphead.Checked = true;
+            this.radioRealTimerCuphead.Location = new System.Drawing.Point(40, 34);
+            this.radioRealTimerCuphead.Name = "radioRealTimerCuphead";
+            this.radioRealTimerCuphead.Size = new System.Drawing.Size(73, 17);
+            this.radioRealTimerCuphead.TabIndex = 0;
+            this.radioRealTimerCuphead.TabStop = true;
+            this.radioRealTimerCuphead.Text = "Real Time";
+            this.radioRealTimerCuphead.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxTHK
+            // 
+            this.groupBoxTHK.Controls.Add(this.groupBoxATHk);
+            this.groupBoxTHK.Controls.Add(this.groupBoxTMHollow);
+            this.groupBoxTHK.Location = new System.Drawing.Point(128, 68);
+            this.groupBoxTHK.Name = "groupBoxTHK";
+            this.groupBoxTHK.Size = new System.Drawing.Size(361, 158);
+            this.groupBoxTHK.TabIndex = 14;
+            this.groupBoxTHK.TabStop = false;
+            this.groupBoxTHK.Text = "Hollow Knight Timing";
+            // 
+            // groupBoxATHk
+            // 
+            this.groupBoxATHk.Controls.Add(this.checkBoxATHollow);
+            this.groupBoxATHk.Location = new System.Drawing.Point(15, 30);
+            this.groupBoxATHk.Name = "groupBoxATHk";
+            this.groupBoxATHk.Size = new System.Drawing.Size(153, 108);
+            this.groupBoxATHk.TabIndex = 4;
+            this.groupBoxATHk.TabStop = false;
+            this.groupBoxATHk.Text = "AutoTimer";
+            // 
+            // checkBoxATHollow
+            // 
+            this.checkBoxATHollow.AutoSize = true;
+            this.checkBoxATHollow.Location = new System.Drawing.Point(46, 49);
+            this.checkBoxATHollow.Name = "checkBoxATHollow";
+            this.checkBoxATHollow.Size = new System.Drawing.Size(59, 17);
+            this.checkBoxATHollow.TabIndex = 1;
+            this.checkBoxATHollow.Text = "Enable";
+            this.checkBoxATHollow.UseVisualStyleBackColor = true;
+            this.checkBoxATHollow.CheckedChanged += new System.EventHandler(this.checkBoxATHollow_CheckedChanged);
+            // 
+            // groupBoxTMHollow
+            // 
+            this.groupBoxTMHollow.Controls.Add(this.radioIGTHollow);
+            this.groupBoxTMHollow.Controls.Add(this.radioRealTimerHollow);
+            this.groupBoxTMHollow.Location = new System.Drawing.Point(185, 30);
+            this.groupBoxTMHollow.Name = "groupBoxTMHollow";
+            this.groupBoxTMHollow.Size = new System.Drawing.Size(157, 108);
+            this.groupBoxTMHollow.TabIndex = 3;
+            this.groupBoxTMHollow.TabStop = false;
+            this.groupBoxTMHollow.Text = "Timing Method";
+            // 
+            // radioIGTHollow
+            // 
+            this.radioIGTHollow.AutoSize = true;
+            this.radioIGTHollow.Location = new System.Drawing.Point(39, 58);
+            this.radioIGTHollow.Name = "radioIGTHollow";
+            this.radioIGTHollow.Size = new System.Drawing.Size(79, 17);
+            this.radioIGTHollow.TabIndex = 1;
+            this.radioIGTHollow.Text = "Game Time";
+            this.radioIGTHollow.UseVisualStyleBackColor = true;
+            this.radioIGTHollow.CheckedChanged += new System.EventHandler(this.radioIGTHollow_CheckedChanged);
+            // 
+            // radioRealTimerHollow
+            // 
+            this.radioRealTimerHollow.AutoSize = true;
+            this.radioRealTimerHollow.Checked = true;
+            this.radioRealTimerHollow.Location = new System.Drawing.Point(40, 34);
+            this.radioRealTimerHollow.Name = "radioRealTimerHollow";
+            this.radioRealTimerHollow.Size = new System.Drawing.Size(73, 17);
+            this.radioRealTimerHollow.TabIndex = 0;
+            this.radioRealTimerHollow.TabStop = true;
+            this.radioRealTimerHollow.Text = "Real Time";
+            this.radioRealTimerHollow.UseVisualStyleBackColor = true;
+            // 
             // AutoSplitter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6273,11 +6822,16 @@
             this.Load += new System.EventHandler(this.AutoSplitter_Load);
             this.TabControl2.ResumeLayout(false);
             this.tabConfig.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBoxSplitters.ResumeLayout(false);
             this.tabManual.ResumeLayout(false);
             this.tabManual.PerformLayout();
+            this.tabTiming.ResumeLayout(false);
+            this.tabTiming.PerformLayout();
+            this.groupBoxTSekiro.ResumeLayout(false);
+            this.groupBoxATS.ResumeLayout(false);
+            this.groupBoxATS.PerformLayout();
+            this.groupBoxTMS.ResumeLayout(false);
+            this.groupBoxTMS.PerformLayout();
             this.tabSekiro.ResumeLayout(false);
             this.tabSekiro.PerformLayout();
             this.panelBossS.ResumeLayout(false);
@@ -6374,6 +6928,41 @@
             this.tabCuphead.PerformLayout();
             this.panelBossCuphead.ResumeLayout(false);
             this.panelLevelCuphead.ResumeLayout(false);
+            this.groupBoxTDs1.ResumeLayout(false);
+            this.groupBoxATDs1.ResumeLayout(false);
+            this.groupBoxATDs1.PerformLayout();
+            this.groupBoxTMDs1.ResumeLayout(false);
+            this.groupBoxTMDs1.PerformLayout();
+            this.groupBoxTDs2.ResumeLayout(false);
+            this.groupBoxATDs2.ResumeLayout(false);
+            this.groupBoxATDs2.PerformLayout();
+            this.groupBoxTMDs2.ResumeLayout(false);
+            this.groupBoxTMDs2.PerformLayout();
+            this.groupBoxTDs3.ResumeLayout(false);
+            this.groupBoxATDs3.ResumeLayout(false);
+            this.groupBoxATDs3.PerformLayout();
+            this.groupBoxTMDs3.ResumeLayout(false);
+            this.groupBoxTMDs3.PerformLayout();
+            this.groupBoxTEr.ResumeLayout(false);
+            this.groupBoxATEr.ResumeLayout(false);
+            this.groupBoxATEr.PerformLayout();
+            this.groupBoxTMEr.ResumeLayout(false);
+            this.groupBoxTMEr.PerformLayout();
+            this.groupBoxTCeleste.ResumeLayout(false);
+            this.groupBoxATCeleste.ResumeLayout(false);
+            this.groupBoxATCeleste.PerformLayout();
+            this.groupBoxTMCeleste.ResumeLayout(false);
+            this.groupBoxTMCeleste.PerformLayout();
+            this.groupBoxTCuphead.ResumeLayout(false);
+            this.groupBoxATCuphead.ResumeLayout(false);
+            this.groupBoxATCuphead.PerformLayout();
+            this.groupBoxTMCuphead.ResumeLayout(false);
+            this.groupBoxTMCuphead.PerformLayout();
+            this.groupBoxTHK.ResumeLayout(false);
+            this.groupBoxATHk.ResumeLayout(false);
+            this.groupBoxATHk.PerformLayout();
+            this.groupBoxTMHollow.ResumeLayout(false);
+            this.groupBoxTMHollow.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -6682,15 +7271,6 @@
         private System.Windows.Forms.Panel panelLevelCuphead;
         private System.Windows.Forms.CheckedListBox checkedListLevelCuphead;
         private System.Windows.Forms.Label label60;
-        private System.Windows.Forms.CheckBox checkBoxATDS3;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkBoxATCuphead;
-        private System.Windows.Forms.CheckBox checkBoxATCeleste;
-        private System.Windows.Forms.CheckBox checkBoxATHollow;
-        private System.Windows.Forms.CheckBox checkBoxATEr;
-        private System.Windows.Forms.CheckBox checkBoxATDs2;
-        private System.Windows.Forms.CheckBox checkBoxATDs1;
-        private System.Windows.Forms.CheckBox checkBoxATS;
         private System.Windows.Forms.Button btnRefreshDs1;
         private System.Windows.Forms.Button btnDesactiveAllDs1;
         private System.Windows.Forms.Label Ds1Running;
@@ -6742,5 +7322,57 @@
         private System.Windows.Forms.ListBox listBoxItemDs1;
         private System.Windows.Forms.Label label74;
         private System.Windows.Forms.ComboBox comboBoxStateDs1;
+        private System.Windows.Forms.TabPage tabTiming;
+        private System.Windows.Forms.GroupBox groupBoxTSekiro;
+        private System.Windows.Forms.CheckBox checkBoxATS;
+        private System.Windows.Forms.ComboBox comboBoxTGame;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.GroupBox groupBoxTMS;
+        private System.Windows.Forms.RadioButton radioIGTSTimer;
+        private System.Windows.Forms.RadioButton radioRealTimerS;
+        private System.Windows.Forms.GroupBox groupBoxATS;
+        private System.Windows.Forms.Button btnTiming;
+        private System.Windows.Forms.GroupBox groupBoxTDs1;
+        private System.Windows.Forms.GroupBox groupBoxATDs1;
+        private System.Windows.Forms.CheckBox checkBoxATDs1;
+        private System.Windows.Forms.GroupBox groupBoxTMDs1;
+        private System.Windows.Forms.RadioButton radioIGTDs1;
+        private System.Windows.Forms.RadioButton radioRealTimerDs1;
+        private System.Windows.Forms.GroupBox groupBoxTDs2;
+        private System.Windows.Forms.GroupBox groupBoxATDs2;
+        private System.Windows.Forms.CheckBox checkBoxATDs2;
+        private System.Windows.Forms.GroupBox groupBoxTMDs2;
+        private System.Windows.Forms.RadioButton radioIGTDs2;
+        private System.Windows.Forms.RadioButton radioRealTimerDs2;
+        private System.Windows.Forms.GroupBox groupBoxTDs3;
+        private System.Windows.Forms.GroupBox groupBoxATDs3;
+        private System.Windows.Forms.CheckBox checkBoxATDs3;
+        private System.Windows.Forms.GroupBox groupBoxTMDs3;
+        private System.Windows.Forms.RadioButton radioIGTDs3;
+        private System.Windows.Forms.RadioButton radioRealTimerDs3;
+        private System.Windows.Forms.GroupBox groupBoxTEr;
+        private System.Windows.Forms.GroupBox groupBoxATEr;
+        private System.Windows.Forms.CheckBox checkBoxATEr;
+        private System.Windows.Forms.GroupBox groupBoxTMEr;
+        private System.Windows.Forms.RadioButton radioIGTEr;
+        private System.Windows.Forms.RadioButton radioRealTimerEr;
+        private System.Windows.Forms.GroupBox groupBoxTCeleste;
+        private System.Windows.Forms.GroupBox groupBoxATCeleste;
+        private System.Windows.Forms.CheckBox checkBoxATCeleste;
+        private System.Windows.Forms.GroupBox groupBoxTMCeleste;
+        private System.Windows.Forms.RadioButton radioIGTCeleste;
+        private System.Windows.Forms.RadioButton radioRealTimerCeleste;
+        private System.Windows.Forms.GroupBox groupBoxTCuphead;
+        private System.Windows.Forms.GroupBox groupBoxATCuphead;
+        private System.Windows.Forms.CheckBox checkBoxATCuphead;
+        private System.Windows.Forms.GroupBox groupBoxTMCuphead;
+        private System.Windows.Forms.RadioButton radioIGTCuphead;
+        private System.Windows.Forms.RadioButton radioRealTimerCuphead;
+        private System.Windows.Forms.GroupBox groupBoxTHK;
+        private System.Windows.Forms.GroupBox groupBoxATHk;
+        private System.Windows.Forms.CheckBox checkBoxATHollow;
+        private System.Windows.Forms.GroupBox groupBoxTMHollow;
+        private System.Windows.Forms.RadioButton radioIGTHollow;
+        private System.Windows.Forms.RadioButton radioRealTimerHollow;
     }
 }

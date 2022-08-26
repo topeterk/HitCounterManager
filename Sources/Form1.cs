@@ -24,6 +24,7 @@ using System;
 using System.Drawing;
 using System.Net;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace HitCounterManager
 {
@@ -53,7 +54,7 @@ namespace HitCounterManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = Text + " - v" + Application.ProductVersion + " Pre-Release 3.2 " + OsLayer.Name;
+            Text = Text + " - v" + Application.ProductVersion + " Pre-Release 4.0a " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();  
             ProfileChangedHandler(sender, e);
@@ -274,7 +275,8 @@ namespace HitCounterManager
             profCtrl.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB, out TotalTime, false);
             TotalTime /= 1000; // we only care about seconds
 
-            lbl_time.Text = "Time: " + (TotalTime/60/60).ToString("D2") + " : " + ((TotalTime/60) % 60).ToString("D2") + " : " + (TotalTime % 60).ToString("D2");
+            lbl_progress.Text = "Progress:  " + TotalActiveSplit + " / " + TotalSplits + "  # " + profCtrl.CurrentAttempts.ToString("D3");
+            lbl_time.Text = "Time: " + (TotalTime / 60 / 60).ToString("D2") + " : " + ((TotalTime / 60) % 60).ToString("D2") + " : " + (TotalTime % 60).ToString("D2");
             lbl_totals.Text = "Total: " + (TotalHits + TotalHitsWay) + " Hits   " + TotalPB + " PB";
             btnPause.Image = profCtrl.TimerRunning ? Sources.Resources.icons8_sleep_32 : Sources.Resources.icons8_time_32;
         }
@@ -285,17 +287,20 @@ namespace HitCounterManager
             btnPause.Image = Start ? Sources.Resources.icons8_sleep_32 : Sources.Resources.icons8_time_32;
 
             /* To any that understand OutModule and all related to Timer, the nexts functions return a full duration of a run in ms
-             * sekiroSplitter.getTimeInGame(); Sekiro
-             * eldenSplitter.getTimeInGame(); //Reset 0 in IGT EldenRing
-             * ds3Splitter.getTimeInGame(); Ds3
-             * ds1Splitter.getTimeInGame(); Ds1
-             * celesteSplitter.getTimeInGame(); Celeste
-             * cup.getTimeInGame(); Cuphead
+             * sekiroSplitter.getTimeInGame(); //Sekiro
+             * eldenSplitter.getTimeInGame(); //EldenRing
+             * ds3Splitter.getTimeInGame(); //Ds3
+             * ds1Splitter.getTimeInGame(); //Ds1
+             * celesteSplitter.getTimeInGame(); //Celeste
+             * cup.getTimeInGame(); //Cuphead
              * 
              * Ds2 Dont Have getTimeInGame() because the motor of game dont track time, livsplit follow the time with real time timming, pausing on loading screens
-             * ds2Splitter.getIsLoading() => return bool
+             * ds2Splitter.getIsLoading() // => return bool
+             * Same with Hollow Knight
+             * hollowSplitter.getIsLoading() // => return bool
+             * Note: Ready to Use in CheckAutoTimers();
              * 
-             * Hollow Knight i dont found the function.
+             * OR: IgtModule.ReturnCurrentIGT(); //Not Ds2 and Hollow
             }*/
 
         }
@@ -306,101 +311,169 @@ namespace HitCounterManager
             switch (gameActive)
             {            
                 case 1: //Sekiro
-                    if (sekiroSplitter.dataSekiro.autoTimer && !sekiroSplitter._runStarted && sekiroSplitter.getTimeInGame() > 0)
+                    if (sekiroSplitter.dataSekiro.autoTimer)
                     {
-                        StartStopTimer(true);
-                        sekiroSplitter._runStarted = true;                       
-                    }else
-                    if (sekiroSplitter.dataSekiro.autoTimer && sekiroSplitter._runStarted && sekiroSplitter.getTimeInGame() == 0)
-                    {
-                        StartStopTimer(false);
-                        sekiroSplitter._runStarted = false;
+                        if (!sekiroSplitter.dataSekiro.gameTimer)
+                        {
+                            if (!sekiroSplitter._runStarted && sekiroSplitter.getTimeInGame() > 0)
+                            {
+                                StartStopTimer(true);
+                                sekiroSplitter._runStarted = true;
+                            }
+                            else
+                            if (sekiroSplitter._runStarted && sekiroSplitter.getTimeInGame() == 0)
+                            {
+                                StartStopTimer(false);
+                                sekiroSplitter._runStarted = false;
+                            }
+                        }
+                        else
+                        {
+                            IgtModule.gameSelect = gameActive;
+                        }
                     }
                     break;
                 case 2: //DS1
-                    if (ds1Splitter.dataDs1.autoTimer && !ds1Splitter._runStarted && ds1Splitter.getTimeInGame() > 0)
+                    if (ds1Splitter.dataDs1.autoTimer)
                     {
-                        StartStopTimer(true);
-                        sekiroSplitter._runStarted = true;
-                    }
-                    else
-                   if (ds1Splitter.dataDs1.autoTimer && ds1Splitter._runStarted && ds1Splitter.getTimeInGame() == 0)
-                    {
-                        StartStopTimer(false);
-                        sekiroSplitter._runStarted = false;
+                        if (!ds1Splitter.dataDs1.gameTimer)
+                        {
+                            if (!ds1Splitter._runStarted && ds1Splitter.getTimeInGame() > 0)
+                            {
+                                StartStopTimer(true);
+                                sekiroSplitter._runStarted = true;
+                            }
+                            else
+                       if (ds1Splitter._runStarted && ds1Splitter.getTimeInGame() == 0)
+                            {
+                                StartStopTimer(false);
+                                sekiroSplitter._runStarted = false;
+                            }
+                        }
+                        else
+                        {
+                            IgtModule.gameSelect = gameActive;
+                        }
                     }
                     break;
                 case 4: //Ds3
-                    if (ds3Splitter.dataDs3.autoTimer && !ds3Splitter._runStarted && ds3Splitter.getTimeInGame() > 0)
+                    if (ds3Splitter.dataDs3.autoTimer)
                     {
-                        StartStopTimer(true);
-                        ds3Splitter._runStarted = true;
-                    } else if (ds3Splitter.dataDs3.enableSplitting && ds3Splitter.dataDs3.autoTimer && ds3Splitter._runStarted && ds3Splitter.getTimeInGame() == 0)
-                    {
-                        StartStopTimer(false);
-                        ds3Splitter._runStarted = false;
+                        if (!ds3Splitter.dataDs3.gameTimer)
+                        {
+
+                            if (!ds3Splitter._runStarted && ds3Splitter.getTimeInGame() > 0)
+                            {
+                                StartStopTimer(true);
+                                ds3Splitter._runStarted = true;
+                            }
+                            else if (ds3Splitter.dataDs3.autoTimer && ds3Splitter._runStarted && ds3Splitter.getTimeInGame() == 0)
+                            {
+                                StartStopTimer(false);
+                                ds3Splitter._runStarted = false;
+                            }
+                        }
+                        else
+                        {
+                            IgtModule.gameSelect = gameActive;
+                        }
                     }
-                    break;
+                        break;
                 case 5: //Elden
-                    if (eldenSplitter.dataElden.autoTimer && !eldenSplitter._runStarted && eldenSplitter.getTimeInGame() > 0)
+                    if (eldenSplitter.dataElden.autoTimer)
                     {
-                        StartStopTimer(true);
-                        eldenSplitter._runStarted = true;
-                    }
-                    else if (eldenSplitter.dataElden.autoTimer && eldenSplitter._runStarted && eldenSplitter.getTimeInGame() == 0)
-                    {
-                        StartStopTimer(false);
-                        eldenSplitter._runStarted = false;
+                        if (!eldenSplitter.dataElden.gameTimer)
+                        {
+                            if (!eldenSplitter._runStarted && eldenSplitter.getTimeInGame() > 0)
+                            {
+                                StartStopTimer(true);
+                                eldenSplitter._runStarted = true;
+                            }
+                            else if (eldenSplitter._runStarted && eldenSplitter.getTimeInGame() == 0)
+                            {
+                                StartStopTimer(false);
+                                eldenSplitter._runStarted = false;
+                            }
+                        }
+                        else
+                        {
+                            IgtModule.gameSelect = gameActive;
+                        }
                     }
                     break;
                 case 7: //Celeste
-                    if (celesteSplitter.dataCeleste.autoTimer && !celesteSplitter._runStarted && celesteSplitter.getTimeInGame() > 0)
+                    if (celesteSplitter.dataCeleste.autoTimer)
                     {
-                        StartStopTimer(true);
-                        celesteSplitter._runStarted = true;
-                    }
-                    else if (celesteSplitter.dataCeleste.autoTimer && celesteSplitter._runStarted && celesteSplitter.getTimeInGame() == 0)
-                    {
-                        StartStopTimer(false);
-                        celesteSplitter._runStarted = false;
+                        if (!celesteSplitter.dataCeleste.gameTimer)
+                        {
+                            if (celesteSplitter.dataCeleste.autoTimer && !celesteSplitter._runStarted && celesteSplitter.getTimeInGame() > 0)
+                            {
+                                StartStopTimer(true);
+                                celesteSplitter._runStarted = true;
+                            }
+                            else if (celesteSplitter._runStarted && celesteSplitter.getTimeInGame() == 0)
+                            {
+                                StartStopTimer(false);
+                                celesteSplitter._runStarted = false;
+                            }
+                        }
+                        else
+                        {
+                            IgtModule.gameSelect = gameActive;
+                        }
                     }
                     break;
                 case 8: //Cuphead
-                    if (cupSplitter.dataCuphead.autoTimer && !cupSplitter._runStarted && cupSplitter.getTimeInGame() > 0)
+                    if (cupSplitter.dataCuphead.autoTimer)
                     {
-                        StartStopTimer(true);
-                        cupSplitter._runStarted = true;
-                    }
-                    else if (cupSplitter.dataCuphead.autoTimer && cupSplitter._runStarted && cupSplitter.getTimeInGame() == 0)
-                    {
-                        StartStopTimer(false);
-                        cupSplitter._runStarted = false;
+                        if (!cupSplitter.dataCuphead.gameTimer)
+                        {
+                            if (!cupSplitter._runStarted && cupSplitter.getTimeInGame() > 0)
+                            {
+                                StartStopTimer(true);
+                                cupSplitter._runStarted = true;
+                            }
+                            else if (cupSplitter._runStarted && cupSplitter.getTimeInGame() == 0)
+                            {
+                                StartStopTimer(false);
+                                cupSplitter._runStarted = false;
+                            }
+                        }
+                        else
+                        {
+                            IgtModule.gameSelect = gameActive;
+                        }
                     }
                     break;
              
                 case 3: //DS2
-                    if (ds2Splitter.dataDs2.autoTimer && ds2Splitter._runStarted)
-                    {
-                        StartStopTimer(true);
-                    }
-                    else
-                    {
-                        if (ds2Splitter.dataDs2.autoTimer && !ds2Splitter._runStarted)
+                    if (ds2Splitter.dataDs2.autoTimer) {
+                        if (ds2Splitter._runStarted)
                         {
-                            StartStopTimer(false);
+                            StartStopTimer(true);
+                        }
+                        else
+                        {
+                            if (!ds2Splitter._runStarted)
+                            {
+                                StartStopTimer(false);
+                            }
                         }
                     }
                     break;
                 case 6: //Hollow
-                    if (hollowSplitter.dataHollow.autoTimer && hollowSplitter._runStarted)
+                    if (hollowSplitter.dataHollow.autoTimer)
                     {
-                        StartStopTimer(true);
-                    }
-                    else
-                    {
-                        if (hollowSplitter.dataHollow.autoTimer && !hollowSplitter._runStarted)
+                        if (hollowSplitter._runStarted)
                         {
-                            StartStopTimer(false);
+                            StartStopTimer(true);
+                        }
+                        else
+                        {
+                            if (!hollowSplitter._runStarted)
+                            {
+                                StartStopTimer(false);
+                            }
                         }
                     }
                     break;
@@ -475,6 +548,7 @@ namespace HitCounterManager
                 ds1Splitter.setStatusSplitting(true);
                 gameActive = 2;
             }
+            
         }
 
         #endregion

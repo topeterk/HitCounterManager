@@ -337,6 +337,7 @@ namespace HitCounterManager
         //Settings Vars
         public bool enableSplitting = false;
         public bool autoTimer = false;
+        public bool gameTimer = false;
         //Flags to Split
         public List<DefinitionsSekiro.BossS> bossToSplit = new List<DefinitionsSekiro.BossS>();
         public List<DefinitionsSekiro.Idol> idolsTosplit = new List<DefinitionsSekiro.Idol>();

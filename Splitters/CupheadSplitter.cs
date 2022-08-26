@@ -71,7 +71,7 @@ namespace HitCounterManager
         {
             lock (_object)
             {
-                if (!_SplitGo) { Thread.Sleep(2000); }
+                if (_SplitGo) { Thread.Sleep(2000); }
                 _SplitGo = true;
             }
         }
