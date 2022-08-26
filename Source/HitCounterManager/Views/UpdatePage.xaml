@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -22,48 +22,40 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 -->
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
-             xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
-             x:Class="HitCounterManager.Views.UpdatePage"
-             NavigationPage.HasNavigationBar="False"
-             NavigationPage.HasBackButton="False"
-             BackgroundColor="{AppThemeBinding Default=BurlyWood, Dark={StaticResource AlmostBlack}}">
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
+        xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
+        x:Class="HitCounterManager.Views.UpdatePage"
+        x:DataType="local:UpdateViewModel"
+        Icon="/Resources/FireIcon.ico"
+        Title="Updates" Classes="DialogWindow"
+        MinWidth="420" MinHeight="380" Width="800" Height="630">
 
-    <ContentPage.BindingContext>
+    <Window.DataContext>
         <local:UpdateViewModel />
-    </ContentPage.BindingContext>
+    </Window.DataContext>
 
-    <StackLayout Margin="10" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-        <Grid Padding="0" Margin="10,0,10,0" RowSpacing="4" ColumnSpacing="6" HorizontalOptions="FillAndExpand">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Button Grid.Row="0" Grid.Column="0" Margin="0" Padding="4" Command="{Binding DownloadReleaseLog}" Text="Check for new version"/>
-            <Label  Grid.Row="0" Grid.Column="1" Margin="0" Text="Current version:" HorizontalOptions="Start" VerticalOptions="Center" />
-            <Label  Grid.Row="0" Grid.Column="2" Margin="0" Text="{x:Static common:Statics.ApplicationVersionString, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
-            <Button Grid.Row="1" Grid.Column="0" Margin="0" Padding="4" Clicked="WebOpenLatestRelease_Clicked" Text="Go to download page"/>
-            <Label  Grid.Row="1" Grid.Column="1" Margin="0" Text="Latest available version:" HorizontalOptions="Start" VerticalOptions="Center" />
-            <Label  Grid.Row="1" Grid.Column="2" Margin="0" Text="{Binding LatestVersionName, Mode=OneWay}" HorizontalOptions="Start" VerticalOptions="Center" />
+    <DockPanel Margin="10">
+        <Grid DockPanel.Dock="Top" Margin="20" ColumnDefinitions="Auto,Auto,*" RowDefinitions="Auto,Auto" HorizontalAlignment="Stretch">
+            <Button Grid.Row="0" Grid.Column="0" Margin="0" Padding="4" Command="{Binding DownloadReleaseLog}" Content="Check for new version"/>
+            <TextBlock  Grid.Row="0" Grid.Column="1" Margin="0" Text="Current version:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <TextBlock  Grid.Row="0" Grid.Column="2" Margin="0" Text="{x:Static common:Statics.ApplicationVersionString}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <Button Grid.Row="1" Grid.Column="0" Margin="0" Padding="4" Command="{Binding WebOpenLatestRelease}" Content="Go to download page"/>
+            <TextBlock  Grid.Row="1" Grid.Column="1" Margin="0" Text="Latest available version:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <TextBlock  Grid.Row="1" Grid.Column="2" Margin="0" Text="{Binding LatestVersionName, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
         </Grid>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <ToggleSwitch Margin="0" IsChecked="{Binding Settings.CheckUpdatesOnStartup, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <TextBlock  Margin="0" Text="Check for updates on startup" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        </StackPanel>
 
-        <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
-            <Switch Margin="0" IsToggled="{Binding Settings.CheckUpdatesOnStartup, Mode=TwoWay}" OnColor="Orange" ThumbColor="Green" HorizontalOptions="Start" VerticalOptions="Center" />
-            <Label  Margin="0" Text="Check for updates on startup" HorizontalOptions="Start" VerticalOptions="Center" />
-        </StackLayout>
+        <Button DockPanel.Dock="Bottom" Margin="20" Width="200" Content="OK" Command="{Binding $parent[Window].Close}" HorizontalAlignment="Right"/>
 
-        <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
-        <ScrollView Padding="0,0,30,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
-            <Label HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Text="{Binding FullChangeLog, Mode=OneWay}" />
-        </ScrollView>
-
-        <Button Padding="4" Clicked="PopBack_Clicked" WidthRequest="200" Text="OK" HorizontalOptions="End"/>
-    </StackLayout>
-</ContentPage>
+        <Border Padding="2" Classes="InfoBoxBorder">
+            <ScrollViewer Padding="0,0,30,0" AllowAutoHide="false">
+                <TextBox TextWrapping="Wrap" Padding="5" Text="{Binding FullChangeLog, Mode=OneWay}" IsReadOnly="true" BorderThickness="0" />
+            </ScrollViewer>
+        </Border>
+    </DockPanel>
+</Window>

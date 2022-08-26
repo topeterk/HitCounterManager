@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -20,47 +20,76 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-using System.Windows.Input;
-using Xamarin.Forms;
-using HitCounterManager.Common;
 using System;
+using System.Windows.Input;
+using ReactiveUI;
+using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
+using HitCounterManager.Common;
+using HitCounterManager.Views;
 
 namespace HitCounterManager.ViewModels
 {
-    // Xamarin Examples: https://docs.microsoft.com/en-us/samples/browse/?products=xamarin&term=Xamarin.Forms&terms=Xamarin.Forms
-
-    // Multiple Templates in TreeView: https://www.wpf-tutorial.com/treeview-control/treeview-data-binding-multiple-templates/
-
-    // BoxView: https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/boxview
-
-    class MainPageViewModel : NotifyPropertyChangedImpl
+    public class MainPageViewModel : NotifyPropertyChangedImpl
     {
+        public Window? OwnerWindow { get; set; }
+        private ProfileView? ProfileView => OwnerWindow?.FindControl<ProfileView>("profileView");
+
         public MainPageViewModel()
         {
-            ToggleAlwaysOnTop = new Command(() => {
+            NavigateToSettings = ReactiveCommand.CreateFromTask(async () => { if (null != OwnerWindow) await new SettingsPage().ShowDialog(OwnerWindow); });
+            NavigateToUpdate = ReactiveCommand.CreateFromTask(async () => { if (null != OwnerWindow) await new UpdatePage().ShowDialog(OwnerWindow); });
+            NavigateToAbout = ReactiveCommand.CreateFromTask(async () => { if (null != OwnerWindow) await new AboutPage().ShowDialog(OwnerWindow); } );
+
+            NavigateToSetAttempts = ReactiveCommand.CreateFromTask(async () => {
+                if ((null == OwnerWindow) || (null == ProfileView)) return;
+
+                await new ProfileAttemptsPage((ProfileViewModel?)ProfileView?.DataContext!).ShowDialog(OwnerWindow);
+            });
+            NavigateToProfileAction = ReactiveCommand.CreateFromTask(async (ProfileAction type) => {
+                if (App.CurrentApp.Settings.ReadOnlyMode || (null == OwnerWindow) || (null == ProfileView)) return;
+
+                await new ProfileActionPage(type, (ProfileViewModel?)ProfileView?.DataContext!).ShowDialog(OwnerWindow);
+            });
+
+            CheckUpdatesOnline = ReactiveCommand.Create(() => App.CurrentApp.CheckAndShowUpdates(this));
+
+            ToggleAlwaysOnTop = ReactiveCommand.Create(() => {
                 App app = App.CurrentApp;
-                app.Settings.AlwaysOnTop = app.PlatformLayer.ApplicationWindowTopMost = !app.PlatformLayer.ApplicationWindowTopMost;
+                app.SetTopMost(!app.Settings.AlwaysOnTop);
                 CallPropertyChanged(this, nameof(AlwaysOnTop));
             });
-            ToggleDarkMode = new Command(() => {
+            ToggleDarkMode = ReactiveCommand.Create(() => {
                 App app = App.CurrentApp;
-                app.Settings.DarkMode = !app.Settings.DarkMode;
-                if (app.PlatformLayer.AppThemeBindingSupport)
-                    app.UserAppTheme = app.Settings.DarkMode ? OSAppTheme.Dark : OSAppTheme.Light;
-                else
-                    app.MainPage.DisplayAlert("Dark Mode changed", "Please restart the application that changes take effect. Mode will be set to: " + (app.Settings.DarkMode ? "Dark" : "Light") + "!", "OK");
+                app.ApplyTheme(!app.Settings.DarkMode); // Toggle
             });
         }
 
-        public bool AlwaysOnTop { get => App.CurrentApp.PlatformLayer.ApplicationWindowTopMost; }
+        public ICommand NavigateToSettings { get; }
+        public ICommand NavigateToUpdate { get; }
+        public ICommand NavigateToAbout { get; }
 
-        public ICommand SaveToDisk { get; } = new Command(() => App.CurrentApp.SaveSettings());
-        public ICommand OpenWebsiteHome { get; } = new Command(() => GitHubUpdate.WebOpenLandingPage());
-#pragma warning disable CS0618 // Ignore deprecated (but without replacement, sure it is Launcher.OpenAsync in Xamarin.Essentials but requires additianal references
-        public ICommand OpenWebsiteTeamHitless { get; } = new Command(() => Device.OpenUri(new Uri("https://discord.gg/4E7cSK7")));
-#pragma warning restore CS0618
-        public ICommand CheckUpdatesOnline { get; } = new Command(() => App.CurrentApp.CheckAndShowUpdates());
+        public ICommand NavigateToSetAttempts { get; }
 
+        public ICommand NavigateToProfileAction { get; }
+
+
+        public ICommand SaveToDisk { get; } = ReactiveCommand.Create(() => {
+            App.CurrentApp.SaveSettings();
+            App.CurrentApp.DisplayAlert("Saving complete!", "Written to \"" + Statics.ApplicationName + "Save.xml\"", NotificationType.Success);
+        });
+        public ICommand OpenWebsiteHome { get; } = ReactiveCommand.Create(() => GitHubUpdate.WebOpenLandingPage());
+        public ICommand OpenWebsiteTeamHitless { get; } = ReactiveCommand.Create(() => Device.OpenUri(new Uri("https://discord.gg/4E7cSK7")));
+        public ICommand CheckUpdatesOnline { get; }
+
+        public bool AlwaysOnTopDataTriggerWorkaroundCalled = false;
+        public bool? AlwaysOnTop {
+            get
+            {
+                if (!AlwaysOnTopDataTriggerWorkaroundCalled) return null;
+                return App.CurrentApp.Settings.AlwaysOnTop;
+            }
+        }
         public ICommand ToggleAlwaysOnTop { get; }
         public ICommand ToggleDarkMode { get; }
     }

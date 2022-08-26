@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -20,15 +20,58 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
+using Avalonia.Controls;
 using HitCounterManager.Common;
+using ReactiveUI;
+using System.Windows.Input;
 
 namespace HitCounterManager.ViewModels
 {
+    // TODO Avalonia: [sctypefix] Nested types not working with + sign within xaml, so it must be directly in namespace (ProfileAction)
+    public enum ProfileAction { Invalid, Create, Rename, Copy, Delete }
+
     public class ProfileActionPageViewModel : NotifyPropertyChangedImpl
     {
-        public enum ProfileAction { Create, Rename, Copy, Delete }
+        public Window? OwnerWindow { get; set; }
 
-        private ProfileAction _Action = ProfileAction.Create;
+        public ProfileActionPageViewModel()
+        {
+            Submit = ReactiveCommand.Create(() => {
+
+                try
+                {
+                    if (null == _Origin) throw new ProfileViewModel.ProfileActionException("Internal error");
+                    switch (Action)
+                    {
+                        case ProfileAction.Create:
+                            if (null == UserInput) throw new ProfileViewModel.ProfileActionException("Internal error");
+                            _Origin.ProfileNew(UserInput);
+                            break;
+                        case ProfileAction.Rename:
+                            if (null == UserInput) throw new ProfileViewModel.ProfileActionException("Internal error"); 
+                            _Origin.ProfileRename(UserInput);
+                            break;
+                        case ProfileAction.Copy:
+                            if (null == UserInput) throw new ProfileViewModel.ProfileActionException("Internal error"); 
+                            _Origin.ProfileCopy(UserInput);
+                            break;
+                        case ProfileAction.Delete:
+                            _Origin.ProfileDelete();
+                            break;
+                        default: throw new ProfileViewModel.ProfileActionException("Unknown action");
+                    }
+                }
+                catch (ProfileViewModel.ProfileActionException ex)
+                {
+                    App.CurrentApp.DisplayAlert("Profile action failed!", ex.Message);
+                    return; // Error
+                }
+
+                OwnerWindow?.Close(); // Success
+            });
+        }
+
+        private ProfileAction _Action = ProfileAction.Invalid;
         public ProfileAction Action
         {
             get => _Action;
@@ -42,8 +85,8 @@ namespace HitCounterManager.ViewModels
             }
         }
 
-        private ProfileViewModel _Origin;
-        public ProfileViewModel Origin
+        private ProfileViewModel? _Origin;
+        public ProfileViewModel? Origin
         {
             get => _Origin;
             set
@@ -56,8 +99,8 @@ namespace HitCounterManager.ViewModels
             }
         }
 
-        private string _UserInput;
-        public string UserInput
+        private string? _UserInput;
+        public string? UserInput
         {
             get => _UserInput;
             set
@@ -81,41 +124,36 @@ namespace HitCounterManager.ViewModels
         {
             switch (Action)
             {
-                case ProfileAction.Create: UserInput = null; IsUserInputEnabled = true; break;
-                case ProfileAction.Rename: UserInput = _Origin.ProfileSelected.Name; IsUserInputEnabled = true; break;
+                case ProfileAction.Create:
+                    UserInput = null;
+                    IsUserInputEnabled = true;
+                    break;
+                case ProfileAction.Rename:
+                    if (null == _Origin) throw new ProfileViewModel.ProfileActionException("Internal error"); 
+                    UserInput = _Origin.ProfileSelected.Name;
+                    IsUserInputEnabled = true;
+                    break;
                 case ProfileAction.Copy:
                     {
+                        if (null == _Origin) throw new ProfileViewModel.ProfileActionException("Internal error");
                         string NewName = _Origin.ProfileSelected.Name;
                         do { NewName += " COPY"; } while (_Origin.IsProfileExisting(NewName)); // extend name till it becomes unique
                         UserInput = NewName;
                         IsUserInputEnabled = true;
                         break;
                     }
-                case ProfileAction.Delete: UserInput = _Origin.ProfileSelected.Name; IsUserInputEnabled = false; break;
-                default: UserInput = ""; IsUserInputEnabled = false; break;
+                case ProfileAction.Delete:
+                    if (null == _Origin) throw new ProfileViewModel.ProfileActionException("Internal error"); 
+                    UserInput = _Origin.ProfileSelected.Name;
+                    IsUserInputEnabled = false;
+                    break;
+                default:
+                    UserInput = "";
+                    IsUserInputEnabled = false;
+                    break;
             }
         }
 
-        public bool Submit()
-        {
-            try
-            {
-                switch (Action)
-                {
-                    case ProfileAction.Create: _Origin.ProfileNew(UserInput); break;
-                    case ProfileAction.Rename: _Origin.ProfileRename(UserInput); break;
-                    case ProfileAction.Copy: _Origin.ProfileCopy(UserInput); break;
-                    case ProfileAction.Delete: _Origin.ProfileDelete(); break;
-                    default: throw new ProfileViewModel.ProfileActionException("Unknown action");
-                }
-            }
-            catch (ProfileViewModel.ProfileActionException ex)
-            {
-                App.CurrentApp.DisplayAlert("Profile action failed!", ex.Message, "OK");
-                return false; // Error
-            }
-
-            return true; // Success
-        }
+        public ICommand Submit { get; }
     }
 }

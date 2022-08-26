@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -22,75 +22,76 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 -->
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
-             xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
-             x:Class="HitCounterManager.Views.ProfileActionPage"
-             NavigationPage.HasNavigationBar="False"
-             NavigationPage.HasBackButton="False"
-             BackgroundColor="{AppThemeBinding Default=BurlyWood, Dark={StaticResource AlmostBlack}}">
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
+        xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
+        x:Class="HitCounterManager.Views.ProfileActionPage"
+        x:DataType="local:ProfileActionPageViewModel"
+        Icon="/Resources/FireIcon.ico"
+        Title="Profile Action" Classes="DialogWindow"
+        MinWidth="500" MinHeight="210" Width="500" Height="210">
 
-    <ContentPage.BindingContext>
+    <Window.DataContext>
         <local:ProfileActionPageViewModel />
-    </ContentPage.BindingContext>
+    </Window.DataContext>
 
-    <StackLayout Margin="10" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-        <Label  Margin="0,0,100,0" Text="Action..." HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}">
-            <Label.Triggers>
-                <DataTrigger TargetType="Label" Binding="{Binding Action}" Value="Create">
-                    <Setter Property="Text" Value="Creating a new profile..."/>
-                </DataTrigger>
-                <DataTrigger TargetType="Label" Binding="{Binding Action}" Value="Rename">
-                    <Setter Property="Text" Value="Renaming a profile..."/>
-                </DataTrigger>
-                <DataTrigger TargetType="Label" Binding="{Binding Action}" Value="Copy">
-                    <Setter Property="Text" Value="Copying a profile..."/>
-                </DataTrigger>
-                <DataTrigger TargetType="Label" Binding="{Binding Action}" Value="Delete">
-                    <Setter Property="Text" Value="Deleting a profile..."/>
-                </DataTrigger>
-            </Label.Triggers>
-        </Label>
+    <StackPanel Margin="10" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <TextBlock Margin="0,0,0,5" Text="Action..." HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold">
+            <Interaction.Behaviors>
+                <DataTriggerBehavior Binding="{Binding Action}" ComparisonCondition="Equal" Value="{x:Static local:ProfileAction.Create}">
+                    <ChangePropertyAction TargetObject="{Binding $parent[TextBlock]}" PropertyName="Text" Value="Creating a new profile..." />
+                </DataTriggerBehavior>
+                <DataTriggerBehavior Binding="{Binding Action}" ComparisonCondition="Equal" Value="{x:Static local:ProfileAction.Rename}">
+                    <ChangePropertyAction TargetObject="{Binding $parent[TextBlock]}" PropertyName="Text" Value="Renaming a profile..." />
+                </DataTriggerBehavior>
+                <DataTriggerBehavior Binding="{Binding Action}" ComparisonCondition="Equal" Value="{x:Static local:ProfileAction.Copy}">
+                    <ChangePropertyAction TargetObject="{Binding $parent[TextBlock]}" PropertyName="Text" Value="Copying a profile..." />
+                </DataTriggerBehavior>
+                <DataTriggerBehavior Binding="{Binding Action}" ComparisonCondition="Equal" Value="{x:Static local:ProfileAction.Delete}">
+                    <ChangePropertyAction TargetObject="{Binding $parent[TextBlock]}" PropertyName="Text" Value="Deleting a profile..." />
+                </DataTriggerBehavior>
+            </Interaction.Behaviors>
+        </TextBlock>
 
-        <Label  Margin="0" Text="Previous:" HorizontalOptions="Start" VerticalOptions="Center">
-            <Label.Triggers>
-                <DataTrigger TargetType="Label" Binding="{Binding Action}" Value="Create">
-                    <Setter Property="Text" Value="Currently selected:"/>
-                </DataTrigger>
-                <DataTrigger TargetType="Label" Binding="{Binding Action}" Value="Rename">
-                    <Setter Property="Text" Value="Current name:"/>
-                </DataTrigger>
-                <DataTrigger TargetType="Label" Binding="{Binding Action}" Value="Copy">
-                    <Setter Property="Text" Value="Origin name:"/>
-                </DataTrigger>
-                <DataTrigger TargetType="Label" Binding="{Binding Action}" Value="Delete">
-                    <Setter Property="Text" Value="The currently selected profile will be deleted:"/>
-                </DataTrigger>
-            </Label.Triggers>
-        </Label>
-        <Label  Margin="20,0,0,0" Text="{Binding Origin.ProfileSelected.Name, Mode=OneWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+        <TextBlock Margin="0,5,0,5" Text="Previous:" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Interaction.Behaviors>
+                <DataTriggerBehavior Binding="{Binding Action}" ComparisonCondition="Equal" Value="{x:Static local:ProfileAction.Create}">
+                    <ChangePropertyAction TargetObject="{Binding $parent[TextBlock]}" PropertyName="Text" Value="Currently selected:" />
+                </DataTriggerBehavior>
+                <DataTriggerBehavior Binding="{Binding Action}" ComparisonCondition="Equal" Value="{x:Static local:ProfileAction.Rename}">
+                    <ChangePropertyAction TargetObject="{Binding $parent[TextBlock]}" PropertyName="Text" Value="Current name:" />
+                </DataTriggerBehavior>
+                <DataTriggerBehavior Binding="{Binding Action}" ComparisonCondition="Equal" Value="{x:Static local:ProfileAction.Copy}">
+                    <ChangePropertyAction TargetObject="{Binding $parent[TextBlock]}" PropertyName="Text" Value="Origin name:" />
+                </DataTriggerBehavior>
+                <DataTriggerBehavior Binding="{Binding Action}" ComparisonCondition="Equal" Value="{x:Static local:ProfileAction.Delete}">
+                    <ChangePropertyAction TargetObject="{Binding $parent[TextBlock]}" PropertyName="Text" Value="The currently selected profile will be deleted:" />
+                </DataTriggerBehavior>
+            </Interaction.Behaviors>
+        </TextBlock>
+        <TextBlock Margin="20,0,0,0" Text="{Binding Origin.ProfileSelected.Name, Mode=OneWay}" FontWeight="Bold" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
 
-        <Label  Margin="0" Text="Next:" HorizontalOptions="Start" VerticalOptions="Center">
-            <Label.Triggers>
-                <DataTrigger TargetType="Label" Binding="{Binding Action}" Value="Create">
-                    <Setter Property="Text" Value="Name of new profile:"/>
-                </DataTrigger>
-                <DataTrigger TargetType="Label" Binding="{Binding Action}" Value="Rename">
-                    <Setter Property="Text" Value="New profile name:"/>
-                </DataTrigger>
-                <DataTrigger TargetType="Label" Binding="{Binding Action}" Value="Copy">
-                    <Setter Property="Text" Value="Copied profile name:"/>
-                </DataTrigger>
-                <DataTrigger TargetType="Label" Binding="{Binding Action}" Value="Delete">
-                    <Setter Property="Text" Value="Are you sure that the profile shall be deleted?"/>
-                </DataTrigger>
-            </Label.Triggers>
-        </Label>
-        <Entry  Margin="20,0,0,0" IsEnabled="{Binding IsUserInputEnabled}" Text="{Binding UserInput, Mode=TwoWay}" Placeholder="  [Enter profile name]" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
-        <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
-            <Button Padding="4" Clicked="PopBack_Dismiss_Clicked" WidthRequest="200" Text="Dismiss" HorizontalOptions="End"/>
-            <Button Padding="4" Clicked="PopBack_OK_Clicked" WidthRequest="200" Text="OK" HorizontalOptions="End"/>
-        </StackLayout>
-    </StackLayout>
-</ContentPage>
+        <TextBlock Margin="0,5,0,5" Text="Next:" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Interaction.Behaviors>
+                <DataTriggerBehavior Binding="{Binding Action}" ComparisonCondition="Equal" Value="{x:Static local:ProfileAction.Create}">
+                    <ChangePropertyAction TargetObject="{Binding $parent[TextBlock]}" PropertyName="Text" Value="Name of new profile:" />
+                </DataTriggerBehavior>
+                <DataTriggerBehavior Binding="{Binding Action}" ComparisonCondition="Equal" Value="{x:Static local:ProfileAction.Rename}">
+                    <ChangePropertyAction TargetObject="{Binding $parent[TextBlock]}" PropertyName="Text" Value="New profile name:" />
+                </DataTriggerBehavior>
+                <DataTriggerBehavior Binding="{Binding Action}" ComparisonCondition="Equal" Value="{x:Static local:ProfileAction.Copy}">
+                    <ChangePropertyAction TargetObject="{Binding $parent[TextBlock]}" PropertyName="Text" Value="Copied profile name:" />
+                </DataTriggerBehavior>
+                <DataTriggerBehavior Binding="{Binding Action}" ComparisonCondition="Equal" Value="{x:Static local:ProfileAction.Delete}">
+                    <ChangePropertyAction TargetObject="{Binding $parent[TextBlock]}" PropertyName="Text" Value="Are you sure that the profile shall be deleted?" />
+                </DataTriggerBehavior>
+            </Interaction.Behaviors>
+        </TextBlock>
+        <TextBox Margin="20,0,0,0" IsVisible="{Binding IsUserInputEnabled}" Text="{Binding UserInput, Mode=TwoWay}" Watermark="  [Enter profile name]" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <Button Margin="20" Width="200" Content="Dismiss" Command="{Binding $parent[Window].Close}" HorizontalAlignment="Right" />
+            <Button Margin="20" Width="200" Content="OK" Command="{Binding Submit}" HorizontalAlignment="Right" />
+        </StackPanel>
+    </StackPanel>
+</Window>

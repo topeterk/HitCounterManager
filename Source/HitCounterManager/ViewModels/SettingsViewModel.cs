@@ -24,13 +24,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
-using Xamarin.Forms;
+using ReactiveUI;
+using Avalonia.Controls.Notifications;
 using HitCounterManager.Common;
 using HitCounterManager.Models;
 
 namespace HitCounterManager.ViewModels
 {
-    public class SettingsViewModel : NotifyPropertyChangedImpl, IDisposable
+    public class SettingsViewModel : NotifyPropertyChangedImpl
     {
         public SettingsRoot Settings => App.CurrentApp.Settings;
         private Shortcuts sc = App.CurrentApp.sc;
@@ -44,10 +45,13 @@ namespace HitCounterManager.ViewModels
             _StyleFontUrl = Settings.StyleFontUrl;
             _StyleCssUrl = Settings.StyleCssUrl;
 
-            ToggleShowInfo = new Command<string>((string name) => { ShowInfo[name].Value = !ShowInfo[name].Value; });
+            ToggleShowInfo = ReactiveCommand.Create<string>((string name) => { ShowInfo[name].Value = !ShowInfo[name].Value; });
 
-            Capture = new Command<Shortcuts.SC_Type>((type) =>
+            Capture = ReactiveCommand.Create<SC_Type>((sc_type_intermmediate) =>
             {
+                // TODO Avalonia: [sctypefix] Nested types not working with + sign within xaml, so it must be directly in namespace (SC_Type)
+                Shortcuts.SC_Type type = (Shortcuts.SC_Type)sc_type_intermmediate;
+
                 Shortcuts.SC_Type CapturingIdPrev = CapturingId;
 
                 if ((Shortcuts.SC_Type.SC_Type_MAX == type) || (CapturingId == type))
@@ -65,12 +69,12 @@ namespace HitCounterManager.ViewModels
                 {
                     // Start capturing
                     CapturingId = type;
-                    App.StartApplicationTimer(TimerIDs.ShortcutsCapture, 20, CaptureKeysTick);
+                    App.CurrentApp.StartApplicationTimer(TimerIDs.ShortcutsCapture, 20, CaptureKeysTick);
                     RecordActionChanged(CapturingId);
                 }
             });
 
-            ApplyCssAndFont = new Command(() =>
+            ApplyCssAndFont = ReactiveCommand.Create(() =>
             {
                 Settings.StyleFontName = _StyleFontName;
                 Settings.StyleFontUrl = _StyleFontUrl;
@@ -85,34 +89,17 @@ namespace HitCounterManager.ViewModels
             PropertyChanged += SettingDataChangedHandler;
         }
 
-        ~SettingsViewModel() => Dispose(false);
-
-        private bool _Disposed = false;
-        public void Dispose() { Dispose(true); GC.SuppressFinalize(this); } // Allow to free memory early (https://coding.abel.nu/2011/12/implementing-idisposable/)
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_Disposed) // only once
-            {
-                /*if (disposing) // called manually (true) or from destructor (false)
-                {
-                }*/
-
-                Capture.Execute(Shortcuts.SC_Type.SC_Type_MAX); // Stop any running capture
-                App.CurrentApp.SettingsDialogOpen = false; // Re-Enable hotkeys (for main application)
-
-                _Disposed = true;
-            }
-        }
-
         // Move this into a event handler of Settings itself, so we can run Update depending on the whole Settings from anywhere
-        private void SettingDataChangedHandler(object sender, PropertyChangedEventArgs e)
+        private void SettingDataChangedHandler(object? sender, PropertyChangedEventArgs e)
         {
             // Do not propagate local variables
-            if (e.PropertyName.Equals(nameof(StyleFontName)) ||
-                e.PropertyName.Equals(nameof(StyleFontUrl)) ||
-                e.PropertyName.Equals(nameof(StyleCssUrl))) return;
+            if (null != e.PropertyName && (
+                    e.PropertyName.Equals(nameof(StyleFontName)) ||
+                    e.PropertyName.Equals(nameof(StyleFontUrl)) ||
+                    e.PropertyName.Equals(nameof(StyleCssUrl)))
+                ) return;
 
-            App.CurrentApp.profileViewModel.OutputDataChangedHandler(sender, e);
+            App.CurrentApp.profileViewModel?.OutputDataChangedHandler(sender, e);
         }
 
         public class ShowInfoBool : NotifyPropertyChangedImpl
@@ -175,7 +162,7 @@ namespace HitCounterManager.ViewModels
             // Early cancellation point
             if (Shortcuts.SC_Type.SC_Type_MAX == CapturingId) return false;
 
-            List<int> PressedKeys = App.CurrentApp.OsLayer.GetKeysPressedAsync();
+            List<int>? PressedKeys = App.CurrentApp.GetKeysPressedAsync();
             if (null == PressedKeys) return (Shortcuts.SC_Type.SC_Type_MAX != CapturingId);
 
             KeyEventArgs key = new KeyEventArgs(Keys.None);
@@ -315,7 +302,13 @@ namespace HitCounterManager.ViewModels
             App.CurrentApp.SettingsDialogOpen = true; // To disable hotkeys (for main application)
         }
 
-#region Global Shortcuts
+        public void OnDisappearing()
+        {
+            Capture.Execute(SC_Type.SC_Type_MAX); // Stop any running capture
+            App.CurrentApp.SettingsDialogOpen = false; // Re-Enable hotkeys (for main application)
+        }
+
+        #region Global Shortcuts
         public bool ShortcutHitEnable
         {
             get => Settings.ShortcutHitEnable;
@@ -466,7 +459,7 @@ namespace HitCounterManager.ViewModels
                 case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb: CallPropertyChanged(this, nameof(RadioHotKeyMethod_LLKb)); break;
                 default: break;
             }
-            App.CurrentApp.DisplayAlert("Restart required", "Changes only take effect after restarting the application.", "OK");
+            App.CurrentApp.DisplayAlert("Restart required", "Changes only take effect after restarting the application.", NotificationType.Information);
         }
         public bool RadioHotKeyMethod_Sync
         {
@@ -553,9 +546,7 @@ namespace HitCounterManager.ViewModels
         }
         public ICommand ApplyCssAndFont { get; }
 
-#pragma warning disable CS0618 // Ignore deprecated (but without replacement, sure it is Launcher.OpenAsync in Xamarin.Essentials but requires additianal references
-        public ICommand WebOpenGoogleFontsUrl { get; } = new Command(() => Device.OpenUri(new Uri("https://fonts.google.com")));
-#pragma warning restore CS0618
+        public ICommand WebOpenGoogleFontsUrl { get; } = ReactiveCommand.Create(() => Device.OpenUri(new Uri("https://fonts.google.com")));
 #endregion
 
 #region Behavior

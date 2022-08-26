@@ -29,7 +29,7 @@ namespace HitCounterManager.Models
 {
     public  class ProfileModel : NotifyPropertyChangedImpl
     {
-        public event PropertyChangedEventHandler ProfileDataChanged;
+        public event PropertyChangedEventHandler? ProfileDataChanged;
 
         private readonly Profile _origin;
 
@@ -72,7 +72,7 @@ namespace HitCounterManager.Models
             }
         }
 
-        public ProfileRowModel ActiveSplitModel => (_origin.ActiveSplit < Rows.Count ? Rows[_origin.ActiveSplit] : null);
+        public ProfileRowModel? ActiveSplitModel => _origin.ActiveSplit < Rows.Count ? Rows[_origin.ActiveSplit] : null;
 
         public int BestProgress
         {
@@ -88,7 +88,7 @@ namespace HitCounterManager.Models
                 CallPropertyChanged(this, nameof(BestProgress));
             }
         }
-        public ProfileRowModel BestProgressModel => (_origin.BestProgress < Rows.Count ? Rows[_origin.BestProgress] : null);
+        public ProfileRowModel? BestProgressModel => _origin.BestProgress < Rows.Count ? Rows[_origin.BestProgress] : null;
 
         public ObservableCollection<ProfileRowModel> Rows { get; private set; }
         private int _SessionProgress = 0;
@@ -106,7 +106,7 @@ namespace HitCounterManager.Models
                 CallPropertyChanged(this, nameof(SessionProgress));
             }
         }
-        public ProfileRowModel SessionProgressModel => (_SessionProgress < Rows.Count ? Rows[_SessionProgress] : null);
+        public ProfileRowModel? SessionProgressModel => _SessionProgress < Rows.Count ? Rows[_SessionProgress] : null;
 
         public void PermuteActiveSplit(int Offset)
         {
@@ -134,7 +134,7 @@ namespace HitCounterManager.Models
             Rows.Insert(ActiveSplit, new ProfileRowModel(row, this));
 
             Rows[ActiveSplit].ActiveChanged();
-            Rows[ActiveSplit+1].ActiveChanged();
+            if (ActiveSplit+1 < Rows.Count) Rows[ActiveSplit+1].ActiveChanged();
         }
 
         public void DeleteRow(ProfileRowModel row)
@@ -159,9 +159,9 @@ namespace HitCounterManager.Models
             Rows.RemoveAt(rowIndex);
         }
 
-        private void PropertyChangedHandler(object sender, PropertyChangedEventArgs e) => ProfileDataChanged?.Invoke(sender, e);
+        private void PropertyChangedHandler(object? sender, PropertyChangedEventArgs e) => ProfileDataChanged?.Invoke(sender, e);
 
-        private void CollectionChangedHandler(object sender, NotifyCollectionChangedEventArgs e) => PropertyChangedHandler(sender, new PropertyChangedEventArgs(nameof(Rows)));
+        private void CollectionChangedHandler(object? sender, NotifyCollectionChangedEventArgs e) => PropertyChangedHandler(sender, new PropertyChangedEventArgs(nameof(Rows)));
 
         public Profile DeepCopyOrigin() => _origin.DeepCopy();
     }

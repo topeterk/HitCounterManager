@@ -49,24 +49,23 @@ namespace HitCounterManager.Models
 
         public OM_Purpose Purpose
         {
-            get { return (_settings.Purpose < (int)OM_Purpose.OM_Purpose_MAX ? (OM_Purpose)_settings.Purpose : OM_Purpose.OM_Purpose_SplitCounter); }
-            set { _settings.Purpose = (int)value; }
+            get { return _settings!.Purpose < (int)OM_Purpose.OM_Purpose_MAX ? (OM_Purpose)_settings.Purpose : OM_Purpose.OM_Purpose_SplitCounter; }
+            set { _settings!.Purpose = (int)value; }
         }
         public OM_Severity Severity
         {
-            get { return (_settings.Severity < (int)OM_Severity.OM_Severity_MAX ? (OM_Severity)_settings.Severity : OM_Severity.OM_Severity_AnyHitsCritical); }
-            set { _settings.Severity = (int)value; }
+            get { return _settings!.Severity < (int)OM_Severity.OM_Severity_MAX ? (OM_Severity)_settings.Severity : OM_Severity.OM_Severity_AnyHitsCritical; }
+            set { _settings!.Severity = (int)value; }
         }
 
-        private SettingsRoot _settings = null;
-        private string template = null;
+        private SettingsRoot? _settings = null;
+        private string? template = null;
 
         /// <summary>
         /// Object binding to the user settings
         /// </summary>
         public SettingsRoot Settings
         {
-            get { return _settings; }
             set
             {
                 _settings = value;
@@ -83,7 +82,7 @@ namespace HitCounterManager.Models
         public void ReloadTemplate()
         {
             // Reload input file handle when possible
-            if (File.Exists(_settings.Inputfile))
+            if (File.Exists(_settings!.Inputfile))
             {
                 StreamReader sr = new StreamReader(_settings.Inputfile);
                 template = sr.ReadToEnd();
@@ -98,7 +97,7 @@ namespace HitCounterManager.Models
         /// </summary>
         /// <param name="Str">String with special characters</param>
         /// <returns>String with HTML encoded special character</returns>
-        public string SimpleHtmlEscape(string Str)
+        public string? SimpleHtmlEscape(string? Str)
         {
             if (null != Str)
             {
@@ -128,7 +127,7 @@ namespace HitCounterManager.Models
         /// <summary>
         /// Writes a JSON statement to assign a simple value
         /// </summary>
-        private void WriteJsonSimpleValue(StreamWriter File, string Name, string String)
+        private void WriteJsonSimpleValue(StreamWriter File, string Name, string? String)
         {
             File.WriteLine("\"" + Name + "\": " + (null != String ? "\"" + String.Replace("\"", "\\\"") + "\"" : "undefined") + ",");
         }

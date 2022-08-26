@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -20,25 +20,28 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-using System;
-using Xamarin.Forms;
-using HitCounterManager.Common;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
+using HitCounterManager.ViewModels;
 
 namespace HitCounterManager.Views
 {
-    public partial class UpdatePage : ContentPage
+    public partial class UpdatePage : Window
     {
         public UpdatePage()
         {
             InitializeComponent();
+
+            ((UpdateViewModel)DataContext!).OwnerWindow = this;
+#if DEBUG
+            this.AttachDevTools();
+#endif
         }
 
-        private void WebOpenLatestRelease_Clicked(object sender, EventArgs e)
+        private void InitializeComponent()
         {
-            GitHubUpdate.WebOpenLatestRelease();
-            Navigation.PopModalAsync();
+            AvaloniaXamlLoader.Load(this);
         }
-
-        private void PopBack_Clicked(object sender, EventArgs e) => Navigation.PopModalAsync();
     }
 }

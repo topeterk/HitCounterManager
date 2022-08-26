@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -20,17 +20,24 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-using Xamarin.Forms;
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
 using HitCounterManager.ViewModels;
 
 namespace HitCounterManager.Views
 {
-    public partial class ProfileView : ContentView
+    public partial class ProfileView : UserControl
     {
         public ProfileView()
         {
             InitializeComponent();
-            ((ProfileViewModel)BindingContext).ProfileSelector = profileSelector;
+
+            ((ProfileViewModel)DataContext!).ProfileSelector = this.FindControl<ComboBox>("profileSelector");
+        }
+
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

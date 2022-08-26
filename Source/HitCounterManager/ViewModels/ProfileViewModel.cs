@@ -27,21 +27,23 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Threading;
 using System.Windows.Input;
-using Xamarin.Forms;
+using ReactiveUI;
+using Avalonia.Controls;
 using HitCounterManager.Common;
 using HitCounterManager.Models;
+using Avalonia.Threading;
+using System.Diagnostics.CodeAnalysis;
 
 namespace HitCounterManager.ViewModels
 {
     public class ProfileViewModel : NotifyPropertyChangedImpl
     {
         private SettingsRoot Settings = App.CurrentApp.Settings;
-        public Picker ProfileSelector = null;
+        public ComboBox? ProfileSelector = null;
 
         public ProfileViewModel()
         {
-
-            ToggleShowInfo = new Command<string>((string name) => { ShowInfo[name].Value = !ShowInfo[name].Value; });
+            ToggleShowInfo = ReactiveCommand.Create<string>((string name) => { ShowInfo[name].Value = !ShowInfo[name].Value; });
 
             ProfileList = new ObservableCollection<ProfileModel>();
             foreach (Profile prof in Settings.Profiles.ProfileList)
@@ -64,7 +66,7 @@ namespace HitCounterManager.ViewModels
             // when no matching profile is found, we start with the first one
             if (null == ProfileSelected) ProfileSelected = ProfileList[0];
 
-            CmdRemoveSplit = new Command<ProfileRowModel>((ProfileRowModel item) =>
+            CmdRemoveSplit = ReactiveCommand.Create<ProfileRowModel>((ProfileRowModel item) =>
             {
                 // sad there is no try-lock, so we use the "precise equivalent" of lock(){}
                 // from: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/lock-statement
@@ -81,23 +83,23 @@ namespace HitCounterManager.ViewModels
                     if (GotLock) Monitor.Exit(TimerUpdateLock);
                 }
             });
-            CmdSetActiveSplit = new Command<ProfileRowModel>((ProfileRowModel item) =>
+            CmdSetActiveSplit = ReactiveCommand.Create<ProfileRowModel>((ProfileRowModel item) =>
             {
                 if (item.Active) return;
                 _ProfileSelected.ActiveSplit = _ProfileRowList.IndexOf(item);
             });
-            CmdSetSessionProgress = new Command<ProfileRowModel>((ProfileRowModel item) =>
+            CmdSetSessionProgress = ReactiveCommand.Create<ProfileRowModel>((ProfileRowModel item) =>
             {
                 if (item.SP) return;
                 _ProfileSelected.SessionProgress = _ProfileRowList.IndexOf(item);
             });
-            CmdSetBestProgress = new Command<ProfileRowModel>((ProfileRowModel item) =>
+            CmdSetBestProgress = ReactiveCommand.Create<ProfileRowModel>((ProfileRowModel item) =>
             {
                 if (item.BP) return;
                 _ProfileSelected.BestProgress = _ProfileRowList.IndexOf(item);
             });
 
-            ProfileReset = new Command(() =>
+            ProfileReset = ReactiveCommand.Create(() =>
             {
                 TimerRunning = false;
 
@@ -114,7 +116,7 @@ namespace HitCounterManager.ViewModels
                 }
                 _ProfileSelected.ActiveSplit = 0;
             });
-            ProfilePB = new Command(() =>
+            ProfilePB = ReactiveCommand.Create(() =>
             {
                 TimerRunning = false;
 
@@ -127,30 +129,33 @@ namespace HitCounterManager.ViewModels
                 _ProfileSelected.ActiveSplit = _ProfileSelected.Rows.Count - 1;
                 _ProfileSelected.SessionProgress = _ProfileSelected.Rows.Count - 1;
             });
-            ProfileSetAttempts = new Command<int>((int NewAttempts) => _ProfileSelected.Attempts = NewAttempts);
+            ProfileSetAttempts = ReactiveCommand.Create<int>((int NewAttempts) => _ProfileSelected.Attempts = NewAttempts);
 
-            ToggleTimerPause = new Command(() => TimerRunning = !TimerRunning);
-            ToggleReadOnlyMode = new Command(() => IsReadOnly = !IsReadOnly);
+            ToggleTimerPause = ReactiveCommand.Create(() => TimerRunning = !TimerRunning);
+            ToggleReadOnlyMode = ReactiveCommand.Create(() => IsReadOnly = !IsReadOnly);
 
-            ProfileSplitMoveUp = new Command(() => {
+            ProfileSplitMoveUp = ReactiveCommand.Create(() => {
                 if (App.CurrentApp.Settings.ReadOnlyMode) return;
                 _ProfileSelected.PermuteActiveSplit(-1);
             });
-            ProfileSplitMoveDown = new Command(() => {
+            ProfileSplitMoveDown = ReactiveCommand.Create(() => {
                 if (App.CurrentApp.Settings.ReadOnlyMode) return;
                 _ProfileSelected.PermuteActiveSplit(+1);
             });
-            ProfileSplitInsert = new Command(() => {
+            ProfileSplitInsert = ReactiveCommand.Create(() => {
                 if (App.CurrentApp.Settings.ReadOnlyMode) return;
                 _ProfileSelected.InsertNewRow();
             });
 
-            HitIncrease = new Command(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Hits++);
-            HitDecrease = new Command(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Hits--);
-            HitWayIncrease = new Command(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].WayHits++);
-            HitWayDecrease = new Command(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].WayHits--);
-            SplitSelectNext = new Command(() => GoSplits(+1));
-            SplitSelectPrev = new Command(() => GoSplits(-1));
+            HitIncrease = ReactiveCommand.Create(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Hits++);
+            HitDecrease = ReactiveCommand.Create(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Hits--);
+            HitWayIncrease = ReactiveCommand.Create(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].WayHits++);
+            HitWayDecrease = ReactiveCommand.Create(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].WayHits--);
+            SplitSelectNext = ReactiveCommand.Create(() => GoSplits(+1));
+            SplitSelectPrev = ReactiveCommand.Create(() => GoSplits(-1));
+
+            OutputUpdateTimer = new DispatcherTimer(TimeSpan.FromMilliseconds(300), DispatcherPriority.Background, OutputUpdateTimerTick);
+            OutputUpdateTimer.Start();
         }
 
         public class ShowInfoBool : NotifyPropertyChangedImpl
@@ -170,7 +175,7 @@ namespace HitCounterManager.ViewModels
 
         public ICommand ToggleShowInfo { get; }
 
-        public void OutputDataChangedHandler(object sender, PropertyChangedEventArgs e)
+        public void OutputDataChangedHandler(object? sender, PropertyChangedEventArgs e)
         {
             UpdateDuration();
             CallPropertyChanged(this, nameof(StatsProgress));
@@ -178,7 +183,7 @@ namespace HitCounterManager.ViewModels
             CallPropertyChanged(this, nameof(StatsTotalHits));
             OutputDataQueueUpdate();
         }
-        private void CollectionChangedHandler(object sender, NotifyCollectionChangedEventArgs e) => OutputDataChangedHandler(sender, new PropertyChangedEventArgs(nameof(ProfileList)));
+        private void CollectionChangedHandler(object? sender, NotifyCollectionChangedEventArgs e) => OutputDataChangedHandler(sender, new PropertyChangedEventArgs(nameof(ProfileList)));
 
         public ICommand CmdRemoveSplit { get; }
         public ICommand CmdSetActiveSplit { get; }
@@ -186,9 +191,6 @@ namespace HitCounterManager.ViewModels
         public ICommand CmdSetBestProgress { get; }
 
         private ObservableCollection<ProfileRowModel> _ProfileRowList => _ProfileSelected.Rows;
-
-        // https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/picker/populating-itemssource
-
         public ObservableCollection<ProfileModel> ProfileList { get; private set; }
 
         public bool IsProfileExisting(string Name)
@@ -200,13 +202,15 @@ namespace HitCounterManager.ViewModels
             return false;
         }
 
-        private ProfileModel _ProfileSelected = null;
+        private ProfileModel _ProfileSelected;
+        [MemberNotNull(nameof(_ProfileSelected))]
         public ProfileModel ProfileSelected
         {
-            get { return _ProfileSelected; }
+#pragma warning disable CS8774
+            get => _ProfileSelected!;
             set
             {
-                if (_ProfileSelected != value)
+                if (null != value && _ProfileSelected != value)
                 {
                     if (ProfileList.Contains(value))
                     {
@@ -222,6 +226,7 @@ namespace HitCounterManager.ViewModels
                     }
                 }
             }
+#pragma warning restore CS8774
         }
 
         public bool IsReadOnly
@@ -262,9 +267,6 @@ namespace HitCounterManager.ViewModels
             int profileIndex = Settings.Profiles.ProfileList.IndexOf(profile);
             ProfileList.Insert(profileIndex, profileModel);
             ProfileSelected = profileModel;
-
-            // TODO: [PICKER] Test and rework code if a ObservableCollection can be used for the picker instead!
-            ProfileSelector?.ForceUpdate(); // Workaround as this should not be required!
         }
         public void ProfileRename(string NewName)
         {
@@ -275,9 +277,6 @@ namespace HitCounterManager.ViewModels
             if (IsProfileExisting(NewName)) throw new ProfileActionException("Profile already exists.");
 
             _ProfileSelected.Name = NewName;
-
-            // TODO: [PICKER] Test and rework code if a ObservableCollection can be used for the picker instead!
-            ProfileSelector?.ForceUpdate(); // Workaround as this should not be required!
         }
         public void ProfileCopy(string NewName)
         {
@@ -301,9 +300,6 @@ namespace HitCounterManager.ViewModels
             int profileIndex = Settings.Profiles.ProfileList.IndexOf(profile);
             ProfileList.Insert(profileIndex, profileModel);
             ProfileSelected = profileModel;
-
-            // TODO: [PICKER] Test and rework code if a ObservableCollection can be used for the picker instead!
-            ProfileSelector?.ForceUpdate(); // Workaround as this should not be required!
         }
         public void ProfileDelete()
         {
@@ -325,9 +321,6 @@ namespace HitCounterManager.ViewModels
             ProfileList.RemoveAt(profileIndex);
 
             OutputDataChangedHandler(this, new PropertyChangedEventArgs(nameof(ProfileSelected)));
-
-            // TODO: [PICKER] Test and rework code if a ObservableCollection can be used for the picker instead!
-            ProfileSelector?.ForceUpdate(); // Workaround as this should not be required!
         }
 
         public ICommand ProfileReset { get; }
@@ -413,9 +406,27 @@ namespace HitCounterManager.ViewModels
 
         #region Output Update Queue
 
+        private DispatcherTimer? OutputUpdateTimer;
         private readonly object OutputUpdateLock = new object();
         private bool IsOutputUpdatePending = false;
         private bool IsOutputUpdateStable = true;
+
+        private void OutputUpdateTimerTick(object? sender, EventArgs e)
+        {
+            lock (OutputUpdateLock)
+            {
+                // Continue waiting as long as data is not stable
+                IsOutputUpdatePending = !IsOutputUpdateStable;
+                IsOutputUpdateStable = true;
+            }
+
+            // When update is no longer pending, write output and stop timer
+            if (!IsOutputUpdatePending)
+            {
+                Dispatcher.UIThread.Post(() => App.CurrentApp.om.Update(_ProfileSelected, TimerRunning));
+                OutputUpdateTimer!.Stop();
+            }
+        }
 
         /// <summary>
         /// When data has changed, call this function to write the output.
@@ -423,6 +434,8 @@ namespace HitCounterManager.ViewModels
         /// </summary>
         private void OutputDataQueueUpdate()
         {
+            if (null == OutputUpdateTimer) return;
+
             lock (OutputUpdateLock)
             {
                 IsOutputUpdateStable = false;
@@ -430,19 +443,8 @@ namespace HitCounterManager.ViewModels
                 if (!IsOutputUpdatePending)
                 {
                     IsOutputUpdatePending = true;
-                    Device.StartTimer(TimeSpan.FromMilliseconds(300), () =>
-                    {
-                        lock (OutputUpdateLock)
-                        {
-                            // Continue waiting as long as data is not stable
-                            IsOutputUpdatePending = !IsOutputUpdateStable;
-                            IsOutputUpdateStable = true;
-                        }
-
-                        // When update is no longer pending, write output and stop timer
-                        if (!IsOutputUpdatePending) Device.BeginInvokeOnMainThread(() => App.CurrentApp.om.Update(_ProfileSelected, TimerRunning));
-                        return IsOutputUpdatePending;
-                    });
+                    OutputUpdateTimer.Stop();
+                    OutputUpdateTimer.Start();
                 }
             }
         }
@@ -466,8 +468,8 @@ namespace HitCounterManager.ViewModels
                     // Starting the timer
                     last_update_time = DateTime.UtcNow;
                     _TimerRunning = true;
-                    App.StartApplicationTimer(TimerIDs.GameTime, 10, UpdateDuration);
-                    App.StartApplicationTimer(TimerIDs.GameTimeGui, 300, () => { CallPropertyChanged(this, nameof(StatsTime)); return _TimerRunning; });
+                    App.CurrentApp.StartApplicationTimer(TimerIDs.GameTime, 10, UpdateDuration);
+                    App.CurrentApp.StartApplicationTimer(TimerIDs.GameTimeGui, 300, () => { CallPropertyChanged(this, nameof(StatsTime)); return _TimerRunning; });
                 }
                 else
                 {

@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -20,18 +20,29 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-using System;
-using Xamarin.Forms;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
 using HitCounterManager.ViewModels;
+using System;
 
 namespace HitCounterManager.Views
 {
-    public partial class SettingsPage : ContentPage
+    public partial class SettingsPage : Window
     {
-        public SettingsPage() => InitializeComponent();
+        public SettingsPage()
+        {
+            InitializeComponent();
+#if DEBUG
+            this.AttachDevTools();
+#endif
+            Opened += (object? sender, EventArgs e) => ((SettingsViewModel)DataContext!).OnAppearing();
+            Closed += (object? sender, EventArgs e) => ((SettingsViewModel)DataContext!).OnDisappearing();
+        }
 
-        protected override void OnAppearing() => ((SettingsViewModel)BindingContext).OnAppearing();
-
-        private void PopBack_Clicked(object sender, EventArgs e) => Navigation.PopModalAsync();
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
+        }
     }
 }

@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -21,18 +21,20 @@
 //SOFTWARE.
 
 using System.Windows.Input;
-using Xamarin.Forms;
+using ReactiveUI;
+using Avalonia.Controls;
 using HitCounterManager.Common;
 
 namespace HitCounterManager.ViewModels
 {
     public class UpdateViewModel : NotifyPropertyChangedImpl
     {
+        public Window? OwnerWindow { get; set; }
         public SettingsRoot Settings => App.CurrentApp.Settings;
 
         public UpdateViewModel()
         {
-            DownloadReleaseLog = new Command(() =>
+            DownloadReleaseLog = ReactiveCommand.Create(() =>
             {
                 if (GitHubUpdate.QueryAllReleases())
                 {
@@ -40,11 +42,16 @@ namespace HitCounterManager.ViewModels
                     CallPropertyChanged(this, nameof(FullChangeLog));
                 }
             });
+            WebOpenLatestRelease = ReactiveCommand.Create(() => {
+                GitHubUpdate.WebOpenLatestRelease();
+                OwnerWindow?.Close();
+            });
         }
 
         public string LatestVersionName => GitHubUpdate.LatestVersionName;
         public string FullChangeLog { get => GitHubUpdate.Changelog; }
 
         public ICommand DownloadReleaseLog { get; }
+        public ICommand WebOpenLatestRelease { get; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2021 Peter Kirmeier
+//Copyright (c) 2016-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,6 @@
 using System;
 using System.IO;
 using System.Xml.Serialization;
-using Xamarin.Forms;
 
 namespace HitCounterManager.Models
 {
@@ -58,14 +57,14 @@ namespace HitCounterManager.Models
         /// <param name="EnableBackup">Ture: A backup will be created when read was successful</param>
         /// <param name="Filename">File being read</param>
         /// <returns>Data of data type</returns>
-        public T ReadXML(bool EnableBackup, string Filename = null)
+        public T? ReadXML(bool EnableBackup, string? Filename = null)
         {
-            StreamReader file = null;
+            StreamReader? file = null;
             if (null == Filename) Filename = _Filename;
             try
             {
                 file = new StreamReader(Filename);
-                T result = (T)xml.Deserialize(file);
+                T? result = xml.Deserialize(file) as T;
                 file.Close();
 
                 if (EnableBackup) File.Copy(Filename, Filename + ".bak", true); // Create backup on successful read only
@@ -75,7 +74,7 @@ namespace HitCounterManager.Models
             catch (FileNotFoundException) { } // Exception.HResult == COR_E_FILENOTFOUND only be available since .Net 4.5, use overloading for older frameworks
             catch (Exception ex)
             {
-                App.CurrentApp.DisplayAlert("Error loading settings!", ex.Message + Environment.NewLine + "==> Using defaults", "OK");
+                App.CurrentApp.DisplayAlert("Error loading settings!", ex.Message + Environment.NewLine + "==> Using defaults");
             }
             finally
             {
@@ -91,7 +90,7 @@ namespace HitCounterManager.Models
         /// <returns>Success state</returns>
         public bool WriteXML(T data)
         {
-            StreamWriter file = null;
+            StreamWriter? file = null;
             try
             {
                 file = new StreamWriter(_Filename, false, System.Text.Encoding.Unicode); // UTF16LE
@@ -102,7 +101,7 @@ namespace HitCounterManager.Models
             catch (Exception ex)
             {
                 if (null != file) file.Close();
-                App.CurrentApp.DisplayAlert("Error writing settings!", ex.Message, "OK");
+                App.CurrentApp.DisplayAlert("Error writing settings!", ex.Message);
             }
             return false;
         }

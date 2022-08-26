@@ -20,14 +20,33 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
+using Avalonia.Controls;
 using HitCounterManager.Common;
+using ReactiveUI;
+using System.Windows.Input;
 
 namespace HitCounterManager.ViewModels
 {
     public class ProfileAttemptsPageViewModel : NotifyPropertyChangedImpl
     {
-        private ProfileViewModel _Origin;
-        public ProfileViewModel Origin
+        public Window? OwnerWindow { get; set; }
+
+        public ProfileAttemptsPageViewModel()
+        {
+            Submit = ReactiveCommand.Create(() => {
+                if (null == _UserInput) return; // Error
+
+                int val;
+                if (!Extensions.TryParseMinMaxNumber(_UserInput, out val, 0, int.MaxValue)) return; // Error
+
+                _Origin?.ProfileSetAttempts.Execute(val);
+
+                OwnerWindow?.Close(); // Success
+            });
+        }
+
+        private ProfileViewModel? _Origin;
+        public ProfileViewModel? Origin
         {
             get => _Origin;
             set
@@ -40,8 +59,8 @@ namespace HitCounterManager.ViewModels
             }
         }
 
-        private string _UserInput;
-        public string UserInput
+        private string? _UserInput;
+        public string? UserInput
         {
             get => _UserInput;
             set
@@ -54,13 +73,6 @@ namespace HitCounterManager.ViewModels
             }
         }
 
-        public bool Submit()
-        {
-            int val;
-            if (!Extensions.TryParseMinMaxNumber(_UserInput, out val, 0, int.MaxValue)) return false;
-
-            _Origin.ProfileSetAttempts.Execute(val);
-            return true;
-        }
+        public ICommand Submit { get; }
     }
 }

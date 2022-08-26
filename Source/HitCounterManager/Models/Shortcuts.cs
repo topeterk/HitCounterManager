@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright(c) 2016-2021 Peter Kirmeier
+//Copyright(c) 2016-2022 Peter Kirmeier
 
 //Permission Is hereby granted, free Of charge, to any person obtaining a copy
 //of this software And associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 //OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
 //SOFTWARE.
 
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
-using HitCounterManager.Common.OsLayer;
 
 namespace HitCounterManager.Models
 {
@@ -134,8 +134,6 @@ namespace HitCounterManager.Models
     /// </summary>
     public class ShortcutsKey
     {
-        private IOsLayer OsLayer { get => App.CurrentApp.OsLayer; }
-
         private bool _used; // indicates if shortcut is registered at windows
         private bool _down; // indicates if shortcut is currently pressed
         public bool valid;  // indicates if a valid key/modifier pair was ever set
@@ -171,10 +169,10 @@ namespace HitCounterManager.Models
 
             string Description = "";
             if (!valid) Description += "ERROR:   ";
-            if (key.Alt) Description += "ALT + ";
-            if (key.Control) Description += "CTRL + ";
-            if (key.Shift) Description += "SHIFT + ";
-            return Description + OsLayer.GetKeyName(key.KeyValue);
+            if (key.Alt) Description += "ALT  +  ";
+            if (key.Control) Description += "CTRL  +  ";
+            if (key.Shift) Description += "SHIFT  +  ";
+            return Description + App.CurrentApp.GetKeyName(key.KeyValue);
         }
 
         /// <summary>
@@ -190,7 +188,7 @@ namespace HitCounterManager.Models
         /// </summary>
         private bool CheckPressedState(bool ShiftState, bool ControlState, bool AltState)
         {
-            if (!App.CurrentApp.OsLayer.IsKeyPressedAsync(key.KeyValue)) return false;
+            if (!App.CurrentApp.IsKeyPressedAsync(key.KeyValue)) return false;
             if (key.Shift && !ShiftState) return false;
             if (key.Control && !ControlState) return false;
             if (key.Alt && !AltState) return false;
@@ -216,6 +214,28 @@ namespace HitCounterManager.Models
         }
     }
 
+    // TODO Avalonia: [sctypefix] Nested types not working with + sign within xaml, so it must be directly in namespace (SC_Type)
+    //                See: https://github.com/kekekeks/XamlX/issues/68
+    //                See:  `-> https://github.com/kekekeks/XamlX/pull/54
+    //                See:       `-> https://github.com/AvaloniaUI/Avalonia/pull/7354
+    public enum SC_Type
+    {
+        SC_Type_Reset = 0,
+        SC_Type_Hit = 1,
+        SC_Type_Split = 2,
+        // Since version 1.15:
+        SC_Type_HitUndo = 3,
+        SC_Type_SplitPrev = 4,
+        // Since version 1.17:
+        SC_Type_WayHit = 5,
+        SC_Type_WayHitUndo = 6,
+        SC_Type_PB = 7,
+        // Since version 1.20:
+        SC_Type_TimerStart = 8,
+        SC_Type_TimerStop = 9,
+        SC_Type_MAX = 10
+    };
+
     /// <summary>
     /// Manages all hot keys aka shortcuts
     /// </summary>
@@ -233,8 +253,6 @@ namespace HitCounterManager.Models
         private const int VK_RCONTROL = 0xA3;
         private const int VK_LMENU = 0xA4;
         private const int VK_RMENU = 0xA5;
-
-        private TimerProc TimerProcKeepAliveReference;
 
         public enum SC_Type {
             SC_Type_Reset = 0,
@@ -259,8 +277,6 @@ namespace HitCounterManager.Models
             SC_HotKeyMethod_LLKb = 2 // = SetWindowsHookEx (low level keyboard hook) + UnhookWindowsHookEx + SendMessage
         };
 
-        private IOsLayer OsLayer { get => App.CurrentApp.OsLayer; }
-
         private IntPtr hwnd;
         private ShortcutsKey[] sc_list = new ShortcutsKey[(int)SC_Type.SC_Type_MAX];
         private SC_HotKeyMethod method;
@@ -281,16 +297,16 @@ namespace HitCounterManager.Models
         /// </summary>
         ~Shortcuts()
         {
-            if (method == SC_HotKeyMethod.SC_HotKeyMethod_Async) OsLayer.KillTimer(hwnd, 0);
+            if (method == SC_HotKeyMethod.SC_HotKeyMethod_Async) App.CurrentApp.StopApplicationTimer(TimerIDs.Shortcuts);
             else if (method == SC_HotKeyMethod.SC_HotKeyMethod_LLKb)
             {
-                OsLayer.StopKeyboardLowLevelHook();
-                OsLayer.LowLevelKeyboardEvent -= low_level_keyboard_event;
+                App.CurrentApp.StopKeyboardLowLevelHook();
+                App.CurrentApp.LowLevelKeyboardEvent -= low_level_keyboard_event;
             }
         }
 
         /// <summary>
-        /// Initializes oject by setting the method (and configure timer)
+        /// Initializes object by setting the method (and configure timer)
         /// </summary>
         public void Initialize(SC_HotKeyMethod HotKeyMethod, IntPtr WindowHandle)
         {
@@ -301,20 +317,14 @@ namespace HitCounterManager.Models
 
             if (method == SC_HotKeyMethod.SC_HotKeyMethod_Async)
             {
-                TimerProcKeepAliveReference = new TimerProc(timer_event); // prevent garbage collector freeing up the callback
-                OsLayer.SetTimer(hwnd, (int)TimerIDs.Shortcuts, 20, TimerProcKeepAliveReference);
+                App.CurrentApp.StartApplicationTimer(TimerIDs.Shortcuts, 2, () => { low_level_keyboard_event(); return true; } );
             }
             else if (method == SC_HotKeyMethod.SC_HotKeyMethod_LLKb)
             {
-                OsLayer.LowLevelKeyboardEvent += low_level_keyboard_event;
-                OsLayer.StartKeyboardLowLevelHook();
+                App.CurrentApp.LowLevelKeyboardEvent += low_level_keyboard_event;
+                App.CurrentApp.StartKeyboardLowLevelHook();
             }
         }
-
-        /// <summary>
-        /// Indicates if implementation can support global hotkeys
-        /// </summary>
-        public bool IsGlobalHotKeySupported { get { return OsLayer.GlobalHotKeySupport; } }
 
         /// <summary>
         /// Registers and unregisters a hotkey
@@ -331,7 +341,7 @@ namespace HitCounterManager.Models
             {
                 if (Enable)
                 {
-                    if (OsLayer.SetHotKey(hwnd, (int)Id, modifier, key.key.KeyValue))
+                    if (App.CurrentApp.SetHotKey(hwnd, (int)Id, modifier, key.key.KeyValue))
                     {
                         key.used = true;
                         key.valid = true;
@@ -345,7 +355,7 @@ namespace HitCounterManager.Models
                 }
                 else
                 {
-                    OsLayer.KillHotKey(hwnd, (int)Id);
+                    App.CurrentApp.KillHotKey(hwnd, (int)Id);
                     key.used = false;
                 }
             }
@@ -353,9 +363,9 @@ namespace HitCounterManager.Models
             {
                 if (Enable)
                 {
-                    if (OsLayer.SetHotKey(hwnd, (int)Id, modifier, key.key.KeyValue))
+                    if (App.CurrentApp.SetHotKey(hwnd, (int)Id, modifier, key.key.KeyValue))
                     {
-                        OsLayer.KillHotKey(hwnd, (int)Id); // don't use this method, we just used registration to check if keycode is valid and works
+                        App.CurrentApp.KillHotKey(hwnd, (int)Id); // don't use this method, we just used registration to check if keycode is valid and works
                         key.used = true;
                         key.valid = true;
                     }
@@ -410,33 +420,28 @@ namespace HitCounterManager.Models
         /// </summary>
         public ShortcutsKey Key_Get(SC_Type Id)
         {
-            ShortcutsKey key = (ShortcutsKey)sc_list.GetValue((int)Id);
+            ShortcutsKey key = (ShortcutsKey)sc_list.GetValue((int)Id)!;
             return key.ShallowCopy();
         }
 
         /// <summary>
-        /// Timer message handler to check for async hot keys
-        /// </summary>
-        private void timer_event(IntPtr hwnd, uint uMsg, IntPtr nIDEvent, uint dwTime) { low_level_keyboard_event(null, null); }
-
-        /// <summary>
         /// Low Level Keyboard message handler to check for hot keys
         /// </summary>
-        private void low_level_keyboard_event(object sender, EventArgs e)
+        private void low_level_keyboard_event()
         {
             bool k_shift;
             bool k_control;
             bool k_alt;
 
-            k_shift = OsLayer.IsKeyPressedAsync(VK_SHIFT) || OsLayer.IsKeyPressedAsync(VK_LSHIFT) || OsLayer.IsKeyPressedAsync(VK_RSHIFT);
-            k_control = OsLayer.IsKeyPressedAsync(VK_CONTROL) || OsLayer.IsKeyPressedAsync(VK_LCONTROL) || OsLayer.IsKeyPressedAsync(VK_RCONTROL);
-            k_alt = OsLayer.IsKeyPressedAsync(VK_MENU) || OsLayer.IsKeyPressedAsync(VK_LMENU) || OsLayer.IsKeyPressedAsync(VK_RMENU);
+            k_shift = App.CurrentApp.IsKeyPressedAsync(VK_SHIFT) || App.CurrentApp.IsKeyPressedAsync(VK_LSHIFT) || App.CurrentApp.IsKeyPressedAsync(VK_RSHIFT);
+            k_control = App.CurrentApp.IsKeyPressedAsync(VK_CONTROL) || App.CurrentApp.IsKeyPressedAsync(VK_LCONTROL) || App.CurrentApp.IsKeyPressedAsync(VK_RCONTROL);
+            k_alt = App.CurrentApp.IsKeyPressedAsync(VK_MENU) || App.CurrentApp.IsKeyPressedAsync(VK_LMENU) || App.CurrentApp.IsKeyPressedAsync(VK_RMENU);
 
             for (int i = 0; i < (int)SC_Type.SC_Type_MAX; i++)
             {
                 if (sc_list[i].used)
                 {
-                    if (sc_list[i].WasPressed(k_shift, k_control, k_alt)) OsLayer.SendHotKeyMessage(hwnd, (IntPtr)i, (IntPtr)0);
+                    if (sc_list[i].WasPressed(k_shift, k_control, k_alt)) App.CurrentApp.SendHotKeyMessage(hwnd, (IntPtr)i, (IntPtr)0);
                 }
             }
         }

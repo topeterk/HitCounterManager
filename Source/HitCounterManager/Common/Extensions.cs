@@ -23,49 +23,171 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Reflection;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using System.Resources;
+using System.Runtime.InteropServices;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Data.Converters;
+using Avalonia.Input;
+using Avalonia.Interactivity;
+using Avalonia.Markup.Xaml;
+using Avalonia.Media;
+using Avalonia.Metadata;
+using Avalonia.Platform;
+using Avalonia.Xaml.Interactions.Events;
+using Avalonia.Xaml.Interactivity;
+using Bitmap = Avalonia.Media.Imaging.Bitmap;
+using Color = Avalonia.Media.Color;
 
 namespace HitCounterManager.Common
 {
-    /// <summary>
-    /// Markup extension to load embedded resources directly into XAML.
-    /// see https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/images?tabs=windows
-    /// see https://docs.microsoft.com/de-de/xamarin/xamarin-forms/xaml/markup-extensions/creating
-    /// </summary>
-    [ContentProperty(nameof(Resource))]
-    public class ImageFromResource : IMarkupExtension
+    public static class Device
     {
-        // On GTK: Do not remove this image cache (e.g. with loading on demand) as images may not load properly
-        static Dictionary<string, ImageSource> LoadedImageSources = new Dictionary<string, ImageSource>();
+        // TODO: Temporary placeholder Device.OpenUri
+        // Workaround to open a browser with a given url:
+        // https://github.com/dotnet/runtime/issues/21798
+        public static void OpenUri(Uri uri)
+        {
+            string url = uri.OriginalString;
+            try
+            {
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}") { CreateNoWindow = true });
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                    Process.Start("xdg-open", url);
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                    Process.Start("open", url);
+                else
+                    Process.Start(url);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+    }
 
-        public string Resource { get; set; }
+    /// <summary>
+    /// Markup extension to load embedded image resources (AvaloniaResource) directly into XAML.
+    /// TODO: Avalonia see alternative implementation: https://docs.avaloniaui.net/docs/controls/image
+    /// </summary>
+    public class ImageFromResource : MarkupExtension
+    {
+        static Dictionary<string, Bitmap> LoadedImageSources = new Dictionary<string, Bitmap>();
 
-        public object ProvideValue(IServiceProvider serviceProvider)
+        public string? Resource { get; set; }
+
+        public override object? ProvideValue(IServiceProvider serviceProvider)
         {
             if (Resource == null) return null;
             if (LoadedImageSources.ContainsKey(Resource)) return LoadedImageSources[Resource];
 
-            ImageSource result = ImageSource.FromResource(Resource, typeof(ImageFromResource).GetTypeInfo().Assembly);
+            IAssetLoader AssetLoader = AvaloniaLocator.Current.GetService<IAssetLoader>()!;
+            string assemblyName = Assembly.GetEntryAssembly()!.GetName().Name!;
+            Bitmap result = new Bitmap(AssetLoader.Open(new Uri($"avares://{assemblyName}{Resource}")));
             LoadedImageSources.Add(Resource, result);
             return result;
         }
     }
 
+    /// <summary>
+    /// Markup extension to load embedded string resources (EmbeddedResource) directly into XAML.
+    /// </summary>
+    public class StringFromManifest : MarkupExtension
+    {
+        // On GTK: Do not remove this image cache (e.g. with loading on demand) as images may not load properly
+        static Dictionary<string, string> LoadedStringSources = new Dictionary<string, string>();
+
+        public string? Resource { get; set; }
+
+        public override object? ProvideValue(IServiceProvider serviceProvider)
+        {
+            if (Resource == null) return null;
+            if (LoadedStringSources.ContainsKey(Resource)) return LoadedStringSources[Resource];
+
+            IAssetLoader AssetLoader = AvaloniaLocator.Current.GetService<IAssetLoader>()!;
+            string assemblyName = Assembly.GetEntryAssembly()!.GetName().Name!;
+            string result = new StreamReader(AssetLoader.Open(new Uri($"resm:{assemblyName}{Resource}"))).ReadToEnd();
+            LoadedStringSources.Add(Resource, result);
+            return result;
+        }
+    }
+
+    /// <summary>
+    /// Markup extension for a stupid way to protect text from silly bots but hey, we learned how to use Content property :)
+    /// </summary>
+    public class ObscuredString : MarkupExtension
+    {
+        [Content]
+        public string? Content { get; set; }
+        public override object? ProvideValue(IServiceProvider serviceProvider) => Content?.Replace("(Obscure)", "");
+    }
+
+    // TODO: Avalonia workaround to support custom colors for BoxShadows
+    public class BoxShadowsBuilder : MarkupExtension
+    {
+        private readonly BoxShadows BoxShadows;
+        public BoxShadowsBuilder(string s)
+        {
+            string[] sp = s.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            BoxShadow BoxShadowFirst = BoxShadow.Parse(ResolveColorFromString(sp[0]));
+            if (1 == sp.Length)
+            {
+                BoxShadows = new BoxShadows(BoxShadowFirst);
+            }
+            else if (1 < sp.Length)
+            {
+                BoxShadow[] BoxShadowsRest = new BoxShadow[sp.Length - 1];
+                for (int i = 0; i < sp.Length-1; i++)
+                {
+                    BoxShadowsRest[i] = BoxShadow.Parse(ResolveColorFromString(sp[i+1]));
+                }
+                BoxShadows = new BoxShadows(BoxShadowFirst, BoxShadowsRest);
+            }
+            else BoxShadows = new BoxShadows();
+        }
+
+        private string ResolveColorFromString(string s)
+        {
+            int index = s.TrimEnd().LastIndexOf(" ");
+            string keep = s.Substring(0, index + 1);
+            string value = s.Substring(index + 1);
+            Color color_value;
+            if (Color.TryParse(keep, out color_value))
+                return keep + color_value.ToString();
+            else if (App.CurrentApp.Resources.ContainsKey(value))
+            {
+                if (App.CurrentApp.Resources[value] is SolidColorBrush brush)
+                    return keep + brush.Color.ToString();
+                else if (App.CurrentApp.Resources[value] is Color color)
+                    return keep + color.ToString();
+            }
+            return s;
+        }
+
+        public override object ProvideValue(IServiceProvider serviceProvider) => BoxShadows;
+    }
+
+    // TODO Avalonia https://docs.avaloniaui.net/docs/data-binding/converting-binding-values (Convert bool)
     public class NegateBoolConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => !(bool)value;
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => !(bool)value;
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) => !(bool?)value ?? null;
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => !(bool?)value;
+        public IValueConverter ProvideValue() => this; // TODO Avalonia What is this? Why does it require provide method? https://github.com/AvaloniaUI/Avalonia/issues/2835
     }
+
+    // TODO Avalonia: [riseifchanged] Replace NotifyPropertyChangedImpl with ReactiveObject::RaiseAndSetIfChanged? https://docs.avaloniaui.net/docs/data-binding/change-notifications
 
     /// <summary>
     /// Replace INotifyPropertyChanged with this class to be able to use the simplified CallPropertyChanged
     /// </summary>
     public class NotifyPropertyChangedImpl : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// Triggers an PropertyChanged event of INotifyPropertyChanged
@@ -140,46 +262,32 @@ namespace HitCounterManager.Common
         }
     }
 
-    public class NaturalNumbersEntryValidationBehavior : Behavior<Entry>
+    // TODO: Avalonia User Numeric input field?
+    public class NaturalNumbersEntryValidationBehavior : Behavior<TextBox>
     {
-        protected override void OnAttachedTo(Entry entry)
+        public static readonly StyledProperty<RoutingStrategies> RoutingStrategiesProperty =
+            AvaloniaProperty.Register<TextInputEventBehavior, RoutingStrategies>(nameof(RoutingStrategies), RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
+
+        public RoutingStrategies RoutingStrategies
         {
-            entry.TextChanged += OnEntryTextChanged;
-            base.OnAttachedTo(entry);
+            get => GetValue(RoutingStrategiesProperty);
+            set => SetValue(RoutingStrategiesProperty, value);
         }
 
-        protected override void OnDetachingFrom(Entry entry)
-        {
-            entry.TextChanged -= OnEntryTextChanged;
-            base.OnDetachingFrom(entry);
-        }
+        protected override void OnAttachedToVisualTree() => AssociatedObject?.AddHandler(InputElement.TextInputEvent, TextInput, RoutingStrategies);
+        protected override void OnDetachedFromVisualTree() => AssociatedObject?.RemoveHandler(InputElement.TextInputEvent, TextInput);
 
-        private static void OnEntryTextChanged(object sender, TextChangedEventArgs e)
+        private void TextInput(object? sender, TextInputEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(e.NewTextValue)) return;
+            if (string.IsNullOrWhiteSpace(e.Text)) return;
 
             int i;
-            if (!Extensions.TryParseMinMaxNumber(e.NewTextValue, out i)) ((Entry)sender).Text = e.OldTextValue;
+            if (!Extensions.TryParseMinMaxNumber(e.Text, out i)) e.Text = "";
         }
     }
 
     public static class Extensions
     {
-        /// <summary>
-        /// Workaround that Picker in some cases acts like using a OneTime binding.
-        /// This function replaces the ItemSource that will reload the values.
-        /// see: https://github.com/xamarin/Xamarin.Forms/issues/4077
-        /// </summary>
-        /// <param name="picker">Picker control that shall update its values.</param>
-        public static void ForceUpdate(this Picker picker)
-        {
-            System.Collections.IList prevSource = picker.ItemsSource;
-            object prevSelectedItem = picker.SelectedItem;
-            picker.ItemsSource = null;
-            picker.ItemsSource = prevSource;
-            picker.SelectedItem = prevSelectedItem;
-        }
-
         /// <summary>
         /// Tries to convert a string into an integer that is in a given range
         /// </summary>
@@ -203,6 +311,7 @@ namespace HitCounterManager.Common
                     return true;
                 }
             }
+
             return false;
         }
     }

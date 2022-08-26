@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -30,24 +30,14 @@ namespace HitCounterManager.Common
     public static class Statics
     {
         /// <summary>
-        /// Name of the running OsLayer
-        /// </summary>
-        public static string CurrentOsLayerName { get => App.CurrentApp.OsLayer.Name; }
-
-        /// <summary>
-        /// Name of the running PlatformLayer
-        /// </summary>
-        public static string CurrentPlatformLayerName { get => App.CurrentApp.PlatformLayer.Name; }
-
-        /// <summary>
         /// Name of the running application
         /// </summary>
-        public static string ApplicationName { get => Assembly.GetExecutingAssembly().GetName().Name; }
+        public static string ApplicationName { get => Assembly.GetExecutingAssembly().GetName().Name!; }
 
         /// <summary>
         /// Version string of the running application
         /// </summary>
-        public static string ApplicationVersionString { get => Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
+        public static string ApplicationVersionString { get => Assembly.GetExecutingAssembly().GetName().Version!.ToString(); }
 
         /// <summary>
         /// Titel string of the application including its version
@@ -57,7 +47,6 @@ namespace HitCounterManager.Common
         /// <summary>
         /// Application is capable of global hotkeys
         /// </summary>
-        public static bool GlobalHotKeySupport { get => App.CurrentApp.OsLayer.GlobalHotKeySupport; }
-
+        public static bool GlobalHotKeySupport { get => App.CurrentApp.GlobalHotKeySupport; }
     }
 }

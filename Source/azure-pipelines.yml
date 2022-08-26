@@ -1,6 +1,6 @@
 #MIT License
 
-#Copyright (c) 2021-2021 Peter Kirmeier
+#Copyright (c) 2021-2022 Peter Kirmeier
 
 #Permission is hereby granted, free of charge, to any person obtaining a copy
 #of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@
 #SOFTWARE.
 
 # https://aka.ms/yaml
+# RuntimeRID values: https://docs.microsoft.com/en-us/dotnet/core/rid-catalog
 
 trigger:
 - v2.x
@@ -36,87 +37,108 @@ stages:
     strategy:
       maxParallel: 4
       matrix:
-        WindowsWPF:
-          PlatformLayer: WPF
-          OSLayer: Windows
+# Windows
+        win-x64:
           PoolVmImg: 'windows-latest'
-        WindowsGTK:
-          PlatformLayer: GTK
-          OSLayer: Windows
+          RuntimeRID: 'win-x64'
+        win-x86:
           PoolVmImg: 'windows-latest'
-        LinuxGTK:
-          PlatformLayer: GTK
-          OSLayer: Any
+          RuntimeRID: 'win-x86'
+        win-arm:
+          PoolVmImg: 'windows-latest'
+          RuntimeRID: 'win-arm'
+        win-arm64:
+          PoolVmImg: 'windows-latest'
+          RuntimeRID: 'win-arm64'
+# Windows 7
+        win7-x64:
+          PoolVmImg: 'windows-latest'
+          RuntimeRID: 'win7-x64'
+        win7-x86:
+          PoolVmImg: 'windows-latest'
+          RuntimeRID: 'win7-x86'
+        win7-arm:
+          PoolVmImg: 'windows-latest'
+          RuntimeRID: 'win7-arm'
+        win7-arm64:
+          PoolVmImg: 'windows-latest'
+          RuntimeRID: 'win7-arm64'
+# Linux
+        linux-x64:
           PoolVmImg: 'ubuntu-latest'
-        MacOsGTK:
-          PlatformLayer: GTK
-          OSLayer: Any
+          RuntimeRID: 'linux-x64'
+        linux-musl-x64:
+          PoolVmImg: 'ubuntu-latest'
+          RuntimeRID: 'linux-musl-x64'
+        linux-arm:
+          PoolVmImg: 'ubuntu-latest'
+          RuntimeRID: 'linux-arm'
+        linux-arm64:
+          PoolVmImg: 'ubuntu-latest'
+          RuntimeRID: 'linux-arm64'
+# MacOS
+        osx-x64:
           PoolVmImg: 'macOS-latest'
+          RuntimeRID: 'osx-x64'
+# iOS
+#   building using Xcode? https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/xcode?view=azure-devops
+#   ios-arm64
+# Android
+#   building using Gradle? https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/android?view=azure-devops
+#   android-arm64
 
     variables:
-      projectfile: '**/*.$(PlatformLayer).csproj'
       buildConfiguration: 'Release'
-      targetDirectory: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformLayer)/bin/$(buildConfiguration)'
 
     pool:
       vmImage: '$(PoolVmImg)'
 
     steps:
 
-    - task: NuGetToolInstaller@1
-      displayName: NuGet Install
+# seems to be done implicitly by publish:
+# the commented part was never tested and might not work
+#    - task: DotNetCoreCLI@2
+#      inputs:
+#        command: 'restore'
+#        projects: '**/*.csproj'
+#        feedsToUse: 'select'
+#
+#    - task: DotNetCoreCLI@2
+#      inputs:
+#        command: 'build'
+#        arguments: '-c $(buildConfiguration) --no-restore'
+#        projects: '**/*.csproj'
 
-    - task: NuGetCommand@2
-      displayName: NuGet Restore
+    - task: DotNetCoreCLI@2
+      condition: eq(variables['PoolVmImg'], 'windows-latest')
       inputs:
-        restoreSolution: '**/*.sln'
-
-    - task: CmdLine@2
-      displayName: GTK# Install (Windows)
-      condition: and(eq(variables['OSLayer'], 'Windows'), eq(variables['PlatformLayer'], 'GTK'))
-      inputs:
-        script: |
-          msiexec /i https://xamarin.azureedge.net/GTKforWindows/Windows/gtk-sharp-2.12.45.msi /quiet
-
-    - task: CmdLine@2
-      displayName: GTK# Install (Ubuntu)
-      condition: eq(variables['PoolVmImg'], 'ubuntu-latest')
-      inputs:
-        script: |
-          set -x
-          sudo apt-get install gtk-sharp2
-
-    - task: MSBuild@1
-      displayName: Compile
-      inputs:
-        solution: '$(projectfile)'
-        msbuildArchitecture: 'x64'
-        platform: 'AnyCPU'
-        configuration: '$(buildConfiguration)'
-        clean: true
-        logProjectEvents: true
-        logFileVerbosity: 'detailed'
+        command: 'publish'
+        arguments: '--runtime $(RuntimeRID) --no-self-contained'
+        publishWebProjects: false
+        projects: '**/*.csproj'
 
     - task: Bash@3
       displayName: 'Assembly Variables'
       env:
-        ASSEMBLYFILE: '$(Build.SourcesDirectory)/Source/AssemblyInfo.cs'
+        PROJECTFILE: '$(Build.SourcesDirectory)/Source/HitCounterManager/HitCounterManager.csproj'
       inputs:
         targetType: 'inline'
         script: |
-          echo "Parsing '$ASSEMBLYFILE' ..."
-          grep AssemblyVersionAttribute "$ASSEMBLYFILE" | tee    AssemblyInfoReport.txt | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyVersionAttribute]\1,g'
-          grep AssemblyProductAttribute "$ASSEMBLYFILE" | tee -a AssemblyInfoReport.txt | sed -e 's,[^\"]*\"\([^\"]*\)\".*,##vso[task.setvariable variable=AssemblyProductAttribute]\1,g'
-          cat AssemblyInfoReport.txt
-          rm -f AssemblyInfoReport.txt
+          echo "Parsing '$PROJECTFILE' ..."
+          grep "<Version>"         "$PROJECTFILE" | tee    Dump.txt | sed -e 's,^.*<Version>\([0-9\.]*\)</Version>,##vso[task.setvariable variable=AssemblyVersionAttribute]\1,g'
+          grep "<Product>"         "$PROJECTFILE" | tee -a Dump.txt | sed -e 's,^.*<Product>\([0-9\.]*\)</Product>,##vso[task.setvariable variable=AssemblyProductAttribute]\1,g'
+          grep "<TargetFramework>" "$PROJECTFILE" | tee -a Dump.txt | sed -e 's,^.*<TargetFramework>\([0-9\.]*\)</TargetFramework>,##vso[task.setvariable variable=AssemblyTargetFrameworkAttribute]\1,g'
+          cat Dump.txt
+          rm -f Dump.txt
 
     - task: ArchiveFiles@2
       displayName: 'Archive $(Build.ArtifactStagingDirectory)'
       inputs:
-        rootFolderOrFile: '$(targetDirectory)/'
+        rootFolderOrFile: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/publish/'
         includeRootFolder: false
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.zip'
 
+#https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/build/dotnet-core-cli?view=azure-devops
 
 #- stage: Deploy
 #  dependsOn: Build

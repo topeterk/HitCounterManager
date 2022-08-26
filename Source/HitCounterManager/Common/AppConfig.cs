@@ -21,7 +21,7 @@
 //SOFTWARE.
 
 using System;
-using Xamarin.Forms;
+using System.Diagnostics.CodeAnalysis;
 using HitCounterManager.Common;
 using HitCounterManager.Models;
 
@@ -65,8 +65,8 @@ namespace HitCounterManager
         public int ShortcutTimerStartKeyCode; // Actually KeyData as it is combined with modifiers
         public bool ShortcutTimerStopEnable;
         public int ShortcutTimerStopKeyCode;  // Actually KeyData as it is combined with modifiers
-        public string Inputfile;
-        public string OutputFile;
+        public string Inputfile = "HitCounter.template";
+        public string OutputFile = "HitCounter.html";
         public bool ShowAttemptsCounter;
         public bool ShowHeadline;
         public bool ShowFooter;
@@ -91,14 +91,14 @@ namespace HitCounterManager
         public bool StyleUseRoman;
         public bool StyleProgressBarColored;
         public bool StyleUseCustom;
-        public string StyleCssUrl;
-        public string StyleFontUrl;
-        public string StyleFontName;
+        public string StyleCssUrl = "stylesheet_pink.css";
+        public string StyleFontUrl = "https://fonts.googleapis.com/css?family=Fontdiner%20Swanky";
+        public string StyleFontName = "Fontdiner Swanky";
         public int StyleDesiredHeight;
         public int StyleDesiredWidth;
         public bool StyleSubscriptPB;
         public bool StyleHightlightCurrentSplit;
-        public string ProfileSelected;
+        public string ProfileSelected = "Unnamed";
         public Profiles Profiles = new Profiles();
     }
 
@@ -135,9 +135,9 @@ namespace HitCounterManager
         {
             bool Success = true;
 
-            if (sc.IsGlobalHotKeySupported)
+            if (GlobalHotKeySupport)
             {
-                sc.Initialize((Shortcuts.SC_HotKeyMethod)Settings.HotKeyMethod, PlatformLayer.ApplicationWindowHandle);
+                sc.Initialize((Shortcuts.SC_HotKeyMethod)Settings.HotKeyMethod, NativeWindowHandle);
 
                 if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Reset, Settings.ShortcutResetKeyCode, Settings.ShortcutResetEnable)) Success = false;
                 if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Hit, Settings.ShortcutHitKeyCode, Settings.ShortcutHitEnable)) Success = false;
@@ -157,22 +157,27 @@ namespace HitCounterManager
         /// <summary>
         /// Loads user data from XML
         /// </summary>
+        [MemberNotNull(nameof(Settings), nameof(sm))]
         private void LoadSettings()
         {
-            bool cleanStart = true;
             int baseVersion = -1;
+            SettingsRoot? loadedSettings;
 
             sm = new SaveModule<SettingsRoot>(Statics.ApplicationName + "Save.xml");
-            Settings = sm.ReadXML(true);
-            if (null != Settings)
-                cleanStart = false;
+            loadedSettings = sm.ReadXML(true);
+            if (null != loadedSettings)
+                IsCleanStart = false;
             else
             {
                 // When no user save file is available, try loading the init file instead to provide predefined profiles and settings
-                Settings = sm.ReadXML(false, Statics.ApplicationName + "Init.xml");
+                loadedSettings = sm.ReadXML(false, Statics.ApplicationName + "Init.xml");
             }
-            if (null != Settings)
-                baseVersion = Settings.Version; // successfully loaded Save or Init file, so remember original version for upgrade
+            if (null != loadedSettings)
+            {
+                // successfully loaded Save or Init file, so remember original version for upgrade
+                Settings = loadedSettings;
+                baseVersion = Settings.Version;
+            }
             else
             {
                 Settings = new SettingsRoot();
@@ -188,9 +193,9 @@ namespace HitCounterManager
                 Settings.ShortcutHitKeyCode = 0x10000 | 0x76; // Shift F7
                 Settings.ShortcutSplitEnable = false;
                 Settings.ShortcutSplitKeyCode = 0x10000 | 0x77; // Shift F8
-                Settings.Inputfile = "HitCounter.template";
-                Settings.OutputFile = "HitCounter.html";
-                Settings.ProfileSelected = "Unnamed";
+                // Settings.InputFile       is new but default value is in ctor
+                // Settings.OutputFile      is new but default value is in ctor
+                // Settings.ProfileSelected is new but default value is in ctor
             }
             if (Settings.Version == 0) // Coming from version 1.9 or older
             {
@@ -201,8 +206,8 @@ namespace HitCounterManager
                 Settings.ShowSplitsCountUpcoming = 999;
                 Settings.StyleUseHighContrast = false;
                 Settings.StyleUseCustom = false;
-                Settings.StyleCssUrl = "stylesheet_pink.css";
-                Settings.StyleFontUrl = "https://fonts.googleapis.com/css?family=Fontdiner%20Swanky";
+                // Settings.StyleCssUrl  is new but default value is in ctor
+                // Settings.StyleFontUrl is new but default value is in ctor
             }
             if (Settings.Version == 1) // Coming from version 1.10
             {
@@ -222,7 +227,7 @@ namespace HitCounterManager
             if (Settings.Version == 3) // Coming from version 1.15
             {
                 Settings.Version = 4;
-                Settings.StyleFontName = "Fontdiner Swanky";
+                // Settings.StyleFontName is new but default value is in ctor
             }
             if (Settings.Version == 4) // Coming from version 1.16
             {
@@ -273,8 +278,8 @@ namespace HitCounterManager
                 Settings.Version = 7;
                 Settings.MainWidth += 6; // added tabs (6)
                 Settings.MainHeight += 27; // added tabs (27)
-                Settings.MainPosX = (int)PlatformLayer.ApplicationWindowPosition.X;
-                Settings.MainPosY = (int)PlatformLayer.ApplicationWindowPosition.Y;
+                Settings.MainPosX = 100; // Assume a default value (will not be applied if not on any screen later on)
+                Settings.MainPosY = 100; // Assume a default value (will not be applied if not on any screen later on)
                 Settings.ReadOnlyMode = false;
                 Settings.StyleUseRoman = false;
                 Settings.StyleHightlightCurrentSplit = false;
@@ -286,7 +291,7 @@ namespace HitCounterManager
                 Settings.Version = 8;
                 Settings.CheckUpdatesOnStartup = false;
 
-                Settings.DarkMode = OsLayer.IsDarkModeActive();
+                Settings.DarkMode = IsDarkModeActive();
                 // Only use latest hot key method as default when new settings were created
                 if (baseVersion < 0) Settings.HotKeyMethod = (int)Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb;
 
@@ -316,17 +321,6 @@ namespace HitCounterManager
 
             }*/
 
-            // Apply settings..
-            if (!cleanStart && PlatformLayer.IsTitleBarOnScreen(Settings.MainPosX, Settings.MainPosY, Settings.MainWidth))
-            {
-                // Set window position when application is not started the first time and window would not end up outside of all screens
-                PlatformLayer.ApplicationWindowPosition = new Point(Settings.MainPosX, Settings.MainPosY);
-            }
-            PlatformLayer.ApplicationWindowSize = new Size(Settings.MainWidth, Settings.MainHeight);
-            PlatformLayer.ApplicationWindowTopMost = Settings.AlwaysOnTop;
-
-            Current.UserAppTheme = Settings.DarkMode ? OSAppTheme.Dark : OSAppTheme.Light; // Controls the XAML binding: {AppThemeBinding Dark=xx, Light=xx}
-
             // Load profile data..
             if (Settings.Profiles.ProfileList.Count == 0)
             {
@@ -343,22 +337,11 @@ namespace HitCounterManager
         /// </summary>
         public void SaveSettings()
         {
-            // Remember window position and sates
-            Point position = PlatformLayer.ApplicationWindowPosition;
-            Size size = PlatformLayer.ApplicationWindowSize;
-            Settings.MainWidth = (int)size.Width;
-            Settings.MainHeight = (int)size.Height;
-            if (PlatformLayer.IsTitleBarOnScreen((int)position.X, (int)position.Y, (int)size.Width))
-            {
-                // remember values when not outside of screen
-                Settings.MainPosX = (int)position.X;
-                Settings.MainPosY = (int)position.Y;
-            }
-
             // Store hot keys..
-            if (sc.IsGlobalHotKeySupported)
+            if (GlobalHotKeySupport)
             {
                 ShortcutsKey key;
+                Settings.HotKeyMethod = (int)sc.NextStart_Method;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Reset);
                 Settings.ShortcutResetKeyCode = (int)key.key.KeyData;
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Hit);

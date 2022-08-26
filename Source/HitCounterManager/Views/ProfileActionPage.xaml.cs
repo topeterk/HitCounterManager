@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -21,25 +21,35 @@
 //SOFTWARE.
 
 using System;
-using Xamarin.Forms;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
 using HitCounterManager.ViewModels;
 
 namespace HitCounterManager.Views
 {
-    public partial class ProfileActionPage : ContentPage
+    public partial class ProfileActionPage : Window
     {
         ProfileActionPageViewModel vm;
-        public ProfileActionPage(ProfileActionPageViewModel.ProfileAction Action, ProfileViewModel Origin)
+        public ProfileActionPage() => throw new NotImplementedException(); // This ctor is only needed for Avalonia XAML interpreter
+
+        public ProfileActionPage(ProfileAction Action, ProfileViewModel Origin)
         {
             InitializeComponent();
-            vm = (ProfileActionPageViewModel)BindingContext;
+            vm = (ProfileActionPageViewModel)DataContext!;
+            vm.OwnerWindow = this;
             vm.Action = Action;
             vm.Origin = Origin;
+#if DEBUG
+            this.AttachDevTools();
+#endif
+            Opened += (object? sender, EventArgs e) => vm.OnAppearing();
         }
 
-        protected override void OnAppearing() => vm.OnAppearing();
-
-        private void PopBack_Dismiss_Clicked(object sender, EventArgs e) => Navigation.PopModalAsync();
-        private void PopBack_OK_Clicked(object sender, EventArgs e) { if (vm.Submit()) Navigation.PopModalAsync(); }
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
+        }
     }
 }
+

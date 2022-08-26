@@ -22,205 +22,148 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 -->
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+<UserControl xmlns="https://github.com/avaloniaui" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
              xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
              x:Class="HitCounterManager.Views.ProfileView"
-             x:Name="ProfileViewPage"
-             BackgroundColor="Transparent">
+             x:Name="ProfileViewPage">
 
-    <ContentView.BindingContext>
+    <UserControl.DataContext>
         <local:ProfileViewModel />
-    </ContentView.BindingContext>
+    </UserControl.DataContext>
 
-    <StackLayout Padding="0" Margin="0" Spacing="2" HorizontalOptions="FillAndExpand" Orientation="Vertical">
+    <StackPanel Margin="10" Spacing="2" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top">
 
-        <StackLayout Orientation="Horizontal" Spacing="8" HorizontalOptions="FillAndExpand" HeightRequest="32">
-            <!-- Font size names: https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/text/fonts#understand-named-font-sizes -->
-            <!-- https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/controls/common-properties#units-of-measurement -->
-            <!-- text size scaling:  GTK: x in pixels  Others: in 160 DPI???                        FontSize="{OnPlatform 14, GTK=10}-->
-            <!-- WPF Named sizes: https://github.com/xamarin/Xamarin.Forms/blob/caab66bcf9614aca0c0805d560a34e176d196e17/Xamarin.Forms.Platform.WPF/WPFResources.xaml -->
-            <!-- GTK Named sizes: https://github.com/xamarin/Xamarin.Forms/blob/caab66bcf9614aca0c0805d560a34e176d196e17/Xamarin.Forms.Platform.GTK/GtkPlatformServices.cs -->
-            <Label Text="{Binding StatsProgress}"  Margin="0" HorizontalOptions="StartAndExpand"  FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" />
-            <Label Text="{Binding StatsTime}"      Margin="0" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" x:Name="StatsTime" />
-            <Label Text="{Binding StatsTotalHits}" Margin="0" HorizontalOptions="EndAndExpand"    FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" />
-        </StackLayout>
-
-        <Picker x:Name="profileSelector" ItemsSource="{Binding ProfileList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding ProfileSelected}" />
-
-        <!-- TODO: Merge this with actual list below to maintain same grid definitions -->
-        <Grid Padding="0,8,0,0" Margin="0" RowSpacing="0" ColumnSpacing="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <!--<RowDefinition Height="0.5"/>-->
-            </Grid.RowDefinitions>
+        <Grid Margin="0" HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30" />
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="50" />
-                <ColumnDefinition Width="50" />
-                <ColumnDefinition Width="50" />
-                <ColumnDefinition Width="50" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" MinWidth="6"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" MinWidth="6"/>
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <RelativeLayout Grid.Row="0" Grid.Column="0" Margin="0" HeightRequest="18" BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}" HorizontalOptions="Center" VerticalOptions="Center">
-                <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-information-18.png}" >
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ToggleShowInfo}" CommandParameter="MainColumnHeaders" NumberOfTapsRequired="1" />
-                    </Image.GestureRecognizers>
-                </Image>
-            </RelativeLayout>
-            <Label Grid.Column="1" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" Text="Title" />
-            <Label Grid.Column="2" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="Boss&#10;Hits" />
-            <Label Grid.Column="3" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="Way&#10;Hits" />
-            <Label Grid.Column="4" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="Diff" />
-            <Label Grid.Column="5" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="PB" />
-            <Label Grid.Column="6" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="SP" />
-            <Label Grid.Column="7" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" HorizontalTextAlignment="Center" Text="BP" />
-            <Label Grid.Column="8" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text=" " />
+            <TextBlock Grid.Column="0" Text="{Binding StatsProgress}"  Margin="0" HorizontalAlignment="Left"   FontFamily="Arial" FontSize="14" FontWeight="Bold" />
+            <TextBlock Grid.Column="2" Text="{Binding StatsTime}"      Margin="0" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
+            <TextBlock Grid.Column="4" Text="{Binding StatsTotalHits}" Margin="0" HorizontalAlignment="Right"  FontFamily="Arial" FontSize="14" FontWeight="Bold" />
         </Grid>
-        <!-- Workaround: GTK is failing to use inherited color, so it is applied manually here -->
-        <Frame OutlineColor="Accent" Padding="{OnPlatform 8, WPF=0}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
-               IsVisible="{Binding ShowInfo[MainColumnHeaders].Value, Mode=OneWay}"
-               BackgroundColor="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BackgroundColor, Mode=OneWay}">
-            <Label Padding="{OnPlatform 0, WPF=8}" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span>* Titel: The name of the split.
+
+        <ComboBox x:Name="profileSelector" Items="{Binding ProfileList}" SelectedItem="{Binding ProfileSelected}" HorizontalAlignment="Stretch">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Grid Margin="0" ColumnDefinitions="30,*,68,68,50,68,20,20,20" RowDefinitions="Auto">
+            <RelativePanel Grid.Row="0" Grid.Column="0" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Command="{Binding ToggleShowInfo}" CommandParameter="MainColumnHeaders" Classes="ImageButton" Width="18" Height="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Image Source="{common:ImageFromResource Resource=/Resources/Images/icons8-information-18.png}" Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Button>
+            </RelativePanel>
+            <TextBlock Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left"   FontFamily="Arial" FontSize="14" FontWeight="Bold" Text="Title" />
+            <TextBlock Grid.Column="2" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Boss&#10;Hits" />
+            <TextBlock Grid.Column="3" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Way&#10;Hits" />
+            <TextBlock Grid.Column="4" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Diff" />
+            <TextBlock Grid.Column="5" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="PB" />
+            <TextBlock Grid.Column="6" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="SP" />
+            <TextBlock Grid.Column="7" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="BP" />
+            <TextBlock Grid.Column="8" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text=" " />
+        </Grid>
+        <Border Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top" Classes="InfoBoxBorder"
+                IsVisible="{Binding ShowInfo[MainColumnHeaders].Value, Mode=OneWay}" >
+            <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                <TextBlock.Text>
+                    <x:String>* Titel: The name of the split.
 * Boss Hits: Amount of hits taken by anything or bosses or just a marker that a boss has been defeated (depends on the configured behavior).
 * Way Hits: Amount of hits taken on the way to a boss or not used at all (depends on the configured behavior). E.g. track if a boss or the way through a slit should be trained more.
 * Diff: The difference between the hits taken (sum of Boss Hits and Way Hits) and the personal best hits taken.
 * SP (Session Progress): Marks the farthest reached split per stream session and resets on application start. Represented by a 24 hour clock symbol.
 * BP (Best Progress / Distance PB): Marks the furthest reached split of the best flawless run ever. Represented by a flag symbol.
-* Trash: Removes the split from the list.</Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-        </Frame>
-        <!-- Maybe CollectionView, but seems buggy: https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/collectionview/populate-data -->
-        <!-- https://www.jerriepelser.com/blog/3-ways-dynamic-data-templates/ (Use option 3?) -->
-        <StackLayout Padding="0" Margin="0" Spacing="0" x:Name="ProfileList" BindableLayout.ItemsSource="{Binding ProfileSelected.Rows}" HorizontalOptions="FillAndExpand" Orientation="Vertical">
-            <BindableLayout.ItemTemplate>
+* Trash: Removes the split from the list.</x:String>
+                </TextBlock.Text>
+            </TextBlock>
+        </Border>
+
+        <ItemsRepeater Margin="0" x:Name="ProfileList" Items="{Binding ProfileSelected.Rows}" HorizontalAlignment="Stretch">
+            <ItemsRepeater.Layout>
+                <StackLayout Spacing="0" Orientation="Vertical"/>
+            </ItemsRepeater.Layout>
+            <ItemsRepeater.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="2" Margin="0" RowSpacing="0" ColumnSpacing="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <!--<RowDefinition Height="0.5"/>-->
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30" />
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="20" />
-                            <ColumnDefinition Width="20" />
-                            <ColumnDefinition Width="20" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.Triggers>
-                            <DataTrigger TargetType="Grid" Binding="{Binding Active, Mode=OneWay}" Value="false">
-                                <Setter Property="BackgroundColor" Value="Transparent"/>
-                            </DataTrigger>
-                            <DataTrigger TargetType="Grid" Binding="{Binding Active, Mode=OneWay}" Value="true">
-                                <Setter Property="BackgroundColor" Value="Goldenrod"/>
-                            </DataTrigger>
-                        </Grid.Triggers>
-                        <RelativeLayout Grid.Column="0" Margin="0" WidthRequest="20" HeightRequest="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                                        BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}">
-                            <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-inactive-state-20.png}" >
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding BindingContext.CmdSetActiveSplit, Source={x:Reference ProfileViewPage}}" CommandParameter="{Binding .}" NumberOfTapsRequired="1" />
-                                </Image.GestureRecognizers>
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image" Binding="{Binding Active, Mode=OneWay}" Value="false">
-                                        <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-inactive-state-20.png}"/>
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Image" Binding="{Binding Active, Mode=OneWay}" Value="true">
-                                        <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-circled-right-20.png}"/>
-                                    </DataTrigger>
-                                </Image.Triggers>
+                    <Grid Margin="2" ColumnDefinitions="30,*,68,68,50,68,20,20,20" RowDefinitions="Auto">
+                        <Interaction.Behaviors>
+                            <DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
+                                <ChangePropertyAction TargetObject="{Binding $parent[Grid]}" PropertyName="Background" Value="Transparent" />
+                            </DataTriggerBehavior>
+                            <DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
+                                <ChangePropertyAction TargetObject="{Binding $parent[Grid]}" PropertyName="Background" Value="Goldenrod" />
+                            </DataTriggerBehavior>
+                        </Interaction.Behaviors>
+                        <Button Grid.Column="0" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                Command="{Binding $parent[UserControl].DataContext.CmdSetActiveSplit}" CommandParameter="{Binding .}">
+                            <Image Source="{common:ImageFromResource Resource=/Resources/Images/icons8-inactive-state-20.png}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Interaction.Behaviors>
+                                    <DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:ImageFromResource Resource=/Resources/Images/icons8-inactive-state-20.png}" />
+                                    </DataTriggerBehavior>
+                                    <DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:ImageFromResource Resource=/Resources/Images/icons8-circled-right-20.png}" />
+                                    </DataTriggerBehavior>
+                                </Interaction.Behaviors>
                             </Image>
-                        </RelativeLayout>
-                        <Entry Grid.Column="1" Margin="0" HorizontalTextAlignment="Start" Text="{Binding Title}" Placeholder="       [Empty title]" />
-                        <Entry Grid.Column="2" Margin="0" HorizontalTextAlignment="Center" Text="{Binding Hits}" Placeholder="0">
-                            <Entry.Behaviors>
+                        </Button>
+                        <TextBox Grid.Column="1" Margin="2" TextAlignment="Left" Text="{Binding Title}" Watermark="       [Empty title]" />
+                        <TextBox Grid.Column="2" Margin="2" TextAlignment="Center" Text="{Binding Hits}" Watermark="0">
+                            <Interaction.Behaviors>
                                 <common:NaturalNumbersEntryValidationBehavior />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Entry Grid.Column="3" Margin="0" HorizontalTextAlignment="Center" Text="{Binding WayHits}" Placeholder="0">
-                            <Entry.Behaviors>
+                            </Interaction.Behaviors>
+                        </TextBox>
+                        <TextBox Grid.Column="3" Margin="2" TextAlignment="Center" Text="{Binding WayHits}" Watermark="0">
+                            <Interaction.Behaviors>
                                 <common:NaturalNumbersEntryValidationBehavior />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <StackLayout Grid.Column="4" Margin="0" Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                            <!-- Workaround: GTK cannot render a Label correctly after the Control gets created during runtime, so we use Entry instead -->
-                            <Entry VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="{Binding Diff, Mode=OneWay}" IsEnabled="False">
-                                <Entry.IsVisible>
-                                    <OnPlatform x:TypeArguments="x:Boolean" Default="false">
-                                        <On Platform="GTK" Value="true" />
-                                    </OnPlatform>
-                                </Entry.IsVisible>
-                            </Entry>
-                            <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Text="{Binding Diff, Mode=OneWay}">
-                                <Label.IsVisible>
-                                    <OnPlatform x:TypeArguments="x:Boolean" Default="true">
-                                        <On Platform="GTK" Value="false" />
-                                    </OnPlatform>
-                                </Label.IsVisible>
-                            </Label>
-                        </StackLayout>
-                        <Entry Grid.Column="5" Margin="0" HorizontalTextAlignment="Center" Text="{Binding PB}" Placeholder="0">
-                            <Entry.Behaviors>
+                            </Interaction.Behaviors>
+                        </TextBox>
+                        <TextBlock Grid.Column="4" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Diff, Mode=OneWay}" />
+                        <TextBox Grid.Column="5" Margin="2" TextAlignment="Center" Text="{Binding PB}" Watermark="0">
+                            <Interaction.Behaviors>
                                 <common:NaturalNumbersEntryValidationBehavior />
-                            </Entry.Behaviors>
-                        </Entry>
-                        <RelativeLayout Grid.Column="6" Margin="0" WidthRequest="20" HeightRequest="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                                        BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}">
-                            <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-inactive-state-20.png}" >
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding BindingContext.CmdSetSessionProgress, Source={x:Reference ProfileViewPage}}" CommandParameter="{Binding .}" NumberOfTapsRequired="1" />
-                                </Image.GestureRecognizers>
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image" Binding="{Binding SP, Mode=OneWay}" Value="false">
-                                        <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-inactive-state-20.png}"/>
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Image" Binding="{Binding SP, Mode=OneWay}" Value="true">
-                                        <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-last-24-hours-20.png}"/>
-                                    </DataTrigger>
-                                </Image.Triggers>
+                            </Interaction.Behaviors>
+                        </TextBox>
+                        <Button Grid.Column="6" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                Command="{Binding $parent[UserControl].DataContext.CmdSetSessionProgress}" CommandParameter="{Binding .}">
+                            <Image Source="{common:ImageFromResource Resource=/Resources/Images/icons8-inactive-state-20.png}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Interaction.Behaviors>
+                                    <DataTriggerBehavior Binding="{Binding SP, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:ImageFromResource Resource=/Resources/Images/icons8-inactive-state-20.png}" />
+                                    </DataTriggerBehavior>
+                                    <DataTriggerBehavior Binding="{Binding SP, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:ImageFromResource Resource=/Resources/Images/icons8-last-24-hours-20.png}" />
+                                    </DataTriggerBehavior>
+                                </Interaction.Behaviors>
                             </Image>
-                        </RelativeLayout>
-                        <RelativeLayout Grid.Column="7" Margin="0" WidthRequest="20" HeightRequest="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                                        BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}">
-                            <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-empty-flag-20.png}" >
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding BindingContext.CmdSetBestProgress, Source={x:Reference ProfileViewPage}}" CommandParameter="{Binding .}" NumberOfTapsRequired="1" />
-                                </Image.GestureRecognizers>
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image" Binding="{Binding BP, Mode=OneWay}" Value="false">
-                                        <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-empty-flag-20.png}"/>
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Image" Binding="{Binding BP, Mode=OneWay}" Value="true">
-                                        <Setter Property="Source" Value="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-flag-filled-20.png}"/>
-                                    </DataTrigger>
-                                </Image.Triggers>
+                        </Button>
+                        <Button Grid.Column="7" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                Command="{Binding $parent[UserControl].DataContext.CmdSetBestProgress}" CommandParameter="{Binding .}">
+                            <Image Source="{common:ImageFromResource Resource=/Resources/Images/icons8-empty-flag-20.png}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Interaction.Behaviors>
+                                    <DataTriggerBehavior Binding="{Binding BP, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:ImageFromResource Resource=/Resources/Images/icons8-empty-flag-20.png}" />
+                                    </DataTriggerBehavior>
+                                    <DataTriggerBehavior Binding="{Binding BP, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:ImageFromResource Resource=/Resources/Images/icons8-flag-filled-20.png}" />
+                                    </DataTriggerBehavior>
+                                </Interaction.Behaviors>
                             </Image>
-                        </RelativeLayout>
-                        <RelativeLayout Grid.Column="8" Margin="0" WidthRequest="20" HeightRequest="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                                        BackgroundColor="{AppThemeBinding Default={StaticResource ImageButtonBackgroundLight}, Dark={StaticResource ImageButtonBackgroundDark}}">
-                            <Image Source="{common:ImageFromResource Resource=HitCounterManager.Resources.Images.icons8-trash-20.png}" >
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding BindingContext.CmdRemoveSplit, Source={x:Reference ProfileViewPage}}" CommandParameter="{Binding .}" NumberOfTapsRequired="1" />
-                                </Image.GestureRecognizers>
-                            </Image>
-                        </RelativeLayout>
+                        </Button>
+                        <Button Grid.Column="8" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                Command="{Binding $parent[UserControl].DataContext.CmdRemoveSplit}" CommandParameter="{Binding .}">
+                            <Image Source="{common:ImageFromResource Resource=/Resources/Images/icons8-trash-20.png}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Button>
                     </Grid>
                 </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </StackLayout>
-    </StackLayout>
-</ContentView>
+            </ItemsRepeater.ItemTemplate>
+        </ItemsRepeater>
+    </StackPanel>
+</UserControl>

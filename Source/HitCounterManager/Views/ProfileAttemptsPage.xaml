@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -22,31 +22,31 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 -->
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
-             xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
-             x:Class="HitCounterManager.Views.ProfileAttemptsPage"
-             NavigationPage.HasNavigationBar="False"
-             NavigationPage.HasBackButton="False"
-             BackgroundColor="{AppThemeBinding Default=BurlyWood, Dark={StaticResource AlmostBlack}}">
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
+        xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
+        x:Class="HitCounterManager.Views.ProfileAttemptsPage"
+        x:DataType="local:ProfileAttemptsPageViewModel"
+        Icon="/Resources/FireIcon.ico"
+        Title="Attempts" Classes="DialogWindow"
+        MinWidth="500" MinHeight="130" Width="500" Height="130">
 
-    <ContentPage.BindingContext>
+    <Window.DataContext>
         <local:ProfileAttemptsPageViewModel />
-    </ContentPage.BindingContext>
+    </Window.DataContext>
 
-    <StackLayout Margin="10" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-        <Label Margin="0,0,100,0" Text="Setting attempts count..." HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontAttributes="Bold" FontFamily="Arial" FontSize="{OnPlatform 14, GTK=10}" />
-
-        <Entry Margin="20,0,0,0" Text="{Binding UserInput, Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-            <Entry.Behaviors>
+    <StackPanel Margin="10" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <TextBlock Margin="0,0,0,5" Text="Setting attempts count..." HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
+        <TextBox Margin="20,0,0,0" Text="{Binding UserInput, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <Interaction.Behaviors>
                 <common:NaturalNumbersEntryValidationBehavior />
-            </Entry.Behaviors>
-        </Entry>
+            </Interaction.Behaviors>
+        </TextBox>
 
-        <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
-            <Button Padding="4" Clicked="PopBack_Dismiss_Clicked" WidthRequest="200" Text="Dismiss" HorizontalOptions="End"/>
-            <Button Padding="4" Clicked="PopBack_OK_Clicked" WidthRequest="200" Text="OK" HorizontalOptions="End"/>
-        </StackLayout>
-    </StackLayout>
-</ContentPage>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <Button Margin="20" Width="200" Content="Dismiss" Command="{Binding $parent[Window].Close}" HorizontalAlignment="Right"/>
+            <Button Margin="20" Width="200" Content="OK" Command="{Binding Submit}" HorizontalAlignment="Right"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

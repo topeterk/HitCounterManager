@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2020-2021 Peter Kirmeier
+//Copyright (c) 2020-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -23,35 +23,25 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using TinyJson;
-using Xamarin.Forms;
 
 namespace HitCounterManager.Common
 {
     public static class GitHubUpdate
     {
-        private static List<Dictionary<string, object>> Releases = null;
+        private static List<Dictionary<string, object>>? Releases = null;
 
         /// <summary>
         /// Opens the default project website on GitHub
         /// </summary>
-        public static void WebOpenLandingPage()
-        {
-#pragma warning disable CS0618 // Ignore deprecated (but without replacement, sure it is Launcher.OpenAsync in Xamarin.Essentials but requires additianal references
-            Device.OpenUri(new Uri("https://github.com/topeterk/HitCounterManager"));
-#pragma warning restore CS0618
-        }
+        public static void WebOpenLandingPage() => Device.OpenUri(new Uri("https://github.com/topeterk/HitCounterManager"));
 
         /// <summary>
         /// Opens the website on GitHub of the latest release version
         /// </summary>
-        public static void WebOpenLatestRelease()
-        {
-#pragma warning disable CS0618 // Ignore deprecated (but without replacement, sure it is Launcher.OpenAsync in Xamarin.Essentials but requires additianal references
-            Device.OpenUri(new Uri("https://github.com/topeterk/HitCounterManager/releases/latest"));
-#pragma warning restore CS0618
-        }
+        public static void WebOpenLatestRelease() =>Device.OpenUri(new Uri("https://github.com/topeterk/HitCounterManager/releases/latest"));
 
         /// <summary>
         /// Updates the information about all available releases
@@ -63,21 +53,21 @@ namespace HitCounterManager.Common
 
             try
             {
-                WebClient client = new WebClient();
-                client.Encoding = System.Text.Encoding.UTF8;
-
+                HttpClient client = new HttpClient();
                 // https://developer.github.com/v3/#user-agent-required
-                client.Headers.Add("User-Agent", "HitCounterManager/" + Statics.ApplicationVersionString);
-                // https://developer.github.com/v3/media/#request-specific-version
-                client.Headers.Add("Accept", "application/vnd.github.v3.text+json");
-                // https://developer.github.com/v3/repos/releases/#get-a-single-release
-                string response = client.DownloadString("http://api.github.com/repos/topeterk/HitCounterManager/releases");
+                client.DefaultRequestHeaders.Add("User-Agent", "HitCounterManager/" + Statics.ApplicationVersionString);
 
+                // https://developer.github.com/v3/repos/releases/#get-a-single-release
+                HttpRequestMessage msg = new HttpRequestMessage(HttpMethod.Get, "http://api.github.com/repos/topeterk/HitCounterManager/releases");
+                // https://developer.github.com/v3/media/#request-specific-version
+                msg.Headers.Add("Accept", "application/vnd.github.v3.text+json");
+
+                string response = client.GetStringAsync("http://api.github.com/repos/topeterk/HitCounterManager/releases").Result;
                 Releases = response.FromJson<List<Dictionary<string, object>>>();
 
                 // Only keep newer releases of own major version
                 int i = Releases.Count;
-                string MajorVersionString = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + ".";
+                string MajorVersionString = Assembly.GetExecutingAssembly().GetName().Version!.Major.ToString() + ".";
                 while (0 < i--)
                 {
                     string tag_name = Releases[i]["tag_name"].ToString();
@@ -104,7 +94,7 @@ namespace HitCounterManager.Common
 
                 try
                 {
-                    result = Releases[0]["tag_name"].ToString(); // 0 = latest
+                    result = Releases[0]["tag_name"].ToString()!; // 0 = latest
                 }
                 catch (Exception) { };
 

@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2021 Peter Kirmeier
+//Copyright (c) 2021-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -21,41 +21,67 @@
 //SOFTWARE.
 
 using System;
-using Xamarin.Forms;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Interactivity;
+using Avalonia.Markup.Xaml;
+using Avalonia.Xaml.Interactivity;
 using HitCounterManager.ViewModels;
 
 namespace HitCounterManager.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : Window
     {
-        public int MinWidth { get; set; }
-        public int MinHeight { get; set; }
-
-        public ProfileView ProfileView => profileView;
+        private SettingsRoot Settings => App.CurrentApp.Settings;
+        public ProfileView ProfileView => this.FindControl<ProfileView>("profileView");
 
         public MainPage()
         {
             InitializeComponent();
+            Closing += ClosingHandler;
+            PositionChanged += PositionChangedHandler;
+
+            MainPageViewModel vm = (MainPageViewModel)DataContext!;
+            vm.OwnerWindow = this;
+
+            // Workaround: Avalonia's DataTriggerBehavior seems to be created but not executed during InitializeComponent()
+            //             However, we rely on this trigger to update the UI accordingly.
+            //             Therefore we notify about the propery change that the UI will update the value.
+            //             But when the actual value does not change the trigger will not be executed,
+            //             so, we return null up to here that we ensure there is a data change during notify.
+            vm.AlwaysOnTopDataTriggerWorkaroundCalled = true;
+            vm.CallPropertyChanged(this, nameof(vm.AlwaysOnTop));
+
+#if DEBUG
+            this.AttachDevTools();
+#endif
         }
 
-        private void NavigateToSettings(object sender, EventArgs e) => Navigation.PushModalAsync(new SettingsPage(), false);
-        private void NavigateToAbout(object sender, EventArgs e) => Navigation.PushModalAsync(new AboutPage(), false);
-        private void NavigateFromAbout(object sender, EventArgs e) => Navigation.PopModalAsync();
-
-        private void NavigateToProfileAction(object sender, EventArgs e) // TODO: Check other "Tapped" calls (e.g. of Settings with hotkey enum) that parameters are used instead of binding context?
+        private void PositionChangedHandler(object? sender, PixelPointEventArgs e)
         {
-            if (App.CurrentApp.Settings.ReadOnlyMode) return;
-
-            ProfileActionPageViewModel.ProfileAction type;
-            if (Enum.TryParse<ProfileActionPageViewModel.ProfileAction>((string)((TappedEventArgs)e).Parameter, out type))
-            {
-                Navigation.PushModalAsync(new ProfileActionPage(type, (ProfileViewModel)profileView.BindingContext), false);
-            }
+            Settings.MainPosX = e.Point.X;
+            Settings.MainPosY = e.Point.Y;
         }
 
-        private void NavigateToSetAttempts(object sender, EventArgs e) // TODO: Check other "Tapped" calls (e.g. of Settings with hotkey enum) that parameters are used instead of binding context?
+        private void ClosingHandler(object? sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new ProfileAttemptsPage((ProfileViewModel)profileView.BindingContext), false);
+            Settings.MainWidth = (int)Width;
+            Settings.MainHeight = (int)Height;
+
+            // TODO Prevent Window from closing? (Save question upon appexit?) https://docs.avaloniaui.net/docs/controls/window
+#if TODO_WinForms
+            DialogResult result = MessageBox.Show("Do you want to save this session?", this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes) SaveSettings();
+            else if (result == DialogResult.Cancel) e.Cancel = true;
+#endif
+        }
+
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
+            Width = Settings.MainWidth;
+            Height = Settings.MainHeight;
         }
     }
 }
