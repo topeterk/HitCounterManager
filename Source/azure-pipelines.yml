@@ -96,18 +96,21 @@ stages:
     steps:
 
 # https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/package/nuget-authenticate?view=azure-devops
-    - task: NuGetAuthenticate@1
-    - task: UseDotNet@2
-      displayName: Use .NET 6 SDK
-      inputs:
-        packageType: sdk
-        version: 6.x
+## does not seem to be required as I do not use or own nuget packages that I want to reference from Azure Artefacts
+#    - task: NuGetAuthenticate@1
+## does not seem to be required as the following build steps are using .net 6 already correctly
+#    - task: UseDotNet@2
+#      displayName: Use .NET 6 SDK
+#      inputs:
+#        packageType: sdk
+#        version: 6.x
 
     - task: DotNetCoreCLI@2
       inputs:
         command: 'publish'
-        arguments: '--configuration $(buildConfiguration) --runtime $(RuntimeRID) --no-self-contained'
+        arguments: '--configuration $(buildConfiguration) --runtime $(RuntimeRID) --self-contained false'
         publishWebProjects: false
+        zipAfterPublish: false
         projects: '**/*.csproj'
 
     - task: Bash@3
