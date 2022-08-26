@@ -20,7 +20,6 @@
 //OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
 //SOFTWARE.
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 
 namespace HitCounterManager.Models

@@ -96,7 +96,6 @@ stages:
     steps:
 
     - task: DotNetCoreCLI@2
-      condition: eq(variables['PoolVmImg'], 'windows-latest')
       inputs:
         command: 'publish'
         arguments: '--configuration $(buildConfiguration) --runtime $(RuntimeRID) --no-self-contained'
