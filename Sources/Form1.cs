@@ -54,7 +54,7 @@ namespace HitCounterManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = Text + " - v" + Application.ProductVersion + " Pre-Release 4.0a " + OsLayer.Name;
+            Text = Text + " - v" + Application.ProductVersion + " Pre-Release 4.0" + OsLayer.Name;
             btnHit.Select();
             LoadSettings();  
             ProfileChangedHandler(sender, e);
