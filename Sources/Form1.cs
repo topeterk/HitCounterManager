@@ -309,6 +309,7 @@ namespace HitCounterManager
         }
 
         private int gameActive = 0;
+        private long? _lastInGameTime;
         private void CheckAutoTimers()
         {
             switch (gameActive)
@@ -360,6 +361,12 @@ namespace HitCounterManager
                                 StartStopTimer( true );
                             else if (inGameTime == 0 && profCtrl.TimerRunning)
                                 StartStopTimer( false );
+                            else if (inGameTime > 0 && _lastInGameTime == inGameTime && profCtrl.TimerRunning)
+                                StartStopTimer( false );
+                            else if (inGameTime > 0 && _lastInGameTime != inGameTime && !profCtrl.TimerRunning)
+                                StartStopTimer( true );
+                            if (inGameTime > 0)
+                                _lastInGameTime = inGameTime;
                         }
                     }
                     break;

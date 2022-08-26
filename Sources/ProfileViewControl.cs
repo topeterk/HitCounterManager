@@ -563,10 +563,13 @@ namespace HitCounterManager
             SetSplitDuration(active, duration);
         }
 
-        public void SetDuration( long duration )
+        public void SetDuration( long duration, bool forceUpdate )
         {
-            // We don't mark profile as updated here as this would generate output very very often!
+            if (forceUpdate)
+                ProfileUpdateBegin();
             SetSplitDuration( ActiveSplit, duration > 0 ? duration : 0 );
+            if (forceUpdate)
+                ProfileUpdateEnd();
         }
 
         public int GetSessionProgress()

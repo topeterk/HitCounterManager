@@ -290,7 +290,8 @@ namespace HitCounterManager
         /// Sets the duration of a split
         /// </summary>
         /// <param name="duration">Milliseconds</param>
-        void SetDuration(long duration);
+        /// <param name="forceUpdate">True, if this duration should be pushed to JS</param>
+        void SetDuration(long duration, bool forceUpdate);
 
         /// <summary>
         /// Gets the split index of the session progress

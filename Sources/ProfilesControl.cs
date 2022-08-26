@@ -91,23 +91,18 @@ namespace HitCounterManager
 
 
         //public event Action StopTimer;
+        private int _updateCounter;
         private void UpdateDuration()
         {
             var inGameTime = IGTSource?.ReturnCurrentIGT() ?? -1;
-            if (inGameTime > 0) // != -1)
+            if (inGameTime != -1) // we have a valid time
             {
-                //if (inGameTime == 0)
-                //{
-                //    StopTimer?.Invoke();
-                //}
-                //else
+                if (inGameTime > 0) // only use the time if we're in the game
                 {
-                    SelectedProfileInfo.SetDuration(inGameTime);
-                    //_lastValidInGameTime = inGameTime;
-                    //_lastInGameTimeAge.Restart();
+                    SelectedProfileInfo.SetDuration(inGameTime, !TimerRunning || _updateCounter++%30==0);
                 }
             }
-            else
+            else 
             {
                 DateTime utc_now = DateTime.UtcNow;
                 SelectedProfileInfo.AddDuration( (long)(utc_now - last_update_time).TotalMilliseconds );
