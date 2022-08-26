@@ -79,17 +79,43 @@ namespace HitCounterManager
             }
         }
 
-        public void UpdateDuration()
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
+        public void UpdateDurationIfTimerIsRunning()
         {
             if (_TimerRunning)
             {
+                UpdateDuration();
+            }
+        }
+
+
+        //public event Action StopTimer;
+        private void UpdateDuration()
+        {
+            var inGameTime = IGTSource?.ReturnCurrentIGT() ?? -1;
+            if (inGameTime > 0) // != -1)
+            {
+                //if (inGameTime == 0)
+                //{
+                //    StopTimer?.Invoke();
+                //}
+                //else
+                {
+                    SelectedProfileInfo.SetDuration(inGameTime);
+                    //_lastValidInGameTime = inGameTime;
+                    //_lastInGameTimeAge.Restart();
+                }
+            }
+            else
+            {
                 DateTime utc_now = DateTime.UtcNow;
-                SelectedProfileInfo.AddDuration((long)(utc_now - last_update_time).TotalMilliseconds);
+                SelectedProfileInfo.AddDuration( (long)(utc_now - last_update_time).TotalMilliseconds );
                 last_update_time = utc_now;
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e) { UpdateDuration(); }
+        private void timer1_Tick(object sender, EventArgs e) { UpdateDurationIfTimerIsRunning(); }
 
         #endregion
 
@@ -123,8 +149,8 @@ namespace HitCounterManager
             gpSuccession.Top -= diff;
         }
 
-        private void AddTabToolStripMenuItem_Click(object sender, EventArgs e) { UpdateDuration(); ptc.ProfileTabCreateAndSelect(); }
-        private void RemoveToolStripMenuItem_Click(object sender, EventArgs e) { UpdateDuration(); ptc.ProfileTabRemove(ptc.SelectedTab); }
+        private void AddTabToolStripMenuItem_Click(object sender, EventArgs e) { UpdateDurationIfTimerIsRunning(); ptc.ProfileTabCreateAndSelect(); }
+        private void RemoveToolStripMenuItem_Click(object sender, EventArgs e) { UpdateDurationIfTimerIsRunning(); ptc.ProfileTabRemove(ptc.SelectedTab); }
 
         private void Menu_ptc_Opening(object sender, CancelEventArgs e)
         {
@@ -169,7 +195,9 @@ namespace HitCounterManager
             get { return ptc.ReadOnlyMode; }
             set { ptc.ReadOnlyMode = value; }
         }
- 
+        
+        public IGTModule IGTSource { get; set; }
+
         public void InitializeProfilesControl(Profiles profiles, Succession Succession)
         {
             profs = profiles;
@@ -204,14 +232,12 @@ namespace HitCounterManager
                 ProfileChangedEventArgs eventArgs = (ProfileChangedEventArgs)e;
                 if (eventArgs.RunCompleted && _TimerRunning)
                 {
-                    DateTime utc_now = DateTime.UtcNow;
                     timer1.Enabled = _TimerRunning = false;
-                    SelectedProfileInfo.AddDuration((long)(utc_now - last_update_time).TotalMilliseconds);
-                    last_update_time = utc_now;
+                    UpdateDuration(); // we want to update once at the end of the run (although the timer's stopped already)
                 }
             }
 
-            UpdateDuration();
+            UpdateDurationIfTimerIsRunning();
 
             succession.HistorySplitVisible = cbShowPredecessor.Checked;
             succession.HistorySplitTitle = txtPredecessorTitle.Text;
@@ -223,7 +249,7 @@ namespace HitCounterManager
 
         private void SelectedProfileChanged(object sender, ProfileViewControl.SelectedProfileChangedCauseType cause)
         {
-            UpdateDuration();
+            UpdateDurationIfTimerIsRunning();
 
             ProfileViewControl pvc_sender = (ProfileViewControl)sender;
             if (cause != ProfileViewControl.SelectedProfileChangedCauseType.Delete)
@@ -249,7 +275,7 @@ namespace HitCounterManager
             switch (action)
             {
                 case ProfileTabControl.ProfileTabSelectAction.Selecting:
-                    UpdateDuration();
+                    UpdateDurationIfTimerIsRunning();
                     profs.SaveProfile(SelectedProfileInfo); // save current tab's profile
                     break;
                 case ProfileTabControl.ProfileTabSelectAction.Created:
@@ -262,7 +288,7 @@ namespace HitCounterManager
                     succession.ActiveIndex = ptc.IndexOf(pvc_sender);
                     break;
                 case ProfileTabControl.ProfileTabSelectAction.Deleting:
-                    UpdateDuration();
+                    UpdateDurationIfTimerIsRunning();
                     succession.SuccessionList.RemoveAt(ptc.IndexOf(pvc_sender));
                     break;
                 default: break;
@@ -280,7 +306,7 @@ namespace HitCounterManager
                 return;
             }
 
-            UpdateDuration();
+            UpdateDurationIfTimerIsRunning();
             profs.SaveProfile(SelectedProfileViewControl.ProfileInfo); // save previous selected profile
 
             // Apply on all tabs
@@ -303,7 +329,7 @@ namespace HitCounterManager
                 return;
             }
 
-            UpdateDuration();
+            UpdateDurationIfTimerIsRunning();
             profs.RenameProfile(NameOld, NameNew);
 
             // Apply on all tabs
@@ -314,7 +340,7 @@ namespace HitCounterManager
         }
         public void ProfileCopy()
         {
-            UpdateDuration();
+            UpdateDurationIfTimerIsRunning();
             profs.SaveProfile(SelectedProfileViewControl.ProfileInfo); // save previous selected profile
 
             string NameNew = SelectedProfile;
@@ -331,7 +357,7 @@ namespace HitCounterManager
             string NameDel = SelectedProfile;
             if (DialogResult.OK == MessageBox.Show("Do you really want to delete profile \"" + NameDel + "\"?", "Deleting profile", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
             {
-                UpdateDuration();
+                UpdateDurationIfTimerIsRunning();
                 profs.DeleteProfile(NameDel);
 
                 // Apply on all tabs
@@ -348,13 +374,13 @@ namespace HitCounterManager
             }
         }
 
-        public void ProfileSplitPermute(int Amount) { UpdateDuration(); SelectedProfileInfo.PermuteSplit(SelectedProfileInfo.ActiveSplit, Amount); }
-        public void ProfileSplitInsert() { UpdateDuration(); SelectedProfileInfo.InsertSplit(); }
-        public void ProfileSplitDelete() { UpdateDuration(); SelectedProfileInfo.DeleteSplit(); }
+        public void ProfileSplitPermute(int Amount) { UpdateDurationIfTimerIsRunning(); SelectedProfileInfo.PermuteSplit(SelectedProfileInfo.ActiveSplit, Amount); }
+        public void ProfileSplitInsert() { UpdateDurationIfTimerIsRunning(); SelectedProfileInfo.InsertSplit(); }
+        public void ProfileSplitDelete() { UpdateDurationIfTimerIsRunning(); SelectedProfileInfo.DeleteSplit(); }
 
         public void ProfileReset()
         {
-            UpdateDuration();
+            UpdateDurationIfTimerIsRunning();
 
             // Apply on all tabs
             foreach (ProfileViewControl pvc_tab in ptc.ProfileViewControls)
@@ -366,7 +392,7 @@ namespace HitCounterManager
         }
         public void ProfilePB()
         {
-            UpdateDuration();
+            UpdateDurationIfTimerIsRunning();
 
             // Apply on all tabs
             foreach (ProfileViewControl pvc_tab in ptc.ProfileViewControls)
@@ -376,9 +402,9 @@ namespace HitCounterManager
                 profs.SaveProfile(pi_tab); // save tab's profile
             }
         }
-        public void ProfileHit(int Amount) { UpdateDuration(); SelectedProfileInfo.Hit(Amount); }
-        public void ProfileWayHit(int Amount) { UpdateDuration(); SelectedProfileInfo.WayHit(Amount); }
-        public void ProfileSplitGo(int Amount) { UpdateDuration(); SelectedProfileInfo.GoSplits(Amount); }
+        public void ProfileHit(int Amount) { UpdateDurationIfTimerIsRunning(); SelectedProfileInfo.Hit(Amount); }
+        public void ProfileWayHit(int Amount) { UpdateDurationIfTimerIsRunning(); SelectedProfileInfo.WayHit(Amount); }
+        public void ProfileSplitGo(int Amount) { UpdateDurationIfTimerIsRunning(); SelectedProfileInfo.GoSplits(Amount); }
 
         public void ProfileSetAttempts()
         {
@@ -391,7 +417,7 @@ namespace HitCounterManager
                 return;
             }
 
-            UpdateDuration();
+            UpdateDurationIfTimerIsRunning();
             CurrentAttempts = amount_value;
         }
         

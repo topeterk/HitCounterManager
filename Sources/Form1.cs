@@ -126,8 +126,11 @@ namespace HitCounterManager
             }
 
             #endregion
-            _update_timer.Tick += (senderT, args) => CheckAutoTimers();
-            _update_timer.Enabled = true;
+
+            profCtrl.IGTSource    =  IgtModule;
+            //profCtrl.StopTimer    += () => StartStopTimer( false );
+            _update_timer.Tick    += (senderT, args) => CheckAutoTimers();
+            _update_timer.Enabled =  true;
             this.UpdateDarkMode();
         }
 
@@ -340,19 +343,23 @@ namespace HitCounterManager
                         {
                             if (!ds1Splitter._runStarted && ds1Splitter.getTimeInGame() > 0)
                             {
-                                StartStopTimer(true);
-                                sekiroSplitter._runStarted = true;
+                                StartStopTimer( true );
+                                ds1Splitter._runStarted = true;
                             }
-                            else
-                       if (ds1Splitter._runStarted && ds1Splitter.getTimeInGame() == 0)
+                            else if (ds1Splitter._runStarted && ds1Splitter.getTimeInGame() == 0)
                             {
-                                StartStopTimer(false);
-                                sekiroSplitter._runStarted = false;
+                                StartStopTimer( false );
+                                ds1Splitter._runStarted = false;
                             }
                         }
                         else
                         {
                             IgtModule.gameSelect = gameActive;
+                            var inGameTime = IgtModule.ReturnCurrentIGT();
+                            if (inGameTime > 0 && !profCtrl.TimerRunning)
+                                StartStopTimer( true );
+                            else if (inGameTime == 0 && profCtrl.TimerRunning)
+                                StartStopTimer( false );
                         }
                     }
                     break;
