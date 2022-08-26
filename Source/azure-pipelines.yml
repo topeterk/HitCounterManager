@@ -125,11 +125,12 @@ stages:
         targetType: 'inline'
         script: |
           echo "Parsing '$PROJECTFILE' ..."
-          grep "<Version>"         "$PROJECTFILE" | tee    Dump.txt | sed -e 's,^.*<Version>\([0-9\.]*\)</Version>,##vso[task.setvariable variable=AssemblyVersionAttribute]\1,g'
-          grep "<Product>"         "$PROJECTFILE" | tee -a Dump.txt | sed -e 's,^.*<Product>\([0-9\.]*\)</Product>,##vso[task.setvariable variable=AssemblyProductAttribute]\1,g'
-          grep "<TargetFramework>" "$PROJECTFILE" | tee -a Dump.txt | sed -e 's,^.*<TargetFramework>\([0-9\.]*\)</TargetFramework>,##vso[task.setvariable variable=AssemblyTargetFrameworkAttribute]\1,g'
-          cat Dump.txt
-          rm -f Dump.txt
+          grep "<Version>"         "$PROJECTFILE" | tee    Vars.txt | sed -e 's,^.*<Version>\([^<^>]*\)</Version>,##vso[task.setvariable variable=AssemblyVersionAttribute]\1,g'
+          grep "<Product>"         "$PROJECTFILE" | tee -a Vars.txt | sed -e 's,^.*<Product>\([^<^>]*\)</Product>,##vso[task.setvariable variable=AssemblyProductAttribute]\1,g'
+          grep "<TargetFramework>" "$PROJECTFILE" | tee -a Vars.txt | sed -e 's,^.*<TargetFramework>\([^<^>]*\)</TargetFramework>,##vso[task.setvariable variable=AssemblyTargetFrameworkAttribute]\1,g'
+          echo "Read into variables:"
+          cat Vars.txt
+          rm -f Vars.txt
 
     - task: ArchiveFiles@2
       displayName: 'Archive $(Build.ArtifactStagingDirectory)'
