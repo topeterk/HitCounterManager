@@ -114,7 +114,7 @@ Thanks to Beta Testers of AutoSplit(in alphabetical order):
 * [OlallaZ2](https://www.twitch.tv/olallaz2)
 * [Zirob21](https://www.twitch.tv/zirob21)
 
-* Special Thanks to **Hauke Lasinger** and **[Mario Schulz]**(https://www.twitch.tv/D4rn4S) for develop the IGT Track Timer :fire:
+* Special Thanks to **Hauke Lasinger** and **[Mario Schulz](https://www.twitch.tv/D4rn4S)** for develop the IGT Track Timer :fire:
 
 
 [-]..And All that participate in the Pre-Release.
