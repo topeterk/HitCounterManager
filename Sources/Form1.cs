@@ -54,7 +54,7 @@ namespace HitCounterManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = Text + " - v" + Application.ProductVersion + " Pre-Release 4.0a " + OsLayer.Name;
+            Text = Text + " - v" + Application.ProductVersion + " Pre-Release 4.0 " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();  
             ProfileChangedHandler(sender, e);
@@ -311,6 +311,7 @@ namespace HitCounterManager
         private long? _lastInGameTime;
         private void CheckAutoTimers()
         {
+            int inGameTime = 0;
             switch (gameActive)
             {            
                 case 1: //Sekiro
@@ -333,6 +334,17 @@ namespace HitCounterManager
                         else
                         {
                             IgtModule.gameSelect = gameActive;
+                            inGameTime = IgtModule.ReturnCurrentIGT();
+                            if (inGameTime > 0 && !profCtrl.TimerRunning)
+                                StartStopTimer(true);
+                            else if (inGameTime == 0 && profCtrl.TimerRunning)
+                                StartStopTimer(false);
+                            else if (inGameTime > 0 && _lastInGameTime == inGameTime && profCtrl.TimerRunning)
+                                StartStopTimer(false);
+                            else if (inGameTime > 0 && _lastInGameTime != inGameTime && !profCtrl.TimerRunning)
+                                StartStopTimer(true);
+                            if (inGameTime > 0)
+                                _lastInGameTime = inGameTime;
                         }
                     }
                     break;
@@ -355,7 +367,7 @@ namespace HitCounterManager
                         else
                         {
                             IgtModule.gameSelect = gameActive;
-                            var inGameTime = IgtModule.ReturnCurrentIGT();
+                            inGameTime = IgtModule.ReturnCurrentIGT();
                             if (inGameTime > 0 && !profCtrl.TimerRunning)
                                 StartStopTimer( true );
                             else if (inGameTime == 0 && profCtrl.TimerRunning)
@@ -389,6 +401,17 @@ namespace HitCounterManager
                         else
                         {
                             IgtModule.gameSelect = gameActive;
+                            inGameTime = IgtModule.ReturnCurrentIGT();
+                            if (inGameTime > 0 && !profCtrl.TimerRunning)
+                                StartStopTimer(true);
+                            else if (inGameTime == 0 && profCtrl.TimerRunning)
+                                StartStopTimer(false);
+                            else if (inGameTime > 0 && _lastInGameTime == inGameTime && profCtrl.TimerRunning)
+                                StartStopTimer(false);
+                            else if (inGameTime > 0 && _lastInGameTime != inGameTime && !profCtrl.TimerRunning)
+                                StartStopTimer(true);
+                            if (inGameTime > 0)
+                                _lastInGameTime = inGameTime;
                         }
                     }
                         break;
@@ -411,6 +434,17 @@ namespace HitCounterManager
                         else
                         {
                             IgtModule.gameSelect = gameActive;
+                            inGameTime = IgtModule.ReturnCurrentIGT();
+                            if (inGameTime > 0 && !profCtrl.TimerRunning)
+                                StartStopTimer(true);
+                            else if (inGameTime == 0 && profCtrl.TimerRunning)
+                                StartStopTimer(false);
+                            else if (inGameTime > 0 && _lastInGameTime == inGameTime && profCtrl.TimerRunning)
+                                StartStopTimer(false);
+                            else if (inGameTime > 0 && _lastInGameTime != inGameTime && !profCtrl.TimerRunning)
+                                StartStopTimer(true);
+                            if (inGameTime > 0)
+                                _lastInGameTime = inGameTime;
                         }
                     }
                     break;
@@ -433,6 +467,17 @@ namespace HitCounterManager
                         else
                         {
                             IgtModule.gameSelect = gameActive;
+                            inGameTime = IgtModule.ReturnCurrentIGT();
+                            if (inGameTime > 0 && !profCtrl.TimerRunning)
+                                StartStopTimer(true);
+                            else if (inGameTime == 0 && profCtrl.TimerRunning)
+                                StartStopTimer(false);
+                            else if (inGameTime > 0 && _lastInGameTime == inGameTime && profCtrl.TimerRunning)
+                                StartStopTimer(false);
+                            else if (inGameTime > 0 && _lastInGameTime != inGameTime && !profCtrl.TimerRunning)
+                                StartStopTimer(true);
+                            if (inGameTime > 0)
+                                _lastInGameTime = inGameTime;
                         }
                     }
                     break;
@@ -455,6 +500,17 @@ namespace HitCounterManager
                         else
                         {
                             IgtModule.gameSelect = gameActive;
+                            inGameTime = IgtModule.ReturnCurrentIGT();
+                            if (inGameTime > 0 && !profCtrl.TimerRunning)
+                                StartStopTimer(true);
+                            else if (inGameTime == 0 && profCtrl.TimerRunning)
+                                StartStopTimer(false);
+                            else if (inGameTime > 0 && _lastInGameTime == inGameTime && profCtrl.TimerRunning)
+                                StartStopTimer(false);
+                            else if (inGameTime > 0 && _lastInGameTime != inGameTime && !profCtrl.TimerRunning)
+                                StartStopTimer(true);
+                            if (inGameTime > 0)
+                                _lastInGameTime = inGameTime;
                         }
                     }
                     break;

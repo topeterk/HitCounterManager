@@ -32,11 +32,6 @@ namespace HitCounterManager
         CelesteSplitter celesteSplitter;
         CupheadSplitter cupSplitter;
 
-
-        public IGTModule()
-        {
-        }
-
         public int ReturnCurrentIGT()
         {
             switch (gameSelect)

@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TextBox1.Text" xml:space="preserve">
+  <data name="License_Information.Text" xml:space="preserve">
     <value>Licence information:
 
 The software aims to only use licenses that allow commercial and non-commercial use.
@@ -140,6 +140,18 @@ Title: AutoSplitter
 Author: Ezequiel Medina (Neimex23)
 Contact: &lt;ezequielmedina23@gmail.com&gt;
 Licence: MIT
+
+Title: IGT Timer Track
+Author: Hauke Lasinger 
+Contact: &lt;hauke@haukinger.de&gt;
+Licence: MIT
+
+Title: IGT Timer Track Test
+Author: Mario Schulz
+Contact: &lt;joop.jooop@gmail.com&gt;
+Licence: MIT
+
+DLL Used:
     - DLL SoulsMemory from:
     [-]    Title: SoulSplitter
            Author:  F.stam

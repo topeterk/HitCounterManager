@@ -20,6 +20,18 @@ Title: AutoSplitter
 Author: Ezequiel Medina (Neimex23)
 Contact: <ezequielmedina23@gmail.com>
 Licence: MIT
+
+Title: IGT Timer Track
+Author: Hauke Lasinger 
+Contact: <hauke@haukinger.de>
+Licence: MIT
+
+Title: IGT Timer Track Test
+Author: Mario Schulz
+Contact: <joop.jooop@gmail.com>
+Licence: MIT
+
+DLL Used:
     - DLL SoulsMemory from:
     [-]    Title: SoulSplitter
            Author:  F.stam

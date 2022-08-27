@@ -29,29 +29,29 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(About));
-            this.TextBox1 = new System.Windows.Forms.TextBox();
+            this.License_Information = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // TextBox1
+            // License_Information
             // 
-            this.TextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.License_Information.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TextBox1.Location = new System.Drawing.Point(13, 13);
-            this.TextBox1.Multiline = true;
-            this.TextBox1.Name = "TextBox1";
-            this.TextBox1.ReadOnly = true;
-            this.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TextBox1.Size = new System.Drawing.Size(709, 486);
-            this.TextBox1.TabIndex = 1;
-            this.TextBox1.TabStop = false;
-            this.TextBox1.Text = resources.GetString("TextBox1.Text");
+            this.License_Information.Location = new System.Drawing.Point(13, 13);
+            this.License_Information.Multiline = true;
+            this.License_Information.Name = "License_Information";
+            this.License_Information.ReadOnly = true;
+            this.License_Information.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.License_Information.Size = new System.Drawing.Size(709, 486);
+            this.License_Information.TabIndex = 1;
+            this.License_Information.TabStop = false;
+            this.License_Information.Text = resources.GetString("License_Information.Text");
             // 
             // About
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(734, 511);
-            this.Controls.Add(this.TextBox1);
+            this.Controls.Add(this.License_Information);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(550, 300);
@@ -65,6 +65,6 @@
 
         #endregion
 
-        internal System.Windows.Forms.TextBox TextBox1;
+        internal System.Windows.Forms.TextBox License_Information;
     }
 }

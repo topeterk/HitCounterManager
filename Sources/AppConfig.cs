@@ -527,7 +527,6 @@ namespace HitCounterManager
             dataAS.ASLMethod = aslSplitter.enableSplitting;
             formatter.Serialize(myStream, dataAS);
             myStream.Close();
-            IgtModule.gameSelect = 0;
             XmlDocument Save = new XmlDocument();
             Save.Load(savePath);
             XmlNode Asl = Save.CreateElement("DataASL");
