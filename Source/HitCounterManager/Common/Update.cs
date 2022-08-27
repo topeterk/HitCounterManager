@@ -53,14 +53,13 @@ namespace HitCounterManager.Common
 
             try
             {
-                HttpClient client = new HttpClient();
                 // https://developer.github.com/v3/#user-agent-required
-                client.DefaultRequestHeaders.Add("User-Agent", "HitCounterManager/" + Statics.ApplicationVersionString);
-
                 // https://developer.github.com/v3/repos/releases/#get-a-single-release
-                HttpRequestMessage msg = new HttpRequestMessage(HttpMethod.Get, "http://api.github.com/repos/topeterk/HitCounterManager/releases");
                 // https://developer.github.com/v3/media/#request-specific-version
-                msg.Headers.Add("Accept", "application/vnd.github.v3.text+json");
+
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Add("User-Agent", "HitCounterManager/" + Statics.ApplicationVersionString);
+                client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3.text+json");
 
                 string response = client.GetStringAsync("http://api.github.com/repos/topeterk/HitCounterManager/releases").Result;
                 Releases = response.FromJson<List<Dictionary<string, object>>>();
