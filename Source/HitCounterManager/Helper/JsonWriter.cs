@@ -34,14 +34,14 @@ namespace TinyJson
     //- Will only output public fields and property getters on objects
     public static class JSONWriter
     {
-        public static string ToJson(this object item)
+        public static string ToJson(this object? item)
         {
             StringBuilder stringBuilder = new StringBuilder();
             AppendValue(stringBuilder, item);
             return stringBuilder.ToString();
         }
 
-        static void AppendValue(StringBuilder stringBuilder, object item)
+        static void AppendValue(StringBuilder stringBuilder, object? item)
         {
             if (item == null)
             {
@@ -53,7 +53,7 @@ namespace TinyJson
             if (type == typeof(string) || type == typeof(char))
             {
                 stringBuilder.Append('"');
-                string str = item.ToString();
+                string str = item.ToString()!;
                 for (int i = 0; i < str.Length; ++i)
                     if (str[i] < ' ' || str[i] == '"' || str[i] == '\\')
                     {
@@ -112,11 +112,10 @@ namespace TinyJson
                 stringBuilder.Append(item.ToString());
                 stringBuilder.Append('"');
             }
-            else if (item is IList)
+            else if (item is IList list)
             {
                 stringBuilder.Append('[');
                 bool isFirst = true;
-                IList list = item as IList;
                 for (int i = 0; i < list.Count; i++)
                 {
                     if (isFirst)
@@ -139,7 +138,7 @@ namespace TinyJson
                 }
 
                 stringBuilder.Append('{');
-                IDictionary dict = item as IDictionary;
+                IDictionary dict = (item as IDictionary)!;
                 bool isFirst = true;
                 foreach (object key in dict.Keys)
                 {
@@ -165,7 +164,7 @@ namespace TinyJson
                     if (fieldInfos[i].IsDefined(typeof(IgnoreDataMemberAttribute), true))
                         continue;
 
-                    object value = fieldInfos[i].GetValue(item);
+                    object? value = fieldInfos[i].GetValue(item);
                     if (value != null)
                     {
                         if (isFirst)
@@ -184,7 +183,7 @@ namespace TinyJson
                     if (!propertyInfo[i].CanRead || propertyInfo[i].IsDefined(typeof(IgnoreDataMemberAttribute), true))
                         continue;
 
-                    object value = propertyInfo[i].GetValue(item, null);
+                    object? value = propertyInfo[i].GetValue(item, null);
                     if (value != null)
                     {
                         if (isFirst)
@@ -206,8 +205,8 @@ namespace TinyJson
         {
             if (member.IsDefined(typeof(DataMemberAttribute), true))
             {
-                DataMemberAttribute dataMemberAttribute = (DataMemberAttribute)Attribute.GetCustomAttribute(member, typeof(DataMemberAttribute), true);
-                if (!string.IsNullOrEmpty(dataMemberAttribute.Name))
+                DataMemberAttribute? dataMemberAttribute = (DataMemberAttribute?)Attribute.GetCustomAttribute(member, typeof(DataMemberAttribute), true);
+                if (!string.IsNullOrEmpty(dataMemberAttribute?.Name))
                     return dataMemberAttribute.Name;
             }
 
