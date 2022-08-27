@@ -20,23 +20,11 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Threading;
-using System.IO;
-
 namespace HitCounterManager
 {
     public class IGTModule
     {
-        System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1 };
         public int gameSelect = 0;
-        private int IgtMs = 0;
-        private string IgtFilePath = Path.GetFullPath("./Designs/IGT_Timer.xml");
         SekiroSplitter sekiroSplitter;
         EldenSplitter eldenSplitter;
         Ds3Splitter ds3Splitter;
@@ -47,13 +35,32 @@ namespace HitCounterManager
 
         public IGTModule()
         {
-            _update_timer.Tick += (sender, args) => IGTText();
-            _update_timer.Enabled = true;             
         }
 
         public int ReturnCurrentIGT()
         {
-            return IgtMs;
+            switch (gameSelect)
+            {
+                case 1:
+                    return sekiroSplitter.getTimeInGame();
+                case 2:
+                    return ds1Splitter.getTimeInGame();
+                case 4:
+                    return ds3Splitter.getTimeInGame();
+                case 5:
+                    return eldenSplitter.getTimeInGame();
+                case 7:
+                    return celesteSplitter.getTimeInGame();
+                case 8:
+                    return cupSplitter.getTimeInGame();
+
+                case 3:
+                case 6:
+                case 0:
+                case 9:
+                default:
+                    return -1;
+            }
         }
 
         public void setSplitterPointers(SekiroSplitter sekiroSplitter, EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter, CupheadSplitter cupSplitter, Ds1Splitter ds1Splitter)
@@ -64,51 +71,6 @@ namespace HitCounterManager
             this.ds1Splitter = ds1Splitter;
             this.celesteSplitter = celesteSplitter;
             this.cupSplitter = cupSplitter;
-        }
-
-        private void IGTText()
-        {
-            try
-            {
-                File.WriteAllText(IgtFilePath, string.Empty);
-                using (StreamWriter writer = new StreamWriter(IgtFilePath))
-                {
-                    switch (gameSelect)
-                    {
-                        case 1:
-                            IgtMs = sekiroSplitter.getTimeInGame();
-                            writer.Write(IgtMs.ToString());
-                            break;
-                        case 2:
-                            IgtMs = ds1Splitter.getTimeInGame();
-                            writer.Write(IgtMs.ToString());
-                            break;
-                        case 4:
-                            IgtMs = ds3Splitter.getTimeInGame();
-                            writer.Write(IgtMs.ToString());
-                            break;
-                        case 5:
-                            IgtMs = eldenSplitter.getTimeInGame();
-                            writer.Write(IgtMs.ToString());
-                            break;
-                        case 7:
-                            IgtMs = celesteSplitter.getTimeInGame();
-                            writer.Write(IgtMs.ToString());
-                            break;
-                        case 8:
-                            IgtMs = cupSplitter.getTimeInGame();
-                            writer.Write(IgtMs.ToString());
-                            break;
-
-                        case 3:
-                        case 6:
-                        case 0:
-                        case 9:
-                        default:
-                            writer.Write("-1"); break;
-                    }
-                }
-            }catch (Exception) { }
         }
     }
 }

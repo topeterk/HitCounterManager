@@ -54,7 +54,7 @@ namespace HitCounterManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = Text + " - v" + Application.ProductVersion + " Pre-Release 4.0" + OsLayer.Name;
+            Text = Text + " - v" + Application.ProductVersion + " Pre-Release 4.0a " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();  
             ProfileChangedHandler(sender, e);
@@ -126,8 +126,10 @@ namespace HitCounterManager
             }
 
             #endregion
-            _update_timer.Tick += (senderT, args) => CheckAutoTimers();
-            _update_timer.Enabled = true;
+
+            profCtrl.IGTSource    =  IgtModule;
+            _update_timer.Tick    += (senderT, args) => CheckAutoTimers();
+            _update_timer.Enabled =  true;
             this.UpdateDarkMode();
         }
 
@@ -306,6 +308,7 @@ namespace HitCounterManager
         }
 
         private int gameActive = 0;
+        private long? _lastInGameTime;
         private void CheckAutoTimers()
         {
             switch (gameActive)
@@ -340,19 +343,29 @@ namespace HitCounterManager
                         {
                             if (!ds1Splitter._runStarted && ds1Splitter.getTimeInGame() > 0)
                             {
-                                StartStopTimer(true);
-                                sekiroSplitter._runStarted = true;
+                                StartStopTimer( true );
+                                ds1Splitter._runStarted = true;
                             }
-                            else
-                       if (ds1Splitter._runStarted && ds1Splitter.getTimeInGame() == 0)
+                            else if (ds1Splitter._runStarted && ds1Splitter.getTimeInGame() == 0)
                             {
-                                StartStopTimer(false);
-                                sekiroSplitter._runStarted = false;
+                                StartStopTimer( false );
+                                ds1Splitter._runStarted = false;
                             }
                         }
                         else
                         {
                             IgtModule.gameSelect = gameActive;
+                            var inGameTime = IgtModule.ReturnCurrentIGT();
+                            if (inGameTime > 0 && !profCtrl.TimerRunning)
+                                StartStopTimer( true );
+                            else if (inGameTime == 0 && profCtrl.TimerRunning)
+                                StartStopTimer( false );
+                            else if (inGameTime > 0 && _lastInGameTime == inGameTime && profCtrl.TimerRunning)
+                                StartStopTimer( false );
+                            else if (inGameTime > 0 && _lastInGameTime != inGameTime && !profCtrl.TimerRunning)
+                                StartStopTimer( true );
+                            if (inGameTime > 0)
+                                _lastInGameTime = inGameTime;
                         }
                     }
                     break;
