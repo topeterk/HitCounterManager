@@ -90,7 +90,6 @@ namespace HitCounterManager
         }
 
 
-        //public event Action StopTimer;
         private int _updateCounter;
         private void UpdateDuration()
         {

@@ -128,7 +128,6 @@ namespace HitCounterManager
             #endregion
 
             profCtrl.IGTSource    =  IgtModule;
-            //profCtrl.StopTimer    += () => StartStopTimer( false );
             _update_timer.Tick    += (senderT, args) => CheckAutoTimers();
             _update_timer.Enabled =  true;
             this.UpdateDarkMode();
