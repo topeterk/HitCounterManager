@@ -1,7 +1,7 @@
 ﻿//The MIT License (MIT)
 
 //Copyright (c) 2018 Alex Parker
-//Copyright (c) 2018-2019 Peter Kirmeier
+//Copyright (c) 2018-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy of
 //this software and associated documentation files (the "Software"), to deal in
@@ -27,13 +27,6 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 
-// We require this to work with .Net framework 2.0 as well:
-namespace System.Runtime.CompilerServices
-{
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method)]
-    public sealed class ExtensionAttribute : Attribute { }
-}
-
 namespace TinyJson
 {
     // Really simple JSON parser in ~300 lines
@@ -55,18 +48,18 @@ namespace TinyJson
     // - Parsing of abstract classes or interfaces is NOT supported and will throw an exception.
     public static class JSONParser
     {
-        [ThreadStatic] static Stack<List<string>> splitArrayPool;
-        [ThreadStatic] static StringBuilder stringBuilder;
-        [ThreadStatic] static Dictionary<Type, Dictionary<string, FieldInfo>> fieldInfoCache;
-        [ThreadStatic] static Dictionary<Type, Dictionary<string, PropertyInfo>> propertyInfoCache;
+        [ThreadStatic] static Stack<List<string>>? splitArrayPool;
+        [ThreadStatic] static StringBuilder? stringBuilder;
+        [ThreadStatic] static Dictionary<Type, Dictionary<string, FieldInfo>>? fieldInfoCache;
+        [ThreadStatic] static Dictionary<Type, Dictionary<string, PropertyInfo>>? propertyInfoCache;
 
-        public static T FromJson<T>(this string json)
+        public static T? FromJson<T>(this string json)
         {
             // Initialize, if needed, the ThreadStatic variables
-            if (propertyInfoCache == null) propertyInfoCache = new Dictionary<Type, Dictionary<string, PropertyInfo>>();
-            if (fieldInfoCache == null) fieldInfoCache = new Dictionary<Type, Dictionary<string, FieldInfo>>();
-            if (stringBuilder == null) stringBuilder = new StringBuilder();
-            if (splitArrayPool == null) splitArrayPool = new Stack<List<string>>();
+            propertyInfoCache ??= new Dictionary<Type, Dictionary<string, PropertyInfo>>();
+            fieldInfoCache ??= new Dictionary<Type, Dictionary<string, FieldInfo>>();
+            stringBuilder ??= new StringBuilder();
+            splitArrayPool ??= new Stack<List<string>>();
 
             //Remove all whitespace not within strings to make parsing simpler
             stringBuilder.Length = 0;
@@ -85,13 +78,13 @@ namespace TinyJson
             }
 
             //Parse the thing!
-            return (T)ParseValue(typeof(T), stringBuilder.ToString());
+            return (T?)ParseValue(typeof(T), stringBuilder.ToString());
         }
 
         static int AppendUntilStringEnd(bool appendEscapeCharacter, int startIdx, string json)
         {
-            stringBuilder.Append(json[startIdx]);
-            for (int i = startIdx+1; i<json.Length; i++)
+            stringBuilder!.Append(json[startIdx]);
+            for (int i = startIdx + 1; i < json.Length; i++)
             {
                 if (json[i] == '\\')
                 {
@@ -114,13 +107,13 @@ namespace TinyJson
         //Splits { <value>:<value>, <value>:<value> } and [ <value>, <value> ] into a list of <value> strings
         static List<string> Split(string json)
         {
-            List<string> splitArray = splitArrayPool.Count > 0 ? splitArrayPool.Pop() : new List<string>();
+            List<string> splitArray = splitArrayPool!.Count > 0 ? splitArrayPool.Pop() : new List<string>();
             splitArray.Clear();
-            if(json.Length == 2)
+            if (json.Length == 2)
                 return splitArray;
             int parseDepth = 0;
-            stringBuilder.Length = 0;
-            for (int i = 1; i<json.Length-1; i++)
+            stringBuilder!.Length = 0;
+            for (int i = 1; i < json.Length - 1; i++)
             {
                 switch (json[i])
                 {
@@ -154,14 +147,20 @@ namespace TinyJson
             return splitArray;
         }
 
-        internal static object ParseValue(Type type, string json)
+        internal static object? ParseValue(Type type, string json)
         {
+            // Initialize, if needed, the ThreadStatic variables
+            propertyInfoCache ??= new Dictionary<Type, Dictionary<string, PropertyInfo>>();
+            fieldInfoCache ??= new Dictionary<Type, Dictionary<string, FieldInfo>>();
+            stringBuilder ??= new StringBuilder();
+            splitArrayPool ??= new Stack<List<string>>();
+
             if (type == typeof(string))
             {
                 if (json.Length <= 2)
                     return string.Empty;
                 StringBuilder parseStringBuilder = new StringBuilder(json.Length);
-                for (int i = 1; i<json.Length-1; ++i)
+                for (int i = 1; i < json.Length - 1; ++i)
                 {
                     if (json[i] == '\\' && i + 1 < json.Length - 1)
                     {
@@ -198,6 +197,12 @@ namespace TinyJson
                 decimal.TryParse(json, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out result);
                 return result;
             }
+            if (type == typeof(DateTime))
+            {
+                DateTime result;
+                DateTime.TryParse(json.Replace("\"",""), System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out result);
+                return result;
+            }
             if (json == "null")
             {
                 return null;
@@ -217,7 +222,7 @@ namespace TinyJson
             }
             if (type.IsArray)
             {
-                Type arrayType = type.GetElementType();
+                Type arrayType = type.GetElementType()!;
                 if (json[0] != '[' || json[json.Length - 1] != ']')
                     return null;
 
@@ -235,7 +240,10 @@ namespace TinyJson
                     return null;
 
                 List<string> elems = Split(json);
-                var list = (IList)type.GetConstructor(new Type[] { typeof(int) }).Invoke(new object[] { elems.Count });
+                var list = (IList?)type.GetConstructor(new Type[] { typeof(int) })?.Invoke(new object[] { elems.Count });
+                if (null == list)
+                    return null;
+
                 for (int i = 0; i < elems.Count; i++)
                     list.Add(ParseValue(listType, elems[i]));
                 splitArrayPool.Push(elems);
@@ -261,14 +269,17 @@ namespace TinyJson
                 if (elems.Count % 2 != 0)
                     return null;
 
-                var dictionary = (IDictionary)type.GetConstructor(new Type[] { typeof(int) }).Invoke(new object[] { elems.Count / 2 });
+                var dictionary = (IDictionary?)type.GetConstructor(new Type[] { typeof(int) })?.Invoke(new object[] { elems.Count / 2 });
+                if (null == dictionary)
+                    return null;
+
                 for (int i = 0; i < elems.Count; i += 2)
                 {
                     if (elems[i].Length <= 2)
                         continue;
                     string keyValue = elems[i].Substring(1, elems[i].Length - 2);
-                    object val = ParseValue(valueType, elems[i + 1]);
-                    dictionary.Add(keyValue, val);
+                    object? val = ParseValue(valueType, elems[i + 1]);
+                    dictionary[keyValue] = val;
                 }
                 return dictionary;
             }
@@ -284,7 +295,7 @@ namespace TinyJson
             return null;
         }
 
-        static object ParseAnonymousValue(string json)
+        static object? ParseAnonymousValue(string json)
         {
             if (json.Length == 0)
                 return null;
@@ -293,15 +304,15 @@ namespace TinyJson
                 List<string> elems = Split(json);
                 if (elems.Count % 2 != 0)
                     return null;
-                var dict = new Dictionary<string, object>(elems.Count / 2);
+                var dict = new Dictionary<string, object?>(elems.Count / 2);
                 for (int i = 0; i < elems.Count; i += 2)
-                    dict.Add(elems[i].Substring(1, elems[i].Length - 2), ParseAnonymousValue(elems[i + 1]));
+                    dict[elems[i].Substring(1, elems[i].Length - 2)] = ParseAnonymousValue(elems[i + 1]);
                 return dict;
             }
             if (json[0] == '[' && json[json.Length - 1] == ']')
             {
                 List<string> items = Split(json);
-                var finalList = new List<object>(items.Count);
+                var finalList = new List<object?>(items.Count);
                 for (int i = 0; i < items.Count; i++)
                     finalList.Add(ParseAnonymousValue(items[i]));
                 return finalList;
@@ -338,21 +349,19 @@ namespace TinyJson
             Dictionary<string, T> nameToMember = new Dictionary<string, T>(StringComparer.OrdinalIgnoreCase);
             for (int i = 0; i < members.Length; i++)
             {
-                /*T member = members[i];
+                T member = members[i];
                 if (member.IsDefined(typeof(IgnoreDataMemberAttribute), true))
                     continue;
 
                 string name = member.Name;
                 if (member.IsDefined(typeof(DataMemberAttribute), true))
                 {
-                    DataMemberAttribute dataMemberAttribute = (DataMemberAttribute)Attribute.GetCustomAttribute(member, typeof(DataMemberAttribute), true);
-                    if (!string.IsNullOrEmpty(dataMemberAttribute.Name))
+                    DataMemberAttribute? dataMemberAttribute = (DataMemberAttribute?)Attribute.GetCustomAttribute(member, typeof(DataMemberAttribute), true);
+                    if (!string.IsNullOrEmpty(dataMemberAttribute?.Name))
                         name = dataMemberAttribute.Name;
                 }
 
-                nameToMember.Add(name, member);*/
-                // The above code is not working with .Net framework 2.0, so we ignore these attributes for compatibility reasons:
-                nameToMember.Add(members[i].Name, members[i]);
+                nameToMember.Add(name, member);
             }
 
             return nameToMember;
@@ -367,14 +376,14 @@ namespace TinyJson
             if (elems.Count % 2 != 0)
                 return instance;
 
-            Dictionary<string, FieldInfo> nameToField;
-            Dictionary<string, PropertyInfo> nameToProperty;
-            if (!fieldInfoCache.TryGetValue(type, out nameToField))
+            Dictionary<string, FieldInfo>? nameToField;
+            Dictionary<string, PropertyInfo>? nameToProperty;
+            if (!fieldInfoCache!.TryGetValue(type, out nameToField))
             {
                 nameToField = CreateMemberNameDictionary(type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy));
                 fieldInfoCache.Add(type, nameToField);
             }
-            if (!propertyInfoCache.TryGetValue(type, out nameToProperty))
+            if (!propertyInfoCache!.TryGetValue(type, out nameToProperty))
             {
                 nameToProperty = CreateMemberNameDictionary(type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy));
                 propertyInfoCache.Add(type, nameToProperty);
@@ -387,8 +396,8 @@ namespace TinyJson
                 string key = elems[i].Substring(1, elems[i].Length - 2);
                 string value = elems[i + 1];
 
-                FieldInfo fieldInfo;
-                PropertyInfo propertyInfo;
+                FieldInfo? fieldInfo;
+                PropertyInfo? propertyInfo;
                 if (nameToField.TryGetValue(key, out fieldInfo))
                     fieldInfo.SetValue(instance, ParseValue(fieldInfo.FieldType, value));
                 else if (nameToProperty.TryGetValue(key, out propertyInfo))
