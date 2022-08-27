@@ -33,7 +33,7 @@ Just add the local HTML file to you broadcasting software and the setup is done.
   > Note: The settings will be kept when upgrading on newer versions.
   > I try my best keeping it backwards compatible that you can still load an upgraded save file on older versions.
 * Create profiles for each challenge or game or build a sequence of runs (called succession) like for the Dark Souls trilogy
-* Dark Mode (not the best looking but hey: its dark)
+* Dark Mode
 * Timer (including current, PB and gold split times)
 * Customizable designs (Find [some examples](../../wiki/Designs) at the [Wiki pages](../../wiki))
 
@@ -66,13 +66,8 @@ All available releases can be found at the [Releases page](../../releases) on Gi
     * iOS 10 or newer _(most likely not running yet)_
     * Android 21 or newer _(most likely not running yet)_
 * Prerequisites:
-  * [.NET 6.0 Runtime](dotnet.microsoft.com/download) or newer
-    * More information can be found here: [Install .NET on Windows, Linux, and macOS](https://docs.microsoft.com/en-us/dotnet/core/install/)
-
-As of now, there is no installer.  
-Depending on the OS the start of the application works differently:
- * Windows: run *HitCounterManager.exe*
- * Linux: execute *dotnet HitCounterManager.dll* within the application's directory.
+  * [.NET 6.0 Runtime](https://dotnet.microsoft.com/download/dotnet/6.0/runtime) or newer
+    * More information can be found here: [Install .NET on Windows, Linux, and macOS](https://docs.microsoft.com/dotnet/core/install/)
 
 Please have a look at the _v2.x_ branch or find *pre-compiled development builds* [here](../../issues/21).
 
