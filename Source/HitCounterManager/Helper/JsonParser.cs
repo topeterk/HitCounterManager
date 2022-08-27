@@ -1,38 +1,9 @@
-﻿//The MIT License (MIT)
-
-//Copyright (c) 2018 Alex Parker
-//Copyright (c) 2018-2019 Peter Kirmeier
-
-//Permission is hereby granted, free of charge, to any person obtaining a copy of
-//this software and associated documentation files (the "Software"), to deal in
-//the Software without restriction, including without limitation the rights to
-//use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-//the Software, and to permit persons to whom the Software is furnished to do so,
-//subject to the following conditions:
-
-//The above copyright notice and this permission notice shall be included in all
-//copies or substantial portions of the Software.
-
-//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-//FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-//COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-//IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-//CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-
-// We require this to work with .Net framework 2.0 as well:
-namespace System.Runtime.CompilerServices
-{
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method)]
-    public sealed class ExtensionAttribute : Attribute { }
-}
 
 namespace TinyJson
 {
@@ -91,7 +62,7 @@ namespace TinyJson
         static int AppendUntilStringEnd(bool appendEscapeCharacter, int startIdx, string json)
         {
             stringBuilder.Append(json[startIdx]);
-            for (int i = startIdx+1; i<json.Length; i++)
+            for (int i = startIdx + 1; i < json.Length; i++)
             {
                 if (json[i] == '\\')
                 {
@@ -116,11 +87,11 @@ namespace TinyJson
         {
             List<string> splitArray = splitArrayPool.Count > 0 ? splitArrayPool.Pop() : new List<string>();
             splitArray.Clear();
-            if(json.Length == 2)
+            if (json.Length == 2)
                 return splitArray;
             int parseDepth = 0;
             stringBuilder.Length = 0;
-            for (int i = 1; i<json.Length-1; i++)
+            for (int i = 1; i < json.Length - 1; i++)
             {
                 switch (json[i])
                 {
@@ -161,7 +132,7 @@ namespace TinyJson
                 if (json.Length <= 2)
                     return string.Empty;
                 StringBuilder parseStringBuilder = new StringBuilder(json.Length);
-                for (int i = 1; i<json.Length-1; ++i)
+                for (int i = 1; i < json.Length - 1; ++i)
                 {
                     if (json[i] == '\\' && i + 1 < json.Length - 1)
                     {
@@ -196,6 +167,12 @@ namespace TinyJson
             {
                 decimal result;
                 decimal.TryParse(json, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out result);
+                return result;
+            }
+            if (type == typeof(DateTime))
+            {
+                DateTime result;
+                DateTime.TryParse(json.Replace("\"",""), System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out result);
                 return result;
             }
             if (json == "null")
@@ -268,7 +245,7 @@ namespace TinyJson
                         continue;
                     string keyValue = elems[i].Substring(1, elems[i].Length - 2);
                     object val = ParseValue(valueType, elems[i + 1]);
-                    dictionary.Add(keyValue, val);
+                    dictionary[keyValue] = val;
                 }
                 return dictionary;
             }
@@ -295,7 +272,7 @@ namespace TinyJson
                     return null;
                 var dict = new Dictionary<string, object>(elems.Count / 2);
                 for (int i = 0; i < elems.Count; i += 2)
-                    dict.Add(elems[i].Substring(1, elems[i].Length - 2), ParseAnonymousValue(elems[i + 1]));
+                    dict[elems[i].Substring(1, elems[i].Length - 2)] = ParseAnonymousValue(elems[i + 1]);
                 return dict;
             }
             if (json[0] == '[' && json[json.Length - 1] == ']')
@@ -308,7 +285,8 @@ namespace TinyJson
             }
             if (json[0] == '"' && json[json.Length - 1] == '"')
             {
-                return ParseValue(typeof(string), json); // fix https://github.com/zanders3/json/issues/29
+                string str = json.Substring(1, json.Length - 2);
+                return str.Replace("\\", string.Empty);
             }
             if (char.IsDigit(json[0]) || json[0] == '-')
             {
@@ -338,7 +316,7 @@ namespace TinyJson
             Dictionary<string, T> nameToMember = new Dictionary<string, T>(StringComparer.OrdinalIgnoreCase);
             for (int i = 0; i < members.Length; i++)
             {
-                /*T member = members[i];
+                T member = members[i];
                 if (member.IsDefined(typeof(IgnoreDataMemberAttribute), true))
                     continue;
 
@@ -350,9 +328,7 @@ namespace TinyJson
                         name = dataMemberAttribute.Name;
                 }
 
-                nameToMember.Add(name, member);*/
-                // The above code is not working with .Net framework 2.0, so we ignore these attributes for compatibility reasons:
-                nameToMember.Add(members[i].Name, members[i]);
+                nameToMember.Add(name, member);
             }
 
             return nameToMember;

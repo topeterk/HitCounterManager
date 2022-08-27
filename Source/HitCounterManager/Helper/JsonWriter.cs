@@ -1,25 +1,4 @@
-﻿//The MIT License (MIT)
-
-//Copyright (c) 2018 Alex Parker
-
-//Permission is hereby granted, free of charge, to any person obtaining a copy of
-//this software and associated documentation files (the "Software"), to deal in
-//the Software without restriction, including without limitation the rights to
-//use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-//the Software, and to permit persons to whom the Software is furnished to do so,
-//subject to the following conditions:
-
-//The above copyright notice and this permission notice shall be included in all
-//copies or substantial portions of the Software.
-
-//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-//FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-//COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-//IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-//CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -50,11 +29,11 @@ namespace TinyJson
             }
 
             Type type = item.GetType();
-            if (type == typeof(string))
+            if (type == typeof(string) || type == typeof(char))
             {
                 stringBuilder.Append('"');
-                string str = (string)item;
-                for (int i = 0; i<str.Length; ++i)
+                string str = item.ToString();
+                for (int i = 0; i < str.Length; ++i)
                     if (str[i] < ' ' || str[i] == '"' || str[i] == '\\')
                     {
                         stringBuilder.Append('\\');
@@ -68,7 +47,19 @@ namespace TinyJson
                         stringBuilder.Append(str[i]);
                 stringBuilder.Append('"');
             }
-            else if (type == typeof(byte) || type == typeof(int))
+            else if (type == typeof(byte) || type == typeof(sbyte))
+            {
+                stringBuilder.Append(item.ToString());
+            }
+            else if (type == typeof(short) || type == typeof(ushort))
+            {
+                stringBuilder.Append(item.ToString());
+            }
+            else if (type == typeof(int) || type == typeof(uint))
+            {
+                stringBuilder.Append(item.ToString());
+            }
+            else if (type == typeof(long) || type == typeof(ulong))
             {
                 stringBuilder.Append(item.ToString());
             }
@@ -80,9 +71,19 @@ namespace TinyJson
             {
                 stringBuilder.Append(((double)item).ToString(System.Globalization.CultureInfo.InvariantCulture));
             }
+            else if (type == typeof(decimal))
+            {
+                stringBuilder.Append(((decimal)item).ToString(System.Globalization.CultureInfo.InvariantCulture));
+            }
             else if (type == typeof(bool))
             {
                 stringBuilder.Append(((bool)item) ? "true" : "false");
+            }
+            else if (type == typeof(DateTime))
+            {
+                stringBuilder.Append('"');
+                stringBuilder.Append(((DateTime)item).ToString(System.Globalization.CultureInfo.InvariantCulture));
+                stringBuilder.Append('"');
             }
             else if (type.IsEnum)
             {
@@ -157,7 +158,7 @@ namespace TinyJson
                     }
                 }
                 PropertyInfo[] propertyInfo = type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
-                for (int i = 0; i<propertyInfo.Length; i++)
+                for (int i = 0; i < propertyInfo.Length; i++)
                 {
                     if (!propertyInfo[i].CanRead || propertyInfo[i].IsDefined(typeof(IgnoreDataMemberAttribute), true))
                         continue;
