@@ -49,8 +49,6 @@ namespace HitCounterManager.Common
         /// <returns>Success state</returns>
         public static bool QueryAllReleases()
         {
-            bool result = false;
-
             try
             {
                 // https://developer.github.com/v3/#user-agent-required
@@ -63,21 +61,24 @@ namespace HitCounterManager.Common
 
                 string response = client.GetStringAsync("http://api.github.com/repos/topeterk/HitCounterManager/releases").Result;
                 Releases = response.FromJson<List<Dictionary<string, object>>>();
-
-                // Only keep newer releases of own major version
-                int i = Releases.Count;
-                string MajorVersionString = Assembly.GetExecutingAssembly().GetName().Version!.Major.ToString() + ".";
-                while (0 < i--)
-                {
-                    string tag_name = Releases[i]["tag_name"].ToString();
-                    if (!tag_name.StartsWith(MajorVersionString)) Releases.RemoveAt(i);
-                }
-
-                result = true;
             }
-            catch (Exception) { };
+            catch (Exception)
+            {
+                return false;
+            };
 
-            return result;
+            if (null == Releases) return false;
+
+            // Only keep newer releases of own major version
+            int i = Releases.Count;
+            string MajorVersionString = Assembly.GetExecutingAssembly().GetName().Version!.Major.ToString() + ".";
+            while (0 < i--)
+            {
+                string? tag_name = Releases[i]["tag_name"]?.ToString();
+                if ((null == tag_name) || (!tag_name.StartsWith(MajorVersionString))) Releases.RemoveAt(i);
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -133,15 +134,16 @@ namespace HitCounterManager.Common
 
                             result += "----------------------------------------------------------------------------------------------------------------------------------------------------------------"
                                 + Environment.NewLine
-                                + release["name"].ToString()
+                                + (release["name"]?.ToString() ?? "")
                                 + Environment.NewLine + Environment.NewLine
-                                + release["body_text"].ToString().Replace("\n\n", Environment.NewLine)
+                                + (release["body_text"]?.ToString()?.Replace("\n\n", Environment.NewLine) ?? "")
                                 + Environment.NewLine + Environment.NewLine;
                         }
 
-                        result = i.ToString() + " new version" + (i == 1 ? "" : "s") + " available:" + Environment.NewLine + Environment.NewLine + result;
-
-                        result = result.Replace("\n", Environment.NewLine);
+                        result = i.ToString() + " new version" + (i == 1 ? "" : "s") + " available:"
+                            + Environment.NewLine
+                            + Environment.NewLine
+                            + result.Replace("\n", Environment.NewLine);
                     }
                     catch (Exception ex)
                     {
