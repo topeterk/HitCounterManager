@@ -26,7 +26,6 @@ namespace HitCounterManager
     {
         public int gameSelect = 0;
         SekiroSplitter sekiroSplitter;
-        HollowSplitter hollowSplitter;
         EldenSplitter eldenSplitter;
         Ds3Splitter ds3Splitter;
         Ds1Splitter ds1Splitter;
@@ -64,10 +63,9 @@ namespace HitCounterManager
             }
         }
 
-        public void setSplitterPointers(SekiroSplitter sekiroSplitter, HollowSplitter hollowSplitter, EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter, CupheadSplitter cupSplitter, Ds1Splitter ds1Splitter)
+        public void setSplitterPointers(SekiroSplitter sekiroSplitter, EldenSplitter eldenSplitter, Ds3Splitter ds3Splitter, CelesteSplitter celesteSplitter, CupheadSplitter cupSplitter, Ds1Splitter ds1Splitter)
         {
             this.sekiroSplitter = sekiroSplitter;
-            this.hollowSplitter = hollowSplitter;
             this.eldenSplitter = eldenSplitter;
             this.ds3Splitter = ds3Splitter;
             this.ds1Splitter = ds1Splitter;
