@@ -26,11 +26,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using SoulMemory.Sekiro;
 using SoulMemory;
-using System.Windows.Forms;
 
 namespace HitCounterManager
 {
-
     public class SekiroSplitter
     {
         public static Sekiro sekiro = new Sekiro();
@@ -180,16 +178,9 @@ namespace HitCounterManager
 
         public Vector3f getCurrentPosition()
         {
-            if (!_StatusSekiro)
-            {
-                _StatusSekiro = getSekiroStatusProcess(0);
-            }
-           
+            getSekiroStatusProcess(0);
             return sekiro.GetPlayerPosition();
         }
-
-
-       
         
         public bool getSekiroStatusProcess(int delay) //Use Delay 0 only for first Starts
         {
@@ -283,11 +274,11 @@ namespace HitCounterManager
         public void RefreshSekiro()
         {
             int delay = 2000;
-            _StatusSekiro = getSekiroStatusProcess(delay);
+            getSekiroStatusProcess(delay);
             while (_StatusProcedure && dataSekiro.enableSplitting)
             {
                 Thread.Sleep(10);
-                _StatusSekiro = getSekiroStatusProcess(delay);
+               getSekiroStatusProcess(delay);
                if (!_StatusSekiro)
                {
                     _writeMemory = false;
@@ -306,7 +297,6 @@ namespace HitCounterManager
                     }                   
                     _writeMemory = true;
                 }
-
             }           
         }
 
@@ -359,8 +349,6 @@ namespace HitCounterManager
                         listPendingI.Clear();
                         listPendingP.Clear();
                         listPendingCf.Clear();
-
-
                     }
                 }
             }
@@ -387,8 +375,7 @@ namespace HitCounterManager
                             b.IsSplited = true;
                             SplitCheck();
                         }
-                    }
-                       
+                    }                      
                 }
             }
         }
@@ -449,8 +436,7 @@ namespace HitCounterManager
                                 p.IsSplited = true;
                                 SplitCheck();
                             }                                                       
-                        }
-                        
+                        }                       
                     }
                 }
             }

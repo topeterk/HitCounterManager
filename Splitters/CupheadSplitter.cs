@@ -23,7 +23,6 @@
 using System;
 using System.Threading.Tasks;
 using System.Threading;
-using System.Windows.Forms;
 using LiveSplit.Cuphead;
 
 
@@ -143,11 +142,11 @@ namespace HitCounterManager
         public void RefreshCuphead()
         {
             int delay = 2000;
-            _StatusCuphead = getCupheadStatusProcess(0);
+            getCupheadStatusProcess(0);
             while (_StatusProcedure && dataCuphead.enableSplitting)
             {
                 Thread.Sleep(10);
-                _StatusCuphead = getCupheadStatusProcess(delay);
+                getCupheadStatusProcess(delay);
                 if (!_StatusCuphead) { delay = 2000; } else { delay = 20000; }
             }
         }

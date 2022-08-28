@@ -45,6 +45,7 @@
             this.tabManual = new System.Windows.Forms.TabPage();
             this.TextBoxManual = new System.Windows.Forms.TextBox();
             this.tabTiming = new System.Windows.Forms.TabPage();
+            this.btnDesactiveAllTiming = new System.Windows.Forms.Button();
             this.groupBoxTHK = new System.Windows.Forms.GroupBox();
             this.groupBoxATHk = new System.Windows.Forms.GroupBox();
             this.checkBoxATHollow = new System.Windows.Forms.CheckBox();
@@ -206,22 +207,6 @@
             this.toSplitSelectSekiro = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabDs1 = new System.Windows.Forms.TabPage();
-            this.panelItemDs1 = new System.Windows.Forms.Panel();
-            this.btnAddItem = new System.Windows.Forms.Button();
-            this.label72 = new System.Windows.Forms.Label();
-            this.comboBoxItemDs1 = new System.Windows.Forms.ComboBox();
-            this.label73 = new System.Windows.Forms.Label();
-            this.comboBoxHowItemDs1 = new System.Windows.Forms.ComboBox();
-            this.listBoxItemDs1 = new System.Windows.Forms.ListBox();
-            this.panelBonfireDs1 = new System.Windows.Forms.Panel();
-            this.label74 = new System.Windows.Forms.Label();
-            this.comboBoxStateDs1 = new System.Windows.Forms.ComboBox();
-            this.listBoxBonfireDs1 = new System.Windows.Forms.ListBox();
-            this.btnAddBonfireDs1 = new System.Windows.Forms.Button();
-            this.label63 = new System.Windows.Forms.Label();
-            this.comboBoxHowBonfireDs1 = new System.Windows.Forms.ComboBox();
-            this.comboBoxBonfireDs1 = new System.Windows.Forms.ComboBox();
-            this.label64 = new System.Windows.Forms.Label();
             this.panelPositionDs1 = new System.Windows.Forms.Panel();
             this.label68 = new System.Windows.Forms.Label();
             this.label69 = new System.Windows.Forms.Label();
@@ -244,6 +229,22 @@
             this.comboBoxHowAttributesDs1 = new System.Windows.Forms.ComboBox();
             this.comboBoxAttributesDs1 = new System.Windows.Forms.ComboBox();
             this.label67 = new System.Windows.Forms.Label();
+            this.panelBonfireDs1 = new System.Windows.Forms.Panel();
+            this.label74 = new System.Windows.Forms.Label();
+            this.comboBoxStateDs1 = new System.Windows.Forms.ComboBox();
+            this.listBoxBonfireDs1 = new System.Windows.Forms.ListBox();
+            this.btnAddBonfireDs1 = new System.Windows.Forms.Button();
+            this.label63 = new System.Windows.Forms.Label();
+            this.comboBoxHowBonfireDs1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxBonfireDs1 = new System.Windows.Forms.ComboBox();
+            this.label64 = new System.Windows.Forms.Label();
+            this.panelItemDs1 = new System.Windows.Forms.Panel();
+            this.btnAddItem = new System.Windows.Forms.Button();
+            this.label72 = new System.Windows.Forms.Label();
+            this.comboBoxItemDs1 = new System.Windows.Forms.ComboBox();
+            this.label73 = new System.Windows.Forms.Label();
+            this.comboBoxHowItemDs1 = new System.Windows.Forms.ComboBox();
+            this.listBoxItemDs1 = new System.Windows.Forms.ListBox();
             this.panelBossDs1 = new System.Windows.Forms.Panel();
             this.btnAddBossDs1 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -258,7 +259,7 @@
             this.comboBoxToSplitDs1 = new System.Windows.Forms.ComboBox();
             this.label62 = new System.Windows.Forms.Label();
             this.tabDs2 = new System.Windows.Forms.TabPage();
-            this.panelAttributeDs2 = new System.Windows.Forms.Panel();
+            this.panelLvlDs2 = new System.Windows.Forms.Panel();
             this.label52 = new System.Windows.Forms.Label();
             this.textBoxValueDs2 = new System.Windows.Forms.TextBox();
             this.listBoxAttributeDs2 = new System.Windows.Forms.ListBox();
@@ -294,14 +295,6 @@
             this.comboBoxToSplitDs2 = new System.Windows.Forms.ComboBox();
             this.label51 = new System.Windows.Forms.Label();
             this.tabDs3 = new System.Windows.Forms.TabPage();
-            this.panelCfDs3 = new System.Windows.Forms.Panel();
-            this.label46 = new System.Windows.Forms.Label();
-            this.comboBoxHowCfDs3 = new System.Windows.Forms.ComboBox();
-            this.listBoxCfDs3 = new System.Windows.Forms.ListBox();
-            this.btnAddCfeDs3 = new System.Windows.Forms.Button();
-            this.btnGetListFlagDs3 = new System.Windows.Forms.Button();
-            this.label47 = new System.Windows.Forms.Label();
-            this.textBoxIdDs3 = new System.Windows.Forms.TextBox();
             this.panelLvlDs3 = new System.Windows.Forms.Panel();
             this.label45 = new System.Windows.Forms.Label();
             this.textBoxValueDs3 = new System.Windows.Forms.TextBox();
@@ -311,6 +304,14 @@
             this.comboBoxHowAttributeDs3 = new System.Windows.Forms.ComboBox();
             this.comboBoxAttributeDs3 = new System.Windows.Forms.ComboBox();
             this.label44 = new System.Windows.Forms.Label();
+            this.panelCfDs3 = new System.Windows.Forms.Panel();
+            this.label46 = new System.Windows.Forms.Label();
+            this.comboBoxHowCfDs3 = new System.Windows.Forms.ComboBox();
+            this.listBoxCfDs3 = new System.Windows.Forms.ListBox();
+            this.btnAddCfeDs3 = new System.Windows.Forms.Button();
+            this.btnGetListFlagDs3 = new System.Windows.Forms.Button();
+            this.label47 = new System.Windows.Forms.Label();
+            this.textBoxIdDs3 = new System.Windows.Forms.TextBox();
             this.panelBonfireDs3 = new System.Windows.Forms.Panel();
             this.listBoxBonfireDs3 = new System.Windows.Forms.ListBox();
             this.btnAddBonfire = new System.Windows.Forms.Button();
@@ -374,6 +375,17 @@
             this.comboBoxToSplitEldenRing = new System.Windows.Forms.ComboBox();
             this.label30 = new System.Windows.Forms.Label();
             this.tabHollow = new System.Windows.Forms.TabPage();
+            this.panelPositionH = new System.Windows.Forms.Panel();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.comboBoxMarginH = new System.Windows.Forms.ComboBox();
+            this.listBoxPositionH = new System.Windows.Forms.ListBox();
+            this.btn_AddPositionH = new System.Windows.Forms.Button();
+            this.btn_getPositionH = new System.Windows.Forms.Button();
+            this.textBoxXh = new System.Windows.Forms.TextBox();
+            this.textBoxYh = new System.Windows.Forms.TextBox();
+            this.textBoxSh = new System.Windows.Forms.TextBox();
             this.panelBossH = new System.Windows.Forms.Panel();
             this.groupBoxMBH = new System.Windows.Forms.GroupBox();
             this.checkedListBoxHMB = new System.Windows.Forms.CheckedListBox();
@@ -387,17 +399,6 @@
             this.checkedListBoxBossH = new System.Windows.Forms.CheckedListBox();
             this.comboBoxSelectKindBoss = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.panelPositionH = new System.Windows.Forms.Panel();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.comboBoxMarginH = new System.Windows.Forms.ComboBox();
-            this.listBoxPositionH = new System.Windows.Forms.ListBox();
-            this.btn_AddPositionH = new System.Windows.Forms.Button();
-            this.btn_getPositionH = new System.Windows.Forms.Button();
-            this.textBoxXh = new System.Windows.Forms.TextBox();
-            this.textBoxYh = new System.Windows.Forms.TextBox();
-            this.textBoxSh = new System.Windows.Forms.TextBox();
             this.panelItemH = new System.Windows.Forms.Panel();
             this.groupBoxSkillsH = new System.Windows.Forms.GroupBox();
             this.checkedListBoxSkillsH = new System.Windows.Forms.CheckedListBox();
@@ -485,18 +486,18 @@
             this.groupBoxRadiosAshinaOutskirts.SuspendLayout();
             this.panelCfSekiro.SuspendLayout();
             this.tabDs1.SuspendLayout();
-            this.panelItemDs1.SuspendLayout();
-            this.panelBonfireDs1.SuspendLayout();
             this.panelPositionDs1.SuspendLayout();
             this.panelLvlDs1.SuspendLayout();
+            this.panelBonfireDs1.SuspendLayout();
+            this.panelItemDs1.SuspendLayout();
             this.panelBossDs1.SuspendLayout();
             this.tabDs2.SuspendLayout();
-            this.panelAttributeDs2.SuspendLayout();
+            this.panelLvlDs2.SuspendLayout();
             this.panelPositionDs2.SuspendLayout();
             this.panelBossDS2.SuspendLayout();
             this.tabDs3.SuspendLayout();
-            this.panelCfDs3.SuspendLayout();
             this.panelLvlDs3.SuspendLayout();
+            this.panelCfDs3.SuspendLayout();
             this.panelBonfireDs3.SuspendLayout();
             this.panelBossDs3.SuspendLayout();
             this.tabElden.SuspendLayout();
@@ -505,11 +506,11 @@
             this.panelGraceER.SuspendLayout();
             this.panelBossER.SuspendLayout();
             this.tabHollow.SuspendLayout();
+            this.panelPositionH.SuspendLayout();
             this.panelBossH.SuspendLayout();
             this.groupBoxMBH.SuspendLayout();
             this.groupBoxPantheon.SuspendLayout();
             this.groupBossH.SuspendLayout();
-            this.panelPositionH.SuspendLayout();
             this.panelItemH.SuspendLayout();
             this.groupBoxSkillsH.SuspendLayout();
             this.groupBoxCharms.SuspendLayout();
@@ -699,6 +700,7 @@
             // tabTiming
             // 
             this.tabTiming.BackColor = System.Drawing.SystemColors.Control;
+            this.tabTiming.Controls.Add(this.btnDesactiveAllTiming);
             this.tabTiming.Controls.Add(this.groupBoxTHK);
             this.tabTiming.Controls.Add(this.groupBoxTCuphead);
             this.tabTiming.Controls.Add(this.groupBoxTCeleste);
@@ -715,11 +717,21 @@
             this.tabTiming.TabIndex = 11;
             this.tabTiming.Text = "Timing";
             // 
+            // btnDesactiveAllTiming
+            // 
+            this.btnDesactiveAllTiming.Location = new System.Drawing.Point(484, 21);
+            this.btnDesactiveAllTiming.Name = "btnDesactiveAllTiming";
+            this.btnDesactiveAllTiming.Size = new System.Drawing.Size(89, 31);
+            this.btnDesactiveAllTiming.TabIndex = 15;
+            this.btnDesactiveAllTiming.Text = "Desactive All";
+            this.btnDesactiveAllTiming.UseVisualStyleBackColor = true;
+            this.btnDesactiveAllTiming.Click += new System.EventHandler(this.btnDesactiveAllTiming_Click);
+            // 
             // groupBoxTHK
             // 
             this.groupBoxTHK.Controls.Add(this.groupBoxATHk);
             this.groupBoxTHK.Controls.Add(this.groupBoxTMHollow);
-            this.groupBoxTHK.Location = new System.Drawing.Point(128, 68);
+            this.groupBoxTHK.Location = new System.Drawing.Point(126, 62);
             this.groupBoxTHK.Name = "groupBoxTHK";
             this.groupBoxTHK.Size = new System.Drawing.Size(361, 158);
             this.groupBoxTHK.TabIndex = 14;
@@ -785,7 +797,7 @@
             // 
             this.groupBoxTCuphead.Controls.Add(this.groupBoxATCuphead);
             this.groupBoxTCuphead.Controls.Add(this.groupBoxTMCuphead);
-            this.groupBoxTCuphead.Location = new System.Drawing.Point(126, 68);
+            this.groupBoxTCuphead.Location = new System.Drawing.Point(126, 62);
             this.groupBoxTCuphead.Name = "groupBoxTCuphead";
             this.groupBoxTCuphead.Size = new System.Drawing.Size(361, 158);
             this.groupBoxTCuphead.TabIndex = 13;
@@ -851,7 +863,7 @@
             // 
             this.groupBoxTCeleste.Controls.Add(this.groupBoxATCeleste);
             this.groupBoxTCeleste.Controls.Add(this.groupBoxTMCeleste);
-            this.groupBoxTCeleste.Location = new System.Drawing.Point(125, 68);
+            this.groupBoxTCeleste.Location = new System.Drawing.Point(126, 62);
             this.groupBoxTCeleste.Name = "groupBoxTCeleste";
             this.groupBoxTCeleste.Size = new System.Drawing.Size(361, 158);
             this.groupBoxTCeleste.TabIndex = 12;
@@ -917,7 +929,7 @@
             // 
             this.groupBoxTEr.Controls.Add(this.groupBoxATEr);
             this.groupBoxTEr.Controls.Add(this.groupBoxTMEr);
-            this.groupBoxTEr.Location = new System.Drawing.Point(124, 68);
+            this.groupBoxTEr.Location = new System.Drawing.Point(126, 62);
             this.groupBoxTEr.Name = "groupBoxTEr";
             this.groupBoxTEr.Size = new System.Drawing.Size(361, 158);
             this.groupBoxTEr.TabIndex = 11;
@@ -983,7 +995,7 @@
             // 
             this.groupBoxTDs3.Controls.Add(this.groupBoxATDs3);
             this.groupBoxTDs3.Controls.Add(this.groupBoxTMDs3);
-            this.groupBoxTDs3.Location = new System.Drawing.Point(125, 68);
+            this.groupBoxTDs3.Location = new System.Drawing.Point(126, 62);
             this.groupBoxTDs3.Name = "groupBoxTDs3";
             this.groupBoxTDs3.Size = new System.Drawing.Size(361, 158);
             this.groupBoxTDs3.TabIndex = 10;
@@ -1049,7 +1061,7 @@
             // 
             this.groupBoxTDs2.Controls.Add(this.groupBoxATDs2);
             this.groupBoxTDs2.Controls.Add(this.groupBoxTMDs2);
-            this.groupBoxTDs2.Location = new System.Drawing.Point(126, 68);
+            this.groupBoxTDs2.Location = new System.Drawing.Point(126, 62);
             this.groupBoxTDs2.Name = "groupBoxTDs2";
             this.groupBoxTDs2.Size = new System.Drawing.Size(361, 158);
             this.groupBoxTDs2.TabIndex = 9;
@@ -1115,7 +1127,7 @@
             // 
             this.groupBoxTDs1.Controls.Add(this.groupBoxATDs1);
             this.groupBoxTDs1.Controls.Add(this.groupBoxTMDs1);
-            this.groupBoxTDs1.Location = new System.Drawing.Point(125, 68);
+            this.groupBoxTDs1.Location = new System.Drawing.Point(126, 62);
             this.groupBoxTDs1.Name = "groupBoxTDs1";
             this.groupBoxTDs1.Size = new System.Drawing.Size(361, 158);
             this.groupBoxTDs1.TabIndex = 8;
@@ -1181,7 +1193,7 @@
             // 
             this.groupBoxTSekiro.Controls.Add(this.groupBoxATS);
             this.groupBoxTSekiro.Controls.Add(this.groupBoxTMS);
-            this.groupBoxTSekiro.Location = new System.Drawing.Point(127, 68);
+            this.groupBoxTSekiro.Location = new System.Drawing.Point(126, 62);
             this.groupBoxTSekiro.Name = "groupBoxTSekiro";
             this.groupBoxTSekiro.Size = new System.Drawing.Size(361, 158);
             this.groupBoxTSekiro.TabIndex = 7;
@@ -1258,7 +1270,7 @@
             "Cuphead"});
             this.comboBoxTGame.Location = new System.Drawing.Point(89, 25);
             this.comboBoxTGame.Name = "comboBoxTGame";
-            this.comboBoxTGame.Size = new System.Drawing.Size(444, 21);
+            this.comboBoxTGame.Size = new System.Drawing.Size(379, 21);
             this.comboBoxTGame.TabIndex = 6;
             this.comboBoxTGame.SelectedIndexChanged += new System.EventHandler(this.comboBoxTGame_SelectedIndexChanged);
             // 
@@ -1267,9 +1279,9 @@
             this.label75.AutoSize = true;
             this.label75.Location = new System.Drawing.Point(50, 28);
             this.label75.Name = "label75";
-            this.label75.Size = new System.Drawing.Size(33, 13);
+            this.label75.Size = new System.Drawing.Size(35, 13);
             this.label75.TabIndex = 5;
-            this.label75.Text = "game";
+            this.label75.Text = "Game";
             this.label75.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // tabSekiro
@@ -2626,10 +2638,10 @@
             // tabDs1
             // 
             this.tabDs1.BackColor = System.Drawing.SystemColors.Control;
-            this.tabDs1.Controls.Add(this.panelItemDs1);
-            this.tabDs1.Controls.Add(this.panelBonfireDs1);
             this.tabDs1.Controls.Add(this.panelPositionDs1);
             this.tabDs1.Controls.Add(this.panelLvlDs1);
+            this.tabDs1.Controls.Add(this.panelBonfireDs1);
+            this.tabDs1.Controls.Add(this.panelItemDs1);
             this.tabDs1.Controls.Add(this.panelBossDs1);
             this.tabDs1.Controls.Add(this.btnRefreshDs1);
             this.tabDs1.Controls.Add(this.btnDesactiveAllDs1);
@@ -2642,6 +2654,397 @@
             this.tabDs1.Size = new System.Drawing.Size(587, 351);
             this.tabDs1.TabIndex = 4;
             this.tabDs1.Text = "Dark Souls 1";
+            // 
+            // panelPositionDs1
+            // 
+            this.panelPositionDs1.Controls.Add(this.label68);
+            this.panelPositionDs1.Controls.Add(this.label69);
+            this.panelPositionDs1.Controls.Add(this.label70);
+            this.panelPositionDs1.Controls.Add(this.label71);
+            this.panelPositionDs1.Controls.Add(this.comboBoxHowPositionsDs1);
+            this.panelPositionDs1.Controls.Add(this.comboBoxMarginDs1);
+            this.panelPositionDs1.Controls.Add(this.listBoxPositionsDs1);
+            this.panelPositionDs1.Controls.Add(this.btnAddPositionDs1);
+            this.panelPositionDs1.Controls.Add(this.btnGetPositionDs1);
+            this.panelPositionDs1.Controls.Add(this.textBoxZDs1);
+            this.panelPositionDs1.Controls.Add(this.textBoxYDs1);
+            this.panelPositionDs1.Controls.Add(this.textBoxXDs1);
+            this.panelPositionDs1.Location = new System.Drawing.Point(43, 89);
+            this.panelPositionDs1.Name = "panelPositionDs1";
+            this.panelPositionDs1.Size = new System.Drawing.Size(505, 244);
+            this.panelPositionDs1.TabIndex = 27;
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(219, 1);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(66, 13);
+            this.label68.TabIndex = 12;
+            this.label68.Text = "Coordinates:";
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Location = new System.Drawing.Point(383, 19);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(39, 13);
+            this.label69.TabIndex = 11;
+            this.label69.Text = "Margin";
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Location = new System.Drawing.Point(185, 19);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(130, 13);
+            this.label70.TabIndex = 10;
+            this.label70.Text = "X                 Y                 Z";
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(77, 19);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(32, 13);
+            this.label71.TabIndex = 9;
+            this.label71.Text = "How:";
+            // 
+            // comboBoxHowPositionsDs1
+            // 
+            this.comboBoxHowPositionsDs1.BackColor = System.Drawing.Color.LightGray;
+            this.comboBoxHowPositionsDs1.FormattingEnabled = true;
+            this.comboBoxHowPositionsDs1.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowPositionsDs1.Location = new System.Drawing.Point(36, 34);
+            this.comboBoxHowPositionsDs1.Name = "comboBoxHowPositionsDs1";
+            this.comboBoxHowPositionsDs1.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxHowPositionsDs1.TabIndex = 8;
+            // 
+            // comboBoxMarginDs1
+            // 
+            this.comboBoxMarginDs1.BackColor = System.Drawing.Color.LightGray;
+            this.comboBoxMarginDs1.FormattingEnabled = true;
+            this.comboBoxMarginDs1.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3 (R)",
+            "4 (R)",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.comboBoxMarginDs1.Location = new System.Drawing.Point(351, 35);
+            this.comboBoxMarginDs1.Name = "comboBoxMarginDs1";
+            this.comboBoxMarginDs1.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxMarginDs1.TabIndex = 7;
+            this.comboBoxMarginDs1.SelectedIndexChanged += new System.EventHandler(this.comboBoxMarginDs1_SelectedIndexChanged);
+            // 
+            // listBoxPositionsDs1
+            // 
+            this.listBoxPositionsDs1.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxPositionsDs1.FormattingEnabled = true;
+            this.listBoxPositionsDs1.Location = new System.Drawing.Point(3, 90);
+            this.listBoxPositionsDs1.Name = "listBoxPositionsDs1";
+            this.listBoxPositionsDs1.Size = new System.Drawing.Size(495, 147);
+            this.listBoxPositionsDs1.TabIndex = 6;
+            this.listBoxPositionsDs1.DoubleClick += new System.EventHandler(this.listBoxPositionDs1_DoubleClick);
+            // 
+            // btnAddPositionDs1
+            // 
+            this.btnAddPositionDs1.Location = new System.Drawing.Point(248, 63);
+            this.btnAddPositionDs1.Name = "btnAddPositionDs1";
+            this.btnAddPositionDs1.Size = new System.Drawing.Size(100, 21);
+            this.btnAddPositionDs1.TabIndex = 5;
+            this.btnAddPositionDs1.Text = "Add";
+            this.btnAddPositionDs1.UseVisualStyleBackColor = true;
+            this.btnAddPositionDs1.Click += new System.EventHandler(this.btnAddPositionDs1_Click);
+            // 
+            // btnGetPositionDs1
+            // 
+            this.btnGetPositionDs1.Location = new System.Drawing.Point(142, 63);
+            this.btnGetPositionDs1.Name = "btnGetPositionDs1";
+            this.btnGetPositionDs1.Size = new System.Drawing.Size(100, 21);
+            this.btnGetPositionDs1.TabIndex = 4;
+            this.btnGetPositionDs1.Text = "Get Position";
+            this.btnGetPositionDs1.UseVisualStyleBackColor = true;
+            this.btnGetPositionDs1.Click += new System.EventHandler(this.btnGetPositionDs1_Click);
+            // 
+            // textBoxZDs1
+            // 
+            this.textBoxZDs1.BackColor = System.Drawing.Color.LightGray;
+            this.textBoxZDs1.Location = new System.Drawing.Point(280, 35);
+            this.textBoxZDs1.Name = "textBoxZDs1";
+            this.textBoxZDs1.ReadOnly = true;
+            this.textBoxZDs1.Size = new System.Drawing.Size(52, 20);
+            this.textBoxZDs1.TabIndex = 3;
+            // 
+            // textBoxYDs1
+            // 
+            this.textBoxYDs1.BackColor = System.Drawing.Color.LightGray;
+            this.textBoxYDs1.Location = new System.Drawing.Point(222, 35);
+            this.textBoxYDs1.Name = "textBoxYDs1";
+            this.textBoxYDs1.ReadOnly = true;
+            this.textBoxYDs1.Size = new System.Drawing.Size(52, 20);
+            this.textBoxYDs1.TabIndex = 2;
+            // 
+            // textBoxXDs1
+            // 
+            this.textBoxXDs1.BackColor = System.Drawing.Color.LightGray;
+            this.textBoxXDs1.Location = new System.Drawing.Point(164, 35);
+            this.textBoxXDs1.Name = "textBoxXDs1";
+            this.textBoxXDs1.ReadOnly = true;
+            this.textBoxXDs1.Size = new System.Drawing.Size(52, 20);
+            this.textBoxXDs1.TabIndex = 0;
+            // 
+            // panelLvlDs1
+            // 
+            this.panelLvlDs1.Controls.Add(this.label65);
+            this.panelLvlDs1.Controls.Add(this.textBoxValueDs1);
+            this.panelLvlDs1.Controls.Add(this.listBoxAttributesDs1);
+            this.panelLvlDs1.Controls.Add(this.btnAddAttributeDs1);
+            this.panelLvlDs1.Controls.Add(this.label66);
+            this.panelLvlDs1.Controls.Add(this.comboBoxHowAttributesDs1);
+            this.panelLvlDs1.Controls.Add(this.comboBoxAttributesDs1);
+            this.panelLvlDs1.Controls.Add(this.label67);
+            this.panelLvlDs1.Location = new System.Drawing.Point(43, 89);
+            this.panelLvlDs1.Name = "panelLvlDs1";
+            this.panelLvlDs1.Size = new System.Drawing.Size(503, 239);
+            this.panelLvlDs1.TabIndex = 26;
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Location = new System.Drawing.Point(118, 34);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(33, 13);
+            this.label65.TabIndex = 24;
+            this.label65.Text = "value";
+            // 
+            // textBoxValueDs1
+            // 
+            this.textBoxValueDs1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.textBoxValueDs1.Location = new System.Drawing.Point(158, 30);
+            this.textBoxValueDs1.Name = "textBoxValueDs1";
+            this.textBoxValueDs1.Size = new System.Drawing.Size(100, 20);
+            this.textBoxValueDs1.TabIndex = 23;
+            // 
+            // listBoxAttributesDs1
+            // 
+            this.listBoxAttributesDs1.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxAttributesDs1.FormattingEnabled = true;
+            this.listBoxAttributesDs1.Location = new System.Drawing.Point(7, 86);
+            this.listBoxAttributesDs1.Name = "listBoxAttributesDs1";
+            this.listBoxAttributesDs1.Size = new System.Drawing.Size(489, 147);
+            this.listBoxAttributesDs1.TabIndex = 22;
+            this.listBoxAttributesDs1.DoubleClick += new System.EventHandler(this.listBoxAttributeDs1_DoubleClick);
+            // 
+            // btnAddAttributeDs1
+            // 
+            this.btnAddAttributeDs1.Location = new System.Drawing.Point(212, 57);
+            this.btnAddAttributeDs1.Name = "btnAddAttributeDs1";
+            this.btnAddAttributeDs1.Size = new System.Drawing.Size(100, 21);
+            this.btnAddAttributeDs1.TabIndex = 21;
+            this.btnAddAttributeDs1.Text = "Add";
+            this.btnAddAttributeDs1.UseVisualStyleBackColor = true;
+            this.btnAddAttributeDs1.Click += new System.EventHandler(this.btnAddAttributeDs1_Click);
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(393, 34);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(27, 13);
+            this.label66.TabIndex = 20;
+            this.label66.Text = "how";
+            // 
+            // comboBoxHowAttributesDs1
+            // 
+            this.comboBoxHowAttributesDs1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.comboBoxHowAttributesDs1.FormattingEnabled = true;
+            this.comboBoxHowAttributesDs1.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowAttributesDs1.Location = new System.Drawing.Point(269, 30);
+            this.comboBoxHowAttributesDs1.Name = "comboBoxHowAttributesDs1";
+            this.comboBoxHowAttributesDs1.Size = new System.Drawing.Size(117, 21);
+            this.comboBoxHowAttributesDs1.TabIndex = 19;
+            // 
+            // comboBoxAttributesDs1
+            // 
+            this.comboBoxAttributesDs1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxAttributesDs1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.comboBoxAttributesDs1.FormattingEnabled = true;
+            this.comboBoxAttributesDs1.Items.AddRange(new object[] {
+            "Vitality",
+            "Attunement",
+            "Endurance",
+            "Strength",
+            "Dexterity",
+            "Resistance",
+            "Intelligence",
+            "Faith",
+            "SoulLevel",
+            "Humanity"});
+            this.comboBoxAttributesDs1.Location = new System.Drawing.Point(82, 5);
+            this.comboBoxAttributesDs1.Name = "comboBoxAttributesDs1";
+            this.comboBoxAttributesDs1.Size = new System.Drawing.Size(361, 21);
+            this.comboBoxAttributesDs1.TabIndex = 18;
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(35, 9);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(45, 13);
+            this.label67.TabIndex = 17;
+            this.label67.Text = "attribute";
+            // 
+            // panelBonfireDs1
+            // 
+            this.panelBonfireDs1.Controls.Add(this.label74);
+            this.panelBonfireDs1.Controls.Add(this.comboBoxStateDs1);
+            this.panelBonfireDs1.Controls.Add(this.listBoxBonfireDs1);
+            this.panelBonfireDs1.Controls.Add(this.btnAddBonfireDs1);
+            this.panelBonfireDs1.Controls.Add(this.label63);
+            this.panelBonfireDs1.Controls.Add(this.comboBoxHowBonfireDs1);
+            this.panelBonfireDs1.Controls.Add(this.comboBoxBonfireDs1);
+            this.panelBonfireDs1.Controls.Add(this.label64);
+            this.panelBonfireDs1.Location = new System.Drawing.Point(42, 90);
+            this.panelBonfireDs1.Name = "panelBonfireDs1";
+            this.panelBonfireDs1.Size = new System.Drawing.Size(504, 240);
+            this.panelBonfireDs1.TabIndex = 25;
+            // 
+            // label74
+            // 
+            this.label74.AutoSize = true;
+            this.label74.Location = new System.Drawing.Point(113, 37);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(30, 13);
+            this.label74.TabIndex = 18;
+            this.label74.Text = "state";
+            // 
+            // comboBoxStateDs1
+            // 
+            this.comboBoxStateDs1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.comboBoxStateDs1.FormattingEnabled = true;
+            this.comboBoxStateDs1.Items.AddRange(new object[] {
+            "Discovered",
+            "Unlocked (R)",
+            "Kindled 1",
+            "Kindled 2",
+            "Kindled 3"});
+            this.comboBoxStateDs1.Location = new System.Drawing.Point(153, 34);
+            this.comboBoxStateDs1.Name = "comboBoxStateDs1";
+            this.comboBoxStateDs1.Size = new System.Drawing.Size(111, 21);
+            this.comboBoxStateDs1.TabIndex = 17;
+            // 
+            // listBoxBonfireDs1
+            // 
+            this.listBoxBonfireDs1.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxBonfireDs1.FormattingEnabled = true;
+            this.listBoxBonfireDs1.Location = new System.Drawing.Point(8, 88);
+            this.listBoxBonfireDs1.Name = "listBoxBonfireDs1";
+            this.listBoxBonfireDs1.Size = new System.Drawing.Size(489, 147);
+            this.listBoxBonfireDs1.TabIndex = 16;
+            this.listBoxBonfireDs1.DoubleClick += new System.EventHandler(this.listBoxBonfireDs1_DoubleClick);
+            // 
+            // btnAddBonfireDs1
+            // 
+            this.btnAddBonfireDs1.Location = new System.Drawing.Point(213, 61);
+            this.btnAddBonfireDs1.Name = "btnAddBonfireDs1";
+            this.btnAddBonfireDs1.Size = new System.Drawing.Size(100, 21);
+            this.btnAddBonfireDs1.TabIndex = 15;
+            this.btnAddBonfireDs1.Text = "Add";
+            this.btnAddBonfireDs1.UseVisualStyleBackColor = true;
+            this.btnAddBonfireDs1.Click += new System.EventHandler(this.btnAddBonfireDs1_Click);
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(387, 38);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(27, 13);
+            this.label63.TabIndex = 13;
+            this.label63.Text = "how";
+            // 
+            // comboBoxHowBonfireDs1
+            // 
+            this.comboBoxHowBonfireDs1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.comboBoxHowBonfireDs1.FormattingEnabled = true;
+            this.comboBoxHowBonfireDs1.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowBonfireDs1.Location = new System.Drawing.Point(271, 34);
+            this.comboBoxHowBonfireDs1.Name = "comboBoxHowBonfireDs1";
+            this.comboBoxHowBonfireDs1.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxHowBonfireDs1.TabIndex = 12;
+            // 
+            // comboBoxBonfireDs1
+            // 
+            this.comboBoxBonfireDs1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxBonfireDs1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.comboBoxBonfireDs1.FormattingEnabled = true;
+            this.comboBoxBonfireDs1.Items.AddRange(new object[] {
+            "Undead Asylum - Courtyard",
+            "Undead Asylum - Interior",
+            "Firelink Shrine",
+            "Firelink Altar - Lordvessel",
+            "Undead Burg",
+            "Undead Burg - Sunlight Altar",
+            "Undead Parish",
+            "Darkroot Garden",
+            "Darkroot Basin",
+            "Depths",
+            "Blighttown Catwalk",
+            "Blighttown Swap",
+            "Quelaag\'s Domain - DaughterOfChaos",
+            "The Great Hollow",
+            "Ash Lake",
+            "Ash Lake - Stone Dragon",
+            "Demon Ruins - Entrance",
+            "Demon Ruins - Staircase",
+            "Demon Ruins - Catacombs",
+            "Lost Izalith - Lava Pits",
+            "Lost Izalith - 2 (illusory wall)",
+            "Lost Izalith Heart of Chaos",
+            "Sen\'s Fortress",
+            "Anor Londo",
+            "Anor Londo Darkmoon Tomb",
+            "Anor Londo Residence",
+            "Anor Londo Chamber of the Princess",
+            "Painted World of Ariamis",
+            "The Duke\'s Archives 1 (entrance)",
+            "The Duke\'s Archives 2 (prison cell)",
+            "The Duke\'s Archives 3 (balcony)",
+            "Crystal Cave",
+            "Catacombs 1 (necromancer)",
+            "Catacombs 2 (illusory wall)",
+            "Tomb of the Giants - 1 (patches)",
+            "Tomb of the Giants - 2",
+            "Tomb of the Giants - Altar of the Gravelord",
+            "The Abyss",
+            "Oolacile - Sanctuary Garden",
+            "Oolacile - Sanctuary",
+            "Oolacile - Township",
+            "Oolacile - Township Dungeon",
+            "Chasm of the Abyss"});
+            this.comboBoxBonfireDs1.Location = new System.Drawing.Point(83, 6);
+            this.comboBoxBonfireDs1.Name = "comboBoxBonfireDs1";
+            this.comboBoxBonfireDs1.Size = new System.Drawing.Size(361, 21);
+            this.comboBoxBonfireDs1.TabIndex = 9;
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(36, 10);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(39, 13);
+            this.label64.TabIndex = 8;
+            this.label64.Text = "bonfire";
             // 
             // panelItemDs1
             // 
@@ -3402,397 +3805,6 @@
             this.listBoxItemDs1.TabIndex = 7;
             this.listBoxItemDs1.DoubleClick += new System.EventHandler(this.listBoxItemDs1_DoubleClick);
             // 
-            // panelBonfireDs1
-            // 
-            this.panelBonfireDs1.Controls.Add(this.label74);
-            this.panelBonfireDs1.Controls.Add(this.comboBoxStateDs1);
-            this.panelBonfireDs1.Controls.Add(this.listBoxBonfireDs1);
-            this.panelBonfireDs1.Controls.Add(this.btnAddBonfireDs1);
-            this.panelBonfireDs1.Controls.Add(this.label63);
-            this.panelBonfireDs1.Controls.Add(this.comboBoxHowBonfireDs1);
-            this.panelBonfireDs1.Controls.Add(this.comboBoxBonfireDs1);
-            this.panelBonfireDs1.Controls.Add(this.label64);
-            this.panelBonfireDs1.Location = new System.Drawing.Point(42, 90);
-            this.panelBonfireDs1.Name = "panelBonfireDs1";
-            this.panelBonfireDs1.Size = new System.Drawing.Size(504, 240);
-            this.panelBonfireDs1.TabIndex = 25;
-            // 
-            // label74
-            // 
-            this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(125, 37);
-            this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(30, 13);
-            this.label74.TabIndex = 18;
-            this.label74.Text = "state";
-            // 
-            // comboBoxStateDs1
-            // 
-            this.comboBoxStateDs1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.comboBoxStateDs1.FormattingEnabled = true;
-            this.comboBoxStateDs1.Items.AddRange(new object[] {
-            "Discovered",
-            "Unlocked (R)",
-            "Kindled 1",
-            "Kindled 2",
-            "Kindled 3"});
-            this.comboBoxStateDs1.Location = new System.Drawing.Point(165, 34);
-            this.comboBoxStateDs1.Name = "comboBoxStateDs1";
-            this.comboBoxStateDs1.Size = new System.Drawing.Size(99, 21);
-            this.comboBoxStateDs1.TabIndex = 17;
-            // 
-            // listBoxBonfireDs1
-            // 
-            this.listBoxBonfireDs1.BackColor = System.Drawing.SystemColors.Control;
-            this.listBoxBonfireDs1.FormattingEnabled = true;
-            this.listBoxBonfireDs1.Location = new System.Drawing.Point(8, 88);
-            this.listBoxBonfireDs1.Name = "listBoxBonfireDs1";
-            this.listBoxBonfireDs1.Size = new System.Drawing.Size(489, 147);
-            this.listBoxBonfireDs1.TabIndex = 16;
-            this.listBoxBonfireDs1.DoubleClick += new System.EventHandler(this.listBoxBonfireDs1_DoubleClick);
-            // 
-            // btnAddBonfireDs1
-            // 
-            this.btnAddBonfireDs1.Location = new System.Drawing.Point(213, 61);
-            this.btnAddBonfireDs1.Name = "btnAddBonfireDs1";
-            this.btnAddBonfireDs1.Size = new System.Drawing.Size(100, 21);
-            this.btnAddBonfireDs1.TabIndex = 15;
-            this.btnAddBonfireDs1.Text = "Add";
-            this.btnAddBonfireDs1.UseVisualStyleBackColor = true;
-            this.btnAddBonfireDs1.Click += new System.EventHandler(this.btnAddBonfireDs1_Click);
-            // 
-            // label63
-            // 
-            this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(387, 37);
-            this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(27, 13);
-            this.label63.TabIndex = 13;
-            this.label63.Text = "how";
-            // 
-            // comboBoxHowBonfireDs1
-            // 
-            this.comboBoxHowBonfireDs1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.comboBoxHowBonfireDs1.FormattingEnabled = true;
-            this.comboBoxHowBonfireDs1.Items.AddRange(new object[] {
-            "Inmediatly",
-            "Loading game after"});
-            this.comboBoxHowBonfireDs1.Location = new System.Drawing.Point(270, 34);
-            this.comboBoxHowBonfireDs1.Name = "comboBoxHowBonfireDs1";
-            this.comboBoxHowBonfireDs1.Size = new System.Drawing.Size(110, 21);
-            this.comboBoxHowBonfireDs1.TabIndex = 12;
-            // 
-            // comboBoxBonfireDs1
-            // 
-            this.comboBoxBonfireDs1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxBonfireDs1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.comboBoxBonfireDs1.FormattingEnabled = true;
-            this.comboBoxBonfireDs1.Items.AddRange(new object[] {
-            "Undead Asylum - Courtyard",
-            "Undead Asylum - Interior",
-            "Firelink Shrine",
-            "Firelink Altar - Lordvessel",
-            "Undead Burg",
-            "Undead Burg - Sunlight Altar",
-            "Undead Parish",
-            "Darkroot Garden",
-            "Darkroot Basin",
-            "Depths",
-            "Blighttown Catwalk",
-            "Blighttown Swap",
-            "Quelaag\'s Domain - DaughterOfChaos",
-            "The Great Hollow",
-            "Ash Lake",
-            "Ash Lake - Stone Dragon",
-            "Demon Ruins - Entrance",
-            "Demon Ruins - Staircase",
-            "Demon Ruins - Catacombs",
-            "Lost Izalith - Lava Pits",
-            "Lost Izalith - 2 (illusory wall)",
-            "Lost Izalith Heart of Chaos",
-            "Sen\'s Fortress",
-            "Anor Londo",
-            "Anor Londo Darkmoon Tomb",
-            "Anor Londo Residence",
-            "Anor Londo Chamber of the Princess",
-            "Painted World of Ariamis",
-            "The Duke\'s Archives 1 (entrance)",
-            "The Duke\'s Archives 2 (prison cell)",
-            "The Duke\'s Archives 3 (balcony)",
-            "Crystal Cave",
-            "Catacombs 1 (necromancer)",
-            "Catacombs 2 (illusory wall)",
-            "Tomb of the Giants - 1 (patches)",
-            "Tomb of the Giants - 2",
-            "Tomb of the Giants - Altar of the Gravelord",
-            "The Abyss",
-            "Oolacile - Sanctuary Garden",
-            "Oolacile - Sanctuary",
-            "Oolacile - Township",
-            "Oolacile - Township Dungeon",
-            "Chasm of the Abyss"});
-            this.comboBoxBonfireDs1.Location = new System.Drawing.Point(83, 7);
-            this.comboBoxBonfireDs1.Name = "comboBoxBonfireDs1";
-            this.comboBoxBonfireDs1.Size = new System.Drawing.Size(361, 21);
-            this.comboBoxBonfireDs1.TabIndex = 9;
-            // 
-            // label64
-            // 
-            this.label64.AutoSize = true;
-            this.label64.Location = new System.Drawing.Point(36, 11);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(39, 13);
-            this.label64.TabIndex = 8;
-            this.label64.Text = "bonfire";
-            // 
-            // panelPositionDs1
-            // 
-            this.panelPositionDs1.Controls.Add(this.label68);
-            this.panelPositionDs1.Controls.Add(this.label69);
-            this.panelPositionDs1.Controls.Add(this.label70);
-            this.panelPositionDs1.Controls.Add(this.label71);
-            this.panelPositionDs1.Controls.Add(this.comboBoxHowPositionsDs1);
-            this.panelPositionDs1.Controls.Add(this.comboBoxMarginDs1);
-            this.panelPositionDs1.Controls.Add(this.listBoxPositionsDs1);
-            this.panelPositionDs1.Controls.Add(this.btnAddPositionDs1);
-            this.panelPositionDs1.Controls.Add(this.btnGetPositionDs1);
-            this.panelPositionDs1.Controls.Add(this.textBoxZDs1);
-            this.panelPositionDs1.Controls.Add(this.textBoxYDs1);
-            this.panelPositionDs1.Controls.Add(this.textBoxXDs1);
-            this.panelPositionDs1.Location = new System.Drawing.Point(43, 89);
-            this.panelPositionDs1.Name = "panelPositionDs1";
-            this.panelPositionDs1.Size = new System.Drawing.Size(505, 244);
-            this.panelPositionDs1.TabIndex = 27;
-            // 
-            // label68
-            // 
-            this.label68.AutoSize = true;
-            this.label68.Location = new System.Drawing.Point(219, 1);
-            this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(66, 13);
-            this.label68.TabIndex = 12;
-            this.label68.Text = "Coordinates:";
-            // 
-            // label69
-            // 
-            this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(383, 19);
-            this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(39, 13);
-            this.label69.TabIndex = 11;
-            this.label69.Text = "Margin";
-            // 
-            // label70
-            // 
-            this.label70.AutoSize = true;
-            this.label70.Location = new System.Drawing.Point(185, 19);
-            this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(130, 13);
-            this.label70.TabIndex = 10;
-            this.label70.Text = "X                 Y                 Z";
-            // 
-            // label71
-            // 
-            this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(77, 19);
-            this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(32, 13);
-            this.label71.TabIndex = 9;
-            this.label71.Text = "How:";
-            // 
-            // comboBoxHowPositionsDs1
-            // 
-            this.comboBoxHowPositionsDs1.BackColor = System.Drawing.Color.LightGray;
-            this.comboBoxHowPositionsDs1.FormattingEnabled = true;
-            this.comboBoxHowPositionsDs1.Items.AddRange(new object[] {
-            "Inmediatly",
-            "Loading game after"});
-            this.comboBoxHowPositionsDs1.Location = new System.Drawing.Point(36, 34);
-            this.comboBoxHowPositionsDs1.Name = "comboBoxHowPositionsDs1";
-            this.comboBoxHowPositionsDs1.Size = new System.Drawing.Size(110, 21);
-            this.comboBoxHowPositionsDs1.TabIndex = 8;
-            // 
-            // comboBoxMarginDs1
-            // 
-            this.comboBoxMarginDs1.BackColor = System.Drawing.Color.LightGray;
-            this.comboBoxMarginDs1.FormattingEnabled = true;
-            this.comboBoxMarginDs1.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3 (R)",
-            "4 (R)",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10"});
-            this.comboBoxMarginDs1.Location = new System.Drawing.Point(351, 35);
-            this.comboBoxMarginDs1.Name = "comboBoxMarginDs1";
-            this.comboBoxMarginDs1.Size = new System.Drawing.Size(110, 21);
-            this.comboBoxMarginDs1.TabIndex = 7;
-            this.comboBoxMarginDs1.SelectedIndexChanged += new System.EventHandler(this.comboBoxMarginDs1_SelectedIndexChanged);
-            // 
-            // listBoxPositionsDs1
-            // 
-            this.listBoxPositionsDs1.BackColor = System.Drawing.SystemColors.Control;
-            this.listBoxPositionsDs1.FormattingEnabled = true;
-            this.listBoxPositionsDs1.Location = new System.Drawing.Point(3, 90);
-            this.listBoxPositionsDs1.Name = "listBoxPositionsDs1";
-            this.listBoxPositionsDs1.Size = new System.Drawing.Size(495, 147);
-            this.listBoxPositionsDs1.TabIndex = 6;
-            this.listBoxPositionsDs1.DoubleClick += new System.EventHandler(this.listBoxPositionDs1_DoubleClick);
-            // 
-            // btnAddPositionDs1
-            // 
-            this.btnAddPositionDs1.Location = new System.Drawing.Point(248, 63);
-            this.btnAddPositionDs1.Name = "btnAddPositionDs1";
-            this.btnAddPositionDs1.Size = new System.Drawing.Size(100, 21);
-            this.btnAddPositionDs1.TabIndex = 5;
-            this.btnAddPositionDs1.Text = "Add";
-            this.btnAddPositionDs1.UseVisualStyleBackColor = true;
-            this.btnAddPositionDs1.Click += new System.EventHandler(this.btnAddPositionDs1_Click);
-            // 
-            // btnGetPositionDs1
-            // 
-            this.btnGetPositionDs1.Location = new System.Drawing.Point(142, 63);
-            this.btnGetPositionDs1.Name = "btnGetPositionDs1";
-            this.btnGetPositionDs1.Size = new System.Drawing.Size(100, 21);
-            this.btnGetPositionDs1.TabIndex = 4;
-            this.btnGetPositionDs1.Text = "Get Position";
-            this.btnGetPositionDs1.UseVisualStyleBackColor = true;
-            this.btnGetPositionDs1.Click += new System.EventHandler(this.btnGetPositionDs1_Click);
-            // 
-            // textBoxZDs1
-            // 
-            this.textBoxZDs1.BackColor = System.Drawing.Color.LightGray;
-            this.textBoxZDs1.Location = new System.Drawing.Point(280, 35);
-            this.textBoxZDs1.Name = "textBoxZDs1";
-            this.textBoxZDs1.ReadOnly = true;
-            this.textBoxZDs1.Size = new System.Drawing.Size(52, 20);
-            this.textBoxZDs1.TabIndex = 3;
-            // 
-            // textBoxYDs1
-            // 
-            this.textBoxYDs1.BackColor = System.Drawing.Color.LightGray;
-            this.textBoxYDs1.Location = new System.Drawing.Point(222, 35);
-            this.textBoxYDs1.Name = "textBoxYDs1";
-            this.textBoxYDs1.ReadOnly = true;
-            this.textBoxYDs1.Size = new System.Drawing.Size(52, 20);
-            this.textBoxYDs1.TabIndex = 2;
-            // 
-            // textBoxXDs1
-            // 
-            this.textBoxXDs1.BackColor = System.Drawing.Color.LightGray;
-            this.textBoxXDs1.Location = new System.Drawing.Point(164, 35);
-            this.textBoxXDs1.Name = "textBoxXDs1";
-            this.textBoxXDs1.ReadOnly = true;
-            this.textBoxXDs1.Size = new System.Drawing.Size(52, 20);
-            this.textBoxXDs1.TabIndex = 0;
-            // 
-            // panelLvlDs1
-            // 
-            this.panelLvlDs1.Controls.Add(this.label65);
-            this.panelLvlDs1.Controls.Add(this.textBoxValueDs1);
-            this.panelLvlDs1.Controls.Add(this.listBoxAttributesDs1);
-            this.panelLvlDs1.Controls.Add(this.btnAddAttributeDs1);
-            this.panelLvlDs1.Controls.Add(this.label66);
-            this.panelLvlDs1.Controls.Add(this.comboBoxHowAttributesDs1);
-            this.panelLvlDs1.Controls.Add(this.comboBoxAttributesDs1);
-            this.panelLvlDs1.Controls.Add(this.label67);
-            this.panelLvlDs1.Location = new System.Drawing.Point(43, 89);
-            this.panelLvlDs1.Name = "panelLvlDs1";
-            this.panelLvlDs1.Size = new System.Drawing.Size(503, 239);
-            this.panelLvlDs1.TabIndex = 26;
-            // 
-            // label65
-            // 
-            this.label65.AutoSize = true;
-            this.label65.Location = new System.Drawing.Point(108, 34);
-            this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(33, 13);
-            this.label65.TabIndex = 24;
-            this.label65.Text = "value";
-            // 
-            // textBoxValueDs1
-            // 
-            this.textBoxValueDs1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBoxValueDs1.Location = new System.Drawing.Point(150, 31);
-            this.textBoxValueDs1.Name = "textBoxValueDs1";
-            this.textBoxValueDs1.Size = new System.Drawing.Size(100, 20);
-            this.textBoxValueDs1.TabIndex = 23;
-            // 
-            // listBoxAttributesDs1
-            // 
-            this.listBoxAttributesDs1.BackColor = System.Drawing.SystemColors.Control;
-            this.listBoxAttributesDs1.FormattingEnabled = true;
-            this.listBoxAttributesDs1.Location = new System.Drawing.Point(7, 86);
-            this.listBoxAttributesDs1.Name = "listBoxAttributesDs1";
-            this.listBoxAttributesDs1.Size = new System.Drawing.Size(489, 147);
-            this.listBoxAttributesDs1.TabIndex = 22;
-            this.listBoxAttributesDs1.DoubleClick += new System.EventHandler(this.listBoxAttributeDs1_DoubleClick);
-            // 
-            // btnAddAttributeDs1
-            // 
-            this.btnAddAttributeDs1.Location = new System.Drawing.Point(212, 59);
-            this.btnAddAttributeDs1.Name = "btnAddAttributeDs1";
-            this.btnAddAttributeDs1.Size = new System.Drawing.Size(100, 21);
-            this.btnAddAttributeDs1.TabIndex = 21;
-            this.btnAddAttributeDs1.Text = "Add";
-            this.btnAddAttributeDs1.UseVisualStyleBackColor = true;
-            this.btnAddAttributeDs1.Click += new System.EventHandler(this.btnAddAttributeDs1_Click);
-            // 
-            // label66
-            // 
-            this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(385, 33);
-            this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(27, 13);
-            this.label66.TabIndex = 20;
-            this.label66.Text = "how";
-            // 
-            // comboBoxHowAttributesDs1
-            // 
-            this.comboBoxHowAttributesDs1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.comboBoxHowAttributesDs1.FormattingEnabled = true;
-            this.comboBoxHowAttributesDs1.Items.AddRange(new object[] {
-            "Inmediatly",
-            "Loading game after"});
-            this.comboBoxHowAttributesDs1.Location = new System.Drawing.Point(256, 30);
-            this.comboBoxHowAttributesDs1.Name = "comboBoxHowAttributesDs1";
-            this.comboBoxHowAttributesDs1.Size = new System.Drawing.Size(117, 21);
-            this.comboBoxHowAttributesDs1.TabIndex = 19;
-            // 
-            // comboBoxAttributesDs1
-            // 
-            this.comboBoxAttributesDs1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxAttributesDs1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.comboBoxAttributesDs1.FormattingEnabled = true;
-            this.comboBoxAttributesDs1.Items.AddRange(new object[] {
-            "Vitality",
-            "Attunement",
-            "Endurance",
-            "Strength",
-            "Dexterity",
-            "Resistance",
-            "Intelligence",
-            "Faith",
-            "SoulLevel",
-            "Humanity"});
-            this.comboBoxAttributesDs1.Location = new System.Drawing.Point(82, 5);
-            this.comboBoxAttributesDs1.Name = "comboBoxAttributesDs1";
-            this.comboBoxAttributesDs1.Size = new System.Drawing.Size(361, 21);
-            this.comboBoxAttributesDs1.TabIndex = 18;
-            // 
-            // label67
-            // 
-            this.label67.AutoSize = true;
-            this.label67.Location = new System.Drawing.Point(35, 9);
-            this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(45, 13);
-            this.label67.TabIndex = 17;
-            this.label67.Text = "attribute";
-            // 
             // panelBossDs1
             // 
             this.panelBossDs1.Controls.Add(this.btnAddBossDs1);
@@ -3961,7 +3973,7 @@
             // tabDs2
             // 
             this.tabDs2.BackColor = System.Drawing.SystemColors.Control;
-            this.tabDs2.Controls.Add(this.panelAttributeDs2);
+            this.tabDs2.Controls.Add(this.panelLvlDs2);
             this.tabDs2.Controls.Add(this.panelPositionDs2);
             this.tabDs2.Controls.Add(this.panelBossDS2);
             this.tabDs2.Controls.Add(this.btnRefreshDs2);
@@ -3977,20 +3989,20 @@
             this.tabDs2.TabIndex = 0;
             this.tabDs2.Text = "Dark Souls 2";
             // 
-            // panelAttributeDs2
+            // panelLvlDs2
             // 
-            this.panelAttributeDs2.Controls.Add(this.label52);
-            this.panelAttributeDs2.Controls.Add(this.textBoxValueDs2);
-            this.panelAttributeDs2.Controls.Add(this.listBoxAttributeDs2);
-            this.panelAttributeDs2.Controls.Add(this.btnAddAttributeDs2);
-            this.panelAttributeDs2.Controls.Add(this.label53);
-            this.panelAttributeDs2.Controls.Add(this.comboBoxHowAttributeDs2);
-            this.panelAttributeDs2.Controls.Add(this.comboBoxAttributeDs2);
-            this.panelAttributeDs2.Controls.Add(this.label54);
-            this.panelAttributeDs2.Location = new System.Drawing.Point(40, 92);
-            this.panelAttributeDs2.Name = "panelAttributeDs2";
-            this.panelAttributeDs2.Size = new System.Drawing.Size(503, 239);
-            this.panelAttributeDs2.TabIndex = 25;
+            this.panelLvlDs2.Controls.Add(this.label52);
+            this.panelLvlDs2.Controls.Add(this.textBoxValueDs2);
+            this.panelLvlDs2.Controls.Add(this.listBoxAttributeDs2);
+            this.panelLvlDs2.Controls.Add(this.btnAddAttributeDs2);
+            this.panelLvlDs2.Controls.Add(this.label53);
+            this.panelLvlDs2.Controls.Add(this.comboBoxHowAttributeDs2);
+            this.panelLvlDs2.Controls.Add(this.comboBoxAttributeDs2);
+            this.panelLvlDs2.Controls.Add(this.label54);
+            this.panelLvlDs2.Location = new System.Drawing.Point(40, 92);
+            this.panelLvlDs2.Name = "panelLvlDs2";
+            this.panelLvlDs2.Size = new System.Drawing.Size(503, 239);
+            this.panelLvlDs2.TabIndex = 25;
             // 
             // label52
             // 
@@ -4406,8 +4418,8 @@
             // tabDs3
             // 
             this.tabDs3.BackColor = System.Drawing.SystemColors.Control;
-            this.tabDs3.Controls.Add(this.panelCfDs3);
             this.tabDs3.Controls.Add(this.panelLvlDs3);
+            this.tabDs3.Controls.Add(this.panelCfDs3);
             this.tabDs3.Controls.Add(this.panelBonfireDs3);
             this.tabDs3.Controls.Add(this.panelBossDs3);
             this.tabDs3.Controls.Add(this.btnRefreshDS3);
@@ -4422,6 +4434,110 @@
             this.tabDs3.Size = new System.Drawing.Size(587, 351);
             this.tabDs3.TabIndex = 1;
             this.tabDs3.Text = "Dark Souls 3";
+            // 
+            // panelLvlDs3
+            // 
+            this.panelLvlDs3.Controls.Add(this.label45);
+            this.panelLvlDs3.Controls.Add(this.textBoxValueDs3);
+            this.panelLvlDs3.Controls.Add(this.listBoxAttributesDs3);
+            this.panelLvlDs3.Controls.Add(this.btnAddAttributeDs3);
+            this.panelLvlDs3.Controls.Add(this.label43);
+            this.panelLvlDs3.Controls.Add(this.comboBoxHowAttributeDs3);
+            this.panelLvlDs3.Controls.Add(this.comboBoxAttributeDs3);
+            this.panelLvlDs3.Controls.Add(this.label44);
+            this.panelLvlDs3.Location = new System.Drawing.Point(44, 89);
+            this.panelLvlDs3.Name = "panelLvlDs3";
+            this.panelLvlDs3.Size = new System.Drawing.Size(503, 239);
+            this.panelLvlDs3.TabIndex = 23;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(109, 34);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(33, 13);
+            this.label45.TabIndex = 24;
+            this.label45.Text = "value";
+            // 
+            // textBoxValueDs3
+            // 
+            this.textBoxValueDs3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.textBoxValueDs3.Location = new System.Drawing.Point(150, 31);
+            this.textBoxValueDs3.Name = "textBoxValueDs3";
+            this.textBoxValueDs3.Size = new System.Drawing.Size(108, 20);
+            this.textBoxValueDs3.TabIndex = 23;
+            // 
+            // listBoxAttributesDs3
+            // 
+            this.listBoxAttributesDs3.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxAttributesDs3.FormattingEnabled = true;
+            this.listBoxAttributesDs3.Location = new System.Drawing.Point(7, 86);
+            this.listBoxAttributesDs3.Name = "listBoxAttributesDs3";
+            this.listBoxAttributesDs3.Size = new System.Drawing.Size(489, 147);
+            this.listBoxAttributesDs3.TabIndex = 22;
+            this.listBoxAttributesDs3.DoubleClick += new System.EventHandler(this.listBoxAttributesDs3_DoubleClick);
+            // 
+            // btnAddAttributeDs3
+            // 
+            this.btnAddAttributeDs3.Location = new System.Drawing.Point(211, 59);
+            this.btnAddAttributeDs3.Name = "btnAddAttributeDs3";
+            this.btnAddAttributeDs3.Size = new System.Drawing.Size(100, 21);
+            this.btnAddAttributeDs3.TabIndex = 21;
+            this.btnAddAttributeDs3.Text = "Add";
+            this.btnAddAttributeDs3.UseVisualStyleBackColor = true;
+            this.btnAddAttributeDs3.Click += new System.EventHandler(this.btnAddAttributeDs3_Click);
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(386, 34);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(27, 13);
+            this.label43.TabIndex = 20;
+            this.label43.Text = "how";
+            // 
+            // comboBoxHowAttributeDs3
+            // 
+            this.comboBoxHowAttributeDs3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.comboBoxHowAttributeDs3.FormattingEnabled = true;
+            this.comboBoxHowAttributeDs3.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowAttributeDs3.Location = new System.Drawing.Point(264, 30);
+            this.comboBoxHowAttributeDs3.Name = "comboBoxHowAttributeDs3";
+            this.comboBoxHowAttributeDs3.Size = new System.Drawing.Size(117, 21);
+            this.comboBoxHowAttributeDs3.TabIndex = 19;
+            // 
+            // comboBoxAttributeDs3
+            // 
+            this.comboBoxAttributeDs3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxAttributeDs3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.comboBoxAttributeDs3.FormattingEnabled = true;
+            this.comboBoxAttributeDs3.Items.AddRange(new object[] {
+            "Vigor",
+            "Attunement",
+            "Endurance",
+            "Vitality",
+            "Strength",
+            "Dexterity",
+            "Intelligence",
+            "Faith",
+            "Luck",
+            "SoulLevel",
+            "Humanity"});
+            this.comboBoxAttributeDs3.Location = new System.Drawing.Point(82, 5);
+            this.comboBoxAttributeDs3.Name = "comboBoxAttributeDs3";
+            this.comboBoxAttributeDs3.Size = new System.Drawing.Size(361, 21);
+            this.comboBoxAttributeDs3.TabIndex = 18;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(35, 9);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(45, 13);
+            this.label44.TabIndex = 17;
+            this.label44.Text = "attribute";
             // 
             // panelCfDs3
             // 
@@ -4504,110 +4620,6 @@
             this.textBoxIdDs3.Name = "textBoxIdDs3";
             this.textBoxIdDs3.Size = new System.Drawing.Size(100, 20);
             this.textBoxIdDs3.TabIndex = 0;
-            // 
-            // panelLvlDs3
-            // 
-            this.panelLvlDs3.Controls.Add(this.label45);
-            this.panelLvlDs3.Controls.Add(this.textBoxValueDs3);
-            this.panelLvlDs3.Controls.Add(this.listBoxAttributesDs3);
-            this.panelLvlDs3.Controls.Add(this.btnAddAttributeDs3);
-            this.panelLvlDs3.Controls.Add(this.label43);
-            this.panelLvlDs3.Controls.Add(this.comboBoxHowAttributeDs3);
-            this.panelLvlDs3.Controls.Add(this.comboBoxAttributeDs3);
-            this.panelLvlDs3.Controls.Add(this.label44);
-            this.panelLvlDs3.Location = new System.Drawing.Point(44, 89);
-            this.panelLvlDs3.Name = "panelLvlDs3";
-            this.panelLvlDs3.Size = new System.Drawing.Size(503, 239);
-            this.panelLvlDs3.TabIndex = 23;
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(108, 34);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(33, 13);
-            this.label45.TabIndex = 24;
-            this.label45.Text = "value";
-            // 
-            // textBoxValueDs3
-            // 
-            this.textBoxValueDs3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBoxValueDs3.Location = new System.Drawing.Point(150, 31);
-            this.textBoxValueDs3.Name = "textBoxValueDs3";
-            this.textBoxValueDs3.Size = new System.Drawing.Size(100, 20);
-            this.textBoxValueDs3.TabIndex = 23;
-            // 
-            // listBoxAttributesDs3
-            // 
-            this.listBoxAttributesDs3.BackColor = System.Drawing.SystemColors.Control;
-            this.listBoxAttributesDs3.FormattingEnabled = true;
-            this.listBoxAttributesDs3.Location = new System.Drawing.Point(7, 86);
-            this.listBoxAttributesDs3.Name = "listBoxAttributesDs3";
-            this.listBoxAttributesDs3.Size = new System.Drawing.Size(489, 147);
-            this.listBoxAttributesDs3.TabIndex = 22;
-            this.listBoxAttributesDs3.DoubleClick += new System.EventHandler(this.listBoxAttributesDs3_DoubleClick);
-            // 
-            // btnAddAttributeDs3
-            // 
-            this.btnAddAttributeDs3.Location = new System.Drawing.Point(212, 59);
-            this.btnAddAttributeDs3.Name = "btnAddAttributeDs3";
-            this.btnAddAttributeDs3.Size = new System.Drawing.Size(100, 21);
-            this.btnAddAttributeDs3.TabIndex = 21;
-            this.btnAddAttributeDs3.Text = "Add";
-            this.btnAddAttributeDs3.UseVisualStyleBackColor = true;
-            this.btnAddAttributeDs3.Click += new System.EventHandler(this.btnAddAttributeDs3_Click);
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(385, 33);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(27, 13);
-            this.label43.TabIndex = 20;
-            this.label43.Text = "how";
-            // 
-            // comboBoxHowAttributeDs3
-            // 
-            this.comboBoxHowAttributeDs3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.comboBoxHowAttributeDs3.FormattingEnabled = true;
-            this.comboBoxHowAttributeDs3.Items.AddRange(new object[] {
-            "Inmediatly",
-            "Loading game after"});
-            this.comboBoxHowAttributeDs3.Location = new System.Drawing.Point(256, 30);
-            this.comboBoxHowAttributeDs3.Name = "comboBoxHowAttributeDs3";
-            this.comboBoxHowAttributeDs3.Size = new System.Drawing.Size(117, 21);
-            this.comboBoxHowAttributeDs3.TabIndex = 19;
-            // 
-            // comboBoxAttributeDs3
-            // 
-            this.comboBoxAttributeDs3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxAttributeDs3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.comboBoxAttributeDs3.FormattingEnabled = true;
-            this.comboBoxAttributeDs3.Items.AddRange(new object[] {
-            "Vigor",
-            "Attunement",
-            "Endurance",
-            "Vitality",
-            "Strength",
-            "Dexterity",
-            "Intelligence",
-            "Faith",
-            "Luck",
-            "SoulLevel",
-            "Humanity"});
-            this.comboBoxAttributeDs3.Location = new System.Drawing.Point(82, 5);
-            this.comboBoxAttributeDs3.Name = "comboBoxAttributeDs3";
-            this.comboBoxAttributeDs3.Size = new System.Drawing.Size(361, 21);
-            this.comboBoxAttributeDs3.TabIndex = 18;
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(35, 9);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(45, 13);
-            this.label44.TabIndex = 17;
-            this.label44.Text = "attribute";
             // 
             // panelBonfireDs3
             // 
@@ -5869,8 +5881,8 @@
             // tabHollow
             // 
             this.tabHollow.BackColor = System.Drawing.SystemColors.Control;
-            this.tabHollow.Controls.Add(this.panelBossH);
             this.tabHollow.Controls.Add(this.panelPositionH);
+            this.tabHollow.Controls.Add(this.panelBossH);
             this.tabHollow.Controls.Add(this.panelItemH);
             this.tabHollow.Controls.Add(this.refreshHollow);
             this.tabHollow.Controls.Add(this.btn_DesactiveAllH);
@@ -5883,6 +5895,125 @@
             this.tabHollow.Size = new System.Drawing.Size(587, 351);
             this.tabHollow.TabIndex = 5;
             this.tabHollow.Text = "Hollow Knight";
+            // 
+            // panelPositionH
+            // 
+            this.panelPositionH.Controls.Add(this.label29);
+            this.panelPositionH.Controls.Add(this.label26);
+            this.panelPositionH.Controls.Add(this.label27);
+            this.panelPositionH.Controls.Add(this.comboBoxMarginH);
+            this.panelPositionH.Controls.Add(this.listBoxPositionH);
+            this.panelPositionH.Controls.Add(this.btn_AddPositionH);
+            this.panelPositionH.Controls.Add(this.btn_getPositionH);
+            this.panelPositionH.Controls.Add(this.textBoxXh);
+            this.panelPositionH.Controls.Add(this.textBoxYh);
+            this.panelPositionH.Controls.Add(this.textBoxSh);
+            this.panelPositionH.Location = new System.Drawing.Point(43, 82);
+            this.panelPositionH.Name = "panelPositionH";
+            this.panelPositionH.Size = new System.Drawing.Size(506, 255);
+            this.panelPositionH.TabIndex = 20;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(136, 26);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(238, 13);
+            this.label29.TabIndex = 24;
+            this.label29.Text = "X                                 Y                             Scene";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(222, 9);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(66, 13);
+            this.label26.TabIndex = 23;
+            this.label26.Text = "Coordinates:";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(440, 49);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(39, 13);
+            this.label27.TabIndex = 22;
+            this.label27.Text = "Margin";
+            // 
+            // comboBoxMarginH
+            // 
+            this.comboBoxMarginH.BackColor = System.Drawing.SystemColors.Control;
+            this.comboBoxMarginH.FormattingEnabled = true;
+            this.comboBoxMarginH.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3 (R)",
+            "4 (R)",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.comboBoxMarginH.Location = new System.Drawing.Point(425, 70);
+            this.comboBoxMarginH.Name = "comboBoxMarginH";
+            this.comboBoxMarginH.Size = new System.Drawing.Size(68, 21);
+            this.comboBoxMarginH.TabIndex = 19;
+            this.comboBoxMarginH.SelectedIndexChanged += new System.EventHandler(this.comboBoxMarginH_SelectedIndexChanged);
+            // 
+            // listBoxPositionH
+            // 
+            this.listBoxPositionH.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxPositionH.FormattingEnabled = true;
+            this.listBoxPositionH.Location = new System.Drawing.Point(6, 98);
+            this.listBoxPositionH.Name = "listBoxPositionH";
+            this.listBoxPositionH.Size = new System.Drawing.Size(495, 147);
+            this.listBoxPositionH.TabIndex = 18;
+            this.listBoxPositionH.DoubleClick += new System.EventHandler(this.listBoxPositionH_DoubleClick);
+            // 
+            // btn_AddPositionH
+            // 
+            this.btn_AddPositionH.Location = new System.Drawing.Point(251, 71);
+            this.btn_AddPositionH.Name = "btn_AddPositionH";
+            this.btn_AddPositionH.Size = new System.Drawing.Size(100, 21);
+            this.btn_AddPositionH.TabIndex = 17;
+            this.btn_AddPositionH.Text = "Add";
+            this.btn_AddPositionH.UseVisualStyleBackColor = true;
+            this.btn_AddPositionH.Click += new System.EventHandler(this.btn_AddPositionH_Click);
+            // 
+            // btn_getPositionH
+            // 
+            this.btn_getPositionH.Location = new System.Drawing.Point(145, 71);
+            this.btn_getPositionH.Name = "btn_getPositionH";
+            this.btn_getPositionH.Size = new System.Drawing.Size(100, 21);
+            this.btn_getPositionH.TabIndex = 16;
+            this.btn_getPositionH.Text = "Get Position";
+            this.btn_getPositionH.UseVisualStyleBackColor = true;
+            this.btn_getPositionH.Click += new System.EventHandler(this.btn_getPositionH_Click);
+            // 
+            // textBoxXh
+            // 
+            this.textBoxXh.Location = new System.Drawing.Point(93, 44);
+            this.textBoxXh.Name = "textBoxXh";
+            this.textBoxXh.ReadOnly = true;
+            this.textBoxXh.Size = new System.Drawing.Size(100, 20);
+            this.textBoxXh.TabIndex = 15;
+            // 
+            // textBoxYh
+            // 
+            this.textBoxYh.Location = new System.Drawing.Point(199, 44);
+            this.textBoxYh.Name = "textBoxYh";
+            this.textBoxYh.ReadOnly = true;
+            this.textBoxYh.Size = new System.Drawing.Size(100, 20);
+            this.textBoxYh.TabIndex = 14;
+            // 
+            // textBoxSh
+            // 
+            this.textBoxSh.Location = new System.Drawing.Point(305, 44);
+            this.textBoxSh.Name = "textBoxSh";
+            this.textBoxSh.ReadOnly = true;
+            this.textBoxSh.Size = new System.Drawing.Size(100, 20);
+            this.textBoxSh.TabIndex = 13;
             // 
             // panelBossH
             // 
@@ -6147,125 +6278,6 @@
             this.label6.Size = new System.Drawing.Size(35, 13);
             this.label6.TabIndex = 6;
             this.label6.Text = "select";
-            // 
-            // panelPositionH
-            // 
-            this.panelPositionH.Controls.Add(this.label29);
-            this.panelPositionH.Controls.Add(this.label26);
-            this.panelPositionH.Controls.Add(this.label27);
-            this.panelPositionH.Controls.Add(this.comboBoxMarginH);
-            this.panelPositionH.Controls.Add(this.listBoxPositionH);
-            this.panelPositionH.Controls.Add(this.btn_AddPositionH);
-            this.panelPositionH.Controls.Add(this.btn_getPositionH);
-            this.panelPositionH.Controls.Add(this.textBoxXh);
-            this.panelPositionH.Controls.Add(this.textBoxYh);
-            this.panelPositionH.Controls.Add(this.textBoxSh);
-            this.panelPositionH.Location = new System.Drawing.Point(43, 82);
-            this.panelPositionH.Name = "panelPositionH";
-            this.panelPositionH.Size = new System.Drawing.Size(506, 255);
-            this.panelPositionH.TabIndex = 20;
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(136, 26);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(238, 13);
-            this.label29.TabIndex = 24;
-            this.label29.Text = "X                                 Y                             Scene";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(222, 9);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(66, 13);
-            this.label26.TabIndex = 23;
-            this.label26.Text = "Coordinates:";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(440, 49);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(39, 13);
-            this.label27.TabIndex = 22;
-            this.label27.Text = "Margin";
-            // 
-            // comboBoxMarginH
-            // 
-            this.comboBoxMarginH.BackColor = System.Drawing.SystemColors.Control;
-            this.comboBoxMarginH.FormattingEnabled = true;
-            this.comboBoxMarginH.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3 (R)",
-            "4 (R)",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10"});
-            this.comboBoxMarginH.Location = new System.Drawing.Point(425, 70);
-            this.comboBoxMarginH.Name = "comboBoxMarginH";
-            this.comboBoxMarginH.Size = new System.Drawing.Size(68, 21);
-            this.comboBoxMarginH.TabIndex = 19;
-            this.comboBoxMarginH.SelectedIndexChanged += new System.EventHandler(this.comboBoxMarginH_SelectedIndexChanged);
-            // 
-            // listBoxPositionH
-            // 
-            this.listBoxPositionH.BackColor = System.Drawing.SystemColors.Control;
-            this.listBoxPositionH.FormattingEnabled = true;
-            this.listBoxPositionH.Location = new System.Drawing.Point(6, 98);
-            this.listBoxPositionH.Name = "listBoxPositionH";
-            this.listBoxPositionH.Size = new System.Drawing.Size(495, 147);
-            this.listBoxPositionH.TabIndex = 18;
-            this.listBoxPositionH.DoubleClick += new System.EventHandler(this.listBoxPositionH_DoubleClick);
-            // 
-            // btn_AddPositionH
-            // 
-            this.btn_AddPositionH.Location = new System.Drawing.Point(251, 71);
-            this.btn_AddPositionH.Name = "btn_AddPositionH";
-            this.btn_AddPositionH.Size = new System.Drawing.Size(100, 21);
-            this.btn_AddPositionH.TabIndex = 17;
-            this.btn_AddPositionH.Text = "Add";
-            this.btn_AddPositionH.UseVisualStyleBackColor = true;
-            this.btn_AddPositionH.Click += new System.EventHandler(this.btn_AddPositionH_Click);
-            // 
-            // btn_getPositionH
-            // 
-            this.btn_getPositionH.Location = new System.Drawing.Point(145, 71);
-            this.btn_getPositionH.Name = "btn_getPositionH";
-            this.btn_getPositionH.Size = new System.Drawing.Size(100, 21);
-            this.btn_getPositionH.TabIndex = 16;
-            this.btn_getPositionH.Text = "Get Position";
-            this.btn_getPositionH.UseVisualStyleBackColor = true;
-            this.btn_getPositionH.Click += new System.EventHandler(this.btn_getPositionH_Click);
-            // 
-            // textBoxXh
-            // 
-            this.textBoxXh.Location = new System.Drawing.Point(93, 44);
-            this.textBoxXh.Name = "textBoxXh";
-            this.textBoxXh.ReadOnly = true;
-            this.textBoxXh.Size = new System.Drawing.Size(100, 20);
-            this.textBoxXh.TabIndex = 15;
-            // 
-            // textBoxYh
-            // 
-            this.textBoxYh.Location = new System.Drawing.Point(199, 44);
-            this.textBoxYh.Name = "textBoxYh";
-            this.textBoxYh.ReadOnly = true;
-            this.textBoxYh.Size = new System.Drawing.Size(100, 20);
-            this.textBoxYh.TabIndex = 14;
-            // 
-            // textBoxSh
-            // 
-            this.textBoxSh.Location = new System.Drawing.Point(305, 44);
-            this.textBoxSh.Name = "textBoxSh";
-            this.textBoxSh.ReadOnly = true;
-            this.textBoxSh.Size = new System.Drawing.Size(100, 20);
-            this.textBoxSh.TabIndex = 13;
             // 
             // panelItemH
             // 
@@ -6903,30 +6915,30 @@
             this.panelCfSekiro.PerformLayout();
             this.tabDs1.ResumeLayout(false);
             this.tabDs1.PerformLayout();
-            this.panelItemDs1.ResumeLayout(false);
-            this.panelItemDs1.PerformLayout();
-            this.panelBonfireDs1.ResumeLayout(false);
-            this.panelBonfireDs1.PerformLayout();
             this.panelPositionDs1.ResumeLayout(false);
             this.panelPositionDs1.PerformLayout();
             this.panelLvlDs1.ResumeLayout(false);
             this.panelLvlDs1.PerformLayout();
+            this.panelBonfireDs1.ResumeLayout(false);
+            this.panelBonfireDs1.PerformLayout();
+            this.panelItemDs1.ResumeLayout(false);
+            this.panelItemDs1.PerformLayout();
             this.panelBossDs1.ResumeLayout(false);
             this.panelBossDs1.PerformLayout();
             this.tabDs2.ResumeLayout(false);
             this.tabDs2.PerformLayout();
-            this.panelAttributeDs2.ResumeLayout(false);
-            this.panelAttributeDs2.PerformLayout();
+            this.panelLvlDs2.ResumeLayout(false);
+            this.panelLvlDs2.PerformLayout();
             this.panelPositionDs2.ResumeLayout(false);
             this.panelPositionDs2.PerformLayout();
             this.panelBossDS2.ResumeLayout(false);
             this.panelBossDS2.PerformLayout();
             this.tabDs3.ResumeLayout(false);
             this.tabDs3.PerformLayout();
-            this.panelCfDs3.ResumeLayout(false);
-            this.panelCfDs3.PerformLayout();
             this.panelLvlDs3.ResumeLayout(false);
             this.panelLvlDs3.PerformLayout();
+            this.panelCfDs3.ResumeLayout(false);
+            this.panelCfDs3.PerformLayout();
             this.panelBonfireDs3.ResumeLayout(false);
             this.panelBonfireDs3.PerformLayout();
             this.panelBossDs3.ResumeLayout(false);
@@ -6943,14 +6955,14 @@
             this.panelBossER.PerformLayout();
             this.tabHollow.ResumeLayout(false);
             this.tabHollow.PerformLayout();
+            this.panelPositionH.ResumeLayout(false);
+            this.panelPositionH.PerformLayout();
             this.panelBossH.ResumeLayout(false);
             this.panelBossH.PerformLayout();
             this.groupBoxMBH.ResumeLayout(false);
             this.groupBoxPantheon.ResumeLayout(false);
             this.groupBoxPantheon.PerformLayout();
             this.groupBossH.ResumeLayout(false);
-            this.panelPositionH.ResumeLayout(false);
-            this.panelPositionH.PerformLayout();
             this.panelItemH.ResumeLayout(false);
             this.panelItemH.PerformLayout();
             this.groupBoxSkillsH.ResumeLayout(false);
@@ -7224,7 +7236,7 @@
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.ComboBox comboBoxHowBossDs2;
         private System.Windows.Forms.ListBox listBoxBossDs2;
-        private System.Windows.Forms.Panel panelAttributeDs2;
+        private System.Windows.Forms.Panel panelLvlDs2;
         private System.Windows.Forms.Label label52;
         private System.Windows.Forms.TextBox textBoxValueDs2;
         private System.Windows.Forms.ListBox listBoxAttributeDs2;
@@ -7374,5 +7386,6 @@
         private System.Windows.Forms.GroupBox groupBoxTMHollow;
         private System.Windows.Forms.RadioButton radioIGTHollow;
         private System.Windows.Forms.RadioButton radioRealTimerHollow;
+        private System.Windows.Forms.Button btnDesactiveAllTiming;
     }
 }

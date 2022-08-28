@@ -25,7 +25,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using SoulMemory.EldenRing;
 using System.Threading;
-using System.Windows.Forms;
 
 namespace HitCounterManager
 {
@@ -98,6 +97,7 @@ namespace HitCounterManager
 
         public SoulMemory.EldenRing.Position getCurrentPosition()
         {
+            getEldenStatusProcess(0);
             return elden.GetPosition();
         }
 
@@ -252,11 +252,11 @@ namespace HitCounterManager
         public void RefreshElden()
         {
             int delay = 2000;
-            _StatusElden = getEldenStatusProcess(delay);
+            getEldenStatusProcess(delay);
             while (_StatusProcedure && dataElden.enableSplitting)
             {
                 Thread.Sleep(10);
-                _StatusElden = getEldenStatusProcess(20000);
+                getEldenStatusProcess(20000);
                 if (!_StatusElden)
                 {
                     _writeMemory = false;

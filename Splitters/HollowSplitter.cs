@@ -26,7 +26,6 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Threading;
 using LiveSplit.HollowKnight;
-using System.Windows.Forms;
 
 namespace HitCounterManager
 {
@@ -83,10 +82,7 @@ namespace HitCounterManager
 
         public PointF getCurrentPosition()
         {
-            if (!dataHollow.enableSplitting)
-            {
-                manualRefreshPosition();
-            }
+            manualRefreshPosition();
             return this.currentPosition.position;
         }
 
@@ -201,8 +197,6 @@ namespace HitCounterManager
         
         }
 
-
-
         public void RemoveBoss(string boss)
         {
             dataHollow.bossToSplit.RemoveAll(i=> i.Title == boss);
@@ -310,11 +304,11 @@ namespace HitCounterManager
         public void RefreshHollow()
         {
             int delay = 2000;
-            _StatusHollow = getHollowStatusProcess(0);
+            getHollowStatusProcess(0);
             while (_StatusProcedure && dataHollow.enableSplitting)
             {
                 Thread.Sleep(10);
-                _StatusHollow = getHollowStatusProcess(delay);
+                getHollowStatusProcess(delay);
                 if (!_StatusHollow) { delay = 2000; } else { delay = 20000; }
             }
         }
@@ -360,6 +354,7 @@ namespace HitCounterManager
 
         private void manualRefreshPosition()
         {
+            getHollowStatusProcess(0);
             currentPosition.position = hollow.Memory.GetCameraTarget();
             currentPosition.sceneName = hollow.Memory.SceneName();
         }

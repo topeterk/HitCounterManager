@@ -25,7 +25,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 using SoulMemory.DarkSouls3;
-using System.Windows.Forms;
 
 namespace HitCounterManager
 {
@@ -254,7 +253,7 @@ namespace HitCounterManager
             while (_StatusProcedure && dataDs3.enableSplitting)
             {
                 Thread.Sleep(10);
-                _StatusDs3 = getDs3StatusProcess(delay);
+                getDs3StatusProcess(delay);
                 if (!_StatusDs3)
                 {
                     _writeMemory = false;

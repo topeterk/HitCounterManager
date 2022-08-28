@@ -25,7 +25,6 @@ using System.Threading.Tasks;
 using LiveSplit.UI.Components;
 using System.Windows.Forms;
 using System.Threading;
-using System.Timers;
 using System.Xml;
 
 namespace HitCounterManager
@@ -112,59 +111,5 @@ namespace HitCounterManager
              }
          }
          #endregion
-
-         #region ProfileManager
-         /*       /* Descarted Idea error in GetSettings/SetSettings and others
-          *       public string GetGame()
-         {
-             return asl.Script != null ? asl.Script.GameName(): String.Empty;
-         } 
-          *       public int GetDefault()
-                {
-                    return dataAsl.ProfileAsl.FindIndex(i => i._default == true);
-                }
-
-                public void AddGame(string game)
-                {
-                    if (!dataAsl.ProfileAsl.Exists(i => i.Game == game))
-                    {
-                        XmlDocument doc = new XmlDocument();
-                        DefinitionASL cGame = new DefinitionASL
-                        {
-                            Game = game,
-                            _default = true, 
-                            Node = asl.GetSettings(doc)
-
-                        };
-                        (dataAsl.ProfileAsl[dataAsl.ProfileAsl.Count - 1])._default = false;
-                        dataAsl.ProfileAsl.Add(cGame);
-                    }
-                    else
-                    {
-                        throw new Exception();
-                    }         
-                }
-
-                public void SetDefault(int position)
-                {
-                    dataAsl.ProfileAsl.Find(i => i._default == true)._default = false;
-                    dataAsl.ProfileAsl[position]._default = true;
-                    asl.SetSettings(dataAsl.ProfileAsl[position].Node);
-                }
-
-                public void RemoveGame(int position)
-                {
-                    if (dataAsl.ProfileAsl[position]._default)
-                    {
-                        dataAsl.ProfileAsl[0]._default = true;
-                    }
-                    dataAsl.ProfileAsl.RemoveAt(0);
-
-                 private void UpdateSettingsASL()
-                {
-                    dataAsl.ProfileAsl.Find(i => i.Node.ChildNodes[1].InnerText == asl.GetPathScript()).Node = asl.GetSettings(doc);
-                }
-                }*/
-                #endregion
     }
 }

@@ -24,7 +24,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
-using System.Windows.Forms;
 using SoulMemory.DarkSouls1;
 using SoulMemory;
 
@@ -111,8 +110,7 @@ namespace HitCounterManager
             dataDs1.positionsToSplit.Clear();
             dataDs1.itemToSplit.Clear();
             dataDs1.positionMargin = 3;
-            _runStarted = false;
-            
+            _runStarted = false;           
         }
 
         public void resetSplited()
@@ -217,6 +215,7 @@ namespace HitCounterManager
 
         public Vector3f getCurrentPosition()
         {
+            getDs1StatusProcess(0);
             return Ds1.GetPosition();
         }
 
@@ -302,11 +301,11 @@ namespace HitCounterManager
         public void RefreshDs1()
         {
             int delay = 2000;
-            _StatusDs1 = getDs1StatusProcess(delay);
+            getDs1StatusProcess(delay);
             while (_StatusProcedure && dataDs1.enableSplitting)
             {
                 Thread.Sleep(10);
-                _StatusDs1 = getDs1StatusProcess(delay);
+                getDs1StatusProcess(delay);
                 if (!_StatusDs1)
                 {
                     delay = 2000;
@@ -411,7 +410,6 @@ namespace HitCounterManager
                             SplitCheck();                          
                         }
                     }
-
                 }
             }
         }

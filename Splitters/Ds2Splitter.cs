@@ -209,10 +209,7 @@ namespace HitCounterManager
         
         public Vector3f getCurrentPosition()
         {
-            if (!_StatusDs2)
-            {
-                _StatusDs2 = getDs2StatusProcess(0);
-            }
+            getDs2StatusProcess(0);
             return Ds2.GetPosition();
         }
 
@@ -225,11 +222,11 @@ namespace HitCounterManager
         public void RefreshDs2()
         {
             int delay = 2000;
-            _StatusDs2 = getDs2StatusProcess(delay);
+            getDs2StatusProcess(delay);
             while (_StatusProcedure && dataDs2.enableSplitting)
             {
                 Thread.Sleep(10);
-                _StatusDs2 = getDs2StatusProcess(delay);
+                getDs2StatusProcess(delay);
                 if (!_StatusDs2) { delay = 2000; }else { delay = 20000; }
             }
         }
@@ -326,7 +323,6 @@ namespace HitCounterManager
 
                         }
                     }
-
                 }
             }
         }

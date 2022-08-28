@@ -37,7 +37,7 @@ namespace HitCounterManager
         private bool SettingsDialogOpen = false;
         private bool ReadOnlyMode = false;
 
-        private System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1500 };
+        private System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
 
         #region Form
 
@@ -54,7 +54,7 @@ namespace HitCounterManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text = Text + " - v" + Application.ProductVersion + " Pre-Release 4.0 " + OsLayer.Name;
+            Text = Text + " - v" + Application.ProductVersion + " Pre-Release 4.1 " + OsLayer.Name;
             btnHit.Select();
             LoadSettings();  
             ProfileChangedHandler(sender, e);
@@ -287,31 +287,14 @@ namespace HitCounterManager
         {
             timer1.Enabled = profCtrl.TimerRunning = Start;
             btnPause.Image = Start ? Sources.Resources.icons8_sleep_32 : Sources.Resources.icons8_time_32;
-
-            /* To any that understand OutModule and all related to Timer, the nexts functions return a full duration of a run in ms
-             * sekiroSplitter.getTimeInGame(); //Sekiro
-             * eldenSplitter.getTimeInGame(); //EldenRing
-             * ds3Splitter.getTimeInGame(); //Ds3
-             * ds1Splitter.getTimeInGame(); //Ds1
-             * celesteSplitter.getTimeInGame(); //Celeste
-             * cup.getTimeInGame(); //Cuphead
-             * 
-             * Ds2 Dont Have getTimeInGame() because the motor of game dont track time, livsplit follow the time with real time timming, pausing on loading screens
-             * ds2Splitter.getIsLoading() // => return bool
-             * Same with Hollow Knight
-             * hollowSplitter.getIsLoading() // => return bool
-             * Note: Ready to Use in CheckAutoTimers();
-             * 
-             * OR: IgtModule.ReturnCurrentIGT(); //Not Ds2 and Hollow
-            }*/
-
         }
 
         private int gameActive = 0;
+        private int _lastGameActive = 0;
         private long? _lastInGameTime;
         private void CheckAutoTimers()
         {
-            int inGameTime = 0;
+            bool anyGameTime = false;
             switch (gameActive)
             {            
                 case 1: //Sekiro
@@ -333,18 +316,7 @@ namespace HitCounterManager
                         }
                         else
                         {
-                            IgtModule.gameSelect = gameActive;
-                            inGameTime = IgtModule.ReturnCurrentIGT();
-                            if (inGameTime > 0 && !profCtrl.TimerRunning)
-                                StartStopTimer(true);
-                            else if (inGameTime == 0 && profCtrl.TimerRunning)
-                                StartStopTimer(false);
-                            else if (inGameTime > 0 && _lastInGameTime == inGameTime && profCtrl.TimerRunning)
-                                StartStopTimer(false);
-                            else if (inGameTime > 0 && _lastInGameTime != inGameTime && !profCtrl.TimerRunning)
-                                StartStopTimer(true);
-                            if (inGameTime > 0)
-                                _lastInGameTime = inGameTime;
+                            anyGameTime = true;
                         }
                     }
                     break;
@@ -366,18 +338,7 @@ namespace HitCounterManager
                         }
                         else
                         {
-                            IgtModule.gameSelect = gameActive;
-                            inGameTime = IgtModule.ReturnCurrentIGT();
-                            if (inGameTime > 0 && !profCtrl.TimerRunning)
-                                StartStopTimer( true );
-                            else if (inGameTime == 0 && profCtrl.TimerRunning)
-                                StartStopTimer( false );
-                            else if (inGameTime > 0 && _lastInGameTime == inGameTime && profCtrl.TimerRunning)
-                                StartStopTimer( false );
-                            else if (inGameTime > 0 && _lastInGameTime != inGameTime && !profCtrl.TimerRunning)
-                                StartStopTimer( true );
-                            if (inGameTime > 0)
-                                _lastInGameTime = inGameTime;
+                            anyGameTime = true;
                         }
                     }
                     break;
@@ -400,18 +361,7 @@ namespace HitCounterManager
                         }
                         else
                         {
-                            IgtModule.gameSelect = gameActive;
-                            inGameTime = IgtModule.ReturnCurrentIGT();
-                            if (inGameTime > 0 && !profCtrl.TimerRunning)
-                                StartStopTimer(true);
-                            else if (inGameTime == 0 && profCtrl.TimerRunning)
-                                StartStopTimer(false);
-                            else if (inGameTime > 0 && _lastInGameTime == inGameTime && profCtrl.TimerRunning)
-                                StartStopTimer(false);
-                            else if (inGameTime > 0 && _lastInGameTime != inGameTime && !profCtrl.TimerRunning)
-                                StartStopTimer(true);
-                            if (inGameTime > 0)
-                                _lastInGameTime = inGameTime;
+                            anyGameTime = true;
                         }
                     }
                         break;
@@ -433,18 +383,7 @@ namespace HitCounterManager
                         }
                         else
                         {
-                            IgtModule.gameSelect = gameActive;
-                            inGameTime = IgtModule.ReturnCurrentIGT();
-                            if (inGameTime > 0 && !profCtrl.TimerRunning)
-                                StartStopTimer(true);
-                            else if (inGameTime == 0 && profCtrl.TimerRunning)
-                                StartStopTimer(false);
-                            else if (inGameTime > 0 && _lastInGameTime == inGameTime && profCtrl.TimerRunning)
-                                StartStopTimer(false);
-                            else if (inGameTime > 0 && _lastInGameTime != inGameTime && !profCtrl.TimerRunning)
-                                StartStopTimer(true);
-                            if (inGameTime > 0)
-                                _lastInGameTime = inGameTime;
+                            anyGameTime = true;
                         }
                     }
                     break;
@@ -466,18 +405,7 @@ namespace HitCounterManager
                         }
                         else
                         {
-                            IgtModule.gameSelect = gameActive;
-                            inGameTime = IgtModule.ReturnCurrentIGT();
-                            if (inGameTime > 0 && !profCtrl.TimerRunning)
-                                StartStopTimer(true);
-                            else if (inGameTime == 0 && profCtrl.TimerRunning)
-                                StartStopTimer(false);
-                            else if (inGameTime > 0 && _lastInGameTime == inGameTime && profCtrl.TimerRunning)
-                                StartStopTimer(false);
-                            else if (inGameTime > 0 && _lastInGameTime != inGameTime && !profCtrl.TimerRunning)
-                                StartStopTimer(true);
-                            if (inGameTime > 0)
-                                _lastInGameTime = inGameTime;
+                            anyGameTime = true;
                         }
                     }
                     break;
@@ -499,18 +427,7 @@ namespace HitCounterManager
                         }
                         else
                         {
-                            IgtModule.gameSelect = gameActive;
-                            inGameTime = IgtModule.ReturnCurrentIGT();
-                            if (inGameTime > 0 && !profCtrl.TimerRunning)
-                                StartStopTimer(true);
-                            else if (inGameTime == 0 && profCtrl.TimerRunning)
-                                StartStopTimer(false);
-                            else if (inGameTime > 0 && _lastInGameTime == inGameTime && profCtrl.TimerRunning)
-                                StartStopTimer(false);
-                            else if (inGameTime > 0 && _lastInGameTime != inGameTime && !profCtrl.TimerRunning)
-                                StartStopTimer(true);
-                            if (inGameTime > 0)
-                                _lastInGameTime = inGameTime;
+                            anyGameTime = true;
                         }
                     }
                     break;
@@ -553,6 +470,26 @@ namespace HitCounterManager
                 default: break;
             }
             
+            if (_lastGameActive != gameActive)
+            {
+                IgtModule.gameSelect = gameActive;
+                _lastGameActive = gameActive;
+            }
+
+            if (anyGameTime)
+            {
+                var inGameTime = IgtModule.ReturnCurrentIGT();
+                if (inGameTime > 0 && !profCtrl.TimerRunning)
+                    StartStopTimer(true);
+                else if (inGameTime == 0 && profCtrl.TimerRunning)
+                    StartStopTimer(false);
+                else if (inGameTime > 0 && _lastInGameTime == inGameTime && profCtrl.TimerRunning)
+                    StartStopTimer(false);
+                else if (inGameTime > 0 && _lastInGameTime != inGameTime && !profCtrl.TimerRunning)
+                    StartStopTimer(true);
+                if (inGameTime > 0)
+                    _lastInGameTime = inGameTime;
+            }
         
         }
 
@@ -570,57 +507,54 @@ namespace HitCounterManager
             ds1Splitter.setStatusSplitting(false);
             gameActive = 0;
 
-
             //Ask Selected index
             if (comboBoxGame.SelectedIndex == 1)
             {
                 sekiroSplitter.setStatusSplitting(true);
                 gameActive = 1;
             }
-            if (comboBoxGame.SelectedIndex == 6)
+            if (comboBoxGame.SelectedIndex == 2)
             {
-                hollowSplitter.setStatusSplitting(true);
-                gameActive = 6;
+                ds1Splitter.setStatusSplitting(true);
+                gameActive = 2;
             }
-            if(comboBoxGame.SelectedIndex == 5)
+            if (comboBoxGame.SelectedIndex == 3)
             {
-                eldenSplitter.setStatusSplitting(true);
-                gameActive = 5;
+                ds2Splitter.setStatusSplitting(true);
+                gameActive = 3;
             }
-            if(comboBoxGame.SelectedIndex == 4)
+            if (comboBoxGame.SelectedIndex == 4)
             {
                 ds3Splitter.setStatusSplitting(true);
                 gameActive = 4;
             }
+            if (comboBoxGame.SelectedIndex == 5)
+            {
+                eldenSplitter.setStatusSplitting(true);
+                gameActive = 5;
+            }
+            if (comboBoxGame.SelectedIndex == 6)
+            {
+                hollowSplitter.setStatusSplitting(true);
+                gameActive = 6;
+            }        
             if(comboBoxGame.SelectedIndex == 7)
             {
                 celesteSplitter.setStatusSplitting(true);
                 gameActive = 7;
             }
-            if(comboBoxGame.SelectedIndex == 3)
-            {
-                ds2Splitter.setStatusSplitting(true);
-                gameActive = 3;
-            }   
-            if(comboBoxGame.SelectedIndex == 9)
-            {
-                aslSplitter.setStatusSplitting(true);
-                gameActive = 9;
-            }
-            if(comboBoxGame.SelectedIndex == 8)
+            if (comboBoxGame.SelectedIndex == 8)
             {
                 cupSplitter.setStatusSplitting(true);
                 gameActive = 8;
             }
-            if(comboBoxGame.SelectedIndex == 2)
+            if (comboBoxGame.SelectedIndex == 9)
             {
-                ds1Splitter.setStatusSplitting(true);
-                gameActive = 2;
-            }
-            
+                aslSplitter.setStatusSplitting(true);
+                gameActive = 9;
+            }            
         }
 
         #endregion
-
     }
 }

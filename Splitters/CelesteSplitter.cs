@@ -23,7 +23,6 @@
 using System;
 using System.Threading.Tasks;
 using System.Threading;
-using System.Windows.Forms;
 using LiveSplit.Celeste;
 
 namespace HitCounterManager
@@ -148,11 +147,11 @@ namespace HitCounterManager
         public void RefreshCeleste()
         {
             int delay = 2000;
-            _StatusCeleste = getCelesteStatusProcess(delay);
+            getCelesteStatusProcess(delay);
             while (_StatusProcedure && dataCeleste.enableSplitting)
             {
                 Thread.Sleep(10);
-                _StatusCeleste = getCelesteStatusProcess(delay);
+                getCelesteStatusProcess(delay);
                 if (!_StatusCeleste) { delay = 2000; } else { delay = 20000; }
             }
         }
@@ -178,8 +177,7 @@ namespace HitCounterManager
                 foreach (var element in dataCeleste.getChapterToSplit())
                 {
                     if (!element.IsSplited)
-                    {
-                        
+                    {                    
                         switch (element.Title)
                         {
                             case "Prologue (Complete)": 
@@ -289,7 +287,6 @@ namespace HitCounterManager
                     }
                 }
             }
-
         }
 
         #endregion

@@ -602,17 +602,6 @@ namespace HitCounterManager
             catch (Exception) { aslSplitter.setData(null, profiles); }
             
             IgtModule.setSplitterPointers(getSekiroInstance(), getEldenInstance(), getDs3Instance(), getCelesteInstance(), getCupheadInstance(), getDs1Instance());
-
-            /* LoadProcedures are covered by SelectedIndexChanged
-            sekiroSplitter.LoadAutoSplitterProcedure();
-            hollowSplitter.LoadAutoSplitterProcedure();
-            eldenSplitter.LoadAutoSplitterProcedure();
-            ds3Splitter.LoadAutoSplitterProcedure();
-            ds2Splitter.LoadAutoSplitterProcedure();
-            ds1Splitter.LoadAutoSplitterProcedure();
-            celesteSplitter.LoadAutoSplitterProcedure();
-            aslSplitter.LoadAutoSplitterProcedure();
-            */
         }
 
         public SekiroSplitter getSekiroInstance()
