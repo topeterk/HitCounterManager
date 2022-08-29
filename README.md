@@ -24,13 +24,13 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 * Easy to use profile management
 * On the fly configurable design
 * Configurable keyboard hot keys that can easily be used while playing
-* One single save file for all settings and profiles: **HitCounterManagerSave.xml**
-* One single save file for all settings of AutoSplit: **HitCounterManagerSaveAutoSplitter.xml**
+* Save file for all settings and profiles: **HitCounterManagerSave.xml**
+* Save file for all settings of AutoSplit: **HitCounterManagerSaveAutoSplitter.xml**
 * Create profiles for each challenge or game or build a sequence of runs (called succession) like for the Dark Souls trilogy 
-* Posibility to AutoSplit for: 
- Dark Souls 1, Dark Souls 2, Dark Souls 3, Sekiro Shadow Die Twice, Elden Ring, Hollow Knight, Celeste, Cuphead and Others
+* Posibility to AutoSplit for: (Windows only)
+ Dark Souls 1, Dark Souls 2, Dark Souls 3, Sekiro Shadow Die Twice, Elden Ring, Hollow Knight, Celeste, Cuphead and Others 
 * Dark Mode (not the best looking but hey: its dark)
-* Timer (including current, autotimers, PB and gold split times)
+* Timer (including current, PB, gold split times, auto timers and InGameTime tracking values)
 * Customizable designs (Find [some examples](../../wiki/Designs) at the [Wiki pages](../../wiki))
 
 ### Pre-defined profiles
@@ -60,14 +60,10 @@ All available releases can be found at the [Releases page](../../releases) on Gi
 [![Download latest version here](https://img.shields.io/badge/-Download%20latest%20version%20here-brightgreen?longCache=true&style=for-the-badge)](../../releases/latest)
 
 ## Systemrequirements
-* OS: Windows Vista, Windows Server 2003 or newer (64 bit)
-  * Portable version (ZIP)
-    * [.Net Framework 2.0 or newer](https://www.microsoft.com/net)
-    > **Note**: Version 1.13 and older requires [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
-  * Installer version (Setup)
-    * [.Net Framework 4.8 or newer](https://www.microsoft.com/net)
-    > **Note**: Version 1.21 and older requires [.Net Framework 4.5 or newer](https://www.microsoft.com/net)
-* OS: 64 bits
+* OS: Windows Vista or newer
+* Software: [.Net Framework 4.8 or newer](https://dotnet.microsoft.com/en-us/download/dotnet-framework)
+  > **Note**: Version 1.20 and older requires [.Net Framework 4.5 or newer](https://dotnet.microsoft.com/en-us/download/dotnet-framework)
+* OS: 64-bits
 * Execute the program as Administrator
  
 
@@ -117,7 +113,7 @@ Thanks to Beta Testers of AutoSplit(in alphabetical order):
 * Special Thanks to **Hauke Lasinger** and **[Mario Schulz](https://www.twitch.tv/D4rn4S)** for develop the IGT Track Timer :fire:
 
 
-[-]..And All that participate in the Pre-Release.
+[-]..And All that participated in the Pre-Release of Split of Pleasure Update.
 
 
 * Every member of the [Hitless team on Twitch](https://www.twitch.tv/team/hitless) and [No Hit Hispano on Twitch](https://www.twitch.tv/nohithispano)
