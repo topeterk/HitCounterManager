@@ -9,17 +9,17 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HitCounterManagerWinInstall
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any Cpu = Debug|Any Cpu
-		Release|Any Cpu = Release|Any Cpu
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8007D948-906F-4F80-8F32-C41EC7CCEFD5}.Debug|Any Cpu.ActiveCfg = Debug|Any CPU
-		{8007D948-906F-4F80-8F32-C41EC7CCEFD5}.Release|Any Cpu.ActiveCfg = Release|Any CPU
-		{8007D948-906F-4F80-8F32-C41EC7CCEFD5}.Release|Any Cpu.Build.0 = Release|Any CPU
-		{86BE27FE-3D25-40FE-B26E-64E6F3ED5393}.Debug|Any Cpu.ActiveCfg = Debug
-		{86BE27FE-3D25-40FE-B26E-64E6F3ED5393}.Debug|Any Cpu.Build.0 = Debug
-		{86BE27FE-3D25-40FE-B26E-64E6F3ED5393}.Release|Any Cpu.ActiveCfg = Release
-		{86BE27FE-3D25-40FE-B26E-64E6F3ED5393}.Release|Any Cpu.Build.0 = Release
+		{8007D948-906F-4F80-8F32-C41EC7CCEFD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8007D948-906F-4F80-8F32-C41EC7CCEFD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8007D948-906F-4F80-8F32-C41EC7CCEFD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86BE27FE-3D25-40FE-B26E-64E6F3ED5393}.Debug|Any CPU.ActiveCfg = Debug
+		{86BE27FE-3D25-40FE-B26E-64E6F3ED5393}.Debug|Any CPU.Build.0 = Debug
+		{86BE27FE-3D25-40FE-B26E-64E6F3ED5393}.Release|Any CPU.ActiveCfg = Release
+		{86BE27FE-3D25-40FE-B26E-64E6F3ED5393}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
