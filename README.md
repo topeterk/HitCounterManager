@@ -60,10 +60,9 @@ All available releases can be found at the [Releases page](../../releases) on Gi
 [![Download latest version here](https://img.shields.io/badge/-Download%20latest%20version%20here-brightgreen?longCache=true&style=for-the-badge)](../../releases/latest)
 
 ## Systemrequirements
-* OS: Windows Vista or newer
 * Software: [.Net Framework 4.8 or newer](https://dotnet.microsoft.com/en-us/download/dotnet-framework)
   > **Note**: Version 1.20 and older requires [.Net Framework 4.5 or newer](https://dotnet.microsoft.com/en-us/download/dotnet-framework)
-* OS: 64-bits
+* OS: Windows Vista or newer (64-bits)
 * Execute the program as Administrator
  
 
@@ -111,7 +110,6 @@ Thanks to Beta Testers of AutoSplit(in alphabetical order):
 * [Zirob21](https://www.twitch.tv/zirob21)
 
 * Special Thanks to **Hauke Lasinger** and **[Mario Schulz](https://www.twitch.tv/D4rn4S)** for develop the IGT Track Timer :fire:
-
 
 [-]..And All that participated in the Pre-Release of Split of Pleasure Update.
 
