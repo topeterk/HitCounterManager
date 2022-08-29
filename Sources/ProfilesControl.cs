@@ -89,7 +89,6 @@ namespace HitCounterManager
             }
         }
 
-
         private int _updateCounter;
         private void UpdateDuration()
         {
@@ -104,7 +103,7 @@ namespace HitCounterManager
             else 
             {
                 DateTime utc_now = DateTime.UtcNow;
-                SelectedProfileInfo.AddDuration( (long)(utc_now - last_update_time).TotalMilliseconds );
+                SelectedProfileInfo.AddDuration((long)(utc_now - last_update_time).TotalMilliseconds);
                 last_update_time = utc_now;
             }
         }

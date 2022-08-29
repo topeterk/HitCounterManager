@@ -30,7 +30,6 @@ using System.Text;
 
 namespace HitCounterManager
 {
-
     /// <summary>
     /// Content of XML stored user data (succession entry)
     /// </summary>
@@ -156,7 +155,6 @@ namespace HitCounterManager
     {
         private SaveModule<SettingsRoot> sm;
         private SettingsRoot _settings;
-
 
         /// <summary>
         /// Validates a hotkey and when enabled registers it

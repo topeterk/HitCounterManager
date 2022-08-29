@@ -79,37 +79,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Splitters\AslConfigurator.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Splitters\AslConfigurator.Designer.cs">
-      <DependentUpon>AslConfigurator.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Splitters\AslSplitter.cs" />
-    <Compile Include="Splitters\CelesteSplitter.cs" />
-    <Compile Include="Splitters\CupheadSplitter.cs" />
-    <Compile Include="Splitters\DataAutoSplitter.cs" />
-    <Compile Include="Splitters\Ds1Splitter.cs" />
-    <Compile Include="Splitters\Ds2Splitter.cs" />
-    <Compile Include="Splitters\Ds3Splitter.cs" />
-    <Compile Include="Splitters\DTCeleste.cs" />
-    <Compile Include="Splitters\DTCuphead.cs" />
-    <Compile Include="Splitters\DTDs1.cs" />
-    <Compile Include="Splitters\DTDs2.cs" />
-    <Compile Include="Splitters\DTDs3.cs" />
-    <Compile Include="Splitters\DTElden.cs" />
-    <Compile Include="Splitters\DTHollow.cs" />
-    <Compile Include="Splitters\DTSekiro.cs" />
-    <Compile Include="Splitters\AutoSplitter.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Splitters\AutoSplitter.Designer.cs">
-      <DependentUpon>AutoSplitter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Splitters\EldenSplitter.cs" />
-    <Compile Include="Splitters\HollowSplitter.cs" />
-    <Compile Include="Splitters\IGTModule.cs" />
-    <Compile Include="Splitters\SekiroSplitter.cs" />
     <Compile Include="Sources\ProfilesControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -153,6 +122,37 @@
     </Compile>
     <Compile Include="Sources\Shortcuts.cs" />
     <Compile Include="Sources\AssemblyInfo.cs" />
+    <Compile Include="Sources\Splitters\AslConfigurator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sources\Splitters\AslConfigurator.Designer.cs">
+      <DependentUpon>AslConfigurator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\Splitters\AslSplitter.cs" />
+    <Compile Include="Sources\Splitters\AutoSplitter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sources\Splitters\AutoSplitter.Designer.cs">
+      <DependentUpon>AutoSplitter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\Splitters\CelesteSplitter.cs" />
+    <Compile Include="Sources\Splitters\CupheadSplitter.cs" />
+    <Compile Include="Sources\Splitters\DataAutoSplitter.cs" />
+    <Compile Include="Sources\Splitters\Ds1Splitter.cs" />
+    <Compile Include="Sources\Splitters\Ds2Splitter.cs" />
+    <Compile Include="Sources\Splitters\Ds3Splitter.cs" />
+    <Compile Include="Sources\Splitters\DTCeleste.cs" />
+    <Compile Include="Sources\Splitters\DTCuphead.cs" />
+    <Compile Include="Sources\Splitters\DTDs1.cs" />
+    <Compile Include="Sources\Splitters\DTDs2.cs" />
+    <Compile Include="Sources\Splitters\DTDs3.cs" />
+    <Compile Include="Sources\Splitters\DTElden.cs" />
+    <Compile Include="Sources\Splitters\DTHollow.cs" />
+    <Compile Include="Sources\Splitters\DTSekiro.cs" />
+    <Compile Include="Sources\Splitters\EldenSplitter.cs" />
+    <Compile Include="Sources\Splitters\HollowSplitter.cs" />
+    <Compile Include="Sources\Splitters\IGTModule.cs" />
+    <Compile Include="Sources\Splitters\SekiroSplitter.cs" />
     <Compile Include="Sources\Update.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -186,12 +186,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Splitters\AslConfigurator.resx">
-      <DependentUpon>AslConfigurator.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Splitters\AutoSplitter.resx">
-      <DependentUpon>AutoSplitter.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Sources\ProfilesControl.resx">
       <DependentUpon>ProfilesControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -211,6 +205,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sources\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\Splitters\AslConfigurator.resx">
+      <DependentUpon>AslConfigurator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\Splitters\AutoSplitter.resx">
+      <DependentUpon>AutoSplitter.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
