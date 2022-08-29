@@ -27,7 +27,7 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 * Save file for all settings and profiles: **HitCounterManagerSave.xml**
 * Save file for all settings of AutoSplit: **HitCounterManagerSaveAutoSplitter.xml**
 * Create profiles for each challenge or game or build a sequence of runs (called succession) like for the Dark Souls trilogy 
-* Posibility to AutoSplit for: (Windows only)
+* Posibility to AutoSplit for:
  Dark Souls 1, Dark Souls 2, Dark Souls 3, Sekiro Shadow Die Twice, Elden Ring, Hollow Knight, Celeste, Cuphead and Others 
 * Dark Mode (not the best looking but hey: its dark)
 * Timer (including current, PB, gold split times, auto timers and InGameTime tracking values)
