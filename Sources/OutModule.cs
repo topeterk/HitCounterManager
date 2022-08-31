@@ -170,7 +170,7 @@ namespace HitCounterManager
             catch { return; }
             sr.NewLine = Environment.NewLine;
 
-            profCtrl.UpdateDuration();
+            profCtrl.UpdateDurationIfTimerIsRunning();
             IProfileInfo pi = profCtrl.SelectedProfileInfo;
 
             foreach (string line in template.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))

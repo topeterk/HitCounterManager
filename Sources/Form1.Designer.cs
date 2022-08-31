@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnSplitter = new System.Windows.Forms.Button();
+            this.btnTeamHitlessHispano = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnWeb = new System.Windows.Forms.Button();
@@ -62,6 +64,8 @@
             this.lbl_progress = new System.Windows.Forms.Label();
             this.lbl_time = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.GameToSplitLabel = new System.Windows.Forms.Label();
+            this.comboBoxGame = new System.Windows.Forms.ComboBox();
             this.profCtrl = new HitCounterManager.ProfilesControl();
             this.SuspendLayout();
             // 
@@ -70,6 +74,36 @@
             this.ToolTip1.AutoPopDelay = 15000;
             this.ToolTip1.InitialDelay = 500;
             this.ToolTip1.ReshowDelay = 100;
+            // 
+            // btnSplitter
+            // 
+            this.btnSplitter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSplitter.BackColor = System.Drawing.Color.Teal;
+            this.btnSplitter.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnSplitter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSplitter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSplitter.Image = global::HitCounterManager.Sources.Resources.icon_autosplitter_32;
+            this.btnSplitter.Location = new System.Drawing.Point(607, 30);
+            this.btnSplitter.Name = "btnSplitter";
+            this.btnSplitter.Size = new System.Drawing.Size(75, 40);
+            this.btnSplitter.TabIndex = 45;
+            this.ToolTip1.SetToolTip(this.btnSplitter, "AutoSplitter Configuration");
+            this.btnSplitter.UseVisualStyleBackColor = false;
+            this.btnSplitter.Click += new System.EventHandler(this.btnSplitter_Click);
+            // 
+            // btnTeamHitlessHispano
+            // 
+            this.btnTeamHitlessHispano.BackColor = System.Drawing.SystemColors.Control;
+            this.btnTeamHitlessHispano.FlatAppearance.BorderSize = 0;
+            this.btnTeamHitlessHispano.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTeamHitlessHispano.Image = global::HitCounterManager.Sources.Resources._20p_logo_black_THH;
+            this.btnTeamHitlessHispano.Location = new System.Drawing.Point(117, 4);
+            this.btnTeamHitlessHispano.Name = "btnTeamHitlessHispano";
+            this.btnTeamHitlessHispano.Size = new System.Drawing.Size(20, 20);
+            this.btnTeamHitlessHispano.TabIndex = 47;
+            this.ToolTip1.SetToolTip(this.btnTeamHitlessHispano, "No Hit Hispano Discord\r\n(Spanish Community all about no hit runs)");
+            this.btnTeamHitlessHispano.UseVisualStyleBackColor = false;
+            this.btnTeamHitlessHispano.Click += new System.EventHandler(this.btnTeamHitlessHispano_Click);
             // 
             // btnSettings
             // 
@@ -133,7 +167,7 @@
             this.btnCheckVersion.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_cloud_20;
             this.btnCheckVersion.FlatAppearance.BorderSize = 0;
             this.btnCheckVersion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCheckVersion.Location = new System.Drawing.Point(117, 4);
+            this.btnCheckVersion.Location = new System.Drawing.Point(146, 4);
             this.btnCheckVersion.Name = "btnCheckVersion";
             this.btnCheckVersion.Size = new System.Drawing.Size(20, 20);
             this.btnCheckVersion.TabIndex = 4;
@@ -147,7 +181,7 @@
             this.btnAbout.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_about_20;
             this.btnAbout.FlatAppearance.BorderSize = 0;
             this.btnAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAbout.Location = new System.Drawing.Point(143, 4);
+            this.btnAbout.Location = new System.Drawing.Point(172, 4);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(20, 20);
             this.btnAbout.TabIndex = 5;
@@ -161,7 +195,7 @@
             this.btnNew.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_add_20;
             this.btnNew.FlatAppearance.BorderSize = 0;
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNew.Location = new System.Drawing.Point(184, 4);
+            this.btnNew.Location = new System.Drawing.Point(213, 4);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(20, 20);
             this.btnNew.TabIndex = 6;
@@ -175,7 +209,7 @@
             this.btnRename.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_edit_20;
             this.btnRename.FlatAppearance.BorderSize = 0;
             this.btnRename.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRename.Location = new System.Drawing.Point(210, 4);
+            this.btnRename.Location = new System.Drawing.Point(239, 4);
             this.btnRename.Name = "btnRename";
             this.btnRename.Size = new System.Drawing.Size(20, 20);
             this.btnRename.TabIndex = 7;
@@ -189,7 +223,7 @@
             this.btnCopy.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_copy_20;
             this.btnCopy.FlatAppearance.BorderSize = 0;
             this.btnCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCopy.Location = new System.Drawing.Point(236, 4);
+            this.btnCopy.Location = new System.Drawing.Point(265, 4);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(20, 20);
             this.btnCopy.TabIndex = 8;
@@ -203,7 +237,7 @@
             this.btnDelete.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_trash_20;
             this.btnDelete.FlatAppearance.BorderSize = 0;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Location = new System.Drawing.Point(262, 4);
+            this.btnDelete.Location = new System.Drawing.Point(291, 4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(20, 20);
             this.btnDelete.TabIndex = 9;
@@ -217,7 +251,7 @@
             this.btnAttempts.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_counter_20;
             this.btnAttempts.FlatAppearance.BorderSize = 0;
             this.btnAttempts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAttempts.Location = new System.Drawing.Point(288, 4);
+            this.btnAttempts.Location = new System.Drawing.Point(317, 4);
             this.btnAttempts.Name = "btnAttempts";
             this.btnAttempts.Size = new System.Drawing.Size(20, 20);
             this.btnAttempts.TabIndex = 10;
@@ -231,7 +265,7 @@
             this.btnUp.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_scroll_up_20;
             this.btnUp.FlatAppearance.BorderSize = 0;
             this.btnUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUp.Location = new System.Drawing.Point(329, 4);
+            this.btnUp.Location = new System.Drawing.Point(358, 4);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(20, 20);
             this.btnUp.TabIndex = 11;
@@ -245,7 +279,7 @@
             this.btnDown.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_scroll_down_20;
             this.btnDown.FlatAppearance.BorderSize = 0;
             this.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDown.Location = new System.Drawing.Point(355, 4);
+            this.btnDown.Location = new System.Drawing.Point(384, 4);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(20, 20);
             this.btnDown.TabIndex = 12;
@@ -259,7 +293,7 @@
             this.btnInsertSplit.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_add_list_20;
             this.btnInsertSplit.FlatAppearance.BorderSize = 0;
             this.btnInsertSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInsertSplit.Location = new System.Drawing.Point(381, 4);
+            this.btnInsertSplit.Location = new System.Drawing.Point(410, 4);
             this.btnInsertSplit.Name = "btnInsertSplit";
             this.btnInsertSplit.Size = new System.Drawing.Size(20, 20);
             this.btnInsertSplit.TabIndex = 13;
@@ -273,7 +307,7 @@
             this.btnDeleteSplit.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_delete_list_20;
             this.btnDeleteSplit.FlatAppearance.BorderSize = 0;
             this.btnDeleteSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteSplit.Location = new System.Drawing.Point(407, 4);
+            this.btnDeleteSplit.Location = new System.Drawing.Point(436, 4);
             this.btnDeleteSplit.Name = "btnDeleteSplit";
             this.btnDeleteSplit.Size = new System.Drawing.Size(20, 20);
             this.btnDeleteSplit.TabIndex = 14;
@@ -287,7 +321,7 @@
             this.btnLock.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_padlock_20;
             this.btnLock.FlatAppearance.BorderSize = 0;
             this.btnLock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLock.Location = new System.Drawing.Point(448, 4);
+            this.btnLock.Location = new System.Drawing.Point(477, 4);
             this.btnLock.Name = "btnLock";
             this.btnLock.Size = new System.Drawing.Size(20, 20);
             this.btnLock.TabIndex = 15;
@@ -301,7 +335,7 @@
             this.btnOnTop.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_pin_20;
             this.btnOnTop.FlatAppearance.BorderSize = 0;
             this.btnOnTop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOnTop.Location = new System.Drawing.Point(474, 4);
+            this.btnOnTop.Location = new System.Drawing.Point(503, 4);
             this.btnOnTop.Name = "btnOnTop";
             this.btnOnTop.Size = new System.Drawing.Size(20, 20);
             this.btnOnTop.TabIndex = 16;
@@ -315,7 +349,7 @@
             this.btnDarkMode.BackgroundImage = global::HitCounterManager.Sources.Resources.icons8_taschenlampe_20;
             this.btnDarkMode.FlatAppearance.BorderSize = 0;
             this.btnDarkMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDarkMode.Location = new System.Drawing.Point(500, 4);
+            this.btnDarkMode.Location = new System.Drawing.Point(529, 4);
             this.btnDarkMode.Name = "btnDarkMode";
             this.btnDarkMode.Size = new System.Drawing.Size(20, 20);
             this.btnDarkMode.TabIndex = 17;
@@ -380,7 +414,7 @@
             this.btnHit.Image = global::HitCounterManager.Sources.Resources.icons8_attack_32;
             this.btnHit.Location = new System.Drawing.Point(255, 30);
             this.btnHit.Name = "btnHit";
-            this.btnHit.Size = new System.Drawing.Size(274, 40);
+            this.btnHit.Size = new System.Drawing.Size(184, 40);
             this.btnHit.TabIndex = 21;
             this.ToolTip1.SetToolTip(this.btnHit, "Count a HIT (boss) on the current split");
             this.btnHit.UseVisualStyleBackColor = false;
@@ -395,7 +429,7 @@
             this.btnWayHit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWayHit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnWayHit.Image = global::HitCounterManager.Sources.Resources.icons8_watch_your_step_32;
-            this.btnWayHit.Location = new System.Drawing.Point(535, 30);
+            this.btnWayHit.Location = new System.Drawing.Point(445, 30);
             this.btnWayHit.Name = "btnWayHit";
             this.btnWayHit.Size = new System.Drawing.Size(75, 40);
             this.btnWayHit.TabIndex = 22;
@@ -412,7 +446,7 @@
             this.btnSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSplit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSplit.Image = global::HitCounterManager.Sources.Resources.icons8_staircase_32;
-            this.btnSplit.Location = new System.Drawing.Point(616, 30);
+            this.btnSplit.Location = new System.Drawing.Point(526, 30);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(75, 40);
             this.btnSplit.TabIndex = 23;
@@ -425,7 +459,7 @@
             // 
             this.Spacer1.AutoSize = true;
             this.Spacer1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.Spacer1.Location = new System.Drawing.Point(169, 8);
+            this.Spacer1.Location = new System.Drawing.Point(198, 8);
             this.Spacer1.Name = "Spacer1";
             this.Spacer1.Size = new System.Drawing.Size(9, 13);
             this.Spacer1.TabIndex = 40;
@@ -435,7 +469,7 @@
             // 
             this.Spacer2.AutoSize = true;
             this.Spacer2.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.Spacer2.Location = new System.Drawing.Point(314, 8);
+            this.Spacer2.Location = new System.Drawing.Point(343, 8);
             this.Spacer2.Name = "Spacer2";
             this.Spacer2.Size = new System.Drawing.Size(9, 13);
             this.Spacer2.TabIndex = 41;
@@ -445,7 +479,7 @@
             // 
             this.Spacer3.AutoSize = true;
             this.Spacer3.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.Spacer3.Location = new System.Drawing.Point(433, 8);
+            this.Spacer3.Location = new System.Drawing.Point(462, 8);
             this.Spacer3.Name = "Spacer3";
             this.Spacer3.Size = new System.Drawing.Size(9, 13);
             this.Spacer3.TabIndex = 42;
@@ -491,21 +525,58 @@
             this.timer1.Interval = 300;
             this.timer1.Tick += new System.EventHandler(this.ProfileChangedHandler);
             // 
+            // GameToSplitLabel
+            // 
+            this.GameToSplitLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GameToSplitLabel.Location = new System.Drawing.Point(17, 95);
+            this.GameToSplitLabel.Name = "GameToSplitLabel";
+            this.GameToSplitLabel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.GameToSplitLabel.Size = new System.Drawing.Size(97, 25);
+            this.GameToSplitLabel.TabIndex = 48;
+            this.GameToSplitLabel.Text = "Game to Split:";
+            this.GameToSplitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // comboBoxGame
+            // 
+            this.comboBoxGame.BackColor = System.Drawing.SystemColors.Control;
+            this.comboBoxGame.FormattingEnabled = true;
+            this.comboBoxGame.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.comboBoxGame.Items.AddRange(new object[] {
+            "None",
+            "Sekiro",
+            "Dark Souls 1",
+            "Dark Souls 2",
+            "Dark Souls 3",
+            "Elden Ring",
+            "Hollow Knight",
+            "Celeste",
+            "Cuphead",
+            "ASL Method"});
+            this.comboBoxGame.Location = new System.Drawing.Point(112, 97);
+            this.comboBoxGame.Name = "comboBoxGame";
+            this.comboBoxGame.Size = new System.Drawing.Size(95, 21);
+            this.comboBoxGame.TabIndex = 49;
+            this.comboBoxGame.SelectedIndexChanged += new System.EventHandler(this.comboBoxGame_SelectedIndexChanged);
+            // 
             // profCtrl
             // 
             this.profCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.profCtrl.Location = new System.Drawing.Point(14, 96);
+            this.profCtrl.Location = new System.Drawing.Point(14, 123);
             this.profCtrl.Name = "profCtrl";
-            this.profCtrl.Size = new System.Drawing.Size(677, 367);
+            this.profCtrl.Size = new System.Drawing.Size(677, 376);
             this.profCtrl.TabIndex = 24;
             this.profCtrl.ProfileChanged += new System.EventHandler<System.EventArgs>(this.ProfileChangedHandler);
             // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-            this.ClientSize = new System.Drawing.Size(703, 475);
+            this.ClientSize = new System.Drawing.Size(703, 511);
+            this.Controls.Add(this.comboBoxGame);
+            this.Controls.Add(this.GameToSplitLabel);
+            this.Controls.Add(this.btnTeamHitlessHispano);
+            this.Controls.Add(this.btnSplitter);
             this.Controls.Add(this.lbl_time);
             this.Controls.Add(this.profCtrl);
             this.Controls.Add(this.btnSettings);
@@ -583,5 +654,9 @@
         private System.Windows.Forms.Label lbl_time;
         private System.Windows.Forms.Timer timer1;
         public ProfilesControl profCtrl;
+        private System.Windows.Forms.Button btnSplitter;
+        private System.Windows.Forms.Button btnTeamHitlessHispano;
+        private System.Windows.Forms.Label GameToSplitLabel;
+        private System.Windows.Forms.ComboBox comboBoxGame;
     }
 }

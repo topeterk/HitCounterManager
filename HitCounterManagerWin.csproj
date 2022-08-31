@@ -144,6 +144,8 @@
     <Content Include="Designs\javascript.js" />
     <Content Include="Designs\stylesheet.css" />
     <Content Include="Designs\stylesheet_pink.css" />
+    <None Include="Images\20p_logo_black_THH.png" />
+    <None Include="Images\icon-autosplitter-32.png" />
     <Content Include="Sources\HitCounter.html" />
     <Content Include="Sources\HitCounter.template" />
     <Content Include="Sources\HitCounterManagerInit.xml" />
