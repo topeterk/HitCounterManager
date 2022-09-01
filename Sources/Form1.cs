@@ -84,10 +84,7 @@ namespace HitCounterManager
             if (!File.Exists(DllPath))
             {
                 _DllAttached = false;
-                GameToSplitLabel.Hide();
-                comboBoxGame.Hide();
-                btnSplit.Hide();
-                btnHit.Size = new System.Drawing.Size(274, 40);
+                comboBoxGame.Enabled = false;
             }
             else
             {
@@ -268,6 +265,10 @@ namespace HitCounterManager
             if (_DllAttached)
             {
                 AutoSplitterForm.Invoke(obj, new[] { (object)Program.DarkMode });
+            }
+            else
+            {
+                MessageBox.Show("Download and Install AutoSplitter Extencion", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
                 
