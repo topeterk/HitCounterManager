@@ -84,7 +84,13 @@ namespace HitCounterManager
             if (!File.Exists(DllPath))
             {
                 _DllAttached = false;
-                comboBoxGame.Enabled = false;
+                comboBoxGame.Hide();
+                GameToSplitLabel.Hide();
+                btnSplitter.Hide();
+                this.btnHit.Size = new System.Drawing.Size(200, 40);
+                this.btnSplit.Location = new System.Drawing.Point(540, 30);
+                this.btnWayHit.Location = new System.Drawing.Point(460, 30);
+                this.profCtrl.Location = new System.Drawing.Point(14, 100);
             }
             else
             {
@@ -265,10 +271,6 @@ namespace HitCounterManager
             if (_DllAttached)
             {
                 AutoSplitterForm.Invoke(obj, new[] { (object)Program.DarkMode });
-            }
-            else
-            {
-                MessageBox.Show("Download and Install AutoSplitter Extencion", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
                 
