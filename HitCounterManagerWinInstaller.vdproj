@@ -500,7 +500,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:HitCounterManager"
         "ProductCode" = "8:{96343A68-357C-4FD1-A94A-34945F980237}"
-        "PackageCode" = "8:{02FF8B4A-3A10-4665-A848-5FE89E1E34B1}"
+        "PackageCode" = "8:{8FF4F890-31EF-421F-A3CC-E07F4320959B}"
         "UpgradeCode" = "8:{E37C963F-DDC5-4776-80DD-7B583A48415F}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

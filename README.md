@@ -120,58 +120,59 @@ Thanks to (in alphabetical order):
 ## AutoSplitter Flags
 
  - Sekiro: 
-	[Instantaly/Loading After]
-		    Kill a Boss
-	    Is Activated a Idol
-         Trigger a position
+	[Instantaly/Loading After].
+		    Kill a Boss.
+	    Is Activated a Idol.
+         Trigger a position.
 
 - Elden Ring:
-	  [Instantaly/Loading After]
-	  	    Kill a Boss
-	   Is Activated a Grace 
-          Trigger a position
+	  [Instantaly/Loading After].
+	  	    Kill a Boss.
+	   Is Activated a Grace .
+          Trigger a position.
 
 - DarkSouls 1:
-	  [Inmediatly/Loading Game After]
-	 	    Kill a Boss
-	  	 Active a Bonfire
-	  	Level the Charapter
-	  	Trigger a Position
-	  	  Obtain a Item
+	  [Inmediatly/Loading Game After].
+	 	    Kill a Boss.
+	  	 Active a Bonfire.
+	  	Level the Charapter.
+	  	Trigger a Position.
+	  	  Obtain a Item.
 
 - DarkSouls 2:
-	  [Instantaly/Loading After]
-	 	    Kill a Boss
-	  	Level the Charapter
-	  	 Trigger a position
+	  [Instantaly/Loading After].
+	 	    Kill a Boss.
+	  	Level the Charapter.
+	  	 Trigger a position.
 
 - DarkSouls 3:
-	  [Instantaly/Loading After]
-	 	    Kill a Boss
-	   Is Activated a Bonfire
-		 Level the Charapter
-			Custom Flag
+	  [Instantaly/Loading After].
+	 	    Kill a Boss.
+	   Is Activated a Bonfire.
+		 Level the Charapter.
+			Custom Flag.
 
 - Hollow Knight:
-		Kill a Boss/Minibosses
-		Dreamers/Kills Events
-		      Colosseum
-		      Pantheons
-		    Charms/Skills
-		  Trigger a position
+		Kill a Boss/Minibosses.
+		Dreamers/Kills Events.
+		      Colosseum.
+		      Pantheons.
+		    Charms/Skills.
+		  Trigger a position.
 
 - Celeste:
-		      Chapter
-		     Checkpoints
+		      Chapter.
+		     Checkpoints.
 
 - Cuphead v1.2.4:
-	 	    Kill a Boss
-		 Complete a Level
+	 	    Kill a Boss.
+		 Complete a Level.
+		 
 > Unfortunately the creator of the dll has it out of date, and in LiveSplit there is only one TempFix that is not applicable here.
 If one day he updates it, I will be happy to do it.
 
 - ASL:
-	Any ASL with Split (AutoSplitter Language for LiveSplit)
+	Any ASL with Split (AutoSplitter Language for LiveSplit).
 	> Can give you the possibility to use AutoSplitting for any game that was development ASL file to LiveSplit
 
 ## AutoMods Features
@@ -183,12 +184,12 @@ No Tutorials
 No Logos Intro
 
 ## Systemrequirements
-* Software: [.Net Framework 4.8 or newer](https://dotnet.microsoft.com/en-us/download/dotnet-framework)
-* OS: Windows 7 or newer (**64-bits only**)
-* Execute the program as Administrator
+* Software: [.Net Framework 4.8 or newer](https://dotnet.microsoft.com/en-us/download/dotnet-framework).
+* OS: Windows 7 or newer (**64-bits only**).
+* Execute the program as Administrator.
 
 ## Issues or Bugs
-* Issues Contact to <ezequielmedina23@gmail.com> or Twitch: [Neimex23](https://www.twitch.tv/neimex23)
+* Issues Contact to <ezequielmedina23@gmail.com> or Twitch: [Neimex23](https://www.twitch.tv/neimex23).
 
 ## Special thanks
 

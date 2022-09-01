@@ -697,6 +697,7 @@ namespace AutoSplitterCore
             this.TextBoxManual.Size = new System.Drawing.Size(575, 339);
             this.TextBoxManual.TabIndex = 2;
             this.TextBoxManual.TabStop = false;
+            this.TextBoxManual.Text = resources.GetString("TextBoxManual.Text");
             // 
             // tabTiming
             // 

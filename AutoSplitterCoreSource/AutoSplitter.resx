@@ -117,6 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="TextBoxManual.Text" xml:space="preserve">
+    <value>Notes:
+===========================================
+AutoSplitting:
+- To activate any autosplitting you should select in main program "Game to Split".
+
+- To Auto initialize Timer should select in main program "Game to Split" and check the game in Configuration AutoSplitter AutoTimer
+
+- Is recommended to configure everything before setting the game to spliter, to avoid autosplitting
+
+-Depends on Configurable Autosplit, the addons autosplitting a split (+1 in the actually position), 
+regardless of what is written on them
+
+- When a event of autosplit happen, an internal variable is set, for evit that event is repit. 
+Use "Reset Run" button or Shortcut, for reset this state.
+
+- If you want auto reset internal flags to split all Pantheon bosses in hollow autosplitter.
+If you want play P1+P2+P3+P4 to play P5 after, or P5 to play P1....P4 after 
+You should check "Grey Prince Zote" if you run, have this boss or not.
+(Turn on/off depending the case)
+
+- Currently Elden Ring is only supported with Easy Anti-Cheat disabled.
+To disable Easy Anti-Cheat, navigate to "Steam\steamapps\common\ELDEN RING\Game"
+Launching the game from "Steam\steamapps\common\ELDEN RING\Game\eldenring.exe" will run elden ring without EAC.
+
+- Split by Attributes and some custom flags in DS3 dont work on versions previous to 1.15
+
+- AutoSplitter of Cuphed only work on versions pre-dlc like v1.2.4
+
+- ASL Method can read whateaver ASL file (AutoSplit Language to Livesplit) and split with them. Dont use ASL that no have autospliting and 
+if the game is into this plugin Sekiro,ds1,ds2,etc.
+Browse the file with .asl extencion and clic on "Update Script" if this dont show configuration after 5 seconds.
+
+===========================================
+Sekiro Features:
+- No Intro
+- No Tutorials
+
+Elden Ring Features:
+- No Intro</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
