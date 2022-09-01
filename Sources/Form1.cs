@@ -24,7 +24,8 @@ using System;
 using System.Drawing;
 using System.Net;
 using System.Windows.Forms;
-using System.Threading;
+using System.IO;
+using System.Reflection;
 
 namespace HitCounterManager
 {
@@ -38,6 +39,26 @@ namespace HitCounterManager
         private bool ReadOnlyMode = false;
 
         private System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
+        private bool _DllAttached { get; set; }
+        private string DllPath = String.Empty;
+        private Assembly assembly = null;
+        private object obj = null;
+        Type type = null;
+        MethodInfo LoadAutoSplitterSettings = null;
+        MethodInfo SaveAutoSplitterSettings = null;
+        MethodInfo GetSplitterEnable = null;
+        MethodInfo EnableSplitting = null;
+        MethodInfo ReturnCurrentIGT = null;
+        MethodInfo ResetSplitterFlags = null;
+        MethodInfo SetGameIGT = null;
+        MethodInfo AutoSplitterForm = null;
+        MethodInfo CheckAutoTimerFlag = null;
+        MethodInfo CheckGameTimerFlag = null;
+        MethodInfo GetIgtSplitterTimer = null;
+        MethodInfo CheckSplitterRunStarted = null;
+        MethodInfo SetSplitterRunStarted = null;
+        MethodInfo SetPointers = null;
+
 
         #region Form
 
@@ -56,80 +77,65 @@ namespace HitCounterManager
         {
             Text = Text + " - v" + Application.ProductVersion + " " + OsLayer.Name;
             btnHit.Select();
-            LoadSettings();  
+            LoadSettings();
             ProfileChangedHandler(sender, e);
-            LoadAutoSplitterSettings(profCtrl);
-            #region ComboBoxSet
-            if (sekiroSplitter.dataSekiro.enableSplitting)
+
+            DllPath = @Path.GetFullPath("AutoSplitterCore.dll");
+            if (!File.Exists(DllPath))
             {
-                comboBoxGame.SelectedIndex = 1;
+                _DllAttached = false;
+                comboBoxGame.Hide();
+                GameToSplitLabel.Hide();
+                btnSplitter.Hide();
+                this.btnHit.Size = new System.Drawing.Size(200, 40);
+                this.btnSplit.Location = new System.Drawing.Point(540, 30);
+                this.btnWayHit.Location = new System.Drawing.Point(460, 30);
+                this.profCtrl.Location = new System.Drawing.Point(14, 100);
             }
             else
             {
-                if (hollowSplitter.dataHollow.enableSplitting)
+               _DllAttached = true;
+                assembly = Assembly.LoadFile(DllPath);
+                type = assembly.GetType("AutoSplitterCore.AutoSplitterMainModule");
+                obj = Activator.CreateInstance(type);
+                LoadAutoSplitterSettings = type.GetMethod("LoadAutoSplitterSettingsM");
+                SaveAutoSplitterSettings = type.GetMethod("SaveAutoSplitterSettingsM");
+                GetSplitterEnable = type.GetMethod("GetSplitterEnable");
+                EnableSplitting = type.GetMethod("EnableSplitting");
+                ReturnCurrentIGT = type.GetMethod("ReturnCurrentIGTM");
+                ResetSplitterFlags = type.GetMethod("ResetSplitterFlags");
+                SetGameIGT = type.GetMethod("SetGameIGT");
+                AutoSplitterForm = type.GetMethod("AutoSplitterForm");
+                CheckAutoTimerFlag = type.GetMethod("CheckAutoTimerFlag");
+                CheckGameTimerFlag = type.GetMethod("CheckGameTimerFlag");
+                GetIgtSplitterTimer = type.GetMethod("GetIgtSplitterTimer");
+                CheckSplitterRunStarted = type.GetMethod("CheckSplitterRunStarted");
+                SetSplitterRunStarted = type.GetMethod("SetSplitterRunStarted");
+                SetPointers = type.GetMethod("SetPointers");
+
+
+                SetPointers.Invoke(obj, null);
+                LoadAutoSplitterSettings.Invoke(obj, new object [] { profCtrl });
+                var index = GetSplitterEnable.Invoke(obj,null);
+                switch (index)
                 {
-                    comboBoxGame.SelectedIndex = 6;
+                    case 1: comboBoxGame.SelectedIndex = 1; break;
+                    case 2: comboBoxGame.SelectedIndex = 2; break;
+                    case 3: comboBoxGame.SelectedIndex = 3; break;
+                    case 4: comboBoxGame.SelectedIndex = 4; break;
+                    case 5: comboBoxGame.SelectedIndex = 5; break;
+                    case 6: comboBoxGame.SelectedIndex = 6; break;
+                    case 7: comboBoxGame.SelectedIndex = 7; break;
+                    case 8: comboBoxGame.SelectedIndex = 8; break;
+                    case 9: comboBoxGame.SelectedIndex = 9; break;
+                    case 0:
+                    default: comboBoxGame.SelectedIndex = 0; break;
                 }
-                else
-                {
-                    if (eldenSplitter.dataElden.enableSplitting)
-                    {
-                        comboBoxGame.SelectedIndex = 5;
-                    }
-                    else
-                    {
-                        if (ds3Splitter.dataDs3.enableSplitting)
-                        {
-                            comboBoxGame.SelectedIndex = 4;
-                        }
-                        else
-                        {
-                            if (celesteSplitter.dataCeleste.enableSplitting)
-                            {
-                                comboBoxGame.SelectedIndex = 7;
-                            }
-                            else
-                            {
-                                if (ds2Splitter.dataDs2.enableSplitting)
-                                {
-                                    comboBoxGame.SelectedIndex = 3;
-                                }
-                                else
-                                {
-                                    if (cupSplitter.dataCuphead.enableSplitting)
-                                    {
-                                        comboBoxGame.SelectedIndex = 8;
-                                    }
-                                    else
-                                    {
-                                        if (aslSplitter.enableSplitting)
-                                        {
-                                            comboBoxGame.SelectedIndex = 9;
-                                        }
-                                        else
-                                        {
-                                            if (ds1Splitter.dataDs1.enableSplitting)
-                                            {
-                                                comboBoxGame.SelectedIndex = 2;
-                                            }
-                                            else
-                                            {
-                                                comboBoxGame.SelectedIndex = 0;
-                                            }                                       
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }                    
-                }               
-            }
 
-            #endregion
-
-            profCtrl.IGTSource    =  IgtModule;
-            _update_timer.Tick    += (senderT, args) => CheckAutoTimers();
-            _update_timer.Enabled =  true;
+                profCtrl.SetIGTSource(ReturnCurrentIGT,obj);
+                _update_timer.Tick += (senderT, args) => CheckAutoTimers();
+                _update_timer.Enabled = true;
+            }         
             this.UpdateDarkMode();
         }
 
@@ -139,7 +145,7 @@ namespace HitCounterManager
             if (result == DialogResult.Yes)
             {
                 SaveSettings();
-                SaveAutoSplitterSettings();
+                if (_DllAttached) { SaveAutoSplitterSettings.Invoke(obj, null); }
             }
             else if (result == DialogResult.Cancel) e.Cancel = true;
         }
@@ -214,7 +220,7 @@ namespace HitCounterManager
             SettingsDialogOpen = false;
         }
 
-        private void btnSave_Click(object sender, EventArgs e) { SaveSettings(); SaveAutoSplitterSettings(); }
+        private void btnSave_Click(object sender, EventArgs e) { SaveSettings(); if (_DllAttached) { SaveAutoSplitterSettings.Invoke(obj, null); }; }
         private void btnWeb_Click(object sender, EventArgs e) { GitHubUpdate.WebOpenLandingPage(); }
         private void btnTeamHitless_Click(object sender, EventArgs e) { System.Diagnostics.Process.Start("https://discord.gg/4E7cSK7"); }
         private void btnTeamHitlessHispano_Click(object sender, EventArgs e) { System.Diagnostics.Process.Start("https://discord.gg/ntygnch"); }
@@ -246,14 +252,7 @@ namespace HitCounterManager
         private void btnReset_Click(object sender, EventArgs e) 
         { StartStopTimer(false); 
           profCtrl.ProfileReset();
-          sekiroSplitter.resetSplited();
-          hollowSplitter.resetSplited();
-          eldenSplitter.resetSplited();
-          ds3Splitter.resetSplited();
-          celesteSplitter.resetSplited();
-          ds2Splitter.resetSplited();
-          cupSplitter.resetSplited();
-          ds1Splitter.resetSplited();
+          if (_DllAttached) { ResetSplitterFlags.Invoke(obj, null); }
         }
         private void btnPB_Click(object sender, EventArgs e) { StartStopTimer(false); profCtrl.ProfilePB(); }
         private void btnPause_Click(object sender, EventArgs e) { StartStopTimer(!profCtrl.TimerRunning); }
@@ -267,8 +266,14 @@ namespace HitCounterManager
         private void btnSplit_MouseDown(object sender, MouseEventArgs e) { if (e.Button == MouseButtons.Right) profCtrl.ProfileSplitGo(-1); }
         private void btnSplitPrev_Click(object sender, EventArgs e) { profCtrl.ProfileSplitGo(-1); }
 
-        private void btnSplitter_Click(object sender, EventArgs e) 
-        { Form form = new AutoSplitter(getSekiroInstance(),getHollowInstance(),getEldenInstance(),getDs3Instance(),getCelesteInstance(),getDs2Instance(),getAslInstance(),getCupheadInstance(),getDs1Instance(), Program.DarkMode); form.ShowDialog(this);}
+        private void btnSplitter_Click(object sender, EventArgs e)
+        {
+            if (_DllAttached)
+            {
+                AutoSplitterForm.Invoke(obj, new[] { (object)Program.DarkMode });
+            }
+        }
+                
 
         private void ProfileChangedHandler(object sender, EventArgs e)
         {
@@ -292,26 +297,29 @@ namespace HitCounterManager
         private int gameActive = 0;
         private int _lastGameActive = 0;
         private long? _lastInGameTime;
+
         private void CheckAutoTimers()
         {
             bool anyGameTime = false;
+            object g = 0;
             switch (gameActive)
-            {            
+            {
                 case 1: //Sekiro
-                    if (sekiroSplitter.dataSekiro.autoTimer)
+                    g = 1;
+                    if ((bool)CheckAutoTimerFlag.Invoke(obj, new[] { g }))
                     {
-                        if (!sekiroSplitter.dataSekiro.gameTimer)
+                        if ((bool)CheckGameTimerFlag.Invoke(obj, new[] { g }))
                         {
-                            if (!sekiroSplitter._runStarted && sekiroSplitter.getTimeInGame() > 0)
+                            if (!(bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) > 0)
                             {
                                 StartStopTimer(true);
-                                sekiroSplitter._runStarted = true;
+                                SetSplitterRunStarted.Invoke(obj, new object[] { g, true });
                             }
                             else
-                            if (sekiroSplitter._runStarted && sekiroSplitter.getTimeInGame() == 0)
+                            if ((bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) == 0)
                             {
                                 StartStopTimer(false);
-                                sekiroSplitter._runStarted = false;
+                                SetSplitterRunStarted.Invoke(obj, new object[] { g, false });
                             }
                         }
                         else
@@ -321,19 +329,21 @@ namespace HitCounterManager
                     }
                     break;
                 case 2: //DS1
-                    if (ds1Splitter.dataDs1.autoTimer)
+                    g = 2;
+                    if ((bool)CheckAutoTimerFlag.Invoke(obj, new[] { g }))
                     {
-                        if (!ds1Splitter.dataDs1.gameTimer)
+                        if ((bool)CheckGameTimerFlag.Invoke(obj, new[] { g }))
                         {
-                            if (!ds1Splitter._runStarted && ds1Splitter.getTimeInGame() > 0)
+                            if (!(bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) > 0)
                             {
-                                StartStopTimer( true );
-                                ds1Splitter._runStarted = true;
+                                StartStopTimer(true);
+                                SetSplitterRunStarted.Invoke(obj, new object[] { g, true });
                             }
-                            else if (ds1Splitter._runStarted && ds1Splitter.getTimeInGame() == 0)
+                            else
+                            if ((bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) == 0)
                             {
-                                StartStopTimer( false );
-                                ds1Splitter._runStarted = false;
+                                StartStopTimer(false);
+                                SetSplitterRunStarted.Invoke(obj, new object[] { g, false });
                             }
                         }
                         else
@@ -343,20 +353,21 @@ namespace HitCounterManager
                     }
                     break;
                 case 4: //Ds3
-                    if (ds3Splitter.dataDs3.autoTimer)
+                    g = 4;
+                    if ((bool)CheckAutoTimerFlag.Invoke(obj, new[] { g }))
                     {
-                        if (!ds3Splitter.dataDs3.gameTimer)
+                        if ((bool)CheckGameTimerFlag.Invoke(obj, new[] { g }))
                         {
-
-                            if (!ds3Splitter._runStarted && ds3Splitter.getTimeInGame() > 0)
+                            if (!(bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) > 0)
                             {
                                 StartStopTimer(true);
-                                ds3Splitter._runStarted = true;
+                                SetSplitterRunStarted.Invoke(obj, new object[] { g, true });
                             }
-                            else if (ds3Splitter.dataDs3.autoTimer && ds3Splitter._runStarted && ds3Splitter.getTimeInGame() == 0)
+                            else
+                            if ((bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) == 0)
                             {
                                 StartStopTimer(false);
-                                ds3Splitter._runStarted = false;
+                                SetSplitterRunStarted.Invoke(obj, new object[] { g, false });
                             }
                         }
                         else
@@ -364,21 +375,23 @@ namespace HitCounterManager
                             anyGameTime = true;
                         }
                     }
-                        break;
+                    break;
                 case 5: //Elden
-                    if (eldenSplitter.dataElden.autoTimer)
+                    g = 5;
+                    if ((bool)CheckAutoTimerFlag.Invoke(obj, new[] { g }))
                     {
-                        if (!eldenSplitter.dataElden.gameTimer)
+                        if ((bool)CheckGameTimerFlag.Invoke(obj, new[] { g }))
                         {
-                            if (!eldenSplitter._runStarted && eldenSplitter.getTimeInGame() > 0)
+                            if (!(bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) > 0)
                             {
                                 StartStopTimer(true);
-                                eldenSplitter._runStarted = true;
+                                SetSplitterRunStarted.Invoke(obj, new object[] { g, true });
                             }
-                            else if (eldenSplitter._runStarted && eldenSplitter.getTimeInGame() == 0)
+                            else
+                            if ((bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) == 0)
                             {
                                 StartStopTimer(false);
-                                eldenSplitter._runStarted = false;
+                                SetSplitterRunStarted.Invoke(obj, new object[] { g, false });
                             }
                         }
                         else
@@ -388,19 +401,21 @@ namespace HitCounterManager
                     }
                     break;
                 case 7: //Celeste
-                    if (celesteSplitter.dataCeleste.autoTimer)
+                    g = 7;
+                    if ((bool)CheckAutoTimerFlag.Invoke(obj, new[] { g }))
                     {
-                        if (!celesteSplitter.dataCeleste.gameTimer)
+                        if ((bool)CheckGameTimerFlag.Invoke(obj, new[] { g }))
                         {
-                            if (celesteSplitter.dataCeleste.autoTimer && !celesteSplitter._runStarted && celesteSplitter.getTimeInGame() > 0)
+                            if (!(bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) > 0)
                             {
                                 StartStopTimer(true);
-                                celesteSplitter._runStarted = true;
+                                SetSplitterRunStarted.Invoke(obj, new object[] { g, true });
                             }
-                            else if (celesteSplitter._runStarted && celesteSplitter.getTimeInGame() == 0)
+                            else
+                            if ((bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) == 0)
                             {
                                 StartStopTimer(false);
-                                celesteSplitter._runStarted = false;
+                                SetSplitterRunStarted.Invoke(obj, new object[] { g, false });
                             }
                         }
                         else
@@ -410,19 +425,21 @@ namespace HitCounterManager
                     }
                     break;
                 case 8: //Cuphead
-                    if (cupSplitter.dataCuphead.autoTimer)
+                    g = 8;
+                    if ((bool)CheckAutoTimerFlag.Invoke(obj, new[] { g }))
                     {
-                        if (!cupSplitter.dataCuphead.gameTimer)
+                        if ((bool)CheckGameTimerFlag.Invoke(obj, new[] { g }))
                         {
-                            if (!cupSplitter._runStarted && cupSplitter.getTimeInGame() > 0)
+                            if (!(bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) > 0)
                             {
                                 StartStopTimer(true);
-                                cupSplitter._runStarted = true;
+                                SetSplitterRunStarted.Invoke(obj, new object[] { g, true });
                             }
-                            else if (cupSplitter._runStarted && cupSplitter.getTimeInGame() == 0)
+                            else
+                            if ((bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) == 0)
                             {
                                 StartStopTimer(false);
-                                cupSplitter._runStarted = false;
+                                SetSplitterRunStarted.Invoke(obj, new object[] { g, false });
                             }
                         }
                         else
@@ -431,16 +448,18 @@ namespace HitCounterManager
                         }
                     }
                     break;
-             
+
                 case 3: //DS2
-                    if (ds2Splitter.dataDs2.autoTimer) {
-                        if (ds2Splitter._runStarted)
+                    g = 3;
+                    if ((bool)CheckAutoTimerFlag.Invoke(obj, new[] { g }))
+                    {
+                        if ((bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }))
                         {
                             StartStopTimer(true);
                         }
                         else
                         {
-                            if (!ds2Splitter._runStarted)
+                            if (!(bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }))
                             {
                                 StartStopTimer(false);
                             }
@@ -448,37 +467,38 @@ namespace HitCounterManager
                     }
                     break;
                 case 6: //Hollow
-                    if (hollowSplitter.dataHollow.autoTimer)
+                    g = 6;
+                    if ((bool)CheckAutoTimerFlag.Invoke(obj, new[] { g }))
                     {
-                        if (hollowSplitter._runStarted)
+                        if ((bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }))
                         {
                             StartStopTimer(true);
                         }
                         else
                         {
-                            if (!hollowSplitter._runStarted)
+                            if (!(bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }))
                             {
                                 StartStopTimer(false);
                             }
                         }
                     }
                     break;
-                
-                
+
+
                 case 0:
                 case 9:
                 default: break;
             }
-            
+
             if (_lastGameActive != gameActive)
             {
-                IgtModule.gameSelect = gameActive;
+                SetGameIGT.Invoke(obj, new object[] { gameActive });
                 _lastGameActive = gameActive;
             }
 
             if (anyGameTime)
             {
-                var inGameTime = IgtModule.ReturnCurrentIGT();
+                var inGameTime = (int)ReturnCurrentIGT.Invoke(obj, null);
                 if (inGameTime > 0 && !profCtrl.TimerRunning)
                     StartStopTimer(true);
                 else if (inGameTime == 0 && profCtrl.TimerRunning)
@@ -490,67 +510,59 @@ namespace HitCounterManager
                 if (inGameTime > 0)
                     _lastInGameTime = inGameTime;
             }
-        
+
         }
 
         private void comboBoxGame_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Disable all games
-            sekiroSplitter.setStatusSplitting(false);
-            hollowSplitter.setStatusSplitting(false);
-            eldenSplitter.setStatusSplitting(false);
-            ds3Splitter.setStatusSplitting(false);
-            celesteSplitter.setStatusSplitting(false);
-            ds2Splitter.setStatusSplitting(false);
-            aslSplitter.setStatusSplitting(false);
-            cupSplitter.setStatusSplitting(false);
-            ds1Splitter.setStatusSplitting(false);
+            EnableSplitting.Invoke(obj, new object[] { 0 });
             gameActive = 0;
 
             //Ask Selected index
             if (comboBoxGame.SelectedIndex == 1)
             {
-                sekiroSplitter.setStatusSplitting(true);
+                EnableSplitting.Invoke(obj, new object[] { 1 });
                 gameActive = 1;
             }
             if (comboBoxGame.SelectedIndex == 2)
             {
-                ds1Splitter.setStatusSplitting(true);
+                EnableSplitting.Invoke(obj, new object[] { 2 });
                 gameActive = 2;
             }
             if (comboBoxGame.SelectedIndex == 3)
             {
-                ds2Splitter.setStatusSplitting(true);
+                EnableSplitting.Invoke(obj, new object[] { 3 });
                 gameActive = 3;
             }
             if (comboBoxGame.SelectedIndex == 4)
             {
-                ds3Splitter.setStatusSplitting(true);
+                EnableSplitting.Invoke(obj, new object[] { 4 });
                 gameActive = 4;
             }
             if (comboBoxGame.SelectedIndex == 5)
             {
-                eldenSplitter.setStatusSplitting(true);
+                EnableSplitting.Invoke(obj, new object[] { 5 });
                 gameActive = 5;
             }
             if (comboBoxGame.SelectedIndex == 6)
             {
-                hollowSplitter.setStatusSplitting(true);
+                EnableSplitting.Invoke(obj, new object[] { 6 });
                 gameActive = 6;
             }        
             if(comboBoxGame.SelectedIndex == 7)
             {
-                celesteSplitter.setStatusSplitting(true);
+                EnableSplitting.Invoke(obj, new object[] { 7 });
                 gameActive = 7;
             }
             if (comboBoxGame.SelectedIndex == 8)
             {
-                cupSplitter.setStatusSplitting(true);
+                EnableSplitting.Invoke(obj, new object[] { 8 });
                 gameActive = 8;
             }
             if (comboBoxGame.SelectedIndex == 9)
             {
-                aslSplitter.setStatusSplitting(true);
+                EnableSplitting.Invoke(obj, new object[] { 9 });
                 gameActive = 9;
             }            
         }

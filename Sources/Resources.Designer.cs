@@ -85,7 +85,7 @@ namespace HitCounterManager.Sources {
         /// </summary>
         internal static System.Drawing.Bitmap icon_autosplitter_32 {
             get {
-                object obj = ResourceManager.GetObject("icon_autosplitter_32", resourceCulture);
+                object obj = ResourceManager.GetObject("icon-autosplitter-32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

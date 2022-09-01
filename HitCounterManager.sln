@@ -5,7 +5,16 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HitCounterManagerWin", "HitCounterManagerWin.csproj", "{8007D948-906F-4F80-8F32-C41EC7CCEFD5}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HitCounterManagerWinInstaller", "HitCounterManagerWinInstaller.vdproj", "{86BE27FE-3D25-40FE-B26E-64E6F3ED5393}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HitCounterManagerMono", "HitCounterManagerMono.csproj", "{FE772261-BA6A-4296-A06F-72400FE505C6}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HitCounterManagerWinInstaller", "HitCounterManagerWinInstaller.vdproj", "{E2708A34-EBEB-442F-895D-750C333CD0C0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8007D948-906F-4F80-8F32-C41EC7CCEFD5} = {8007D948-906F-4F80-8F32-C41EC7CCEFD5}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSplitterCore", "AutoSplitterCore.csproj", "{00816FD1-20D3-483C-8731-3F7195E8EE71}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AutoSplitterCore Installer", "AutoSplitterCoreInstaller.vdproj", "{7648132C-9F11-496A-AD27-6E769379C182}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,12 +23,24 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8007D948-906F-4F80-8F32-C41EC7CCEFD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8007D948-906F-4F80-8F32-C41EC7CCEFD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8007D948-906F-4F80-8F32-C41EC7CCEFD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8007D948-906F-4F80-8F32-C41EC7CCEFD5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{86BE27FE-3D25-40FE-B26E-64E6F3ED5393}.Debug|Any CPU.ActiveCfg = Debug
-		{86BE27FE-3D25-40FE-B26E-64E6F3ED5393}.Debug|Any CPU.Build.0 = Debug
-		{86BE27FE-3D25-40FE-B26E-64E6F3ED5393}.Release|Any CPU.ActiveCfg = Release
-		{86BE27FE-3D25-40FE-B26E-64E6F3ED5393}.Release|Any CPU.Build.0 = Release
+		{FE772261-BA6A-4296-A06F-72400FE505C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE772261-BA6A-4296-A06F-72400FE505C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE772261-BA6A-4296-A06F-72400FE505C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE772261-BA6A-4296-A06F-72400FE505C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2708A34-EBEB-442F-895D-750C333CD0C0}.Debug|Any CPU.ActiveCfg = Debug
+		{E2708A34-EBEB-442F-895D-750C333CD0C0}.Release|Any CPU.ActiveCfg = Release
+		{E2708A34-EBEB-442F-895D-750C333CD0C0}.Release|Any CPU.Build.0 = Release
+		{00816FD1-20D3-483C-8731-3F7195E8EE71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00816FD1-20D3-483C-8731-3F7195E8EE71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00816FD1-20D3-483C-8731-3F7195E8EE71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00816FD1-20D3-483C-8731-3F7195E8EE71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7648132C-9F11-496A-AD27-6E769379C182}.Debug|Any CPU.ActiveCfg = Debug
+		{7648132C-9F11-496A-AD27-6E769379C182}.Debug|Any CPU.Build.0 = Debug
+		{7648132C-9F11-496A-AD27-6E769379C182}.Release|Any CPU.ActiveCfg = Release
+		{7648132C-9F11-496A-AD27-6E769379C182}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

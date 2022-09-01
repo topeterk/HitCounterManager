@@ -103,11 +103,11 @@
     <IntegrateIntoProgressBar>false</IntegrateIntoProgressBar>
     <SuccessionList>
       <SuccessionEntry>
-        <ProfileSelected>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE - DONT USE</ProfileSelected>
+        <ProfileSelected>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE</ProfileSelected>
       </SuccessionEntry>
     </SuccessionList>
   </Succession>
-  <ProfileSelected>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE - DONT USE</ProfileSelected>
+  <ProfileSelected>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE</ProfileSelected>
   <Profiles>
     <ProfileList>
       <Profile>
@@ -1217,7 +1217,7 @@
         </Rows>
       </Profile>
       <Profile>
-        <Name>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE - DONT USE</Name>
+        <Name>Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE</Name>
         <Attempts>42</Attempts>
         <ActiveSplit>18</ActiveSplit>
         <Rows>
@@ -1388,7 +1388,7 @@
             <Hits>0</Hits>
             <WayHits>1</WayHits>
             <PB>0</PB>
-            <Duration>555555</Duration>
+            <Duration>0</Duration>
             <DurationPB>555555</DurationPB>
             <DurationGold>555555</DurationGold>
           </ProfileRow>
@@ -1947,7 +1947,7 @@
             <Hits>0</Hits>
             <WayHits>0</WayHits>
             <PB>0</PB>
-            <Duration>0</Duration>
+            <Duration>2522049</Duration>
             <DurationPB>0</DurationPB>
             <DurationGold>0</DurationGold>
           </ProfileRow>

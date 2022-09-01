@@ -23,6 +23,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace HitCounterManager
 {
@@ -92,15 +93,23 @@ namespace HitCounterManager
         private int _updateCounter;
         private void UpdateDuration()
         {
-            var inGameTime = IGTSource?.ReturnCurrentIGT() ?? -1;
-            if (inGameTime != -1) // we have a valid time
+            if (ReturnCurrentIGT != null)
             {
-                if (inGameTime > 0) // only use the time if we're in the game
+                var inGameTime = (int)ReturnCurrentIGT.Invoke(obj,null);
+                if (inGameTime != -1) // we have a valid time
                 {
-                    SelectedProfileInfo.SetDuration(inGameTime, !TimerRunning || _updateCounter++%30==0);
+                    if (inGameTime > 0) // only use the time if we're in the game
+                    {
+                        SelectedProfileInfo.SetDuration(inGameTime, !TimerRunning || _updateCounter++ % 30 == 0);
+                    }
                 }
-            }
-            else 
+                else
+                {
+                    DateTime utc_now = DateTime.UtcNow;
+                    SelectedProfileInfo.AddDuration((long)(utc_now - last_update_time).TotalMilliseconds);
+                    last_update_time = utc_now;
+                }
+            }else
             {
                 DateTime utc_now = DateTime.UtcNow;
                 SelectedProfileInfo.AddDuration((long)(utc_now - last_update_time).TotalMilliseconds);
@@ -188,8 +197,15 @@ namespace HitCounterManager
             get { return ptc.ReadOnlyMode; }
             set { ptc.ReadOnlyMode = value; }
         }
+
+        private object obj = null;
+        private MethodInfo ReturnCurrentIGT = null;
+        public void SetIGTSource(MethodInfo ReturnCurrentIGT, object obj)
+        {
+            this.obj = obj;
+            this.ReturnCurrentIGT = ReturnCurrentIGT;  
+        }
         
-        public IGTModule IGTSource { get; set; }
 
         public void InitializeProfilesControl(Profiles profiles, Succession Succession)
         {

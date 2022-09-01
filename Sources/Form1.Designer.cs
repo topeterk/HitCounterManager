@@ -31,8 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnTeamHitlessHispano = new System.Windows.Forms.Button();
             this.btnSplitter = new System.Windows.Forms.Button();
+            this.btnTeamHitlessHispano = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnWeb = new System.Windows.Forms.Button();
@@ -64,7 +64,7 @@
             this.lbl_progress = new System.Windows.Forms.Label();
             this.lbl_time = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
+            this.GameToSplitLabel = new System.Windows.Forms.Label();
             this.comboBoxGame = new System.Windows.Forms.ComboBox();
             this.profCtrl = new HitCounterManager.ProfilesControl();
             this.SuspendLayout();
@@ -74,20 +74,6 @@
             this.ToolTip1.AutoPopDelay = 15000;
             this.ToolTip1.InitialDelay = 500;
             this.ToolTip1.ReshowDelay = 100;
-            // 
-            // btnTeamHitlessHispano
-            // 
-            this.btnTeamHitlessHispano.BackColor = System.Drawing.SystemColors.Control;
-            this.btnTeamHitlessHispano.BackgroundImage = global::HitCounterManager.Sources.Resources._20p_logo_black_THH;
-            this.btnTeamHitlessHispano.FlatAppearance.BorderSize = 0;
-            this.btnTeamHitlessHispano.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTeamHitlessHispano.Location = new System.Drawing.Point(117, 4);
-            this.btnTeamHitlessHispano.Name = "btnTeamHitlessHispano";
-            this.btnTeamHitlessHispano.Size = new System.Drawing.Size(20, 20);
-            this.btnTeamHitlessHispano.TabIndex = 47;
-            this.ToolTip1.SetToolTip(this.btnTeamHitlessHispano, "No Hit Hispano Discord\r\n(Spanish Community all about no hit runs)");
-            this.btnTeamHitlessHispano.UseVisualStyleBackColor = false;
-            this.btnTeamHitlessHispano.Click += new System.EventHandler(this.btnTeamHitlessHispano_Click);
             // 
             // btnSplitter
             // 
@@ -104,6 +90,20 @@
             this.ToolTip1.SetToolTip(this.btnSplitter, "AutoSplitter Configuration");
             this.btnSplitter.UseVisualStyleBackColor = false;
             this.btnSplitter.Click += new System.EventHandler(this.btnSplitter_Click);
+            // 
+            // btnTeamHitlessHispano
+            // 
+            this.btnTeamHitlessHispano.BackColor = System.Drawing.SystemColors.Control;
+            this.btnTeamHitlessHispano.FlatAppearance.BorderSize = 0;
+            this.btnTeamHitlessHispano.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTeamHitlessHispano.Image = global::HitCounterManager.Sources.Resources._20p_logo_black_THH;
+            this.btnTeamHitlessHispano.Location = new System.Drawing.Point(117, 4);
+            this.btnTeamHitlessHispano.Name = "btnTeamHitlessHispano";
+            this.btnTeamHitlessHispano.Size = new System.Drawing.Size(20, 20);
+            this.btnTeamHitlessHispano.TabIndex = 47;
+            this.ToolTip1.SetToolTip(this.btnTeamHitlessHispano, "No Hit Hispano Discord\r\n(Spanish Community all about no hit runs)");
+            this.btnTeamHitlessHispano.UseVisualStyleBackColor = false;
+            this.btnTeamHitlessHispano.Click += new System.EventHandler(this.btnTeamHitlessHispano_Click);
             // 
             // btnSettings
             // 
@@ -525,16 +525,16 @@
             this.timer1.Interval = 300;
             this.timer1.Tick += new System.EventHandler(this.ProfileChangedHandler);
             // 
-            // label1
+            // GameToSplitLabel
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(17, 95);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.label1.Size = new System.Drawing.Size(97, 25);
-            this.label1.TabIndex = 48;
-            this.label1.Text = "Game to Split:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.GameToSplitLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GameToSplitLabel.Location = new System.Drawing.Point(17, 95);
+            this.GameToSplitLabel.Name = "GameToSplitLabel";
+            this.GameToSplitLabel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.GameToSplitLabel.Size = new System.Drawing.Size(97, 25);
+            this.GameToSplitLabel.TabIndex = 48;
+            this.GameToSplitLabel.Text = "Game to Split:";
+            this.GameToSplitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBoxGame
             // 
@@ -574,7 +574,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(703, 511);
             this.Controls.Add(this.comboBoxGame);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.GameToSplitLabel);
             this.Controls.Add(this.btnTeamHitlessHispano);
             this.Controls.Add(this.btnSplitter);
             this.Controls.Add(this.lbl_time);
@@ -656,7 +656,7 @@
         public ProfilesControl profCtrl;
         private System.Windows.Forms.Button btnSplitter;
         private System.Windows.Forms.Button btnTeamHitlessHispano;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label GameToSplitLabel;
         private System.Windows.Forms.ComboBox comboBoxGame;
     }
 }

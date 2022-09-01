@@ -13,38 +13,21 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\DebugWin\</OutputPath>
     <IntermediateOutputPath>obj\DebugWin\</IntermediateOutputPath>
-    <DefineConstants>DEBUG;TRACE;OS_WINDOWS</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;OS_WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\ReleaseWin\</OutputPath>
@@ -53,10 +36,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>HitCounterManager.Program</StartupObject>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Images\FireIcon.ico</ApplicationIcon>
@@ -74,11 +57,6 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Sources\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Sources\ProfilesControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -113,6 +91,11 @@
     <Compile Include="Sources\OsLayerWindows.cs" />
     <Compile Include="Sources\OutModule.cs" />
     <Compile Include="Sources\Profiles.cs" />
+    <Compile Include="Sources\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Sources\SaveModule.cs" />
     <Compile Include="Sources\Settings.cs">
       <SubType>Form</SubType>
@@ -122,65 +105,11 @@
     </Compile>
     <Compile Include="Sources\Shortcuts.cs" />
     <Compile Include="Sources\AssemblyInfo.cs" />
-    <Compile Include="Sources\Splitters\AslConfigurator.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sources\Splitters\AslConfigurator.Designer.cs">
-      <DependentUpon>AslConfigurator.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sources\Splitters\AslSplitter.cs" />
-    <Compile Include="Sources\Splitters\AutoSplitter.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sources\Splitters\AutoSplitter.Designer.cs">
-      <DependentUpon>AutoSplitter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sources\Splitters\CelesteSplitter.cs" />
-    <Compile Include="Sources\Splitters\CupheadSplitter.cs" />
-    <Compile Include="Sources\Splitters\DataAutoSplitter.cs" />
-    <Compile Include="Sources\Splitters\Ds1Splitter.cs" />
-    <Compile Include="Sources\Splitters\Ds2Splitter.cs" />
-    <Compile Include="Sources\Splitters\Ds3Splitter.cs" />
-    <Compile Include="Sources\Splitters\DTCeleste.cs" />
-    <Compile Include="Sources\Splitters\DTCuphead.cs" />
-    <Compile Include="Sources\Splitters\DTDs1.cs" />
-    <Compile Include="Sources\Splitters\DTDs2.cs" />
-    <Compile Include="Sources\Splitters\DTDs3.cs" />
-    <Compile Include="Sources\Splitters\DTElden.cs" />
-    <Compile Include="Sources\Splitters\DTHollow.cs" />
-    <Compile Include="Sources\Splitters\DTSekiro.cs" />
-    <Compile Include="Sources\Splitters\EldenSplitter.cs" />
-    <Compile Include="Sources\Splitters\HollowSplitter.cs" />
-    <Compile Include="Sources\Splitters\IGTModule.cs" />
-    <Compile Include="Sources\Splitters\SekiroSplitter.cs" />
     <Compile Include="Sources\Update.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="LiveSplit.Celeste">
-      <HintPath>Sources\LiveSplit.Celeste.dll</HintPath>
-    </Reference>
-    <Reference Include="LiveSplit.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Sources\LiveSplit.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="LiveSplit.Cuphead">
-      <HintPath>Sources\LiveSplit.Cuphead.dll</HintPath>
-    </Reference>
-    <Reference Include="LiveSplit.HollowKnight, Version=3.1.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>Sources\LiveSplit.HollowKnight.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="LiveSplit.ScriptableAutoSplit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Sources\LiveSplit.ScriptableAutoSplit.dll</HintPath>
-    </Reference>
-    <Reference Include="SoulMemory">
-      <HintPath>Sources\SoulMemory.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -206,12 +135,6 @@
     <EmbeddedResource Include="Sources\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Splitters\AslConfigurator.resx">
-      <DependentUpon>AslConfigurator.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Splitters\AutoSplitter.resx">
-      <DependentUpon>AutoSplitter.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Designs\HitCounterGui.html" />
@@ -224,7 +147,6 @@
     <Content Include="Designs\stylesheet_pink.css" />
     <None Include="Images\20p_logo_black_THH.png" />
     <None Include="Images\icon-autosplitter-32.png" />
-    <None Include="Images\icons8-copy-20.png" />
     <Content Include="Sources\HitCounter.html" />
     <Content Include="Sources\HitCounter.template" />
     <Content Include="Sources\HitCounterManagerInit.xml" />
@@ -234,6 +156,7 @@
     <None Include="Images\icons8-add-list-20.png" />
     <None Include="Images\icons8-attack-32.png" />
     <None Include="Images\icons8-cloud-20.png" />
+    <None Include="Images\icons8-copy-20.png" />
     <None Include="Images\icons8-counter-20.png" />
     <None Include="Images\icons8-delete-list-20.png" />
     <None Include="Images\icons8-double-down-20.png" />
@@ -257,18 +180,6 @@
     <None Include="Images\icons8-watch-your-step-32.png" />
     <None Include="Images\icons8-website-20.png" />
     <None Include="Sources\App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.8 %28x86 y x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

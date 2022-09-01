@@ -136,7 +136,7 @@ Licence: MIT
 ==============================================================================
 Addons
 
-Title: AutoSplitter
+Title: AutoSplitterCore
 Author: Ezequiel Medina (Neimex23)
 Contact: &lt;ezequielmedina23@gmail.com&gt;
 Licence: MIT
@@ -154,7 +154,7 @@ Licence: MIT
 DLL Used:
     - DLL SoulsMemory from:
     [-]    Title: SoulSplitter
-           Author:  F.stam
+           Author:  F.stam (FrankvdStam)
            Source:  https://github.com/FrankvdStam/SoulSplitter.git
            Licence: GNU
 
@@ -174,8 +174,7 @@ DLL Used:
            Title: LiveSplit.Cuphead
            Author: DevilSquirrel
            Source: https://github.com/ShootMe/LiveSplit.Cuphead.git
-           Licence: MIT	
-		   
+           Licence: MIT			   
 
     - DLL LiveSplit.Core
     [-]    Title: LiveSplit
@@ -188,11 +187,19 @@ DLL Used:
            Author: LiveSplit
            Source: https://github.com/LiveSplit/LiveSplit.ScriptableAutoSplit.git
            Licence: MIT
+		   Source Modified: https://github.com/neimex23/LiveSplit.ScriptableAutoSplit.git
+		   Licence: MIT
 		   
 	- DLL Irony (Dependency of ScripteableAutoSplit)
 		   Title: Irony — .NET Language Implementation Kit
 		   Author: IronyProject 
 		   Source: https://github.com/IronyProject/Irony.git
+		   Licence: MIT
+		   
+    - DLL Newtonsoft.Json (Dependency of SoulsMemory)
+	       Title: Newtonsoft.Json
+		   Author: James Newton-King (JamesNK)
+		   Source: https://github.com/JamesNK/Newtonsoft.Json.git
 		   Licence: MIT
 
 ==============================================================================
@@ -270,6 +277,20 @@ Title: -
 Author: Free-Photos
 Source: https://pixabay.com/photos/bonfire-fire-man-dancing-rituals-1209269/
 Licence: Pixabay License
+
+==============================================================================
+Setup AutoSplitterCore Banner Image
+
+Title: -
+Author: Neimex23
+Licence: MIT
+
+==============================================================================
+Setup AutoSplitterCore Icon
+
+Title: -
+Author: Neimex23
+Licence: MIT
 
 ==============================================================================
 C# JSON parser

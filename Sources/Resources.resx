@@ -175,6 +175,9 @@
   <data name="icons8-double-up-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8-double-up-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8_copy_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8-copy-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8-double-down-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8-double-down-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -205,10 +208,7 @@
   <data name="20p_logo_black_THH" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\20p_logo_black_THH.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8_copy_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8-copy-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_autosplitter_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="icon-autosplitter-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icon-autosplitter-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
