@@ -1,3 +1,4 @@
+
 # HitCounterManager - A Dark Souls inspired Hit Counter
 
 **Free Hit Counter** that is running in the background, so you can focus on your stream.  
@@ -108,7 +109,7 @@ Thanks to (in alphabetical order):
 * And also all the other great challenge runners out there that I cannot name here all.
   
  
-## AutoSplitter Extension
+# **AutoSplitter Extension**
 
 * This Extension can give you the possibility to Automatically split when an event happen in a game
 * Posibility to AutoSplit for:
@@ -119,69 +120,64 @@ Thanks to (in alphabetical order):
 
 ## AutoSplitter Flags
 
- - Sekiro: 
-	[Instantaly/Loading After].
-		    Kill a Boss.
-	    Is Activated a Idol.
-         Trigger a position.
+ - Sekiro || **[Inmediatly/Loading After]**
+    - Kill a Boss
+    - Is Activated a Idol 
+    - Trigger a position.
 
-- Elden Ring:
-	  [Instantaly/Loading After].
-	  	    Kill a Boss.
-	   Is Activated a Grace .
-          Trigger a position.
+ - Elden Ring || [**Inmediatly/Loading After]**
+   - Kill a Boss.
+   - Is Activated a Grace
+   - Trigger a position
 
-- DarkSouls 1:
-	  [Inmediatly/Loading Game After].
-	 	    Kill a Boss.
-	  	 Active a Bonfire.
-	  	Level the Charapter.
-	  	Trigger a Position.
-	  	  Obtain a Item.
+- DarkSouls 1 || **[Inmediatly/Loading Game After]**
+   - Kill a Boss
+   - Active a Bonfire
+   - Level the Charapter
+   - Trigger a Position
+   - Obtain a Item
 
-- DarkSouls 2:
-	  [Instantaly/Loading After].
-	 	    Kill a Boss.
-	  	Level the Charapter.
-	  	 Trigger a position.
+ - DarkSouls 2 || **[Inmediatly/Loading After]**
+   - Kill a Boss
+   - Level the Charapter
+   - Trigger a position
 
-- DarkSouls 3:
-	  [Instantaly/Loading After].
-	 	    Kill a Boss.
-	   Is Activated a Bonfire.
-		 Level the Charapter.
-			Custom Flag.
+ - DarkSouls 3 || **[Inmediatly/Loading After]**
+   - Kill a Boss
+   - Is Activated a Bonfire
+   - Level the Charapter
+   - Custom Flag
 
-- Hollow Knight:
-		Kill a Boss/Minibosses.
-		Dreamers/Kills Events.
-		      Colosseum.
-		      Pantheons.
-		    Charms/Skills.
-		  Trigger a position.
+ - Hollow Knight || **[Inmediatly]**
+   - Kill a Boss/Minibosses
+   - Dreamers/Kills Events
+   - Colosseum
+   - Pantheons
+   - Charms/Skills
+   - Trigger a position
 
-- Celeste:
-		      Chapter.
-		     Checkpoints.
+ - Celeste || **[Inmediatly]**
+   - Chapter
+   - Checkpoints
 
-- Cuphead v1.2.4:
-	 	    Kill a Boss.
-		 Complete a Level.
-		 
-> Unfortunately the creator of the dll has it out of date, and in LiveSplit there is only one TempFix that is not applicable here.
-If one day he updates it, I will be happy to do it.
+ - Cuphead *v1.2.4* || **[Inmediatly]**
+   - Kill a Boss
+   - Complete a Level
+> Unfortunately the creator of the dll has it out of date, and in LiveSplit there is only one TempFix that is not applicable here. If one day he updates it, I will be happy to do it.
 
-- ASL:
-	Any ASL with Split (AutoSplitter Language for LiveSplit).
+
+ - ASL || **[Inmediatly]**
+   - Any ASL with Split (AutoSplitter Language for LiveSplit).
 	> Can give you the possibility to use AutoSplitting for any game that was development ASL file to LiveSplit
+
 
 ## AutoMods Features
 - Sekiro: 
-No Logos Intro
-No Tutorials 
+   - No Logos Intro
+   - No Tutorials 
 
 - Elden Ring:
-No Logos Intro
+   - No Logos Intro
 
 ## Systemrequirements
 * Software: [.Net Framework 4.8 or newer](https://dotnet.microsoft.com/en-us/download/dotnet-framework).
