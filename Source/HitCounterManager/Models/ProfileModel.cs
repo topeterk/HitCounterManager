@@ -50,12 +50,12 @@ namespace HitCounterManager.Models
         public string Name
         {
             get { return _origin.Name; }
-            set { SetAndNotifyWhenChanged(this, ref _origin.Name, value, nameof(Name)); }
+            set { SetAndNotifyWhenChanged(ref _origin.Name, value); }
         }
         public int Attempts
         {
             get { return _origin.Attempts; }
-            set { SetAndNotifyWhenChanged(this, ref _origin.Attempts, value, nameof(Attempts)); }
+            set { SetAndNotifyWhenChanged(ref _origin.Attempts, value); }
         }
         public int ActiveSplit
         {
@@ -68,7 +68,7 @@ namespace HitCounterManager.Models
                 _origin.ActiveSplit = value;
                 if (prevValue < Rows.Count) Rows[prevValue].ActiveChanged();
                 if (value < Rows.Count) Rows[value].ActiveChanged();
-                CallPropertyChanged(this, nameof(ActiveSplit));
+                CallPropertyChanged();
             }
         }
 
@@ -85,7 +85,7 @@ namespace HitCounterManager.Models
                 _origin.BestProgress = value;
                 if (prevValue < Rows.Count) Rows[prevValue].BPChanged();
                 if (value < Rows.Count) Rows[value].BPChanged();
-                CallPropertyChanged(this, nameof(BestProgress));
+                CallPropertyChanged();
             }
         }
         public ProfileRowModel? BestProgressModel => _origin.BestProgress < Rows.Count ? Rows[_origin.BestProgress] : null;
@@ -103,7 +103,7 @@ namespace HitCounterManager.Models
                 _SessionProgress = value;
                 if (prevValue < Rows.Count) Rows[prevValue].SPChanged();
                 if (value < Rows.Count) Rows[value].SPChanged();
-                CallPropertyChanged(this, nameof(SessionProgress));
+                CallPropertyChanged();
             }
         }
         public ProfileRowModel? SessionProgressModel => _SessionProgress < Rows.Count ? Rows[_SessionProgress] : null;

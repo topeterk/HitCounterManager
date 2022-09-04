@@ -28,7 +28,7 @@
         xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
         xmlns:models="clr-namespace:HitCounterManager.Models;assembly=HitCounterManager"
         x:Class="HitCounterManager.Views.SettingsPage"
-        x:DataType="local:SettingsViewModel"
+        x:DataType="local:SettingsPageViewModel"
         Icon="/Resources/FireIcon.ico"
         Title="Settings" Classes="DialogWindow"
         MinWidth="620" MinHeight="270" Width="760" Height="660">
@@ -36,7 +36,7 @@
     <!-- TODO: Tooltips -->
 
     <Window.DataContext>
-        <local:SettingsViewModel />
+        <local:SettingsPageViewModel />
     </Window.DataContext>
 
     <DockPanel Margin="10">

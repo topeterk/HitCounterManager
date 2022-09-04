@@ -27,13 +27,13 @@
         xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
         xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
         x:Class="HitCounterManager.Views.UpdatePage"
-        x:DataType="local:UpdateViewModel"
+        x:DataType="local:UpdatePageViewModel"
         Icon="/Resources/FireIcon.ico"
         Title="Updates" Classes="DialogWindow"
         MinWidth="420" MinHeight="380" Width="800" Height="630">
 
     <Window.DataContext>
-        <local:UpdateViewModel />
+        <local:UpdatePageViewModel />
     </Window.DataContext>
 
     <DockPanel Margin="10">

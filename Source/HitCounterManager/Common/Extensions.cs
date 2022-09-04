@@ -27,9 +27,9 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Resources;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
+using ReactiveUI;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data.Converters;
@@ -119,16 +119,6 @@ namespace HitCounterManager.Common
         }
     }
 
-    /// <summary>
-    /// Markup extension for a stupid way to protect text from silly bots but hey, we learned how to use Content property :)
-    /// </summary>
-    public class ObscuredString : MarkupExtension
-    {
-        [Content]
-        public string? Content { get; set; }
-        public override object? ProvideValue(IServiceProvider serviceProvider) => Content?.Replace("(Obscure)", "");
-    }
-
     // TODO: Avalonia workaround to support custom colors for BoxShadows
     public class BoxShadowsBuilder : MarkupExtension
     {
@@ -182,83 +172,53 @@ namespace HitCounterManager.Common
         public IValueConverter ProvideValue() => this; // TODO Avalonia What is this? Why does it require provide method? https://github.com/AvaloniaUI/Avalonia/issues/2835
     }
 
-    // TODO Avalonia: [riseifchanged] Replace NotifyPropertyChangedImpl with ReactiveObject::RaiseAndSetIfChanged? https://docs.avaloniaui.net/docs/data-binding/change-notifications
-
     /// <summary>
-    /// Replace INotifyPropertyChanged with this class to be able to use the simplified CallPropertyChanged
+    /// Wrapper for a ReactiveObject with some additional helper methods
     /// </summary>
-    public class NotifyPropertyChangedImpl : INotifyPropertyChanged
+    public class NotifyPropertyChangedImpl : ReactiveObject
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         /// <summary>
         /// Triggers an PropertyChanged event of INotifyPropertyChanged
         /// Note: As noted here (https://twitter.com/ogormanphilip/status/1240740053652922368), it is safe to call this on non-UI threads
+        /// TODO Avalonia: Check if this is still safe from outside UI thread?
         /// </summary>
-        /// <param name="sender">The sender who was the origin of this change</param>
         /// <param name="propertyName">Name of the changing property</param>
-        public void CallPropertyChanged(object sender, string propertyName) => PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(propertyName));
+        public void CallPropertyChanged([CallerMemberName] string? propertyName = null) => this.RaisePropertyChanged(propertyName);
 
         /// <summary>
         /// When a different value is set for the property, it gets updated and an INotifyPropertyChanged event is fired 
         /// </summary>
         /// <typeparam name="T">Type that can be checked for equality</typeparam>
-        /// <param name="sender">Origin of the change, will be given to the INotifyPropertyChanged</param>
         /// <param name="property">The property that shall be changed</param>
         /// <param name="newValue">The new value for the property</param>
         /// <param name="propertyName">The name of the property, recommended to use: nameof(xxx)</param>
         /// <returns>true = data has changed, false = data has not changed</returns>
-        public bool SetAndNotifyWhenChanged<T>(object sender, ref T property, T newValue, string propertyName) where T : IEquatable<T>
+        public bool SetAndNotifyWhenChanged<T>(ref T property, T newValue, [CallerMemberName] string? propertyName = null) where T : IEquatable<T>
         {
             if (!property.Equals(newValue))
             {
                 property = newValue;
-                CallPropertyChanged(sender, propertyName);
+                CallPropertyChanged(propertyName);
                 return true;
             }
             return false;
         }
-        
-        /// <summary>
-        /// When a different value is set for the property, it gets updated and an INotifyPropertyChanged event is fired.
-        /// The value must be a natural number to allow update of the property
-        /// </summary>
-        /// <param name="sender">Origin of the change, will be given to the INotifyPropertyChanged</param>
-        /// <param name="property">The property that shall be changed</param>
-        /// <param name="newValueString">The new value for the property as string</param>
-        /// <param name="propertyName">The name of the property, recommended to use: nameof(xxx)</param>
-        /// <returns>true = data has changed, false = data has not changed</returns>
-        public bool SetAndNotifyWhenNaturalNumberChanged(object sender, ref int property, string? newValueString, string propertyName)
-        {
-            int i;
-            if (!Extensions.TryParseMinMaxNumber(newValueString, out i, 0, int.MaxValue))
-            {
-                CallPropertyChanged(this, propertyName); // This will reset to last valid value
-                return false;
-            }
-
-            return SetAndNotifyWhenChanged(sender, ref property, i, propertyName);
-        }
 
         /// <summary>
         /// When a different value is set for the property, it gets updated and an INotifyPropertyChanged event is fired.
         /// The value must be a natural number to allow update of the property
         /// </summary>
-        /// <param name="sender">Origin of the change, will be given to the INotifyPropertyChanged</param>
         /// <param name="property">The property that shall be changed</param>
         /// <param name="newValue">The new value for the property</param>
         /// <param name="propertyName">The name of the property, recommended to use: nameof(xxx)</param>
         /// <returns>true = data has changed, false = data has not changed</returns>
-        public bool SetAndNotifyWhenNaturalNumberChanged(object sender, ref int property, int newValue, string propertyName)
+        public bool SetAndNotifyWhenNaturalNumberChanged(ref int property, int newValue, [CallerMemberName] string? propertyName = null)
         {
-            if (newValue < 0)
-            {
-                // This will reset to last valid value
-                CallPropertyChanged(this, propertyName);
-                return false;
-            }
-
-            return SetAndNotifyWhenChanged(sender, ref property, newValue, propertyName);
+            if (0 <= newValue)
+                return SetAndNotifyWhenChanged(ref property, newValue, propertyName);
+            else
+                CallPropertyChanged(propertyName); // This will reset the UI to last valid value
+            return false;
         }
     }
 

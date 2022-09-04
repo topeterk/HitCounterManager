@@ -33,7 +33,9 @@
 		<!-- <local:ViewModel x:Key="sharedViewModel" /> -->
 		<!-- DataContext="{StaticResource sharedViewModel}" -->
 
-		<!-- TODO: Avalonia When are ViewModels disposed, do we have to dispose by ourself? -->
+		<!-- TODO: Avalonia When are ViewModels disposed, do we have to dispose by ourself?
+		     https://www.reactiveui.net/docs/handbook/when-activated/
+		     https://docs.avaloniaui.net/guides/deep-dives/reactiveui/view-activation -->
 
 		<!-- Avalonia UI Dispatch https://docs.avaloniaui.net/guides/basics/accessing-the-ui-thread -->
 

@@ -36,12 +36,12 @@ using HitCounterManager.Models;
 
 namespace HitCounterManager.ViewModels
 {
-    public class ProfileViewModel : NotifyPropertyChangedImpl
+    public class ProfileViewViewModel : ViewModelBase
     {
         private SettingsRoot Settings = App.CurrentApp.Settings;
         public ComboBox? ProfileSelector = null;
 
-        public ProfileViewModel()
+        public ProfileViewViewModel()
         {
             ToggleShowInfo = ReactiveCommand.Create<string>((string name) => { ShowInfo[name].Value = !ShowInfo[name].Value; });
 
@@ -164,7 +164,7 @@ namespace HitCounterManager.ViewModels
             public bool Value
             {
                 get => _Value;
-                set => SetAndNotifyWhenChanged(this, ref _Value, value, nameof(Value));
+                set => SetAndNotifyWhenChanged(ref _Value, value);
             }
         }
 
@@ -178,9 +178,9 @@ namespace HitCounterManager.ViewModels
         public void OutputDataChangedHandler(object? sender, PropertyChangedEventArgs e)
         {
             UpdateDuration();
-            CallPropertyChanged(this, nameof(StatsProgress));
-            CallPropertyChanged(this, nameof(StatsTime));
-            CallPropertyChanged(this, nameof(StatsTotalHits));
+            CallPropertyChanged(nameof(StatsProgress));
+            CallPropertyChanged(nameof(StatsTime));
+            CallPropertyChanged(nameof(StatsTotalHits));
             OutputDataQueueUpdate();
         }
         private void CollectionChangedHandler(object? sender, NotifyCollectionChangedEventArgs e) => OutputDataChangedHandler(sender, new PropertyChangedEventArgs(nameof(ProfileList)));
@@ -221,7 +221,7 @@ namespace HitCounterManager.ViewModels
                         Monitor.Exit(TimerUpdateLock);
                         Settings.ProfileSelected = _ProfileSelected.Name;
 
-                        CallPropertyChanged(this, nameof(ProfileSelected));
+                        CallPropertyChanged();
                         OutputDataChangedHandler(this, new PropertyChangedEventArgs(nameof(ProfileSelected)));
                     }
                 }
@@ -235,7 +235,7 @@ namespace HitCounterManager.ViewModels
             set
             {
                 Settings.ReadOnlyMode = value;
-                CallPropertyChanged(this, nameof(IsReadOnly));
+                CallPropertyChanged();
             }
         }
 
@@ -469,7 +469,7 @@ namespace HitCounterManager.ViewModels
                     last_update_time = DateTime.UtcNow;
                     _TimerRunning = true;
                     App.CurrentApp.StartApplicationTimer(TimerIDs.GameTime, 10, UpdateDuration);
-                    App.CurrentApp.StartApplicationTimer(TimerIDs.GameTimeGui, 300, () => { CallPropertyChanged(this, nameof(StatsTime)); return _TimerRunning; });
+                    App.CurrentApp.StartApplicationTimer(TimerIDs.GameTimeGui, 300, () => { CallPropertyChanged(nameof(StatsTime)); return _TimerRunning; });
                 }
                 else
                 {
@@ -477,7 +477,7 @@ namespace HitCounterManager.ViewModels
                     UpdateDuration();
                     _TimerRunning = false;
                 }
-                CallPropertyChanged(this, nameof(TimerRunning));
+                CallPropertyChanged();
                 OutputDataChangedHandler(this, new PropertyChangedEventArgs(nameof(TimerRunning)));
             }
         }

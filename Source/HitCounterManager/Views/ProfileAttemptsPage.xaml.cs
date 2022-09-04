@@ -32,7 +32,7 @@ namespace HitCounterManager.Views
     {
         ProfileAttemptsPageViewModel vm;
         public ProfileAttemptsPage() => throw new NotImplementedException(); // This ctor is only needed for Avalonia XAML interpreter
-        public ProfileAttemptsPage(ProfileViewModel Origin)
+        public ProfileAttemptsPage(ProfileViewViewModel Origin)
         {
             InitializeComponent();
             PlatformImpl.SetTopmost(App.CurrentApp.Settings.AlwaysOnTop);

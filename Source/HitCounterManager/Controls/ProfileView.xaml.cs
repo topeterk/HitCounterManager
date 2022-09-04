@@ -32,7 +32,7 @@ namespace HitCounterManager.Controls
         {
             InitializeComponent();
 
-            ((ProfileViewModel)DataContext!).ProfileSelector = this.FindControl<ComboBox>("profileSelector");
+            ((ProfileViewViewModel)DataContext!).ProfileSelector = this.FindControl<ComboBox>("profileSelector");
         }
 
         private void InitializeComponent()

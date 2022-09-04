@@ -38,29 +38,29 @@ namespace HitCounterManager.Models
         public string Title
         {
             get => _origin.Title;
-            set => SetAndNotifyWhenChanged(this, ref _origin.Title, value, nameof(Title));
+            set => SetAndNotifyWhenChanged(ref _origin.Title, value);
         }
         public int Hits
         {
             get => _origin.Hits;
-            set { if (SetAndNotifyWhenNaturalNumberChanged(this, ref _origin.Hits, value, nameof(Hits))) CallPropertyChanged(this, nameof(Diff)); }
+            set { if (SetAndNotifyWhenNaturalNumberChanged(ref _origin.Hits, value)) CallPropertyChanged(nameof(Diff)); }
         }
         public int WayHits
         {
             get => _origin.WayHits;
-            set { if (SetAndNotifyWhenNaturalNumberChanged(this, ref _origin.WayHits, value, nameof(WayHits))) CallPropertyChanged(this, nameof(Diff)); }
+            set { if (SetAndNotifyWhenNaturalNumberChanged(ref _origin.WayHits, value)) CallPropertyChanged(nameof(Diff)); }
         }
         public int Diff => _origin.Hits + _origin.WayHits - _origin.PB;
 
         public int PB
         {
             get => _origin.PB;
-            set { if (SetAndNotifyWhenNaturalNumberChanged(this, ref _origin.PB, value, nameof(PB))) CallPropertyChanged(this, nameof(Diff)); }
+            set { if (SetAndNotifyWhenNaturalNumberChanged(ref _origin.PB, value)) CallPropertyChanged(nameof(Diff)); }
         }
         public bool SP => this == _parent.SessionProgressModel;
-        public void SPChanged() => CallPropertyChanged(this, nameof(SP));
+        public void SPChanged() => CallPropertyChanged();
         public bool BP => this == _parent.BestProgressModel;
-        public void BPChanged() => CallPropertyChanged(this, nameof(BP));
+        public void BPChanged() => CallPropertyChanged();
         public long Duration
         {
             get => _origin.Duration;
@@ -69,14 +69,14 @@ namespace HitCounterManager.Models
         public long DurationPB
         {
             get => _origin.DurationPB;
-            set => SetAndNotifyWhenChanged(this, ref _origin.DurationPB, value, nameof(DurationPB));
+            set => SetAndNotifyWhenChanged(ref _origin.DurationPB, value);
         }
         public long DurationGold
         {
             get => _origin.DurationGold;
-            set => SetAndNotifyWhenChanged(this, ref _origin.DurationGold, value, nameof(DurationGold));
+            set => SetAndNotifyWhenChanged(ref _origin.DurationGold, value);
         }
         public bool Active => this == _parent.ActiveSplitModel;
-        public void ActiveChanged() => CallPropertyChanged(this, nameof(Active));
+        public void ActiveChanged() => CallPropertyChanged(nameof(Active));
     }
 }

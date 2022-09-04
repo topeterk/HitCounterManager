@@ -23,7 +23,6 @@
 using System;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using HitCounterManager.ViewModels;
 
@@ -36,8 +35,8 @@ namespace HitCounterManager.Views
             InitializeComponent();
             PlatformImpl.SetTopmost(App.CurrentApp.Settings.AlwaysOnTop);
 
-            Opened += (object? sender, EventArgs e) => ((SettingsViewModel)DataContext!).OnAppearing();
-            Closed += (object? sender, EventArgs e) => ((SettingsViewModel)DataContext!).OnDisappearing();
+            Opened += (object? sender, EventArgs e) => ((SettingsPageViewModel)DataContext!).OnAppearing();
+            Closed += (object? sender, EventArgs e) => ((SettingsPageViewModel)DataContext!).OnDisappearing();
 
 #if DEBUG
             this.AttachDevTools();

@@ -27,10 +27,8 @@ using HitCounterManager.Common;
 
 namespace HitCounterManager.ViewModels
 {
-    public class ProfileAttemptsPageViewModel : NotifyPropertyChangedImpl
+    public class ProfileAttemptsPageViewModel : ViewModelWindowBase
     {
-        public Window? OwnerWindow { get; set; }
-
         public ProfileAttemptsPageViewModel()
         {
             Submit = ReactiveCommand.Create(() => {
@@ -43,8 +41,8 @@ namespace HitCounterManager.ViewModels
             });
         }
 
-        private ProfileViewModel? _Origin;
-        public ProfileViewModel? Origin
+        private ProfileViewViewModel? _Origin;
+        public ProfileViewViewModel? Origin
         {
             get => _Origin;
             set
@@ -52,7 +50,7 @@ namespace HitCounterManager.ViewModels
                 if (_Origin != value)
                 {
                     _Origin = value;
-                    CallPropertyChanged(this, nameof(Origin));
+                    CallPropertyChanged();
                 }
             }
         }
@@ -66,7 +64,7 @@ namespace HitCounterManager.ViewModels
                 if (_UserInput != value)
                 {
                     _UserInput = value;
-                    CallPropertyChanged(this, nameof(UserInput));
+                    CallPropertyChanged();
                 }
             }
         }

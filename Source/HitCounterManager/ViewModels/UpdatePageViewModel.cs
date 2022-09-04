@@ -22,24 +22,22 @@
 
 using System.Windows.Input;
 using ReactiveUI;
-using Avalonia.Controls;
 using HitCounterManager.Common;
 
 namespace HitCounterManager.ViewModels
 {
-    public class UpdateViewModel : NotifyPropertyChangedImpl
+    public class UpdatePageViewModel : ViewModelWindowBase
     {
-        public Window? OwnerWindow { get; set; }
         public SettingsRoot Settings => App.CurrentApp.Settings;
 
-        public UpdateViewModel()
+        public UpdatePageViewModel()
         {
             DownloadReleaseLog = ReactiveCommand.Create(() =>
             {
                 if (GitHubUpdate.QueryAllReleases())
                 {
-                    CallPropertyChanged(this, nameof(LatestVersionName));
-                    CallPropertyChanged(this, nameof(FullChangeLog));
+                    CallPropertyChanged(nameof(LatestVersionName));
+                    CallPropertyChanged(nameof(FullChangeLog));
                 }
             });
             WebOpenLatestRelease = ReactiveCommand.Create(() => {

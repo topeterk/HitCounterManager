@@ -34,7 +34,7 @@ namespace HitCounterManager.Views
             InitializeComponent();
             PlatformImpl.SetTopmost(App.CurrentApp.Settings.AlwaysOnTop);
 
-            ((UpdateViewModel)DataContext!).OwnerWindow = this;
+            ((UpdatePageViewModel)DataContext!).OwnerWindow = this;
 
 #if DEBUG
             this.AttachDevTools();

@@ -30,38 +30,36 @@ namespace HitCounterManager.ViewModels
     // TODO Avalonia: [sctypefix] Nested types not working with + sign within xaml, so it must be directly in namespace (ProfileAction)
     public enum ProfileAction { Invalid, Create, Rename, Copy, Delete }
 
-    public class ProfileActionPageViewModel : NotifyPropertyChangedImpl
+    public class ProfileActionPageViewModel : ViewModelWindowBase
     {
-        public Window? OwnerWindow { get; set; }
-
         public ProfileActionPageViewModel()
         {
             Submit = ReactiveCommand.Create(() => {
 
                 try
                 {
-                    if (null == _Origin) throw new ProfileViewModel.ProfileActionException("Internal error");
+                    if (null == _Origin) throw new ProfileViewViewModel.ProfileActionException("Internal error");
                     switch (Action)
                     {
                         case ProfileAction.Create:
-                            if (null == UserInput) throw new ProfileViewModel.ProfileActionException("Internal error");
+                            if (null == UserInput) throw new ProfileViewViewModel.ProfileActionException("Internal error");
                             _Origin.ProfileNew(UserInput);
                             break;
                         case ProfileAction.Rename:
-                            if (null == UserInput) throw new ProfileViewModel.ProfileActionException("Internal error"); 
+                            if (null == UserInput) throw new ProfileViewViewModel.ProfileActionException("Internal error"); 
                             _Origin.ProfileRename(UserInput);
                             break;
                         case ProfileAction.Copy:
-                            if (null == UserInput) throw new ProfileViewModel.ProfileActionException("Internal error"); 
+                            if (null == UserInput) throw new ProfileViewViewModel.ProfileActionException("Internal error"); 
                             _Origin.ProfileCopy(UserInput);
                             break;
                         case ProfileAction.Delete:
                             _Origin.ProfileDelete();
                             break;
-                        default: throw new ProfileViewModel.ProfileActionException("Unknown action");
+                        default: throw new ProfileViewViewModel.ProfileActionException("Unknown action");
                     }
                 }
-                catch (ProfileViewModel.ProfileActionException ex)
+                catch (ProfileViewViewModel.ProfileActionException ex)
                 {
                     App.CurrentApp.DisplayAlert("Profile action failed!", ex.Message);
                     return; // Error
@@ -80,13 +78,13 @@ namespace HitCounterManager.ViewModels
                 if (_Action != value)
                 {
                     _Action = value;
-                    CallPropertyChanged(this, nameof(Action));
+                    CallPropertyChanged();
                 }
             }
         }
 
-        private ProfileViewModel? _Origin;
-        public ProfileViewModel? Origin
+        private ProfileViewViewModel? _Origin;
+        public ProfileViewViewModel? Origin
         {
             get => _Origin;
             set
@@ -94,7 +92,7 @@ namespace HitCounterManager.ViewModels
                 if (_Origin != value)
                 {
                     _Origin = value;
-                    CallPropertyChanged(this, nameof(Origin));
+                    CallPropertyChanged();
                 }
             }
         }
@@ -108,7 +106,7 @@ namespace HitCounterManager.ViewModels
                 if (_UserInput != value)
                 {
                     _UserInput = value;
-                    CallPropertyChanged(this, nameof(UserInput));
+                    CallPropertyChanged();
                 }
             }
         }
@@ -117,7 +115,7 @@ namespace HitCounterManager.ViewModels
         public bool IsUserInputEnabled
         {
             get => _IsUserInputEnabled;
-            private set => SetAndNotifyWhenChanged(this, ref _IsUserInputEnabled, value, nameof(IsUserInputEnabled));
+            private set => SetAndNotifyWhenChanged(ref _IsUserInputEnabled, value);
         }
 
         public void OnAppearing()
@@ -129,13 +127,13 @@ namespace HitCounterManager.ViewModels
                     IsUserInputEnabled = true;
                     break;
                 case ProfileAction.Rename:
-                    if (null == _Origin) throw new ProfileViewModel.ProfileActionException("Internal error"); 
+                    if (null == _Origin) throw new ProfileViewViewModel.ProfileActionException("Internal error"); 
                     UserInput = _Origin.ProfileSelected.Name;
                     IsUserInputEnabled = true;
                     break;
                 case ProfileAction.Copy:
                     {
-                        if (null == _Origin) throw new ProfileViewModel.ProfileActionException("Internal error");
+                        if (null == _Origin) throw new ProfileViewViewModel.ProfileActionException("Internal error");
                         string NewName = _Origin.ProfileSelected.Name;
                         do { NewName += " COPY"; } while (_Origin.IsProfileExisting(NewName)); // extend name till it becomes unique
                         UserInput = NewName;
@@ -143,7 +141,7 @@ namespace HitCounterManager.ViewModels
                         break;
                     }
                 case ProfileAction.Delete:
-                    if (null == _Origin) throw new ProfileViewModel.ProfileActionException("Internal error"); 
+                    if (null == _Origin) throw new ProfileViewViewModel.ProfileActionException("Internal error"); 
                     UserInput = _Origin.ProfileSelected.Name;
                     IsUserInputEnabled = false;
                     break;

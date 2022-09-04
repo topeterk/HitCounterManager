@@ -50,7 +50,7 @@ namespace HitCounterManager.Views
             //             But when the actual value does not change the trigger will not be executed,
             //             so, we return null up to here that we ensure there is a data change during notify.
             vm.AlwaysOnTopDataTriggerWorkaroundCalled = true;
-            vm.CallPropertyChanged(this, nameof(vm.AlwaysOnTop));
+            vm.CallPropertyChanged(nameof(vm.AlwaysOnTop));
 
 #if DEBUG
             this.AttachDevTools();

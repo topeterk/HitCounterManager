@@ -54,7 +54,7 @@ namespace HitCounterManager
     public partial class App : Application
     {
         private IntPtr NativeWindowHandle = IntPtr.Zero;
-        public ProfileViewModel? profileViewModel { get; private set; }
+        public ProfileViewViewModel? profileViewViewModel { get; private set; }
         public readonly OutModule om = new OutModule();
         public readonly Shortcuts sc = new Shortcuts();
         public SettingsRoot Settings { get; internal set; }
@@ -377,16 +377,16 @@ namespace HitCounterManager
                     // Console.WriteLine("WinProc: " + ((Shortcuts.SC_Type)wParam).ToString() +"!");
                     switch ((Shortcuts.SC_Type)wParam)
                     {
-                        case Shortcuts.SC_Type.SC_Type_Reset: app.profileViewModel?.ProfileReset.Execute(null); break;
-                        case Shortcuts.SC_Type.SC_Type_Hit: app.profileViewModel?.HitIncrease.Execute(null); break;
-                        case Shortcuts.SC_Type.SC_Type_Split: app.profileViewModel?.SplitSelectNext.Execute(null); break;
-                        case Shortcuts.SC_Type.SC_Type_HitUndo: app.profileViewModel?.HitDecrease.Execute(null); break;
-                        case Shortcuts.SC_Type.SC_Type_SplitPrev: app.profileViewModel?.SplitSelectPrev.Execute(null); break;
-                        case Shortcuts.SC_Type.SC_Type_WayHit: app.profileViewModel?.HitWayIncrease.Execute(null); break;
-                        case Shortcuts.SC_Type.SC_Type_WayHitUndo: app.profileViewModel?.HitWayDecrease.Execute(null); break;
-                        case Shortcuts.SC_Type.SC_Type_PB: app.profileViewModel?.ProfilePB.Execute(null); break;
-                        case Shortcuts.SC_Type.SC_Type_TimerStart: if (null != app.profileViewModel) app.profileViewModel.TimerRunning = true; break;
-                        case Shortcuts.SC_Type.SC_Type_TimerStop: if (null != app.profileViewModel) app.profileViewModel.TimerRunning = false; break;
+                        case Shortcuts.SC_Type.SC_Type_Reset: app.profileViewViewModel?.ProfileReset.Execute(null); break;
+                        case Shortcuts.SC_Type.SC_Type_Hit: app.profileViewViewModel?.HitIncrease.Execute(null); break;
+                        case Shortcuts.SC_Type.SC_Type_Split: app.profileViewViewModel?.SplitSelectNext.Execute(null); break;
+                        case Shortcuts.SC_Type.SC_Type_HitUndo: app.profileViewViewModel?.HitDecrease.Execute(null); break;
+                        case Shortcuts.SC_Type.SC_Type_SplitPrev: app.profileViewViewModel?.SplitSelectPrev.Execute(null); break;
+                        case Shortcuts.SC_Type.SC_Type_WayHit: app.profileViewViewModel?.HitWayIncrease.Execute(null); break;
+                        case Shortcuts.SC_Type.SC_Type_WayHitUndo: app.profileViewViewModel?.HitWayDecrease.Execute(null); break;
+                        case Shortcuts.SC_Type.SC_Type_PB: app.profileViewViewModel?.ProfilePB.Execute(null); break;
+                        case Shortcuts.SC_Type.SC_Type_TimerStart: if (null != app.profileViewViewModel) app.profileViewViewModel.TimerRunning = true; break;
+                        case Shortcuts.SC_Type.SC_Type_TimerStop: if (null != app.profileViewViewModel) app.profileViewViewModel.TimerRunning = false; break;
                         default: break;
                     }
                 }
@@ -453,7 +453,7 @@ namespace HitCounterManager
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 MainPage main = new MainPage();
-                profileViewModel = (ProfileViewModel)main.ProfileView.DataContext!;
+                profileViewViewModel = (ProfileViewViewModel)main.ProfileView.DataContext!;
                 main.Opened += MainPageAppearing;
 
                 desktop.MainWindow = main;

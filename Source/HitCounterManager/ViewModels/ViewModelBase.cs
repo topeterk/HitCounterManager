@@ -20,11 +20,17 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-using ReactiveUI;
+using Avalonia.Controls;
+using HitCounterManager.Common;
 
 namespace HitCounterManager.ViewModels
 {
-    public class ViewModelBase : ReactiveObject
+    public class ViewModelBase : NotifyPropertyChangedImpl
     {
+    }
+
+    public class ViewModelWindowBase : ViewModelBase
+    {
+        public Window? OwnerWindow { get; set; }
     }
 }

@@ -31,9 +31,8 @@ using HitCounterManager.Views;
 
 namespace HitCounterManager.ViewModels
 {
-    public class MainPageViewModel : NotifyPropertyChangedImpl
+    public class MainPageViewModel : ViewModelWindowBase
     {
-        public Window? OwnerWindow { get; set; }
         private ProfileView? ProfileView => OwnerWindow?.FindControl<ProfileView>("profileView");
 
         public MainPageViewModel()
@@ -45,19 +44,19 @@ namespace HitCounterManager.ViewModels
             NavigateToSetAttempts = ReactiveCommand.CreateFromTask(async () => {
                 if ((null == OwnerWindow) || (null == ProfileView)) return;
 
-                await new ProfileAttemptsPage((ProfileViewModel?)ProfileView?.DataContext!).ShowDialog(OwnerWindow);
+                await new ProfileAttemptsPage((ProfileViewViewModel?)ProfileView?.DataContext!).ShowDialog(OwnerWindow);
             });
             NavigateToProfileAction = ReactiveCommand.CreateFromTask(async (ProfileAction type) => {
                 if (App.CurrentApp.Settings.ReadOnlyMode || (null == OwnerWindow) || (null == ProfileView)) return;
 
-                await new ProfileActionPage(type, (ProfileViewModel?)ProfileView?.DataContext!).ShowDialog(OwnerWindow);
+                await new ProfileActionPage(type, (ProfileViewViewModel?)ProfileView?.DataContext!).ShowDialog(OwnerWindow);
             });
 
             CheckUpdatesOnline = ReactiveCommand.Create(() => App.CurrentApp.CheckAndShowUpdates(this));
 
             ToggleAlwaysOnTop = ReactiveCommand.Create(() => {
                 OwnerWindow?.PlatformImpl.SetTopmost(App.CurrentApp.Settings.AlwaysOnTop = !App.CurrentApp.Settings.AlwaysOnTop);
-                CallPropertyChanged(this, nameof(AlwaysOnTop));
+                CallPropertyChanged(nameof(AlwaysOnTop));
             });
             ToggleDarkMode = ReactiveCommand.Create(() => {
                 App app = App.CurrentApp;

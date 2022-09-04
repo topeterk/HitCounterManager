@@ -31,7 +31,7 @@ using HitCounterManager.Models;
 
 namespace HitCounterManager.ViewModels
 {
-    public class SettingsViewModel : NotifyPropertyChangedImpl
+    public class SettingsPageViewModel : ViewModelWindowBase
     {
         public SettingsRoot Settings => App.CurrentApp.Settings;
         private Shortcuts sc = App.CurrentApp.sc;
@@ -39,7 +39,7 @@ namespace HitCounterManager.ViewModels
         private bool AppearedOnce = false;
         private Shortcuts.SC_Type CapturingId = Shortcuts.SC_Type.SC_Type_MAX;
 
-        public SettingsViewModel()
+        public SettingsPageViewModel()
         {
             _StyleFontName = Settings.StyleFontName;
             _StyleFontUrl = Settings.StyleFontUrl;
@@ -81,9 +81,9 @@ namespace HitCounterManager.ViewModels
                 Settings.StyleCssUrl = _StyleCssUrl;
 
                 // Implicitly enable custom settings
-                SetAndNotifyWhenChanged(this, ref Settings.StyleUseCustom, true, nameof(StyleUseCustom));
+                SetAndNotifyWhenChanged(ref Settings.StyleUseCustom, true);
 
-                CallPropertyChanged(this, nameof(ApplyCssAndFont));
+                CallPropertyChanged(nameof(ApplyCssAndFont));
             });
 
             PropertyChanged += SettingDataChangedHandler;
@@ -99,7 +99,7 @@ namespace HitCounterManager.ViewModels
                     e.PropertyName.Equals(nameof(StyleCssUrl)))
                 ) return;
 
-            App.CurrentApp.profileViewModel?.OutputDataChangedHandler(sender, e);
+            App.CurrentApp.profileViewViewModel?.OutputDataChangedHandler(sender, e);
         }
 
         public class ShowInfoBool : NotifyPropertyChangedImpl
@@ -108,7 +108,7 @@ namespace HitCounterManager.ViewModels
             public bool Value
             {
                 get => _Value;
-                set => SetAndNotifyWhenChanged(this, ref _Value, value, nameof(Value));
+                set => SetAndNotifyWhenChanged(ref _Value, value);
             }
         }
 
@@ -219,43 +219,43 @@ namespace HitCounterManager.ViewModels
             switch (Id)
             {
                 case Shortcuts.SC_Type.SC_Type_Hit:
-                    CallPropertyChanged(this, nameof(ShortcutHitDescription));
+                    CallPropertyChanged(nameof(ShortcutHitDescription));
                     ShortcutHitEnable = true;
                     break;
                 case Shortcuts.SC_Type.SC_Type_HitUndo:
-                    CallPropertyChanged(this, nameof(ShortcutHitUndoDescription));
+                    CallPropertyChanged(nameof(ShortcutHitUndoDescription));
                     ShortcutHitUndoEnable = true;
                     break;
                 case Shortcuts.SC_Type.SC_Type_WayHit:
-                    CallPropertyChanged(this, nameof(ShortcutWayHitDescription));
+                    CallPropertyChanged(nameof(ShortcutWayHitDescription));
                     ShortcutWayHitEnable = true;
                     break;
                 case Shortcuts.SC_Type.SC_Type_WayHitUndo:
-                    CallPropertyChanged(this, nameof(ShortcutWayHitUndoDescription));
+                    CallPropertyChanged(nameof(ShortcutWayHitUndoDescription));
                     ShortcutWayHitUndoEnable = true;
                     break;
                 case Shortcuts.SC_Type.SC_Type_Split:
-                    CallPropertyChanged(this, nameof(ShortcutSplitDescription));
+                    CallPropertyChanged(nameof(ShortcutSplitDescription));
                     ShortcutSplitEnable = true;
                     break;
                 case Shortcuts.SC_Type.SC_Type_SplitPrev:
-                    CallPropertyChanged(this, nameof(ShortcutSplitPrevDescription));
+                    CallPropertyChanged(nameof(ShortcutSplitPrevDescription));
                     ShortcutSplitPrevEnable = true;
                     break;
                 case Shortcuts.SC_Type.SC_Type_PB:
-                    CallPropertyChanged(this, nameof(ShortcutPBDescription));
+                    CallPropertyChanged(nameof(ShortcutPBDescription));
                     ShortcutPBEnable = true;
                     break;
                 case Shortcuts.SC_Type.SC_Type_Reset:
-                    CallPropertyChanged(this, nameof(ShortcutResetDescription));
+                    CallPropertyChanged(nameof(ShortcutResetDescription));
                     ShortcutResetEnable = true;
                     break;
                 case Shortcuts.SC_Type.SC_Type_TimerStart:
-                    CallPropertyChanged(this, nameof(ShortcutTimerStartDescription));
+                    CallPropertyChanged(nameof(ShortcutTimerStartDescription));
                     ShortcutTimerStartEnable = true;
                     break;
                 case Shortcuts.SC_Type.SC_Type_TimerStop:
-                    CallPropertyChanged(this, nameof(ShortcutTimerStopDescription));
+                    CallPropertyChanged(nameof(ShortcutTimerStopDescription));
                     ShortcutTimerStopEnable = true;
                     break;
                 default: break;
@@ -272,31 +272,31 @@ namespace HitCounterManager.ViewModels
                 // therefore the settings must be loaded again later (=here)
                 // in order to present the correct data
                 // TODO: Get rid of this by displaying stored keys instead of loaded keys?
-                CallPropertyChanged(this, nameof(ShortcutHitRecordAction));
-                CallPropertyChanged(this, nameof(ShortcutHitUndoRecordAction));
-                CallPropertyChanged(this, nameof(ShortcutWayHitRecordAction));
-                CallPropertyChanged(this, nameof(ShortcutWayHitUndoRecordAction));
-                CallPropertyChanged(this, nameof(ShortcutSplitRecordAction));
-                CallPropertyChanged(this, nameof(ShortcutSplitPrevRecordAction));
-                CallPropertyChanged(this, nameof(ShortcutPBRecordAction));
-                CallPropertyChanged(this, nameof(ShortcutResetRecordAction));
-                CallPropertyChanged(this, nameof(ShortcutTimerStartRecordAction));
-                CallPropertyChanged(this, nameof(ShortcutTimerStopRecordAction));
+                CallPropertyChanged(nameof(ShortcutHitRecordAction));
+                CallPropertyChanged(nameof(ShortcutHitUndoRecordAction));
+                CallPropertyChanged(nameof(ShortcutWayHitRecordAction));
+                CallPropertyChanged(nameof(ShortcutWayHitUndoRecordAction));
+                CallPropertyChanged(nameof(ShortcutSplitRecordAction));
+                CallPropertyChanged(nameof(ShortcutSplitPrevRecordAction));
+                CallPropertyChanged(nameof(ShortcutPBRecordAction));
+                CallPropertyChanged(nameof(ShortcutResetRecordAction));
+                CallPropertyChanged(nameof(ShortcutTimerStartRecordAction));
+                CallPropertyChanged(nameof(ShortcutTimerStopRecordAction));
 
-                CallPropertyChanged(this, nameof(ShortcutHitDescription));
-                CallPropertyChanged(this, nameof(ShortcutHitUndoDescription));
-                CallPropertyChanged(this, nameof(ShortcutWayHitDescription));
-                CallPropertyChanged(this, nameof(ShortcutWayHitUndoDescription));
-                CallPropertyChanged(this, nameof(ShortcutSplitDescription));
-                CallPropertyChanged(this, nameof(ShortcutSplitPrevDescription));
-                CallPropertyChanged(this, nameof(ShortcutPBDescription));
-                CallPropertyChanged(this, nameof(ShortcutResetDescription));
-                CallPropertyChanged(this, nameof(ShortcutTimerStartDescription));
-                CallPropertyChanged(this, nameof(ShortcutTimerStopDescription));
+                CallPropertyChanged(nameof(ShortcutHitDescription));
+                CallPropertyChanged(nameof(ShortcutHitUndoDescription));
+                CallPropertyChanged(nameof(ShortcutWayHitDescription));
+                CallPropertyChanged(nameof(ShortcutWayHitUndoDescription));
+                CallPropertyChanged(nameof(ShortcutSplitDescription));
+                CallPropertyChanged(nameof(ShortcutSplitPrevDescription));
+                CallPropertyChanged(nameof(ShortcutPBDescription));
+                CallPropertyChanged(nameof(ShortcutResetDescription));
+                CallPropertyChanged(nameof(ShortcutTimerStartDescription));
+                CallPropertyChanged(nameof(ShortcutTimerStopDescription));
 
-                CallPropertyChanged(this, nameof(RadioHotKeyMethod_Sync));
-                CallPropertyChanged(this, nameof(RadioHotKeyMethod_Async));
-                CallPropertyChanged(this, nameof(RadioHotKeyMethod_LLKb));
+                CallPropertyChanged(nameof(RadioHotKeyMethod_Sync));
+                CallPropertyChanged(nameof(RadioHotKeyMethod_Async));
+                CallPropertyChanged(nameof(RadioHotKeyMethod_LLKb));
             }
 
             App.CurrentApp.SettingsDialogOpen = true; // To disable hotkeys (for main application)
@@ -314,7 +314,7 @@ namespace HitCounterManager.ViewModels
             get => Settings.ShortcutHitEnable;
             set
             {
-                if (SetAndNotifyWhenChanged(this, ref Settings.ShortcutHitEnable, value, nameof(ShortcutHitEnable)))
+                if (SetAndNotifyWhenChanged(ref Settings.ShortcutHitEnable, value))
                     sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Hit, Settings.ShortcutHitEnable);
             }
         }
@@ -323,7 +323,7 @@ namespace HitCounterManager.ViewModels
             get => Settings.ShortcutHitUndoEnable;
             set
             {
-                if (SetAndNotifyWhenChanged(this, ref Settings.ShortcutHitUndoEnable, value, nameof(ShortcutHitUndoEnable)))
+                if (SetAndNotifyWhenChanged(ref Settings.ShortcutHitUndoEnable, value))
                     sc.Key_SetState(Shortcuts.SC_Type.SC_Type_HitUndo, Settings.ShortcutHitUndoEnable);
             }
         }
@@ -332,7 +332,7 @@ namespace HitCounterManager.ViewModels
             get => Settings.ShortcutWayHitEnable;
             set
             {
-                if (SetAndNotifyWhenChanged(this, ref Settings.ShortcutWayHitEnable, value, nameof(ShortcutWayHitEnable)))
+                if (SetAndNotifyWhenChanged(ref Settings.ShortcutWayHitEnable, value))
                     sc.Key_SetState(Shortcuts.SC_Type.SC_Type_WayHit, Settings.ShortcutWayHitEnable);
             }
         }
@@ -341,7 +341,7 @@ namespace HitCounterManager.ViewModels
             get => Settings.ShortcutWayHitUndoEnable;
             set
             {
-                if (SetAndNotifyWhenChanged(this, ref Settings.ShortcutWayHitUndoEnable, value, nameof(ShortcutWayHitUndoEnable)))
+                if (SetAndNotifyWhenChanged(ref Settings.ShortcutWayHitUndoEnable, value))
                     sc.Key_SetState(Shortcuts.SC_Type.SC_Type_WayHitUndo, Settings.ShortcutWayHitUndoEnable);
             }
         }
@@ -350,7 +350,7 @@ namespace HitCounterManager.ViewModels
             get => Settings.ShortcutSplitEnable;
             set
             {
-                if (SetAndNotifyWhenChanged(this, ref Settings.ShortcutSplitEnable, value, nameof(ShortcutSplitEnable)))
+                if (SetAndNotifyWhenChanged(ref Settings.ShortcutSplitEnable, value))
                     sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Split, Settings.ShortcutSplitEnable);
             }
         }
@@ -359,7 +359,7 @@ namespace HitCounterManager.ViewModels
             get => Settings.ShortcutSplitPrevEnable;
             set
             {
-                if (SetAndNotifyWhenChanged(this, ref Settings.ShortcutSplitPrevEnable, value, nameof(ShortcutSplitPrevEnable)))
+                if (SetAndNotifyWhenChanged(ref Settings.ShortcutSplitPrevEnable, value))
                     sc.Key_SetState(Shortcuts.SC_Type.SC_Type_SplitPrev, Settings.ShortcutSplitPrevEnable);
             }
         }
@@ -368,7 +368,7 @@ namespace HitCounterManager.ViewModels
             get => Settings.ShortcutPBEnable;
             set
             {
-                if (SetAndNotifyWhenChanged(this, ref Settings.ShortcutPBEnable, value, nameof(ShortcutPBEnable)))
+                if (SetAndNotifyWhenChanged(ref Settings.ShortcutPBEnable, value))
                     sc.Key_SetState(Shortcuts.SC_Type.SC_Type_PB, Settings.ShortcutPBEnable);
             }
         }
@@ -377,7 +377,7 @@ namespace HitCounterManager.ViewModels
             get => Settings.ShortcutResetEnable;
             set
             {
-                if (SetAndNotifyWhenChanged(this, ref Settings.ShortcutResetEnable, value, nameof(ShortcutResetEnable)))
+                if (SetAndNotifyWhenChanged(ref Settings.ShortcutResetEnable, value))
                     sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Reset, Settings.ShortcutResetEnable);
             }
         }
@@ -386,7 +386,7 @@ namespace HitCounterManager.ViewModels
             get => Settings.ShortcutTimerStartEnable;
             set
             {
-                if (SetAndNotifyWhenChanged(this, ref Settings.ShortcutTimerStartEnable, value, nameof(ShortcutTimerStartEnable)))
+                if (SetAndNotifyWhenChanged(ref Settings.ShortcutTimerStartEnable, value))
                     sc.Key_SetState(Shortcuts.SC_Type.SC_Type_TimerStart, Settings.ShortcutTimerStartEnable);
             }
         }
@@ -395,7 +395,7 @@ namespace HitCounterManager.ViewModels
             get => Settings.ShortcutTimerStopEnable;
             set
             {
-                if (SetAndNotifyWhenChanged(this, ref Settings.ShortcutTimerStopEnable, value, nameof(ShortcutTimerStopEnable)))
+                if (SetAndNotifyWhenChanged(ref Settings.ShortcutTimerStopEnable, value))
                     sc.Key_SetState(Shortcuts.SC_Type.SC_Type_TimerStop, Settings.ShortcutTimerStopEnable);
             }
         }
@@ -404,16 +404,16 @@ namespace HitCounterManager.ViewModels
         {
             switch (type)
             {
-                case Shortcuts.SC_Type.SC_Type_Hit: CallPropertyChanged(this, nameof(ShortcutHitRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_HitUndo: CallPropertyChanged(this, nameof(ShortcutHitUndoRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_WayHit: CallPropertyChanged(this, nameof(ShortcutWayHitRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_WayHitUndo: CallPropertyChanged(this, nameof(ShortcutWayHitUndoRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_Split: CallPropertyChanged(this, nameof(ShortcutSplitRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_SplitPrev: CallPropertyChanged(this, nameof(ShortcutSplitPrevRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_PB: CallPropertyChanged(this, nameof(ShortcutPBRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_Reset: CallPropertyChanged(this, nameof(ShortcutResetRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_TimerStart: CallPropertyChanged(this, nameof(ShortcutTimerStartRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_TimerStop: CallPropertyChanged(this, nameof(ShortcutTimerStopRecordAction)); break;
+                case Shortcuts.SC_Type.SC_Type_Hit: CallPropertyChanged(nameof(ShortcutHitRecordAction)); break;
+                case Shortcuts.SC_Type.SC_Type_HitUndo: CallPropertyChanged(nameof(ShortcutHitUndoRecordAction)); break;
+                case Shortcuts.SC_Type.SC_Type_WayHit: CallPropertyChanged(nameof(ShortcutWayHitRecordAction)); break;
+                case Shortcuts.SC_Type.SC_Type_WayHitUndo: CallPropertyChanged(nameof(ShortcutWayHitUndoRecordAction)); break;
+                case Shortcuts.SC_Type.SC_Type_Split: CallPropertyChanged(nameof(ShortcutSplitRecordAction)); break;
+                case Shortcuts.SC_Type.SC_Type_SplitPrev: CallPropertyChanged(nameof(ShortcutSplitPrevRecordAction)); break;
+                case Shortcuts.SC_Type.SC_Type_PB: CallPropertyChanged(nameof(ShortcutPBRecordAction)); break;
+                case Shortcuts.SC_Type.SC_Type_Reset: CallPropertyChanged(nameof(ShortcutResetRecordAction)); break;
+                case Shortcuts.SC_Type.SC_Type_TimerStart: CallPropertyChanged(nameof(ShortcutTimerStartRecordAction)); break;
+                case Shortcuts.SC_Type.SC_Type_TimerStop: CallPropertyChanged(nameof(ShortcutTimerStopRecordAction)); break;
                 default: break;
             }
         }
@@ -447,16 +447,16 @@ namespace HitCounterManager.ViewModels
             sc.NextStart_Method = next;
             switch (prev)
             {
-                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync: CallPropertyChanged(this, nameof(RadioHotKeyMethod_Sync)); break;
-                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async: CallPropertyChanged(this, nameof(RadioHotKeyMethod_Async)); break;
-                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb: CallPropertyChanged(this, nameof(RadioHotKeyMethod_LLKb)); break;
+                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync: CallPropertyChanged(nameof(RadioHotKeyMethod_Sync)); break;
+                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async: CallPropertyChanged(nameof(RadioHotKeyMethod_Async)); break;
+                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb: CallPropertyChanged(nameof(RadioHotKeyMethod_LLKb)); break;
                 default: break;
             }
             switch (next)
             {
-                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync: CallPropertyChanged(this, nameof(RadioHotKeyMethod_Sync)); break;
-                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async: CallPropertyChanged(this, nameof(RadioHotKeyMethod_Async)); break;
-                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb: CallPropertyChanged(this, nameof(RadioHotKeyMethod_LLKb)); break;
+                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync: CallPropertyChanged(nameof(RadioHotKeyMethod_Sync)); break;
+                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async: CallPropertyChanged(nameof(RadioHotKeyMethod_Async)); break;
+                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb: CallPropertyChanged(nameof(RadioHotKeyMethod_LLKb)); break;
                 default: break;
             }
             App.CurrentApp.DisplayAlert("Restart required", "Changes only take effect after restarting the application.", NotificationType.Information);
@@ -482,67 +482,67 @@ namespace HitCounterManager.ViewModels
         public bool StyleUseHighContrast
         {
             get => Settings.StyleUseHighContrast;
-            set => SetAndNotifyWhenChanged(this, ref Settings.StyleUseHighContrast, value, nameof(StyleUseHighContrast));
+            set => SetAndNotifyWhenChanged(ref Settings.StyleUseHighContrast, value);
         }
         public bool StyleUseHighContrastNames
         {
             get => Settings.StyleUseHighContrastNames;
-            set => SetAndNotifyWhenChanged(this, ref Settings.StyleUseHighContrastNames, value, nameof(StyleUseHighContrastNames));
+            set => SetAndNotifyWhenChanged(ref Settings.StyleUseHighContrastNames, value);
         }
         public bool StyleProgressBarColored
         {
             get => Settings.StyleProgressBarColored;
-            set => SetAndNotifyWhenChanged(this, ref Settings.StyleProgressBarColored, value, nameof(StyleProgressBarColored));
+            set => SetAndNotifyWhenChanged(ref Settings.StyleProgressBarColored, value);
         }
         public bool StyleSubscriptPB
         {
             get => Settings.StyleSubscriptPB;
-            set => SetAndNotifyWhenChanged(this, ref Settings.StyleSubscriptPB, value, nameof(StyleSubscriptPB));
+            set => SetAndNotifyWhenChanged(ref Settings.StyleSubscriptPB, value);
         }
         public bool StyleUseRoman
         {
             get => Settings.StyleUseRoman;
-            set => SetAndNotifyWhenChanged(this, ref Settings.StyleUseRoman, value, nameof(StyleUseRoman));
+            set => SetAndNotifyWhenChanged(ref Settings.StyleUseRoman, value);
         }
         public bool StyleHightlightCurrentSplit
         {
             get => Settings.StyleHightlightCurrentSplit;
-            set => SetAndNotifyWhenChanged(this, ref Settings.StyleHightlightCurrentSplit, value, nameof(StyleHightlightCurrentSplit));
+            set => SetAndNotifyWhenChanged(ref Settings.StyleHightlightCurrentSplit, value);
         }
 
         public int StyleDesiredHeight
         {
             get => Settings.StyleDesiredHeight;
-            set => SetAndNotifyWhenNaturalNumberChanged(this, ref Settings.StyleDesiredHeight, value, nameof(StyleDesiredHeight));
+            set => SetAndNotifyWhenNaturalNumberChanged(ref Settings.StyleDesiredHeight, value);
         }
         public int StyleDesiredWidth
         {
             get => Settings.StyleDesiredWidth;
-            set => SetAndNotifyWhenNaturalNumberChanged(this, ref Settings.StyleDesiredWidth, value, nameof(StyleDesiredWidth));
+            set => SetAndNotifyWhenNaturalNumberChanged(ref Settings.StyleDesiredWidth, value);
         }
 
         public bool StyleUseCustom
         {
             get => Settings.StyleUseCustom;
-            set => SetAndNotifyWhenChanged(this, ref Settings.StyleUseCustom, value, nameof(StyleUseCustom));
+            set => SetAndNotifyWhenChanged(ref Settings.StyleUseCustom, value);
         }
         private string _StyleFontName;
         public string StyleFontName
         {
             get => _StyleFontName;
-            set => SetAndNotifyWhenChanged(this, ref _StyleFontName, value, nameof(StyleFontName));
+            set => SetAndNotifyWhenChanged(ref _StyleFontName, value);
         }
         private string _StyleFontUrl;
         public string StyleFontUrl
         {
             get => _StyleFontUrl;
-            set => SetAndNotifyWhenChanged(this, ref _StyleFontUrl, value, nameof(StyleFontUrl));
+            set => SetAndNotifyWhenChanged(ref _StyleFontUrl, value);
         }
         private string _StyleCssUrl;
         public string StyleCssUrl
         {
             get => _StyleCssUrl;
-            set => SetAndNotifyWhenChanged(this, ref _StyleCssUrl, value, nameof(StyleCssUrl));
+            set => SetAndNotifyWhenChanged(ref _StyleCssUrl, value);
         }
         public ICommand ApplyCssAndFont { get; }
 
@@ -558,20 +558,20 @@ namespace HitCounterManager.ViewModels
             om.Purpose = next;
             switch (prev)
             {
-                case OutModule.OM_Purpose.OM_Purpose_SplitCounter: CallPropertyChanged(this, nameof(RadioPurpose_SplitCounter)); break;
-                case OutModule.OM_Purpose.OM_Purpose_Checklist: CallPropertyChanged(this, nameof(RadioPurpose_Checklist)); break;
-                case OutModule.OM_Purpose.OM_Purpose_NoDeath: CallPropertyChanged(this, nameof(RadioPurpose_NoDeath)); break;
-                case OutModule.OM_Purpose.OM_Purpose_DeathCounter: CallPropertyChanged(this, nameof(RadioPurpose_DeathCounter)); break;
-                case OutModule.OM_Purpose.OM_Purpose_ResetCounter: CallPropertyChanged(this, nameof(RadioPurpose_ResetCounter)); break;
+                case OutModule.OM_Purpose.OM_Purpose_SplitCounter: CallPropertyChanged(nameof(RadioPurpose_SplitCounter)); break;
+                case OutModule.OM_Purpose.OM_Purpose_Checklist: CallPropertyChanged(nameof(RadioPurpose_Checklist)); break;
+                case OutModule.OM_Purpose.OM_Purpose_NoDeath: CallPropertyChanged(nameof(RadioPurpose_NoDeath)); break;
+                case OutModule.OM_Purpose.OM_Purpose_DeathCounter: CallPropertyChanged(nameof(RadioPurpose_DeathCounter)); break;
+                case OutModule.OM_Purpose.OM_Purpose_ResetCounter: CallPropertyChanged(nameof(RadioPurpose_ResetCounter)); break;
                 default: break;
             }
             switch (next)
             {
-                case OutModule.OM_Purpose.OM_Purpose_SplitCounter: CallPropertyChanged(this, nameof(RadioPurpose_SplitCounter)); break;
-                case OutModule.OM_Purpose.OM_Purpose_Checklist: CallPropertyChanged(this, nameof(RadioPurpose_Checklist)); break;
-                case OutModule.OM_Purpose.OM_Purpose_NoDeath: CallPropertyChanged(this, nameof(RadioPurpose_NoDeath)); break;
-                case OutModule.OM_Purpose.OM_Purpose_DeathCounter: CallPropertyChanged(this, nameof(RadioPurpose_DeathCounter)); break;
-                case OutModule.OM_Purpose.OM_Purpose_ResetCounter: CallPropertyChanged(this, nameof(RadioPurpose_ResetCounter)); break;
+                case OutModule.OM_Purpose.OM_Purpose_SplitCounter: CallPropertyChanged(nameof(RadioPurpose_SplitCounter)); break;
+                case OutModule.OM_Purpose.OM_Purpose_Checklist: CallPropertyChanged(nameof(RadioPurpose_Checklist)); break;
+                case OutModule.OM_Purpose.OM_Purpose_NoDeath: CallPropertyChanged(nameof(RadioPurpose_NoDeath)); break;
+                case OutModule.OM_Purpose.OM_Purpose_DeathCounter: CallPropertyChanged(nameof(RadioPurpose_DeathCounter)); break;
+                case OutModule.OM_Purpose.OM_Purpose_ResetCounter: CallPropertyChanged(nameof(RadioPurpose_ResetCounter)); break;
                 default: break;
             }
         }
@@ -609,16 +609,16 @@ namespace HitCounterManager.ViewModels
             om.Severity = next;
             switch (prev)
             {
-                case OutModule.OM_Severity.OM_Severity_AnyHitsCritical: CallPropertyChanged(this, nameof(RadioHitSeverity_AnyHitCritical)); break;
-                case OutModule.OM_Severity.OM_Severity_ComparePB: CallPropertyChanged(this, nameof(RadioHitSeverity_ComparePB)); break;
-                case OutModule.OM_Severity.OM_Severity_BossHitCritical: CallPropertyChanged(this, nameof(RadioHitSeverity_BossHitCritical)); break;
+                case OutModule.OM_Severity.OM_Severity_AnyHitsCritical: CallPropertyChanged(nameof(RadioHitSeverity_AnyHitCritical)); break;
+                case OutModule.OM_Severity.OM_Severity_ComparePB: CallPropertyChanged(nameof(RadioHitSeverity_ComparePB)); break;
+                case OutModule.OM_Severity.OM_Severity_BossHitCritical: CallPropertyChanged(nameof(RadioHitSeverity_BossHitCritical)); break;
                 default: break;
             }
             switch (next)
             {
-                case OutModule.OM_Severity.OM_Severity_AnyHitsCritical: CallPropertyChanged(this, nameof(RadioHitSeverity_AnyHitCritical)); break;
-                case OutModule.OM_Severity.OM_Severity_ComparePB: CallPropertyChanged(this, nameof(RadioHitSeverity_ComparePB)); break;
-                case OutModule.OM_Severity.OM_Severity_BossHitCritical: CallPropertyChanged(this, nameof(RadioHitSeverity_BossHitCritical)); break;
+                case OutModule.OM_Severity.OM_Severity_AnyHitsCritical: CallPropertyChanged(nameof(RadioHitSeverity_AnyHitCritical)); break;
+                case OutModule.OM_Severity.OM_Severity_ComparePB: CallPropertyChanged(nameof(RadioHitSeverity_ComparePB)); break;
+                case OutModule.OM_Severity.OM_Severity_BossHitCritical: CallPropertyChanged(nameof(RadioHitSeverity_BossHitCritical)); break;
                 default: break;
             }
         }
@@ -640,88 +640,88 @@ namespace HitCounterManager.ViewModels
         public bool ShowAttemptsCounter
         {
             get => Settings.ShowAttemptsCounter;
-            set => SetAndNotifyWhenChanged(this, ref Settings.ShowAttemptsCounter, value, nameof(ShowAttemptsCounter));
+            set => SetAndNotifyWhenChanged(ref Settings.ShowAttemptsCounter, value);
         }
         public bool ShowHeadline
         {
             get => Settings.ShowHeadline;
-            set => SetAndNotifyWhenChanged(this, ref Settings.ShowHeadline, value, nameof(ShowHeadline));
+            set => SetAndNotifyWhenChanged(ref Settings.ShowHeadline, value);
         }
         public bool ShowFooter
         {
             get => Settings.ShowFooter;
-            set => SetAndNotifyWhenChanged(this, ref Settings.ShowFooter, value, nameof(ShowFooter));
+            set => SetAndNotifyWhenChanged(ref Settings.ShowFooter, value);
         }
         public bool ShowSessionProgress
         {
             get => Settings.ShowSessionProgress;
-            set => SetAndNotifyWhenChanged(this, ref Settings.ShowSessionProgress, value, nameof(ShowSessionProgress));
+            set => SetAndNotifyWhenChanged(ref Settings.ShowSessionProgress, value);
         }
         public bool ShowProgressBar
         {
             get => Settings.ShowProgressBar;
-            set => SetAndNotifyWhenChanged(this, ref Settings.ShowProgressBar, value, nameof(ShowProgressBar));
+            set => SetAndNotifyWhenChanged(ref Settings.ShowProgressBar, value);
         }
         public bool ShowHits
         {
             get => Settings.ShowHits;
-            set => SetAndNotifyWhenChanged(this, ref Settings.ShowHits, value, nameof(ShowHits));
+            set => SetAndNotifyWhenChanged(ref Settings.ShowHits, value);
         }
         public bool ShowHitsCombined
         {
             get => Settings.ShowHitsCombined;
-            set => SetAndNotifyWhenChanged(this, ref Settings.ShowHitsCombined, value, nameof(ShowHitsCombined));
+            set => SetAndNotifyWhenChanged(ref Settings.ShowHitsCombined, value);
         }
         public bool ShowPB
         {
             get => Settings.ShowPB;
-            set => SetAndNotifyWhenChanged(this, ref Settings.ShowPB, value, nameof(ShowPB));
+            set => SetAndNotifyWhenChanged(ref Settings.ShowPB, value);
         }
         public bool ShowPBTotals
         {
             get => Settings.ShowPBTotals;
-            set => SetAndNotifyWhenChanged(this, ref Settings.ShowPBTotals, value, nameof(ShowPBTotals));
+            set => SetAndNotifyWhenChanged(ref Settings.ShowPBTotals, value);
         }
         public bool ShowDiff
         {
             get => Settings.ShowDiff;
-            set => SetAndNotifyWhenChanged(this, ref Settings.ShowDiff, value, nameof(ShowDiff));
+            set => SetAndNotifyWhenChanged(ref Settings.ShowDiff, value);
         }
         public bool ShowNumbers
         {
             get => Settings.ShowNumbers;
-            set => SetAndNotifyWhenChanged(this, ref Settings.ShowNumbers, value, nameof(ShowNumbers));
+            set => SetAndNotifyWhenChanged(ref Settings.ShowNumbers, value);
         }
         public bool ShowTimeCurrent
         {
             get => Settings.ShowTimeCurrent;
-            set => SetAndNotifyWhenChanged(this, ref Settings.ShowTimeCurrent, value, nameof(ShowTimeCurrent));
+            set => SetAndNotifyWhenChanged(ref Settings.ShowTimeCurrent, value);
         }
         public bool ShowTimePB
         {
             get => Settings.ShowTimePB;
-            set => SetAndNotifyWhenChanged(this, ref Settings.ShowTimePB, value, nameof(ShowTimePB));
+            set => SetAndNotifyWhenChanged(ref Settings.ShowTimePB, value);
         }
         public bool ShowTimeFooter
         {
             get => Settings.ShowTimeFooter;
-            set => SetAndNotifyWhenChanged(this, ref Settings.ShowTimeFooter, value, nameof(ShowTimeFooter));
+            set => SetAndNotifyWhenChanged(ref Settings.ShowTimeFooter, value);
         }
         public bool ShowTimeDiff
         {
             get => Settings.ShowTimeDiff;
-            set => SetAndNotifyWhenChanged(this, ref Settings.ShowTimeDiff, value, nameof(ShowTimeDiff));
+            set => SetAndNotifyWhenChanged(ref Settings.ShowTimeDiff, value);
         }
 
         public int ShowSplitsCountFinished
         {
             get => Settings.ShowSplitsCountFinished;
-            set => SetAndNotifyWhenNaturalNumberChanged(this, ref Settings.ShowSplitsCountFinished, value, nameof(ShowSplitsCountFinished));
+            set => SetAndNotifyWhenNaturalNumberChanged(ref Settings.ShowSplitsCountFinished, value);
         }
         public int ShowSplitsCountUpcoming
         {
             get => Settings.ShowSplitsCountUpcoming;
-            set => SetAndNotifyWhenNaturalNumberChanged(this, ref Settings.ShowSplitsCountUpcoming, value, nameof(ShowSplitsCountUpcoming));
+            set => SetAndNotifyWhenNaturalNumberChanged(ref Settings.ShowSplitsCountUpcoming, value);
         }
 #endregion
     }

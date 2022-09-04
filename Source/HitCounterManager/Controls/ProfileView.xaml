@@ -30,7 +30,7 @@
              x:Name="ProfileViewPage">
 
     <UserControl.DataContext>
-        <local:ProfileViewModel />
+        <local:ProfileViewViewModel />
     </UserControl.DataContext>
 
     <StackPanel Margin="10" Spacing="2" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top">
