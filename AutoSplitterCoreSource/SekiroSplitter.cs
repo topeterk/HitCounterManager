@@ -36,13 +36,14 @@ namespace AutoSplitterCore
         public bool _StatusProcedure = true;
         public bool _StatusSekiro = false;
         public bool _runStarted = false;
+        public bool _SplitGo = false;
         public DTSekiro dataSekiro;
         public DefinitionsSekiro defS = new DefinitionsSekiro();
         public ProfilesControl _profile;
         private bool _writeMemory = false;
-        private bool _SplitGo = false;
         private static readonly object _object = new object();
-        System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
+        private System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
+        public bool DebugMode = false;
 
 
         public DTSekiro getDataSekiro()
@@ -61,7 +62,7 @@ namespace AutoSplitterCore
         {
             if (_SplitGo)
             {
-                try { _profile.ProfileSplitGo(+1); } catch (Exception) { }
+                if (!DebugMode) { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } }else { Thread.Sleep(15000); }
                 _SplitGo = false;
             }
         }
@@ -194,6 +195,11 @@ namespace AutoSplitterCore
             return sekiro.GetInGameTimeMilliseconds();
         }
 
+
+        public bool CheckFlag(uint id)
+        {
+            return sekiro.ReadEventFlag(id);
+        }
         public void resetSplited()
         {
             listPendingB.Clear();
@@ -233,6 +239,9 @@ namespace AutoSplitterCore
                 }
             }
             _runStarted = false;
+            index = 0;
+            notSplited(ref MortalJourneyData);
+            PendingMortal.Clear();
         }
 
 
@@ -262,17 +271,21 @@ namespace AutoSplitterCore
             {
                 customFlagToSplit();
             });
+            var task5 = new Task(() =>
+            {
+                MortalJourney();
+            });
             taskRefresh.Start();
             taskCheckload.Start();
             task1.Start();
             task2.Start();
             task3.Start();
             task4.Start();
-
+            task5.Start();
         }
 
         #region init()    
-        public void RefreshSekiro()
+        private void RefreshSekiro()
         {
             int delay = 2000;
             getSekiroStatusProcess(delay);
@@ -377,6 +390,86 @@ namespace AutoSplitterCore
                             SplitCheck();
                         }
                     }                      
+                }
+            }
+        }
+
+        List<DefinitionsSekiro.PositionS> MortalJourneyData = new List<DefinitionsSekiro.PositionS>()
+        {
+            new DefinitionsSekiro.PositionS(){vector = new Vector3f((float)-100.3826, (float)-69.91195, (float)38.01242)}, //Gyobu
+            new DefinitionsSekiro.PositionS(){vector = new Vector3f((float)-217, (float)-787.8057, (float)569.8)},//Lady Butterfly - MJG
+            new DefinitionsSekiro.PositionS(){vector = new Vector3f((float)-102.9621, (float)53.90246, (float)243.125)}, //Genichiro - MJG
+            new DefinitionsSekiro.PositionS(){vector = new Vector3f((float)-626.7878, (float)-296.0899, (float)757.6398)}, //Guardian Ape - MJG
+            new DefinitionsSekiro.PositionS(){vector = new Vector3f((float)-180.1189, (float)-397.2622, (float)1406.365)}, //Corrupted Monk - MJG
+            new DefinitionsSekiro.PositionS(){vector = new Vector3f((float)-117.93, (float)54.07684, (float)231.449)},  //Owl - MJG
+            new DefinitionsSekiro.PositionS(){vector = new Vector3f((float)-197.3754,(float) -377.826, (float)632.1486)},//Double Apes - MJG
+            new DefinitionsSekiro.PositionS(){vector = new Vector3f((float)-103.509,(float) 53.90246,(float) 243.125)}, //Emma - MJG
+            new DefinitionsSekiro.PositionS(){vector = new Vector3f((float)-103.508,(float) 53.90246,(float) 243.125)}, //Isshin - MJG
+            new DefinitionsSekiro.PositionS(){vector = new Vector3f((float)91.34,(float) 154.8877,(float) 69.23)}, //True Monk - MJG
+            new DefinitionsSekiro.PositionS(){vector = new Vector3f((float)-206.346, (float)-787.7436,(float) 565.117)}, //Owl Father - MJG
+            new DefinitionsSekiro.PositionS(){vector = new Vector3f((float)-122.3998,(float) -71.81956, (float)-1.056416)}, //Demon of Hatred - MJG
+            new DefinitionsSekiro.PositionS(){vector = new Vector3f((float)-372.1678,(float) -46.28377, (float)184.5305)}, //Genichiro Way of Tomoe - MJG
+            new DefinitionsSekiro.PositionS(){vector = new Vector3f((float)-372.1679,(float) -46.28377,(float) 184.5305)}, //Sword Saint Isshin - MJG
+            new DefinitionsSekiro.PositionS(){vector = new Vector3f((float)-102.9759,(float) 53.90246, (float)243.125)}, //Inner Genichiro
+            new DefinitionsSekiro.PositionS(){vector = new Vector3f((float)-206.347, (float)-787.7436, (float)565.117)}, //Inner Father
+            new DefinitionsSekiro.PositionS(){vector = new Vector3f((float)-372.1677, (float)-46.28377, (float)184.5305)}, //Inner Isshin
+            
+        };
+
+        private void notSplited(ref List<DefinitionsSekiro.PositionS> p)
+        {
+            foreach (var i in p)
+            {
+                i.IsSplited = false;
+            }
+        }
+
+        int index = 0;
+        List<DefinitionsSekiro.PositionS> PendingMortal = new List<DefinitionsSekiro.PositionS>();
+        private void MortalJourney()
+        {
+            DefinitionsSekiro.PositionS p;
+            while (dataSekiro.enableSplitting)
+            {
+                Thread.Sleep(100);
+                if (dataSekiro.mortalJourneyRun && index < MortalJourneyData.Count)
+                {
+                    p = MortalJourneyData[index];
+                    if (PendingMortal.Count == 0)
+                    {
+                        if (!p.IsSplited)
+                        {
+                            var currentlyPosition = sekiro.GetPlayerPosition();
+                            var rangeX = ((currentlyPosition.X - p.vector.X) <= 10) && ((currentlyPosition.X - p.vector.X) >= -10);
+                            var rangeY = ((currentlyPosition.Y - p.vector.Y) <= 10) && ((currentlyPosition.Y - p.vector.Y) >= -10);
+                            var rangeZ = ((currentlyPosition.Z - p.vector.Z) <= 10) && ((currentlyPosition.Z - p.vector.Z) >= -10);
+                            if (rangeX && rangeY && rangeZ)
+                            {
+                                if (!PendingMortal.Contains(p))
+                                {
+                                    PendingMortal.Add(p);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            index++;
+                        }
+                    }
+                    else
+                    {
+                       if (!sekiro.IsPlayerLoaded())
+                        {
+                            SplitCheck();
+                            p.IsSplited = true;
+                            PendingMortal.Clear();
+                        }             
+                    }
+                }
+                else
+                {
+                    index = 0;
+                    notSplited(ref MortalJourneyData);
                 }
             }
         }

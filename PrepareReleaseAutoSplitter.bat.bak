@@ -34,7 +34,7 @@ if not exist %PR_FINAL% mkdir %PR_FINAL%
 echo Packing Portable AutoSplitterCore Release:
 set PR_BASE=bin\ReleaseWin\AutoSplitterCore
 set PR_TARGET=%PR_FINAL%\AutoSplitterCorePortable
-set PR_OUTPUT=%PR_FINAL%\AutoSplitterCore_Portable_v1.x.0.zip
+set PR_OUTPUT=%PR_FINAL%\AutoSplitterCore_Portable_v1.x.0.0.zip
 rmdir /S /Q %PR_TARGET% 2>nul
 mkdir %PR_TARGET%
 del %PR_OUTPUT% 2>nul
@@ -47,6 +47,6 @@ copy ASLScripts %PR_TARGET%\ASLScripts
 7z a %PR_OUTPUT% .\%PR_TARGET%\*
 
 echo Copying AutoSplitterCore Installer Release:
-copy bin\AutoSplitterCoreInstaller\AutoSplitterCore_Installer_v1.x.0.msi %PR_FINAL%
+copy bin\AutoSplitterCoreInstaller\AutoSplitterCore_Installer_v1.x.0.0.msi %PR_FINAL%
 
 echo PrepareReleaseAutoSplitter.bat END ===========

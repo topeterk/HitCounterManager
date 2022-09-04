@@ -34,14 +34,15 @@ namespace AutoSplitterCore
         public static EldenRing elden = new EldenRing();
         public bool _StatusProcedure = true;
         public bool _StatusElden = false;
+        public bool _SplitGo = false;
         public DTElden dataElden;
         public DefinitionsElden defE = new DefinitionsElden();
         public ProfilesControl _profile;
         public bool _runStarted = false;
-        private bool _writeMemory = false;
-        private bool _SplitGo = false;
+        private bool _writeMemory = false;      
         private static readonly object _object = new object();
-        System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
+        private System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
+        public bool DebugMode = false;
 
         public DTElden getDataElden()
         {
@@ -59,7 +60,7 @@ namespace AutoSplitterCore
         {
             if (_SplitGo)
             {
-                try { _profile.ProfileSplitGo(+1); } catch (Exception) { }
+                if (!DebugMode) { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } } else { Thread.Sleep(15000); }
                 _SplitGo = false;
             }
         }
@@ -249,8 +250,13 @@ namespace AutoSplitterCore
             dataElden.flagsToSplit.RemoveAt(position);
         }
 
+        public bool CheckFlag(uint id)
+        {
+            return elden.ReadEventFlag(id);
+        }
+
         #region init()
-        public void RefreshElden()
+        private void RefreshElden()
         {
             int delay = 2000;
             getEldenStatusProcess(delay);

@@ -43,6 +43,7 @@ namespace AutoSplitterCore
         public AslSplitter aslSplitter = new AslSplitter();
         public IGTModule igtModule = new IGTModule();
         public SaveModule saveModule = new SaveModule();
+        public bool DebugMode = false;
         
         public void AutoSplitterForm(bool darkMode)
         {
@@ -58,6 +59,19 @@ namespace AutoSplitterCore
         public void LoadAutoSplitterSettingsM(ProfilesControl profiles)
         {
             saveModule.LoadAutoSplitterSettings(profiles);
+        }
+
+        public void InitDebug()
+        {
+            sekiroSplitter.DebugMode = true;
+            ds1Splitter.DebugMode = true;
+            ds2Splitter.DebugMode = true;
+            ds3Splitter.DebugMode = true;
+            eldenSplitter.DebugMode = true;
+            hollowSplitter.DebugMode = true;
+            celesteSplitter.DebugMode = true;
+            cupSplitter.DebugMode = true;
+            aslSplitter.DebugMode = true;
         }
 
         public void SaveAutoSplitterSettingsM()

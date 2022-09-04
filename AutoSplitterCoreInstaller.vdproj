@@ -327,7 +327,7 @@
         "InstallerBootstrapper" = "3:2"
             "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
             {
-            "Enabled" = "11:TRUE"
+            "Enabled" = "11:FALSE"
             "PromptEnabled" = "11:TRUE"
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
@@ -336,7 +336,7 @@
                 {
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
                     {
-                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 y x64)"
                     "ProductCode" = "8:.NETFramework,Version=v4.7.2"
                     }
                 }
@@ -347,7 +347,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:bin\\AutoSplitterCoreInstaller\\AutoSplitterCore_Installer_v1.x.0.0.msi"
+        "OutputFilename" = "8:bin\\AutoSplitterCoreInstaller\\AutoSplitterCore_Installer_v1.x.0.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -1130,15 +1130,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:AutoSplitterCore for HCM"
-        "ProductCode" = "8:{D2E4E23E-25D9-4B6E-833C-2C598D97C566}"
-        "PackageCode" = "8:{D81D0E3A-F6FF-423D-AECA-B9949D016EEB}"
+        "ProductCode" = "8:{8D85FF79-CC64-49F2-BB73-82022748ACA1}"
+        "PackageCode" = "8:{60C28902-B286-4A28-A764-F0BCC55A19D8}"
         "UpgradeCode" = "8:{8D9DB7B5-72BC-4051-90C2-F744423C2376}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.1.0"
         "Manufacturer" = "8:Neimex23"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1662,7 +1662,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_22C25E7771974A488CBF0431869EF64C"
             {
-            "SourcePath" = "8:obj\\Release\\AutoSplitterCore.dll"
+            "SourcePath" = "8:obj\\Release\\AutoSplitterCore.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_4D8FE2CE9E694CB7A8B64FD65FEC552B"

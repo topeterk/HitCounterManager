@@ -37,12 +37,13 @@ namespace AutoSplitterCore
         public bool _StatusProcedure = true;
         public bool _StatusDs2 = false;
         public bool _runStarted = false;
+        public bool _SplitGo = false;
         public DTDs2 dataDs2;
         public DefinitionsDs2 defD2 = new DefinitionsDs2();
         public ProfilesControl _profile;
-        private bool _SplitGo = false;
         private static readonly object _object = new object();
-        System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
+        private System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
+        public bool DebugMode = false;
 
 
         public DTDs2 getDataDs2()
@@ -61,7 +62,7 @@ namespace AutoSplitterCore
         {
             if (_SplitGo)
             {
-                try { _profile.ProfileSplitGo(+1); } catch (Exception) { }
+                if (!DebugMode) { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } } else { Thread.Sleep(15000); }
                 _SplitGo = false;
             }
         }
@@ -219,8 +220,14 @@ namespace AutoSplitterCore
             return Ds2.IsLoading();
         }
 
+        public bool CheckFlag(uint id)
+        {
+            return Ds2.ReadEventFlag(id);
+        }
+
+
         #region Init()
-        public void RefreshDs2()
+        private void RefreshDs2()
         {
             int delay = 2000;
             getDs2StatusProcess(delay);

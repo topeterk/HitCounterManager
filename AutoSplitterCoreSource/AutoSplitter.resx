@@ -158,6 +158,31 @@ Sekiro Features:
 Elden Ring Features:
 - No Intro</value>
   </data>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>Mortal Journey run should be activated if you run play this gauntlet,
+Work by trigger of positions and split after loading events.
+It Is recommended not to have others Trigger Position Flags
+And not check if you run not is this.
+Split Automatically the next bosses in this order 
+17 splits no more and no less:
+Gyoubu
+Lady Butterfly
+Genichiro
+Guardian Ape
+Corrupted Monk
+Owl
+Double Apes
+Emma
+Isshin
+True Monk
+Owl Father
+Demon of Hatred
+Genichiro Way of Tomoe
+Sword Saint Isshin
+Inner Genichiro
+Inner Father
+Inner Isshin</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

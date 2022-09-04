@@ -36,13 +36,14 @@ namespace AutoSplitterCore
         public bool _StatusProcedure = true;
         public bool _StatusDs1 = false;
         public bool _runStarted = false;
+        public bool _SplitGo = false;
         public DTDs1 dataDs1;
         public DefinitionsDs1 defDs1 = new DefinitionsDs1();
         public ProfilesControl _profile;       
         private List<Item> inventory = null;
         private static readonly object _object = new object();
-        private bool _SplitGo = false;
-        System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
+        private System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
+        public bool DebugMode = false;
 
         public DTDs1 getDataDs1()
         {
@@ -60,7 +61,7 @@ namespace AutoSplitterCore
         {
             if (_SplitGo)
             {
-                try { _profile.ProfileSplitGo(+1); } catch (Exception) { }
+                if (!DebugMode) { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } } else { Thread.Sleep(15000); }
                 _SplitGo = false;
             }
         }
@@ -298,8 +299,14 @@ namespace AutoSplitterCore
             dataDs1.bossToSplit.RemoveAt(position);
         }
 
+        public bool CheckFlag(uint id)
+        {
+            return Ds1.ReadEventFlag(id);
+        }
+
+
         #region init()
-        public void RefreshDs1()
+        private void RefreshDs1()
         {
             int delay = 2000;
             getDs1StatusProcess(delay);

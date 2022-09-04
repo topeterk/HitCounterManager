@@ -38,9 +38,11 @@ namespace AutoSplitterCore
         public ProfilesControl _profile;
         public bool enableSplitting = false;
         private static readonly object _object = new object();
-        private bool _SplitGo = false;
-        System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1500 };      
-        System.Windows.Forms.Timer _update_timer2 = new System.Windows.Forms.Timer() { Interval = 1000 };
+        public bool _SplitGo = false;
+        private System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1500 };
+        private System.Windows.Forms.Timer _update_timer2 = new System.Windows.Forms.Timer() { Interval = 1000 };
+        public bool DebugMode = false;
+
 
         public void setData(XmlNode node, ProfilesControl profile)
         {
@@ -83,7 +85,7 @@ namespace AutoSplitterCore
         {
             if (_SplitGo)
             {
-                try { _profile.ProfileSplitGo(+1); } catch (Exception) { }
+                if (!DebugMode) { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } } else { Thread.Sleep(15000); }
                 _SplitGo = false;
             }
         }

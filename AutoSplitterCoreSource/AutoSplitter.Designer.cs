@@ -437,6 +437,10 @@ namespace AutoSplitterCore
             this.btnRemoveAllCuphead = new System.Windows.Forms.Button();
             this.CupheadRunning = new System.Windows.Forms.Label();
             this.CupheadNotRunning = new System.Windows.Forms.Label();
+            this.panelMortalJourney = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxMortalJourneyRun = new System.Windows.Forms.CheckBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.TabControl2.SuspendLayout();
             this.tabConfig.SuspendLayout();
             this.groupBoxSplitters.SuspendLayout();
@@ -522,6 +526,8 @@ namespace AutoSplitterCore
             this.tabCuphead.SuspendLayout();
             this.panelBossCuphead.SuspendLayout();
             this.panelLevelCuphead.SuspendLayout();
+            this.panelMortalJourney.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // TabControl2
@@ -1289,10 +1295,11 @@ namespace AutoSplitterCore
             // tabSekiro
             // 
             this.tabSekiro.BackColor = System.Drawing.SystemColors.Control;
-            this.tabSekiro.Controls.Add(this.panelBossS);
             this.tabSekiro.Controls.Add(this.panelPositionS);
-            this.tabSekiro.Controls.Add(this.panelIdolsS);
+            this.tabSekiro.Controls.Add(this.panelMortalJourney);
             this.tabSekiro.Controls.Add(this.panelCfSekiro);
+            this.tabSekiro.Controls.Add(this.panelBossS);
+            this.tabSekiro.Controls.Add(this.panelIdolsS);
             this.tabSekiro.Controls.Add(this.btnRefreshSekiro);
             this.tabSekiro.Controls.Add(this.btnDesactiveSekiro);
             this.tabSekiro.Controls.Add(this.sekiroRunning);
@@ -2621,6 +2628,7 @@ namespace AutoSplitterCore
             "Kill a Boss",
             "Is Activated a Idol",
             "Trigger a Position",
+            "Mortal Journey",
             "Custom Flags"});
             this.toSplitSelectSekiro.Location = new System.Drawing.Point(80, 54);
             this.toSplitSelectSekiro.Name = "toSplitSelectSekiro";
@@ -6821,6 +6829,50 @@ namespace AutoSplitterCore
             this.CupheadNotRunning.TabIndex = 25;
             this.CupheadNotRunning.Text = "Cuphead is Not Running";
             // 
+            // panelMortalJourney
+            // 
+            this.panelMortalJourney.Controls.Add(this.textBox1);
+            this.panelMortalJourney.Controls.Add(this.groupBox1);
+            this.panelMortalJourney.Location = new System.Drawing.Point(46, 81);
+            this.panelMortalJourney.Name = "panelMortalJourney";
+            this.panelMortalJourney.Size = new System.Drawing.Size(504, 245);
+            this.panelMortalJourney.TabIndex = 26;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkBoxMortalJourneyRun);
+            this.groupBox1.Location = new System.Drawing.Point(147, 11);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 100);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            // 
+            // checkBoxMortalJourneyRun
+            // 
+            this.checkBoxMortalJourneyRun.AutoSize = true;
+            this.checkBoxMortalJourneyRun.Location = new System.Drawing.Point(25, 45);
+            this.checkBoxMortalJourneyRun.Name = "checkBoxMortalJourneyRun";
+            this.checkBoxMortalJourneyRun.Size = new System.Drawing.Size(154, 17);
+            this.checkBoxMortalJourneyRun.TabIndex = 0;
+            this.checkBoxMortalJourneyRun.Text = "Enable Mortal Journey Run";
+            this.checkBoxMortalJourneyRun.UseVisualStyleBackColor = true;
+            this.checkBoxMortalJourneyRun.CheckedChanged += new System.EventHandler(this.checkBoxMortalJourneyRun_CheckedChanged);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(63, 117);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(376, 115);
+            this.textBox1.TabIndex = 3;
+            this.textBox1.TabStop = false;
+            this.textBox1.Text = resources.GetString("textBox1.Text");
+            // 
             // AutoSplitter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6976,6 +7028,10 @@ namespace AutoSplitterCore
             this.tabCuphead.PerformLayout();
             this.panelBossCuphead.ResumeLayout(false);
             this.panelLevelCuphead.ResumeLayout(false);
+            this.panelMortalJourney.ResumeLayout(false);
+            this.panelMortalJourney.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -7388,5 +7444,9 @@ namespace AutoSplitterCore
         private System.Windows.Forms.RadioButton radioIGTHollow;
         private System.Windows.Forms.RadioButton radioRealTimerHollow;
         private System.Windows.Forms.Button btnDesactiveAllTiming;
+        private System.Windows.Forms.Panel panelMortalJourney;
+        internal System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox checkBoxMortalJourneyRun;
     }
 }

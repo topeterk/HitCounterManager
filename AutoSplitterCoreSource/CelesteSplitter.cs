@@ -34,12 +34,13 @@ namespace AutoSplitterCore
         public bool _StatusProcedure = true;
         public bool _StatusCeleste = false;
         public bool _runStarted = false;
+        public bool _SplitGo = false;
         public DTCeleste dataCeleste;
         public ProfilesControl _profile;
         public DefinitionsCeleste.InfoPlayerCeleste infoPlayer = new DefinitionsCeleste.InfoPlayerCeleste();
         private static readonly object _object = new object();
-        private bool _SplitGo = false;
-        System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
+        private System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
+        public bool DebugMode = false;
 
         public DTCeleste getDataCeleste()
         {
@@ -62,7 +63,7 @@ namespace AutoSplitterCore
         {
             if (_SplitGo)
             {
-                try { _profile.ProfileSplitGo(+1); } catch (Exception) { }
+                if (!DebugMode) { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } } else { Thread.Sleep(15000); }
                 _SplitGo = false;
             }
         }
@@ -145,7 +146,7 @@ namespace AutoSplitterCore
 
         #region init()
 
-        public void RefreshCeleste()
+        private void RefreshCeleste()
         {
             int delay = 2000;
             getCelesteStatusProcess(delay);

@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{00816FD1-20D3-483C-8731-3F7195E8EE71}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AutoSplitterCore</RootNamespace>
     <AssemblyName>AutoSplitterCore</AssemblyName>
@@ -34,8 +34,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>AutoSplitterCoreSource\FireIcon-2.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HitCounterManager">
@@ -118,6 +120,13 @@
     <Compile Include="AutoSplitterCoreSource\AssemblyInfo.cs" />
     <Compile Include="AutoSplitterCoreSource\SaveModule.cs" />
     <Compile Include="AutoSplitterCoreSource\SekiroSplitter.cs" />
+    <Compile Include="AutoSplitterCoreSource\Program.cs" />
+    <Compile Include="AutoSplitterCoreSource\Debug.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AutoSplitterCoreSource\Debug.Designer.cs">
+      <DependentUpon>Debug.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AutoSplitterCoreSource\AslConfigurator.resx">
@@ -126,9 +135,15 @@
     <EmbeddedResource Include="AutoSplitterCoreSource\AutoSplitter.resx">
       <DependentUpon>AutoSplitter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AutoSplitterCoreSource\Debug.resx">
+      <DependentUpon>Debug.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AutoSplitterCoreSource\FireIcon-2.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

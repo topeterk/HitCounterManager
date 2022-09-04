@@ -35,13 +35,14 @@ namespace AutoSplitterCore
         public bool _StatusProcedure = true;
         public bool _StatusDs3 = false;
         public bool _runStarted = false;
+        public bool _SplitGo = false;
         public DTDs3 dataDs3;
         public DefinitionsDs3 defD3 = new DefinitionsDs3();
         public ProfilesControl _profile;
-        private bool _writeMemory = false;
-        private bool _SplitGo = false;
+        private bool _writeMemory = false;      
         private static readonly object _object = new object();
-        System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
+        private System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
+        public bool DebugMode = false;
 
 
         public DTDs3 getDataDs3()
@@ -60,7 +61,7 @@ namespace AutoSplitterCore
         {
             if (_SplitGo)
             {
-                try { _profile.ProfileSplitGo(+1); } catch (Exception) { }
+                if (!DebugMode) { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } } else { Thread.Sleep(15000); }
                 _SplitGo = false;
             }
         }
@@ -245,9 +246,13 @@ namespace AutoSplitterCore
             dataDs3.flagToSplit.RemoveAt(position);
         }
 
+        public bool CheckFlag(uint id)
+        {
+            return Ds3.ReadEventFlag(id);
+        }
 
         #region init()
-        public void RefreshDs3()
+        private void RefreshDs3()
         {           
             int delay = 2000;
             _StatusDs3 = getDs3StatusProcess(delay);

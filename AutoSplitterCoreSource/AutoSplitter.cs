@@ -75,6 +75,7 @@ namespace AutoSplitterCore
             panelBossS.Hide();
             panelCfSekiro.Hide();
             panelIdolsS.Hide();
+            panelMortalJourney.Hide();
             groupBoxAshinaOutskirts.Hide();
             groupBoxHirataEstate.Hide();
             groupBoxAshinaCastle.Hide();
@@ -244,6 +245,16 @@ namespace AutoSplitterCore
                 listBoxPositionsS.Items.Add(position.vector.X + "; " + position.vector.Y + "; " + position.vector.Z + " - " + position.Mode);
             }
             comboBoxMarginS.SelectedIndex = sekiroData.positionMargin;
+            #endregion
+            #region SekiroLoad.MortalJourney
+            if (sekiroData.mortalJourneyRun)
+            {
+                checkBoxMortalJourneyRun.Checked = true;
+            }
+            else
+            {
+                checkBoxMortalJourneyRun.Checked = false;
+            }
             #endregion
             #region SekiroLoad.CustomFlag
             foreach (DefinitionsSekiro.CfSk cf in sekiroData.getFlagToSplit())
@@ -749,6 +760,10 @@ namespace AutoSplitterCore
 
         #region Config UI
 
+        private void checkBoxMortalJourneyRun_CheckedChanged(object sender, EventArgs e)
+        {
+            _ = checkBoxMortalJourneyRun.Checked ? sekiroSplitter.dataSekiro.mortalJourneyRun = true : sekiroSplitter.dataSekiro.mortalJourneyRun = false;
+        }
         private void comboBoxTGame_SelectedIndexChanged(object sender, EventArgs e)
         {
             groupBoxTSekiro.Hide();
@@ -995,6 +1010,7 @@ namespace AutoSplitterCore
             this.panelBossS.Hide();
             this.panelIdolsS.Hide();
             this.panelCfSekiro.Hide();
+            this.panelMortalJourney.Hide();
 
 
             switch (toSplitSelectSekiro.SelectedIndex)
@@ -1008,7 +1024,9 @@ namespace AutoSplitterCore
                 case 2: //Target Position
                     this.panelPositionS.Show();
                     break;
-                case 3: //CustomFlags
+                case 3://Mortal Journey
+                    this.panelMortalJourney.Show(); break;
+                case 4: //CustomFlags
                     this.panelCfSekiro.Show(); break;
             }
         }
@@ -1052,8 +1070,7 @@ namespace AutoSplitterCore
                             else
                             {
                                 sekiroSplitter.setProcedure(false);
-                                listBoxPositionsS.Items.Add(X + "; " + Y + "; " + Z + " - " + comboBoxHowPosition.Text.ToString());
-                                MessageBox.Show("Move your character to avoid autosplitting", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                listBoxPositionsS.Items.Add(X + "; " + Y + "; " + Z + " - " + comboBoxHowPosition.Text.ToString());                                
                                 sekiroSplitter.AddPosition(X, Y, Z, comboBoxHowPosition.Text.ToString());
                                 sekiroSplitter.setProcedure(true);
                             }
@@ -1919,7 +1936,6 @@ namespace AutoSplitterCore
                     else
                     {
                         listBoxPositionH.Items.Add(this.VectorH + " - " + textBoxSh.Text);
-                        MessageBox.Show("Move your character to avoid autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         hollowSplitter.setProcedure(false);
                         hollowSplitter.AddPosition(this.VectorH, textBoxSh.Text);
                         hollowSplitter.setProcedure(true);
@@ -2102,7 +2118,6 @@ namespace AutoSplitterCore
                         {
                             eldenSplitter.setProcedure(false);
                             listBoxPositionsER.Items.Add(this.VectorER + " - " + comboBoxHowPositionsER.Text.ToString());
-                            MessageBox.Show("Move your character to avoid autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                             eldenSplitter.AddPosition(this.VectorER, comboBoxHowPositionsER.Text.ToString());
                             eldenSplitter.setProcedure(true);
                         }
@@ -2621,7 +2636,6 @@ namespace AutoSplitterCore
                         {
                             ds2Splitter.setProcedure(false);
                             listBoxPositionsDs2.Items.Add(this.VectorDs2 + " - " + comboBoxHowPositionsDs2.Text.ToString());
-                            MessageBox.Show("Move your character to avoid autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                             ds2Splitter.AddPosition(this.VectorDs2, comboBoxHowPositionsDs2.Text.ToString());
                             ds2Splitter.setProcedure(true);
                         }
@@ -2928,7 +2942,6 @@ namespace AutoSplitterCore
                         {
                             ds1Splitter.setProcedure(false);
                             listBoxPositionsDs1.Items.Add(this.VectorDs1 + " - " + comboBoxHowPositionsDs1.Text.ToString());
-                            MessageBox.Show("Move your character to avoid autosplitting ", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                             ds1Splitter.AddPosition(this.VectorDs1, comboBoxHowPositionsDs1.Text.ToString());
                             ds1Splitter.setProcedure(true);
                         }
@@ -3001,6 +3014,8 @@ namespace AutoSplitterCore
         }
 
 
-        #endregion      
+        #endregion
+
+
     }
 }

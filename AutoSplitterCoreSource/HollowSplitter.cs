@@ -37,13 +37,13 @@ namespace AutoSplitterCore
         public bool _StatusProcedure = true;
         public bool _StatusHollow = false;
         public bool _runStarted = false;
+        public bool _SplitGo = false;
         public DTHollow dataHollow;
         public ProfilesControl _profile;    
         public DefinitionHollow.Vector3F currentPosition = new DefinitionHollow.Vector3F();
-        private bool _SplitGo = false;
         private static readonly object _object = new object();
-        System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
-
+        private System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
+        public bool DebugMode = false;
         public DTHollow getDataHollow()
         {
             return this.dataHollow;
@@ -66,7 +66,7 @@ namespace AutoSplitterCore
         {
             if (_SplitGo)
             {
-                try { _profile.ProfileSplitGo(+1); } catch (Exception) { }
+                if (!DebugMode) { try { _profile.ProfileSplitGo(+1); } catch (Exception) { } } else { Thread.Sleep(15000); }
                 _SplitGo = false;
             }
         }
@@ -302,7 +302,7 @@ namespace AutoSplitterCore
 
         #region init()
 
-        public void RefreshHollow()
+        private void RefreshHollow()
         {
             int delay = 2000;
             getHollowStatusProcess(0);
@@ -339,7 +339,7 @@ namespace AutoSplitterCore
             }
         }
 
-        public void RefreshPosition()
+        private void RefreshPosition()
         {     
             while (dataHollow.enableSplitting)
             {
