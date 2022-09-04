@@ -31,6 +31,8 @@ namespace HitCounterManager.Views
         public AboutPage()
         {
             InitializeComponent();
+            PlatformImpl.SetTopmost(App.CurrentApp.Settings.AlwaysOnTop);
+
 #if DEBUG
             this.AttachDevTools();
 #endif

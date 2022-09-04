@@ -35,11 +35,13 @@ namespace HitCounterManager.Views
         public ProfileAttemptsPage(ProfileViewModel Origin)
         {
             InitializeComponent();
+            PlatformImpl.SetTopmost(App.CurrentApp.Settings.AlwaysOnTop);
 
             vm = (ProfileAttemptsPageViewModel)DataContext!;
             vm.OwnerWindow = this;
             vm.Origin = Origin;
             vm.UserInput = Origin.ProfileSelected.Attempts.ToString();
+
 #if DEBUG
             this.AttachDevTools();
 #endif

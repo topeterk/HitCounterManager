@@ -30,6 +30,7 @@ using Microsoft.Win32;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Controls.Notifications;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Platform;
@@ -40,10 +41,7 @@ using HitCounterManager.Common;
 using HitCounterManager.Models;
 using HitCounterManager.Views;
 using HitCounterManager.ViewModels;
-using Avalonia.Controls.Notifications;
-using Avalonia.Shared.PlatformSupport;
-using System.IO;
-using System.Reflection;
+using Avalonia.Controls.Templates;
 
 #if SHOW_COMPLER_VERSION // enable and hover over #error to see C# compiler version and the used language version
 #error version
@@ -461,7 +459,6 @@ namespace HitCounterManager
                 desktop.MainWindow = main;
                 NotificationManager = new WindowNotificationManager(desktop.MainWindow) { Position = NotificationPosition.TopRight, MaxItems = 1 };
                 NativeWindowHandle = desktop.MainWindow.PlatformImpl.Handle.Handle;
-                SetTopMost(Settings.AlwaysOnTop);
                 if (!IsCleanStart && IsTitleBarOnScreen(desktop.MainWindow.Screens, Settings.MainPosX, Settings.MainPosY, Settings.MainWidth))
                 {
                     // Set window position when application is not started the first time and window would not end up outside of all screens
@@ -489,14 +486,6 @@ namespace HitCounterManager
             }
 
             base.OnFrameworkInitializationCompleted();
-        }
-
-        public void SetTopMost(bool TopMost)
-        {
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            {
-                desktop.MainWindow.PlatformImpl.SetTopmost(Settings.AlwaysOnTop = TopMost);
-            }
         }
 
         /// <summary>
@@ -754,6 +743,27 @@ namespace HitCounterManager
         public IntPtr SendHotKeyMessage(IntPtr WindowHandle, IntPtr wParam, IntPtr lParam)
         {
             return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? SendMessageW(WindowHandle, WM_HOTKEY, wParam, lParam) : IntPtr.Zero;
+        }
+    }
+
+    public class ViewLocator : IDataTemplate
+    {
+        public IControl Build(object data)
+        {
+            var name = data.GetType().FullName!.Replace("ViewModel", "View");
+            var type = Type.GetType(name);
+
+            if (type != null)
+            {
+                return (Control)Activator.CreateInstance(type)!;
+            }
+
+            return new TextBlock { Text = "Not Found: " + name };
+        }
+
+        public bool Match(object data)
+        {
+            return data is ViewModelBase;
         }
     }
 }

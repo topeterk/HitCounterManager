@@ -26,6 +26,7 @@ using ReactiveUI;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using HitCounterManager.Common;
+using HitCounterManager.Controls;
 using HitCounterManager.Views;
 
 namespace HitCounterManager.ViewModels
@@ -55,8 +56,7 @@ namespace HitCounterManager.ViewModels
             CheckUpdatesOnline = ReactiveCommand.Create(() => App.CurrentApp.CheckAndShowUpdates(this));
 
             ToggleAlwaysOnTop = ReactiveCommand.Create(() => {
-                App app = App.CurrentApp;
-                app.SetTopMost(!app.Settings.AlwaysOnTop);
+                OwnerWindow?.PlatformImpl.SetTopmost(App.CurrentApp.Settings.AlwaysOnTop = !App.CurrentApp.Settings.AlwaysOnTop);
                 CallPropertyChanged(this, nameof(AlwaysOnTop));
             });
             ToggleDarkMode = ReactiveCommand.Create(() => {

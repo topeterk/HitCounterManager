@@ -32,8 +32,10 @@ namespace HitCounterManager.Views
         public UpdatePage()
         {
             InitializeComponent();
+            PlatformImpl.SetTopmost(App.CurrentApp.Settings.AlwaysOnTop);
 
             ((UpdateViewModel)DataContext!).OwnerWindow = this;
+
 #if DEBUG
             this.AttachDevTools();
 #endif

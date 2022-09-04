@@ -24,7 +24,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using HitCounterManager.ViewModels;
 
-namespace HitCounterManager.Views
+namespace HitCounterManager.Controls
 {
     public partial class ProfileView : UserControl
     {

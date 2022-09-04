@@ -143,7 +143,7 @@ echo Fetching NuGet packages 1>&2
 
 LICENSES=""
 NUGET_PACKAGES_DIR=$(dotnet nuget locals -l global-packages | sed -e 's,^[^ ]* ,,')
-NUGET_PACKAGES_SPECS=$(dotnet list HitCounterManagerAvalonia.sln package --include-transitive | grep ">" | sed -e 's,^[^>]*>[ \t]*\([^ ^\t]*\)[ \t]*\([^ ^\t]*\).*,\L\1/\2/\L\1.nuspec,' | xargs)
+NUGET_PACKAGES_SPECS=$(dotnet list HitCounterManager.sln package --include-transitive | grep ">" | sed -e 's,^[^>]*>[ \t]*\([^ ^\t]*\)[ \t]*\([^ ^\t]*\).*,\L\1/\2/\L\1.nuspec,' | xargs)
 
 echo Printing NuGet packages 1>&2
 

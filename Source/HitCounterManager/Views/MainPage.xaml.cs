@@ -23,10 +23,8 @@
 using System;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Input;
-using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using Avalonia.Xaml.Interactivity;
+using HitCounterManager.Controls;
 using HitCounterManager.ViewModels;
 
 namespace HitCounterManager.Views
@@ -39,6 +37,7 @@ namespace HitCounterManager.Views
         public MainPage()
         {
             InitializeComponent();
+            PlatformImpl.SetTopmost(App.CurrentApp.Settings.AlwaysOnTop);
             Closing += ClosingHandler;
             PositionChanged += PositionChangedHandler;
 

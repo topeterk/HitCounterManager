@@ -26,37 +26,23 @@
     <RepositoryType>git</RepositoryType>
     <!-- <PackageTags></PackageTags> -->
     <!-- <PackageReleaseNotes></PackageReleaseNotes> -->
-	<ApplicationIcon>Resources/FireIcon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources/FireIcon.ico</ApplicationIcon>
 
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Models/" />
     <AvaloniaResource Include="Resources/**" />
+    <AvaloniaXaml Include="Controls/*.xaml" />
+    <AvaloniaXaml Include="Views/*.xaml" />
+    <!-- "None" Datafiles are used for showing the files as project sources within a sub directory.
+         "ContentWithTargetPath" Datafiles are not shown as project sources but will copy the "Content" to its target directory. -->
+    <None Include="../Datafiles/**" Link="Datafiles/%(RecursiveDir)%(Filename)%(Extension)"/>
+    <ContentWithTargetPath Include="../Datafiles/**" TargetPath="%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <EmbeddedResource Include="../../THIRDPARTYLICENSEREADME" Link="THIRDPARTYLICENSEREADME" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Views/FramedImageButton.xaml" />
-    <None Remove="Views/ProfileAttemptsPage.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AvaloniaXaml Include="Views/AboutPage.xaml" />
-    <AvaloniaXaml Include="Views/FramedImageButton.xaml" />
-    <AvaloniaXaml Include="Views/MainPage.xaml" />
-    <AvaloniaXaml Include="Views/ProfileActionPage.xaml" />
-    <AvaloniaXaml Include="Views/ProfileAttemptsPage.xaml" />
-    <AvaloniaXaml Include="Views/ProfileView.xaml" />
-    <AvaloniaXaml Include="Views/SettingsPage.xaml" />
-    <AvaloniaXaml Include="Views/UpdatePage.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="../Datafiles/**">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <!--This helps with theme dll-s trimming.
-    If you will publish your application in self-contained mode with p:PublishTrimmed=true and it will use Fluent theme Default theme will be trimmed from the output and vice versa.
-    https://github.com/AvaloniaUI/Avalonia/issues/5593 -->
+    If you will publish your application in self-contained mode with p:PublishTrimmed=true and it will use Fluent theme, Default theme will be trimmed from the output and vice versa.
+    https://github.com/AvaloniaUI/Avalonia/issues/5593 Should be fixed with version 11.x but is still in preview.-->
     <TrimmableAssembly Include="Avalonia.Themes.Fluent" />
     <TrimmableAssembly Include="Avalonia.Themes.Default" />
   </ItemGroup>
@@ -66,6 +52,6 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.18" />
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.10.18" />
-    <PackageReference Include="XamlNameReferenceGenerator" Version="1.3.4" />
+    <!-- <PackageReference Include="XamlNameReferenceGenerator" Version="1.3.4" /> -->
   </ItemGroup>
 </Project>

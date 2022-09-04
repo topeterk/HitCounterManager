@@ -26,7 +26,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
              xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
-             x:Class="HitCounterManager.Views.ProfileView"
+             x:Class="HitCounterManager.Controls.ProfileView"
              x:Name="ProfileViewPage">
 
     <UserControl.DataContext>

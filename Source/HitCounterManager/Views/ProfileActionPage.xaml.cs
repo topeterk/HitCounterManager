@@ -36,14 +36,17 @@ namespace HitCounterManager.Views
         public ProfileActionPage(ProfileAction Action, ProfileViewModel Origin)
         {
             InitializeComponent();
+            PlatformImpl.SetTopmost(App.CurrentApp.Settings.AlwaysOnTop);
+
             vm = (ProfileActionPageViewModel)DataContext!;
             vm.OwnerWindow = this;
             vm.Action = Action;
             vm.Origin = Origin;
+            Opened += (object? sender, EventArgs e) => vm.OnAppearing();
+
 #if DEBUG
             this.AttachDevTools();
 #endif
-            Opened += (object? sender, EventArgs e) => vm.OnAppearing();
         }
 
         private void InitializeComponent()

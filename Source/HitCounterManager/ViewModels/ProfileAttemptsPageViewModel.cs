@@ -20,10 +20,10 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
+using System.Windows.Input;
+using ReactiveUI;
 using Avalonia.Controls;
 using HitCounterManager.Common;
-using ReactiveUI;
-using System.Windows.Input;
 
 namespace HitCounterManager.ViewModels
 {
@@ -34,8 +34,6 @@ namespace HitCounterManager.ViewModels
         public ProfileAttemptsPageViewModel()
         {
             Submit = ReactiveCommand.Create(() => {
-                if (null == _UserInput) return; // Error
-
                 int val;
                 if (!Extensions.TryParseMinMaxNumber(_UserInput, out val, 0, int.MaxValue)) return; // Error
 

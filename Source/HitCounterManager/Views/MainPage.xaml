@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!--
 //MIT License
 
@@ -27,7 +27,7 @@
         xmlns:app="clr-namespace:HitCounterManager;assembly=HitCounterManager"
         xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
         xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
-        xmlns:views="clr-namespace:HitCounterManager.Views;assembly=HitCounterManager"
+        xmlns:controls="clr-namespace:HitCounterManager.Controls;assembly=HitCounterManager"
         x:Class="HitCounterManager.Views.MainPage"
         x:DataType="local:MainPageViewModel"
         Icon="/Resources/FireIcon.ico"
@@ -216,35 +216,35 @@
                     <ColumnDefinition Width="82" />
                     <ColumnDefinition Width="82" />
                 </Grid.ColumnDefinitions>
-                <views:FramedImageButton Grid.Column="0" MainColor="{DynamicResource ProfileResetBrush}"
+                <controls:FramedImageButton Grid.Column="0" MainColor="{DynamicResource ProfileResetBrush}"
                         ImgSrc="{common:ImageFromResource Resource=/Resources/Images/icons8-repeat-one-32.png}"
                         OnClickCommand="{Binding #profileView.DataContext.ProfileReset}" />
-                <views:FramedImageButton Grid.Column="1" MainColor="{DynamicResource ProfilePBBrush}"
+                <controls:FramedImageButton Grid.Column="1" MainColor="{DynamicResource ProfilePBBrush}"
                         ImgSrc="{common:ImageFromResource Resource=/Resources/Images/icons8-trophy-32.png}"
                         OnClickCommand="{Binding #profileView.DataContext.ProfilePB}" />
-                <views:FramedImageButton Grid.Column="2" MainColor="{DynamicResource ToggleTimerPauseBrush}"
+                <controls:FramedImageButton Grid.Column="2" MainColor="{DynamicResource ToggleTimerPauseBrush}"
                         OnClickCommand="{Binding #profileView.DataContext.ToggleTimerPause}">
                     <Interaction.Behaviors>
                         <DataTriggerBehavior Binding="{Binding #profileView.DataContext.TimerRunning}" ComparisonCondition="Equal" Value="true">
-                            <ChangePropertyAction TargetObject="{Binding $parent[views:FramedImageButton]}" PropertyName="ImgSrc" Value="{common:ImageFromResource Resource=/Resources/Images/icons8-sleep-32.png}" />
+                            <ChangePropertyAction TargetObject="{Binding $parent[controls:FramedImageButton]}" PropertyName="ImgSrc" Value="{common:ImageFromResource Resource=/Resources/Images/icons8-sleep-32.png}" />
                         </DataTriggerBehavior>
                         <DataTriggerBehavior Binding="{Binding #profileView.DataContext.TimerRunning}" ComparisonCondition="Equal" Value="false">
-                            <ChangePropertyAction TargetObject="{Binding $parent[views:FramedImageButton]}" PropertyName="ImgSrc" Value="{common:ImageFromResource Resource=/Resources/Images/icons8-time-32.png}" />
+                            <ChangePropertyAction TargetObject="{Binding $parent[controls:FramedImageButton]}" PropertyName="ImgSrc" Value="{common:ImageFromResource Resource=/Resources/Images/icons8-time-32.png}" />
                         </DataTriggerBehavior>
                     </Interaction.Behaviors>
-                </views:FramedImageButton>
-                <views:FramedImageButton Grid.Column="3" MainColor="{DynamicResource HitIncreaseBrush}"
+                </controls:FramedImageButton>
+                <controls:FramedImageButton Grid.Column="3" MainColor="{DynamicResource HitIncreaseBrush}"
                         ImgSrc="{common:ImageFromResource Resource=/Resources/Images/icons8-attack-32.png}"
                         OnClickCommand="{Binding #profileView.DataContext.HitIncrease}" />
-                <views:FramedImageButton Grid.Column="4" MainColor="{DynamicResource HitWayIncreaseBrush}"
+                <controls:FramedImageButton Grid.Column="4" MainColor="{DynamicResource HitWayIncreaseBrush}"
                         ImgSrc="{common:ImageFromResource Resource=/Resources/Images/icons8-watch-your-step-32.png}"
                         OnClickCommand="{Binding #profileView.DataContext.HitWayIncrease}" />
-                <views:FramedImageButton Grid.Column="5" MainColor="{DynamicResource SplitSelectNextBrush}"
+                <controls:FramedImageButton Grid.Column="5" MainColor="{DynamicResource SplitSelectNextBrush}"
                         ImgSrc="{common:ImageFromResource Resource=/Resources/Images/icons8-staircase-32.png}"
                         OnClickCommand="{Binding #profileView.DataContext.SplitSelectNext}" />
             </Grid>
-            
-            <views:ProfileView Padding="0" Margin="0" x:Name="profileView"/>
+
+            <controls:ProfileView Padding="0" Margin="0" x:Name="profileView"/>
 
         </StackPanel>
     </ScrollViewer>

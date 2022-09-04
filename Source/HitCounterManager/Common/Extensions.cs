@@ -29,10 +29,12 @@ using System.IO;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data.Converters;
 using Avalonia.Input;
+using Avalonia.Input.Platform;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
@@ -226,10 +228,8 @@ namespace HitCounterManager.Common
         /// <param name="newValueString">The new value for the property as string</param>
         /// <param name="propertyName">The name of the property, recommended to use: nameof(xxx)</param>
         /// <returns>true = data has changed, false = data has not changed</returns>
-        public bool SetAndNotifyWhenNaturalNumberChanged(object sender, ref int property, string newValueString, string propertyName)
+        public bool SetAndNotifyWhenNaturalNumberChanged(object sender, ref int property, string? newValueString, string propertyName)
         {
-            if (string.IsNullOrWhiteSpace(newValueString)) return false;
-
             int i;
             if (!Extensions.TryParseMinMaxNumber(newValueString, out i, 0, int.MaxValue))
             {
@@ -238,7 +238,7 @@ namespace HitCounterManager.Common
             }
 
             return SetAndNotifyWhenChanged(sender, ref property, i, propertyName);
-        }  
+        }
 
         /// <summary>
         /// When a different value is set for the property, it gets updated and an INotifyPropertyChanged event is fired.
@@ -274,15 +274,24 @@ namespace HitCounterManager.Common
             set => SetValue(RoutingStrategiesProperty, value);
         }
 
-        protected override void OnAttachedToVisualTree() => AssociatedObject?.AddHandler(InputElement.TextInputEvent, TextInput, RoutingStrategies);
-        protected override void OnDetachedFromVisualTree() => AssociatedObject?.RemoveHandler(InputElement.TextInputEvent, TextInput);
-
-        private void TextInput(object? sender, TextInputEventArgs e)
+        protected override void OnAttachedToVisualTree()
         {
-            if (string.IsNullOrWhiteSpace(e.Text)) return;
+            AssociatedObject?.AddHandler(TextBox.PastingFromClipboardEvent, TextPaste, RoutingStrategies);
+            AssociatedObject?.AddHandler(InputElement.TextInputEvent, TextInput, RoutingStrategies);
+        }
+        protected override void OnDetachedFromVisualTree()
+        {
+            AssociatedObject?.RemoveHandler(TextBox.PastingFromClipboardEvent, TextPaste);
+            AssociatedObject?.RemoveHandler(InputElement.TextInputEvent, TextInput);
+        }
 
+        private void TextPaste(object? sender, RoutedEventArgs e) => ValidateText(e, ((IClipboard)AvaloniaLocator.Current.GetRequiredService(typeof(IClipboard))).GetTextAsync().Result);
+        private void TextInput(object? sender, TextInputEventArgs e) => ValidateText(e, e.Text);
+
+        private void ValidateText(RoutedEventArgs e, string? Text)
+        {
             int i;
-            if (!Extensions.TryParseMinMaxNumber(e.Text, out i)) e.Text = "";
+            if (!Extensions.TryParseMinMaxNumber(Text, out i)) e.Handled = true;
         }
     }
 
@@ -296,7 +305,7 @@ namespace HitCounterManager.Common
         /// <param name="minValue">Min value of the range</param>
         /// <param name="maxValue">Max value of the range</param>
         /// <returns>true = successfull, false = cannot be converted or not in range</returns>
-        public static bool TryParseMinMaxNumber(string input, out int output, int minValue = int.MinValue, int maxValue = int.MaxValue)
+        public static bool TryParseMinMaxNumber(string? input, out int output, int minValue = int.MinValue, int maxValue = int.MaxValue)
         {
             if (string.IsNullOrWhiteSpace(input))
             {

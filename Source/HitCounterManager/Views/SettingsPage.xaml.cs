@@ -20,11 +20,12 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
+using System;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using HitCounterManager.ViewModels;
-using System;
 
 namespace HitCounterManager.Views
 {
@@ -33,11 +34,14 @@ namespace HitCounterManager.Views
         public SettingsPage()
         {
             InitializeComponent();
+            PlatformImpl.SetTopmost(App.CurrentApp.Settings.AlwaysOnTop);
+
+            Opened += (object? sender, EventArgs e) => ((SettingsViewModel)DataContext!).OnAppearing();
+            Closed += (object? sender, EventArgs e) => ((SettingsViewModel)DataContext!).OnDisappearing();
+
 #if DEBUG
             this.AttachDevTools();
 #endif
-            Opened += (object? sender, EventArgs e) => ((SettingsViewModel)DataContext!).OnAppearing();
-            Closed += (object? sender, EventArgs e) => ((SettingsViewModel)DataContext!).OnDisappearing();
         }
 
         private void InitializeComponent()

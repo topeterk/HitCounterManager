@@ -20,10 +20,10 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
+using System.Windows.Input;
+using ReactiveUI;
 using Avalonia.Controls;
 using HitCounterManager.Common;
-using ReactiveUI;
-using System.Windows.Input;
 
 namespace HitCounterManager.ViewModels
 {

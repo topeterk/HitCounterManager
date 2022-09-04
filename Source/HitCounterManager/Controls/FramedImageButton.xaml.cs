@@ -20,14 +20,14 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
+using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
-using System.Windows.Input;
 
-namespace HitCounterManager.Views
+namespace HitCounterManager.Controls
 {
     public partial class FramedImageButton : UserControl
     {
