@@ -99,13 +99,6 @@ namespace AutoSplitterCore
             this.comboBoxTGame = new System.Windows.Forms.ComboBox();
             this.label75 = new System.Windows.Forms.Label();
             this.tabSekiro = new System.Windows.Forms.TabPage();
-            this.panelBossS = new System.Windows.Forms.Panel();
-            this.btn_AddBoss = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.comboBoxBoss = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.comboBoxHowBoss = new System.Windows.Forms.ComboBox();
-            this.listBoxBosses = new System.Windows.Forms.ListBox();
             this.panelPositionS = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -119,6 +112,25 @@ namespace AutoSplitterCore
             this.textBoxZ = new System.Windows.Forms.TextBox();
             this.textBoxY = new System.Windows.Forms.TextBox();
             this.textBoxX = new System.Windows.Forms.TextBox();
+            this.panelMortalJourney = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxMortalJourneyRun = new System.Windows.Forms.CheckBox();
+            this.panelCfSekiro = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.comboBoxHowCfS = new System.Windows.Forms.ComboBox();
+            this.listBoxCfS = new System.Windows.Forms.ListBox();
+            this.btnAddCfS = new System.Windows.Forms.Button();
+            this.btnGetListFlagsSekiro = new System.Windows.Forms.Button();
+            this.label59 = new System.Windows.Forms.Label();
+            this.textBoxCfIdS = new System.Windows.Forms.TextBox();
+            this.panelBossS = new System.Windows.Forms.Panel();
+            this.btn_AddBoss = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.comboBoxBoss = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.comboBoxHowBoss = new System.Windows.Forms.ComboBox();
+            this.listBoxBosses = new System.Windows.Forms.ListBox();
             this.panelIdolsS = new System.Windows.Forms.Panel();
             this.groupBoxAshinaCastle = new System.Windows.Forms.GroupBox();
             this.listBoxAshinaCastle = new System.Windows.Forms.ListBox();
@@ -194,14 +206,6 @@ namespace AutoSplitterCore
             this.radioImmAO = new System.Windows.Forms.RadioButton();
             this.comboBoxZoneSelectS = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.panelCfSekiro = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.comboBoxHowCfS = new System.Windows.Forms.ComboBox();
-            this.listBoxCfS = new System.Windows.Forms.ListBox();
-            this.btnAddCfS = new System.Windows.Forms.Button();
-            this.btnGetListFlagsSekiro = new System.Windows.Forms.Button();
-            this.label59 = new System.Windows.Forms.Label();
-            this.textBoxCfIdS = new System.Windows.Forms.TextBox();
             this.btnRefreshSekiro = new System.Windows.Forms.Button();
             this.btnDesactiveSekiro = new System.Windows.Forms.Button();
             this.sekiroRunning = new System.Windows.Forms.Label();
@@ -437,10 +441,6 @@ namespace AutoSplitterCore
             this.btnRemoveAllCuphead = new System.Windows.Forms.Button();
             this.CupheadRunning = new System.Windows.Forms.Label();
             this.CupheadNotRunning = new System.Windows.Forms.Label();
-            this.panelMortalJourney = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBoxMortalJourneyRun = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.TabControl2.SuspendLayout();
             this.tabConfig.SuspendLayout();
             this.groupBoxSplitters.SuspendLayout();
@@ -471,8 +471,11 @@ namespace AutoSplitterCore
             this.groupBoxATS.SuspendLayout();
             this.groupBoxTMS.SuspendLayout();
             this.tabSekiro.SuspendLayout();
-            this.panelBossS.SuspendLayout();
             this.panelPositionS.SuspendLayout();
+            this.panelMortalJourney.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.panelCfSekiro.SuspendLayout();
+            this.panelBossS.SuspendLayout();
             this.panelIdolsS.SuspendLayout();
             this.groupBoxAshinaCastle.SuspendLayout();
             this.groupBoxRadioAshinaCastle.SuspendLayout();
@@ -490,7 +493,6 @@ namespace AutoSplitterCore
             this.groupBoxRadioFountainhead.SuspendLayout();
             this.groupBoxAshinaOutskirts.SuspendLayout();
             this.groupBoxRadiosAshinaOutskirts.SuspendLayout();
-            this.panelCfSekiro.SuspendLayout();
             this.tabDs1.SuspendLayout();
             this.panelPositionDs1.SuspendLayout();
             this.panelLvlDs1.SuspendLayout();
@@ -526,8 +528,6 @@ namespace AutoSplitterCore
             this.tabCuphead.SuspendLayout();
             this.panelBossCuphead.SuspendLayout();
             this.panelLevelCuphead.SuspendLayout();
-            this.panelMortalJourney.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // TabControl2
@@ -1295,8 +1295,8 @@ namespace AutoSplitterCore
             // tabSekiro
             // 
             this.tabSekiro.BackColor = System.Drawing.SystemColors.Control;
-            this.tabSekiro.Controls.Add(this.panelPositionS);
             this.tabSekiro.Controls.Add(this.panelMortalJourney);
+            this.tabSekiro.Controls.Add(this.panelPositionS);
             this.tabSekiro.Controls.Add(this.panelCfSekiro);
             this.tabSekiro.Controls.Add(this.panelBossS);
             this.tabSekiro.Controls.Add(this.panelIdolsS);
@@ -1312,96 +1312,6 @@ namespace AutoSplitterCore
             this.tabSekiro.Size = new System.Drawing.Size(587, 351);
             this.tabSekiro.TabIndex = 2;
             this.tabSekiro.Text = "Sekiro";
-            // 
-            // panelBossS
-            // 
-            this.panelBossS.Controls.Add(this.btn_AddBoss);
-            this.panelBossS.Controls.Add(this.label13);
-            this.panelBossS.Controls.Add(this.comboBoxBoss);
-            this.panelBossS.Controls.Add(this.label12);
-            this.panelBossS.Controls.Add(this.comboBoxHowBoss);
-            this.panelBossS.Controls.Add(this.listBoxBosses);
-            this.panelBossS.Location = new System.Drawing.Point(44, 83);
-            this.panelBossS.Name = "panelBossS";
-            this.panelBossS.Size = new System.Drawing.Size(505, 240);
-            this.panelBossS.TabIndex = 14;
-            // 
-            // btn_AddBoss
-            // 
-            this.btn_AddBoss.Location = new System.Drawing.Point(204, 48);
-            this.btn_AddBoss.Name = "btn_AddBoss";
-            this.btn_AddBoss.Size = new System.Drawing.Size(100, 21);
-            this.btn_AddBoss.TabIndex = 14;
-            this.btn_AddBoss.Text = "Add";
-            this.btn_AddBoss.UseVisualStyleBackColor = true;
-            this.btn_AddBoss.Click += new System.EventHandler(this.btn_AddBoss_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(295, 3);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(33, 13);
-            this.label13.TabIndex = 13;
-            this.label13.Text = "Boss:";
-            // 
-            // comboBoxBoss
-            // 
-            this.comboBoxBoss.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxBoss.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.comboBoxBoss.FormattingEnabled = true;
-            this.comboBoxBoss.Items.AddRange(new object[] {
-            "Genichiro Ashina - Tutorial",
-            "Gyoubu Masataka Oniwa",
-            "Lady Butterfly",
-            "Genichiro Ashina",
-            "Folding Screen Monkeys",
-            "Guardian Ape",
-            "Headless Ape",
-            "Corrupted Monk (ghost)",
-            "Emma, the Gentle Blade",
-            "Isshin Ashina",
-            "Great Shinobi Owl",
-            "True Corrupted Monk",
-            "Divine Dragon",
-            "Owl (Father)",
-            "Demon of Hatred",
-            "Isshin, the Sword Saint"});
-            this.comboBoxBoss.Location = new System.Drawing.Point(184, 18);
-            this.comboBoxBoss.Name = "comboBoxBoss";
-            this.comboBoxBoss.Size = new System.Drawing.Size(292, 21);
-            this.comboBoxBoss.TabIndex = 12;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(87, 3);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(32, 13);
-            this.label12.TabIndex = 11;
-            this.label12.Text = "How:";
-            // 
-            // comboBoxHowBoss
-            // 
-            this.comboBoxHowBoss.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.comboBoxHowBoss.FormattingEnabled = true;
-            this.comboBoxHowBoss.Items.AddRange(new object[] {
-            "Inmediatly",
-            "Loading game after"});
-            this.comboBoxHowBoss.Location = new System.Drawing.Point(46, 18);
-            this.comboBoxHowBoss.Name = "comboBoxHowBoss";
-            this.comboBoxHowBoss.Size = new System.Drawing.Size(110, 21);
-            this.comboBoxHowBoss.TabIndex = 10;
-            // 
-            // listBoxBosses
-            // 
-            this.listBoxBosses.BackColor = System.Drawing.SystemColors.Control;
-            this.listBoxBosses.FormattingEnabled = true;
-            this.listBoxBosses.Location = new System.Drawing.Point(9, 82);
-            this.listBoxBosses.Name = "listBoxBosses";
-            this.listBoxBosses.Size = new System.Drawing.Size(489, 147);
-            this.listBoxBosses.TabIndex = 7;
-            this.listBoxBosses.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxBosses_MouseDoubleClick);
             // 
             // panelPositionS
             // 
@@ -1541,6 +1451,222 @@ namespace AutoSplitterCore
             this.textBoxX.Name = "textBoxX";
             this.textBoxX.Size = new System.Drawing.Size(52, 20);
             this.textBoxX.TabIndex = 0;
+            // 
+            // panelMortalJourney
+            // 
+            this.panelMortalJourney.Controls.Add(this.textBox1);
+            this.panelMortalJourney.Controls.Add(this.groupBox1);
+            this.panelMortalJourney.Location = new System.Drawing.Point(46, 81);
+            this.panelMortalJourney.Name = "panelMortalJourney";
+            this.panelMortalJourney.Size = new System.Drawing.Size(504, 245);
+            this.panelMortalJourney.TabIndex = 26;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(63, 117);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(376, 115);
+            this.textBox1.TabIndex = 3;
+            this.textBox1.TabStop = false;
+            this.textBox1.Text = resources.GetString("textBox1.Text");
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkBoxMortalJourneyRun);
+            this.groupBox1.Location = new System.Drawing.Point(147, 11);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 100);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            // 
+            // checkBoxMortalJourneyRun
+            // 
+            this.checkBoxMortalJourneyRun.AutoSize = true;
+            this.checkBoxMortalJourneyRun.Location = new System.Drawing.Point(25, 45);
+            this.checkBoxMortalJourneyRun.Name = "checkBoxMortalJourneyRun";
+            this.checkBoxMortalJourneyRun.Size = new System.Drawing.Size(154, 17);
+            this.checkBoxMortalJourneyRun.TabIndex = 0;
+            this.checkBoxMortalJourneyRun.Text = "Enable Mortal Journey Run";
+            this.checkBoxMortalJourneyRun.UseVisualStyleBackColor = true;
+            this.checkBoxMortalJourneyRun.CheckedChanged += new System.EventHandler(this.checkBoxMortalJourneyRun_CheckedChanged);
+            // 
+            // panelCfSekiro
+            // 
+            this.panelCfSekiro.Controls.Add(this.label7);
+            this.panelCfSekiro.Controls.Add(this.comboBoxHowCfS);
+            this.panelCfSekiro.Controls.Add(this.listBoxCfS);
+            this.panelCfSekiro.Controls.Add(this.btnAddCfS);
+            this.panelCfSekiro.Controls.Add(this.btnGetListFlagsSekiro);
+            this.panelCfSekiro.Controls.Add(this.label59);
+            this.panelCfSekiro.Controls.Add(this.textBoxCfIdS);
+            this.panelCfSekiro.Location = new System.Drawing.Point(46, 82);
+            this.panelCfSekiro.Name = "panelCfSekiro";
+            this.panelCfSekiro.Size = new System.Drawing.Size(504, 242);
+            this.panelCfSekiro.TabIndex = 25;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(392, 53);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(32, 13);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "How:";
+            // 
+            // comboBoxHowCfS
+            // 
+            this.comboBoxHowCfS.BackColor = System.Drawing.SystemColors.Control;
+            this.comboBoxHowCfS.FormattingEnabled = true;
+            this.comboBoxHowCfS.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowCfS.Location = new System.Drawing.Point(276, 50);
+            this.comboBoxHowCfS.Name = "comboBoxHowCfS";
+            this.comboBoxHowCfS.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxHowCfS.TabIndex = 20;
+            // 
+            // listBoxCfS
+            // 
+            this.listBoxCfS.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxCfS.FormattingEnabled = true;
+            this.listBoxCfS.Location = new System.Drawing.Point(9, 116);
+            this.listBoxCfS.Name = "listBoxCfS";
+            this.listBoxCfS.Size = new System.Drawing.Size(488, 121);
+            this.listBoxCfS.TabIndex = 19;
+            this.listBoxCfS.DoubleClick += new System.EventHandler(this.listBoxCfS_DoubleClick);
+            // 
+            // btnAddCfS
+            // 
+            this.btnAddCfS.Location = new System.Drawing.Point(211, 82);
+            this.btnAddCfS.Name = "btnAddCfS";
+            this.btnAddCfS.Size = new System.Drawing.Size(100, 21);
+            this.btnAddCfS.TabIndex = 18;
+            this.btnAddCfS.Text = "Add";
+            this.btnAddCfS.UseVisualStyleBackColor = true;
+            this.btnAddCfS.Click += new System.EventHandler(this.btnAddCfS_Click);
+            // 
+            // btnGetListFlagsSekiro
+            // 
+            this.btnGetListFlagsSekiro.Location = new System.Drawing.Point(201, 9);
+            this.btnGetListFlagsSekiro.Name = "btnGetListFlagsSekiro";
+            this.btnGetListFlagsSekiro.Size = new System.Drawing.Size(127, 23);
+            this.btnGetListFlagsSekiro.TabIndex = 2;
+            this.btnGetListFlagsSekiro.Text = "Get List Flags";
+            this.btnGetListFlagsSekiro.UseVisualStyleBackColor = true;
+            this.btnGetListFlagsSekiro.Click += new System.EventHandler(this.btnGetListFlagsSekiro_Click);
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(120, 53);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(21, 13);
+            this.label59.TabIndex = 1;
+            this.label59.Text = "ID:";
+            // 
+            // textBoxCfIdS
+            // 
+            this.textBoxCfIdS.BackColor = System.Drawing.SystemColors.Control;
+            this.textBoxCfIdS.Location = new System.Drawing.Point(151, 50);
+            this.textBoxCfIdS.Name = "textBoxCfIdS";
+            this.textBoxCfIdS.Size = new System.Drawing.Size(100, 20);
+            this.textBoxCfIdS.TabIndex = 0;
+            // 
+            // panelBossS
+            // 
+            this.panelBossS.Controls.Add(this.btn_AddBoss);
+            this.panelBossS.Controls.Add(this.label13);
+            this.panelBossS.Controls.Add(this.comboBoxBoss);
+            this.panelBossS.Controls.Add(this.label12);
+            this.panelBossS.Controls.Add(this.comboBoxHowBoss);
+            this.panelBossS.Controls.Add(this.listBoxBosses);
+            this.panelBossS.Location = new System.Drawing.Point(44, 83);
+            this.panelBossS.Name = "panelBossS";
+            this.panelBossS.Size = new System.Drawing.Size(505, 240);
+            this.panelBossS.TabIndex = 14;
+            // 
+            // btn_AddBoss
+            // 
+            this.btn_AddBoss.Location = new System.Drawing.Point(204, 48);
+            this.btn_AddBoss.Name = "btn_AddBoss";
+            this.btn_AddBoss.Size = new System.Drawing.Size(100, 21);
+            this.btn_AddBoss.TabIndex = 14;
+            this.btn_AddBoss.Text = "Add";
+            this.btn_AddBoss.UseVisualStyleBackColor = true;
+            this.btn_AddBoss.Click += new System.EventHandler(this.btn_AddBoss_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(295, 3);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(33, 13);
+            this.label13.TabIndex = 13;
+            this.label13.Text = "Boss:";
+            // 
+            // comboBoxBoss
+            // 
+            this.comboBoxBoss.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxBoss.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.comboBoxBoss.FormattingEnabled = true;
+            this.comboBoxBoss.Items.AddRange(new object[] {
+            "Genichiro Ashina - Tutorial",
+            "Gyoubu Masataka Oniwa",
+            "Lady Butterfly",
+            "Genichiro Ashina",
+            "Folding Screen Monkeys",
+            "Guardian Ape",
+            "Headless Ape",
+            "Corrupted Monk (ghost)",
+            "Emma, the Gentle Blade",
+            "Isshin Ashina",
+            "Great Shinobi Owl",
+            "True Corrupted Monk",
+            "Divine Dragon",
+            "Owl (Father)",
+            "Demon of Hatred",
+            "Isshin, the Sword Saint"});
+            this.comboBoxBoss.Location = new System.Drawing.Point(184, 18);
+            this.comboBoxBoss.Name = "comboBoxBoss";
+            this.comboBoxBoss.Size = new System.Drawing.Size(292, 21);
+            this.comboBoxBoss.TabIndex = 12;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(87, 3);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(32, 13);
+            this.label12.TabIndex = 11;
+            this.label12.Text = "How:";
+            // 
+            // comboBoxHowBoss
+            // 
+            this.comboBoxHowBoss.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.comboBoxHowBoss.FormattingEnabled = true;
+            this.comboBoxHowBoss.Items.AddRange(new object[] {
+            "Inmediatly",
+            "Loading game after"});
+            this.comboBoxHowBoss.Location = new System.Drawing.Point(46, 18);
+            this.comboBoxHowBoss.Name = "comboBoxHowBoss";
+            this.comboBoxHowBoss.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxHowBoss.TabIndex = 10;
+            // 
+            // listBoxBosses
+            // 
+            this.listBoxBosses.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxBosses.FormattingEnabled = true;
+            this.listBoxBosses.Location = new System.Drawing.Point(9, 82);
+            this.listBoxBosses.Name = "listBoxBosses";
+            this.listBoxBosses.Size = new System.Drawing.Size(489, 147);
+            this.listBoxBosses.TabIndex = 7;
+            this.listBoxBosses.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxBosses_MouseDoubleClick);
             // 
             // panelIdolsS
             // 
@@ -2497,88 +2623,6 @@ namespace AutoSplitterCore
             this.label14.Size = new System.Drawing.Size(36, 13);
             this.label14.TabIndex = 4;
             this.label14.Text = "where";
-            // 
-            // panelCfSekiro
-            // 
-            this.panelCfSekiro.Controls.Add(this.label7);
-            this.panelCfSekiro.Controls.Add(this.comboBoxHowCfS);
-            this.panelCfSekiro.Controls.Add(this.listBoxCfS);
-            this.panelCfSekiro.Controls.Add(this.btnAddCfS);
-            this.panelCfSekiro.Controls.Add(this.btnGetListFlagsSekiro);
-            this.panelCfSekiro.Controls.Add(this.label59);
-            this.panelCfSekiro.Controls.Add(this.textBoxCfIdS);
-            this.panelCfSekiro.Location = new System.Drawing.Point(46, 82);
-            this.panelCfSekiro.Name = "panelCfSekiro";
-            this.panelCfSekiro.Size = new System.Drawing.Size(504, 242);
-            this.panelCfSekiro.TabIndex = 25;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(392, 53);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(32, 13);
-            this.label7.TabIndex = 21;
-            this.label7.Text = "How:";
-            // 
-            // comboBoxHowCfS
-            // 
-            this.comboBoxHowCfS.BackColor = System.Drawing.SystemColors.Control;
-            this.comboBoxHowCfS.FormattingEnabled = true;
-            this.comboBoxHowCfS.Items.AddRange(new object[] {
-            "Inmediatly",
-            "Loading game after"});
-            this.comboBoxHowCfS.Location = new System.Drawing.Point(276, 50);
-            this.comboBoxHowCfS.Name = "comboBoxHowCfS";
-            this.comboBoxHowCfS.Size = new System.Drawing.Size(110, 21);
-            this.comboBoxHowCfS.TabIndex = 20;
-            // 
-            // listBoxCfS
-            // 
-            this.listBoxCfS.BackColor = System.Drawing.SystemColors.Control;
-            this.listBoxCfS.FormattingEnabled = true;
-            this.listBoxCfS.Location = new System.Drawing.Point(9, 116);
-            this.listBoxCfS.Name = "listBoxCfS";
-            this.listBoxCfS.Size = new System.Drawing.Size(488, 121);
-            this.listBoxCfS.TabIndex = 19;
-            this.listBoxCfS.DoubleClick += new System.EventHandler(this.listBoxCfS_DoubleClick);
-            // 
-            // btnAddCfS
-            // 
-            this.btnAddCfS.Location = new System.Drawing.Point(211, 82);
-            this.btnAddCfS.Name = "btnAddCfS";
-            this.btnAddCfS.Size = new System.Drawing.Size(100, 21);
-            this.btnAddCfS.TabIndex = 18;
-            this.btnAddCfS.Text = "Add";
-            this.btnAddCfS.UseVisualStyleBackColor = true;
-            this.btnAddCfS.Click += new System.EventHandler(this.btnAddCfS_Click);
-            // 
-            // btnGetListFlagsSekiro
-            // 
-            this.btnGetListFlagsSekiro.Location = new System.Drawing.Point(201, 9);
-            this.btnGetListFlagsSekiro.Name = "btnGetListFlagsSekiro";
-            this.btnGetListFlagsSekiro.Size = new System.Drawing.Size(127, 23);
-            this.btnGetListFlagsSekiro.TabIndex = 2;
-            this.btnGetListFlagsSekiro.Text = "Get List Flags";
-            this.btnGetListFlagsSekiro.UseVisualStyleBackColor = true;
-            this.btnGetListFlagsSekiro.Click += new System.EventHandler(this.btnGetListFlagsSekiro_Click);
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(120, 53);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(21, 13);
-            this.label59.TabIndex = 1;
-            this.label59.Text = "ID:";
-            // 
-            // textBoxCfIdS
-            // 
-            this.textBoxCfIdS.BackColor = System.Drawing.SystemColors.Control;
-            this.textBoxCfIdS.Location = new System.Drawing.Point(151, 50);
-            this.textBoxCfIdS.Name = "textBoxCfIdS";
-            this.textBoxCfIdS.Size = new System.Drawing.Size(100, 20);
-            this.textBoxCfIdS.TabIndex = 0;
             // 
             // btnRefreshSekiro
             // 
@@ -6829,50 +6873,6 @@ namespace AutoSplitterCore
             this.CupheadNotRunning.TabIndex = 25;
             this.CupheadNotRunning.Text = "Cuphead is Not Running";
             // 
-            // panelMortalJourney
-            // 
-            this.panelMortalJourney.Controls.Add(this.textBox1);
-            this.panelMortalJourney.Controls.Add(this.groupBox1);
-            this.panelMortalJourney.Location = new System.Drawing.Point(46, 81);
-            this.panelMortalJourney.Name = "panelMortalJourney";
-            this.panelMortalJourney.Size = new System.Drawing.Size(504, 245);
-            this.panelMortalJourney.TabIndex = 26;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.checkBoxMortalJourneyRun);
-            this.groupBox1.Location = new System.Drawing.Point(147, 11);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 100);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            // 
-            // checkBoxMortalJourneyRun
-            // 
-            this.checkBoxMortalJourneyRun.AutoSize = true;
-            this.checkBoxMortalJourneyRun.Location = new System.Drawing.Point(25, 45);
-            this.checkBoxMortalJourneyRun.Name = "checkBoxMortalJourneyRun";
-            this.checkBoxMortalJourneyRun.Size = new System.Drawing.Size(154, 17);
-            this.checkBoxMortalJourneyRun.TabIndex = 0;
-            this.checkBoxMortalJourneyRun.Text = "Enable Mortal Journey Run";
-            this.checkBoxMortalJourneyRun.UseVisualStyleBackColor = true;
-            this.checkBoxMortalJourneyRun.CheckedChanged += new System.EventHandler(this.checkBoxMortalJourneyRun_CheckedChanged);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(63, 117);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(376, 115);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.TabStop = false;
-            this.textBox1.Text = resources.GetString("textBox1.Text");
-            // 
             // AutoSplitter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6934,10 +6934,16 @@ namespace AutoSplitterCore
             this.groupBoxTMS.PerformLayout();
             this.tabSekiro.ResumeLayout(false);
             this.tabSekiro.PerformLayout();
-            this.panelBossS.ResumeLayout(false);
-            this.panelBossS.PerformLayout();
             this.panelPositionS.ResumeLayout(false);
             this.panelPositionS.PerformLayout();
+            this.panelMortalJourney.ResumeLayout(false);
+            this.panelMortalJourney.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.panelCfSekiro.ResumeLayout(false);
+            this.panelCfSekiro.PerformLayout();
+            this.panelBossS.ResumeLayout(false);
+            this.panelBossS.PerformLayout();
             this.panelIdolsS.ResumeLayout(false);
             this.panelIdolsS.PerformLayout();
             this.groupBoxAshinaCastle.ResumeLayout(false);
@@ -6964,8 +6970,6 @@ namespace AutoSplitterCore
             this.groupBoxAshinaOutskirts.ResumeLayout(false);
             this.groupBoxRadiosAshinaOutskirts.ResumeLayout(false);
             this.groupBoxRadiosAshinaOutskirts.PerformLayout();
-            this.panelCfSekiro.ResumeLayout(false);
-            this.panelCfSekiro.PerformLayout();
             this.tabDs1.ResumeLayout(false);
             this.tabDs1.PerformLayout();
             this.panelPositionDs1.ResumeLayout(false);
@@ -7028,10 +7032,6 @@ namespace AutoSplitterCore
             this.tabCuphead.PerformLayout();
             this.panelBossCuphead.ResumeLayout(false);
             this.panelLevelCuphead.ResumeLayout(false);
-            this.panelMortalJourney.ResumeLayout(false);
-            this.panelMortalJourney.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }

@@ -13,6 +13,8 @@ regardless of what is written on them
 - When a event of autosplit happen, an internal variable is set, for evit that event is repit. 
 Use "Reset Run" button or Shortcut, for reset this state.
 
+- If you have set "GameToSplit" and added a position trigger, be careful with autospliting.
+
 - If you want auto reset internal flags to split all Pantheon bosses in hollow autosplitter.
 If you want play P1+P2+P3+P4 to play P5 after, or P5 to play P1....P4 after 
 You should check "Grey Prince Zote" if you run, have this boss or not.
