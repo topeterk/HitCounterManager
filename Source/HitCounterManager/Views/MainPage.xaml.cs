@@ -21,7 +21,6 @@
 //SOFTWARE.
 
 using System;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using HitCounterManager.Controls;
@@ -29,32 +28,29 @@ using HitCounterManager.ViewModels;
 
 namespace HitCounterManager.Views
 {
-    public partial class MainPage : Window
+    public partial class MainPage : WindowPageBase<MainPageViewModel>
     {
         private SettingsRoot Settings => App.CurrentApp.Settings;
         public ProfileView ProfileView => this.FindControl<ProfileView>("profileView");
 
         public MainPage()
         {
+            AvaloniaXamlLoader.Load(this);
             InitializeComponent();
-            PlatformImpl.SetTopmost(App.CurrentApp.Settings.AlwaysOnTop);
-            Closing += ClosingHandler;
-            PositionChanged += PositionChangedHandler;
 
-            MainPageViewModel vm = (MainPageViewModel)DataContext!;
-            vm.OwnerWindow = this;
+            Width = Settings.MainWidth;
+            Height = Settings.MainHeight;
 
             // Workaround: Avalonia's DataTriggerBehavior seems to be created but not executed during InitializeComponent()
             //             However, we rely on this trigger to update the UI accordingly.
             //             Therefore we notify about the propery change that the UI will update the value.
             //             But when the actual value does not change the trigger will not be executed,
             //             so, we return null up to here that we ensure there is a data change during notify.
-            vm.AlwaysOnTopDataTriggerWorkaroundCalled = true;
-            vm.CallPropertyChanged(nameof(vm.AlwaysOnTop));
+            ViewModel.AlwaysOnTopDataTriggerWorkaroundCalled = true;
+            ViewModel.CallPropertyChanged(nameof(ViewModel.AlwaysOnTop));
 
-#if DEBUG
-            this.AttachDevTools();
-#endif
+            Closing += ClosingHandler;
+            PositionChanged += PositionChangedHandler;
         }
 
         private void PositionChangedHandler(object? sender, PixelPointEventArgs e)
@@ -74,13 +70,6 @@ namespace HitCounterManager.Views
             if (result == DialogResult.Yes) SaveSettings();
             else if (result == DialogResult.Cancel) e.Cancel = true;
 #endif
-        }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-            Width = Settings.MainWidth;
-            Height = Settings.MainHeight;
         }
     }
 }

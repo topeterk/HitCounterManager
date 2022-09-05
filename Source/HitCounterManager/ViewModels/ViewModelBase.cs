@@ -32,5 +32,8 @@ namespace HitCounterManager.ViewModels
     public class ViewModelWindowBase : ViewModelBase
     {
         public Window? OwnerWindow { get; set; }
+
+        public virtual void OnAppearing() { }
+        public virtual void OnDisappearing() { }
     }
 }

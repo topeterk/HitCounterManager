@@ -118,7 +118,7 @@ namespace HitCounterManager.ViewModels
             private set => SetAndNotifyWhenChanged(ref _IsUserInputEnabled, value);
         }
 
-        public void OnAppearing()
+        public sealed override void OnAppearing()
         {
             switch (Action)
             {

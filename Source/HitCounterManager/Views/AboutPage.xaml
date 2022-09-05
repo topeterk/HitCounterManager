@@ -31,6 +31,10 @@
         Title="About" Classes="DialogWindow"
         MinWidth="420" MinHeight="380" Width="800" Height="630">
 
+    <Window.DataContext>
+        <local:ViewModelWindowBase />
+    </Window.DataContext>
+
     <DockPanel Margin="10">
         <TextBlock DockPanel.Dock="Top"    Margin="20" Text="{x:Static common:Statics.ApplicationTitle}" HorizontalAlignment="Center" FontWeight="Bold"/>
         <Button    DockPanel.Dock="Bottom" Margin="20" Width="200" Content="OK" Command="{Binding $parent[Window].Close}" HorizontalAlignment="Right"/>

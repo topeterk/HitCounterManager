@@ -20,32 +20,17 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-using System;
-using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using HitCounterManager.ViewModels;
 
 namespace HitCounterManager.Views
 {
-    public partial class SettingsPage : Window
+    public partial class SettingsPage : WindowPageBase<SettingsPageViewModel>
     {
         public SettingsPage()
         {
-            InitializeComponent();
-            PlatformImpl.SetTopmost(App.CurrentApp.Settings.AlwaysOnTop);
-
-            Opened += (object? sender, EventArgs e) => ((SettingsPageViewModel)DataContext!).OnAppearing();
-            Closed += (object? sender, EventArgs e) => ((SettingsPageViewModel)DataContext!).OnDisappearing();
-
-#if DEBUG
-            this.AttachDevTools();
-#endif
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
+            InitializeComponent();
         }
     }
 }

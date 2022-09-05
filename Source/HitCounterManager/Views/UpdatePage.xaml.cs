@@ -20,30 +20,17 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using HitCounterManager.ViewModels;
 
 namespace HitCounterManager.Views
 {
-    public partial class UpdatePage : Window
+    public partial class UpdatePage : WindowPageBase<UpdatePageViewModel>
     {
         public UpdatePage()
         {
-            InitializeComponent();
-            PlatformImpl.SetTopmost(App.CurrentApp.Settings.AlwaysOnTop);
-
-            ((UpdatePageViewModel)DataContext!).OwnerWindow = this;
-
-#if DEBUG
-            this.AttachDevTools();
-#endif
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
+            InitializeComponent();
         }
     }
 }

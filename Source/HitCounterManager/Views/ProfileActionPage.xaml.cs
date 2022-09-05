@@ -20,38 +20,17 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-using System;
-using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using HitCounterManager.ViewModels;
 
 namespace HitCounterManager.Views
 {
-    public partial class ProfileActionPage : Window
+    public partial class ProfileActionPage : WindowPageBase<ProfileActionPageViewModel>
     {
-        ProfileActionPageViewModel vm;
-        public ProfileActionPage() => throw new NotImplementedException(); // This ctor is only needed for Avalonia XAML interpreter
-
-        public ProfileActionPage(ProfileAction Action, ProfileViewViewModel Origin)
-        {
-            InitializeComponent();
-            PlatformImpl.SetTopmost(App.CurrentApp.Settings.AlwaysOnTop);
-
-            vm = (ProfileActionPageViewModel)DataContext!;
-            vm.OwnerWindow = this;
-            vm.Action = Action;
-            vm.Origin = Origin;
-            Opened += (object? sender, EventArgs e) => vm.OnAppearing();
-
-#if DEBUG
-            this.AttachDevTools();
-#endif
-        }
-
-        private void InitializeComponent()
+        public ProfileActionPage()
         {
             AvaloniaXamlLoader.Load(this);
+            InitializeComponent();
         }
     }
 }

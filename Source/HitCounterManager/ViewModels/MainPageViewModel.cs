@@ -44,12 +44,18 @@ namespace HitCounterManager.ViewModels
             NavigateToSetAttempts = ReactiveCommand.CreateFromTask(async () => {
                 if ((null == OwnerWindow) || (null == ProfileView)) return;
 
-                await new ProfileAttemptsPage((ProfileViewViewModel?)ProfileView?.DataContext!).ShowDialog(OwnerWindow);
+                ProfileAttemptsPage page = new ProfileAttemptsPage();
+                page.ViewModel.Origin = (ProfileViewViewModel?)ProfileView?.DataContext!;
+                page.ViewModel.UserInput = page.ViewModel.Origin.ProfileSelected.Attempts.ToString();
+                await page.ShowDialog(OwnerWindow);
             });
             NavigateToProfileAction = ReactiveCommand.CreateFromTask(async (ProfileAction type) => {
                 if (App.CurrentApp.Settings.ReadOnlyMode || (null == OwnerWindow) || (null == ProfileView)) return;
 
-                await new ProfileActionPage(type, (ProfileViewViewModel?)ProfileView?.DataContext!).ShowDialog(OwnerWindow);
+                ProfileActionPage page = new ProfileActionPage();
+                page.ViewModel.Origin = (ProfileViewViewModel?)ProfileView?.DataContext!;
+                page.ViewModel.Action = type;
+                await page.ShowDialog(OwnerWindow);
             });
 
             CheckUpdatesOnline = ReactiveCommand.Create(() => App.CurrentApp.CheckAndShowUpdates(this));

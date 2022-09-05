@@ -20,17 +20,36 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-using Avalonia.Markup.Xaml;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using Avalonia;
+using Avalonia.Controls;
 using HitCounterManager.ViewModels;
 
 namespace HitCounterManager.Views
 {
-    public partial class ProfileAttemptsPage : WindowPageBase<ProfileAttemptsPageViewModel>
+    public class WindowPageBase<TViewModel> : Window where TViewModel : ViewModelWindowBase
     {
-        public ProfileAttemptsPage()
+        /// <summary>
+        /// InitializeComponent must be called by the derived class.
+        /// </summary>
+        public TViewModel ViewModel => (TViewModel?)DataContext!;
+
+        [MemberNotNull(nameof(ViewModel))]
+        protected void InitializeComponent()
         {
-            AvaloniaXamlLoader.Load(this);
-            InitializeComponent();
+            if (null == ViewModel) throw new Exception("ViewModel is not set!");
+
+            ViewModel.OwnerWindow = this;
+
+            PlatformImpl.SetTopmost(App.CurrentApp.Settings.AlwaysOnTop);
+
+            Opened += (object? sender, EventArgs e) => ViewModel.OnAppearing();
+            Closed += (object? sender, EventArgs e) => ViewModel.OnDisappearing();
+
+#if DEBUG
+            this.AttachDevTools();
+#endif
         }
     }
 }

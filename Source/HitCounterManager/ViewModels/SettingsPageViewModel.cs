@@ -262,7 +262,7 @@ namespace HitCounterManager.ViewModels
             }
         }
 
-        public void OnAppearing()
+        public sealed override void OnAppearing()
         {
             if (!AppearedOnce)
             {
@@ -302,7 +302,7 @@ namespace HitCounterManager.ViewModels
             App.CurrentApp.SettingsDialogOpen = true; // To disable hotkeys (for main application)
         }
 
-        public void OnDisappearing()
+        public sealed override void OnDisappearing()
         {
             Capture.Execute(SC_Type.SC_Type_MAX); // Stop any running capture
             App.CurrentApp.SettingsDialogOpen = false; // Re-Enable hotkeys (for main application)
