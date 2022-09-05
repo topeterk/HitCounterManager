@@ -34,7 +34,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>AutoSplitterCoreSource\FireIcon-2.ico</ApplicationIcon>
+    <ApplicationIcon>AutoSplitterCoreSource\AutoSplitterSetupIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -143,7 +143,7 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AutoSplitterCoreSource\FireIcon-2.ico" />
+    <Content Include="AutoSplitterCoreSource\AutoSplitterSetupIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

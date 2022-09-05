@@ -284,13 +284,17 @@ Setup AutoSplitterCore Banner Image
 Title: -
 Author: Neimex23
 Licence: MIT
+Using: Setup AutoSplitterCore Icon
 
 ==============================================================================
 Setup AutoSplitterCore Icon
 
 Title: -
-Author: Neimex23
-Licence: MIT
+File Title: AutoSplitterSetupIcon.ico
+Author: Elionas
+Source: https://pixabay.com/images/id-1345869/
+Licence: Pixabay License
+
 
 ==============================================================================
 C# JSON parser

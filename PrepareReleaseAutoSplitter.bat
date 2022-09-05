@@ -2,7 +2,8 @@
 
 REM MIT License
 
-REM Copyright(c) 2022 Ezequiel Medina
+REM Copyright(c) 2022 Peter Kirmeier and Ezequiel Medina
+REM Based on "PrepareRelease.bat" by Peter Kirmeier
 
 REM Permission Is hereby granted, free Of charge, to any person obtaining a copy
 REM of this software And associated documentation files (the "Software"), to deal

@@ -141,12 +141,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_90F6EF9D63574E7698AB3B21A6C849C6"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_9CCD6C4830914F1BA94E4E0CD5926353"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -165,7 +159,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_B5917EBECF3E45768DB8DAF957839BD4"
+        "MsmKey" = "8:_B8C9532BD7C0418CBFAECCFCBDCFFFB7"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C2AD2960C2B447DB9C6A82477241A2E4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -759,26 +759,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_90F6EF9D63574E7698AB3B21A6C849C6"
-            {
-            "SourcePath" = "8:Images\\FireIcon-2.ico"
-            "TargetName" = "8:FireIcon-2.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_4D8FE2CE9E694CB7A8B64FD65FEC552B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9CCD6C4830914F1BA94E4E0CD5926353"
             {
             "SourcePath" = "8:ASLScripts\\Hades.asl"
@@ -839,7 +819,27 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B5917EBECF3E45768DB8DAF957839BD4"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B8C9532BD7C0418CBFAECCFCBDCFFFB7"
+            {
+            "SourcePath" = "8:Images\\AutoSplitterSetupIcon.ico"
+            "TargetName" = "8:AutoSplitterSetupIcon.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_4D8FE2CE9E694CB7A8B64FD65FEC552B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C2AD2960C2B447DB9C6A82477241A2E4"
             {
             "SourcePath" = "8:Images\\installer-banner-autosplitter.png"
             "TargetName" = "8:installer-banner-autosplitter.png"
@@ -1131,7 +1131,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:AutoSplitterCore for HCM"
         "ProductCode" = "8:{8D85FF79-CC64-49F2-BB73-82022748ACA1}"
-        "PackageCode" = "8:{60C28902-B286-4A28-A764-F0BCC55A19D8}"
+        "PackageCode" = "8:{E025820D-8CD8-4D42-B475-F77C6590ECC0}"
         "UpgradeCode" = "8:{8D9DB7B5-72BC-4051-90C2-F744423C2376}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -1148,7 +1148,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Install AutoSplitter Core Into HCM"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:_90F6EF9D63574E7698AB3B21A6C849C6"
+        "ARPPRODUCTICON" = "8:_B8C9532BD7C0418CBFAECCFCBDCFFFB7"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -1279,7 +1279,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_B5917EBECF3E45768DB8DAF957839BD4"
+                            "Value" = "8:_C2AD2960C2B447DB9C6A82477241A2E4"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "ShowProgress"
@@ -1324,7 +1324,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_B5917EBECF3E45768DB8DAF957839BD4"
+                            "Value" = "8:_C2AD2960C2B447DB9C6A82477241A2E4"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "UpdateText"
@@ -1375,7 +1375,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_B5917EBECF3E45768DB8DAF957839BD4"
+                            "Value" = "8:_C2AD2960C2B447DB9C6A82477241A2E4"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1407,7 +1407,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_B5917EBECF3E45768DB8DAF957839BD4"
+                            "Value" = "8:_C2AD2960C2B447DB9C6A82477241A2E4"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "ShowProgress"
@@ -1452,7 +1452,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_B5917EBECF3E45768DB8DAF957839BD4"
+                            "Value" = "8:_C2AD2960C2B447DB9C6A82477241A2E4"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1475,7 +1475,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_B5917EBECF3E45768DB8DAF957839BD4"
+                            "Value" = "8:_C2AD2960C2B447DB9C6A82477241A2E4"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1498,7 +1498,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_B5917EBECF3E45768DB8DAF957839BD4"
+                            "Value" = "8:_C2AD2960C2B447DB9C6A82477241A2E4"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"
@@ -1556,7 +1556,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_B5917EBECF3E45768DB8DAF957839BD4"
+                            "Value" = "8:_C2AD2960C2B447DB9C6A82477241A2E4"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "InstallAllUsersVisible"
@@ -1592,7 +1592,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_B5917EBECF3E45768DB8DAF957839BD4"
+                            "Value" = "8:_C2AD2960C2B447DB9C6A82477241A2E4"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1615,7 +1615,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_B5917EBECF3E45768DB8DAF957839BD4"
+                            "Value" = "8:_C2AD2960C2B447DB9C6A82477241A2E4"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"
@@ -1662,7 +1662,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_22C25E7771974A488CBF0431869EF64C"
             {
-            "SourcePath" = "8:obj\\Release\\AutoSplitterCore.exe"
+            "SourcePath" = "8:obj\\Release\\AutoSplitterCore.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_4D8FE2CE9E694CB7A8B64FD65FEC552B"
