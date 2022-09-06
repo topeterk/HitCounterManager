@@ -37,6 +37,15 @@ DLL Used:
            Author:  F.stam (FrankvdStam)
            Source:  https://github.com/FrankvdStam/SoulSplitter.git
            Licence: GNU
+	[=] Attributions:
+      [-]  Title: IGT Save File Dark Souls 1
+       	   Author: CapitaineToinon
+		   Source: https://github.com/CapitaineToinon/LiveSplit.DarkSoulsIGT
+           License: GNU	     
+	  [-]  Title: DarkSouls3RemoveIntroScreens
+	       Author: Blade (bladecoding)
+		   Source: https://github.com/bladecoding/DarkSouls3RemoveIntroScreens
+		   License: MIT            		   
 
     - DLL LiveSplit.HollowKnight
     [-]    Title: LiveSplit.HollowKnight
