@@ -171,11 +171,16 @@ namespace AutoSplitterCore
             listPendingI.Clear();
             listPendingP.Clear();
             listPendingCf.Clear();
+            PendingMortal.Clear();
             dataSekiro.bossToSplit.Clear();
             dataSekiro.idolsTosplit.Clear();
-            dataSekiro.positionMargin = 3;
             dataSekiro.positionsToSplit.Clear();
+            dataSekiro.flagToSplit.Clear();
+            notSplited(ref MortalJourneyData);
+            dataSekiro.positionMargin = 3;           
+            dataSekiro.mortalJourneyRun = false;
             _runStarted = false;
+            index = 0;           
         }
 
         public Vector3f getCurrentPosition()
