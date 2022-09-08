@@ -37,7 +37,7 @@ namespace AutoSplitterCore
             InitializeComponent();
             this.mainModule = mainModule;
             mainModule.SetPointers();
-            mainModule.LoadAutoSplitterSettingsM(new HitCounterManager.ProfilesControl());
+            mainModule.LoadAutoSplitterSettingsM(new HitCounterManager.ProfilesControl(),null);
             mainModule.InitDebug();    
             _update_timer.Tick += (sender, args) => CheckInfo();
             _update_timer.Enabled = true;

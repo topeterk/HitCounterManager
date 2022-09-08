@@ -38,7 +38,6 @@ namespace HitCounterManager
         private bool SettingsDialogOpen = false;
         private bool ReadOnlyMode = false;
 
-        private System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
         private bool _DllAttached { get; set; }
         private string DllPath = String.Empty;
         private Assembly assembly = null;
@@ -58,7 +57,8 @@ namespace HitCounterManager
         MethodInfo CheckSplitterRunStarted = null;
         MethodInfo SetSplitterRunStarted = null;
         MethodInfo SetPointers = null;
-
+        MethodInfo GetIsIGTActive = null;
+        public Form1 main = null;
 
         #region Form
 
@@ -112,10 +112,11 @@ namespace HitCounterManager
                 CheckSplitterRunStarted = type.GetMethod("CheckSplitterRunStarted");
                 SetSplitterRunStarted = type.GetMethod("SetSplitterRunStarted");
                 SetPointers = type.GetMethod("SetPointers");
+                GetIsIGTActive = type.GetMethod("GetIsIGTActive");
 
 
                 SetPointers.Invoke(obj, null);
-                LoadAutoSplitterSettings.Invoke(obj, new object [] { profCtrl });
+                LoadAutoSplitterSettings.Invoke(obj, new object [] { profCtrl,this.main });
                 var index = GetSplitterEnable.Invoke(obj,null);
                 switch (index)
                 {
@@ -132,9 +133,8 @@ namespace HitCounterManager
                     default: comboBoxGame.SelectedIndex = 0; break;
                 }
 
-                profCtrl.SetIGTSource(ReturnCurrentIGT,obj);
-                _update_timer.Tick += (senderT, args) => CheckAutoTimers();
-                _update_timer.Enabled = true;
+                profCtrl.SetIGTSource(ReturnCurrentIGT,GetIsIGTActive, obj);
+                
             }         
             this.UpdateDarkMode();
         }
@@ -274,7 +274,6 @@ namespace HitCounterManager
             }
         }
                 
-
         private void ProfileChangedHandler(object sender, EventArgs e)
         {
             int TotalSplits, TotalActiveSplit, TotalHits, TotalHitsWay, TotalPB;
@@ -288,282 +287,54 @@ namespace HitCounterManager
             btnPause.Image = profCtrl.TimerRunning ? Sources.Resources.icons8_sleep_32 : Sources.Resources.icons8_time_32;
         }
 
-        private void StartStopTimer(bool Start)
+        public void StartStopTimer(bool Start)
         {
             timer1.Enabled = profCtrl.TimerRunning = Start;
             btnPause.Image = Start ? Sources.Resources.icons8_sleep_32 : Sources.Resources.icons8_time_32;
         }
 
-        private int gameActive = 0;
-        private int _lastGameActive = 0;
-        private long? _lastInGameTime;
-
-        private void CheckAutoTimers()
-        {
-            bool anyGameTime = false;
-            object g = 0;
-            switch (gameActive)
-            {
-                case 1: //Sekiro
-                    g = 1;
-                    if ((bool)CheckAutoTimerFlag.Invoke(obj, new[] { g }))
-                    {
-                        if ((bool)CheckGameTimerFlag.Invoke(obj, new[] { g }))
-                        {
-                            if (!(bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) > 0)
-                            {
-                                StartStopTimer(true);
-                                SetSplitterRunStarted.Invoke(obj, new object[] { g, true });
-                            }
-                            else
-                            if ((bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) == 0)
-                            {
-                                StartStopTimer(false);
-                                SetSplitterRunStarted.Invoke(obj, new object[] { g, false });
-                            }
-                        }
-                        else
-                        {
-                            anyGameTime = true;
-                        }
-                    }
-                    break;
-                case 2: //DS1
-                    g = 2;
-                    if ((bool)CheckAutoTimerFlag.Invoke(obj, new[] { g }))
-                    {
-                        if ((bool)CheckGameTimerFlag.Invoke(obj, new[] { g }))
-                        {
-                            if (!(bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) > 0)
-                            {
-                                StartStopTimer(true);
-                                SetSplitterRunStarted.Invoke(obj, new object[] { g, true });
-                            }
-                            else
-                            if ((bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) == 0)
-                            {
-                                StartStopTimer(false);
-                                SetSplitterRunStarted.Invoke(obj, new object[] { g, false });
-                            }
-                        }
-                        else
-                        {
-                            anyGameTime = true;
-                        }
-                    }
-                    break;
-                case 4: //Ds3
-                    g = 4;
-                    if ((bool)CheckAutoTimerFlag.Invoke(obj, new[] { g }))
-                    {
-                        if ((bool)CheckGameTimerFlag.Invoke(obj, new[] { g }))
-                        {
-                            if (!(bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) > 0)
-                            {
-                                StartStopTimer(true);
-                                SetSplitterRunStarted.Invoke(obj, new object[] { g, true });
-                            }
-                            else
-                            if ((bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) == 0)
-                            {
-                                StartStopTimer(false);
-                                SetSplitterRunStarted.Invoke(obj, new object[] { g, false });
-                            }
-                        }
-                        else
-                        {
-                            anyGameTime = true;
-                        }
-                    }
-                    break;
-                case 5: //Elden
-                    g = 5;
-                    if ((bool)CheckAutoTimerFlag.Invoke(obj, new[] { g }))
-                    {
-                        if ((bool)CheckGameTimerFlag.Invoke(obj, new[] { g }))
-                        {
-                            if (!(bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) > 0)
-                            {
-                                StartStopTimer(true);
-                                SetSplitterRunStarted.Invoke(obj, new object[] { g, true });
-                            }
-                            else
-                            if ((bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) == 0)
-                            {
-                                StartStopTimer(false);
-                                SetSplitterRunStarted.Invoke(obj, new object[] { g, false });
-                            }
-                        }
-                        else
-                        {
-                            anyGameTime = true;
-                        }
-                    }
-                    break;
-                case 7: //Celeste
-                    g = 7;
-                    if ((bool)CheckAutoTimerFlag.Invoke(obj, new[] { g }))
-                    {
-                        if ((bool)CheckGameTimerFlag.Invoke(obj, new[] { g }))
-                        {
-                            if (!(bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) > 0)
-                            {
-                                StartStopTimer(true);
-                                SetSplitterRunStarted.Invoke(obj, new object[] { g, true });
-                            }
-                            else
-                            if ((bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) == 0)
-                            {
-                                StartStopTimer(false);
-                                SetSplitterRunStarted.Invoke(obj, new object[] { g, false });
-                            }
-                        }
-                        else
-                        {
-                            anyGameTime = true;
-                        }
-                    }
-                    break;
-                case 8: //Cuphead
-                    g = 8;
-                    if ((bool)CheckAutoTimerFlag.Invoke(obj, new[] { g }))
-                    {
-                        if ((bool)CheckGameTimerFlag.Invoke(obj, new[] { g }))
-                        {
-                            if (!(bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) > 0)
-                            {
-                                StartStopTimer(true);
-                                SetSplitterRunStarted.Invoke(obj, new object[] { g, true });
-                            }
-                            else
-                            if ((bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }) && (int)GetIgtSplitterTimer.Invoke(obj, new[] { g }) == 0)
-                            {
-                                StartStopTimer(false);
-                                SetSplitterRunStarted.Invoke(obj, new object[] { g, false });
-                            }
-                        }
-                        else
-                        {
-                            anyGameTime = true;
-                        }
-                    }
-                    break;
-
-                case 3: //DS2
-                    g = 3;
-                    if ((bool)CheckAutoTimerFlag.Invoke(obj, new[] { g }))
-                    {
-                        if ((bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }))
-                        {
-                            StartStopTimer(true);
-                        }
-                        else
-                        {
-                            if (!(bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }))
-                            {
-                                StartStopTimer(false);
-                            }
-                        }
-                    }
-                    break;
-                case 6: //Hollow
-                    g = 6;
-                    if ((bool)CheckAutoTimerFlag.Invoke(obj, new[] { g }))
-                    {
-                        if ((bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }))
-                        {
-                            StartStopTimer(true);
-                        }
-                        else
-                        {
-                            if (!(bool)CheckSplitterRunStarted.Invoke(obj, new[] { g }))
-                            {
-                                StartStopTimer(false);
-                            }
-                        }
-                    }
-                    break;
-
-
-                case 0:
-                case 9:
-                default: break;
-            }
-
-            if (_lastGameActive != gameActive)
-            {
-                SetGameIGT.Invoke(obj, new object[] { gameActive });
-                _lastGameActive = gameActive;
-            }
-
-            if (anyGameTime)
-            {
-                var inGameTime = (int)ReturnCurrentIGT.Invoke(obj, null);
-                if (inGameTime > 0 && !profCtrl.TimerRunning)
-                    StartStopTimer(true);
-                else if (inGameTime == 0 && profCtrl.TimerRunning)
-                    StartStopTimer(false);
-                else if (inGameTime > 0 && _lastInGameTime == inGameTime && profCtrl.TimerRunning)
-                    StartStopTimer(false);
-                else if (inGameTime > 0 && _lastInGameTime != inGameTime && !profCtrl.TimerRunning)
-                    StartStopTimer(true);
-                if (inGameTime > 0)
-                    _lastInGameTime = inGameTime;
-            }
-
-        }
 
         private void comboBoxGame_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Disable all games
             EnableSplitting.Invoke(obj, new object[] { 0 });
-            gameActive = 0;
 
             //Ask Selected index
             if (comboBoxGame.SelectedIndex == 1)
             {
                 EnableSplitting.Invoke(obj, new object[] { 1 });
-                gameActive = 1;
             }
             if (comboBoxGame.SelectedIndex == 2)
             {
                 EnableSplitting.Invoke(obj, new object[] { 2 });
-                gameActive = 2;
             }
             if (comboBoxGame.SelectedIndex == 3)
             {
                 EnableSplitting.Invoke(obj, new object[] { 3 });
-                gameActive = 3;
             }
             if (comboBoxGame.SelectedIndex == 4)
             {
                 EnableSplitting.Invoke(obj, new object[] { 4 });
-                gameActive = 4;
             }
             if (comboBoxGame.SelectedIndex == 5)
             {
                 EnableSplitting.Invoke(obj, new object[] { 5 });
-                gameActive = 5;
             }
             if (comboBoxGame.SelectedIndex == 6)
             {
                 EnableSplitting.Invoke(obj, new object[] { 6 });
-                gameActive = 6;
             }        
             if(comboBoxGame.SelectedIndex == 7)
             {
                 EnableSplitting.Invoke(obj, new object[] { 7 });
-                gameActive = 7;
             }
             if (comboBoxGame.SelectedIndex == 8)
             {
                 EnableSplitting.Invoke(obj, new object[] { 8 });
-                gameActive = 8;
             }
             if (comboBoxGame.SelectedIndex == 9)
             {
                 EnableSplitting.Invoke(obj, new object[] { 9 });
-                gameActive = 9;
             }            
         }
 
