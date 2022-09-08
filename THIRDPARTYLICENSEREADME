@@ -34,9 +34,18 @@ Licence: MIT
 DLL Used:
     - DLL SoulsMemory from:
     [-]    Title: SoulSplitter
-           Author:  F.stam
+           Author:  F.stam (FrankvdStam)
            Source:  https://github.com/FrankvdStam/SoulSplitter.git
            Licence: GNU
+	[=] Attributions:
+      [-]  Title: IGT Save File Dark Souls 1
+       	   Author: CapitaineToinon
+		   Source: https://github.com/CapitaineToinon/LiveSplit.DarkSoulsIGT
+           License: GNU	     
+	  [-]  Title: DarkSouls3RemoveIntroScreens
+	       Author: Blade (bladecoding)
+		   Source: https://github.com/bladecoding/DarkSouls3RemoveIntroScreens
+		   License: MIT            		   
 
     - DLL LiveSplit.HollowKnight
     [-]    Title: LiveSplit.HollowKnight
@@ -54,8 +63,7 @@ DLL Used:
            Title: LiveSplit.Cuphead
            Author: DevilSquirrel
            Source: https://github.com/ShootMe/LiveSplit.Cuphead.git
-           Licence: MIT	
-		   
+           Licence: MIT			   
 
     - DLL LiveSplit.Core
     [-]    Title: LiveSplit
@@ -68,11 +76,19 @@ DLL Used:
            Author: LiveSplit
            Source: https://github.com/LiveSplit/LiveSplit.ScriptableAutoSplit.git
            Licence: MIT
+		   Source Modified: https://github.com/neimex23/LiveSplit.ScriptableAutoSplit.git
+		   Licence: MIT
 		   
 	- DLL Irony (Dependency of ScripteableAutoSplit)
 		   Title: Irony — .NET Language Implementation Kit
 		   Author: IronyProject 
 		   Source: https://github.com/IronyProject/Irony.git
+		   Licence: MIT
+		   
+    - DLL Newtonsoft.Json (Dependency of SoulsMemory)
+	       Title: Newtonsoft.Json
+		   Author: James Newton-King (JamesNK)
+		   Source: https://github.com/JamesNK/Newtonsoft.Json.git
 		   Licence: MIT
 
 ==============================================================================
@@ -150,6 +166,24 @@ Title: -
 Author: Free-Photos
 Source: https://pixabay.com/photos/bonfire-fire-man-dancing-rituals-1209269/
 Licence: Pixabay License
+
+==============================================================================
+Setup AutoSplitterCore Banner Image
+
+Title: -
+Author: Neimex23
+Licence: MIT
+Using: Setup AutoSplitterCore Icon
+
+==============================================================================
+Setup AutoSplitterCore Icon
+
+Title: -
+File Title: AutoSplitterSetupIcon.ico
+Author: Elionas
+Source: https://pixabay.com/images/id-1345869/
+Licence: Pixabay License
+
 
 ==============================================================================
 C# JSON parser

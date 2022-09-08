@@ -93,23 +93,11 @@ namespace HitCounterManager
         private int _updateCounter;
         private void UpdateDuration()
         {
-            if (ReturnCurrentIGT != null)
+            if (obj != null && (int)ReturnCurrentIGT.Invoke(obj, null) > 0 && (bool)GetIsIGTActive.Invoke(obj, null))
             {
-                var inGameTime = (int)ReturnCurrentIGT.Invoke(obj,null);
-                if (inGameTime != -1) // we have a valid time
-                {
-                    if (inGameTime > 0) // only use the time if we're in the game
-                    {
-                        SelectedProfileInfo.SetDuration(inGameTime, !TimerRunning || _updateCounter++ % 30 == 0);
-                    }
-                }
-                else
-                {
-                    DateTime utc_now = DateTime.UtcNow;
-                    SelectedProfileInfo.AddDuration((long)(utc_now - last_update_time).TotalMilliseconds);
-                    last_update_time = utc_now;
-                }
-            }else
+                SelectedProfileInfo.SetDuration((int)ReturnCurrentIGT.Invoke(obj, null), !TimerRunning || _updateCounter++ % 30 == 0);
+            }
+            else
             {
                 DateTime utc_now = DateTime.UtcNow;
                 SelectedProfileInfo.AddDuration((long)(utc_now - last_update_time).TotalMilliseconds);
@@ -200,10 +188,12 @@ namespace HitCounterManager
 
         private object obj = null;
         private MethodInfo ReturnCurrentIGT = null;
-        public void SetIGTSource(MethodInfo ReturnCurrentIGT, object obj)
+        private MethodInfo GetIsIGTActive = null;
+        public void SetIGTSource(MethodInfo ReturnCurrentIGT, MethodInfo GetIsIGTActive, object obj)
         {
             this.obj = obj;
-            this.ReturnCurrentIGT = ReturnCurrentIGT;  
+            this.ReturnCurrentIGT = ReturnCurrentIGT;
+            this.GetIsIGTActive = GetIsIGTActive;
         }
         
 
