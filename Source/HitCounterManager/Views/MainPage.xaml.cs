@@ -20,9 +20,10 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-using System;
+using System.ComponentModel;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Threading;
 using HitCounterManager.Controls;
 using HitCounterManager.ViewModels;
 
@@ -55,21 +56,21 @@ namespace HitCounterManager.Views
 
         private void PositionChangedHandler(object? sender, PixelPointEventArgs e)
         {
-            Settings.MainPosX = e.Point.X;
-            Settings.MainPosY = e.Point.Y;
+            Settings.MainPosX = Position.X;
+            Settings.MainPosY = Position.Y;
         }
 
-        private void ClosingHandler(object? sender, EventArgs e)
+        private void ClosingHandler(object? sender, CancelEventArgs e)
         {
             Settings.MainWidth = (int)Width;
             Settings.MainHeight = (int)Height;
 
-            // TODO Prevent Window from closing? (Save question upon appexit?) https://docs.avaloniaui.net/docs/controls/window
-#if TODO_WinForms
-            DialogResult result = MessageBox.Show("Do you want to save this session?", this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes) SaveSettings();
-            else if (result == DialogResult.Cancel) e.Cancel = true;
-#endif
+            if (ViewModel.DoAskSaveBeforeClose)
+            {
+                // Not sure if we need to dispatch it but better safe than sorry
+                Dispatcher.UIThread.Post(() => ViewModel.OpenPageAskSaveBeforeClose.Execute(null));
+                e.Cancel = true;
+            }
         }
     }
 }

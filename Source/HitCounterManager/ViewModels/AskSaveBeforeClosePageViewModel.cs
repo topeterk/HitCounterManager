@@ -1,6 +1,6 @@
-﻿//MIT License
+//MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2022-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -20,17 +20,29 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-using Avalonia.Markup.Xaml;
-using HitCounterManager.ViewModels;
+using System.Windows.Input;
+using ReactiveUI;
 
-namespace HitCounterManager.Views
+namespace HitCounterManager.ViewModels
 {
-    public partial class ProfileActionPage : WindowPageBase<ProfileActionPageViewModel>
+    public class AskSaveBeforeClosePageViewModel : ViewModelWindowBase
     {
-        public ProfileActionPage()
+        public AskSaveBeforeClosePageViewModel()
         {
-            AvaloniaXamlLoader.Load(this);
-            InitializeComponent();
+            Submit = ReactiveCommand.Create((bool input) => {
+                PressedYes = input;
+                OwnerWindow?.Close();
+            });
         }
+
+        /// <summary>
+        /// Result of user action.
+        /// null = Cancel or Closed
+        /// true = Yes
+        /// false = No
+        /// </summary>
+        public bool? PressedYes;
+
+        public ICommand Submit { get; }
     }
 }

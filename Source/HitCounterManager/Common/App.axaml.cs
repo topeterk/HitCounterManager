@@ -105,7 +105,6 @@ namespace HitCounterManager
         }
         private List<PostponedAlert>? PostponedAlerts = new List<PostponedAlert>();
 
-        // TODO: Cancel removed
         /// <summary>
         /// Page.DisplayAlert but when no appeared yet, it will be postponed until MainPage has appeared
         /// </summary>
@@ -140,7 +139,7 @@ namespace HitCounterManager
                 // When we are not the latest version, switch to the update page
                 if (GitHubUpdate.LatestVersionName != Statics.ApplicationVersionString)
                 {
-                    vm.NavigateToUpdate.Execute(null);
+                    vm.OpenPageUpdate.Execute(null);
                 }
             }
         }
@@ -520,7 +519,6 @@ namespace HitCounterManager
                     }
                 }
             }
-            SaveSettings();
         }
 
         public void ApplyTheme(bool DarkMode)

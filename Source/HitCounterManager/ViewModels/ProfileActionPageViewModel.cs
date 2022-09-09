@@ -22,8 +22,6 @@
 
 using System.Windows.Input;
 using ReactiveUI;
-using Avalonia.Controls;
-using HitCounterManager.Common;
 
 namespace HitCounterManager.ViewModels
 {

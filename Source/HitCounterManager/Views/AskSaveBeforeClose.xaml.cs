@@ -25,12 +25,13 @@ using HitCounterManager.ViewModels;
 
 namespace HitCounterManager.Views
 {
-    public partial class ProfileActionPage : WindowPageBase<ProfileActionPageViewModel>
+    public partial class AskSaveBeforeClosePage : WindowPageBase<AskSaveBeforeClosePageViewModel>
     {
-        public ProfileActionPage()
+        public AskSaveBeforeClosePage()
         {
             AvaloniaXamlLoader.Load(this);
             InitializeComponent();
         }
     }
 }
+

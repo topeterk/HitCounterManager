@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+//MIT License
+
+//Copyright (c) 2022-2022 Peter Kirmeier
+
+//Permission is hereby granted, free of charge, to any person obtaining a copy
+//of this software and associated documentation files (the "Software"), to deal
+//in the Software without restriction, including without limitation the rights
+//to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//copies of the Software, and to permit persons to whom the Software is
+//furnished to do so, subject to the following conditions:
+
+//The above copyright notice and this permission notice shall be included in all
+//copies or substantial portions of the Software.
+
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//SOFTWARE.
+-->
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
+        xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
+        x:Class="HitCounterManager.Views.AskSaveBeforeClosePage"
+        x:DataType="local:AskSaveBeforeClosePageViewModel"
+        Icon="/Resources/FireIcon.ico"
+        Title="{x:Static common:Statics.ApplicationTitle}" Classes="DialogWindow"
+        MinWidth="500" MinHeight="130" Width="500" Height="130">
+
+    <Window.DataContext>
+        <local:AskSaveBeforeClosePageViewModel />
+    </Window.DataContext>
+
+    <StackPanel Margin="10" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+        <TextBlock Margin="0,0,0,5" Text="Do you want to save this session?" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <Button Margin="20" Width="100" Content="Yes" Command="{Binding Submit}" HorizontalAlignment="Right" FontWeight="Bold">
+                <Button.CommandParameter>
+                    <x:Boolean>True</x:Boolean>
+                </Button.CommandParameter>
+            </Button>
+            <Button Margin="20" Width="100" Content="No" Command="{Binding Submit}" HorizontalAlignment="Right">
+                <Button.CommandParameter>
+                    <x:Boolean>False</x:Boolean>
+                </Button.CommandParameter>
+            </Button>
+            <Button Margin="20" Width="100" Content="Cancel" Command="{Binding $parent[Window].Close}" HorizontalAlignment="Right" />
+        </StackPanel>
+    </StackPanel>
+</Window>

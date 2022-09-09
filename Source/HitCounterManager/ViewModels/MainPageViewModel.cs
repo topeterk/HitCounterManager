@@ -37,11 +37,11 @@ namespace HitCounterManager.ViewModels
 
         public MainPageViewModel()
         {
-            NavigateToSettings = ReactiveCommand.CreateFromTask(async () => { if (null != OwnerWindow) await new SettingsPage().ShowDialog(OwnerWindow); });
-            NavigateToUpdate = ReactiveCommand.CreateFromTask(async () => { if (null != OwnerWindow) await new UpdatePage().ShowDialog(OwnerWindow); });
-            NavigateToAbout = ReactiveCommand.CreateFromTask(async () => { if (null != OwnerWindow) await new AboutPage().ShowDialog(OwnerWindow); } );
+            OpenPageSettings = ReactiveCommand.CreateFromTask(async () => { if (null != OwnerWindow) await new SettingsPage().ShowDialog(OwnerWindow); });
+            OpenPageUpdate = ReactiveCommand.CreateFromTask(async () => { if (null != OwnerWindow) await new UpdatePage().ShowDialog(OwnerWindow); });
+            OpenPageAbout = ReactiveCommand.CreateFromTask(async () => { if (null != OwnerWindow) await new AboutPage().ShowDialog(OwnerWindow); } );
 
-            NavigateToSetAttempts = ReactiveCommand.CreateFromTask(async () => {
+            OpenPageSetAttempts = ReactiveCommand.CreateFromTask(async () => {
                 if ((null == OwnerWindow) || (null == ProfileView)) return;
 
                 ProfileAttemptsPage page = new ProfileAttemptsPage();
@@ -49,13 +49,24 @@ namespace HitCounterManager.ViewModels
                 page.ViewModel.UserInput = page.ViewModel.Origin.ProfileSelected.Attempts.ToString();
                 await page.ShowDialog(OwnerWindow);
             });
-            NavigateToProfileAction = ReactiveCommand.CreateFromTask(async (ProfileAction type) => {
+            OpenPageProfileAction = ReactiveCommand.CreateFromTask(async (ProfileAction type) => {
                 if (App.CurrentApp.Settings.ReadOnlyMode || (null == OwnerWindow) || (null == ProfileView)) return;
 
                 ProfileActionPage page = new ProfileActionPage();
                 page.ViewModel.Origin = (ProfileViewViewModel?)ProfileView?.DataContext!;
                 page.ViewModel.Action = type;
                 await page.ShowDialog(OwnerWindow);
+            });
+            OpenPageAskSaveBeforeClose = ReactiveCommand.CreateFromTask(async () => {
+                if (null == OwnerWindow) return;
+
+                AskSaveBeforeClosePage page = new AskSaveBeforeClosePage();
+                await page.ShowDialog(OwnerWindow);
+                if (null == page.ViewModel.PressedYes) return; // Cancel pressed or dialog closed
+
+                DoAskSaveBeforeClose = false; // Do not ask any more, we are about to shutdown
+                if (true == page.ViewModel.PressedYes) App.CurrentApp.SaveSettings();
+                OwnerWindow.Close();
             });
 
             CheckUpdatesOnline = ReactiveCommand.Create(() => App.CurrentApp.CheckAndShowUpdates(this));
@@ -70,14 +81,14 @@ namespace HitCounterManager.ViewModels
             });
         }
 
-        public ICommand NavigateToSettings { get; }
-        public ICommand NavigateToUpdate { get; }
-        public ICommand NavigateToAbout { get; }
+        public ICommand OpenPageSettings { get; }
+        public ICommand OpenPageUpdate { get; }
+        public ICommand OpenPageAbout { get; }
 
-        public ICommand NavigateToSetAttempts { get; }
-
-        public ICommand NavigateToProfileAction { get; }
-
+        public ICommand OpenPageSetAttempts { get; }
+        public ICommand OpenPageProfileAction { get; }
+        public ICommand OpenPageAskSaveBeforeClose { get; }
+        public bool DoAskSaveBeforeClose { get; private set; } = true;
 
         public ICommand SaveToDisk { get; } = ReactiveCommand.Create(() => {
             App.CurrentApp.SaveSettings();

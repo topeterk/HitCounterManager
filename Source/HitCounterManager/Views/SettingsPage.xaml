@@ -33,8 +33,6 @@
         Title="Settings" Classes="DialogWindow"
         MinWidth="620" MinHeight="270" Width="760" Height="660">
 
-    <!-- TODO: Tooltips -->
-
     <Window.DataContext>
         <local:SettingsPageViewModel />
     </Window.DataContext>

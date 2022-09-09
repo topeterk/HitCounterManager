@@ -35,8 +35,6 @@
         MinWidth="540" MinHeight="344"
         Background="{DynamicResource MainWindowBackgroundBrush}">
 
-    <!-- TODO: Tooltips -->
-
     <Window.DataContext>
         <local:MainPageViewModel />
     </Window.DataContext>
@@ -46,7 +44,7 @@
 
             <Grid Margin="2" ColumnDefinitions="26,26,26,26,26,26,10,26,26,26,26,10,26,26,26,26,10,26,26,26,*" RowDefinitions="28" HorizontalAlignment="Stretch">
                 <RelativePanel Grid.Column="0" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Button Command="{Binding NavigateToSettings}" Classes="ImageButton">
+                    <Button Command="{Binding OpenPageSettings}" Classes="ImageButton">
                         <Image Source="{common:ImageFromResource Resource=/Resources/Images/icons8-settings-20.png}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Button>
                 </RelativePanel>
@@ -71,13 +69,13 @@
                     </Button>
                 </RelativePanel>
                 <RelativePanel Grid.Column="5" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Button Command="{Binding NavigateToAbout}" Classes="ImageButton">
+                    <Button Command="{Binding OpenPageAbout}" Classes="ImageButton">
                         <Image Source="{common:ImageFromResource Resource=/Resources/Images/icons8-about-20.png}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Button>
                 </RelativePanel>
                 <!-- Spacer Row -->
                 <RelativePanel Grid.Column="7" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Button Command="{Binding NavigateToProfileAction}" CommandParameter="{x:Static local:ProfileAction.Create}" Classes="ImageButton">
+                    <Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static local:ProfileAction.Create}" Classes="ImageButton">
                         <Image Source="{common:ImageFromResource Resource=/Resources/Images/icons8-add-20.png}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <Interaction.Behaviors>
                             <DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
@@ -90,7 +88,7 @@
                     </Button>
                 </RelativePanel>
                 <RelativePanel Grid.Column="8" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Button Command="{Binding NavigateToProfileAction}" CommandParameter="{x:Static local:ProfileAction.Rename}" Classes="ImageButton">
+                    <Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static local:ProfileAction.Rename}" Classes="ImageButton">
                         <Image Source="{common:ImageFromResource Resource=/Resources/Images/icons8-edit-20.png}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <Interaction.Behaviors>
                             <DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
@@ -103,7 +101,7 @@
                     </Button>
                 </RelativePanel>
                 <RelativePanel Grid.Column="9" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Button Command="{Binding NavigateToProfileAction}" CommandParameter="{x:Static local:ProfileAction.Copy}" Classes="ImageButton">
+                    <Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static local:ProfileAction.Copy}" Classes="ImageButton">
                         <Image Source="{common:ImageFromResource Resource=/Resources/Images/icons8-copy-20.png}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <Interaction.Behaviors>
                             <DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
@@ -116,7 +114,7 @@
                     </Button>
                 </RelativePanel>
                 <RelativePanel Grid.Column="10" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Button Command="{Binding NavigateToProfileAction}" CommandParameter="{x:Static local:ProfileAction.Delete}" Classes="ImageButton">
+                    <Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static local:ProfileAction.Delete}" Classes="ImageButton">
                         <Image Source="{common:ImageFromResource Resource=/Resources/Images/icons8-trash-20.png}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <Interaction.Behaviors>
                             <DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
@@ -130,7 +128,7 @@
                 </RelativePanel>
                 <!-- Spacer Row -->
                 <RelativePanel Grid.Column="12" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Button Command="{Binding NavigateToSetAttempts}" Classes="ImageButton">
+                    <Button Command="{Binding OpenPageSetAttempts}" Classes="ImageButton">
                         <Image Source="{common:ImageFromResource Resource=/Resources/Images/icons8-counter-20.png}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Button>
                 </RelativePanel>
