@@ -164,12 +164,22 @@ namespace HitCounterManager.Common
         public override object ProvideValue(IServiceProvider serviceProvider) => BoxShadows;
     }
 
-    // TODO Avalonia https://docs.avaloniaui.net/docs/data-binding/converting-binding-values (Convert bool)
+    /// <summary>
+    /// Inverts/Negates a bool value. This works for Statics as well, for usual Bindings it is recommended to use bang operator "!".
+    /// (see: https://docs.avaloniaui.net/docs/data-binding/converting-binding-values)
+    /// </summary>
     public class NegateBoolConverter : IValueConverter
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) => !(bool?)value ?? null;
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => !(bool?)value;
-        public IValueConverter ProvideValue() => this; // TODO Avalonia What is this? Why does it require provide method? https://github.com/AvaloniaUI/Avalonia/issues/2835
+
+        /// <summary>
+        /// Avalonia needs this.
+        /// The converter is resolved as a markup extension and therefore requires this method:
+        /// See: https://github.com/AvaloniaUI/Avalonia/issues/2554 or https://github.com/AvaloniaUI/Avalonia/issues/2835
+        /// </summary>
+        /// <returns>Instance to the converted (itself)</returns>
+        public IValueConverter ProvideValue() => this;
     }
 
     /// <summary>
