@@ -59,7 +59,7 @@
         <Grid Margin="0" ColumnDefinitions="30,*,68,68,50,68,20,20,20" RowDefinitions="Auto">
             <RelativePanel Grid.Row="0" Grid.Column="0" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button Command="{Binding ToggleShowInfo}" CommandParameter="MainColumnHeaders" Classes="ImageButton" Width="18" Height="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Image Source="{common:ImageFromResource Resource=/Resources/Images/icons8-information-18.png}" Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
             </RelativePanel>
             <TextBlock Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left"   FontFamily="Arial" FontSize="14" FontWeight="Bold" Text="Title" />
@@ -103,13 +103,13 @@
                         </Interaction.Behaviors>
                         <Button Grid.Column="0" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                 Command="{Binding $parent[UserControl].DataContext.CmdSetActiveSplit}" CommandParameter="{Binding .}">
-                            <Image Source="{common:ImageFromResource Resource=/Resources/Images/icons8-inactive-state-20.png}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Image Source="{DynamicResource ImageInactive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Interaction.Behaviors>
                                     <DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:ImageFromResource Resource=/Resources/Images/icons8-inactive-state-20.png}" />
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{DynamicResource ImageInactive}" />
                                     </DataTriggerBehavior>
                                     <DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:ImageFromResource Resource=/Resources/Images/icons8-circled-right-20.png}" />
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{DynamicResource ImageActive}" />
                                     </DataTriggerBehavior>
                                 </Interaction.Behaviors>
                             </Image>
@@ -133,33 +133,33 @@
                         </TextBox>
                         <Button Grid.Column="6" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                 Command="{Binding $parent[UserControl].DataContext.CmdSetSessionProgress}" CommandParameter="{Binding .}">
-                            <Image Source="{common:ImageFromResource Resource=/Resources/Images/icons8-inactive-state-20.png}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Image Source="{DynamicResource ImageInactive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Interaction.Behaviors>
                                     <DataTriggerBehavior Binding="{Binding SP, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:ImageFromResource Resource=/Resources/Images/icons8-inactive-state-20.png}" />
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{DynamicResource ImageInactive}" />
                                     </DataTriggerBehavior>
                                     <DataTriggerBehavior Binding="{Binding SP, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:ImageFromResource Resource=/Resources/Images/icons8-last-24-hours-20.png}" />
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{DynamicResource ImageSP}" />
                                     </DataTriggerBehavior>
                                 </Interaction.Behaviors>
                             </Image>
                         </Button>
                         <Button Grid.Column="7" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                 Command="{Binding $parent[UserControl].DataContext.CmdSetBestProgress}" CommandParameter="{Binding .}">
-                            <Image Source="{common:ImageFromResource Resource=/Resources/Images/icons8-empty-flag-20.png}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Image Source="{DynamicResource ImageInactiveBP}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Interaction.Behaviors>
                                     <DataTriggerBehavior Binding="{Binding BP, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:ImageFromResource Resource=/Resources/Images/icons8-empty-flag-20.png}" />
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{DynamicResource ImageInactiveBP}" />
                                     </DataTriggerBehavior>
                                     <DataTriggerBehavior Binding="{Binding BP, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:ImageFromResource Resource=/Resources/Images/icons8-flag-filled-20.png}" />
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{DynamicResource ImageBP}" />
                                     </DataTriggerBehavior>
                                 </Interaction.Behaviors>
                             </Image>
                         </Button>
                         <Button Grid.Column="8" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                 Command="{Binding $parent[UserControl].DataContext.CmdRemoveSplit}" CommandParameter="{Binding .}">
-                            <Image Source="{common:ImageFromResource Resource=/Resources/Images/icons8-trash-20.png}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            <Image Source="{DynamicResource ImageTrash}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </Button>
                     </Grid>
                 </DataTemplate>

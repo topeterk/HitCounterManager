@@ -74,26 +74,13 @@ namespace HitCounterManager.Common
     }
 
     /// <summary>
-    /// Markup extension to load embedded image resources (AvaloniaResource) directly into XAML.
-    /// TODO: Avalonia see alternative implementation: https://docs.avaloniaui.net/docs/controls/image
+    /// Loads an image (Bitmap) from local resources (avares://)
     /// </summary>
-    public class ImageFromResource : MarkupExtension
+    public class LocalResourceBitmap : Bitmap
     {
-        static Dictionary<string, Bitmap> LoadedImageSources = new Dictionary<string, Bitmap>();
-
-        public string? Resource { get; set; }
-
-        public override object? ProvideValue(IServiceProvider serviceProvider)
-        {
-            if (Resource == null) return null;
-            if (LoadedImageSources.ContainsKey(Resource)) return LoadedImageSources[Resource];
-
-            IAssetLoader AssetLoader = AvaloniaLocator.Current.GetService<IAssetLoader>()!;
-            string assemblyName = Assembly.GetEntryAssembly()!.GetName().Name!;
-            Bitmap result = new Bitmap(AssetLoader.Open(new Uri($"avares://{assemblyName}{Resource}")));
-            LoadedImageSources.Add(Resource, result);
-            return result;
-        }
+        public LocalResourceBitmap(string path) : base(
+            AvaloniaLocator.Current.GetService<IAssetLoader>()!.Open(
+                new Uri($"avares://{Assembly.GetEntryAssembly()!.GetName().Name!}{path}"))) { }
     }
 
     /// <summary>
