@@ -95,7 +95,7 @@ namespace HitCounterManager.ViewModels
             App.CurrentApp.DisplayAlert("Saving complete!", "Written to \"" + Statics.ApplicationName + "Save.xml\"", NotificationType.Success);
         });
         public ICommand OpenWebsiteHome { get; } = ReactiveCommand.Create(() => GitHubUpdate.WebOpenLandingPage());
-        public ICommand OpenWebsiteTeamHitless { get; } = ReactiveCommand.Create(() => Device.OpenUri(new Uri("https://discord.gg/4E7cSK7")));
+        public ICommand OpenWebsiteTeamHitless { get; } = ReactiveCommand.Create(() => Extensions.OpenWithBrowser(new Uri("https://discord.gg/4E7cSK7")));
         public ICommand CheckUpdatesOnline { get; }
 
         public bool AlwaysOnTopDataTriggerWorkaroundCalled = false;

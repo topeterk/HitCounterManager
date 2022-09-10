@@ -546,7 +546,7 @@ namespace HitCounterManager.ViewModels
         }
         public ICommand ApplyCssAndFont { get; }
 
-        public ICommand WebOpenGoogleFontsUrl { get; } = ReactiveCommand.Create(() => Device.OpenUri(new Uri("https://fonts.google.com")));
+        public ICommand WebOpenGoogleFontsUrl { get; } = ReactiveCommand.Create(() => Extensions.OpenWithBrowser(new Uri("https://fonts.google.com")));
 #endregion
 
 #region Behavior

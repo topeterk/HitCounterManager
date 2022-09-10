@@ -35,12 +35,12 @@ namespace HitCounterManager.Common
         /// <summary>
         /// Opens the default project website on GitHub
         /// </summary>
-        public static void WebOpenLandingPage() => Device.OpenUri(new Uri("https://github.com/topeterk/HitCounterManager"));
+        public static void WebOpenLandingPage() => Extensions.OpenWithBrowser(new Uri("https://github.com/topeterk/HitCounterManager"));
 
         /// <summary>
         /// Opens the website on GitHub of the latest release version
         /// </summary>
-        public static void WebOpenLatestRelease() =>Device.OpenUri(new Uri("https://github.com/topeterk/HitCounterManager/releases/latest"));
+        public static void WebOpenLatestRelease() => Extensions.OpenWithBrowser(new Uri("https://github.com/topeterk/HitCounterManager/releases/latest"));
 
         /// <summary>
         /// Updates the information about all available releases

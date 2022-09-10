@@ -22,7 +22,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -38,41 +37,13 @@ using Avalonia.Input.Platform;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
-using Avalonia.Metadata;
+using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Xaml.Interactions.Events;
 using Avalonia.Xaml.Interactivity;
-using Bitmap = Avalonia.Media.Imaging.Bitmap;
-using Color = Avalonia.Media.Color;
 
 namespace HitCounterManager.Common
 {
-    public static class Device
-    {
-        // TODO: Temporary placeholder Device.OpenUri
-        // Workaround to open a browser with a given url:
-        // https://github.com/dotnet/runtime/issues/21798
-        public static void OpenUri(Uri uri)
-        {
-            string url = uri.OriginalString;
-            try
-            {
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}") { CreateNoWindow = true });
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                    Process.Start("xdg-open", url);
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                    Process.Start("open", url);
-                else
-                    Process.Start(url);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-    }
-
     /// <summary>
     /// Loads an image (Bitmap) from local resources (avares://)
     /// </summary>
@@ -279,6 +250,31 @@ namespace HitCounterManager.Common
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Tries to open an URI with the system's registered default browser.
+        /// (See: https://github.com/dotnet/runtime/issues/21798)
+        /// </summary>
+        /// <param name="uri">URI that shall be opened</param>
+        public static void OpenWithBrowser(Uri uri)
+        {
+            string url = uri.OriginalString;
+            try
+            {
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}") { CreateNoWindow = true });
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                    Process.Start("xdg-open", url);
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                    Process.Start("open", url);
+                else
+                    Process.Start(url);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
