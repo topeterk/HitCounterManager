@@ -22,16 +22,12 @@
 
 using System;
 using System.IO;
+using System.Text;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace HitCounterManager.Models
 {
-    //[Serializable]
-    //public class TestType
-    //{
-    //    public string test;
-    //}
-
     /// <summary>
     /// Loads and Saves data from/to XML files
     /// </summary>
@@ -59,11 +55,11 @@ namespace HitCounterManager.Models
         /// <returns>Data of data type</returns>
         public T? ReadXML(bool EnableBackup, string? Filename = null)
         {
-            StreamReader? file = null;
+            XmlReader? file = null;
             if (null == Filename) Filename = _Filename;
             try
             {
-                file = new StreamReader(Filename);
+                file = XmlReader.Create(Filename);
                 T? result = xml.Deserialize(file) as T;
                 file.Close();
 
@@ -78,7 +74,7 @@ namespace HitCounterManager.Models
             }
             finally
             {
-                if (null != file) file.Close();
+                file?.Close();
             }
             return null;
         }
@@ -90,17 +86,21 @@ namespace HitCounterManager.Models
         /// <returns>Success state</returns>
         public bool WriteXML(T data)
         {
-            StreamWriter? file = null;
+            XmlWriter? file = null;
             try
             {
-                file = new StreamWriter(_Filename, false, System.Text.Encoding.Unicode); // UTF16LE
+                file = XmlWriter.Create(_Filename, new XmlWriterSettings()
+                {
+                    Encoding = Encoding.Unicode, // UTF16LE
+                    Indent = true
+                });
                 xml.Serialize(file, data);
                 file.Close();
                 return true;
             }
             catch (Exception ex)
             {
-                if (null != file) file.Close();
+                file?.Close();
                 App.CurrentApp.DisplayAlert("Error writing settings!", ex.Message);
             }
             return false;
