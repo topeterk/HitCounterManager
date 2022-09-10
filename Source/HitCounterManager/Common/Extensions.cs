@@ -77,7 +77,9 @@ namespace HitCounterManager.Common
         }
     }
 
-    // TODO: Avalonia workaround to support custom colors for BoxShadows
+    /// <summary>
+    /// Avalonia workaround to support custom colors for BoxShadows
+    /// </summary>
     public class BoxShadowsBuilder : MarkupExtension
     {
         private readonly BoxShadows BoxShadows;

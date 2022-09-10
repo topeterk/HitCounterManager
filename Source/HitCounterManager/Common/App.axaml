@@ -29,21 +29,12 @@
              x:Class="HitCounterManager.App">
 
 	<Application.Resources>
-		<!-- https://www.javaer101.com/en/article/19770490.html -->
-		<!-- <local:ViewModel x:Key="sharedViewModel" /> -->
-		<!-- DataContext="{StaticResource sharedViewModel}" -->
+		<!-- Fluent Colors:  https://github.com/AvaloniaUI/Avalonia/blob/master/src/Avalonia.Themes.Fluent/Accents/BaseLight.xaml
+		                     https://github.com/AvaloniaUI/Avalonia/blob/master/src/Avalonia.Themes.Fluent/Accents/FluentControlResourcesLight.xaml
+		     Default Colors: https://docs.microsoft.com/de-de/dotnet/api/system.windows.media.colors?view=net-5.0 -->
 
-		<!-- TODO: Avalonia When are ViewModels disposed, do we have to dispose by ourself?
-		     https://www.reactiveui.net/docs/handbook/when-activated/
-		     https://docs.avaloniaui.net/guides/deep-dives/reactiveui/view-activation -->
-
-		<!-- Avalonia UI Dispatch https://docs.avaloniaui.net/guides/basics/accessing-the-ui-thread -->
-
-		<!-- https://www.codeproject.com/Articles/5308645/Multiplatform-UI-Coding-with-AvaloniaUI-in-Easy-Sa lots of examples -->
-		
-		<!-- https://github.com/AvaloniaUI/Avalonia/issues/2605 keyframe shadow animation -->
-		
-		<!-- https://docs.microsoft.com/de-de/dotnet/api/system.windows.media.colors?view=net-5.0 -->
+		<!-- TODO: Add somewhere keyframe shadow animation? See: https://github.com/AvaloniaUI/Avalonia/issues/2605#issuecomment-499169368 -->
+		<!-- TODO: Check for more detailed style improvements? See: https://github.com/AvaloniaUI/Avalonia/issues/1362#issuecomment-493026953 -->
 
 		<SolidColorBrush x:Key="ProfileResetBrush" Color="IndianRed" />
 		<SolidColorBrush x:Key="ProfilePBBrush" Color="Tan" />
@@ -185,10 +176,7 @@
 
 	<Application.Styles>
 		<FluentTheme Mode="Light"/>
-		<!-- Fluent Colors: https://github.com/AvaloniaUI/Avalonia/blob/master/src/Avalonia.Themes.Fluent/Accents/BaseLight.xaml
-		                    https://github.com/AvaloniaUI/Avalonia/blob/master/src/Avalonia.Themes.Fluent/Accents/FluentControlResourcesLight.xaml -->
 
-		<!-- Some examples how to setup styles (TOOD: check for improvements): https://github.com/AvaloniaUI/Avalonia/issues/1362#issuecomment-493026953 -->
 		<Style Selector="TextBox">
 			<Setter Property="Background" Value="{DynamicResource TextBoxBackgroundBrush}" />
 		</Style>

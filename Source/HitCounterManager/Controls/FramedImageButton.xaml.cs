@@ -31,18 +31,12 @@ namespace HitCounterManager.Controls
 {
     public partial class FramedImageButton : UserControl
     {
-        // TODO Avalonia Reference ok? https://docs.avaloniaui.net/docs/authoring-controls/defining-properties
-        // TODO Avalonia Reference ok? https://docs.avaloniaui.net/docs/data-binding/creating-and-binding-attached-properties
+        // Info about StyledProperty, see: https://docs.avaloniaui.net/docs/authoring-controls/defining-properties
         public static readonly StyledProperty<ICommand> OnClickCommandProperty = AvaloniaProperty.Register<FramedImageButton, ICommand>(nameof(OnClickCommand));
         public static readonly StyledProperty<Bitmap> ImgSrcProperty = AvaloniaProperty.Register<FramedImageButton, Bitmap>(nameof(ImgSrc));
         public static readonly StyledProperty<IBrush> MainColorProperty = AvaloniaProperty.Register<FramedImageButton, IBrush>(nameof(MainColor));
 
         public FramedImageButton()
-        {
-            this.InitializeComponent();
-        }
-
-        private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
         }
