@@ -46,7 +46,7 @@ namespace HitCounterManager.ViewModels
 
                 ProfileAttemptsPage page = new ProfileAttemptsPage();
                 page.ViewModel.Origin = (ProfileViewViewModel?)ProfileView?.DataContext!;
-                page.ViewModel.UserInput = page.ViewModel.Origin.ProfileSelected.Attempts.ToString();
+                page.ViewModel.UserInput = page.ViewModel.Origin.ProfileSelected.Attempts;
                 await page.ShowDialog(OwnerWindow);
             });
             OpenPageProfileAction = ReactiveCommand.CreateFromTask(async (ProfileAction type) => {

@@ -38,11 +38,8 @@
 
     <StackPanel Margin="10" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <TextBlock Margin="0,0,0,5" Text="Setting attempts count..." HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
-        <TextBox Margin="20,0,0,0" Text="{Binding UserInput, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-            <Interaction.Behaviors>
-                <common:NaturalNumbersEntryValidationBehavior />
-            </Interaction.Behaviors>
-        </TextBox>
+        <NumericUpDown Margin="20,0,0,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="True" Watermark="999"
+                       Value="{Binding UserInput}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <Button Margin="20" Width="200" Content="Dismiss" Command="{Binding $parent[Window].Close}" HorizontalAlignment="Right"/>

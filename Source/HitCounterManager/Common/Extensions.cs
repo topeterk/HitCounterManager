@@ -149,8 +149,6 @@ namespace HitCounterManager.Common
     {
         /// <summary>
         /// Triggers an PropertyChanged event of INotifyPropertyChanged
-        /// Note: As noted here (https://twitter.com/ogormanphilip/status/1240740053652922368), it is safe to call this on non-UI threads
-        /// TODO Avalonia: Check if this is still safe from outside UI thread?
         /// </summary>
         /// <param name="propertyName">Name of the changing property</param>
         public void CallPropertyChanged([CallerMemberName] string? propertyName = null) => this.RaisePropertyChanged(propertyName);
@@ -192,68 +190,8 @@ namespace HitCounterManager.Common
         }
     }
 
-    // TODO: Avalonia User Numeric input field?
-    public class NaturalNumbersEntryValidationBehavior : Behavior<TextBox>
-    {
-        public static readonly StyledProperty<RoutingStrategies> RoutingStrategiesProperty =
-            AvaloniaProperty.Register<TextInputEventBehavior, RoutingStrategies>(nameof(RoutingStrategies), RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
-
-        public RoutingStrategies RoutingStrategies
-        {
-            get => GetValue(RoutingStrategiesProperty);
-            set => SetValue(RoutingStrategiesProperty, value);
-        }
-
-        protected override void OnAttachedToVisualTree()
-        {
-            AssociatedObject?.AddHandler(TextBox.PastingFromClipboardEvent, TextPaste, RoutingStrategies);
-            AssociatedObject?.AddHandler(InputElement.TextInputEvent, TextInput, RoutingStrategies);
-        }
-        protected override void OnDetachedFromVisualTree()
-        {
-            AssociatedObject?.RemoveHandler(TextBox.PastingFromClipboardEvent, TextPaste);
-            AssociatedObject?.RemoveHandler(InputElement.TextInputEvent, TextInput);
-        }
-
-        private void TextPaste(object? sender, RoutedEventArgs e) => ValidateText(e, ((IClipboard)AvaloniaLocator.Current.GetRequiredService(typeof(IClipboard))).GetTextAsync().Result);
-        private void TextInput(object? sender, TextInputEventArgs e) => ValidateText(e, e.Text);
-
-        private void ValidateText(RoutedEventArgs e, string? Text)
-        {
-            int i;
-            if (!Extensions.TryParseMinMaxNumber(Text, out i)) e.Handled = true;
-        }
-    }
-
     public static class Extensions
     {
-        /// <summary>
-        /// Tries to convert a string into an integer that is in a given range
-        /// </summary>
-        /// <param name="output">Integer that is set when successfull</param>
-        /// <param name="input">String to convert</param>
-        /// <param name="minValue">Min value of the range</param>
-        /// <param name="maxValue">Max value of the range</param>
-        /// <returns>true = successfull, false = cannot be converted or not in range</returns>
-        public static bool TryParseMinMaxNumber(string? input, out int output, int minValue = int.MinValue, int maxValue = int.MaxValue)
-        {
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                output = 0;
-                return false;
-            }
-
-            if (int.TryParse(input, out output))
-            {
-                if ((0 <= output.CompareTo(minValue)) && (output.CompareTo(maxValue) <= 0))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         /// <summary>
         /// Tries to open an URI with the system's registered default browser.
         /// (See: https://github.com/dotnet/runtime/issues/21798)

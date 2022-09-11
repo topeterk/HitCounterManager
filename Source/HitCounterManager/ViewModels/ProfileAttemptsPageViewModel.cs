@@ -22,8 +22,6 @@
 
 using System.Windows.Input;
 using ReactiveUI;
-using Avalonia.Controls;
-using HitCounterManager.Common;
 
 namespace HitCounterManager.ViewModels
 {
@@ -32,12 +30,8 @@ namespace HitCounterManager.ViewModels
         public ProfileAttemptsPageViewModel()
         {
             Submit = ReactiveCommand.Create(() => {
-                int val;
-                if (!Extensions.TryParseMinMaxNumber(_UserInput, out val, 0, int.MaxValue)) return; // Error
-
-                _Origin?.ProfileSetAttempts.Execute(val);
-
-                OwnerWindow?.Close(); // Success
+                _Origin?.ProfileSetAttempts.Execute(_UserInput);
+                OwnerWindow?.Close();
             });
         }
 
@@ -55,8 +49,8 @@ namespace HitCounterManager.ViewModels
             }
         }
 
-        private string? _UserInput;
-        public string? UserInput
+        private int _UserInput = 0;
+        public int UserInput
         {
             get => _UserInput;
             set

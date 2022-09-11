@@ -115,22 +115,13 @@
                             </Image>
                         </Button>
                         <TextBox Grid.Column="1" Margin="2" TextAlignment="Left" Text="{Binding Title}" Watermark="       [Empty title]" />
-                        <TextBox Grid.Column="2" Margin="2" TextAlignment="Center" Text="{Binding Hits}" Watermark="0">
-                            <Interaction.Behaviors>
-                                <common:NaturalNumbersEntryValidationBehavior />
-                            </Interaction.Behaviors>
-                        </TextBox>
-                        <TextBox Grid.Column="3" Margin="2" TextAlignment="Center" Text="{Binding WayHits}" Watermark="0">
-                            <Interaction.Behaviors>
-                                <common:NaturalNumbersEntryValidationBehavior />
-                            </Interaction.Behaviors>
-                        </TextBox>
+                        <NumericUpDown Grid.Column="2" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
+                                       Value="{Binding Hits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+                        <NumericUpDown Grid.Column="3" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
+                                       Value="{Binding WayHits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
                         <TextBlock Grid.Column="4" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Diff, Mode=OneWay}" />
-                        <TextBox Grid.Column="5" Margin="2" TextAlignment="Center" Text="{Binding PB}" Watermark="0">
-                            <Interaction.Behaviors>
-                                <common:NaturalNumbersEntryValidationBehavior />
-                            </Interaction.Behaviors>
-                        </TextBox>
+                        <NumericUpDown Grid.Column="5" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
+                                       Value="{Binding PB}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
                         <Button Grid.Column="6" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                 Command="{Binding $parent[UserControl].DataContext.CmdSetSessionProgress}" CommandParameter="{Binding .}">
                             <Image Source="{DynamicResource ImageInactive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">

@@ -498,18 +498,12 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                 </Grid>
 
                 <Grid Margin="10,0,10,0" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" HorizontalAlignment="Stretch">
-                    <TextBlock Grid.Row="0" Grid.Column="0" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Desired width (in px):" />
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" Text="{Binding StyleDesiredWidth, Mode=TwoWay}">
-                        <Interaction.Behaviors>
-                            <common:NaturalNumbersEntryValidationBehavior />
-                        </Interaction.Behaviors>
-                    </TextBox>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Desired height (in px)" />
-                    <TextBox Grid.Row="1" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" Text="{Binding StyleDesiredHeight, Mode=TwoWay}">
-                        <Interaction.Behaviors>
-                            <common:NaturalNumbersEntryValidationBehavior />
-                        </Interaction.Behaviors>
-                    </TextBox>
+                    <TextBlock     Grid.Row="0" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Desired width (in px):" />
+                    <NumericUpDown Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
+                                   Value="{Binding StyleDesiredWidth}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+                    <TextBlock     Grid.Row="1" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Desired height (in px):" />
+                    <NumericUpDown Grid.Row="1" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
+                                   Value="{Binding StyleDesiredHeight}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
                 </Grid>
                 <TextBlock HorizontalAlignment="Stretch" Margin="30,0,0,0" FontStyle="Italic" Text="When value is set back to 0, you may have to reload the browser." />
 
@@ -661,18 +655,12 @@ BAD splits have more hits than on the PB run</x:String>
                 </Grid>
 
                 <Grid Margin="10,0,10,0" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" HorizontalAlignment="Stretch">
-                    <TextBlock   Grid.Row="0" Grid.Column="0" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Maxium previous splits:" />
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" Text="{Binding ShowSplitsCountFinished, Mode=TwoWay}">
-                        <Interaction.Behaviors>
-                            <common:NaturalNumbersEntryValidationBehavior />
-                        </Interaction.Behaviors>
-                    </TextBox>
-                    <TextBlock   Grid.Row="1" Grid.Column="0" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Maxium upcoming splits:" />
-                    <TextBox Grid.Row="1" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" Text="{Binding ShowSplitsCountUpcoming, Mode=TwoWay}">
-                        <Interaction.Behaviors>
-                            <common:NaturalNumbersEntryValidationBehavior />
-                        </Interaction.Behaviors>
-                    </TextBox>
+                    <TextBlock     Grid.Row="0" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Maxium previous splits:" />
+                    <NumericUpDown Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="999"
+                                   Value="{Binding ShowSplitsCountFinished}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+                    <TextBlock     Grid.Row="1" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Maxium upcoming splits:" />
+                    <NumericUpDown Grid.Row="1" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="999"
+                                   Value="{Binding ShowSplitsCountUpcoming}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
                 </Grid>
                 <StackPanel Margin="30,3,0,0" Orientation="Horizontal" HorizontalAlignment="Left">
                     <TextBlock HorizontalAlignment="Left" FontStyle="Italic" Text="Current configuration will show up to " />
