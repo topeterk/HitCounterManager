@@ -30,14 +30,9 @@ namespace HitCounterManager.Controls
     {
         public ProfileView()
         {
-            InitializeComponent();
+            AvaloniaXamlLoader.Load(this);
 
             ((ProfileViewViewModel)DataContext!).ProfileSelector = this.FindControl<ComboBox>("profileSelector");
-        }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
         }
     }
 }

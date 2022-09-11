@@ -30,17 +30,11 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using ReactiveUI;
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Data.Converters;
-using Avalonia.Input;
-using Avalonia.Input.Platform;
-using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-using Avalonia.Xaml.Interactions.Events;
-using Avalonia.Xaml.Interactivity;
 
 namespace HitCounterManager.Common
 {
@@ -52,6 +46,30 @@ namespace HitCounterManager.Common
         public LocalResourceBitmap(string path) : base(
             AvaloniaLocator.Current.GetService<IAssetLoader>()!.Open(
                 new Uri($"avares://{Assembly.GetEntryAssembly()!.GetName().Name!}{path}"))) { }
+    }
+
+    /// <summary>
+    /// Should be replaced with DynamicResource.
+    /// Workaround: Avalonia DataTriggerBehavior does not always work when page is loaded.
+    ///             This class seems to work as kind of a proxy.
+    ///             During first pass the DataTriggerBehavior is created and this object is instantiated,
+    ///             however, the trigger will somehow not be fired.
+    ///             During second pass the markup extension (ProvideValue) gets executed,
+    ///             but this time the trigger was/gets fired as well.
+    /// See: https://github.com/wieslawsoltes/AvaloniaBehaviors/issues/56
+    /// See: https://stackoverflow.com/questions/68979876/how-to-simulate-datatrigger-with-avalonia
+    /// </summary>
+    public class LazyResource : MarkupExtension
+    {
+        private string Key { get; init; }
+
+        public LazyResource(string key) => Key = key;
+
+        public override object? ProvideValue(IServiceProvider serviceProvider)
+        {
+            if (!App.CurrentApp.Resources.ContainsKey(Key)) return null;
+            return App.CurrentApp.Resources[Key];
+        }
     }
 
     /// <summary>

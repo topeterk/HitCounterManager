@@ -58,9 +58,9 @@ namespace HitCounterManager.Models
             set { if (SetAndNotifyWhenNaturalNumberChanged(ref _origin.PB, value)) CallPropertyChanged(nameof(Diff)); }
         }
         public bool SP => this == _parent.SessionProgressModel;
-        public void SPChanged() => CallPropertyChanged();
+        public void SPChanged() => CallPropertyChanged(nameof(SP));
         public bool BP => this == _parent.BestProgressModel;
-        public void BPChanged() => CallPropertyChanged();
+        public void BPChanged() => CallPropertyChanged(nameof(BP));
         public long Duration
         {
             get => _origin.Duration;

@@ -115,7 +115,6 @@ namespace HitCounterManager
         public void DisplayAlert(string Title, string Message, NotificationType Type = NotificationType.Error)
         {
             if (null == PostponedAlerts)
-                // TODO: Play system sound queue on errors?
                 NotificationManager?.Show(new Notification(Title, Message, Type, TimeSpan.FromSeconds(10)));
             else
                 PostponedAlerts.Add(new PostponedAlert(Title, Message, Type));

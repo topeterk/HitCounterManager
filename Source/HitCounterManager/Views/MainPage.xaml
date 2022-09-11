@@ -45,38 +45,38 @@
             <Grid Margin="2" ColumnDefinitions="26,26,26,26,26,26,10,26,26,26,26,10,26,26,26,26,10,26,26,26,*" RowDefinitions="28" HorizontalAlignment="Stretch">
                 <RelativePanel Grid.Column="0" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Command="{Binding OpenPageSettings}" Classes="ImageButton">
-                        <Image Source="{DynamicResource ImageSettings}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Image Source="{common:LazyResource ImageSettings}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Button>
                 </RelativePanel>
                 <RelativePanel Grid.Column="1" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Command="{Binding SaveToDisk}" Classes="ImageButton">
-                        <Image Source="{DynamicResource ImageSave}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Image Source="{common:LazyResource ImageSave}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Button>
                 </RelativePanel>
                 <RelativePanel Grid.Column="2" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Command="{Binding OpenWebsiteHome}" Classes="ImageButton">
-                        <Image Source="{DynamicResource ImageWeb}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Image Source="{common:LazyResource ImageWeb}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Button>
                 </RelativePanel>
                 <RelativePanel Grid.Column="3" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Command="{Binding OpenWebsiteTeamHitless}" Classes="ImageButton">
-                        <Image Source="{DynamicResource ImageTeamHitless}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Image Source="{common:LazyResource ImageTeamHitless}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Button>
                 </RelativePanel>
                 <RelativePanel Grid.Column="4" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Command="{Binding CheckUpdatesOnline}" Classes="ImageButton">
-                        <Image Source="{DynamicResource ImageUpdates}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Image Source="{common:LazyResource ImageUpdates}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Button>
                 </RelativePanel>
                 <RelativePanel Grid.Column="5" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Command="{Binding OpenPageAbout}" Classes="ImageButton">
-                        <Image Source="{DynamicResource ImageAbout}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Image Source="{common:LazyResource ImageAbout}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Button>
                 </RelativePanel>
                 <!-- Spacer Row -->
                 <RelativePanel Grid.Column="7" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static local:ProfileAction.Create}" Classes="ImageButton">
-                        <Image Source="{DynamicResource ImageProfileCreate}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Image Source="{common:LazyResource ImageProfileCreate}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <Interaction.Behaviors>
                             <DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
                                 <ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
@@ -89,20 +89,20 @@
                 </RelativePanel>
                 <RelativePanel Grid.Column="8" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static local:ProfileAction.Rename}" Classes="ImageButton">
-                        <Image Source="{DynamicResource ImageProfileRename}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Image Source="{common:LazyResource ImageProfileRename}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <Interaction.Behaviors>
                             <DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
-                                <ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
+                                <ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{common:LazyResource ImageButtonLockedBackgroundBrush}" />
                             </DataTriggerBehavior>
                             <DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="false">
-                                <ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonBackgroundBrush}" />
+                                <ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{common:LazyResource ImageButtonBackgroundBrush}" />
                             </DataTriggerBehavior>
                         </Interaction.Behaviors>
                     </Button>
                 </RelativePanel>
                 <RelativePanel Grid.Column="9" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static local:ProfileAction.Copy}" Classes="ImageButton">
-                        <Image Source="{DynamicResource ImageProfileCopy}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Image Source="{common:LazyResource ImageProfileCopy}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <Interaction.Behaviors>
                             <DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
                                 <ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
@@ -115,7 +115,7 @@
                 </RelativePanel>
                 <RelativePanel Grid.Column="10" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static local:ProfileAction.Delete}" Classes="ImageButton">
-                        <Image Source="{DynamicResource ImageTrash}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Image Source="{common:LazyResource ImageTrash}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <Interaction.Behaviors>
                             <DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
                                 <ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
@@ -129,12 +129,12 @@
                 <!-- Spacer Row -->
                 <RelativePanel Grid.Column="12" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Command="{Binding OpenPageSetAttempts}" Classes="ImageButton">
-                        <Image Source="{DynamicResource ImageAttempts}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Image Source="{common:LazyResource ImageAttempts}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Button>
                 </RelativePanel>
                 <RelativePanel Grid.Column="13" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Command="{Binding #profileView.DataContext.ProfileSplitMoveUp}" Classes="ImageButton">
-                        <Image Source="{DynamicResource ImageSplitUp}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Image Source="{common:LazyResource ImageSplitUp}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <Interaction.Behaviors>
                             <DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
                                 <ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
@@ -147,7 +147,7 @@
                 </RelativePanel>
                 <RelativePanel Grid.Column="14" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Command="{Binding #profileView.DataContext.ProfileSplitMoveDown}" Classes="ImageButton">
-                        <Image Source="{DynamicResource ImageSplitDown}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Image Source="{common:LazyResource ImageSplitDown}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <Interaction.Behaviors>
                             <DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
                                 <ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
@@ -160,7 +160,7 @@
                 </RelativePanel>
                 <RelativePanel Grid.Column="15" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Command="{Binding #profileView.DataContext.ProfileSplitInsert}" Classes="ImageButton">
-                        <Image Source="{DynamicResource ImageSplitInsert}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Image Source="{common:LazyResource ImageSplitInsert}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <Interaction.Behaviors>
                             <DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
                                 <ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
@@ -174,15 +174,15 @@
                 <!-- Spacer Row -->
                 <RelativePanel Grid.Column="17" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Command="{Binding #profileView.DataContext.ToggleReadOnlyMode}" Classes="ImageButton">
-                        <Image Source="{DynamicResource ImageLockOn}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image Source="{common:LazyResource ImageLockOn}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <Interaction.Behaviors>
                                 <DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
                                     <ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
-                                    <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{DynamicResource ImageLockOn}" />
+                                    <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:LazyResource ImageLockOn}" />
                                 </DataTriggerBehavior>
                                 <DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="false">
                                     <ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonBackgroundBrush}" />
-                                    <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{DynamicResource ImageLockOff}" />
+                                    <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:LazyResource ImageLockOff}" />
                                 </DataTriggerBehavior>
                             </Interaction.Behaviors>
                         </Image>
@@ -190,7 +190,7 @@
                 </RelativePanel>
                 <RelativePanel Grid.Column="18" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Command="{Binding ToggleAlwaysOnTop}" Classes="ImageButton">
-                        <Image Source="{DynamicResource ImageAlwaysOnTop}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Image Source="{common:LazyResource ImageAlwaysOnTop}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <Interaction.Behaviors>
                             <DataTriggerBehavior Binding="{Binding AlwaysOnTop}" ComparisonCondition="Equal" Value="true">
                                 <ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
@@ -203,7 +203,7 @@
                 </RelativePanel>
                 <RelativePanel Grid.Column="19" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Command="{Binding ToggleDarkMode}" Classes="ImageButton">
-                        <Image Source="{DynamicResource ImageDarkMode}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Image Source="{common:LazyResource ImageDarkMode}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Button>
                 </RelativePanel>
             </Grid>
@@ -225,10 +225,10 @@
                         OnClickCommand="{Binding #profileView.DataContext.ToggleTimerPause}">
                     <Interaction.Behaviors>
                         <DataTriggerBehavior Binding="{Binding #profileView.DataContext.TimerRunning}" ComparisonCondition="Equal" Value="true">
-                            <ChangePropertyAction TargetObject="{Binding $parent[controls:FramedImageButton]}" PropertyName="ImgSrc" Value="{DynamicResource ImageTimerOff}" />
+                            <ChangePropertyAction TargetObject="{Binding $parent[controls:FramedImageButton]}" PropertyName="ImgSrc" Value="{common:LazyResource ImageTimerOff}" />
                         </DataTriggerBehavior>
                         <DataTriggerBehavior Binding="{Binding #profileView.DataContext.TimerRunning}" ComparisonCondition="Equal" Value="false">
-                            <ChangePropertyAction TargetObject="{Binding $parent[controls:FramedImageButton]}" PropertyName="ImgSrc" Value="{DynamicResource ImageTimerOn}" />
+                            <ChangePropertyAction TargetObject="{Binding $parent[controls:FramedImageButton]}" PropertyName="ImgSrc" Value="{common:LazyResource ImageTimerOn}" />
                         </DataTriggerBehavior>
                     </Interaction.Behaviors>
                 </controls:FramedImageButton>
