@@ -55,7 +55,7 @@ namespace HitCounterManager
     {
         private IntPtr NativeWindowHandle = IntPtr.Zero;
         public ProfileViewViewModel? profileViewViewModel { get; private set; }
-        public readonly OutModule om = new OutModule();
+        public readonly OutModule om;
         public readonly Shortcuts sc = new Shortcuts();
         public SettingsRoot Settings { get; internal set; }
         public bool SettingsDialogOpen = false;
@@ -73,8 +73,7 @@ namespace HitCounterManager
         public App()
         {
             LoadSettings();
-            // TODO: Check if we can create OutModule after Settings were loaded?
-            om.Settings = Settings!;
+            om = new OutModule(Settings);
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {

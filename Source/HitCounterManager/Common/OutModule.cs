@@ -49,31 +49,25 @@ namespace HitCounterManager.Models
 
         public OM_Purpose Purpose
         {
-            get { return _settings!.Purpose < (int)OM_Purpose.OM_Purpose_MAX ? (OM_Purpose)_settings.Purpose : OM_Purpose.OM_Purpose_SplitCounter; }
-            set { _settings!.Purpose = (int)value; }
+            get { return Settings.Purpose < (int)OM_Purpose.OM_Purpose_MAX ? (OM_Purpose)Settings.Purpose : OM_Purpose.OM_Purpose_SplitCounter; }
+            set { Settings.Purpose = (int)value; }
         }
         public OM_Severity Severity
         {
-            get { return _settings!.Severity < (int)OM_Severity.OM_Severity_MAX ? (OM_Severity)_settings.Severity : OM_Severity.OM_Severity_AnyHitsCritical; }
-            set { _settings!.Severity = (int)value; }
+            get { return Settings.Severity < (int)OM_Severity.OM_Severity_MAX ? (OM_Severity)Settings.Severity : OM_Severity.OM_Severity_AnyHitsCritical; }
+            set { Settings.Severity = (int)value; }
         }
 
-        private SettingsRoot? _settings = null;
         private string? template = null;
-
-        /// <summary>
-        /// Object binding to the user settings
-        /// </summary>
-        public SettingsRoot Settings
-        {
-            set
-            {
-                _settings = value;
-                ReloadTemplate();
-            }
-        }
+        private SettingsRoot Settings { get; init; }
 
         #endregion
+
+        public OutModule(SettingsRoot settings)
+        {
+            Settings = settings;
+            ReloadTemplate();
+        }
 
         /// <summary>
         /// Refreshes the file handles.
@@ -82,9 +76,9 @@ namespace HitCounterManager.Models
         public void ReloadTemplate()
         {
             // Reload input file handle when possible
-            if (File.Exists(_settings!.Inputfile))
+            if (File.Exists(Settings.Inputfile))
             {
-                StreamReader sr = new StreamReader(_settings.Inputfile);
+                StreamReader sr = new StreamReader(Settings.Inputfile);
                 template = sr.ReadToEnd();
                 sr.Close();
             }
@@ -141,8 +135,7 @@ namespace HitCounterManager.Models
         {
             //Console.Beep(); // For debugging to check whenever output is beeing generated :)
 
-            if (null == _settings) return;
-            if (null == _settings.OutputFile) return;
+            if (null == Settings.OutputFile) return;
             if (null == template) // no valid template read yet?
             {
                 ReloadTemplate(); // try to read template again
@@ -154,7 +147,7 @@ namespace HitCounterManager.Models
             bool IsWritingJson = false;
             try
             {
-                sr = new StreamWriter(_settings.OutputFile, false, System.Text.Encoding.Unicode); // UTF16LE
+                sr = new StreamWriter(Settings.OutputFile, false, System.Text.Encoding.Unicode); // UTF16LE
             }
             catch { return; }
             sr.NewLine = Environment.NewLine;
@@ -207,19 +200,19 @@ namespace HitCounterManager.Models
                     //  4   4   4   4  <4>  4   4
                     //  5   5   5   5   5  <5>  5
                     //                  6   6  <6>
-                    if (active < _settings.ShowSplitsCountFinished) // A-C: less previous, more upcoming
+                    if (active < Settings.ShowSplitsCountFinished) // A-C: less previous, more upcoming
                     {
                         iSplitFirst = 0;
-                        iSplitLast = _settings.ShowSplitsCountUpcoming + _settings.ShowSplitsCountFinished;
+                        iSplitLast = Settings.ShowSplitsCountUpcoming + Settings.ShowSplitsCountFinished;
                     }
-                    else if (iSplitCount - active > _settings.ShowSplitsCountUpcoming) // D-E: previous and upcoming as it is
+                    else if (iSplitCount - active > Settings.ShowSplitsCountUpcoming) // D-E: previous and upcoming as it is
                     {
-                        iSplitFirst = active - _settings.ShowSplitsCountFinished;
-                        iSplitLast = active + _settings.ShowSplitsCountUpcoming;
+                        iSplitFirst = active - Settings.ShowSplitsCountFinished;
+                        iSplitLast = active + Settings.ShowSplitsCountUpcoming;
                     }
                     else // F-G: more previous, less upcoming
                     {
-                        iSplitFirst = iSplitCount - 1 - _settings.ShowSplitsCountUpcoming - _settings.ShowSplitsCountFinished;
+                        iSplitFirst = iSplitCount - 1 - Settings.ShowSplitsCountUpcoming - Settings.ShowSplitsCountFinished;
                         iSplitLast = iSplitCount - 1;
                     }
 
@@ -233,35 +226,35 @@ namespace HitCounterManager.Models
                     WriteJsonSimpleValue(sr, "split_last", iSplitLast);
 
                     WriteJsonSimpleValue(sr, "attempts", pi.Attempts);
-                    WriteJsonSimpleValue(sr, "show_attempts", _settings.ShowAttemptsCounter);
-                    WriteJsonSimpleValue(sr, "show_headline", _settings.ShowHeadline);
-                    WriteJsonSimpleValue(sr, "show_footer", _settings.ShowFooter);
-                    WriteJsonSimpleValue(sr, "show_session_progress", _settings.ShowSessionProgress);
-                    WriteJsonSimpleValue(sr, "show_progress_bar", _settings.ShowProgressBar);
-                    WriteJsonSimpleValue(sr, "show_hits", _settings.ShowHits);
-                    WriteJsonSimpleValue(sr, "show_hitscombined", _settings.ShowHitsCombined);
-                    WriteJsonSimpleValue(sr, "show_numbers", _settings.ShowNumbers);
-                    WriteJsonSimpleValue(sr, "show_pb", _settings.ShowPB);
-                    WriteJsonSimpleValue(sr, "show_pb_totals", _settings.ShowPBTotals);
-                    WriteJsonSimpleValue(sr, "show_diff", _settings.ShowDiff);
-                    WriteJsonSimpleValue(sr, "show_time", _settings.ShowTimeCurrent);
-                    WriteJsonSimpleValue(sr, "show_time_pb", _settings.ShowTimePB);
-                    WriteJsonSimpleValue(sr, "show_time_diff", _settings.ShowTimeDiff);
-                    WriteJsonSimpleValue(sr, "show_time_footer", _settings.ShowTimeFooter);
+                    WriteJsonSimpleValue(sr, "show_attempts", Settings.ShowAttemptsCounter);
+                    WriteJsonSimpleValue(sr, "show_headline", Settings.ShowHeadline);
+                    WriteJsonSimpleValue(sr, "show_footer", Settings.ShowFooter);
+                    WriteJsonSimpleValue(sr, "show_session_progress", Settings.ShowSessionProgress);
+                    WriteJsonSimpleValue(sr, "show_progress_bar", Settings.ShowProgressBar);
+                    WriteJsonSimpleValue(sr, "show_hits", Settings.ShowHits);
+                    WriteJsonSimpleValue(sr, "show_hitscombined", Settings.ShowHitsCombined);
+                    WriteJsonSimpleValue(sr, "show_numbers", Settings.ShowNumbers);
+                    WriteJsonSimpleValue(sr, "show_pb", Settings.ShowPB);
+                    WriteJsonSimpleValue(sr, "show_pb_totals", Settings.ShowPBTotals);
+                    WriteJsonSimpleValue(sr, "show_diff", Settings.ShowDiff);
+                    WriteJsonSimpleValue(sr, "show_time", Settings.ShowTimeCurrent);
+                    WriteJsonSimpleValue(sr, "show_time_pb", Settings.ShowTimePB);
+                    WriteJsonSimpleValue(sr, "show_time_diff", Settings.ShowTimeDiff);
+                    WriteJsonSimpleValue(sr, "show_time_footer", Settings.ShowTimeFooter);
                     WriteJsonSimpleValue(sr, "purpose", (int)Purpose);
                     WriteJsonSimpleValue(sr, "severity", (int)Severity);
 
-                    WriteJsonSimpleValue(sr, "font_name", (_settings.StyleUseCustom ? _settings.StyleFontName : null));
-                    WriteJsonSimpleValue(sr, "font_url", (_settings.StyleUseCustom ? _settings.StyleFontUrl : ""));
-                    WriteJsonSimpleValue(sr, "css_url", (_settings.StyleUseCustom ? _settings.StyleCssUrl : "stylesheet.css"));
-                    WriteJsonSimpleValue(sr, "high_contrast", _settings.StyleUseHighContrast);
-                    WriteJsonSimpleValue(sr, "high_contrast_names", _settings.StyleUseHighContrastNames);
-                    WriteJsonSimpleValue(sr, "use_roman", _settings.StyleUseRoman);
-                    WriteJsonSimpleValue(sr, "highlight_active_split", _settings.StyleHightlightCurrentSplit);
-                    WriteJsonSimpleValue(sr, "progress_bar_colored", _settings.StyleProgressBarColored);
-                    WriteJsonSimpleValue(sr, "height", _settings.StyleDesiredHeight);
-                    WriteJsonSimpleValue(sr, "width", _settings.StyleDesiredWidth);
-                    WriteJsonSimpleValue(sr, "subPB", _settings.StyleSubscriptPB);
+                    WriteJsonSimpleValue(sr, "font_name", (Settings.StyleUseCustom ? Settings.StyleFontName : null));
+                    WriteJsonSimpleValue(sr, "font_url", (Settings.StyleUseCustom ? Settings.StyleFontUrl : ""));
+                    WriteJsonSimpleValue(sr, "css_url", (Settings.StyleUseCustom ? Settings.StyleCssUrl : "stylesheet.css"));
+                    WriteJsonSimpleValue(sr, "high_contrast", Settings.StyleUseHighContrast);
+                    WriteJsonSimpleValue(sr, "high_contrast_names", Settings.StyleUseHighContrastNames);
+                    WriteJsonSimpleValue(sr, "use_roman", Settings.StyleUseRoman);
+                    WriteJsonSimpleValue(sr, "highlight_active_split", Settings.StyleHightlightCurrentSplit);
+                    WriteJsonSimpleValue(sr, "progress_bar_colored", Settings.StyleProgressBarColored);
+                    WriteJsonSimpleValue(sr, "height", Settings.StyleDesiredHeight);
+                    WriteJsonSimpleValue(sr, "width", Settings.StyleDesiredWidth);
+                    WriteJsonSimpleValue(sr, "subPB", Settings.StyleSubscriptPB);
                     
                     WriteJsonSimpleValue(sr, "update_time", (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds);
                     WriteJsonSimpleValue(sr, "timer_paused", !TimerRunning);
