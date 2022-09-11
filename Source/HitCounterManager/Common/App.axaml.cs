@@ -78,7 +78,6 @@ namespace HitCounterManager
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                // TODO: Improve garbage collection? https://docs.microsoft.com/en-us/dotnet/framework/interop/marshalling-a-delegate-as-a-callback-method
                 _Subclassproc = new Subclassproc(SubclassprocFunc); // store delegate to prevent garbage collector from freeing it
                 _HookProc ??= new HookProc(HookCallback); // store delegate to prevent garbage collector from freeing it
             }
@@ -363,7 +362,7 @@ namespace HitCounterManager
 #endregion
 
         [SupportedOSPlatform("windows")]
-        private static IntPtr SubclassprocFunc(IntPtr hWnd, uint uMsg, IntPtr wParam, IntPtr lParam, IntPtr uIdSubclass, IntPtr dwRefData) // like WndProc
+        private IntPtr SubclassprocFunc(IntPtr hWnd, uint uMsg, IntPtr wParam, IntPtr lParam, IntPtr uIdSubclass, IntPtr dwRefData) // like WndProc
         {
             const int WM_HOTKEY = 0x312;
             App app = CurrentApp;
@@ -507,6 +506,8 @@ namespace HitCounterManager
 
         private void AppExitHandler(object? sender, ControlledApplicationLifetimeExitEventArgs e)
         {
+            foreach ((TimerIDs _, DispatcherTimer timer) in ApplicationTimers) timer.Stop();
+
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))

@@ -158,6 +158,11 @@ namespace HitCounterManager.ViewModels
             OutputUpdateTimer.Start();
         }
 
+        ~ProfileViewViewModel()
+        {
+            OutputUpdateTimer?.Stop();
+        }
+
         public class ShowInfoBool : NotifyPropertyChangedImpl
         {
             private bool _Value = false;
