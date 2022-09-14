@@ -31,12 +31,14 @@ namespace HitCounterManager
         private OutModule om;
         private SettingsRoot _settings;
         private bool IsFormLoaded = false;
+        public bool _DllAttached = false;
 
         #region Form
 
-        public Settings()
+        public Settings(bool _DllAttached)
         {
             InitializeComponent();
+            this._DllAttached = _DllAttached;
         }
 
         private void Settings_Load(object sender, EventArgs e)
@@ -55,6 +57,17 @@ namespace HitCounterManager
             LoadHotKey(Shortcuts.SC_Type.SC_Type_PB, cbScPB, txtPB);
             LoadHotKey(Shortcuts.SC_Type.SC_Type_TimerStart, cbScTimerStart, txtTimerStart);
             LoadHotKey(Shortcuts.SC_Type.SC_Type_TimerStop, cbScTimerStop, txtTimerStop);
+            if (!_DllAttached) 
+            { 
+                TabControl1.TabPages.Remove(tab_autosplitter_shortcuts);  
+            }else 
+            { 
+                LoadHotKey(Shortcuts.SC_Type.SC_Type_Practice, cbScPracticeMode, txtPracticeMode);
+                LoadHotKey(Shortcuts.SC_Type.SC_Type_HitBossPrev, cbScHitBossPrev, txtHitBossPrev);
+                LoadHotKey(Shortcuts.SC_Type.SC_Type_HitWayPrev, cbScHitWayPrev, txtHitWayPrev);
+                LoadHotKey(Shortcuts.SC_Type.SC_Type_BossHitUndoPrev, cbScUndoHitBossPrev, txtUndoHitBossPrev);
+                LoadHotKey(Shortcuts.SC_Type.SC_Type_WayHitUndoPrev, cbScUndoHitWayPrev, txtUndoHitWayPrev);
+            }
 
             radioHotKeyMethod_sync.Checked = (sc.NextStart_Method == Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync);
             radioHotKeyMethod_async.Checked = (sc.NextStart_Method == Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async);
@@ -242,6 +255,11 @@ namespace HitCounterManager
         private void txtPB_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_PB, cbScPB, txtPB, e); }
         private void txtTimerStart_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_TimerStart, cbScTimerStart, txtTimerStart, e); }
         private void txtTimerStop_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_TimerStop, cbScTimerStop, txtTimerStop, e); }
+        private void txtPracticeMode_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_Practice, cbScPracticeMode, txtPracticeMode, e); }
+        private void txtHitPrevBoss_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_HitBossPrev, cbScHitBossPrev, txtHitBossPrev, e); }
+        private void txtHitPrevWay_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_HitWayPrev, cbScHitWayPrev, txtHitWayPrev, e); }
+        private void txtUndoHitBossPrev_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_BossHitUndoPrev, cbScUndoHitBossPrev, txtUndoHitBossPrev, e); }
+        private void txtUndoHitWayPrev_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_WayHitUndoPrev, cbScUndoHitWayPrev, txtUndoHitWayPrev, e); }
 
         private void cbScReset_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Reset, cbScReset.Checked); }
         private void cbScHit_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Hit, cbScHit.Checked); }
@@ -253,6 +271,11 @@ namespace HitCounterManager
         private void cbScPB_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_PB, cbScPB.Checked); }
         private void cbScTimerStart_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_TimerStart, cbScTimerStart.Checked); }
         private void cbScTimerStop_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_TimerStop, cbScTimerStop.Checked); }
+        private void cbScPracticeMode_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Practice, cbScPracticeMode.Checked); }
+        private void cbScHitBossPrev_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_HitBossPrev, cbScHitBossPrev.Checked); }
+        private void cbScHitWayPrev_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_HitWayPrev, cbScHitWayPrev.Checked); }
+        private void cbScUndoHitBossPrev_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_BossHitUndoPrev, cbScUndoHitBossPrev.Checked); }
+        private void cbScUndoHitWayPrev_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_WayHitUndoPrev, cbScUndoHitWayPrev.Checked); }
 
         private void radioHotKeyMethod_CheckedChanged(object sender, EventArgs e)
         {
@@ -285,6 +308,11 @@ namespace HitCounterManager
         private void btnGoToDownloadPage_Click(object sender, EventArgs e) { GitHubUpdate.WebOpenLatestRelease(); }
         private void cbCheckUpdatesOnStartup_CheckedChanged(object sender, EventArgs e) { _settings.CheckUpdatesOnStartup = cbCheckUpdatesOnStartup.Checked; }
 
+
+
+
         #endregion
+
+        
     }
 }

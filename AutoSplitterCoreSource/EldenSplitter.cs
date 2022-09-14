@@ -35,6 +35,7 @@ namespace AutoSplitterCore
         public bool _StatusProcedure = true;
         public bool _StatusElden = false;
         public bool _SplitGo = false;
+        public bool _PracticeMode = false;
         public DTElden dataElden;
         public DefinitionsElden defE = new DefinitionsElden();
         public ProfilesControl _profile;
@@ -342,22 +343,25 @@ namespace AutoSplitterCore
         {
             while (dataElden.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(5000);
-                foreach (var b in dataElden.getBossToSplit())
+                Thread.Sleep(3000);
+                if (!_PracticeMode)
                 {
-                    if (!b.IsSplited && elden.ReadEventFlag(b.Id))
+                    foreach (var b in dataElden.getBossToSplit())
                     {
-                        if (b.Mode == "Loading game after")
+                        if (!b.IsSplited && elden.ReadEventFlag(b.Id))
                         {
-                            if (!listPendingB.Contains(b))
+                            if (b.Mode == "Loading game after")
                             {
-                                listPendingB.Add(b);
+                                if (!listPendingB.Contains(b))
+                                {
+                                    listPendingB.Add(b);
+                                }
                             }
-                        }
-                        else
-                        {
-                            b.IsSplited = true;
-                            SplitCheck();                                                    
+                            else
+                            {
+                                b.IsSplited = true;
+                                SplitCheck();
+                            }
                         }
                     }
                 }
@@ -368,23 +372,26 @@ namespace AutoSplitterCore
         {
             while (dataElden.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(5000);
-                foreach (var i in dataElden.getGraceToSplit())
+                Thread.Sleep(3000);
+                if (!_PracticeMode)
                 {
-
-                    if (!i.IsSplited && elden.ReadEventFlag(i.Id))
+                    foreach (var i in dataElden.getGraceToSplit())
                     {
-                        if (i.Mode == "Loading game after")
+
+                        if (!i.IsSplited && elden.ReadEventFlag(i.Id))
                         {
-                            if (!listPendingG.Contains(i))
+                            if (i.Mode == "Loading game after")
                             {
-                                listPendingG.Add(i);
+                                if (!listPendingG.Contains(i))
+                                {
+                                    listPendingG.Add(i);
+                                }
                             }
-                        }
-                        else
-                        {
-                            i.IsSplited = true;
-                            SplitCheck();
+                            else
+                            {
+                                i.IsSplited = true;
+                                SplitCheck();
+                            }
                         }
                     }
                 }
@@ -395,23 +402,26 @@ namespace AutoSplitterCore
         {
             while (dataElden.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(5000);
-                foreach (var cf in dataElden.getFlagsToSplit())
+                Thread.Sleep(3000);
+                if (!_PracticeMode)
                 {
-
-                    if (!cf.IsSplited && elden.ReadEventFlag(cf.Id))
+                    foreach (var cf in dataElden.getFlagsToSplit())
                     {
-                        if (cf.Mode == "Loading game after")
+
+                        if (!cf.IsSplited && elden.ReadEventFlag(cf.Id))
                         {
-                            if (!listPendingCf.Contains(cf))
+                            if (cf.Mode == "Loading game after")
                             {
-                                listPendingCf.Add(cf);
+                                if (!listPendingCf.Contains(cf))
+                                {
+                                    listPendingCf.Add(cf);
+                                }
                             }
-                        }
-                        else
-                        {
-                            cf.IsSplited = true;
-                            SplitCheck();
+                            else
+                            {
+                                cf.IsSplited = true;
+                                SplitCheck();
+                            }
                         }
                     }
                 }
@@ -423,32 +433,32 @@ namespace AutoSplitterCore
             while (dataElden.enableSplitting && _StatusProcedure)
             {
                 Thread.Sleep(100);
-                foreach (var p in dataElden.getPositionToSplit())
+                if (!_PracticeMode)
                 {
-                    if (!p.IsSplited)
+                    foreach (var p in dataElden.getPositionToSplit())
                     {
-                        var currentlyPosition = elden.GetPosition();
-                        var rangeX = ((currentlyPosition.X - p.vector.X) <= dataElden.positionMargin) && ((currentlyPosition.X - p.vector.X) >= -dataElden.positionMargin);
-                        var rangeY = ((currentlyPosition.Y - p.vector.Y) <= dataElden.positionMargin) && ((currentlyPosition.Y - p.vector.Y) >= -dataElden.positionMargin);
-                        var rangeZ = ((currentlyPosition.Z - p.vector.Z) <= dataElden.positionMargin) && ((currentlyPosition.Z - p.vector.Z) >= -dataElden.positionMargin);
-                        if (rangeX && rangeY && rangeZ)
+                        if (!p.IsSplited)
                         {
-                            if (p.Mode == "Loading game after")
+                            var currentlyPosition = elden.GetPosition();
+                            var rangeX = ((currentlyPosition.X - p.vector.X) <= dataElden.positionMargin) && ((currentlyPosition.X - p.vector.X) >= -dataElden.positionMargin);
+                            var rangeY = ((currentlyPosition.Y - p.vector.Y) <= dataElden.positionMargin) && ((currentlyPosition.Y - p.vector.Y) >= -dataElden.positionMargin);
+                            var rangeZ = ((currentlyPosition.Z - p.vector.Z) <= dataElden.positionMargin) && ((currentlyPosition.Z - p.vector.Z) >= -dataElden.positionMargin);
+                            if (rangeX && rangeY && rangeZ)
                             {
-
-                                if (!listPendingP.Contains(p))
+                                if (p.Mode == "Loading game after")
                                 {
-                                    listPendingP.Add(p);
+                                    if (!listPendingP.Contains(p))
+                                    {
+                                        listPendingP.Add(p);
+                                    }
                                 }
-
-                            }
-                            else
-                            {
-                                p.IsSplited = true;
-                                SplitCheck();
+                                else
+                                {
+                                    p.IsSplited = true;
+                                    SplitCheck();
+                                }
                             }
                         }
-
                     }
                 }
             }

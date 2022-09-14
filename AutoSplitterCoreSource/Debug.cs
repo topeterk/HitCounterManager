@@ -37,7 +37,7 @@ namespace AutoSplitterCore
             InitializeComponent();
             this.mainModule = mainModule;
             mainModule.SetPointers();
-            mainModule.LoadAutoSplitterSettingsM(new HitCounterManager.ProfilesControl(),null);
+            mainModule.LoadAutoSplitterSettings(new HitCounterManager.ProfilesControl(),null);
             mainModule.InitDebug();    
             _update_timer.Tick += (sender, args) => CheckInfo();
             _update_timer.Enabled = true;
@@ -66,7 +66,7 @@ namespace AutoSplitterCore
             mainModule.EnableSplitting(0);
             mainModule.EnableSplitting(comboBoxGame.SelectedIndex);
             GameActive = comboBoxGame.SelectedIndex;
-            mainModule.SetGameIGT(GameActive);
+            mainModule.igtModule.gameSelect = GameActive;
         }
 
         private void CheckInfo()
@@ -159,7 +159,7 @@ namespace AutoSplitterCore
 
         private void btnSaveConfig_Click(object sender, EventArgs e)
         {
-            mainModule.SaveAutoSplitterSettingsM();
+            mainModule.SaveAutoSplitterSettings();
             MessageBox.Show("Save Successfully", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

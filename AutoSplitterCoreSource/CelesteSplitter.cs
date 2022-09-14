@@ -35,6 +35,7 @@ namespace AutoSplitterCore
         public bool _StatusCeleste = false;
         public bool _runStarted = false;
         public bool _SplitGo = false;
+        public bool _PracticeMode = false;
         public DTCeleste dataCeleste;
         public ProfilesControl _profile;
         public DefinitionsCeleste.InfoPlayerCeleste infoPlayer = new DefinitionsCeleste.InfoPlayerCeleste();
@@ -176,115 +177,118 @@ namespace AutoSplitterCore
             while (dataCeleste.enableSplitting && _StatusProcedure)
             {
                 Thread.Sleep(10);
-                foreach (var element in dataCeleste.getChapterToSplit())
+                if (!_PracticeMode)
                 {
-                    if (!element.IsSplited)
-                    {                    
-                        switch (element.Title)
+                    foreach (var element in dataCeleste.getChapterToSplit())
+                    {
+                        if (!element.IsSplited)
                         {
-                            case "Prologue (Complete)": 
-                                shouldSplit = infoPlayer.areaID == Area.Prologue && infoPlayer.completed; break;
-                            case "Chapter 1 - Forsaken City A/B/C (Complete)":
-                                shouldSplit = infoPlayer.areaID == Area.ForsakenCity && infoPlayer.completed; break;
-                            case "Chapter 2 - Old Site A/B/C (Complete)":
-                                shouldSplit = infoPlayer.areaID == Area.OldSite && infoPlayer.completed; break;
-                            case "Chapter 3 - Celestial Resort A/B/C (Complete)":
-                                shouldSplit = infoPlayer.areaID == Area.CelestialResort && infoPlayer.completed; break;
-                            case "Chapter 4 - Golden Ridge A/B/C (Complete)":
-                                shouldSplit = infoPlayer.areaID == Area.GoldenRidge && infoPlayer.completed; break;
-                            case "Chapter 5 - Mirror Temple A/B/C (Complete)":
-                                shouldSplit = infoPlayer.areaID == Area.MirrorTemple && infoPlayer.completed; break;
-                            case "Chapter 6 - Reflection A/B/C (Complete)":
-                                shouldSplit = infoPlayer.areaID == Area.Reflection && infoPlayer.completed; break;
-                            case "Chapter 7 - The Summit A/B/C (Complete)":
-                                shouldSplit = infoPlayer.areaID == Area.TheSummit && infoPlayer.completed; break;
-                            case "Epilogue (Complete)":
-                                shouldSplit = infoPlayer.areaID == Area.Epilogue && infoPlayer.completed; break;
-                            case "Chapter 8 - Core A/B/C (Complete)":
-                                shouldSplit = infoPlayer.areaID == Area.Core && infoPlayer.completed; break;
-                            case "Chapter 9 - Farewell (Complete)":
-                                shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.completed; break;
+                            switch (element.Title)
+                            {
+                                case "Prologue (Complete)":
+                                    shouldSplit = infoPlayer.areaID == Area.Prologue && infoPlayer.completed; break;
+                                case "Chapter 1 - Forsaken City A/B/C (Complete)":
+                                    shouldSplit = infoPlayer.areaID == Area.ForsakenCity && infoPlayer.completed; break;
+                                case "Chapter 2 - Old Site A/B/C (Complete)":
+                                    shouldSplit = infoPlayer.areaID == Area.OldSite && infoPlayer.completed; break;
+                                case "Chapter 3 - Celestial Resort A/B/C (Complete)":
+                                    shouldSplit = infoPlayer.areaID == Area.CelestialResort && infoPlayer.completed; break;
+                                case "Chapter 4 - Golden Ridge A/B/C (Complete)":
+                                    shouldSplit = infoPlayer.areaID == Area.GoldenRidge && infoPlayer.completed; break;
+                                case "Chapter 5 - Mirror Temple A/B/C (Complete)":
+                                    shouldSplit = infoPlayer.areaID == Area.MirrorTemple && infoPlayer.completed; break;
+                                case "Chapter 6 - Reflection A/B/C (Complete)":
+                                    shouldSplit = infoPlayer.areaID == Area.Reflection && infoPlayer.completed; break;
+                                case "Chapter 7 - The Summit A/B/C (Complete)":
+                                    shouldSplit = infoPlayer.areaID == Area.TheSummit && infoPlayer.completed; break;
+                                case "Epilogue (Complete)":
+                                    shouldSplit = infoPlayer.areaID == Area.Epilogue && infoPlayer.completed; break;
+                                case "Chapter 8 - Core A/B/C (Complete)":
+                                    shouldSplit = infoPlayer.areaID == Area.Core && infoPlayer.completed; break;
+                                case "Chapter 9 - Farewell (Complete)":
+                                    shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.completed; break;
 
-                            case "Chapter 1 - Crossing (A) / Contraption (B) (CP 1)":
-                                shouldSplit = infoPlayer.areaID == Area.ForsakenCity && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "6" : "04"); break;
-                            case "Chapter 1 - Chasm (A) / Scrap Pit (B) (CP 2)":
-                                shouldSplit = infoPlayer.areaID == Area.ForsakenCity && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "9b" : "08"); break;
-                            case "Chapter 2 - Intervention (A) / Combination Lock (B) (CP 1)":
-                                shouldSplit = infoPlayer.areaID == Area.OldSite && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "3" : "03"); break;
-                            case "Chapter 2 - Awake (A) / Dream Altar (B) (CP 2)":
-                                shouldSplit = infoPlayer.areaID == Area.OldSite && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "end_3" : "08b"); break;
-                            case "Chapter 3 - Huge Mess (A) / Staff Quarters (B) (CP 1)":
-                                shouldSplit = infoPlayer.areaID == Area.CelestialResort && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "08-a" : "06"); break;
-                            case "Chapter 3 - Elevator Shaft (A) / Library (B) (CP 2)":
-                                shouldSplit = infoPlayer.areaID == Area.CelestialResort && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "09-d" : "11"); break;
-                            case "Chapter 3 - Presidential Suite (A) / Rooftop (B) (CP 3)":
-                                shouldSplit = infoPlayer.areaID == Area.CelestialResort && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "00-d" : "16"); break;
-                            case "Chapter 4 - Shrine (A) / Stepping Stones (B) (CP 1)":
-                                shouldSplit = infoPlayer.areaID == Area.GoldenRidge && infoPlayer.levelName == "b-00"; break;
-                            case "Chapter 4 - Old Trail (A) / Gusty Canyon (B) (CP 2)":
-                                shouldSplit = infoPlayer.areaID == Area.GoldenRidge && infoPlayer.levelName == "c-00"; break;
-                            case "Chapter 4 - Cliff Face (A) / Eye Of The Storm (B) (CP 3)":
-                                shouldSplit = infoPlayer.areaID == Area.GoldenRidge && infoPlayer.levelName == "d-00"; break;
-                            case "Chapter 5 - Depths (A) / Central Chamber (B) (CP 1)":
-                                shouldSplit = infoPlayer.areaID == Area.MirrorTemple && infoPlayer.levelName == "b-00"; break;
-                            case "Chapter 5 - Unravelling (A) / Through The Mirror (B) (CP 2)":
-                                shouldSplit = infoPlayer.areaID == Area.MirrorTemple && infoPlayer.levelName == "c-00"; break;
-                            case "Chapter 5 - Search (A) / Mix Master (B) (CP 3)":
-                                shouldSplit = infoPlayer.areaID == Area.MirrorTemple && infoPlayer.levelName == "d-00"; break;
-                            case "Chapter 5 - Rescue (A) (CP 4)":
-                                shouldSplit = infoPlayer.areaID == Area.MirrorTemple && infoPlayer.levelName == "e-00"; break;
-                            case "Chapter 6 - Lake (A) / Reflection (B) (CP 1)":
-                                shouldSplit = infoPlayer.areaID == Area.Reflection && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "00" : "b-00"); break;
-                            case "Chapter 6 - Hollows (A) / Rock Bottom (B) (CP 2)":
-                                shouldSplit = infoPlayer.areaID == Area.Reflection && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "04" : "c-00"); break;
-                            case "Chapter 6 - Reflection (A) / Reprieve (B) (CP 3)":
-                                shouldSplit = infoPlayer.areaID == Area.Reflection && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "b-00" : "d-00"); break;
-                            case "Chapter 6 - Rock Bottom (A) (CP 4)":
-                                shouldSplit = infoPlayer.areaID == Area.Reflection && infoPlayer.levelName == "boss-00"; break;
-                            case "Chapter 6 - Resolution (A) (CP 5)":
-                                shouldSplit = infoPlayer.areaID == Area.Reflection && infoPlayer.levelName == "after-00"; break;
-                            case "Chapter 7 - 500M (A) / 500M (B) (CP 1)":
-                                shouldSplit = infoPlayer.areaID == Area.TheSummit && infoPlayer.levelName == "b-00"; break;
-                            case "Chapter 7 - 1000M (A) / 1000M (B) (CP 2)":
-                                shouldSplit = infoPlayer.areaID == Area.TheSummit && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "c-00" : "c-01"); break;
-                            case "Chapter 7 - 1500M (A) / 1500M (B) (CP 3)":
-                                shouldSplit = infoPlayer.areaID == Area.TheSummit && infoPlayer.levelName == "d-00"; break;
-                            case "Chapter 7 - 2000M (A) / 2000M (B) (CP 4)":
-                                shouldSplit = infoPlayer.areaID == Area.TheSummit && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "e-00b" : "e-00"); break;
-                            case "Chapter 7 - 2500M (A) / 2500M (B) (CP 5)":
-                                shouldSplit = infoPlayer.areaID == Area.TheSummit && infoPlayer.levelName == "f-00"; break;
-                            case "Chapter 7 - 3000M (A) / 3000M (B) (CP 6)":
-                                shouldSplit = infoPlayer.areaID == Area.TheSummit && infoPlayer.levelName == "g-00"; break;
-                            case "Chapter 8 - Into The Core (A) / Into The Core (B) (CP 1)":
-                                shouldSplit = infoPlayer.areaID == Area.Core && infoPlayer.levelName == "a-00"; break;
-                            case "Chapter 8 - Hot And Cold (A) / Burning Or Freezing (B) (CP 2)":
-                                shouldSplit = infoPlayer.areaID == Area.Core && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "c-00" : "b-00"); break;
-                            case "Chapter 8 - Heart Of The Mountain (A) / Heartbeat (B) (CP 3)":
-                                shouldSplit = infoPlayer.areaID == Area.Core && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "d-00" : "c-01"); break;
-                            case "Chapter 9 - Singular (CP 1)":
-                                shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.levelName == "a-00"; break;
-                            case "Chapter 9 - Power Source (CP 2)":
-                                shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.levelName == "c-00"; break;
-                            case "Chapter 9 - Remembered (CP 3)":
-                                shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.levelName == "e-00z"; break;
-                            case "Chapter 9 - Event Horizon (CP 4)":
-                                shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.levelName == "f-door"; break;
-                            case "Chapter 9 - Determination (CP 5)":
-                                shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.levelName == "h-00b"; break;
-                            case "Chapter 9 - Stubbornness (CP 6)":
-                                shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.levelName == "i-00"; break;
-                            case "Chapter 9 - Reconciliation (CP 7)":
-                                shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.levelName == "j-00"; break;
-                            case "Chapter 9 - Farewell (CP 8)":
-                                shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.levelName == "j-16"; break;
-                            default:                                
-                                   shouldSplit = false; break;                          
-                        }
+                                case "Chapter 1 - Crossing (A) / Contraption (B) (CP 1)":
+                                    shouldSplit = infoPlayer.areaID == Area.ForsakenCity && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "6" : "04"); break;
+                                case "Chapter 1 - Chasm (A) / Scrap Pit (B) (CP 2)":
+                                    shouldSplit = infoPlayer.areaID == Area.ForsakenCity && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "9b" : "08"); break;
+                                case "Chapter 2 - Intervention (A) / Combination Lock (B) (CP 1)":
+                                    shouldSplit = infoPlayer.areaID == Area.OldSite && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "3" : "03"); break;
+                                case "Chapter 2 - Awake (A) / Dream Altar (B) (CP 2)":
+                                    shouldSplit = infoPlayer.areaID == Area.OldSite && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "end_3" : "08b"); break;
+                                case "Chapter 3 - Huge Mess (A) / Staff Quarters (B) (CP 1)":
+                                    shouldSplit = infoPlayer.areaID == Area.CelestialResort && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "08-a" : "06"); break;
+                                case "Chapter 3 - Elevator Shaft (A) / Library (B) (CP 2)":
+                                    shouldSplit = infoPlayer.areaID == Area.CelestialResort && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "09-d" : "11"); break;
+                                case "Chapter 3 - Presidential Suite (A) / Rooftop (B) (CP 3)":
+                                    shouldSplit = infoPlayer.areaID == Area.CelestialResort && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "00-d" : "16"); break;
+                                case "Chapter 4 - Shrine (A) / Stepping Stones (B) (CP 1)":
+                                    shouldSplit = infoPlayer.areaID == Area.GoldenRidge && infoPlayer.levelName == "b-00"; break;
+                                case "Chapter 4 - Old Trail (A) / Gusty Canyon (B) (CP 2)":
+                                    shouldSplit = infoPlayer.areaID == Area.GoldenRidge && infoPlayer.levelName == "c-00"; break;
+                                case "Chapter 4 - Cliff Face (A) / Eye Of The Storm (B) (CP 3)":
+                                    shouldSplit = infoPlayer.areaID == Area.GoldenRidge && infoPlayer.levelName == "d-00"; break;
+                                case "Chapter 5 - Depths (A) / Central Chamber (B) (CP 1)":
+                                    shouldSplit = infoPlayer.areaID == Area.MirrorTemple && infoPlayer.levelName == "b-00"; break;
+                                case "Chapter 5 - Unravelling (A) / Through The Mirror (B) (CP 2)":
+                                    shouldSplit = infoPlayer.areaID == Area.MirrorTemple && infoPlayer.levelName == "c-00"; break;
+                                case "Chapter 5 - Search (A) / Mix Master (B) (CP 3)":
+                                    shouldSplit = infoPlayer.areaID == Area.MirrorTemple && infoPlayer.levelName == "d-00"; break;
+                                case "Chapter 5 - Rescue (A) (CP 4)":
+                                    shouldSplit = infoPlayer.areaID == Area.MirrorTemple && infoPlayer.levelName == "e-00"; break;
+                                case "Chapter 6 - Lake (A) / Reflection (B) (CP 1)":
+                                    shouldSplit = infoPlayer.areaID == Area.Reflection && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "00" : "b-00"); break;
+                                case "Chapter 6 - Hollows (A) / Rock Bottom (B) (CP 2)":
+                                    shouldSplit = infoPlayer.areaID == Area.Reflection && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "04" : "c-00"); break;
+                                case "Chapter 6 - Reflection (A) / Reprieve (B) (CP 3)":
+                                    shouldSplit = infoPlayer.areaID == Area.Reflection && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "b-00" : "d-00"); break;
+                                case "Chapter 6 - Rock Bottom (A) (CP 4)":
+                                    shouldSplit = infoPlayer.areaID == Area.Reflection && infoPlayer.levelName == "boss-00"; break;
+                                case "Chapter 6 - Resolution (A) (CP 5)":
+                                    shouldSplit = infoPlayer.areaID == Area.Reflection && infoPlayer.levelName == "after-00"; break;
+                                case "Chapter 7 - 500M (A) / 500M (B) (CP 1)":
+                                    shouldSplit = infoPlayer.areaID == Area.TheSummit && infoPlayer.levelName == "b-00"; break;
+                                case "Chapter 7 - 1000M (A) / 1000M (B) (CP 2)":
+                                    shouldSplit = infoPlayer.areaID == Area.TheSummit && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "c-00" : "c-01"); break;
+                                case "Chapter 7 - 1500M (A) / 1500M (B) (CP 3)":
+                                    shouldSplit = infoPlayer.areaID == Area.TheSummit && infoPlayer.levelName == "d-00"; break;
+                                case "Chapter 7 - 2000M (A) / 2000M (B) (CP 4)":
+                                    shouldSplit = infoPlayer.areaID == Area.TheSummit && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "e-00b" : "e-00"); break;
+                                case "Chapter 7 - 2500M (A) / 2500M (B) (CP 5)":
+                                    shouldSplit = infoPlayer.areaID == Area.TheSummit && infoPlayer.levelName == "f-00"; break;
+                                case "Chapter 7 - 3000M (A) / 3000M (B) (CP 6)":
+                                    shouldSplit = infoPlayer.areaID == Area.TheSummit && infoPlayer.levelName == "g-00"; break;
+                                case "Chapter 8 - Into The Core (A) / Into The Core (B) (CP 1)":
+                                    shouldSplit = infoPlayer.areaID == Area.Core && infoPlayer.levelName == "a-00"; break;
+                                case "Chapter 8 - Hot And Cold (A) / Burning Or Freezing (B) (CP 2)":
+                                    shouldSplit = infoPlayer.areaID == Area.Core && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "c-00" : "b-00"); break;
+                                case "Chapter 8 - Heart Of The Mountain (A) / Heartbeat (B) (CP 3)":
+                                    shouldSplit = infoPlayer.areaID == Area.Core && infoPlayer.levelName == (celeste.AreaDifficulty() == AreaMode.ASide ? "d-00" : "c-01"); break;
+                                case "Chapter 9 - Singular (CP 1)":
+                                    shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.levelName == "a-00"; break;
+                                case "Chapter 9 - Power Source (CP 2)":
+                                    shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.levelName == "c-00"; break;
+                                case "Chapter 9 - Remembered (CP 3)":
+                                    shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.levelName == "e-00z"; break;
+                                case "Chapter 9 - Event Horizon (CP 4)":
+                                    shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.levelName == "f-door"; break;
+                                case "Chapter 9 - Determination (CP 5)":
+                                    shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.levelName == "h-00b"; break;
+                                case "Chapter 9 - Stubbornness (CP 6)":
+                                    shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.levelName == "i-00"; break;
+                                case "Chapter 9 - Reconciliation (CP 7)":
+                                    shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.levelName == "j-00"; break;
+                                case "Chapter 9 - Farewell (CP 8)":
+                                    shouldSplit = infoPlayer.areaID == Area.Farewell && infoPlayer.levelName == "j-16"; break;
+                                default:
+                                    shouldSplit = false; break;
+                            }
 
-                        if (shouldSplit)
-                        {
-                            element.IsSplited = true;
-                            SplitCheck();
+                            if (shouldSplit)
+                            {
+                                element.IsSplited = true;
+                                SplitCheck();
+                            }
                         }
                     }
                 }

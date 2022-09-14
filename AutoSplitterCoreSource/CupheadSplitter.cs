@@ -37,6 +37,7 @@ namespace AutoSplitterCore
         public bool _StatusCuphead = false;
         public bool _runStarted = false;
         public bool _SplitGo = false;
+        public bool _PracticeMode = false;
         public ProfilesControl _profile;       
         private static readonly object _object = new object();
         private System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
@@ -240,12 +241,15 @@ namespace AutoSplitterCore
             while (dataCuphead.enableSplitting && _StatusProcedure)
             {
                 Thread.Sleep(1000);
-                foreach (var element in dataCuphead.getElementToSplit())
+                if (!_PracticeMode)
                 {
-                    if (!element.IsSplited && ElementCase(element.Title))
+                    foreach (var element in dataCuphead.getElementToSplit())
                     {
-                        element.IsSplited = true;
-                        SplitCheck();
+                        if (!element.IsSplited && ElementCase(element.Title))
+                        {
+                            element.IsSplited = true;
+                            SplitCheck();
+                        }
                     }
                 }
             }

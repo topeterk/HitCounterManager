@@ -44,34 +44,10 @@ namespace AutoSplitterCore
         public IGTModule igtModule = new IGTModule();
         public SaveModule saveModule = new SaveModule();
         public bool DebugMode = false;
+        public bool _PracticeMode = false;
         private ProfilesControl profCtrl;
         private Form1 main;
         private System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1000 };
-
-
-
-        public void AutoSplitterForm(bool darkMode)
-        {
-            Form form = new AutoSplitter(sekiroSplitter, hollowSplitter, eldenSplitter, ds3Splitter, celesteSplitter, ds2Splitter, aslSplitter, cupSplitter, ds1Splitter, darkMode);
-            form.ShowDialog();
-        }
-
-        public void SetPointers()
-        {
-            igtModule.setSplitterPointers(sekiroSplitter, eldenSplitter, ds3Splitter, celesteSplitter, cupSplitter, ds1Splitter);
-            saveModule.SetPointers(sekiroSplitter, ds1Splitter, ds2Splitter, ds3Splitter, eldenSplitter, hollowSplitter, celesteSplitter, cupSplitter, aslSplitter);
-        }
-        public void LoadAutoSplitterSettingsM(ProfilesControl profiles, Form1 main)
-        {
-            saveModule.LoadAutoSplitterSettings(profiles);
-            this.profCtrl = profiles;
-            this.main = main;         
-            if (main != null)
-            {
-                _update_timer.Tick += (senderT, args) => CheckAutoTimers();
-                _update_timer.Enabled = true;
-            }         
-        }
 
         public void InitDebug()
         {
@@ -86,19 +62,32 @@ namespace AutoSplitterCore
             aslSplitter.DebugMode = true;
         }
 
-        public void SaveAutoSplitterSettingsM()
+        public void AutoSplitterForm(bool darkMode)
+        {
+            Form form = new AutoSplitter(sekiroSplitter, hollowSplitter, eldenSplitter, ds3Splitter, celesteSplitter, ds2Splitter, aslSplitter, cupSplitter, ds1Splitter, darkMode);
+            form.ShowDialog();
+        }
+
+        public void SetPointers()
+        {
+            igtModule.setSplitterPointers(sekiroSplitter, eldenSplitter, ds3Splitter, celesteSplitter, cupSplitter, ds1Splitter);
+            saveModule.SetPointers(sekiroSplitter, ds1Splitter, ds2Splitter, ds3Splitter, eldenSplitter, hollowSplitter, celesteSplitter, cupSplitter, aslSplitter);
+        }
+        public void LoadAutoSplitterSettings(ProfilesControl profiles, Form1 main)
+        {
+            saveModule.LoadAutoSplitterSettings(profiles);
+            this.profCtrl = profiles;
+            this.main = main;         
+            if (main != null)
+            {
+                _update_timer.Tick += (senderT, args) => CheckAutoTimers();
+                _update_timer.Enabled = true;
+            }         
+        }
+
+        public void SaveAutoSplitterSettings()
         {
             saveModule.SaveAutoSplitterSettings();
-        }
-
-        public int ReturnCurrentIGTM()
-        {
-            return igtModule.ReturnCurrentIGT();
-        }
-
-        public void SetGameIGT(int game)
-        {
-            igtModule.gameSelect = game;
         }
 
         public int GetSplitterEnable()
@@ -115,6 +104,25 @@ namespace AutoSplitterCore
             return 0;
         }
 
+        public int ReturnCurrentIGTM()
+        {
+            return igtModule.ReturnCurrentIGT();
+        }
+
+        public void SetPracticeMode(bool status)
+        {
+            _PracticeMode = status;
+            sekiroSplitter._PracticeMode = status;
+            ds1Splitter._PracticeMode = status;
+            ds2Splitter._PracticeMode = status;
+            ds3Splitter._PracticeMode = status;
+            eldenSplitter._PracticeMode = status;
+            hollowSplitter._PracticeMode = status;
+            celesteSplitter._PracticeMode = status;
+            cupSplitter._PracticeMode = status;
+            aslSplitter._PracticeMode = status;
+        }
+
         private int gameActive = 0;
         private long? _lastInGameTime;
         private bool anyGameTime = false;
@@ -126,10 +134,11 @@ namespace AutoSplitterCore
 
         public void CheckAutoTimers()
         {
+            if (_PracticeMode) { anyGameTime = false; }
             switch (gameActive)
             {
                 case 1: //Sekiro
-                    if (sekiroSplitter.dataSekiro.autoTimer)
+                    if (sekiroSplitter.dataSekiro.autoTimer && !_PracticeMode)
                     {
                         anyGameTime = false;
                         if (!sekiroSplitter.dataSekiro.gameTimer)
@@ -153,7 +162,7 @@ namespace AutoSplitterCore
                     }
                     break;
                 case 2: //DS1
-                    if (ds1Splitter.dataDs1.autoTimer)
+                    if (ds1Splitter.dataDs1.autoTimer && !_PracticeMode)
                     {
                         if (!ds1Splitter.dataDs1.gameTimer)
                         {
@@ -176,7 +185,7 @@ namespace AutoSplitterCore
                     }
                     break;
                 case 4: //Ds3
-                    if (ds3Splitter.dataDs3.autoTimer)
+                    if (ds3Splitter.dataDs3.autoTimer && !_PracticeMode)
                     {
                         if (!ds3Splitter.dataDs3.gameTimer)
                         {
@@ -199,7 +208,7 @@ namespace AutoSplitterCore
                     }
                     break;
                 case 5: //Elden
-                    if (eldenSplitter.dataElden.autoTimer)
+                    if (eldenSplitter.dataElden.autoTimer && !_PracticeMode)
                     {
                         if (!eldenSplitter.dataElden.gameTimer)
                         {
@@ -222,7 +231,7 @@ namespace AutoSplitterCore
                     }
                     break;
                 case 7: //Celeste
-                    if (celesteSplitter.dataCeleste.autoTimer)
+                    if (celesteSplitter.dataCeleste.autoTimer && !_PracticeMode)
                     {
                         if (!celesteSplitter.dataCeleste.gameTimer)
                         {
@@ -245,7 +254,7 @@ namespace AutoSplitterCore
                     }
                     break;
                 case 8: //Cuphead
-                    if (cupSplitter.dataCuphead.autoTimer)
+                    if (cupSplitter.dataCuphead.autoTimer && !_PracticeMode)
                     {
                         if (!cupSplitter.dataCuphead.gameTimer)
                         {
@@ -269,7 +278,7 @@ namespace AutoSplitterCore
                     break;
 
                 case 3: //DS2
-                    if (ds2Splitter.dataDs2.autoTimer)
+                    if (ds2Splitter.dataDs2.autoTimer && !_PracticeMode)
                     {
                         anyGameTime = false;
                         if (ds2Splitter._runStarted)
@@ -286,7 +295,7 @@ namespace AutoSplitterCore
                     }
                     break;
                 case 6: //Hollow
-                    if (hollowSplitter.dataHollow.autoTimer)
+                    if (hollowSplitter.dataHollow.autoTimer && !_PracticeMode)
                     {
                         anyGameTime = false;
                         if (hollowSplitter._runStarted)

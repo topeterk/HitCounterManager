@@ -36,6 +36,7 @@ namespace AutoSplitterCore
         public bool _StatusDs3 = false;
         public bool _runStarted = false;
         public bool _SplitGo = false;
+        public bool _PracticeMode = false;
         public DTDs3 dataDs3;
         public DefinitionsDs3 defD3 = new DefinitionsDs3();
         public ProfilesControl _profile;
@@ -340,25 +341,28 @@ namespace AutoSplitterCore
         {
             while (dataDs3.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(5000);
-                foreach (var b in dataDs3.getBossToSplit())
+                Thread.Sleep(3000);
+                if (!_PracticeMode)
                 {
-                    if (!b.IsSplited && Ds3.ReadEventFlag(b.Id))
+                    foreach (var b in dataDs3.getBossToSplit())
                     {
-                        if (b.Mode == "Loading game after")
+                        if (!b.IsSplited && Ds3.ReadEventFlag(b.Id))
                         {
-                            if (!listPendingB.Contains(b))
+                            if (b.Mode == "Loading game after")
                             {
-                                listPendingB.Add(b);
+                                if (!listPendingB.Contains(b))
+                                {
+                                    listPendingB.Add(b);
+                                }
+                            }
+                            else
+                            {
+                                b.IsSplited = true;
+                                SplitCheck();
                             }
                         }
-                        else
-                        {
-                            b.IsSplited = true;
-                            SplitCheck();
-                        }
-                    }
 
+                    }
                 }
             }
         }
@@ -368,26 +372,28 @@ namespace AutoSplitterCore
         {
             while (dataDs3.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(5000);
-                foreach (var bonfire in dataDs3.getBonfireToSplit())
+                Thread.Sleep(3000);
+                if (!_PracticeMode)
                 {
-                    if (!bonfire.IsSplited && Ds3.ReadEventFlag(bonfire.Id))
+                    foreach (var bonfire in dataDs3.getBonfireToSplit())
                     {
-                        if (bonfire.Mode == "Loading game after")
+                        if (!bonfire.IsSplited && Ds3.ReadEventFlag(bonfire.Id))
                         {
-                            if (!listPendingBon.Contains(bonfire))
+                            if (bonfire.Mode == "Loading game after")
                             {
-                                listPendingBon.Add(bonfire);
+                                if (!listPendingBon.Contains(bonfire))
+                                {
+                                    listPendingBon.Add(bonfire);
+                                }
+                            }
+                            else
+                            {
+                                bonfire.IsSplited = true;
+                                SplitCheck();
+
                             }
                         }
-                        else
-                        {
-                            bonfire.IsSplited = true;
-                            SplitCheck();
-
-                        }
                     }
-
                 }
             }
         }
@@ -396,22 +402,25 @@ namespace AutoSplitterCore
         {
             while (dataDs3.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(5000);
-                foreach (var lvl in dataDs3.getLvlToSplit())
+                Thread.Sleep(3000);
+                if (!_PracticeMode)
                 {
-                    if (!lvl.IsSplited && Ds3.ReadAttribute(lvl.Attribute) >= lvl.Value)
+                    foreach (var lvl in dataDs3.getLvlToSplit())
                     {
-                        if (lvl.Mode == "Loading game after")
+                        if (!lvl.IsSplited && Ds3.ReadAttribute(lvl.Attribute) >= lvl.Value)
                         {
-                            if (!listPendingLvl.Contains(lvl))
+                            if (lvl.Mode == "Loading game after")
                             {
-                                listPendingLvl.Add(lvl);
+                                if (!listPendingLvl.Contains(lvl))
+                                {
+                                    listPendingLvl.Add(lvl);
+                                }
                             }
-                        }
-                        else
-                        {
-                            lvl.IsSplited = true;
-                            SplitCheck();
+                            else
+                            {
+                                lvl.IsSplited = true;
+                                SplitCheck();
+                            }
                         }
                     }
                 }
@@ -422,22 +431,25 @@ namespace AutoSplitterCore
         {
             while (dataDs3.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(5000);
-                foreach (var cf in dataDs3.getFlagToSplit())
+                Thread.Sleep(3000);
+                if (!_PracticeMode)
                 {
-                    if (!cf.IsSplited && Ds3.ReadEventFlag(cf.Id))
+                    foreach (var cf in dataDs3.getFlagToSplit())
                     {
-                        if (cf.Mode == "Loading game after")
+                        if (!cf.IsSplited && Ds3.ReadEventFlag(cf.Id))
                         {
-                            if (!listPendingCf.Contains(cf))
+                            if (cf.Mode == "Loading game after")
                             {
-                                listPendingCf.Add(cf);
+                                if (!listPendingCf.Contains(cf))
+                                {
+                                    listPendingCf.Add(cf);
+                                }
                             }
-                        }
-                        else
-                        {
-                            cf.IsSplited = true;
-                            SplitCheck();
+                            else
+                            {
+                                cf.IsSplited = true;
+                                SplitCheck();
+                            }
                         }
                     }
                 }

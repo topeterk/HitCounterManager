@@ -58,6 +58,7 @@ namespace HitCounterManager
         MethodInfo SetSplitterRunStarted = null;
         MethodInfo SetPointers = null;
         MethodInfo GetIsIGTActive = null;
+        MethodInfo SetPracticeMode = null;
         public Form1 main = null;
 
         #region Form
@@ -87,6 +88,7 @@ namespace HitCounterManager
                 comboBoxGame.Hide();
                 GameToSplitLabel.Hide();
                 btnSplitter.Hide();
+                PracticeModeCheck.Hide();
                 this.btnHit.Size = new System.Drawing.Size(200, 40);
                 this.btnSplit.Location = new System.Drawing.Point(540, 30);
                 this.btnWayHit.Location = new System.Drawing.Point(460, 30);
@@ -98,8 +100,8 @@ namespace HitCounterManager
                 assembly = Assembly.LoadFile(DllPath);
                 type = assembly.GetType("AutoSplitterCore.AutoSplitterMainModule");
                 obj = Activator.CreateInstance(type);
-                LoadAutoSplitterSettings = type.GetMethod("LoadAutoSplitterSettingsM");
-                SaveAutoSplitterSettings = type.GetMethod("SaveAutoSplitterSettingsM");
+                LoadAutoSplitterSettings = type.GetMethod("LoadAutoSplitterSettings");
+                SaveAutoSplitterSettings = type.GetMethod("SaveAutoSplitterSettings");
                 GetSplitterEnable = type.GetMethod("GetSplitterEnable");
                 EnableSplitting = type.GetMethod("EnableSplitting");
                 ReturnCurrentIGT = type.GetMethod("ReturnCurrentIGTM");
@@ -113,7 +115,7 @@ namespace HitCounterManager
                 SetSplitterRunStarted = type.GetMethod("SetSplitterRunStarted");
                 SetPointers = type.GetMethod("SetPointers");
                 GetIsIGTActive = type.GetMethod("GetIsIGTActive");
-
+                SetPracticeMode = type.GetMethod("SetPracticeMode");
 
                 SetPointers.Invoke(obj, null);
                 LoadAutoSplitterSettings.Invoke(obj, new object [] { profCtrl,this.main });
@@ -132,7 +134,6 @@ namespace HitCounterManager
                     case 0:
                     default: comboBoxGame.SelectedIndex = 0; break;
                 }
-
                 profCtrl.SetIGTSource(ReturnCurrentIGT,GetIsIGTActive, obj);
                 
             }         
@@ -168,6 +169,11 @@ namespace HitCounterManager
                         case Shortcuts.SC_Type.SC_Type_PB: btnPB_Click(null, null); break;
                         case Shortcuts.SC_Type.SC_Type_TimerStart: StartStopTimer(true); break;
                         case Shortcuts.SC_Type.SC_Type_TimerStop: StartStopTimer(false); break;
+                        case Shortcuts.SC_Type.SC_Type_Practice:  if (_DllAttached) { SetPractice(); } break;
+                        case Shortcuts.SC_Type.SC_Type_HitBossPrev: if (_DllAttached) { btnSplitPrev_Click(null, null); btnHit_Click(null, null); btnSplit_Click(null, null); } break;
+                        case Shortcuts.SC_Type.SC_Type_HitWayPrev:  if (_DllAttached) { btnSplitPrev_Click(null, null); btnWayHit_Click(null, null); btnSplit_Click(null, null); } break;
+                        case Shortcuts.SC_Type.SC_Type_BossHitUndoPrev: if (_DllAttached) { btnSplitPrev_Click(null, null); btnHitUndo_Click(null, null); btnSplit_Click(null, null); } break;
+                        case Shortcuts.SC_Type.SC_Type_WayHitUndoPrev:  if (_DllAttached) { btnSplitPrev_Click(null, null); btnWayHitUndo_Click(null, null); btnSplit_Click(null, null); } break;
                     }
                 }
             }
@@ -214,7 +220,7 @@ namespace HitCounterManager
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            Form form = new Settings();
+            Form form = new Settings(_DllAttached);
             SettingsDialogOpen = true;
             form.ShowDialog(this);
             SettingsDialogOpen = false;
@@ -282,7 +288,7 @@ namespace HitCounterManager
             TotalTime /= 1000; // we only care about seconds
 
             lbl_progress.Text = "Progress:  " + TotalActiveSplit + " / " + TotalSplits + "  # " + profCtrl.CurrentAttempts.ToString("D3");
-            lbl_time.Text = "Time: " + (TotalTime / 60 / 60).ToString("D2") + " : " + ((TotalTime / 60) % 60).ToString("D2") + " : " + (TotalTime % 60).ToString("D2");
+            lbl_time.Text = "Time: " + (TotalTime/60/60).ToString("D2") + " : " + ((TotalTime/60) % 60).ToString("D2") + " : " + (TotalTime % 60).ToString("D2");
             lbl_totals.Text = "Total: " + (TotalHits + TotalHitsWay) + " Hits   " + TotalPB + " PB";
             btnPause.Image = profCtrl.TimerRunning ? Sources.Resources.icons8_sleep_32 : Sources.Resources.icons8_time_32;
         }
@@ -293,6 +299,16 @@ namespace HitCounterManager
             btnPause.Image = Start ? Sources.Resources.icons8_sleep_32 : Sources.Resources.icons8_time_32;
         }
 
+        private void SetPractice()
+        {
+            _ = PracticeModeCheck.Checked ? PracticeModeCheck.Checked = false : PracticeModeCheck.Checked = true;
+            SetPracticeMode.Invoke(obj, new object[] { (object)PracticeModeCheck.Checked });
+        }
+
+        private void PracticeModeCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_DllAttached) SetPracticeMode.Invoke(obj, new object[] { (object)PracticeModeCheck.Checked });
+        }
 
         private void comboBoxGame_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -337,7 +353,7 @@ namespace HitCounterManager
                 EnableSplitting.Invoke(obj, new object[] { 9 });
             }            
         }
-
         #endregion
+
     }
 }

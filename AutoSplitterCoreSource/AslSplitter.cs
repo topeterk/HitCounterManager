@@ -37,8 +37,9 @@ namespace AutoSplitterCore
         public Control control = asl.GetSettingsControl(LiveSplit.UI.LayoutMode.Vertical);
         public ProfilesControl _profile;
         public bool enableSplitting = false;
-        private static readonly object _object = new object();
         public bool _SplitGo = false;
+        public bool _PracticeMode = false;
+        private static readonly object _object = new object();       
         private System.Windows.Forms.Timer _update_timer = new System.Windows.Forms.Timer() { Interval = 1500 };
         private System.Windows.Forms.Timer _update_timer2 = new System.Windows.Forms.Timer() { Interval = 1000 };
         public bool DebugMode = false;
@@ -107,7 +108,7 @@ namespace AutoSplitterCore
                  {
                      if (asl.Script.shouldSplit)
                      {
-                        SplitCheck();
+                        if (!_PracticeMode) { SplitCheck(); }     
                         asl.Script.shouldSplit = false;
                      }
                  }

@@ -37,6 +37,7 @@ namespace AutoSplitterCore
         public bool _StatusDs1 = false;
         public bool _runStarted = false;
         public bool _SplitGo = false;
+        public bool _PracticeMode = false;
         public DTDs1 dataDs1;
         public DefinitionsDs1 defDs1 = new DefinitionsDs1();
         public ProfilesControl _profile;       
@@ -400,22 +401,25 @@ namespace AutoSplitterCore
         {
             while (dataDs1.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(5000);
-                foreach (var b in dataDs1.getBossToSplit())
+                Thread.Sleep(3000);
+                if (!_PracticeMode)
                 {
-                    if (!b.IsSplited && Ds1.ReadEventFlag(b.Id))
+                    foreach (var b in dataDs1.getBossToSplit())
                     {
-                        if (b.Mode == "Loading game after")
+                        if (!b.IsSplited && Ds1.ReadEventFlag(b.Id))
                         {
-                            if (!listPendingB.Contains(b))
+                            if (b.Mode == "Loading game after")
                             {
-                                listPendingB.Add(b);
+                                if (!listPendingB.Contains(b))
+                                {
+                                    listPendingB.Add(b);
+                                }
                             }
-                        }
-                        else
-                        {
-                            b.IsSplited = true;
-                            SplitCheck();                          
+                            else
+                            {
+                                b.IsSplited = true;
+                                SplitCheck();
+                            }
                         }
                     }
                 }
@@ -426,23 +430,26 @@ namespace AutoSplitterCore
         {
             while (dataDs1.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(5000);
-                foreach (var bonfire in dataDs1.getBonfireToSplit())
+                Thread.Sleep(3000);
+                if (!_PracticeMode)
                 {
-                    Bonfire aux = bonfire.Id;
-                    if (!bonfire.IsSplited && Ds1.GetBonfireState(bonfire.Id) == bonfire.Value)
+                    foreach (var bonfire in dataDs1.getBonfireToSplit())
                     {
-                        if (bonfire.Mode == "Loading game after")
+                        Bonfire aux = bonfire.Id;
+                        if (!bonfire.IsSplited && Ds1.GetBonfireState(bonfire.Id) == bonfire.Value)
                         {
-                            if (!listPendingBon.Contains(bonfire))
+                            if (bonfire.Mode == "Loading game after")
                             {
-                                listPendingBon.Add(bonfire);
+                                if (!listPendingBon.Contains(bonfire))
+                                {
+                                    listPendingBon.Add(bonfire);
+                                }
                             }
-                        }
-                        else
-                        {
-                            bonfire.IsSplited = true;
-                            SplitCheck();
+                            else
+                            {
+                                bonfire.IsSplited = true;
+                                SplitCheck();
+                            }
                         }
                     }
                 }
@@ -453,22 +460,25 @@ namespace AutoSplitterCore
         {
             while (dataDs1.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(5000);
-                foreach (var lvl in dataDs1.getLvlToSplit())
+                Thread.Sleep(3000);
+                if (!_PracticeMode)
                 {
-                    if (!lvl.IsSplited && Ds1.GetAttribute(lvl.Attribute) >= lvl.Value)
+                    foreach (var lvl in dataDs1.getLvlToSplit())
                     {
-                        if (lvl.Mode == "Loading game after")
+                        if (!lvl.IsSplited && Ds1.GetAttribute(lvl.Attribute) >= lvl.Value)
                         {
-                            if (!listPendingLvl.Contains(lvl))
+                            if (lvl.Mode == "Loading game after")
                             {
-                                listPendingLvl.Add(lvl);
+                                if (!listPendingLvl.Contains(lvl))
+                                {
+                                    listPendingLvl.Add(lvl);
+                                }
                             }
-                        }
-                        else
-                        {
-                            lvl.IsSplited = true;
-                            SplitCheck();
+                            else
+                            {
+                                lvl.IsSplited = true;
+                                SplitCheck();
+                            }
                         }
                     }
                 }
@@ -480,27 +490,30 @@ namespace AutoSplitterCore
             while (dataDs1.enableSplitting && _StatusProcedure)
             {
                 Thread.Sleep(100);
-                foreach (var p in dataDs1.getPositionsToSplit())
+                if (!_PracticeMode)
                 {
-                    if (!p.IsSplited)
+                    foreach (var p in dataDs1.getPositionsToSplit())
                     {
-                        var currentlyPosition = Ds1.GetPosition();
-                        var rangeX = ((currentlyPosition.X - p.vector.X) <= dataDs1.positionMargin) && ((currentlyPosition.X - p.vector.X) >= -dataDs1.positionMargin);
-                        var rangeY = ((currentlyPosition.Y - p.vector.Y) <= dataDs1.positionMargin) && ((currentlyPosition.Y - p.vector.Y) >= -dataDs1.positionMargin);
-                        var rangeZ = ((currentlyPosition.Z - p.vector.Z) <= dataDs1.positionMargin) && ((currentlyPosition.Z - p.vector.Z) >= -dataDs1.positionMargin);
-                        if (rangeX && rangeY && rangeZ)
+                        if (!p.IsSplited)
                         {
-                            if (p.Mode == "Loading game after")
+                            var currentlyPosition = Ds1.GetPosition();
+                            var rangeX = ((currentlyPosition.X - p.vector.X) <= dataDs1.positionMargin) && ((currentlyPosition.X - p.vector.X) >= -dataDs1.positionMargin);
+                            var rangeY = ((currentlyPosition.Y - p.vector.Y) <= dataDs1.positionMargin) && ((currentlyPosition.Y - p.vector.Y) >= -dataDs1.positionMargin);
+                            var rangeZ = ((currentlyPosition.Z - p.vector.Z) <= dataDs1.positionMargin) && ((currentlyPosition.Z - p.vector.Z) >= -dataDs1.positionMargin);
+                            if (rangeX && rangeY && rangeZ)
                             {
-                                if (!listPendingP.Contains(p))
+                                if (p.Mode == "Loading game after")
                                 {
-                                    listPendingP.Add(p);
+                                    if (!listPendingP.Contains(p))
+                                    {
+                                        listPendingP.Add(p);
+                                    }
                                 }
-                            }
-                            else
-                            {
-                                p.IsSplited = true;
-                                SplitCheck();                         
+                                else
+                                {
+                                    p.IsSplited = true;
+                                    SplitCheck();
+                                }
                             }
                         }
                     }
@@ -513,23 +526,26 @@ namespace AutoSplitterCore
         {
             while (dataDs1.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(5000);
-                foreach (var item in dataDs1.getItemsToSplit())
+                Thread.Sleep(3000);
+                if (!_PracticeMode)
                 {
-                    Item aux = allItems.Find(i => i.Id == item.Id);
-                    if (!item.IsSplited && inventory.Exists(i => i.ItemType == aux.ItemType))
+                    foreach (var item in dataDs1.getItemsToSplit())
                     {
-                        if (item.Mode == "Loading game after")
+                        Item aux = allItems.Find(i => i.Id == item.Id);
+                        if (!item.IsSplited && inventory.Exists(i => i.ItemType == aux.ItemType))
                         {
-                            if (!listPendingItem.Contains(item))
+                            if (item.Mode == "Loading game after")
                             {
-                                listPendingItem.Add(item);
+                                if (!listPendingItem.Contains(item))
+                                {
+                                    listPendingItem.Add(item);
+                                }
                             }
-                        }
-                        else
-                        {
-                            item.IsSplited = true;
-                            SplitCheck();
+                            else
+                            {
+                                item.IsSplited = true;
+                                SplitCheck();
+                            }
                         }
                     }
                 }

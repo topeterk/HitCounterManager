@@ -38,6 +38,7 @@ namespace AutoSplitterCore
         public bool _StatusHollow = false;
         public bool _runStarted = false;
         public bool _SplitGo = false;
+        public bool _PracticeMode = false;
         public DTHollow dataHollow;
         public ProfilesControl _profile;    
         public DefinitionHollow.Vector3F currentPosition = new DefinitionHollow.Vector3F();
@@ -319,22 +320,25 @@ namespace AutoSplitterCore
             while (dataHollow.enableSplitting)
             {
                 Thread.Sleep(500);
-                if (hollow.Memory.GameState() == GameState.PLAYING)
+                if (!_PracticeMode)
                 {
-                    _runStarted = true;
-                }
-                if (dataHollow.gameTimer && (hollow.Memory.GameState() == GameState.LOADING || hollow.Memory.GameState() == GameState.CUTSCENE))
-                {
-                    do
+                    if (hollow.Memory.GameState() == GameState.PLAYING)
+                    {
+                        _runStarted = true;
+                    }
+                    if (dataHollow.gameTimer && (hollow.Memory.GameState() == GameState.LOADING || hollow.Memory.GameState() == GameState.CUTSCENE))
+                    {
+                        do
+                        {
+                            _runStarted = false;
+                        } while (hollow.Memory.GameState() == GameState.LOADING || hollow.Memory.GameState() == GameState.CUTSCENE);
+                        _runStarted = true;
+                    }
+
+                    if (currentPosition.sceneName.StartsWith("Quit_To_Menu") || currentPosition.sceneName.StartsWith("Menu_Title") || currentPosition.sceneName.StartsWith("PermaDeath") || hollow.Memory.GameState() == GameState.MAIN_MENU)
                     {
                         _runStarted = false;
-                    } while (hollow.Memory.GameState() == GameState.LOADING || hollow.Memory.GameState() == GameState.CUTSCENE);
-                    _runStarted = true;
-                }
-                
-                if (currentPosition.sceneName.StartsWith("Quit_To_Menu") || currentPosition.sceneName.StartsWith("Menu_Title") || currentPosition.sceneName.StartsWith("PermaDeath") || hollow.Memory.GameState() == GameState.MAIN_MENU)
-                {
-                    _runStarted=false;
+                    }
                 }
             }
         }
@@ -366,13 +370,16 @@ namespace AutoSplitterCore
         {
             while (dataHollow.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(5000);
-                foreach (var element in dataHollow.getBosstoSplit())
+                Thread.Sleep(3000);
+                if (!_PracticeMode)
                 {
-                    if (!element.IsSplited && hollow.Memory.PlayerData<bool>(element.Offset))
+                    foreach (var element in dataHollow.getBosstoSplit())
                     {
-                        element.IsSplited = true;
-                        SplitCheck();
+                        if (!element.IsSplited && hollow.Memory.PlayerData<bool>(element.Offset))
+                        {
+                            element.IsSplited = true;
+                            SplitCheck();
+                        }
                     }
                 }
             }
@@ -382,7 +389,7 @@ namespace AutoSplitterCore
         {
             while (dataHollow.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(5000);
+                Thread.Sleep(3000);
                 foreach (var element in dataHollow.getMiniBossToSplit())
                 {
                     if (!element.IsSplited)
@@ -412,32 +419,35 @@ namespace AutoSplitterCore
         {
             while (dataHollow.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(5000);
-                foreach (var element in dataHollow.getCharmToSplit())
+                Thread.Sleep(3000);
+                if (!_PracticeMode)
                 {
-                    if (!element.IsSplited)
+                    foreach (var element in dataHollow.getCharmToSplit())
                     {
-                        if (element.intMethod)
+                        if (!element.IsSplited)
                         {
-                            if (_StatusHollow && hollow.Memory.PlayerData<int>(element.Offset) == element.intCompare)
+                            if (element.intMethod)
                             {
-                                element.IsSplited = true;
-                                SplitCheck();
-                            }
-                        }
-                        else
-                        {
-                            if (hollow.Memory.PlayerData<bool>(element.Offset) && !element.kingSoulsCase)
-                            {
-                                element.IsSplited = true;
-                                SplitCheck();
-                            }
-                            else
-                            {
-                                if(hollow.Memory.PlayerData<int>(Offset.charmCost_36) == 5 && hollow.Memory.PlayerData<int>(Offset.royalCharmState) == 3)
+                                if (_StatusHollow && hollow.Memory.PlayerData<int>(element.Offset) == element.intCompare)
                                 {
                                     element.IsSplited = true;
                                     SplitCheck();
+                                }
+                            }
+                            else
+                            {
+                                if (hollow.Memory.PlayerData<bool>(element.Offset) && !element.kingSoulsCase)
+                                {
+                                    element.IsSplited = true;
+                                    SplitCheck();
+                                }
+                                else
+                                {
+                                    if (hollow.Memory.PlayerData<int>(Offset.charmCost_36) == 5 && hollow.Memory.PlayerData<int>(Offset.royalCharmState) == 3)
+                                    {
+                                        element.IsSplited = true;
+                                        SplitCheck();
+                                    }
                                 }
                             }
                         }
@@ -450,25 +460,28 @@ namespace AutoSplitterCore
         {
             while (dataHollow.enableSplitting && _StatusProcedure)
             {
-                Thread.Sleep(5000);
-                foreach (var element in dataHollow.getSkillsToSplit())
+                Thread.Sleep(3000);
+                if (!_PracticeMode)
                 {
-                    if (!element.IsSplited)
+                    foreach (var element in dataHollow.getSkillsToSplit())
                     {
-                        if (element.intMethod)
+                        if (!element.IsSplited)
                         {
-                            if (_StatusHollow && hollow.Memory.PlayerData<int>(element.Offset) == element.intCompare)
+                            if (element.intMethod)
                             {
-                                element.IsSplited = true;
-                                SplitCheck();
+                                if (_StatusHollow && hollow.Memory.PlayerData<int>(element.Offset) == element.intCompare)
+                                {
+                                    element.IsSplited = true;
+                                    SplitCheck();
+                                }
                             }
-                        }
-                        else
-                        {
-                            if (hollow.Memory.PlayerData<bool>(element.Offset))
+                            else
                             {
-                                element.IsSplited = true;
-                                SplitCheck();
+                                if (hollow.Memory.PlayerData<bool>(element.Offset))
+                                {
+                                    element.IsSplited = true;
+                                    SplitCheck();
+                                }
                             }
                         }
                     }
@@ -481,126 +494,27 @@ namespace AutoSplitterCore
             while (dataHollow.enableSplitting && _StatusProcedure)
             {
                 Thread.Sleep(100);
-                foreach (var p in dataHollow.getPositionToSplit())
+                if (!_PracticeMode)
                 {
-                    if (!p.IsSplited)
+                    foreach (var p in dataHollow.getPositionToSplit())
                     {
-                        var currentlyPosition = this.currentPosition;
-                        var rangeX = ((currentlyPosition.position.X - p.position.X) <= dataHollow.positionMargin) && ((currentlyPosition.position.X - p.position.X) >= -dataHollow.positionMargin);
-                        var rangeY = ((currentlyPosition.position.Y - p.position.Y) <= dataHollow.positionMargin) && ((currentlyPosition.position.Y - p.position.Y) >= -dataHollow.positionMargin);
-                        var rangeZ = currentPosition.sceneName == p.sceneName;
-                        if (rangeX && rangeY && rangeZ)
-                        {                    
-                            p.IsSplited = true;
-                            SplitCheck();
+                        if (!p.IsSplited)
+                        {
+                            var currentlyPosition = this.currentPosition;
+                            var rangeX = ((currentlyPosition.position.X - p.position.X) <= dataHollow.positionMargin) && ((currentlyPosition.position.X - p.position.X) >= -dataHollow.positionMargin);
+                            var rangeY = ((currentlyPosition.position.Y - p.position.Y) <= dataHollow.positionMargin) && ((currentlyPosition.position.Y - p.position.Y) >= -dataHollow.positionMargin);
+                            var rangeZ = currentPosition.sceneName == p.sceneName;
+                            if (rangeX && rangeY && rangeZ)
+                            {
+                                p.IsSplited = true;
+                                SplitCheck();
+                            }
                         }
                     }
                 }
             }
         }
 
-        #region Internal Data Pantheon
-        /*
-        private List<DefinitionHollow.Pantheon> p1 = new List<DefinitionHollow.Pantheon>
-        {
-            new DefinitionHollow.Pantheon() { Title = "Vengefly King"},
-            new DefinitionHollow.Pantheon() { Title = "Gruz Mother"},
-            new DefinitionHollow.Pantheon() { Title = "False Knight"},
-            new DefinitionHollow.Pantheon() { Title = "Massive Moss Charger"},
-            new DefinitionHollow.Pantheon() { Title = "Hornet (Protector)"},
-            new DefinitionHollow.Pantheon() { Title = "Gorb"},
-            new DefinitionHollow.Pantheon() { Title = "Dung Defender"},
-            new DefinitionHollow.Pantheon() { Title = "Soul Warrior"},
-            new DefinitionHollow.Pantheon() { Title = "Brooding Mawlek"},
-            new DefinitionHollow.Pantheon() { Title = "Oro & Mato Nail Bros"}
-
-        };
-        private List<DefinitionHollow.Pantheon> p2 = new List<DefinitionHollow.Pantheon>
-        {
-             new DefinitionHollow.Pantheon() { Title = "Xero"},
-             new DefinitionHollow.Pantheon() { Title = "Crystal Guardian"},
-             new DefinitionHollow.Pantheon() { Title = "Soul Master"},
-             new DefinitionHollow.Pantheon() { Title = "Oblobbles"},
-             new DefinitionHollow.Pantheon() { Title = "Sisters of Battle"},
-             new DefinitionHollow.Pantheon() { Title = "Marmu"},
-             new DefinitionHollow.Pantheon() { Title = "Nosk"},
-             new DefinitionHollow.Pantheon() { Title = "Flukemarm"},
-             new DefinitionHollow.Pantheon() { Title = "Broken Vessel"},
-             new DefinitionHollow.Pantheon() { Title = "Paintmaster Sheo"}
-        };
-        private List<DefinitionHollow.Pantheon> p3 = new List<DefinitionHollow.Pantheon>
-        {
-            new DefinitionHollow.Pantheon(){Title = "Hive Knight"},
-            new DefinitionHollow.Pantheon(){Title = "Elder Hu"},
-            new DefinitionHollow.Pantheon(){Title = "The Collector"},
-            new DefinitionHollow.Pantheon(){Title = "God Tamer"},
-            new DefinitionHollow.Pantheon(){Title = "Troupe Master Grimm"},
-            new DefinitionHollow.Pantheon(){Title = "Galien"},
-            new DefinitionHollow.Pantheon(){Title = "Grey Prince Zote"},
-            new DefinitionHollow.Pantheon(){Title = "Uumuu"},
-            new DefinitionHollow.Pantheon(){Title = "Hornet (Sentinel)"},
-            new DefinitionHollow.Pantheon(){Title = "Great Nailsage Sly"}
-        };
-        private List<DefinitionHollow.Pantheon> p4 = new List<DefinitionHollow.Pantheon>()
-        {
-            new DefinitionHollow.Pantheon(){Title = "Enraged Guardian" },
-            new DefinitionHollow.Pantheon(){Title = "Lost Kin" },
-            new DefinitionHollow.Pantheon(){Title = "No Eyes" },
-            new DefinitionHollow.Pantheon(){Title = "Traitor Lord" },
-            new DefinitionHollow.Pantheon(){Title = "White Defender" },
-            new DefinitionHollow.Pantheon(){Title = "Failed Champion" },
-            new DefinitionHollow.Pantheon(){Title = "Markoth" },
-            new DefinitionHollow.Pantheon(){Title = "Watcher Knight" },
-            new DefinitionHollow.Pantheon(){Title = "Soul Tyrant" },
-            new DefinitionHollow.Pantheon(){Title = "Pure Vessel" }
-        };
-        private List<DefinitionHollow.Pantheon> p5 = new List<DefinitionHollow.Pantheon>()
-        {
-            new DefinitionHollow.Pantheon(){Title = "Grey Prince Zote"},
-            new DefinitionHollow.Pantheon(){Title = "Vengefly King"},
-            new DefinitionHollow.Pantheon(){Title = "Gruz Mother"},
-            new DefinitionHollow.Pantheon(){Title = "False Knight"},
-            new DefinitionHollow.Pantheon(){Title = "Massive Moss Charger"},
-            new DefinitionHollow.Pantheon(){Title = "Hornet (Protector)"},
-            new DefinitionHollow.Pantheon(){Title = "Gorb"},
-            new DefinitionHollow.Pantheon(){Title = "Dung Defender"},
-            new DefinitionHollow.Pantheon(){Title = "Soul Warrior"},
-            new DefinitionHollow.Pantheon(){Title = "Brooding Mawlek"},
-            new DefinitionHollow.Pantheon(){Title = "Oro & Mato Nail Bros"},
-            new DefinitionHollow.Pantheon(){Title = "Xero"},
-            new DefinitionHollow.Pantheon(){Title = "Crystal Guardian"},
-            new DefinitionHollow.Pantheon(){Title = "Soul Master"},
-            new DefinitionHollow.Pantheon(){Title = "Oblobbles"},
-            new DefinitionHollow.Pantheon(){Title = "Sisters of Battle"},
-            new DefinitionHollow.Pantheon(){Title = "Marmu"},
-            new DefinitionHollow.Pantheon(){Title = "Flukemarm"},
-            new DefinitionHollow.Pantheon(){Title = "Broken Vessel"},
-            new DefinitionHollow.Pantheon(){Title = "Galien"},
-            new DefinitionHollow.Pantheon(){Title = "Paintmaster Sheo"},
-            new DefinitionHollow.Pantheon(){Title = "Hive Knight"},
-            new DefinitionHollow.Pantheon(){Title = "Elder Hu"},
-            new DefinitionHollow.Pantheon(){Title = "The Collector"},
-            new DefinitionHollow.Pantheon(){Title = "God Tamer"},
-            new DefinitionHollow.Pantheon(){Title = "Troupe Master Grim"},
-            new DefinitionHollow.Pantheon(){Title = "Watcher Knights"},
-            new DefinitionHollow.Pantheon(){Title = "Uumuu"},
-            new DefinitionHollow.Pantheon(){Title = "Winged Nosk"},
-            new DefinitionHollow.Pantheon(){Title = "Great Nailsage Slay"},
-            new DefinitionHollow.Pantheon(){Title = "Hornet (Sentinel)"},
-            new DefinitionHollow.Pantheon(){Title = "Enraged Guardian"},
-            new DefinitionHollow.Pantheon(){Title = "Lost Kin"},
-            new DefinitionHollow.Pantheon(){Title = "No Eyes"},
-            new DefinitionHollow.Pantheon(){Title = "Traitor Lord"},
-            new DefinitionHollow.Pantheon(){Title = "White Defender"},
-            new DefinitionHollow.Pantheon(){Title = "Soul Tyrant"},
-            new DefinitionHollow.Pantheon(){Title = "Markoth"},
-            new DefinitionHollow.Pantheon(){Title = "Failed Champion"},
-            new DefinitionHollow.Pantheon(){Title = "Nightmare King Grimm"},
-            new DefinitionHollow.Pantheon(){Title = "Pure Vessel"},
-            new DefinitionHollow.Pantheon(){Title = "Absolute Radiance"}
-
-        };*/
-        #endregion
 
         private bool PantheonCase(string title)
         {
@@ -726,71 +640,75 @@ namespace AutoSplitterCore
             while (dataHollow.enableSplitting && _StatusProcedure)
             {
                 Thread.Sleep(10);
-                if (dataHollow.PantheonMode == 0)
+                if (!_PracticeMode)
                 {
-                    
-                    foreach (var element in dataHollow.getPhanteonToSplit())
+                    if (dataHollow.PantheonMode == 0)
                     {
-                        if (!element.IsSplited && PantheonCase(element.Title))
+
+                        foreach (var element in dataHollow.getPhanteonToSplit())
                         {
-                            element.IsSplited = true;
-                            SplitCheck();
-                            nSplit++;
+                            if (!element.IsSplited && PantheonCase(element.Title))
+                            {
+                                element.IsSplited = true;
+                                SplitCheck();
+                                nSplit++;
+                            }
+                        }
+                        if ((nSplit == tSplit && currentPosition.sceneName.StartsWith("GG_Atrium")) || (nSplit == p5s && currentPosition.sceneName.StartsWith("Cinematic_Ending_E")))
+                        { //P1+2+3+4 o p5
+                            notSplited(ref dataHollow.phanteonToSplit);
+                            nSplit = 0;
                         }
                     }
-                    if ( (nSplit == tSplit && currentPosition.sceneName.StartsWith("GG_Atrium")) || (nSplit == p5s && currentPosition.sceneName.StartsWith("Cinematic_Ending_E"))){ //P1+2+3+4 o p5
-                        notSplited(ref dataHollow.phanteonToSplit);
-                        nSplit = 0;
-                    }
-                }
-                else
-                {                 
-                    foreach (var element in dataHollow.getPhanteonToSplit())
+                    else
                     {
-                        if (element.Title == "Pantheon of the Master" && !element.IsSplited)
+                        foreach (var element in dataHollow.getPhanteonToSplit())
                         {
-                            if (currentPosition.previousScene.StartsWith("GG_Nailmasters") && !currentPosition.sceneName.StartsWith("GG_Atrium"))
+                            if (element.Title == "Pantheon of the Master" && !element.IsSplited)
                             {
-                                SplitCheck();
-                                element.IsSplited = true;
+                                if (currentPosition.previousScene.StartsWith("GG_Nailmasters") && !currentPosition.sceneName.StartsWith("GG_Atrium"))
+                                {
+                                    SplitCheck();
+                                    element.IsSplited = true;
+                                }
                             }
-                        }
 
 
-                        if (element.Title == "Pantheon of the Artist" && !element.IsSplited)
-                        {
-                            if (currentPosition.previousScene.StartsWith("GG_Painter") && !currentPosition.sceneName.StartsWith("GG_Atrium"))
+                            if (element.Title == "Pantheon of the Artist" && !element.IsSplited)
                             {
-                                SplitCheck();
-                                element.IsSplited = true;
+                                if (currentPosition.previousScene.StartsWith("GG_Painter") && !currentPosition.sceneName.StartsWith("GG_Atrium"))
+                                {
+                                    SplitCheck();
+                                    element.IsSplited = true;
+                                }
                             }
-                        }
 
-                        if (element.Title == "Pantheon of the Sage" && !element.IsSplited)
-                        {
-                            if (currentPosition.previousScene.StartsWith("GG_Sly") && !currentPosition.sceneName.StartsWith("GG_Atrium"))
+                            if (element.Title == "Pantheon of the Sage" && !element.IsSplited)
                             {
-                                SplitCheck();
-                                element.IsSplited = true;
+                                if (currentPosition.previousScene.StartsWith("GG_Sly") && !currentPosition.sceneName.StartsWith("GG_Atrium"))
+                                {
+                                    SplitCheck();
+                                    element.IsSplited = true;
+                                }
+
                             }
-                            
-                        }
 
-                        if (element.Title == "Pantheon of the Knight" && !element.IsSplited)
-                        {
-                            if (currentPosition.previousScene.StartsWith("GG_Hollow_Knight") && !currentPosition.sceneName.StartsWith("GG_Atrium"))
+                            if (element.Title == "Pantheon of the Knight" && !element.IsSplited)
                             {
-                                SplitCheck();
-                                element.IsSplited = true;
+                                if (currentPosition.previousScene.StartsWith("GG_Hollow_Knight") && !currentPosition.sceneName.StartsWith("GG_Atrium"))
+                                {
+                                    SplitCheck();
+                                    element.IsSplited = true;
+                                }
                             }
-                        }
 
-                        if (element.Title == "Pantheon of Hallownest" && !element.IsSplited)
-                        {
-                            if (currentPosition.sceneName.StartsWith("Cinematic_Ending_E"))
+                            if (element.Title == "Pantheon of Hallownest" && !element.IsSplited)
                             {
-                                SplitCheck();
-                                element.IsSplited = true;
+                                if (currentPosition.sceneName.StartsWith("Cinematic_Ending_E"))
+                                {
+                                    SplitCheck();
+                                    element.IsSplited = true;
+                                }
                             }
                         }
                     }
