@@ -32,6 +32,7 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 * Timer (including current, PB and gold split times)
 * Customizable designs (Find [some examples](../../wiki/Designs) at the [Wiki pages](../../wiki))
 
+
 ### Pre-defined profiles
 
 * Bloodborne + The old hunters
@@ -45,6 +46,14 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 * The Surge + A walk in the park
 * The Surge 2
 * Mortal Shell
+* Celeste
+* Crash Bandicut 1 
+* Crash Bandicut 2
+* Crash Bandicut 3
+* Crash Bandicut 4
+* Cuphead
+* Hades
+* Hollow Knight
 
 ## Get the software
 All available releases can be found at the [Releases page](../../releases) on GitHub.  
