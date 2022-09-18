@@ -698,7 +698,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_FECADC846DF34601AA947629D8F47E12"
                     {
                     "Sequence" = "3:300"
-                    "DisplayName" = "8:Confirmar bestätigen"
+                    "DisplayName" = "8:Installation bestätigen"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdConfirmDlg.wid"
@@ -753,7 +753,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_C79133F6A0FD4780A7E22AA094B433EE"
                     {
                     "Sequence" = "3:200"
-                    "DisplayName" = "8:Carpeta de instalación"
+                    "DisplayName" = "8:Installationsordner"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdAdminFolderDlg.wid"
@@ -830,7 +830,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_42A87679F4604615AD4E9D4302832281"
                     {
                     "Sequence" = "3:100"
-                    "DisplayName" = "8:Progreso"
+                    "DisplayName" = "8:Status"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdProgressDlg.wid"
