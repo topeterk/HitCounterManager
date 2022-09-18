@@ -210,6 +210,19 @@ DLL Used:
 		   Author: James Newton-King (JamesNK)
 		   Source: https://github.com/JamesNK/Newtonsoft.Json.git
 		   Licence: MIT
+Resources:	
+	- Setup AutoSplitterCore Banner Image
+		Title: -
+		Author: Neimex23
+		Licence: MIT
+		Using: Setup AutoSplitterCore Icon
+
+	- Setup AutoSplitterCore Icon
+		Title: -
+		File Title: AutoSplitterSetupIcon.ico
+		Author: Elionas
+		Source: https://pixabay.com/images/id-1345869/
+		Licence: Pixabay License
 
 ==============================================================================
 Application Icon
@@ -286,24 +299,6 @@ Title: -
 Author: Free-Photos
 Source: https://pixabay.com/photos/bonfire-fire-man-dancing-rituals-1209269/
 Licence: Pixabay License
-
-==============================================================================
-Setup AutoSplitterCore Banner Image
-
-Title: -
-Author: Neimex23
-Licence: MIT
-Using: Setup AutoSplitterCore Icon
-
-==============================================================================
-Setup AutoSplitterCore Icon
-
-Title: -
-File Title: AutoSplitterSetupIcon.ico
-Author: Elionas
-Source: https://pixabay.com/images/id-1345869/
-Licence: Pixabay License
-
 
 ==============================================================================
 C# JSON parser

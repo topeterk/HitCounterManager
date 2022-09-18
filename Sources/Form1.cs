@@ -38,28 +38,6 @@ namespace HitCounterManager
         private bool SettingsDialogOpen = false;
         private bool ReadOnlyMode = false;
 
-        private bool _DllAttached { get; set; }
-        private string DllPath = String.Empty;
-        private Assembly assembly = null;
-        private object obj = null;
-        Type type = null;
-        MethodInfo LoadAutoSplitterSettings = null;
-        MethodInfo SaveAutoSplitterSettings = null;
-        MethodInfo GetSplitterEnable = null;
-        MethodInfo EnableSplitting = null;
-        MethodInfo ReturnCurrentIGT = null;
-        MethodInfo ResetSplitterFlags = null;
-        MethodInfo SetGameIGT = null;
-        MethodInfo AutoSplitterForm = null;
-        MethodInfo CheckAutoTimerFlag = null;
-        MethodInfo CheckGameTimerFlag = null;
-        MethodInfo GetIgtSplitterTimer = null;
-        MethodInfo CheckSplitterRunStarted = null;
-        MethodInfo SetSplitterRunStarted = null;
-        MethodInfo SetPointers = null;
-        MethodInfo GetIsIGTActive = null;
-        public Form1 main = null;
-
         #region Form
 
         public Form1()
@@ -79,63 +57,7 @@ namespace HitCounterManager
             btnHit.Select();
             LoadSettings();
             ProfileChangedHandler(sender, e);
-
-            DllPath = @Path.GetFullPath("AutoSplitterCore.dll");
-            if (!File.Exists(DllPath))
-            {
-                _DllAttached = false;
-                comboBoxGame.Hide();
-                GameToSplitLabel.Hide();
-                btnSplitter.Hide();
-                this.btnHit.Size = new System.Drawing.Size(200, 40);
-                this.btnSplit.Location = new System.Drawing.Point(540, 30);
-                this.btnWayHit.Location = new System.Drawing.Point(460, 30);
-                this.profCtrl.Location = new System.Drawing.Point(14, 100);
-            }
-            else
-            {
-               _DllAttached = true;
-                assembly = Assembly.LoadFile(DllPath);
-                type = assembly.GetType("AutoSplitterCore.AutoSplitterMainModule");
-                obj = Activator.CreateInstance(type);
-                LoadAutoSplitterSettings = type.GetMethod("LoadAutoSplitterSettingsM");
-                SaveAutoSplitterSettings = type.GetMethod("SaveAutoSplitterSettingsM");
-                GetSplitterEnable = type.GetMethod("GetSplitterEnable");
-                EnableSplitting = type.GetMethod("EnableSplitting");
-                ReturnCurrentIGT = type.GetMethod("ReturnCurrentIGTM");
-                ResetSplitterFlags = type.GetMethod("ResetSplitterFlags");
-                SetGameIGT = type.GetMethod("SetGameIGT");
-                AutoSplitterForm = type.GetMethod("AutoSplitterForm");
-                CheckAutoTimerFlag = type.GetMethod("CheckAutoTimerFlag");
-                CheckGameTimerFlag = type.GetMethod("CheckGameTimerFlag");
-                GetIgtSplitterTimer = type.GetMethod("GetIgtSplitterTimer");
-                CheckSplitterRunStarted = type.GetMethod("CheckSplitterRunStarted");
-                SetSplitterRunStarted = type.GetMethod("SetSplitterRunStarted");
-                SetPointers = type.GetMethod("SetPointers");
-                GetIsIGTActive = type.GetMethod("GetIsIGTActive");
-
-
-                SetPointers.Invoke(obj, null);
-                LoadAutoSplitterSettings.Invoke(obj, new object [] { profCtrl,this.main });
-                var index = GetSplitterEnable.Invoke(obj,null);
-                switch (index)
-                {
-                    case 1: comboBoxGame.SelectedIndex = 1; break;
-                    case 2: comboBoxGame.SelectedIndex = 2; break;
-                    case 3: comboBoxGame.SelectedIndex = 3; break;
-                    case 4: comboBoxGame.SelectedIndex = 4; break;
-                    case 5: comboBoxGame.SelectedIndex = 5; break;
-                    case 6: comboBoxGame.SelectedIndex = 6; break;
-                    case 7: comboBoxGame.SelectedIndex = 7; break;
-                    case 8: comboBoxGame.SelectedIndex = 8; break;
-                    case 9: comboBoxGame.SelectedIndex = 9; break;
-                    case 0:
-                    default: comboBoxGame.SelectedIndex = 0; break;
-                }
-
-                profCtrl.SetIGTSource(ReturnCurrentIGT,GetIsIGTActive, obj);
-                
-            }         
+            LoadAutoSplitterCoreExtension();
             this.UpdateDarkMode();
         }
 
@@ -168,6 +90,11 @@ namespace HitCounterManager
                         case Shortcuts.SC_Type.SC_Type_PB: btnPB_Click(null, null); break;
                         case Shortcuts.SC_Type.SC_Type_TimerStart: StartStopTimer(true); break;
                         case Shortcuts.SC_Type.SC_Type_TimerStop: StartStopTimer(false); break;
+                        case Shortcuts.SC_Type.SC_Type_Practice: if (_DllAttached) { SetPractice(); } break;
+                        case Shortcuts.SC_Type.SC_Type_HitBossPrev: if (_DllAttached) { btnSplitPrev_Click(null, null); btnHit_Click(null, null); btnSplit_Click(null, null); } break;
+                        case Shortcuts.SC_Type.SC_Type_HitWayPrev: if (_DllAttached) { btnSplitPrev_Click(null, null); btnWayHit_Click(null, null); btnSplit_Click(null, null); } break;
+                        case Shortcuts.SC_Type.SC_Type_BossHitUndoPrev: if (_DllAttached) { btnSplitPrev_Click(null, null); btnHitUndo_Click(null, null); btnSplit_Click(null, null); } break;
+                        case Shortcuts.SC_Type.SC_Type_WayHitUndoPrev: if (_DllAttached) { btnSplitPrev_Click(null, null); btnWayHitUndo_Click(null, null); btnSplit_Click(null, null); } break;
                     }
                 }
             }
@@ -214,13 +141,13 @@ namespace HitCounterManager
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            Form form = new Settings();
+            Form form = new Settings(_DllAttached);
             SettingsDialogOpen = true;
             form.ShowDialog(this);
             SettingsDialogOpen = false;
         }
 
-        private void btnSave_Click(object sender, EventArgs e) { SaveSettings(); if (_DllAttached) { SaveAutoSplitterSettings.Invoke(obj, null); }; }
+        private void btnSave_Click(object sender, EventArgs e) { SaveSettings(); if (_DllAttached) { SaveAutoSplitterSettings.Invoke(obj, null);} }
         private void btnWeb_Click(object sender, EventArgs e) { GitHubUpdate.WebOpenLandingPage(); }
         private void btnTeamHitless_Click(object sender, EventArgs e) { System.Diagnostics.Process.Start("https://discord.gg/4E7cSK7"); }
         private void btnTeamHitlessHispano_Click(object sender, EventArgs e) { System.Diagnostics.Process.Start("https://discord.gg/ntygnch"); }
@@ -249,11 +176,7 @@ namespace HitCounterManager
         private void BtnSplitLock_Click(object sender, EventArgs e) { SetReadOnlyMode(!profCtrl.ReadOnlyMode); }
         private void btnDarkMode_Click(object sender, EventArgs e) { Program.DarkMode = !Program.DarkMode; this.UpdateDarkMode(); }
 
-        private void btnReset_Click(object sender, EventArgs e) 
-        { StartStopTimer(false); 
-          profCtrl.ProfileReset();
-          if (_DllAttached) { ResetSplitterFlags.Invoke(obj, null); }
-        }
+        private void btnReset_Click(object sender, EventArgs e) { StartStopTimer(false); profCtrl.ProfileReset(); if (_DllAttached) { ResetSplitterFlags.Invoke(obj, null); } }
         private void btnPB_Click(object sender, EventArgs e) { StartStopTimer(false); profCtrl.ProfilePB(); }
         private void btnPause_Click(object sender, EventArgs e) { StartStopTimer(!profCtrl.TimerRunning); }
         private void btnHit_Click(object sender, EventArgs e) { profCtrl.ProfileHit(+1); }
@@ -266,14 +189,6 @@ namespace HitCounterManager
         private void btnSplit_MouseDown(object sender, MouseEventArgs e) { if (e.Button == MouseButtons.Right) profCtrl.ProfileSplitGo(-1); }
         private void btnSplitPrev_Click(object sender, EventArgs e) { profCtrl.ProfileSplitGo(-1); }
 
-        private void btnSplitter_Click(object sender, EventArgs e)
-        {
-            if (_DllAttached)
-            {
-                AutoSplitterForm.Invoke(obj, new[] { (object)Program.DarkMode });
-            }
-        }
-                
         private void ProfileChangedHandler(object sender, EventArgs e)
         {
             int TotalSplits, TotalActiveSplit, TotalHits, TotalHitsWay, TotalPB;
@@ -282,7 +197,7 @@ namespace HitCounterManager
             TotalTime /= 1000; // we only care about seconds
 
             lbl_progress.Text = "Progress:  " + TotalActiveSplit + " / " + TotalSplits + "  # " + profCtrl.CurrentAttempts.ToString("D3");
-            lbl_time.Text = "Time: " + (TotalTime / 60 / 60).ToString("D2") + " : " + ((TotalTime / 60) % 60).ToString("D2") + " : " + (TotalTime % 60).ToString("D2");
+            lbl_time.Text = "Time: " + (TotalTime/60/60).ToString("D2") + " : " + ((TotalTime/60) % 60).ToString("D2") + " : " + (TotalTime % 60).ToString("D2");
             lbl_totals.Text = "Total: " + (TotalHits + TotalHitsWay) + " Hits   " + TotalPB + " PB";
             btnPause.Image = profCtrl.TimerRunning ? Sources.Resources.icons8_sleep_32 : Sources.Resources.icons8_time_32;
         }
@@ -293,6 +208,108 @@ namespace HitCounterManager
             btnPause.Image = Start ? Sources.Resources.icons8_sleep_32 : Sources.Resources.icons8_time_32;
         }
 
+        #endregion
+        #region AutoSplitterCoreExtencion
+        //Internal AutoSplitter Without Livesplit program by Neimex23
+        private bool _DllAttached { get; set; }
+        private string DllPath = String.Empty;
+        private Assembly assembly = null;
+        private object obj = null;
+        Type type = null;
+        MethodInfo LoadAutoSplitterSettings = null;
+        MethodInfo SaveAutoSplitterSettings = null;
+        MethodInfo GetSplitterEnable = null;
+        MethodInfo EnableSplitting = null;
+        MethodInfo ReturnCurrentIGT = null;
+        MethodInfo ResetSplitterFlags = null;
+        MethodInfo SetGameIGT = null;
+        MethodInfo AutoSplitterForm = null;
+        MethodInfo CheckAutoTimerFlag = null;
+        MethodInfo CheckGameTimerFlag = null;
+        MethodInfo GetIgtSplitterTimer = null;
+        MethodInfo CheckSplitterRunStarted = null;
+        MethodInfo SetSplitterRunStarted = null;
+        MethodInfo SetPointers = null;
+        MethodInfo GetIsIGTActive = null;
+        MethodInfo SetPracticeMode = null;
+        public Form1 main = null;
+
+        private void LoadAutoSplitterCoreExtension()
+        {
+            DllPath = @Path.GetFullPath("AutoSplitterCore.dll");
+            if (!File.Exists(DllPath))
+            {
+                _DllAttached = false;
+                comboBoxGame.Hide();
+                GameToSplitLabel.Hide();
+                btnSplitter.Hide();
+                PracticeModeCheck.Hide();
+                this.btnHit.Size = new System.Drawing.Size(200, 40);
+                this.btnSplit.Location = new System.Drawing.Point(540, 30);
+                this.btnWayHit.Location = new System.Drawing.Point(460, 30);
+                this.profCtrl.Location = new System.Drawing.Point(14, 100);
+            }
+            else
+            {
+                _DllAttached = true;
+                assembly = Assembly.LoadFile(DllPath);
+                type = assembly.GetType("AutoSplitterCore.AutoSplitterMainModule");
+                obj = Activator.CreateInstance(type);
+                LoadAutoSplitterSettings = type.GetMethod("LoadAutoSplitterSettings");
+                SaveAutoSplitterSettings = type.GetMethod("SaveAutoSplitterSettings");
+                GetSplitterEnable = type.GetMethod("GetSplitterEnable");
+                EnableSplitting = type.GetMethod("EnableSplitting");
+                ReturnCurrentIGT = type.GetMethod("ReturnCurrentIGTM");
+                ResetSplitterFlags = type.GetMethod("ResetSplitterFlags");
+                SetGameIGT = type.GetMethod("SetGameIGT");
+                AutoSplitterForm = type.GetMethod("AutoSplitterForm");
+                CheckAutoTimerFlag = type.GetMethod("CheckAutoTimerFlag");
+                CheckGameTimerFlag = type.GetMethod("CheckGameTimerFlag");
+                GetIgtSplitterTimer = type.GetMethod("GetIgtSplitterTimer");
+                CheckSplitterRunStarted = type.GetMethod("CheckSplitterRunStarted");
+                SetSplitterRunStarted = type.GetMethod("SetSplitterRunStarted");
+                SetPointers = type.GetMethod("SetPointers");
+                GetIsIGTActive = type.GetMethod("GetIsIGTActive");
+                SetPracticeMode = type.GetMethod("SetPracticeMode");
+
+                SetPointers.Invoke(obj, null);
+                LoadAutoSplitterSettings.Invoke(obj, new object[] { profCtrl, this.main });
+                var index = GetSplitterEnable.Invoke(obj, null);
+                switch (index)
+                {
+                    case 1: comboBoxGame.SelectedIndex = 1; break;
+                    case 2: comboBoxGame.SelectedIndex = 2; break;
+                    case 3: comboBoxGame.SelectedIndex = 3; break;
+                    case 4: comboBoxGame.SelectedIndex = 4; break;
+                    case 5: comboBoxGame.SelectedIndex = 5; break;
+                    case 6: comboBoxGame.SelectedIndex = 6; break;
+                    case 7: comboBoxGame.SelectedIndex = 7; break;
+                    case 8: comboBoxGame.SelectedIndex = 8; break;
+                    case 9: comboBoxGame.SelectedIndex = 9; break;
+                    case 0:
+                    default: comboBoxGame.SelectedIndex = 0; break;
+                }
+                profCtrl.SetIGTSource(ReturnCurrentIGT, GetIsIGTActive, obj);
+            }
+        }
+
+        private void btnSplitter_Click(object sender, EventArgs e)
+        {
+            if (_DllAttached)
+            {
+                AutoSplitterForm.Invoke(obj, new[] { (object)Program.DarkMode });
+            }
+        }
+        private void SetPractice()
+        {
+            _ = PracticeModeCheck.Checked ? PracticeModeCheck.Checked = false : PracticeModeCheck.Checked = true;
+            SetPracticeMode.Invoke(obj, new object[] { (object)PracticeModeCheck.Checked });
+        }
+
+        private void PracticeModeCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_DllAttached) SetPracticeMode.Invoke(obj, new object[] { (object)PracticeModeCheck.Checked });
+        }
 
         private void comboBoxGame_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -323,8 +340,8 @@ namespace HitCounterManager
             if (comboBoxGame.SelectedIndex == 6)
             {
                 EnableSplitting.Invoke(obj, new object[] { 6 });
-            }        
-            if(comboBoxGame.SelectedIndex == 7)
+            }
+            if (comboBoxGame.SelectedIndex == 7)
             {
                 EnableSplitting.Invoke(obj, new object[] { 7 });
             }
@@ -335,9 +352,9 @@ namespace HitCounterManager
             if (comboBoxGame.SelectedIndex == 9)
             {
                 EnableSplitting.Invoke(obj, new object[] { 9 });
-            }            
+            }
         }
-
         #endregion
+
     }
 }

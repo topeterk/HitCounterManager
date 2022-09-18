@@ -67,6 +67,7 @@
             this.GameToSplitLabel = new System.Windows.Forms.Label();
             this.comboBoxGame = new System.Windows.Forms.ComboBox();
             this.profCtrl = new HitCounterManager.ProfilesControl();
+            this.PracticeModeCheck = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // ToolTip1
@@ -569,10 +570,24 @@
             this.profCtrl.TabIndex = 24;
             this.profCtrl.ProfileChanged += new System.EventHandler<System.EventArgs>(this.ProfileChangedHandler);
             // 
+            // PracticeModeCheck
+            // 
+            this.PracticeModeCheck.AutoSize = true;
+            this.PracticeModeCheck.BackColor = System.Drawing.SystemColors.Control;
+            this.PracticeModeCheck.ForeColor = System.Drawing.Color.Blue;
+            this.PracticeModeCheck.Location = new System.Drawing.Point(533, 92);
+            this.PracticeModeCheck.Name = "PracticeModeCheck";
+            this.PracticeModeCheck.Size = new System.Drawing.Size(68, 30);
+            this.PracticeModeCheck.TabIndex = 50;
+            this.PracticeModeCheck.Text = "Practice \r\n Mode";
+            this.PracticeModeCheck.UseVisualStyleBackColor = false;
+            this.PracticeModeCheck.CheckedChanged += new System.EventHandler(this.PracticeModeCheck_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(703, 511);
+            this.Controls.Add(this.PracticeModeCheck);
             this.Controls.Add(this.comboBoxGame);
             this.Controls.Add(this.GameToSplitLabel);
             this.Controls.Add(this.btnTeamHitlessHispano);
@@ -658,5 +673,6 @@
         private System.Windows.Forms.Button btnTeamHitlessHispano;
         private System.Windows.Forms.Label GameToSplitLabel;
         private System.Windows.Forms.ComboBox comboBoxGame;
+        private System.Windows.Forms.CheckBox PracticeModeCheck;
     }
 }

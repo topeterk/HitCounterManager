@@ -143,8 +143,14 @@ namespace HitCounterManager
             SC_Type_PB = 7,
             // Since version 1.20:
             SC_Type_TimerStart = 8,
-            SC_Type_TimerStop = 9,
-            SC_Type_MAX = 10
+            SC_Type_TimerStop = 9,    
+            // Since version 1.21 (IF DLL Attached)
+            SC_Type_Practice = 11,
+            SC_Type_HitBossPrev = 12,
+            SC_Type_HitWayPrev = 13,
+            SC_Type_BossHitUndoPrev = 14,
+            SC_Type_WayHitUndoPrev = 15,
+            SC_Type_MAX = 16,
         };
 
         public enum SC_HotKeyMethod {
