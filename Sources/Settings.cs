@@ -308,11 +308,6 @@ namespace HitCounterManager
         private void btnGoToDownloadPage_Click(object sender, EventArgs e) { GitHubUpdate.WebOpenLatestRelease(); }
         private void cbCheckUpdatesOnStartup_CheckedChanged(object sender, EventArgs e) { _settings.CheckUpdatesOnStartup = cbCheckUpdatesOnStartup.Checked; }
 
-
-
-
-        #endregion
-
-        
+        #endregion        
     }
 }

@@ -32,7 +32,6 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 * Timer (including current, PB and gold split times)
 * Customizable designs (Find [some examples](../../wiki/Designs) at the [Wiki pages](../../wiki))
 
-
 ### Pre-defined profiles
 
 * Bloodborne + The old hunters
