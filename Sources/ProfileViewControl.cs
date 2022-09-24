@@ -554,12 +554,24 @@ namespace HitCounterManager
         }
         public void AddDuration(long Duration)
         {
+            //Trace.WriteLine( $"AddDuration({Duration}) @ {DateTime.Now:HH:mm:ss.fff}" );
             int active = ActiveSplit;
             long duration = GetSplitDuration(active) + Duration;
             if (duration < 0) duration = 0;
 
             // We don't mark profile as updated here as this would generate output very very often!
             SetSplitDuration(active, duration);
+        }
+
+        public void SetDuration( long duration, bool forceUpdate )
+        {
+            if (forceUpdate)
+                ProfileUpdateBegin();
+            for (var previousSplitIndex = 0; previousSplitIndex < ActiveSplit; previousSplitIndex++)
+                duration -= GetSplitDuration( previousSplitIndex );
+            SetSplitDuration( ActiveSplit, duration > 0 ? duration : 0 );
+            if (forceUpdate)
+                ProfileUpdateEnd();
         }
 
         public int GetSessionProgress()
