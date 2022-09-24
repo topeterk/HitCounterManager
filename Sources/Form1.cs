@@ -21,6 +21,7 @@
 //SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -234,7 +235,7 @@ namespace HitCounterManager
         MethodInfo SetPointers = null;
         MethodInfo GetIsIGTActive = null;
         MethodInfo SetPracticeMode = null;
-
+        MethodInfo GetGames = null;
         private void LoadAutoSplitter()
         {
             int Offset = btnAutoSplitter.Left - btnSplit.Left;
@@ -278,12 +279,16 @@ namespace HitCounterManager
                 SetPointers = AutoSplitterMainModuleType.GetMethod("SetPointers");
                 GetIsIGTActive = AutoSplitterMainModuleType.GetMethod("GetIsIGTActive");
                 SetPracticeMode = AutoSplitterMainModuleType.GetMethod("SetPracticeMode");
+                GetGames = AutoSplitterMainModuleType.GetMethod("GetGames");
                 AutoSplitterLoaded = true;
 
                 SetPointers.Invoke(AutoSplitterInstance, null);
                 LoadAutoSplitterSettings.Invoke(AutoSplitterInstance, new object[] { profCtrl, this });
+                List<string> GameList = (List<string>)GetGames.Invoke(AutoSplitterInstance, null);
+                foreach (string i in GameList) comboBoxGame.Items.Add(i);
                 comboBoxGame.SelectedIndex = (int)GetSplitterEnable.Invoke(AutoSplitterInstance, null);
                 profCtrl.SetIGTSource(ReturnCurrentIGT, GetIsIGTActive, AutoSplitterInstance);
+                LoadAutoSplitterHotKeys();
             }
         }
 
