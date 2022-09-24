@@ -233,6 +233,7 @@ namespace HitCounterManager
         MethodInfo SetPointers = null;
         MethodInfo GetIsIGTActive = null;
         MethodInfo SetPracticeMode = null;
+        MethodInfo GetPracticeMode = null;
         MethodInfo GetGames = null;
         public Form1 main = null;
 
@@ -273,6 +274,7 @@ namespace HitCounterManager
                 SetPointers = type.GetMethod("SetPointers");
                 GetIsIGTActive = type.GetMethod("GetIsIGTActive");
                 SetPracticeMode = type.GetMethod("SetPracticeMode");
+                GetPracticeMode = type.GetMethod("GetPracticeMode");
                 GetGames = type.GetMethod("GetGames");
 
                 SetPointers.Invoke(obj, null);
@@ -283,6 +285,7 @@ namespace HitCounterManager
                     comboBoxGame.Items.Add(i);
                 }
                 comboBoxGame.SelectedIndex = (int)GetSplitterEnable.Invoke(obj, null);
+                PracticeModeCheck.Checked = (bool)GetPracticeMode.Invoke(obj, null);
                 profCtrl.SetIGTSource(ReturnCurrentIGT, GetIsIGTActive, obj);
                 LoadAutoSplitterHotKeys();
             }
