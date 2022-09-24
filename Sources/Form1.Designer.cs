@@ -543,16 +543,7 @@
             this.comboBoxGame.FormattingEnabled = true;
             this.comboBoxGame.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.comboBoxGame.Items.AddRange(new object[] {
-            "None",
-            "Sekiro",
-            "Dark Souls 1",
-            "Dark Souls 2",
-            "Dark Souls 3",
-            "Elden Ring",
-            "Hollow Knight",
-            "Celeste",
-            "Cuphead",
-            "ASL Method"});
+            "None"});
             this.comboBoxGame.Location = new System.Drawing.Point(112, 97);
             this.comboBoxGame.Name = "comboBoxGame";
             this.comboBoxGame.Size = new System.Drawing.Size(95, 21);

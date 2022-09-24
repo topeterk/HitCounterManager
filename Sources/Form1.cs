@@ -26,6 +26,7 @@ using System.Net;
 using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace HitCounterManager
 {
@@ -232,6 +233,7 @@ namespace HitCounterManager
         MethodInfo SetPointers = null;
         MethodInfo GetIsIGTActive = null;
         MethodInfo SetPracticeMode = null;
+        MethodInfo GetGames = null;
         public Form1 main = null;
 
         private void LoadAutoSplitterCoreExtension()
@@ -271,34 +273,24 @@ namespace HitCounterManager
                 SetPointers = type.GetMethod("SetPointers");
                 GetIsIGTActive = type.GetMethod("GetIsIGTActive");
                 SetPracticeMode = type.GetMethod("SetPracticeMode");
+                GetGames = type.GetMethod("GetGames");
 
                 SetPointers.Invoke(obj, null);
                 LoadAutoSplitterSettings.Invoke(obj, new object[] { profCtrl, this.main });
-                var index = GetSplitterEnable.Invoke(obj, null);
-                switch (index)
+                var GameList = (List<string>)GetGames.Invoke(obj, null);
+                foreach (var i in GameList)
                 {
-                    case 1: comboBoxGame.SelectedIndex = 1; break;
-                    case 2: comboBoxGame.SelectedIndex = 2; break;
-                    case 3: comboBoxGame.SelectedIndex = 3; break;
-                    case 4: comboBoxGame.SelectedIndex = 4; break;
-                    case 5: comboBoxGame.SelectedIndex = 5; break;
-                    case 6: comboBoxGame.SelectedIndex = 6; break;
-                    case 7: comboBoxGame.SelectedIndex = 7; break;
-                    case 8: comboBoxGame.SelectedIndex = 8; break;
-                    case 9: comboBoxGame.SelectedIndex = 9; break;
-                    case 0:
-                    default: comboBoxGame.SelectedIndex = 0; break;
+                    comboBoxGame.Items.Add(i);
                 }
+                comboBoxGame.SelectedIndex = (int)GetSplitterEnable.Invoke(obj, null);
                 profCtrl.SetIGTSource(ReturnCurrentIGT, GetIsIGTActive, obj);
+                LoadAutoSplitterHotKeys();
             }
         }
 
         private void btnSplitter_Click(object sender, EventArgs e)
         {
-            if (_DllAttached)
-            {
-                AutoSplitterForm.Invoke(obj, new[] { (object)Program.DarkMode });
-            }
+            AutoSplitterForm.Invoke(obj, new[] { (object)Program.DarkMode });
         }
         private void SetPractice()
         {
@@ -308,7 +300,7 @@ namespace HitCounterManager
 
         private void PracticeModeCheck_CheckedChanged(object sender, EventArgs e)
         {
-            if (_DllAttached) SetPracticeMode.Invoke(obj, new object[] { (object)PracticeModeCheck.Checked });
+            SetPracticeMode.Invoke(obj, new object[] { (object)PracticeModeCheck.Checked });
         }
 
         private void comboBoxGame_SelectedIndexChanged(object sender, EventArgs e)
@@ -317,42 +309,8 @@ namespace HitCounterManager
             EnableSplitting.Invoke(obj, new object[] { 0 });
 
             //Ask Selected index
-            if (comboBoxGame.SelectedIndex == 1)
-            {
-                EnableSplitting.Invoke(obj, new object[] { 1 });
-            }
-            if (comboBoxGame.SelectedIndex == 2)
-            {
-                EnableSplitting.Invoke(obj, new object[] { 2 });
-            }
-            if (comboBoxGame.SelectedIndex == 3)
-            {
-                EnableSplitting.Invoke(obj, new object[] { 3 });
-            }
-            if (comboBoxGame.SelectedIndex == 4)
-            {
-                EnableSplitting.Invoke(obj, new object[] { 4 });
-            }
-            if (comboBoxGame.SelectedIndex == 5)
-            {
-                EnableSplitting.Invoke(obj, new object[] { 5 });
-            }
-            if (comboBoxGame.SelectedIndex == 6)
-            {
-                EnableSplitting.Invoke(obj, new object[] { 6 });
-            }
-            if (comboBoxGame.SelectedIndex == 7)
-            {
-                EnableSplitting.Invoke(obj, new object[] { 7 });
-            }
-            if (comboBoxGame.SelectedIndex == 8)
-            {
-                EnableSplitting.Invoke(obj, new object[] { 8 });
-            }
-            if (comboBoxGame.SelectedIndex == 9)
-            {
-                EnableSplitting.Invoke(obj, new object[] { 9 });
-            }
+            EnableSplitting.Invoke(obj, new object[] { comboBoxGame.SelectedIndex });
+
         }
         #endregion
 
