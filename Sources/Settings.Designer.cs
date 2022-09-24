@@ -97,6 +97,18 @@
             this.btnCheckVersion = new System.Windows.Forms.Button();
             this.btnGoToDownloadPage = new System.Windows.Forms.Button();
             this.cbCheckUpdatesOnStartup = new System.Windows.Forms.CheckBox();
+            this.tab_autosplitter_shortcuts = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtPracticeMode = new System.Windows.Forms.TextBox();
+            this.cbScPracticeMode = new System.Windows.Forms.CheckBox();
+            this.txtHitWayPrev = new System.Windows.Forms.TextBox();
+            this.txtHitBossPrev = new System.Windows.Forms.TextBox();
+            this.cbScHitWayPrev = new System.Windows.Forms.CheckBox();
+            this.cbScHitBossPrev = new System.Windows.Forms.CheckBox();
+            this.txtUndoHitWayPrev = new System.Windows.Forms.TextBox();
+            this.txtUndoHitBossPrev = new System.Windows.Forms.TextBox();
+            this.cbScUndoHitWayPrev = new System.Windows.Forms.CheckBox();
+            this.cbScUndoHitBossPrev = new System.Windows.Forms.CheckBox();
             this.tab_behavior = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lblShowSplitCount = new System.Windows.Forms.Label();
@@ -127,18 +139,6 @@
             this.txtChangelog = new System.Windows.Forms.TextBox();
             this.lblVersionCurrent = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.tab_autosplitter_shortcuts = new System.Windows.Forms.TabPage();
-            this.txtPracticeMode = new System.Windows.Forms.TextBox();
-            this.cbScPracticeMode = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtHitWayPrev = new System.Windows.Forms.TextBox();
-            this.txtHitBossPrev = new System.Windows.Forms.TextBox();
-            this.cbScHitWayPrev = new System.Windows.Forms.CheckBox();
-            this.cbScHitBossPrev = new System.Windows.Forms.CheckBox();
-            this.txtUndoHitWayPrev = new System.Windows.Forms.TextBox();
-            this.txtUndoHitBossPrev = new System.Windows.Forms.TextBox();
-            this.cbScUndoHitWayPrev = new System.Windows.Forms.CheckBox();
-            this.cbScUndoHitBossPrev = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredHeight)).BeginInit();
@@ -152,8 +152,8 @@
             this.GroupBox1.SuspendLayout();
             this.tab_globalshortcuts.SuspendLayout();
             this.TabControl1.SuspendLayout();
-            this.tab_update.SuspendLayout();
             this.tab_autosplitter_shortcuts.SuspendLayout();
+            this.tab_update.SuspendLayout();
             this.SuspendLayout();
             // 
             // ToolTip1
@@ -705,7 +705,7 @@
             // radioHotKeyMethod_sync
             // 
             this.radioHotKeyMethod_sync.AutoSize = true;
-            this.radioHotKeyMethod_sync.Location = new System.Drawing.Point(6, 215);
+            this.radioHotKeyMethod_sync.Location = new System.Drawing.Point(6, 197);
             this.radioHotKeyMethod_sync.Name = "radioHotKeyMethod_sync";
             this.radioHotKeyMethod_sync.Size = new System.Drawing.Size(219, 17);
             this.radioHotKeyMethod_sync.TabIndex = 17;
@@ -717,7 +717,7 @@
             // radioHotKeyMethod_async
             // 
             this.radioHotKeyMethod_async.AutoSize = true;
-            this.radioHotKeyMethod_async.Location = new System.Drawing.Point(6, 238);
+            this.radioHotKeyMethod_async.Location = new System.Drawing.Point(6, 220);
             this.radioHotKeyMethod_async.Name = "radioHotKeyMethod_async";
             this.radioHotKeyMethod_async.Size = new System.Drawing.Size(204, 17);
             this.radioHotKeyMethod_async.TabIndex = 18;
@@ -730,7 +730,7 @@
             // 
             this.radioHotKeyMethod_llkb.AutoSize = true;
             this.radioHotKeyMethod_llkb.Checked = true;
-            this.radioHotKeyMethod_llkb.Location = new System.Drawing.Point(6, 261);
+            this.radioHotKeyMethod_llkb.Location = new System.Drawing.Point(6, 243);
             this.radioHotKeyMethod_llkb.Name = "radioHotKeyMethod_llkb";
             this.radioHotKeyMethod_llkb.Size = new System.Drawing.Size(296, 17);
             this.radioHotKeyMethod_llkb.TabIndex = 19;
@@ -1030,6 +1030,166 @@
             this.cbCheckUpdatesOnStartup.UseVisualStyleBackColor = true;
             this.cbCheckUpdatesOnStartup.CheckedChanged += new System.EventHandler(this.cbCheckUpdatesOnStartup_CheckedChanged);
             // 
+            // tab_autosplitter_shortcuts
+            // 
+            this.tab_autosplitter_shortcuts.BackColor = System.Drawing.SystemColors.Control;
+            this.tab_autosplitter_shortcuts.Controls.Add(this.cbScHitBossPrev);
+            this.tab_autosplitter_shortcuts.Controls.Add(this.txtUndoHitWayPrev);
+            this.tab_autosplitter_shortcuts.Controls.Add(this.cbScHitWayPrev);
+            this.tab_autosplitter_shortcuts.Controls.Add(this.label4);
+            this.tab_autosplitter_shortcuts.Controls.Add(this.txtUndoHitBossPrev);
+            this.tab_autosplitter_shortcuts.Controls.Add(this.txtPracticeMode);
+            this.tab_autosplitter_shortcuts.Controls.Add(this.txtHitBossPrev);
+            this.tab_autosplitter_shortcuts.Controls.Add(this.cbScPracticeMode);
+            this.tab_autosplitter_shortcuts.Controls.Add(this.cbScUndoHitWayPrev);
+            this.tab_autosplitter_shortcuts.Controls.Add(this.cbScUndoHitBossPrev);
+            this.tab_autosplitter_shortcuts.Controls.Add(this.txtHitWayPrev);
+            this.tab_autosplitter_shortcuts.Location = new System.Drawing.Point(4, 22);
+            this.tab_autosplitter_shortcuts.Name = "tab_autosplitter_shortcuts";
+            this.tab_autosplitter_shortcuts.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_autosplitter_shortcuts.Size = new System.Drawing.Size(588, 301);
+            this.tab_autosplitter_shortcuts.TabIndex = 5;
+            this.tab_autosplitter_shortcuts.Text = "AutoSplitter shortcuts";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 10);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(462, 13);
+            this.label4.TabIndex = 27;
+            this.label4.Text = "Click into a textbox and press any key combination to setup your hotkey for the r" +
+    "espective event:";
+            // 
+            // txtPracticeMode
+            // 
+            this.txtPracticeMode.BackColor = System.Drawing.Color.LightSlateGray;
+            this.txtPracticeMode.Location = new System.Drawing.Point(185, 30);
+            this.txtPracticeMode.Name = "txtPracticeMode";
+            this.txtPracticeMode.ReadOnly = true;
+            this.txtPracticeMode.Size = new System.Drawing.Size(194, 20);
+            this.txtPracticeMode.TabIndex = 2;
+            this.txtPracticeMode.Text = "None";
+            this.txtPracticeMode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip1.SetToolTip(this.txtPracticeMode, "Click into the field and press the hot key you want to use");
+            this.txtPracticeMode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPracticeMode_KeyDown);
+            // 
+            // cbScPracticeMode
+            // 
+            this.cbScPracticeMode.AutoSize = true;
+            this.cbScPracticeMode.Location = new System.Drawing.Point(6, 32);
+            this.cbScPracticeMode.Name = "cbScPracticeMode";
+            this.cbScPracticeMode.Size = new System.Drawing.Size(134, 17);
+            this.cbScPracticeMode.TabIndex = 1;
+            this.cbScPracticeMode.Text = "Toggle Practice Mode:";
+            this.ToolTip1.SetToolTip(this.cbScPracticeMode, "Switch between Normal Mode and Practice Mode");
+            this.cbScPracticeMode.UseVisualStyleBackColor = true;
+            this.cbScPracticeMode.CheckedChanged += new System.EventHandler(this.cbScPracticeMode_CheckedChanged);
+            // 
+            // txtHitWayPrev
+            // 
+            this.txtHitWayPrev.BackColor = System.Drawing.Color.LightBlue;
+            this.txtHitWayPrev.Location = new System.Drawing.Point(185, 82);
+            this.txtHitWayPrev.Name = "txtHitWayPrev";
+            this.txtHitWayPrev.ReadOnly = true;
+            this.txtHitWayPrev.Size = new System.Drawing.Size(194, 20);
+            this.txtHitWayPrev.TabIndex = 6;
+            this.txtHitWayPrev.Text = "None";
+            this.txtHitWayPrev.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip1.SetToolTip(this.txtHitWayPrev, "Click into the field and press the hot key you want to use");
+            this.txtHitWayPrev.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtHitPrevWay_KeyDown);
+            // 
+            // txtHitBossPrev
+            // 
+            this.txtHitBossPrev.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.txtHitBossPrev.Location = new System.Drawing.Point(185, 56);
+            this.txtHitBossPrev.Name = "txtHitBossPrev";
+            this.txtHitBossPrev.ReadOnly = true;
+            this.txtHitBossPrev.Size = new System.Drawing.Size(194, 20);
+            this.txtHitBossPrev.TabIndex = 4;
+            this.txtHitBossPrev.Text = "None";
+            this.txtHitBossPrev.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip1.SetToolTip(this.txtHitBossPrev, "Click into the field and press the hot key you want to use");
+            this.txtHitBossPrev.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtHitPrevBoss_KeyDown);
+            // 
+            // cbScHitWayPrev
+            // 
+            this.cbScHitWayPrev.AutoSize = true;
+            this.cbScHitWayPrev.Location = new System.Drawing.Point(6, 84);
+            this.cbScHitWayPrev.Name = "cbScHitWayPrev";
+            this.cbScHitWayPrev.Size = new System.Drawing.Size(143, 17);
+            this.cbScHitWayPrev.TabIndex = 5;
+            this.cbScHitWayPrev.Text = "Previous Split - Hit (way):";
+            this.ToolTip1.SetToolTip(this.cbScHitWayPrev, "Enable hot key for getting hit (way) during the previous split.\r\nAllows correctin" +
+        "g hits without changing the active split which the timer might run on.");
+            this.cbScHitWayPrev.UseVisualStyleBackColor = true;
+            this.cbScHitWayPrev.CheckedChanged += new System.EventHandler(this.cbScHitWayPrev_CheckedChanged);
+            // 
+            // cbScHitBossPrev
+            // 
+            this.cbScHitBossPrev.AutoSize = true;
+            this.cbScHitBossPrev.Location = new System.Drawing.Point(6, 58);
+            this.cbScHitBossPrev.Name = "cbScHitBossPrev";
+            this.cbScHitBossPrev.Size = new System.Drawing.Size(146, 17);
+            this.cbScHitBossPrev.TabIndex = 3;
+            this.cbScHitBossPrev.Text = "Previous Split - Hit (boss):";
+            this.ToolTip1.SetToolTip(this.cbScHitBossPrev, "Enable hot key for getting hit (boss) during the previous split.\r\nAllows correcti" +
+        "ng hits without changing the active split which the timer might run on.");
+            this.cbScHitBossPrev.UseVisualStyleBackColor = true;
+            this.cbScHitBossPrev.CheckedChanged += new System.EventHandler(this.cbScHitBossPrev_CheckedChanged);
+            // 
+            // txtUndoHitWayPrev
+            // 
+            this.txtUndoHitWayPrev.BackColor = System.Drawing.Color.IndianRed;
+            this.txtUndoHitWayPrev.Location = new System.Drawing.Point(185, 134);
+            this.txtUndoHitWayPrev.Name = "txtUndoHitWayPrev";
+            this.txtUndoHitWayPrev.ReadOnly = true;
+            this.txtUndoHitWayPrev.Size = new System.Drawing.Size(194, 20);
+            this.txtUndoHitWayPrev.TabIndex = 10;
+            this.txtUndoHitWayPrev.Text = "None";
+            this.txtUndoHitWayPrev.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip1.SetToolTip(this.txtUndoHitWayPrev, "Click into the field and press the hot key you want to use");
+            this.txtUndoHitWayPrev.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUndoHitWayPrev_KeyDown);
+            // 
+            // txtUndoHitBossPrev
+            // 
+            this.txtUndoHitBossPrev.BackColor = System.Drawing.Color.RosyBrown;
+            this.txtUndoHitBossPrev.Location = new System.Drawing.Point(185, 108);
+            this.txtUndoHitBossPrev.Name = "txtUndoHitBossPrev";
+            this.txtUndoHitBossPrev.ReadOnly = true;
+            this.txtUndoHitBossPrev.Size = new System.Drawing.Size(194, 20);
+            this.txtUndoHitBossPrev.TabIndex = 8;
+            this.txtUndoHitBossPrev.Text = "None";
+            this.txtUndoHitBossPrev.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip1.SetToolTip(this.txtUndoHitBossPrev, "Click into the field and press the hot key you want to use");
+            this.txtUndoHitBossPrev.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUndoHitBossPrev_KeyDown);
+            // 
+            // cbScUndoHitWayPrev
+            // 
+            this.cbScUndoHitWayPrev.AutoSize = true;
+            this.cbScUndoHitWayPrev.Location = new System.Drawing.Point(6, 136);
+            this.cbScUndoHitWayPrev.Name = "cbScUndoHitWayPrev";
+            this.cbScUndoHitWayPrev.Size = new System.Drawing.Size(170, 17);
+            this.cbScUndoHitWayPrev.TabIndex = 9;
+            this.cbScUndoHitWayPrev.Text = "Previous Split - Undo hit (way):";
+            this.ToolTip1.SetToolTip(this.cbScUndoHitWayPrev, "Enable hot key for undoing hits (way) during the previous split.\r\nAllows correcti" +
+        "ng hits without changing the active split which the timer might run on.");
+            this.cbScUndoHitWayPrev.UseVisualStyleBackColor = true;
+            this.cbScUndoHitWayPrev.CheckedChanged += new System.EventHandler(this.cbScUndoHitWayPrev_CheckedChanged);
+            // 
+            // cbScUndoHitBossPrev
+            // 
+            this.cbScUndoHitBossPrev.AutoSize = true;
+            this.cbScUndoHitBossPrev.Location = new System.Drawing.Point(6, 110);
+            this.cbScUndoHitBossPrev.Name = "cbScUndoHitBossPrev";
+            this.cbScUndoHitBossPrev.Size = new System.Drawing.Size(173, 17);
+            this.cbScUndoHitBossPrev.TabIndex = 7;
+            this.cbScUndoHitBossPrev.Text = "Previous Split - Undo hit (boss):";
+            this.ToolTip1.SetToolTip(this.cbScUndoHitBossPrev, "Enable hot key for undoing hits (boss) during the previous split.\r\nAllows correct" +
+        "ing hits without changing the active split which the timer might run on.");
+            this.cbScUndoHitBossPrev.UseVisualStyleBackColor = true;
+            this.cbScUndoHitBossPrev.CheckedChanged += new System.EventHandler(this.cbScUndoHitBossPrev_CheckedChanged);
+            // 
             // tab_behavior
             // 
             this.tab_behavior.Controls.Add(this.groupBox5);
@@ -1307,7 +1467,7 @@
             // Label6
             // 
             this.Label6.AutoSize = true;
-            this.Label6.Location = new System.Drawing.Point(3, 196);
+            this.Label6.Location = new System.Drawing.Point(6, 178);
             this.Label6.Name = "Label6";
             this.Label6.Size = new System.Drawing.Size(393, 13);
             this.Label6.TabIndex = 9;
@@ -1403,162 +1563,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Current version:      ";
             // 
-            // tab_autosplitter_shortcuts
-            // 
-            this.tab_autosplitter_shortcuts.BackColor = System.Drawing.SystemColors.Control;
-            this.tab_autosplitter_shortcuts.Controls.Add(this.txtUndoHitWayPrev);
-            this.tab_autosplitter_shortcuts.Controls.Add(this.txtUndoHitBossPrev);
-            this.tab_autosplitter_shortcuts.Controls.Add(this.cbScUndoHitWayPrev);
-            this.tab_autosplitter_shortcuts.Controls.Add(this.cbScUndoHitBossPrev);
-            this.tab_autosplitter_shortcuts.Controls.Add(this.txtHitWayPrev);
-            this.tab_autosplitter_shortcuts.Controls.Add(this.txtHitBossPrev);
-            this.tab_autosplitter_shortcuts.Controls.Add(this.cbScHitWayPrev);
-            this.tab_autosplitter_shortcuts.Controls.Add(this.cbScHitBossPrev);
-            this.tab_autosplitter_shortcuts.Controls.Add(this.label4);
-            this.tab_autosplitter_shortcuts.Controls.Add(this.txtPracticeMode);
-            this.tab_autosplitter_shortcuts.Controls.Add(this.cbScPracticeMode);
-            this.tab_autosplitter_shortcuts.Location = new System.Drawing.Point(4, 22);
-            this.tab_autosplitter_shortcuts.Name = "tab_autosplitter_shortcuts";
-            this.tab_autosplitter_shortcuts.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_autosplitter_shortcuts.Size = new System.Drawing.Size(588, 301);
-            this.tab_autosplitter_shortcuts.TabIndex = 5;
-            this.tab_autosplitter_shortcuts.Text = "AutoSplitter Shortcuts";
-            // 
-            // txtPracticeMode
-            // 
-            this.txtPracticeMode.BackColor = System.Drawing.Color.LightSlateGray;
-            this.txtPracticeMode.Location = new System.Drawing.Point(161, 35);
-            this.txtPracticeMode.Name = "txtPracticeMode";
-            this.txtPracticeMode.ReadOnly = true;
-            this.txtPracticeMode.Size = new System.Drawing.Size(194, 20);
-            this.txtPracticeMode.TabIndex = 26;
-            this.txtPracticeMode.Text = "None";
-            this.txtPracticeMode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ToolTip1.SetToolTip(this.txtPracticeMode, "Click into the field and press the hot key you want to use");
-            this.txtPracticeMode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPracticeMode_KeyDown);
-            // 
-            // cbScPracticeMode
-            // 
-            this.cbScPracticeMode.AutoSize = true;
-            this.cbScPracticeMode.Location = new System.Drawing.Point(15, 37);
-            this.cbScPracticeMode.Name = "cbScPracticeMode";
-            this.cbScPracticeMode.Size = new System.Drawing.Size(134, 17);
-            this.cbScPracticeMode.TabIndex = 25;
-            this.cbScPracticeMode.Text = "Practice Mode Toggle:";
-            this.ToolTip1.SetToolTip(this.cbScPracticeMode, "Start the timer");
-            this.cbScPracticeMode.UseVisualStyleBackColor = true;
-            this.cbScPracticeMode.CheckedChanged += new System.EventHandler(this.cbScPracticeMode_CheckedChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 10);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(462, 13);
-            this.label4.TabIndex = 27;
-            this.label4.Text = "Click into a textbox and press any key combination to setup your hotkey for the r" +
-    "espective event:";
-            // 
-            // txtHitPrevWay
-            // 
-            this.txtHitWayPrev.BackColor = System.Drawing.Color.LightBlue;
-            this.txtHitWayPrev.Location = new System.Drawing.Point(161, 90);
-            this.txtHitWayPrev.Name = "txtHitPrevWay";
-            this.txtHitWayPrev.ReadOnly = true;
-            this.txtHitWayPrev.Size = new System.Drawing.Size(194, 20);
-            this.txtHitWayPrev.TabIndex = 31;
-            this.txtHitWayPrev.Text = "None";
-            this.txtHitWayPrev.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ToolTip1.SetToolTip(this.txtHitWayPrev, "Click into the field and press the hot key you want to use");
-            this.txtHitWayPrev.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtHitPrevWay_KeyDown);
-            // 
-            // txtHitPrevBoss
-            // 
-            this.txtHitBossPrev.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.txtHitBossPrev.Location = new System.Drawing.Point(161, 63);
-            this.txtHitBossPrev.Name = "txtHitPrevBoss";
-            this.txtHitBossPrev.ReadOnly = true;
-            this.txtHitBossPrev.Size = new System.Drawing.Size(194, 20);
-            this.txtHitBossPrev.TabIndex = 29;
-            this.txtHitBossPrev.Text = "None";
-            this.txtHitBossPrev.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ToolTip1.SetToolTip(this.txtHitBossPrev, "Click into the field and press the hot key you want to use");
-            this.txtHitBossPrev.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtHitPrevBoss_KeyDown);
-            // 
-            // cbScHitWayPrev
-            // 
-            this.cbScHitWayPrev.AutoSize = true;
-            this.cbScHitWayPrev.Location = new System.Drawing.Point(15, 91);
-            this.cbScHitWayPrev.Name = "cbScHitWayPrev";
-            this.cbScHitWayPrev.Size = new System.Drawing.Size(137, 17);
-            this.cbScHitWayPrev.TabIndex = 30;
-            this.cbScHitWayPrev.Text = "Hit Previous Split (way):";
-            this.ToolTip1.SetToolTip(this.cbScHitWayPrev, "Enable hot key for getting hit (way)");
-            this.cbScHitWayPrev.UseVisualStyleBackColor = true;
-            this.cbScHitWayPrev.CheckedChanged += new System.EventHandler(this.cbScHitWayPrev_CheckedChanged);
-            // 
-            // cbScHitBossPrev
-            // 
-            this.cbScHitBossPrev.AutoSize = true;
-            this.cbScHitBossPrev.Location = new System.Drawing.Point(15, 63);
-            this.cbScHitBossPrev.Name = "cbScHitBossPrev";
-            this.cbScHitBossPrev.Size = new System.Drawing.Size(140, 17);
-            this.cbScHitBossPrev.TabIndex = 28;
-            this.cbScHitBossPrev.Text = "Hit Previous Split (boss):";
-            this.ToolTip1.SetToolTip(this.cbScHitBossPrev, "Enable hot key for getting hit (boss)");
-            this.cbScHitBossPrev.UseVisualStyleBackColor = true;
-            this.cbScHitBossPrev.CheckedChanged += new System.EventHandler(this.cbScHitBossPrev_CheckedChanged);
-            // 
-            // txtUndoHitWayPrev
-            // 
-            this.txtUndoHitWayPrev.BackColor = System.Drawing.Color.IndianRed;
-            this.txtUndoHitWayPrev.Location = new System.Drawing.Point(161, 165);
-            this.txtUndoHitWayPrev.Name = "txtUndoHitWayPrev";
-            this.txtUndoHitWayPrev.ReadOnly = true;
-            this.txtUndoHitWayPrev.Size = new System.Drawing.Size(194, 20);
-            this.txtUndoHitWayPrev.TabIndex = 35;
-            this.txtUndoHitWayPrev.Text = "None";
-            this.txtUndoHitWayPrev.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ToolTip1.SetToolTip(this.txtUndoHitWayPrev, "Click into the field and press the hot key you want to use");
-            this.txtUndoHitWayPrev.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUndoHitWayPrev_KeyDown);
-            // 
-            // txtUndoHitBossPrev
-            // 
-            this.txtUndoHitBossPrev.BackColor = System.Drawing.Color.RosyBrown;
-            this.txtUndoHitBossPrev.Location = new System.Drawing.Point(161, 133);
-            this.txtUndoHitBossPrev.Name = "txtUndoHitBossPrev";
-            this.txtUndoHitBossPrev.ReadOnly = true;
-            this.txtUndoHitBossPrev.Size = new System.Drawing.Size(194, 20);
-            this.txtUndoHitBossPrev.TabIndex = 33;
-            this.txtUndoHitBossPrev.Text = "None";
-            this.txtUndoHitBossPrev.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ToolTip1.SetToolTip(this.txtUndoHitBossPrev, "Click into the field and press the hot key you want to use");
-            this.txtUndoHitBossPrev.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUndoHitBossPrev_KeyDown);
-            // 
-            // cbScUndoHitWayPrev
-            // 
-            this.cbScUndoHitWayPrev.AutoSize = true;
-            this.cbScUndoHitWayPrev.Location = new System.Drawing.Point(52, 164);
-            this.cbScUndoHitWayPrev.Name = "cbScUndoHitWayPrev";
-            this.cbScUndoHitWayPrev.Size = new System.Drawing.Size(97, 30);
-            this.cbScUndoHitWayPrev.TabIndex = 34;
-            this.cbScUndoHitWayPrev.Text = "Undo hit (way):\r\nPrevious Split";
-            this.ToolTip1.SetToolTip(this.cbScUndoHitWayPrev, "Enable hot key for undoing hits (way)");
-            this.cbScUndoHitWayPrev.UseVisualStyleBackColor = true;
-            this.cbScUndoHitWayPrev.CheckedChanged += new System.EventHandler(this.cbScUndoHitWayPrev_CheckedChanged);
-            // 
-            // cbScUndoHitBossPrev
-            // 
-            this.cbScUndoHitBossPrev.AutoSize = true;
-            this.cbScUndoHitBossPrev.Location = new System.Drawing.Point(52, 128);
-            this.cbScUndoHitBossPrev.Name = "cbScUndoHitBossPrev";
-            this.cbScUndoHitBossPrev.Size = new System.Drawing.Size(100, 30);
-            this.cbScUndoHitBossPrev.TabIndex = 32;
-            this.cbScUndoHitBossPrev.Text = "Undo hit (boss):\r\nPrevious Split";
-            this.ToolTip1.SetToolTip(this.cbScUndoHitBossPrev, "Enable hot key for undoing hits (boss)");
-            this.cbScUndoHitBossPrev.UseVisualStyleBackColor = true;
-            this.cbScUndoHitBossPrev.CheckedChanged += new System.EventHandler(this.cbScUndoHitBossPrev_CheckedChanged);
-            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1593,10 +1597,10 @@
             this.tab_globalshortcuts.ResumeLayout(false);
             this.tab_globalshortcuts.PerformLayout();
             this.TabControl1.ResumeLayout(false);
-            this.tab_update.ResumeLayout(false);
-            this.tab_update.PerformLayout();
             this.tab_autosplitter_shortcuts.ResumeLayout(false);
             this.tab_autosplitter_shortcuts.PerformLayout();
+            this.tab_update.ResumeLayout(false);
+            this.tab_update.PerformLayout();
             this.ResumeLayout(false);
 
         }

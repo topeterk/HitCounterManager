@@ -38,8 +38,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>
-    </StartupObject>
+    <StartupObject>HitCounterManager.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Images\FireIcon.ico</ApplicationIcon>
@@ -145,12 +144,12 @@
     <Content Include="Designs\javascript.js" />
     <Content Include="Designs\stylesheet.css" />
     <Content Include="Designs\stylesheet_pink.css" />
-    <None Include="Images\20p_logo_black_THH.png" />
-    <None Include="Images\icon-autosplitter-32.png" />
     <Content Include="Sources\HitCounter.html" />
     <Content Include="Sources\HitCounter.template" />
     <Content Include="Sources\HitCounterManagerInit.xml" />
     <None Include="Images\20p_logo_black.png" />
+    <None Include="Images\20p_logo_black_THH.png" />
+    <None Include="Images\icon-autosplitter-32.png" />
     <None Include="Images\icons8-about-20.png" />
     <None Include="Images\icons8-add-20.png" />
     <None Include="Images\icons8-add-list-20.png" />

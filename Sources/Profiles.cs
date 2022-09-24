@@ -285,7 +285,6 @@ namespace HitCounterManager
         /// </summary>
         /// <param name="Duration">Milliseconds to add</param>
         void AddDuration(long Duration);
-        
         /// <summary>
         /// Sets the duration of a split
         /// </summary>

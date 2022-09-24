@@ -9,100 +9,17 @@ DISCLAIMER: Above notice comes without warranty, so please refer to the explicit
 Application
 
 Title: HitCounterManager
-Author: Peter Kirmeier <topeterk@freenet.de>
+Author: Peter Kirmeier (General Gunrider)
 Source: https://github.com/topeterk/HitCounterManager
 Licence: MIT
 
 ==============================================================================
-Addons
+AutoSplitter Extension Support
 
-Title: AutoSplitterCore
+Title: -
 Author: Ezequiel Medina (Neimex23)
 Contact: <ezequielmedina23@gmail.com>
 Licence: MIT
-
-Title: IGT Timer Track
-Author: Hauke Lasinger 
-Contact: <hauke@haukinger.de>
-Licence: MIT
-
-Title: IGT Timer Track Test
-Author: Mario Schulz
-Contact: <joop.jooop@gmail.com>
-Licence: MIT
-
-DLL Used:
-    - DLL SoulsMemory from:
-    [-]    Title: SoulSplitter
-           Author:  F.stam (FrankvdStam)
-           Source:  https://github.com/FrankvdStam/SoulSplitter.git
-           Licence: GNU
-	[=] Attributions:
-      [-]  Title: IGT Save File Dark Souls 1
-       	   Author: CapitaineToinon
-		   Source: https://github.com/CapitaineToinon/LiveSplit.DarkSoulsIGT
-           License: GNU	     
-	  [-]  Title: DarkSouls3RemoveIntroScreens
-	       Author: Blade (bladecoding)
-		   Source: https://github.com/bladecoding/DarkSouls3RemoveIntroScreens
-		   License: MIT            		   
-
-    - DLL LiveSplit.HollowKnight
-    [-]    Title: LiveSplit.HollowKnight
-           Author: DevilSquirrel
-           Source: https://github.com/ShootMe/LiveSplit.HollowKnight.git
-           Licence: MIT
-
-    - DLL LiveSplit.Celeste
-           Title: LiveSplit.HollowKnight
-           Author: DevilSquirrel
-           Source: https://github.com/ShootMe/LiveSplit.Celeste.git
-           Licence: MIT
-	
-	- DLL LiveSplit.Cuphead
-           Title: LiveSplit.Cuphead
-           Author: DevilSquirrel
-           Source: https://github.com/ShootMe/LiveSplit.Cuphead.git
-           Licence: MIT			   
-
-    - DLL LiveSplit.Core
-    [-]    Title: LiveSplit
-           Author: LiveSplit
-           Source: https://github.com/LiveSplit/LiveSplit
-           Licence: MIT
-
-    - DLL LiveSplit.ScriptableAutoSplit (Modified)
-           Title: ScriptableAutoSplit
-           Author: LiveSplit
-           Source: https://github.com/LiveSplit/LiveSplit.ScriptableAutoSplit.git
-           Licence: MIT
-		   Source Modified: https://github.com/neimex23/LiveSplit.ScriptableAutoSplit.git
-		   Licence: MIT
-		   
-	- DLL Irony (Dependency of ScripteableAutoSplit)
-		   Title: Irony — .NET Language Implementation Kit
-		   Author: IronyProject 
-		   Source: https://github.com/IronyProject/Irony.git
-		   Licence: MIT
-		   
-    - DLL Newtonsoft.Json (Dependency of SoulsMemory)
-	       Title: Newtonsoft.Json
-		   Author: James Newton-King (JamesNK)
-		   Source: https://github.com/JamesNK/Newtonsoft.Json.git
-		   Licence: MIT
-Resources:	
-	- Setup AutoSplitterCore Banner Image
-		Title: -
-		Author: Neimex23
-		Licence: MIT
-		Using: Setup AutoSplitterCore Icon
-
-	- Setup AutoSplitterCore Icon
-		Title: -
-		File Title: AutoSplitterSetupIcon.ico
-		Author: Elionas
-		Source: https://pixabay.com/images/id-1345869/
-		Licence: Pixabay License
 
 ==============================================================================
 Application Icon
@@ -121,7 +38,7 @@ Source: https://icons8.com/
 Licence: CC BY-ND 3.0  https://creativecommons.org/licenses/by-nd/3.0/
 
 ==============================================================================
-AutoSplitter Button Icon
+AutoSplitter Button Image
 
 Title: icon-autosplitter-32
 Author: Neimex23
@@ -139,7 +56,7 @@ Licence: MIT
 No Hit Hispano Button Image
 
 Title: -
-Author: ParaBellum 
+Author: ParaBellum
 Source: Provided by the Discord user for this project
 Licence: MIT
 
@@ -198,18 +115,6 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 URL: https://opensource.org/licenses/MIT
-
-==============================================================================
-The General Public License (GNU)[GPL-3.0]
-(Complete License on LICENSE - SOULSMEMORY)
-
-The GNU General Public License is a free, copyleft license for software and other kinds of works.
-
-The licenses for most software and other practical works are designed to take away your freedom to share and change the works. 
-By contrast, the GNU General Public License is intended to guarantee your freedom to share and change all versions of a program--to make sure it remains free software for all its users. 
-We, the Free Software Foundation, use the GNU General Public License for most of our software; it applies also to any other work released this way by its authors. You can apply it to your programs, too.
-
-URL: https://opensource.org/licenses/GPL-3.0
 
 ==============================================================================
 Pixabay License

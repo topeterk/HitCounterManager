@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <SettingsRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Version>9</Version>
+  <Version>10</Version>
   <MainWidth>652</MainWidth>
   <MainHeight>875</MainHeight>
   <MainPosX>77</MainPosX>
@@ -56,6 +56,16 @@
   <ShortcutTimerStartKeyCode>65643</ShortcutTimerStartKeyCode>
   <ShortcutTimerStopEnable>false</ShortcutTimerStopEnable>
   <ShortcutTimerStopKeyCode>65645</ShortcutTimerStopKeyCode>
+  <ShortcutPracticeEnable>false</ShortcutPracticeEnable>
+  <ShortcutPracticeKeyCode>0</ShortcutPracticeKeyCode>
+  <ShortcutHitBossPrevEnable>false</ShortcutHitBossPrevEnable>
+  <ShortcutHitBossPrevKeyCode>0</ShortcutHitBossPrevKeyCode>
+  <ShortcutHitWayPrevEnable>false</ShortcutHitWayPrevEnable>
+  <ShortcutHitWayPrevKeyCode>0</ShortcutHitWayPrevKeyCode>
+  <ShortcutBossHitUndoPrevEnable>false</ShortcutBossHitUndoPrevEnable>
+  <ShortcutBossHitUndoPrevKeyCode>0</ShortcutBossHitUndoPrevKeyCode>
+  <ShortcutWayHitUndoPrevEnable>false</ShortcutWayHitUndoPrevEnable>
+  <ShortcutWayHitUndoPrevKeyCode>0</ShortcutWayHitUndoPrevKeyCode>
   <Inputfile>HitCounter.template</Inputfile>
   <OutputFile>HitCounter.html</OutputFile>
   <ShowAttemptsCounter>true</ShowAttemptsCounter>
@@ -1388,7 +1398,7 @@
             <Hits>0</Hits>
             <WayHits>1</WayHits>
             <PB>0</PB>
-            <Duration>0</Duration>
+            <Duration>555555</Duration>
             <DurationPB>555555</DurationPB>
             <DurationGold>555555</DurationGold>
           </ProfileRow>
@@ -1947,7 +1957,7 @@
             <Hits>0</Hits>
             <WayHits>0</WayHits>
             <PB>0</PB>
-            <Duration>2522049</Duration>
+            <Duration>0</Duration>
             <DurationPB>0</DurationPB>
             <DurationGold>0</DurationGold>
           </ProfileRow>
@@ -2553,7 +2563,7 @@
       <Profile>
         <Name>Sekiro (All Main Bosses) [EN]</Name>
         <Attempts>0</Attempts>
-        <ActiveSplit>7</ActiveSplit>
+        <ActiveSplit>0</ActiveSplit>
         <Rows>
           <ProfileRow>
             <Title>Genichiro Ashina</Title>
@@ -2683,6 +2693,472 @@
           </ProfileRow>
           <ProfileRow>
             <Title>Isshin, the Sword Saint</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+        </Rows>
+      </Profile>
+      <Profile>
+        <Name>Sekiro (All Main Bosses and Mini Bosses) [EN]</Name>
+        <Attempts>0</Attempts>
+        <ActiveSplit>0</ActiveSplit>
+        <Rows>
+          <ProfileRow>
+            <Title>Leader Shigenori Yamauchi</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Genichiro Ashina</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>General Naomori Kawarada</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Chained Ogre</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Gyoubu Masataka Oniwa</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Blazing Bull</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Lone Shadow Longswordsman</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Snake Eyes Shirahagi</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>O'Rin of the Water</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Corrupted Monk (Ghost)</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Genichiro Way of Tomoe</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Shichimen Warrior - Abandoned Dungeon</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Armored Warrior</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Folding Screen Monkeys</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Ashina Elite - Jinsuke Saze</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>General Kuranosuke Matsomoto </Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Snake Eyes 2</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Centipede Giraffe</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Snake Eyes Shirafuji</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Guardian Ape</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Seven Spears - Shikibu Yamauchi</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Great Shinobi Owl</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>True Corrupted Monk</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Sakura Bull</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Okami Leader Shizu</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Yashariku Headless</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>General Tenzen Yamauchi</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Ako Headless</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Ungo Headless</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Lone Shadow Masanga</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Gokan Headless</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Divine Dragon</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Shigekichi</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Double Ape</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Seven Spears - Shume Oniwa</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Isshin, the Sword Saint</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Shinobi Hunter</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Juzou the Drunkard</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Lady Butterfly</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Centipede Sen'un</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Lone Shadow Spear-Bearer</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Juzou the Drunkard 2</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Owl (Father)</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Elite - Ujinari Mizuo</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Lone Shadow Vilehand</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Chained Ogre - Ashina Castle</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Demon of Hatred</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Gachin Headless</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Tokujiro the Glutton</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Shichimen Warrior - Ashina Depths</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Shichimen Warrior - Fountainhead</Title>
             <Hits>0</Hits>
             <WayHits>0</WayHits>
             <PB>0</PB>
@@ -3207,472 +3683,6 @@
         </Rows>
       </Profile>
       <Profile>
-        <Name>Sekiro (All Main Bosses+Minibosses) [EN] </Name>
-        <Attempts>0</Attempts>
-        <ActiveSplit>0</ActiveSplit>
-        <Rows>
-          <ProfileRow>
-            <Title>Leader Shigenori Yamauchi</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Genichiro Ashina</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>General Naomori Kawarada</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Chained Ogre</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Gyoubu Masataka Oniwa</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Blazing Bull</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Lone Shadow Longswordsman</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Snake Eyes Shirahagi</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>O'Rin of the Water</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Corrupted Monk (Ghost)</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Genichiro Way of Tomoe</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Shichimen Warrior - Abandoned Dungeon</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Armored Warrior</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Folding Screen Monkeys</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Ashina Elite - Jinsuke Saze</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>General Kuranosuke Matsomoto </Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Snake Eyes 2</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Centipede Giraffe</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Snake Eyes Shirafuji</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Guardian Ape</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Seven Spears - Shikibu Yamauchi</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Great Shinobi Owl</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>True Corrupted Monk</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Sakura Bull</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Okami Leader Shizu</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Yashariku Headless</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>General Tenzen Yamauchi</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Ako Headless</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Ungo Headless</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Lone Shadow Masanga</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Gokan Headless</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Divine Dragon</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Shigekichi</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Double Ape</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Seven Spears - Shume Oniwa</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>	Isshin, the Sword Saint</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Shinobi Hunter</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Juzou the Drunkard</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Lady Butterfly</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Centipede Sen'un</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Lone Shadow Spear-Bearer</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Juzou the Drunkard 2</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Owl (Father)</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Elite - Ujinari Mizuo</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Lone Shadow Vilehand</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Chained Ogre - Ashina Castle</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Demon of Hatred</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Gachin Headless</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Tokujiro the Glutton</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Shichimen Warrior - Ashina Depths</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-          <ProfileRow>
-            <Title>Shichimen Warrior - Fountainhead</Title>
-            <Hits>0</Hits>
-            <WayHits>0</WayHits>
-            <PB>0</PB>
-            <Duration>0</Duration>
-            <DurationPB>0</DurationPB>
-            <DurationGold>0</DurationGold>
-          </ProfileRow>
-        </Rows>
-      </Profile>
-      <Profile>
         <Name>Celeste [EN]</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
@@ -3752,7 +3762,7 @@
         </Rows>
       </Profile>
       <Profile>
-        <Name>Hollow Knight [En]</Name>
+        <Name>Hollow Knight [EN]</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
         <Rows>
@@ -4595,7 +4605,7 @@
             <DurationGold>0</DurationGold>
           </ProfileRow>
           <ProfileRow>
-            <Title> High Time</Title>
+            <Title>High Time</Title>
             <Hits>0</Hits>
             <WayHits>0</WayHits>
             <PB>0</PB>
@@ -5336,7 +5346,7 @@
             <DurationGold>0</DurationGold>
           </ProfileRow>
           <ProfileRow>
-            <Title>False Knight </Title>
+            <Title>False Knight</Title>
             <Hits>0</Hits>
             <WayHits>0</WayHits>
             <PB>0</PB>

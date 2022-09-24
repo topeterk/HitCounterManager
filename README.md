@@ -35,24 +35,24 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 ### Pre-defined profiles
 
 * Bloodborne + The old hunters
+* Celeste
+* Crash Bandicoot 1
+* Crash Bandicoot 2
+* Crash Bandicoot 3
+* Crash Bandicoot 4
+* Cuphead
 * Dark Souls 1 Prepare To Die Edition
 * Dark Souls 2
 * Dark Souls 3 + Ashes of Ariandel + The Ringed City
 * Demon's Souls
 * Elden Ring
+* Hades
+* Hollow Knight
+* Mortal Shell
 * Salt and Sanctuary
 * Sekiro
 * The Surge + A walk in the park
 * The Surge 2
-* Mortal Shell
-* Celeste
-* Crash Bandicut 1 
-* Crash Bandicut 2
-* Crash Bandicut 3
-* Crash Bandicut 4
-* Cuphead
-* Hades
-* Hollow Knight
 
 ## Get the software
 All available releases can be found at the [Releases page](../../releases) on GitHub.  
