@@ -22,7 +22,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime;
 using System.Windows.Forms;
 
 namespace HitCounterManager
@@ -183,20 +182,6 @@ namespace HitCounterManager
 
             return true;
         }
-
-        #region AutoSplitter
-        public void LoadAutoSplitterHotKeys()
-        {
-            bool isKeyInvalid = false;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Practice, _settings.ShortcutPracticeKeyCode, _settings.ShortcutPracticeEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_HitBossPrev, _settings.ShortcutHitBossPrevKeyCode, _settings.ShortcutHitBossPrevEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_HitWayPrev, _settings.ShortcutHitWayPrevKeyCode, _settings.ShortcutHitWayPrevEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_BossHitUndoPrev, _settings.ShortcutBossHitUndoPrevKeyCode, _settings.ShortcutBossHitUndoPrevEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHitUndoPrev, _settings.ShortcutWayHitUndoPrevKeyCode, _settings.ShortcutWayHitUndoPrevEnable)) isKeyInvalid = true;
-            if (isKeyInvalid)
-                MessageBox.Show("Error setting up hot keys of AutoSplitterCore!");
-        }
-        #endregion
 
         /// Loads user data from XML
         /// </summary>
@@ -441,6 +426,23 @@ namespace HitCounterManager
             if (isKeyInvalid)
                 MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
         }
+
+        #region AutoSplitter
+        /// <summary>
+        /// Load AutoSplitter HotKeys from XML
+        /// </summary>
+        public void LoadAutoSplitterHotKeys()
+        {
+            bool isKeyInvalid = false;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Practice, _settings.ShortcutPracticeKeyCode, _settings.ShortcutPracticeEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_HitBossPrev, _settings.ShortcutHitBossPrevKeyCode, _settings.ShortcutHitBossPrevEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_HitWayPrev, _settings.ShortcutHitWayPrevKeyCode, _settings.ShortcutHitWayPrevEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_BossHitUndoPrev, _settings.ShortcutBossHitUndoPrevKeyCode, _settings.ShortcutBossHitUndoPrevEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHitUndoPrev, _settings.ShortcutWayHitUndoPrevKeyCode, _settings.ShortcutWayHitUndoPrevEnable)) isKeyInvalid = true;
+            if (isKeyInvalid)
+                MessageBox.Show("Error setting up hot keys of AutoSplitterCore!");
+        }
+        #endregion
 
         /// <summary>
         /// Stores user data in XML
