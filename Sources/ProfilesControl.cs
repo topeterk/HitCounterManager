@@ -90,7 +90,7 @@ namespace HitCounterManager
             #region AutoSplitter
             if (AutoSplitterInstance != null && (int)ReturnCurrentIGT.Invoke(AutoSplitterInstance, null) > 0 && (bool)GetIsIGTActive.Invoke(AutoSplitterInstance, null))
             {
-                SelectedProfileInfo.SetDuration((int)ReturnCurrentIGT.Invoke(AutoSplitterInstance, null), !TimerRunning || _UpdateCounter++ % 30 == 0);
+                SelectedProfileInfo.SetDurationByCurrentTotalTime((int)ReturnCurrentIGT.Invoke(AutoSplitterInstance, null), !TimerRunning || _UpdateCounter++ % 30 == 0);
             }
             else
             #endregion

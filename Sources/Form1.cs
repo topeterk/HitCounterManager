@@ -280,7 +280,7 @@ namespace HitCounterManager
                 SetPointers = AutoSplitterMainModuleType.GetMethod("SetPointers");
                 GetIsIGTActive = AutoSplitterMainModuleType.GetMethod("GetIsIGTActive");
                 SetPracticeMode = AutoSplitterMainModuleType.GetMethod("SetPracticeMode");
-                GetPracticeMode = type.GetMethod("GetPracticeMode");
+                GetPracticeMode = AutoSplitterMainModuleType.GetMethod("GetPracticeMode");
                 GetGames = AutoSplitterMainModuleType.GetMethod("GetGames");
                 AutoSplitterLoaded = true;
 
@@ -289,7 +289,7 @@ namespace HitCounterManager
                 List<string> GameList = (List<string>)GetGames.Invoke(AutoSplitterInstance, null);
                 foreach (string i in GameList) comboBoxGame.Items.Add(i);
                 comboBoxGame.SelectedIndex = (int)GetSplitterEnable.Invoke(AutoSplitterInstance, null);
-                PracticeModeCheck.Checked = (bool)GetPracticeMode.Invoke(obj, null);
+                PracticeModeCheck.Checked = (bool)GetPracticeMode.Invoke(AutoSplitterMainModuleType, null);
                 profCtrl.SetIGTSource(ReturnCurrentIGT, GetIsIGTActive, AutoSplitterInstance);
                 LoadAutoSplitterHotKeys();
             }

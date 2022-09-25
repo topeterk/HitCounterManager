@@ -562,15 +562,24 @@ namespace HitCounterManager
             // We don't mark profile as updated here as this would generate output very very often!
             SetSplitDuration(active, duration);
         }
-        public void SetDuration(long duration, bool forceUpdate)
+        public void SetDurationByCurrentTotalTime(long CurrentTotalTime, bool ForceUpdate)
         {
-            // We don't always mark profile as updated here as this would generate output very often!
-            if (forceUpdate) ProfileUpdateBegin();
+            // Calculate the current split's duration by removing durations of all previous splits from total time
+            long duration = CurrentTotalTime;
             for (var previousSplitIndex = 0; previousSplitIndex < ActiveSplit; previousSplitIndex++)
-                duration -= GetSplitDuration( previousSplitIndex );
-            if ((duration - GetSplitDuration(ActiveSplit)) >= 1000)
-                SetSplitDuration( ActiveSplit, duration > 0 ? duration : 0 );
-            if (forceUpdate) ProfileUpdateEnd();
+                duration -= GetSplitDuration(previousSplitIndex);
+
+            if (!ForceUpdate)
+            {
+                // When not forced, only update output when given and stored time is significantly out of sync
+                if (Math.Abs(duration - GetSplitDuration(ActiveSplit)) <= 1000) // = 1 sec
+                    ForceUpdate = true;
+            }
+
+            // We don't always mark profile as updated here as this would generate output very often!
+            if (ForceUpdate) ProfileUpdateBegin();
+            SetSplitDuration(ActiveSplit, duration > 0 ? duration : 0);
+            if (ForceUpdate) ProfileUpdateEnd();
         }
 
         public int GetSessionProgress()

@@ -560,7 +560,7 @@
             this.PracticeModeCheck.BackColor = System.Drawing.SystemColors.Control;
             this.PracticeModeCheck.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.PracticeModeCheck.ForeColor = System.Drawing.Color.Blue;
-            this.PracticeModeCheck.Location = new System.Drawing.Point(587, 99);
+            this.PracticeModeCheck.Location = new System.Drawing.Point(587, 100);
             this.PracticeModeCheck.Name = "PracticeModeCheck";
             this.PracticeModeCheck.Size = new System.Drawing.Size(95, 17);
             this.PracticeModeCheck.TabIndex = 27;
