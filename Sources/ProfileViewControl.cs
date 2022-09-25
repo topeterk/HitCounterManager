@@ -569,17 +569,14 @@ namespace HitCounterManager
             for (var previousSplitIndex = 0; previousSplitIndex < ActiveSplit; previousSplitIndex++)
                 duration -= GetSplitDuration(previousSplitIndex);
 
-            if (!ForceUpdate)
-            {
-                // When not forced, only update output when given and stored time is significantly out of sync
-                if (Math.Abs(duration - GetSplitDuration(ActiveSplit)) <= 1000) // = 1 sec
-                    ForceUpdate = true;
-            }
-
             // We don't always mark profile as updated here as this would generate output very often!
-            if (ForceUpdate) ProfileUpdateBegin();
-            SetSplitDuration(ActiveSplit, duration > 0 ? duration : 0);
-            if (ForceUpdate) ProfileUpdateEnd();
+            // When not forced, only update output when given and stored time is significantly out of sync
+            if ((ForceUpdate) || (Math.Abs(duration - GetSplitDuration(ActiveSplit)) <= 1000)) // = 1 sec
+            {
+                ProfileUpdateBegin();
+                SetSplitDuration(ActiveSplit, duration > 0 ? duration : 0);
+                ProfileUpdateEnd();
+            }
         }
 
         public int GetSessionProgress()
