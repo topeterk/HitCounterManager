@@ -569,7 +569,7 @@ namespace HitCounterManager
                 ProfileUpdateBegin();
             for (var previousSplitIndex = 0; previousSplitIndex < ActiveSplit; previousSplitIndex++)
                 duration -= GetSplitDuration( previousSplitIndex );
-            if ((duration - GetSplitDuration(LastActiveSplit)) >= 1000)
+            if ((duration - GetSplitDuration(ActiveSplit)) >= 1000)
                 SetSplitDuration( ActiveSplit, duration > 0 ? duration : 0 );
             if (forceUpdate)
                 ProfileUpdateEnd();

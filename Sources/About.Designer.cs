@@ -49,6 +49,7 @@
             // 
             // About
             // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(734, 511);
             this.Controls.Add(this.TextBox1);

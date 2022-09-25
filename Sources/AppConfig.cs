@@ -22,7 +22,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime;
 using System.Windows.Forms;
 
 namespace HitCounterManager
@@ -182,9 +181,10 @@ namespace HitCounterManager
             return true;
         }
 
-    /// Loads user data from XML
-    /// </summary>
-    private void LoadSettings()
+        /// </summary>
+        /// Loads user data from XML
+        /// </summary>
+        private void LoadSettings()
         {
             int baseVersion = -1;
             bool isKeyInvalid = false;
