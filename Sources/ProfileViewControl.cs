@@ -562,17 +562,31 @@ namespace HitCounterManager
             // We don't mark profile as updated here as this would generate output very very often!
             SetSplitDuration(active, duration);
         }
-
-        public void SetDuration( long duration, bool forceUpdate )
+        public void SetDurationByCurrentTotalTime(long CurrentTotalTime, bool ForceUpdate)
         {
-            if (forceUpdate)
+            if (ForceUpdate)
                 ProfileUpdateBegin();
             for (var previousSplitIndex = 0; previousSplitIndex < ActiveSplit; previousSplitIndex++)
-                duration -= GetSplitDuration( previousSplitIndex );
-            if ((duration - GetSplitDuration(ActiveSplit)) >= 1000)
-                SetSplitDuration( ActiveSplit, duration > 0 ? duration : 0 );
-            if (forceUpdate)
+                CurrentTotalTime -= GetSplitDuration(previousSplitIndex);
+            if ((Math.Abs(CurrentTotalTime - GetSplitDuration(ActiveSplit)) >= 1000))
+                SetSplitDuration(ActiveSplit, CurrentTotalTime > 0 ? CurrentTotalTime : 0);
+            if (ForceUpdate)
                 ProfileUpdateEnd();
+            
+            /* Current Code Cause StackOverflow
+            // Calculate the current split's duration by removing durations of all previous splits from total time
+            long duration = CurrentTotalTime;
+            for (var previousSplitIndex = 0; previousSplitIndex < ActiveSplit; previousSplitIndex++)
+                duration -= GetSplitDuration(previousSplitIndex);
+
+            // We don't always mark profile as updated here as this would generate output very often!
+            // When not forced, only update output when given and stored time is significantly out of sync
+            if ((ForceUpdate) || (Math.Abs(duration - GetSplitDuration(ActiveSplit)) <= 1000)) // = 1 sec
+            {
+                ProfileUpdateBegin();
+                SetSplitDuration(ActiveSplit, duration > 0 ? duration : 0);
+                ProfileUpdateEnd();
+            }*/
         }
 
         public int GetSessionProgress()
