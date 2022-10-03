@@ -31,7 +31,6 @@ namespace HitCounterManager
         // Debug symbol that can be used in every scope:
         // Example: ((ProfilesControl)Program.main.Controls["profCtrl"]).ProfileTabControl.ProfileViewControls[2].ProfileInfo.ActiveSplit
         private static Form main;
-        private static Form1 main1; //Use for Send to AutoSplitterCore a pointer of Form1 for have "StartStopTimer" Function
 
         /// <summary>
         /// The main entry point for the application.
@@ -42,8 +41,6 @@ namespace HitCounterManager
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             main = new Form1();
-            main1 = (Form1)main;
-            main1.main = main1;
             Application.Run(main);
         }
 

@@ -102,8 +102,9 @@ namespace HitCounterManager
         public bool ShortcutTimerStartEnable;
         public int ShortcutTimerStartKeyCode;
         public bool ShortcutTimerStopEnable;
-        public int ShortcutTimerStopKeyCode;        
-        public bool ShortcutPracticeEnable; //AutoSplitterShortcuts
+        public int ShortcutTimerStopKeyCode;
+        #region AutoSplitter
+        public bool ShortcutPracticeEnable; 
         public int ShortcutPracticeKeyCode;
         public bool ShortcutHitBossPrevEnable;
         public int ShortcutHitBossPrevKeyCode;
@@ -113,6 +114,7 @@ namespace HitCounterManager
         public int ShortcutBossHitUndoPrevKeyCode;
         public bool ShortcutWayHitUndoPrevEnable;
         public int ShortcutWayHitUndoPrevKeyCode;
+        #endregion
         public string Inputfile;
         public string OutputFile;
         public bool ShowAttemptsCounter;
@@ -181,7 +183,6 @@ namespace HitCounterManager
             return true;
         }
 
-        /// </summary>
         /// Loads user data from XML
         /// </summary>
         private void LoadSettings()
@@ -344,6 +345,22 @@ namespace HitCounterManager
                 _settings.StyleSubscriptPB = _settings.StyleSuperscriptPB;
                 //_settings.ColWidths added but no default is needed
             }
+            if (_settings.Version == 9) // Coming from version 1.21
+            {
+                _settings.Version = 10;
+                #region AutoSplitter
+                _settings.ShortcutPracticeEnable = false;
+                _settings.ShortcutPracticeKeyCode = 0;
+                _settings.ShortcutHitBossPrevEnable = false;
+                _settings.ShortcutHitBossPrevKeyCode = 0;
+                _settings.ShortcutHitWayPrevEnable = false;
+                _settings.ShortcutHitWayPrevKeyCode = 0;
+                _settings.ShortcutBossHitUndoPrevEnable = false;
+                _settings.ShortcutBossHitUndoPrevKeyCode = 0;
+                _settings.ShortcutWayHitUndoPrevEnable = false;
+                _settings.ShortcutWayHitUndoPrevKeyCode = 0;
+                #endregion
+            }
 
             // Check for updates..
             if (_settings.CheckUpdatesOnStartup)
@@ -410,7 +427,7 @@ namespace HitCounterManager
                 MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
         }
 
-
+        #region AutoSplitter
         /// <summary>
         /// Load AutoSplitter HotKeys from XML
         /// </summary>
@@ -425,6 +442,7 @@ namespace HitCounterManager
             if (isKeyInvalid)
                 MessageBox.Show("Error setting up hot keys of AutoSplitterCore!");
         }
+        #endregion
 
         /// <summary>
         /// Stores user data in XML
@@ -486,8 +504,8 @@ namespace HitCounterManager
             key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_TimerStop);
             _settings.ShortcutTimerStopEnable = key.used;
             _settings.ShortcutTimerStopKeyCode = (int)key.key.KeyData;
-            //AutoSplitter ShortCuts
-            if (_DllAttached)
+            #region AutoSplitter
+            if (AutoSplitterLoaded)
             {
                 key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Practice);
                 _settings.ShortcutPracticeEnable = key.used;
@@ -518,8 +536,7 @@ namespace HitCounterManager
                 _settings.ShortcutWayHitUndoPrevEnable = false;
                 _settings.ShortcutWayHitUndoPrevKeyCode = 0;
             }
-
-
+            #endregion
 
             // Store customizing..
             int TotalSplits, TotalActiveSplit, SuccessionHits, SuccessionHitsWay, SuccessionHitsPB;
@@ -536,7 +553,5 @@ namespace HitCounterManager
 
             sm.WriteXML(_settings);
         }
-
-
     }
 }

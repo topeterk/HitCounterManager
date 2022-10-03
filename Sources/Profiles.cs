@@ -285,13 +285,12 @@ namespace HitCounterManager
         /// </summary>
         /// <param name="Duration">Milliseconds to add</param>
         void AddDuration(long Duration);
-        
         /// <summary>
-        /// Sets the duration of a split
+        /// Sets the duration of the active split using current total time
         /// </summary>
-        /// <param name="duration">Milliseconds</param>
-        /// <param name="forceUpdate">True, if this duration should be pushed to JS</param>
-        void SetDuration(long duration, bool forceUpdate);
+        /// <param name="CurrentTotalTime">Milliseconds</param>
+        /// <param name="ForceUpdate">True, if this duration should be pushed to JS</param>
+        void SetDurationByCurrentTotalTime(long CurrentTotalTime, bool ForceUpdate);
 
         /// <summary>
         /// Gets the split index of the session progress
