@@ -289,7 +289,7 @@ namespace HitCounterManager
                 List<string> GameList = (List<string>)GetGames.Invoke(AutoSplitterInstance, null);
                 foreach (string i in GameList) comboBoxGame.Items.Add(i);
                 comboBoxGame.SelectedIndex = (int)GetSplitterEnable.Invoke(AutoSplitterInstance, null);
-                PracticeModeCheck.Checked = (bool)GetPracticeMode.Invoke(AutoSplitterMainModuleType, null);
+                PracticeModeCheck.Checked = (bool)GetPracticeMode.Invoke(AutoSplitterInstance, null);
                 profCtrl.SetIGTSource(ReturnCurrentIGT, GetIsIGTActive, AutoSplitterInstance);
                 LoadAutoSplitterHotKeys();
             }

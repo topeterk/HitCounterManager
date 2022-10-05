@@ -564,6 +564,16 @@ namespace HitCounterManager
         }
         public void SetDurationByCurrentTotalTime(long CurrentTotalTime, bool ForceUpdate)
         {
+            if (ForceUpdate)
+                ProfileUpdateBegin();
+            for (var previousSplitIndex = 0; previousSplitIndex < ActiveSplit; previousSplitIndex++)
+                CurrentTotalTime -= GetSplitDuration(previousSplitIndex);
+            if ((Math.Abs(CurrentTotalTime - GetSplitDuration(ActiveSplit)) >= 1000))
+                SetSplitDuration(ActiveSplit, CurrentTotalTime > 0 ? CurrentTotalTime : 0);
+            if (ForceUpdate)
+                ProfileUpdateEnd();
+
+            /* Code below causes stack overflow TODO: Check why this happens as above code is only a single long value less
             // Calculate the current split's duration by removing durations of all previous splits from total time
             long duration = CurrentTotalTime;
             for (var previousSplitIndex = 0; previousSplitIndex < ActiveSplit; previousSplitIndex++)
@@ -576,7 +586,7 @@ namespace HitCounterManager
                 ProfileUpdateBegin();
                 SetSplitDuration(ActiveSplit, duration > 0 ? duration : 0);
                 ProfileUpdateEnd();
-            }
+            }*/
         }
 
         public int GetSessionProgress()

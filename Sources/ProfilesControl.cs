@@ -88,9 +88,10 @@ namespace HitCounterManager
         private void UpdateDurationInternal()
         {
             #region AutoSplitter
-            if (AutoSplitterInstance != null && (int)ReturnCurrentIGT.Invoke(AutoSplitterInstance, null) > 0 && (bool)GetIsIGTActive.Invoke(AutoSplitterInstance, null))
+            if (AutoSplitterInstance != null && (long)ReturnCurrentIGT.Invoke(AutoSplitterInstance, null) > 0 && (bool)GetIsIGTActive.Invoke(AutoSplitterInstance, null))
             {
-                SelectedProfileInfo.SetDurationByCurrentTotalTime((int)ReturnCurrentIGT.Invoke(AutoSplitterInstance, null), !TimerRunning || _UpdateCounter++ % 30 == 0);
+                long duration = (long)ReturnCurrentIGT.Invoke(AutoSplitterInstance, null);
+                SelectedProfileInfo.SetDurationByCurrentTotalTime(duration, !TimerRunning || _UpdateCounter++ % 30 == 0);
             }
             else
             #endregion
