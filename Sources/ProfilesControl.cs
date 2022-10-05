@@ -115,6 +115,7 @@ namespace HitCounterManager
             this.AutoSplitterInstance = AutoSplitterInstance;
             this.ReturnCurrentIGT = ReturnCurrentIGT;
             this.GetIsIGTActive = GetIsIGTActive;
+            om.AutoSplitterLoaded = true;
         }
         #endregion
 

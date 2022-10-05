@@ -1,4 +1,5 @@
 ﻿//MIT License
+//MIT License
 
 //Copyright (c) 2016-2022 Peter Kirmeier
 
@@ -76,6 +77,7 @@ namespace HitCounterManager
         }
 
         #endregion
+        public bool AutoSplitterLoaded = false;
 
         /// <summary>
         /// Bind object to a profile tab control
@@ -170,7 +172,8 @@ namespace HitCounterManager
             catch { return; }
             sr.NewLine = Environment.NewLine;
 
-            profCtrl.UpdateDuration();
+            if (!AutoSplitterLoaded)
+            { profCtrl.UpdateDuration(); }
             IProfileInfo pi = profCtrl.SelectedProfileInfo;
 
             foreach (string line in template.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
