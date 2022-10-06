@@ -581,7 +581,7 @@ namespace HitCounterManager
 
             // We don't always mark profile as updated here as this would generate output very often!
             // When not forced, only update output when given and stored time is significantly out of sync
-            if ((ForceUpdate) || (Math.Abs(duration - GetSplitDuration(ActiveSplit)) <= 1000)) // = 1 sec
+            if ((ForceUpdate) || (Math.Abs(duration - GetSplitDuration(ActiveSplit)) >= 1000)) // = 1 sec
             {
                 ProfileUpdateBegin();
                 SetSplitDuration(ActiveSplit, duration > 0 ? duration : 0);
