@@ -219,24 +219,18 @@ namespace HitCounterManager
         //Internal AutoSplitter Without Livesplit program by Neimex23
         private bool AutoSplitterLoaded = false;
         private object AutoSplitterInstance = null;
-        MethodInfo LoadAutoSplitterSettings = null;
-        MethodInfo SaveAutoSplitterSettings = null;
-        MethodInfo GetSplitterEnable = null;
-        MethodInfo EnableSplitting = null;
-        MethodInfo ReturnCurrentIGT = null;
-        MethodInfo ResetSplitterFlags = null;
-        MethodInfo SetGameIGT = null;
-        MethodInfo AutoSplitterForm = null;
-        MethodInfo CheckAutoTimerFlag = null;
-        MethodInfo CheckGameTimerFlag = null;
-        MethodInfo GetIgtSplitterTimer = null;
-        MethodInfo CheckSplitterRunStarted = null;
-        MethodInfo SetSplitterRunStarted = null;
-        MethodInfo SetPointers = null;
-        MethodInfo GetIsIGTActive = null;
-        MethodInfo SetPracticeMode = null;
-        MethodInfo GetPracticeMode = null;
-        MethodInfo GetGames = null;
+        MethodInfo LoadAutoSplitterSettings = null; // Load AutoSplitter Settings from XML File <<Parameter: Profile Control, Form1>>
+        MethodInfo SaveAutoSplitterSettings = null; // Save AutoSplitter Settings Into XML File
+        MethodInfo GetSplitterEnable = null; // Return a (int)number that represent active AutoSplitter
+        MethodInfo EnableSplitting = null; // Set Splitter Procedure <<Parameter: int >>
+        MethodInfo ReturnCurrentIGT = null; // Return a (int) number with full in game time in ms
+        MethodInfo ResetSplitterFlags = null; //Reset Internal Flags
+        MethodInfo AutoSplitterForm = null; // Open AutoSplitter Settings Window
+        MethodInfo GetIsIGTActive = null; // Return a bool if IGT is Active on Settings
+        MethodInfo SetPracticeMode = null; // Set Practice Mode for avoid AutoSplitting in a loaded runs <<Parameter: bool>>
+        MethodInfo GetPracticeMode = null; // Return Current Bool Practice Mode
+        MethodInfo GetGames = null; // Return a list of String with All Games Availables in AutoSplitter
+
         private void LoadAutoSplitter()
         {
             int Offset = btnAutoSplitter.Left - btnSplit.Left;
@@ -268,23 +262,15 @@ namespace HitCounterManager
                 SaveAutoSplitterSettings = AutoSplitterMainModuleType.GetMethod("SaveAutoSplitterSettings");
                 GetSplitterEnable = AutoSplitterMainModuleType.GetMethod("GetSplitterEnable");
                 EnableSplitting = AutoSplitterMainModuleType.GetMethod("EnableSplitting");
-                ReturnCurrentIGT = AutoSplitterMainModuleType.GetMethod("ReturnCurrentIGTM");
+                ReturnCurrentIGT = AutoSplitterMainModuleType.GetMethod("ReturnCurrentIGT");
                 ResetSplitterFlags = AutoSplitterMainModuleType.GetMethod("ResetSplitterFlags");
-                SetGameIGT = AutoSplitterMainModuleType.GetMethod("SetGameIGT");
                 AutoSplitterForm = AutoSplitterMainModuleType.GetMethod("AutoSplitterForm");
-                CheckAutoTimerFlag = AutoSplitterMainModuleType.GetMethod("CheckAutoTimerFlag");
-                CheckGameTimerFlag = AutoSplitterMainModuleType.GetMethod("CheckGameTimerFlag");
-                GetIgtSplitterTimer = AutoSplitterMainModuleType.GetMethod("GetIgtSplitterTimer");
-                CheckSplitterRunStarted = AutoSplitterMainModuleType.GetMethod("CheckSplitterRunStarted");
-                SetSplitterRunStarted = AutoSplitterMainModuleType.GetMethod("SetSplitterRunStarted");
-                SetPointers = AutoSplitterMainModuleType.GetMethod("SetPointers");
                 GetIsIGTActive = AutoSplitterMainModuleType.GetMethod("GetIsIGTActive");
                 SetPracticeMode = AutoSplitterMainModuleType.GetMethod("SetPracticeMode");
                 GetPracticeMode = AutoSplitterMainModuleType.GetMethod("GetPracticeMode");
                 GetGames = AutoSplitterMainModuleType.GetMethod("GetGames");
                 AutoSplitterLoaded = true;
 
-                SetPointers.Invoke(AutoSplitterInstance, null);
                 LoadAutoSplitterSettings.Invoke(AutoSplitterInstance, new object[] { profCtrl, this });
                 List<string> GameList = (List<string>)GetGames.Invoke(AutoSplitterInstance, null);
                 foreach (string i in GameList) comboBoxGame.Items.Add(i);
