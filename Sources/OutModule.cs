@@ -1,5 +1,4 @@
 ﻿//MIT License
-//MIT License
 
 //Copyright (c) 2016-2022 Peter Kirmeier
 
@@ -77,7 +76,6 @@ namespace HitCounterManager
         }
 
         #endregion
-        public bool AutoSplitterLoaded = false;
 
         /// <summary>
         /// Bind object to a profile tab control
@@ -148,6 +146,12 @@ namespace HitCounterManager
         #endregion
 
         /// <summary>
+        /// Marker to prevent updates while an update is already running.
+        /// May happen during update, e.g. when the time value has been modified, triggering another recursive update.
+        /// </summary>
+        private bool IsUpdateRunning = false;
+
+        /// <summary>
         /// Use buffer to create outputfile while patching some data
         /// </summary>
         public void Update()
@@ -162,6 +166,9 @@ namespace HitCounterManager
                 if (null == template) return; // still invalid, avoid writing empty output file
             }
 
+            if (IsUpdateRunning) return; // Prevent multiple outputs at the same time (not thread safe, only works on same thread!)
+            IsUpdateRunning = true;
+
             StreamWriter sr;
             bool IsWritingList = false; // Kept for old designs before version 1.10
             bool IsWritingJson = false;
@@ -169,11 +176,14 @@ namespace HitCounterManager
             {
                 sr = new StreamWriter(_settings.OutputFile, false, System.Text.Encoding.Unicode); // UTF16LE
             }
-            catch { return; }
+            catch
+            {
+                IsUpdateRunning = false;
+                return;
+            }
             sr.NewLine = Environment.NewLine;
 
-            if (!AutoSplitterLoaded)
-            { profCtrl.UpdateDuration(); }
+            profCtrl.UpdateDuration();
             IProfileInfo pi = profCtrl.SelectedProfileInfo;
 
             foreach (string line in template.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
@@ -369,6 +379,8 @@ namespace HitCounterManager
             }
 
             sr.Close();
+
+            IsUpdateRunning = false;
         }
     }
 }
