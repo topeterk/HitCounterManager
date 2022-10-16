@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright(c) 2016-2020 Peter Kirmeier
+//Copyright(c) 2016-2022 Peter Kirmeier
 
 //Permission Is hereby granted, free Of charge, to any person obtaining a copy
 //of this software And associated documentation files (the "Software"), to deal
@@ -144,7 +144,15 @@ namespace HitCounterManager
             // Since version 1.20:
             SC_Type_TimerStart = 8,
             SC_Type_TimerStop = 9,
-            SC_Type_MAX = 10
+            // Since version 1.21:
+            #region AutoSplitter
+            SC_Type_Practice = 10,
+            SC_Type_HitBossPrev = 11,
+            SC_Type_HitWayPrev = 12,
+            SC_Type_BossHitUndoPrev = 13,
+            SC_Type_WayHitUndoPrev = 14,
+            #endregion
+            SC_Type_MAX = 15,
         };
 
         public enum SC_HotKeyMethod {

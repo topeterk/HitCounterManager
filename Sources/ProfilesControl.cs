@@ -22,6 +22,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace HitCounterManager
@@ -73,15 +74,27 @@ namespace HitCounterManager
                 {
                     last_update_time = DateTime.UtcNow;
                     timer1.Enabled = _TimerRunning = value;
-                    UpdateDuration();
+                    UpdateDurationInternal();
                     om.Update();
                 }
             }
         }
 
-        public void UpdateDuration()
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
+        public void UpdateDuration() { if (_TimerRunning) UpdateDurationInternal(); }
+
+        private int _UpdateCounter;
+        private void UpdateDurationInternal()
         {
-            if (_TimerRunning)
+            #region AutoSplitter
+            if (AutoSplitterInstance != null && (long)ReturnCurrentIGT.Invoke(AutoSplitterInstance, null) > 0 && (bool)GetIsIGTActive.Invoke(AutoSplitterInstance, null))
+            {
+                long duration = (long)ReturnCurrentIGT.Invoke(AutoSplitterInstance, null);
+                SelectedProfileInfo.SetDurationByCurrentTotalTime(duration, !TimerRunning || _UpdateCounter++ % 30 == 0);
+            }
+            else
+            #endregion
             {
                 DateTime utc_now = DateTime.UtcNow;
                 SelectedProfileInfo.AddDuration((long)(utc_now - last_update_time).TotalMilliseconds);
@@ -91,6 +104,18 @@ namespace HitCounterManager
 
         private void timer1_Tick(object sender, EventArgs e) { UpdateDuration(); }
 
+        #endregion
+
+        #region AutoSplitter
+        private object AutoSplitterInstance = null;
+        private MethodInfo ReturnCurrentIGT = null;
+        private MethodInfo GetIsIGTActive = null;
+        public void SetIGTSource(MethodInfo ReturnCurrentIGT, MethodInfo GetIsIGTActive, object AutoSplitterInstance)
+        {
+            this.AutoSplitterInstance = AutoSplitterInstance;
+            this.ReturnCurrentIGT = ReturnCurrentIGT;
+            this.GetIsIGTActive = GetIsIGTActive;
+        }
         #endregion
 
         #region Succession related
@@ -204,10 +229,8 @@ namespace HitCounterManager
                 ProfileChangedEventArgs eventArgs = (ProfileChangedEventArgs)e;
                 if (eventArgs.RunCompleted && _TimerRunning)
                 {
-                    DateTime utc_now = DateTime.UtcNow;
                     timer1.Enabled = _TimerRunning = false;
-                    SelectedProfileInfo.AddDuration((long)(utc_now - last_update_time).TotalMilliseconds);
-                    last_update_time = utc_now;
+                    UpdateDurationInternal(); // we want to update once at the end of the run (although the timer's stopped already)
                 }
             }
 

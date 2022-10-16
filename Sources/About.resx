@@ -129,8 +129,16 @@ DISCLAIMER: Above notice comes without warranty, so please refer to the explicit
 Application
 
 Title: HitCounterManager
-Author: Peter Kirmeier &lt;topeterk@freenet.de&gt;
+Author: Peter Kirmeier (General Gunrider)
 Source: https://github.com/topeterk/HitCounterManager
+Licence: MIT
+
+==============================================================================
+AutoSplitter Extension Support
+
+Title: -
+Author: Ezequiel Medina (Neimex23)
+Contact: &lt;ezequielmedina23@gmail.com&gt;
 Licence: MIT
 
 ==============================================================================
@@ -140,7 +148,6 @@ Title: Pioneer Camp
 Author: Iconka  http://www.iconka.com
 Source: https://iconka.com/en/269/
 License: Linkware
-Licence information:
 
 ==============================================================================
 Application Button Images
@@ -151,10 +158,25 @@ Source: https://icons8.com/
 Licence: CC BY-ND 3.0  https://creativecommons.org/licenses/by-nd/3.0/
 
 ==============================================================================
+AutoSplitter Button Image
+
+Title: icon-autosplitter-32
+Author: Neimex23
+Licence: MIT
+
+==============================================================================
 Team Hitless Button Image
 
 Title: -
 Author: AronTheBaron
+Source: Provided by the Discord user for this project
+Licence: MIT
+
+==============================================================================
+No Hit Hispano Button Image
+
+Title: -
+Author: ParaBellum
 Source: Provided by the Discord user for this project
 Licence: MIT
 
