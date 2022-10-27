@@ -263,7 +263,7 @@ namespace HitCounterManager
                 GetSplitterEnable = AutoSplitterMainModuleType.GetMethod("GetSplitterEnable");
                 EnableSplitting = AutoSplitterMainModuleType.GetMethod("EnableSplitting");
                 ReturnCurrentIGT = AutoSplitterMainModuleType.GetMethod("ReturnCurrentIGT");
-                ResetSplitterFlags = AutoSplitterMainModuleType.GetMethod("ResetSplitterFlags");
+                ResetSplitterFlags = AutoSplitterMainModuleType.GetMethod("ResetSplitterFlags");          
                 AutoSplitterForm = AutoSplitterMainModuleType.GetMethod("AutoSplitterForm");
                 GetIsIGTActive = AutoSplitterMainModuleType.GetMethod("GetIsIGTActive");
                 SetPracticeMode = AutoSplitterMainModuleType.GetMethod("SetPracticeMode");
@@ -304,6 +304,18 @@ namespace HitCounterManager
 
             //Ask Selected index
             EnableSplitting.Invoke(AutoSplitterInstance, new object[] { comboBoxGame.SelectedIndex });
+        }
+
+        //To update when change Profile 
+        public void SetComboBoxGameIndex(int index)  
+        {
+            if (index <= comboBoxGame.Items.Count)
+                comboBoxGame.SelectedIndex = index;
+        }
+
+        public void SetPractice(bool status)
+        {
+            PracticeModeCheck.Checked = status;
         }
         #endregion
 
