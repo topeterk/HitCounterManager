@@ -263,7 +263,7 @@ namespace HitCounterManager
                 GetSplitterEnable = AutoSplitterMainModuleType.GetMethod("GetSplitterEnable");
                 EnableSplitting = AutoSplitterMainModuleType.GetMethod("EnableSplitting");
                 ReturnCurrentIGT = AutoSplitterMainModuleType.GetMethod("ReturnCurrentIGT");
-                ResetSplitterFlags = AutoSplitterMainModuleType.GetMethod("ResetSplitterFlags");          
+                ResetSplitterFlags = AutoSplitterMainModuleType.GetMethod("ResetSplitterFlags");
                 AutoSplitterForm = AutoSplitterMainModuleType.GetMethod("AutoSplitterForm");
                 GetIsIGTActive = AutoSplitterMainModuleType.GetMethod("GetIsIGTActive");
                 SetPracticeMode = AutoSplitterMainModuleType.GetMethod("SetPracticeMode");
