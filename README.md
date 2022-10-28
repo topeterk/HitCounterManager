@@ -7,6 +7,7 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 **Works completely offline, no account or login required.**
 
 [![Download latest version here](https://img.shields.io/badge/-Download%20latest%20version%20here-brightgreen?longCache=true&style=for-the-badge)](../../releases/latest)
+[![Addons](https://img.shields.io/badge/-Addons-yellow?longCache=true&style=for-the-badge)](#addons)
 [![Setup Guide / Wiki](https://img.shields.io/badge/-Setup%20Guide%20%2F%20Wiki-blue?longCache=true&style=for-the-badge)](../../wiki)
 [![Tutorial on YouTube](https://img.shields.io/badge/-Tutorial%20on%20YouTube-red?longCache=true&style=for-the-badge)](https://www.youtube.com/watch?v=iXGExlS4xeM&list=PLvBCl9o55PB7BYB7vXVxQuP5J27X_XXzm)
 
@@ -57,6 +58,13 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 ## Get the software
 All available releases can be found at the [Releases page](../../releases) on GitHub.  
 [![Download latest version here](https://img.shields.io/badge/-Download%20latest%20version%20here-brightgreen?longCache=true&style=for-the-badge)](../../releases/latest)
+
+## Addons
+There are addons available now, e.g.:
+* The LiveSplit plugin [**LiveSplit.HitCounterManagerConnector**](https://github.com/topeterk/LiveSplit.HitCounterManagerConnector)
+  * Automatically selecting the HCM splits and restarts a new run when LiveSplit is doing so either due to AutoSplitter or manual input.
+* The HitCounterManager plugin [**AutoSplitterCore for HCM**](https://github.com/neimex23/HitCounterManager)
+  * Adds AutoSplitting and InGameTime directly into HitCounterManager without requiring LiveSplit
 
 ## Systemrequirements
 * OS: Windows Vista, Windows Server 2003 or newer (32/64 bit)
