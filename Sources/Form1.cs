@@ -305,6 +305,18 @@ namespace HitCounterManager
             //Ask Selected index
             EnableSplitting.Invoke(AutoSplitterInstance, new object[] { comboBoxGame.SelectedIndex });
         }
+
+        //To update when change Profile 
+        public void SetComboBoxGameIndex(int index)  
+        {
+            if (index <= comboBoxGame.Items.Count)
+                comboBoxGame.SelectedIndex = index;
+        }
+
+        public void SetPractice(bool status)
+        {
+            PracticeModeCheck.Checked = status;
+        }
         #endregion
 
     }
