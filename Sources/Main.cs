@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2020 Peter Kirmeier
+//Copyright (c) 2016-2022 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -124,7 +124,7 @@ namespace HitCounterManager
         public static void UpdateDarkMode(this Control ctrl)
         {
             // Workaround: Mono has several different "KnownColors", so there a two or more "Controls"
-            // Therefore, instead of checkin if the color matches a specific one, we have to check the name.
+            // Therefore, instead of checking if the color matches a specific one, we have to check the name.
             try
             {
                 if (DarkMode)
@@ -144,8 +144,8 @@ namespace HitCounterManager
                         if (OsLayer.Name != "Win") // required for Mono
                         {
 #pragma warning disable CS0162 // unreachable code.
-                            if (dcs.ForeColor.Name == ControlText_Light.Name) dcs.ForeColor = ControlText_Dark;
-                            if (dcs.SelectionForeColor.Name == ControlText_Light.Name) dcs.SelectionForeColor = ControlText_Dark;
+                            if (dcs.ForeColor.Name != ControlText_Dark.Name) dcs.ForeColor = ControlText_Dark;
+                            if (dcs.SelectionForeColor.Name != ControlText_Dark.Name) dcs.SelectionForeColor = ControlText_Dark;
 #pragma warning restore CS0162 // unreachable code.
                         }
                         if (dgv.RowHeadersDefaultCellStyle.BackColor.Name == Control_Light.Name) dgv.RowHeadersDefaultCellStyle.BackColor = Control_Dark;
@@ -200,8 +200,8 @@ namespace HitCounterManager
                         if (OsLayer.Name != "Win") // required for Mono
                         {
 #pragma warning disable CS0162 // unreachable code
-                            if (dcs.ForeColor.Name == ControlText_Dark.Name) dcs.ForeColor = ControlText_Light;
-                            if (dcs.SelectionForeColor.Name == ControlText_Dark.Name) dcs.SelectionForeColor = ControlText_Light;
+                            if (dcs.ForeColor.Name != ControlText_Light.Name) dcs.ForeColor = ControlText_Light;
+                            if (dcs.SelectionForeColor.Name != ControlText_Light.Name) dcs.SelectionForeColor = ControlText_Light;
 #pragma warning restore CS0162 // unreachable code.
                         }
                         if (dgv.RowHeadersDefaultCellStyle.BackColor.Name == Control_Dark.Name) dgv.RowHeadersDefaultCellStyle.BackColor = Control_Light;
