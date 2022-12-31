@@ -18,7 +18,7 @@
     <FileVersion>$(Version)</FileVersion>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>Manages a hit counter</Description>
-    <Copyright>Copyright © Peter Kirmeier 2022</Copyright>
+    <Copyright>Copyright © Peter Kirmeier 2023</Copyright>
     <PackageLicenseFile>../../LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/topeterk/HitCounterManager</PackageProjectUrl>
     <!-- <PackageIconUrl></PackageIconUrl> -->
