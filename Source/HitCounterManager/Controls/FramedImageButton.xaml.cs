@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2021-2023 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
@@ -33,6 +34,7 @@ namespace HitCounterManager.Controls
     {
         // Info about StyledProperty, see: https://docs.avaloniaui.net/docs/authoring-controls/defining-properties
         public static readonly StyledProperty<ICommand> OnClickCommandProperty = AvaloniaProperty.Register<FramedImageButton, ICommand>(nameof(OnClickCommand));
+        public static readonly StyledProperty<ICommand> OnRightClickCommandProperty = AvaloniaProperty.Register<FramedImageButton, ICommand>(nameof(OnRightClickCommandProperty));
         public static readonly StyledProperty<Bitmap> ImgSrcProperty = AvaloniaProperty.Register<FramedImageButton, Bitmap>(nameof(ImgSrc));
         public static readonly StyledProperty<IBrush> MainColorProperty = AvaloniaProperty.Register<FramedImageButton, IBrush>(nameof(MainColor));
 
@@ -47,6 +49,12 @@ namespace HitCounterManager.Controls
             set => SetValue(OnClickCommandProperty, value);
         }
 
+        public ICommand OnRightClickCommand
+        {
+            get => GetValue(OnRightClickCommandProperty);
+            set => SetValue(OnRightClickCommandProperty, value);
+        }
+
         public Bitmap ImgSrc
         {
             get => GetValue(ImgSrcProperty);
@@ -57,6 +65,17 @@ namespace HitCounterManager.Controls
         {
             get => GetValue(MainColorProperty);
             set => SetValue(MainColorProperty, value);
+        }
+
+        void ButtonPointerPressedHandler(object? sender, PointerPressedEventArgs e)
+        {
+            if (PointerUpdateKind.RightButtonPressed == e.GetCurrentPoint(this).Properties.PointerUpdateKind)
+            {
+                if (OnRightClickCommand?.CanExecute(null) ?? false)
+                {
+                    OnRightClickCommand.Execute(null);
+                }
+            }
         }
     }
 }

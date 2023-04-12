@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2021-2023 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -233,11 +233,14 @@
                     </Interaction.Behaviors>
                 </controls:FramedImageButton>
                 <controls:FramedImageButton Grid.Column="3" MainColor="{DynamicResource HitIncreaseBrush}" ImgSrc="{DynamicResource ImageHit}"
-                        OnClickCommand="{Binding #profileView.DataContext.HitIncrease}" />
+                        OnClickCommand="{Binding #profileView.DataContext.HitIncrease}"
+                        OnRightClickCommand="{Binding #profileView.DataContext.HitDecrease}" />
                 <controls:FramedImageButton Grid.Column="4" MainColor="{DynamicResource HitWayIncreaseBrush}" ImgSrc="{DynamicResource ImageHitWay}"
-                        OnClickCommand="{Binding #profileView.DataContext.HitWayIncrease}" />
+                        OnClickCommand="{Binding #profileView.DataContext.HitWayIncrease}"
+                        OnRightClickCommand="{Binding #profileView.DataContext.HitWayDecrease}" />
                 <controls:FramedImageButton Grid.Column="5" MainColor="{DynamicResource SplitSelectNextBrush}" ImgSrc="{DynamicResource ImageNextSplit}"
-                        OnClickCommand="{Binding #profileView.DataContext.SplitSelectNext}" />
+                        OnClickCommand="{Binding #profileView.DataContext.SplitSelectNext}"
+                        OnRightClickCommand="{Binding #profileView.DataContext.SplitSelectPrev}" />
             </Grid>
 
             <controls:ProfileView Padding="0" Margin="0" x:Name="profileView"/>

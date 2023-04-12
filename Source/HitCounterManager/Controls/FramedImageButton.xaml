@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2022-2022 Peter Kirmeier
+//Copyright (c) 2022-2023 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
              x:Class="HitCounterManager.Controls.FramedImageButton">
     <Border Margin="3" CornerRadius="5" BorderThickness="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
             BorderBrush="DimGray" Background="{Binding $parent[UserControl].MainColor}" >
-        <Button Command="{Binding $parent[UserControl].OnClickCommand}" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Button Command="{Binding $parent[UserControl].OnClickCommand}" PointerPressed="ButtonPointerPressedHandler" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Image Source="{Binding $parent[UserControl].ImgSrc}" Width="32" Height="32" VerticalAlignment="Center" HorizontalAlignment="Center" />
         </Button>
     </Border>
