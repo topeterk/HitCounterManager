@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <!-- https://docs.microsoft.com/en-us/dotnet/core/rid-catalog -->
     <RuntimeIdentifiers>win;linux;osx;android;ios</RuntimeIdentifiers>
     <Nullable>enable</Nullable>
@@ -35,7 +35,7 @@
     <AvaloniaXaml Include="Views/*.xaml" />
     <!-- "None" Datafiles are used for showing the files as project sources within a sub directory.
          "ContentWithTargetPath" Datafiles are not shown as project sources but will copy the "Content" to its target directory. -->
-    <None Include="../Datafiles/**" Link="Datafiles/%(RecursiveDir)%(Filename)%(Extension)"/>
+    <None Include="../Datafiles/**" Link="Datafiles/%(RecursiveDir)%(Filename)%(Extension)" />
     <ContentWithTargetPath Include="../Datafiles/**" TargetPath="%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <EmbeddedResource Include="../../THIRDPARTYLICENSEREADME" Link="THIRDPARTYLICENSEREADME" />
   </ItemGroup>
@@ -47,11 +47,11 @@
     <TrimmableAssembly Include="Avalonia.Themes.Default" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.18" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.18" />
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.18" />
-    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.10.18" />
+    <PackageReference Include="Avalonia" Version="0.10.19" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.19" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.19" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.19" />
+    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.10.19" />
     <!-- <PackageReference Include="XamlNameReferenceGenerator" Version="1.3.4" /> -->
   </ItemGroup>
 </Project>
