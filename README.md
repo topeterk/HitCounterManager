@@ -72,16 +72,17 @@ There are addons available now, e.g.:
 ## Systemrequirements
 * Operating System:
   * **Including** global hot key support:
-    * Windows 7, Windows Server 2008 R2 or newer
+    * Windows 10, Windows Server 2012 or newer
   * **Without** global hot key support:
-    * Most Linux variants like CentOS, Debian, Fedora, Ubuntu, Ubuntu Server, Raspbianm, Red Hat Enterprise Linux 6+, Tizen (only tested on Ubuntu)
-    * macOS 10.12 Sierra or newer _(untested - please let me know if it works)_
+    * Most Linux variants like Alpine 3.15+, CentOS 7+, Debian 10+, Fedora 36+, Ubuntu 18.04+, Red Hat Enterprise Linux 7+, Tizen (only tested on Ubuntu)
+    * macOS 10.15+ Catalina _(untested - please let me know if it works)_
   * **Maybe** coming later (at least I try)
-    * iOS 10 or newer _(most likely not running yet)_
-    * Android 21 or newer _(most likely not running yet)_
+    * iOS 10+ or newer _(most likely not running yet)_
+    * Android 21+ or newer _(most likely not running yet)_
 * Prerequisites:
-  * [.NET 6.0 Runtime](https://dotnet.microsoft.com/download/dotnet/6.0/runtime) or newer
+  * [.NET 7.0 Runtime](https://dotnet.microsoft.com/download/dotnet/7.0/runtime) or newer
     * More information can be found here: [Install .NET on Windows, Linux, and macOS](https://docs.microsoft.com/dotnet/core/install/)
+      and here [Supported OS versions](https://github.com/dotnet/core/blob/main/release-notes/7.0/supported-os.md)
 
 Please have a look at the _v2.x_ branch or find *pre-compiled development builds* [here](../../issues/21).
 
