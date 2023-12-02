@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2021-2023 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -72,7 +72,10 @@ namespace HitCounterManager.ViewModels
             CheckUpdatesOnline = ReactiveCommand.Create(() => App.CurrentApp.CheckAndShowUpdates(this));
 
             ToggleAlwaysOnTop = ReactiveCommand.Create(() => {
-                OwnerWindow?.PlatformImpl.SetTopmost(App.CurrentApp.Settings.AlwaysOnTop = !App.CurrentApp.Settings.AlwaysOnTop);
+                if (OwnerWindow != null)
+                {
+                    OwnerWindow.Topmost = App.CurrentApp.Settings.AlwaysOnTop = !App.CurrentApp.Settings.AlwaysOnTop;
+                }
                 CallPropertyChanged(nameof(AlwaysOnTop));
             });
             ToggleDarkMode = ReactiveCommand.Create(() => {

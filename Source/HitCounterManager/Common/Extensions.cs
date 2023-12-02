@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2021-2023 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,6 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using ReactiveUI;
-using Avalonia;
 using Avalonia.Data.Converters;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
@@ -43,9 +42,7 @@ namespace HitCounterManager.Common
     /// </summary>
     public class LocalResourceBitmap : Bitmap
     {
-        public LocalResourceBitmap(string path) : base(
-            AvaloniaLocator.Current.GetService<IAssetLoader>()!.Open(
-                new Uri($"avares://{Assembly.GetEntryAssembly()!.GetName().Name!}{path}"))) { }
+        public LocalResourceBitmap(string path) : base(AssetLoader.Open(new Uri($"avares://{Assembly.GetEntryAssembly()!.GetName().Name!}{path}"))) { }
     }
 
     /// <summary>
@@ -65,11 +62,7 @@ namespace HitCounterManager.Common
 
         public LazyResource(string key) => Key = key;
 
-        public override object? ProvideValue(IServiceProvider serviceProvider)
-        {
-            if (!App.CurrentApp.Resources.ContainsKey(Key)) return null;
-            return App.CurrentApp.Resources[Key];
-        }
+        public override object ProvideValue(IServiceProvider serviceProvider) => App.CurrentApp.Resources[Key]!;
     }
 
     /// <summary>
@@ -82,12 +75,11 @@ namespace HitCounterManager.Common
 
         public string? Resource { get; set; }
 
-        public override object? ProvideValue(IServiceProvider serviceProvider)
+        public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            if (Resource == null) return null;
+            if (Resource == null) return null!;
             if (LoadedStringSources.ContainsKey(Resource)) return LoadedStringSources[Resource];
 
-            IAssetLoader AssetLoader = AvaloniaLocator.Current.GetService<IAssetLoader>()!;
             string assemblyName = Assembly.GetEntryAssembly()!.GetName().Name!;
             string result = new StreamReader(AssetLoader.Open(new Uri($"resm:{assemblyName}{Resource}"))).ReadToEnd();
             LoadedStringSources.Add(Resource, result);

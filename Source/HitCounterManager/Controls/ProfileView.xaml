@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2021-2023 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -48,7 +48,7 @@
             <TextBlock Grid.Column="4" Text="{Binding StatsTotalHits}" Margin="0" HorizontalAlignment="Right"  FontFamily="Arial" FontSize="14" FontWeight="Bold" />
         </Grid>
 
-        <ComboBox x:Name="profileSelector" Items="{Binding ProfileList}" SelectedItem="{Binding ProfileSelected}" HorizontalAlignment="Stretch">
+        <ComboBox x:Name="profileSelector" ItemsSource="{Binding ProfileList}" SelectedItem="{Binding ProfileSelected}" HorizontalAlignment="Stretch">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />
@@ -86,7 +86,7 @@
             </TextBlock>
         </Border>
 
-        <ItemsRepeater Margin="0" x:Name="ProfileList" Items="{Binding ProfileSelected.Rows}" HorizontalAlignment="Stretch">
+        <ItemsRepeater Margin="0" x:Name="ProfileList" ItemsSource="{Binding ProfileSelected.Rows}" HorizontalAlignment="Stretch">
             <ItemsRepeater.Layout>
                 <StackLayout Spacing="0" Orientation="Vertical"/>
             </ItemsRepeater.Layout>

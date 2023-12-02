@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2021-2023 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -23,10 +23,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using Microsoft.Win32;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -35,13 +33,13 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Styling;
-using Avalonia.Themes.Fluent;
 using Avalonia.Threading;
 using HitCounterManager.Common;
 using HitCounterManager.Models;
 using HitCounterManager.Views;
 using HitCounterManager.ViewModels;
 using Avalonia.Controls.Templates;
+using System.Drawing.Drawing2D;
 
 #if SHOW_COMPLER_VERSION // enable and hover over #error to see C# compiler version and the used language version
 #error version
@@ -63,8 +61,8 @@ namespace HitCounterManager
 
         private static readonly IntPtr SubclassID = new IntPtr(0x48434D); // ASCII = "HCM"
         private bool SubclassprocInstalled = false;
-        private Subclassproc? _Subclassproc = null;
-        private static HookProc? _HookProc = null;
+        private NativeApi.Subclassproc? _Subclassproc = null;
+        private static NativeApi.HookProc? _HookProc = null;
 
         private readonly Dictionary<TimerIDs, DispatcherTimer> ApplicationTimers = new Dictionary<TimerIDs, DispatcherTimer>();
         private IDisposable? UpdateCheckTimer;
@@ -77,8 +75,8 @@ namespace HitCounterManager
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                _Subclassproc = new Subclassproc(SubclassprocFunc); // store delegate to prevent garbage collector from freeing it
-                _HookProc ??= new HookProc(HookCallback); // store delegate to prevent garbage collector from freeing it
+                _Subclassproc = new NativeApi.Subclassproc(SubclassprocFunc); // store delegate to prevent garbage collector from freeing it
+                _HookProc ??= new NativeApi.HookProc(HookCallback); // store delegate to prevent garbage collector from freeing it
             }
         }
 
@@ -141,232 +139,12 @@ namespace HitCounterManager
             }
         }
 
-#region Windows API
-
-        // Datatypes: https://docs.microsoft.com/en-us/windows/win32/winprog/windows-data-types
-
-#region Window Subclass
-
-        private const int WM_HOTKEY = 0x0312;
-
-        /// <summary>
-        /// https://docs.microsoft.com/en-us/windows/win32/api/commctrl/nc-commctrl-subclassproc
-        /// </summary>
-        /// <param name="hWnd">HWND = HANDLE = PVOID = void*</param>
-        /// <param name="uMsg">UINT = unsigned int</param>
-        /// <param name="wParam">WPARAM = UINT_PTR = __int64 or long</param>
-        /// <param name="lParam">LPARAM = LONG_PTR = __int64 or long</param>
-        /// <param name="uIdSubclass">UINT_PTR = __int64 or long</param>
-        /// <param name="dwRefData">DWORD_PTR = ULONG_PTR = __int64 or long</param>
-        /// <returns>LRESULT = LONG_PTR = __int64 or long</returns>
-        [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        private delegate IntPtr Subclassproc(IntPtr hWnd, uint uMsg, IntPtr wParam, IntPtr lParam, IntPtr uIdSubclass, IntPtr dwRefData);
-
-        /// <summary>
-        /// https://docs.microsoft.com/en-us/windows/win32/api/commctrl/nf-commctrl-setwindowsubclass
-        /// </summary>
-        /// <param name="hWnd">HWND = HANDLE = PVOID = void*</param>
-        /// <param name="pfnSubclass">SUBCLASSPROC</param>
-        /// <param name="uIdSubclass">UINT_PTR = __int64 or long</param>
-        /// <param name="dwRefData">DWORD_PTR = ULONG_PTR = __int64 or long</param>
-        /// <returns>BOOL = int</returns>
-        [SupportedOSPlatform("windows")]
-        [DllImport("Comctl32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
-        private static extern int SetWindowSubclass(IntPtr hWnd, Subclassproc pfnSubclass, IntPtr uIdSubclass, IntPtr dwRefData);
-
-        /// <summary>
-        /// https://docs.microsoft.com/en-us/windows/win32/api/commctrl/nf-commctrl-removewindowsubclass
-        /// </summary>
-        /// <param name="hWnd">HWND = HANDLE = PVOID = void*</param>
-        /// <param name="pfnSubclass">SUBCLASSPROC</param>
-        /// <param name="uIdSubclass">UINT_PTR = __int64 or long</param>
-        /// <returns>BOOL = int</returns>
-        [SupportedOSPlatform("windows")]
-        [DllImport("Comctl32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
-        private static extern int RemoveWindowSubclass(IntPtr hWnd, Subclassproc pfnSubclass, IntPtr uIdSubclass);
-
-        /// <summary>
-        /// https://docs.microsoft.com/en-us/windows/win32/api/commctrl/nf-commctrl-defsubclassproc
-        /// </summary>
-        /// <param name="hWnd">HWND = HANDLE = PVOID = void*</param>
-        /// <param name="uMsg">UINT = unsigned int</param>
-        /// <param name="wParam">WPARAM = UINT_PTR = __int64 or long</param>
-        /// <param name="lParam">LPARAM = LONG_PTR = __int64 or long</param>
-        /// <returns>LRESULT = LONG_PTR = __int64 or long</returns>
-        [SupportedOSPlatform("windows")]
-        [DllImport("Comctl32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
-        private static extern IntPtr DefSubclassProc(IntPtr hWnd, uint uMsg, IntPtr wParam, IntPtr lParam);
-
-        /// <summary>
-        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagew
-        /// </summary>
-        /// <param name="hWnd">HWND = HANDLE = PVOID = void*</param>
-        /// <param name="Msg">UINT = unsigned int</param>
-        /// <param name="wParam">WPARAM = UINT_PTR = __int64 or long</param>
-        /// <param name="lParam">LPARAM = LONG_PTR = __int64 or long</param>
-        /// <returns>LRESULT = LONG_PTR = __int64 or long</returns>
-        [SupportedOSPlatform("windows")]
-        [DllImport("User32.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        private static extern IntPtr SendMessageW(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
-
-#endregion
-
-#region Window Message Hook
-
-        private const int WH_KEYBOARD_LL = 13;
-
-        /// <summary>
-        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexw
-        /// </summary>
-        /// <param name="idHook">int</param>
-        /// <param name="lpfn">HOOKPROC</param>
-        /// <param name="hMod">HINSTANCE = HANDLE = PVOID = void*</param>
-        /// <param name="dwThreadId">DWORD = unsigned long</param>
-        /// <returns>HHOOK = HANDLE = PVOID = void*</returns>
-        [SupportedOSPlatform("windows")]
-        [DllImport("User32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
-        private static extern IntPtr SetWindowsHookEx(int idHook, HookProc lpfn, IntPtr hMod, uint dwThreadId);
-
-        /// <summary>
-        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unhookwindowshookex
-        /// </summary>
-        /// <param name="hhk">HHOOK = HANDLE = PVOID = void*</param>
-        /// <returns>BOOL = int</returns>
-        [SupportedOSPlatform("windows")]
-        [DllImport("User32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
-        private static extern int UnhookWindowsHookEx(IntPtr hhk);
-
-        /// <summary>
-        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-callnexthookex
-        /// </summary>
-        /// <param name="hhk">HHOOK = HANDLE = PVOID = void*</param>
-        /// <param name="nCode">int</param>
-        /// <param name="wParam">WPARAM = UINT_PTR = __int64 or long</param>
-        /// <param name="lParam">LPARAM = LONG_PTR = __int64 or long</param>
-        /// <returns>LRESULT = LONG_PTR = __int64 or long</returns>
-        [SupportedOSPlatform("windows")]
-        [DllImport("User32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
-        private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
-
-        /// <summary>
-        /// https://docs.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandlew
-        /// </summary>
-        /// <param name="lpModuleName">LPCWSTR = CONST WCHAR * = const wchar_t *</param>
-        /// <returns>HMODULE = HINSTANCE = HANDLE = PVOID = void*</returns>
-        [SupportedOSPlatform("windows")]
-        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        private static extern IntPtr GetModuleHandleW(string lpModuleName);
-
-#endregion
-
-#region Hot Key
-
-        private const int WM_KEYDOWN = 0x0100;
-        private const int WM_KEYUP = 0x0101;
-        private const int WM_SYSKEYDOWN = 0x0104;
-        private const int WM_SYSKEYUP = 0x0105;
-        private const int HC_ACTION = 0;
-        private const int KF_ALTDOWN = 0x2000;
-        private const int KF_UP = 0x8000;
-        private const int LLKHF_ALTDOWN = (KF_ALTDOWN >> 8);
-        private const int LLKHF_UP = (KF_UP >> 8);
-        private const int KEY_PRESSED_NOW = 0x8000;
-        private const uint MAPVK_VK_TO_VSC = 0;
-
-        /// <summary>
-        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-mapvirtualkeyw
-        /// </summary>
-        /// <param name="uCode">UINT = unsigned int</param>
-        /// <param name="uMapType">UINT = unsigned int</param>
-        /// <returns>UINT = unsigned int</returns>
-        [SupportedOSPlatform("windows")]
-        [DllImport("User32.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        private static extern uint MapVirtualKeyW(uint uCode, uint uMapType);
-
-        /// <summary>
-        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getkeynametextw
-        /// </summary>
-        /// <param name="lParam">LONG = long</param>
-        /// <param name="lpBuffer">LPWSTR = CONST WCHAR * = const wchar_t *</param>
-        /// <param name="nSize">int</param>
-        /// <returns>int</returns>
-        [SupportedOSPlatform("windows")]
-        [DllImport("User32.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        private static extern int GetKeyNameTextW(int lParam, string lpBuffer, int nSize);
-
-        /// <summary>
-        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerhotkey
-        /// </summary>
-        /// <param name="hWnd">HWND = HANDLE = PVOID = void*</param>
-        /// <param name="id">int</param>
-        /// <param name="fsModifiers">UINT = unsigned int</param>
-        /// <param name="vk">UINT = unsigned int</param>
-        /// <returns>BOOL = int</returns>
-        [SupportedOSPlatform("windows")]
-        [DllImport("User32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
-        private static extern int RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
-
-        /// <summary>
-        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unregisterhotkey
-        /// </summary>
-        /// <param name="hWnd">HWND = HANDLE = PVOID = void*</param>
-        /// <param name="id">int </param>
-        /// <returns>BOOL = int</returns>
-        [SupportedOSPlatform("windows")]
-        [DllImport("User32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
-        private static extern int UnregisterHotKey(IntPtr hWnd, int id);
-
-        /// <summary>
-        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getkeyboardstate
-        /// </summary>
-        /// <param name="lpKeyState">PBYTE = BYTE * = unsigned char *</param>
-        /// <returns>BOOL = int</returns>
-        [SupportedOSPlatform("windows")]
-        [DllImport("User32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
-        static extern int GetKeyboardState(byte[] lpKeyState);
-
-        /// <summary>
-        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getasynckeystate
-        /// </summary>
-        /// <param name="vKey">int</param>
-        /// <returns>SHORT = short</returns>
-        [SupportedOSPlatform("windows")]
-        [DllImport("User32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
-        private static extern short GetAsyncKeyState(int vKey);
-
-#endregion
-
-#endregion
-
-#region Windows Runtime Assembly
-
-        [MethodImpl(MethodImplOptions.NoInlining)] // https://stackoverflow.com/questions/21914692/when-exactly-are-assemblies-loaded
-        [SupportedOSPlatform("windows")]
-        private bool IsDarkModeActiveWin32()
-        {
-            try
-            {
-                // Check: AppsUseLightTheme (REG_DWORD)
-                // 0 = Dark mode, 1 = Light mode
-                object? value = Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "AppsUseLightTheme", 1);
-                return null == value ? false : value.ToString() == "0";
-            }
-            catch
-            {
-                // Catch exceptions when key is not working on this system
-                return false;
-            }
-        }
-
-#endregion
-
         [SupportedOSPlatform("windows")]
         private IntPtr SubclassprocFunc(IntPtr hWnd, uint uMsg, IntPtr wParam, IntPtr lParam, IntPtr uIdSubclass, IntPtr dwRefData) // like WndProc
         {
-            const int WM_HOTKEY = 0x312;
             App app = CurrentApp;
 
-            if (uMsg == WM_HOTKEY)
+            if (uMsg == NativeApi.WM_HOTKEY)
             {
                 if (!app.SettingsDialogOpen)
                 {
@@ -389,7 +167,7 @@ namespace HitCounterManager
                 // else Console.WriteLine("WinProc: Settings open!");
             }
 
-            return DefSubclassProc(hWnd, uMsg, wParam, lParam);
+            return NativeApi.DefSubclassProc(hWnd, uMsg, wParam, lParam);
         }
 
         /// <summary>
@@ -440,21 +218,17 @@ namespace HitCounterManager
 
         public override void OnFrameworkInitializationCompleted()
         {
-            foreach (IStyle style in Styles)
-            {
-                if (style is FluentTheme theme)
-                    theme.Mode = Settings.DarkMode ? FluentThemeMode.Dark : FluentThemeMode.Light;
-            }
+            RequestedThemeVariant = Settings.DarkMode ? ThemeVariant.Dark : ThemeVariant.Light; // TODO: Avalonia11 fluent test
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 MainPage main = new MainPage();
-                profileViewViewModel = (ProfileViewViewModel)main.ProfileView.DataContext!;
+                profileViewViewModel = (ProfileViewViewModel?)main.ProfileView?.DataContext;
                 main.Opened += MainPageAppearing;
 
                 desktop.MainWindow = main;
                 NotificationManager = new WindowNotificationManager(desktop.MainWindow) { Position = NotificationPosition.TopRight, MaxItems = 1 };
-                NativeWindowHandle = desktop.MainWindow.PlatformImpl.Handle.Handle;
+                NativeWindowHandle = desktop.MainWindow.TryGetPlatformHandle()?.Handle ?? default;
                 if (!IsCleanStart && IsTitleBarOnScreen(desktop.MainWindow.Screens, Settings.MainPosX, Settings.MainPosY, Settings.MainWidth))
                 {
                     // Set window position when application is not started the first time and window would not end up outside of all screens
@@ -465,7 +239,7 @@ namespace HitCounterManager
                 // Register the hot key handler and hot keys
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    SubclassprocInstalled = 0 != SetWindowSubclass(NativeWindowHandle, _Subclassproc!, SubclassID, IntPtr.Zero);
+                    SubclassprocInstalled = 0 != NativeApi.SetWindowSubclass(NativeWindowHandle, _Subclassproc!, SubclassID, IntPtr.Zero);
                 }
                 bool Success = LoadAllHotKeySettings();
                 if (!Success) DisplayAlert("Error setting up hot keys!", "Not all enabled hot keys could be registered successfully!");
@@ -488,7 +262,7 @@ namespace HitCounterManager
         /// Read the OS setting whether dark mode is enabled
         /// </summary>
         /// <returns>true = Dark mode; false = Light mode</returns>
-        private bool IsDarkModeActive() => RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? IsDarkModeActiveWin32() : false;
+        private bool IsDarkModeActive() => RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? NativeApi.IsDarkModeActiveWin32() : false;
 
         private bool IsTitleBarOnScreen(Screens screens, int Left, int Top, int Width, int Threshold = 10, int RectSize = 30)
         {
@@ -514,7 +288,7 @@ namespace HitCounterManager
                     // store false then successful as then it is no longer installed
                     if (SubclassprocInstalled)
                     {
-                        SubclassprocInstalled = 0 == RemoveWindowSubclass(NativeWindowHandle, _Subclassproc!, SubclassID);
+                        SubclassprocInstalled = 0 == NativeApi.RemoveWindowSubclass(NativeWindowHandle, _Subclassproc!, SubclassID);
                     }
                 }
             }
@@ -531,11 +305,7 @@ namespace HitCounterManager
             UpdateBrushColor("MainWindowBackgroundBrush", "MainWindowBackgroundColor" + ModeName);
             UpdateBrushColor("TextBoxBackgroundBrush", "TextBoxBackgroundColor" + ModeName);
 
-            foreach (IStyle style in Styles)
-            {
-                if (style is FluentTheme theme)
-                    theme.Mode = DarkMode ? FluentThemeMode.Dark : FluentThemeMode.Light;
-            }
+            CurrentApp.RequestedThemeVariant = DarkMode ? ThemeVariant.Dark : ThemeVariant.Light; // TODO: Avalonia11 fluent test
         }
 
         private void UpdateBrushColor(string BrushName, string ColorName)
@@ -564,8 +334,8 @@ namespace HitCounterManager
             {
                 string lpKeyNameString = new string('\0', 256);
 
-                uint lParam = MapVirtualKeyW((uint)KeyCode, MAPVK_VK_TO_VSC) << 16;
-                if (0 != GetKeyNameTextW((int)lParam, lpKeyNameString, lpKeyNameString.Length))
+                uint lParam = NativeApi.MapVirtualKeyW((uint)KeyCode, NativeApi.MAPVK_VK_TO_VSC) << 16;
+                if (0 != NativeApi.GetKeyNameTextW((int)lParam, lpKeyNameString, lpKeyNameString.Length))
                     return lpKeyNameString.Trim('\0');
             }
             return "?";
@@ -581,7 +351,7 @@ namespace HitCounterManager
         /// <returns>Success state</returns>
         public bool SetHotKey(IntPtr WindowHandle, int HotKeyID, uint Modifiers, int KeyCode)
         {
-            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? (0 != RegisterHotKey(WindowHandle, HotKeyID, Modifiers, (uint)KeyCode)) : false;
+            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? (0 != NativeApi.RegisterHotKey(WindowHandle, HotKeyID, Modifiers, (uint)KeyCode)) : false;
         }
 
         /// <summary>
@@ -592,10 +362,9 @@ namespace HitCounterManager
         /// <returns>Success state</returns>
         public bool KillHotKey(IntPtr WindowHandle, int HotKeyID)
         {
-            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? (0 != UnregisterHotKey(WindowHandle, HotKeyID)) : false;
+            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? (0 != NativeApi.UnregisterHotKey(WindowHandle, HotKeyID)) : false;
         }
 
-        private delegate IntPtr HookProc(int nCode, IntPtr wParam, IntPtr lParam);
         private static IntPtr _HookId = IntPtr.Zero;
         private static bool[] KeyStates = new bool[256];
 
@@ -627,7 +396,7 @@ namespace HitCounterManager
                 else
                 {
                     byte[] buffer = new byte[256];
-                    if (0 == GetKeyboardState(buffer)) return null;
+                    if (0 == NativeApi.GetKeyboardState(buffer)) return null;
                     for (int KeyCode = 0; KeyCode < buffer.Length; KeyCode++)
                         if (0 != (buffer[KeyCode] & 0x80 /*key is down flag*/)) result.Add(KeyCode);
                 }
@@ -655,7 +424,7 @@ namespace HitCounterManager
                     return KeyStates[KeyCode];
                 }
 
-                return 0 != (GetAsyncKeyState(KeyCode) & KEY_PRESSED_NOW);
+                return 0 != (NativeApi.GetAsyncKeyState(KeyCode) & NativeApi.KEY_PRESSED_NOW);
             }
 
             return false;
@@ -678,7 +447,7 @@ namespace HitCounterManager
 
                 ProcessModule? module = Process.GetCurrentProcess().MainModule;
                 if (null == module || null == module.ModuleName) return false;
-                _HookId = SetWindowsHookEx(WH_KEYBOARD_LL, _HookProc!, GetModuleHandleW(module.ModuleName), 0);
+                _HookId = NativeApi.SetWindowsHookEx(NativeApi.WH_KEYBOARD_LL, _HookProc!, NativeApi.GetModuleHandleW(module.ModuleName), 0);
                 return _HookId == IntPtr.Zero ? false : true;
             }
 
@@ -688,21 +457,21 @@ namespace HitCounterManager
         [SupportedOSPlatform("windows")]
         private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
         {
-            if (HC_ACTION == nCode)
+            if (NativeApi.HC_ACTION == nCode)
             {
                 switch ((int)wParam)
                 {
-                    case WM_KEYDOWN:
-                    case WM_KEYUP:
-                    case WM_SYSKEYDOWN:
-                    case WM_SYSKEYUP:
+                    case NativeApi.WM_KEYDOWN:
+                    case NativeApi.WM_KEYUP:
+                    case NativeApi.WM_SYSKEYDOWN:
+                    case NativeApi.WM_SYSKEYUP:
                         {
                             int KeyCode = Marshal.ReadInt32(lParam); // KBDLLHOOKSTRUCT.vkCode
                             int flags = Marshal.ReadInt32(lParam, 8); // KBDLLHOOKSTRUCT.flags
 
                             if (KeyStates.Length <= KeyCode) break; // Invalid value
 
-                            bool isPressed = ((flags & LLKHF_UP) == 0 ? true : false); //transition state: 0 = pressed, 1 = released
+                            bool isPressed = ((flags & NativeApi.LLKHF_UP) == 0 ? true : false); //transition state: 0 = pressed, 1 = released
                             if (KeyStates[KeyCode] != isPressed) // drop this event, we already know this!
                             {
                                 KeyStates[KeyCode] = isPressed;
@@ -713,7 +482,7 @@ namespace HitCounterManager
                     default: break;
                 }
             }
-            return CallNextHookEx(_HookId, nCode, wParam, lParam);
+            return NativeApi.CallNextHookEx(_HookId, nCode, wParam, lParam);
         }
 
         /// <summary>
@@ -725,7 +494,7 @@ namespace HitCounterManager
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                return _HookId != IntPtr.Zero ? (0 != UnhookWindowsHookEx(_HookId)) : true;
+                return _HookId != IntPtr.Zero ? (0 != NativeApi.UnhookWindowsHookEx(_HookId)) : true;
             }
             return false;
         }
@@ -739,16 +508,16 @@ namespace HitCounterManager
         /// <returns>Message result</returns>
         public IntPtr SendHotKeyMessage(IntPtr WindowHandle, IntPtr wParam, IntPtr lParam)
         {
-            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? SendMessageW(WindowHandle, WM_HOTKEY, wParam, lParam) : IntPtr.Zero;
+            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? NativeApi.SendMessageW(WindowHandle, NativeApi.WM_HOTKEY, wParam, lParam) : IntPtr.Zero;
         }
     }
 
     public class ViewLocator : IDataTemplate
     {
-        public IControl Build(object data)
+        public Control Build(object? data)
         {
-            var name = data.GetType().FullName!.Replace("ViewModel", "View");
-            var type = Type.GetType(name);
+            var name = data?.GetType().FullName!.Replace("ViewModel", "View");
+            var type = name is null ? null : Type.GetType(name);
 
             if (type != null)
             {
@@ -758,7 +527,7 @@ namespace HitCounterManager
             return new TextBlock { Text = "Not Found: " + name };
         }
 
-        public bool Match(object data)
+        public bool Match(object? data)
         {
             return data is ViewModelBase;
         }

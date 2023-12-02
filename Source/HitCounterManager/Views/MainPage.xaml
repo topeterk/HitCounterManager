@@ -39,8 +39,8 @@
         <local:MainPageViewModel />
     </Window.DataContext>
 
-    <ScrollViewer Padding="0,0,30,0" Margin="6,4,0,0" AllowAutoHide="false">
-        <StackPanel Margin="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+    <ScrollViewer Padding="0" Margin="6,4,0,0" AllowAutoHide="false">
+        <StackPanel Margin="0,0,30,0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Stretch">
 
             <Grid Margin="2" ColumnDefinitions="26,26,26,26,26,26,10,26,26,26,26,10,26,26,26,26,10,26,26,26,*" RowDefinitions="28" HorizontalAlignment="Stretch">
                 <RelativePanel Grid.Column="0" Margin="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

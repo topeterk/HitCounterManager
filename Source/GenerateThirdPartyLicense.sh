@@ -2,7 +2,7 @@
 
 #MIT License
 
-#Copyright (c) 2022-2022 Peter Kirmeier
+#Copyright (c) 2022-2023 Peter Kirmeier
 
 #Permission is hereby granted, free of charge, to any person obtaining a copy
 #of this software and associated documentation files (the "Software"), to deal
@@ -143,7 +143,7 @@ echo Fetching NuGet packages 1>&2
 
 LICENSES=""
 NUGET_PACKAGES_DIR=$(dotnet nuget locals -l global-packages | sed -e 's,^[^ ]* ,,')
-NUGET_PACKAGES_SPECS=$(dotnet list HitCounterManager.sln package --include-transitive | grep ">" | sed -e 's,^[^>]*>[ \t]*\([^ ^\t]*\)[ \t]*\([^ ^\t]*\).*,\L\1/\2/\L\1.nuspec,' | xargs)
+NUGET_PACKAGES_SPECS=$(dotnet list $(pwd)/HitCounterManager.sln package --include-transitive | grep ">" | sed -e 's,^[^>]*>[ \t]*\([^ ^\t]*\)[ \t]*\([^ ^\t]*\).*,\L\1/\2/\L\1.nuspec,' | xargs)
 
 echo Printing NuGet packages 1>&2
 
@@ -157,14 +157,22 @@ do
 	echo Author\(s\): $(grepkey authors "${xml}")
 	if [ "${id}" = "Avalonia.Angle.Windows.Natives" ] ; then
 		# https://github.com/AvaloniaUI/Avalonia/discussions/6122
-		echo Source: https://github.com/AvaloniaUI/Avalonia
-		lic=https://github.com/AvaloniaUI/angle/blob/master/LICENSE
+		echo Source: $(grepinline repository url "${xml}")
+		lic=https://raw.githubusercontent.com/AvaloniaUI/angle/master/LICENSE
+	elif [ "${id}" = "Avalonia.BuildServices" ] ; then
+		# https://github.com/AvaloniaUI/Avalonia/issues/11984
+		echo Source: https://avaloniaui.net/
+		lic=https://licenses.nuget.org/MIT
 	elif [ "${id}" = "Tmds.DBus" ] ; then
 		echo Source: $(grepinline repository url "${xml}")
 		lic=$(grepkey licenseUrl "${xml}")
 	else
 		echo Source: $(grepkey projectUrl "${xml}")
 		lic=$(grepkey licenseUrl "${xml}")
+	fi
+	GITHUB_RAWURL=$(echo ${lic} | sed -n 's,https://github.com/\(.*\)/blob/\(.*\),https://raw.githubusercontent.com/\1/\2,p')
+	if [ ! -z ${GITHUB_RAWURL} ] ; then
+		lic=${GITHUB_RAWURL}
 	fi
 	echo License: ${lic}
 	LICENSES="${LICENSES} ${lic}"
@@ -174,6 +182,17 @@ echo Printing NuGet licenses 1>&2
 
 for lic in $(echo $LICENSES | xargs -n 1 echo | sort -u) ;
 do
+	if [ "${lic}" = "https://licenses.nuget.org/MIT" ] ; then
+		# MIT is already attached above
+		continue
+	elif [ "${lic}" = "https://licenses.nuget.org/Apache-2.0" ] ; then
+		lic=https://www.apache.org/licenses/LICENSE-2.0.txt
+	elif [ ! -z $(echo ${lic} | sed -n 's,^https://go.microsoft.com/fwlink/.*,true,p') ] ; then
+		MSSHORT_URL=$(curl -sL ${lic} | sed -n 's,.*"rawBlobUrl"[ \t]*:[ \t]*"\([^"]*\)".*,\1,p')
+		if [ ! -z ${MSSHORT_URL} ] ; then
+			lic=${MSSHORT_URL}
+		fi
+	fi
 	echo ==============================================================================
 	echo Embedded License: ${lic}
 	echo ""
