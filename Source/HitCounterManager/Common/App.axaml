@@ -24,8 +24,7 @@
 -->
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="using:HitCounterManager"
-             xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
+             xmlns:c="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager.PCL"
              x:Class="HitCounterManager.App"
              RequestedThemeVariant="Light">
 
@@ -69,112 +68,112 @@
 		<Color x:Key="MainWindowBackgroundColorLight">Beige</Color>
 
 		<!-- Generic -->
-		<common:LocalResourceBitmap x:Key="ImageTrash">
-			<x:Arguments>/Resources/Images/icons8-trash-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageSearchWeb">
-			<x:Arguments>/Resources/Images/icons8-search-in-browser-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageInfo">
-			<x:Arguments>/Resources/Images/icons8-information-18.png</x:Arguments>
-		</common:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageTrash">
+			<x:Arguments>/Resources/drawable/icons8_trash_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageSearchWeb">
+			<x:Arguments>/Resources/drawable/icons8_search_in_browser_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageInfo">
+			<x:Arguments>/Resources/drawable/icons8_information_18.png</x:Arguments>
+		</c:LocalResourceBitmap>
 		<!-- ProfileView -->
-		<common:LocalResourceBitmap x:Key="ImageInactive">
-			<x:Arguments>/Resources/Images/icons8-inactive-state-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageActive">
-			<x:Arguments>/Resources/Images/icons8-circled-right-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageSP">
-			<x:Arguments>/Resources/Images/icons8-last-24-hours-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageInactiveBP">
-			<x:Arguments>/Resources/Images/icons8-empty-flag-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageBP">
-			<x:Arguments>/Resources/Images/icons8-flag-filled-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageInactive">
+			<x:Arguments>/Resources/drawable/icons8_inactive_state_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageActive">
+			<x:Arguments>/Resources/drawable/icons8_circled_right_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageSP">
+			<x:Arguments>/Resources/drawable/icons8_last_24_hours_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageInactiveBP">
+			<x:Arguments>/Resources/drawable/icons8_empty_flag_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageBP">
+			<x:Arguments>/Resources/drawable/icons8_flag_filled_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
 		<!-- MainMenu (App section) -->
-		<common:LocalResourceBitmap x:Key="ImageSettings">
-			<x:Arguments>/Resources/Images/icons8-settings-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageSave">
-			<x:Arguments>/Resources/Images/icons8-save-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageWeb">
-			<x:Arguments>/Resources/Images/icons8-website-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageTeamHitless">
-			<x:Arguments>/Resources/Images/20p_logo_black.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageUpdates">
-			<x:Arguments>/Resources/Images/icons8-cloud-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageAbout">
-			<x:Arguments>/Resources/Images/icons8-about-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageSettings">
+			<x:Arguments>/Resources/drawable/icons8_settings_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageSave">
+			<x:Arguments>/Resources/drawable/icons8_save_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageWeb">
+			<x:Arguments>/Resources/drawable/icons8_website_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageTeamHitless">
+			<x:Arguments>/Resources/drawable/team_hitless_20p_logo_black.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageUpdates">
+			<x:Arguments>/Resources/drawable/icons8_cloud_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageAbout">
+			<x:Arguments>/Resources/drawable/icons8_about_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
 		<!-- MainMenu (Profile section) -->
-		<common:LocalResourceBitmap x:Key="ImageProfileCreate">
-			<x:Arguments>/Resources/Images/icons8-add-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageProfileRename">
-			<x:Arguments>/Resources/Images/icons8-edit-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageProfileCopy">
-			<x:Arguments>/Resources/Images/icons8-copy-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageProfileCreate">
+			<x:Arguments>/Resources/drawable/icons8_add_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageProfileRename">
+			<x:Arguments>/Resources/drawable/icons8_edit_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageProfileCopy">
+			<x:Arguments>/Resources/drawable/icons8_copy_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
 		<!-- MainMenu (Splits section) -->
-		<common:LocalResourceBitmap x:Key="ImageAttempts">
-			<x:Arguments>/Resources/Images/icons8-counter-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageSplitUp">
-			<x:Arguments>/Resources/Images/icons8-scroll-up-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageSplitDown">
-			<x:Arguments>/Resources/Images/icons8-scroll-down-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageSplitInsert">
-			<x:Arguments>/Resources/Images/icons8-add-list-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageAttempts">
+			<x:Arguments>/Resources/drawable/icons8_counter_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageSplitUp">
+			<x:Arguments>/Resources/drawable/icons8_scroll_up_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageSplitDown">
+			<x:Arguments>/Resources/drawable/icons8_scroll_down_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageSplitInsert">
+			<x:Arguments>/Resources/drawable/icons8_add_list_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
 		<!-- MainMenu (Utility section) -->
-		<common:LocalResourceBitmap x:Key="ImageLockOn">
-			<x:Arguments>/Resources/Images/icons8-lock-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageLockOff">
-			<x:Arguments>/Resources/Images/icons8-padlock-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageAlwaysOnTop">
-			<x:Arguments>/Resources/Images/icons8-pin-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageDarkMode">
-			<x:Arguments>/Resources/Images/icons8-flash-light-20.png</x:Arguments>
-		</common:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageLockOn">
+			<x:Arguments>/Resources/drawable/icons8_lock_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageLockOff">
+			<x:Arguments>/Resources/drawable/icons8_padlock_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageAlwaysOnTop">
+			<x:Arguments>/Resources/drawable/icons8_pin_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageDarkMode">
+			<x:Arguments>/Resources/drawable/icons8_flash_light_20.png</x:Arguments>
+		</c:LocalResourceBitmap>
 		<!-- MainMenu (Run section) -->
-		<common:LocalResourceBitmap x:Key="ImageProfileReset">
-			<x:Arguments>/Resources/Images/icons8-repeat-one-32.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageProfilePB">
-			<x:Arguments>/Resources/Images/icons8-trophy-32.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageTimerOff">
-			<x:Arguments>/Resources/Images/icons8-sleep-32.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageTimerOn">
-			<x:Arguments>/Resources/Images/icons8-time-32.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageHit">
-			<x:Arguments>/Resources/Images/icons8-attack-32.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageHitWay">
-			<x:Arguments>/Resources/Images/icons8-watch-your-step-32.png</x:Arguments>
-		</common:LocalResourceBitmap>
-		<common:LocalResourceBitmap x:Key="ImageNextSplit">
-			<x:Arguments>/Resources/Images/icons8-staircase-32.png</x:Arguments>
-		</common:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageProfileReset">
+			<x:Arguments>/Resources/drawable/icons8_repeat_one_32.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageProfilePB">
+			<x:Arguments>/Resources/drawable/icons8_trophy_32.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageTimerOff">
+			<x:Arguments>/Resources/drawable/icons8_sleep_32.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageTimerOn">
+			<x:Arguments>/Resources/drawable/icons8_time_32.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageHit">
+			<x:Arguments>/Resources/drawable/icons8_attack_32.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageHitWay">
+			<x:Arguments>/Resources/drawable/icons8_watch_your_step_32.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<c:LocalResourceBitmap x:Key="ImageNextSplit">
+			<x:Arguments>/Resources/drawable/icons8_staircase_32.png</x:Arguments>
+		</c:LocalResourceBitmap>
 	</Application.Resources>
 
 	<Application.DataTemplates>
-		<local:ViewLocator/>
+		<c:ViewLocator/>
 	</Application.DataTemplates>
 
 	<Application.Styles>
@@ -197,7 +196,7 @@
 			<Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
 			<Setter Property="BorderThickness" Value="1" />
 			<Setter Property="CornerRadius" Value="5" />
-			<Setter Property="BoxShadow" Value="{common:BoxShadowsBuilder 'inset 1 1 4 Accent, inset -1 -1 4 Accent'}" />
+			<Setter Property="BoxShadow" Value="{c:BoxShadowsBuilder 'inset 1 1 4 Accent, inset -1 -1 4 Accent'}" />
 		</Style>
 		<Style Selector="Border.InfoBoxBorder > TextBlock">
 			<Setter Property="TextWrapping" Value="Wrap" />

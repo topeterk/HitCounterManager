@@ -1,6 +1,8 @@
-﻿//MIT License
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+//MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2023-2023 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -19,19 +21,13 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
-
-using Avalonia.Markup.Xaml;
-using HitCounterManager.ViewModels;
-
-namespace HitCounterManager.Views
-{
-    public partial class AskSaveBeforeClosePage : WindowPageBase<AskSaveBeforeClosePageViewModel>
-    {
-        public AskSaveBeforeClosePage()
-        {
-            AvaloniaXamlLoader.Load(this);
-            InitializeComponent();
-        }
-    }
-}
-
+-->
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:v="clr-namespace:HitCounterManager.Views;assembly=HitCounterManager.PCL"
+        x:Class="HitCounterManager.Views.ProfileActionWindow"
+        Icon="/Resources/FireIcon.ico"
+        Title="Profile Action" Classes="DialogWindow"
+        MinWidth="500" MinHeight="210" Width="500" Height="210">
+	<v:ProfileActionPage x:Name="InnerPage"/>
+</Window>

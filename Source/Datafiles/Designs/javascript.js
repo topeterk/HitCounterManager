@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2018-2022 Peter Kirmeier
+//Copyright (c) 2018-2023 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -59,8 +59,8 @@ function IntToStringSigned(i) { if (i == 0) return '0'; else if (i > 0) return '
 
 function ShowCrossOrCheckMark(i) { return '<img src="' + (i > 0 ? 'img_cross.png" height="15px"' : ( i == 0 ? 'img_check.png" height="21px"' : 'img_bar.png" height="21px"')) + '>'; }
 
-function ShowSessionProgress() { return '<img src="icons8-24-64.png" height="21px">'; }
-function ShowBestProgress() { return '<img src="icons8-flagpole-64.png" height="21px">'; }
+function ShowSessionProgress() { return '<img src="icons8_24_64.png" height="21px">'; }
+function ShowBestProgress() { return '<img src="icons8_flagpole_64.png" height="21px">'; }
 
 function OffsetTimerTick() { if (offset_timer_tick_callback != undefined) offset_timer_tick_callback(Date.now() - offset_timer_start); }
 

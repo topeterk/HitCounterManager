@@ -24,13 +24,13 @@
 -->
 <UserControl xmlns="https://github.com/avaloniaui" 
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
-             xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
+             xmlns:c="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager.PCL"
+             xmlns:vm="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager.PCL"
              x:Class="HitCounterManager.Controls.ProfileView"
              x:Name="ProfileViewPage">
 
     <UserControl.DataContext>
-        <local:ProfileViewViewModel />
+        <vm:ProfileViewViewModel />
     </UserControl.DataContext>
 
     <StackPanel Margin="10" Spacing="2" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top">
@@ -59,7 +59,7 @@
         <Grid Margin="0" ColumnDefinitions="30,*,68,68,50,68,20,20,20" RowDefinitions="Auto">
             <RelativePanel Grid.Row="0" Grid.Column="0" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button Command="{Binding ToggleShowInfo}" CommandParameter="MainColumnHeaders" Classes="ImageButton" Width="18" Height="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
             </RelativePanel>
             <TextBlock Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left"   FontFamily="Arial" FontSize="14" FontWeight="Bold" Text="Title" />
@@ -103,13 +103,13 @@
                         </Interaction.Behaviors>
                         <Button Grid.Column="0" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                 Command="{Binding $parent[UserControl].DataContext.CmdSetActiveSplit}" CommandParameter="{Binding .}">
-                            <Image Source="{common:LazyResource ImageInactive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Image Source="{c:LazyResource ImageInactive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Interaction.Behaviors>
                                     <DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:LazyResource ImageInactive}" />
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageInactive}" />
                                     </DataTriggerBehavior>
                                     <DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:LazyResource ImageActive}" />
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageActive}" />
                                     </DataTriggerBehavior>
                                 </Interaction.Behaviors>
                             </Image>
@@ -124,33 +124,33 @@
                                        Value="{Binding PB}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
                         <Button Grid.Column="6" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                 Command="{Binding $parent[UserControl].DataContext.CmdSetSessionProgress}" CommandParameter="{Binding .}">
-                            <Image Source="{common:LazyResource ImageInactive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Image Source="{c:LazyResource ImageInactive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Interaction.Behaviors>
                                     <DataTriggerBehavior Binding="{Binding SP, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:LazyResource ImageInactive}" />
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageInactive}" />
                                     </DataTriggerBehavior>
                                     <DataTriggerBehavior Binding="{Binding SP, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:LazyResource ImageSP}" />
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageSP}" />
                                     </DataTriggerBehavior>
                                 </Interaction.Behaviors>
                             </Image>
                         </Button>
                         <Button Grid.Column="7" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                 Command="{Binding $parent[UserControl].DataContext.CmdSetBestProgress}" CommandParameter="{Binding .}">
-                            <Image Source="{common:LazyResource ImageInactiveBP}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Image Source="{c:LazyResource ImageInactiveBP}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Interaction.Behaviors>
                                     <DataTriggerBehavior Binding="{Binding BP, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:LazyResource ImageInactiveBP}" />
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageInactiveBP}" />
                                     </DataTriggerBehavior>
                                     <DataTriggerBehavior Binding="{Binding BP, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{common:LazyResource ImageBP}" />
+                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageBP}" />
                                     </DataTriggerBehavior>
                                 </Interaction.Behaviors>
                             </Image>
                         </Button>
                         <Button Grid.Column="8" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                 Command="{Binding $parent[UserControl].DataContext.CmdRemoveSplit}" CommandParameter="{Binding .}">
-                            <Image Source="{common:LazyResource ImageTrash}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            <Image Source="{c:LazyResource ImageTrash}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </Button>
                     </Grid>
                 </DataTemplate>

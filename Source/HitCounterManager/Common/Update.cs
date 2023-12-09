@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2020-2022 Peter Kirmeier
+//Copyright (c) 2020-2023 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,6 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Reflection;
 using TinyJson;
 
 namespace HitCounterManager.Common
@@ -70,11 +69,14 @@ namespace HitCounterManager.Common
 
             // Only keep newer releases of own major version
             int i = Releases.Count;
-            string MajorVersionString = Assembly.GetExecutingAssembly().GetName().Version!.Major.ToString() + ".";
-            while (0 < i--)
+            if (Statics.ApplicationVersion is not null)
             {
-                string? tag_name = Releases[i]["tag_name"]?.ToString();
-                if ((null == tag_name) || (!tag_name.StartsWith(MajorVersionString))) Releases.RemoveAt(i);
+                string MajorVersionString = Statics.ApplicationVersion.Major.ToString() + ".";
+                while (0 < i--)
+                {
+                    string? tag_name = Releases[i]["tag_name"]?.ToString();
+                    if ((null == tag_name) || (!tag_name.StartsWith(MajorVersionString))) Releases.RemoveAt(i);
+                }
             }
 
             return true;

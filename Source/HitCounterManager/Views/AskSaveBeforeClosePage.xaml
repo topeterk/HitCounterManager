@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2022-2022 Peter Kirmeier
+//Copyright (c) 2022-2023 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -22,19 +22,16 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 -->
-<Window xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
-        xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
+        xmlns:c="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager.PCL"
+        xmlns:vm="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager.PCL"
         x:Class="HitCounterManager.Views.AskSaveBeforeClosePage"
-        x:DataType="local:AskSaveBeforeClosePageViewModel"
-        Icon="/Resources/FireIcon.ico"
-        Title="{x:Static common:Statics.ApplicationTitle}" Classes="DialogWindow"
-        MinWidth="500" MinHeight="130" Width="500" Height="130">
+        x:DataType="vm:AskSaveBeforeClosePageViewModel">
 
-    <Window.DataContext>
-        <local:AskSaveBeforeClosePageViewModel />
-    </Window.DataContext>
+	<UserControl.DataContext>
+        <vm:AskSaveBeforeClosePageViewModel />
+    </UserControl.DataContext>
 
     <StackPanel Margin="10" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Stretch">
         <TextBlock Margin="0,0,0,5" Text="Do you want to save this session?" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
@@ -50,7 +47,7 @@
                     <x:Boolean>False</x:Boolean>
                 </Button.CommandParameter>
             </Button>
-            <Button Margin="20" Width="100" Content="Cancel" Command="{Binding $parent[Window].Close}" HorizontalAlignment="Right" />
+            <Button Margin="20" Width="100" Content="Cancel"  Click="CloseHandler" HorizontalAlignment="Right" />
         </StackPanel>
     </StackPanel>
-</Window>
+</UserControl>

@@ -34,6 +34,9 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
+using Avalonia.Controls.Templates;
+using Avalonia.Controls;
+using HitCounterManager.ViewModels;
 
 namespace HitCounterManager.Common
 {
@@ -42,7 +45,7 @@ namespace HitCounterManager.Common
     /// </summary>
     public class LocalResourceBitmap : Bitmap
     {
-        public LocalResourceBitmap(string path) : base(AssetLoader.Open(new Uri($"avares://{Assembly.GetEntryAssembly()!.GetName().Name!}{path}"))) { }
+        public LocalResourceBitmap(string path) : base(AssetLoader.Open(new Uri($"avares://{Assembly.GetExecutingAssembly().GetName().Name!}{path}"))) { }
     }
 
     /// <summary>
@@ -70,7 +73,6 @@ namespace HitCounterManager.Common
     /// </summary>
     public class StringFromManifest : MarkupExtension
     {
-        // On GTK: Do not remove this image cache (e.g. with loading on demand) as images may not load properly
         static Dictionary<string, string> LoadedStringSources = new Dictionary<string, string>();
 
         public string? Resource { get; set; }
@@ -80,7 +82,7 @@ namespace HitCounterManager.Common
             if (Resource == null) return null!;
             if (LoadedStringSources.ContainsKey(Resource)) return LoadedStringSources[Resource];
 
-            string assemblyName = Assembly.GetEntryAssembly()!.GetName().Name!;
+            string assemblyName = Assembly.GetExecutingAssembly().GetName().Name ?? string.Empty;
             string result = new StreamReader(AssetLoader.Open(new Uri($"resm:{assemblyName}{Resource}"))).ReadToEnd();
             LoadedStringSources.Add(Resource, result);
             return result;
@@ -225,6 +227,27 @@ namespace HitCounterManager.Common
             {
                 Console.WriteLine(e.Message);
             }
+        }
+    }
+
+    public class ViewLocator : IDataTemplate
+    {
+        public Control Build(object? data)
+        {
+            var name = data?.GetType().FullName!.Replace("ViewModel", "View");
+            var type = name is null ? null : Type.GetType(name);
+
+            if (type != null)
+            {
+                return (Control)Activator.CreateInstance(type)!;
+            }
+
+            return new TextBlock { Text = "Not Found: " + name };
+        }
+
+        public bool Match(object? data)
+        {
+            return data is ViewModelBase;
         }
     }
 }

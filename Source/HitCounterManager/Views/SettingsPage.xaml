@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2021-2023 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -22,26 +22,23 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 -->
-<Window xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
-        xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
-        xmlns:models="clr-namespace:HitCounterManager.Models;assembly=HitCounterManager"
+        xmlns:c="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager.PCL"
+        xmlns:m="clr-namespace:HitCounterManager.Models;assembly=HitCounterManager.PCL"
+        xmlns:vm="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager.PCL"
         x:Class="HitCounterManager.Views.SettingsPage"
-        x:DataType="local:SettingsPageViewModel"
-        Icon="/Resources/FireIcon.ico"
-        Title="Settings" Classes="DialogWindow"
-        MinWidth="620" MinHeight="270" Width="760" Height="660">
+        x:DataType="vm:SettingsPageViewModel">
 
-    <Window.DataContext>
-        <local:SettingsPageViewModel />
-    </Window.DataContext>
+	<UserControl.DataContext>
+        <vm:SettingsPageViewModel />
+    </UserControl.DataContext>
 
     <DockPanel Margin="10">
 
         <TextBlock DockPanel.Dock="Top" Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Text="SETTINGS" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
 
-        <Button DockPanel.Dock="Bottom" Margin="20" Width="200" Content="OK" Command="{Binding $parent[Window].Close}" HorizontalAlignment="Right"/>
+        <Button DockPanel.Dock="Bottom" Margin="20" Width="200" Content="OK"  Click="CloseHandler" HorizontalAlignment="Right"/>
 
         <ScrollViewer Padding="0,0,30,0" Margin="6,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AllowAutoHide="false">
 
@@ -56,9 +53,9 @@
                 </Border>
 
                 <TextBlock HorizontalAlignment="Left" Text="Global hot keys not supported in this version!" Foreground="Red"
-                       IsVisible="{Binding Source={x:Static common:Statics.GlobalHotKeySupport}, Converter={common:NegateBoolConverter}, Mode=OneTime}"/>
+                       IsVisible="{Binding Source={x:Static c:Statics.GlobalHotKeySupport}, Converter={c:NegateBoolConverter}, Mode=OneTime}"/>
                 <Grid Margin="10,0,10,0" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch"
-                      IsEnabled="{x:Static common:Statics.GlobalHotKeySupport}">
+                      IsEnabled="{x:Static c:Statics.GlobalHotKeySupport}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
@@ -68,70 +65,70 @@
 
                     <ToggleSwitch Grid.Row="0" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutHitEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <TextBlock    Grid.Row="0" Grid.Column="1" Margin="0" Text="Hit +1 (boss):" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="0" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:SC_Type.SC_Type_Hit}" Content="{Binding ShortcutHitRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <Button       Grid.Row="0" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_Hit}" Content="{Binding ShortcutHitRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Border       Grid.Row="0" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource HitIncreaseBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock Text="{Binding ShortcutHitDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
 
                     <ToggleSwitch Grid.Row="1" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutHitUndoEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <TextBlock    Grid.Row="1" Grid.Column="1" Margin="0" Text="Hit -1 (boss):" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="1" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:SC_Type.SC_Type_HitUndo}" Content="{Binding ShortcutHitUndoRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <Button       Grid.Row="1" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_HitUndo}" Content="{Binding ShortcutHitUndoRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Border       Grid.Row="1" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock Text="{Binding ShortcutHitUndoDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
 
                     <ToggleSwitch Grid.Row="2" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutWayHitEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <TextBlock    Grid.Row="2" Grid.Column="1" Margin="0" Text="Hit +1 (way):" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="2" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:SC_Type.SC_Type_WayHit}" Content="{Binding ShortcutWayHitRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <Button       Grid.Row="2" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_WayHit}" Content="{Binding ShortcutWayHitRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Border       Grid.Row="2" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource HitWayIncreaseBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock Text="{Binding ShortcutWayHitDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
 
                     <ToggleSwitch Grid.Row="3" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutWayHitUndoEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <TextBlock    Grid.Row="3" Grid.Column="1" Margin="0" Text="Hit -1 (way)" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="3" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:SC_Type.SC_Type_WayHitUndo}" Content="{Binding ShortcutWayHitUndoRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <Button       Grid.Row="3" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_WayHitUndo}" Content="{Binding ShortcutWayHitUndoRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Border       Grid.Row="3" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock Text="{Binding ShortcutWayHitUndoDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
 
                     <ToggleSwitch Grid.Row="4" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutSplitEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <TextBlock    Grid.Row="4" Grid.Column="1" Margin="0" Text="Next split:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="4" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:SC_Type.SC_Type_Split}" Content="{Binding ShortcutSplitRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <Button       Grid.Row="4" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_Split}" Content="{Binding ShortcutSplitRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Border       Grid.Row="4" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource SplitSelectNextBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock Text="{Binding ShortcutSplitDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
 
                     <ToggleSwitch Grid.Row="5" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutSplitPrevEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <TextBlock    Grid.Row="5" Grid.Column="1" Margin="0" Text="Prev split:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="5" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:SC_Type.SC_Type_SplitPrev}" Content="{Binding ShortcutSplitPrevRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <Button       Grid.Row="5" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_SplitPrev}" Content="{Binding ShortcutSplitPrevRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Border       Grid.Row="5" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock Text="{Binding ShortcutSplitPrevDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
 
                     <ToggleSwitch Grid.Row="6" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutPBEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <TextBlock    Grid.Row="6" Grid.Column="1" Margin="0" Text="Set PB:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="6" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:SC_Type.SC_Type_PB}" Content="{Binding ShortcutPBRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <Button       Grid.Row="6" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_PB}" Content="{Binding ShortcutPBRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Border       Grid.Row="6" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource ProfilePBBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock Text="{Binding ShortcutPBDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
 
                     <ToggleSwitch Grid.Row="7" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutResetEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <TextBlock    Grid.Row="7" Grid.Column="1" Margin="0" Text="Reset:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="7" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:SC_Type.SC_Type_Reset}" Content="{Binding ShortcutResetRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <Button       Grid.Row="7" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_Reset}" Content="{Binding ShortcutResetRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Border       Grid.Row="7" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource ProfileResetBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock Text="{Binding ShortcutResetDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
 
                     <ToggleSwitch Grid.Row="8" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutTimerStartEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <TextBlock    Grid.Row="8" Grid.Column="1" Margin="0" Text="Start timer:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="8" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:SC_Type.SC_Type_TimerStart}" Content="{Binding ShortcutTimerStartRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <Button       Grid.Row="8" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_TimerStart}" Content="{Binding ShortcutTimerStartRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Border       Grid.Row="8" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource ToggleTimerPauseBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock Text="{Binding ShortcutTimerStartDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
 
                     <ToggleSwitch Grid.Row="9" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutTimerStopEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <TextBlock    Grid.Row="9" Grid.Column="1" Margin="0" Text="Stop timer" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="9" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static models:SC_Type.SC_Type_TimerStop}" Content="{Binding ShortcutTimerStopRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <Button       Grid.Row="9" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_TimerStop}" Content="{Binding ShortcutTimerStopRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Border       Grid.Row="9" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource ToggleTimerPauseBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock Text="{Binding ShortcutTimerStopDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
@@ -140,12 +137,12 @@
 
                 <TextBlock HorizontalAlignment="Left" Text="Select method of global hotkey registration (changing needs restart of application):" />
                 <TextBlock HorizontalAlignment="Left" Text="Global hot keys not supported in this version!" Foreground="Red"
-                       IsVisible="{Binding Source={x:Static common:Statics.GlobalHotKeySupport}, Converter={common:NegateBoolConverter}, Mode=OneTime}"/>
+                       IsVisible="{Binding Source={x:Static c:Statics.GlobalHotKeySupport}, Converter={c:NegateBoolConverter}, Mode=OneTime}"/>
                 <Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch"
-                      IsEnabled="{x:Static common:Statics.GlobalHotKeySupport}">
+                      IsEnabled="{x:Static c:Statics.GlobalHotKeySupport}">
                     <RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHotKeyMethod_Sync" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHotKeyMethod_Sync, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -163,7 +160,7 @@
                     </Border>
                     <RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHotKeyMethod_Async" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHotKeyMethod_Async, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -181,7 +178,7 @@
                     </Border>
                     <RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHotKeyMethod_LLKb" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHotKeyMethod_LLKb, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -210,7 +207,7 @@
                 <Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
                     <RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowAttemptsCounter" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding ShowAttemptsCounter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -225,7 +222,7 @@
                     </Border>
                     <RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowHeadline" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding ShowHeadline, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -240,7 +237,7 @@
                     </Border>
                     <RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowProgressBar" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding ShowProgressBar, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -255,7 +252,7 @@
                     </Border>
                     <RelativePanel Grid.Row="6" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowFooter" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="6" Grid.Column="1" Margin="0" IsChecked="{Binding ShowFooter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -270,7 +267,7 @@
                     </Border>
                     <RelativePanel Grid.Row="8" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowTimeFooter" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="8" Grid.Column="1" Margin="0" IsChecked="{Binding ShowTimeFooter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -289,7 +286,7 @@
                 <Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
                     <RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowHits" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding ShowHits, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -305,7 +302,7 @@ Can be configured to show boss and way hits as a combined value in a single colu
                     </Border>
                     <RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowHitsCombined" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding ShowHitsCombined, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -321,7 +318,7 @@ Unchecked: The boss and way hits are shown as separate values</x:String>
                     </Border>
                     <RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowDiff" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding ShowDiff, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -332,7 +329,7 @@ Unchecked: The boss and way hits are shown as separate values</x:String>
                     </Border>
                     <RelativePanel Grid.Row="6" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowPB" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="6" Grid.Column="1" Margin="0" IsChecked="{Binding ShowPB, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -349,7 +346,7 @@ Allows quick comparison with the current hit count total.</x:String>
                     </Border>
                     <RelativePanel Grid.Row="8" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowPBTotals" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="8" Grid.Column="1" Margin="0" IsChecked="{Binding ShowPBTotals, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -366,7 +363,7 @@ Allows quick comparison with the current hit count total.</x:String>
                     </Border>
                     <RelativePanel Grid.Row="10" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowTimeCurrent" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="10" Grid.Column="1" Margin="0" IsChecked="{Binding ShowTimeCurrent, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -377,7 +374,7 @@ Allows quick comparison with the current hit count total.</x:String>
                     </Border>
                     <RelativePanel Grid.Row="12" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowTimeDiff" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="12" Grid.Column="1" Margin="0" IsChecked="{Binding ShowTimeDiff, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -388,7 +385,7 @@ Allows quick comparison with the current hit count total.</x:String>
                     </Border>
                     <RelativePanel Grid.Row="14" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowTimePB" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="14" Grid.Column="1" Margin="0" IsChecked="{Binding ShowTimePB, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -399,7 +396,7 @@ Allows quick comparison with the current hit count total.</x:String>
                     </Border>
                     <RelativePanel Grid.Row="16" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowSessionProgress" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="16" Grid.Column="1" Margin="0" IsChecked="{Binding ShowSessionProgress, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -420,7 +417,7 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                 <Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
                     <RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowNumbers" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding ShowNumbers, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -431,7 +428,7 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                     </Border>
                     <RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleUseHighContrast" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding StyleUseHighContrast, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -442,7 +439,7 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                     </Border>
                     <RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleUseHighContrastNames" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding StyleUseHighContrastNames, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -453,7 +450,7 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                     </Border>
                     <RelativePanel Grid.Row="6" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleProgressBarColored" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="6" Grid.Column="1" Margin="0" IsChecked="{Binding StyleProgressBarColored, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -464,7 +461,7 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                     </Border>
                     <RelativePanel Grid.Row="8" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleSubscriptPB" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="8" Grid.Column="1" Margin="0" IsChecked="{Binding StyleSubscriptPB, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -475,7 +472,7 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                     </Border>
                     <RelativePanel Grid.Row="10" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleUseRoman" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="10" Grid.Column="1" Margin="0" IsChecked="{Binding StyleUseRoman, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -486,7 +483,7 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                     </Border>
                     <RelativePanel Grid.Row="12" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleHightlightCurrentSplit" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="12" Grid.Column="1" Margin="0" IsChecked="{Binding StyleHightlightCurrentSplit, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -519,7 +516,7 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                     <TextBox   Grid.Row="1" Grid.Column="1" Margin="0" Text="{Binding StyleFontUrl, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
                     <RelativePanel Grid.Row="1" Grid.Column="2" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                         <Button Command="{Binding WebOpenGoogleFontsUrl}" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageSearchWeb}" Width="20" Height="20" />
+                            <Image Source="{c:LazyResource ImageSearchWeb}" Width="20" Height="20" />
                         </Button>
                     </RelativePanel>
                     <TextBlock Grid.Row="2" Grid.Column="0" Margin="0" Text="CSS (URL):" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -542,7 +539,7 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                 <Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
                     <RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_SplitCounter" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding RadioPurpose_SplitCounter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -553,7 +550,7 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                     </Border>
                     <RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_Checklist" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding RadioPurpose_Checklist, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -564,7 +561,7 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                     </Border>
                     <RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_NoDeath" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding RadioPurpose_NoDeath, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -575,7 +572,7 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                     </Border>
                     <RelativePanel Grid.Row="6" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_DeathCounter" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="6" Grid.Column="1" Margin="0" IsChecked="{Binding RadioPurpose_DeathCounter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -586,7 +583,7 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                     </Border>
                     <RelativePanel Grid.Row="8" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_ResetCounter" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="8" Grid.Column="1" Margin="0" IsChecked="{Binding RadioPurpose_ResetCounter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -601,7 +598,7 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                 <Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
                     <RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHitSeverity_AnyHitCritical" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHitSeverity_AnyHitCritical, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -618,7 +615,7 @@ BAD splits have at least one hit</x:String>
                     </Border>
                     <RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHitSeverity_ComparePB" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHitSeverity_ComparePB, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -636,7 +633,7 @@ BAD splits have at least one hit counted for bosses</x:String>
                     </Border>
                     <RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHitSeverity_BossHitCritical" Classes="ImageButton">
-                            <Image Source="{common:LazyResource ImageInfo}" Width="18" Height="18" />
+                            <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" />
                         </Button>
                     </RelativePanel>
                     <ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHitSeverity_BossHitCritical, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -673,4 +670,4 @@ BAD splits have more hits than on the PB run</x:String>
             </StackPanel>
         </ScrollViewer>
     </DockPanel>
-</Window>
+</UserControl>

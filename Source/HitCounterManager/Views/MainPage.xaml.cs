@@ -21,7 +21,9 @@
 //SOFTWARE.
 
 using System.ComponentModel;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
 using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
 using HitCounterManager.Controls;
@@ -29,18 +31,15 @@ using HitCounterManager.ViewModels;
 
 namespace HitCounterManager.Views
 {
-    public partial class MainPage : WindowPageBase<MainPageViewModel>
+    public partial class MainPage : PageBase<MainPageViewModel>
     {
-        private SettingsRoot Settings => App.CurrentApp.Settings;
         public ProfileView? ProfileView => this.FindControl<ProfileView>("profileView");
 
         public MainPage()
         {
             AvaloniaXamlLoader.Load(this);
-            InitializeComponent();
 
-            Width = Settings.MainWidth;
-            Height = Settings.MainHeight;
+            ViewModel.ProfileView = ProfileView;
 
             // Workaround: Avalonia's DataTriggerBehavior seems to be created but not executed during InitializeComponent()
             //             However, we rely on this trigger to update the UI accordingly.
@@ -49,22 +48,15 @@ namespace HitCounterManager.Views
             //             so, we return null up to here that we ensure there is a data change during notify.
             ViewModel.AlwaysOnTopDataTriggerWorkaroundCalled = true;
             ViewModel.CallPropertyChanged(nameof(ViewModel.AlwaysOnTop));
-
-            Closing += ClosingHandler;
-            PositionChanged += PositionChangedHandler;
         }
 
-        private void PositionChangedHandler(object? sender, PixelPointEventArgs e)
+        protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
         {
-            Settings.MainPosX = Position.X;
-            Settings.MainPosY = Position.Y;
+            App.CurrentApp.NotificationManager = new WindowNotificationManager(TopLevel.GetTopLevel(this)) { Position = NotificationPosition.TopRight, MaxItems = 1 };
         }
 
-        private void ClosingHandler(object? sender, CancelEventArgs e)
+        public override void OnClosing(object? sender, CancelEventArgs e)
         {
-            Settings.MainWidth = (int)Width;
-            Settings.MainHeight = (int)Height;
-
             if (ViewModel.DoAskSaveBeforeClose)
             {
                 // Not sure if we need to dispatch it but better safe than sorry

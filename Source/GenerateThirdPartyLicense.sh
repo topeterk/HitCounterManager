@@ -142,14 +142,16 @@ EOF
 echo Fetching NuGet packages 1>&2
 
 LICENSES=""
-NUGET_PACKAGES_DIR=$(dotnet nuget locals -l global-packages | sed -e 's,^[^ ]* ,,')
-NUGET_PACKAGES_SPECS=$(dotnet list $(pwd)/HitCounterManager.sln package --include-transitive | grep ">" | sed -e 's,^[^>]*>[ \t]*\([^ ^\t]*\)[ \t]*\([^ ^\t]*\).*,\L\1/\2/\L\1.nuspec,' | xargs)
+NUGET_PACKAGES_DIR=$(dotnet nuget locals -l global-packages | sed -e 's,^[^ ]* ,,' -e 's,[ \t/\\]*$,,' -e 's,\\,/,g')
+NUGET_PACKAGES_SPECS=$(dotnet list $(pwd)/HitCounterManager.sln package --include-transitive --format json | grep -e '"id":\|"resolvedVersion":' | sed -e 's,.*: "\(.*\)"\,*$,\1,' | xargs -n2 -d'\n' | sed -e 's,\([^ ]*\) \(.*\),\L\1/\2/\L\1.nuspec,')
 
 echo Printing NuGet packages 1>&2
 
-for nuspec in ${NUGET_PACKAGES_SPECS};
+for nuspec in ${NUGET_PACKAGES_SPECS}
 do
-	xml="${NUGET_PACKAGES_DIR}/${nuspec}"
+	# (a) seems to be filler expression to whatever version is available, try detect folder using shell's star autocompletion
+	xml="$(echo ${NUGET_PACKAGES_DIR}/${nuspec} | sed -e 's,/(a)/,/*/,g')"
+
 	id=$(grepkey id "${xml}")
 	echo ==============================================================================
 	echo NuGet Package: ${id} $(grepkey version "${xml}")
@@ -174,13 +176,20 @@ do
 	if [ ! -z ${GITHUB_RAWURL} ] ; then
 		lic=${GITHUB_RAWURL}
 	fi
-	echo License: ${lic}
-	LICENSES="${LICENSES} ${lic}"
+	# Split dual licences
+	if [ "${lic}" = "https://licenses.nuget.org/MIT%20AND%20Apache-2.0" ] ; then
+		lic="https://licenses.nuget.org/MIT https://licenses.nuget.org/Apache-2.0"
+	fi
+	for lic in ${lic}
+	do
+		echo License: ${lic}
+		LICENSES="${LICENSES} ${lic}"
+	done
 done
 
 echo Printing NuGet licenses 1>&2
 
-for lic in $(echo $LICENSES | xargs -n 1 echo | sort -u) ;
+for lic in $(echo $LICENSES | xargs -n 1 echo | sort -u)
 do
 	if [ "${lic}" = "https://licenses.nuget.org/MIT" ] ; then
 		# MIT is already attached above

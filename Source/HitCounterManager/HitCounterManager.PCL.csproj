@@ -1,31 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <AssemblyName>$(Product).PCL</AssemblyName>
     <TargetFramework>net7.0</TargetFramework>
-    <!-- https://docs.microsoft.com/en-us/dotnet/core/rid-catalog -->
-    <RuntimeIdentifiers>win;linux;osx;android;ios</RuntimeIdentifiers>
-    <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-
-    <Version>2.0.0.0</Version>
-    <Authors>Peter Kirmeier</Authors>
-    <Company></Company>
-    <Product>HitCounterManager</Product>
-    <PackageId>HitCounterManager</PackageId>
-    <AssemblyVersion>$(Version)</AssemblyVersion>
-    <FileVersion>$(Version)</FileVersion>
-    <NeutralLanguage>en</NeutralLanguage>
-    <Description>Manages a hit counter</Description>
-    <Copyright>Copyright © Peter Kirmeier 2023</Copyright>
     <PackageLicenseFile>../../LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/topeterk/HitCounterManager</PackageProjectUrl>
     <RepositoryUrl>https://github.com/topeterk/HitCounterManager.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <ApplicationIcon>Resources/FireIcon.ico</ApplicationIcon>
     <AvaloniaNameGeneratorIsEnabled>false</AvaloniaNameGeneratorIsEnabled>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="../Datafiles/**" Link="Datafiles/%(RecursiveDir)%(Filename)%(Extension)" />
     <AvaloniaResource Include="Resources/**" />
+    <!-- https://learn.microsoft.com/de-de/visualstudio/msbuild/msbuild-well-known-item-metadata?view=vs-2022 -->
+    <!-- <AvaloniaResource Include="Resources/**" Link="%(RelativeDir)$([System.String]::Concat('%(Filename)%(Extension)').Replace('-','_'))"/> -->
     <AvaloniaXaml Include="Controls/*.xaml" />
     <AvaloniaXaml Include="Views/*.xaml" />
     <!-- "None" Datafiles are used for showing the files as project sources within a sub directory.
@@ -35,12 +23,11 @@
     <EmbeddedResource Include="../../THIRDPARTYLICENSEREADME" Link="THIRDPARTYLICENSEREADME" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.0.5" />
-    <PackageReference Include="Avalonia.Controls.ItemsRepeater" Version="11.0.5" />
-    <PackageReference Include="Avalonia.Desktop" Version="11.0.5" />
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.5" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.5" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.5" />
-    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.0.5" />
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Controls.ItemsRepeater" Version="$(AvaloniaVersion)" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="$(AvaloniaVersion)" />
   </ItemGroup>
 </Project>

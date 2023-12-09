@@ -1,0 +1,25 @@
+<Project>
+  <PropertyGroup>
+    <!-- Consumed by pipeline START -->
+    <Version>2.0.0.0</Version>
+    <Product>HitCounterManager</Product>
+    <!-- Consumed by pipeline END -->
+    <FileVersion>$(Version)</FileVersion>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <AssemblyName>$(Product)</AssemblyName>
+    <AssemblyTitle>Manages a hit counter</AssemblyTitle>
+    <NeutralLanguage>en</NeutralLanguage>
+
+    <Authors>Peter Kirmeier</Authors>
+    <Company></Company>
+    <Copyright>Copyright © $(Authors) $([System.DateTime]::Now.Year)</Copyright>
+
+    <Nullable>enable</Nullable>
+    <!-- The path must be set in this property file as it must be loaded before the    -->
+    <!-- actual project file includes the properties from the dotnet SDK. This is only -->
+    <!-- needed as Android and Desktop NuGet packages are overwriting each other files -->
+    <!--<MSBuildProjectExtensionsPath>obj/ext/$(PlatformName)</MSBuildProjectExtensionsPath>-->
+
+    <AvaloniaVersion>11.0.5</AvaloniaVersion>
+  </PropertyGroup>
+</Project>

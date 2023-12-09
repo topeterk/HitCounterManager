@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2021-2023 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +20,7 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
+using System;
 using System.Reflection;
 
 namespace HitCounterManager.Common
@@ -30,14 +31,26 @@ namespace HitCounterManager.Common
     public static class Statics
     {
         /// <summary>
-        /// Name of the running application
+        /// AssemblyName of the running application (e.g. exe file)
+        /// On Android it may not be set, so fallback to the running platform class library (e.g. PCL/DLL)
         /// </summary>
-        public static string ApplicationName { get => Assembly.GetExecutingAssembly().GetName().Name!; }
+        public static AssemblyName ApplicationNameRaw { get => Assembly.GetEntryAssembly()?.GetName() ?? Assembly.GetExecutingAssembly().GetName(); }
 
         /// <summary>
-        /// Version string of the running application
+        /// Name of the running application (e.g. exe file)
+        /// On Android it may not be set, so fallback to the running platform class library (e.g. PCL/DLL)
         /// </summary>
-        public static string ApplicationVersionString { get => Assembly.GetExecutingAssembly().GetName().Version!.ToString(); }
+        public static string ApplicationName { get => ApplicationNameRaw.Name ?? string.Empty; }
+
+        /// <summary>
+        /// Version of the running platform class library (e.g. PCL/DLL)
+        /// </summary>
+        public static Version? ApplicationVersion { get => ApplicationNameRaw.Version; }
+
+        /// <summary>
+        /// Version string of the running platform class library (e.g. PCL/DLL)
+        /// </summary>
+        public static string ApplicationVersionString { get => ApplicationVersion?.ToString() ?? string.Empty; }
 
         /// <summary>
         /// Titel string of the application including its version

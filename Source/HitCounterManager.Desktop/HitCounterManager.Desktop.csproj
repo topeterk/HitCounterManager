@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- Consumed by pipeline START -->
+    <TargetFramework>net7.0</TargetFramework>
+    <!-- Consumed by pipeline END -->
+
+    <OutputType>WinExe</OutputType>
+    <PackageId>$(Product).Desktop</PackageId>
+    <!-- https://docs.microsoft.com/en-us/dotnet/core/rid-catalog -->
+    <RuntimeIdentifiers>win;linux;osx</RuntimeIdentifiers>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationIcon>../$(Product)/Resources/FireIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../$(Product)/$(Product).PCL.csproj" />
+    <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+</Project>

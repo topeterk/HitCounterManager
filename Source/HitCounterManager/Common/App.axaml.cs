@@ -38,8 +38,6 @@ using HitCounterManager.Common;
 using HitCounterManager.Models;
 using HitCounterManager.Views;
 using HitCounterManager.ViewModels;
-using Avalonia.Controls.Templates;
-using System.Drawing.Drawing2D;
 
 #if SHOW_COMPLER_VERSION // enable and hover over #error to see C# compiler version and the used language version
 #error version
@@ -66,7 +64,7 @@ namespace HitCounterManager
 
         private readonly Dictionary<TimerIDs, DispatcherTimer> ApplicationTimers = new Dictionary<TimerIDs, DispatcherTimer>();
         private IDisposable? UpdateCheckTimer;
-        private WindowNotificationManager? NotificationManager;
+        public WindowNotificationManager? NotificationManager;
 
         public App()
         {
@@ -106,7 +104,6 @@ namespace HitCounterManager
         /// </summary>
         /// <param name="Title"></param>
         /// <param name="Message"></param>
-        /// <param name="Cancel"></param>
         /// <param name="Type"></param>
         public void DisplayAlert(string Title, string Message, NotificationType Type = NotificationType.Error)
         {
@@ -116,7 +113,7 @@ namespace HitCounterManager
                 PostponedAlerts.Add(new PostponedAlert(Title, Message, Type));
         }
 
-        private void MainPageAppearing(object? sender, EventArgs e)
+        internal void MainPageAppearing(object? sender, EventArgs e)
         {
             if (null != PostponedAlerts)
             {
@@ -218,16 +215,17 @@ namespace HitCounterManager
 
         public override void OnFrameworkInitializationCompleted()
         {
-            RequestedThemeVariant = Settings.DarkMode ? ThemeVariant.Dark : ThemeVariant.Light; // TODO: Avalonia11 fluent test
+            MainPage? mainPage = null;
+            RequestedThemeVariant = Settings.DarkMode ? ThemeVariant.Dark : ThemeVariant.Light;
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                MainPage main = new MainPage();
-                profileViewViewModel = (ProfileViewViewModel?)main.ProfileView?.DataContext;
+                MainWindow main = new MainWindow();
+                mainPage = main.InnerPage;
+                profileViewViewModel = (ProfileViewViewModel?)mainPage.ProfileView?.DataContext;
                 main.Opened += MainPageAppearing;
 
                 desktop.MainWindow = main;
-                NotificationManager = new WindowNotificationManager(desktop.MainWindow) { Position = NotificationPosition.TopRight, MaxItems = 1 };
                 NativeWindowHandle = desktop.MainWindow.TryGetPlatformHandle()?.Handle ?? default;
                 if (!IsCleanStart && IsTitleBarOnScreen(desktop.MainWindow.Screens, Settings.MainPosX, Settings.MainPosY, Settings.MainWidth))
                 {
@@ -243,16 +241,24 @@ namespace HitCounterManager
                 }
                 bool Success = LoadAllHotKeySettings();
                 if (!Success) DisplayAlert("Error setting up hot keys!", "Not all enabled hot keys could be registered successfully!");
+            }
+            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+            {
+                //MainPage main = new MainPage();
+                SingleViewNavigationPage main = new SingleViewNavigationPage();
+                mainPage = main.InnerPage;
+                singleViewPlatform.MainView = main;
+                profileViewViewModel = (ProfileViewViewModel?)mainPage.ProfileView?.DataContext;
+            }
 
-                // Check for updates..
-                if (Settings.CheckUpdatesOnStartup)
-                {
-                    // Run check later in the background, so offline startup can proceed faster
-                    UpdateCheckTimer = DispatcherTimer.RunOnce(
-                        () => Dispatcher.UIThread.Post(() => CheckAndShowUpdates((MainPageViewModel)main.DataContext!)),
-                        TimeSpan.FromSeconds(4),
-                        DispatcherPriority.ApplicationIdle);
-                }
+            // Check for updates..
+            if (Settings.CheckUpdatesOnStartup && mainPage is not null)
+            {
+                // Run check later in the background, so offline startup can proceed faster
+                UpdateCheckTimer = DispatcherTimer.RunOnce(
+                    () => Dispatcher.UIThread.Post(() => CheckAndShowUpdates(mainPage.ViewModel)),
+                    TimeSpan.FromSeconds(4),
+                    DispatcherPriority.ApplicationIdle);
             }
 
             base.OnFrameworkInitializationCompleted();
@@ -277,7 +283,7 @@ namespace HitCounterManager
             return false;
         }
 
-        private void AppExitHandler(object? sender, ControlledApplicationLifetimeExitEventArgs e)
+        public void AppExitHandler(object? sender, EventArgs e)
         {
             foreach ((TimerIDs _, DispatcherTimer timer) in ApplicationTimers) timer.Stop();
 
@@ -305,7 +311,7 @@ namespace HitCounterManager
             UpdateBrushColor("MainWindowBackgroundBrush", "MainWindowBackgroundColor" + ModeName);
             UpdateBrushColor("TextBoxBackgroundBrush", "TextBoxBackgroundColor" + ModeName);
 
-            CurrentApp.RequestedThemeVariant = DarkMode ? ThemeVariant.Dark : ThemeVariant.Light; // TODO: Avalonia11 fluent test
+            CurrentApp.RequestedThemeVariant = DarkMode ? ThemeVariant.Dark : ThemeVariant.Light;
         }
 
         private void UpdateBrushColor(string BrushName, string ColorName)
@@ -509,27 +515,6 @@ namespace HitCounterManager
         public IntPtr SendHotKeyMessage(IntPtr WindowHandle, IntPtr wParam, IntPtr lParam)
         {
             return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? NativeApi.SendMessageW(WindowHandle, NativeApi.WM_HOTKEY, wParam, lParam) : IntPtr.Zero;
-        }
-    }
-
-    public class ViewLocator : IDataTemplate
-    {
-        public Control Build(object? data)
-        {
-            var name = data?.GetType().FullName!.Replace("ViewModel", "View");
-            var type = name is null ? null : Type.GetType(name);
-
-            if (type != null)
-            {
-                return (Control)Activator.CreateInstance(type)!;
-            }
-
-            return new TextBlock { Text = "Not Found: " + name };
-        }
-
-        public bool Match(object? data)
-        {
-            return data is ViewModelBase;
         }
     }
 }

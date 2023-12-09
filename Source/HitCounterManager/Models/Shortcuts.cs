@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright(c) 2016-2022 Peter Kirmeier
+//Copyright(c) 2016-2023 Peter Kirmeier
 
 //Permission Is hereby granted, free Of charge, to any person obtaining a copy
 //of this software And associated documentation files (the "Software"), to deal
@@ -69,6 +69,7 @@ namespace HitCounterManager.Models
         None = 0,
         /// <summary>
         /// The BACKSPACE key
+        /// </summary>
         Back = 8,
         /// <summary>
         /// The SHIFT key

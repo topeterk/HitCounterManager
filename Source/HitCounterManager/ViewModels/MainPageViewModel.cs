@@ -23,7 +23,6 @@
 using System;
 using System.Windows.Input;
 using ReactiveUI;
-using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using HitCounterManager.Common;
 using HitCounterManager.Controls;
@@ -33,40 +32,41 @@ namespace HitCounterManager.ViewModels
 {
     public class MainPageViewModel : ViewModelWindowBase
     {
-        private ProfileView? ProfileView => OwnerWindow?.FindControl<ProfileView>("profileView");
+        internal ProfileView? ProfileView;
 
         public MainPageViewModel()
         {
-            OpenPageSettings = ReactiveCommand.CreateFromTask(async () => { if (null != OwnerWindow) await new SettingsPage().ShowDialog(OwnerWindow); });
-            OpenPageUpdate = ReactiveCommand.CreateFromTask(async () => { if (null != OwnerWindow) await new UpdatePage().ShowDialog(OwnerWindow); });
-            OpenPageAbout = ReactiveCommand.CreateFromTask(async () => { if (null != OwnerWindow) await new AboutPage().ShowDialog(OwnerWindow); } );
+            OpenPageSettings = ReactiveCommand.CreateFromTask(async () => { await this.CreatePageOrWindow<SettingsPageViewModel, SettingsPage, SettingsWindow>().OpenAsDialog(OwnerWindow); });
+            OpenPageUpdate = ReactiveCommand.CreateFromTask(async () => { await this.CreatePageOrWindow<UpdatePageViewModel, UpdatePage, UpdateWindow>().OpenAsDialog(OwnerWindow); });
+            OpenPageAbout = ReactiveCommand.CreateFromTask(async () => { await this.CreatePageOrWindow<ViewModelWindowBase, AboutPage, AboutWindow>().OpenAsDialog(OwnerWindow); } );
 
             OpenPageSetAttempts = ReactiveCommand.CreateFromTask(async () => {
-                if ((null == OwnerWindow) || (null == ProfileView)) return;
+                if (null == ProfileView) return;
 
-                ProfileAttemptsPage page = new ProfileAttemptsPage();
-                page.ViewModel.Origin = (ProfileViewViewModel?)ProfileView?.DataContext!;
-                page.ViewModel.UserInput = page.ViewModel.Origin.ProfileSelected.Attempts;
-                await page.ShowDialog(OwnerWindow);
+                IPageBase<ProfileAttemptsPageViewModel> page = this.CreatePageOrWindow<ProfileAttemptsPageViewModel, ProfileAttemptsPage, ProfileAttemptsWindow>();
+                ProfileAttemptsPageViewModel viewModel = page.GetViewModel();
+                viewModel.Origin = (ProfileViewViewModel?)ProfileView?.DataContext!;
+                viewModel.UserInput = viewModel.Origin!.ProfileSelected.Attempts;
+                await page.OpenAsDialog(OwnerWindow);
             });
             OpenPageProfileAction = ReactiveCommand.CreateFromTask(async (ProfileAction type) => {
-                if (App.CurrentApp.Settings.ReadOnlyMode || (null == OwnerWindow) || (null == ProfileView)) return;
+                if (App.CurrentApp.Settings.ReadOnlyMode || (null == ProfileView)) return;
 
-                ProfileActionPage page = new ProfileActionPage();
-                page.ViewModel.Origin = (ProfileViewViewModel?)ProfileView?.DataContext!;
-                page.ViewModel.Action = type;
-                await page.ShowDialog(OwnerWindow);
+                IPageBase<ProfileActionPageViewModel> page = this.CreatePageOrWindow<ProfileActionPageViewModel, ProfileActionPage, ProfileActionWindow>();
+                ProfileActionPageViewModel viewModel = page.GetViewModel();
+                viewModel.Origin = (ProfileViewViewModel?)ProfileView?.DataContext!;
+                viewModel.Action = type;
+                await page.OpenAsDialog(OwnerWindow);
             });
             OpenPageAskSaveBeforeClose = ReactiveCommand.CreateFromTask(async () => {
-                if (null == OwnerWindow) return;
-
-                AskSaveBeforeClosePage page = new AskSaveBeforeClosePage();
-                await page.ShowDialog(OwnerWindow);
-                if (null == page.ViewModel.PressedYes) return; // Cancel pressed or dialog closed
+                IPageBase<AskSaveBeforeClosePageViewModel> page = this.CreatePageOrWindow<AskSaveBeforeClosePageViewModel, AskSaveBeforeClosePage, AskSaveBeforeCloseWindow>();
+                AskSaveBeforeClosePageViewModel viewModel = page.GetViewModel();
+                await page.OpenAsDialog(OwnerWindow);
+                if (null == viewModel.PressedYes) return; // Cancel pressed or dialog closed
 
                 DoAskSaveBeforeClose = false; // Do not ask any more, we are about to shutdown
-                if (true == page.ViewModel.PressedYes) App.CurrentApp.SaveSettings();
-                OwnerWindow.Close();
+                if (true == viewModel.PressedYes) App.CurrentApp.SaveSettings();
+                OwnerWindow?.Close();
             });
 
             CheckUpdatesOnline = ReactiveCommand.Create(() => App.CurrentApp.CheckAndShowUpdates(this));

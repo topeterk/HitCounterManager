@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- Consumed by pipeline START -->
+    <TargetFramework>net7.0-android</TargetFramework>
+    <!-- Consumed by pipeline END -->
+
+    <OutputType>Exe</OutputType>
+    <PackageId>$(Product).Android</PackageId>
+    <!-- https://docs.microsoft.com/en-us/dotnet/core/rid-catalog -->
+    <!--<RuntimeIdentifiers>android-arm64</RuntimeIdentifiers>-->
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <ApplicationId>com.peterkirmeier.$(Product)</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AndroidResource Include="Icon.png">
+      <Link>Resources\drawable\Icon.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../$(Product)/$(Product).PCL.csproj" />
+    <PackageReference Include="Avalonia.Android" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Xamarin.AndroidX.Annotation" Version="1.7.0.3" />
+    <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.1" />
+  </ItemGroup>
+</Project>

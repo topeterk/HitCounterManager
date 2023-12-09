@@ -21,6 +21,8 @@
 #SOFTWARE.
 
 # https://aka.ms/yaml
+# https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/?view=azure-pipelines&viewFallbackFrom=azure-devops
+# https://learn.microsoft.com/en-us/azure/devops/pipelines/process/expressions?view=azure-devops
 # RuntimeRID values: https://docs.microsoft.com/en-us/dotnet/core/rid-catalog
 
 trigger:
@@ -41,38 +43,50 @@ stages:
         win-x64:
           PoolVmImg: 'windows-latest'
           RuntimeRID: 'win-x64'
+          PlatformType: 'Desktop'
         linux-x64:
           PoolVmImg: 'ubuntu-latest'
           RuntimeRID: 'linux-x64'
+          PlatformType: 'Desktop'
         osx-x64:
           PoolVmImg: 'macOS-latest'
           RuntimeRID: 'osx-x64'
+          PlatformType: 'Desktop'
 # Windows
         win-x86:
           PoolVmImg: 'windows-latest'
           RuntimeRID: 'win-x86'
+          PlatformType: 'Desktop'
         win-arm:
           PoolVmImg: 'windows-latest'
           RuntimeRID: 'win-arm'
+          PlatformType: 'Desktop'
         win-arm64:
           PoolVmImg: 'windows-latest'
           RuntimeRID: 'win-arm64'
+          PlatformType: 'Desktop'
 # Linux
         linux-musl-x64:
           PoolVmImg: 'ubuntu-latest'
           RuntimeRID: 'linux-musl-x64'
+          PlatformType: 'Desktop'
         linux-arm:
           PoolVmImg: 'ubuntu-latest'
           RuntimeRID: 'linux-arm'
+          PlatformType: 'Desktop'
         linux-arm64:
           PoolVmImg: 'ubuntu-latest'
           RuntimeRID: 'linux-arm64'
+          PlatformType: 'Desktop'
 # iOS
 #   building using Xcode? https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/xcode?view=azure-devops
 #   ios-arm64
 # Android
 #   building using Gradle? https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/android?view=azure-devops
-#   android-arm64
+#       android-arm64:
+#         PoolVmImg: 'windows-latest'
+#         RuntimeRID: 'android-arm64'
+#         PlatformType: 'Android'
 
     variables:
       buildConfiguration: 'Release'
@@ -92,25 +106,29 @@ stages:
 #        packageType: sdk
 #        version: 6.x
 
+
+# example:  dotnet publish --configuration Release  --runtime win-x64  --self-contained false HitCounterManager.Desktop\HitCounterManager.Desktop.csproj
+# example:  dotnet publish --configuration Debug  --runtime android-arm64  --self-contained false HitCounterManager.Android\HitCounterManager.Android.csproj
     - task: DotNetCoreCLI@2
       inputs:
         command: 'publish'
         arguments: '--configuration $(buildConfiguration) --runtime $(RuntimeRID) --self-contained false'
         publishWebProjects: false
         zipAfterPublish: false
-        projects: '**/*.csproj'
+        projects: '**/*.$(PlatformType).csproj'
 
     - task: Bash@3
       displayName: 'Assembly Variables'
       env:
-        PROJECTFILE: '$(Build.SourcesDirectory)/Source/HitCounterManager/HitCounterManager.csproj'
+        DIR_FILE: '$(Build.SourcesDirectory)/Source/Directory.Build.props'
+        PRJ_FILE: '$(Build.SourcesDirectory)/Source/HitCounterManager.$(PlatformType)/HitCounterManager.$(PlatformType).csproj'
       inputs:
         targetType: 'inline'
         script: |
-          echo "Parsing '$PROJECTFILE' ..."
-          grep "<Version>"         "$PROJECTFILE" | tee    Vars.txt | sed -e 's,^.*<Version>\([^<^>]*\)</Version>,##vso[task.setvariable variable=AssemblyVersionAttribute]\1,g'
-          grep "<Product>"         "$PROJECTFILE" | tee -a Vars.txt | sed -e 's,^.*<Product>\([^<^>]*\)</Product>,##vso[task.setvariable variable=AssemblyProductAttribute]\1,g'
-          grep "<TargetFramework>" "$PROJECTFILE" | tee -a Vars.txt | sed -e 's,^.*<TargetFramework>\([^<^>]*\)</TargetFramework>,##vso[task.setvariable variable=AssemblyTargetFrameworkAttribute]\1,g'
+          echo "Parsing '$DIR_FILE' and '$PRJ_FILE' ..."
+          grep "<Version>"         "$DIR_FILE" | tee    Vars.txt | sed -e 's,^.*<Version>\([^<^>]*\)</Version>,##vso[task.setvariable variable=AssemblyVersionAttribute]\1,g'
+          grep "<Product>"         "$DIR_FILE" | tee -a Vars.txt | sed -e 's,^.*<Product>\([^<^>]*\)</Product>,##vso[task.setvariable variable=AssemblyProductAttribute]\1,g'
+          grep "<TargetFramework>" "$PRJ_FILE" | tee -a Vars.txt | sed -e 's,^.*<TargetFramework>\([^<^>]*\)</TargetFramework>,##vso[task.setvariable variable=AssemblyTargetFrameworkAttribute]\1,g'
           echo "Read into variables:"
           cat Vars.txt
           rm -f Vars.txt
@@ -123,11 +141,12 @@ stages:
           echo "Listing '$(Build.SourcesDirectory)' ..."
           find -L . -type f
 
+# example publish path:  ./Source/HitCounterManager.Desktop/bin/Release/net7.0/win-x64/publish
     - task: ArchiveFiles@2
-      condition: startsWith(variables['PoolVmImg'], 'windows')
+      condition: startsWith(variables['RuntimeRID'], 'win-')
       displayName: 'Archive $(Build.ArtifactStagingDirectory)'
       inputs:
-        rootFolderOrFile: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/publish/'
+        rootFolderOrFile: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/publish/'
         includeRootFolder: false
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.zip'
         archiveType: 'zip'
@@ -135,10 +154,10 @@ stages:
         verbose: true
 
     - task: ArchiveFiles@2
-      condition: not(startsWith(variables['PoolVmImg'], 'windows'))
+      condition: or(startsWith(variables['RuntimeRID'], 'linux-'), startsWith(variables['RuntimeRID'], 'osx-'))
       displayName: 'Archive $(Build.ArtifactStagingDirectory)'
       inputs:
-        rootFolderOrFile: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/publish/'
+        rootFolderOrFile: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/publish/'
         includeRootFolder: false
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.tar.gz'
         archiveType: 'tar'

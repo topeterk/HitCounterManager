@@ -22,10 +22,8 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 -->
-<UserControl xmlns="https://github.com/avaloniaui" 
+<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
-             xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
              x:Class="HitCounterManager.Controls.FramedImageButton">
     <Border Margin="3" CornerRadius="5" BorderThickness="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
             BorderBrush="DimGray" Background="{Binding $parent[UserControl].MainColor}" >

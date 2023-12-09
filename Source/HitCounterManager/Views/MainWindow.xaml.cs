@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2023 Peter Kirmeier
+//Copyright (c) 2023-2023 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -20,36 +20,43 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-using System;
-using System.Diagnostics.CodeAnalysis;
-using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
 using HitCounterManager.ViewModels;
+using System.ComponentModel;
 
 namespace HitCounterManager.Views
 {
-    public class WindowPageBase<TViewModel> : Window where TViewModel : ViewModelWindowBase
+    public partial class MainWindow : WindowBase<MainPageViewModel>
     {
-        /// <summary>
-        /// InitializeComponent must be called by the derived class.
-        /// </summary>
-        public TViewModel ViewModel => (TViewModel?)DataContext!;
+        private SettingsRoot Settings => App.CurrentApp.Settings;
 
-        [MemberNotNull(nameof(ViewModel))]
-        protected void InitializeComponent()
+        internal readonly MainPage InnerPage;
+
+        public MainWindow()
         {
-            if (null == ViewModel) throw new Exception("ViewModel is not set!");
+            AvaloniaXamlLoader.Load(this);
+            InitializeComponent();
 
-            ViewModel.OwnerWindow = this;
+            Width = Settings.MainWidth;
+            Height = Settings.MainHeight;
 
-            Topmost = App.CurrentApp.Settings.AlwaysOnTop;
+            InnerPage = this.FindControl<MainPage>("InnerPage")!;
 
-            Opened += (object? sender, EventArgs e) => ViewModel.OnAppearing();
-            Closed += (object? sender, EventArgs e) => ViewModel.OnDisappearing();
+            Closing += ClosingHandler;
+            PositionChanged += PositionChangedHandler;
+        }
 
-#if DEBUG
-            this.AttachDevTools();
-#endif
+        private void PositionChangedHandler(object? sender, PixelPointEventArgs e)
+        {
+            Settings.MainPosX = Position.X;
+            Settings.MainPosY = Position.Y;
+        }
+
+        private void ClosingHandler(object? sender, CancelEventArgs e)
+        {
+            Settings.MainWidth = (int)Width;
+            Settings.MainHeight = (int)Height;
         }
     }
 }

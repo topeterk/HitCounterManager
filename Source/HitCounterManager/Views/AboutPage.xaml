@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2021-2023 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -22,27 +22,24 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 -->
-<Window xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
-        xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
-        x:Class="HitCounterManager.Views.AboutPage"
-        Icon="/Resources/FireIcon.ico"
-        Title="About" Classes="DialogWindow"
-        MinWidth="420" MinHeight="380" Width="800" Height="630">
+        xmlns:c="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager.PCL"
+        xmlns:vm="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager.PCL"
+        x:Class="HitCounterManager.Views.AboutPage">
 
-    <Window.DataContext>
-        <local:ViewModelWindowBase />
-    </Window.DataContext>
+	<UserControl.DataContext>
+		<vm:ViewModelWindowBase />
+	</UserControl.DataContext>
 
-    <DockPanel Margin="10">
-        <TextBlock DockPanel.Dock="Top"    Margin="20" Text="{x:Static common:Statics.ApplicationTitle}" HorizontalAlignment="Center" FontWeight="Bold"/>
-        <Button    DockPanel.Dock="Bottom" Margin="20" Width="200" Content="OK" Command="{Binding $parent[Window].Close}" HorizontalAlignment="Right"/>
+	<DockPanel Margin="10">
+		<TextBlock DockPanel.Dock="Top"    Margin="20" Text="{x:Static c:Statics.ApplicationTitle}" HorizontalAlignment="Center" FontWeight="Bold"/>
+		<Button    DockPanel.Dock="Bottom" Margin="20" Width="200" Content="OK" Click="CloseHandler" HorizontalAlignment="Right"/>
 
-        <Border Padding="2" Classes="InfoBoxBorder">
-            <ScrollViewer Padding="0,0,30,0" AllowAutoHide="false">
-                <TextBox TextWrapping="Wrap" Padding="5" IsReadOnly="true" Text="{common:StringFromManifest Resource=.THIRDPARTYLICENSEREADME}" />
-            </ScrollViewer>
-        </Border>
-    </DockPanel>
-</Window>
+		<Border Padding="2" Classes="InfoBoxBorder">
+			<ScrollViewer Padding="0,0,30,0" AllowAutoHide="false">
+				<TextBox TextWrapping="Wrap" Padding="5" IsReadOnly="true" Text="{c:StringFromManifest Resource=.THIRDPARTYLICENSEREADME}" />
+			</ScrollViewer>
+		</Border>
+	</DockPanel>
+</UserControl>

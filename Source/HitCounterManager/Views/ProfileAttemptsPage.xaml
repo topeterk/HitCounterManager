@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2021-2023 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -22,19 +22,15 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 -->
-<Window xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:common="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager"
-        xmlns:local="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager"
+        xmlns:vm="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager.PCL"
         x:Class="HitCounterManager.Views.ProfileAttemptsPage"
-        x:DataType="local:ProfileAttemptsPageViewModel"
-        Icon="/Resources/FireIcon.ico"
-        Title="Attempts" Classes="DialogWindow"
-        MinWidth="500" MinHeight="130" Width="500" Height="130">
+        x:DataType="vm:ProfileAttemptsPageViewModel">
 
-    <Window.DataContext>
-        <local:ProfileAttemptsPageViewModel />
-    </Window.DataContext>
+	<UserControl.DataContext>
+        <vm:ProfileAttemptsPageViewModel />
+    </UserControl.DataContext>
 
     <StackPanel Margin="10" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <TextBlock Margin="0,0,0,5" Text="Setting attempts count..." HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
@@ -42,8 +38,8 @@
                        Value="{Binding UserInput}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-            <Button Margin="20" Width="200" Content="Dismiss" Command="{Binding $parent[Window].Close}" HorizontalAlignment="Right"/>
+            <Button Margin="20" Width="200" Content="Dismiss"  Click="CloseHandler" HorizontalAlignment="Right"/>
             <Button Margin="20" Width="200" Content="OK" Command="{Binding Submit}" HorizontalAlignment="Right"/>
         </StackPanel>
     </StackPanel>
-</Window>
+</UserControl>

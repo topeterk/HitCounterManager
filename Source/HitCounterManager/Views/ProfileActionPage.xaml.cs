@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2021-2023 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -25,12 +25,11 @@ using HitCounterManager.ViewModels;
 
 namespace HitCounterManager.Views
 {
-    public partial class ProfileActionPage : WindowPageBase<ProfileActionPageViewModel>
+    public partial class ProfileActionPage : PageBase<ProfileActionPageViewModel>
     {
         public ProfileActionPage()
         {
             AvaloniaXamlLoader.Load(this);
-            InitializeComponent();
         }
     }
 }
