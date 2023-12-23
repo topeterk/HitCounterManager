@@ -9,11 +9,12 @@
     <PackageId>$(Product).Android</PackageId>
     <!-- https://docs.microsoft.com/en-us/dotnet/core/rid-catalog -->
     <!--<RuntimeIdentifiers>android-arm64</RuntimeIdentifiers>-->
-    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
     <ApplicationVersion>$(MajorVersion)</ApplicationVersion>
     <ApplicationDisplayVersion>$(Version)</ApplicationDisplayVersion>
-    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <AndroidPackageFormats>apk</AndroidPackageFormats>
     <AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
+    <AndroidUseApkSigner>True</AndroidUseApkSigner>
+    <AndroidApkSignerAdditionalArguments>--v2-signing-enabled true</AndroidApkSignerAdditionalArguments>
   </PropertyGroup>
 
   <ItemGroup>
