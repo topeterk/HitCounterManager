@@ -2,6 +2,7 @@
   <PropertyGroup>
     <!-- Consumed by pipeline START -->
     <TargetFramework>net7.0-android</TargetFramework>
+    <ApplicationId>com.peterkirmeier.$(Product)</ApplicationId>
     <!-- Consumed by pipeline END -->
 
     <OutputType>Exe</OutputType>
@@ -9,9 +10,8 @@
     <!-- https://docs.microsoft.com/en-us/dotnet/core/rid-catalog -->
     <!--<RuntimeIdentifiers>android-arm64</RuntimeIdentifiers>-->
     <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
-    <ApplicationId>com.peterkirmeier.$(Product)</ApplicationId>
-    <ApplicationVersion>1</ApplicationVersion>
-    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>$(MajorVersion)</ApplicationVersion>
+    <ApplicationDisplayVersion>$(Version)</ApplicationDisplayVersion>
     <AndroidPackageFormat>apk</AndroidPackageFormat>
     <AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
   </PropertyGroup>
