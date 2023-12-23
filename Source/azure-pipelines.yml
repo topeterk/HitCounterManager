@@ -45,50 +45,61 @@ stages:
           PoolVmImg: 'windows-latest'
           RuntimeRID: 'win-x64'
           PlatformType: 'Desktop'
+          SelfContained: 'false'
         linux-x64:
           PoolVmImg: 'ubuntu-latest'
           RuntimeRID: 'linux-x64'
           PlatformType: 'Desktop'
+          SelfContained: 'false'
         android-arm64:
           PoolVmImg: 'windows-latest'
           RuntimeRID: 'android-arm64'
           PlatformType: 'Android'
+          SelfContained: 'true'
         osx-x64:
           PoolVmImg: 'macOS-latest'
           RuntimeRID: 'osx-x64'
           PlatformType: 'Desktop'
+          SelfContained: 'false'
 # Windows
         win-x86:
           PoolVmImg: 'windows-latest'
           RuntimeRID: 'win-x86'
           PlatformType: 'Desktop'
+          SelfContained: 'false'
         win-arm:
           PoolVmImg: 'windows-latest'
           RuntimeRID: 'win-arm'
           PlatformType: 'Desktop'
+          SelfContained: 'false'
         win-arm64:
           PoolVmImg: 'windows-latest'
           RuntimeRID: 'win-arm64'
           PlatformType: 'Desktop'
+          SelfContained: 'false'
 # Linux
         linux-musl-x64:
           PoolVmImg: 'ubuntu-latest'
           RuntimeRID: 'linux-musl-x64'
           PlatformType: 'Desktop'
+          SelfContained: 'false'
         linux-arm:
           PoolVmImg: 'ubuntu-latest'
           RuntimeRID: 'linux-arm'
           PlatformType: 'Desktop'
+          SelfContained: 'false'
         linux-arm64:
           PoolVmImg: 'ubuntu-latest'
           RuntimeRID: 'linux-arm64'
           PlatformType: 'Desktop'
+          SelfContained: 'false'
 # iOS
 #   building using Xcode? https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/xcode?view=azure-devops
 #       ios-arm64:
 #         PoolVmImg: ??
 #         RuntimeRID: 'ios-arm64'
 #         PlatformType: ??
+#         SelfContained: ??
 
     variables:
       buildConfiguration: 'Release'
@@ -161,32 +172,22 @@ stages:
 #   keytool -list -keystore android.keystore
 # See certificate by dumping the certificate:
 #   keytool -exportcert -keystore android.keystore -alias hcmkey -file hcmkey.cer
-    - task: DownloadSecureFile@1
-      condition: eq(variables['PlatformType'], 'Android')
-      displayName: 'Download Android KeyStore SecureFile'
-      name: androidKeyStoreSecureFile
-      inputs:
-        secureFile: 'android.keystore'
+# Download only required in case the task doesn't support download of the file by its own
+#    - task: DownloadSecureFile@1
+#      condition: eq(variables['PlatformType'], 'Android')
+#      displayName: 'Download Android KeyStore SecureFile'
+#      name: androidKeyStoreSecureFile
+#      inputs:
+#        secureFile: 'android.keystore' # files is stored at $(androidKeyStoreSecureFile.secureFilePath)
 
 # example:  dotnet publish --configuration Release --runtime win-x64       --self-contained false HitCounterManager.Desktop\HitCounterManager.Desktop.csproj
 # example:  dotnet publish --configuration Release --runtime android-arm64 --self-contained true  HitCounterManager.Android\HitCounterManager.Android.csproj
 
     - task: DotNetCoreCLI@2
-      condition: eq(variables['PlatformType'], 'Desktop')
-      displayName: 'DotNet Publish Desktop'
+      displayName: 'DotNet Publish'
       inputs:
         command: 'publish'
-        arguments: '--configuration $(buildConfiguration) --runtime $(RuntimeRID) --self-contained false'
-        publishWebProjects: false
-        zipAfterPublish: false
-        projects: '**/*.$(PlatformType).csproj'
-
-    - task: DotNetCoreCLI@2
-      condition: eq(variables['PlatformType'], 'Android')
-      displayName: 'DotNet Publish Android'
-      inputs:
-        command: 'build'
-        arguments: '--configuration $(buildConfiguration) --runtime $(RuntimeRID) --self-contained true -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=$(androidKeyStoreSecureFile.secureFilePath) -p:AndroidSigningKeyAlias=hcmkey -p:AndroidSigningKeyPass=$(androidKeyStorePassword) -p:AndroidSigningStorePass=$(androidKeyStorePassword)'
+        arguments: '--configuration $(buildConfiguration) --runtime $(RuntimeRID) --self-contained $(SelfContained)'
         publishWebProjects: false
         zipAfterPublish: false
         projects: '**/*.$(PlatformType).csproj'
@@ -198,10 +199,21 @@ stages:
         targetType: 'inline'
         script: |
           echo "Apply friendly APK file name in $(pwd) ..."
-          echo "Original: $(AssemblyApplicationIdAttribute)-Signed.apk"
-          echo "Firendly: $(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.apk"
+          echo "Original: $(AssemblyApplicationIdAttribute).apk"
+          echo "Friendly: $(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.apk"
           cp "$(AssemblyApplicationIdAttribute).apk" "$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.apk"
         workingDirectory: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)'
+
+# example signing check:  "C:\Program Files (x86)\Android\android-sdk\build-tools\32.0.0\apksigner.bat" verify --verbose --print-certs "HitCounterManager.android-arm64-2.0.0.0-PreRelease.apk"
+    - task: AndroidSigning@3
+      condition: startsWith(variables['RuntimeRID'], 'android-')
+      displayName: 'Signing APK'
+      inputs:
+        apkFiles: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.apk'
+        apksignerKeystoreFile: 'android.keystore'
+        apksignerKeystoreAlias: 'hcmkey'
+        apksignerKeystorePassword: '$(androidKeyStorePassword)'
+        apksignerKeyPassword: '$(androidKeyStorePassword)'
 
     - task: Bash@3
       displayName: 'Dump file tree'
