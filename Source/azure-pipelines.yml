@@ -150,7 +150,7 @@ stages:
         versionSpec: '6.x'
 
     - task: DotNetCoreCLI@2
-      condition: eq(variables['PlatformType'], 'Android')
+      condition: startsWith(variables['RuntimeRID'], 'android-')
       displayName: 'Install Android SDK'
       inputs:
         command: 'custom'
@@ -159,7 +159,7 @@ stages:
 
 # https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/java-tool-installer-v0?view=azure-pipelines
     - task: JavaToolInstaller@0
-      condition: eq(variables['PlatformType'], 'Android')
+      condition: startsWith(variables['RuntimeRID'], 'android-')
       displayName: 'Install Java 17'
       inputs:
         versionSpec: '17'
@@ -174,7 +174,7 @@ stages:
 #   keytool -exportcert -keystore android.keystore -alias hcmkey -file hcmkey.cer
 # Download only required in case the task doesn't support download of the file by its own
 #    - task: DownloadSecureFile@1
-#      condition: eq(variables['PlatformType'], 'Android')
+#      condition: startsWith(variables['RuntimeRID'], 'android-')
 #      displayName: 'Download Android KeyStore SecureFile'
 #      name: androidKeyStoreSecureFile
 #      inputs:
@@ -223,12 +223,22 @@ stages:
           echo "Listing '$(Build.SourcesDirectory)' ..."
           find -L . -type f
 
-# example publish path:  ./Source/HitCounterManager.Desktop/bin/Release/net7.0/win-x64/publish
     - task: ArchiveFiles@2
       condition: startsWith(variables['RuntimeRID'], 'win-')
       displayName: 'Archive ZIP'
       inputs:
         rootFolderOrFile: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/publish/'
+        includeRootFolder: false
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.zip'
+        archiveType: 'zip'
+        replaceExistingArchive: true
+        verbose: true
+
+    - task: ArchiveFiles@2
+      condition: startsWith(variables['RuntimeRID'], 'android-')
+      displayName: 'Archive APK.ZIP'
+      inputs:
+        rootFolderOrFile: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.apk'
         includeRootFolder: false
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.zip'
         archiveType: 'zip'
@@ -246,14 +256,6 @@ stages:
         tarCompression: 'gz'
         replaceExistingArchive: true
         verbose: true
-
-    - task: CopyFiles@2
-      condition: startsWith(variables['RuntimeRID'], 'android-')
-      displayName: 'Archive APK'
-      inputs:
-        SourceFolder: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)'
-        Contents: '$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.apk'
-        targetFolder: $(Build.ArtifactStagingDirectory)
 
 #https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/build/dotnet-core-cli?view=azure-devops
 
