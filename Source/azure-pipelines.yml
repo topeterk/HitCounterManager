@@ -156,33 +156,18 @@ stages:
         jdkArchitectureOption: 'x64'
         jdkSourceOption: 'PreInstalled'
 
+# Keystore generated with:
+#   keytool -genkeypair -v -keystore android.keystore -alias hcmkey -keyalg RSA -keysize 2048 -validity 36500
+# List keys in keystore:
+#   keytool -list -keystore android.keystore
+# See certificate by dumping the certificate:
+#   keytool -exportcert -keystore android.keystore -alias hcmkey -file hcmkey.cer
     - task: DownloadSecureFile@1
       condition: eq(variables['PlatformType'], 'Android')
       displayName: 'Download Android KeyStore SecureFile'
       name: androidKeyStoreSecureFile
       inputs:
-        secureFile: 'androidapp.keystore.TEST'
-
-# TODO Signing:
-#   - task: Bash@3
-#     condition: eq(variables['PlatformType'], 'Android')
-#     displayName: 'TEST'
-#     inputs:
-#       targetType: 'inline'
-#       script: |
-#         echo "a=$(androidKeyStoreSecureFile.secureFilePath)"
-#         echo "b=$(androidKeyStorePasswordTEST)"
-#         echo "cat $(androidKeyStoreSecureFile.secureFilePath)"
-#         echo Content START
-#         cat $(androidKeyStoreSecureFile.secureFilePath)
-#         echo Content END
-#         echo "cat /d/a/_temp/androidapp.keystore.TEST"
-#         echo Content START
-#         cat /d/a/_temp/androidapp.keystore.TEST
-#         echo ""
-#         echo Content END
-#     env:
-#       SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+        secureFile: 'android.keystore'
 
 # example:  dotnet publish --configuration Release --runtime win-x64       --self-contained false HitCounterManager.Desktop\HitCounterManager.Desktop.csproj
 # example:  dotnet publish --configuration Release --runtime android-arm64 --self-contained true  HitCounterManager.Android\HitCounterManager.Android.csproj
@@ -202,8 +187,7 @@ stages:
       displayName: 'DotNet Publish Android'
       inputs:
         command: 'build'
-        arguments: '--configuration $(buildConfiguration) --runtime $(RuntimeRID) --self-contained true'
-# TODO Signing:     -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=$(androidKeyStoreSecureFile.secureFilePath) -p:AndroidSigningKeyAlias=myapp -p:AndroidSigningKeyPass=$(androidKeyStorePasswordTEST) -p:AndroidSigningStorePass=$(androidKeyStorePasswordTEST)'
+        arguments: '--configuration $(buildConfiguration) --runtime $(RuntimeRID) --self-contained true -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=$(androidKeyStoreSecureFile.secureFilePath) -p:AndroidSigningKeyAlias=hcmkey -p:AndroidSigningKeyPass=$(androidKeyStorePassword) -p:AndroidSigningStorePass=$(androidKeyStorePassword)'
         publishWebProjects: false
         zipAfterPublish: false
         projects: '**/*.$(PlatformType).csproj'
@@ -215,10 +199,10 @@ stages:
         targetType: 'inline'
         script: |
           echo "Apply friendly APK file name in $(pwd) ..."
-          echo "Original: $(AssemblyApplicationIdAttribute).apk"
+          echo "Original: $(AssemblyApplicationIdAttribute)-Signed.apk"
           echo "Firendly: $(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.apk"
           cp "$(AssemblyApplicationIdAttribute).apk" "$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.apk"
-        workingDirectory: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/obj/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/android/bin'
+        workingDirectory: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)'
 
     - task: Bash@3
       displayName: 'Dump file tree'
@@ -256,7 +240,7 @@ stages:
       condition: startsWith(variables['RuntimeRID'], 'android-')
       displayName: 'Archive APK'
       inputs:
-        SourceFolder: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/obj/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/android/bin'
+        SourceFolder: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)'
         Contents: '$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.apk'
         targetFolder: $(Build.ArtifactStagingDirectory)
 
