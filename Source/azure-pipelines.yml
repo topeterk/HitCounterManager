@@ -49,6 +49,10 @@ stages:
           PoolVmImg: 'ubuntu-latest'
           RuntimeRID: 'linux-x64'
           PlatformType: 'Desktop'
+        android-arm64:
+          PoolVmImg: 'windows-latest'
+          RuntimeRID: 'android-arm64'
+          PlatformType: 'Android'
         osx-x64:
           PoolVmImg: 'macOS-latest'
           RuntimeRID: 'osx-x64'
@@ -85,11 +89,6 @@ stages:
 #         PoolVmImg: ??
 #         RuntimeRID: 'ios-arm64'
 #         PlatformType: ??
-# Android
-        android-arm64:
-          PoolVmImg: 'windows-latest'
-          RuntimeRID: 'android-arm64'
-          PlatformType: 'Android'
 
     variables:
       buildConfiguration: 'Release'
