@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2021-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Windows.Input;
@@ -43,6 +44,8 @@ namespace HitCounterManager.ViewModels
 
         public ProfileViewViewModel()
         {
+            monotonic_timer.Start();
+
             ToggleShowInfo = ReactiveCommand.Create<string>((string name) => { ShowInfo[name].Value = !ShowInfo[name].Value; });
 
             ProfileList = new ObservableCollection<ProfileModel>();
@@ -458,7 +461,9 @@ namespace HitCounterManager.ViewModels
 
         #region Game Timer
 
-        private DateTime last_update_time = DateTime.UtcNow;
+        private Stopwatch monotonic_timer = new ();
+
+        private long last_elapsed_time = 0;
 
         private bool _TimerRunning = false;
         public bool TimerRunning
@@ -471,7 +476,7 @@ namespace HitCounterManager.ViewModels
                 if (!_TimerRunning)
                 {
                     // Starting the timer
-                    last_update_time = DateTime.UtcNow;
+                    last_elapsed_time = monotonic_timer.ElapsedMilliseconds;
                     _TimerRunning = true;
                     App.CurrentApp.StartApplicationTimer(TimerIDs.GameTime, 10, UpdateDuration);
                     App.CurrentApp.StartApplicationTimer(TimerIDs.GameTimeGui, 300, () => { CallPropertyChanged(nameof(StatsTime)); return _TimerRunning; });
@@ -500,9 +505,9 @@ namespace HitCounterManager.ViewModels
             {
                 Monitor.Enter(TimerUpdateLock, ref GotLock);
 
-                DateTime utc_now = DateTime.UtcNow;
-                _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Duration += (long)(utc_now - last_update_time).TotalMilliseconds;
-                last_update_time = utc_now;
+                long elapsed_time = monotonic_timer.ElapsedMilliseconds;
+                _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Duration += elapsed_time - last_elapsed_time;
+                last_elapsed_time = elapsed_time;
             }
             catch
             {
