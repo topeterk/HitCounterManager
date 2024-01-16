@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2018-2021 Peter Kirmeier
+//Copyright (c) 2018-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -118,6 +118,7 @@ function Watchdog()
 			'- <u>OBS Studio / SLOBS</u>: Make sure "local file" is checked at your browser source<br/>' +
 			'- <u>OBS Studio</u>: If "local file" is not available with your OBS Studio version, make sure the URL of the browser source looks like this: <b>http://absolute/</b>C:/MyHitCounter/Designs/HitCounterNumeric.html<br/>' +
 			'- <u>Chrome</u>: Make sure to start the browser with command line option <b>--allow-file-access-from-files</b><br/>' +
+			'- <u>Opera</u>: Make sure to start <b>launcher.exe</b> with command line option <b>--allow-file-access-from-files</b> while not having any instance currently running<br/>' +
 			'- <u>Firefox</u>: Change the security policy in the browser settings <b>"about:config" -&gt; "security.fileuri.strict_origin_policy" -&gt; false</b>. But keep in mind, this is a global settings, means you should enable this only for offline/trusted websites!<br/>' +
 			'- <u>Internet Explorer 11</u>: Accepting the "blocked execution" warning should be sufficient<br/>' +
 			'- <u>Others or still not working?</u>: Please disable cross domain protection as reading local files don\'t have a "domain", ' +
