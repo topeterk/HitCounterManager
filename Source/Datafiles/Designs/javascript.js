@@ -31,7 +31,7 @@ var iframe;
 var font_name = undefined;
 var font_name_loaded = undefined;
 
-var offset_timer_start = Date.now();
+var offset_timer_start = performance.now();
 var offset_timer_tick_callback = undefined;
 
 link_font.rel  = 'stylesheet';
@@ -62,7 +62,7 @@ function ShowCrossOrCheckMark(i) { return '<img src="' + (i > 0 ? 'img_cross.png
 function ShowSessionProgress() { return '<img src="icons8_24_64.png" height="21px">'; }
 function ShowBestProgress() { return '<img src="icons8_flagpole_64.png" height="21px">'; }
 
-function OffsetTimerTick() { if (offset_timer_tick_callback != undefined) offset_timer_tick_callback(Date.now() - offset_timer_start); }
+function OffsetTimerTick() { if (offset_timer_tick_callback != undefined) offset_timer_tick_callback(performance.now() - offset_timer_start); }
 
 function IntToTimeStr(val, show_ms)
 {
@@ -193,7 +193,7 @@ function DoUpdate(data)
 	if (data.update_time == undefined || data.update_time != last_update_time)
 	{
 		last_update_time = data.update_time; // remember that we don't execute it twice
-		offset_timer_start = Date.now();
+		offset_timer_start = performance.now();
 
 		DoVisualUpdate(data); // build graphical content
 	}
