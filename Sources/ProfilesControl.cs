@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2019-2022 Peter Kirmeier
+//Copyright (c) 2019-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -37,6 +38,8 @@ namespace HitCounterManager
 
         public ProfilesControl()
         {
+            monotonic_timer.Start();
+
             InitializeComponent();
 
             // Workaround: Should be done by designer but...
@@ -60,7 +63,9 @@ namespace HitCounterManager
 
         #region Timer related
         
-        private DateTime last_update_time = DateTime.UtcNow;
+        private Stopwatch monotonic_timer = new Stopwatch();
+
+        private long last_elapsed_time = 0;
 
         private bool _TimerRunning = false;
         [Browsable(false)] // Hide from designer
@@ -72,7 +77,7 @@ namespace HitCounterManager
             {
                 if (value != _TimerRunning)
                 {
-                    last_update_time = DateTime.UtcNow;
+                    last_elapsed_time = monotonic_timer.ElapsedMilliseconds;
                     timer1.Enabled = _TimerRunning = value;
                     UpdateDurationInternal();
                     om.Update();
@@ -96,9 +101,9 @@ namespace HitCounterManager
             else
             #endregion
             {
-                DateTime utc_now = DateTime.UtcNow;
-                SelectedProfileInfo.AddDuration((long)(utc_now - last_update_time).TotalMilliseconds);
-                last_update_time = utc_now;
+                long elapsed_time = monotonic_timer.ElapsedMilliseconds;
+                SelectedProfileInfo.AddDuration(elapsed_time - last_elapsed_time);
+                last_elapsed_time = elapsed_time;
             }
         }
 
