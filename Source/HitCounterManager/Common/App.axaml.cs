@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2021-2023 Peter Kirmeier
+//Copyright (c) 2021-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ using HitCounterManager.Models;
 using HitCounterManager.Views;
 using HitCounterManager.ViewModels;
 
-#if SHOW_COMPLER_VERSION // enable and hover over #error to see C# compiler version and the used language version
+#if SHOW_COMPILER_VERSION // enable and hover over #error to see C# compiler version and the used language version
 #error version
 #endif
 
