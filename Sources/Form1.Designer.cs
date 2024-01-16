@@ -54,6 +54,7 @@
             this.btnPB = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnHit = new System.Windows.Forms.Button();
+            this.pnlHideRightButtonsWhenWindowTooShort = new System.Windows.Forms.Panel();
             this.btnWayHit = new System.Windows.Forms.Button();
             this.btnSplit = new System.Windows.Forms.Button();
             this.btnAutoSplitter = new System.Windows.Forms.Button();
@@ -66,6 +67,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.GameToSplitLabel = new System.Windows.Forms.Label();
             this.comboBoxGame = new System.Windows.Forms.ComboBox();
+            this.pnlHidePracticeModeCheckWhenWindowTooShort = new System.Windows.Forms.Panel();
             this.PracticeModeCheck = new System.Windows.Forms.CheckBox();
             this.profCtrl = new HitCounterManager.ProfilesControl();
             this.SuspendLayout();
@@ -398,6 +400,7 @@
             this.btnHit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHit.Image = global::HitCounterManager.Sources.Resources.icons8_attack_32;
             this.btnHit.Location = new System.Drawing.Point(255, 30);
+            this.btnHit.MinimumSize = new System.Drawing.Size(75, 40);
             this.btnHit.Name = "btnHit";
             this.btnHit.Size = new System.Drawing.Size(184, 40);
             this.btnHit.TabIndex = 22;
@@ -405,6 +408,13 @@
             this.btnHit.UseVisualStyleBackColor = false;
             this.btnHit.Click += new System.EventHandler(this.btnHit_Click);
             this.btnHit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnHit_MouseDown);
+            // 
+            // pnlHideRightButtonsWhenWindowTooShort
+            // 
+            this.pnlHideRightButtonsWhenWindowTooShort.Location = new System.Drawing.Point(0, 30);
+            this.pnlHideRightButtonsWhenWindowTooShort.Name = "pnlHideRightButtonsWhenWindowTooShort";
+            this.pnlHideRightButtonsWhenWindowTooShort.Size = new System.Drawing.Size(255, 40);
+            this.pnlHideRightButtonsWhenWindowTooShort.TabIndex = 49;
             // 
             // btnWayHit
             // 
@@ -415,6 +425,7 @@
             this.btnWayHit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnWayHit.Image = global::HitCounterManager.Sources.Resources.icons8_watch_your_step_32;
             this.btnWayHit.Location = new System.Drawing.Point(445, 30);
+            this.btnWayHit.MinimumSize = new System.Drawing.Size(75, 40);
             this.btnWayHit.Name = "btnWayHit";
             this.btnWayHit.Size = new System.Drawing.Size(75, 40);
             this.btnWayHit.TabIndex = 23;
@@ -432,6 +443,7 @@
             this.btnSplit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSplit.Image = global::HitCounterManager.Sources.Resources.icons8_staircase_32;
             this.btnSplit.Location = new System.Drawing.Point(526, 30);
+            this.btnSplit.MinimumSize = new System.Drawing.Size(75, 40);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(75, 40);
             this.btnSplit.TabIndex = 24;
@@ -449,6 +461,7 @@
             this.btnAutoSplitter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAutoSplitter.Image = global::HitCounterManager.Sources.Resources.icon_autosplitter_32;
             this.btnAutoSplitter.Location = new System.Drawing.Point(607, 30);
+            this.btnAutoSplitter.MinimumSize = new System.Drawing.Size(75, 40);
             this.btnAutoSplitter.Name = "btnAutoSplitter";
             this.btnAutoSplitter.Size = new System.Drawing.Size(75, 40);
             this.btnAutoSplitter.TabIndex = 25;
@@ -547,11 +560,19 @@
             this.comboBoxGame.Items.AddRange(new object[] {
             "None"});
             this.comboBoxGame.Location = new System.Drawing.Point(143, 98);
+            this.comboBoxGame.MinimumSize = new System.Drawing.Size(100, 21);
             this.comboBoxGame.Name = "comboBoxGame";
             this.comboBoxGame.Size = new System.Drawing.Size(438, 21);
             this.comboBoxGame.TabIndex = 26;
             this.ToolTip1.SetToolTip(this.comboBoxGame, "Selected game for automatic splitting");
             this.comboBoxGame.SelectedIndexChanged += new System.EventHandler(this.comboBoxGame_SelectedIndexChanged);
+            // 
+            // pnlHidePracticeModeCheckWhenWindowTooShort
+            // 
+            this.pnlHidePracticeModeCheckWhenWindowTooShort.Location = new System.Drawing.Point(0, 98);
+            this.pnlHidePracticeModeCheckWhenWindowTooShort.Name = "pnlHidePracticeModeCheckWhenWindowTooShort";
+            this.pnlHidePracticeModeCheckWhenWindowTooShort.Size = new System.Drawing.Size(143, 21);
+            this.pnlHidePracticeModeCheckWhenWindowTooShort.TabIndex = 49;
             // 
             // PracticeModeCheck
             // 
@@ -606,6 +627,7 @@
             this.Controls.Add(this.btnPB);
             this.Controls.Add(this.btnPause);
             this.Controls.Add(this.btnHit);
+            this.Controls.Add(this.pnlHideRightButtonsWhenWindowTooShort);
             this.Controls.Add(this.btnWayHit);
             this.Controls.Add(this.btnSplit);
             this.Controls.Add(this.btnAutoSplitter);
@@ -617,10 +639,11 @@
             this.Controls.Add(this.lbl_time);
             this.Controls.Add(this.GameToSplitLabel);
             this.Controls.Add(this.comboBoxGame);
+            this.Controls.Add(this.pnlHidePracticeModeCheckWhenWindowTooShort);
             this.Controls.Add(this.PracticeModeCheck);
             this.Controls.Add(this.profCtrl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(576, 400);
+            this.MinimumSize = new System.Drawing.Size(128, 300);
             this.Name = "Form1";
             this.Text = "HitCounterManager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -656,6 +679,7 @@
         private System.Windows.Forms.Button btnPB;
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button btnHit;
+        private System.Windows.Forms.Panel pnlHideRightButtonsWhenWindowTooShort;
         private System.Windows.Forms.Button btnWayHit;
         private System.Windows.Forms.Button btnSplit;
         private System.Windows.Forms.Button btnAutoSplitter;
@@ -668,6 +692,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label GameToSplitLabel;
         private System.Windows.Forms.ComboBox comboBoxGame;
+        private System.Windows.Forms.Panel pnlHidePracticeModeCheckWhenWindowTooShort;
         private System.Windows.Forms.CheckBox PracticeModeCheck;
         public ProfilesControl profCtrl;
     }

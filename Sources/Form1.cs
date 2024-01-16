@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2022 Peter Kirmeier and Ezequiel Medina
+//Copyright (c) 2016-2024 Peter Kirmeier and Ezequiel Medina
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -240,6 +240,7 @@ namespace HitCounterManager
                 comboBoxGame.Hide();
                 GameToSplitLabel.Hide();
                 btnAutoSplitter.Hide();
+                pnlHidePracticeModeCheckWhenWindowTooShort.Hide();
                 PracticeModeCheck.Hide();
 
                 btnHit.Width += Offset;
@@ -251,10 +252,6 @@ namespace HitCounterManager
             }
             else
             {
-                Size Min = MinimumSize;
-                Min.Width += Offset;
-                MinimumSize = Min;
-
                 Assembly AutoSplitterAssembly = Assembly.LoadFile(DllPath);
                 Type AutoSplitterMainModuleType = AutoSplitterAssembly.GetType("AutoSplitterCore.AutoSplitterMainModule");
                 AutoSplitterInstance = Activator.CreateInstance(AutoSplitterMainModuleType);
