@@ -169,7 +169,7 @@ namespace HitCounterManager.Models
 
                     sr.WriteLine("{");
 
-                    WriteJsonSimpleValue(sr, "profile_name", pi.Name);
+                    WriteJsonSimpleValue(sr, "profile_name", SimpleHtmlEscape(pi.Name));
 
                     sr.WriteLine("\"list\": [");
 
