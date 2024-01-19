@@ -113,17 +113,35 @@ function Watchdog()
 	{
 		if (!init_done) // reading the data file never worked before or updating failed?
 		{
-			ShowHelpText('The browser or broadcasting software cannot read the hit counter data file.<br/>' +
-			'Please try one of the following:<br/>&nbsp;<br/>' +
-			'- <u>OBS Studio / SLOBS</u>: Make sure "local file" is checked at your browser source<br/>' +
-			'- <u>OBS Studio</u>: If "local file" is not available with your OBS Studio version, make sure the URL of the browser source looks like this: <b>http://absolute/</b>C:/MyHitCounter/Designs/HitCounterNumeric.html<br/>' +
-			'- <u>Chrome</u>: Make sure to start the browser with command line option <b>--allow-file-access-from-files</b><br/>' +
-			'- <u>Opera</u>: Make sure to start <b>launcher.exe</b> with command line option <b>--allow-file-access-from-files</b> while not having any instance currently running<br/>' +
-			'- <u>Firefox</u>: Change the security policy in the browser settings <b>"about:config" -&gt; "security.fileuri.strict_origin_policy" -&gt; false</b>. But keep in mind, this is a global settings, means you should enable this only for offline/trusted websites!<br/>' +
-			'- <u>Internet Explorer 11</u>: Accepting the "blocked execution" warning should be sufficient<br/>' +
-			'- <u>Others or still not working?</u>: Please disable cross domain protection as reading local files don\'t have a "domain", ' +
-			'so the data file is treated as being hosted on another domain. This does not allow reading the file due to security reasons by most browsers\'  default. ' +
-			'Please look at the online readme on github for the latest instructions that may already contain additional instructions.');
+			ShowHelpText('<span style="font-weight:normal;font-size:80%;">' + 
+			'The browser or broadcasting software cannot read the hit counter data file.<br/>' +
+			'Please try one of the following:<br/>&nbsp;<br/><ul>' +
+			'<li><u>OBS Studio / SLOBS</u>:<br/>' +
+				'<ul><li>Make sure <i>"local file"</i> is checked at your browser source</li></ul></li>' +
+			'<li><u>OBS Studio</u>:<br/>' +
+				'<ul><li>If <i>"local file"</i> is not available with your OBS Studio version, ' +
+				'make sure the URL of the browser source looks like this:<br/>' +
+				'<b>http://absolute/</b>C:/MyHitCounter/Designs/HitCounterNumeric.html</li></ul></li>' +
+			'<li><u>Chrome</u>:<br/>' +
+				'<ul><li>Shutdown all running instances of the browser (kill the processes) making sure startup parameters are loaded properly in the next step.</li>' +
+				'<li>Start the browser with command line option <b>--allow-file-access-from-files</b></li></ul></li>' +
+			'<li><u>Edge</u>:<br/>' +
+				'<ul><li>Shutdown all running instances of the browser (kill the processes) making sure startup parameters are loaded properly in the next step.</li>' +
+				'<li>Start <b>msedge.exe</b> with command line option <b>--profile-directory=Default --allow-file-access-from-files</b></li></ul></li>' +
+			'<li><u>Opera</u>:<br/>' +
+				'<ul><li>Shutdown all running instances of the browser (kill the processes) making sure startup parameters are loaded properly int the next step.</li>' +
+				'<li>Start <b>launcher.exe</b> with command line option <b>--allow-file-access-from-files</b></li></ul></li>' +
+			'<li><u>Firefox</u>:<br/>' +
+				'<ul><li>Change the security policy in the browser settings <b>"about:config" -&gt; "security.fileuri.strict_origin_policy" -&gt; false</b>.<br/>' +
+				'But keep in mind that this is a global settings, which means you should enable this only for offline/trusted websites!</li></ul></li>' +
+			'<li><u>Internet Explorer 11</u>:<br/>' +
+				'<ul><li>Accepting the "blocked execution" warning should be sufficient</li></ul></li>' +
+			'<li><u>Others or still not working?</u>:<br/>' +
+				'<ul><li>Please disable any cross domain protection as reading local files don\'t have a "domain", ' +
+				'so each data file is treated as being hosted on another domain. ' +
+				'This does not allow reading the file due to security reasons by most browsers\'  default. ' +
+				'Please look at the online readme on github for the latest instructions that may already contain additional instructions.</li></ul></li>' +
+			'</ul></span>');
 		}
 		RefreshData(); // retry reloading file in case of errors
 	}
