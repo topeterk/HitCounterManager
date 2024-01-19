@@ -324,7 +324,7 @@ function DoVisualUpdate(d /*data*/)
 			if (d.show_numbers)
 			{
 				new_tbl += '<tr>' +
-                                               '<td class="' + majorclass + ' bottom ' + total_hits_class + ' left">Total:</td>'                                                                           + // Total
+                                               '<td class="' + majorclass + ' bottom ' + total_hits_class + ' right">Total:</td>'                                                                           + // Total
   (!d.show_hits || !d.show_hitscombined ? '' : '<td class="' + majorclass + ' bottom ' + total_hits_class + '">' + IntToDisplayString(total_hits_combined,                  false, d.use_roman) + '</td>') + // Sum of Now
   (!d.show_hits ||  d.show_hitscombined ? '' : '<td class="' + majorclass + ' bottom ' + total_hits_class + '">' + IntToDisplayString(total_hits_combined - total_hits_way, false, d.use_roman) + '</td>'  + // Sum of Boss
                                                '<td class="' + majorclass + ' bottom ' + total_hits_class + '">' + IntToDisplayString(total_hits_way,                       false, d.use_roman) + '</td>') + // Sum of Way
