@@ -55,11 +55,12 @@ function Start(cb)
 // ------------------------------------------------------------------------------------
 // --------------------------------- Helper functions ---------------------------------
 
-function IntToStringSigned(i) { if (i == 0) return '0'; else if (i > 0) return '+' + i; else return i; }
+function IntToDisplayString(val, show_positiv_sign, show_roman) { return (show_positiv_sign && val > 0 ? "+" : 0 > val ? "-" : "") + (show_roman ? IntToRomanStr(Math.abs(val)) : Math.abs(val)); }
 
 function ShowCrossOrCheckMark(i) { return '<img src="' + (i > 0 ? 'img_cross.png" height="15px"' : ( i == 0 ? 'img_check.png" height="21px"' : 'img_bar.png" height="21px"')) + '>'; }
 
-function ShowSessionProgress() { return '<img src="img_star.png" height="21px">'; }
+function ShowSessionProgress() { return '<img src="img_star.png" height="21px">'; } // in v1 only star is available
+function ShowBestProgress() { return '<img src="img_star.png" height="21px">'; }    // in v1 only star is available
 
 function OffsetTimerTick() { if (offset_timer_tick_callback != undefined) offset_timer_tick_callback(performance.now() - offset_timer_start); }
 
@@ -84,7 +85,7 @@ function IntToRomanStr(val)
 	if (isNaN(val) || (val <= 0)) { return val; }
 
 	var letters = new Array("M",  "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I");
-    var weight  = new Array(1000, 900 , 500, 400 , 100, 90  , 50 , 40  , 10 , 9   , 5  , 4   , 1  );
+	var weight  = new Array(1000, 900 , 500, 400 , 100, 90  , 50 , 40  , 10 , 9   , 5  , 4   , 1  );
 	var result = "";
 	for (var i = 0; i < weight.length; i++)
 	{
