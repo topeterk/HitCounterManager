@@ -87,18 +87,14 @@ namespace HitCounterManager.Models
         #region JSON helpers
 
         /// <summary>
-        /// Escapes special HTML characters
+        /// Escapes special JSON characters
         /// </summary>
         /// <param name="Str">String with special characters</param>
         /// <returns>String with HTML encoded special character</returns>
-        public string? SimpleHtmlEscape(string? Str)
+        public string? SimpleJsonEscape(string? Str)
         {
-            if (null != Str)
+            if (!string.IsNullOrEmpty(Str))
             {
-                Str = Str.ToString().Replace("&", "&amp;").Replace(" ", "&nbsp;");
-                // Keep for compatibility supporting designs up to version 1.15 as they have not used Unicode:
-                Str = Str.Replace("ä", "&auml;").Replace("ö", "&ouml;").Replace("ü", "&uuml;");
-                Str = Str.Replace("Ä", "&Auml;").Replace("Ö", "&Ouml;").Replace("Ü", "&Uuml;");
                 Str = Str.Replace("\\", "\\\\").Replace("\"", "\\\"");
             }
             return Str;
@@ -123,7 +119,7 @@ namespace HitCounterManager.Models
         /// </summary>
         private void WriteJsonSimpleValue(StreamWriter File, string Name, string? String)
         {
-            File.WriteLine("\"" + Name + "\": " + (null != String ? "\"" + String.Replace("\"", "\\\"") + "\"" : "undefined") + ",");
+            File.WriteLine("\"" + Name + "\": " + (null != String ? "\"" + SimpleJsonEscape(String) + "\"" : "undefined") + ",");
         }
 
         #endregion
@@ -169,7 +165,7 @@ namespace HitCounterManager.Models
 
                     sr.WriteLine("{");
 
-                    WriteJsonSimpleValue(sr, "profile_name", SimpleHtmlEscape(pi.Name));
+                    WriteJsonSimpleValue(sr, "profile_name", pi.Name);
 
                     sr.WriteLine("\"list\": [");
 
@@ -179,7 +175,7 @@ namespace HitCounterManager.Models
                     {
                         // Dump all actually visible splits of the current run
                         if (0 < r) sr.WriteLine(","); // separator
-                        sr.Write("[\"" + SimpleHtmlEscape(pi.Rows[r].Title) + "\", "
+                        sr.Write("[\"" + SimpleJsonEscape(pi.Rows[r].Title) + "\", "
                             + (pi.Rows[r].Hits + pi.Rows[r].WayHits) + ", " + pi.Rows[r].PB + ", " + pi.Rows[r].WayHits + ", "
                             + RunIndex + ", " + pi.Rows[r].Duration + ", " + pi.Rows[r].DurationPB + ", " + pi.Rows[r].DurationGold + "]");
                     }
