@@ -110,12 +110,15 @@ namespace HitCounterManager
         /// <returns>String with HTML encoded special character</returns>
         public string SimpleHtmlEscape(string Str)
         {
-            if (null != Str)
+            if (!string.IsNullOrEmpty(Str))
             {
-                Str = Str.ToString().Replace("&", "&amp;").Replace(" ", "&nbsp;");
-                // Keep for compatibility supporting designs up to version 1.15 as they have not used Unicode:
-                Str = Str.Replace("ä", "&auml;").Replace("ö", "&ouml;").Replace("ü", "&uuml;");
-                Str = Str.Replace("Ä", "&Auml;").Replace("Ö", "&Ouml;").Replace("Ü", "&Uuml;");
+                if (!Settings.AllowHtml) // when HTML is allowed, skip HTML encoding
+                {
+                    Str = Str.ToString().Replace("&", "&amp;").Replace(" ", "&nbsp;");
+                    // Keep for compatibility supporting designs up to version 1.15 as they have not used Unicode:
+                    Str = Str.Replace("ä", "&auml;").Replace("ö", "&ouml;").Replace("ü", "&uuml;");
+                    Str = Str.Replace("Ä", "&Auml;").Replace("Ö", "&Ouml;").Replace("Ü", "&Uuml;");
+                }
                 Str = Str.Replace("\\", "\\\\").Replace("\"", "\\\"");
             }
             return Str;

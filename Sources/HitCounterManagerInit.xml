@@ -68,6 +68,7 @@
   <ShortcutWayHitUndoPrevKeyCode>0</ShortcutWayHitUndoPrevKeyCode>
   <Inputfile>HitCounter.template</Inputfile>
   <OutputFile>HitCounter.html</OutputFile>
+  <AllowHtml>false</AllowHtml>
   <ShowAttemptsCounter>true</ShowAttemptsCounter>
   <ShowHeadline>true</ShowHeadline>
   <ShowFooter>true</ShowFooter>

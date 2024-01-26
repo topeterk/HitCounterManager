@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2022 Peter Kirmeier
+//Copyright (c) 2016-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -117,6 +117,7 @@ namespace HitCounterManager
         #endregion
         public string Inputfile;
         public string OutputFile;
+        public bool AllowHtml;
         public bool ShowAttemptsCounter;
         public bool ShowHeadline;
         public bool ShowFooter;
@@ -345,7 +346,7 @@ namespace HitCounterManager
                 _settings.StyleSubscriptPB = _settings.StyleSuperscriptPB;
                 //_settings.ColWidths added but no default is needed
             }
-            if (_settings.Version == 9) // Coming from version 1.21
+            if (_settings.Version == 9) // Coming from version 1.20 (without Autosplitter integration)
             {
                 _settings.Version = 10;
                 #region AutoSplitter
@@ -360,6 +361,11 @@ namespace HitCounterManager
                 _settings.ShortcutWayHitUndoPrevEnable = false;
                 _settings.ShortcutWayHitUndoPrevKeyCode = 0;
                 #endregion
+            }
+            if (_settings.Version == 10) // Coming from version 1.21
+            {
+                _settings.Version = 11;
+                _settings.AllowHtml = false;
             }
 
             // Check for updates..

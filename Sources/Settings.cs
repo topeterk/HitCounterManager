@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2022 Peter Kirmeier
+//Copyright (c) 2016-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -95,6 +95,7 @@ namespace HitCounterManager
             txtFontName.Text = _settings.StyleFontName;
 
             // Behavior
+            cbAllowHtml.Checked = _settings.AllowHtml;
             cbShowAttempts.Checked = _settings.ShowAttemptsCounter;
             cbShowHeadline.Checked = _settings.ShowHeadline;
             cbShowFooter.Checked = _settings.ShowFooter;
@@ -198,6 +199,7 @@ namespace HitCounterManager
             _settings.StyleDesiredWidth = (int)numStyleDesiredWidth.Value;
 
             // Behavior
+            _settings.AllowHtml = cbAllowHtml.Checked;
             _settings.ShowAttemptsCounter = cbShowAttempts.Checked;
             _settings.ShowHeadline = cbShowHeadline.Checked;
             _settings.ShowFooter = cbShowFooter.Checked;
