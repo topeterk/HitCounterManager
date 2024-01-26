@@ -90,7 +90,7 @@ namespace HitCounterManager.Models
         /// Escapes special JSON characters
         /// </summary>
         /// <param name="Str">String with special characters</param>
-        /// <returns>String with HTML encoded special character</returns>
+        /// <returns>String with JSON encoded special characters</returns>
         public string? SimpleJsonEscape(string? Str)
         {
             if (!string.IsNullOrEmpty(Str))
