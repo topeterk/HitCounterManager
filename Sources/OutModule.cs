@@ -104,22 +104,32 @@ namespace HitCounterManager
         #region JSON helpers
 
         /// <summary>
-        /// Escapes special HTML characters
+        /// Escapes special JSON characters
         /// </summary>
         /// <param name="Str">String with special characters</param>
-        /// <returns>String with HTML encoded special character</returns>
-        public string SimpleHtmlEscape(string Str)
+        /// <returns>String with JSON encoded special characters</returns>
+        public string SimpleJsonEscape(string Str)
         {
             if (!string.IsNullOrEmpty(Str))
             {
-                if (!Settings.AllowHtml) // when HTML is allowed, skip HTML encoding
-                {
-                    Str = Str.ToString().Replace("&", "&amp;").Replace(" ", "&nbsp;");
-                    // Keep for compatibility supporting designs up to version 1.15 as they have not used Unicode:
-                    Str = Str.Replace("ä", "&auml;").Replace("ö", "&ouml;").Replace("ü", "&uuml;");
-                    Str = Str.Replace("Ä", "&Auml;").Replace("Ö", "&Ouml;").Replace("Ü", "&Uuml;");
-                }
                 Str = Str.Replace("\\", "\\\\").Replace("\"", "\\\"");
+            }
+            return Str;
+        }
+
+        /// <summary>
+        /// Escapes special HTML characters
+        /// </summary>
+        /// <param name="Str">String with special characters</param>
+        /// <returns>String with HTML encoded special characters</returns>
+        public string SimpleHtmlEscape(string Str)
+        {
+            if (!string.IsNullOrEmpty(Str) && !Settings.AllowHtml) // when HTML is allowed, skip HTML encoding
+            {
+                Str = Str.ToString().Replace("&", "&amp;").Replace(" ", "&nbsp;");
+                // Keep for compatibility supporting designs up to version 1.15 as they have not used Unicode:
+                Str = Str.Replace("ä", "&auml;").Replace("ö", "&ouml;").Replace("ü", "&uuml;");
+                Str = Str.Replace("Ä", "&Auml;").Replace("Ö", "&Ouml;").Replace("Ü", "&Uuml;");
             }
             return Str;
         }
@@ -143,7 +153,7 @@ namespace HitCounterManager
         /// </summary>
         private void WriteJsonSimpleValue(StreamWriter File, string Name, string String)
         {
-            File.WriteLine("\"" + Name + "\": " + (null != String ? "\"" + String.Replace("\"", "\\\"") + "\"" : "undefined") + ",");
+            File.WriteLine("\"" + Name + "\": " + (null != String ? "\"" + SimpleJsonEscape(String) + "\"" : "undefined") + ",");
         }
 
         #endregion
@@ -232,7 +242,7 @@ namespace HitCounterManager
                             for (int r = 0; r < pi_pvc.SplitCount; r++)
                             {
                                 if (0 < r + HiddenSplitCount) sr.WriteLine(","); // separator
-                                sr.Write("[\"" + SimpleHtmlEscape(pi_pvc.GetSplitTitle(r)) + "\", " + (pi_pvc.GetSplitHits(r) + pi_pvc.GetSplitWayHits(r)) + ", " + pi_pvc.GetSplitPB(r) + ", " + pi_pvc.GetSplitWayHits(r) + ", " + RunIndex + ", " + 0/*NoTime*/ + ", " + 0/*NoPBTime*/ + "]");
+                                sr.Write("[\"" + SimpleJsonEscape(SimpleHtmlEscape(pi_pvc.GetSplitTitle(r))) + "\", " + (pi_pvc.GetSplitHits(r) + pi_pvc.GetSplitWayHits(r)) + ", " + pi_pvc.GetSplitPB(r) + ", " + pi_pvc.GetSplitWayHits(r) + ", " + RunIndex + ", " + 0/*NoTime*/ + ", " + 0/*NoPBTime*/ + "]");
                             }
                             HiddenSplitCount += pi_pvc.SplitCount;
                             RunIndex++;
@@ -246,7 +256,7 @@ namespace HitCounterManager
                         // Insert the "history" split
                         InjectedSplitCount++;
                         if (0 < HiddenSplitCount) sr.WriteLine(","); // separator
-                        sr.Write("[\"" + SimpleHtmlEscape(_settings.Succession.HistorySplitTitle) + "\", "
+                        sr.Write("[\"" + SimpleJsonEscape(SimpleHtmlEscape(_settings.Succession.HistorySplitTitle)) + "\", "
                             + (SuccessionHits + SuccessionHitsWay) + ", " + SuccessionHitsPB + ", " + SuccessionHitsWay + ", "
                             + 0 /*Invalid-RunIndex*/ + ", " + 0/*NoTime*/ + ", " + 0/*NoPBTime*/ + ", " + 0/*NoGoldTime*/ + "]");
                     }
@@ -254,7 +264,7 @@ namespace HitCounterManager
                     {
                         // Dump all actually visible splits of the current run
                         if (0 < r + HiddenSplitCount + InjectedSplitCount) sr.WriteLine(","); // separator
-                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", "
+                        sr.Write("[\"" + SimpleJsonEscape(SimpleHtmlEscape(pi.GetSplitTitle(r))) + "\", "
                             + (pi.GetSplitHits(r) + pi.GetSplitWayHits(r)) + ", " + pi.GetSplitPB(r) + ", " + pi.GetSplitWayHits(r) + ", "
                             + RunIndex + ", " + pi.GetSplitDuration(r) + ", " + pi.GetSplitDurationPB(r) + ", " + pi.GetSplitDurationGold(r)+ "]");
                     }
@@ -273,7 +283,7 @@ namespace HitCounterManager
                                 for (int r = 0; r < pi_pvc.SplitCount; r++)
                                 {
                                     if (0 < r + HiddenSplitCount + InjectedSplitCount + iSplitCount) sr.WriteLine(","); // separator
-                                    sr.Write("[\"" + SimpleHtmlEscape(pi_pvc.GetSplitTitle(r)) + "\", "
+                                    sr.Write("[\"" + SimpleJsonEscape(SimpleHtmlEscape(pi_pvc.GetSplitTitle(r))) + "\", "
                                         + (pi_pvc.GetSplitHits(r) + pi_pvc.GetSplitWayHits(r)) + ", " + pi_pvc.GetSplitPB(r) + ", " + pi_pvc.GetSplitWayHits(r) + ", "
                                         + RunIndex + ", " + 0/*NoTime*/ + ", " + 0/*NoPBTime*/ + ", " + 0/*NoGoldTime*/ + "]");
                                 }
@@ -372,7 +382,7 @@ namespace HitCounterManager
 
                     for (int r = 0; r < pi.SplitCount; r++)
                     {
-                        sr.Write("[\"" + SimpleHtmlEscape(pi.GetSplitTitle(r)) + "\", " + pi.GetSplitHits(r) + pi.GetSplitWayHits(r) + ", " + pi.GetSplitPB(r) + ", " + (r == active ? "1" : "0") + "]");
+                        sr.Write("[\"" + SimpleJsonEscape(SimpleHtmlEscape(pi.GetSplitTitle(r))) + "\", " + pi.GetSplitHits(r) + pi.GetSplitWayHits(r) + ", " + pi.GetSplitPB(r) + ", " + (r == active ? "1" : "0") + "]");
                     }
 
                     IsWritingList = true;
