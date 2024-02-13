@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2021-2023 Peter Kirmeier
+//Copyright (c) 2021-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -56,13 +56,24 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Grid Margin="0" ColumnDefinitions="30,*,68,68,50,68,20,20,20" RowDefinitions="Auto">
-            <RelativePanel Grid.Row="0" Grid.Column="0" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid Margin="0" RowDefinitions="Auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="24" MinWidth="24"></ColumnDefinition>
+                <ColumnDefinition Width="*"  MinWidth="30"></ColumnDefinition>
+                <ColumnDefinition Width="68"></ColumnDefinition>
+                <ColumnDefinition Width="68"></ColumnDefinition>
+                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition Width="68"></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <RelativePanel Grid.Row="0" Grid.Column="0" Margin="0" MinWidth="24" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button Command="{Binding ToggleShowInfo}" CommandParameter="MainColumnHeaders" Classes="ImageButton" Width="18" Height="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
             </RelativePanel>
-            <TextBlock Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left"   FontFamily="Arial" FontSize="14" FontWeight="Bold" Text="Title" />
+            <TextBlock Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left"   FontFamily="Arial" FontSize="14" FontWeight="Bold" MinWidth="30" Text="Title" />
             <TextBlock Grid.Column="2" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Boss&#10;Hits" />
             <TextBlock Grid.Column="3" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Way&#10;Hits" />
             <TextBlock Grid.Column="4" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Diff" />
@@ -92,7 +103,18 @@
             </ItemsRepeater.Layout>
             <ItemsRepeater.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="2" ColumnDefinitions="30,*,68,68,50,68,20,20,20" RowDefinitions="Auto">
+                    <Grid Margin="2" RowDefinitions="Auto">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="24" MinWidth="24"></ColumnDefinition>
+                            <ColumnDefinition Width="*"  MinWidth="30"></ColumnDefinition>
+                            <ColumnDefinition Width="68"></ColumnDefinition>
+                            <ColumnDefinition Width="68"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="68"></ColumnDefinition>
+                            <ColumnDefinition Width="20"></ColumnDefinition>
+                            <ColumnDefinition Width="20"></ColumnDefinition>
+                            <ColumnDefinition Width="20"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
                         <Interaction.Behaviors>
                             <DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
                                 <ChangePropertyAction TargetObject="{Binding $parent[Grid]}" PropertyName="Background" Value="Transparent" />
@@ -101,7 +123,7 @@
                                 <ChangePropertyAction TargetObject="{Binding $parent[Grid]}" PropertyName="Background" Value="Goldenrod" />
                             </DataTriggerBehavior>
                         </Interaction.Behaviors>
-                        <Button Grid.Column="0" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                        <Button Grid.Column="0" Margin="0" MinWidth="24" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Center"
                                 Command="{Binding $parent[UserControl].DataContext.CmdSetActiveSplit}" CommandParameter="{Binding .}">
                             <Image Source="{c:LazyResource ImageInactive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Interaction.Behaviors>
@@ -114,7 +136,7 @@
                                 </Interaction.Behaviors>
                             </Image>
                         </Button>
-                        <TextBox Grid.Column="1" Margin="2" TextAlignment="Left" Text="{Binding Title}" Watermark="       [Empty title]" />
+                        <TextBox Grid.Column="1" Margin="2" MinWidth="30" TextAlignment="Left" Text="{Binding Title}" Watermark="       [Empty title]" />
                         <NumericUpDown Grid.Column="2" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
                                        Value="{Binding Hits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
                         <NumericUpDown Grid.Column="3" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
