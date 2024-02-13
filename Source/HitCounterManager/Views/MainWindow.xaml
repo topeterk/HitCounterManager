@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2023-2023 Peter Kirmeier
+//Copyright (c) 2023-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,6 @@
         x:Class="HitCounterManager.Views.MainWindow"
         Icon="/Resources/FireIcon.ico"
         Title="{x:Static c:Statics.ApplicationTitle}"
-        MinWidth="540" MinHeight="344">
-	<v:MainPage x:Name="InnerPage"/>
+        MinWidth="92" MinHeight="244">
+    <v:MainPage x:Name="InnerPage"/>
 </Window>
