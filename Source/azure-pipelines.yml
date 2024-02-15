@@ -160,9 +160,9 @@ stages:
 # https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/java-tool-installer-v0?view=azure-pipelines
     - task: JavaToolInstaller@0
       condition: startsWith(variables['RuntimeRID'], 'android-')
-      displayName: 'Install Java 17'
+      displayName: 'Install Java 11'
       inputs:
-        versionSpec: '17'
+        versionSpec: '11'
         jdkArchitectureOption: 'x64'
         jdkSourceOption: 'PreInstalled'
 
