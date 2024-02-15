@@ -35,18 +35,41 @@
 
     <StackPanel Margin="10" Spacing="2" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top">
 
-        <Grid Margin="0" HorizontalAlignment="Stretch">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" MinWidth="6"/>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" MinWidth="6"/>
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="{Binding StatsProgress}"  Margin="0" HorizontalAlignment="Left"   FontFamily="Arial" FontSize="14" FontWeight="Bold" />
-            <TextBlock Grid.Column="2" Text="{Binding StatsTime}"      Margin="0" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
-            <TextBlock Grid.Column="4" Text="{Binding StatsTotalHits}" Margin="0" HorizontalAlignment="Right"  FontFamily="Arial" FontSize="14" FontWeight="Bold" />
-        </Grid>
+		<!-- Vertical statistics -->
+		<StackPanel x:Name="StatsStack" Margin="0" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+			<Interaction.Behaviors>
+				<DataTriggerBehavior Binding="{Binding $parent[UserControl].Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="480">
+					<ChangePropertyAction PropertyName="IsVisible" Value="True" />
+				</DataTriggerBehavior>
+				<DataTriggerBehavior Binding="{Binding $parent[UserControl].Bounds.Width}" ComparisonCondition="GreaterThan" Value="480">
+					<ChangePropertyAction PropertyName="IsVisible" Value="False" />
+				</DataTriggerBehavior>
+			</Interaction.Behaviors>
+			<TextBlock Text="{Binding StatsProgress}"  Margin="0" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
+			<TextBlock Text="{Binding StatsTime}"      Margin="0" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
+			<TextBlock Text="{Binding StatsTotalHits}" Margin="0" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
+		</StackPanel>
+		<!-- Horizontal statistics -->
+		<Grid Margin="0" HorizontalAlignment="Stretch">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" MinWidth="6"/>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" MinWidth="6"/>
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+			<Interaction.Behaviors>
+				<DataTriggerBehavior Binding="{Binding $parent[UserControl].Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="480">
+					<ChangePropertyAction PropertyName="IsVisible" Value="False" />
+				</DataTriggerBehavior>
+				<DataTriggerBehavior Binding="{Binding $parent[UserControl].Bounds.Width}" ComparisonCondition="GreaterThan" Value="480">
+					<ChangePropertyAction PropertyName="IsVisible" Value="True" />
+				</DataTriggerBehavior>
+			</Interaction.Behaviors>
+			<TextBlock Grid.Column="0" Text="{Binding StatsProgress}"  Margin="0" HorizontalAlignment="Left"   FontFamily="Arial" FontSize="14" FontWeight="Bold" />
+			<TextBlock Grid.Column="2" Text="{Binding StatsTime}"      Margin="0" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
+			<TextBlock Grid.Column="4" Text="{Binding StatsTotalHits}" Margin="0" HorizontalAlignment="Right"  FontFamily="Arial" FontSize="14" FontWeight="Bold" />
+		</Grid>
 
         <ComboBox x:Name="profileSelector" ItemsSource="{Binding ProfileList}" SelectedItem="{Binding ProfileSelected}" HorizontalAlignment="Stretch">
             <ComboBox.ItemTemplate>
