@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2022 Peter Kirmeier
+//Copyright (c) 2016-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -68,6 +68,32 @@ namespace HitCounterManager.Models
                 return result;
             }
             catch (FileNotFoundException) { } // Exception.HResult == COR_E_FILENOTFOUND only be available since .Net 4.5, use overloading for older frameworks
+            catch (Exception ex)
+            {
+                App.CurrentApp.DisplayAlert("Error loading settings!", ex.Message + Environment.NewLine + "==> Using defaults");
+            }
+            finally
+            {
+                file?.Close();
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Reads the data from the XML file (given as string stream)
+        /// </summary>
+        /// <param name="xmlStringStream">Stream with file contents being read</param>
+        /// <returns>Data of data type</returns>
+        public T? ReadXML(Stream xmlStringStream)
+        {
+            XmlReader? file = null;
+            try
+            {
+                file = XmlReader.Create(xmlStringStream);
+                T? result = xml.Deserialize(file) as T;
+                file.Close();
+                return result;
+            }
             catch (Exception ex)
             {
                 App.CurrentApp.DisplayAlert("Error loading settings!", ex.Message + Environment.NewLine + "==> Using defaults");

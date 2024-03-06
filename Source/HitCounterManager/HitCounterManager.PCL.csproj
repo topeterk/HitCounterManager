@@ -21,6 +21,7 @@
     <None Include="../Datafiles/**" Link="Datafiles/%(RecursiveDir)%(Filename)%(Extension)" />
     <ContentWithTargetPath Include="../Datafiles/**" TargetPath="%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <EmbeddedResource Include="../../THIRDPARTYLICENSEREADME" Link="THIRDPARTYLICENSEREADME" />
+    <EmbeddedResource Include="../Datafiles/HitCounterManagerInit.xml" Link="DefaultSettingsXML" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />

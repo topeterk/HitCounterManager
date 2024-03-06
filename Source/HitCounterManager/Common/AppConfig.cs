@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2022 Peter Kirmeier
+//Copyright (c) 2016-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,8 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
+using Avalonia.Platform;
 using HitCounterManager.Common;
 using HitCounterManager.Models;
 
@@ -171,6 +173,12 @@ namespace HitCounterManager
             {
                 // When no user save file is available, try loading the init file instead to provide predefined profiles and settings
                 loadedSettings = sm.ReadXML(false, Statics.ApplicationName + "Init.xml");
+                if (null == loadedSettings)
+                {
+                    // When init file cannot be read, fallback to defaults from resources
+                    string resourceNameDefaultSettingsXML = ".DefaultSettingsXML";
+                    loadedSettings = sm.ReadXML(AssetLoader.Open(new Uri($"resm:{Assembly.GetExecutingAssembly().GetName().Name ?? string.Empty}{resourceNameDefaultSettingsXML}")));
+                }
             }
             if (null != loadedSettings)
             {
