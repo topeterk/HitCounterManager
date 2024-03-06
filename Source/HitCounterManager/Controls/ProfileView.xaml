@@ -79,32 +79,70 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Grid Margin="0" RowDefinitions="Auto">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="24" MinWidth="24"></ColumnDefinition>
-                <ColumnDefinition Width="*"  MinWidth="30"></ColumnDefinition>
-                <ColumnDefinition Width="68"></ColumnDefinition>
-                <ColumnDefinition Width="68"></ColumnDefinition>
-                <ColumnDefinition Width="50"></ColumnDefinition>
-                <ColumnDefinition Width="68"></ColumnDefinition>
-                <ColumnDefinition Width="20"></ColumnDefinition>
-                <ColumnDefinition Width="20"></ColumnDefinition>
-                <ColumnDefinition Width="20"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <RelativePanel Grid.Row="0" Grid.Column="0" Margin="0" MinWidth="24" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Command="{Binding ToggleShowInfo}" CommandParameter="MainColumnHeaders" Classes="ImageButton" Width="18" Height="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                </Button>
-            </RelativePanel>
-            <TextBlock Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left"   FontFamily="Arial" FontSize="14" FontWeight="Bold" MinWidth="30" Text="Title" />
-            <TextBlock Grid.Column="2" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Boss&#10;Hits" />
-            <TextBlock Grid.Column="3" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Way&#10;Hits" />
-            <TextBlock Grid.Column="4" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Diff" />
-            <TextBlock Grid.Column="5" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="PB" />
-            <TextBlock Grid.Column="6" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="SP" />
-            <TextBlock Grid.Column="7" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="BP" />
-            <TextBlock Grid.Column="8" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text=" " />
-        </Grid>
+		<OnPlatform>
+			<OnPlatform.Default>
+				<Grid Margin="0" RowDefinitions="Auto">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="24" MinWidth="24"></ColumnDefinition>
+						<ColumnDefinition Width="*"  MinWidth="30"></ColumnDefinition>
+						<ColumnDefinition Width="68"></ColumnDefinition>
+						<ColumnDefinition Width="68"></ColumnDefinition>
+						<ColumnDefinition Width="50"></ColumnDefinition>
+						<ColumnDefinition Width="68"></ColumnDefinition>
+						<ColumnDefinition Width="20"></ColumnDefinition>
+						<ColumnDefinition Width="20"></ColumnDefinition>
+						<ColumnDefinition Width="20"></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<RelativePanel Grid.Row="0" Grid.Column="0" Margin="0" MinWidth="24" HorizontalAlignment="Center" VerticalAlignment="Center">
+						<Button Command="{Binding ToggleShowInfo}" CommandParameter="MainColumnHeaders" Classes="ImageButton" Width="18" Height="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+							<Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" />
+						</Button>
+					</RelativePanel>
+					<TextBlock Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left"   FontFamily="Arial" FontSize="14" FontWeight="Bold" MinWidth="30" Text="Title" />
+					<TextBlock Grid.Column="2" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Boss&#10;Hits" />
+					<TextBlock Grid.Column="3" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Way&#10;Hits" />
+					<TextBlock Grid.Column="4" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Diff" />
+					<TextBlock Grid.Column="5" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="PB" />
+					<TextBlock Grid.Column="6" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="SP" />
+					<TextBlock Grid.Column="7" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="BP" />
+					<TextBlock Grid.Column="8" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text=" " />
+				</Grid>
+			</OnPlatform.Default>
+			<On Options="Android, iOS">
+				<StackPanel Spacing="0" Orientation="Vertical">
+					<Grid Margin="2" RowDefinitions="Auto">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="24" MinWidth="24"></ColumnDefinition>
+							<ColumnDefinition Width="*"  MinWidth="30"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<RelativePanel Grid.Row="0" Grid.Column="0" Margin="0" MinWidth="24" HorizontalAlignment="Center" VerticalAlignment="Center">
+							<Button Command="{Binding ToggleShowInfo}" CommandParameter="MainColumnHeaders" Classes="ImageButton" Width="18" Height="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+								<Image Source="{c:LazyResource ImageInfo}" Width="18" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" />
+							</Button>
+						</RelativePanel>
+						<TextBlock Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left"   FontFamily="Arial" FontSize="14" FontWeight="Bold" MinWidth="30" Text="Title" />
+					</Grid>
+					<Grid Margin="2" RowDefinitions="Auto">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="68"></ColumnDefinition>
+							<ColumnDefinition Width="68"></ColumnDefinition>
+							<ColumnDefinition Width="50"></ColumnDefinition>
+							<ColumnDefinition Width="68"></ColumnDefinition>
+							<ColumnDefinition Width="20"></ColumnDefinition>
+							<ColumnDefinition Width="20"></ColumnDefinition>
+							<ColumnDefinition Width="20"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<TextBlock Grid.Column="0" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Boss&#10;Hits" />
+						<TextBlock Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Way&#10;Hits" />
+						<TextBlock Grid.Column="2" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Diff" />
+						<TextBlock Grid.Column="3" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="PB" />
+						<TextBlock Grid.Column="4" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="SP" />
+						<TextBlock Grid.Column="5" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="BP" />
+						<TextBlock Grid.Column="6" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text=" " />
+					</Grid>
+				</StackPanel>
+			</On>
+		</OnPlatform>
         <Border Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top" Classes="InfoBoxBorder"
                 IsVisible="{Binding ShowInfo[MainColumnHeaders].Value, Mode=OneWay}" >
             <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Center">
@@ -120,86 +158,187 @@
             </TextBlock>
         </Border>
 
-        <ItemsRepeater Margin="0" x:Name="ProfileList" ItemsSource="{Binding ProfileSelected.Rows}" HorizontalAlignment="Stretch">
+		<ItemsRepeater Margin="0" x:Name="ProfileList" ItemsSource="{Binding ProfileSelected.Rows}" HorizontalAlignment="Stretch" ItemTemplate="{OnPlatform Default={StaticResource DefaultTemplate}, Android={StaticResource SmallTemplate}, iOS={StaticResource SmallTemplate}}">
             <ItemsRepeater.Layout>
                 <StackLayout Spacing="0" Orientation="Vertical"/>
             </ItemsRepeater.Layout>
-            <ItemsRepeater.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="2" RowDefinitions="Auto">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="24" MinWidth="24"></ColumnDefinition>
-                            <ColumnDefinition Width="*"  MinWidth="30"></ColumnDefinition>
-                            <ColumnDefinition Width="68"></ColumnDefinition>
-                            <ColumnDefinition Width="68"></ColumnDefinition>
-                            <ColumnDefinition Width="50"></ColumnDefinition>
-                            <ColumnDefinition Width="68"></ColumnDefinition>
-                            <ColumnDefinition Width="20"></ColumnDefinition>
-                            <ColumnDefinition Width="20"></ColumnDefinition>
-                            <ColumnDefinition Width="20"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Interaction.Behaviors>
-                            <DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
-                                <ChangePropertyAction TargetObject="{Binding $parent[Grid]}" PropertyName="Background" Value="Transparent" />
-                            </DataTriggerBehavior>
-                            <DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
-                                <ChangePropertyAction TargetObject="{Binding $parent[Grid]}" PropertyName="Background" Value="Goldenrod" />
-                            </DataTriggerBehavior>
-                        </Interaction.Behaviors>
-                        <Button Grid.Column="0" Margin="0" MinWidth="24" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Center"
+			<ItemsRepeater.Resources>
+				<DataTemplate x:Key="SmallTemplate">
+					<StackPanel Spacing="0" Orientation="Vertical">
+						<Grid Margin="2" RowDefinitions="Auto">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="24" MinWidth="24"></ColumnDefinition>
+								<ColumnDefinition Width="*"  MinWidth="30"></ColumnDefinition>
+							</Grid.ColumnDefinitions>
+							<Interaction.Behaviors>
+								<DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
+									<ChangePropertyAction TargetObject="{Binding $parent[Grid]}" PropertyName="Background" Value="Transparent" />
+								</DataTriggerBehavior>
+								<DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
+									<ChangePropertyAction TargetObject="{Binding $parent[Grid]}" PropertyName="Background" Value="Goldenrod" />
+								</DataTriggerBehavior>
+							</Interaction.Behaviors>
+							<Button Grid.Column="0" Margin="0" MinWidth="24" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Center"
+									Command="{Binding $parent[UserControl].DataContext.CmdSetActiveSplit}" CommandParameter="{Binding .}">
+								<Image Source="{c:LazyResource ImageInactive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+									<Interaction.Behaviors>
+										<DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
+											<ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageInactive}" />
+										</DataTriggerBehavior>
+										<DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
+											<ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageActive}" />
+										</DataTriggerBehavior>
+									</Interaction.Behaviors>
+								</Image>
+							</Button>
+							<TextBox Grid.Column="1" Margin="2" MinWidth="30" TextAlignment="Left" Text="{Binding Title}" Watermark="       [Empty title]" />
+						</Grid>
+						<Grid Margin="2" RowDefinitions="Auto">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="68"></ColumnDefinition>
+								<ColumnDefinition Width="68"></ColumnDefinition>
+								<ColumnDefinition Width="50"></ColumnDefinition>
+								<ColumnDefinition Width="68"></ColumnDefinition>
+								<ColumnDefinition Width="20"></ColumnDefinition>
+								<ColumnDefinition Width="20"></ColumnDefinition>
+								<ColumnDefinition Width="20"></ColumnDefinition>
+							</Grid.ColumnDefinitions>
+							<NumericUpDown Grid.Column="0" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
+										   Value="{Binding Hits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+							<NumericUpDown Grid.Column="1" IsVisible="{Binding Active}" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
+										   Value="{Binding WayHits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+							<TextBlock Grid.Column="2" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Diff, Mode=OneWay}" />
+							<NumericUpDown Grid.Column="3" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
+										   Value="{Binding PB}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+							<Button Grid.Column="4" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+									Command="{Binding $parent[UserControl].DataContext.CmdSetSessionProgress}" CommandParameter="{Binding .}">
+								<Image Source="{c:LazyResource ImageInactive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+									<Interaction.Behaviors>
+										<DataTriggerBehavior Binding="{Binding SP, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
+											<ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageInactive}" />
+										</DataTriggerBehavior>
+										<DataTriggerBehavior Binding="{Binding SP, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
+											<ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageSP}" />
+										</DataTriggerBehavior>
+									</Interaction.Behaviors>
+								</Image>
+							</Button>
+							<Button Grid.Column="5" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+									Command="{Binding $parent[UserControl].DataContext.CmdSetBestProgress}" CommandParameter="{Binding .}">
+								<Image Source="{c:LazyResource ImageInactiveBP}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+									<Interaction.Behaviors>
+										<DataTriggerBehavior Binding="{Binding BP, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
+											<ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageInactiveBP}" />
+										</DataTriggerBehavior>
+										<DataTriggerBehavior Binding="{Binding BP, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
+											<ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageBP}" />
+										</DataTriggerBehavior>
+									</Interaction.Behaviors>
+								</Image>
+							</Button>
+							<Button Grid.Column="6" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+									Command="{Binding $parent[UserControl].DataContext.CmdRemoveSplit}" CommandParameter="{Binding .}">
+								<Image Source="{c:LazyResource ImageTrash}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+							</Button>
+						</Grid>
+					</StackPanel>
+				</DataTemplate>
+				<DataTemplate x:Key="DefaultTemplate">
+					<Grid Margin="2" RowDefinitions="Auto">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="24" MinWidth="24"></ColumnDefinition>
+							<ColumnDefinition Width="*"  MinWidth="30"></ColumnDefinition>
+							<ColumnDefinition Width="68"></ColumnDefinition>
+							<ColumnDefinition Width="68"></ColumnDefinition>
+							<ColumnDefinition Width="50"></ColumnDefinition>
+							<ColumnDefinition Width="68"></ColumnDefinition>
+							<ColumnDefinition Width="20"></ColumnDefinition>
+							<ColumnDefinition Width="20"></ColumnDefinition>
+							<ColumnDefinition Width="20"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<Interaction.Behaviors>
+							<DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
+								<ChangePropertyAction TargetObject="{Binding $parent[Grid]}" PropertyName="Background" Value="Transparent" />
+							</DataTriggerBehavior>
+							<DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
+								<ChangePropertyAction TargetObject="{Binding $parent[Grid]}" PropertyName="Background" Value="Goldenrod" />
+							</DataTriggerBehavior>
+						</Interaction.Behaviors>
+						<Button Grid.Column="0" Margin="0" MinWidth="24" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Center"
                                 Command="{Binding $parent[UserControl].DataContext.CmdSetActiveSplit}" CommandParameter="{Binding .}">
-                            <Image Source="{c:LazyResource ImageInactive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <Interaction.Behaviors>
-                                    <DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageInactive}" />
-                                    </DataTriggerBehavior>
-                                    <DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageActive}" />
-                                    </DataTriggerBehavior>
-                                </Interaction.Behaviors>
-                            </Image>
-                        </Button>
-                        <TextBox Grid.Column="1" Margin="2" MinWidth="30" TextAlignment="Left" Text="{Binding Title}" Watermark="       [Empty title]" />
-                        <NumericUpDown Grid.Column="2" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
-                                       Value="{Binding Hits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
-                        <NumericUpDown Grid.Column="3" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
+							<Image Source="{c:LazyResource ImageInactive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+								<Interaction.Behaviors>
+									<DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
+										<ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageInactive}" />
+									</DataTriggerBehavior>
+									<DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
+										<ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageActive}" />
+									</DataTriggerBehavior>
+								</Interaction.Behaviors>
+							</Image>
+						</Button>
+						<TextBox Grid.Column="1" Margin="2" MinWidth="30" TextAlignment="Left" Text="{Binding Title}" Watermark="       [Empty title]" />
+						<NumericUpDown Grid.Column="2" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
+                                       Value="{Binding Hits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer">
+<!--
+							<Interaction.Behaviors>
+								<DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
+									<ChangePropertyAction TargetObject="{Binding $parent[NumericUpDown]}" PropertyName="Grid.Column" Value="3" />
+								</DataTriggerBehavior>
+								<DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
+									<ChangePropertyAction TargetObject="{Binding $parent[NumericUpDown]}" PropertyName="Grid.Column" Value="2" />
+								</DataTriggerBehavior>
+							</Interaction.Behaviors>
+-->
+						</NumericUpDown>
+						<NumericUpDown Grid.Column="3" IsVisible="{Binding Active}" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
                                        Value="{Binding WayHits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
-                        <TextBlock Grid.Column="4" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Diff, Mode=OneWay}" />
-                        <NumericUpDown Grid.Column="5" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
+						<TextBlock Grid.Column="4" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Diff, Mode=OneWay}" />
+						<NumericUpDown Grid.Column="5" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
                                        Value="{Binding PB}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
-                        <Button Grid.Column="6" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+						<Button Grid.Column="6" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                 Command="{Binding $parent[UserControl].DataContext.CmdSetSessionProgress}" CommandParameter="{Binding .}">
-                            <Image Source="{c:LazyResource ImageInactive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <Interaction.Behaviors>
-                                    <DataTriggerBehavior Binding="{Binding SP, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageInactive}" />
-                                    </DataTriggerBehavior>
-                                    <DataTriggerBehavior Binding="{Binding SP, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageSP}" />
-                                    </DataTriggerBehavior>
-                                </Interaction.Behaviors>
-                            </Image>
-                        </Button>
-                        <Button Grid.Column="7" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+							<Image Source="{c:LazyResource ImageInactive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+								<Interaction.Behaviors>
+									<DataTriggerBehavior Binding="{Binding SP, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
+										<ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageInactive}" />
+									</DataTriggerBehavior>
+									<DataTriggerBehavior Binding="{Binding SP, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
+										<ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageSP}" />
+									</DataTriggerBehavior>
+								</Interaction.Behaviors>
+							</Image>
+						</Button>
+						<Button Grid.Column="7" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                 Command="{Binding $parent[UserControl].DataContext.CmdSetBestProgress}" CommandParameter="{Binding .}">
-                            <Image Source="{c:LazyResource ImageInactiveBP}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <Interaction.Behaviors>
-                                    <DataTriggerBehavior Binding="{Binding BP, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageInactiveBP}" />
-                                    </DataTriggerBehavior>
-                                    <DataTriggerBehavior Binding="{Binding BP, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
-                                        <ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageBP}" />
-                                    </DataTriggerBehavior>
-                                </Interaction.Behaviors>
-                            </Image>
-                        </Button>
-                        <Button Grid.Column="8" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+							<Image Source="{c:LazyResource ImageInactiveBP}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+								<Interaction.Behaviors>
+									<DataTriggerBehavior Binding="{Binding BP, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
+										<ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageInactiveBP}" />
+									</DataTriggerBehavior>
+									<DataTriggerBehavior Binding="{Binding BP, Mode=OneWay}" ComparisonCondition="Equal" Value="true">
+										<ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageBP}" />
+									</DataTriggerBehavior>
+								</Interaction.Behaviors>
+							</Image>
+						</Button>
+						<Button Grid.Column="8" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                 Command="{Binding $parent[UserControl].DataContext.CmdRemoveSplit}" CommandParameter="{Binding .}">
-                            <Image Source="{c:LazyResource ImageTrash}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                        </Button>
-                    </Grid>
-                </DataTemplate>
-            </ItemsRepeater.ItemTemplate>
-        </ItemsRepeater>
+							<Image Source="{c:LazyResource ImageTrash}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+						</Button>
+					</Grid>
+				</DataTemplate>
+			</ItemsRepeater.Resources>
+<!--
+			<Interaction.Behaviors>
+				<DataTriggerBehavior Binding="{Binding $parent[UserControl].Bounds.Width}" ComparisonCondition="GreaterThan" Value="400">
+					<ChangePropertyAction TargetObject="{Binding $parent[ItemsRepeater]}" PropertyName="ItemTemplate" Value="{StaticResource DefaultTemplate}" />
+				</DataTriggerBehavior>
+				<DataTriggerBehavior Binding="{Binding $parent[UserControl].Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="400">
+					<ChangePropertyAction TargetObject="{Binding $parent[ItemsRepeater]}" PropertyName="ItemTemplate" Value="{StaticResource SmallTemplate}" />
+				</DataTriggerBehavior>
+			</Interaction.Behaviors>
+-->
+		</ItemsRepeater>
     </StackPanel>
 </UserControl>
