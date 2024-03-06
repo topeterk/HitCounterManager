@@ -38,11 +38,23 @@
 	<ScrollViewer Padding="0" Margin="6,4,0,0" AllowAutoHide="false">
 		<StackPanel Margin="0,0,30,0" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
-			<WrapPanel Margin="2" ItemHeight="28">
+			<WrapPanel Margin="2">
 				<WrapPanel.Styles>
+					<OnPlatform>
+						<OnPlatform.Default>
+							<Style Selector="Button">
+								<Setter Property="Margin" Value="1" />
+								<Setter Property="Padding" Value="1,3" />
+							</Style>
+						</OnPlatform.Default>
+						<On Options="Android, iOS">
+							<Style Selector="Button">
+								<Setter Property="Margin" Value="4" />
+								<Setter Property="Padding" Value="4" />
+							</Style>
+						</On>
+					</OnPlatform>
 					<Style Selector="Button">
-						<Setter Property="Margin" Value="1" />
-						<Setter Property="Width" Value="24" />
 						<Setter Property="HorizontalAlignment" Value="Stretch" />
 						<Setter Property="VerticalAlignment" Value="Stretch" />
 					</Style>
