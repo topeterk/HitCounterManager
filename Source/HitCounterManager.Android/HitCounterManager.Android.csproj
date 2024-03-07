@@ -18,11 +18,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AndroidResource Include="Icon.png">
-      <Link>Resources\drawable\Icon.png</Link>
-    </AndroidResource>
+    <AndroidResource Include="../HitCounterManager/Resources/drawable/FireIcon.png" Link="Resources/drawable/Icon.png" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="../$(Product)/$(Product).PCL.csproj" />
     <PackageReference Include="Avalonia.Android" Version="$(AvaloniaVersion)" />
