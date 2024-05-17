@@ -147,7 +147,7 @@
                 IsVisible="{Binding ShowInfo[MainColumnHeaders].Value, Mode=OneWay}" >
             <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Center">
                 <TextBlock.Text>
-                    <x:String>* Titel: The name of the split.
+                    <x:String xml:space="preserve">* Titel: The name of the split.
 * Boss Hits: Amount of hits taken by anything or bosses or just a marker that a boss has been defeated (depends on the configured behavior).
 * Way Hits: Amount of hits taken on the way to a boss or not used at all (depends on the configured behavior). E.g. track if a boss or the way through a slit should be trained more.
 * Diff: The difference between the hits taken (sum of Boss Hits and Way Hits) and the personal best hits taken.

@@ -39,7 +39,7 @@ namespace HitCounterManager.ViewModels
 {
     public class ProfileViewViewModel : ViewModelBase
     {
-        private SettingsRoot Settings = App.CurrentApp.Settings;
+        private readonly SettingsRoot Settings = App.CurrentApp.Settings;
         public ComboBox? ProfileSelector = null;
 
         public ProfileViewViewModel()
@@ -51,7 +51,7 @@ namespace HitCounterManager.ViewModels
             ProfileList = new ObservableCollection<ProfileModel>();
             foreach (Profile prof in Settings.Profiles.ProfileList)
             {
-                ProfileModel profileModel = new ProfileModel(prof);
+                ProfileModel profileModel = new (prof);
                 profileModel.ProfileDataChanged += OutputDataChangedHandler;
                 ProfileList.Add(profileModel);
             }
@@ -89,17 +89,17 @@ namespace HitCounterManager.ViewModels
             CmdSetActiveSplit = ReactiveCommand.Create<ProfileRowModel>((ProfileRowModel item) =>
             {
                 if (item.Active) return;
-                _ProfileSelected.ActiveSplit = _ProfileRowList.IndexOf(item);
+                _ProfileSelected.ActiveSplit = _ProfileSelected.Rows.IndexOf(item);
             });
             CmdSetSessionProgress = ReactiveCommand.Create<ProfileRowModel>((ProfileRowModel item) =>
             {
                 if (item.SP) return;
-                _ProfileSelected.SessionProgress = _ProfileRowList.IndexOf(item);
+                _ProfileSelected.SessionProgress = _ProfileSelected.Rows.IndexOf(item);
             });
             CmdSetBestProgress = ReactiveCommand.Create<ProfileRowModel>((ProfileRowModel item) =>
             {
                 if (item.BP) return;
-                _ProfileSelected.BestProgress = _ProfileRowList.IndexOf(item);
+                _ProfileSelected.BestProgress = _ProfileSelected.Rows.IndexOf(item);
             });
 
             ProfileReset = ReactiveCommand.Create(() =>
@@ -157,13 +157,13 @@ namespace HitCounterManager.ViewModels
             SplitSelectNext = ReactiveCommand.Create(() => GoSplits(+1));
             SplitSelectPrev = ReactiveCommand.Create(() => GoSplits(-1));
 
-            OutputUpdateTimer = new DispatcherTimer(TimeSpan.FromMilliseconds(300), DispatcherPriority.Background, OutputUpdateTimerTick);
+            OutputUpdateTimer = new (TimeSpan.FromMilliseconds(300), DispatcherPriority.Background, OutputUpdateTimerTick);
             OutputUpdateTimer.Start();
         }
 
         ~ProfileViewViewModel()
         {
-            OutputUpdateTimer?.Stop();
+            OutputUpdateTimer.Stop();
         }
 
         public class ShowInfoBool : NotifyPropertyChangedImpl
@@ -176,10 +176,9 @@ namespace HitCounterManager.ViewModels
             }
         }
 
-        private Dictionary<string, ShowInfoBool> _ShowInfo = new Dictionary<string, ShowInfoBool>(){
-            {"MainColumnHeaders", new ShowInfoBool()},
-        };
-        public Dictionary<string, ShowInfoBool> ShowInfo { get => _ShowInfo; }
+        public Dictionary<string, ShowInfoBool> ShowInfo { get; } = new () {
+                {"MainColumnHeaders", new ShowInfoBool()},
+            };
 
         public ICommand ToggleShowInfo { get; }
 
@@ -198,7 +197,6 @@ namespace HitCounterManager.ViewModels
         public ICommand CmdSetSessionProgress { get; }
         public ICommand CmdSetBestProgress { get; }
 
-        private ObservableCollection<ProfileRowModel> _ProfileRowList => _ProfileSelected.Rows;
         public ObservableCollection<ProfileModel> ProfileList { get; private set; }
 
         public bool IsProfileExisting(string Name)
@@ -263,9 +261,11 @@ namespace HitCounterManager.ViewModels
             TimerRunning = false;
 
             // Create profile
-            Profile profile = new Profile();
-            profile.Name = NewName;
-            ProfileModel profileModel = new ProfileModel(profile);
+            Profile profile = new()
+            {
+                Name = NewName
+            };
+            ProfileModel profileModel = new (profile);
             profileModel.InsertNewRow();
             profileModel.ProfileDataChanged += OutputDataChangedHandler;
 
@@ -299,7 +299,7 @@ namespace HitCounterManager.ViewModels
             // Create profile
             Profile profile = ProfileSelected.DeepCopyOrigin();
             profile.Name = NewName;
-            ProfileModel profileModel = new ProfileModel(profile);
+            ProfileModel profileModel = new(profile);
             profileModel.ProfileDataChanged += OutputDataChangedHandler;
 
             // Add and select profile
@@ -351,28 +351,28 @@ namespace HitCounterManager.ViewModels
         private void GoSplits(int Amount)
         {
             int split = _ProfileSelected.ActiveSplit + Amount;
-            if ((0 <= split) && (split < _ProfileRowList.Count))
+            if ((0 <= split) && (split < _ProfileSelected.Rows.Count))
             {
                 if (0 < Amount) // going forward?
                 {
-                    if (_ProfileRowList[_ProfileSelected.ActiveSplit].SP) CmdSetSessionProgress.Execute(_ProfileRowList[split]);
+                    if (_ProfileSelected.Rows[_ProfileSelected.ActiveSplit].SP) CmdSetSessionProgress.Execute(_ProfileSelected.Rows[split]);
                     if (_ProfileSelected.ActiveSplit == _ProfileSelected.BestProgress)
                     {
                         bool IsFlawless = true;
                         for (int i = 0; i < split; i++)
                         {
-                            if ((0 != _ProfileRowList[i].Hits) || (0 != _ProfileRowList[i].WayHits))
+                            if ((0 != _ProfileSelected.Rows[i].Hits) || (0 != _ProfileSelected.Rows[i].WayHits))
                             {
                                 IsFlawless = false;
                                 break;
                             }
                         }
-                        if (IsFlawless) CmdSetBestProgress.Execute(_ProfileRowList[split]);
+                        if (IsFlawless) CmdSetBestProgress.Execute(_ProfileSelected.Rows[split]);
                     }
                 }
                 _ProfileSelected.ActiveSplit = split;
             }
-            else if (split <= _ProfileRowList.Count)
+            else if (split <= _ProfileSelected.Rows.Count)
             {
                 // Stop timer when run completes (when last split is finished)
                 TimerRunning = false;
@@ -414,8 +414,8 @@ namespace HitCounterManager.ViewModels
 
         #region Output Update Queue
 
-        private DispatcherTimer? OutputUpdateTimer;
-        private readonly object OutputUpdateLock = new object();
+        private readonly DispatcherTimer OutputUpdateTimer;
+        private readonly object OutputUpdateLock = new ();
         private bool IsOutputUpdatePending = false;
         private bool IsOutputUpdateStable = true;
 
@@ -432,7 +432,7 @@ namespace HitCounterManager.ViewModels
             if (!IsOutputUpdatePending)
             {
                 Dispatcher.UIThread.Post(() => App.CurrentApp.om.Update(_ProfileSelected, TimerRunning));
-                OutputUpdateTimer!.Stop();
+                OutputUpdateTimer.Stop();
             }
         }
 
@@ -461,7 +461,7 @@ namespace HitCounterManager.ViewModels
 
         #region Game Timer
 
-        private Stopwatch monotonic_timer = new ();
+        private readonly Stopwatch monotonic_timer = new ();
 
         private long last_elapsed_time = 0;
 
@@ -492,7 +492,7 @@ namespace HitCounterManager.ViewModels
             }
         }
 
-        private readonly object TimerUpdateLock = new object();
+        private readonly object TimerUpdateLock = new ();
         public bool UpdateDuration()
         {
             // Early cancellation point

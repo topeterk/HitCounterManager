@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2021-2023 Peter Kirmeier
+//Copyright (c) 2021-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -36,20 +36,24 @@
 
     <DockPanel Margin="10">
 
-        <TextBlock DockPanel.Dock="Top" Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Text="SETTINGS" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
-
         <Button DockPanel.Dock="Bottom" Margin="20" Width="200" Content="OK"  Click="CloseHandler" HorizontalAlignment="Right"/>
 
-        <ScrollViewer Padding="0,0,30,0" Margin="6,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AllowAutoHide="false">
+        <ScrollViewer Padding="0,0,30,20" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AllowAutoHide="false">
+            <ScrollViewer.Styles>
+                <Style Selector="StackPanel > Grid">
+                    <!-- Ensures that Info TextBlocks cannot take more space than actually available (it seems Padding/Margin does not count as overflow and therefore does not wrap when it should)-->
+                    <Setter Property="MaxWidth" Value="{Binding $parent.Bounds.Width}" />
+                </Style>
+            </ScrollViewer.Styles>
 
-            <StackPanel Margin="0,0,0,30" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Margin="0" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
                 <!-- ================== -->
                 <!-- ================== -->
                 <!-- ================== -->
 
-                <Border Background="#CC6600" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
-                    <TextBlock HorizontalAlignment="Center" Text="GLOBAL SHORTCUTS" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
+                <Border Classes="SettingsSectionHeader">
+                    <TextBlock Text="GLOBAL SHORTCUTS" />
                 </Border>
 
                 <TextBlock HorizontalAlignment="Left" Text="Global hot keys not supported in this version!" Foreground="Red"
@@ -151,7 +155,7 @@
                             IsVisible="{Binding ShowInfo[RadioHotKeyMethod_Sync].Value, Mode=OneWay}">
                         <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                             <TextBlock.Text>
-                                <x:String>* This is a synchronous method as it uses the RegisterHotKey function (Windows API).
+                                <x:String xml:space="preserve">* This is a synchronous method as it uses the RegisterHotKey function (Windows API).
 * Only when Windows detects a hotkey, a notification to the application is sent, therefore the performance impact is at its minimum.
 * The privilege level must at least be on the same level as the application that is sending the notification. This means if you run the game as administratior you most likely have to run the HitCounterManager as administrator, too.
 * Downside: It may happen that an applications can "eat" the keys presses and therefore no notification will be sent.</x:String>
@@ -169,7 +173,7 @@
                             IsVisible="{Binding ShowInfo[RadioHotKeyMethod_Async].Value, Mode=OneWay}">
                         <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                             <TextBlock.Text>
-                                <x:String>* This is an asynchronous method as it periodically checks the keyboard key presses using the GetAsyncKeyState function (Windows API).
+                                <x:String xml:space="preserve">* This is an asynchronous method as it periodically checks the keyboard key presses using the GetAsyncKeyState function (Windows API).
 * This means the application has to check all the relevant keys in around every 20 milliseconds. This brings a slight performance drawback.
 * This method checks a key directly, so another application cannot interfere a hotkey detection.
 * Downside: Very short software generated hotkey events may be missed due to the polling interval.</x:String>
@@ -187,7 +191,7 @@
                             IsVisible="{Binding ShowInfo[RadioHotKeyMethod_LLKb].Value, Mode=OneWay}">
                         <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                             <TextBlock.Text>
-                                <x:String>* This is a synchronous method as it uses the WH_KEYBOARD_LL hook via SetWindowsHookEx function (Windows API).
+                                <x:String xml:space="preserve">* This is a synchronous method as it uses the WH_KEYBOARD_LL hook via SetWindowsHookEx function (Windows API).
 * Even a software generated key that is set and released at the same time (yes, at the exact same time due to message buffering) can be detected this way.
 * Downside: Windows will notify the application for every single key state change, which brings a slight performance impact. But more importantly this detection is based on a global hook chain, so before the key press reaches the actual game, the key will also be processed by the HitCounterManager. Therefore you will get an input lag of probably a few nano seconds (depending on the processor). This is why Microsoft stated that this method should be used for debugging but not for productive environments.</x:String>
                             </TextBlock.Text>
@@ -199,8 +203,8 @@
                 <!-- ================== -->
                 <!-- ================== -->
 
-                <Border Background="#CC6600" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
-                    <TextBlock Padding="0" HorizontalAlignment="Center" Text="STYLE" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
+                <Border Classes="SettingsSectionHeader">
+                    <TextBlock Text="STYLE" />
                 </Border>
 
                 <TextBlock HorizontalAlignment="Left" Text="Sections" />
@@ -216,7 +220,7 @@
                             IsVisible="{Binding ShowInfo[ShowAttemptsCounter].Value, Mode=OneWay}">
                         <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                             <TextBlock.Text>
-                                <x:String>Show/Hide how many runs have been started yet</x:String>
+                                <x:String xml:space="preserve">Show/Hide how many runs have been started yet</x:String>
                             </TextBlock.Text>
                         </TextBlock>
                     </Border>
@@ -231,7 +235,7 @@
                             IsVisible="{Binding ShowInfo[ShowHeadline].Value, Mode=OneWay}">
                         <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                             <TextBlock.Text>
-                                <x:String>Show/Hide the headlines of the columns</x:String>
+                                <x:String xml:space="preserve">Show/Hide the headlines of the columns</x:String>
                             </TextBlock.Text>
                         </TextBlock>
                     </Border>
@@ -246,7 +250,7 @@
                             IsVisible="{Binding ShowInfo[ShowProgressBar].Value, Mode=OneWay}">
                         <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                             <TextBlock.Text>
-                                <x:String>Show/Hide the progress bar to graphically represent the run's progress</x:String>
+                                <x:String xml:space="preserve">Show/Hide the progress bar to graphically represent the run's progress</x:String>
                             </TextBlock.Text>
                         </TextBlock>
                     </Border>
@@ -261,7 +265,7 @@
                             IsVisible="{Binding ShowInfo[ShowFooter].Value, Mode=OneWay}">
                         <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                             <TextBlock.Text>
-                                <x:String>Show/Hide the totals for each column (in the footer)</x:String>
+                                <x:String xml:space="preserve">Show/Hide the totals for each column (in the footer)</x:String>
                             </TextBlock.Text>
                         </TextBlock>
                     </Border>
@@ -276,7 +280,7 @@
                             IsVisible="{Binding ShowInfo[ShowTimeFooter].Value, Mode=OneWay}">
                         <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                             <TextBlock.Text>
-                                <x:String>Show/Hide full time of the current run (in the footer)</x:String>
+                                <x:String xml:space="preserve">Show/Hide full time of the current run (in the footer)</x:String>
                             </TextBlock.Text>
                         </TextBlock>
                     </Border>
@@ -295,7 +299,7 @@
                             IsVisible="{Binding ShowInfo[ShowHits].Value, Mode=OneWay}">
                         <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                             <TextBlock.Text>
-                                <x:String>Show/Hide hits column(s)
+                                <x:String xml:space="preserve">Show/Hide hits column(s)
 Can be configured to show boss and way hits as a combined value in a single column or separately in two columns</x:String>
                             </TextBlock.Text>
                         </TextBlock>
@@ -311,7 +315,7 @@ Can be configured to show boss and way hits as a combined value in a single colu
                             IsVisible="{Binding ShowInfo[ShowHitsCombined].Value, Mode=OneWay}">
                         <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                             <TextBlock.Text>
-                                <x:String>Checked: The boss and way hits are combined and shown as a single value
+                                <x:String xml:space="preserve">Checked: The boss and way hits are combined and shown as a single value
 Unchecked: The boss and way hits are shown as separate values</x:String>
                             </TextBlock.Text>
                         </TextBlock>
@@ -338,7 +342,7 @@ Unchecked: The boss and way hits are shown as separate values</x:String>
                             IsVisible="{Binding ShowInfo[ShowPB].Value, Mode=OneWay}">
                         <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                             <TextBlock.Text>
-                                <x:String>Show personal best hit counts
+                                <x:String xml:space="preserve">Show personal best hit counts
 Can be configured to additionally show the cumulative sum of PB hits up to each split.
 Allows quick comparison with the current hit count total.</x:String>
                             </TextBlock.Text>
@@ -355,7 +359,7 @@ Allows quick comparison with the current hit count total.</x:String>
                             IsVisible="{Binding ShowInfo[ShowPBTotals].Value, Mode=OneWay}">
                         <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                             <TextBlock.Text>
-                                <x:String>Show personal best hit count totals
+                                <x:String xml:space="preserve">Show personal best hit count totals
 Shows the cumulative sum of PB hits up to each split next to the PB hits of the current split.
 Allows quick comparison with the current hit count total.</x:String>
                             </TextBlock.Text>
@@ -403,9 +407,9 @@ Allows quick comparison with the current hit count total.</x:String>
                     <TextBlock  Grid.Row="16" Grid.Column="2" Margin="0" Text="SP and BP (session progress and best progress)" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Border Grid.Row="17" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
                             IsVisible="{Binding ShowInfo[ShowSessionProgress].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" Text="" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                             <TextBlock.Text>
-                                <x:String>Show/Hide the column for the session progress and best progress
+                                <x:String xml:space="preserve">Show/Hide the column for the session progress and best progress
 The session progress (SP) is represented by a 24 hour clock symbol and marks the farthest reached split per stream session (resets on application start).
 The best progress (BP) is represented by a flag symbol and marks the farthest reached split of the best flawless run ever (also known as distance PB).</x:String>
                             </TextBlock.Text>
@@ -531,8 +535,8 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                 <!-- ================== -->
                 <!-- ================== -->
 
-                <Border Background="#CC6600" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
-                    <TextBlock Padding="0" HorizontalAlignment="Center" Text="BEHAVIOR" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
+                <Border Classes="SettingsSectionHeader">
+                    <TextBlock Text="BEHAVIOR" />
                 </Border>
 
                 <TextBlock HorizontalAlignment="Left" Text="Purpose" />
@@ -607,7 +611,7 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                             IsVisible="{Binding ShowInfo[RadioHitSeverity_AnyHitCritical].Value, Mode=OneWay}">
                         <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                             <TextBlock.Text>
-                                <x:String>Counting independently of the hit type (boss or way)
+                                <x:String xml:space="preserve">Counting independently of the hit type (boss or way)
 GOOD splits have a hit count of 0
 BAD splits have at least one hit</x:String>
                             </TextBlock.Text>
@@ -624,7 +628,7 @@ BAD splits have at least one hit</x:String>
                             IsVisible="{Binding ShowInfo[RadioHitSeverity_ComparePB].Value, Mode=OneWay}">
                         <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                             <TextBlock.Text>
-                                <x:String>Marks hits during boss fight more severe than hits on the way.
+                                <x:String xml:space="preserve">Marks hits during boss fight more severe than hits on the way.
 GOOD splits have a hit count of 0
 EVEN splits have at least one hit counted for the way but have 0 hits for bosses
 BAD splits have at least one hit counted for bosses</x:String>
@@ -642,7 +646,7 @@ BAD splits have at least one hit counted for bosses</x:String>
                             IsVisible="{Binding ShowInfo[RadioHitSeverity_BossHitCritical].Value, Mode=OneWay}">
                         <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                             <TextBlock.Text>
-                                <x:String>Marks hit counts beyond the PB hit counts more severe.
+                                <x:String xml:space="preserve">Marks hit counts beyond the PB hit counts more severe.
 GOOD splits have a hit count of 0
 EVEN splits have at least one hit counted but still have even or less hits than on the PB run
 BAD splits have more hits than on the PB run</x:String>

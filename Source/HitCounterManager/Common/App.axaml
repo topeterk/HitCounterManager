@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2021-2023 Peter Kirmeier
+//Copyright (c) 2021-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -189,6 +189,16 @@
 			<Setter Property="Background" Value="{DynamicResource TextBoxBackgroundBrush}" />
 		</Style>
 
+		<Style Selector="Border.SettingsSectionHeader">
+			<Setter Property="Background" Value="#CC6600" />
+			<Setter Property="Margin" Value="0,10" />
+			<Setter Property="Padding" Value="8" />
+			<Setter Property="CornerRadius" Value="6" />
+		</Style>
+		<Style Selector="Border.SettingsSectionHeader > TextBlock">
+			<Setter Property="FontWeight" Value="Bold" />
+			<Setter Property="HorizontalAlignment" Value="Center" />
+		</Style>
 		<Style Selector="Button.ImageButton">
 			<Setter Property="Background" Value="{DynamicResource ImageButtonBackgroundBrush}" />
 		</Style>
