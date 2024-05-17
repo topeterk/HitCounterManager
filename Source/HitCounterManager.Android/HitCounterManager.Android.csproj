@@ -24,7 +24,7 @@
     <ProjectReference Include="../$(Product)/$(Product).PCL.csproj" />
     <PackageReference Include="Avalonia.Android" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="Xamarin.AndroidX.Annotation" Version="1.7.1" />
-    <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.5" />
+    <PackageReference Include="Xamarin.AndroidX.Annotation" Version="1.7.1.2" />
+    <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.7" />
   </ItemGroup>
 </Project>
