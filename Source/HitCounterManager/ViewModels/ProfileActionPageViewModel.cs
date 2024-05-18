@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2021-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,6 @@ using ReactiveUI;
 
 namespace HitCounterManager.ViewModels
 {
-    // TODO Avalonia: [sctypefix] Nested types not working with + sign within xaml, so it must be directly in namespace (ProfileAction)
     public enum ProfileAction { Invalid, Create, Rename, Copy, Delete }
 
     public class ProfileActionPageViewModel : ViewModelWindowBase

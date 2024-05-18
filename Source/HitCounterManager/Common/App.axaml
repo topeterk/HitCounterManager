@@ -33,9 +33,6 @@
 		                     https://github.com/AvaloniaUI/Avalonia/blob/master/src/Avalonia.Themes.Fluent/Accents/FluentControlResourcesLight.xaml
 		     Default Colors: https://docs.microsoft.com/de-de/dotnet/api/system.windows.media.colors?view=net-5.0 -->
 
-		<!-- TODO: Add somewhere keyframe shadow animation? See: https://github.com/AvaloniaUI/Avalonia/issues/2605#issuecomment-499169368 -->
-		<!-- TODO: Check for more detailed style improvements? See: https://github.com/AvaloniaUI/Avalonia/issues/1362#issuecomment-493026953 -->
-
 		<x:Double x:Key="Int32MaxValueAsDouble">2147483647</x:Double>
 
 		<SolidColorBrush x:Key="ProfileResetBrush" Color="IndianRed" />

@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2021-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ namespace HitCounterManager.ViewModels
         private Shortcuts sc = App.CurrentApp.sc;
         private OutModule om = App.CurrentApp.om;
         private bool AppearedOnce = false;
-        private Shortcuts.SC_Type CapturingId = Shortcuts.SC_Type.SC_Type_MAX;
+        private SC_Type CapturingId = SC_Type.SC_Type_MAX;
 
         public SettingsPageViewModel()
         {
@@ -47,19 +47,16 @@ namespace HitCounterManager.ViewModels
 
             ToggleShowInfo = ReactiveCommand.Create<string>((string name) => { ShowInfo[name].Value = !ShowInfo[name].Value; });
 
-            Capture = ReactiveCommand.Create<SC_Type>((sc_type_intermmediate) =>
+            Capture = ReactiveCommand.Create<SC_Type>((type) =>
             {
-                // TODO Avalonia: [sctypefix] Nested types not working with + sign within xaml, so it must be directly in namespace (SC_Type)
-                Shortcuts.SC_Type type = (Shortcuts.SC_Type)sc_type_intermmediate;
+                SC_Type CapturingIdPrev = CapturingId;
 
-                Shortcuts.SC_Type CapturingIdPrev = CapturingId;
-
-                if ((Shortcuts.SC_Type.SC_Type_MAX == type) || (CapturingId == type))
+                if ((SC_Type.SC_Type_MAX == type) || (CapturingId == type))
                 {
-                    CapturingId = Shortcuts.SC_Type.SC_Type_MAX; // Stop capturing and implicitly stop timer
+                    CapturingId = SC_Type.SC_Type_MAX; // Stop capturing and implicitly stop timer
                     RecordActionChanged(CapturingIdPrev);
                 }
-                else if (Shortcuts.SC_Type.SC_Type_MAX != CapturingId)
+                else if (SC_Type.SC_Type_MAX != CapturingId)
                 {
                     CapturingId = type; // Switch to another key
                     RecordActionChanged(CapturingIdPrev);
@@ -160,10 +157,10 @@ namespace HitCounterManager.ViewModels
         private bool CaptureKeysTick()
         {
             // Early cancellation point
-            if (Shortcuts.SC_Type.SC_Type_MAX == CapturingId) return false;
+            if (SC_Type.SC_Type_MAX == CapturingId) return false;
 
             List<int>? PressedKeys = App.CurrentApp.GetKeysPressedAsync();
-            if (null == PressedKeys) return (Shortcuts.SC_Type.SC_Type_MAX != CapturingId);
+            if (null == PressedKeys) return (SC_Type.SC_Type_MAX != CapturingId);
 
             KeyEventArgs key = new KeyEventArgs(Keys.None);
             foreach (int KeyCode in PressedKeys)
@@ -187,14 +184,14 @@ namespace HitCounterManager.ViewModels
 
                     // Assign key code
                     default:
-                        if (key.KeyCode != Keys.None) return (Shortcuts.SC_Type.SC_Type_MAX != CapturingId); // Only a single key can be captured
+                        if (key.KeyCode != Keys.None) return (SC_Type.SC_Type_MAX != CapturingId); // Only a single key can be captured
                         key.KeyData |= (Keys)KeyCode;
                         break;
                 }
             }
             if (key.KeyCode != Keys.None) RegisterHotKey(key); // Was a key combination detected? -> Register key
 
-            return Shortcuts.SC_Type.SC_Type_MAX != CapturingId;
+            return SC_Type.SC_Type_MAX != CapturingId;
         }
 
         /// <summary>
@@ -204,7 +201,7 @@ namespace HitCounterManager.ViewModels
         private void RegisterHotKey(KeyEventArgs e)
         {
             ShortcutsKey key = new ShortcutsKey();
-            Shortcuts.SC_Type Id = CapturingId;
+            SC_Type Id = CapturingId;
 
             if (e.KeyCode == Keys.None) return;
             if (e.KeyCode == Keys.ShiftKey) return;
@@ -218,43 +215,43 @@ namespace HitCounterManager.ViewModels
 
             switch (Id)
             {
-                case Shortcuts.SC_Type.SC_Type_Hit:
+                case SC_Type.SC_Type_Hit:
                     CallPropertyChanged(nameof(ShortcutHitDescription));
                     ShortcutHitEnable = true;
                     break;
-                case Shortcuts.SC_Type.SC_Type_HitUndo:
+                case SC_Type.SC_Type_HitUndo:
                     CallPropertyChanged(nameof(ShortcutHitUndoDescription));
                     ShortcutHitUndoEnable = true;
                     break;
-                case Shortcuts.SC_Type.SC_Type_WayHit:
+                case SC_Type.SC_Type_WayHit:
                     CallPropertyChanged(nameof(ShortcutWayHitDescription));
                     ShortcutWayHitEnable = true;
                     break;
-                case Shortcuts.SC_Type.SC_Type_WayHitUndo:
+                case SC_Type.SC_Type_WayHitUndo:
                     CallPropertyChanged(nameof(ShortcutWayHitUndoDescription));
                     ShortcutWayHitUndoEnable = true;
                     break;
-                case Shortcuts.SC_Type.SC_Type_Split:
+                case SC_Type.SC_Type_Split:
                     CallPropertyChanged(nameof(ShortcutSplitDescription));
                     ShortcutSplitEnable = true;
                     break;
-                case Shortcuts.SC_Type.SC_Type_SplitPrev:
+                case SC_Type.SC_Type_SplitPrev:
                     CallPropertyChanged(nameof(ShortcutSplitPrevDescription));
                     ShortcutSplitPrevEnable = true;
                     break;
-                case Shortcuts.SC_Type.SC_Type_PB:
+                case SC_Type.SC_Type_PB:
                     CallPropertyChanged(nameof(ShortcutPBDescription));
                     ShortcutPBEnable = true;
                     break;
-                case Shortcuts.SC_Type.SC_Type_Reset:
+                case SC_Type.SC_Type_Reset:
                     CallPropertyChanged(nameof(ShortcutResetDescription));
                     ShortcutResetEnable = true;
                     break;
-                case Shortcuts.SC_Type.SC_Type_TimerStart:
+                case SC_Type.SC_Type_TimerStart:
                     CallPropertyChanged(nameof(ShortcutTimerStartDescription));
                     ShortcutTimerStartEnable = true;
                     break;
-                case Shortcuts.SC_Type.SC_Type_TimerStop:
+                case SC_Type.SC_Type_TimerStop:
                     CallPropertyChanged(nameof(ShortcutTimerStopDescription));
                     ShortcutTimerStopEnable = true;
                     break;
@@ -271,7 +268,6 @@ namespace HitCounterManager.ViewModels
                 // but when this ViewModel gets created, the handle is not know yet
                 // therefore the settings must be loaded again later (=here)
                 // in order to present the correct data
-                // TODO: Get rid of this by displaying stored keys instead of loaded keys?
                 CallPropertyChanged(nameof(ShortcutHitRecordAction));
                 CallPropertyChanged(nameof(ShortcutHitUndoRecordAction));
                 CallPropertyChanged(nameof(ShortcutWayHitRecordAction));
@@ -315,7 +311,7 @@ namespace HitCounterManager.ViewModels
             set
             {
                 if (SetAndNotifyWhenChanged(ref Settings.ShortcutHitEnable, value))
-                    sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Hit, Settings.ShortcutHitEnable);
+                    sc.Key_SetState(SC_Type.SC_Type_Hit, Settings.ShortcutHitEnable);
             }
         }
         public bool ShortcutHitUndoEnable
@@ -324,7 +320,7 @@ namespace HitCounterManager.ViewModels
             set
             {
                 if (SetAndNotifyWhenChanged(ref Settings.ShortcutHitUndoEnable, value))
-                    sc.Key_SetState(Shortcuts.SC_Type.SC_Type_HitUndo, Settings.ShortcutHitUndoEnable);
+                    sc.Key_SetState(SC_Type.SC_Type_HitUndo, Settings.ShortcutHitUndoEnable);
             }
         }
         public bool ShortcutWayHitEnable
@@ -333,7 +329,7 @@ namespace HitCounterManager.ViewModels
             set
             {
                 if (SetAndNotifyWhenChanged(ref Settings.ShortcutWayHitEnable, value))
-                    sc.Key_SetState(Shortcuts.SC_Type.SC_Type_WayHit, Settings.ShortcutWayHitEnable);
+                    sc.Key_SetState(SC_Type.SC_Type_WayHit, Settings.ShortcutWayHitEnable);
             }
         }
         public bool ShortcutWayHitUndoEnable
@@ -342,7 +338,7 @@ namespace HitCounterManager.ViewModels
             set
             {
                 if (SetAndNotifyWhenChanged(ref Settings.ShortcutWayHitUndoEnable, value))
-                    sc.Key_SetState(Shortcuts.SC_Type.SC_Type_WayHitUndo, Settings.ShortcutWayHitUndoEnable);
+                    sc.Key_SetState(SC_Type.SC_Type_WayHitUndo, Settings.ShortcutWayHitUndoEnable);
             }
         }
         public bool ShortcutSplitEnable
@@ -351,7 +347,7 @@ namespace HitCounterManager.ViewModels
             set
             {
                 if (SetAndNotifyWhenChanged(ref Settings.ShortcutSplitEnable, value))
-                    sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Split, Settings.ShortcutSplitEnable);
+                    sc.Key_SetState(SC_Type.SC_Type_Split, Settings.ShortcutSplitEnable);
             }
         }
         public bool ShortcutSplitPrevEnable
@@ -360,7 +356,7 @@ namespace HitCounterManager.ViewModels
             set
             {
                 if (SetAndNotifyWhenChanged(ref Settings.ShortcutSplitPrevEnable, value))
-                    sc.Key_SetState(Shortcuts.SC_Type.SC_Type_SplitPrev, Settings.ShortcutSplitPrevEnable);
+                    sc.Key_SetState(SC_Type.SC_Type_SplitPrev, Settings.ShortcutSplitPrevEnable);
             }
         }
         public bool ShortcutPBEnable
@@ -369,7 +365,7 @@ namespace HitCounterManager.ViewModels
             set
             {
                 if (SetAndNotifyWhenChanged(ref Settings.ShortcutPBEnable, value))
-                    sc.Key_SetState(Shortcuts.SC_Type.SC_Type_PB, Settings.ShortcutPBEnable);
+                    sc.Key_SetState(SC_Type.SC_Type_PB, Settings.ShortcutPBEnable);
             }
         }
         public bool ShortcutResetEnable
@@ -378,7 +374,7 @@ namespace HitCounterManager.ViewModels
             set
             {
                 if (SetAndNotifyWhenChanged(ref Settings.ShortcutResetEnable, value))
-                    sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Reset, Settings.ShortcutResetEnable);
+                    sc.Key_SetState(SC_Type.SC_Type_Reset, Settings.ShortcutResetEnable);
             }
         }
         public bool ShortcutTimerStartEnable
@@ -387,7 +383,7 @@ namespace HitCounterManager.ViewModels
             set
             {
                 if (SetAndNotifyWhenChanged(ref Settings.ShortcutTimerStartEnable, value))
-                    sc.Key_SetState(Shortcuts.SC_Type.SC_Type_TimerStart, Settings.ShortcutTimerStartEnable);
+                    sc.Key_SetState(SC_Type.SC_Type_TimerStart, Settings.ShortcutTimerStartEnable);
             }
         }
         public bool ShortcutTimerStopEnable
@@ -396,48 +392,48 @@ namespace HitCounterManager.ViewModels
             set
             {
                 if (SetAndNotifyWhenChanged(ref Settings.ShortcutTimerStopEnable, value))
-                    sc.Key_SetState(Shortcuts.SC_Type.SC_Type_TimerStop, Settings.ShortcutTimerStopEnable);
+                    sc.Key_SetState(SC_Type.SC_Type_TimerStop, Settings.ShortcutTimerStopEnable);
             }
         }
 
-        private void RecordActionChanged(Shortcuts.SC_Type type)
+        private void RecordActionChanged(SC_Type type)
         {
             switch (type)
             {
-                case Shortcuts.SC_Type.SC_Type_Hit: CallPropertyChanged(nameof(ShortcutHitRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_HitUndo: CallPropertyChanged(nameof(ShortcutHitUndoRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_WayHit: CallPropertyChanged(nameof(ShortcutWayHitRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_WayHitUndo: CallPropertyChanged(nameof(ShortcutWayHitUndoRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_Split: CallPropertyChanged(nameof(ShortcutSplitRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_SplitPrev: CallPropertyChanged(nameof(ShortcutSplitPrevRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_PB: CallPropertyChanged(nameof(ShortcutPBRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_Reset: CallPropertyChanged(nameof(ShortcutResetRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_TimerStart: CallPropertyChanged(nameof(ShortcutTimerStartRecordAction)); break;
-                case Shortcuts.SC_Type.SC_Type_TimerStop: CallPropertyChanged(nameof(ShortcutTimerStopRecordAction)); break;
+                case SC_Type.SC_Type_Hit: CallPropertyChanged(nameof(ShortcutHitRecordAction)); break;
+                case SC_Type.SC_Type_HitUndo: CallPropertyChanged(nameof(ShortcutHitUndoRecordAction)); break;
+                case SC_Type.SC_Type_WayHit: CallPropertyChanged(nameof(ShortcutWayHitRecordAction)); break;
+                case SC_Type.SC_Type_WayHitUndo: CallPropertyChanged(nameof(ShortcutWayHitUndoRecordAction)); break;
+                case SC_Type.SC_Type_Split: CallPropertyChanged(nameof(ShortcutSplitRecordAction)); break;
+                case SC_Type.SC_Type_SplitPrev: CallPropertyChanged(nameof(ShortcutSplitPrevRecordAction)); break;
+                case SC_Type.SC_Type_PB: CallPropertyChanged(nameof(ShortcutPBRecordAction)); break;
+                case SC_Type.SC_Type_Reset: CallPropertyChanged(nameof(ShortcutResetRecordAction)); break;
+                case SC_Type.SC_Type_TimerStart: CallPropertyChanged(nameof(ShortcutTimerStartRecordAction)); break;
+                case SC_Type.SC_Type_TimerStop: CallPropertyChanged(nameof(ShortcutTimerStopRecordAction)); break;
                 default: break;
             }
         }
-        public string ShortcutHitRecordAction => Shortcuts.SC_Type.SC_Type_Hit == CapturingId ? "Stop" : "Rec";
-        public string ShortcutHitUndoRecordAction => Shortcuts.SC_Type.SC_Type_HitUndo == CapturingId ? "Stop" : "Rec";
-        public string ShortcutWayHitRecordAction => Shortcuts.SC_Type.SC_Type_WayHit == CapturingId ? "Stop" : "Rec";
-        public string ShortcutWayHitUndoRecordAction => Shortcuts.SC_Type.SC_Type_WayHitUndo == CapturingId ? "Stop" : "Rec";
-        public string ShortcutSplitRecordAction => Shortcuts.SC_Type.SC_Type_Split == CapturingId ? "Stop" : "Rec";
-        public string ShortcutSplitPrevRecordAction => Shortcuts.SC_Type.SC_Type_SplitPrev == CapturingId ? "Stop" : "Rec";
-        public string ShortcutPBRecordAction => Shortcuts.SC_Type.SC_Type_PB == CapturingId ? "Stop" : "Rec";
-        public string ShortcutResetRecordAction => Shortcuts.SC_Type.SC_Type_Reset == CapturingId ? "Stop" : "Rec";
-        public string ShortcutTimerStartRecordAction => Shortcuts.SC_Type.SC_Type_TimerStart == CapturingId ? "Stop" : "Rec";
-        public string ShortcutTimerStopRecordAction => Shortcuts.SC_Type.SC_Type_TimerStop == CapturingId ? "Stop" : "Rec";
+        public string ShortcutHitRecordAction => SC_Type.SC_Type_Hit == CapturingId ? "Stop" : "Rec";
+        public string ShortcutHitUndoRecordAction => SC_Type.SC_Type_HitUndo == CapturingId ? "Stop" : "Rec";
+        public string ShortcutWayHitRecordAction => SC_Type.SC_Type_WayHit == CapturingId ? "Stop" : "Rec";
+        public string ShortcutWayHitUndoRecordAction => SC_Type.SC_Type_WayHitUndo == CapturingId ? "Stop" : "Rec";
+        public string ShortcutSplitRecordAction => SC_Type.SC_Type_Split == CapturingId ? "Stop" : "Rec";
+        public string ShortcutSplitPrevRecordAction => SC_Type.SC_Type_SplitPrev == CapturingId ? "Stop" : "Rec";
+        public string ShortcutPBRecordAction => SC_Type.SC_Type_PB == CapturingId ? "Stop" : "Rec";
+        public string ShortcutResetRecordAction => SC_Type.SC_Type_Reset == CapturingId ? "Stop" : "Rec";
+        public string ShortcutTimerStartRecordAction => SC_Type.SC_Type_TimerStart == CapturingId ? "Stop" : "Rec";
+        public string ShortcutTimerStopRecordAction => SC_Type.SC_Type_TimerStop == CapturingId ? "Stop" : "Rec";
 
-        public string ShortcutHitDescription => sc.Key_Get(Shortcuts.SC_Type.SC_Type_Hit).GetDescriptionString();
-        public string ShortcutHitUndoDescription => sc.Key_Get(Shortcuts.SC_Type.SC_Type_HitUndo).GetDescriptionString();
-        public string ShortcutWayHitDescription => sc.Key_Get(Shortcuts.SC_Type.SC_Type_WayHit).GetDescriptionString();
-        public string ShortcutWayHitUndoDescription => sc.Key_Get(Shortcuts.SC_Type.SC_Type_WayHitUndo).GetDescriptionString();
-        public string ShortcutSplitDescription => sc.Key_Get(Shortcuts.SC_Type.SC_Type_Split).GetDescriptionString();
-        public string ShortcutSplitPrevDescription => sc.Key_Get(Shortcuts.SC_Type.SC_Type_SplitPrev).GetDescriptionString();
-        public string ShortcutPBDescription => sc.Key_Get(Shortcuts.SC_Type.SC_Type_PB).GetDescriptionString();
-        public string ShortcutResetDescription => sc.Key_Get(Shortcuts.SC_Type.SC_Type_Reset).GetDescriptionString();
-        public string ShortcutTimerStartDescription => sc.Key_Get(Shortcuts.SC_Type.SC_Type_TimerStart).GetDescriptionString();
-        public string ShortcutTimerStopDescription => sc.Key_Get(Shortcuts.SC_Type.SC_Type_TimerStop).GetDescriptionString();
+        public string ShortcutHitDescription => sc.Key_Get(SC_Type.SC_Type_Hit).GetDescriptionString();
+        public string ShortcutHitUndoDescription => sc.Key_Get(SC_Type.SC_Type_HitUndo).GetDescriptionString();
+        public string ShortcutWayHitDescription => sc.Key_Get(SC_Type.SC_Type_WayHit).GetDescriptionString();
+        public string ShortcutWayHitUndoDescription => sc.Key_Get(SC_Type.SC_Type_WayHitUndo).GetDescriptionString();
+        public string ShortcutSplitDescription => sc.Key_Get(SC_Type.SC_Type_Split).GetDescriptionString();
+        public string ShortcutSplitPrevDescription => sc.Key_Get(SC_Type.SC_Type_SplitPrev).GetDescriptionString();
+        public string ShortcutPBDescription => sc.Key_Get(SC_Type.SC_Type_PB).GetDescriptionString();
+        public string ShortcutResetDescription => sc.Key_Get(SC_Type.SC_Type_Reset).GetDescriptionString();
+        public string ShortcutTimerStartDescription => sc.Key_Get(SC_Type.SC_Type_TimerStart).GetDescriptionString();
+        public string ShortcutTimerStopDescription => sc.Key_Get(SC_Type.SC_Type_TimerStop).GetDescriptionString();
 
         private void SetNextShortcutMethod(Shortcuts.SC_HotKeyMethod next)
         {

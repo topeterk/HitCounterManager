@@ -145,19 +145,19 @@ namespace HitCounterManager
             {
                 if (!app.SettingsDialogOpen)
                 {
-                    // Console.WriteLine("WinProc: " + ((Shortcuts.SC_Type)wParam).ToString() +"!");
-                    switch ((Shortcuts.SC_Type)wParam)
+                    // Console.WriteLine("WinProc: " + ((SC_Type)wParam).ToString() +"!");
+                    switch ((SC_Type)wParam)
                     {
-                        case Shortcuts.SC_Type.SC_Type_Reset: app.profileViewViewModel?.ProfileReset.Execute(null); break;
-                        case Shortcuts.SC_Type.SC_Type_Hit: app.profileViewViewModel?.HitIncrease.Execute(null); break;
-                        case Shortcuts.SC_Type.SC_Type_Split: app.profileViewViewModel?.SplitSelectNext.Execute(null); break;
-                        case Shortcuts.SC_Type.SC_Type_HitUndo: app.profileViewViewModel?.HitDecrease.Execute(null); break;
-                        case Shortcuts.SC_Type.SC_Type_SplitPrev: app.profileViewViewModel?.SplitSelectPrev.Execute(null); break;
-                        case Shortcuts.SC_Type.SC_Type_WayHit: app.profileViewViewModel?.HitWayIncrease.Execute(null); break;
-                        case Shortcuts.SC_Type.SC_Type_WayHitUndo: app.profileViewViewModel?.HitWayDecrease.Execute(null); break;
-                        case Shortcuts.SC_Type.SC_Type_PB: app.profileViewViewModel?.ProfilePB.Execute(null); break;
-                        case Shortcuts.SC_Type.SC_Type_TimerStart: if (null != app.profileViewViewModel) app.profileViewViewModel.TimerRunning = true; break;
-                        case Shortcuts.SC_Type.SC_Type_TimerStop: if (null != app.profileViewViewModel) app.profileViewViewModel.TimerRunning = false; break;
+                        case SC_Type.SC_Type_Reset: app.profileViewViewModel?.ProfileReset.Execute(null); break;
+                        case SC_Type.SC_Type_Hit: app.profileViewViewModel?.HitIncrease.Execute(null); break;
+                        case SC_Type.SC_Type_Split: app.profileViewViewModel?.SplitSelectNext.Execute(null); break;
+                        case SC_Type.SC_Type_HitUndo: app.profileViewViewModel?.HitDecrease.Execute(null); break;
+                        case SC_Type.SC_Type_SplitPrev: app.profileViewViewModel?.SplitSelectPrev.Execute(null); break;
+                        case SC_Type.SC_Type_WayHit: app.profileViewViewModel?.HitWayIncrease.Execute(null); break;
+                        case SC_Type.SC_Type_WayHitUndo: app.profileViewViewModel?.HitWayDecrease.Execute(null); break;
+                        case SC_Type.SC_Type_PB: app.profileViewViewModel?.ProfilePB.Execute(null); break;
+                        case SC_Type.SC_Type_TimerStart: if (null != app.profileViewViewModel) app.profileViewViewModel.TimerRunning = true; break;
+                        case SC_Type.SC_Type_TimerStop: if (null != app.profileViewViewModel) app.profileViewViewModel.TimerRunning = false; break;
                         default: break;
                     }
                 }
