@@ -87,114 +87,48 @@
 					</Button>
 				</StackPanel>
 				<StackPanel Margin="0,0,10,0" Orientation="Horizontal">
-					<Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static vm:ProfileAction.Create}" Classes="ImageButton">
+					<Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static vm:ProfileAction.Create}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
 						<Image Source="{c:LazyResource ImageProfileCreate}" />
-						<Interaction.Behaviors>
-							<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
-								<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
-							</DataTriggerBehavior>
-							<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="false">
-								<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonBackgroundBrush}" />
-							</DataTriggerBehavior>
-						</Interaction.Behaviors>
 					</Button>
-					<Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static vm:ProfileAction.Rename}" Classes="ImageButton">
+					<Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static vm:ProfileAction.Rename}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
 						<Image Source="{c:LazyResource ImageProfileRename}" />
-						<Interaction.Behaviors>
-							<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
-								<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{c:LazyResource ImageButtonLockedBackgroundBrush}" />
-							</DataTriggerBehavior>
-							<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="false">
-								<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{c:LazyResource ImageButtonBackgroundBrush}" />
-							</DataTriggerBehavior>
-						</Interaction.Behaviors>
 					</Button>
-					<Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static vm:ProfileAction.Copy}" Classes="ImageButton">
+					<Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static vm:ProfileAction.Copy}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
 						<Image Source="{c:LazyResource ImageProfileCopy}" />
-						<Interaction.Behaviors>
-							<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
-								<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
-							</DataTriggerBehavior>
-							<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="false">
-								<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonBackgroundBrush}" />
-							</DataTriggerBehavior>
-						</Interaction.Behaviors>
 					</Button>
-					<Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static vm:ProfileAction.Delete}" Classes="ImageButton">
+					<Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static vm:ProfileAction.Delete}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
 						<Image Source="{c:LazyResource ImageTrash}" />
-						<Interaction.Behaviors>
-							<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
-								<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
-							</DataTriggerBehavior>
-							<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="false">
-								<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonBackgroundBrush}" />
-							</DataTriggerBehavior>
-						</Interaction.Behaviors>
 					</Button>
 				</StackPanel>
 				<StackPanel Margin="0,0,10,0" Orientation="Horizontal">
 					<Button Command="{Binding OpenPageSetAttempts}" Classes="ImageButton">
 						<Image Source="{c:LazyResource ImageAttempts}" />
 					</Button>
-					<Button Command="{Binding #profileView.DataContext.ProfileSplitMoveUp}" Classes="ImageButton">
+					<Button Command="{Binding #profileView.DataContext.ProfileSplitMoveUp}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
 						<Image Source="{c:LazyResource ImageSplitUp}" />
-						<Interaction.Behaviors>
-							<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
-								<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
-							</DataTriggerBehavior>
-							<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="false">
-								<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonBackgroundBrush}" />
-							</DataTriggerBehavior>
-						</Interaction.Behaviors>
 					</Button>
-					<Button Command="{Binding #profileView.DataContext.ProfileSplitMoveDown}" Classes="ImageButton">
+					<Button Command="{Binding #profileView.DataContext.ProfileSplitMoveDown}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
 						<Image Source="{c:LazyResource ImageSplitDown}" />
-						<Interaction.Behaviors>
-							<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
-								<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
-							</DataTriggerBehavior>
-							<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="false">
-								<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonBackgroundBrush}" />
-							</DataTriggerBehavior>
-						</Interaction.Behaviors>
 					</Button>
-					<Button Command="{Binding #profileView.DataContext.ProfileSplitInsert}" Classes="ImageButton">
+					<Button Command="{Binding #profileView.DataContext.ProfileSplitInsert}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
 						<Image Source="{c:LazyResource ImageSplitInsert}" />
-						<Interaction.Behaviors>
-							<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
-								<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
-							</DataTriggerBehavior>
-							<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="false">
-								<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonBackgroundBrush}" />
-							</DataTriggerBehavior>
-						</Interaction.Behaviors>
 					</Button>
 				</StackPanel>
 				<StackPanel Margin="0" Orientation="Horizontal">
-					<Button Command="{Binding #profileView.DataContext.ToggleReadOnlyMode}" Classes="ImageButton">
+					<Button Command="{Binding #profileView.DataContext.ToggleReadOnlyMode}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
 						<Image Source="{c:LazyResource ImageLockOn}">
 							<Interaction.Behaviors>
 								<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
-									<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
 									<ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageLockOn}" />
 								</DataTriggerBehavior>
 								<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="false">
-									<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonBackgroundBrush}" />
 									<ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageLockOff}" />
 								</DataTriggerBehavior>
 							</Interaction.Behaviors>
 						</Image>
 					</Button>
-					<Button Command="{Binding ToggleAlwaysOnTop}" Classes="ImageButton">
+					<Button Command="{Binding ToggleAlwaysOnTop}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding AlwaysOnTop}">
 						<Image Source="{c:LazyResource ImageAlwaysOnTop}" />
-						<Interaction.Behaviors>
-							<DataTriggerBehavior Binding="{Binding AlwaysOnTop}" ComparisonCondition="Equal" Value="true">
-								<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
-							</DataTriggerBehavior>
-							<DataTriggerBehavior Binding="{Binding AlwaysOnTop}" ComparisonCondition="Equal" Value="false">
-								<ChangePropertyAction TargetObject="{Binding $parent[Button]}" PropertyName="Background" Value="{DynamicResource ImageButtonBackgroundBrush}" />
-							</DataTriggerBehavior>
-						</Interaction.Behaviors>
 					</Button>
 					<Button Command="{Binding ToggleDarkMode}" Classes="ImageButton">
 						<Image Source="{c:LazyResource ImageDarkMode}" />

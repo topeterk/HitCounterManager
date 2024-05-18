@@ -202,6 +202,9 @@
 		<Style Selector="Button.ImageButton">
 			<Setter Property="Background" Value="{DynamicResource ImageButtonBackgroundBrush}" />
 		</Style>
+		<Style Selector="Button.ImageButtonLocked">
+			<Setter Property="Background" Value="{DynamicResource ImageButtonLockedBackgroundBrush}" />
+		</Style>
 		<Style Selector="Border.InfoBoxBorder">
 			<Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
 			<Setter Property="BorderThickness" Value="1" />

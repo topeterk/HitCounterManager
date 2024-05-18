@@ -29,11 +29,11 @@
              x:Class="HitCounterManager.Controls.ProfileView"
              x:Name="ProfileViewPage">
 
-    <UserControl.DataContext>
-        <vm:ProfileViewViewModel />
-    </UserControl.DataContext>
+	<UserControl.DataContext>
+		<vm:ProfileViewViewModel />
+	</UserControl.DataContext>
 
-    <StackPanel Margin="10" Spacing="2" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+	<StackPanel Margin="10" Spacing="2" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top">
 
 		<!-- Vertical statistics -->
 		<StackPanel x:Name="StatsStack" Margin="0" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top">
@@ -71,13 +71,13 @@
 			<TextBlock Grid.Column="4" Text="{Binding StatsTotalHits}" Margin="0" HorizontalAlignment="Right"  FontFamily="Arial" FontSize="14" FontWeight="Bold" />
 		</Grid>
 
-        <ComboBox x:Name="profileSelector" ItemsSource="{Binding ProfileList}" SelectedItem="{Binding ProfileSelected}" HorizontalAlignment="Stretch">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}" />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+		<ComboBox x:Name="profileSelector" ItemsSource="{Binding ProfileList}" SelectedItem="{Binding ProfileSelected}" HorizontalAlignment="Stretch">
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding Name}" />
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
 
 		<OnPlatform>
 			<OnPlatform.Default>
@@ -143,25 +143,22 @@
 				</StackPanel>
 			</On>
 		</OnPlatform>
-        <Border Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top" Classes="InfoBoxBorder"
-                IsVisible="{Binding ShowInfo[MainColumnHeaders].Value, Mode=OneWay}" >
-            <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                <TextBlock.Text>
-                    <x:String xml:space="preserve">* Titel: The name of the split.
+		<Border Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top" Classes="InfoBoxBorder"
+				IsVisible="{Binding ShowInfo[MainColumnHeaders].Value, Mode=OneWay}" >
+			<TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Center">
+				<TextBlock.Text>
+					<x:String xml:space="preserve">* Titel: The name of the split.
 * Boss Hits: Amount of hits taken by anything or bosses or just a marker that a boss has been defeated (depends on the configured behavior).
 * Way Hits: Amount of hits taken on the way to a boss or not used at all (depends on the configured behavior). E.g. track if a boss or the way through a slit should be trained more.
 * Diff: The difference between the hits taken (sum of Boss Hits and Way Hits) and the personal best hits taken.
 * SP (Session Progress): Marks the farthest reached split per stream session and resets on application start. Represented by a 24 hour clock symbol.
 * BP (Best Progress / Distance PB): Marks the furthest reached split of the best flawless run ever. Represented by a flag symbol.
 * Trash: Removes the split from the list.</x:String>
-                </TextBlock.Text>
-            </TextBlock>
-        </Border>
+				</TextBlock.Text>
+			</TextBlock>
+		</Border>
 
 		<ItemsRepeater Margin="0" x:Name="ProfileList" ItemsSource="{Binding ProfileSelected.Rows}" HorizontalAlignment="Stretch" ItemTemplate="{OnPlatform Default={StaticResource DefaultTemplate}, Android={StaticResource SmallTemplate}, iOS={StaticResource SmallTemplate}}">
-            <ItemsRepeater.Layout>
-                <StackLayout Spacing="0" Orientation="Vertical"/>
-            </ItemsRepeater.Layout>
 			<ItemsRepeater.Resources>
 				<DataTemplate x:Key="SmallTemplate">
 					<StackPanel Spacing="0" Orientation="Vertical">
@@ -205,7 +202,7 @@
 							</Grid.ColumnDefinitions>
 							<NumericUpDown Grid.Column="0" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
 										   Value="{Binding Hits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
-							<NumericUpDown Grid.Column="1" IsVisible="{Binding Active}" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
+							<NumericUpDown Grid.Column="1" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
 										   Value="{Binding WayHits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 							<TextBlock Grid.Column="2" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Diff, Mode=OneWay}" />
 							<NumericUpDown Grid.Column="3" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
@@ -265,7 +262,7 @@
 							</DataTriggerBehavior>
 						</Interaction.Behaviors>
 						<Button Grid.Column="0" Margin="0" MinWidth="24" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Center"
-                                Command="{Binding $parent[UserControl].DataContext.CmdSetActiveSplit}" CommandParameter="{Binding .}">
+								Command="{Binding $parent[UserControl].DataContext.CmdSetActiveSplit}" CommandParameter="{Binding .}">
 							<Image Source="{c:LazyResource ImageInactive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
 								<Interaction.Behaviors>
 									<DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
@@ -279,7 +276,7 @@
 						</Button>
 						<TextBox Grid.Column="1" Margin="2" MinWidth="30" TextAlignment="Left" Text="{Binding Title}" Watermark="       [Empty title]" />
 						<NumericUpDown Grid.Column="2" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
-                                       Value="{Binding Hits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer">
+								 Value="{Binding Hits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer">
 <!--
 							<Interaction.Behaviors>
 								<DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
@@ -291,13 +288,13 @@
 							</Interaction.Behaviors>
 -->
 						</NumericUpDown>
-						<NumericUpDown Grid.Column="3" IsVisible="{Binding Active}" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
-                                       Value="{Binding WayHits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+						<NumericUpDown Grid.Column="3" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
+								Value="{Binding WayHits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 						<TextBlock Grid.Column="4" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Diff, Mode=OneWay}" />
 						<NumericUpDown Grid.Column="5" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
-                                       Value="{Binding PB}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+								Value="{Binding PB}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 						<Button Grid.Column="6" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                Command="{Binding $parent[UserControl].DataContext.CmdSetSessionProgress}" CommandParameter="{Binding .}">
+								Command="{Binding $parent[UserControl].DataContext.CmdSetSessionProgress}" CommandParameter="{Binding .}">
 							<Image Source="{c:LazyResource ImageInactive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
 								<Interaction.Behaviors>
 									<DataTriggerBehavior Binding="{Binding SP, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
@@ -310,7 +307,7 @@
 							</Image>
 						</Button>
 						<Button Grid.Column="7" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                Command="{Binding $parent[UserControl].DataContext.CmdSetBestProgress}" CommandParameter="{Binding .}">
+								Command="{Binding $parent[UserControl].DataContext.CmdSetBestProgress}" CommandParameter="{Binding .}">
 							<Image Source="{c:LazyResource ImageInactiveBP}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
 								<Interaction.Behaviors>
 									<DataTriggerBehavior Binding="{Binding BP, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
@@ -323,7 +320,7 @@
 							</Image>
 						</Button>
 						<Button Grid.Column="8" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                Command="{Binding $parent[UserControl].DataContext.CmdRemoveSplit}" CommandParameter="{Binding .}">
+								Command="{Binding $parent[UserControl].DataContext.CmdRemoveSplit}" CommandParameter="{Binding .}">
 							<Image Source="{c:LazyResource ImageTrash}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
 						</Button>
 					</Grid>
