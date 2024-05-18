@@ -1,6 +1,6 @@
 /*MIT License
 
-//Copyright (c) 2018-2022 Peter Kirmeier
+//Copyright (c) 2018-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -42,9 +42,12 @@ table {
 td { padding: 2px 2px 2px 2px; } /* top, right, bottom, left */
 
 /* split rows */
-.current { background-color: #990066; }
-.even    { background-color: #333333; }
-.odd     { background-color: #000000; }
+.even           { background-color: #333333; }
+.odd            { background-color: #000000; }
+.completed      { /*background-color: #004400;*/ }
+.completed.even { background-color: #663355; }
+.completed.odd  { background-color: #330022; }
+.current        { background-color: #990066; }
 
 /* split cells */
 #table td { border-bottom: 2px solid #FF0099; } /* as progress shadow */
