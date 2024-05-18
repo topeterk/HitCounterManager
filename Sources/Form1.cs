@@ -79,24 +79,24 @@ namespace HitCounterManager
             {
                 if (!SettingsDialogOpen)
                 {
-                    switch ((Shortcuts.SC_Type)m.WParam)
+                    switch ((SC_Type)m.WParam)
                     {
-                        case Shortcuts.SC_Type.SC_Type_Reset: btnReset_Click(null, null); break;
-                        case Shortcuts.SC_Type.SC_Type_Hit: btnHit_Click(null, null); break;
-                        case Shortcuts.SC_Type.SC_Type_Split: btnSplit_Click(null, null); break;
-                        case Shortcuts.SC_Type.SC_Type_HitUndo: btnHitUndo_Click(null, null); break;
-                        case Shortcuts.SC_Type.SC_Type_SplitPrev: btnSplitPrev_Click(null, null); break;
-                        case Shortcuts.SC_Type.SC_Type_WayHit: btnWayHit_Click(null, null); break;
-                        case Shortcuts.SC_Type.SC_Type_WayHitUndo: btnWayHitUndo_Click(null, null); break;
-                        case Shortcuts.SC_Type.SC_Type_PB: btnPB_Click(null, null); break;
-                        case Shortcuts.SC_Type.SC_Type_TimerStart: StartStopTimer(true); break;
-                        case Shortcuts.SC_Type.SC_Type_TimerStop: StartStopTimer(false); break;
+                        case SC_Type.SC_Type_Reset: btnReset_Click(null, null); break;
+                        case SC_Type.SC_Type_Hit: btnHit_Click(null, null); break;
+                        case SC_Type.SC_Type_Split: btnSplit_Click(null, null); break;
+                        case SC_Type.SC_Type_HitUndo: btnHitUndo_Click(null, null); break;
+                        case SC_Type.SC_Type_SplitPrev: btnSplitPrev_Click(null, null); break;
+                        case SC_Type.SC_Type_WayHit: btnWayHit_Click(null, null); break;
+                        case SC_Type.SC_Type_WayHitUndo: btnWayHitUndo_Click(null, null); break;
+                        case SC_Type.SC_Type_PB: btnPB_Click(null, null); break;
+                        case SC_Type.SC_Type_TimerStart: StartStopTimer(true); break;
+                        case SC_Type.SC_Type_TimerStop: StartStopTimer(false); break;
                         #region AutoSplitter
-                        case Shortcuts.SC_Type.SC_Type_Practice: if (AutoSplitterLoaded) { TogglePracticeMode(); } break;
-                        case Shortcuts.SC_Type.SC_Type_HitBossPrev: if (AutoSplitterLoaded) { btnSplitPrev_Click(null, null); btnHit_Click(null, null); btnSplit_Click(null, null); } break;
-                        case Shortcuts.SC_Type.SC_Type_HitWayPrev: if (AutoSplitterLoaded) { btnSplitPrev_Click(null, null); btnWayHit_Click(null, null); btnSplit_Click(null, null); } break;
-                        case Shortcuts.SC_Type.SC_Type_BossHitUndoPrev: if (AutoSplitterLoaded) { btnSplitPrev_Click(null, null); btnHitUndo_Click(null, null); btnSplit_Click(null, null); } break;
-                        case Shortcuts.SC_Type.SC_Type_WayHitUndoPrev: if (AutoSplitterLoaded) { btnSplitPrev_Click(null, null); btnWayHitUndo_Click(null, null); btnSplit_Click(null, null); } break;
+                        case SC_Type.SC_Type_Practice: if (AutoSplitterLoaded) { TogglePracticeMode(); } break;
+                        case SC_Type.SC_Type_HitBossPrev: if (AutoSplitterLoaded) { btnSplitPrev_Click(null, null); btnHit_Click(null, null); btnSplit_Click(null, null); } break;
+                        case SC_Type.SC_Type_HitWayPrev: if (AutoSplitterLoaded) { btnSplitPrev_Click(null, null); btnWayHit_Click(null, null); btnSplit_Click(null, null); } break;
+                        case SC_Type.SC_Type_BossHitUndoPrev: if (AutoSplitterLoaded) { btnSplitPrev_Click(null, null); btnHitUndo_Click(null, null); btnSplit_Click(null, null); } break;
+                        case SC_Type.SC_Type_WayHitUndoPrev: if (AutoSplitterLoaded) { btnSplitPrev_Click(null, null); btnWayHitUndo_Click(null, null); btnSplit_Click(null, null); } break;
                         #endregion
                     }
                 }

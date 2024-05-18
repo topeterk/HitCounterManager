@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright(c) 2016-2022 Peter Kirmeier
+//Copyright(c) 2016-2024 Peter Kirmeier
 
 //Permission Is hereby granted, free Of charge, to any person obtaining a copy
 //of this software And associated documentation files (the "Software"), to deal
@@ -110,6 +110,31 @@ namespace HitCounterManager
         }
     }
 
+    public enum SC_Type
+    {
+        SC_Type_Reset = 0,
+        SC_Type_Hit = 1,
+        SC_Type_Split = 2,
+        // Since version 1.15:
+        SC_Type_HitUndo = 3,
+        SC_Type_SplitPrev = 4,
+        // Since version 1.17:
+        SC_Type_WayHit = 5,
+        SC_Type_WayHitUndo = 6,
+        SC_Type_PB = 7,
+        // Since version 1.20:
+        SC_Type_TimerStart = 8,
+        SC_Type_TimerStop = 9,
+        #region AutoSplitter
+        SC_Type_Practice = 10,
+        SC_Type_HitBossPrev = 11,
+        SC_Type_HitWayPrev = 12,
+        SC_Type_BossHitUndoPrev = 13,
+        SC_Type_WayHitUndoPrev = 14,
+        #endregion
+        SC_Type_MAX = 15,
+    };
+
     /// <summary>
     /// Manages all hot keys aka shortcuts
     /// </summary>
@@ -129,31 +154,6 @@ namespace HitCounterManager
         private const int VK_RMENU = 0xA5;
 
         private OsLayer.TimerProc TimerProcKeepAliveReference; // prevent garbage collector freeing up the callback without any reason
-
-        public enum SC_Type {
-            SC_Type_Reset = 0,
-            SC_Type_Hit = 1,
-            SC_Type_Split = 2,
-            // Since version 1.15:
-            SC_Type_HitUndo = 3,
-            SC_Type_SplitPrev = 4,
-            // Since version 1.17:
-            SC_Type_WayHit = 5,
-            SC_Type_WayHitUndo = 6,
-            SC_Type_PB = 7,
-            // Since version 1.20:
-            SC_Type_TimerStart = 8,
-            SC_Type_TimerStop = 9,
-            // Since version 1.21:
-            #region AutoSplitter
-            SC_Type_Practice = 10,
-            SC_Type_HitBossPrev = 11,
-            SC_Type_HitWayPrev = 12,
-            SC_Type_BossHitUndoPrev = 13,
-            SC_Type_WayHitUndoPrev = 14,
-            #endregion
-            SC_Type_MAX = 15,
-        };
 
         public enum SC_HotKeyMethod {
             SC_HotKeyMethod_Sync = 0, // = RegisterHotKey + UnregisterHotKey

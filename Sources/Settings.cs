@@ -49,24 +49,24 @@ namespace HitCounterManager
             om = ((Form1)Owner).profCtrl.om;
             _settings = om.Settings;
 
-            LoadHotKey(Shortcuts.SC_Type.SC_Type_Reset, cbScReset, txtReset);
-            LoadHotKey(Shortcuts.SC_Type.SC_Type_Hit, cbScHit, txtHit);
-            LoadHotKey(Shortcuts.SC_Type.SC_Type_HitUndo, cbScHitUndo, txtHitUndo);
-            LoadHotKey(Shortcuts.SC_Type.SC_Type_WayHit, cbScWayHit, txtWayHit);
-            LoadHotKey(Shortcuts.SC_Type.SC_Type_WayHitUndo, cbScWayHitUndo, txtWayHitUndo);
-            LoadHotKey(Shortcuts.SC_Type.SC_Type_Split, cbScNextSplit, txtNextSplit);
-            LoadHotKey(Shortcuts.SC_Type.SC_Type_SplitPrev, cbScPrevSplit, txtPrevSplit);
-            LoadHotKey(Shortcuts.SC_Type.SC_Type_PB, cbScPB, txtPB);
-            LoadHotKey(Shortcuts.SC_Type.SC_Type_TimerStart, cbScTimerStart, txtTimerStart);
-            LoadHotKey(Shortcuts.SC_Type.SC_Type_TimerStop, cbScTimerStop, txtTimerStop);
+            LoadHotKey(SC_Type.SC_Type_Reset, cbScReset, txtReset);
+            LoadHotKey(SC_Type.SC_Type_Hit, cbScHit, txtHit);
+            LoadHotKey(SC_Type.SC_Type_HitUndo, cbScHitUndo, txtHitUndo);
+            LoadHotKey(SC_Type.SC_Type_WayHit, cbScWayHit, txtWayHit);
+            LoadHotKey(SC_Type.SC_Type_WayHitUndo, cbScWayHitUndo, txtWayHitUndo);
+            LoadHotKey(SC_Type.SC_Type_Split, cbScNextSplit, txtNextSplit);
+            LoadHotKey(SC_Type.SC_Type_SplitPrev, cbScPrevSplit, txtPrevSplit);
+            LoadHotKey(SC_Type.SC_Type_PB, cbScPB, txtPB);
+            LoadHotKey(SC_Type.SC_Type_TimerStart, cbScTimerStart, txtTimerStart);
+            LoadHotKey(SC_Type.SC_Type_TimerStop, cbScTimerStop, txtTimerStop);
             #region AutoSplitter
             if (AutoSplitterLoaded) 
             {
-                LoadHotKey(Shortcuts.SC_Type.SC_Type_Practice, cbScPracticeMode, txtPracticeMode);
-                LoadHotKey(Shortcuts.SC_Type.SC_Type_HitBossPrev, cbScHitBossPrev, txtHitBossPrev);
-                LoadHotKey(Shortcuts.SC_Type.SC_Type_HitWayPrev, cbScHitWayPrev, txtHitWayPrev);
-                LoadHotKey(Shortcuts.SC_Type.SC_Type_BossHitUndoPrev, cbScUndoHitBossPrev, txtUndoHitBossPrev);
-                LoadHotKey(Shortcuts.SC_Type.SC_Type_WayHitUndoPrev, cbScUndoHitWayPrev, txtUndoHitWayPrev);
+                LoadHotKey(SC_Type.SC_Type_Practice, cbScPracticeMode, txtPracticeMode);
+                LoadHotKey(SC_Type.SC_Type_HitBossPrev, cbScHitBossPrev, txtHitBossPrev);
+                LoadHotKey(SC_Type.SC_Type_HitWayPrev, cbScHitWayPrev, txtHitWayPrev);
+                LoadHotKey(SC_Type.SC_Type_BossHitUndoPrev, cbScUndoHitBossPrev, txtUndoHitBossPrev);
+                LoadHotKey(SC_Type.SC_Type_WayHitUndoPrev, cbScUndoHitWayPrev, txtUndoHitWayPrev);
             }
             #endregion
 
@@ -142,7 +142,7 @@ namespace HitCounterManager
         /// <param name="Id">Configuration type to be read</param>
         /// <param name="cb">Checkbox to show enable/disable status</param>
         /// <param name="txt">Textbox to show description string</param>
-        private void LoadHotKey(Shortcuts.SC_Type Id, CheckBox cb, TextBox txt)
+        private void LoadHotKey(SC_Type Id, CheckBox cb, TextBox txt)
         {
             ShortcutsKey key = sc.Key_Get(Id);
             cb.Checked = key.used;
@@ -165,7 +165,7 @@ namespace HitCounterManager
         /// <param name="cb">Checkbox that will be checked</param>
         /// <param name="txt">Textbox to show description string</param>
         /// <param name="e">HotKey configuration</param>
-        private void RegisterHotKey(Shortcuts.SC_Type Id, CheckBox cb, TextBox txt, KeyEventArgs e)
+        private void RegisterHotKey(SC_Type Id, CheckBox cb, TextBox txt, KeyEventArgs e)
         {
             ShortcutsKey key = new ShortcutsKey();
 
@@ -248,40 +248,40 @@ namespace HitCounterManager
         #endregion
         #region UI
 
-        private void txtReset_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_Reset, cbScReset, txtReset, e); }
-        private void txtHit_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_Hit, cbScHit, txtHit, e); }
-        private void txtHitUndo_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_HitUndo, cbScHitUndo, txtHitUndo, e); }
-        private void TxtWayHit_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_WayHit, cbScWayHit, txtWayHit, e); }
-        private void TxtWayHitUndo_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_WayHitUndo, cbScWayHitUndo, txtWayHitUndo, e); }
-        private void txtNextSplit_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_Split, cbScNextSplit, txtNextSplit, e); }
-        private void txtPrevSplit_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_SplitPrev, cbScPrevSplit, txtPrevSplit, e); }
-        private void txtPB_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_PB, cbScPB, txtPB, e); }
-        private void txtTimerStart_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_TimerStart, cbScTimerStart, txtTimerStart, e); }
-        private void txtTimerStop_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_TimerStop, cbScTimerStop, txtTimerStop, e); }
+        private void txtReset_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(SC_Type.SC_Type_Reset, cbScReset, txtReset, e); }
+        private void txtHit_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(SC_Type.SC_Type_Hit, cbScHit, txtHit, e); }
+        private void txtHitUndo_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(SC_Type.SC_Type_HitUndo, cbScHitUndo, txtHitUndo, e); }
+        private void TxtWayHit_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(SC_Type.SC_Type_WayHit, cbScWayHit, txtWayHit, e); }
+        private void TxtWayHitUndo_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(SC_Type.SC_Type_WayHitUndo, cbScWayHitUndo, txtWayHitUndo, e); }
+        private void txtNextSplit_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(SC_Type.SC_Type_Split, cbScNextSplit, txtNextSplit, e); }
+        private void txtPrevSplit_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(SC_Type.SC_Type_SplitPrev, cbScPrevSplit, txtPrevSplit, e); }
+        private void txtPB_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(SC_Type.SC_Type_PB, cbScPB, txtPB, e); }
+        private void txtTimerStart_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(SC_Type.SC_Type_TimerStart, cbScTimerStart, txtTimerStart, e); }
+        private void txtTimerStop_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(SC_Type.SC_Type_TimerStop, cbScTimerStop, txtTimerStop, e); }
         #region AutoSplitter
-        private void txtPracticeMode_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_Practice, cbScPracticeMode, txtPracticeMode, e); }
-        private void txtHitPrevBoss_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_HitBossPrev, cbScHitBossPrev, txtHitBossPrev, e); }
-        private void txtHitPrevWay_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_HitWayPrev, cbScHitWayPrev, txtHitWayPrev, e); }
-        private void txtUndoHitBossPrev_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_BossHitUndoPrev, cbScUndoHitBossPrev, txtUndoHitBossPrev, e); }
-        private void txtUndoHitWayPrev_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(Shortcuts.SC_Type.SC_Type_WayHitUndoPrev, cbScUndoHitWayPrev, txtUndoHitWayPrev, e); }
+        private void txtPracticeMode_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(SC_Type.SC_Type_Practice, cbScPracticeMode, txtPracticeMode, e); }
+        private void txtHitPrevBoss_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(SC_Type.SC_Type_HitBossPrev, cbScHitBossPrev, txtHitBossPrev, e); }
+        private void txtHitPrevWay_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(SC_Type.SC_Type_HitWayPrev, cbScHitWayPrev, txtHitWayPrev, e); }
+        private void txtUndoHitBossPrev_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(SC_Type.SC_Type_BossHitUndoPrev, cbScUndoHitBossPrev, txtUndoHitBossPrev, e); }
+        private void txtUndoHitWayPrev_KeyDown(object sender, KeyEventArgs e) { RegisterHotKey(SC_Type.SC_Type_WayHitUndoPrev, cbScUndoHitWayPrev, txtUndoHitWayPrev, e); }
         #endregion
 
-        private void cbScReset_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Reset, cbScReset.Checked); }
-        private void cbScHit_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Hit, cbScHit.Checked); }
-        private void cbScHitUndo_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_HitUndo, cbScHitUndo.Checked); }
-        private void CbScWayHit_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_WayHit, cbScWayHit.Checked); }
-        private void CbScWayHitUndo_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_WayHitUndo, cbScWayHitUndo.Checked); }
-        private void cbScNextSplit_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Split, cbScNextSplit.Checked); }
-        private void cbScPrevSplit_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_SplitPrev, cbScPrevSplit.Checked); }
-        private void cbScPB_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_PB, cbScPB.Checked); }
-        private void cbScTimerStart_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_TimerStart, cbScTimerStart.Checked); }
-        private void cbScTimerStop_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_TimerStop, cbScTimerStop.Checked); }
+        private void cbScReset_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(SC_Type.SC_Type_Reset, cbScReset.Checked); }
+        private void cbScHit_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(SC_Type.SC_Type_Hit, cbScHit.Checked); }
+        private void cbScHitUndo_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(SC_Type.SC_Type_HitUndo, cbScHitUndo.Checked); }
+        private void CbScWayHit_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(SC_Type.SC_Type_WayHit, cbScWayHit.Checked); }
+        private void CbScWayHitUndo_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(SC_Type.SC_Type_WayHitUndo, cbScWayHitUndo.Checked); }
+        private void cbScNextSplit_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(SC_Type.SC_Type_Split, cbScNextSplit.Checked); }
+        private void cbScPrevSplit_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(SC_Type.SC_Type_SplitPrev, cbScPrevSplit.Checked); }
+        private void cbScPB_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(SC_Type.SC_Type_PB, cbScPB.Checked); }
+        private void cbScTimerStart_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(SC_Type.SC_Type_TimerStart, cbScTimerStart.Checked); }
+        private void cbScTimerStop_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(SC_Type.SC_Type_TimerStop, cbScTimerStop.Checked); }
         #region AutoSplitter
-        private void cbScPracticeMode_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_Practice, cbScPracticeMode.Checked); }
-        private void cbScHitBossPrev_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_HitBossPrev, cbScHitBossPrev.Checked); }
-        private void cbScHitWayPrev_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_HitWayPrev, cbScHitWayPrev.Checked); }
-        private void cbScUndoHitBossPrev_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_BossHitUndoPrev, cbScUndoHitBossPrev.Checked); }
-        private void cbScUndoHitWayPrev_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(Shortcuts.SC_Type.SC_Type_WayHitUndoPrev, cbScUndoHitWayPrev.Checked); }
+        private void cbScPracticeMode_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(SC_Type.SC_Type_Practice, cbScPracticeMode.Checked); }
+        private void cbScHitBossPrev_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(SC_Type.SC_Type_HitBossPrev, cbScHitBossPrev.Checked); }
+        private void cbScHitWayPrev_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(SC_Type.SC_Type_HitWayPrev, cbScHitWayPrev.Checked); }
+        private void cbScUndoHitBossPrev_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(SC_Type.SC_Type_BossHitUndoPrev, cbScUndoHitBossPrev.Checked); }
+        private void cbScUndoHitWayPrev_CheckedChanged(object sender, EventArgs e) { sc.Key_SetState(SC_Type.SC_Type_WayHitUndoPrev, cbScUndoHitWayPrev.Checked); }
         #endregion
 
         private void radioHotKeyMethod_CheckedChanged(object sender, EventArgs e)

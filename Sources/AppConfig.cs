@@ -168,7 +168,7 @@ namespace HitCounterManager
         /// <summary>
         /// Validates a hotkey and when enabled registers it
         /// </summary>
-        private bool LoadHotKeySettings(Shortcuts.SC_Type Type, int KeyCode, bool Enable)
+        private bool LoadHotKeySettings(SC_Type Type, int KeyCode, bool Enable)
         {
             ShortcutsKey key = new ShortcutsKey();
             key.key = new KeyEventArgs((Keys)KeyCode);
@@ -419,16 +419,16 @@ namespace HitCounterManager
             // Configure hot keys..
             sc.Initialize((Shortcuts.SC_HotKeyMethod)_settings.HotKeyMethod);
 
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Reset, _settings.ShortcutResetKeyCode , _settings.ShortcutResetEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Hit, _settings.ShortcutHitKeyCode , _settings.ShortcutHitEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_HitUndo, _settings.ShortcutHitUndoKeyCode , _settings.ShortcutHitUndoEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHit, _settings.ShortcutWayHitKeyCode , _settings.ShortcutWayHitEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHitUndo, _settings.ShortcutWayHitUndoKeyCode , _settings.ShortcutWayHitUndoEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Split, _settings.ShortcutSplitKeyCode , _settings.ShortcutSplitEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_SplitPrev, _settings.ShortcutSplitPrevKeyCode , _settings.ShortcutSplitPrevEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_PB, _settings.ShortcutPBKeyCode , _settings.ShortcutPBEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_TimerStart, _settings.ShortcutTimerStartKeyCode , _settings.ShortcutTimerStartEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_TimerStop, _settings.ShortcutTimerStopKeyCode , _settings.ShortcutTimerStopEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(SC_Type.SC_Type_Reset, _settings.ShortcutResetKeyCode , _settings.ShortcutResetEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(SC_Type.SC_Type_Hit, _settings.ShortcutHitKeyCode , _settings.ShortcutHitEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(SC_Type.SC_Type_HitUndo, _settings.ShortcutHitUndoKeyCode , _settings.ShortcutHitUndoEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(SC_Type.SC_Type_WayHit, _settings.ShortcutWayHitKeyCode , _settings.ShortcutWayHitEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(SC_Type.SC_Type_WayHitUndo, _settings.ShortcutWayHitUndoKeyCode , _settings.ShortcutWayHitUndoEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(SC_Type.SC_Type_Split, _settings.ShortcutSplitKeyCode , _settings.ShortcutSplitEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(SC_Type.SC_Type_SplitPrev, _settings.ShortcutSplitPrevKeyCode , _settings.ShortcutSplitPrevEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(SC_Type.SC_Type_PB, _settings.ShortcutPBKeyCode , _settings.ShortcutPBEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(SC_Type.SC_Type_TimerStart, _settings.ShortcutTimerStartKeyCode , _settings.ShortcutTimerStartEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(SC_Type.SC_Type_TimerStop, _settings.ShortcutTimerStopKeyCode , _settings.ShortcutTimerStopEnable)) isKeyInvalid = true;
             if (isKeyInvalid)
                 MessageBox.Show("Not all enabled hot keys could be registered successfully!", "Error setting up hot keys!");
         }
@@ -440,11 +440,11 @@ namespace HitCounterManager
         public void LoadAutoSplitterHotKeys()
         {
             bool isKeyInvalid = false;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_Practice, _settings.ShortcutPracticeKeyCode, _settings.ShortcutPracticeEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_HitBossPrev, _settings.ShortcutHitBossPrevKeyCode, _settings.ShortcutHitBossPrevEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_HitWayPrev, _settings.ShortcutHitWayPrevKeyCode, _settings.ShortcutHitWayPrevEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_BossHitUndoPrev, _settings.ShortcutBossHitUndoPrevKeyCode, _settings.ShortcutBossHitUndoPrevEnable)) isKeyInvalid = true;
-            if (!LoadHotKeySettings(Shortcuts.SC_Type.SC_Type_WayHitUndoPrev, _settings.ShortcutWayHitUndoPrevKeyCode, _settings.ShortcutWayHitUndoPrevEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(SC_Type.SC_Type_Practice, _settings.ShortcutPracticeKeyCode, _settings.ShortcutPracticeEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(SC_Type.SC_Type_HitBossPrev, _settings.ShortcutHitBossPrevKeyCode, _settings.ShortcutHitBossPrevEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(SC_Type.SC_Type_HitWayPrev, _settings.ShortcutHitWayPrevKeyCode, _settings.ShortcutHitWayPrevEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(SC_Type.SC_Type_BossHitUndoPrev, _settings.ShortcutBossHitUndoPrevKeyCode, _settings.ShortcutBossHitUndoPrevEnable)) isKeyInvalid = true;
+            if (!LoadHotKeySettings(SC_Type.SC_Type_WayHitUndoPrev, _settings.ShortcutWayHitUndoPrevKeyCode, _settings.ShortcutWayHitUndoPrevEnable)) isKeyInvalid = true;
             if (isKeyInvalid)
                 MessageBox.Show("Error setting up hot keys of AutoSplitterCore!");
         }
@@ -480,52 +480,52 @@ namespace HitCounterManager
 
             // Store hot keys..
             _settings.HotKeyMethod = (int)sc.NextStart_Method;
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Reset);
+            key = sc.Key_Get(SC_Type.SC_Type_Reset);
             _settings.ShortcutResetEnable = key.used;
             _settings.ShortcutResetKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Hit);
+            key = sc.Key_Get(SC_Type.SC_Type_Hit);
             _settings.ShortcutHitEnable = key.used;
             _settings.ShortcutHitKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_HitUndo);
+            key = sc.Key_Get(SC_Type.SC_Type_HitUndo);
             _settings.ShortcutHitUndoEnable = key.used;
             _settings.ShortcutHitUndoKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_WayHit);
+            key = sc.Key_Get(SC_Type.SC_Type_WayHit);
             _settings.ShortcutWayHitEnable = key.used;
             _settings.ShortcutWayHitKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_WayHitUndo);
+            key = sc.Key_Get(SC_Type.SC_Type_WayHitUndo);
             _settings.ShortcutWayHitUndoEnable = key.used;
             _settings.ShortcutWayHitUndoKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Split);
+            key = sc.Key_Get(SC_Type.SC_Type_Split);
             _settings.ShortcutSplitEnable = key.used;
             _settings.ShortcutSplitKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_SplitPrev);
+            key = sc.Key_Get(SC_Type.SC_Type_SplitPrev);
             _settings.ShortcutSplitPrevEnable = key.used;
             _settings.ShortcutSplitPrevKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_PB);
+            key = sc.Key_Get(SC_Type.SC_Type_PB);
             _settings.ShortcutPBEnable = key.used;
             _settings.ShortcutPBKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_TimerStart);
+            key = sc.Key_Get(SC_Type.SC_Type_TimerStart);
             _settings.ShortcutTimerStartEnable = key.used;
             _settings.ShortcutTimerStartKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_TimerStop);
+            key = sc.Key_Get(SC_Type.SC_Type_TimerStop);
             _settings.ShortcutTimerStopEnable = key.used;
             _settings.ShortcutTimerStopKeyCode = (int)key.key.KeyData;
             #region AutoSplitter
             if (AutoSplitterLoaded)
             {
-                key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_Practice);
+                key = sc.Key_Get(SC_Type.SC_Type_Practice);
                 _settings.ShortcutPracticeEnable = key.used;
                 _settings.ShortcutPracticeKeyCode = (int)key.key.KeyData;
-                key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_HitBossPrev);
+                key = sc.Key_Get(SC_Type.SC_Type_HitBossPrev);
                 _settings.ShortcutHitBossPrevEnable = key.used;
                 _settings.ShortcutHitBossPrevKeyCode = (int)key.key.KeyData;
-                key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_HitWayPrev);
+                key = sc.Key_Get(SC_Type.SC_Type_HitWayPrev);
                 _settings.ShortcutHitWayPrevEnable = key.used;
                 _settings.ShortcutHitWayPrevKeyCode = (int)key.key.KeyData;
-                key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_BossHitUndoPrev);
+                key = sc.Key_Get(SC_Type.SC_Type_BossHitUndoPrev);
                 _settings.ShortcutBossHitUndoPrevEnable = key.used;
                 _settings.ShortcutBossHitUndoPrevKeyCode = (int)key.key.KeyData;
-                key = sc.Key_Get(Shortcuts.SC_Type.SC_Type_WayHitUndoPrev);
+                key = sc.Key_Get(SC_Type.SC_Type_WayHitUndoPrev);
                 _settings.ShortcutWayHitUndoPrevEnable = key.used;
                 _settings.ShortcutWayHitUndoPrevKeyCode = (int)key.key.KeyData;
             }
