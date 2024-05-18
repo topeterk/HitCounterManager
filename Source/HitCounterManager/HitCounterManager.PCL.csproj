@@ -8,6 +8,7 @@
     <RepositoryUrl>https://github.com/topeterk/HitCounterManager.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <AvaloniaNameGeneratorIsEnabled>false</AvaloniaNameGeneratorIsEnabled>
+    <NoWarn>$(NoWarn);SYSLIB1054</NoWarn> <!-- Do not use recommended LibraryImport as it requires to enable unsafe code for the whole project which is not required by DllImport, TODO: Check if still required with .Net8 -->
   </PropertyGroup>
   <ItemGroup>
     <None Include="../Datafiles/**" Link="Datafiles/%(RecursiveDir)%(Filename)%(Extension)" />

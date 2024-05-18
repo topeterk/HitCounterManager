@@ -23,13 +23,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using ReactiveUI;
-using Avalonia.Data.Converters;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
@@ -60,7 +57,7 @@ namespace HitCounterManager.Common
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             if (Resource == null) return null!;
-            if (LoadedStringSources.ContainsKey(Resource)) return LoadedStringSources[Resource];
+            if (LoadedStringSources.TryGetValue(Resource, out var existingResource)) return existingResource;
 
             string result = new StreamReader(AssetLoader.Open(new Uri($"resm:{Assembly.GetExecutingAssembly().GetName().Name ?? string.Empty}{Resource}"))).ReadToEnd();
             LoadedStringSources.Add(Resource, result);
@@ -94,19 +91,18 @@ namespace HitCounterManager.Common
             else BoxShadows = new BoxShadows();
         }
 
-        private string ResolveColorFromString(string s)
+        private static string ResolveColorFromString(string s)
         {
             int index = s.TrimEnd().LastIndexOf(" ");
-            string keep = s.Substring(0, index + 1);
-            string value = s.Substring(index + 1);
-            Color color_value;
-            if (Color.TryParse(keep, out color_value))
+            string keep = s[..(index + 1)];
+            string value = s[(index + 1)..];
+            if (Color.TryParse(keep, out var color_value))
                 return keep + color_value.ToString();
-            else if (App.CurrentApp.Resources.ContainsKey(value))
+            else if (App.CurrentApp.Resources.TryGetValue(value, out var resourceColor))
             {
-                if (App.CurrentApp.Resources[value] is SolidColorBrush brush)
+                if (resourceColor is SolidColorBrush brush)
                     return keep + brush.Color.ToString();
-                else if (App.CurrentApp.Resources[value] is Color color)
+                else if (resourceColor is Color color)
                     return keep + color.ToString();
             }
             return s;
@@ -175,11 +171,11 @@ namespace HitCounterManager.Common
             string url = uri.OriginalString;
             try
             {
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                if (OperatingSystem.IsWindows())
                     Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}") { CreateNoWindow = true });
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                else if (OperatingSystem.IsLinux())
                     Process.Start("xdg-open", url);
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                else if (OperatingSystem.IsMacOS())
                     Process.Start("open", url);
                 else
                     Process.Start(url);

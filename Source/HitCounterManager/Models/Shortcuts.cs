@@ -138,7 +138,7 @@ namespace HitCounterManager.Models
         private bool _down; // indicates if shortcut is currently pressed
         public bool valid;  // indicates if a valid key/modifier pair was ever set
         public KeyEventArgs key;
-        public bool used
+        public bool Used
         {
             get { return _used; }
             set
@@ -172,7 +172,15 @@ namespace HitCounterManager.Models
             if (key.Alt) Description += "ALT  +  ";
             if (key.Control) Description += "CTRL  +  ";
             if (key.Shift) Description += "SHIFT  +  ";
-            return Description + App.CurrentApp.GetKeyName(key.KeyValue);
+
+            if (OperatingSystem.IsWindows())
+            {
+                return Description + NativeApi.GetKeyName(key.KeyValue);
+            }
+            else
+            {
+                return Description + "(?)";
+            }
         }
 
         /// <summary>
@@ -188,7 +196,7 @@ namespace HitCounterManager.Models
         /// </summary>
         private bool CheckPressedState(bool ShiftState, bool ControlState, bool AltState)
         {
-            if (!App.CurrentApp.IsKeyPressedAsync(key.KeyValue)) return false;
+            if (!App.IsKeyPressedAsync(key.KeyValue)) return false;
             if (key.Shift && !ShiftState) return false;
             if (key.Control && !ControlState) return false;
             if (key.Alt && !AltState) return false;
@@ -257,7 +265,7 @@ namespace HitCounterManager.Models
         };
 
         private IntPtr hwnd;
-        private ShortcutsKey[] sc_list = new ShortcutsKey[(int)SC_Type.SC_Type_MAX];
+        private readonly ShortcutsKey[] sc_list = new ShortcutsKey[(int)SC_Type.SC_Type_MAX];
         private SC_HotKeyMethod method;
 
         public SC_HotKeyMethod NextStart_Method;
@@ -279,8 +287,8 @@ namespace HitCounterManager.Models
             if (method == SC_HotKeyMethod.SC_HotKeyMethod_Async) App.CurrentApp.StopApplicationTimer(TimerIDs.Shortcuts);
             else if (method == SC_HotKeyMethod.SC_HotKeyMethod_LLKb)
             {
-                App.CurrentApp.StopKeyboardLowLevelHook();
-                App.CurrentApp.LowLevelKeyboardEvent -= low_level_keyboard_event;
+                App.StopKeyboardLowLevelHook();
+                App.CurrentApp.LowLevelKeyboardEvent -= LowLevelKeyboardEventHandler;
             }
         }
 
@@ -296,12 +304,12 @@ namespace HitCounterManager.Models
 
             if (method == SC_HotKeyMethod.SC_HotKeyMethod_Async)
             {
-                App.CurrentApp.StartApplicationTimer(TimerIDs.Shortcuts, 2, () => { low_level_keyboard_event(); return true; } );
+                App.CurrentApp.StartApplicationTimer(TimerIDs.Shortcuts, 2, () => { LowLevelKeyboardEventHandler(); return true; } );
             }
             else if (method == SC_HotKeyMethod.SC_HotKeyMethod_LLKb)
             {
-                App.CurrentApp.LowLevelKeyboardEvent += low_level_keyboard_event;
-                App.CurrentApp.StartKeyboardLowLevelHook();
+                App.CurrentApp.LowLevelKeyboardEvent += LowLevelKeyboardEventHandler;
+                App.StartKeyboardLowLevelHook();
             }
         }
 
@@ -320,42 +328,42 @@ namespace HitCounterManager.Models
             {
                 if (Enable)
                 {
-                    if (App.CurrentApp.SetHotKey(hwnd, (int)Id, modifier, key.key.KeyValue))
+                    if (App.SetHotKey(hwnd, (int)Id, modifier, key.key.KeyValue))
                     {
-                        key.used = true;
+                        key.Used = true;
                         key.valid = true;
                     }
                     else
                     {
                         // anything went wrong while registering, clear key..
-                        key.used = false;
+                        key.Used = false;
                         key.valid = false;
                     }
                 }
                 else
                 {
-                    App.CurrentApp.KillHotKey(hwnd, (int)Id);
-                    key.used = false;
+                    App.KillHotKey(hwnd, (int)Id);
+                    key.Used = false;
                 }
             }
             else if ((method == SC_HotKeyMethod.SC_HotKeyMethod_Async) || (method == SC_HotKeyMethod.SC_HotKeyMethod_LLKb))
             {
                 if (Enable)
                 {
-                    if (App.CurrentApp.SetHotKey(hwnd, (int)Id, modifier, key.key.KeyValue))
+                    if (App.SetHotKey(hwnd, (int)Id, modifier, key.key.KeyValue))
                     {
-                        App.CurrentApp.KillHotKey(hwnd, (int)Id); // don't use this method, we just used registration to check if keycode is valid and works
-                        key.used = true;
+                        App.KillHotKey(hwnd, (int)Id); // don't use this method, we just used registration to check if keycode is valid and works
+                        key.Used = true;
                         key.valid = true;
                     }
                     else
                     {
                         // anything went wrong while registering, clear key..
-                        key.used = false;
+                        key.Used = false;
                         key.valid = false;
                     }
                 }
-                else key.used = false;
+                else key.Used = false;
             }
         }
 
@@ -373,7 +381,7 @@ namespace HitCounterManager.Models
         /// </summary>
         public void Key_Set(SC_Type Id, ShortcutsKey key)
         {
-            if (Key_Get(Id).used) HotKeyRegister(Id, key, false);
+            if (Key_Get(Id).Used) HotKeyRegister(Id, key, false);
 
             HotKeyRegister(Id, key, true);
             sc_list.SetValue(key.ShallowCopy(), (int)Id);
@@ -388,8 +396,8 @@ namespace HitCounterManager.Models
 
             if (!key.valid) return;
 
-            if (!key.used && IsEnabled) HotKeyRegister(Id, key, true);
-            else if (key.used && !IsEnabled) HotKeyRegister(Id, key, false);
+            if (!key.Used && IsEnabled) HotKeyRegister(Id, key, true);
+            else if (key.Used && !IsEnabled) HotKeyRegister(Id, key, false);
 
             sc_list.SetValue(key, (int)Id);
         }
@@ -406,21 +414,21 @@ namespace HitCounterManager.Models
         /// <summary>
         /// Low Level Keyboard message handler to check for hot keys
         /// </summary>
-        private void low_level_keyboard_event()
+        private void LowLevelKeyboardEventHandler()
         {
             bool k_shift;
             bool k_control;
             bool k_alt;
 
-            k_shift = App.CurrentApp.IsKeyPressedAsync(VK_SHIFT) || App.CurrentApp.IsKeyPressedAsync(VK_LSHIFT) || App.CurrentApp.IsKeyPressedAsync(VK_RSHIFT);
-            k_control = App.CurrentApp.IsKeyPressedAsync(VK_CONTROL) || App.CurrentApp.IsKeyPressedAsync(VK_LCONTROL) || App.CurrentApp.IsKeyPressedAsync(VK_RCONTROL);
-            k_alt = App.CurrentApp.IsKeyPressedAsync(VK_MENU) || App.CurrentApp.IsKeyPressedAsync(VK_LMENU) || App.CurrentApp.IsKeyPressedAsync(VK_RMENU);
+            k_shift = App.IsKeyPressedAsync(VK_SHIFT) || App.IsKeyPressedAsync(VK_LSHIFT) || App.IsKeyPressedAsync(VK_RSHIFT);
+            k_control = App.IsKeyPressedAsync(VK_CONTROL) || App.IsKeyPressedAsync(VK_LCONTROL) || App.IsKeyPressedAsync(VK_RCONTROL);
+            k_alt = App.IsKeyPressedAsync(VK_MENU) || App.IsKeyPressedAsync(VK_LMENU) || App.IsKeyPressedAsync(VK_RMENU);
 
             for (int i = 0; i < (int)SC_Type.SC_Type_MAX; i++)
             {
-                if (sc_list[i].used)
+                if (sc_list[i].Used)
                 {
-                    if (sc_list[i].WasPressed(k_shift, k_control, k_alt)) App.CurrentApp.SendHotKeyMessage(hwnd, (IntPtr)i, (IntPtr)0);
+                    if (sc_list[i].WasPressed(k_shift, k_control, k_alt)) App.SendHotKeyMessage(hwnd, (IntPtr)i, (IntPtr)0);
                 }
             }
         }

@@ -60,7 +60,7 @@ namespace HitCounterManager.Views
 
         public async Task OpenAsDialog(Window? owner)
         {
-            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime /* desktop */)
             {
                 if (owner is not null) await ShowDialog(owner);
             }

@@ -50,19 +50,19 @@ namespace HitCounterManager
     public partial class App : Application
     {
         private IntPtr NativeWindowHandle = IntPtr.Zero;
-        public ProfileViewViewModel? profileViewViewModel { get; private set; }
+        public ProfileViewViewModel? ProfileViewViewModel { get; private set; }
         public readonly OutModule om;
-        public readonly Shortcuts sc = new Shortcuts();
+        public readonly Shortcuts sc = new ();
         public SettingsRoot Settings { get; internal set; }
         public bool SettingsDialogOpen = false;
         private bool IsCleanStart = true;
 
-        private static readonly IntPtr SubclassID = new IntPtr(0x48434D); // ASCII = "HCM"
+        private static readonly IntPtr SubclassID = new (0x48434D); // ASCII = "HCM"
         private bool SubclassprocInstalled = false;
-        private NativeApi.Subclassproc? _Subclassproc = null;
+        private readonly NativeApi.Subclassproc? _Subclassproc = null;
         private static NativeApi.HookProc? _HookProc = null;
 
-        private readonly Dictionary<TimerIDs, DispatcherTimer> ApplicationTimers = new Dictionary<TimerIDs, DispatcherTimer>();
+        private readonly Dictionary<TimerIDs, DispatcherTimer> ApplicationTimers = new ();
         private IDisposable? UpdateCheckTimer;
         public WindowNotificationManager? NotificationManager;
 
@@ -71,7 +71,7 @@ namespace HitCounterManager
             LoadSettings();
             om = new OutModule(Settings);
 
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            if (OperatingSystem.IsWindows())
             {
                 _Subclassproc = new NativeApi.Subclassproc(SubclassprocFunc); // store delegate to prevent garbage collector from freeing it
                 _HookProc ??= new NativeApi.HookProc(HookCallback); // store delegate to prevent garbage collector from freeing it
@@ -97,7 +97,7 @@ namespace HitCounterManager
                 this.Type = Type;
             }
         }
-        private List<PostponedAlert>? PostponedAlerts = new List<PostponedAlert>();
+        private List<PostponedAlert>? PostponedAlerts = new ();
 
         /// <summary>
         /// Page.DisplayAlert but when no appeared yet, it will be postponed until MainPage has appeared
@@ -123,7 +123,7 @@ namespace HitCounterManager
             }
         }
 
-        public void CheckAndShowUpdates(MainPageViewModel vm)
+        public static void CheckAndShowUpdates(MainPageViewModel vm)
         {
             // Get latest data
             if (GitHubUpdate.QueryAllReleases())
@@ -136,7 +136,7 @@ namespace HitCounterManager
             }
         }
 
-        [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("Windows")]
         private IntPtr SubclassprocFunc(IntPtr hWnd, uint uMsg, IntPtr wParam, IntPtr lParam, IntPtr uIdSubclass, IntPtr dwRefData) // like WndProc
         {
             App app = CurrentApp;
@@ -148,16 +148,16 @@ namespace HitCounterManager
                     // Console.WriteLine("WinProc: " + ((SC_Type)wParam).ToString() +"!");
                     switch ((SC_Type)wParam)
                     {
-                        case SC_Type.SC_Type_Reset: app.profileViewViewModel?.ProfileReset.Execute(null); break;
-                        case SC_Type.SC_Type_Hit: app.profileViewViewModel?.HitIncrease.Execute(null); break;
-                        case SC_Type.SC_Type_Split: app.profileViewViewModel?.SplitSelectNext.Execute(null); break;
-                        case SC_Type.SC_Type_HitUndo: app.profileViewViewModel?.HitDecrease.Execute(null); break;
-                        case SC_Type.SC_Type_SplitPrev: app.profileViewViewModel?.SplitSelectPrev.Execute(null); break;
-                        case SC_Type.SC_Type_WayHit: app.profileViewViewModel?.HitWayIncrease.Execute(null); break;
-                        case SC_Type.SC_Type_WayHitUndo: app.profileViewViewModel?.HitWayDecrease.Execute(null); break;
-                        case SC_Type.SC_Type_PB: app.profileViewViewModel?.ProfilePB.Execute(null); break;
-                        case SC_Type.SC_Type_TimerStart: if (null != app.profileViewViewModel) app.profileViewViewModel.TimerRunning = true; break;
-                        case SC_Type.SC_Type_TimerStop: if (null != app.profileViewViewModel) app.profileViewViewModel.TimerRunning = false; break;
+                        case SC_Type.SC_Type_Reset: app.ProfileViewViewModel?.ProfileReset.Execute(null); break;
+                        case SC_Type.SC_Type_Hit: app.ProfileViewViewModel?.HitIncrease.Execute(null); break;
+                        case SC_Type.SC_Type_Split: app.ProfileViewViewModel?.SplitSelectNext.Execute(null); break;
+                        case SC_Type.SC_Type_HitUndo: app.ProfileViewViewModel?.HitDecrease.Execute(null); break;
+                        case SC_Type.SC_Type_SplitPrev: app.ProfileViewViewModel?.SplitSelectPrev.Execute(null); break;
+                        case SC_Type.SC_Type_WayHit: app.ProfileViewViewModel?.HitWayIncrease.Execute(null); break;
+                        case SC_Type.SC_Type_WayHitUndo: app.ProfileViewViewModel?.HitWayDecrease.Execute(null); break;
+                        case SC_Type.SC_Type_PB: app.ProfileViewViewModel?.ProfilePB.Execute(null); break;
+                        case SC_Type.SC_Type_TimerStart: if (null != app.ProfileViewViewModel) app.ProfileViewViewModel.TimerRunning = true; break;
+                        case SC_Type.SC_Type_TimerStop: if (null != app.ProfileViewViewModel) app.ProfileViewViewModel.TimerRunning = false; break;
                         default: break;
                     }
                 }
@@ -182,17 +182,11 @@ namespace HitCounterManager
         /// <returns>Success state</returns>
         public bool StartApplicationTimer(TimerIDs ID, double Interval, Func<bool> Callback)
         {
-            Dictionary<TimerIDs, DispatcherTimer> timers = ApplicationTimers;
+            StopApplicationTimer(ID);
 
-            if (timers.ContainsKey(ID))
-            {
-                timers[ID].Stop();
-                timers.Remove(ID);
-            }
-
-            DispatcherTimer timer = new DispatcherTimer(DispatcherPriority.MaxValue) { Interval = TimeSpan.FromMilliseconds(Interval) };
+            DispatcherTimer timer = new (DispatcherPriority.MaxValue) { Interval = TimeSpan.FromMilliseconds(Interval) };
             timer.Tick += (s, e) => { if (!Callback()) timer.Stop(); };
-            timers.Add(ID, timer);
+            ApplicationTimers.Add(ID, timer);
             timer.Start();
 
             return true;
@@ -204,12 +198,9 @@ namespace HitCounterManager
         /// <param name="ID">The timer ID</param>
         public void StopApplicationTimer(TimerIDs ID)
         {
-            Dictionary<TimerIDs, DispatcherTimer> timers = ApplicationTimers;
-
-            if (timers.ContainsKey(ID))
+            if (ApplicationTimers.Remove(ID, out var oldTimer))
             {
-                timers[ID].Stop();
-                timers.Remove(ID);
+                oldTimer.Stop();
             }
         }
 
@@ -220,9 +211,9 @@ namespace HitCounterManager
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                MainWindow main = new MainWindow();
+                MainWindow main = new ();
                 mainPage = main.InnerPage;
-                profileViewViewModel = (ProfileViewViewModel?)mainPage.ProfileView?.DataContext;
+                ProfileViewViewModel = (ProfileViewViewModel?)mainPage.ProfileView?.DataContext;
                 main.Opened += MainPageAppearing;
 
                 desktop.MainWindow = main;
@@ -235,7 +226,7 @@ namespace HitCounterManager
                 desktop.Exit += AppExitHandler;
 
                 // Register the hot key handler and hot keys
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                if (OperatingSystem.IsWindows())
                 {
                     SubclassprocInstalled = 0 != NativeApi.SetWindowSubclass(NativeWindowHandle, _Subclassproc!, SubclassID, IntPtr.Zero);
                 }
@@ -245,10 +236,10 @@ namespace HitCounterManager
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
             {
                 //MainPage main = new MainPage();
-                SingleViewNavigationPage main = new SingleViewNavigationPage();
+                SingleViewNavigationPage main = new ();
                 mainPage = main.InnerPage;
                 singleViewPlatform.MainView = main;
-                profileViewViewModel = (ProfileViewViewModel?)mainPage.ProfileView?.DataContext;
+                ProfileViewViewModel = (ProfileViewViewModel?)mainPage.ProfileView?.DataContext;
             }
 
             // Check for updates..
@@ -268,12 +259,12 @@ namespace HitCounterManager
         /// Read the OS setting whether dark mode is enabled
         /// </summary>
         /// <returns>true = Dark mode; false = Light mode</returns>
-        private bool IsDarkModeActive() => RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? NativeApi.IsDarkModeActiveWin32() : false;
+        private static bool IsDarkModeActive() => OperatingSystem.IsWindows() && NativeApi.IsDarkModeActiveWin32();
 
-        private bool IsTitleBarOnScreen(Screens screens, int Left, int Top, int Width, int Threshold = 10, int RectSize = 30)
+        private static bool IsTitleBarOnScreen(Screens screens, int Left, int Top, int Width, int Threshold = 10, int RectSize = 30)
         {
-            PixelRect rectLeft = new PixelRect(Left + Threshold, Top + Threshold, RectSize, RectSize); // upper left corner
-            PixelRect rectRight = new PixelRect(Left + Width - Threshold - RectSize, Top + Threshold, RectSize, RectSize); // upper right corner
+            PixelRect rectLeft = new (Left + Threshold, Top + Threshold, RectSize, RectSize); // upper left corner
+            PixelRect rectRight = new (Left + Width - Threshold - RectSize, Top + Threshold, RectSize, RectSize); // upper right corner
             foreach (Screen screen in screens.All)
             {
                 // at least one of the edges must be present on any screen
@@ -287,9 +278,11 @@ namespace HitCounterManager
         {
             foreach ((TimerIDs _, DispatcherTimer timer) in ApplicationTimers) timer.Stop();
 
+            UpdateCheckTimer?.Dispose();
+
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                if (OperatingSystem.IsWindows())
                 {
                     // store false then successful as then it is no longer installed
                     if (SubclassprocInstalled)
@@ -316,35 +309,12 @@ namespace HitCounterManager
 
         private void UpdateBrushColor(string BrushName, string ColorName)
         {
-            if (Resources.ContainsKey(BrushName) && Resources.ContainsKey(ColorName))
-                (Resources[BrushName] as SolidColorBrush)!.Color = (Color)Resources[ColorName]!;
+            if (Resources.TryGetValue(BrushName, out var resourceBrush) && Resources.TryGetValue(ColorName, out var resourceColor))
+                (resourceBrush as SolidColorBrush)!.Color = (Color)resourceColor!;
 #if DEBUG
             else
                 throw new Exception("The brush \"" + BrushName + "\" cannot be updated with the color \"" + ColorName + "\"!");
 #endif
-        }
-
-        /// <summary>
-        /// Indicates if this OS is capable of global hotkeys
-        /// </summary>
-        public bool GlobalHotKeySupport => RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? true : false;
-
-        /// <summary>
-        /// Retrieves the name of a given key
-        /// </summary>
-        /// <param name="KeyCode">Key name to gather</param>
-        /// <returns>Key name</returns>
-        public string GetKeyName(int KeyCode)
-        {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                string lpKeyNameString = new string('\0', 256);
-
-                uint lParam = NativeApi.MapVirtualKeyW((uint)KeyCode, NativeApi.MAPVK_VK_TO_VSC) << 16;
-                if (0 != NativeApi.GetKeyNameTextW((int)lParam, lpKeyNameString, lpKeyNameString.Length))
-                    return lpKeyNameString.Trim('\0');
-            }
-            return "?";
         }
 
         /// <summary>
@@ -355,9 +325,9 @@ namespace HitCounterManager
         /// <param name="Modifiers">Key modifiers</param>
         /// <param name="KeyCode">Key to register</param>
         /// <returns>Success state</returns>
-        public bool SetHotKey(IntPtr WindowHandle, int HotKeyID, uint Modifiers, int KeyCode)
+        public static bool SetHotKey(IntPtr WindowHandle, int HotKeyID, uint Modifiers, int KeyCode)
         {
-            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? (0 != NativeApi.RegisterHotKey(WindowHandle, HotKeyID, Modifiers, (uint)KeyCode)) : false;
+            return OperatingSystem.IsWindows() && (0 != NativeApi.RegisterHotKey(WindowHandle, HotKeyID, Modifiers, (uint)KeyCode));
         }
 
         /// <summary>
@@ -366,13 +336,13 @@ namespace HitCounterManager
         /// <param name="WindowHandle">Window handle that is receiving the hotkey message</param>
         /// <param name="HotKeyID">Custom ID for the hotkey</param>
         /// <returns>Success state</returns>
-        public bool KillHotKey(IntPtr WindowHandle, int HotKeyID)
+        public static bool KillHotKey(IntPtr WindowHandle, int HotKeyID)
         {
-            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? (0 != NativeApi.UnregisterHotKey(WindowHandle, HotKeyID)) : false;
+            return OperatingSystem.IsWindows() && (0 != NativeApi.UnregisterHotKey(WindowHandle, HotKeyID));
         }
 
         private static IntPtr _HookId = IntPtr.Zero;
-        private static bool[] KeyStates = new bool[256];
+        private static readonly bool[] KeyStates = new bool[256];
 
         /// <summary>
         /// Fires when a low level keyboard event designates a key state changes.
@@ -387,11 +357,11 @@ namespace HitCounterManager
         /// Gets the key state from internal cache when the low level keybaord events are enabled.
         /// </summary>
         /// <returns>null on error; otherwise a list of KeyCodes of all currently pressed keys</returns>
-        public List<int>? GetKeysPressedAsync()
+        public static List<int>? GetKeysPressedAsync()
         {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            if (OperatingSystem.IsWindows())
             {
-                List<int> result = new List<int>();
+                List<int> result = new ();
 
                 if (_HookId != IntPtr.Zero)
                 {
@@ -420,9 +390,9 @@ namespace HitCounterManager
         /// </summary>
         /// <param name="KeyCode">The key to check</param>
         /// <returns>true = pressed, false = released</returns>
-        public bool IsKeyPressedAsync(int KeyCode)
+        public static bool IsKeyPressedAsync(int KeyCode)
         {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            if (OperatingSystem.IsWindows())
             {
                 if ((_HookId != IntPtr.Zero) && (KeyStates.Length < KeyCode))
                 {
@@ -442,9 +412,9 @@ namespace HitCounterManager
         /// The states for IsKeyPressedAsync will be taken from internal cache.
         /// </summary>
         /// <returns>Success state</returns>
-        public bool StartKeyboardLowLevelHook()
+        public static bool StartKeyboardLowLevelHook()
         {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            if (OperatingSystem.IsWindows())
             {
                 if (_HookId != IntPtr.Zero) return false; // Only one instance supported
 
@@ -454,18 +424,18 @@ namespace HitCounterManager
                 ProcessModule? module = Process.GetCurrentProcess().MainModule;
                 if (null == module || null == module.ModuleName) return false;
                 _HookId = NativeApi.SetWindowsHookEx(NativeApi.WH_KEYBOARD_LL, _HookProc!, NativeApi.GetModuleHandleW(module.ModuleName), 0);
-                return _HookId == IntPtr.Zero ? false : true;
+                return _HookId != IntPtr.Zero;
             }
 
             return false;
         }
 
-        [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("Windows")]
         private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
         {
             if (NativeApi.HC_ACTION == nCode)
             {
-                switch ((int)wParam)
+                switch (wParam)
                 {
                     case NativeApi.WM_KEYDOWN:
                     case NativeApi.WM_KEYUP:
@@ -477,7 +447,7 @@ namespace HitCounterManager
 
                             if (KeyStates.Length <= KeyCode) break; // Invalid value
 
-                            bool isPressed = ((flags & NativeApi.LLKHF_UP) == 0 ? true : false); //transition state: 0 = pressed, 1 = released
+                            bool isPressed = (flags & NativeApi.LLKHF_UP) == 0; //transition state: 0 = pressed, 1 = released
                             if (KeyStates[KeyCode] != isPressed) // drop this event, we already know this!
                             {
                                 KeyStates[KeyCode] = isPressed;
@@ -496,11 +466,11 @@ namespace HitCounterManager
         /// This disables the LowLevelKeyboardEvent
         /// </summary>
         /// <returns>Success state</returns>
-        public bool StopKeyboardLowLevelHook()
+        public static bool StopKeyboardLowLevelHook()
         {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            if (OperatingSystem.IsWindows())
             {
-                return _HookId != IntPtr.Zero ? (0 != NativeApi.UnhookWindowsHookEx(_HookId)) : true;
+                return _HookId == IntPtr.Zero || (0 != NativeApi.UnhookWindowsHookEx(_HookId));
             }
             return false;
         }
@@ -512,9 +482,9 @@ namespace HitCounterManager
         /// <param name="wParam">Parameter 1 of message</param>
         /// <param name="lParam">Parameter 2 of message</param>
         /// <returns>Message result</returns>
-        public IntPtr SendHotKeyMessage(IntPtr WindowHandle, IntPtr wParam, IntPtr lParam)
+        public static IntPtr SendHotKeyMessage(IntPtr WindowHandle, IntPtr wParam, IntPtr lParam)
         {
-            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? NativeApi.SendMessageW(WindowHandle, NativeApi.WM_HOTKEY, wParam, lParam) : IntPtr.Zero;
+            return OperatingSystem.IsWindows() ? NativeApi.SendMessageW(WindowHandle, NativeApi.WM_HOTKEY, wParam, lParam) : IntPtr.Zero;
         }
     }
 }

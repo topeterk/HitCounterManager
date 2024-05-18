@@ -33,9 +33,9 @@ namespace HitCounterManager.ViewModels
 {
     public class SettingsPageViewModel : ViewModelWindowBase
     {
-        public SettingsRoot Settings => App.CurrentApp.Settings;
-        private Shortcuts sc = App.CurrentApp.sc;
-        private OutModule om = App.CurrentApp.om;
+        public static SettingsRoot Settings => App.CurrentApp.Settings;
+        private readonly Shortcuts sc = App.CurrentApp.sc;
+        private readonly OutModule om = App.CurrentApp.om;
         private bool AppearedOnce = false;
         private SC_Type CapturingId = SC_Type.SC_Type_MAX;
 
@@ -96,7 +96,7 @@ namespace HitCounterManager.ViewModels
                     e.PropertyName.Equals(nameof(StyleCssUrl)))
                 ) return;
 
-            App.CurrentApp.profileViewViewModel?.OutputDataChangedHandler(sender, e);
+            App.CurrentApp.ProfileViewViewModel?.OutputDataChangedHandler(sender, e);
         }
 
         public class ShowInfoBool : NotifyPropertyChangedImpl
@@ -109,7 +109,7 @@ namespace HitCounterManager.ViewModels
             }
         }
 
-        private Dictionary<string, ShowInfoBool> _ShowInfo = new Dictionary<string, ShowInfoBool>(){
+        private readonly Dictionary<string, ShowInfoBool> _ShowInfo = new () {
             {"RadioHotKeyMethod_Sync", new ShowInfoBool()},
             {"RadioHotKeyMethod_Async", new ShowInfoBool()},
             {"RadioHotKeyMethod_LLKb", new ShowInfoBool()},
@@ -159,10 +159,10 @@ namespace HitCounterManager.ViewModels
             // Early cancellation point
             if (SC_Type.SC_Type_MAX == CapturingId) return false;
 
-            List<int>? PressedKeys = App.CurrentApp.GetKeysPressedAsync();
+            List<int>? PressedKeys = App.GetKeysPressedAsync();
             if (null == PressedKeys) return (SC_Type.SC_Type_MAX != CapturingId);
 
-            KeyEventArgs key = new KeyEventArgs(Keys.None);
+            KeyEventArgs key = new (Keys.None);
             foreach (int KeyCode in PressedKeys)
             {
                 if (((Keys)KeyCode < Keys.Back) || (Keys.OemClear <= (Keys)KeyCode)) continue; // Ignore mouse keys
@@ -200,7 +200,7 @@ namespace HitCounterManager.ViewModels
         /// <param name="e">Key combination</param>
         private void RegisterHotKey(KeyEventArgs e)
         {
-            ShortcutsKey key = new ShortcutsKey();
+            ShortcutsKey key = new ();
             SC_Type Id = CapturingId;
 
             if (e.KeyCode == Keys.None) return;

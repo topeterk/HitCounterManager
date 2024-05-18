@@ -101,7 +101,7 @@ namespace HitCounterManager
         public bool StyleSubscriptPB;
         public bool StyleHightlightCurrentSplit;
         public string ProfileSelected = "Unnamed";
-        public Profiles Profiles = new Profiles();
+        public Profiles Profiles = new ();
     }
 
     #endregion
@@ -115,8 +115,10 @@ namespace HitCounterManager
         /// </summary>
         private bool LoadHotKeySettings(SC_Type Type, int KeyData, bool Enable)
         {
-            ShortcutsKey key = new ShortcutsKey();
-            key.key = new KeyEventArgs((Keys)KeyData);
+            ShortcutsKey key = new()
+            {
+                key = new KeyEventArgs((Keys)KeyData)
+            };
             if (Enable)
             {
                 sc.Key_Set(Type, key);
@@ -137,7 +139,7 @@ namespace HitCounterManager
         {
             bool Success = true;
 
-            if (GlobalHotKeySupport)
+            if (Statics.GlobalHotKeySupport)
             {
                 sc.Initialize((Shortcuts.SC_HotKeyMethod)Settings.HotKeyMethod, NativeWindowHandle);
 
@@ -188,7 +190,9 @@ namespace HitCounterManager
             }
             else
             {
-                Settings = new SettingsRoot();
+#pragma warning disable IDE0017
+                Settings = new();
+#pragma warning restore IDE0017
 
                 // prepare defaults..
                 Settings.Version = 0;
@@ -277,9 +281,9 @@ namespace HitCounterManager
                 Settings.AlwaysOnTop = false;
 
                 // Only enable progress bar when new settings were created
-                Settings.ShowProgressBar = (baseVersion < 0 ? true : false);
+                Settings.ShowProgressBar = baseVersion < 0;
                 // Introduced with true in version 5, keep user setting when this version was used
-                Settings.StyleProgressBarColored = (baseVersion == 5 ? true : false);
+                Settings.StyleProgressBarColored = baseVersion == 5;
             }
             if (Settings.Version == 6) // Coming from version 1.18
             {
@@ -292,7 +296,7 @@ namespace HitCounterManager
                 Settings.StyleUseRoman = false;
                 Settings.StyleHightlightCurrentSplit = false;
                 // Introduced with false in version 6, keep user setting when this version was used
-                Settings.StyleProgressBarColored = (baseVersion == 6 ? false : true);
+                Settings.StyleProgressBarColored = baseVersion != 6;
             }
             if (Settings.Version == 7) // Coming from version 1.19
             {
@@ -304,7 +308,7 @@ namespace HitCounterManager
                 if (baseVersion < 0) Settings.HotKeyMethod = (int)Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb;
 
                 // Only enable time column when new settings were created
-                Settings.ShowTimeCurrent = (baseVersion < 0 ? true : false);
+                Settings.ShowTimeCurrent = baseVersion < 0;
                 Settings.ShowHits = true;
                 Settings.ShowDiff = Settings.ShowPB; // was combined in previous versions
                 Settings.ShowTimePB = false;
@@ -333,8 +337,10 @@ namespace HitCounterManager
             if (Settings.Profiles.ProfileList.Count == 0)
             {
                 // There is no profile at all, initially create a clean one
-                Profile unnamed = new Profile();
-                unnamed.Name = "Unnamed";
+                Profile unnamed = new()
+                {
+                    Name = "Unnamed"
+                };
                 Settings.Profiles.ProfileList.Add(unnamed);
             }
             else Settings.Profiles.ProfileList.Sort((a, b) => a.Name.CompareTo(b.Name)); // Sort by name
@@ -346,7 +352,7 @@ namespace HitCounterManager
         public void SaveSettings()
         {
             // Store hot keys..
-            if (GlobalHotKeySupport)
+            if (Statics.GlobalHotKeySupport)
             {
                 ShortcutsKey key;
                 Settings.HotKeyMethod = (int)sc.NextStart_Method;

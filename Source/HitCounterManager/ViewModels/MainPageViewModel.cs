@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2023 Peter Kirmeier
+//Copyright (c) 2021-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -69,7 +69,7 @@ namespace HitCounterManager.ViewModels
                 OwnerWindow?.Close();
             });
 
-            CheckUpdatesOnline = ReactiveCommand.Create(() => App.CurrentApp.CheckAndShowUpdates(this));
+            CheckUpdatesOnline = ReactiveCommand.Create(() => App.CheckAndShowUpdates(this));
 
             ToggleAlwaysOnTop = ReactiveCommand.Create(() => {
                 if (OwnerWindow != null)
