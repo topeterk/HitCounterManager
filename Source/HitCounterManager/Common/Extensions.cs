@@ -49,31 +49,11 @@ namespace HitCounterManager.Common
     }
 
     /// <summary>
-    /// Should be replaced with DynamicResource.
-    /// Workaround: Avalonia DataTriggerBehavior does not always work when page is loaded.
-    ///             This class seems to work as kind of a proxy.
-    ///             During first pass the DataTriggerBehavior is created and this object is instantiated,
-    ///             however, the trigger will somehow not be fired.
-    ///             During second pass the markup extension (ProvideValue) gets executed,
-    ///             but this time the trigger was/gets fired as well.
-    /// See: https://github.com/wieslawsoltes/AvaloniaBehaviors/issues/56
-    /// See: https://stackoverflow.com/questions/68979876/how-to-simulate-datatrigger-with-avalonia
-    /// </summary>
-    public class LazyResource : MarkupExtension
-    {
-        private string Key { get; init; }
-
-        public LazyResource(string key) => Key = key;
-
-        public override object ProvideValue(IServiceProvider serviceProvider) => App.CurrentApp.Resources[Key]!;
-    }
-
-    /// <summary>
     /// Markup extension to load embedded string resources (EmbeddedResource) directly into XAML.
     /// </summary>
     public class StringFromManifest : MarkupExtension
     {
-        static Dictionary<string, string> LoadedStringSources = new Dictionary<string, string>();
+        static readonly Dictionary<string, string> LoadedStringSources = new ();
 
         public string? Resource { get; set; }
 
@@ -133,24 +113,6 @@ namespace HitCounterManager.Common
         }
 
         public override object ProvideValue(IServiceProvider serviceProvider) => BoxShadows;
-    }
-
-    /// <summary>
-    /// Inverts/Negates a bool value. This works for Statics as well, for usual Bindings it is recommended to use bang operator "!".
-    /// (see: https://docs.avaloniaui.net/docs/data-binding/converting-binding-values)
-    /// </summary>
-    public class NegateBoolConverter : IValueConverter
-    {
-        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) => !(bool?)value ?? null;
-        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => !(bool?)value;
-
-        /// <summary>
-        /// Avalonia needs this.
-        /// The converter is resolved as a markup extension and therefore requires this method:
-        /// See: https://github.com/AvaloniaUI/Avalonia/issues/2554 or https://github.com/AvaloniaUI/Avalonia/issues/2835
-        /// </summary>
-        /// <returns>Instance to the converted (itself)</returns>
-        public IValueConverter ProvideValue() => this;
     }
 
     /// <summary>

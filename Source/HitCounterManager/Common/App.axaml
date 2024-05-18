@@ -228,6 +228,12 @@
 			<Setter Property="ShowInTaskbar" Value="False" />
 		</Style>
 
+		<Style Selector="Image.Inactive">
+			<Setter Property="Source" Value="{DynamicResource ImageInactive}" />
+		</Style>
+		<Style Selector="Image.Inactive.BP">
+			<Setter Property="Source" Value="{DynamicResource ImageInactiveBP}" />
+		</Style>
 	</Application.Styles>
 
 </Application>

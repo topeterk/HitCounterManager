@@ -68,70 +68,69 @@
 
 				<StackPanel Margin="0,0,10,0" Orientation="Horizontal">
 					<Button Command="{Binding OpenPageSettings}" Classes="ImageButton">
-						<Image Source="{c:LazyResource ImageSettings}" />
+						<Image Source="{DynamicResource ImageSettings}" />
 					</Button>
 					<Button Command="{Binding SaveToDisk}" Classes="ImageButton">
-						<Image Source="{c:LazyResource ImageSave}" />
+						<Image Source="{DynamicResource ImageSave}" />
 					</Button>
 					<Button Command="{Binding OpenWebsiteHome}" Classes="ImageButton">
-						<Image Source="{c:LazyResource ImageWeb}" />
+						<Image Source="{DynamicResource ImageWeb}" />
 					</Button>
 					<Button Command="{Binding OpenWebsiteTeamHitless}" Classes="ImageButton">
-						<Image Source="{c:LazyResource ImageTeamHitless}" />
+						<Image Source="{DynamicResource ImageTeamHitless}" />
 					</Button>
 					<Button Command="{Binding CheckUpdatesOnline}" Classes="ImageButton">
-						<Image Source="{c:LazyResource ImageUpdates}" />
+						<Image Source="{DynamicResource ImageUpdates}" />
 					</Button>
 					<Button Command="{Binding OpenPageAbout}" Classes="ImageButton">
-						<Image Source="{c:LazyResource ImageAbout}" />
+						<Image Source="{DynamicResource ImageAbout}" />
 					</Button>
 				</StackPanel>
 				<StackPanel Margin="0,0,10,0" Orientation="Horizontal">
 					<Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static vm:ProfileAction.Create}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
-						<Image Source="{c:LazyResource ImageProfileCreate}" />
+						<Image Source="{DynamicResource ImageProfileCreate}" />
 					</Button>
 					<Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static vm:ProfileAction.Rename}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
-						<Image Source="{c:LazyResource ImageProfileRename}" />
+						<Image Source="{DynamicResource ImageProfileRename}" />
 					</Button>
 					<Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static vm:ProfileAction.Copy}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
-						<Image Source="{c:LazyResource ImageProfileCopy}" />
+						<Image Source="{DynamicResource ImageProfileCopy}" />
 					</Button>
 					<Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static vm:ProfileAction.Delete}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
-						<Image Source="{c:LazyResource ImageTrash}" />
+						<Image Source="{DynamicResource ImageTrash}" />
 					</Button>
 				</StackPanel>
 				<StackPanel Margin="0,0,10,0" Orientation="Horizontal">
 					<Button Command="{Binding OpenPageSetAttempts}" Classes="ImageButton">
-						<Image Source="{c:LazyResource ImageAttempts}" />
+						<Image Source="{DynamicResource ImageAttempts}" />
 					</Button>
 					<Button Command="{Binding #profileView.DataContext.ProfileSplitMoveUp}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
-						<Image Source="{c:LazyResource ImageSplitUp}" />
+						<Image Source="{DynamicResource ImageSplitUp}" />
 					</Button>
 					<Button Command="{Binding #profileView.DataContext.ProfileSplitMoveDown}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
-						<Image Source="{c:LazyResource ImageSplitDown}" />
+						<Image Source="{DynamicResource ImageSplitDown}" />
 					</Button>
 					<Button Command="{Binding #profileView.DataContext.ProfileSplitInsert}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
-						<Image Source="{c:LazyResource ImageSplitInsert}" />
+						<Image Source="{DynamicResource ImageSplitInsert}" />
 					</Button>
 				</StackPanel>
 				<StackPanel Margin="0" Orientation="Horizontal">
 					<Button Command="{Binding #profileView.DataContext.ToggleReadOnlyMode}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
-						<Image Source="{c:LazyResource ImageLockOn}">
-							<Interaction.Behaviors>
-								<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="true">
-									<ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageLockOn}" />
-								</DataTriggerBehavior>
-								<DataTriggerBehavior Binding="{Binding #profileView.DataContext.IsReadOnly}" ComparisonCondition="Equal" Value="false">
-									<ChangePropertyAction TargetObject="{Binding $parent[Image]}" PropertyName="Source" Value="{c:LazyResource ImageLockOff}" />
-								</DataTriggerBehavior>
-							</Interaction.Behaviors>
-						</Image>
+						<Button.Styles>
+							<Style Selector="Button > Image">
+								<Setter Property="Source" Value="{DynamicResource ImageLockOff}" />
+							</Style>
+							<Style Selector="Button.ImageButtonLocked > Image">
+								<Setter Property="Source" Value="{DynamicResource ImageLockOn}" />
+							</Style>
+						</Button.Styles>
+						<Image />
 					</Button>
-					<Button Command="{Binding ToggleAlwaysOnTop}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding AlwaysOnTop}">
-						<Image Source="{c:LazyResource ImageAlwaysOnTop}" />
+					<Button Command="{Binding ToggleAlwaysOnTop}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding AlwaysOnTop}" IsVisible="{OnPlatform Default=True, Android=False, iOS=False}">
+						<Image Source="{DynamicResource ImageAlwaysOnTop}" />
 					</Button>
 					<Button Command="{Binding ToggleDarkMode}" Classes="ImageButton">
-						<Image Source="{c:LazyResource ImageDarkMode}" />
+						<Image Source="{DynamicResource ImageDarkMode}" />
 					</Button>
 				</StackPanel>
 			</WrapPanel>
@@ -148,15 +147,16 @@
 				<ctrls:FramedImageButton MainColor="{DynamicResource ProfilePBBrush}" ImgSrc="{DynamicResource ImageProfilePB}"
 						OnClickCommand="{Binding #profileView.DataContext.ProfilePB}" />
 				<ctrls:FramedImageButton MainColor="{DynamicResource ToggleTimerPauseBrush}"
-						OnClickCommand="{Binding #profileView.DataContext.ToggleTimerPause}">
-					<Interaction.Behaviors>
-						<DataTriggerBehavior Binding="{Binding #profileView.DataContext.TimerRunning}" ComparisonCondition="Equal" Value="true">
-							<ChangePropertyAction TargetObject="{Binding $parent[ctrls:FramedImageButton]}" PropertyName="ImgSrc" Value="{c:LazyResource ImageTimerOff}" />
-						</DataTriggerBehavior>
-						<DataTriggerBehavior Binding="{Binding #profileView.DataContext.TimerRunning}" ComparisonCondition="Equal" Value="false">
-							<ChangePropertyAction TargetObject="{Binding $parent[ctrls:FramedImageButton]}" PropertyName="ImgSrc" Value="{c:LazyResource ImageTimerOn}" />
-						</DataTriggerBehavior>
-					</Interaction.Behaviors>
+						OnClickCommand="{Binding #profileView.DataContext.ToggleTimerPause}"
+						Classes.TimerRunning="{Binding #profileView.DataContext.TimerRunning}">
+					<ctrls:FramedImageButton.Styles>
+						<Style Selector="ctrls|FramedImageButton">
+							<Setter Property="ImgSrc" Value="{DynamicResource ImageTimerOff}" />
+						</Style>
+						<Style Selector="ctrls|FramedImageButton.TimerRunning">
+							<Setter Property="ImgSrc" Value="{DynamicResource ImageTimerOn}" />
+						</Style>
+					</ctrls:FramedImageButton.Styles>
 				</ctrls:FramedImageButton>
 				<ctrls:FramedImageButton MainColor="{DynamicResource HitIncreaseBrush}" ImgSrc="{DynamicResource ImageHit}"
 						OnClickCommand="{Binding #profileView.DataContext.HitIncrease}"
