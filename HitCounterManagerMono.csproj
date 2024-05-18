@@ -13,6 +13,11 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <LangVersion>latest</LangVersion>
+    <WarningLevel>4</WarningLevel>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>$(NoWarn);IDE1006</NoWarn> <!-- Allow lower case names from some Symbols for legacy reasons -->
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -22,9 +27,6 @@
     <OutputPath>bin\DebugMono\</OutputPath>
     <IntermediateOutputPath>obj\DebugMono\</IntermediateOutputPath>
     <DefineConstants>TRACE;DEBUG;OS_ANY</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
     <CustomCommands>
       <CustomCommands>
         <Command>
@@ -43,9 +45,6 @@
     <OutputPath>bin\ReleaseMono\</OutputPath>
     <IntermediateOutputPath>obj\ReleaseMono\</IntermediateOutputPath>
     <DefineConstants>TRACE;OS_ANY</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
     <CustomCommands>
       <CustomCommands>
         <Command>

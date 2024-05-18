@@ -34,7 +34,7 @@ namespace HitCounterManager
         private bool _down; // indicates if shortcut is currently pressed
         public bool valid;  // indicates if a valid key/modifier pair was ever set
         public KeyEventArgs key;
-        public bool used
+        public bool Used
         {
             get { return _used; }
             set
@@ -161,8 +161,8 @@ namespace HitCounterManager
             SC_HotKeyMethod_LLKb = 2 // = SetWindowsHookEx (low level keyboard hook) + UnhookWindowsHookEx + SendMessage
         };
 
-        private IntPtr hwnd;
-        private ShortcutsKey[] sc_list = new ShortcutsKey[(int)SC_Type.SC_Type_MAX];
+        private readonly IntPtr hwnd;
+        private readonly ShortcutsKey[] sc_list = new ShortcutsKey[(int)SC_Type.SC_Type_MAX];
         private SC_HotKeyMethod method;
 
         public SC_HotKeyMethod NextStart_Method;
@@ -214,7 +214,7 @@ namespace HitCounterManager
         /// <summary>
         /// Indicates if implementation can support global hotkeys
         /// </summary>
-        public bool IsGlobalHotKeySupported { get { return OsLayer.GlobalHotKeySupport; } }
+        public static bool IsGlobalHotKeySupported { get { return OsLayer.GlobalHotKeySupport; } }
 
         /// <summary>
         /// Registers and unregisters a hotkey
@@ -233,20 +233,20 @@ namespace HitCounterManager
                 {
                     if (OsLayer.SetHotKey(hwnd, (int)Id, modifier, (int)key.key.KeyCode))
                     {
-                        key.used = true;
+                        key.Used = true;
                         key.valid = true;
                     }
                     else
                     {
                         // anything went wrong while registering, clear key..
-                        key.used = false;
+                        key.Used = false;
                         key.valid = false;
                     }
                 }
                 else
                 {
                     OsLayer.KillHotKey(hwnd, (int)Id);
-                    key.used = false;
+                    key.Used = false;
                 }
             }
             else if ((method == SC_HotKeyMethod.SC_HotKeyMethod_Async) || (method == SC_HotKeyMethod.SC_HotKeyMethod_LLKb))
@@ -256,17 +256,17 @@ namespace HitCounterManager
                     if (OsLayer.SetHotKey(hwnd, (int)Id, modifier, (int)key.key.KeyCode))
                     {
                         OsLayer.KillHotKey(hwnd, (int)Id); // don't use this method, we just used registration to check if keycode is valid and works
-                        key.used = true;
+                        key.Used = true;
                         key.valid = true;
                     }
                     else
                     {
                         // anything went wrong while registering, clear key..
-                        key.used = false;
+                        key.Used = false;
                         key.valid = false;
                     }
                 }
-                else key.used = false;
+                else key.Used = false;
             }
         }
 
@@ -284,7 +284,7 @@ namespace HitCounterManager
         /// </summary>
         public void Key_Set(SC_Type Id, ShortcutsKey key)
         {
-            if (Key_Get(Id).used) HotKeyRegister(Id, key, false);
+            if (Key_Get(Id).Used) HotKeyRegister(Id, key, false);
 
             HotKeyRegister(Id, key, true);
             sc_list.SetValue(key.ShallowCopy(), (int)Id);
@@ -299,8 +299,8 @@ namespace HitCounterManager
 
             if (!key.valid) return;
 
-            if (!key.used && IsEnabled) HotKeyRegister(Id, key, true);
-            else if (key.used && !IsEnabled) HotKeyRegister(Id, key, false);
+            if (!key.Used && IsEnabled) HotKeyRegister(Id, key, true);
+            else if (key.Used && !IsEnabled) HotKeyRegister(Id, key, false);
 
             sc_list.SetValue(key, (int)Id);
         }
@@ -334,7 +334,7 @@ namespace HitCounterManager
 
             for (int i = 0; i < (int)SC_Type.SC_Type_MAX; i++)
             {
-                if (sc_list[i].used)
+                if (sc_list[i].Used)
                 {
                     if (sc_list[i].WasPressed(k_shift, k_control, k_alt)) OsLayer.SendHotKeyMessage(hwnd, (IntPtr)i, (IntPtr)0);
                 }

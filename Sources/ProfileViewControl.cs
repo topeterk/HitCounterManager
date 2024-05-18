@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2019-2022 Peter Kirmeier
+//Copyright (c) 2019-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -44,9 +44,9 @@ namespace HitCounterManager
             InitializeComponent();
             foreach (DataGridViewColumn col in DataGridView1.Columns)
             {
-                if (ProfileDataGridViewSettings.ColumnWidths.ContainsKey(col.Name))
+                if (ProfileDataGridViewSettings.ColumnWidths.TryGetValue(col.Name, out var width))
                 {
-                    col.Width = ProfileDataGridViewSettings.ColumnWidths[col.Name];
+                    col.Width = width;
                 }
             }
             ProfileDataGridViewSettings.ColumnWidthsChangeEnabled = true;
@@ -99,9 +99,9 @@ namespace HitCounterManager
             ProfileDataGridViewSettings.ColumnWidthsChangeEnabled = false;
             foreach (DataGridViewColumn col in DataGridView1.Columns)
             {
-                if (ProfileDataGridViewSettings.ColumnWidths.ContainsKey(col.Name))
+                if (ProfileDataGridViewSettings.ColumnWidths.TryGetValue(col.Name, out var width))
                 {
-                    col.Width = ProfileDataGridViewSettings.ColumnWidths[col.Name];
+                    col.Width = width;
                 }
             }
             ProfileDataGridViewSettings.ColumnWidthsChangeEnabled = true;
@@ -187,7 +187,7 @@ namespace HitCounterManager
     public static class ProfileDataGridViewSettings
     {
         public static bool ColumnWidthsChangeEnabled = true;
-        public static Dictionary<string, int> ColumnWidths = new Dictionary<string, int>(){
+        public static Dictionary<string, int> ColumnWidths = new (){
             { "cTitle", 300 },
             { "cHits", 50 },
             { "cWayHits", 50 },
@@ -233,10 +233,9 @@ namespace HitCounterManager
             if (e.ColumnIndex != Rows[0].Cells["cTitle"].ColumnIndex)
             {
                 // We expect integers only here, so either it is of type int or can be converted
-                if (!(e.FormattedValue is int))
+                if (e.FormattedValue is not int)
                 {
-                    int i;
-                    if (!int.TryParse((string)e.FormattedValue, out i))
+                    if (!int.TryParse((string)e.FormattedValue, out _))
                     {
                         e.Cancel = true;
                         MessageBox.Show("Must be numeric!");
@@ -305,7 +304,7 @@ namespace HitCounterManager
                         // this is the first and only combination that works in Windows and Mono..
                         DataGridViewCheckBoxCell SelectedCell = (DataGridViewCheckBoxCell)cell;
                         ProfileUpdateBegin();
-                        SelectedCell.Value = !(SelectedCell.Value == null ? /*not set yet, so it's not checked*/ false : (bool)SelectedCell.Value); // will fire CellValueChanged
+                        SelectedCell.Value = SelectedCell.Value != null && (bool)SelectedCell.Value; // will fire CellValueChanged
                         EndEdit();
                         ClearSelection();
                         Rows[SelectedCell.RowIndex].Cells[SelectedCell.ColumnIndex].Selected = true;
@@ -417,7 +416,7 @@ namespace HitCounterManager
         public void AddSplit(string Title, int Hits, int WayHits, int PB, long Duration, long DurationPB, long DurationGold)
         {
             ProfileUpdateBegin();
-            Rows[Rows.Add(new object[] { Title, Hits, WayHits, Hits + WayHits - PB, PB, false })].Tag = new HiddenRowData(Duration, DurationPB, DurationGold);
+            Rows[Rows.Add([Title, Hits, WayHits, Hits + WayHits - PB, PB, false])].Tag = new HiddenRowData(Duration, DurationPB, DurationGold);
             ProfileUpdateEnd();
         }
         public void InsertSplit()
@@ -539,11 +538,10 @@ namespace HitCounterManager
                 ProfileUpdateBegin();
                 for (int i = 0; i <= Columns.Count - 1; i++)
                 {
-                    object cell = Rows[Index].Cells[i].Value;
-                    Rows[Index].Cells[i].Value = Rows[IndexDst].Cells[i].Value;
-                    Rows[IndexDst].Cells[i].Value = cell;
+                    // Swap
+                    (Rows[IndexDst].Cells[i].Value, Rows[Index].Cells[i].Value) = (Rows[Index].Cells[i].Value, Rows[IndexDst].Cells[i].Value);
                 }
-                
+
                 HiddenRowData data = (HiddenRowData)Rows[Index].Tag;
                 Rows[Index].Tag = Rows[IndexDst].Tag;
                 Rows[IndexDst].Tag = data;
@@ -688,8 +686,10 @@ namespace HitCounterManager
             {
                 if (null != ProfileChanged)
                 {
-                    ProfileChangedEventArgs args = new ProfileChangedEventArgs();
-                    args.RunCompleted = RunCompleted;
+                    ProfileChangedEventArgs args = new()
+                    {
+                        RunCompleted = RunCompleted
+                    };
                     RunCompleted = false;
                     ProfileChanged(this, args);
                 }

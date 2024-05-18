@@ -194,9 +194,7 @@ namespace HitCounterManager
 
         private void ProfileChangedHandler(object sender, EventArgs e)
         {
-            int TotalSplits, TotalActiveSplit, TotalHits, TotalHitsWay, TotalPB;
-            long TotalTime;
-            profCtrl.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out TotalHits, out TotalHitsWay, out TotalPB, out TotalTime, false);
+            profCtrl.GetCalculatedSums(out int TotalSplits, out int TotalActiveSplit, out int TotalHits, out int TotalHitsWay, out int TotalPB, out long TotalTime, false);
             TotalTime /= 1000; // we only care about seconds
 
             lbl_progress.Text = "Progress:  " + TotalActiveSplit + " / " + TotalSplits + "  # " + profCtrl.CurrentAttempts.ToString("D3");
@@ -268,7 +266,7 @@ namespace HitCounterManager
                 GetGames = AutoSplitterMainModuleType.GetMethod("GetGames");
                 AutoSplitterLoaded = true;
 
-                LoadAutoSplitterSettings.Invoke(AutoSplitterInstance, new object[] { profCtrl, this });
+                LoadAutoSplitterSettings.Invoke(AutoSplitterInstance, [profCtrl, this]);
                 List<string> GameList = (List<string>)GetGames.Invoke(AutoSplitterInstance, null);
                 foreach (string i in GameList) comboBoxGame.Items.Add(i);
                 comboBoxGame.SelectedIndex = (int)GetSplitterEnable.Invoke(AutoSplitterInstance, null);
@@ -280,27 +278,27 @@ namespace HitCounterManager
 
         private void btnAutoSplitter_Click(object sender, EventArgs e)
         {
-            if (AutoSplitterLoaded) AutoSplitterForm.Invoke(AutoSplitterInstance, new[] { (object)Program.DarkMode });
+            if (AutoSplitterLoaded) AutoSplitterForm.Invoke(AutoSplitterInstance, [(object)Program.DarkMode]);
         }
 
         private void TogglePracticeMode()
         {
             PracticeModeCheck.Checked = !PracticeModeCheck.Checked;
-            SetPracticeMode.Invoke(AutoSplitterInstance, new object[] { (object)PracticeModeCheck.Checked });
+            SetPracticeMode.Invoke(AutoSplitterInstance, [(object)PracticeModeCheck.Checked]);
         }
 
         private void PracticeModeCheck_CheckedChanged(object sender, EventArgs e)
         {
-            if (AutoSplitterLoaded) SetPracticeMode.Invoke(AutoSplitterInstance, new object[] { (object)PracticeModeCheck.Checked });
+            if (AutoSplitterLoaded) SetPracticeMode.Invoke(AutoSplitterInstance, [(object)PracticeModeCheck.Checked]);
         }
 
         private void comboBoxGame_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Disable all games
-            EnableSplitting.Invoke(AutoSplitterInstance, new object[] { 0 });
+            EnableSplitting.Invoke(AutoSplitterInstance, [0]);
 
             //Ask Selected index
-            EnableSplitting.Invoke(AutoSplitterInstance, new object[] { comboBoxGame.SelectedIndex });
+            EnableSplitting.Invoke(AutoSplitterInstance, [comboBoxGame.SelectedIndex]);
         }
 
         //To update when change Profile 

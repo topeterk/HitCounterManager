@@ -63,7 +63,7 @@ namespace HitCounterManager
         public string HistorySplitTitle = "Previous";
         public bool HistorySplitVisible = false;
         public bool IntegrateIntoProgressBar = false;
-        public List<SuccessionEntry> SuccessionList = new List<SuccessionEntry>();
+        public List<SuccessionEntry> SuccessionList = [];
     }
 
     /// <summary>
@@ -77,7 +77,7 @@ namespace HitCounterManager
         public int MainHeight;
         public int MainPosX;
         public int MainPosY;
-        public List<SerializableKeyPair<string, int>> ColWidths = new List<SerializableKeyPair<string, int>>();
+        public List<SerializableKeyPair<string, int>> ColWidths = [];
         public bool ReadOnlyMode;
         public bool AlwaysOnTop;
         public bool DarkMode;
@@ -155,9 +155,9 @@ namespace HitCounterManager
         public int SuccessionHits;     // obsolete since version 7 - keep for backwards compatibility (will be calculated, now)
         public int SuccessionHitsWay;  // obsolete since version 7 - keep for backwards compatibility (will be calculated, now)
         public int SuccessionHitsPB;   // obsolete since version 7 - keep for backwards compatibility (will be calculated, now)
-        public Succession Succession = new Succession();
+        public Succession Succession = new();
         public string ProfileSelected; // obsolete since version 7 - keep for backwards compatibility (use Succession.SuccessionList[0].ProfileSelected instead)
-        public Profiles Profiles = new Profiles();
+        public Profiles Profiles = new();
     }
 
     public partial class Form1 : Form
@@ -170,8 +170,10 @@ namespace HitCounterManager
         /// </summary>
         private bool LoadHotKeySettings(SC_Type Type, int KeyCode, bool Enable)
         {
-            ShortcutsKey key = new ShortcutsKey();
-            key.key = new KeyEventArgs((Keys)KeyCode);
+            ShortcutsKey key = new()
+            {
+                key = new KeyEventArgs((Keys)KeyCode)
+            };
             if (Enable)
             {
                 sc.Key_Set(Type, key);
@@ -203,7 +205,9 @@ namespace HitCounterManager
                 baseVersion = _settings.Version; // successfully loaded Save or Init file, so remember original version for upgrade
             else
             {
-                _settings = new SettingsRoot();
+#pragma warning disable IDE0017
+                _settings = new();
+#pragma warning restore IDE0017
 
                 // prepare defaults..
                 _settings.Version = 0;
@@ -296,9 +300,9 @@ namespace HitCounterManager
                 _settings.AlwaysOnTop = false;
 
                 // Only enable progress bar when new settings were created
-                _settings.ShowProgressBar = (baseVersion < 0 ? true : false);
+                _settings.ShowProgressBar = baseVersion < 0;
                 // Introduced with true in version 5, keep user setting when this version was used
-                _settings.StyleProgressBarColored = (baseVersion == 5 ? true : false);
+                _settings.StyleProgressBarColored = baseVersion == 5;
             }
             if (_settings.Version == 6) // Coming from version 1.18
             {
@@ -311,13 +315,15 @@ namespace HitCounterManager
                 _settings.StyleUseRoman = false;
                 _settings.StyleHightlightCurrentSplit = false;
                 // Only enable progress bar integration of succession when new settings were created
-                _settings.Succession.IntegrateIntoProgressBar = (baseVersion < 0 ? true : false);
+                _settings.Succession.IntegrateIntoProgressBar = baseVersion < 0;
                 // Create succession with only one entry (there was only one available in older versions)
-                SuccessionEntry suc_entry = new SuccessionEntry();
-                suc_entry.ProfileSelected = _settings.ProfileSelected;
+                SuccessionEntry suc_entry = new()
+                {
+                    ProfileSelected = _settings.ProfileSelected
+                };
                 _settings.Succession.SuccessionList.Add(suc_entry);
                 // Introduced with false in version 6, keep user setting when this version was used
-                _settings.StyleProgressBarColored = (baseVersion == 6 ? false : true);
+                _settings.StyleProgressBarColored = baseVersion != 6;
             }
             if (_settings.Version == 7) // Coming from version 1.19
             {
@@ -327,7 +333,7 @@ namespace HitCounterManager
                 // Only use latest hot key method as default when new settings were created
                 if (baseVersion < 0) _settings.HotKeyMethod = (int)Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb;
                 // Only enable time column when new settings were created
-                _settings.ShowTimeCurrent = (baseVersion < 0 ? true : false);
+                _settings.ShowTimeCurrent = baseVersion < 0;
                 _settings.ShowHits = true;
                 _settings.ShowDiff = _settings.ShowPB; // was combined in previous versions
                 _settings.ShowTimePB = false;
@@ -400,15 +406,19 @@ namespace HitCounterManager
             if (_settings.Profiles.ProfileList.Count == 0)
             {
                 // There is no profile at all, initially create a clean one
-                Profile unnamed = new Profile();
-                unnamed.Name = "Unnamed";
+                Profile unnamed = new()
+                {
+                    Name = "Unnamed"
+                };
                 _settings.Profiles.ProfileList.Add(unnamed);
             }
             if (_settings.Succession.SuccessionList.Count == 0)
             {
                 // There is no succession at all create an empty succession
-                SuccessionEntry first = new SuccessionEntry();
-                first.ProfileSelected = _settings.Profiles.ProfileList[0].Name;
+                SuccessionEntry first = new()
+                {
+                    ProfileSelected = _settings.Profiles.ProfileList[0].Name
+                };
                 _settings.Succession.SuccessionList.Add(first);
             }
             if (_settings.Succession.SuccessionList.Count <= _settings.Succession.ActiveIndex) _settings.Succession.ActiveIndex = 0;
@@ -455,8 +465,6 @@ namespace HitCounterManager
         /// </summary>
         private void SaveSettings()
         {
-            ShortcutsKey key = new ShortcutsKey();
-
             // Remember window position and sates
             if (this.WindowState == FormWindowState.Normal) // Don't save window size and location when maximized or minimized
             {
@@ -479,75 +487,77 @@ namespace HitCounterManager
             }
 
             // Store hot keys..
-            _settings.HotKeyMethod = (int)sc.NextStart_Method;
-            key = sc.Key_Get(SC_Type.SC_Type_Reset);
-            _settings.ShortcutResetEnable = key.used;
-            _settings.ShortcutResetKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(SC_Type.SC_Type_Hit);
-            _settings.ShortcutHitEnable = key.used;
-            _settings.ShortcutHitKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(SC_Type.SC_Type_HitUndo);
-            _settings.ShortcutHitUndoEnable = key.used;
-            _settings.ShortcutHitUndoKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(SC_Type.SC_Type_WayHit);
-            _settings.ShortcutWayHitEnable = key.used;
-            _settings.ShortcutWayHitKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(SC_Type.SC_Type_WayHitUndo);
-            _settings.ShortcutWayHitUndoEnable = key.used;
-            _settings.ShortcutWayHitUndoKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(SC_Type.SC_Type_Split);
-            _settings.ShortcutSplitEnable = key.used;
-            _settings.ShortcutSplitKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(SC_Type.SC_Type_SplitPrev);
-            _settings.ShortcutSplitPrevEnable = key.used;
-            _settings.ShortcutSplitPrevKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(SC_Type.SC_Type_PB);
-            _settings.ShortcutPBEnable = key.used;
-            _settings.ShortcutPBKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(SC_Type.SC_Type_TimerStart);
-            _settings.ShortcutTimerStartEnable = key.used;
-            _settings.ShortcutTimerStartKeyCode = (int)key.key.KeyData;
-            key = sc.Key_Get(SC_Type.SC_Type_TimerStop);
-            _settings.ShortcutTimerStopEnable = key.used;
-            _settings.ShortcutTimerStopKeyCode = (int)key.key.KeyData;
-            #region AutoSplitter
-            if (AutoSplitterLoaded)
+            if (Shortcuts.IsGlobalHotKeySupported)
             {
-                key = sc.Key_Get(SC_Type.SC_Type_Practice);
-                _settings.ShortcutPracticeEnable = key.used;
-                _settings.ShortcutPracticeKeyCode = (int)key.key.KeyData;
-                key = sc.Key_Get(SC_Type.SC_Type_HitBossPrev);
-                _settings.ShortcutHitBossPrevEnable = key.used;
-                _settings.ShortcutHitBossPrevKeyCode = (int)key.key.KeyData;
-                key = sc.Key_Get(SC_Type.SC_Type_HitWayPrev);
-                _settings.ShortcutHitWayPrevEnable = key.used;
-                _settings.ShortcutHitWayPrevKeyCode = (int)key.key.KeyData;
-                key = sc.Key_Get(SC_Type.SC_Type_BossHitUndoPrev);
-                _settings.ShortcutBossHitUndoPrevEnable = key.used;
-                _settings.ShortcutBossHitUndoPrevKeyCode = (int)key.key.KeyData;
-                key = sc.Key_Get(SC_Type.SC_Type_WayHitUndoPrev);
-                _settings.ShortcutWayHitUndoPrevEnable = key.used;
-                _settings.ShortcutWayHitUndoPrevKeyCode = (int)key.key.KeyData;
+                ShortcutsKey key;
+                _settings.HotKeyMethod = (int)sc.NextStart_Method;
+                key = sc.Key_Get(SC_Type.SC_Type_Reset);
+                _settings.ShortcutResetEnable = key.Used;
+                _settings.ShortcutResetKeyCode = (int)key.key.KeyData;
+                key = sc.Key_Get(SC_Type.SC_Type_Hit);
+                _settings.ShortcutHitEnable = key.Used;
+                _settings.ShortcutHitKeyCode = (int)key.key.KeyData;
+                key = sc.Key_Get(SC_Type.SC_Type_HitUndo);
+                _settings.ShortcutHitUndoEnable = key.Used;
+                _settings.ShortcutHitUndoKeyCode = (int)key.key.KeyData;
+                key = sc.Key_Get(SC_Type.SC_Type_WayHit);
+                _settings.ShortcutWayHitEnable = key.Used;
+                _settings.ShortcutWayHitKeyCode = (int)key.key.KeyData;
+                key = sc.Key_Get(SC_Type.SC_Type_WayHitUndo);
+                _settings.ShortcutWayHitUndoEnable = key.Used;
+                _settings.ShortcutWayHitUndoKeyCode = (int)key.key.KeyData;
+                key = sc.Key_Get(SC_Type.SC_Type_Split);
+                _settings.ShortcutSplitEnable = key.Used;
+                _settings.ShortcutSplitKeyCode = (int)key.key.KeyData;
+                key = sc.Key_Get(SC_Type.SC_Type_SplitPrev);
+                _settings.ShortcutSplitPrevEnable = key.Used;
+                _settings.ShortcutSplitPrevKeyCode = (int)key.key.KeyData;
+                key = sc.Key_Get(SC_Type.SC_Type_PB);
+                _settings.ShortcutPBEnable = key.Used;
+                _settings.ShortcutPBKeyCode = (int)key.key.KeyData;
+                key = sc.Key_Get(SC_Type.SC_Type_TimerStart);
+                _settings.ShortcutTimerStartEnable = key.Used;
+                _settings.ShortcutTimerStartKeyCode = (int)key.key.KeyData;
+                key = sc.Key_Get(SC_Type.SC_Type_TimerStop);
+                _settings.ShortcutTimerStopEnable = key.Used;
+                _settings.ShortcutTimerStopKeyCode = (int)key.key.KeyData;
+                #region AutoSplitter
+                if (AutoSplitterLoaded)
+                {
+                    key = sc.Key_Get(SC_Type.SC_Type_Practice);
+                    _settings.ShortcutPracticeEnable = key.Used;
+                    _settings.ShortcutPracticeKeyCode = (int)key.key.KeyData;
+                    key = sc.Key_Get(SC_Type.SC_Type_HitBossPrev);
+                    _settings.ShortcutHitBossPrevEnable = key.Used;
+                    _settings.ShortcutHitBossPrevKeyCode = (int)key.key.KeyData;
+                    key = sc.Key_Get(SC_Type.SC_Type_HitWayPrev);
+                    _settings.ShortcutHitWayPrevEnable = key.Used;
+                    _settings.ShortcutHitWayPrevKeyCode = (int)key.key.KeyData;
+                    key = sc.Key_Get(SC_Type.SC_Type_BossHitUndoPrev);
+                    _settings.ShortcutBossHitUndoPrevEnable = key.Used;
+                    _settings.ShortcutBossHitUndoPrevKeyCode = (int)key.key.KeyData;
+                    key = sc.Key_Get(SC_Type.SC_Type_WayHitUndoPrev);
+                    _settings.ShortcutWayHitUndoPrevEnable = key.Used;
+                    _settings.ShortcutWayHitUndoPrevKeyCode = (int)key.key.KeyData;
+                }
+                else
+                {
+                    _settings.ShortcutPracticeEnable = false;
+                    _settings.ShortcutPracticeKeyCode = 0;
+                    _settings.ShortcutHitBossPrevEnable = false;
+                    _settings.ShortcutHitBossPrevKeyCode = 0;
+                    _settings.ShortcutHitWayPrevEnable = false;
+                    _settings.ShortcutHitWayPrevKeyCode = 0;
+                    _settings.ShortcutBossHitUndoPrevEnable = false;
+                    _settings.ShortcutBossHitUndoPrevKeyCode = 0;
+                    _settings.ShortcutWayHitUndoPrevEnable = false;
+                    _settings.ShortcutWayHitUndoPrevKeyCode = 0;
+                }
+                #endregion
             }
-            else
-            {
-                _settings.ShortcutPracticeEnable = false;
-                _settings.ShortcutPracticeKeyCode = 0;
-                _settings.ShortcutHitBossPrevEnable = false;
-                _settings.ShortcutHitBossPrevKeyCode = 0;
-                _settings.ShortcutHitWayPrevEnable = false;
-                _settings.ShortcutHitWayPrevKeyCode = 0;
-                _settings.ShortcutBossHitUndoPrevEnable = false;
-                _settings.ShortcutBossHitUndoPrevKeyCode = 0;
-                _settings.ShortcutWayHitUndoPrevEnable = false;
-                _settings.ShortcutWayHitUndoPrevKeyCode = 0;
-            }
-            #endregion
 
             // Store customizing..
-            int TotalSplits, TotalActiveSplit, SuccessionHits, SuccessionHitsWay, SuccessionHitsPB;
-            long TotalTime;
-            profCtrl.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out SuccessionHits, out SuccessionHitsWay, out SuccessionHitsPB, out TotalTime, true);
+            profCtrl.GetCalculatedSums(out int TotalSplits, out int TotalActiveSplit, out int SuccessionHits, out int SuccessionHitsWay, out int SuccessionHitsPB, out long TotalTime, true);
             _settings.SuccessionHits = SuccessionHits;                                          // obsolete since version 7 - keep for backwards compatibility
             _settings.SuccessionHitsWay = SuccessionHitsWay;                                    // obsolete since version 7 - keep for backwards compatibility
             _settings.SuccessionHitsPB = SuccessionHitsPB;                                      // obsolete since version 7 - keep for backwards compatibility

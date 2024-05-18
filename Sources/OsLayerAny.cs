@@ -62,7 +62,7 @@ namespace HitCounterManager
         /// </summary>
         /// <param name="KeyCode">Key name to gather</param>
         /// <returns>Key name</returns>
-        public static string GetKeyName(int KeyCode) { return "?"; }
+        public static string GetKeyName(int KeyCode) { return "(?)"; }
 
         /// <summary>
         /// Registers a hot key

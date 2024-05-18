@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2022 Peter Kirmeier
+//Copyright (c) 2016-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,10 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+
+#if SHOW_COMPILER_VERSION // enable and hover over #error to see C# compiler version and the used language version
+#error version
+#endif
 
 namespace HitCounterManager
 {
@@ -59,8 +63,8 @@ namespace HitCounterManager
         ///          FALSE = Window is not visible on any screen.</returns>
         public static bool IsOnScreen(int Left, int Top, int Width, int Threshold = 10, int RectSize = 30)
         {
-            System.Drawing.Rectangle rectLeft = new System.Drawing.Rectangle(Left + Threshold, Top + Threshold, RectSize, RectSize); // upper left corner
-            System.Drawing.Rectangle rectRight = new System.Drawing.Rectangle(Left + Width - Threshold - RectSize, Top + Threshold, RectSize, RectSize); // upper right corner
+            Rectangle rectLeft = new (Left + Threshold, Top + Threshold, RectSize, RectSize); // upper left corner
+            Rectangle rectRight = new (Left + Width - Threshold - RectSize, Top + Threshold, RectSize, RectSize); // upper right corner
             foreach (Screen screen in Screen.AllScreens)
             {
                 // at least one of the edges must be present on any screen
@@ -78,7 +82,6 @@ namespace HitCounterManager
         private static Color ControlText_Light = Color.FromKnownColor(KnownColor.ControlText);
         private static Color ControlText_Dark = Color.FromKnownColor(KnownColor.HighlightText);
         private static Color ControlText_Light_GroupBox = Color.FromKnownColor(KnownColor.HighlightText);
-        private static Color ControlText_Light_DataGridView_Mono = Color.FromKnownColor(KnownColor.HighlightText);
 
         private static Color AppWorkspace_Light = Color.FromKnownColor(KnownColor.AppWorkspace);
         private static Color AppWorkspace_Dark = Control_Dark;
@@ -106,7 +109,6 @@ namespace HitCounterManager
 
                 ControlText_Light = Color.FromKnownColor(KnownColor.ControlText);
                 ControlText_Light_GroupBox = Color.FromKnownColor(KnownColor.HighlightText);
-                ControlText_Light_DataGridView_Mono = Color.FromKnownColor(KnownColor.HighlightText);
                 ControlText_Dark = Color.FromKnownColor(KnownColor.HighlightText);
 
                 AppWorkspace_Light = Color.FromKnownColor(KnownColor.AppWorkspace);
@@ -135,9 +137,8 @@ namespace HitCounterManager
                     {
                         if (ctrl.BackColor.Name == Control_Light.Name) ctrl.BackColor = Control_Dark_Button;
                     }
-                    else if (ctrl is DataGridView)
+                    else if (ctrl is DataGridView dgv)
                     {
-                        DataGridView dgv = (DataGridView)ctrl;
                         DataGridViewCellStyle dcs = dgv.DefaultCellStyle;
                         if (dgv.BackgroundColor.Name == AppWorkspace_Light.Name) dgv.BackgroundColor = AppWorkspace_Dark;
                         if (dcs.BackColor.Name == Window_Light.Name) dcs.BackColor = Window_Dark;
@@ -152,9 +153,8 @@ namespace HitCounterManager
                         if (dgv.ColumnHeadersDefaultCellStyle.BackColor.Name == Control_Light.Name) dgv.ColumnHeadersDefaultCellStyle.BackColor = Control_Dark;
                         if (dgv.ColumnHeadersDefaultCellStyle.ForeColor.Name == Window_Dark.Name) dgv.ColumnHeadersDefaultCellStyle.ForeColor = ControlText_Dark;
                     }
-                    else if (ctrl is TextBox)
+                    else if (ctrl is TextBox tb)
                     {
-                        TextBox tb = (TextBox)ctrl;
                         if (tb.ReadOnly)
                         {
                             if (ctrl.BackColor.Name == Window_Light.Name) ctrl.BackColor = Window_Dark;
@@ -191,9 +191,8 @@ namespace HitCounterManager
                     {
                         if (ctrl.BackColor.Name == Control_Dark_Button.Name) ctrl.BackColor = Control_Light;
                     }
-                    else if (ctrl is DataGridView)
+                    else if (ctrl is DataGridView dgv)
                     {
-                        DataGridView dgv = (DataGridView)ctrl;
                         DataGridViewCellStyle dcs = dgv.DefaultCellStyle;
                         if (dgv.BackgroundColor.Name == AppWorkspace_Dark.Name) dgv.BackgroundColor = AppWorkspace_Light;
                         if (dcs.BackColor.Name == Window_Dark.Name) dcs.BackColor = Window_Light;
@@ -208,9 +207,8 @@ namespace HitCounterManager
                         if (dgv.ColumnHeadersDefaultCellStyle.BackColor.Name == Control_Dark.Name) dgv.ColumnHeadersDefaultCellStyle.BackColor = Control_Light;
                         if (dgv.ColumnHeadersDefaultCellStyle.ForeColor.Name == ControlText_Dark.Name) dgv.ColumnHeadersDefaultCellStyle.ForeColor = Window_Dark;
                     }
-                    else if (ctrl is TextBox)
+                    else if (ctrl is TextBox tb)
                     {
-                        TextBox tb = (TextBox)ctrl;
                         if (tb.ReadOnly)
                         {
                             if (ctrl.BackColor.Name == Window_Dark.Name) ctrl.BackColor = Window_Light;
@@ -227,7 +225,7 @@ namespace HitCounterManager
 
                     // Foreground..
 
-                    if (!(ctrl is Button))
+                    if (ctrl is not Button)
                     {
                         if (ctrl.ForeColor.Name == ControlText_Dark.Name) ctrl.ForeColor = ControlText_Light;
                     }
@@ -255,45 +253,54 @@ namespace HitCounterManager
             /// <param name="DefaultResponse">Initial user input value</param>
             public static string InputBox(string Prompt, string Title = "", string DefaultResponse = "")
             {
-                Form inputBox = new Form();
+                Form inputBox = new()
+                {
+                    FormBorderStyle = FormBorderStyle.FixedDialog,
+                    ShowIcon = false,
+                    ShowInTaskbar = false,
+                    MaximizeBox = false,
+                    MinimizeBox = false,
+                    ClientSize = new (500, 80),
+                    Text = Title
+                };
 
-                inputBox.FormBorderStyle = FormBorderStyle.FixedDialog;
-                inputBox.ShowIcon = false;
-                inputBox.ShowInTaskbar = false;
-                inputBox.MaximizeBox = false;
-                inputBox.MinimizeBox = false;
-                inputBox.ClientSize = new System.Drawing.Size(500, 80);
-                inputBox.Text = Title;
-
-                Label label = new Label();
-                label.Size = new System.Drawing.Size(inputBox.ClientSize.Width - 10, 23);
-                label.Location = new System.Drawing.Point(5, 5);
-                label.Text = Prompt;
+                Label label = new()
+                {
+                    Size = new (inputBox.ClientSize.Width - 10, 23),
+                    Location = new (5, 5),
+                    Text = Prompt
+                };
                 inputBox.Controls.Add(label);
 
-                TextBox textBox = new TextBox();
-                textBox.Size = new System.Drawing.Size(inputBox.ClientSize.Width - 10, 23);
-                textBox.Location = new System.Drawing.Point(5, label.Location.Y + label.Size.Height + 10);
-                textBox.Text = DefaultResponse;
+                TextBox textBox = new()
+                {
+                    Size = new (inputBox.ClientSize.Width - 10, 23),
+                    Location = new (5, label.Location.Y + label.Size.Height + 10),
+                    Text = DefaultResponse
+                };
                 inputBox.Controls.Add(textBox);
 
-                Button okButton = new Button();
-                okButton.DialogResult = DialogResult.OK;
-                okButton.Name = "okButton";
-                okButton.Size = new System.Drawing.Size(75, 23);
-                okButton.Text = "&OK";
-                okButton.Location = new System.Drawing.Point(inputBox.ClientSize.Width - 80 - 80, textBox.Location.Y + textBox.Size.Height + 10);
+                Button okButton = new()
+                {
+                    DialogResult = DialogResult.OK,
+                    Name = "okButton",
+                    Size = new (75, 23),
+                    Text = "&OK",
+                    Location = new (inputBox.ClientSize.Width - 80 - 80, textBox.Location.Y + textBox.Size.Height + 10)
+                };
                 inputBox.Controls.Add(okButton);
 
-                Button cancelButton = new Button();
-                cancelButton.DialogResult = DialogResult.Cancel;
-                cancelButton.Name = "cancelButton";
-                cancelButton.Size = okButton.Size;
-                cancelButton.Text = "&Cancel";
-                cancelButton.Location = new System.Drawing.Point(inputBox.ClientSize.Width - 80, okButton.Location.Y);
+                Button cancelButton = new()
+                {
+                    DialogResult = DialogResult.Cancel,
+                    Name = "cancelButton",
+                    Size = okButton.Size,
+                    Text = "&Cancel",
+                    Location = new (inputBox.ClientSize.Width - 80, okButton.Location.Y)
+                };
                 inputBox.Controls.Add(cancelButton);
 
-                inputBox.ClientSize = new System.Drawing.Size(inputBox.ClientSize.Width, cancelButton.Location.Y + cancelButton.Size.Height + 5);
+                inputBox.ClientSize = new (inputBox.ClientSize.Width, cancelButton.Location.Y + cancelButton.Size.Height + 5);
                 inputBox.AcceptButton = okButton;
                 inputBox.CancelButton = cancelButton;
 

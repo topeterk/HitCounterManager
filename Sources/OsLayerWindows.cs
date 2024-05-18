@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2018-2021 Peter Kirmeier
+//Copyright (c) 2018-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,7 @@ using System.Runtime.InteropServices;
 
 namespace HitCounterManager
 {
+    /*[SupportedOSPlatform("Windows")]*/
     public static class OsLayer
     {
         /// <summary>
@@ -43,35 +44,51 @@ namespace HitCounterManager
 
         public delegate void TimerProc(IntPtr hWnd, uint uMsg, IntPtr nIDEvent, uint dwTime);
 
-        #region Windows API Imports
+        #region Windows API
 
-        [DllImport("User32.dll")]
-        private static extern short GetAsyncKeyState(int vKey);
+        // Datatypes: https://docs.microsoft.com/en-us/windows/win32/winprog/windows-data-types
 
-        [DllImport("User32.dll")]
-        private static extern int MapVirtualKey(int uCode, int uMapType);
+        #region Window Message Hook
 
-        [DllImport("User32.dll", CharSet = CharSet.Unicode)]
-        private static extern int GetKeyNameTextW(int lParam, string lpBuffer, int nSize);
+        private const int WH_KEYBOARD_LL = 13;
 
-        [DllImport("User32.dll")]
-        private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, int vk);
-
-        [DllImport("User32.dll")]
-        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-
-
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr GetModuleHandle(string lpModuleName);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        /// <summary>
+        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexw
+        /// </summary>
+        /// <param name="idHook">int</param>
+        /// <param name="lpfn">HOOKPROC</param>
+        /// <param name="hMod">HINSTANCE = HANDLE = PVOID = void*</param>
+        /// <param name="dwThreadId">DWORD = unsigned long</param>
+        /// <returns>HHOOK = HANDLE = PVOID = void*</returns>
+        [DllImport("User32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
         private static extern IntPtr SetWindowsHookEx(int idHook, HookProc lpfn, IntPtr hMod, uint dwThreadId);
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern bool UnhookWindowsHookEx(IntPtr hhk);
+        /// <summary>
+        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unhookwindowshookex
+        /// </summary>
+        /// <param name="hhk">HHOOK = HANDLE = PVOID = void*</param>
+        /// <returns>BOOL = int</returns>
+        [DllImport("User32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
+        private static extern int UnhookWindowsHookEx(IntPtr hhk);
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        /// <summary>
+        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-callnexthookex
+        /// </summary>
+        /// <param name="hhk">HHOOK = HANDLE = PVOID = void*</param>
+        /// <param name="nCode">int</param>
+        /// <param name="wParam">WPARAM = UINT_PTR = __int64 or long</param>
+        /// <param name="lParam">LPARAM = LONG_PTR = __int64 or long</param>
+        /// <returns>LRESULT = LONG_PTR = __int64 or long</returns>
+        [DllImport("User32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
         private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
+
+        /// <summary>
+        /// https://docs.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandlew
+        /// </summary>
+        /// <param name="lpModuleName">LPCWSTR = CONST WCHAR * = const wchar_t *</param>
+        /// <returns>HMODULE = HINSTANCE = HANDLE = PVOID = void*</returns>
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
+        private static extern IntPtr GetModuleHandleW(string lpModuleName);
 
 
         [DllImport("User32.dll")]
@@ -80,146 +97,18 @@ namespace HitCounterManager
         [DllImport("User32.dll")]
         private static extern bool KillTimer(IntPtr hWnd, IntPtr nIDEvent);
 
-        [DllImport("User32.dll")]
-        private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        /// <summary>
+        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagew
+        /// </summary>
+        /// <param name="hWnd">HWND = HANDLE = PVOID = void*</param>
+        /// <param name="Msg">UINT = unsigned int</param>
+        /// <param name="wParam">WPARAM = UINT_PTR = __int64 or long</param>
+        /// <param name="lParam">LPARAM = LONG_PTR = __int64 or long</param>
+        /// <returns>LRESULT = LONG_PTR = __int64 or long</returns>
+        [DllImport("User32.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
+        private static extern IntPtr SendMessageW(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
         #endregion
-
-        /// <summary>
-        /// Indicates if this OS is capable of global hotkeys
-        /// </summary>
-        public const bool GlobalHotKeySupport = true;
-
-        private const int MAPVK_VK_TO_VSC = 0;
-        private const int KEY_PRESSED_NOW = 0x8000;
-        private const int WM_HOTKEY = 0x0312;
-        private const int WM_KEYDOWN = 0x0100;
-        private const int WM_KEYUP = 0x0101;
-        private const int WM_SYSKEYDOWN = 0x0104;
-        private const int WM_SYSKEYUP = 0x0105;
-        private const int WH_KEYBOARD_LL = 13;
-        private const int HC_ACTION = 0;
-        private const int KF_ALTDOWN = 0x2000;
-        private const int KF_UP = 0x8000;
-        private const int LLKHF_ALTDOWN = (KF_ALTDOWN >> 8);
-        private const int LLKHF_UP = (KF_UP >> 8);
-
-        private delegate IntPtr HookProc(int nCode, IntPtr wParam, IntPtr lParam);
-        private static readonly HookProc _HookProc = new HookProc(HookCallback); // prevent garbage collector freeing up the callback
-        private static IntPtr _HookId = IntPtr.Zero;
-        private static bool[] KeyStates = new bool[256];
-
-        /// <summary>
-        /// Checks if a given key is pressed right now.
-        /// Key state is read at the moment of this call when the low level keybaord events are disabled.
-        /// Gets the key state from internal cache when the low level keybaord events are enabled.
-        /// </summary>
-        /// <param name="KeyCode">The key to check</param>
-        /// <returns>true = pressed, false = released</returns>
-        public static bool IsKeyPressedAsync(int KeyCode)
-        {
-            if ((_HookId != IntPtr.Zero) && (KeyStates.Length < KeyCode))
-            {
-                // use the values from the low level keyboard hook instead
-                return KeyStates[KeyCode];
-            }
-
-            return (0 != (GetAsyncKeyState(KeyCode) & KEY_PRESSED_NOW));
-        }
-        /// <summary>
-        /// Retrieves the name of a given key
-        /// </summary>
-        /// <param name="KeyCode">Key name to gather</param>
-        /// <returns>Key name</returns>
-        public static string GetKeyName(int KeyCode)
-        {
-            string lpKeyNameString = new string('\0', 256);
-            int lParam = MapVirtualKey(KeyCode, MAPVK_VK_TO_VSC) << 16;
-            if (0 == GetKeyNameTextW(lParam, lpKeyNameString, lpKeyNameString.Length))
-                lpKeyNameString = "?";
-            return lpKeyNameString;
-        }
-
-        /// <summary>
-        /// Registers a hot key
-        /// </summary>
-        /// <param name="WindowHandle">Window handle that is receiving the hotkey message</param>
-        /// <param name="HotKeyID">Custom ID for the hotkey</param>
-        /// <param name="Modifiers">Key modifiers</param>
-        /// <param name="KeyCode">Key to register</param>
-        /// <returns>Success state</returns>
-        public static bool SetHotKey(IntPtr WindowHandle, int HotKeyID, uint Modifiers, int KeyCode)
-        {
-            return RegisterHotKey(WindowHandle, HotKeyID, Modifiers, KeyCode);
-        }
-
-        /// <summary>
-        /// Unregisters a hot key
-        /// </summary>
-        /// <param name="WindowHandle">Window handle that is receiving the hotkey message</param>
-        /// <param name="HotKeyID">Custom ID for the hotkey</param>
-        /// <returns>Success state</returns>
-        public static bool KillHotKey(IntPtr WindowHandle, int HotKeyID)
-        {
-            return UnregisterHotKey(WindowHandle, HotKeyID);
-        }
-
-        private static IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
-        {
-            if (HC_ACTION == nCode)
-            {
-                switch((int)wParam)
-                {
-                    case WM_KEYDOWN:
-                    case WM_KEYUP:
-                    case WM_SYSKEYDOWN:
-                    case WM_SYSKEYUP:
-                        {
-                            int KeyCode = Marshal.ReadInt32(lParam); // KBDLLHOOKSTRUCT.vkCode
-                            int flags = Marshal.ReadInt32(lParam, 8); // KBDLLHOOKSTRUCT.flags
-
-                            if (KeyStates.Length <= KeyCode) break; // Invalid value
-
-                            bool isPressed = ((flags & LLKHF_UP) == 0 ? true : false); //transition state: 0 = pressed, 1 = released
-                            if (KeyStates[KeyCode] != isPressed) // drop this event, we already know this!
-                            {
-                                KeyStates[KeyCode] = isPressed;
-                                if (null != LowLevelKeyboardEvent) LowLevelKeyboardEvent(null, null); // Fire event
-                            }
-                        }
-                        break;
-                    default: break;
-                }
-            }
-            return CallNextHookEx(_HookId, nCode, wParam, lParam);
-        }
-
-        /// <summary>
-        /// Starts using the low level keyboard events.
-        /// This enables the LowLevelKeyboardEvent on the same thread that is calling this function.
-        /// The states for IsKeyPressedAsync will be taken from internal cache.
-        /// </summary>
-        /// <returns>Success state</returns>
-        public static bool StartKeyboardLowLevelHook()
-        {
-            if (_HookId != IntPtr.Zero) return false; // Only one instance supported
-
-            // Reset the keystates, as their correct states are collected on the way
-            for (int i = 0; i < KeyStates.Length; i++) KeyStates[i] = false;
-
-            _HookId = SetWindowsHookEx(WH_KEYBOARD_LL, _HookProc, GetModuleHandle(System.Diagnostics.Process.GetCurrentProcess().MainModule.ModuleName), 0);
-            return (_HookId == IntPtr.Zero ? false : true);
-        }
-
-        /// <summary>
-        /// Stops using the the low level keyboard events.
-        /// This disables the LowLevelKeyboardEvent
-        /// </summary>
-        /// <returns>Success state</returns>
-        public static bool StopKeyboardLowLevelHook()
-        {
-            return _HookId != IntPtr.Zero ? UnhookWindowsHookEx(_HookId) : true;
-        }
 
         /// <summary>
         /// Creates a timer repeatedly calling the callback upon timeout
@@ -254,8 +143,283 @@ namespace HitCounterManager
         /// <returns>Message result</returns>
         public static IntPtr SendHotKeyMessage(IntPtr WindowHandle, IntPtr wParam, IntPtr lParam)
         {
-            return SendMessage(WindowHandle, WM_HOTKEY, wParam, lParam);
+            return SendMessageW(WindowHandle, WM_HOTKEY, wParam, lParam);
         }
+
+        #endregion
+
+        #region Hot Key
+
+        /// <summary>
+        /// Indicates if this OS is capable of global hotkeys
+        /// </summary>
+        public const bool GlobalHotKeySupport = true;
+
+        private const int WM_HOTKEY = 0x0312;
+        private const int WM_KEYDOWN = 0x0100;
+        private const int WM_KEYUP = 0x0101;
+        private const int WM_SYSKEYDOWN = 0x0104;
+        private const int WM_SYSKEYUP = 0x0105;
+        private const int HC_ACTION = 0;
+        private const int KF_EXTENDED = 0x0100;
+        /*private const int KF_ALTDOWN = 0x2000;*/
+        private const int KF_UP = 0x8000;
+        /*private const int LLKHF_ALTDOWN = (KF_ALTDOWN >> 8);*/
+        private const int LLKHF_UP = (KF_UP >> 8);
+        private const int KEY_PRESSED_NOW = 0x8000;
+        private const uint MAPVK_VK_TO_VSC_EX = 4;
+
+        private delegate IntPtr HookProc(int nCode, IntPtr wParam, IntPtr lParam);
+        private static readonly HookProc _HookProc = new(HookCallback); // prevent garbage collector freeing up the callback
+        private static IntPtr _HookId = IntPtr.Zero;
+        private static readonly bool[] KeyStates = new bool[256];
+
+        /// <summary>
+        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-mapvirtualkeyw
+        /// </summary>
+        /// <param name="uCode">UINT = unsigned int</param>
+        /// <param name="uMapType">UINT = unsigned int</param>
+        /// <returns>UINT = unsigned int</returns>
+        [DllImport("User32.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
+        private static extern uint MapVirtualKeyW(uint uCode, uint uMapType);
+
+        /// <summary>
+        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getkeynametextw
+        /// </summary>
+        /// <param name="lParam">LONG = long</param>
+        /// <param name="lpBuffer">LPWSTR = CONST WCHAR * = const wchar_t *</param>
+        /// <param name="nSize">int</param>
+        /// <returns>int</returns>
+        [DllImport("User32.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
+        private static extern int GetKeyNameTextW(int lParam, string lpBuffer, int nSize);
+
+        /// <summary>
+        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerhotkey
+        /// </summary>
+        /// <param name="hWnd">HWND = HANDLE = PVOID = void*</param>
+        /// <param name="id">int</param>
+        /// <param name="fsModifiers">UINT = unsigned int</param>
+        /// <param name="vk">UINT = unsigned int</param>
+        /// <returns>BOOL = int</returns>
+        [DllImport("User32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
+        private static extern int RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
+
+        /// <summary>
+        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unregisterhotkey
+        /// </summary>
+        /// <param name="hWnd">HWND = HANDLE = PVOID = void*</param>
+        /// <param name="id">int </param>
+        /// <returns>BOOL = int</returns>
+        [DllImport("User32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
+        private static extern int UnregisterHotKey(IntPtr hWnd, int id);
+
+        /// <summary>
+        /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getasynckeystate
+        /// </summary>
+        /// <param name="vKey">int</param>
+        /// <returns>SHORT = short</returns>
+        [DllImport("User32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
+        private static extern short GetAsyncKeyState(int vKey);
+
+        /// <summary>
+        /// Checks if a given key is pressed right now.
+        /// Key state is read at the moment of this call when the low level keybaord events are disabled.
+        /// Gets the key state from internal cache when the low level keybaord events are enabled.
+        /// </summary>
+        /// <param name="KeyCode">The key to check</param>
+        /// <returns>true = pressed, false = released</returns>
+        public static bool IsKeyPressedAsync(int KeyCode)
+        {
+            if ((_HookId != IntPtr.Zero) && (KeyStates.Length < KeyCode))
+            {
+                // use the values from the low level keyboard hook instead
+                return KeyStates[KeyCode];
+            }
+
+            return (0 != (GetAsyncKeyState(KeyCode) & KEY_PRESSED_NOW));
+        }
+
+        // Known virtual-key codes that are extended keys.
+        // See: https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
+        internal const int VK_PAUSE = 0x13;
+        internal const int VK_PRIOR = 0x21; // Page Up
+        internal const int VK_NEXT = 0x22; // Page down
+        internal const int VK_END = 0x23;
+        internal const int VK_HOME = 0x24;
+        internal const int VK_LEFT = 0x25;
+        internal const int VK_UP = 0x26;
+        internal const int VK_RIGHT = 0x27;
+        internal const int VK_DOWN = 0x28;
+        internal const int VK_SNAPSHOT = 0x2C; // Print Screen
+        internal const int VK_INSERT = 0x2D;
+        internal const int VK_DELETE = 0x2E;
+        internal const int VK_NUMLOCK = 0x90;
+        internal const int VK_MULTIPLY = 0x6A;
+        internal const int VK_DIVIDE = 0x6F;
+
+        // Known extended scan codes for extended keys.
+        // See: https://learn.microsoft.com/en-us/windows/win32/inputdev/about-keyboard-input#scan-codes
+        internal const uint SC_PRINTSCREEN = 0xE037;
+        internal const uint SC_PAUSE = 0xE11D;
+        internal const uint SC_PAUSE__LEGACY = 0x0045;
+
+        /// <summary>
+        /// Retrieves the name of a given virtual-key code.
+        /// </summary>
+        /// <param name="VirtualKeyCode">Virtual-key code</param>
+        /// <returns>Key name</returns>
+        public static string GetKeyName(int VirtualKeyCode)
+        {
+            // GetKeyNameTextW does not return proper names on some virtual-key codes.
+            // Therefore just directly translate them
+            switch (VirtualKeyCode)
+            {
+                case VK_MULTIPLY:
+                    return "*";
+                case VK_DIVIDE:
+                    return "/";
+                default:
+                    break;
+            }
+
+            // Convert virtual-key code into extended scan code
+            uint extendedScanCode = MapVirtualKeyW((uint)VirtualKeyCode, MAPVK_VK_TO_VSC_EX);
+            uint scanCode = (0xFF & extendedScanCode); // Scan code is in lower byte
+            if (((extendedScanCode >> 8) & 0xFE) == 0xE0)
+            {
+                switch (extendedScanCode)
+                {
+                    case SC_PAUSE:
+                        scanCode = SC_PAUSE__LEGACY;
+                        break;
+                    default:
+                        scanCode |= KF_EXTENDED; // Set extended key flag when it is an extended scan code (0xe0 or 0xe1 in high byte)
+                        break;
+                }
+            }
+            else
+            {
+                // It seems that MAPVK_VK_TO_VSC_EX is not handling extended scan codes properly,
+                // we try fix this by ourself but applying the extended bit for known extended scan codes.
+                switch (VirtualKeyCode)
+                {
+                    case VK_PAUSE:
+                        scanCode = SC_PAUSE__LEGACY;
+                        break;
+                    case VK_PRIOR: // Page Up
+                    case VK_NEXT: // Page down
+                    case VK_END:
+                    case VK_HOME:
+                    case VK_LEFT:
+                    case VK_UP:
+                    case VK_RIGHT:
+                    case VK_DOWN:
+                    case VK_INSERT:
+                    case VK_DELETE:
+                    case VK_NUMLOCK:
+                        scanCode |= KF_EXTENDED;
+                        break;
+                    case VK_SNAPSHOT: // Print Screen
+                        scanCode = KF_EXTENDED | (SC_PRINTSCREEN & 0xFF);
+                        break;
+                }
+            }
+
+            // Retrieve the name
+            int lParam = (int)scanCode << 16;
+            string lpKeyNameString = new('\0', 256);
+            if (0 != GetKeyNameTextW(lParam, lpKeyNameString, lpKeyNameString.Length))
+            {
+                return lpKeyNameString.Trim('\0');
+            }
+
+            return "(?)";
+        }
+
+        /// <summary>
+        /// Registers a hot key
+        /// </summary>
+        /// <param name="WindowHandle">Window handle that is receiving the hotkey message</param>
+        /// <param name="HotKeyID">Custom ID for the hotkey</param>
+        /// <param name="Modifiers">Key modifiers</param>
+        /// <param name="KeyCode">Key to register</param>
+        /// <returns>Success state</returns>
+        public static bool SetHotKey(IntPtr WindowHandle, int HotKeyID, uint Modifiers, int KeyCode)
+        {
+            return 0 != RegisterHotKey(WindowHandle, HotKeyID, Modifiers, (uint)KeyCode);
+        }
+
+        /// <summary>
+        /// Unregisters a hot key
+        /// </summary>
+        /// <param name="WindowHandle">Window handle that is receiving the hotkey message</param>
+        /// <param name="HotKeyID">Custom ID for the hotkey</param>
+        /// <returns>Success state</returns>
+        public static bool KillHotKey(IntPtr WindowHandle, int HotKeyID)
+        {
+            return 0 != UnregisterHotKey(WindowHandle, HotKeyID);
+        }
+
+        private static IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
+        {
+            if (HC_ACTION == nCode)
+            {
+                switch ((int)wParam)
+                {
+                    case WM_KEYDOWN:
+                    case WM_KEYUP:
+                    case WM_SYSKEYDOWN:
+                    case WM_SYSKEYUP:
+                        {
+                            int KeyCode = Marshal.ReadInt32(lParam); // KBDLLHOOKSTRUCT.vkCode
+                            int flags = Marshal.ReadInt32(lParam, 8); // KBDLLHOOKSTRUCT.flags
+
+                            if (KeyStates.Length <= KeyCode) break; // Invalid value
+
+                            bool isPressed = (flags & LLKHF_UP) == 0; //transition state: 0 = pressed, 1 = released
+                            if (KeyStates[KeyCode] != isPressed) // drop this event, we already know this!
+                            {
+                                KeyStates[KeyCode] = isPressed;
+                                LowLevelKeyboardEvent?.Invoke(null, null); // Fire event // Fire event
+                            }
+                        }
+                        break;
+                    default: break;
+                }
+            }
+            return CallNextHookEx(_HookId, nCode, wParam, lParam);
+        }
+
+        /// <summary>
+        /// Starts using the low level keyboard events.
+        /// This enables the LowLevelKeyboardEvent on the same thread that is calling this function.
+        /// The states for IsKeyPressedAsync will be taken from internal cache.
+        /// </summary>
+        /// <returns>Success state</returns>
+        public static bool StartKeyboardLowLevelHook()
+        {
+            if (_HookId != IntPtr.Zero) return false; // Only one instance supported
+
+            // Reset the keystates, as their correct states are collected on the way
+            for (int i = 0; i < KeyStates.Length; i++) KeyStates[i] = false;
+
+            _HookId = SetWindowsHookEx(WH_KEYBOARD_LL, _HookProc, GetModuleHandleW(System.Diagnostics.Process.GetCurrentProcess().MainModule.ModuleName), 0);
+            return _HookId != IntPtr.Zero;
+        }
+
+        /// <summary>
+        /// Stops using the the low level keyboard events.
+        /// This disables the LowLevelKeyboardEvent
+        /// </summary>
+        /// <returns>Success state</returns>
+        public static bool StopKeyboardLowLevelHook()
+        {
+            return _HookId == IntPtr.Zero || (0 != UnhookWindowsHookEx(_HookId));
+        }
+
+        #endregion
+
+        #region Windows Runtime Assembly
 
         /// <summary>
         /// Read the OS setting whether dark mode is enabled
@@ -275,6 +439,8 @@ namespace HitCounterManager
                 return false;
             }
         }
+
+        #endregion
 
         /// <summary>
         /// MonoDevelop workaround placeholder

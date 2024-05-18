@@ -74,9 +74,9 @@ namespace HitCounterManager
             radioHotKeyMethod_async.Checked = (sc.NextStart_Method == Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async);
             radioHotKeyMethod_llkb.Checked = (sc.NextStart_Method == Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb);
 
-            if (!sc.IsGlobalHotKeySupported)
+            if (!Shortcuts.IsGlobalHotKeySupported)
             {
-                tab_globalshortcuts.Text = tab_globalshortcuts.Text + " (OS not supported)";
+                tab_globalshortcuts.Text += " (OS not supported)";
                 tab_globalshortcuts.Enabled = false;
             }
 
@@ -145,7 +145,7 @@ namespace HitCounterManager
         private void LoadHotKey(SC_Type Id, CheckBox cb, TextBox txt)
         {
             ShortcutsKey key = sc.Key_Get(Id);
-            cb.Checked = key.used;
+            cb.Checked = key.Used;
             txt.Text = key.GetDescriptionString();
         }
 
@@ -167,7 +167,7 @@ namespace HitCounterManager
         /// <param name="e">HotKey configuration</param>
         private void RegisterHotKey(SC_Type Id, CheckBox cb, TextBox txt, KeyEventArgs e)
         {
-            ShortcutsKey key = new ShortcutsKey();
+            ShortcutsKey key = new();
 
             if (e.KeyCode == Keys.ShiftKey) return;
             if (e.KeyCode == Keys.ControlKey) return;
