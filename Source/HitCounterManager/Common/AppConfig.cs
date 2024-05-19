@@ -98,6 +98,7 @@ namespace HitCounterManager
         public string StyleFontName = "Fontdiner Swanky";
         public int StyleDesiredHeight;
         public int StyleDesiredWidth;
+        public string StyleTableAlignment = "tblcenter";
         public bool StyleSubscriptPB;
         public bool StyleHightlightCurrentSplit;
         public string ProfileSelected = "Unnamed";
@@ -324,9 +325,18 @@ namespace HitCounterManager
                 // In version 1.x value taken from StyleSuperscriptPB but got removed, so we reset to default
                 Settings.StyleSubscriptPB = false;
             }
-            /*if (Settings.Version == 9) // Coming from version x.xx
+            if (Settings.Version == 9) // Coming from version 1.20 (without Autosplitter integration)
             {
                 Settings.Version = 10;
+            }
+            if (Settings.Version == 10) // Coming from version 1.21
+            {
+                Settings.Version = 11;
+                Settings.StyleTableAlignment = "tblcenter";
+            }
+            /*if (Settings.Version == 11) // Coming from version x.xx
+            {
+                Settings.Version = 12;
 
             }*/
 

@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2023 Peter Kirmeier
+//Copyright (c) 2021-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +20,8 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
+using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using HitCounterManager.ViewModels;
 
@@ -30,6 +32,17 @@ namespace HitCounterManager.Views
         public SettingsPage()
         {
             AvaloniaXamlLoader.Load(this);
+        }
+
+        public void TableAlignmentGroupCheckedChanged(object sender, RoutedEventArgs args)
+        {
+            if (sender is RadioButton radioButton && radioButton.Content is string content)
+            {
+                if (radioButton.IsChecked.HasValue && radioButton.IsChecked.Value)
+                {
+                    ViewModel.SetStyleTableAlignment(content);
+                }
+            }
         }
     }
 }

@@ -28,6 +28,7 @@ using ReactiveUI;
 using Avalonia.Controls.Notifications;
 using HitCounterManager.Common;
 using HitCounterManager.Models;
+using System.Reflection.Metadata;
 
 namespace HitCounterManager.ViewModels
 {
@@ -515,6 +516,18 @@ namespace HitCounterManager.ViewModels
         {
             get => Settings.StyleDesiredWidth;
             set => SetAndNotifyWhenNaturalNumberChanged(ref Settings.StyleDesiredWidth, value);
+        }
+        public bool StyleTableAlignmentLeft => Settings.StyleTableAlignment.Equals("tblleft");
+        public bool StyleTableAlignmentCenter => Settings.StyleTableAlignment.Equals("tblcenter");
+        public bool StyleTableAlignmentRight => Settings.StyleTableAlignment.Equals("tblright");
+        public void SetStyleTableAlignment(string name)
+        {
+            switch (name)
+            {
+                case "Left": SetAndNotifyWhenChanged(ref Settings.StyleTableAlignment, "tblleft"); break;
+                case "Center": SetAndNotifyWhenChanged(ref Settings.StyleTableAlignment, "tblcenter"); break;
+                case "Right": SetAndNotifyWhenChanged(ref Settings.StyleTableAlignment, "tblright"); break;
+            }
         }
 
         public bool StyleUseCustom

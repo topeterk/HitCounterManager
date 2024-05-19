@@ -252,6 +252,7 @@ namespace HitCounterManager.Models
                     WriteJsonSimpleValue(sr, "progress_bar_colored", Settings.StyleProgressBarColored);
                     WriteJsonSimpleValue(sr, "height", Settings.StyleDesiredHeight);
                     WriteJsonSimpleValue(sr, "width", Settings.StyleDesiredWidth);
+                    if (!string.IsNullOrEmpty(Settings.StyleTableAlignment)) WriteJsonSimpleValue(sr, "tblalign", Settings.StyleTableAlignment);
                     WriteJsonSimpleValue(sr, "subPB", Settings.StyleSubscriptPB);
                     
                     WriteJsonSimpleValue(sr, "update_time", (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds);

@@ -506,7 +506,14 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                     <NumericUpDown Grid.Row="1" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
                                    Value="{Binding StyleDesiredHeight}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
                 </Grid>
-                <TextBlock HorizontalAlignment="Stretch" Margin="30,0,0,0" FontStyle="Italic" Text="When value is set back to 0, you may have to reload the browser." />
+                <TextBlock HorizontalAlignment="Stretch" Margin="30,0,0,10" FontFamily="Arial" FontStyle="Italic" Text="When value is set back to 0, you may have to reload the browser." />
+
+                <TextBlock HorizontalAlignment="Left" Text="Table alignment" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                    <RadioButton GroupName="TableAlignmentGroup" IsCheckedChanged="TableAlignmentGroupCheckedChanged" Content="Left" IsChecked="{Binding StyleTableAlignmentLeft, Mode=OneTime}"/>
+                    <RadioButton GroupName="TableAlignmentGroup" IsCheckedChanged="TableAlignmentGroupCheckedChanged" Content="Center" IsChecked="{Binding StyleTableAlignmentCenter, Mode=OneTime}"/>
+                    <RadioButton GroupName="TableAlignmentGroup" IsCheckedChanged="TableAlignmentGroupCheckedChanged" Content="Right" IsChecked="{Binding StyleTableAlignmentRight, Mode=OneTime}"/>
+                </StackPanel>
 
                 <TextBlock HorizontalAlignment="Left" Text="Customization" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
@@ -663,12 +670,13 @@ BAD splits have more hits than on the PB run</x:String>
                     <NumericUpDown Grid.Row="1" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="999"
                                    Value="{Binding ShowSplitsCountUpcoming}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
                 </Grid>
-                <StackPanel Margin="30,3,0,0" Orientation="Horizontal" HorizontalAlignment="Left">
-                    <TextBlock HorizontalAlignment="Left" FontStyle="Italic" Text="Current configuration will show up to " />
-                    <TextBlock Padding="3,0,3,0" HorizontalAlignment="Left" FontStyle="Italic" Text="{Binding ShowSplitsCountFinished, Mode=OneWay}" />
-                    <TextBlock HorizontalAlignment="Left" FontStyle="Italic" Text=" + " />
-                    <TextBlock Padding="3,0,3,0" HorizontalAlignment="Left" FontStyle="Italic" Text="{Binding ShowSplitsCountUpcoming, Mode=OneWay}" />
-                    <TextBlock HorizontalAlignment="Left" FontStyle="Italic" Text=" splits." />
+                <!-- Keep bottom Maring high as Scrollviewer may otherwise cut off controls, don't know why yet -->
+                <StackPanel Margin="30,3,0,50" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <TextBlock HorizontalAlignment="Left" FontFamily="Arial" FontStyle="Italic" Text="Current configuration will show up to " />
+                    <TextBlock Padding="3,0,3,0" HorizontalAlignment="Left" FontFamily="Arial" FontStyle="Italic" Text="{Binding ShowSplitsCountFinished, Mode=OneWay}" />
+                    <TextBlock HorizontalAlignment="Left" FontFamily="Arial" FontStyle="Italic" Text=" + 1 + " />
+                    <TextBlock Padding="3,0,3,0" HorizontalAlignment="Left" FontFamily="Arial" FontStyle="Italic" Text="{Binding ShowSplitsCountUpcoming, Mode=OneWay}" />
+                    <TextBlock HorizontalAlignment="Left" FontFamily="Arial" FontStyle="Italic" Text=" splits." />
                 </StackPanel>
 
             </StackPanel>
