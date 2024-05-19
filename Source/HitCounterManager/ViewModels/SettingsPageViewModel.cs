@@ -28,7 +28,6 @@ using ReactiveUI;
 using Avalonia.Controls.Notifications;
 using HitCounterManager.Common;
 using HitCounterManager.Models;
-using System.Reflection.Metadata;
 
 namespace HitCounterManager.ViewModels
 {
