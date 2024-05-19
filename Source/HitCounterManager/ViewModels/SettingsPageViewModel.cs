@@ -28,7 +28,6 @@ using ReactiveUI;
 using Avalonia.Controls.Notifications;
 using HitCounterManager.Common;
 using HitCounterManager.Models;
-using System.Security.Principal;
 
 namespace HitCounterManager.ViewModels
 {
@@ -46,7 +45,7 @@ namespace HitCounterManager.ViewModels
             _StyleFontUrl = Settings.StyleFontUrl;
             _StyleCssUrl = Settings.StyleCssUrl;
 
-            ToggleShowInfo = ReactiveCommand.Create<string>((string name) => { ShowInfo[name].Value = !ShowInfo[name].Value; });
+            ToggleShowInfo = ReactiveCommand.Create((string name) => { ShowInfo[name].Value = !ShowInfo[name].Value; });
 
             Capture = ReactiveCommand.Create<SC_Type>((type) =>
             {
@@ -191,7 +190,7 @@ namespace HitCounterManager.ViewModels
                         break;
                 }
             }
-            if ((VirtualKeyStates.KeyCode & keyData) != VirtualKeyStates.None) RegisterHotKey(keyData); // Was a key combination detected? -> Register key
+            if ((VirtualKeyStates.KeyCode & keyData) != VirtualKeyStates.None) RegisterHotKey(CapturingId, keyData); // Was a key combination detected? -> Register key
 
             return SC_Type.SC_Type_MAX != CapturingId;
         }
@@ -199,8 +198,9 @@ namespace HitCounterManager.ViewModels
         /// <summary>
         /// Registers a hot key and stores it
         /// </summary>
+        /// <param name="Id">Configuration type to be assigned to hot key</param>
         /// <param name="e">Key combination</param>
-        private void RegisterHotKey(VirtualKeyStates keyData)
+        private void RegisterHotKey(SC_Type Id, VirtualKeyStates keyData)
         {
             ShortcutsKey key = new(keyData);
 
@@ -211,7 +211,6 @@ namespace HitCounterManager.ViewModels
             if (key.KeyCode == VirtualKeyStates.VK_MENU) return; // = Alt
 
             // register hotkey
-            SC_Type Id = CapturingId;
             sc.Key_Set(Id, key);
 
             switch (Id)
