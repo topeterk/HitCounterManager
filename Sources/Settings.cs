@@ -167,15 +167,15 @@ namespace HitCounterManager
         /// <param name="e">HotKey configuration</param>
         private void RegisterHotKey(SC_Type Id, CheckBox cb, TextBox txt, KeyEventArgs e)
         {
-            ShortcutsKey key = new();
+            ShortcutsKey key = new((VirtualKeyStates)e.KeyData);
 
-            if (e.KeyCode == Keys.ShiftKey) return;
-            if (e.KeyCode == Keys.ControlKey) return;
-            if (e.KeyCode == Keys.Alt) return;
-            if (e.KeyCode == Keys.Menu) return; // = Alt
+            if (key.KeyCode == VirtualKeyStates.None) return;
+            if (key.KeyCode == VirtualKeyStates.VK_SHIFT) return;
+            if (key.KeyCode == VirtualKeyStates.VK_CONTROL) return;
+            if (key.KeyCode == VirtualKeyStates.Alt) return;
+            if (key.KeyCode == VirtualKeyStates.VK_MENU) return; // = Alt
 
             // register hotkey
-            key.key = e;
             sc.Key_Set(Id, key);
 
             cb.Checked = true;

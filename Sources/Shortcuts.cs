@@ -21,19 +21,171 @@
 //SOFTWARE.
 
 using System;
-using System.Windows.Forms;
 
 namespace HitCounterManager
 {
+    /// <summary>
+    /// Extended subset of Windows Virtual-key Codes.
+    /// See: https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
+    /// (Non-)extended values for virtual-key codes match with .Net Framework's System.Windows.Forms.Keys.
+    /// (Non-)extended values and names for virtual-key codes match with Avalonia.Win32.Interop.UnmanagedMethods.VirtualKeyStates.
+    /// </summary>
+    public enum VirtualKeyStates : int
+    {
+        #region Custom definitions
+
+        /// <summary>
+        /// No key
+        /// </summary>
+        None = 0,
+
+        // Masks.
+
+        /// <summary>
+        /// The bitmask to extract a key code from a key value
+        /// </summary>
+        KeyCode = 0xFFFF,
+
+        // Modifiers
+
+        /// <summary>
+        /// The SHIFT modifier key
+        /// </summary>
+        Shift = 0x10000,
+        /// <summary>
+        /// The CTRL modifier key
+        /// </summary>
+        Control = 0x20000,
+        /// <summary>
+        /// The ALT modifier key
+        /// </summary>
+        Alt = 0x40000,
+
+        #endregion
+
+        #region Non-extended keys
+
+        /// <summary>
+        /// The BACKSPACE key
+        /// </summary>
+        VK_BACK = 0x08,
+        /// <summary>
+        /// The SHIFT key
+        /// </summary>
+        VK_SHIFT = 0x10,
+        /// <summary>
+        /// The CTRL key
+        /// </summary>
+        VK_CONTROL = 0x11,
+        /// <summary>
+        /// The ALT key
+        /// </summary>
+        VK_MENU = 0x12,
+        /// <summary>
+        /// The left SHIFT key
+        /// </summary>
+        VK_LSHIFT = 0xA0,
+        /// <summary>
+        /// The right SHIFT key
+        /// </summary>
+        VK_RSHIFT = 0xA1,
+        /// <summary>
+        /// The left CTRL key
+        /// </summary>
+        VK_LCONTROL = 0xA2,
+        /// <summary>
+        /// The right CTRL key
+        /// </summary>
+        VK_RCONTROL = 0xA3,
+        /// <summary>
+        /// The left ALT key
+        /// </summary>
+        VK_LMENU = 0xA4,
+        /// <summary>
+        /// The right ALT key
+        /// </summary>
+        VK_RMENU = 0xA5,
+        /// <summary>
+        /// The CLEAR key
+        /// </summary>
+        VK_OEM_CLEAR = 0xFE,
+
+        #endregion
+
+        #region Extended keys
+
+        /// <summary>
+        /// The PAUSE key
+        /// </summary>
+        VK_PAUSE = 0x13,
+        /// <summary>
+        /// The PAGE UP key
+        /// </summary>
+        VK_PRIOR = 0x21,
+        /// <summary>
+        /// The PAGE DOWN key
+        /// </summary>
+        VK_NEXT = 0x22,
+        /// <summary>
+        /// The END key
+        /// </summary>
+        VK_END = 0x23,
+        /// <summary>
+        /// The HOME key
+        /// </summary>
+        VK_HOME = 0x24,
+        /// <summary>
+        /// The LEFT key
+        /// </summary>
+        VK_LEFT = 0x25,
+        /// <summary>
+        /// The UP key
+        /// </summary>
+        VK_UP = 0x26,
+        /// <summary>
+        /// The RIGHT key
+        /// </summary>
+        VK_RIGHT = 0x27,
+        /// <summary>
+        /// The DOWN key
+        /// </summary>
+        VK_DOWN = 0x28,
+        /// <summary>
+        /// The PRINT SCREEN key
+        /// </summary>
+        VK_SNAPSHOT = 0x2C,
+        /// <summary>
+        /// The INSERT key
+        /// </summary>
+        VK_INSERT = 0x2D,
+        /// <summary>
+        /// The DELETE key
+        /// </summary>
+        VK_DELETE = 0x2E,
+        /// <summary>
+        /// The NUMLOCK key
+        /// </summary>
+        VK_NUMLOCK = 0x90,
+        /// <summary>
+        /// The MULTIPLY key
+        /// </summary>
+        VK_MULTIPLY = 0x6A,
+        /// <summary>
+        /// The DIVIDE key
+        /// </summary>
+        VK_DIVIDE = 0x6F,
+
+        #endregion
+    }
+
     /// <summary>
     /// Holds data about a hotkey
     /// </summary>
     public class ShortcutsKey
     {
-        private bool _used; // indicates if shortcut is registered at windows
-        private bool _down; // indicates if shortcut is currently pressed
-        public bool valid;  // indicates if a valid key/modifier pair was ever set
-        public KeyEventArgs key;
+        private bool _used = false; // indicates if shortcut is registered at windows
+        private bool _down = false; // indicates if shortcut is currently pressed
+        public bool valid = false;  // indicates if a valid key/modifier pair was ever set
         public bool Used
         {
             get { return _used; }
@@ -44,16 +196,35 @@ namespace HitCounterManager
             }
         }
 
-        /// <summary>
-        /// Creates a key shortcut object
-        /// </summary>
-        public ShortcutsKey()
+        public ShortcutsKey() : this(VirtualKeyStates.None) { }
+
+        public ShortcutsKey(VirtualKeyStates keyData)
         {
-            _used = false;
-            _down = false;
-            valid = false;
-            key = new KeyEventArgs(0);
+            KeyData = keyData;
         }
+
+        /// <summary>
+        /// Representing the key code for the key that was pressed, combined with modifier flags
+        /// </summary>
+        public readonly VirtualKeyStates KeyData;
+
+        /// <summary>
+        /// Representing the key code for the key that was pressed, without any modifier flags
+        /// </summary>
+        public VirtualKeyStates KeyCode => VirtualKeyStates.KeyCode & KeyData;
+
+        /// <summary>
+        /// Gets a value indicating whether the ALT key was pressed
+        /// </summary>
+        public bool Alt => 0 != (VirtualKeyStates.Alt & KeyData);
+        /// <summary>
+        /// Gets a value indicating whether the CTRL key was pressed
+        /// </summary>
+        public bool Control => 0 != (VirtualKeyStates.Control & KeyData);
+        /// <summary>
+        /// Gets a value indicating whether the SHIFT key was pressed
+        /// </summary>
+        public bool Shift => 0 != (VirtualKeyStates.Shift & KeyData);
 
         /// <summary>
         /// Returns the name of the key and its modifiers
@@ -61,14 +232,14 @@ namespace HitCounterManager
         /// <returns>Description</returns>
         public string GetDescriptionString()
         {
-            if (key.KeyCode == Keys.None) return "None";
+            if (KeyCode == VirtualKeyStates.None) return "None";
 
             string Description = "";
             if (!valid) Description += "ERROR:   ";
-            if (key.Alt) Description += "ALT + ";
-            if (key.Control) Description += "CTRL + ";
-            if (key.Shift) Description += "SHIFT + ";
-            return Description + OsLayer.GetKeyName((int)key.KeyCode);
+            if (Alt) Description += "ALT  +  ";
+            if (Control) Description += "CTRL  +  ";
+            if (Shift) Description += "SHIFT  +  ";
+            return Description + OsLayer.GetKeyName(KeyCode);
         }
 
         /// <summary>
@@ -84,10 +255,10 @@ namespace HitCounterManager
         /// </summary>
         private bool CheckPressedState(bool ShiftState, bool ControlState, bool AltState)
         {
-            if (!OsLayer.IsKeyPressedAsync((int)key.KeyCode)) return false;
-            if (key.Shift && !ShiftState) return false;
-            if (key.Control && !ControlState) return false;
-            if (key.Alt && !AltState) return false;
+            if (!OsLayer.IsKeyPressedAsync(KeyCode)) return false;
+            if (Shift && !ShiftState) return false;
+            if (Control && !ControlState) return false;
+            if (Alt && !AltState) return false;
             return true;
         }
 
@@ -143,15 +314,6 @@ namespace HitCounterManager
         private const int MOD_ALT = 0x0001;
         private const int MOD_CONTROL = 0x0002;
         private const int MOD_SHIFT = 0x0004;
-        private const int VK_SHIFT = 0x10;
-        private const int VK_CONTROL = 0x11;
-        private const int VK_MENU = 0x12;
-        private const int VK_LSHIFT = 0xA0;
-        private const int VK_RSHIFT = 0xA1;
-        private const int VK_LCONTROL = 0xA2;
-        private const int VK_RCONTROL = 0xA3;
-        private const int VK_LMENU = 0xA4;
-        private const int VK_RMENU = 0xA5;
 
         private OsLayer.TimerProc TimerProcKeepAliveReference; // prevent garbage collector freeing up the callback without any reason
 
@@ -197,7 +359,7 @@ namespace HitCounterManager
         {
             NextStart_Method = method = HotKeyMethod;
 
-            for (int i = 0; i < (int)SC_Type.SC_Type_MAX; i++) sc_list[i] = new ShortcutsKey();
+            for (int i = 0; i < (int)SC_Type.SC_Type_MAX; i++) sc_list[i] = new ();
 
             if (method == SC_HotKeyMethod.SC_HotKeyMethod_Async)
             {
@@ -223,15 +385,15 @@ namespace HitCounterManager
         {
             uint modifier = 0;
 
-            if (key.key.Shift) modifier += MOD_SHIFT;
-            if (key.key.Control) modifier += MOD_CONTROL;
-            if (key.key.Alt) modifier += MOD_ALT;
+            if (key.Shift) modifier += MOD_SHIFT;
+            if (key.Control) modifier += MOD_CONTROL;
+            if (key.Alt) modifier += MOD_ALT;
 
             if (method == SC_HotKeyMethod.SC_HotKeyMethod_Sync)
             {
                 if (Enable)
                 {
-                    if (OsLayer.SetHotKey(hwnd, (int)Id, modifier, (int)key.key.KeyCode))
+                    if (OsLayer.SetHotKey(hwnd, (int)Id, modifier, key.KeyCode))
                     {
                         key.Used = true;
                         key.valid = true;
@@ -253,7 +415,7 @@ namespace HitCounterManager
             {
                 if (Enable)
                 {
-                    if (OsLayer.SetHotKey(hwnd, (int)Id, modifier, (int)key.key.KeyCode))
+                    if (OsLayer.SetHotKey(hwnd, (int)Id, modifier, key.KeyCode))
                     {
                         OsLayer.KillHotKey(hwnd, (int)Id); // don't use this method, we just used registration to check if keycode is valid and works
                         key.Used = true;
@@ -308,11 +470,7 @@ namespace HitCounterManager
         /// <summary>
         /// Get the bound key of a shortcut
         /// </summary>
-        public ShortcutsKey Key_Get(SC_Type Id)
-        {
-            ShortcutsKey key = (ShortcutsKey)sc_list.GetValue((int)Id);
-            return key.ShallowCopy();
-        }
+        public ShortcutsKey Key_Get(SC_Type Id) => sc_list[(int)Id].ShallowCopy();
 
         /// <summary>
         /// Timer message handler to check for async hot keys
@@ -328,15 +486,15 @@ namespace HitCounterManager
             bool k_control;
             bool k_alt;
 
-            k_shift = OsLayer.IsKeyPressedAsync(VK_SHIFT) || OsLayer.IsKeyPressedAsync(VK_LSHIFT) || OsLayer.IsKeyPressedAsync(VK_RSHIFT);
-            k_control = OsLayer.IsKeyPressedAsync(VK_CONTROL) || OsLayer.IsKeyPressedAsync(VK_LCONTROL) || OsLayer.IsKeyPressedAsync(VK_RCONTROL);
-            k_alt = OsLayer.IsKeyPressedAsync(VK_MENU) || OsLayer.IsKeyPressedAsync(VK_LMENU) || OsLayer.IsKeyPressedAsync(VK_RMENU);
+            k_shift = OsLayer.IsKeyPressedAsync(VirtualKeyStates.VK_SHIFT) || OsLayer.IsKeyPressedAsync(VirtualKeyStates.VK_LSHIFT) || OsLayer.IsKeyPressedAsync(VirtualKeyStates.VK_RSHIFT);
+            k_control = OsLayer.IsKeyPressedAsync(VirtualKeyStates.VK_CONTROL) || OsLayer.IsKeyPressedAsync(VirtualKeyStates.VK_LCONTROL) || OsLayer.IsKeyPressedAsync(VirtualKeyStates.VK_RCONTROL);
+            k_alt = OsLayer.IsKeyPressedAsync(VirtualKeyStates.VK_MENU) || OsLayer.IsKeyPressedAsync(VirtualKeyStates.VK_LMENU) || OsLayer.IsKeyPressedAsync(VirtualKeyStates.VK_RMENU);
 
             for (int i = 0; i < (int)SC_Type.SC_Type_MAX; i++)
             {
                 if (sc_list[i].Used)
                 {
-                    if (sc_list[i].WasPressed(k_shift, k_control, k_alt)) OsLayer.SendHotKeyMessage(hwnd, (IntPtr)i, (IntPtr)0);
+                    if (sc_list[i].WasPressed(k_shift, k_control, k_alt)) OsLayer.SendHotKeyMessage(hwnd, (IntPtr)i, IntPtr.Zero);
                 }
             }
         }

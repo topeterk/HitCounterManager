@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2018-2020 Peter Kirmeier
+//Copyright (c) 2018-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -55,14 +55,14 @@ namespace HitCounterManager
         /// </summary>
         /// <param name="KeyCode">The key to check</param>
         /// <returns>true = pressed, false = released</returns>
-        public static bool IsKeyPressedAsync(int KeyCode) { return false; }
+        public static bool IsKeyPressedAsync(VirtualKeyStates KeyCode) { return false; }
 
         /// <summary>
         /// Retrieves the name of a given key
         /// </summary>
         /// <param name="KeyCode">Key name to gather</param>
         /// <returns>Key name</returns>
-        public static string GetKeyName(int KeyCode) { return "(?)"; }
+        public static string GetKeyName(VirtualKeyStates KeyCode) { return "(?)"; }
 
         /// <summary>
         /// Registers a hot key
@@ -72,7 +72,7 @@ namespace HitCounterManager
         /// <param name="Modifiers">Key modifiers</param>
         /// <param name="KeyCode">Key to register</param>
         /// <returns>Success state</returns>
-        public static bool SetHotKey(IntPtr WindowHandle, int HotKeyID, uint Modifiers, int KeyCode) { return false; }
+        public static bool SetHotKey(IntPtr WindowHandle, int HotKeyID, uint Modifiers, VirtualKeyStates KeyCode) { return false; }
 
         /// <summary>
         /// Unregisters a hot key
