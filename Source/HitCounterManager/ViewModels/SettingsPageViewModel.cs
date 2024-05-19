@@ -28,6 +28,7 @@ using ReactiveUI;
 using Avalonia.Controls.Notifications;
 using HitCounterManager.Common;
 using HitCounterManager.Models;
+using System.Security.Principal;
 
 namespace HitCounterManager.ViewModels
 {
@@ -162,34 +163,35 @@ namespace HitCounterManager.ViewModels
             List<int>? PressedKeys = App.GetKeysPressedAsync();
             if (null == PressedKeys) return (SC_Type.SC_Type_MAX != CapturingId);
 
-            KeyEventArgs key = new (Keys.None);
+            VirtualKeyStates keyData = VirtualKeyStates.None;
             foreach (int KeyCode in PressedKeys)
             {
-                if (((Keys)KeyCode < Keys.Back) || (Keys.OemClear <= (Keys)KeyCode)) continue; // Ignore mouse keys
+                VirtualKeyStates keyCode = (VirtualKeyStates)KeyCode;
+                if ((keyCode < VirtualKeyStates.VK_BACK) || (VirtualKeyStates.VK_OEM_CLEAR <= keyCode)) continue; // Ignore mouse keys
 
-                switch ((Keys)KeyCode)
+                switch (keyCode)
                 {
                     // When virtual modifiers are not set, we look for actual keys as well
-                    case Keys.LShiftKey:
-                    case Keys.RShiftKey: key.KeyData |= Keys.Shift; break;
-                    case Keys.LControlKey:
-                    case Keys.RControlKey: key.KeyData |= Keys.Control; break;
-                    case Keys.LMenu:
-                    case Keys.RMenu: key.KeyData |= Keys.Alt; break;
+                    case VirtualKeyStates.VK_LSHIFT:
+                    case VirtualKeyStates.VK_RSHIFT: keyData |= VirtualKeyStates.Shift; break;
+                    case VirtualKeyStates.VK_LCONTROL:
+                    case VirtualKeyStates.VK_RCONTROL: keyData |= VirtualKeyStates.Control; break;
+                    case VirtualKeyStates.VK_LMENU:
+                    case VirtualKeyStates.VK_RMENU: keyData |= VirtualKeyStates.Alt; break;
 
                     // Assign virtual modifiers
-                    case Keys.ShiftKey: key.KeyData |= Keys.Shift; break;
-                    case Keys.ControlKey: key.KeyData |= Keys.Control; break;
-                    case Keys.Menu: key.KeyData |= Keys.Alt; break;
+                    case VirtualKeyStates.VK_SHIFT: keyData |= VirtualKeyStates.Shift; break;
+                    case VirtualKeyStates.VK_CONTROL: keyData |= VirtualKeyStates.Control; break;
+                    case VirtualKeyStates.VK_MENU: keyData |= VirtualKeyStates.Alt; break;
 
                     // Assign key code
                     default:
-                        if (key.KeyCode != Keys.None) return (SC_Type.SC_Type_MAX != CapturingId); // Only a single key can be captured
-                        key.KeyData |= (Keys)KeyCode;
+                        if ((VirtualKeyStates.KeyCode & keyData) != VirtualKeyStates.None) return (SC_Type.SC_Type_MAX != CapturingId); // Only a single key can be captured
+                        keyData |= keyCode;
                         break;
                 }
             }
-            if (key.KeyCode != Keys.None) RegisterHotKey(key); // Was a key combination detected? -> Register key
+            if ((VirtualKeyStates.KeyCode & keyData) != VirtualKeyStates.None) RegisterHotKey(keyData); // Was a key combination detected? -> Register key
 
             return SC_Type.SC_Type_MAX != CapturingId;
         }
@@ -198,19 +200,18 @@ namespace HitCounterManager.ViewModels
         /// Registers a hot key and stores it
         /// </summary>
         /// <param name="e">Key combination</param>
-        private void RegisterHotKey(KeyEventArgs e)
+        private void RegisterHotKey(VirtualKeyStates keyData)
         {
-            ShortcutsKey key = new ();
-            SC_Type Id = CapturingId;
+            ShortcutsKey key = new(keyData);
 
-            if (e.KeyCode == Keys.None) return;
-            if (e.KeyCode == Keys.ShiftKey) return;
-            if (e.KeyCode == Keys.ControlKey) return;
-            if (e.KeyCode == Keys.Alt) return;
-            if (e.KeyCode == Keys.Menu) return; // = Alt
+            if (key.KeyCode == VirtualKeyStates.None) return;
+            if (key.KeyCode == VirtualKeyStates.VK_SHIFT) return;
+            if (key.KeyCode == VirtualKeyStates.VK_CONTROL) return;
+            if (key.KeyCode == VirtualKeyStates.Alt) return;
+            if (key.KeyCode == VirtualKeyStates.VK_MENU) return; // = Alt
 
             // register hotkey
-            key.key = e;
+            SC_Type Id = CapturingId;
             sc.Key_Set(Id, key);
 
             switch (Id)

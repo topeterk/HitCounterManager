@@ -115,10 +115,7 @@ namespace HitCounterManager
         /// </summary>
         private bool LoadHotKeySettings(SC_Type Type, int KeyData, bool Enable)
         {
-            ShortcutsKey key = new()
-            {
-                key = new KeyEventArgs((Keys)KeyData)
-            };
+            ShortcutsKey key = new((VirtualKeyStates)KeyData);
             if (Enable)
             {
                 sc.Key_Set(Type, key);
@@ -357,25 +354,25 @@ namespace HitCounterManager
                 ShortcutsKey key;
                 Settings.HotKeyMethod = (int)sc.NextStart_Method;
                 key = sc.Key_Get(SC_Type.SC_Type_Reset);
-                Settings.ShortcutResetKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutResetKeyCode = (int)key.KeyData;
                 key = sc.Key_Get(SC_Type.SC_Type_Hit);
-                Settings.ShortcutHitKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutHitKeyCode = (int)key.KeyData;
                 key = sc.Key_Get(SC_Type.SC_Type_HitUndo);
-                Settings.ShortcutHitUndoKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutHitUndoKeyCode = (int)key.KeyData;
                 key = sc.Key_Get(SC_Type.SC_Type_WayHit);
-                Settings.ShortcutWayHitKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutWayHitKeyCode = (int)key.KeyData;
                 key = sc.Key_Get(SC_Type.SC_Type_WayHitUndo);
-                Settings.ShortcutWayHitUndoKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutWayHitUndoKeyCode = (int)key.KeyData;
                 key = sc.Key_Get(SC_Type.SC_Type_Split);
-                Settings.ShortcutSplitKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutSplitKeyCode = (int)key.KeyData;
                 key = sc.Key_Get(SC_Type.SC_Type_SplitPrev);
-                Settings.ShortcutSplitPrevKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutSplitPrevKeyCode = (int)key.KeyData;
                 key = sc.Key_Get(SC_Type.SC_Type_PB);
-                Settings.ShortcutPBKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutPBKeyCode = (int)key.KeyData;
                 key = sc.Key_Get(SC_Type.SC_Type_TimerStart);
-                Settings.ShortcutTimerStartKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutTimerStartKeyCode = (int)key.KeyData;
                 key = sc.Key_Get(SC_Type.SC_Type_TimerStop);
-                Settings.ShortcutTimerStopKeyCode = (int)key.key.KeyData;
+                Settings.ShortcutTimerStopKeyCode = (int)key.KeyData;
             }
 
             sm.WriteXML(Settings);

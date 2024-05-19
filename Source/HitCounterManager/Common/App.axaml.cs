@@ -325,7 +325,7 @@ namespace HitCounterManager
         /// <param name="Modifiers">Key modifiers</param>
         /// <param name="KeyCode">Key to register</param>
         /// <returns>Success state</returns>
-        public static bool SetHotKey(IntPtr WindowHandle, int HotKeyID, uint Modifiers, int KeyCode)
+        public static bool SetHotKey(IntPtr WindowHandle, int HotKeyID, uint Modifiers, VirtualKeyStates KeyCode)
         {
             return OperatingSystem.IsWindows() && (0 != NativeApi.RegisterHotKey(WindowHandle, HotKeyID, Modifiers, (uint)KeyCode));
         }
@@ -390,14 +390,14 @@ namespace HitCounterManager
         /// </summary>
         /// <param name="KeyCode">The key to check</param>
         /// <returns>true = pressed, false = released</returns>
-        public static bool IsKeyPressedAsync(int KeyCode)
+        public static bool IsKeyPressedAsync(VirtualKeyStates KeyCode)
         {
             if (OperatingSystem.IsWindows())
             {
-                if ((_HookId != IntPtr.Zero) && (KeyStates.Length < KeyCode))
+                if ((_HookId != IntPtr.Zero) && (KeyStates.Length < (int)KeyCode))
                 {
                     // use the values from the low level keyboard hook instead
-                    return KeyStates[KeyCode];
+                    return KeyStates[(int)KeyCode];
                 }
 
                 return 0 != (NativeApi.GetAsyncKeyState(KeyCode) & NativeApi.KEY_PRESSED_NOW);

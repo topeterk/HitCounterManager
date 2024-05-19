@@ -25,6 +25,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using Microsoft.Win32;
+using HitCounterManager.Models;
 
 namespace HitCounterManager
 {
@@ -224,25 +225,7 @@ namespace HitCounterManager
         /// <returns>SHORT = short</returns>
         [SupportedOSPlatform("Windows")]
         [DllImport("User32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
-        internal static extern short GetAsyncKeyState(int vKey);
-
-        // Known virtual-key codes that are extended keys.
-        // See: https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
-        internal const int VK_PAUSE = 0x13;
-        internal const int VK_PRIOR = 0x21; // Page Up
-        internal const int VK_NEXT = 0x22; // Page down
-        internal const int VK_END = 0x23;
-        internal const int VK_HOME = 0x24;
-        internal const int VK_LEFT = 0x25;
-        internal const int VK_UP = 0x26;
-        internal const int VK_RIGHT = 0x27;
-        internal const int VK_DOWN = 0x28;
-        internal const int VK_SNAPSHOT = 0x2C; // Print Screen
-        internal const int VK_INSERT = 0x2D;
-        internal const int VK_DELETE = 0x2E;
-        internal const int VK_NUMLOCK = 0x90;
-        internal const int VK_MULTIPLY = 0x6A;
-        internal const int VK_DIVIDE = 0x6F;
+        internal static extern short GetAsyncKeyState(VirtualKeyStates vKey);
 
         // Known extended scan codes for extended keys.
         // See: https://learn.microsoft.com/en-us/windows/win32/inputdev/about-keyboard-input#scan-codes
@@ -256,7 +239,7 @@ namespace HitCounterManager
         /// <param name="VirtualKeyCode">Virtual-key code</param>
         /// <returns>Key name</returns>
         [SupportedOSPlatform("Windows")]
-        public static string GetKeyName(int VirtualKeyCode)
+        public static string GetKeyName(VirtualKeyStates VirtualKeyCode)
         {
             if (OperatingSystem.IsWindows())
             {
@@ -264,9 +247,9 @@ namespace HitCounterManager
                 // Therefore just directly translate them
                 switch (VirtualKeyCode)
                 {
-                    case VK_MULTIPLY:
+                    case VirtualKeyStates.VK_MULTIPLY:
                         return "*";
-                    case VK_DIVIDE:
+                    case VirtualKeyStates.VK_DIVIDE:
                         return "/";
                     default:
                         break;
@@ -293,23 +276,23 @@ namespace HitCounterManager
                     // we try fix this by ourself but applying the extended bit for known extended scan codes.
                     switch (VirtualKeyCode)
                     {
-                        case VK_PAUSE:
+                        case VirtualKeyStates.VK_PAUSE:
                             scanCode = SC_PAUSE__LEGACY;
                             break;
-                        case VK_PRIOR: // Page Up
-                        case VK_NEXT: // Page down
-                        case VK_END:
-                        case VK_HOME:
-                        case VK_LEFT:
-                        case VK_UP:
-                        case VK_RIGHT:
-                        case VK_DOWN:
-                        case VK_INSERT:
-                        case VK_DELETE:
-                        case VK_NUMLOCK:
+                        case VirtualKeyStates.VK_PRIOR: // Page Up
+                        case VirtualKeyStates.VK_NEXT: // Page down
+                        case VirtualKeyStates.VK_END:
+                        case VirtualKeyStates.VK_HOME:
+                        case VirtualKeyStates.VK_LEFT:
+                        case VirtualKeyStates.VK_UP:
+                        case VirtualKeyStates.VK_RIGHT:
+                        case VirtualKeyStates.VK_DOWN:
+                        case VirtualKeyStates.VK_INSERT:
+                        case VirtualKeyStates.VK_DELETE:
+                        case VirtualKeyStates.VK_NUMLOCK:
                             scanCode |= KF_EXTENDED;
                             break;
-                        case VK_SNAPSHOT: // Print Screen
+                        case VirtualKeyStates.VK_SNAPSHOT: // Print Screen
                             scanCode = KF_EXTENDED | (SC_PRINTSCREEN & 0xFF);
                             break;
                     }
