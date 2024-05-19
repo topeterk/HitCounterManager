@@ -148,6 +148,7 @@ namespace HitCounterManager
         public string StyleFontName;
         public int StyleDesiredHeight;
         public int StyleDesiredWidth;
+        public string StyleTableAlignment = "tblcenter";
         public bool StyleSuperscriptPB; // obsolete since version 9 - keep for backwards compatibility (use StyleSubscriptPB instead)
         public bool StyleSubscriptPB;
         public bool StyleHightlightCurrentSplit;
@@ -369,7 +370,13 @@ namespace HitCounterManager
             {
                 _settings.Version = 11;
                 _settings.AllowHtml = false;
+                _settings.StyleTableAlignment = "tblcenter";
             }
+            /*if (Settings.Version == 11) // Coming from version x.xx
+            {
+                Settings.Version = 12;
+
+            }*/
 
             // Check for updates..
             if (_settings.CheckUpdatesOnStartup)

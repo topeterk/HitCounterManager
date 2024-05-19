@@ -90,6 +90,9 @@ namespace HitCounterManager
             cbProgressBarColored.Checked = !_settings.StyleProgressBarColored;
             cbSubscriptPB.Checked = _settings.StyleSubscriptPB;
             cbApCustomCss.Checked = _settings.StyleUseCustom;
+            radioTableAlignmentLeft.Checked = _settings.StyleTableAlignment.Equals("tblleft");
+            radioTableAlignmentCenter.Checked = _settings.StyleTableAlignment.Equals("tblcenter");
+            radioTableAlignmentRight.Checked = _settings.StyleTableAlignment.Equals("tblright");
             txtCssUrl.Text = _settings.StyleCssUrl;
             txtFontUrl.Text = _settings.StyleFontUrl;
             txtFontName.Text = _settings.StyleFontName;
@@ -197,6 +200,12 @@ namespace HitCounterManager
             _settings.StyleSubscriptPB = cbSubscriptPB.Checked;
             _settings.StyleDesiredHeight = (int)numStyleDesiredHeight.Value;
             _settings.StyleDesiredWidth = (int)numStyleDesiredWidth.Value;
+            if (radioTableAlignmentLeft.Checked)
+                _settings.StyleTableAlignment = "tblleft";
+            else if (radioTableAlignmentCenter.Checked)
+                _settings.StyleTableAlignment = "tblcenter";
+            else if (radioTableAlignmentRight.Checked)
+                _settings.StyleTableAlignment = "tblright";
 
             // Behavior
             _settings.AllowHtml = cbAllowHtml.Checked;

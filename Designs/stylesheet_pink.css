@@ -39,6 +39,11 @@ table {
 	text-align: center;
 }
 
+/* alignment */
+.tblleft   { margin-left: 0px; }
+.tblright  { margin-right: 0px; }
+.tblcenter { /*default is centered*/ }
+
 td { padding: 2px 2px 2px 2px; } /* top, right, bottom, left */
 
 /* split rows */

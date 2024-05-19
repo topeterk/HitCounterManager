@@ -99,6 +99,7 @@
   <StyleFontName>Fontdiner Swanky</StyleFontName>
   <StyleDesiredHeight>0</StyleDesiredHeight>
   <StyleDesiredWidth>0</StyleDesiredWidth>
+  <StyleTableAlignment>tblcenter</StyleTableAlignment>
   <StyleSuperscriptPB>false</StyleSuperscriptPB>
   <StyleSubscriptPB>false</StyleSubscriptPB>
   <StyleHightlightCurrentSplit>false</StyleHightlightCurrentSplit>

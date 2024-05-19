@@ -95,7 +95,7 @@ namespace HitCounterManager
             // Reload input file handle when possible
             if (File.Exists(_settings.Inputfile))
             {
-                StreamReader sr = new StreamReader(_settings.Inputfile);
+                StreamReader sr = new (_settings.Inputfile);
                 template = sr.ReadToEnd();
                 sr.Close();
             }
@@ -211,9 +211,7 @@ namespace HitCounterManager
                 }
                 else if (line.Contains("HITCOUNTER_JSON_START")) // Format data according to RFC 4627 (JSON)
                 {
-                    int TotalSplits, TotalActiveSplit, SuccessionHits, SuccessionHitsWay, SuccessionHitsPB;
-                    long TotalTime;
-                    profCtrl.GetCalculatedSums(out TotalSplits, out TotalActiveSplit, out SuccessionHits, out SuccessionHitsWay, out SuccessionHitsPB, out TotalTime, true);
+                    profCtrl.GetCalculatedSums(out int TotalSplits, out int TotalActiveSplit, out int SuccessionHits, out int SuccessionHitsWay, out int SuccessionHitsPB, out long TotalTime, true);
 
                     int active = pi.ActiveSplit;
                     int iSplitCount = pi.SplitCount;
@@ -367,6 +365,7 @@ namespace HitCounterManager
                     WriteJsonSimpleValue(sr, "progress_bar_colored", _settings.StyleProgressBarColored);
                     WriteJsonSimpleValue(sr, "height", _settings.StyleDesiredHeight);
                     WriteJsonSimpleValue(sr, "width", _settings.StyleDesiredWidth);
+                    if (!string.IsNullOrEmpty(Settings.StyleTableAlignment)) WriteJsonSimpleValue(sr, "tblalign", Settings.StyleTableAlignment);
                     WriteJsonSimpleValue(sr, "supPB", _settings.StyleSubscriptPB); // subPB - wrong name kept for backwards compatibility in version 1.x
 
                     WriteJsonSimpleValue(sr, "update_time", (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds);

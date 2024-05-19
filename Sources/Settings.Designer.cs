@@ -140,6 +140,10 @@
             this.txtChangelog = new System.Windows.Forms.TextBox();
             this.lblVersionCurrent = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.radioTableAlignmentLeft = new System.Windows.Forms.RadioButton();
+            this.radioTableAlignmentCenter = new System.Windows.Forms.RadioButton();
+            this.radioTableAlignmentRight = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredHeight)).BeginInit();
@@ -155,6 +159,7 @@
             this.TabControl1.SuspendLayout();
             this.tab_autosplitter_shortcuts.SuspendLayout();
             this.tab_update.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // ToolTip1
@@ -212,6 +217,7 @@
             this.radioPurposeNoDeath.Text = "No death";
             this.ToolTip1.SetToolTip(this.radioPurposeNoDeath, "Track how far you get without dying");
             this.radioPurposeNoDeath.UseVisualStyleBackColor = true;
+            this.radioPurposeNoDeath.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
             // radioPurposeSplitCounter
             // 
@@ -1325,6 +1331,7 @@
             // 
             // tab_style
             // 
+            this.tab_style.Controls.Add(this.groupBox6);
             this.tab_style.Controls.Add(this.groupBox3);
             this.tab_style.Controls.Add(this.label16);
             this.tab_style.Controls.Add(this.GroupBox1);
@@ -1351,7 +1358,7 @@
             this.groupBox3.Controls.Add(this.cbHighContrastNames);
             this.groupBox3.Location = new System.Drawing.Point(6, 13);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(382, 153);
+            this.groupBox3.Size = new System.Drawing.Size(382, 92);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Appearance";
@@ -1380,7 +1387,7 @@
             this.GroupBox1.Location = new System.Drawing.Point(6, 172);
             this.GroupBox1.Name = "GroupBox1";
             this.GroupBox1.Size = new System.Drawing.Size(571, 126);
-            this.GroupBox1.TabIndex = 3;
+            this.GroupBox1.TabIndex = 4;
             this.GroupBox1.TabStop = false;
             this.GroupBox1.Text = "Customization";
             // 
@@ -1580,6 +1587,54 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Current version:      ";
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.radioTableAlignmentRight);
+            this.groupBox6.Controls.Add(this.radioTableAlignmentCenter);
+            this.groupBox6.Controls.Add(this.radioTableAlignmentLeft);
+            this.groupBox6.Location = new System.Drawing.Point(6, 112);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(382, 54);
+            this.groupBox6.TabIndex = 3;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Table alignment";
+            // 
+            // radioTableAlignmentLeft
+            // 
+            this.radioTableAlignmentLeft.AutoSize = true;
+            this.radioTableAlignmentLeft.Location = new System.Drawing.Point(6, 19);
+            this.radioTableAlignmentLeft.Name = "radioTableAlignmentLeft";
+            this.radioTableAlignmentLeft.Size = new System.Drawing.Size(43, 17);
+            this.radioTableAlignmentLeft.TabIndex = 0;
+            this.radioTableAlignmentLeft.Text = "Left";
+            this.ToolTip1.SetToolTip(this.radioTableAlignmentLeft, "Aligns the table with the left side.");
+            this.radioTableAlignmentLeft.UseVisualStyleBackColor = true;
+            this.radioTableAlignmentLeft.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // radioTableAlignmentCenter
+            // 
+            this.radioTableAlignmentCenter.AutoSize = true;
+            this.radioTableAlignmentCenter.Location = new System.Drawing.Point(76, 19);
+            this.radioTableAlignmentCenter.Name = "radioTableAlignmentCenter";
+            this.radioTableAlignmentCenter.Size = new System.Drawing.Size(56, 17);
+            this.radioTableAlignmentCenter.TabIndex = 1;
+            this.radioTableAlignmentCenter.Text = "Center";
+            this.ToolTip1.SetToolTip(this.radioTableAlignmentCenter, "Aligns the table centered.");
+            this.radioTableAlignmentCenter.UseVisualStyleBackColor = true;
+            this.radioTableAlignmentCenter.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
+            // radioTableAlignmentRight
+            // 
+            this.radioTableAlignmentRight.AutoSize = true;
+            this.radioTableAlignmentRight.Location = new System.Drawing.Point(146, 19);
+            this.radioTableAlignmentRight.Name = "radioTableAlignmentRight";
+            this.radioTableAlignmentRight.Size = new System.Drawing.Size(50, 17);
+            this.radioTableAlignmentRight.TabIndex = 2;
+            this.radioTableAlignmentRight.Text = "Right";
+            this.ToolTip1.SetToolTip(this.radioTableAlignmentRight, "Aligns the table with the right side.");
+            this.radioTableAlignmentRight.UseVisualStyleBackColor = true;
+            this.radioTableAlignmentRight.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1618,6 +1673,8 @@
             this.tab_autosplitter_shortcuts.PerformLayout();
             this.tab_update.ResumeLayout(false);
             this.tab_update.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1733,5 +1790,9 @@
         private System.Windows.Forms.CheckBox cbScHitWayPrev;
         private System.Windows.Forms.CheckBox cbScHitBossPrev;
         private System.Windows.Forms.CheckBox cbAllowHtml;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.RadioButton radioTableAlignmentRight;
+        private System.Windows.Forms.RadioButton radioTableAlignmentCenter;
+        private System.Windows.Forms.RadioButton radioTableAlignmentLeft;
     }
 }

@@ -75,6 +75,7 @@ var data =
 "progress_bar_colored": true,
 "height": 0,
 "width": 0,
+"tblalign": "tblcenter", // or "tblleft" or "tblright" or any custom value
 "supPB": false, // false = normal, true = subscripted (supPB name will be fixed with version 2.x but is kept for compatibility)
 "update_time": 1598986122000,
 "timer_paused": false,
