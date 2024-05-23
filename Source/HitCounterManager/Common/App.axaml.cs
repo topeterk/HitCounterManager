@@ -211,6 +211,12 @@ namespace HitCounterManager
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
+                #region AutoSplitter
+
+                AutoSplitterCoreModule.AutoSplitterCoreTryLoadModule();
+
+                #endregion
+
                 MainWindow main = new ();
                 mainPage = main.InnerPage;
                 ProfileViewViewModel = (ProfileViewViewModel?)mainPage.ProfileView?.DataContext;

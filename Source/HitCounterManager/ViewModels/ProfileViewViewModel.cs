@@ -31,6 +31,7 @@ using System.Threading;
 using System.Windows.Input;
 using ReactiveUI;
 using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
 using Avalonia.Threading;
 using HitCounterManager.Common;
 using HitCounterManager.Models;
@@ -39,6 +40,9 @@ namespace HitCounterManager.ViewModels
 {
     public class ProfileViewViewModel : ViewModelBase
     {
+        #region AutoSplitter
+        private readonly AutoSplitterCoreInterface? InterfaceASC = null;
+        #endregion
         private readonly SettingsRoot Settings = App.CurrentApp.Settings;
         public ComboBox? ProfileSelector = null;
 
@@ -118,6 +122,8 @@ namespace HitCounterManager.ViewModels
                     row.Duration = 0;
                 }
                 _ProfileSelected.ActiveSplit = 0;
+
+                InterfaceASC?.SplitterReset();
             });
             ProfilePB = ReactiveCommand.Create(() =>
             {
@@ -159,6 +165,24 @@ namespace HitCounterManager.ViewModels
 
             OutputUpdateTimer = new (TimeSpan.FromMilliseconds(300), DispatcherPriority.Background, OutputUpdateTimerTick);
             OutputUpdateTimer.Start();
+
+            SaveToDisk = ReactiveCommand.Create(() => {
+                App.CurrentApp.SaveSettings();
+                InterfaceASC?.SaveSettings();
+                App.CurrentApp.DisplayAlert("Saving complete!", "Written to \"" + Statics.ApplicationName + "Save.xml\"", NotificationType.Success);
+            });
+
+            #region AutoSplitter
+
+            if (AutoSplitterCoreModule.AutoSplitterCoreLoaded)
+            {
+                InterfaceASC = new(this);
+                AutoSplitterOpenConfig = ReactiveCommand.Create(InterfaceASC.OpenSettings);
+                AutoSplitterGameList = InterfaceASC.GameList;
+                AutoSplitterCoreModule.AutoSplitterRegisterInterface(InterfaceASC);
+            }
+
+            #endregion
         }
 
         ~ProfileViewViewModel()
@@ -348,7 +372,7 @@ namespace HitCounterManager.ViewModels
         public ICommand SplitSelectNext { get; }
         public ICommand SplitSelectPrev { get; }
 
-        private void GoSplits(int Amount)
+        public void GoSplits(int Amount)
         {
             int split = _ProfileSelected.ActiveSplit + Amount;
             if ((0 <= split) && (split < _ProfileSelected.Rows.Count))
@@ -478,13 +502,13 @@ namespace HitCounterManager.ViewModels
                     // Starting the timer
                     last_elapsed_time = monotonic_timer.ElapsedMilliseconds;
                     _TimerRunning = true;
-                    App.CurrentApp.StartApplicationTimer(TimerIDs.GameTime, 10, UpdateDuration);
+                    App.CurrentApp.StartApplicationTimer(TimerIDs.GameTime, 10, () => UpdateDuration());
                     App.CurrentApp.StartApplicationTimer(TimerIDs.GameTimeGui, 300, () => { CallPropertyChanged(nameof(StatsTime)); return _TimerRunning; });
                 }
                 else
                 {
                     // STOP THE COUNT!
-                    UpdateDuration();
+                    UpdateDuration(true); // AutoSplitterCore might not always update the time, so we have to force update
                     _TimerRunning = false;
                 }
                 CallPropertyChanged();
@@ -493,7 +517,8 @@ namespace HitCounterManager.ViewModels
         }
 
         private readonly object TimerUpdateLock = new ();
-        public bool UpdateDuration()
+        private int AutoSplitterCoreUpdateCounter;
+        public bool UpdateDuration(bool ForceUpdate = false)
         {
             // Early cancellation point
             if (!_TimerRunning) return false;
@@ -505,9 +530,30 @@ namespace HitCounterManager.ViewModels
             {
                 Monitor.Enter(TimerUpdateLock, ref GotLock);
 
-                long elapsed_time = monotonic_timer.ElapsedMilliseconds;
-                _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Duration += elapsed_time - last_elapsed_time;
-                last_elapsed_time = elapsed_time;
+                #region AutoSplitter
+                if (InterfaceASC?.GetCurrentInGameTime(out long CurrentTotalTime) ?? false && CurrentTotalTime > 0)
+                {
+                    // Calculate the current split's duration by removing durations of all previous splits from total time
+                    long duration = CurrentTotalTime;
+                    for (var previousSplitIndex = 0; previousSplitIndex < _ProfileSelected.ActiveSplit; previousSplitIndex++)
+                        duration -= _ProfileSelected.Rows[previousSplitIndex].Duration;
+
+                    // We don't always mark profile as updated here as this would generate output very often!
+                    // When not forced, only update output when given and stored time is significantly out of sync
+                    if (ForceUpdate
+                        || (AutoSplitterCoreUpdateCounter++ % 30 == 0)
+                        || (Math.Abs(duration - _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Duration) >= 1000)) // = 1 sec
+                    {
+                        _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Duration = Math.Max(duration, 0);
+                    }
+                }
+                else
+                #endregion
+                {
+                    long elapsed_time = monotonic_timer.ElapsedMilliseconds;
+                    _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Duration += elapsed_time - last_elapsed_time;
+                    last_elapsed_time = elapsed_time;
+                }
             }
             catch
             {
@@ -521,6 +567,46 @@ namespace HitCounterManager.ViewModels
             }
 
             return _TimerRunning;
+        }
+
+        #endregion
+
+        public ICommand? SaveToDisk { get; init; } = null;
+
+        #region AutoSplitter
+
+        public ICommand? AutoSplitterOpenConfig { get; init; } = null;
+
+        public ObservableCollection<string>? AutoSplitterGameList { get; init; }
+
+        private int _AutoSplitterGameSelectedIndex = 0;
+        public int AutoSplitterGameSelectedIndex
+        {
+            get => _AutoSplitterGameSelectedIndex;
+            set
+            {
+                if (_AutoSplitterGameSelectedIndex != value)
+                {
+                    _AutoSplitterGameSelectedIndex = value;
+                    InterfaceASC?.SetActiveGameIndex(value);
+                    CallPropertyChanged();
+                }
+            }
+        }
+
+        private bool _AutoSplitterPracticeModeChecked = false;
+        public bool AutoSplitterPracticeModeChecked
+        {
+            get => _AutoSplitterPracticeModeChecked;
+            set
+            {
+                if (_AutoSplitterPracticeModeChecked != value)
+                {
+                    _AutoSplitterPracticeModeChecked = value;
+                    InterfaceASC?.SetPracticeMode(value);
+                    CallPropertyChanged();
+                }
+            }
         }
 
         #endregion

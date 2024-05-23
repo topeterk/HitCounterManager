@@ -93,10 +93,6 @@ namespace HitCounterManager.ViewModels
         public ICommand OpenPageAskSaveBeforeClose { get; }
         public bool DoAskSaveBeforeClose { get; private set; } = true;
 
-        public ICommand SaveToDisk { get; } = ReactiveCommand.Create(() => {
-            App.CurrentApp.SaveSettings();
-            App.CurrentApp.DisplayAlert("Saving complete!", "Written to \"" + Statics.ApplicationName + "Save.xml\"", NotificationType.Success);
-        });
         public ICommand OpenWebsiteHome { get; } = ReactiveCommand.Create(() => GitHubUpdate.WebOpenLandingPage());
         public ICommand OpenWebsiteTeamHitless { get; } = ReactiveCommand.Create(() => Extensions.OpenWithBrowser(new Uri("https://discord.gg/4E7cSK7")));
         public ICommand CheckUpdatesOnline { get; }

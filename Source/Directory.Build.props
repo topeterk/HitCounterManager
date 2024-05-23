@@ -15,6 +15,7 @@
     <Company></Company>
     <Copyright>Copyright © $(Authors) $([System.DateTime]::Now.Year)</Copyright>
 
+    <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <!-- The path must be set in this property file as it must be loaded before the    -->
     <!-- actual project file includes the properties from the dotnet SDK. This is only -->

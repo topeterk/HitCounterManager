@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2023-2023 Peter Kirmeier
+//Copyright (c) 2023-2024 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@
 
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using HitCounterManager.Common;
 using HitCounterManager.ViewModels;
 using System.ComponentModel;
 
@@ -38,7 +39,20 @@ namespace HitCounterManager.Views
             AvaloniaXamlLoader.Load(this);
             InitializeComponent();
 
-            Width = Settings.MainWidth;
+            double offset = 0D;
+
+            #region AutoSplitter
+
+            if (AutoSplitterCoreModule.AutoSplitterCoreLoaded &&
+                App.CurrentApp.Resources.TryGetValue("MainButtonWidth", out var mainButtonWidthObj)
+                && mainButtonWidthObj is double mainButtonWidth)
+            {
+                offset = mainButtonWidth;
+            }
+
+            #endregion
+
+            Width = Settings.MainWidth + offset;
             Height = Settings.MainHeight;
 
             InnerPage = this.FindControl<MainPage>("InnerPage")!;

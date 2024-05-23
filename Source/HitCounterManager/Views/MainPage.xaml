@@ -70,7 +70,7 @@
 					<Button Command="{Binding OpenPageSettings}" Classes="ImageButton">
 						<Image Source="{DynamicResource ImageSettings}" />
 					</Button>
-					<Button Command="{Binding SaveToDisk}" Classes="ImageButton">
+					<Button Command="{Binding #profileView.DataContext.SaveToDisk}" Classes="ImageButton">
 						<Image Source="{DynamicResource ImageSave}" />
 					</Button>
 					<Button Command="{Binding OpenWebsiteHome}" Classes="ImageButton">
@@ -138,7 +138,7 @@
 			<WrapPanel Margin="2" ItemHeight="46" HorizontalAlignment="Center">
 				<WrapPanel.Styles>
 					<Style Selector="Button">
-						<Setter Property="Width" Value="82" />
+						<Setter Property="Width" Value="{DynamicResource MainButtonWidth}" />
 					</Style>
 				</WrapPanel.Styles>
 
@@ -168,6 +168,11 @@
 				<ctrls:FramedImageButton MainColor="{DynamicResource SplitSelectNextBrush}" ImgSrc="{DynamicResource ImageNextSplit}"
 						OnClickCommand="{Binding #profileView.DataContext.SplitSelectNext}"
 						OnRightClickCommand="{Binding #profileView.DataContext.SplitSelectPrev}" />
+				<!-- AutoSplitter start -->
+				<ctrls:FramedImageButton MainColor="{DynamicResource AutoSplitterConfigBrush}" ImgSrc="{DynamicResource ImageAutoSplitterConfig}"
+						OnClickCommand="{Binding #profileView.DataContext.AutoSplitterOpenConfig}"
+						IsVisible="{x:Static c:AutoSplitterCoreModule.AutoSplitterCoreLoaded}"/>
+				<!-- AutoSplitter end -->
 			</WrapPanel>
 
 			<ctrls:ProfileView Padding="0" Margin="0" x:Name="profileView"/>

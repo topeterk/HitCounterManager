@@ -22,8 +22,9 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 -->
-<UserControl xmlns="https://github.com/avaloniaui" 
+<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager.PCL"
              xmlns:vm="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager.PCL"
              x:Class="HitCounterManager.Controls.ProfileView"
              x:Name="ProfileViewPage">
@@ -77,6 +78,17 @@
 				</DataTemplate>
 			</ComboBox.ItemTemplate>
 		</ComboBox>
+
+		<!-- AutoSplitter start -->
+		<DockPanel IsVisible="{x:Static c:AutoSplitterCoreModule.AutoSplitterCoreLoaded}">
+			<TextBlock DockPanel.Dock="Left" Text="AutoSplitter Game:" Margin="0,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
+
+			<ToggleSwitch DockPanel.Dock="Right" Margin="0" IsChecked="{Binding AutoSplitterPracticeModeChecked, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+			<TextBlock DockPanel.Dock="Right" Text="Practice Mode:" Margin="10,0,5,0" HorizontalAlignment="Right" Foreground="Blue" VerticalAlignment="Center" />
+
+			<ComboBox x:Name="comboBoxGame" ItemsSource="{Binding AutoSplitterGameList}" SelectedIndex="{Binding AutoSplitterGameSelectedIndex}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+		</DockPanel>
+		<!-- AutoSplitter end -->
 
 		<OnPlatform>
 			<OnPlatform.Default>

@@ -41,6 +41,9 @@
 		<SolidColorBrush x:Key="HitIncreaseBrush" Color="LightSkyBlue" />
 		<SolidColorBrush x:Key="HitWayIncreaseBrush" Color="LightBlue" />
 		<SolidColorBrush x:Key="SplitSelectNextBrush" Color="LightGreen" />
+		<!-- AutoSplitter start -->
+		<SolidColorBrush x:Key="AutoSplitterConfigBrush" Color="Teal" />
+		<!-- AutoSplitter end -->
 		<SolidColorBrush x:Key="UndoBrush" Color="WhiteSmoke" />
 
 		<Color x:Key="Accent">#FF96D1FF</Color>
@@ -63,6 +66,8 @@
 		<SolidColorBrush x:Key="MainWindowBackgroundBrush" Color="#FFFFFFFF" /> <!-- LightTheme -> SystemControlBackgroundAltHighBrush -> SystemAltHighColor -->
 		<Color x:Key="MainWindowBackgroundColorDark">Black</Color>
 		<Color x:Key="MainWindowBackgroundColorLight">Beige</Color>
+
+		<x:Double x:Key="MainButtonWidth">82</x:Double>
 
 		<!-- Generic -->
 		<c:LocalResourceBitmap x:Key="ImageTrash">
@@ -167,6 +172,11 @@
 		<c:LocalResourceBitmap x:Key="ImageNextSplit">
 			<x:Arguments>/Resources/drawable/icons8_staircase_32.png</x:Arguments>
 		</c:LocalResourceBitmap>
+		<!-- AutoSplitter start -->
+		<c:LocalResourceBitmap x:Key="ImageAutoSplitterConfig">
+			<x:Arguments>/Resources/drawable/icon-autosplitter-32.png</x:Arguments>
+		</c:LocalResourceBitmap>
+		<!-- AutoSplitter end -->
 	</Application.Resources>
 
 	<Application.DataTemplates>

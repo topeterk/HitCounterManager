@@ -68,6 +68,13 @@ Source: https://icons8.com/
 Licence: CC BY-ND 3.0  https://creativecommons.org/licenses/by-nd/3.0/
 
 ==============================================================================
+AutoSplitter Button Image
+
+Title: icon-autosplitter-32
+Author: Neimex23
+Licence: MIT
+
+==============================================================================
 Team Hitless Button Image
 
 Title: -
