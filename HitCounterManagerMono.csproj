@@ -108,6 +108,7 @@
     <Compile Include="Sources\OsLayerAny.cs" />
     <Compile Include="Sources\OsLayerWindows.cs" />
     <Compile Include="Sources\OutModule.cs" />
+    <Compile Include="Sources\AutoSplitterCoreModule.cs" />
     <Compile Include="Sources\Profiles.cs" />
     <Compile Include="Sources\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -31,16 +31,14 @@ namespace HitCounterManager
         private OutModule om;
         private SettingsRoot _settings;
         private bool IsFormLoaded = false;
-        private readonly bool AutoSplitterLoaded;
 
         #region Form
 
-        public Settings(bool AutoSplitterLoaded)
+        public Settings()
         {
             InitializeComponent();
 
-            if (!AutoSplitterLoaded) TabControl1.TabPages.Remove(tab_autosplitter_shortcuts);
-            this.AutoSplitterLoaded = AutoSplitterLoaded;
+            if (!AutoSplitterCoreModule.AutoSplitterCoreLoaded) TabControl1.TabPages.Remove(tab_autosplitter_shortcuts);
         }
 
         private void Settings_Load(object sender, EventArgs e)
@@ -60,7 +58,7 @@ namespace HitCounterManager
             LoadHotKey(SC_Type.SC_Type_TimerStart, cbScTimerStart, txtTimerStart);
             LoadHotKey(SC_Type.SC_Type_TimerStop, cbScTimerStop, txtTimerStop);
             #region AutoSplitter
-            if (AutoSplitterLoaded) 
+            if (AutoSplitterCoreModule.AutoSplitterCoreLoaded)
             {
                 LoadHotKey(SC_Type.SC_Type_Practice, cbScPracticeMode, txtPracticeMode);
                 LoadHotKey(SC_Type.SC_Type_HitBossPrev, cbScHitBossPrev, txtHitBossPrev);

@@ -34,6 +34,10 @@ namespace HitCounterManager
         private Profiles profs;
         private Succession succession;
         public readonly OutModule om;
+        #region AutoSplitter
+        public AutoSplitterCoreInterface InterfaceASC;
+        #endregion
+
         private bool Ready = false;
 
         public ProfilesControl()
@@ -93,10 +97,9 @@ namespace HitCounterManager
         private void UpdateDurationInternal()
         {
             #region AutoSplitter
-            if (AutoSplitterInstance != null && (long)ReturnCurrentIGT.Invoke(AutoSplitterInstance, null) > 0 && (bool)GetIsIGTActive.Invoke(AutoSplitterInstance, null))
+            if (InterfaceASC?.GetCurrentInGameTime(out long CurrentTotalTime) ?? false && CurrentTotalTime > 0)
             {
-                long duration = (long)ReturnCurrentIGT.Invoke(AutoSplitterInstance, null);
-                SelectedProfileInfo.SetDurationByCurrentTotalTime(duration, !TimerRunning || _UpdateCounter++ % 30 == 0);
+                SelectedProfileInfo.SetDurationByCurrentTotalTime(CurrentTotalTime, !TimerRunning || _UpdateCounter++ % 30 == 0);
             }
             else
             #endregion

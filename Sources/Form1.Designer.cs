@@ -691,9 +691,9 @@
         private System.Windows.Forms.Label lbl_time;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label GameToSplitLabel;
-        private System.Windows.Forms.ComboBox comboBoxGame;
+        public System.Windows.Forms.ComboBox comboBoxGame;
         private System.Windows.Forms.Panel pnlHidePracticeModeCheckWhenWindowTooShort;
-        private System.Windows.Forms.CheckBox PracticeModeCheck;
+        public System.Windows.Forms.CheckBox PracticeModeCheck;
         public ProfilesControl profCtrl;
     }
 }

@@ -526,7 +526,7 @@ namespace HitCounterManager
                 _settings.ShortcutTimerStopEnable = key.Used;
                 _settings.ShortcutTimerStopKeyCode = (int)key.KeyData;
                 #region AutoSplitter
-                if (AutoSplitterLoaded)
+                if (AutoSplitterCoreModule.AutoSplitterCoreLoaded)
                 {
                     key = sc.Key_Get(SC_Type.SC_Type_Practice);
                     _settings.ShortcutPracticeEnable = key.Used;
