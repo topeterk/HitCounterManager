@@ -156,8 +156,15 @@ namespace HitCounterManager
                         case SC_Type.SC_Type_WayHit: app.ProfileViewViewModel?.HitWayIncrease.Execute(null); break;
                         case SC_Type.SC_Type_WayHitUndo: app.ProfileViewViewModel?.HitWayDecrease.Execute(null); break;
                         case SC_Type.SC_Type_PB: app.ProfileViewViewModel?.ProfilePB.Execute(null); break;
-                        case SC_Type.SC_Type_TimerStart: if (null != app.ProfileViewViewModel) app.ProfileViewViewModel.TimerRunning = true; break;
-                        case SC_Type.SC_Type_TimerStop: if (null != app.ProfileViewViewModel) app.ProfileViewViewModel.TimerRunning = false; break;
+                        case SC_Type.SC_Type_TimerStart: if (app.ProfileViewViewModel is not null) app.ProfileViewViewModel.TimerRunning = true; break;
+                        case SC_Type.SC_Type_TimerStop: if (app.ProfileViewViewModel is not null) app.ProfileViewViewModel.TimerRunning = false; break;
+                        case SC_Type.SC_Type_HitBossPrev: app.ProfileViewViewModel?.HitIncreasePrev.Execute(null); break;
+                        case SC_Type.SC_Type_BossHitUndoPrev: app.ProfileViewViewModel?.HitDecreasePrev.Execute(null); break;
+                        case SC_Type.SC_Type_HitWayPrev: app.ProfileViewViewModel?.HitWayIncreasePrev.Execute(null); break;
+                        case SC_Type.SC_Type_WayHitUndoPrev: app.ProfileViewViewModel?.HitWayDecreasePrev.Execute(null); break;
+                        #region AutoSplitter
+                        case SC_Type.SC_Type_Practice: if (app.ProfileViewViewModel is not null) app.ProfileViewViewModel.AutoSplitterPracticeModeChecked = !app.ProfileViewViewModel.AutoSplitterPracticeModeChecked; break;
+                        #endregion
                         default: break;
                     }
                 }

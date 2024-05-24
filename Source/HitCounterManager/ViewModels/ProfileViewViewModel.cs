@@ -160,6 +160,10 @@ namespace HitCounterManager.ViewModels
             HitDecrease = ReactiveCommand.Create(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Hits--);
             HitWayIncrease = ReactiveCommand.Create(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].WayHits++);
             HitWayDecrease = ReactiveCommand.Create(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].WayHits--);
+            HitIncreasePrev = ReactiveCommand.Create(() => _ProfileSelected.Rows[Math.Max(_ProfileSelected.ActiveSplit - 1, 0)].Hits++);
+            HitDecreasePrev = ReactiveCommand.Create(() => _ProfileSelected.Rows[Math.Max(_ProfileSelected.ActiveSplit - 1, 0)].Hits--);
+            HitWayIncreasePrev = ReactiveCommand.Create(() => _ProfileSelected.Rows[Math.Max(_ProfileSelected.ActiveSplit - 1, 0)].WayHits++);
+            HitWayDecreasePrev = ReactiveCommand.Create(() => _ProfileSelected.Rows[Math.Max(_ProfileSelected.ActiveSplit - 1, 0)].WayHits--);
             SplitSelectNext = ReactiveCommand.Create(() => GoSplits(+1));
             SplitSelectPrev = ReactiveCommand.Create(() => GoSplits(-1));
 
@@ -369,6 +373,10 @@ namespace HitCounterManager.ViewModels
         public ICommand HitDecrease { get; }
         public ICommand HitWayIncrease { get; }
         public ICommand HitWayDecrease { get; }
+        public ICommand HitIncreasePrev { get; }
+        public ICommand HitDecreasePrev { get; }
+        public ICommand HitWayIncreasePrev { get; }
+        public ICommand HitWayDecreasePrev { get; }
         public ICommand SplitSelectNext { get; }
         public ICommand SplitSelectPrev { get; }
 

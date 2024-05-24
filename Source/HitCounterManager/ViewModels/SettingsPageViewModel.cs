@@ -255,6 +255,28 @@ namespace HitCounterManager.ViewModels
                     CallPropertyChanged(nameof(ShortcutTimerStopDescription));
                     ShortcutTimerStopEnable = true;
                     break;
+                case SC_Type.SC_Type_HitBossPrev:
+                    CallPropertyChanged(nameof(ShortcutHitBossPrevDescription));
+                    ShortcutHitBossPrevEnable = true;
+                    break;
+                case SC_Type.SC_Type_BossHitUndoPrev:
+                    CallPropertyChanged(nameof(ShortcutBossHitUndoPrevDescription));
+                    ShortcutBossHitUndoPrevEnable = true;
+                    break;
+                case SC_Type.SC_Type_HitWayPrev:
+                    CallPropertyChanged(nameof(ShortcutHitWayPrevDescription));
+                    ShortcutHitWayPrevEnable = true;
+                    break;
+                case SC_Type.SC_Type_WayHitUndoPrev:
+                    CallPropertyChanged(nameof(ShortcutWayHitUndoPrevDescription));
+                    ShortcutWayHitUndoPrevEnable = true;
+                    break;
+                #region AutoSplitter
+                case SC_Type.SC_Type_Practice:
+                    CallPropertyChanged(nameof(ShortcutPracticeDescription));
+                    ShortcutPracticeEnable = true;
+                    break;
+                #endregion
                 default: break;
             }
         }
@@ -278,6 +300,13 @@ namespace HitCounterManager.ViewModels
                 CallPropertyChanged(nameof(ShortcutResetRecordAction));
                 CallPropertyChanged(nameof(ShortcutTimerStartRecordAction));
                 CallPropertyChanged(nameof(ShortcutTimerStopRecordAction));
+                CallPropertyChanged(nameof(ShortcutHitBossPrevAction));
+                CallPropertyChanged(nameof(ShortcutBossHitUndoPrevAction));
+                CallPropertyChanged(nameof(ShortcutHitWayPrevAction));
+                CallPropertyChanged(nameof(ShortcutWayHitUndoPrevAction));
+                #region AutoSplitter
+                CallPropertyChanged(nameof(ShortcutPracticeAction));
+                #endregion
 
                 CallPropertyChanged(nameof(ShortcutHitDescription));
                 CallPropertyChanged(nameof(ShortcutHitUndoDescription));
@@ -289,6 +318,13 @@ namespace HitCounterManager.ViewModels
                 CallPropertyChanged(nameof(ShortcutResetDescription));
                 CallPropertyChanged(nameof(ShortcutTimerStartDescription));
                 CallPropertyChanged(nameof(ShortcutTimerStopDescription));
+                CallPropertyChanged(nameof(ShortcutHitBossPrevDescription));
+                CallPropertyChanged(nameof(ShortcutBossHitUndoPrevDescription));
+                CallPropertyChanged(nameof(ShortcutHitWayPrevDescription));
+                CallPropertyChanged(nameof(ShortcutWayHitUndoPrevDescription));
+                #region AutoSplitter
+                CallPropertyChanged(nameof(ShortcutPracticeDescription));
+                #endregion
 
                 CallPropertyChanged(nameof(RadioHotKeyMethod_Sync));
                 CallPropertyChanged(nameof(RadioHotKeyMethod_Async));
@@ -395,6 +431,53 @@ namespace HitCounterManager.ViewModels
                     sc.Key_SetState(SC_Type.SC_Type_TimerStop, Settings.ShortcutTimerStopEnable);
             }
         }
+        public bool ShortcutHitBossPrevEnable
+        {
+            get => Settings.ShortcutHitBossPrevEnable;
+            set
+            {
+                if (SetAndNotifyWhenChanged(ref Settings.ShortcutHitBossPrevEnable, value))
+                    sc.Key_SetState(SC_Type.SC_Type_HitBossPrev, Settings.ShortcutHitBossPrevEnable);
+            }
+        }
+        public bool ShortcutBossHitUndoPrevEnable
+        {
+            get => Settings.ShortcutBossHitUndoPrevEnable;
+            set
+            {
+                if (SetAndNotifyWhenChanged(ref Settings.ShortcutBossHitUndoPrevEnable, value))
+                    sc.Key_SetState(SC_Type.SC_Type_BossHitUndoPrev, Settings.ShortcutBossHitUndoPrevEnable);
+            }
+        }
+        public bool ShortcutHitWayPrevEnable
+        {
+            get => Settings.ShortcutHitWayPrevEnable;
+            set
+            {
+                if (SetAndNotifyWhenChanged(ref Settings.ShortcutHitWayPrevEnable, value))
+                    sc.Key_SetState(SC_Type.SC_Type_HitWayPrev, Settings.ShortcutHitWayPrevEnable);
+            }
+        }
+        public bool ShortcutWayHitUndoPrevEnable
+        {
+            get => Settings.ShortcutWayHitUndoPrevEnable;
+            set
+            {
+                if (SetAndNotifyWhenChanged(ref Settings.ShortcutWayHitUndoPrevEnable, value))
+                    sc.Key_SetState(SC_Type.SC_Type_WayHitUndoPrev, Settings.ShortcutWayHitUndoPrevEnable);
+            }
+        }
+        #region AutoSplitter
+        public bool ShortcutPracticeEnable
+        {
+            get => Settings.ShortcutPracticeEnable;
+            set
+            {
+                if (SetAndNotifyWhenChanged(ref Settings.ShortcutPracticeEnable, value))
+                    sc.Key_SetState(SC_Type.SC_Type_Practice, Settings.ShortcutPracticeEnable);
+            }
+        }
+        #endregion
 
         private void RecordActionChanged(SC_Type type)
         {
@@ -410,6 +493,13 @@ namespace HitCounterManager.ViewModels
                 case SC_Type.SC_Type_Reset: CallPropertyChanged(nameof(ShortcutResetRecordAction)); break;
                 case SC_Type.SC_Type_TimerStart: CallPropertyChanged(nameof(ShortcutTimerStartRecordAction)); break;
                 case SC_Type.SC_Type_TimerStop: CallPropertyChanged(nameof(ShortcutTimerStopRecordAction)); break;
+                case SC_Type.SC_Type_HitBossPrev: CallPropertyChanged(nameof(ShortcutHitBossPrevAction)); break;
+                case SC_Type.SC_Type_BossHitUndoPrev: CallPropertyChanged(nameof(ShortcutBossHitUndoPrevAction)); break;
+                case SC_Type.SC_Type_HitWayPrev: CallPropertyChanged(nameof(ShortcutHitWayPrevAction)); break;
+                case SC_Type.SC_Type_WayHitUndoPrev: CallPropertyChanged(nameof(ShortcutWayHitUndoPrevAction)); break;
+                #region AutoSplitter
+                case SC_Type.SC_Type_Practice: CallPropertyChanged(nameof(ShortcutPracticeAction)); break;
+                #endregion
                 default: break;
             }
         }
@@ -423,6 +513,13 @@ namespace HitCounterManager.ViewModels
         public string ShortcutResetRecordAction => SC_Type.SC_Type_Reset == CapturingId ? "Stop" : "Rec";
         public string ShortcutTimerStartRecordAction => SC_Type.SC_Type_TimerStart == CapturingId ? "Stop" : "Rec";
         public string ShortcutTimerStopRecordAction => SC_Type.SC_Type_TimerStop == CapturingId ? "Stop" : "Rec";
+        public string ShortcutHitBossPrevAction => SC_Type.SC_Type_HitBossPrev == CapturingId ? "Stop" : "Rec";
+        public string ShortcutBossHitUndoPrevAction => SC_Type.SC_Type_BossHitUndoPrev == CapturingId ? "Stop" : "Rec";
+        public string ShortcutHitWayPrevAction => SC_Type.SC_Type_HitWayPrev == CapturingId ? "Stop" : "Rec";
+        public string ShortcutWayHitUndoPrevAction => SC_Type.SC_Type_WayHitUndoPrev == CapturingId ? "Stop" : "Rec";
+        #region AutoSplitter
+        public string ShortcutPracticeAction => SC_Type.SC_Type_Practice == CapturingId ? "Stop" : "Rec";
+        #endregion
 
         public string ShortcutHitDescription => sc.Key_Get(SC_Type.SC_Type_Hit).GetDescriptionString();
         public string ShortcutHitUndoDescription => sc.Key_Get(SC_Type.SC_Type_HitUndo).GetDescriptionString();
@@ -434,6 +531,13 @@ namespace HitCounterManager.ViewModels
         public string ShortcutResetDescription => sc.Key_Get(SC_Type.SC_Type_Reset).GetDescriptionString();
         public string ShortcutTimerStartDescription => sc.Key_Get(SC_Type.SC_Type_TimerStart).GetDescriptionString();
         public string ShortcutTimerStopDescription => sc.Key_Get(SC_Type.SC_Type_TimerStop).GetDescriptionString();
+        public string ShortcutHitBossPrevDescription => sc.Key_Get(SC_Type.SC_Type_HitBossPrev).GetDescriptionString();
+        public string ShortcutBossHitUndoPrevDescription => sc.Key_Get(SC_Type.SC_Type_BossHitUndoPrev).GetDescriptionString();
+        public string ShortcutHitWayPrevDescription => sc.Key_Get(SC_Type.SC_Type_HitWayPrev).GetDescriptionString();
+        public string ShortcutWayHitUndoPrevDescription => sc.Key_Get(SC_Type.SC_Type_WayHitUndoPrev).GetDescriptionString();
+        #region AutoSplitter
+        public string ShortcutPracticeDescription => sc.Key_Get(SC_Type.SC_Type_Practice).GetDescriptionString();
+        #endregion
 
         private void SetNextShortcutMethod(Shortcuts.SC_HotKeyMethod next)
         {

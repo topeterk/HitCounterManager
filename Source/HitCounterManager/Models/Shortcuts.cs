@@ -82,6 +82,54 @@ namespace HitCounterManager.Models
         /// </summary>
         VK_MENU = 0x12,
         /// <summary>
+        /// The F1 key
+        /// </summary>
+        VK_F1 = 0x70,
+        /// <summary>
+        /// The F2 key
+        /// </summary>
+        VK_F2 = 0x71,
+        /// <summary>
+        /// The F3 key
+        /// </summary>
+        VK_F3 = 0x72,
+        /// <summary>
+        /// The F4 key
+        /// </summary>
+        VK_F4 = 0x73,
+        /// <summary>
+        /// The F5 key
+        /// </summary>
+        VK_F5 = 0x74,
+        /// <summary>
+        /// The F6 key
+        /// </summary>
+        VK_F6 = 0x75,
+        /// <summary>
+        /// The F7 key
+        /// </summary>
+        VK_F7 = 0x76,
+        /// <summary>
+        /// The F8 key
+        /// </summary>
+        VK_F8 = 0x77,
+        /// <summary>
+        /// The F9 key
+        /// </summary>
+        VK_F9 = 0x78,
+        /// <summary>
+        /// The F10 key
+        /// </summary>
+        VK_F10 = 0x79,
+        /// <summary>
+        /// The F11 key
+        /// </summary>
+        VK_F11 = 0x7A,
+        /// <summary>
+        /// The F12 key
+        /// </summary>
+        VK_F12 = 0x7B,
+        /// <summary>
         /// The left SHIFT key
         /// </summary>
         VK_LSHIFT = 0xA0,
@@ -170,6 +218,14 @@ namespace HitCounterManager.Models
         /// The MULTIPLY key
         /// </summary>
         VK_MULTIPLY = 0x6A,
+        /// <summary>
+        /// The Add (Num) key
+        /// </summary>
+        VK_ADD = 0x6B,
+        /// <summary>
+        /// The Subtract (Num) key
+        /// </summary>
+        VK_SUBTRACT = 0x6D,
         /// <summary>
         /// The DIVIDE key
         /// </summary>
@@ -304,7 +360,14 @@ namespace HitCounterManager.Models
         // Since version 1.20:
         SC_Type_TimerStart = 8,
         SC_Type_TimerStop = 9,
-        SC_Type_MAX = 10
+        #region AutoSplitter
+        SC_Type_Practice = 10,
+        #endregion
+        SC_Type_HitBossPrev = 11,
+        SC_Type_HitWayPrev = 12,
+        SC_Type_BossHitUndoPrev = 13,
+        SC_Type_WayHitUndoPrev = 14,
+        SC_Type_MAX = 15,
     };
 
     /// <summary>

@@ -48,25 +48,37 @@ namespace HitCounterManager
         public bool CheckUpdatesOnStartup { get; set; }
         public int HotKeyMethod;
         public bool ShortcutResetEnable;
-        public int ShortcutResetKeyCode;      // Actually KeyData as it is combined with modifiers
+        public int ShortcutResetKeyCode;            // Actually KeyData as it is combined with modifiers
         public bool ShortcutHitEnable;
-        public int ShortcutHitKeyCode;        // Actually KeyData as it is combined with modifiers
+        public int ShortcutHitKeyCode;              // Actually KeyData as it is combined with modifiers
         public bool ShortcutHitUndoEnable;
-        public int ShortcutHitUndoKeyCode;    // Actually KeyData as it is combined with modifiers
+        public int ShortcutHitUndoKeyCode;          // Actually KeyData as it is combined with modifiers
         public bool ShortcutWayHitEnable;
-        public int ShortcutWayHitKeyCode;     // Actually KeyData as it is combined with modifiers
+        public int ShortcutWayHitKeyCode;           // Actually KeyData as it is combined with modifiers
         public bool ShortcutWayHitUndoEnable;
-        public int ShortcutWayHitUndoKeyCode; // Actually KeyData as it is combined with modifiers
+        public int ShortcutWayHitUndoKeyCode;       // Actually KeyData as it is combined with modifiers
         public bool ShortcutSplitEnable;
-        public int ShortcutSplitKeyCode;      // Actually KeyData as it is combined with modifiers
+        public int ShortcutSplitKeyCode;            // Actually KeyData as it is combined with modifiers
         public bool ShortcutSplitPrevEnable;
-        public int ShortcutSplitPrevKeyCode;  // Actually KeyData as it is combined with modifiers
+        public int ShortcutSplitPrevKeyCode;        // Actually KeyData as it is combined with modifiers
         public bool ShortcutPBEnable;
-        public int ShortcutPBKeyCode;         // Actually KeyData as it is combined with modifiers
+        public int ShortcutPBKeyCode;               // Actually KeyData as it is combined with modifiers
         public bool ShortcutTimerStartEnable;
-        public int ShortcutTimerStartKeyCode; // Actually KeyData as it is combined with modifiers
+        public int ShortcutTimerStartKeyCode;       // Actually KeyData as it is combined with modifiers
         public bool ShortcutTimerStopEnable;
-        public int ShortcutTimerStopKeyCode;  // Actually KeyData as it is combined with modifiers
+        public int ShortcutTimerStopKeyCode;        // Actually KeyData as it is combined with modifiers
+        public bool ShortcutHitBossPrevEnable;
+        public int ShortcutHitBossPrevKeyCode;      // Actually KeyData as it is combined with modifiers
+        public bool ShortcutBossHitUndoPrevEnable;
+        public int ShortcutBossHitUndoPrevKeyCode;  // Actually KeyData as it is combined with modifiers
+        public bool ShortcutHitWayPrevEnable;
+        public int ShortcutHitWayPrevKeyCode;       // Actually KeyData as it is combined with modifiers
+        public bool ShortcutWayHitUndoPrevEnable;
+        public int ShortcutWayHitUndoPrevKeyCode;   // Actually KeyData as it is combined with modifiers
+        #region AutoSplitter
+        public bool ShortcutPracticeEnable;
+        public int ShortcutPracticeKeyCode;         // Actually KeyData as it is combined with modifiers
+        #endregion
         public string Inputfile = "HitCounter.template";
         public string OutputFile = "HitCounter.html";
         public bool ShowAttemptsCounter;
@@ -151,6 +163,13 @@ namespace HitCounterManager
                 if (!LoadHotKeySettings(SC_Type.SC_Type_PB, Settings.ShortcutPBKeyCode, Settings.ShortcutPBEnable)) Success = false;
                 if (!LoadHotKeySettings(SC_Type.SC_Type_TimerStart, Settings.ShortcutTimerStartKeyCode, Settings.ShortcutTimerStartEnable)) Success = false;
                 if (!LoadHotKeySettings(SC_Type.SC_Type_TimerStop, Settings.ShortcutTimerStopKeyCode, Settings.ShortcutTimerStopEnable)) Success = false;
+                if (!LoadHotKeySettings(SC_Type.SC_Type_HitBossPrev, Settings.ShortcutHitBossPrevKeyCode, Settings.ShortcutHitBossPrevEnable)) Success = false;
+                if (!LoadHotKeySettings(SC_Type.SC_Type_BossHitUndoPrev, Settings.ShortcutBossHitUndoPrevKeyCode, Settings.ShortcutBossHitUndoPrevEnable)) Success = false;
+                if (!LoadHotKeySettings(SC_Type.SC_Type_HitWayPrev, Settings.ShortcutHitWayPrevKeyCode, Settings.ShortcutHitWayPrevEnable)) Success = false;
+                if (!LoadHotKeySettings(SC_Type.SC_Type_WayHitUndoPrev, Settings.ShortcutWayHitUndoPrevKeyCode, Settings.ShortcutWayHitUndoPrevEnable)) Success = false;
+                #region AutoSplitter
+                if (!LoadHotKeySettings(SC_Type.SC_Type_Practice, Settings.ShortcutPracticeKeyCode, Settings.ShortcutPracticeEnable)) Success = false;
+                #endregion
             }
 
             return Success;
@@ -198,11 +217,11 @@ namespace HitCounterManager
                 Settings.MainHeight = 723;
                 Settings.HotKeyMethod = (int)Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async;
                 Settings.ShortcutResetEnable = false;
-                Settings.ShortcutResetKeyCode = 0x10000 | 0x75; // Shift F6
+                Settings.ShortcutResetKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F6; // Shift F6
                 Settings.ShortcutHitEnable = false;
-                Settings.ShortcutHitKeyCode = 0x10000 | 0x76; // Shift F7
+                Settings.ShortcutHitKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F7; // Shift F7
                 Settings.ShortcutSplitEnable = false;
-                Settings.ShortcutSplitKeyCode = 0x10000 | 0x77; // Shift F8
+                Settings.ShortcutSplitKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F8; // Shift F8
                 // Settings.InputFile       is new but default value is in ctor
                 // Settings.OutputFile      is new but default value is in ctor
                 // Settings.ProfileSelected is new but default value is in ctor
@@ -230,9 +249,9 @@ namespace HitCounterManager
             {
                 Settings.Version = 3;
                 Settings.ShortcutHitUndoEnable = false;
-                Settings.ShortcutHitUndoKeyCode = 0x10000 | 0x78; // Shift F9
+                Settings.ShortcutHitUndoKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F9; // Shift F9
                 Settings.ShortcutSplitPrevEnable = false;
-                Settings.ShortcutSplitPrevKeyCode = 0x10000 | 0x79; // Shift F10
+                Settings.ShortcutSplitPrevKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F10; // Shift F10
             }
             if (Settings.Version == 3) // Coming from version 1.15
             {
@@ -245,11 +264,11 @@ namespace HitCounterManager
                 Settings.MainWidth += 50; // added "WayHits" textbox to datagrid (50)
                 Settings.MainHeight += 13 + 70; // added second line to datagrid column header(13) and "Succession" group box
                 Settings.ShortcutWayHitEnable = false;
-                Settings.ShortcutWayHitKeyCode = 0x10000 | 0x74; // Shift F5
+                Settings.ShortcutWayHitKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F5; // Shift F5
                 Settings.ShortcutWayHitUndoEnable = false;
-                Settings.ShortcutWayHitUndoKeyCode = 0x10000 | 0x7A; // Shift F11
+                Settings.ShortcutWayHitUndoKeyCode = (int)VirtualKeyStates.Shift | 0x7A; // Shift F11
                 Settings.ShortcutPBEnable = false;
-                Settings.ShortcutPBKeyCode = 0x10000 | 0x73; // Shift F4
+                Settings.ShortcutPBKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F4; // Shift F4
                 Settings.ShowFooter = true;
                 Settings.ShowHitsCombined = true;
                 Settings.ShowNumbers = true;
@@ -262,14 +281,14 @@ namespace HitCounterManager
                 {
                     // Use different hot keys when loaded without any previous settings
                     // (we don't have to take care of previous user/default settings)
-                    Settings.ShortcutHitKeyCode = 0x10000 | 0x70; // Shift F1
-                    Settings.ShortcutWayHitKeyCode = 0x10000 | 0x71; // Shift F2
-                    Settings.ShortcutSplitKeyCode = 0x10000 | 0x72; // Shift F3
-                    Settings.ShortcutPBKeyCode = 0x10000 | 0x73; // Shift F4
-                    Settings.ShortcutHitUndoKeyCode = 0x10000 | 0x74; // Shift F5
-                    Settings.ShortcutWayHitUndoKeyCode = 0x10000 | 0x75; // Shift F6
-                    Settings.ShortcutSplitPrevKeyCode = 0x10000 | 0x76; // Shift F7
-                    Settings.ShortcutResetKeyCode = 0x10000 | 0x77; // Shift F8
+                    Settings.ShortcutHitKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F1; // Shift F1
+                    Settings.ShortcutWayHitKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F2; // Shift F2
+                    Settings.ShortcutSplitKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F3; // Shift F3
+                    Settings.ShortcutPBKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F4; // Shift F4
+                    Settings.ShortcutHitUndoKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F5; // Shift F5
+                    Settings.ShortcutWayHitUndoKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F6; // Shift F6
+                    Settings.ShortcutSplitPrevKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F7; // Shift F7
+                    Settings.ShortcutResetKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F8; // Shift F8
                 }
             }
             if (Settings.Version == 5) // Coming from version 1.17
@@ -313,9 +332,9 @@ namespace HitCounterManager
                 Settings.ShowTimeDiff = false;
                 Settings.ShowTimeFooter = false;
                 Settings.ShortcutTimerStartEnable = false;
-                Settings.ShortcutTimerStartKeyCode = 0x10000 | 0x6B; // Shift Add-Num
+                Settings.ShortcutTimerStartKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_ADD; // Shift Add-Num
                 Settings.ShortcutTimerStopEnable = false;
-                Settings.ShortcutTimerStopKeyCode = 0x10000 | 0x6D; // Shift Subtract-Num
+                Settings.ShortcutTimerStopKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_SUBTRACT; // Shift Subtract-Num
             }
             if (Settings.Version == 8) // Coming from version 1.20
             {
@@ -328,11 +347,30 @@ namespace HitCounterManager
             if (Settings.Version == 9) // Coming from version 1.20 (without Autosplitter integration)
             {
                 Settings.Version = 10;
+                Settings.ShortcutHitBossPrevEnable = false;
+                Settings.ShortcutHitBossPrevKeyCode = (int)VirtualKeyStates.None;
+                Settings.ShortcutBossHitUndoPrevEnable = false;
+                Settings.ShortcutBossHitUndoPrevKeyCode = (int)VirtualKeyStates.None;
+                Settings.ShortcutHitWayPrevEnable = false;
+                Settings.ShortcutHitWayPrevKeyCode = (int)VirtualKeyStates.None;
+                Settings.ShortcutWayHitUndoPrevEnable = false;
+                Settings.ShortcutWayHitUndoPrevKeyCode = (int)VirtualKeyStates.None;
+                #region AutoSplitter
+                Settings.ShortcutPracticeEnable = false;
+                Settings.ShortcutPracticeKeyCode = (int)VirtualKeyStates.None;
+                #endregion
             }
             if (Settings.Version == 10) // Coming from version 1.21
             {
                 Settings.Version = 11;
                 Settings.StyleTableAlignment = "tblcenter";
+
+                // Hotkeys (introduced with AutoSplitter) will be made available in general.
+                // Keep user settings unless values are not set, then change to default values.
+                if (!Settings.ShortcutHitBossPrevEnable && Settings.ShortcutHitBossPrevKeyCode == (int)VirtualKeyStates.None) Settings.ShortcutHitBossPrevKeyCode = (int)VirtualKeyStates.Control | (int)VirtualKeyStates.VK_F1; // Ctrl F1
+                if (!Settings.ShortcutBossHitUndoPrevEnable && Settings.ShortcutBossHitUndoPrevKeyCode == (int)VirtualKeyStates.None) Settings.ShortcutBossHitUndoPrevKeyCode = (int)VirtualKeyStates.Control | (int)VirtualKeyStates.VK_F5; // Ctrl F5
+                if (!Settings.ShortcutHitWayPrevEnable && Settings.ShortcutHitWayPrevKeyCode == (int)VirtualKeyStates.None) Settings.ShortcutHitWayPrevKeyCode = (int)VirtualKeyStates.Control | (int)VirtualKeyStates.VK_F2; // Ctrl F2
+                if (!Settings.ShortcutWayHitUndoPrevEnable && Settings.ShortcutWayHitUndoPrevKeyCode == (int)VirtualKeyStates.None) Settings.ShortcutWayHitUndoPrevKeyCode = (int)VirtualKeyStates.Control | (int)VirtualKeyStates.VK_F6; // Ctrl F6
             }
             /*if (Settings.Version == 11) // Coming from version x.xx
             {
@@ -383,6 +421,22 @@ namespace HitCounterManager
                 Settings.ShortcutTimerStartKeyCode = (int)key.KeyData;
                 key = sc.Key_Get(SC_Type.SC_Type_TimerStop);
                 Settings.ShortcutTimerStopKeyCode = (int)key.KeyData;
+                key = sc.Key_Get(SC_Type.SC_Type_HitBossPrev);
+                Settings.ShortcutHitBossPrevKeyCode = (int)key.KeyData;
+                key = sc.Key_Get(SC_Type.SC_Type_BossHitUndoPrev);
+                Settings.ShortcutBossHitUndoPrevKeyCode = (int)key.KeyData;
+                key = sc.Key_Get(SC_Type.SC_Type_HitWayPrev);
+                Settings.ShortcutHitWayPrevKeyCode = (int)key.KeyData;
+                key = sc.Key_Get(SC_Type.SC_Type_WayHitUndoPrev);
+                Settings.ShortcutWayHitUndoPrevKeyCode = (int)key.KeyData;
+                #region AutoSplitter
+                key = sc.Key_Get(SC_Type.SC_Type_Practice);
+                Settings.ShortcutPracticeKeyCode = (int)key.KeyData;
+                if (!AutoSplitterCoreModule.AutoSplitterCoreLoaded)
+                {
+                    Settings.ShortcutPracticeEnable = false;
+                }
+                #endregion
             }
 
             sm.WriteXML(Settings);
