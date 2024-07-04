@@ -56,16 +56,16 @@
   <ShortcutTimerStartKeyCode>65643</ShortcutTimerStartKeyCode>
   <ShortcutTimerStopEnable>false</ShortcutTimerStopEnable>
   <ShortcutTimerStopKeyCode>65645</ShortcutTimerStopKeyCode>
+  <ShortcutHitBossPrevEnable>false</ShortcutHitBossPrevEnable>
+  <ShortcutHitBossPrevKeyCode>131184</ShortcutHitBossPrevKeyCode>
+  <ShortcutBossHitUndoPrevEnable>false</ShortcutBossHitUndoPrevEnable>
+  <ShortcutBossHitUndoPrevKeyCode>131188</ShortcutBossHitUndoPrevKeyCode>
+  <ShortcutHitWayPrevEnable>false</ShortcutHitWayPrevEnable>
+  <ShortcutHitWayPrevKeyCode>131185</ShortcutHitWayPrevKeyCode>
+  <ShortcutWayHitUndoPrevEnable>false</ShortcutWayHitUndoPrevEnable>
+  <ShortcutWayHitUndoPrevKeyCode>131189</ShortcutWayHitUndoPrevKeyCode>
   <ShortcutPracticeEnable>false</ShortcutPracticeEnable>
   <ShortcutPracticeKeyCode>0</ShortcutPracticeKeyCode>
-  <ShortcutHitBossPrevEnable>false</ShortcutHitBossPrevEnable>
-  <ShortcutHitBossPrevKeyCode>0</ShortcutHitBossPrevKeyCode>
-  <ShortcutHitWayPrevEnable>false</ShortcutHitWayPrevEnable>
-  <ShortcutHitWayPrevKeyCode>0</ShortcutHitWayPrevKeyCode>
-  <ShortcutBossHitUndoPrevEnable>false</ShortcutBossHitUndoPrevEnable>
-  <ShortcutBossHitUndoPrevKeyCode>0</ShortcutBossHitUndoPrevKeyCode>
-  <ShortcutWayHitUndoPrevEnable>false</ShortcutWayHitUndoPrevEnable>
-  <ShortcutWayHitUndoPrevKeyCode>0</ShortcutWayHitUndoPrevKeyCode>
   <Inputfile>HitCounter.template</Inputfile>
   <OutputFile>HitCounter.html</OutputFile>
   <AllowHtml>false</AllowHtml>

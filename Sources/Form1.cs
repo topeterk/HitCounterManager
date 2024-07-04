@@ -127,12 +127,12 @@ namespace HitCounterManager
                         case SC_Type.SC_Type_PB: btnPB_Click(null, null); break;
                         case SC_Type.SC_Type_TimerStart: StartStopTimer(true); break;
                         case SC_Type.SC_Type_TimerStop: StartStopTimer(false); break;
+                        case SC_Type.SC_Type_HitBossPrev: HitIncreasePrev(); break;
+                        case SC_Type.SC_Type_BossHitUndoPrev: HitDecreasePrev(); break;
+                        case SC_Type.SC_Type_HitWayPrev: HitWayIncreasePrev(); break;
+                        case SC_Type.SC_Type_WayHitUndoPrev: HitWayDecreasePrev(); break;
                         #region AutoSplitter
                         case SC_Type.SC_Type_Practice: if (AutoSplitterCoreModule.AutoSplitterCoreLoaded) { TogglePracticeMode(); } break;
-                        case SC_Type.SC_Type_HitBossPrev: if (AutoSplitterCoreModule.AutoSplitterCoreLoaded) { btnSplitPrev_Click(null, null); btnHit_Click(null, null); btnSplit_Click(null, null); } break;
-                        case SC_Type.SC_Type_HitWayPrev: if (AutoSplitterCoreModule.AutoSplitterCoreLoaded) { btnSplitPrev_Click(null, null); btnWayHit_Click(null, null); btnSplit_Click(null, null); } break;
-                        case SC_Type.SC_Type_BossHitUndoPrev: if (AutoSplitterCoreModule.AutoSplitterCoreLoaded) { btnSplitPrev_Click(null, null); btnHitUndo_Click(null, null); btnSplit_Click(null, null); } break;
-                        case SC_Type.SC_Type_WayHitUndoPrev: if (AutoSplitterCoreModule.AutoSplitterCoreLoaded) { btnSplitPrev_Click(null, null); btnWayHitUndo_Click(null, null); btnSplit_Click(null, null); } break;
                         #endregion
                     }
                 }
@@ -224,6 +224,10 @@ namespace HitCounterManager
         private void btnWayHit_Click(object sender, EventArgs e) { profCtrl.ProfileWayHit(+1); }
         private void btnWayHit_MouseDown(object sender, MouseEventArgs e) { if (e.Button == MouseButtons.Right) profCtrl.ProfileWayHit(-1); }
         private void btnWayHitUndo_Click(object sender, EventArgs e) { profCtrl.ProfileWayHit(-1); }
+        private void HitIncreasePrev() { profCtrl.ProfileSplitGo(-1); profCtrl.ProfileHit(+1); profCtrl.ProfileSplitGo(+1); } // TODO: Optimize out back and forth
+        private void HitDecreasePrev() { profCtrl.ProfileSplitGo(-1); profCtrl.ProfileHit(-1); profCtrl.ProfileSplitGo(+1); } // TODO: Optimize out back and forth
+        private void HitWayIncreasePrev() { profCtrl.ProfileSplitGo(-1); profCtrl.ProfileWayHit(+1); profCtrl.ProfileSplitGo(+1); } // TODO: Optimize out back and forth
+        private void HitWayDecreasePrev() { profCtrl.ProfileSplitGo(-1); profCtrl.ProfileWayHit(-1); profCtrl.ProfileSplitGo(+1); } // TODO: Optimize out back and forth
         private void btnSplit_Click(object sender, EventArgs e) { profCtrl.ProfileSplitGo(+1); }
         private void btnSplit_MouseDown(object sender, MouseEventArgs e) { if (e.Button == MouseButtons.Right) profCtrl.ProfileSplitGo(-1); }
         private void btnSplitPrev_Click(object sender, EventArgs e) { profCtrl.ProfileSplitGo(-1); }
