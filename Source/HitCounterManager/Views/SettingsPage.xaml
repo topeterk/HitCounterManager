@@ -140,28 +140,28 @@
                     <ToggleSwitch Grid.Row="10" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutHitBossPrevEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <TextBlock    Grid.Row="10" Grid.Column="1" Margin="0" Text="[Prev] Hit +1 (boss):" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Button       Grid.Row="10" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_HitBossPrev}" Content="{Binding ShortcutHitBossPrevAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="10" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource AutoSplitterConfigBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Border       Grid.Row="10" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock Text="{Binding ShortcutHitBossPrevDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
 
                     <ToggleSwitch Grid.Row="11" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutBossHitUndoPrevEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <TextBlock    Grid.Row="11" Grid.Column="1" Margin="0" Text="[Prev] Hit -1 (boss):" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Button       Grid.Row="11" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_BossHitUndoPrev}" Content="{Binding ShortcutBossHitUndoPrevAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="11" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource AutoSplitterConfigBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Border       Grid.Row="11" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock Text="{Binding ShortcutBossHitUndoPrevDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
 
                     <ToggleSwitch Grid.Row="12" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutHitWayPrevEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <TextBlock    Grid.Row="12" Grid.Column="1" Margin="0" Text="[Prev] Hit +1 (way):" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Button       Grid.Row="12" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_HitWayPrev}" Content="{Binding ShortcutHitWayPrevAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="12" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource AutoSplitterConfigBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Border       Grid.Row="12" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock Text="{Binding ShortcutHitWayPrevDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
 
                     <ToggleSwitch Grid.Row="13" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutWayHitUndoPrevEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <TextBlock    Grid.Row="13" Grid.Column="1" Margin="0" Text="[Prev] Hit -1 (way):" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Button       Grid.Row="13" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_WayHitUndoPrev}" Content="{Binding ShortcutWayHitUndoPrevAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="13" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource AutoSplitterConfigBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Border       Grid.Row="13" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock Text="{Binding ShortcutWayHitUndoPrevDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
 
