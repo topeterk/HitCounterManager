@@ -168,7 +168,14 @@ namespace HitCounterManager
                 if (!LoadHotKeySettings(SC_Type.SC_Type_HitWayPrev, Settings.ShortcutHitWayPrevKeyCode, Settings.ShortcutHitWayPrevEnable)) Success = false;
                 if (!LoadHotKeySettings(SC_Type.SC_Type_WayHitUndoPrev, Settings.ShortcutWayHitUndoPrevKeyCode, Settings.ShortcutWayHitUndoPrevEnable)) Success = false;
                 #region AutoSplitter
-                if (!LoadHotKeySettings(SC_Type.SC_Type_Practice, Settings.ShortcutPracticeKeyCode, Settings.ShortcutPracticeEnable)) Success = false;
+                if (AutoSplitterCoreModule.AutoSplitterCoreLoaded)
+                {
+                    if (!LoadHotKeySettings(SC_Type.SC_Type_Practice, Settings.ShortcutPracticeKeyCode, Settings.ShortcutPracticeEnable)) Success = false;
+                }
+                else
+                {
+                    Settings.ShortcutPracticeEnable = false;
+                }
                 #endregion
             }
 
@@ -266,7 +273,7 @@ namespace HitCounterManager
                 Settings.ShortcutWayHitEnable = false;
                 Settings.ShortcutWayHitKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F5; // Shift F5
                 Settings.ShortcutWayHitUndoEnable = false;
-                Settings.ShortcutWayHitUndoKeyCode = (int)VirtualKeyStates.Shift | 0x7A; // Shift F11
+                Settings.ShortcutWayHitUndoKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F11; // Shift F11
                 Settings.ShortcutPBEnable = false;
                 Settings.ShortcutPBKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F4; // Shift F4
                 Settings.ShowFooter = true;
@@ -432,10 +439,6 @@ namespace HitCounterManager
                 #region AutoSplitter
                 key = sc.Key_Get(SC_Type.SC_Type_Practice);
                 Settings.ShortcutPracticeKeyCode = (int)key.KeyData;
-                if (!AutoSplitterCoreModule.AutoSplitterCoreLoaded)
-                {
-                    Settings.ShortcutPracticeEnable = false;
-                }
                 #endregion
             }
 
