@@ -124,6 +124,13 @@ namespace HitCounterManager
         /// </summary>
         Action<int /* ActiveGameIndex */> SetActiveGameIndexMethod { get; set; }
 
+        // <summary>
+        /// Method that gets called when HCM is loading to set Current ActiveIndex on AutoSplitter game selction.
+        /// An int will be return with the current ActiveGame on AutoSplitterCore.
+        /// The method should be filled once the registration method is called.
+        /// </summary>
+        Func<int> GetActiveGameIndexMethod { get; set; }
+
         /// <summary>
         /// Method that gets called when the user changes the tPracticeMode.
         /// A bool will be given with the new PracticeMode setting.
@@ -202,6 +209,8 @@ namespace HitCounterManager
 
         public void SetActiveGameIndex(int ActiveGameIndex) => SetActiveGameIndexMethod?.Invoke(ActiveGameIndex);
 
+        public int GetActiveGameIndex() => GetActiveGameIndexMethod.Invoke();
+
         public void SetPracticeMode(bool PracticeMode) => SetPracticeModeMethod?.Invoke(PracticeMode);
 
         public void SplitterReset() => SplitterResetMethod?.Invoke();
@@ -243,6 +252,8 @@ namespace HitCounterManager
         public Action SaveSettingsMethod { get; set; }
 
         public Action<int /* ActiveGameIndex */> SetActiveGameIndexMethod { get; set; }
+
+        public Func<int> GetActiveGameIndexMethod { get; set; }
 
         public Action<bool /* PracticeMode */> SetPracticeModeMethod { get; set; }
 
