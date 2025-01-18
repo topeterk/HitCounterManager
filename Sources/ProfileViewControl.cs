@@ -423,9 +423,16 @@ namespace HitCounterManager
         public List<string> GetSplits()
         {
             List<string> splits = new List<string>();
-            foreach (var row in Rows)
+            foreach (DataGridViewRow row in Rows)
             {
-                splits.Add(row.ToString());
+                //Adding just title
+                var firstCellValue = row.Cells[0].Value?.ToString();
+
+                //Not adding empty items
+                if (!string.IsNullOrWhiteSpace(firstCellValue))
+                {
+                    splits.Add(firstCellValue);
+                }
             }
             return splits;
         }

@@ -64,7 +64,6 @@ namespace HitCounterManager
         /// <returns></returns>
         List<string> GetProfiles();
 
-
         /// <summary>
         /// Return All Splits on Current HCM Profile
         /// </summary>
@@ -80,7 +79,7 @@ namespace HitCounterManager
         /// Insert a new Split on current HCM Profile
         /// </summary>
         /// <param name="SplitTitle">Split Name</param>
-        void InsertSplit(string SplitTitle);
+        void AddSplit(string SplitTitle);
 
         /// <summary>
         /// Amount of available splitsin the current run.
@@ -308,7 +307,7 @@ namespace HitCounterManager
 
         public void NewProfile() => profCtrl.ProfileNew();
 
-        public void InsertSplit(string SplitTitle) { profCtrl.SelectedProfileInfo.InsertSplit(); profCtrl.SelectedProfileInfo.AddSplit(SplitTitle, 0, 0, 0, 0, 0, 0); }
+        public void AddSplit(string SplitTitle) => profCtrl.SelectedProfileInfo.AddSplit(SplitTitle, 0, 0, 0, 0, 0, 0); 
 
         public Action<string /*ProfileName*/> ProfileChange { get; set; }
 
