@@ -260,6 +260,7 @@ namespace HitCounterManager
             if (cause != ProfileViewControl.SelectedProfileChangedCauseType.Delete)
             {
                 profs.SaveProfile(pvc_sender.ProfileInfo); // save currently selected profile
+                if (InterfaceASC != null) InterfaceASC.ProfileChangeTrigger(pvc_sender.ProfileInfo.ProfileName);
             }
             profs.LoadProfile(pvc_sender.SelectedProfile, pvc_sender.ProfileInfo);
             succession.SuccessionList[ptc.IndexOf(pvc_sender)].ProfileSelected = pvc_sender.SelectedProfile;
@@ -299,6 +300,8 @@ namespace HitCounterManager
                 default: break;
             }
         }
+
+        public string[] GetProfiles() => profs.GetProfileList();
 
         public void ProfileNew()
         {

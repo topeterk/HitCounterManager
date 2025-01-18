@@ -25,6 +25,9 @@ using System;
 using System.IO;
 using System.Collections.ObjectModel;
 using static HitCounterManager.IAutoSplitterCoreInterface;
+using System.Reflection.Emit;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HitCounterManager
 {
@@ -48,6 +51,36 @@ namespace HitCounterManager
         /// Increased the attempt counter, select first split and reset all values.
         /// </summary>
         void ProfileReset();
+
+        /// <summary>
+        /// Get Current HCM Profile Name
+        /// </summary>
+        /// <returns>String: Profile name</returns>
+        string ProfileName();
+
+        /// <summary>
+        /// Return Name of All HCM Profiles
+        /// </summary>
+        /// <returns></returns>
+        List<string> GetProfiles();
+
+
+        /// <summary>
+        /// Return All Splits on Current HCM Profile
+        /// </summary>
+        /// <returns>List<String> All Splits Names/returns>
+        List<string> GetSplits();
+
+        /// <summary>
+        /// Create a New Profile on HCM
+        /// </summary>
+        void NewProfile();
+
+        /// <summary>
+        /// Insert a new Split on current HCM Profile
+        /// </summary>
+        /// <param name="SplitTitle">Split Name</param>
+        void InsertSplit(string SplitTitle);
 
         /// <summary>
         /// Amount of available splitsin the current run.
@@ -144,6 +177,10 @@ namespace HitCounterManager
         /// </summary>
         Action SplitterResetMethod { get; set; }
 
+      
+
+        public Action<string /*ProfileName*/> ProfileChange { get; set; }
+
         #endregion
     }
 
@@ -215,6 +252,8 @@ namespace HitCounterManager
 
         public void SplitterReset() => SplitterResetMethod?.Invoke();
 
+        public void ProfileChangeTrigger(string ProfileTitle) => ProfileChange?.Invoke(ProfileTitle);
+
         #region IAutoSplitterCoreInterface
 
         public int ActiveGameIndex
@@ -258,6 +297,20 @@ namespace HitCounterManager
         public Action<bool /* PracticeMode */> SetPracticeModeMethod { get; set; }
 
         public Action SplitterResetMethod { get; set; }
+
+
+        //For Cloud Profile Manager or Profile Link
+        public string ProfileName() => profCtrl.SelectedProfileInfo.ProfileName;
+
+        public List<string> GetProfiles() => profCtrl.GetProfiles().ToList(); 
+
+        public List<string> GetSplits() => profCtrl.SelectedProfileInfo.GetSplits();
+
+        public void NewProfile() => profCtrl.ProfileNew();
+
+        public void InsertSplit(string SplitTitle) { profCtrl.SelectedProfileInfo.InsertSplit(); profCtrl.SelectedProfileInfo.AddSplit(SplitTitle, 0, 0, 0, 0, 0, 0); }
+
+        public Action<string /*ProfileName*/> ProfileChange { get; set; }
 
         #endregion
     }

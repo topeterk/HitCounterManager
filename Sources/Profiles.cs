@@ -241,6 +241,13 @@ namespace HitCounterManager
         /// <param name="DurationPB">Milliseconds of the split's personal best duration</param>
         /// <param name="DurationGold">Milliseconds of the split's all times best duration</param>
         void AddSplit(string Title, int Hits, int WayHits, int PB, long Duration, long DurationPB, long DurationGold);
+
+        /// <summary>
+        /// Return All Splits on Current Profile
+        /// </summary>
+        /// <returns></returns>
+        List<string> GetSplits();
+
         /// <summary>
         /// Insert a new split before the current one
         /// </summary>
