@@ -73,7 +73,7 @@ namespace HitCounterManager
         /// <summary>
         /// Create a New Profile on HCM
         /// </summary>
-        void NewProfile();
+        void NewProfile(string profileTitle);
 
         /// <summary>
         /// Insert a new Split on current HCM Profile
@@ -305,7 +305,7 @@ namespace HitCounterManager
 
         public List<string> GetSplits() => profCtrl.SelectedProfileInfo.GetSplits();
 
-        public void NewProfile() => profCtrl.ProfileNew();
+        public void NewProfile(string profileTitle) => profCtrl.ProfileNew(profileTitle);
 
         public void AddSplit(string SplitTitle) => profCtrl.SelectedProfileInfo.AddSplit(SplitTitle, 0, 0, 0, 0, 0, 0); 
 
