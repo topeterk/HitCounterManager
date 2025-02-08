@@ -2,7 +2,7 @@
 
 #MIT License
 
-#Copyright (c) 2022-2023 Peter Kirmeier
+#Copyright (c) 2022-2025 Peter Kirmeier
 
 #Permission is hereby granted, free of charge, to any person obtaining a copy
 #of this software and associated documentation files (the "Software"), to deal
@@ -32,6 +32,8 @@ function grepkey {
 function grepinline {
 	grep "<$1" "$3" | sed -e "s,^.*<$1[^>]*$2=[\'\"]\([^\'^\"]*\)[\'\"].*,\1,"
 }
+
+export DOTNET_CLI_TELEMETRY_OPTOUT=TRUE
 
 echo Printing Non-NuGet info 1>&2
 
@@ -150,7 +152,7 @@ echo Fetching NuGet packages 1>&2
 
 LICENSES=""
 NUGET_PACKAGES_DIR=$(dotnet nuget locals -l global-packages | sed -e 's,^[^ ]* ,,' -e 's,[ \t/\\]*$,,' -e 's,\\,/,g')
-NUGET_PACKAGES_SPECS=$(dotnet list $(pwd)/HitCounterManager.sln package --include-transitive --format json | grep -e '"id":\|"resolvedVersion":' | sed -e 's,.*: "\(.*\)"\,*$,\1,' | xargs -n2 -d'\n' | sed -e 's,\([^ ]*\) \(.*\),\L\1/\2/\L\1.nuspec,')
+NUGET_PACKAGES_SPECS=$(dotnet list $(pwd)/HitCounterManager.sln package --include-transitive --format json | grep -e '"id":\|"resolvedVersion":' | sed -e 's,.*: "\(.*\)"\,*$,\1,' | xargs -n2 -d'\n' | sed -e 's,\([^ ]*\) \(.*\),\L\1/\2/\L\1.nuspec,' | sort -u)
 
 echo Printing NuGet packages 1>&2
 
