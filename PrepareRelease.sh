@@ -2,7 +2,7 @@
 #
 # MIT License
 #
-# Copyright(c) 2018-2018 Peter Kirmeier
+# Copyright(c) 2018-2025 Peter Kirmeier
 #
 # Permission Is hereby granted, free Of charge, to any person obtaining a copy
 # of this software And associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ PR_FINAL=./FinalFiles
 mkdir -p "$PR_FINAL"
 
 echo Packing Mono Portable Release:
-PR_BASE=bin/ReleaseMono
+PR_BASE=bin/ReleaseMono/net48
 PR_TARGET=$PR_FINAL/ReleaseMonoPortable
 PR_OUTPUT=$PR_FINAL/HitCounterManager_Mono_Portable_v1.x.y.z.tar.gz
 rm -rf "$PR_TARGET" 2>/dev/null
