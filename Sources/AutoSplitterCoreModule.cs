@@ -28,6 +28,7 @@ using static HitCounterManager.IAutoSplitterCoreInterface;
 using System.Reflection.Emit;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace HitCounterManager
 {
@@ -96,6 +97,12 @@ namespace HitCounterManager
         /// </summary>
         /// <param name="Amount">Amount of splits that will be moved forwards/backwards</param>
         void ProfileSplitGo(int Amount);
+
+        /// <summary>
+        /// Modifies the currently selected split on hit by Amount.
+        /// </summary>
+        /// <param name="Amount"></param>
+        public void ProfileHitGo(int Aumount, bool WayHit);
 
         /// <summary>
         /// Indicates if timer is currently running.
@@ -274,6 +281,8 @@ namespace HitCounterManager
         public int ActiveSplit => profCtrl.SelectedProfileInfo.ActiveSplit;
 
         public void ProfileSplitGo(int Amount) => profCtrl.ProfileSplitGo(Amount);
+
+        public void ProfileHitGo(int Aumount, bool WayHit) { if (WayHit) profCtrl.ProfileWayHit(Aumount); else profCtrl.ProfileHit(Aumount); }
 
         public bool TimerRunning => profCtrl.TimerRunning;
 
