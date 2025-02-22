@@ -26,6 +26,8 @@ using System.IO;
 using System.Collections.ObjectModel;
 using HitCounterManager.ViewModels;
 using static HitCounterManager.IAutoSplitterCoreInterface;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HitCounterManager
 {
@@ -51,6 +53,35 @@ namespace HitCounterManager
         void ProfileReset();
 
         /// <summary>
+        /// Get Current HCM Profile Name
+        /// </summary>
+        /// <returns>String: Profile name</returns>
+        string ProfileName();
+
+        /// <summary>
+        /// Return Name of All HCM Profiles
+        /// </summary>
+        /// <returns></returns>
+        List<string> GetProfiles();
+
+        /// <summary>
+        /// Return All Splits on Current HCM Profile
+        /// </summary>
+        /// <returns>List<String> All Splits Names/returns>
+        List<string> GetSplits();
+
+        /// <summary>
+        /// Create a New Profile on HCM
+        /// </summary>
+        void NewProfile(string profileTitle);
+
+        /// <summary>
+        /// Insert a new Split on current HCM Profile
+        /// </summary>
+        /// <param name="SplitTitle">Split Name</param>
+        void AddSplit(string SplitTitle);
+
+        /// <summary>
         /// Amount of available splitsin the current run.
         /// </summary>
         int SplitCount { get; }
@@ -65,6 +96,12 @@ namespace HitCounterManager
         /// </summary>
         /// <param name="Amount">Amount of splits that will be moved forwards/backwards</param>
         void ProfileSplitGo(int Amount);
+
+        /// <summary>
+        /// Modifies the currently selected split on hit by Amount.
+        /// </summary>
+        /// <param name="Amount"></param>
+        public void ProfileHitGo(int Aumount, bool WayHit);
 
         /// <summary>
         /// Indicates if timer is currently running.
@@ -145,6 +182,8 @@ namespace HitCounterManager
         /// </summary>
         Action? SplitterResetMethod { get; set; }
 
+
+        public Action<string /*ProfileName*/> ProfileChange { get; set; }
         #endregion
     }
 }
@@ -217,6 +256,7 @@ namespace HitCounterManager.Common
 
         public void SplitterReset() => SplitterResetMethod?.Invoke();
 
+
         #region IAutoSplitterCoreInterface
 
         public int ActiveGameIndex
@@ -233,11 +273,27 @@ namespace HitCounterManager.Common
 
         public void ProfileReset() => ProfileViewViewModel.ProfileReset.Execute(null);
 
+        public string ProfileName() => ProfileViewViewModel.ProfileSelected.Name;
+
+        public void NewProfile(string profileTitle) => ProfileViewViewModel.ProfileNew(profileTitle);
+
+        public List<string> GetProfiles() => ProfileViewViewModel.ProfileList.Select(row => row.Name).ToList();
+
+        public void ProfileHitGo(int Aumount, bool WayHit) { if (WayHit) ProfileViewViewModel.HitWayIncrease.Execute(null); else ProfileViewViewModel.HitIncrease.Execute(null); }
+
         public int SplitCount => ProfileViewViewModel.ProfileSelected.Rows.Count;
 
         public int ActiveSplit => ProfileViewViewModel.ProfileSelected.ActiveSplit;
 
         public void ProfileSplitGo(int Amount) => ProfileViewViewModel.GoSplits(Amount);
+
+        public List<string> GetSplits() => ProfileViewViewModel.ProfileSelected.Rows.Select(row => row.Title).ToList();
+
+        public void AddSplit(string SplitTitle) 
+        {
+            ProfileViewViewModel.ProfileSelected.InsertNewRow();
+            ProfileViewViewModel.ProfileSelected.ActiveSplitModel.Title = SplitTitle;
+        }
 
         public bool TimerRunning => ProfileViewViewModel.TimerRunning;
 
@@ -260,6 +316,10 @@ namespace HitCounterManager.Common
         public Action<bool /* PracticeMode */>? SetPracticeModeMethod { get; set; }
 
         public Action? SplitterResetMethod { get; set; }
+
+        public Action<string /*ProfileName*/> ProfileChange { get; set; }
+
+        public void ProfileChangeTrigger(string ProfileTitle) => ProfileChange?.Invoke(ProfileTitle);
 
         #endregion
     }

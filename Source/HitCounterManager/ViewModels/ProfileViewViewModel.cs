@@ -258,6 +258,7 @@ namespace HitCounterManager.ViewModels
 
                         CallPropertyChanged();
                         OutputDataChangedHandler(this, new PropertyChangedEventArgs(nameof(ProfileSelected)));
+                        InterfaceASC?.ProfileChangeTrigger(ProfileSelected.Name);
                     }
                 }
             }
