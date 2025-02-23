@@ -291,8 +291,12 @@ namespace HitCounterManager.Common
 
         public void AddSplit(string SplitTitle) 
         {
-            ProfileViewViewModel.ProfileSelected.InsertNewRow();
-            ProfileViewViewModel.ProfileSelected.ActiveSplitModel.Title = SplitTitle;
+            var profile = ProfileViewViewModel.ProfileSelected;
+
+            profile.ActiveSplit = profile.Rows.Count > 0 ? profile.Rows.Count - 1 : 0; //Avoid Last Row Insert
+
+            profile.InsertNewRow();
+            profile.ActiveSplitModel.Title = SplitTitle;
         }
 
         public bool TimerRunning => ProfileViewViewModel.TimerRunning;
