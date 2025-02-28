@@ -131,7 +131,8 @@ function Watchdog()
 				'<li>Start <b>msedge.exe</b> with command line option <b>--profile-directory=Default --allow-file-access-from-files</b></li></ul></li>' +
 			'<li><u>Opera</u>:<br/>' +
 				'<ul><li>Shutdown all running instances of the browser (kill the processes) making sure startup parameters are loaded properly int the next step.</li>' +
-				'<li>Start <b>launcher.exe</b> with command line option <b>--allow-file-access-from-files</b></li></ul></li>' +
+				'<li>Older versions: Start <b>launcher.exe</b> with command line option <b>--allow-file-access-from-files</b></li>' +
+				'<li>Newer versions: Start <b>opera.exe</b> with command line option <b>--allow-file-access-from-files</b></li></ul></li>' +
 			'<li><u>Firefox</u>:<br/>' +
 				'<ul><li>Change the security policy in the browser settings <b>"about:config" -&gt; "security.fileuri.strict_origin_policy" -&gt; false</b>.<br/>' +
 				'But keep in mind that this is a global settings, which means you should enable this only for offline/trusted websites!</li></ul></li>' +
