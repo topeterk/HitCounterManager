@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-16"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <SettingsRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Version>10</Version>
+  <Version>11</Version>
   <MainWidth>652</MainWidth>
   <MainHeight>875</MainHeight>
   <MainPosX>77</MainPosX>
