@@ -263,6 +263,7 @@ namespace HitCounterManager
             }
             profs.LoadProfile(pvc_sender.SelectedProfile, pvc_sender.ProfileInfo);
             succession.SuccessionList[ptc.IndexOf(pvc_sender)].ProfileSelected = pvc_sender.SelectedProfile;
+            InterfaceASC?.ProfileChangeTrigger(pvc_sender.ProfileInfo.ProfileName);
         }
   
         public void ProfileTabPermuting(object sender, Tuple<int, int> indices)
@@ -300,9 +301,14 @@ namespace HitCounterManager
             }
         }
 
-        public void ProfileNew()
+        public string[] GetProfiles() => profs.GetProfileList();
+
+        public void ProfileNew(string profileTitle)
         {
-            string NameNew = VisualBasic.Interaction.InputBox("Enter name of new profile", "New profile", SelectedProfile);
+            string NameNew = string.Empty;
+            if (string.IsNullOrEmpty(profileTitle)) NameNew = VisualBasic.Interaction.InputBox("Enter name of new profile", "New profile", SelectedProfile);
+            else NameNew = profileTitle;
+
             if (NameNew.Length == 0) return;
 
             if (profs.HasProfile(NameNew))

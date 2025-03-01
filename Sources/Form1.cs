@@ -89,6 +89,7 @@ namespace HitCounterManager
                 {
                     comboBoxGame.Items.Add(game);
                 }
+                comboBoxGame.SelectedIndex = InterfaceASC.GetActiveGameIndex();
 
                 LoadAutoSplitterHotKeys();
             }
@@ -200,7 +201,7 @@ namespace HitCounterManager
         }
         private void btnAbout_Click(object sender, EventArgs e) { new About().ShowDialog(this); }
 
-        private void btnNew_Click(object sender, EventArgs e) { profCtrl.ProfileNew(); }
+        private void btnNew_Click(object sender, EventArgs e) { profCtrl.ProfileNew(null); }
         private void btnRename_Click(object sender, EventArgs e) { profCtrl.ProfileRename(); }
         private void btnCopy_Click(object sender, EventArgs e) { profCtrl.ProfileCopy(); }
         private void btnDelete_Click(object sender, EventArgs e) { profCtrl.ProfileDelete(); }

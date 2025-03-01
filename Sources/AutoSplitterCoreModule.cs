@@ -25,6 +25,10 @@ using System;
 using System.IO;
 using System.Collections.ObjectModel;
 using static HitCounterManager.IAutoSplitterCoreInterface;
+using System.Reflection.Emit;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace HitCounterManager
 {
@@ -50,6 +54,35 @@ namespace HitCounterManager
         void ProfileReset();
 
         /// <summary>
+        /// Get Current HCM Profile Name
+        /// </summary>
+        /// <returns>String: Profile name</returns>
+        string ProfileName();
+
+        /// <summary>
+        /// Return Name of All HCM Profiles
+        /// </summary>
+        /// <returns></returns>
+        List<string> GetProfiles();
+
+        /// <summary>
+        /// Return All Splits on Current HCM Profile
+        /// </summary>
+        /// <returns>List<String> All Splits Names/returns>
+        List<string> GetSplits();
+
+        /// <summary>
+        /// Create a New Profile on HCM
+        /// </summary>
+        void NewProfile(string profileTitle);
+
+        /// <summary>
+        /// Insert a new Split on current HCM Profile
+        /// </summary>
+        /// <param name="SplitTitle">Split Name</param>
+        void AddSplit(string SplitTitle);
+
+        /// <summary>
         /// Amount of available splitsin the current run.
         /// </summary>
         int SplitCount { get; }
@@ -64,6 +97,12 @@ namespace HitCounterManager
         /// </summary>
         /// <param name="Amount">Amount of splits that will be moved forwards/backwards</param>
         void ProfileSplitGo(int Amount);
+
+        /// <summary>
+        /// Modifies the currently selected split on hit by Amount.
+        /// </summary>
+        /// <param name="Amount"></param>
+        public void ProfileHitGo(int Aumount, bool WayHit);
 
         /// <summary>
         /// Indicates if timer is currently running.
@@ -124,6 +163,13 @@ namespace HitCounterManager
         /// </summary>
         Action<int /* ActiveGameIndex */> SetActiveGameIndexMethod { get; set; }
 
+        // <summary>
+        /// Method that gets called when HCM is loading to set Current ActiveIndex on AutoSplitter game selction.
+        /// An int will be return with the current ActiveGame on AutoSplitterCore.
+        /// The method should be filled once the registration method is called.
+        /// </summary>
+        Func<int> GetActiveGameIndexMethod { get; set; }
+
         /// <summary>
         /// Method that gets called when the user changes the tPracticeMode.
         /// A bool will be given with the new PracticeMode setting.
@@ -136,6 +182,10 @@ namespace HitCounterManager
         /// The method should be filled once the registration method is called.
         /// </summary>
         Action SplitterResetMethod { get; set; }
+
+      
+
+        public Action<string /*ProfileName*/> ProfileChange { get; set; }
 
         #endregion
     }
@@ -202,9 +252,13 @@ namespace HitCounterManager
 
         public void SetActiveGameIndex(int ActiveGameIndex) => SetActiveGameIndexMethod?.Invoke(ActiveGameIndex);
 
+        public int GetActiveGameIndex() => GetActiveGameIndexMethod.Invoke();
+
         public void SetPracticeMode(bool PracticeMode) => SetPracticeModeMethod?.Invoke(PracticeMode);
 
         public void SplitterReset() => SplitterResetMethod?.Invoke();
+
+        public void ProfileChangeTrigger(string ProfileTitle) => ProfileChange?.Invoke(ProfileTitle);
 
         #region IAutoSplitterCoreInterface
 
@@ -228,6 +282,8 @@ namespace HitCounterManager
 
         public void ProfileSplitGo(int Amount) => profCtrl.ProfileSplitGo(Amount);
 
+        public void ProfileHitGo(int Aumount, bool WayHit) { if (WayHit) profCtrl.ProfileWayHit(Aumount); else profCtrl.ProfileHit(Aumount); }
+
         public bool TimerRunning => profCtrl.TimerRunning;
 
         public void StartStopTimer(bool Start) => form1.StartStopTimer(Start);
@@ -244,9 +300,25 @@ namespace HitCounterManager
 
         public Action<int /* ActiveGameIndex */> SetActiveGameIndexMethod { get; set; }
 
+        public Func<int> GetActiveGameIndexMethod { get; set; }
+
         public Action<bool /* PracticeMode */> SetPracticeModeMethod { get; set; }
 
         public Action SplitterResetMethod { get; set; }
+
+
+        //For Cloud Profile Manager or Profile Link
+        public string ProfileName() => profCtrl.SelectedProfileInfo.ProfileName;
+
+        public List<string> GetProfiles() => profCtrl.GetProfiles().ToList(); 
+
+        public List<string> GetSplits() => profCtrl.SelectedProfileInfo.GetSplits();
+
+        public void NewProfile(string profileTitle) => profCtrl.ProfileNew(profileTitle);
+
+        public void AddSplit(string SplitTitle) => profCtrl.SelectedProfileInfo.AddSplit(SplitTitle, 0, 0, 0, 0, 0, 0); 
+
+        public Action<string /*ProfileName*/> ProfileChange { get; set; }
 
         #endregion
     }

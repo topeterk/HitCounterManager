@@ -419,6 +419,24 @@ namespace HitCounterManager
             Rows[Rows.Add([Title, Hits, WayHits, Hits + WayHits - PB, PB, false])].Tag = new HiddenRowData(Duration, DurationPB, DurationGold);
             ProfileUpdateEnd();
         }
+
+        public List<string> GetSplits()
+        {
+            List<string> splits = new List<string>();
+            foreach (DataGridViewRow row in Rows)
+            {
+                //Adding just title
+                var firstCellValue = row.Cells[0].Value?.ToString();
+
+                //Not adding empty items
+                if (!string.IsNullOrWhiteSpace(firstCellValue))
+                {
+                    splits.Add(firstCellValue);
+                }
+            }
+            return splits;
+        }
+
         public void InsertSplit()
         {
             int active = ActiveSplit;
