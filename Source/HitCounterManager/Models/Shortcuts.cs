@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright(c) 2016-2024 Peter Kirmeier
+//Copyright(c) 2016-2025 Peter Kirmeier
 
 //Permission Is hereby granted, free Of charge, to any person obtaining a copy
 //of this software And associated documentation files (the "Software"), to deal
@@ -237,7 +237,7 @@ namespace HitCounterManager.Models
     /// <summary>
     /// Holds data about a hotkey
     /// </summary>
-    public class ShortcutsKey
+    public class ShortcutsKey(VirtualKeyStates keyData)
     {
         private bool _used = false; // indicates if shortcut is registered at windows
         private bool _down = false; // indicates if shortcut is currently pressed
@@ -254,15 +254,10 @@ namespace HitCounterManager.Models
 
         public ShortcutsKey() : this(VirtualKeyStates.None) { }
 
-        public ShortcutsKey(VirtualKeyStates keyData)
-        {
-            KeyData = keyData;
-        }
-
         /// <summary>
         /// Representing the key code for the key that was pressed, combined with modifier flags
         /// </summary>
-        public readonly VirtualKeyStates KeyData;
+        public readonly VirtualKeyStates KeyData = keyData;
 
         /// <summary>
         /// Representing the key code for the key that was pressed, without any modifier flags

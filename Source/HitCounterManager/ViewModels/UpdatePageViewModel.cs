@@ -28,7 +28,7 @@ namespace HitCounterManager.ViewModels
 {
     public class UpdatePageViewModel : ViewModelWindowBase
     {
-        public SettingsRoot Settings => App.CurrentApp.Settings;
+        public static SettingsRoot Settings => App.CurrentApp.Settings;
 
         public UpdatePageViewModel()
         {
@@ -46,8 +46,12 @@ namespace HitCounterManager.ViewModels
             });
         }
 
+#pragma warning disable IDE0079
+#pragma warning disable CA1822
         public string LatestVersionName => GitHubUpdate.LatestVersionName;
-        public string FullChangeLog { get => GitHubUpdate.Changelog; }
+        public string FullChangeLog => GitHubUpdate.Changelog;
+#pragma warning restore CA1822
+#pragma warning restore IDE0079
 
         public bool CheckUpdatesOnStartup
         {

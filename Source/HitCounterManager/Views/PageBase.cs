@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2023-2023 Peter Kirmeier
+//Copyright (c) 2023-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -54,10 +54,10 @@ namespace HitCounterManager.Views
 
         public void CloseHandler(object sender, RoutedEventArgs args)
         {
-            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime)
             {
                 // Pass command to parent window
-                if (ViewModel.OwnerWindow is not null) ViewModel.OwnerWindow.Close();
+                ViewModel.OwnerWindow?.Close();
             }
             else if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
             {

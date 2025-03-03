@@ -214,21 +214,20 @@ namespace HitCounterManager
             }
             else
             {
-#pragma warning disable IDE0017
-                Settings = new();
-#pragma warning restore IDE0017
-
-                // prepare defaults..
-                Settings.Version = 0;
-                Settings.MainWidth = 559;
-                Settings.MainHeight = 723;
-                Settings.HotKeyMethod = (int)Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async;
-                Settings.ShortcutResetEnable = false;
-                Settings.ShortcutResetKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F6; // Shift F6
-                Settings.ShortcutHitEnable = false;
-                Settings.ShortcutHitKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F7; // Shift F7
-                Settings.ShortcutSplitEnable = false;
-                Settings.ShortcutSplitKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F8; // Shift F8
+                Settings = new()
+                {
+                    // prepare defaults..
+                    Version = 0,
+                    MainWidth = 559,
+                    MainHeight = 723,
+                    HotKeyMethod = (int)Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async,
+                    ShortcutResetEnable = false,
+                    ShortcutResetKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F6, // Shift F6
+                    ShortcutHitEnable = false,
+                    ShortcutHitKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F7, // Shift F7
+                    ShortcutSplitEnable = false,
+                    ShortcutSplitKeyCode = (int)VirtualKeyStates.Shift | (int)VirtualKeyStates.VK_F8 // Shift F8
+                };
                 // Settings.InputFile       is new but default value is in ctor
                 // Settings.OutputFile      is new but default value is in ctor
                 // Settings.ProfileSelected is new but default value is in ctor
