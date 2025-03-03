@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2024 Peter Kirmeier
+//Copyright (c) 2016-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -435,6 +435,8 @@ namespace HitCounterManager
             if (_settings.Succession.SuccessionList.Count <= _settings.Succession.ActiveIndex) _settings.Succession.ActiveIndex = 0;
             profCtrl.InitializeProfilesControl(_settings.Profiles, _settings.Succession);
             profCtrl.om.Settings = _settings;
+            if (!profCtrl.om.ReloadTemplate())
+                MessageBox.Show("The file " + (string.IsNullOrEmpty(_settings.Inputfile) ? "<Inputfile not set>" : "\"" + _settings.Inputfile + "\"") + " not found!", "Error loading template!");
             profCtrl.om.Update(); // Write first output once after application start
 
             // Configure hot keys..
