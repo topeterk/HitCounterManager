@@ -145,6 +145,13 @@ namespace TinyJson
                 return result;
             }
 
+            if (type == typeof(DateTime))
+            {
+                DateTime result;
+                DateTime.TryParse(json.Replace("\"", ""), System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out result);
+                return result;
+            }
+
             if (json == "null")
             {
                 return null;
