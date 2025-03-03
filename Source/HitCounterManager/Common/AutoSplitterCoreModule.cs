@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2024-2024 Peter Kirmeier
+//Copyright (c) 2024-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -179,14 +179,9 @@ namespace HitCounterManager.Common
         }
     }
 
-    public class AutoSplitterCoreInterface : IAutoSplitterCoreInterface
+    public class AutoSplitterCoreInterface(ProfileViewViewModel profileViewViewModel) : IAutoSplitterCoreInterface
     {
-        private readonly ProfileViewViewModel ProfileViewViewModel;
-
-        public AutoSplitterCoreInterface(ProfileViewViewModel profileViewViewModel)
-        {
-            ProfileViewViewModel = profileViewViewModel;
-        }
+        private readonly ProfileViewViewModel ProfileViewViewModel = profileViewViewModel;
 
         public bool GetCurrentInGameTime(out long totalTimeMs)
         {

@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2024 Peter Kirmeier
+//Copyright (c) 2021-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -52,7 +52,7 @@ namespace HitCounterManager.ViewModels
 
             ToggleShowInfo = ReactiveCommand.Create<string>((string name) => { ShowInfo[name].Value = !ShowInfo[name].Value; });
 
-            ProfileList = new ObservableCollection<ProfileModel>();
+            ProfileList = [];
             foreach (Profile prof in Settings.Profiles.ProfileList)
             {
                 ProfileModel profileModel = new (prof);
@@ -273,9 +273,8 @@ namespace HitCounterManager.ViewModels
             }
         }
 
-        public class ProfileActionException : Exception
+        public class ProfileActionException(string message) : Exception(message)
         {
-            public ProfileActionException(string message) : base(message) { }
         }
 
         public void ProfileNew(string NewName)

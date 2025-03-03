@@ -21,6 +21,7 @@
 //SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace HitCounterManager.Models
@@ -28,7 +29,7 @@ namespace HitCounterManager.Models
     /// <summary>
     /// Reads a file, patches it and writes to a new file
     /// </summary>
-    public class OutModule
+    public class OutModule(SettingsRoot settings)
     {
         #region Settings
 
@@ -59,26 +60,22 @@ namespace HitCounterManager.Models
         }
 
         private string? template = null;
-        private SettingsRoot Settings { get; init; }
+        private SettingsRoot Settings { get; init; } = settings;
 
         #endregion
-
-        public OutModule(SettingsRoot settings)
-        {
-            Settings = settings;
-        }
 
         /// <summary>
         /// Refreshes the file handles.
         /// Call when Settings.Inputfile changes!
         /// </summary>
+        [MemberNotNullWhen(true, nameof(template))]
         public bool ReloadTemplate()
         {
             // Reload input file handle when possible
             if (!File.Exists(Settings.Inputfile))
                 return false;
 
-            StreamReader sr = new StreamReader(Settings.Inputfile);
+            StreamReader sr = new (Settings.Inputfile);
             template = sr.ReadToEnd();
             sr.Close();
             return true;
@@ -91,7 +88,7 @@ namespace HitCounterManager.Models
         /// </summary>
         /// <param name="Str">String with special characters</param>
         /// <returns>String with JSON encoded special characters</returns>
-        public string? SimpleJsonEscape(string? Str)
+        static public string? SimpleJsonEscape(string? Str)
         {
             if (!string.IsNullOrEmpty(Str))
             {
@@ -103,21 +100,21 @@ namespace HitCounterManager.Models
         /// <summary>
         /// Writes a JSON statement to assign a simple value
         /// </summary>
-        private void WriteJsonSimpleValue(StreamWriter File, string Name, bool Bool)
+        static private void WriteJsonSimpleValue(StreamWriter File, string Name, bool Bool)
         {
             File.WriteLine("\"" + Name + "\": " + (Bool ? "true" : "false") + ",");
         }
         /// <summary>
         /// Writes a JSON statement to assign a simple value
         /// </summary>
-        private void WriteJsonSimpleValue(StreamWriter File, string Name, long Integer)
+        static private void WriteJsonSimpleValue(StreamWriter File, string Name, long Integer)
         {
             File.WriteLine("\"" + Name + "\": " + Integer.ToString() + ",");
         }
         /// <summary>
         /// Writes a JSON statement to assign a simple value
         /// </summary>
-        private void WriteJsonSimpleValue(StreamWriter File, string Name, string? String)
+        static private void WriteJsonSimpleValue(StreamWriter File, string Name, string? String)
         {
             File.WriteLine("\"" + Name + "\": " + (null != String ? "\"" + SimpleJsonEscape(String) + "\"" : "undefined") + ",");
         }
@@ -147,7 +144,7 @@ namespace HitCounterManager.Models
             catch { return; }
             sr.NewLine = Environment.NewLine;
 
-            foreach (string line in template.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (string line in template.Split([Environment.NewLine], StringSplitOptions.RemoveEmptyEntries))
             {
                 if (IsWritingJson)
                 {

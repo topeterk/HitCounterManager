@@ -32,20 +32,14 @@ namespace HitCounterManager.Models
     /// Loads and Saves data from/to XML files
     /// </summary>
     /// <typeparam name="T">Data type</typeparam>
-    public class SaveModule<T> where T : class
+    /// <remarks>
+    /// Creates a Savemodule object
+    /// </remarks>
+    /// <param name="Filename">Filename that is bound for storing the data. Also used for reading if default file is used.</param>
+    public class SaveModule<T>(string Filename) where T : class
     {
-        private string _Filename;
-        private XmlSerializer xml;
-
-        /// <summary>
-        /// Creates a Savemodule object
-        /// </summary>
-        /// <param name="Filename">Filename that is bound for storing the data. Also used for reading if default file is used.</param>
-        public SaveModule(string Filename)
-        {
-            _Filename = Filename;
-            xml = new XmlSerializer(typeof(T));
-        }
+        private readonly string _Filename = Filename;
+        private readonly XmlSerializer xml = new (typeof(T));
 
         /// <summary>
         /// Reads the data from the XML file
