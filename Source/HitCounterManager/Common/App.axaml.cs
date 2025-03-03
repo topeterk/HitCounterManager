@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2021-2024 Peter Kirmeier
+//Copyright (c) 2021-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -70,6 +70,8 @@ namespace HitCounterManager
         {
             LoadSettings();
             om = new OutModule(Settings);
+            if (!om.ReloadTemplate())
+                DisplayAlert("Error loading template!", "The file " + (string.IsNullOrEmpty(Settings.Inputfile) ? "<Inputfile not set>" : "\"" + Settings.Inputfile + "\"") + " not found!");
 
             if (OperatingSystem.IsWindows())
             {

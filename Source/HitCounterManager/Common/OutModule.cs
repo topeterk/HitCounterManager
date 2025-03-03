@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2024 Peter Kirmeier
+//Copyright (c) 2016-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -66,22 +66,22 @@ namespace HitCounterManager.Models
         public OutModule(SettingsRoot settings)
         {
             Settings = settings;
-            ReloadTemplate();
         }
 
         /// <summary>
         /// Refreshes the file handles.
         /// Call when Settings.Inputfile changes!
         /// </summary>
-        public void ReloadTemplate()
+        public bool ReloadTemplate()
         {
             // Reload input file handle when possible
-            if (File.Exists(Settings.Inputfile))
-            {
-                StreamReader sr = new StreamReader(Settings.Inputfile);
-                template = sr.ReadToEnd();
-                sr.Close();
-            }
+            if (!File.Exists(Settings.Inputfile))
+                return false;
+
+            StreamReader sr = new StreamReader(Settings.Inputfile);
+            template = sr.ReadToEnd();
+            sr.Close();
+            return true;
         }
 
         #region JSON helpers
@@ -134,8 +134,7 @@ namespace HitCounterManager.Models
             if (null == Settings.OutputFile) return;
             if (null == template) // no valid template read yet?
             {
-                ReloadTemplate(); // try to read template again
-                if (null == template) return; // still invalid, avoid writing empty output file
+                if (!ReloadTemplate()) return; // try to read template again. on error, avoid writing empty output file
             }
 
             StreamWriter sr;
