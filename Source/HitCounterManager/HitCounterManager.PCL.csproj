@@ -1,17 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyName>$(Product).PCL</AssemblyName>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <PackageLicenseFile>../../LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/topeterk/HitCounterManager</PackageProjectUrl>
     <RepositoryUrl>https://github.com/topeterk/HitCounterManager.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <AvaloniaNameGeneratorIsEnabled>false</AvaloniaNameGeneratorIsEnabled>
-    <NoWarn>$(NoWarn);SYSLIB1054</NoWarn> <!-- Do not use recommended LibraryImport as it requires to enable unsafe code for the whole project which is not required by DllImport, TODO: Check if still required with .Net8 -->
+    <NoWarn>$(NoWarn);SYSLIB1054;IDE0130</NoWarn> <!-- Do not use recommended LibraryImport as it requires to enable unsafe code for the whole project which is not required by DllImport, TODO: Check if still required with .Net8 -->
   </PropertyGroup>
   <ItemGroup>
-    <None Include="../Datafiles/**" Link="Datafiles/%(RecursiveDir)%(Filename)%(Extension)" />
+    <None Include="Helper\JsonWriter.cs" />
+    <Compile Remove="Helper\JsonWriter.cs" />
     <AvaloniaResource Include="Resources/**" />
     <!-- https://learn.microsoft.com/de-de/visualstudio/msbuild/msbuild-well-known-item-metadata?view=vs-2022 -->
     <!-- <AvaloniaResource Include="Resources/**" Link="%(RelativeDir)$([System.String]::Concat('%(Filename)%(Extension)').Replace('-','_'))"/> -->
@@ -26,7 +27,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="Avalonia.Controls.ItemsRepeater" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Controls.ItemsRepeater" Version="$(AvaloniaVersionControlsItemsRepeater)" />
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />

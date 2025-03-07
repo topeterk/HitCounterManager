@@ -1,7 +1,7 @@
 ﻿//The MIT License (MIT)
 
 //Copyright (c) 2018 Alex Parker
-//Copyright (c) 2018-2024 Peter Kirmeier
+//Copyright (c) 2018-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy of
 //this software and associated documentation files (the "Software"), to deal in
@@ -60,10 +60,10 @@ namespace TinyJson
         public static T? FromJson<T>(this string json)
         {
             // Initialize, if needed, the ThreadStatic variables
-            propertyInfoCache ??= new Dictionary<Type, Dictionary<string, PropertyInfo>>();
-            fieldInfoCache ??= new Dictionary<Type, Dictionary<string, FieldInfo>>();
-            stringBuilder ??= new StringBuilder();
-            splitArrayPool ??= new Stack<List<string>>();
+            propertyInfoCache ??= [];
+            fieldInfoCache ??= [];
+            stringBuilder ??= new();
+            splitArrayPool ??= new();
 
             // Remove all whitespace not within strings to make parsing simpler
             stringBuilder.Length = 0;
@@ -91,10 +91,10 @@ namespace TinyJson
         internal static object? ParseValue(Type type, string json)
         {
             // Initialize, if needed, the ThreadStatic variables
-            propertyInfoCache ??= new Dictionary<Type, Dictionary<string, PropertyInfo>>();
-            fieldInfoCache ??= new Dictionary<Type, Dictionary<string, FieldInfo>>();
-            stringBuilder ??= new StringBuilder();
-            splitArrayPool ??= new Stack<List<string>>();
+            propertyInfoCache ??= [];
+            fieldInfoCache ??= [];
+            stringBuilder ??= new();
+            splitArrayPool ??= new();
 
             if (type == typeof(string))
             {
@@ -142,6 +142,12 @@ namespace TinyJson
             if (type == typeof(decimal))
             {
                 decimal.TryParse(json, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out decimal result);
+                return result;
+            }
+
+            if (type == typeof(DateTime))
+            {
+                DateTime.TryParse(json.Replace("\"", ""), System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out DateTime result);
                 return result;
             }
 
@@ -195,7 +201,7 @@ namespace TinyJson
                 }
 
                 List<string> elems = Split(json);
-                var list = (IList?)type.GetConstructor(new Type[] { typeof(int) })?.Invoke(new object[] { elems.Count });
+                var list = (IList?)type.GetConstructor([typeof(int)])?.Invoke([elems.Count]);
                 if (list == null)
                 {
                     return null;
@@ -238,7 +244,7 @@ namespace TinyJson
                     return null;
                 }
 
-                var dictionary = (IDictionary?)type.GetConstructor(new Type[] { typeof(int) })?.Invoke(new object[] { elems.Count / 2 });
+                var dictionary = (IDictionary?)type.GetConstructor([typeof(int)])?.Invoke([elems.Count / 2]);
                 if (dictionary == null)
                 {
                     return null;
@@ -304,7 +310,7 @@ namespace TinyJson
         // Splits { <value>:<value>, <value>:<value> } and [ <value>, <value> ] into a list of <value> strings
         private static List<string> Split(string json)
         {
-            List<string> splitArray = splitArrayPool!.Count > 0 ? splitArrayPool.Pop() : new List<string>();
+            List<string> splitArray = splitArrayPool!.Count > 0 ? splitArrayPool.Pop() : [];
             splitArray.Clear();
             if (json.Length == 2)
             {

@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2021-2024 Peter Kirmeier
+//Copyright (c) 2021-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -538,10 +538,10 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                 <Grid Margin="10,0,10,0" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" HorizontalAlignment="Stretch">
                     <TextBlock     Grid.Row="0" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Desired width (in px):" />
                     <NumericUpDown Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
-                                   Value="{Binding StyleDesiredWidth}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+                                   Value="{Binding StyleDesiredWidth}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
                     <TextBlock     Grid.Row="1" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Desired height (in px):" />
                     <NumericUpDown Grid.Row="1" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
-                                   Value="{Binding StyleDesiredHeight}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+                                   Value="{Binding StyleDesiredHeight}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
                 </Grid>
                 <TextBlock HorizontalAlignment="Stretch" Margin="30,0,0,10" FontFamily="Arial" FontStyle="Italic" Text="When value is set back to 0, you may have to reload the browser." />
 
@@ -702,10 +702,10 @@ BAD splits have more hits than on the PB run</x:String>
                 <Grid Margin="10,0,10,0" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" HorizontalAlignment="Stretch">
                     <TextBlock     Grid.Row="0" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Maxium previous splits:" />
                     <NumericUpDown Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="999"
-                                   Value="{Binding ShowSplitsCountFinished}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+                                   Value="{Binding ShowSplitsCountFinished}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
                     <TextBlock     Grid.Row="1" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Maxium upcoming splits:" />
                     <NumericUpDown Grid.Row="1" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="999"
-                                   Value="{Binding ShowSplitsCountUpcoming}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+                                   Value="{Binding ShowSplitsCountUpcoming}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
                 </Grid>
                 <!-- Keep bottom Maring high as Scrollviewer may otherwise cut off controls, don't know why yet -->
                 <StackPanel Margin="30,3,0,50" Orientation="Horizontal" HorizontalAlignment="Left">

@@ -107,399 +107,15 @@ Please be aware that while all Images and Videos on Pixabay are free to use for 
 
 URL: https://pixabay.com/de/service/license/
 ==============================================================================
-NuGet Package: Avalonia 11.0.10
+NuGet Package: Avalonia.Android 11.2.3
 
 Author(s): Avalonia Team
-Source: https://avaloniaui.net/
+Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Controls.ItemsRepeater 11.0.10
+NuGet Package: Avalonia.Angle.Windows.Natives 2.1.22045.20230930
 
 Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Diagnostics 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.ReactiveUI 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Themes.Fluent 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Behaviors 11.0.10.9
-
-Author(s): Wies≈Çaw ≈†olt√©s
-Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.BuildServices 0.0.29
-
-Author(s): Avalonia.BuildServices
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Controls.ColorPicker 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Controls.DataGrid 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Remote.Protocol 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Themes.Simple 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions 11.0.10.9
-
-Author(s): Wies≈Çaw ≈†olt√©s
-Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Custom 11.0.10.9
-
-Author(s): Wies≈Çaw ≈†olt√©s
-Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.DragAndDrop 11.0.10.9
-
-Author(s): Wies≈Çaw ≈†olt√©s
-Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Draggable 11.0.10.9
-
-Author(s): Wies≈Çaw ≈†olt√©s
-Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Events 11.0.10.9
-
-Author(s): Wies≈Çaw ≈†olt√©s
-Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Responsive 11.0.10.9
-
-Author(s): Wies≈Çaw ≈†olt√©s
-Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactivity 11.0.10.9
-
-Author(s): Wies≈Çaw ≈†olt√©s
-Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: DynamicData 7.9.5
-
-Author(s): Roland Pheasant
-Source: http://dynamic-data.org/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: MicroCom.Runtime 0.11.0
-
-Author(s): MicroCom.Runtime
-Source:
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Microsoft.CodeAnalysis.Analyzers 3.0.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/roslyn-analyzers
-License: https://licenses.nuget.org/Apache-2.0
-==============================================================================
-NuGet Package: Microsoft.CodeAnalysis.Common 3.8.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/roslyn
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Microsoft.CodeAnalysis.CSharp 3.8.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/roslyn
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Microsoft.CodeAnalysis.CSharp.Scripting 3.8.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/roslyn
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Microsoft.CodeAnalysis.Scripting.Common 3.8.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/roslyn
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Microsoft.CSharp 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: Microsoft.NETCore.Platforms 2.1.2
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT
-==============================================================================
-NuGet Package: Microsoft.NETCore.Targets 1.1.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: ReactiveUI 18.3.1
-
-Author(s): .NET Foundation and Contributors
-Source: https://reactiveui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Splat 14.4.1
-
-Author(s): .NET Foundation and Contributors
-Source: https://github.com/reactiveui/splat/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: System.Collections 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Collections.Immutable 5.0.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/runtime
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: System.ComponentModel.Annotations 4.5.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT
-==============================================================================
-NuGet Package: System.Diagnostics.Debug 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Dynamic.Runtime 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Globalization 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.IO 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Linq 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Linq.Expressions 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Memory 4.5.4
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT
-==============================================================================
-NuGet Package: System.ObjectModel 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Reactive 6.0.0
-
-Author(s): .NET Foundation and Contributors
-Source: https://github.com/dotnet/reactive
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: System.Reflection 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Reflection.Emit 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Reflection.Emit.ILGeneration 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Reflection.Emit.Lightweight 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Reflection.Extensions 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Reflection.Metadata 5.0.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/runtime
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: System.Reflection.Primitives 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Reflection.TypeExtensions 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Resources.ResourceManager 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Runtime 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Runtime.CompilerServices.Unsafe 4.7.1
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/corefx
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: System.Runtime.Extensions 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Runtime.Handles 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Runtime.InteropServices 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Text.Encoding 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Text.Encoding.CodePages 4.5.1
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT
-==============================================================================
-NuGet Package: System.Threading 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Threading.Tasks 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Threading.Tasks.Extensions 4.5.4
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT
-==============================================================================
-NuGet Package: Avalonia.Desktop 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Diagnostics 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Fonts.Inter 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Angle.Windows.Natives 2.1.0.2023020321
-
-Author(s): Avalonia
 Source: https://github.com/AvaloniaUI/angle/
 License: https://raw.githubusercontent.com/AvaloniaUI/angle/master/LICENSE
 ==============================================================================
@@ -509,161 +125,191 @@ Author(s): Avalonia.BuildServices
 Source: https://avaloniaui.net/
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Controls.ColorPicker 11.0.10
+NuGet Package: Avalonia.Controls.ColorPicker 11.2.3
+
+Author(s): Avalonia Team
+Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
+License: https://licenses.nuget.org/MIT
+==============================================================================
+NuGet Package: Avalonia.Controls.DataGrid 11.2.3
+
+Author(s): Avalonia Team
+Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
+License: https://licenses.nuget.org/MIT
+==============================================================================
+NuGet Package: Avalonia.Controls.ItemsRepeater 11.1.5
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Controls.DataGrid 11.0.10
+NuGet Package: Avalonia.Desktop 11.2.3
 
 Author(s): Avalonia Team
-Source: https://avaloniaui.net/
+Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Controls.ItemsRepeater 11.0.10
+NuGet Package: Avalonia.Diagnostics 11.2.3
 
 Author(s): Avalonia Team
-Source: https://avaloniaui.net/
+Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.FreeDesktop 11.0.10
+NuGet Package: Avalonia.Fonts.Inter 11.2.3
 
 Author(s): Avalonia Team
-Source: https://avaloniaui.net/
+Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Native 11.0.10
+NuGet Package: Avalonia.FreeDesktop 11.2.3
 
 Author(s): Avalonia Team
-Source: https://avaloniaui.net/
+Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.ReactiveUI 11.0.10
+NuGet Package: Avalonia.Native 11.2.3
 
 Author(s): Avalonia Team
-Source: https://avaloniaui.net/
+Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Remote.Protocol 11.0.10
+NuGet Package: Avalonia.ReactiveUI 11.2.3
 
 Author(s): Avalonia Team
-Source: https://avaloniaui.net/
+Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Skia 11.0.10
+NuGet Package: Avalonia.Remote.Protocol 11.2.3
 
 Author(s): Avalonia Team
-Source: https://avaloniaui.net/
+Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Themes.Fluent 11.0.10
+NuGet Package: Avalonia.Skia 11.2.3
 
 Author(s): Avalonia Team
-Source: https://avaloniaui.net/
+Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Themes.Simple 11.0.10
+NuGet Package: Avalonia.Themes.Fluent 11.2.3
 
 Author(s): Avalonia Team
-Source: https://avaloniaui.net/
+Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Win32 11.0.10
+NuGet Package: Avalonia.Themes.Simple 11.2.3
 
 Author(s): Avalonia Team
-Source: https://avaloniaui.net/
+Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.X11 11.0.10
+NuGet Package: Avalonia.Win32 11.2.3
 
 Author(s): Avalonia Team
-Source: https://avaloniaui.net/
+Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Xaml.Behaviors 11.0.10.9
+NuGet Package: Avalonia.X11 11.2.3
+
+Author(s): Avalonia Team
+Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
+License: https://licenses.nuget.org/MIT
+==============================================================================
+NuGet Package: Avalonia.Xaml.Behaviors 11.2.0.8
 
 Author(s): Wies≈Çaw ≈†olt√©s
 Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions 11.0.10.9
+NuGet Package: Avalonia.Xaml.Interactions.Custom 11.2.0.8
 
 Author(s): Wies≈Çaw ≈†olt√©s
 Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Custom 11.0.10.9
+NuGet Package: Avalonia.Xaml.Interactions.DragAndDrop 11.2.0.8
 
 Author(s): Wies≈Çaw ≈†olt√©s
 Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.DragAndDrop 11.0.10.9
+NuGet Package: Avalonia.Xaml.Interactions.Draggable 11.2.0.8
 
 Author(s): Wies≈Çaw ≈†olt√©s
 Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Draggable 11.0.10.9
+NuGet Package: Avalonia.Xaml.Interactions.Events 11.2.0.8
 
 Author(s): Wies≈Çaw ≈†olt√©s
 Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Events 11.0.10.9
+NuGet Package: Avalonia.Xaml.Interactions.Responsive 11.2.0.8
 
 Author(s): Wies≈Çaw ≈†olt√©s
 Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Responsive 11.0.10.9
+NuGet Package: Avalonia.Xaml.Interactions 11.2.0.8
 
 Author(s): Wies≈Çaw ≈†olt√©s
 Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Xaml.Interactivity 11.0.10.9
+NuGet Package: Avalonia.Xaml.Interactivity 11.2.0.8
 
 Author(s): Wies≈Çaw ≈†olt√©s
 Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: DynamicData 7.9.5
+NuGet Package: Avalonia 11.2.3
+
+Author(s): Avalonia Team
+Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
+License: https://licenses.nuget.org/MIT
+==============================================================================
+NuGet Package: DynamicData 8.4.1
 
 Author(s): Roland Pheasant
 Source: http://dynamic-data.org/
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: HarfBuzzSharp 7.3.0
+NuGet Package: HarfBuzzSharp.NativeAssets.Android 7.3.0.3
 
 Author(s): Microsoft
 Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
+License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: HarfBuzzSharp.NativeAssets.Linux 7.3.0
+NuGet Package: HarfBuzzSharp.NativeAssets.Linux 7.3.0.3
 
 Author(s): Microsoft
 Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
+License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: HarfBuzzSharp.NativeAssets.macOS 7.3.0
+NuGet Package: HarfBuzzSharp.NativeAssets.macOS 7.3.0.3
 
 Author(s): Microsoft
 Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
+License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: HarfBuzzSharp.NativeAssets.WebAssembly 7.3.0
+NuGet Package: HarfBuzzSharp.NativeAssets.WebAssembly 7.3.0.3
 
 Author(s): Microsoft
 Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
+License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: HarfBuzzSharp.NativeAssets.Win32 7.3.0
+NuGet Package: HarfBuzzSharp.NativeAssets.Win32 7.3.0.3
 
 Author(s): Microsoft
 Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
+License: https://licenses.nuget.org/MIT
+==============================================================================
+NuGet Package: HarfBuzzSharp 7.3.0.3
+
+Author(s): Microsoft
+Source: https://go.microsoft.com/fwlink/?linkid=868515
+License: https://licenses.nuget.org/MIT
 ==============================================================================
 NuGet Package: MicroCom.Runtime 0.11.0
 
@@ -671,613 +317,83 @@ Author(s): MicroCom.Runtime
 Source:
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Microsoft.CodeAnalysis.Analyzers 3.0.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/roslyn-analyzers
-License: https://licenses.nuget.org/Apache-2.0
-==============================================================================
-NuGet Package: Microsoft.CodeAnalysis.Common 3.8.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/roslyn
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Microsoft.CodeAnalysis.CSharp 3.8.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/roslyn
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Microsoft.CodeAnalysis.CSharp.Scripting 3.8.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/roslyn
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Microsoft.CodeAnalysis.Scripting.Common 3.8.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/roslyn
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Microsoft.CSharp 4.3.0
+NuGet Package: Microsoft.NET.ILLink.Tasks 8.0.12
 
 Author(s): Microsoft
 Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
+License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Microsoft.NETCore.Platforms 2.1.2
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT
-==============================================================================
-NuGet Package: Microsoft.NETCore.Targets 1.1.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: ReactiveUI 18.3.1
+NuGet Package: ReactiveUI 20.1.1
 
 Author(s): .NET Foundation and Contributors
 Source: https://reactiveui.net/
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: SkiaSharp 2.88.7
+NuGet Package: SkiaSharp.NativeAssets.Android 2.88.9
 
 Author(s): Microsoft
 Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
+License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: SkiaSharp.NativeAssets.Linux 2.88.7
+NuGet Package: SkiaSharp.NativeAssets.Linux 2.88.9
 
 Author(s): Microsoft
 Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
+License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: SkiaSharp.NativeAssets.macOS 2.88.7
+NuGet Package: SkiaSharp.NativeAssets.macOS 2.88.9
 
 Author(s): Microsoft
 Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
+License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: SkiaSharp.NativeAssets.WebAssembly 2.88.7
+NuGet Package: SkiaSharp.NativeAssets.WebAssembly 2.88.9
 
 Author(s): Microsoft
 Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
+License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: SkiaSharp.NativeAssets.Win32 2.88.7
+NuGet Package: SkiaSharp.NativeAssets.Win32 2.88.9
 
 Author(s): Microsoft
 Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
+License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Splat 14.4.1
+NuGet Package: SkiaSharp 2.88.9
+
+Author(s): Microsoft
+Source: https://go.microsoft.com/fwlink/?linkid=868515
+License: https://licenses.nuget.org/MIT
+==============================================================================
+NuGet Package: Splat 15.1.1
 
 Author(s): .NET Foundation and Contributors
 Source: https://github.com/reactiveui/splat/
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: System.Collections 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Collections.Immutable 5.0.0
+NuGet Package: System.ComponentModel.Annotations 5.0.0
 
 Author(s): Microsoft
 Source: https://github.com/dotnet/runtime
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: System.ComponentModel.Annotations 4.5.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT
-==============================================================================
-NuGet Package: System.Diagnostics.Debug 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Dynamic.Runtime 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Globalization 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.IO 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.IO.Pipelines 6.0.0
+NuGet Package: System.IO.Pipelines 8.0.0
 
 Author(s): Microsoft
 Source: https://dot.net/
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: System.Linq 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Linq.Expressions 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Memory 4.5.4
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT
-==============================================================================
-NuGet Package: System.Numerics.Vectors 4.5.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT
-==============================================================================
-NuGet Package: System.ObjectModel 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Reactive 6.0.0
+NuGet Package: System.Reactive 6.0.1
 
 Author(s): .NET Foundation and Contributors
 Source: https://github.com/dotnet/reactive
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: System.Reflection 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Reflection.Emit 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Reflection.Emit.ILGeneration 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Reflection.Emit.Lightweight 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Reflection.Extensions 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Reflection.Metadata 5.0.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/runtime
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: System.Reflection.Primitives 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Reflection.TypeExtensions 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Resources.ResourceManager 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Runtime 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Runtime.CompilerServices.Unsafe 4.7.1
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/corefx
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: System.Runtime.Extensions 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Runtime.Handles 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Runtime.InteropServices 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Text.Encoding 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Text.Encoding.CodePages 4.5.1
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT
-==============================================================================
-NuGet Package: System.Threading 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Threading.Tasks 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: System.Threading.Tasks.Extensions 4.5.4
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT
-==============================================================================
-NuGet Package: Tmds.DBus.Protocol 0.15.0
+NuGet Package: Tmds.DBus.Protocol 0.20.0
 
 Author(s): Tom Deseyn
 Source:
 License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Android 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Fonts.Inter 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Microsoft.NET.ILLink.Analyzers 7.0.100-1.23211.1
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/linker
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Microsoft.NET.ILLink.Tasks 7.0.100-1.23211.1
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/linker
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Xamarin.AndroidX.Annotation 1.7.1.2
-
-Author(s): Microsoft
-Source: https://aka.ms/androidx
-License: https://licenses.nuget.org/MIT
-License: https://licenses.nuget.org/Apache-2.0
-==============================================================================
-NuGet Package: Xamarin.AndroidX.Core.SplashScreen 1.0.1.7
-
-Author(s): Microsoft
-Source: https://aka.ms/androidx
-License: https://licenses.nuget.org/MIT
-License: https://licenses.nuget.org/Apache-2.0
-==============================================================================
-NuGet Package: Avalonia 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.BuildServices 0.0.29
-
-Author(s): Avalonia.BuildServices
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Controls.ColorPicker 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Controls.DataGrid 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Controls.ItemsRepeater 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Diagnostics 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.ReactiveUI 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Remote.Protocol 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Skia 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Themes.Fluent 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Themes.Simple 11.0.10
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Behaviors 11.0.10.9
-
-Author(s): Wies≈Çaw ≈†olt√©s
-Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions 11.0.10.9
-
-Author(s): Wies≈Çaw ≈†olt√©s
-Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Custom 11.0.10.9
-
-Author(s): Wies≈Çaw ≈†olt√©s
-Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.DragAndDrop 11.0.10.9
-
-Author(s): Wies≈Çaw ≈†olt√©s
-Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Draggable 11.0.10.9
-
-Author(s): Wies≈Çaw ≈†olt√©s
-Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Events 11.0.10.9
-
-Author(s): Wies≈Çaw ≈†olt√©s
-Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Responsive 11.0.10.9
-
-Author(s): Wies≈Çaw ≈†olt√©s
-Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactivity 11.0.10.9
-
-Author(s): Wies≈Çaw ≈†olt√©s
-Source: https://github.com/wieslawsoltes/AvaloniaBehaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: DynamicData 7.9.5
-
-Author(s): Roland Pheasant
-Source: http://dynamic-data.org/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: HarfBuzzSharp 7.3.0
-
-Author(s): Microsoft
-Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
-==============================================================================
-NuGet Package: HarfBuzzSharp.NativeAssets.Android 7.3.0
-
-Author(s): Microsoft
-Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
-==============================================================================
-NuGet Package: HarfBuzzSharp.NativeAssets.Linux 7.3.0
-
-Author(s): Microsoft
-Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
-==============================================================================
-NuGet Package: HarfBuzzSharp.NativeAssets.WebAssembly 7.3.0
-
-Author(s): Microsoft
-Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
-==============================================================================
-NuGet Package: MicroCom.Runtime 0.11.0
-
-Author(s): MicroCom.Runtime
-Source:
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Microsoft.CodeAnalysis.Analyzers 3.0.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/roslyn-analyzers
-License: https://licenses.nuget.org/Apache-2.0
-==============================================================================
-NuGet Package: Microsoft.CodeAnalysis.Common 3.8.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/roslyn
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Microsoft.CodeAnalysis.CSharp 3.8.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/roslyn
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Microsoft.CodeAnalysis.CSharp.Scripting 3.8.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/roslyn
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Microsoft.CodeAnalysis.Scripting.Common 3.8.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/roslyn
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Microsoft.CSharp 4.3.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: http://go.microsoft.com/fwlink/?LinkId=329770
-==============================================================================
-NuGet Package: ReactiveUI 18.3.1
-
-Author(s): .NET Foundation and Contributors
-Source: https://reactiveui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: SkiaSharp 2.88.7
-
-Author(s): Microsoft
-Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
-==============================================================================
-NuGet Package: SkiaSharp.NativeAssets.Android 2.88.7
-
-Author(s): Microsoft
-Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
-==============================================================================
-NuGet Package: SkiaSharp.NativeAssets.Linux 2.88.7
-
-Author(s): Microsoft
-Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
-==============================================================================
-NuGet Package: SkiaSharp.NativeAssets.WebAssembly 2.88.7
-
-Author(s): Microsoft
-Source: https://go.microsoft.com/fwlink/?linkid=868515
-License: https://go.microsoft.com/fwlink/?linkid=868514
-==============================================================================
-NuGet Package: Splat 14.4.1
-
-Author(s): .NET Foundation and Contributors
-Source: https://github.com/reactiveui/splat/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: System.Buffers 4.5.1
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT
-==============================================================================
-NuGet Package: System.Collections.Immutable 5.0.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/runtime
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: System.ComponentModel.Annotations 4.5.0
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT
-==============================================================================
-NuGet Package: System.Memory 4.5.4
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT
-==============================================================================
-NuGet Package: System.Reactive 6.0.0
-
-Author(s): .NET Foundation and Contributors
-Source: https://github.com/dotnet/reactive
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: System.Reflection.Metadata 5.0.0
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/runtime
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: System.Runtime.CompilerServices.Unsafe 4.7.1
-
-Author(s): Microsoft
-Source: https://github.com/dotnet/corefx
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: System.Text.Encoding.CodePages 4.5.1
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT
-==============================================================================
-NuGet Package: System.Threading.Tasks.Extensions 4.5.4
-
-Author(s): Microsoft
-Source: https://dot.net/
-License: https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT
 ==============================================================================
 NuGet Package: Xamarin.AndroidX.Activity 1.8.0.1
 
@@ -1293,7 +409,21 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Annotation.Jvm 1.7.1.2
+NuGet Package: Xamarin.AndroidX.Annotation.Jvm 1.9.1.2
+
+Author(s): Microsoft
+Source: https://aka.ms/android-libraries
+License: https://licenses.nuget.org/MIT
+License: https://licenses.nuget.org/Apache-2.0
+==============================================================================
+NuGet Package: Xamarin.AndroidX.Annotation 1.9.1.2
+
+Author(s): Microsoft
+Source: https://aka.ms/android-libraries
+License: https://licenses.nuget.org/MIT
+License: https://licenses.nuget.org/Apache-2.0
+==============================================================================
+NuGet Package: Xamarin.AndroidX.AppCompat.AppCompatResources 1.6.1.6
 
 Author(s): Microsoft
 Source: https://aka.ms/androidx
@@ -1301,13 +431,6 @@ License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
 NuGet Package: Xamarin.AndroidX.AppCompat 1.6.1.5
-
-Author(s): Microsoft
-Source: https://aka.ms/androidx
-License: https://licenses.nuget.org/MIT
-License: https://licenses.nuget.org/Apache-2.0
-==============================================================================
-NuGet Package: Xamarin.AndroidX.AppCompat.AppCompatResources 1.6.1.6
 
 Author(s): Microsoft
 Source: https://aka.ms/androidx
@@ -1328,14 +451,14 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Collection 1.3.0.1
+NuGet Package: Xamarin.AndroidX.Collection.Jvm 1.3.0.1
 
 Author(s): Microsoft
 Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Collection.Jvm 1.3.0.1
+NuGet Package: Xamarin.AndroidX.Collection 1.3.0.1
 
 Author(s): Microsoft
 Source: https://aka.ms/androidx
@@ -1349,14 +472,21 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Core 1.12.0.2
+NuGet Package: Xamarin.AndroidX.Core.Core.Ktx 1.12.0.2
 
 Author(s): Microsoft
 Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Core.Core.Ktx 1.12.0.2
+NuGet Package: Xamarin.AndroidX.Core.SplashScreen 1.0.1.14
+
+Author(s): Microsoft
+Source: https://aka.ms/android-libraries
+License: https://licenses.nuget.org/MIT
+License: https://licenses.nuget.org/Apache-2.0
+==============================================================================
+NuGet Package: Xamarin.AndroidX.Core 1.12.0.2
 
 Author(s): Microsoft
 Source: https://aka.ms/androidx
@@ -1377,13 +507,6 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.DocumentFile 1.0.1.21
-
-Author(s): Microsoft
-Source: https://aka.ms/androidx
-License: https://licenses.nuget.org/MIT
-License: https://licenses.nuget.org/Apache-2.0
-==============================================================================
 NuGet Package: Xamarin.AndroidX.DrawerLayout 1.2.0.5
 
 Author(s): Microsoft
@@ -1391,14 +514,14 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Emoji2 1.4.0.2
+NuGet Package: Xamarin.AndroidX.Emoji2.ViewsHelper 1.4.0.2
 
 Author(s): Microsoft
 Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Emoji2.ViewsHelper 1.4.0.2
+NuGet Package: Xamarin.AndroidX.Emoji2 1.4.0.2
 
 Author(s): Microsoft
 Source: https://aka.ms/androidx
@@ -1503,14 +626,14 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.VectorDrawable 1.1.0.21
+NuGet Package: Xamarin.AndroidX.VectorDrawable.Animated 1.1.0.21
 
 Author(s): Microsoft
 Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.VectorDrawable.Animated 1.1.0.21
+NuGet Package: Xamarin.AndroidX.VectorDrawable 1.1.0.21
 
 Author(s): Microsoft
 Source: https://aka.ms/androidx
@@ -1538,17 +661,10 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.Jetbrains.Annotations 24.1.0.3
+NuGet Package: Xamarin.Jetbrains.Annotations 26.0.1.2
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
-License: https://licenses.nuget.org/MIT
-License: https://licenses.nuget.org/Apache-2.0
-==============================================================================
-NuGet Package: Xamarin.Kotlin.StdLib 1.9.23.1
-
-Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
@@ -1573,6 +689,13 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
+NuGet Package: Xamarin.Kotlin.StdLib 2.0.21.2
+
+Author(s): Microsoft
+Source: https://aka.ms/android-libraries
+License: https://licenses.nuget.org/MIT
+License: https://licenses.nuget.org/Apache-2.0
+==============================================================================
 NuGet Package: Xamarin.KotlinX.Coroutines.Android 1.7.3.2
 
 Author(s): Microsoft
@@ -1586,765 +709,6 @@ Author(s): Microsoft
 Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
-==============================================================================
-Embedded License: http://go.microsoft.com/fwlink/?LinkId=329770
-
-<!DOCTYPE html>
-<html lang="en-us">
-
-<head>
-<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
-<meta name=Generator content="Microsoft Word 15 (filtered)">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="Description" content="Microsoft Software License Terms - Microsoft .NET Library" />
-<title>.NET Library License Terms | .NET</title>
-<style>
-<!--
- /* Font Definitions */
- @font-face
-	{font-family:Wingdings;
-	panose-1:5 0 0 0 0 0 0 0 0 0;}
-@font-face
-	{font-family:"MS Mincho";
-	panose-1:2 2 6 9 4 2 5 8 3 4;}
-@font-face
-	{font-family:SimSun;
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-@font-face
-	{font-family:Tahoma;
-	panose-1:2 11 6 4 3 5 4 4 2 4;}
-@font-face
-	{font-family:"Trebuchet MS";
-	panose-1:2 11 6 3 2 2 2 2 2 4;}
-@font-face
-	{font-family:"\@MS Mincho";
-	panose-1:2 2 6 9 4 2 5 8 3 4;}
-@font-face
-	{font-family:"\@SimSun";
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
- /* Style Definitions */
- p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:0in;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;}
-h1
-	{mso-style-link:"Heading 1 Char";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:17.85pt;
-	text-indent:-17.85pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;}
-h2
-	{mso-style-link:"Heading 1 Char";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:17.85pt;
-	text-indent:-17.85pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;}
-h3
-	{mso-style-link:"Heading 2 Char";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:.5in;
-	text-indent:-18.15pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;}
-h4
-	{mso-style-link:"Heading 3 Char";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:53.85pt;
-	text-indent:-17.85pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;
-	font-weight:normal;}
-h5
-	{mso-style-link:"Heading 5 Char";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:89.6pt;
-	text-indent:-17.85pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;
-	font-weight:normal;}
-h6
-	{mso-style-link:"Heading 6 Char";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:107.45pt;
-	text-indent:-17.85pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;
-	font-weight:normal;}
-p.MsoHeading7, li.MsoHeading7, div.MsoHeading7
-	{mso-style-link:"Heading 7 Char";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:125.3pt;
-	text-indent:-17.85pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;}
-p.MsoHeading8, li.MsoHeading8, div.MsoHeading8
-	{mso-style-link:"Heading 8 Char";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:143.15pt;
-	text-indent:-17.85pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;}
-p.MsoHeading9, li.MsoHeading9, div.MsoHeading9
-	{mso-style-link:"Heading 9 Char";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:161.05pt;
-	text-indent:-17.9pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;}
-p.MsoCommentText, li.MsoCommentText, div.MsoCommentText
-	{mso-style-link:"Comment Text Char";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:0in;
-	font-size:10.0pt;
-	font-family:"Tahoma",sans-serif;}
-p.MsoHeader, li.MsoHeader, div.MsoHeader
-	{mso-style-link:"Header Char";
-	margin:0in;
-	margin-bottom:.0001pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;}
-p.MsoFooter, li.MsoFooter, div.MsoFooter
-	{mso-style-link:"Footer Char";
-	margin:0in;
-	margin-bottom:.0001pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;}
-a:link, span.MsoHyperlink
-	{font-family:"Times New Roman",serif;
-	color:blue;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{color:purple;
-	text-decoration:underline;}
-p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
-	{mso-style-link:"Plain Text Char";
-	margin:0in;
-	margin-bottom:.0001pt;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;}
-p.MsoCommentSubject, li.MsoCommentSubject, div.MsoCommentSubject
-	{mso-style-link:"Comment Subject Char";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:0in;
-	font-size:10.0pt;
-	font-family:"Tahoma",sans-serif;
-	font-weight:bold;}
-p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
-	{mso-style-link:"Balloon Text Char";
-	margin:0in;
-	margin-bottom:.0001pt;
-	font-size:8.0pt;
-	font-family:"Tahoma",sans-serif;}
-span.Heading1Char
-	{mso-style-name:"Heading 1 Char";
-	mso-style-link:"Heading 1";
-	font-family:"Tahoma",sans-serif;
-	font-weight:bold;}
-span.Heading2Char
-	{mso-style-name:"Heading 2 Char";
-	mso-style-link:"Heading 2";
-	font-family:"Tahoma",sans-serif;
-	font-weight:bold;}
-span.Heading3Char
-	{mso-style-name:"Heading 3 Char";
-	mso-style-link:"Heading 3";
-	font-family:"Tahoma",sans-serif;}
-span.Heading4Char
-	{mso-style-name:"Heading 4 Char";
-	mso-style-link:"Heading 4";
-	font-family:"Tahoma",sans-serif;}
-span.Heading5Char
-	{mso-style-name:"Heading 5 Char";
-	mso-style-link:"Heading 5";
-	font-family:"Tahoma",sans-serif;}
-span.Heading6Char
-	{mso-style-name:"Heading 6 Char";
-	mso-style-link:"Heading 6";
-	font-family:"Tahoma",sans-serif;}
-span.Heading7Char
-	{mso-style-name:"Heading 7 Char";
-	mso-style-link:"Heading 7";
-	font-family:"Tahoma",sans-serif;}
-span.Heading8Char
-	{mso-style-name:"Heading 8 Char";
-	mso-style-link:"Heading 8";
-	font-family:"Tahoma",sans-serif;}
-span.Heading9Char
-	{mso-style-name:"Heading 9 Char";
-	mso-style-link:"Heading 9";
-	font-family:"Tahoma",sans-serif;}
-p.Body1, li.Body1, div.Body1
-	{mso-style-name:"Body 1";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:17.85pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;}
-p.Bullet2, li.Bullet2, div.Bullet2
-	{mso-style-name:"Bullet 2";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:.5in;
-	text-indent:-18.15pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;}
-p.Bullet3, li.Bullet3, div.Bullet3
-	{mso-style-name:"Bullet 3";
-	mso-style-link:"Bullet 3 Char1";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:53.85pt;
-	text-indent:-17.85pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;}
-p.HeadingEULA, li.HeadingEULA, div.HeadingEULA
-	{mso-style-name:"Heading EULA";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:0in;
-	font-size:14.0pt;
-	font-family:"Tahoma",sans-serif;
-	font-weight:bold;}
-p.HeadingSoftwareTitle, li.HeadingSoftwareTitle, div.HeadingSoftwareTitle
-	{mso-style-name:"Heading Software Title";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:0in;
-	border:none;
-	padding:0in;
-	font-size:14.0pt;
-	font-family:"Tahoma",sans-serif;
-	font-weight:bold;}
-p.Preamble, li.Preamble, div.Preamble
-	{mso-style-name:Preamble;
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:0in;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;
-	font-weight:bold;}
-p.PreambleBorderAbove, li.PreambleBorderAbove, div.PreambleBorderAbove
-	{mso-style-name:"Preamble Border Above";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:0in;
-	border:none;
-	padding:0in;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;
-	font-weight:bold;}
-p.Body0Bold, li.Body0Bold, div.Body0Bold
-	{mso-style-name:"Body 0 Bold";
-	margin:0in;
-	margin-bottom:.0001pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;
-	font-weight:bold;}
-p.Body0, li.Body0, div.Body0
-	{mso-style-name:"Body 0";
-	margin:0in;
-	margin-bottom:.0001pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;}
-span.BalloonTextChar
-	{mso-style-name:"Balloon Text Char";
-	mso-style-link:"Balloon Text";
-	font-family:"Tahoma",sans-serif;}
-p.Bullet1, li.Bullet1, div.Bullet1
-	{mso-style-name:"Bullet 1";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:17.85pt;
-	text-indent:-17.85pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;}
-p.Bullet4, li.Bullet4, div.Bullet4
-	{mso-style-name:"Bullet 4";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:71.75pt;
-	text-indent:-17.9pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;}
-p.Bullet5, li.Bullet5, div.Bullet5
-	{mso-style-name:"Bullet 5";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:89.6pt;
-	text-indent:-17.85pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;}
-p.Heading3Bold, li.Heading3Bold, div.Heading3Bold
-	{mso-style-name:"Heading 3 Bold";
-	mso-style-link:"Heading 3 Bold Char";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:53.85pt;
-	text-indent:-17.85pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;
-	font-weight:bold;}
-p.Bullet4Underline, li.Bullet4Underline, div.Bullet4Underline
-	{mso-style-name:"Bullet 4 Underline";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:71.75pt;
-	text-indent:-17.9pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;
-	text-decoration:underline;}
-span.Body2Char
-	{mso-style-name:"Body 2 Char";
-	font-family:"Tahoma",sans-serif;}
-span.Body3Char
-	{mso-style-name:"Body 3 Char";
-	font-family:"Tahoma",sans-serif;}
-span.CommentTextChar
-	{mso-style-name:"Comment Text Char";
-	mso-style-link:"Comment Text";
-	font-family:"Tahoma",sans-serif;}
-span.CommentSubjectChar
-	{mso-style-name:"Comment Subject Char";
-	mso-style-link:"Comment Subject";
-	font-family:"Tahoma",sans-serif;
-	font-weight:bold;}
-span.Bullet3Char1
-	{mso-style-name:"Bullet 3 Char1";
-	mso-style-link:"Bullet 3";
-	font-family:"Tahoma",sans-serif;}
-p.Bullet4Underlined, li.Bullet4Underlined, div.Bullet4Underlined
-	{mso-style-name:"Bullet 4 Underlined";
-	margin-top:6.0pt;
-	margin-right:0in;
-	margin-bottom:6.0pt;
-	margin-left:17.85pt;
-	text-indent:-17.85pt;
-	font-size:9.5pt;
-	font-family:"Tahoma",sans-serif;
-	text-decoration:underline;}
-span.Heading3BoldChar
-	{mso-style-name:"Heading 3 Bold Char";
-	mso-style-link:"Heading 3 Bold";
-	font-family:"Tahoma",sans-serif;
-	font-weight:bold;}
-span.PlainTextChar
-	{mso-style-name:"Plain Text Char";
-	mso-style-link:"Plain Text";
-	font-family:"Calibri",sans-serif;}
-span.HeaderChar
-	{mso-style-name:"Header Char";
-	mso-style-link:Header;
-	font-family:"Tahoma",sans-serif;}
-span.FooterChar
-	{mso-style-name:"Footer Char";
-	mso-style-link:Footer;
-	font-family:"Tahoma",sans-serif;}
-p.bullet30, li.bullet30, div.bullet30
-	{mso-style-name:bullet3;
-	margin-right:0in;
-	margin-left:0in;
-	font-size:12.0pt;
-	font-family:"Times New Roman",serif;}
-p.bullet40, li.bullet40, div.bullet40
-	{mso-style-name:bullet4;
-	margin-right:0in;
-	margin-left:0in;
-	font-size:12.0pt;
-	font-family:"Times New Roman",serif;}
-.MsoChpDefault
-	{font-family:"Calibri",sans-serif;}
-.MsoPapDefault
-	{margin-left:.25in;
-	text-indent:-.25in;}
- /* Page Definitions */
- @page WordSection1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.0in 1.0in 1.0in;}
-div.WordSection1
-	{page:WordSection1;}
- /* List Definitions */
- ol
-	{margin-bottom:0in;}
-ul
-	{margin-bottom:0in;}
--->
-</style>
-
-</head>
-
-<body lang=EN-US link=blue vlink=purple>
-
-<div class=WordSection1>
-
-<p class=HeadingEULA><span style='font-size:10.0pt'>MICROSOFT SOFTWARE LICENSE
-TERMS</span></p>
-
-<div style='border:none;border-bottom:solid windowtext 1.0pt;padding:0in 0in 1.0pt 0in'>
-
-<p class=HeadingSoftwareTitle><span style='font-size:10.0pt'>MICROSOFT .NET
-LIBRARY</span></p>
-
-</div>
-
-<p class=Preamble><span style='font-size:10.0pt;font-weight:normal'>These
-license terms are an agreement between you and Microsoft Corporation (or based
-on where you live, one of its affiliates). They apply to the software named
-above. The terms also apply to any Microsoft services or updates for the
-software, except to the extent those have different terms.</span></p>
-
-<div style='border:none;border-top:solid windowtext 1.0pt;padding:1.0pt 0in 0in 0in'>
-
-<h1 class=PreambleBorderAbove><span style='font-size:10.0pt;text-transform:uppercase'>If
-you comply with these license terms, you have the rights below.</span></h1>
-
-</div>
-
-<h2 style='margin-top:6.0pt;margin-right:0in;margin-bottom:0in;margin-left:
-.25in;margin-bottom:.0001pt;text-indent:-.25in'><span style='font-size:10.0pt'>1.<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><span
-style='font-size:10.0pt'>INSTALLATION AND USE RIGHTS. </span></h2>
-
-<p class=Bullet3 style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
-margin-left:.25in;text-indent:0in'><span style='font-size:10.0pt'>You may
-install and use any number of copies of the software </span><span
-style='font-size:10.0pt;color:black'>to develop and test your applications.&nbsp;
-</span></p>
-
-<h2><span style='font-size:10.0pt'>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt'>THIRD PARTY COMPONENTS. </span><span
-style='font-weight:normal'>The software may include third party components with
-separate legal notices or governed by other agreements, as may be described in
-the ThirdPartyNotices file(s) </span><span style='font-size:10.0pt;font-weight:
-normal'>accompanying the software.</span></h2>
-
-<h2><span style='font-size:10.0pt'>3.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt;color:black'>ADDITIONAL LICENSING
-REQUIREMENTS AND/OR USE RIGHTS.</span></h2>
-
-<h3><span style='font-size:10.0pt;color:black'>a.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt;color:black'>DISTRIBUTABLE
-CODE.&nbsp; </span><span style='font-size:10.0pt;color:black;font-weight:normal'>T</span><span
-style='font-size:10.0pt;color:black;font-weight:normal'>he software is
-comprised of Distributable Code. ìDistributable Codeî is code that you are
-permitted to distribute in applications you develop if you comply with the
-terms below.</span></h3>
-
-<h4 style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:53.85pt;
-margin-bottom:.0001pt'><b><span style='font-size:10.0pt;color:black'>i.<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></b><b><span
-style='font-size:10.0pt;color:black'>Right to Use and Distribute. </span></b></h4>
-
-<p class=bullet30 style='margin-top:6.0pt;margin-right:0in;margin-bottom:6.0pt;
-margin-left:1.0in;text-indent:-.25in'><span style="font-size:10.0pt;font-family:
-Symbol;color:black">∑<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt;font-family:"Tahoma",sans-serif;
-color:black'>You may copy and distribute the object code form of the software.</span></p>
-
-<p class=bullet30 style='margin-top:6.0pt;margin-right:0in;margin-bottom:6.0pt;
-margin-left:1.0in;text-indent:-.25in'><span style='font-size:10.0pt;font-family:
-Symbol;color:black'>∑<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt;font-family:"Tahoma",sans-serif;
-color:black'>Third Party Distribution. You may permit distributors of your applications
-to copy and distribute the Distributable Code as part of those applications.</span></p>
-
-<h4 style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:53.85pt;
-margin-bottom:.0001pt'><b><span style='font-size:10.0pt;color:black'>ii.<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></b><b><span
-style='font-size:10.0pt;color:black'>Distribution Requirements. For any
-Distributable Code you distribute, you must</span></b></h4>
-
-<p class=bullet30 style='margin-top:6.0pt;margin-right:0in;margin-bottom:6.0pt;
-margin-left:1.0in;text-indent:-.25in'><span style='font-size:10.0pt;font-family:
-Symbol;color:black'>∑<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt;font-family:"Tahoma",sans-serif;
-color:black'>use the Distributable Code in your applications and not as a
-standalone distribution;</span></p>
-
-<p class=bullet30 style='margin-top:6.0pt;margin-right:0in;margin-bottom:6.0pt;
-margin-left:1.0in;text-indent:-.25in'><span style='font-size:10.0pt;font-family:
-Symbol;color:black'>∑<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt;font-family:"Tahoma",sans-serif;
-color:black'>require distributors and external end users to agree to terms that
-protect it at least as much as this agreement; and</span></p>
-
-<p class=bullet30 style='margin-top:6.0pt;margin-right:0in;margin-bottom:6.0pt;
-margin-left:1.0in;text-indent:-.25in'><span style='font-size:10.0pt;font-family:
-Symbol;color:black'>∑<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt;font-family:"Tahoma",sans-serif;
-color:black'>indemnify, defend, and hold harmless Microsoft from any claims,
-including attorneysí fees, related to the distribution or use of your applications,
-except to the extent that any claim is based solely on the unmodified Distributable
-Code.</span></p>
-
-<h4 style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:53.85pt;
-margin-bottom:.0001pt'><b><span style='font-size:10.0pt;color:black'>iii.<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span></b><b><span
-style='font-size:10.0pt;color:black'>Distribution Restrictions. You may not</span></b></h4>
-
-<p class=bullet30 style='margin-top:6.0pt;margin-right:0in;margin-bottom:6.0pt;
-margin-left:1.0in;text-indent:-.25in'><span style='font-size:10.0pt;font-family:
-Symbol;color:black'>∑<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt;font-family:"Tahoma",sans-serif;
-color:black'>use Microsoftís trademarks in your applicationsí names or in a way
-that suggests your applications come from or are endorsed by Microsoft; or</span></p>
-
-<p class=bullet30 style='margin-top:6.0pt;margin-right:0in;margin-bottom:6.0pt;
-margin-left:1.0in;text-indent:-.25in'><span style='font-size:10.0pt;font-family:
-Symbol;color:black'>∑<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt;font-family:"Tahoma",sans-serif;
-color:black'>modify or distribute the source code of any Distributable Code so
-that any part of it becomes subject to an Excluded License. An ìExcluded
-Licenseî is one that requires, as a condition of use, modification or
-distribution of code, that (i) it be disclosed or distributed in source code
-form; or (ii) others have the right to modify it.</span></p>
-
-<h2><span style='font-size:10.0pt'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt'>DATA.</span></h2>
-
-<h3><span style='font-size:10.0pt'>a.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt'>Data Collection. </span><span
-style='font-size:10.0pt;font-weight:normal'>The software may collect
-information about you and your use of the software, and send that to Microsoft.
-Microsoft may use this information to provide services and improve our products
-and services.† You may opt-out of many of these scenarios, but not all, as
-described in the software documentation.† There are also s<span
-style='color:black'>ome features in the software that may enable you and
-Microsoft to collect data from users of your applications.</span> If you use
-these features, you must comply with applicable law, including providing
-appropriate notices to users of your applications together with Microsoftís
-privacy statement. Our privacy statement is located at </span><a
-href="https://go.microsoft.com/fwlink/?LinkID=824704" target="_blank"><span style='font-size:
-10.0pt;font-weight:normal'>https://go.microsoft.com/fwlink/?LinkID=824704</span></a><span
-style='font-size:10.0pt;font-weight:normal'>. You can learn more about data
-collection and its use from the software documentation and our privacy
-statement. Your use of the software operates as your consent to these
-practices.</span></h3>
-
-<h3><span style='font-size:10.0pt'>b.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt'>Processing of Personal Data. </span><span
-style='font-size:10.0pt;font-weight:normal'>To the extent Microsoft is a
-processor or subprocessor of personal data in connection with the software,
-Microsoft makes the commitments in the European Union General Data Protection
-Regulation Terms of the Online Services Terms to all customers effective May
-25, 2018, at </span><span class=MsoHyperlink><a href="https://learn.microsoft.com/en-us/legal/gdpr" target="_blank" style='font-size:10.0pt;
-font-family:"Tahoma",sans-serif;font-weight:normal'>https://learn.microsoft.com/en-us/legal/gdpr</a></span><span
-style='font-size:10.0pt;font-weight:normal'>.</span></h3>
-
-<h2><span style='font-size:10.0pt'>5.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt;text-transform:uppercase'>Scope of
-License</span><span style='font-size:10.0pt'>.</span><span style='font-size:
-10.0pt;font-weight:normal'> The software is licensed, not sold. This agreement
-only gives you some rights to use the software. Microsoft reserves all other
-rights. Unless applicable law gives you more rights despite this limitation,
-you may use the software only as expressly permitted in this agreement. In
-doing so, you must comply with any technical limitations in the software that
-only allow you to use it in certain ways. You may not</span></h2>
-
-<p class=Bullet2><span style='font-size:10.0pt;font-family:Symbol'>∑<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt'>work around any technical
-limitations in the software</span><span style='font-size:10.0pt'>;</span></p>
-
-<p class=Bullet2><span style='font-size:10.0pt;font-family:Symbol'>∑<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt'>reverse engineer, decompile or
-disassemble the software, or otherwise attempt to derive the source code for
-the software, except and to the extent required by third party licensing terms
-governing use of certain open source components that may be included in the
-software;</span></p>
-
-<p class=Bullet2><span style='font-size:10.0pt;font-family:Symbol'>∑<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt'>remove, minimize, block or modify
-any notices of Microsoft or its suppliers in the software; </span></p>
-
-<p class=Bullet2><span style='font-size:10.0pt;font-family:Symbol'>∑<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt'>use the software in any way that
-is against the law; or</span></p>
-
-<p class=Bullet2><span style='font-size:10.0pt;font-family:Symbol'>∑<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt'>share, publish, rent or lease the
-software, provide the software as a stand-alone offering for others to use, or
-transfer the software or this agreement to any third party.</span></p>
-
-<h2><span style='font-size:10.0pt;'>6.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt;text-transform:uppercase'>Export
-Restrictions</span><span style='font-size:10.0pt'>.</span><span
-style='font-size:10.0pt;font-weight:normal'> </span><span style='font-size:
-10.0pt;font-weight:normal'>You must comply with all domestic and international
-export laws and regulations that apply to the software, which include
-restrictions on destinations, end users, and end use. For further information
-on export restrictions, visit www.microsoft.com/exporting.</span></h2>
-
-<h2><span style='font-size:10.0pt'>7.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt;text-transform:uppercase'>SUPPORT
-SERVICES.</span><span style='font-size:10.0pt'> </span><span style='font-size:
-10.0pt;font-weight:normal'>Because this software is ìas is,î we may not provide
-support services for it.</span></h2>
-
-<h2><span style='font-size:10.0pt'>8.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:10.0pt;text-transform:uppercase'>Entire
-Agreement.</span><span style='font-size:10.0pt;font-weight:normal'> This
-agreement, and the terms for supplements, updates, Internet-based services and
-support services that you use, are the entire agreement for the software and
-support services.</span></h2>
-
-<h2 style='margin-left:.25in;text-indent:-.25in'><span style='font-size:10.0pt'>9.<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><span
-style='font-size:10.0pt;text-transform:uppercase'>Applicable Law</span><span
-style='font-size:10.0pt'>.† </span><span style='font-size:10.0pt;font-weight:
-normal'>If you acquired the software in the United States, Washington law
-applies to interpretation of and claims for breach of this agreement, and the
-laws of the state where you live apply to all other claims. If you acquired the
-software in any other country, its laws apply.</span></h2>
-
-<h2 style='margin-left:.25in;text-indent:-.25in'><span style='font-size:10.0pt'>10.<span
-style='font:7.0pt "Times New Roman"'> </span></span><span style='font-size:
-10.0pt'>CONSUMER RIGHTS; REGIONAL VARIATIONS. </span><span style='font-size:
-10.0pt;font-weight:normal'>This agreement describes certain legal rights. You
-may have other rights, including consumer rights, under the laws of your state
-or country. Separate and apart from your relationship with Microsoft, you may
-also have rights with respect to the party from which you acquired the
-software. This agreement does not change those other rights if the laws of your
-state or country do not permit it to do so. For example, if you acquired the
-software in one of the below regions, or mandatory country law applies, then
-the following provisions apply to you:</span></h2>
-
-<h3 style='margin-left:35.85pt;text-indent:-.25in'><span style='font-size:10.0pt'>a)<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><span
-style='font-size:10.0pt'>Australia. </span><span style='font-size:10.0pt;
-font-weight:normal'>You have statutory guarantees under the Australian Consumer
-Law and nothing in this agreement is intended to affect those rights.</span></h3>
-
-<h3 style='margin-left:35.85pt;text-indent:-.25in'><span style='font-size:10.0pt'>b)<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><span
-style='font-size:10.0pt'>Canada. </span><span style='font-size:10.0pt;
-font-weight:normal'>If you acquired this software in Canada, you may stop
-receiving updates by turning off the automatic update feature, disconnecting
-your device from the Internet (if and when you re-connect to the Internet,
-however, the software will resume checking for and installing updates), or uninstalling
-the software. The product documentation, if any, may also specify how to turn
-off updates for your specific device or software.</span></h3>
-
-<h3 style='margin-left:35.85pt;text-indent:-.25in'><span style='font-size:10.0pt'>c)<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><span
-style='font-size:10.0pt'>Germany and Austria</span><span style='font-size:10.0pt;
-font-weight:normal'>.</span></h3>
-
-<p class=MsoNormal style='margin-left:35.85pt'><b><span style='font-size:10.0pt'>(i)</span></b><span
-style='font-size:10.0pt'>††††††† <b>Warranty</b>. The software will perform
-substantially as described in any Microsoft materials that accompany it.
-However, Microsoft gives no contractual guarantee in relation to the software.</span></p>
-
-<p class=MsoNormal style='margin-left:35.85pt'><b><span style='font-size:10.0pt'>(ii)</span></b><span
-style='font-size:10.0pt'>†††††† <b>Limitation of Liability</b>. In case of
-intentional conduct, gross negligence, claims based on the Product Liability
-Act, as well as in case of death or personal or physical injury, Microsoft is
-liable according to the statutory law.</span></p>
-
-<h2 style='margin-left:22.5pt;text-indent:0in'><span style='font-size:10.0pt;
-font-weight:normal'>Subject to the foregoing clause (ii), Microsoft will only
-be liable for slight negligence if Microsoft is in breach of such material
-contractual obligations, the fulfillment of which facilitate the due
-performance of this agreement, the breach of which would endanger the purpose
-of this agreement and the compliance with which a party may constantly trust in
-(so-called &quot;cardinal obligations&quot;). In other cases of slight negligence,
-Microsoft will not be liable for slight negligence</span></h2>
-
-<h2><span style='font-size:10.0pt;text-transform:uppercase'>11.<span
-style='font:7.0pt "Times New Roman"'> </span></span><span style='font-size:
-10.0pt;text-transform:uppercase'>Disclaimer of Warranty.</span><span
-style='font-size:10.0pt'> THE SOFTWARE IS LICENSED ìAS-IS.î YOU BEAR THE RISK
-OF USING IT. MICROSOFT GIVES NO EXPRESS WARRANTIES, GUARANTEES OR CONDITIONS.
-TO THE EXTENT PERMITTED UNDER YOUR LOCAL LAWS, MICROSOFT EXCLUDES THE IMPLIED
-WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NON-INFRINGEMENT. </span></h2>
-
-<h2><span style='font-size:10.0pt'>12.<span style='font:7.0pt "Times New Roman"'>
-</span></span><span style='font-size:10.0pt;text-transform:uppercase'>Limitation
-on and Exclusion of Remedies and Damages. </span><span style='font-size:10.0pt'>YOU
-CAN RECOVER FROM MICROSOFT AND ITS SUPPLIERS ONLY DIRECT DAMAGES UP TO U.S.
-$5.00. YOU CANNOT RECOVER ANY OTHER DAMAGES, INCLUDING CONSEQUENTIAL, LOST
-PROFITS, SPECIAL, INDIRECT OR INCIDENTAL DAMAGES.</span></h2>
-
-<p class=Body1><span style='font-size:10.0pt'>This limitation applies to (a)
-anything related to the software, services, content (including code) on third
-party Internet sites, or third party applications; and (b) claims for breach of
-contract, breach of warranty, guarantee or condition, strict liability,
-negligence, or other tort to the extent permitted by applicable law.</span></p>
-
-<p class=MsoNormal style='margin-left:.25in'><span style='font-size:10.0pt'>It
-also applies even if Microsoft knew or should have known about the possibility
-of the damages. The above limitation or exclusion may not apply to you because
-your state or country may not allow the exclusion or limitation of incidental,
-consequential or other damages.</span></p>
-
-<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
-
-</div>
-
-</body>
-
-</html>
-
-==============================================================================
-Embedded License: https://github.com/mono/SkiaSharp/raw/main/LICENSE.md
-
-Copyright (c) 2015-2016 Xamarin, Inc.  
-Copyright (c) 2017-2018 Microsoft Corporation.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ==============================================================================
 Embedded License: https://www.apache.org/licenses/LICENSE-2.0.txt
 
@@ -2586,31 +950,4 @@ Embedded License: https://raw.githubusercontent.com/AvaloniaUI/angle/master/LICE
 // LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 // ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-
-==============================================================================
-Embedded License: https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT
-
-The MIT License (MIT)
-
-Copyright (c) .NET Foundation and Contributors
-
-All rights reserved.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
 

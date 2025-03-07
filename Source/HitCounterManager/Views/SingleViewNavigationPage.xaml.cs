@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2023-2023 Peter Kirmeier
+//Copyright (c) 2023-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -28,9 +28,9 @@ namespace HitCounterManager.Views
 {
     public partial class SingleViewNavigationPage : Panel
     {
-        public readonly MainPage InnerPage = new MainPage();
+        public readonly MainPage InnerPage = new();
 
-        public Stack<IPageBasePure> NavStack = new Stack<IPageBasePure>();
+        public Stack<IPageBasePure> NavStack = new();
 
         public SingleViewNavigationPage()
         {

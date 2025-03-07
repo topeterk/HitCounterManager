@@ -76,13 +76,13 @@ There are addons available now, e.g.:
   * **Without** global hot key support:
     * Most Linux variants like Alpine 3.15+, CentOS 7+, Debian 10+, Fedora 36+, Ubuntu 18.04+, Red Hat Enterprise Linux 7+, Tizen (only tested on Ubuntu)
     * macOS 10.15+ Catalina _(untested - please let me know if it works)_
-    * Android 33+ _(runs barely, very limited)_
+    * Android 34+ _(runs barely, very limited)_
   * **Maybe** coming later (at least I try)
     * iOS 10+ _(most likely not running yet)_
 * Prerequisites:
-  * [.NET 7.0 Runtime](https://dotnet.microsoft.com/download/dotnet/7.0/runtime) or newer
+  * [.NET 8.0 Runtime](https://dotnet.microsoft.com/download/dotnet/8.0/runtime) or newer
     * More information can be found here: [Install .NET on Windows, Linux, and macOS](https://docs.microsoft.com/dotnet/core/install/)
-      and here [Supported OS versions](https://github.com/dotnet/core/blob/main/release-notes/7.0/supported-os.md)
+      and here [Supported OS versions](https://github.com/dotnet/core/blob/main/release-notes/8.0/supported-os.md)
   * On Android:
     * As not provided via Google Play Store: [allow installation of unknown apps](https://developer.android.com/studio/publish#publishing-unknown)
 

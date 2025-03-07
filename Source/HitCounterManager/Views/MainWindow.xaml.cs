@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2023-2024 Peter Kirmeier
+//Copyright (c) 2023-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ namespace HitCounterManager.Views
 {
     public partial class MainWindow : WindowBase<MainPageViewModel>
     {
-        private SettingsRoot Settings => App.CurrentApp.Settings;
+        private static SettingsRoot Settings => App.CurrentApp.Settings;
 
         internal readonly MainPage InnerPage;
 

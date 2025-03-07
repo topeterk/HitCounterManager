@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2021-2024 Peter Kirmeier
+//Copyright (c) 2021-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -62,7 +62,7 @@ namespace HitCounterManager
         private readonly NativeApi.Subclassproc? _Subclassproc = null;
         private static NativeApi.HookProc? _HookProc = null;
 
-        private readonly Dictionary<TimerIDs, DispatcherTimer> ApplicationTimers = new ();
+        private readonly Dictionary<TimerIDs, DispatcherTimer> ApplicationTimers = [];
         private IDisposable? UpdateCheckTimer;
         public WindowNotificationManager? NotificationManager;
 
@@ -70,6 +70,8 @@ namespace HitCounterManager
         {
             LoadSettings();
             om = new OutModule(Settings);
+            if (!om.ReloadTemplate())
+                DisplayAlert("Error loading template!", "The file " + (string.IsNullOrEmpty(Settings.Inputfile) ? "<Inputfile not set>" : "\"" + Settings.Inputfile + "\"") + " not found!");
 
             if (OperatingSystem.IsWindows())
             {
@@ -84,20 +86,13 @@ namespace HitCounterManager
             ApplyTheme(Settings.DarkMode); // Initially update values according to selected mode
         }
 
-        private struct PostponedAlert
+        private struct PostponedAlert(string Title, string Message, NotificationType Type)
         {
-            public string Title;
-            public string Message;
-            public NotificationType Type;
-
-            public PostponedAlert(string Title, string Message, NotificationType Type)
-            {
-                this.Title = Title;
-                this.Message = Message;
-                this.Type = Type;
-            }
+            public string Title = Title;
+            public string Message = Message;
+            public NotificationType Type = Type;
         }
-        private List<PostponedAlert>? PostponedAlerts = new ();
+        private List<PostponedAlert>? PostponedAlerts = [];
 
         /// <summary>
         /// Page.DisplayAlert but when no appeared yet, it will be postponed until MainPage has appeared
@@ -374,7 +369,7 @@ namespace HitCounterManager
         {
             if (OperatingSystem.IsWindows())
             {
-                List<int> result = new ();
+                List<int> result = [];
 
                 if (_HookId != IntPtr.Zero)
                 {

@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2024 Peter Kirmeier
+//Copyright (c) 2016-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -32,20 +32,14 @@ namespace HitCounterManager.Models
     /// Loads and Saves data from/to XML files
     /// </summary>
     /// <typeparam name="T">Data type</typeparam>
-    public class SaveModule<T> where T : class
+    /// <remarks>
+    /// Creates a Savemodule object
+    /// </remarks>
+    /// <param name="Filename">Filename that is bound for storing the data. Also used for reading if default file is used.</param>
+    public class SaveModule<T>(string Filename) where T : class
     {
-        private string _Filename;
-        private XmlSerializer xml;
-
-        /// <summary>
-        /// Creates a Savemodule object
-        /// </summary>
-        /// <param name="Filename">Filename that is bound for storing the data. Also used for reading if default file is used.</param>
-        public SaveModule(string Filename)
-        {
-            _Filename = Filename;
-            xml = new XmlSerializer(typeof(T));
-        }
+        private readonly string _Filename = Filename;
+        private readonly XmlSerializer xml = new (typeof(T));
 
         /// <summary>
         /// Reads the data from the XML file
@@ -117,7 +111,7 @@ namespace HitCounterManager.Models
             {
                 file = XmlWriter.Create(_Filename, new XmlWriterSettings()
                 {
-                    Encoding = Encoding.Unicode, // UTF16LE
+                    Encoding = Encoding.UTF8, // UTF-8 BOM
                     Indent = true
                 });
                 xml.Serialize(file, data);

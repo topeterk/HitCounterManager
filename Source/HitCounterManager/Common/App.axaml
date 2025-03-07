@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2021-2024 Peter Kirmeier
+//Copyright (c) 2021-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@
 		                     https://github.com/AvaloniaUI/Avalonia/blob/master/src/Avalonia.Themes.Fluent/Accents/FluentControlResourcesLight.xaml
 		     Default Colors: https://docs.microsoft.com/de-de/dotnet/api/system.windows.media.colors?view=net-5.0 -->
 
-		<x:Double x:Key="Int32MaxValueAsDouble">2147483647</x:Double>
+		<x:Decimal x:Key="Int32MaxValueAsDecimal">2147483647</x:Decimal>
 
 		<SolidColorBrush x:Key="ProfileResetBrush" Color="IndianRed" />
 		<SolidColorBrush x:Key="ProfilePBBrush" Color="Tan" />

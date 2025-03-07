@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2024 Peter Kirmeier
+//Copyright (c) 2021-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -40,9 +40,8 @@ namespace HitCounterManager.Common
     /// <summary>
     /// Loads an image (Bitmap) from local resources (avares://)
     /// </summary>
-    public class LocalResourceBitmap : Bitmap
+    public class LocalResourceBitmap(string path) : Bitmap(AssetLoader.Open(new Uri($"avares://{Assembly.GetExecutingAssembly().GetName().Name ?? string.Empty}{path}")))
     {
-        public LocalResourceBitmap(string path) : base(AssetLoader.Open(new Uri($"avares://{Assembly.GetExecutingAssembly().GetName().Name ?? string.Empty}{path}"))) { }
     }
 
     /// <summary>
@@ -50,7 +49,7 @@ namespace HitCounterManager.Common
     /// </summary>
     public class StringFromManifest : MarkupExtension
     {
-        static readonly Dictionary<string, string> LoadedStringSources = new ();
+        static readonly Dictionary<string, string> LoadedStringSources = [];
 
         public string? Resource { get; set; }
 
@@ -93,7 +92,7 @@ namespace HitCounterManager.Common
 
         private static string ResolveColorFromString(string s)
         {
-            int index = s.TrimEnd().LastIndexOf(" ");
+            int index = s.TrimEnd().LastIndexOf(' ');
             string keep = s[..(index + 1)];
             string value = s[(index + 1)..];
             if (Color.TryParse(keep, out var color_value))

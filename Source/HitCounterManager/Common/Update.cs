@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2020-2023 Peter Kirmeier
+//Copyright (c) 2020-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -53,7 +53,7 @@ namespace HitCounterManager.Common
                 // https://developer.github.com/v3/repos/releases/#get-a-single-release
                 // https://developer.github.com/v3/media/#request-specific-version
 
-                HttpClient client = new HttpClient();
+                HttpClient client = new();
                 client.DefaultRequestHeaders.Add("User-Agent", "HitCounterManager/" + Statics.ApplicationVersionString);
                 client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3.text+json");
 

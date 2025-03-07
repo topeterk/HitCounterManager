@@ -24,16 +24,10 @@ using HitCounterManager.Common;
 
 namespace HitCounterManager.Models
 {
-    public  class ProfileRowModel : NotifyPropertyChangedImpl
+    public  class ProfileRowModel(ProfileRow origin, ProfileModel parent) : NotifyPropertyChangedImpl
     {
-        private readonly ProfileRow _origin;
-        private readonly ProfileModel _parent;
-
-        public ProfileRowModel(ProfileRow origin, ProfileModel parent)
-        {
-            _origin = origin;
-            _parent = parent;
-        }
+        private readonly ProfileRow _origin = origin;
+        private readonly ProfileModel _parent = parent;
 
         public string Title
         {

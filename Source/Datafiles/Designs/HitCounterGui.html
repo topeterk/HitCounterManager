@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <!--
 MIT License
 
-Copyright (c) 2019-2024 Peter Kirmeier
+Copyright (c) 2019-2025 Peter Kirmeier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -355,7 +355,7 @@ function DoVisualUpdate(d /*data*/)
 		{
 			new_tbl +=
  '<tr>' +
-  '<td class="' + majorclass + ' bottom left">Time:</td>'                                                                                                    + // Time
+  '<td class="' + majorclass + ' bottom right">Time:</td>'                                                                                                    + // Time
   '<td colspan="' + hit_cols + '" class="' + majorclass + ' bottom timestamp"><span id="time_total_footer">' + IntToTimeStr(total_time_current, true) + '</span></td>' + // Total Time (Footer)
   '<td colspan="' + (max_cols-1-hit_cols) + '" class="' + majorclass + ' bottom">&nbsp;</td>'                                                                + // Filler
  '</tr>';
@@ -364,7 +364,7 @@ function DoVisualUpdate(d /*data*/)
 		{
 			new_tbl +=
  '<tr class="' + (d.high_contrast ? 'even' : '') + '">' +
-  '<td colspan="' + max_cols + '" class="bottom timestamp left">Time: <span id="time_total_footer">' + IntToTimeStr(total_time_current, true) + '</span></td>' + // Total Time (Footer)
+  '<td colspan="' + max_cols + '" class="bottom timestamp right">Time: <span id="time_total_footer">' + IntToTimeStr(total_time_current, true) + '</span></td>' + // Total Time (Footer)
  '</tr>';
 		}
 	}

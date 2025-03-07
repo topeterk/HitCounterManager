@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2021-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ namespace HitCounterManager.ViewModels
 {
     public class UpdatePageViewModel : ViewModelWindowBase
     {
-        public SettingsRoot Settings => App.CurrentApp.Settings;
+        public static SettingsRoot Settings => App.CurrentApp.Settings;
 
         public UpdatePageViewModel()
         {
@@ -46,8 +46,18 @@ namespace HitCounterManager.ViewModels
             });
         }
 
+#pragma warning disable IDE0079
+#pragma warning disable CA1822
         public string LatestVersionName => GitHubUpdate.LatestVersionName;
-        public string FullChangeLog { get => GitHubUpdate.Changelog; }
+        public string FullChangeLog => GitHubUpdate.Changelog;
+#pragma warning restore CA1822
+#pragma warning restore IDE0079
+
+        public bool CheckUpdatesOnStartup
+        {
+            get => Settings.CheckUpdatesOnStartup;
+            set => SetAndNotifyWhenChanged(ref Settings.CheckUpdatesOnStartup, value);
+        }
 
         public ICommand DownloadReleaseLog { get; }
         public ICommand WebOpenLatestRelease { get; }

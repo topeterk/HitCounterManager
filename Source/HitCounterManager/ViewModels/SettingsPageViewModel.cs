@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2021-2024 Peter Kirmeier
+//Copyright (c) 2021-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -620,9 +620,13 @@ namespace HitCounterManager.ViewModels
             get => Settings.StyleDesiredWidth;
             set => SetAndNotifyWhenNaturalNumberChanged(ref Settings.StyleDesiredWidth, value);
         }
+#pragma warning disable IDE0079
+#pragma warning disable CA1822
         public bool StyleTableAlignmentLeft => Settings.StyleTableAlignment.Equals("tblleft");
         public bool StyleTableAlignmentCenter => Settings.StyleTableAlignment.Equals("tblcenter");
         public bool StyleTableAlignmentRight => Settings.StyleTableAlignment.Equals("tblright");
+#pragma warning restore CA1822
+#pragma warning restore IDE0079
         public void SetStyleTableAlignment(string name)
         {
             switch (name)

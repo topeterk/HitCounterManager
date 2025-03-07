@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2022 Peter Kirmeier
+//Copyright (c) 2016-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -53,7 +53,7 @@ namespace HitCounterManager.Models
         public int Attempts = 0;
         public int ActiveSplit = 0;
         public int BestProgress = 0;
-        public List<ProfileRow> Rows = new List<ProfileRow>();
+        public List<ProfileRow> Rows = [];
 
         public Profile ShallowCopy() => (Profile)MemberwiseClone();
         public Profile DeepCopy()
@@ -71,7 +71,6 @@ namespace HitCounterManager.Models
     [Serializable]
     public class Profiles
     {
-        private List<Profile> _Profiles = new List<Profile>();
-        public List<Profile> ProfileList { get { return _Profiles; } } // used by XML serialization!
+        public List<Profile> ProfileList { get; } = []; // used by XML serialization!
     }
 }

@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2021-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -36,10 +36,10 @@ namespace HitCounterManager.Models
         public ProfileModel(Profile origin)
         {
             _origin = origin;
-            Rows = new ObservableCollection<ProfileRowModel>();
+            Rows = [];
             for (int i = 0; i < _origin.Rows.Count; i++)
             {
-                ProfileRowModel rowModel = new ProfileRowModel(_origin.Rows[i], this);
+                ProfileRowModel rowModel = new(_origin.Rows[i], this);
                 rowModel.PropertyChanged += PropertyChangedHandler;
                 Rows.Add(rowModel);
             }
@@ -116,9 +116,7 @@ namespace HitCounterManager.Models
                 (0 <= IndexDst) && (IndexDst < _origin.Rows.Count)) // Is permutation in range?
             {
                 // Swap Data and Model
-                ProfileRow tmp = _origin.Rows[Index];
-                _origin.Rows[Index] = _origin.Rows[IndexDst];
-                _origin.Rows[IndexDst] = tmp;
+                (_origin.Rows[IndexDst], _origin.Rows[Index]) = (_origin.Rows[Index], _origin.Rows[IndexDst]);
                 Rows.Move(Index, IndexDst);
                 ActiveSplit = IndexDst;
             }
@@ -126,15 +124,27 @@ namespace HitCounterManager.Models
 
         public void InsertNewRow()
         {
-            ProfileRow row = new ProfileRow();
-            ProfileRowModel rowModel = new ProfileRowModel(row, this);
+            ProfileRow row = new();
+            ProfileRowModel rowModel = new(row, this);
             rowModel.PropertyChanged += PropertyChangedHandler;
 
             _origin.Rows.Insert(ActiveSplit, row);
-            Rows.Insert(ActiveSplit, new ProfileRowModel(row, this));
+            Rows.Insert(ActiveSplit, rowModel);
 
             Rows[ActiveSplit].ActiveChanged();
             if (ActiveSplit+1 < Rows.Count) Rows[ActiveSplit+1].ActiveChanged();
+        }
+
+        public void AppendNewRow(string? NewName)
+        {
+            ProfileRow row = new();
+            ProfileRowModel rowModel = new(row, this);
+            rowModel.PropertyChanged += PropertyChangedHandler;
+
+            int rowIndex = Rows.Count;
+            _origin.Rows.Insert(rowIndex, row);
+            Rows.Insert(rowIndex, rowModel);
+            if (!string.IsNullOrEmpty(NewName)) Rows[rowIndex].Title = NewName;
         }
 
         public void DeleteRow(ProfileRowModel row)

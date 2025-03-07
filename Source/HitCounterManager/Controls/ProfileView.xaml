@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2021-2024 Peter Kirmeier
+//Copyright (c) 2021-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -203,12 +203,12 @@
 								<ColumnDefinition Width="20"></ColumnDefinition>
 							</Grid.ColumnDefinitions>
 							<NumericUpDown Grid.Column="0" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
-										   Value="{Binding Hits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+										   Value="{Binding Hits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 							<NumericUpDown Grid.Column="1" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
-										   Value="{Binding WayHits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+										   Value="{Binding WayHits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 							<TextBlock Grid.Column="2" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Diff, Mode=OneWay}" />
 							<NumericUpDown Grid.Column="3" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
-										   Value="{Binding PB}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+										   Value="{Binding PB}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 							<Button Grid.Column="4" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 									Command="{Binding $parent[UserControl].DataContext.CmdSetSessionProgress}" CommandParameter="{Binding .}">
 								<Image Source="{DynamicResource ImageSP}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Classes.Inactive="{Binding !Active, Mode=OneWay}" />
@@ -251,7 +251,7 @@
 						</Button>
 						<TextBox Grid.Column="1" Margin="2" MinWidth="30" TextAlignment="Left" Text="{Binding Title}" Watermark="       [Empty title]" />
 						<NumericUpDown Grid.Column="2" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
-								 Value="{Binding Hits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer">
+								 Value="{Binding Hits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer">
 <!--
 							<Interaction.Behaviors>
 								<DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
@@ -264,10 +264,10 @@
 -->
 						</NumericUpDown>
 						<NumericUpDown Grid.Column="3" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
-								Value="{Binding WayHits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+								Value="{Binding WayHits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 						<TextBlock Grid.Column="4" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Diff, Mode=OneWay}" />
 						<NumericUpDown Grid.Column="5" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
-								Value="{Binding PB}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDouble}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+								Value="{Binding PB}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 						<Button Grid.Column="6" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 								Command="{Binding $parent[UserControl].DataContext.CmdSetSessionProgress}" CommandParameter="{Binding .}">
 							<Image Source="{DynamicResource ImageSP}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Classes.Inactive="{Binding !SP, Mode=OneWay}" />
