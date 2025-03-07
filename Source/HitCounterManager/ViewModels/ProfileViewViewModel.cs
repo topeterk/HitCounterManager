@@ -156,14 +156,14 @@ namespace HitCounterManager.ViewModels
                 _ProfileSelected.InsertNewRow();
             });
 
-            HitIncrease = ReactiveCommand.Create(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Hits++);
-            HitDecrease = ReactiveCommand.Create(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].Hits--);
-            HitWayIncrease = ReactiveCommand.Create(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].WayHits++);
-            HitWayDecrease = ReactiveCommand.Create(() => _ProfileSelected.Rows[_ProfileSelected.ActiveSplit].WayHits--);
-            HitIncreasePrev = ReactiveCommand.Create(() => _ProfileSelected.Rows[Math.Max(_ProfileSelected.ActiveSplit - 1, 0)].Hits++);
-            HitDecreasePrev = ReactiveCommand.Create(() => _ProfileSelected.Rows[Math.Max(_ProfileSelected.ActiveSplit - 1, 0)].Hits--);
-            HitWayIncreasePrev = ReactiveCommand.Create(() => _ProfileSelected.Rows[Math.Max(_ProfileSelected.ActiveSplit - 1, 0)].WayHits++);
-            HitWayDecreasePrev = ReactiveCommand.Create(() => _ProfileSelected.Rows[Math.Max(_ProfileSelected.ActiveSplit - 1, 0)].WayHits--);
+            HitIncrease = ReactiveCommand.Create(() => HitSumUp(+1, false));
+            HitDecrease = ReactiveCommand.Create(() => HitSumUp(-1, false));
+            HitWayIncrease = ReactiveCommand.Create(() => HitSumUp(+1, true));
+            HitWayDecrease = ReactiveCommand.Create(() => HitSumUp(-1, true));
+            HitIncreasePrev = ReactiveCommand.Create(() => HitSumUpPrev(+1, false));
+            HitDecreasePrev = ReactiveCommand.Create(() => HitSumUpPrev(-1, false));
+            HitWayIncreasePrev = ReactiveCommand.Create(() => HitSumUpPrev(+1, true));
+            HitWayDecreasePrev = ReactiveCommand.Create(() => HitSumUpPrev(-1, true));
             SplitSelectNext = ReactiveCommand.Create(() => GoSplits(+1));
             SplitSelectPrev = ReactiveCommand.Create(() => GoSplits(-1));
 
@@ -408,6 +408,20 @@ namespace HitCounterManager.ViewModels
                 // Stop timer when run completes (when last split is finished)
                 TimerRunning = false;
             }
+        }
+
+        public void HitSumUp(int Amount, bool IsWayHit)
+        {
+            ProfileRowModel row = _ProfileSelected.Rows[_ProfileSelected.ActiveSplit];
+            if (IsWayHit) row.WayHits += Amount;
+            else row.Hits += Amount;
+        }
+
+        public void HitSumUpPrev(int Amount, bool IsWayHit)
+        {
+            ProfileRowModel row = _ProfileSelected.Rows[Math.Max(_ProfileSelected.ActiveSplit - 1, 0)];
+            if (IsWayHit) row.WayHits += Amount;
+            else row.Hits += Amount;
         }
 
         public string StatsProgress => "Progress:  " + _ProfileSelected.ActiveSplit.ToString() + " / " + _ProfileSelected.Rows.Count.ToString() + "  # " + _ProfileSelected.Attempts.ToString("D3");
