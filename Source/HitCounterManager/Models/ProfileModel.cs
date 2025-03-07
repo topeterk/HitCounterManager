@@ -129,10 +129,22 @@ namespace HitCounterManager.Models
             rowModel.PropertyChanged += PropertyChangedHandler;
 
             _origin.Rows.Insert(ActiveSplit, row);
-            Rows.Insert(ActiveSplit, new ProfileRowModel(row, this));
+            Rows.Insert(ActiveSplit, rowModel);
 
             Rows[ActiveSplit].ActiveChanged();
             if (ActiveSplit+1 < Rows.Count) Rows[ActiveSplit+1].ActiveChanged();
+        }
+
+        public void AppendNewRow(string? NewName)
+        {
+            ProfileRow row = new();
+            ProfileRowModel rowModel = new(row, this);
+            rowModel.PropertyChanged += PropertyChangedHandler;
+
+            int rowIndex = Rows.Count;
+            _origin.Rows.Insert(rowIndex, row);
+            Rows.Insert(rowIndex, rowModel);
+            if (!string.IsNullOrEmpty(NewName)) Rows[rowIndex].Title = NewName;
         }
 
         public void DeleteRow(ProfileRowModel row)
