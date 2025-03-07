@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2022 Peter Kirmeier
+//Copyright (c) 2016-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -214,6 +214,12 @@ namespace HitCounterManager
         /// Amount of splits
         /// </summary>
         int SplitCount { get; }
+
+        /// <summary>
+        /// Return all split names
+        /// </summary>
+        /// <returns></returns>
+        List<string> SplitNames { get; }
 
         /// <summary>
         /// Index of currently active split

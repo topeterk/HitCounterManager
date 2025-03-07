@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2019-2024 Peter Kirmeier
+//Copyright (c) 2019-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -124,6 +124,7 @@ namespace HitCounterManager
             this.ReturnCurrentIGT = ReturnCurrentIGT;
             this.GetIsIGTActive = GetIsIGTActive;
         }
+        public string[] GetProfileList() => profs.GetProfileList();
         #endregion
 
         #region Succession related
@@ -300,11 +301,8 @@ namespace HitCounterManager
             }
         }
 
-        public void ProfileNew()
+        public void ProfileNew(string NameNew)
         {
-            string NameNew = VisualBasic.Interaction.InputBox("Enter name of new profile", "New profile", SelectedProfile);
-            if (NameNew.Length == 0) return;
-
             if (profs.HasProfile(NameNew))
             {
                 MessageBox.Show("A profile with this name already exists!", "Profile already exists", MessageBoxButtons.OK, MessageBoxIcon.Stop);

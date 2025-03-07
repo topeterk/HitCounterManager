@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2024 Peter Kirmeier and Ezequiel Medina
+//Copyright (c) 2016-2025 Peter Kirmeier and Ezequiel Medina
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -200,7 +200,13 @@ namespace HitCounterManager
         }
         private void btnAbout_Click(object sender, EventArgs e) { new About().ShowDialog(this); }
 
-        private void btnNew_Click(object sender, EventArgs e) { profCtrl.ProfileNew(); }
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            string NameNew = VisualBasic.Interaction.InputBox("Enter name of new profile", "New profile", profCtrl.SelectedProfile);
+            if (NameNew.Length == 0) return;
+
+            profCtrl.ProfileNew(NameNew);
+        }
         private void btnRename_Click(object sender, EventArgs e) { profCtrl.ProfileRename(); }
         private void btnCopy_Click(object sender, EventArgs e) { profCtrl.ProfileCopy(); }
         private void btnDelete_Click(object sender, EventArgs e) { profCtrl.ProfileDelete(); }
