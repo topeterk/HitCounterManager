@@ -253,10 +253,12 @@ namespace HitCounterManager.ViewModels
                         Monitor.Enter(TimerUpdateLock);
                         _ProfileSelected = value;
                         Monitor.Exit(TimerUpdateLock);
-                        Settings.ProfileSelected = _ProfileSelected.Name;
+                        string ProfileName = _ProfileSelected.Name;
+                        Settings.ProfileSelected = ProfileName;
 
                         CallPropertyChanged();
                         OutputDataChangedHandler(this, new PropertyChangedEventArgs(nameof(ProfileSelected)));
+                        InterfaceASC?.ProfileSelected(ProfileName);
                     }
                 }
             }

@@ -20,10 +20,12 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-using System.Reflection;
 using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using HitCounterManager.ViewModels;
 using static HitCounterManager.IAutoSplitterCoreInterface;
 
@@ -40,9 +42,26 @@ namespace HitCounterManager
         int ActiveGameIndex { get; set; }
 
         /// <summary>
-        /// ????
+        /// Gets or sets the ASC practice mode activation (no automatic splitting).
         /// </summary>
         bool PracticeMode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the currently selected profile name.
+        /// </summary>
+        string ProfileName { get; set; }
+
+        /// <summary>
+        /// Gets all profile names.
+        /// </summary>
+        /// <returns></returns>
+        List<string> ProfileNames { get; }
+
+        /// <summary>
+        /// Create a profile with the given new name and select it.
+        /// </summary>
+        /// <param name="NewName">Name of the new profile</param>
+        void ProfileNew(string NewName);
 
         /// <summary>
         /// Start over a new run.
@@ -51,9 +70,14 @@ namespace HitCounterManager
         void ProfileReset();
 
         /// <summary>
-        /// Amount of available splitsin the current run.
+        /// Amount of available splits in the current run.
         /// </summary>
         int SplitCount { get; }
+
+        /// <summary>
+        /// Gets all split names of the currently selected profile.
+        /// </summary>
+        List<string> SplitsNames { get; }
 
         /// <summary>
         /// Index of currently active split.
@@ -61,10 +85,23 @@ namespace HitCounterManager
         int ActiveSplit { get; }
 
         /// <summary>
-        /// Modifies the currently selected split by Amount.
+        /// Creates a split at the end of the splits with the given new name.
+        /// </summary>
+        /// <param name="NewName">Name of the new split</param>
+        void SplitAppendNew(string NewName);
+
+        /// <summary>
+        /// Modifies the currently selected split by given <paramref name="Amount"/>.
         /// </summary>
         /// <param name="Amount">Amount of splits that will be moved forwards/backwards</param>
         void ProfileSplitGo(int Amount);
+
+        /// <summary>
+        /// Inreases or decreases the hit counts of the currently selected split by <paramref name="Amount"/>.
+        /// </summary>
+        /// <param name="Amount">Positive values will increase and negative will decrease hit count respectively</param>
+        /// <param name="IsWayHit">true = count towards way hits, false = count towards (boss) hits</param>
+        public void HitSumUp(int Amount, bool IsWayHit);
 
         /// <summary>
         /// Indicates if timer is currently running.
@@ -138,6 +175,13 @@ namespace HitCounterManager
         /// </summary>
         Action? SplitterResetMethod { get; set; }
 
+        /// <summary>
+        /// Method that gets called when another profile got selected.
+        /// A string will be given with the new selected profile name.
+        /// The method should be filled once the registration method is called.
+        /// </summary>
+        Action<string /* ProfileName */>? ProfileSelectedMethod { get; set; }
+
         #endregion
     }
 }
@@ -203,6 +247,8 @@ namespace HitCounterManager.Common
 
         public void SplitterReset() => SplitterResetMethod?.Invoke();
 
+        public void ProfileSelected(string ProfileName) => ProfileSelectedMethod?.Invoke(ProfileName);
+
         #region IAutoSplitterCoreInterface
 
         public int ActiveGameIndex
@@ -217,13 +263,29 @@ namespace HitCounterManager.Common
             set => ProfileViewViewModel.AutoSplitterPracticeModeChecked = value;
         }
 
+        public string ProfileName
+        {
+            get => ProfileViewViewModel.ProfileSelected.Name;
+            set => ProfileViewViewModel.ProfileSelected.Name = value;
+        }
+
+        public List<string> ProfileNames => [.. ProfileViewViewModel.ProfileList.Select(profileModel => profileModel.Name)];
+
+        public void ProfileNew(string NewName) => ProfileViewViewModel.ProfileNew(NewName);
+
         public void ProfileReset() => ProfileViewViewModel.ProfileReset.Execute(null);
 
         public int SplitCount => ProfileViewViewModel.ProfileSelected.Rows.Count;
 
+        public List<string> SplitsNames => [.. ProfileViewViewModel.ProfileSelected.Rows.Select(profileRowModel => profileRowModel.Title)];
+
         public int ActiveSplit => ProfileViewViewModel.ProfileSelected.ActiveSplit;
 
+        public void SplitAppendNew(string NewName) => ProfileViewViewModel.ProfileSelected.AppendNewRow(NewName);
+
         public void ProfileSplitGo(int Amount) => ProfileViewViewModel.GoSplits(Amount);
+
+        public void HitSumUp(int Amount, bool IsWayHit) => ProfileViewViewModel.HitSumUp(Amount, IsWayHit);
 
         public bool TimerRunning => ProfileViewViewModel.TimerRunning;
 
@@ -244,6 +306,8 @@ namespace HitCounterManager.Common
         public Action<bool /* PracticeMode */>? SetPracticeModeMethod { get; set; }
 
         public Action? SplitterResetMethod { get; set; }
+
+        public Action<string /* ProfileName */>? ProfileSelectedMethod { get; set; }
 
         #endregion
     }
