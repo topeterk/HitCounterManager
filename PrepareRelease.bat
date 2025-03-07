@@ -2,7 +2,7 @@
 
 REM MIT License
 
-REM Copyright(c) 2018-2019 Peter Kirmeier
+REM Copyright(c) 2018-2025 Peter Kirmeier
 
 REM Permission Is hereby granted, free Of charge, to any person obtaining a copy
 REM of this software And associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@ set PR_FINAL=FinalFiles
 if not exist %PR_FINAL% mkdir %PR_FINAL%
 
 echo Packing Windows Portable Release:
-set PR_BASE=bin\ReleaseWin
+set PR_BASE=bin\ReleaseWin\net48
 set PR_TARGET=%PR_FINAL%\ReleaseWinPortable
 set PR_OUTPUT=%PR_FINAL%\HitCounterManager_Windows_Portable_v1.x.0.0.zip
 rmdir /S /Q %PR_TARGET% 2>nul

@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2024-2024 Peter Kirmeier
+//Copyright (c) 2024-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -20,10 +20,11 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-using System.Reflection;
 using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Reflection;
 using static HitCounterManager.IAutoSplitterCoreInterface;
 using System.Reflection.Emit;
 using System.Collections.Generic;
@@ -43,9 +44,26 @@ namespace HitCounterManager
         int ActiveGameIndex { get; set; }
 
         /// <summary>
-        /// ????
+        /// Gets or sets the ASC practice mode activation (no automatic splitting).
         /// </summary>
         bool PracticeMode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the currently selected profile name.
+        /// </summary>
+        string ProfileName { get; set; }
+
+        /// <summary>
+        /// Gets all profile names.
+        /// </summary>
+        /// <returns></returns>
+        List<string> ProfileNames { get; }
+
+        /// <summary>
+        /// Create a profile with the given new name and select it.
+        /// </summary>
+        /// <param name="NewName">Name of the new profile</param>
+        void ProfileNew(string NewName);
 
         /// <summary>
         /// Start over a new run.
@@ -54,38 +72,14 @@ namespace HitCounterManager
         void ProfileReset();
 
         /// <summary>
-        /// Get Current HCM Profile Name
-        /// </summary>
-        /// <returns>String: Profile name</returns>
-        string ProfileName();
-
-        /// <summary>
-        /// Return Name of All HCM Profiles
-        /// </summary>
-        /// <returns></returns>
-        List<string> GetProfiles();
-
-        /// <summary>
-        /// Return All Splits on Current HCM Profile
-        /// </summary>
-        /// <returns>List<String> All Splits Names/returns>
-        List<string> GetSplits();
-
-        /// <summary>
-        /// Create a New Profile on HCM
-        /// </summary>
-        void NewProfile(string profileTitle);
-
-        /// <summary>
-        /// Insert a new Split on current HCM Profile
-        /// </summary>
-        /// <param name="SplitTitle">Split Name</param>
-        void AddSplit(string SplitTitle);
-
-        /// <summary>
-        /// Amount of available splitsin the current run.
+        /// Amount of available splits in the current run.
         /// </summary>
         int SplitCount { get; }
+
+        /// <summary>
+        /// Gets all split names of the currently selected profile.
+        /// </summary>
+        List<string> SplitsNames { get; }
 
         /// <summary>
         /// Index of currently active split.
@@ -93,16 +87,23 @@ namespace HitCounterManager
         int ActiveSplit { get; }
 
         /// <summary>
-        /// Modifies the currently selected split by Amount.
+        /// Creates a split at the end of the splits with the given new name.
+        /// </summary>
+        /// <param name="NewName">Name of the new split</param>
+        void SplitAppendNew(string NewName);
+
+        /// <summary>
+        /// Modifies the currently selected split by given <paramref name="Amount"/>.
         /// </summary>
         /// <param name="Amount">Amount of splits that will be moved forwards/backwards</param>
         void ProfileSplitGo(int Amount);
 
         /// <summary>
-        /// Modifies the currently selected split on hit by Amount.
+        /// Inreases or decreases the hit counts of the currently selected split by <paramref name="Amount"/>.
         /// </summary>
-        /// <param name="Amount"></param>
-        public void ProfileHitGo(int Aumount, bool WayHit);
+        /// <param name="Amount">Positive values will increase and negative will decrease hit count respectively</param>
+        /// <param name="IsWayHit">true = count towards way hits, false = count towards (boss) hits</param>
+        public void HitSumUp(int Amount, bool IsWayHit);
 
         /// <summary>
         /// Indicates if timer is currently running.
@@ -171,7 +172,7 @@ namespace HitCounterManager
         Func<int> GetActiveGameIndexMethod { get; set; }
 
         /// <summary>
-        /// Method that gets called when the user changes the tPracticeMode.
+        /// Method that gets called when the user changes the PracticeMode.
         /// A bool will be given with the new PracticeMode setting.
         /// The method should be filled once the registration method is called.
         /// </summary>
@@ -183,9 +184,12 @@ namespace HitCounterManager
         /// </summary>
         Action SplitterResetMethod { get; set; }
 
-      
-
-        public Action<string /*ProfileName*/> ProfileChange { get; set; }
+        /// <summary>
+        /// Method that gets called when another profile got selected.
+        /// A string will be given with the new selected profile name.
+        /// The method should be filled once the registration method is called.
+        /// </summary>
+        Action<string /* ProfileName */> ProfileSelectedMethod { get; set; }
 
         #endregion
     }
@@ -258,7 +262,7 @@ namespace HitCounterManager
 
         public void SplitterReset() => SplitterResetMethod?.Invoke();
 
-        public void ProfileChangeTrigger(string ProfileTitle) => ProfileChange?.Invoke(ProfileTitle);
+        public void ProfileSelected(string ProfileName) => ProfileSelectedMethod?.Invoke(ProfileName);
 
         #region IAutoSplitterCoreInterface
 
@@ -274,15 +278,33 @@ namespace HitCounterManager
             set => form1.PracticeModeCheck.Checked = value;
         }
 
+        public string ProfileName
+        {
+            get => profCtrl.SelectedProfileInfo.ProfileName;
+            set => profCtrl.SelectedProfileInfo.ProfileName = value;
+        }
+
+        public List<string> ProfileNames => [.. profCtrl.GetProfileList()];
+
+        public void ProfileNew(string NewName) => profCtrl.ProfileNew(NewName);
+
         public void ProfileReset() => profCtrl.ProfileReset();
 
         public int SplitCount => profCtrl.SelectedProfileInfo.SplitCount;
 
+        public List<string> SplitsNames => profCtrl.SelectedProfileInfo.SplitNames;
+
         public int ActiveSplit => profCtrl.SelectedProfileInfo.ActiveSplit;
+
+        public void SplitAppendNew(string NewName) => profCtrl.SelectedProfileInfo.AddSplit(NewName, 0, 0, 0, 0, 0, 0);
 
         public void ProfileSplitGo(int Amount) => profCtrl.ProfileSplitGo(Amount);
 
-        public void ProfileHitGo(int Aumount, bool WayHit) { if (WayHit) profCtrl.ProfileWayHit(Aumount); else profCtrl.ProfileHit(Aumount); }
+        public void HitSumUp(int Amount, bool IsWayHit)
+        {
+            if (IsWayHit) profCtrl.SelectedProfileInfo.WayHit(Amount);
+            else profCtrl.SelectedProfileInfo.Hit(Amount);
+        }
 
         public bool TimerRunning => profCtrl.TimerRunning;
 
@@ -306,19 +328,7 @@ namespace HitCounterManager
 
         public Action SplitterResetMethod { get; set; }
 
-
-        //For Cloud Profile Manager or Profile Link
-        public string ProfileName() => profCtrl.SelectedProfileInfo.ProfileName;
-
-        public List<string> GetProfiles() => profCtrl.GetProfiles().ToList(); 
-
-        public List<string> GetSplits() => profCtrl.SelectedProfileInfo.GetSplits();
-
-        public void NewProfile(string profileTitle) => profCtrl.ProfileNew(profileTitle);
-
-        public void AddSplit(string SplitTitle) => profCtrl.SelectedProfileInfo.AddSplit(SplitTitle, 0, 0, 0, 0, 0, 0); 
-
-        public Action<string /*ProfileName*/> ProfileChange { get; set; }
+        public Action<string /* ProfileName */> ProfileSelectedMethod { get; set; }
 
         #endregion
     }

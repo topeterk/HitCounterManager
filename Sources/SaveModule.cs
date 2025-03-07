@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2019 Peter Kirmeier
+//Copyright (c) 2016-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -94,7 +94,7 @@ namespace HitCounterManager
             StreamWriter file = null;
             try
             {
-                file = new StreamWriter(_Filename, false, System.Text.Encoding.Unicode); // UTF16LE
+                file = new StreamWriter(_Filename, false, System.Text.Encoding.UTF8); // UTF-8 BOM
                 xml.Serialize(file, data);
                 file.Close();
                 return true;

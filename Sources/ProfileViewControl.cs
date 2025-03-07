@@ -387,7 +387,22 @@ namespace HitCounterManager
         [Browsable(false)] // Hide from designer
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public int SplitCount { get { return RowCount - 1; } } // Remove the "new line"
-        
+
+        [Browsable(false)] // Hide from designer
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
+        public List<string> SplitNames
+        {
+            get
+            {
+                List<string> splitsNames = new(SplitCount);
+                for (int Index = 0; Index < SplitCount; Index++)
+                {
+                    splitsNames.Add(GetSplitTitle(Index));
+                }
+                return splitsNames;
+            }
+        }
+
         [Browsable(false)] // Hide from designer
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] // Hide from designer generator
         public int ActiveSplit

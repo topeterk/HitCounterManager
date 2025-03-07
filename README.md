@@ -79,7 +79,8 @@ There are addons available now, e.g.:
   * Portable version (Tar ball)
     * Running with [Mono](https://www.mono-project.com/) (_tested with 5.14.0_)  
       Start the application in the application's directory with **mono HitCounterManager.exe**  
-      > **Note**: Mono supports **32 bit mode only** (therefore it cannot be run on OS without 32 bit support!)
+      > **Note**: Mono supports **32 bit mode only** (therefore it cannot be run on OS without 32 bit support!)  
+      > However, it __may__ work now due to latest Mono releases (but not tested yet)
 
 In case your non-Windows OS is no longer supporting 32 bit Mono then this application will not run!  
 However, there is a new HitCounterManager in development (version 2.x) that can be used instead.  
