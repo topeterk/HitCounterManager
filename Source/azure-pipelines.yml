@@ -44,7 +44,7 @@ stages:
         win-x64:
           PoolVmImg: 'windows-latest'
           RuntimeRID: 'win-x64'
-          PlatformType: 'Desktop'
+          PlatformType: 'Desktop.Win32Forms'
           SelfContained: 'false'
         linux-x64:
           PoolVmImg: 'ubuntu-latest'
@@ -65,12 +65,12 @@ stages:
         win-x86:
           PoolVmImg: 'windows-latest'
           RuntimeRID: 'win-x86'
-          PlatformType: 'Desktop'
+          PlatformType: 'Desktop.Win32Forms'
           SelfContained: 'false'
         win-arm64:
           PoolVmImg: 'windows-latest'
           RuntimeRID: 'win-arm64'
-          PlatformType: 'Desktop'
+          PlatformType: 'Desktop.Win32Forms'
           SelfContained: 'false'
 # Linux
         linux-musl-x64:
