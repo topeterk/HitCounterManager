@@ -28,8 +28,6 @@ using System.Linq;
 using System.Reflection;
 using HitCounterManager.ViewModels;
 using static HitCounterManager.IAutoSplitterCoreInterface;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace HitCounterManager
 {
@@ -285,8 +283,6 @@ namespace HitCounterManager.Common
         public void ProfileNew(string NewName) => ProfileViewViewModel.ProfileNew(NewName);
 
         public void ProfileReset() => ProfileViewViewModel.ProfileReset.Execute(null);
-
-        public string ProfileName() => ProfileViewViewModel.ProfileSelected.Name;
 
         public void NewProfile(string profileTitle) => ProfileViewViewModel.ProfileNew(profileTitle);
 
