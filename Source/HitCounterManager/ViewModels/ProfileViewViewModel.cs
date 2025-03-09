@@ -184,6 +184,7 @@ namespace HitCounterManager.ViewModels
                 AutoSplitterOpenConfig = ReactiveCommand.Create(InterfaceASC.OpenSettings);
                 AutoSplitterGameList = InterfaceASC.GameList;
                 AutoSplitterCoreModule.AutoSplitterRegisterInterface(InterfaceASC);
+                AutoSplitterGameSelectedIndex = InterfaceASC.GetActiveGameIndex();
             }
 
             #endregion

@@ -162,6 +162,13 @@ namespace HitCounterManager
         /// </summary>
         Action<int /* ActiveGameIndex */>? SetActiveGameIndexMethod { get; set; }
 
+        // <summary>
+        /// Method that gets called when HCM is loading to set Current ActiveIndex on AutoSplitter game selction.
+        /// An int will be return with the current ActiveGame on AutoSplitterCore.
+        /// The method should be filled once the registration method is called.
+        /// </summary>
+        Func<int> GetActiveGameIndexMethod { get; set; }
+
         /// <summary>
         /// Method that gets called when the user changes the PracticeMode.
         /// A bool will be given with the new PracticeMode setting.
@@ -243,6 +250,8 @@ namespace HitCounterManager.Common
 
         public void SetActiveGameIndex(int ActiveGameIndex) => SetActiveGameIndexMethod?.Invoke(ActiveGameIndex);
 
+        public int GetActiveGameIndex() => GetActiveGameIndexMethod?.Invoke() ?? -1;
+
         public void SetPracticeMode(bool PracticeMode) => SetPracticeModeMethod?.Invoke(PracticeMode);
 
         public void SplitterReset() => SplitterResetMethod?.Invoke();
@@ -275,6 +284,12 @@ namespace HitCounterManager.Common
 
         public void ProfileReset() => ProfileViewViewModel.ProfileReset.Execute(null);
 
+        public void NewProfile(string profileTitle) => ProfileViewViewModel.ProfileNew(profileTitle);
+
+        public List<string> GetProfiles() => ProfileViewViewModel.ProfileList.Select(row => row.Name).ToList();
+
+        public void ProfileHitGo(int Aumount, bool WayHit) { if (WayHit) ProfileViewViewModel.HitWayIncrease.Execute(null); else ProfileViewViewModel.HitIncrease.Execute(null); }
+
         public int SplitCount => ProfileViewViewModel.ProfileSelected.Rows.Count;
 
         public List<string> SplitsNames => [.. ProfileViewViewModel.ProfileSelected.Rows.Select(profileRowModel => profileRowModel.Title)];
@@ -302,6 +317,8 @@ namespace HitCounterManager.Common
         public Action? SaveSettingsMethod { get; set; }
 
         public Action<int /* ActiveGameIndex */>? SetActiveGameIndexMethod { get; set; }
+
+        public Func<int> GetActiveGameIndexMethod { get; set; } = () => -1;
 
         public Action<bool /* PracticeMode */>? SetPracticeModeMethod { get; set; }
 
