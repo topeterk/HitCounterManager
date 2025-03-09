@@ -22,17 +22,18 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using ReactiveUI;
+using Avalonia.Controls;
+using Avalonia.Controls.Templates;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-using Avalonia.Controls.Templates;
-using Avalonia.Controls;
+using Avalonia.Platform.Storage;
+using Avalonia.Threading;
 using HitCounterManager.ViewModels;
 
 namespace HitCounterManager.Common
@@ -162,26 +163,14 @@ namespace HitCounterManager.Common
     {
         /// <summary>
         /// Tries to open an URI with the system's registered default browser.
-        /// (See: https://github.com/dotnet/runtime/issues/21798)
         /// </summary>
         /// <param name="uri">URI that shall be opened</param>
         public static void OpenWithBrowser(Uri uri)
         {
-            string url = uri.OriginalString;
-            try
+            ILauncher? launcher = App.CurrentApp.TopLevel?.Launcher;
+            if (launcher is not null)
             {
-                if (OperatingSystem.IsWindows())
-                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}") { CreateNoWindow = true });
-                else if (OperatingSystem.IsLinux())
-                    Process.Start("xdg-open", url);
-                else if (OperatingSystem.IsMacOS())
-                    Process.Start("open", url);
-                else
-                    Process.Start(url);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
+                Dispatcher.UIThread.Post(async () => await launcher.LaunchUriAsync(uri), DispatcherPriority.ApplicationIdle);
             }
         }
     }

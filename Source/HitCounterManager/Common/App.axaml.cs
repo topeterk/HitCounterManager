@@ -65,6 +65,7 @@ namespace HitCounterManager
         private readonly Dictionary<TimerIDs, DispatcherTimer> ApplicationTimers = [];
         private IDisposable? UpdateCheckTimer;
         public WindowNotificationManager? NotificationManager;
+        public TopLevel? TopLevel;
 
         public App()
         {
