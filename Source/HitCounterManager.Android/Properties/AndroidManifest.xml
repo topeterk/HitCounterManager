@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto">
 	<!-- Selected by TargetFramework, so no need to set it <uses-sdk android:minSdkVersion="21"/> --> <!-- https://apilevels.com -->
+	<!-- https://developer.android.com/reference/android/Manifest.permission -->
 	<uses-permission android:name="android.permission.INTERNET" />
 	<application android:label="HitCounterManager" android:icon="@drawable/Icon" />
 </manifest>
