@@ -57,7 +57,7 @@ namespace HitCounterManager.Common
                 client.DefaultRequestHeaders.Add("User-Agent", "HitCounterManager/" + Statics.ApplicationVersionString);
                 client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3.text+json");
 
-                string response = client.GetStringAsync("http://api.github.com/repos/topeterk/HitCounterManager/releases").Result;
+                string response = client.GetStringAsync("https://api.github.com/repos/topeterk/HitCounterManager/releases").Result;
                 Releases = response.FromJson<List<Dictionary<string, object>>>();
             }
             catch (Exception)
