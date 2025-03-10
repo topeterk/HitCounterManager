@@ -45,6 +45,13 @@ public class MainActivity : AvaloniaMainActivity<App>
             .UseReactiveUI();
     }
 
+    protected override void OnStop()
+    {
+        // Save when application becomes invisible
+        App.CurrentApp.SaveSettings();
+        base.OnStop();
+    }
+
 /*
     public override void OnBackPressed()
     {
@@ -70,12 +77,6 @@ public class MainActivity : AvaloniaMainActivity<App>
         }
 
         base.OnBackPressed();
-    }
-
-    protected override void OnStop()
-    {
-        App.CurrentApp.SaveSettings();
-        base.OnStop();
     }
 
     protected override void OnDestroy()
