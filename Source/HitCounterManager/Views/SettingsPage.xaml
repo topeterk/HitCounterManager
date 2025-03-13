@@ -30,9 +30,15 @@
         x:Class="HitCounterManager.Views.SettingsPage"
         x:DataType="vm:SettingsPageViewModel">
 
-	<UserControl.DataContext>
+    <UserControl.DataContext>
         <vm:SettingsPageViewModel />
     </UserControl.DataContext>
+
+    <UserControl.Styles>
+        <Style Selector="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+    </UserControl.Styles>
 
     <DockPanel Margin="10">
 
@@ -46,7 +52,7 @@
                 </Style>
             </ScrollViewer.Styles>
 
-            <StackPanel Margin="0" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Margin="0" Orientation="Vertical" HorizontalAlignment="Stretch">
 
                 <!-- ================== -->
                 <!-- ================== -->
@@ -570,10 +576,10 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
                     <TextBlock Grid.Row="2" Grid.Column="0" Margin="0" Text="CSS (URL):" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <TextBox   Grid.Row="2" Grid.Column="1" Margin="0" Grid.ColumnSpan="2" Text="{Binding StyleCssUrl, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
                 </Grid>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                    <Button DockPanel.Dock="Right" Margin="0" Command="{Binding ApplyCssAndFont}" Content="Apply"/>
                     <TextBlock HorizontalAlignment="Left" Text="Please hit apply to save and use the custom settings:" />
-                    <Button Margin="0" Command="{Binding ApplyCssAndFont}" Width="200" Content="Apply" HorizontalAlignment="Right"/>
-                </StackPanel>
+                </DockPanel>
 
                 <!-- ================== -->
                 <!-- ================== -->
@@ -708,13 +714,13 @@ BAD splits have more hits than on the PB run</x:String>
                                    Value="{Binding ShowSplitsCountUpcoming}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
                 </Grid>
                 <!-- Keep bottom Maring high as Scrollviewer may otherwise cut off controls, don't know why yet -->
-                <StackPanel Margin="30,3,0,50" Orientation="Horizontal" HorizontalAlignment="Left">
-                    <TextBlock HorizontalAlignment="Left" FontFamily="Arial" FontStyle="Italic" Text="Current configuration will show up to " />
-                    <TextBlock Padding="3,0,3,0" HorizontalAlignment="Left" FontFamily="Arial" FontStyle="Italic" Text="{Binding ShowSplitsCountFinished, Mode=OneWay}" />
-                    <TextBlock HorizontalAlignment="Left" FontFamily="Arial" FontStyle="Italic" Text=" + 1 + " />
-                    <TextBlock Padding="3,0,3,0" HorizontalAlignment="Left" FontFamily="Arial" FontStyle="Italic" Text="{Binding ShowSplitsCountUpcoming, Mode=OneWay}" />
-                    <TextBlock HorizontalAlignment="Left" FontFamily="Arial" FontStyle="Italic" Text=" splits." />
-                </StackPanel>
+                <TextBlock Margin="30,3,0,50" HorizontalAlignment="Left" FontFamily="Arial" FontStyle="Italic">
+                    <Run Text="Current configuration will show up to "/>
+                    <Run Text="{Binding ShowSplitsCountFinished, Mode=OneWay}"/>
+                    <Run Text=" + 1 + "/>
+                    <Run Text="{Binding ShowSplitsCountUpcoming, Mode=OneWay}"/>
+                    <Run Text=" splits."/>
+                </TextBlock>
 
             </StackPanel>
         </ScrollViewer>
