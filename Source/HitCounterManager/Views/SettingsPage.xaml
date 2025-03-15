@@ -30,699 +30,707 @@
         x:Class="HitCounterManager.Views.SettingsPage"
         x:DataType="vm:SettingsPageViewModel">
 
-    <UserControl.DataContext>
-        <vm:SettingsPageViewModel />
-    </UserControl.DataContext>
+	<UserControl.DataContext>
+		<vm:SettingsPageViewModel />
+	</UserControl.DataContext>
 
-    <UserControl.Styles>
-        <Style Selector="TextBlock">
-            <Setter Property="TextWrapping" Value="Wrap" />
-        </Style>
-    </UserControl.Styles>
+	<UserControl.Styles>
+		<Style Selector="TextBlock">
+			<Setter Property="TextWrapping" Value="Wrap" />
+		</Style>
+	</UserControl.Styles>
 
-    <DockPanel Margin="10">
+	<DockPanel Margin="10">
 
-        <Button DockPanel.Dock="Bottom" Margin="20" Width="200" Content="OK"  Click="CloseHandler" HorizontalAlignment="Right"/>
+		<Button DockPanel.Dock="Bottom" Margin="20" Width="200" Content="OK"  Click="CloseHandler" HorizontalAlignment="Right"/>
 
-        <ScrollViewer Padding="0,0,30,20" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AllowAutoHide="false">
-            <ScrollViewer.Styles>
-                <Style Selector="StackPanel > Grid">
-                    <!-- Ensures that Info TextBlocks cannot take more space than actually available (it seems Padding/Margin does not count as overflow and therefore does not wrap when it should)-->
-                    <Setter Property="MaxWidth" Value="{Binding $parent.Bounds.Width}" />
-                </Style>
-            </ScrollViewer.Styles>
+		<ScrollViewer Padding="0,0,30,20" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AllowAutoHide="false">
+			<ScrollViewer.Styles>
+				<Style Selector="StackPanel > Grid">
+					<!-- Ensures that Info TextBlocks cannot take more space than actually available (it seems Padding/Margin does not count as overflow and therefore does not wrap when it should)-->
+					<Setter Property="MaxWidth" Value="{Binding $parent.Bounds.Width}" />
+				</Style>
+			</ScrollViewer.Styles>
 
-            <StackPanel Margin="0" Orientation="Vertical" HorizontalAlignment="Stretch">
+			<TabControl Margin="0">
 
-                <!-- ================== -->
-                <!-- ================== -->
-                <!-- ================== -->
+				<!-- ================== -->
+				<!-- ================== -->
+				<!-- ================== -->
 
-                <Border Classes="SettingsSectionHeader">
-                    <TextBlock Text="GLOBAL SHORTCUTS" />
-                </Border>
+				<TabItem Header="Hotkeys">
+					<!-- Keep bottom Maring high as Scrollviewer may otherwise cut off controls, don't know why yet -->
+					<StackPanel Margin="0 0 0 50" Orientation="Vertical" HorizontalAlignment="Stretch">
 
-                <TextBlock HorizontalAlignment="Left" Text="Global hot keys not supported in this version!" Foreground="Red"
-                       IsVisible="{Binding Source={x:Static c:Statics.GlobalHotKeySupport}, Converter={x:Static BoolConverters.Not}, Mode=OneTime}"/>
-                <Grid Margin="10,0,10,0" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch"
-                      IsEnabled="{x:Static c:Statics.GlobalHotKeySupport}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" MinWidth="200"/>
-                    </Grid.ColumnDefinitions>
+						<TextBlock HorizontalAlignment="Left" Text="Global hot keys not supported in this version!" Foreground="Red"
+								IsVisible="{Binding Source={x:Static c:Statics.GlobalHotKeySupport}, Converter={x:Static BoolConverters.Not}, Mode=OneTime}"/>
+						<Grid Margin="10,0,10,0" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch"
+								IsEnabled="{x:Static c:Statics.GlobalHotKeySupport}">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" MinWidth="200"/>
+							</Grid.ColumnDefinitions>
 
-                    <ToggleSwitch Grid.Row="0" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutHitEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock    Grid.Row="0" Grid.Column="1" Margin="0" Text="Hit +1 (boss):" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="0" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_Hit}" Content="{Binding ShortcutHitRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="0" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource HitIncreaseBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock Text="{Binding ShortcutHitDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
+							<ToggleSwitch Grid.Row="0" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutHitEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock    Grid.Row="0" Grid.Column="1" Margin="0" Text="Hit +1 (boss):" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Button       Grid.Row="0" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_Hit}" Content="{Binding ShortcutHitRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border       Grid.Row="0" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource HitIncreaseBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+								<TextBlock Text="{Binding ShortcutHitDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
 
-                    <ToggleSwitch Grid.Row="1" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutHitUndoEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock    Grid.Row="1" Grid.Column="1" Margin="0" Text="Hit -1 (boss):" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="1" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_HitUndo}" Content="{Binding ShortcutHitUndoRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="1" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock Text="{Binding ShortcutHitUndoDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
+							<ToggleSwitch Grid.Row="1" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutHitUndoEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock    Grid.Row="1" Grid.Column="1" Margin="0" Text="Hit -1 (boss):" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Button       Grid.Row="1" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_HitUndo}" Content="{Binding ShortcutHitUndoRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border       Grid.Row="1" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+								<TextBlock Text="{Binding ShortcutHitUndoDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
 
-                    <ToggleSwitch Grid.Row="2" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutWayHitEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock    Grid.Row="2" Grid.Column="1" Margin="0" Text="Hit +1 (way):" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="2" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_WayHit}" Content="{Binding ShortcutWayHitRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="2" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource HitWayIncreaseBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock Text="{Binding ShortcutWayHitDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
+							<ToggleSwitch Grid.Row="2" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutWayHitEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock    Grid.Row="2" Grid.Column="1" Margin="0" Text="Hit +1 (way):" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Button       Grid.Row="2" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_WayHit}" Content="{Binding ShortcutWayHitRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border       Grid.Row="2" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource HitWayIncreaseBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+								<TextBlock Text="{Binding ShortcutWayHitDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
 
-                    <ToggleSwitch Grid.Row="3" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutWayHitUndoEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock    Grid.Row="3" Grid.Column="1" Margin="0" Text="Hit -1 (way)" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="3" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_WayHitUndo}" Content="{Binding ShortcutWayHitUndoRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="3" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock Text="{Binding ShortcutWayHitUndoDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
+							<ToggleSwitch Grid.Row="3" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutWayHitUndoEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock    Grid.Row="3" Grid.Column="1" Margin="0" Text="Hit -1 (way)" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Button       Grid.Row="3" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_WayHitUndo}" Content="{Binding ShortcutWayHitUndoRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border       Grid.Row="3" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+								<TextBlock Text="{Binding ShortcutWayHitUndoDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
 
-                    <ToggleSwitch Grid.Row="4" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutSplitEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock    Grid.Row="4" Grid.Column="1" Margin="0" Text="Next split:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="4" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_Split}" Content="{Binding ShortcutSplitRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="4" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource SplitSelectNextBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock Text="{Binding ShortcutSplitDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
+							<ToggleSwitch Grid.Row="4" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutSplitEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock    Grid.Row="4" Grid.Column="1" Margin="0" Text="Next split:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Button       Grid.Row="4" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_Split}" Content="{Binding ShortcutSplitRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border       Grid.Row="4" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource SplitSelectNextBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+								<TextBlock Text="{Binding ShortcutSplitDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
 
-                    <ToggleSwitch Grid.Row="5" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutSplitPrevEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock    Grid.Row="5" Grid.Column="1" Margin="0" Text="Prev split:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="5" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_SplitPrev}" Content="{Binding ShortcutSplitPrevRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="5" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock Text="{Binding ShortcutSplitPrevDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
+							<ToggleSwitch Grid.Row="5" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutSplitPrevEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock    Grid.Row="5" Grid.Column="1" Margin="0" Text="Prev split:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Button       Grid.Row="5" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_SplitPrev}" Content="{Binding ShortcutSplitPrevRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border       Grid.Row="5" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+								<TextBlock Text="{Binding ShortcutSplitPrevDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
 
-                    <ToggleSwitch Grid.Row="6" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutPBEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock    Grid.Row="6" Grid.Column="1" Margin="0" Text="Set PB:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="6" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_PB}" Content="{Binding ShortcutPBRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="6" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource ProfilePBBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock Text="{Binding ShortcutPBDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
+							<ToggleSwitch Grid.Row="6" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutPBEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock    Grid.Row="6" Grid.Column="1" Margin="0" Text="Set PB:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Button       Grid.Row="6" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_PB}" Content="{Binding ShortcutPBRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border       Grid.Row="6" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource ProfilePBBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+								<TextBlock Text="{Binding ShortcutPBDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
 
-                    <ToggleSwitch Grid.Row="7" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutResetEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock    Grid.Row="7" Grid.Column="1" Margin="0" Text="Reset:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="7" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_Reset}" Content="{Binding ShortcutResetRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="7" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource ProfileResetBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock Text="{Binding ShortcutResetDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
+							<ToggleSwitch Grid.Row="7" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutResetEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock    Grid.Row="7" Grid.Column="1" Margin="0" Text="Reset:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Button       Grid.Row="7" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_Reset}" Content="{Binding ShortcutResetRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border       Grid.Row="7" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource ProfileResetBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+								<TextBlock Text="{Binding ShortcutResetDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
 
-                    <ToggleSwitch Grid.Row="8" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutTimerStartEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock    Grid.Row="8" Grid.Column="1" Margin="0" Text="Start timer:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="8" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_TimerStart}" Content="{Binding ShortcutTimerStartRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="8" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource ToggleTimerPauseBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock Text="{Binding ShortcutTimerStartDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
+							<ToggleSwitch Grid.Row="8" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutTimerStartEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock    Grid.Row="8" Grid.Column="1" Margin="0" Text="Start timer:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Button       Grid.Row="8" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_TimerStart}" Content="{Binding ShortcutTimerStartRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border       Grid.Row="8" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource ToggleTimerPauseBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+								<TextBlock Text="{Binding ShortcutTimerStartDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
 
-                    <ToggleSwitch Grid.Row="9" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutTimerStopEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock    Grid.Row="9" Grid.Column="1" Margin="0" Text="Stop timer" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="9" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_TimerStop}" Content="{Binding ShortcutTimerStopRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="9" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource ToggleTimerPauseBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock Text="{Binding ShortcutTimerStopDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
+							<ToggleSwitch Grid.Row="9" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutTimerStopEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock    Grid.Row="9" Grid.Column="1" Margin="0" Text="Stop timer" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Button       Grid.Row="9" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_TimerStop}" Content="{Binding ShortcutTimerStopRecordAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border       Grid.Row="9" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource ToggleTimerPauseBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+								<TextBlock Text="{Binding ShortcutTimerStopDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
 
-                    <ToggleSwitch Grid.Row="10" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutHitBossPrevEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock    Grid.Row="10" Grid.Column="1" Margin="0" Text="[Prev] Hit +1 (boss):" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="10" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_HitBossPrev}" Content="{Binding ShortcutHitBossPrevAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="10" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock Text="{Binding ShortcutHitBossPrevDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
+							<ToggleSwitch Grid.Row="10" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutHitBossPrevEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock    Grid.Row="10" Grid.Column="1" Margin="0" Text="[Prev] Hit +1 (boss):" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Button       Grid.Row="10" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_HitBossPrev}" Content="{Binding ShortcutHitBossPrevAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border       Grid.Row="10" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+								<TextBlock Text="{Binding ShortcutHitBossPrevDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
 
-                    <ToggleSwitch Grid.Row="11" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutBossHitUndoPrevEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock    Grid.Row="11" Grid.Column="1" Margin="0" Text="[Prev] Hit -1 (boss):" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="11" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_BossHitUndoPrev}" Content="{Binding ShortcutBossHitUndoPrevAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="11" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock Text="{Binding ShortcutBossHitUndoPrevDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
+							<ToggleSwitch Grid.Row="11" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutBossHitUndoPrevEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock    Grid.Row="11" Grid.Column="1" Margin="0" Text="[Prev] Hit -1 (boss):" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Button       Grid.Row="11" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_BossHitUndoPrev}" Content="{Binding ShortcutBossHitUndoPrevAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border       Grid.Row="11" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+								<TextBlock Text="{Binding ShortcutBossHitUndoPrevDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
 
-                    <ToggleSwitch Grid.Row="12" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutHitWayPrevEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock    Grid.Row="12" Grid.Column="1" Margin="0" Text="[Prev] Hit +1 (way):" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="12" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_HitWayPrev}" Content="{Binding ShortcutHitWayPrevAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="12" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock Text="{Binding ShortcutHitWayPrevDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
+							<ToggleSwitch Grid.Row="12" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutHitWayPrevEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock    Grid.Row="12" Grid.Column="1" Margin="0" Text="[Prev] Hit +1 (way):" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Button       Grid.Row="12" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_HitWayPrev}" Content="{Binding ShortcutHitWayPrevAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border       Grid.Row="12" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+								<TextBlock Text="{Binding ShortcutHitWayPrevDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
 
-                    <ToggleSwitch Grid.Row="13" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutWayHitUndoPrevEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock    Grid.Row="13" Grid.Column="1" Margin="0" Text="[Prev] Hit -1 (way):" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="13" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_WayHitUndoPrev}" Content="{Binding ShortcutWayHitUndoPrevAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="13" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock Text="{Binding ShortcutWayHitUndoPrevDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
+							<ToggleSwitch Grid.Row="13" Grid.Column="0" Margin="0" IsChecked="{Binding ShortcutWayHitUndoPrevEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock    Grid.Row="13" Grid.Column="1" Margin="0" Text="[Prev] Hit -1 (way):" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Button       Grid.Row="13" Grid.Column="2" Margin="0" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_WayHitUndoPrev}" Content="{Binding ShortcutWayHitUndoPrevAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border       Grid.Row="13" Grid.Column="3" Margin="2" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource UndoBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+								<TextBlock Text="{Binding ShortcutWayHitUndoPrevDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
 
-                    <!-- AutoSplitter start -->
-                    <ToggleSwitch Grid.Row="14" Grid.Column="0" Margin="0"  IsVisible="{x:Static c:AutoSplitterCoreModule.AutoSplitterCoreLoaded}" IsChecked="{Binding ShortcutPracticeEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock    Grid.Row="14" Grid.Column="1" Margin="0"  IsVisible="{x:Static c:AutoSplitterCoreModule.AutoSplitterCoreLoaded}" Text="Practice" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Button       Grid.Row="14" Grid.Column="2" Margin="0"  IsVisible="{x:Static c:AutoSplitterCoreModule.AutoSplitterCoreLoaded}" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_Practice}" Content="{Binding ShortcutPracticeAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border       Grid.Row="14" Grid.Column="3" Margin="2"  IsVisible="{x:Static c:AutoSplitterCoreModule.AutoSplitterCoreLoaded}" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource AutoSplitterConfigBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock Text="{Binding ShortcutPracticeDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
-                    <!-- AutoSplitter end -->
+							<!-- AutoSplitter start -->
+							<ToggleSwitch Grid.Row="14" Grid.Column="0" Margin="0"  IsVisible="{x:Static c:AutoSplitterCoreModule.AutoSplitterCoreLoaded}" IsChecked="{Binding ShortcutPracticeEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock    Grid.Row="14" Grid.Column="1" Margin="0"  IsVisible="{x:Static c:AutoSplitterCoreModule.AutoSplitterCoreLoaded}" Text="Practice" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Button       Grid.Row="14" Grid.Column="2" Margin="0"  IsVisible="{x:Static c:AutoSplitterCoreModule.AutoSplitterCoreLoaded}" Padding="4" Command="{Binding Capture}" CommandParameter="{x:Static m:SC_Type.SC_Type_Practice}" Content="{Binding ShortcutPracticeAction, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border       Grid.Row="14" Grid.Column="3" Margin="2"  IsVisible="{x:Static c:AutoSplitterCoreModule.AutoSplitterCoreLoaded}" Classes="HotkeyNameBoxBorder" Padding="4" Background="{DynamicResource AutoSplitterConfigBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+								<TextBlock Text="{Binding ShortcutPracticeDescription, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
+							<!-- AutoSplitter end -->
 
-                </Grid>
+						</Grid>
 
-                <TextBlock HorizontalAlignment="Left" Text="Select method of global hotkey registration (changing needs restart of application):" />
-                <TextBlock HorizontalAlignment="Left" Text="Global hot keys not supported in this version!" Foreground="Red"
-                       IsVisible="{Binding Source={x:Static c:Statics.GlobalHotKeySupport}, Converter={x:Static BoolConverters.Not}, Mode=OneTime}"/>
-                <Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch"
-                      IsEnabled="{x:Static c:Statics.GlobalHotKeySupport}">
-                    <RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHotKeyMethod_Sync" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHotKeyMethod_Sync, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="0" Grid.Column="2" Margin="0" Text="Synchronous - System hotkey registration" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[RadioHotKeyMethod_Sync].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <x:String xml:space="preserve">* This is a synchronous method as it uses the RegisterHotKey function (Windows API).
+						<TextBlock HorizontalAlignment="Left" Text="Select method of global hotkey registration (changing needs restart of application):" />
+						<TextBlock HorizontalAlignment="Left" Text="Global hot keys not supported in this version!" Foreground="Red"
+							   IsVisible="{Binding Source={x:Static c:Statics.GlobalHotKeySupport}, Converter={x:Static BoolConverters.Not}, Mode=OneTime}"/>
+						<Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch"
+							  IsEnabled="{x:Static c:Statics.GlobalHotKeySupport}">
+							<RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHotKeyMethod_Sync" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHotKeyMethod_Sync, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="0" Grid.Column="2" Margin="0" Text="Synchronous - System hotkey registration" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[RadioHotKeyMethod_Sync].Value, Mode=OneWay}">
+								<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+									<TextBlock.Text>
+										<x:String xml:space="preserve">* This is a synchronous method as it uses the RegisterHotKey function (Windows API).
 * Only when Windows detects a hotkey, a notification to the application is sent, therefore the performance impact is at its minimum.
 * The privilege level must at least be on the same level as the application that is sending the notification. This means if you run the game as administratior you most likely have to run the HitCounterManager as administrator, too.
 * Downside: It may happen that an applications can "eat" the keys presses and therefore no notification will be sent.</x:String>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Border>
-                    <RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHotKeyMethod_Async" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHotKeyMethod_Async, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="2" Grid.Column="2" Margin="0" Text="Asynchronous - Polling keyboard keys" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[RadioHotKeyMethod_Async].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <x:String xml:space="preserve">* This is an asynchronous method as it periodically checks the keyboard key presses using the GetAsyncKeyState function (Windows API).
+									</TextBlock.Text>
+								</TextBlock>
+							</Border>
+							<RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHotKeyMethod_Async" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHotKeyMethod_Async, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="2" Grid.Column="2" Margin="0" Text="Asynchronous - Polling keyboard keys" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[RadioHotKeyMethod_Async].Value, Mode=OneWay}">
+								<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+									<TextBlock.Text>
+										<x:String xml:space="preserve">* This is an asynchronous method as it periodically checks the keyboard key presses using the GetAsyncKeyState function (Windows API).
 * This means the application has to check all the relevant keys in around every 20 milliseconds. This brings a slight performance drawback.
 * This method checks a key directly, so another application cannot interfere a hotkey detection.
 * Downside: Very short software generated hotkey events may be missed due to the polling interval.</x:String>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Border>
-                    <RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHotKeyMethod_LLKb" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHotKeyMethod_LLKb, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="4" Grid.Column="2" Margin="0" Text="Synchronous - Low level keyboard hook (Recommended)" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[RadioHotKeyMethod_LLKb].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <x:String xml:space="preserve">* This is a synchronous method as it uses the WH_KEYBOARD_LL hook via SetWindowsHookEx function (Windows API).
+									</TextBlock.Text>
+								</TextBlock>
+							</Border>
+							<RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHotKeyMethod_LLKb" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHotKeyMethod_LLKb, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="4" Grid.Column="2" Margin="0" Text="Synchronous - Low level keyboard hook (Recommended)" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[RadioHotKeyMethod_LLKb].Value, Mode=OneWay}">
+								<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+									<TextBlock.Text>
+										<x:String xml:space="preserve">* This is a synchronous method as it uses the WH_KEYBOARD_LL hook via SetWindowsHookEx function (Windows API).
 * Even a software generated key that is set and released at the same time (yes, at the exact same time due to message buffering) can be detected this way.
 * Downside: Windows will notify the application for every single key state change, which brings a slight performance impact. But more importantly this detection is based on a global hook chain, so before the key press reaches the actual game, the key will also be processed by the HitCounterManager. Therefore you will get an input lag of probably a few nano seconds (depending on the processor). This is why Microsoft stated that this method should be used for debugging but not for productive environments.</x:String>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Border>
-                </Grid>
+									</TextBlock.Text>
+								</TextBlock>
+							</Border>
+						</Grid>
 
-                <!-- ================== -->
-                <!-- ================== -->
-                <!-- ================== -->
+					</StackPanel>
+				</TabItem>
 
-                <Border Classes="SettingsSectionHeader">
-                    <TextBlock Text="STYLE" />
-                </Border>
+				<!-- ================== -->
+				<!-- ================== -->
+				<!-- ================== -->
 
-                <TextBlock HorizontalAlignment="Left" Text="Sections" />
-                <Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
-                    <RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowAttemptsCounter" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding ShowAttemptsCounter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="0" Grid.Column="2" Margin="0" Text="Run number" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[ShowAttemptsCounter].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <x:String xml:space="preserve">Show/Hide how many runs have been started yet</x:String>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Border>
-                    <RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowHeadline" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding ShowHeadline, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="2" Grid.Column="2" Margin="0" Text="Column heading" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[ShowHeadline].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <x:String xml:space="preserve">Show/Hide the headlines of the columns</x:String>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Border>
-                    <RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowProgressBar" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding ShowProgressBar, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="4" Grid.Column="2" Margin="0" Text="Progress bar" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[ShowProgressBar].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <x:String xml:space="preserve">Show/Hide the progress bar to graphically represent the run's progress</x:String>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Border>
-                    <RelativePanel Grid.Row="6" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowFooter" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="6" Grid.Column="1" Margin="0" IsChecked="{Binding ShowFooter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="6" Grid.Column="2" Margin="0" Text="Totals" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="7" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[ShowFooter].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <x:String xml:space="preserve">Show/Hide the totals for each column (in the footer)</x:String>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Border>
-                    <RelativePanel Grid.Row="8" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowTimeFooter" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="8" Grid.Column="1" Margin="0" IsChecked="{Binding ShowTimeFooter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="8" Grid.Column="2" Margin="0" Text="Time" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="9" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[ShowTimeFooter].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <x:String xml:space="preserve">Show/Hide full time of the current run (in the footer)</x:String>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Border>
-                </Grid>
+				<TabItem Header="Style">
+					<!-- Keep bottom Maring high as Scrollviewer may otherwise cut off controls, don't know why yet -->
+					<StackPanel Margin="0 0 0 50" Orientation="Vertical" HorizontalAlignment="Stretch">
 
-                <TextBlock HorizontalAlignment="Left" Text="Columns" />
-                <Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
-                    <RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowHits" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding ShowHits, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="0" Grid.Column="2" Margin="0" Text="Hits" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[ShowHits].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <x:String xml:space="preserve">Show/Hide hits column(s)
+						<TextBlock HorizontalAlignment="Left" Text="Sections" />
+						<Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
+							<RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowAttemptsCounter" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding ShowAttemptsCounter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="0" Grid.Column="2" Margin="0" Text="Run number" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowAttemptsCounter].Value, Mode=OneWay}">
+								<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+									<TextBlock.Text>
+										<x:String xml:space="preserve">Show/Hide how many runs have been started yet</x:String>
+									</TextBlock.Text>
+								</TextBlock>
+							</Border>
+							<RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowHeadline" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding ShowHeadline, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="2" Grid.Column="2" Margin="0" Text="Column heading" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowHeadline].Value, Mode=OneWay}">
+								<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+									<TextBlock.Text>
+										<x:String xml:space="preserve">Show/Hide the headlines of the columns</x:String>
+									</TextBlock.Text>
+								</TextBlock>
+							</Border>
+							<RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowProgressBar" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding ShowProgressBar, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="4" Grid.Column="2" Margin="0" Text="Progress bar" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowProgressBar].Value, Mode=OneWay}">
+								<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+									<TextBlock.Text>
+										<x:String xml:space="preserve">Show/Hide the progress bar to graphically represent the run's progress</x:String>
+									</TextBlock.Text>
+								</TextBlock>
+							</Border>
+							<RelativePanel Grid.Row="6" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowFooter" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="6" Grid.Column="1" Margin="0" IsChecked="{Binding ShowFooter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="6" Grid.Column="2" Margin="0" Text="Totals" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="7" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowFooter].Value, Mode=OneWay}">
+								<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+									<TextBlock.Text>
+										<x:String xml:space="preserve">Show/Hide the totals for each column (in the footer)</x:String>
+									</TextBlock.Text>
+								</TextBlock>
+							</Border>
+							<RelativePanel Grid.Row="8" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowTimeFooter" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="8" Grid.Column="1" Margin="0" IsChecked="{Binding ShowTimeFooter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="8" Grid.Column="2" Margin="0" Text="Time" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="9" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowTimeFooter].Value, Mode=OneWay}">
+								<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+									<TextBlock.Text>
+										<x:String xml:space="preserve">Show/Hide full time of the current run (in the footer)</x:String>
+									</TextBlock.Text>
+								</TextBlock>
+							</Border>
+						</Grid>
+
+						<TextBlock HorizontalAlignment="Left" Text="Columns" />
+						<Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
+							<RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowHits" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding ShowHits, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="0" Grid.Column="2" Margin="0" Text="Hits" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowHits].Value, Mode=OneWay}">
+								<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+									<TextBlock.Text>
+										<x:String xml:space="preserve">Show/Hide hits column(s)
 Can be configured to show boss and way hits as a combined value in a single column or separately in two columns</x:String>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Border>
-                    <RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowHitsCombined" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding ShowHitsCombined, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="2" Grid.Column="2" Margin="0" Text="+ combine boss and way hits" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[ShowHitsCombined].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <x:String xml:space="preserve">Checked: The boss and way hits are combined and shown as a single value
+									</TextBlock.Text>
+								</TextBlock>
+							</Border>
+							<RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowHitsCombined" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding ShowHitsCombined, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="2" Grid.Column="2" Margin="0" Text="+ combine boss and way hits" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowHitsCombined].Value, Mode=OneWay}">
+								<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+									<TextBlock.Text>
+										<x:String xml:space="preserve">Checked: The boss and way hits are combined and shown as a single value
 Unchecked: The boss and way hits are shown as separate values</x:String>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Border>
-                    <RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowDiff" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding ShowDiff, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="4" Grid.Column="2" Margin="0" Text="Difference" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[ShowDiff].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" Text="Show/Hide difference between personal best and current hit counts" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    </Border>
-                    <RelativePanel Grid.Row="6" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowPB" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="6" Grid.Column="1" Margin="0" IsChecked="{Binding ShowPB, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="6" Grid.Column="2" Margin="0" Text="PB (personal best)" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="7" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[ShowPB].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <x:String xml:space="preserve">Show personal best hit counts
+									</TextBlock.Text>
+								</TextBlock>
+							</Border>
+							<RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowDiff" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding ShowDiff, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="4" Grid.Column="2" Margin="0" Text="Difference" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowDiff].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="Show/Hide difference between personal best and current hit counts" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="6" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowPB" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="6" Grid.Column="1" Margin="0" IsChecked="{Binding ShowPB, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="6" Grid.Column="2" Margin="0" Text="PB (personal best)" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="7" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowPB].Value, Mode=OneWay}">
+								<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+									<TextBlock.Text>
+										<x:String xml:space="preserve">Show personal best hit counts
 Can be configured to additionally show the cumulative sum of PB hits up to each split.
 Allows quick comparison with the current hit count total.</x:String>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Border>
-                    <RelativePanel Grid.Row="8" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowPBTotals" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="8" Grid.Column="1" Margin="0" IsChecked="{Binding ShowPBTotals, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="8" Grid.Column="2" Margin="0" Text="+ show cumulative totals" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="9" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[ShowPBTotals].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <x:String xml:space="preserve">Show personal best hit count totals
+									</TextBlock.Text>
+								</TextBlock>
+							</Border>
+							<RelativePanel Grid.Row="8" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowPBTotals" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="8" Grid.Column="1" Margin="0" IsChecked="{Binding ShowPBTotals, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="8" Grid.Column="2" Margin="0" Text="+ show cumulative totals" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="9" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowPBTotals].Value, Mode=OneWay}">
+								<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+									<TextBlock.Text>
+										<x:String xml:space="preserve">Show personal best hit count totals
 Shows the cumulative sum of PB hits up to each split next to the PB hits of the current split.
 Allows quick comparison with the current hit count total.</x:String>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Border>
-                    <RelativePanel Grid.Row="10" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowTimeCurrent" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="10" Grid.Column="1" Margin="0" IsChecked="{Binding ShowTimeCurrent, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="10" Grid.Column="2" Margin="0" Text="Split time" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="11" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[ShowTimeCurrent].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" Text="Show current split times" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    </Border>
-                    <RelativePanel Grid.Row="12" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowTimeDiff" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="12" Grid.Column="1" Margin="0" IsChecked="{Binding ShowTimeDiff, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="12" Grid.Column="2" Margin="0" Text="Delta time" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="13" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[ShowTimeDiff].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" Text="Show difference between personal best time and currenct split time" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    </Border>
-                    <RelativePanel Grid.Row="14" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowTimePB" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="14" Grid.Column="1" Margin="0" IsChecked="{Binding ShowTimePB, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="14" Grid.Column="2" Margin="0" Text="PB time" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="15" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[ShowTimePB].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" Text="Show personal best times" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    </Border>
-                    <RelativePanel Grid.Row="16" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowSessionProgress" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="16" Grid.Column="1" Margin="0" IsChecked="{Binding ShowSessionProgress, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="16" Grid.Column="2" Margin="0" Text="SP and BP (session progress and best progress)" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="17" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[ShowSessionProgress].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <x:String xml:space="preserve">Show/Hide the column for the session progress and best progress
+									</TextBlock.Text>
+								</TextBlock>
+							</Border>
+							<RelativePanel Grid.Row="10" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowTimeCurrent" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="10" Grid.Column="1" Margin="0" IsChecked="{Binding ShowTimeCurrent, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="10" Grid.Column="2" Margin="0" Text="Split time" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="11" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowTimeCurrent].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="Show current split times" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="12" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowTimeDiff" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="12" Grid.Column="1" Margin="0" IsChecked="{Binding ShowTimeDiff, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="12" Grid.Column="2" Margin="0" Text="Delta time" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="13" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowTimeDiff].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="Show difference between personal best time and currenct split time" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="14" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowTimePB" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="14" Grid.Column="1" Margin="0" IsChecked="{Binding ShowTimePB, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="14" Grid.Column="2" Margin="0" Text="PB time" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="15" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowTimePB].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="Show personal best times" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="16" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowSessionProgress" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="16" Grid.Column="1" Margin="0" IsChecked="{Binding ShowSessionProgress, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="16" Grid.Column="2" Margin="0" Text="SP and BP (session progress and best progress)" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="17" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowSessionProgress].Value, Mode=OneWay}">
+								<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+									<TextBlock.Text>
+										<x:String xml:space="preserve">Show/Hide the column for the session progress and best progress
 The session progress (SP) is represented by a 24 hour clock symbol and marks the farthest reached split per stream session (resets on application start).
 The best progress (BP) is represented by a flag symbol and marks the farthest reached split of the best flawless run ever (also known as distance PB).</x:String>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Border>
-                </Grid>
+									</TextBlock.Text>
+								</TextBlock>
+							</Border>
+						</Grid>
 
-                <TextBlock HorizontalAlignment="Left" Text="Appearance" />
-                <Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
-                    <RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowNumbers" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding ShowNumbers, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="0" Grid.Column="2" Margin="0" Text="Numeric hits (shows images when unchecked)" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[ShowNumbers].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" Text="Show either numeric values (usually during training or routing) or simple images like the check mark and cross." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    </Border>
-                    <RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleUseHighContrast" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding StyleUseHighContrast, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="2" Grid.Column="2" Margin="0" Text="Solid background (transparent when unchecked)" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[StyleUseHighContrast].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" Text="Adds a solid background color that the text can be read clearly no matter what is shown behind." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    </Border>
-                    <RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleUseHighContrastNames" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding StyleUseHighContrastNames, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="4" Grid.Column="2" Margin="0" Text="Single-color split names" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[StyleUseHighContrastNames].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" Text="All split names have the same color." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    </Border>
-                    <RelativePanel Grid.Row="6" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleProgressBarColored" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="6" Grid.Column="1" Margin="0" IsChecked="{Binding StyleProgressBarColored, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="6" Grid.Column="2" Margin="0" Text="Multicolor progress bar" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="7" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[StyleProgressBarColored].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" Text="The splits will be represented with their current colors on the progress bar." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    </Border>
-                    <RelativePanel Grid.Row="8" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleSubscriptPB" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="8" Grid.Column="1" Margin="0" IsChecked="{Binding StyleSubscriptPB, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="8" Grid.Column="2" Margin="0" Text="Subscripted PB totals" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="9" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[StyleSubscriptPB].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" Text="The PB totals shown for each split will be displayed smaller and lower." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    </Border>
-                    <RelativePanel Grid.Row="10" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleUseRoman" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="10" Grid.Column="1" Margin="0" IsChecked="{Binding StyleUseRoman, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="10" Grid.Column="2" Margin="0" Text="Roman numerals" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="11" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[StyleUseRoman].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" Text="The hit counts will be shown with Roman numerals." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    </Border>
-                    <RelativePanel Grid.Row="12" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleHightlightCurrentSplit" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="12" Grid.Column="1" Margin="0" IsChecked="{Binding StyleHightlightCurrentSplit, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="12" Grid.Column="2" Margin="0" Text="Highlight current split" TextAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="13" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[StyleHightlightCurrentSplit].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" Text="The row with the current split will stand out a little bit." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    </Border>
-                </Grid>
+						<TextBlock HorizontalAlignment="Left" Text="Appearance" />
+						<Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
+							<RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowNumbers" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding ShowNumbers, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="0" Grid.Column="2" Margin="0" Text="Numeric hits (shows images when unchecked)" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowNumbers].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="Show either numeric values (usually during training or routing) or simple images like the check mark and cross." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleUseHighContrast" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding StyleUseHighContrast, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="2" Grid.Column="2" Margin="0" Text="Solid background (transparent when unchecked)" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[StyleUseHighContrast].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="Adds a solid background color that the text can be read clearly no matter what is shown behind." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleUseHighContrastNames" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding StyleUseHighContrastNames, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="4" Grid.Column="2" Margin="0" Text="Single-color split names" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[StyleUseHighContrastNames].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="All split names have the same color." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="6" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleProgressBarColored" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="6" Grid.Column="1" Margin="0" IsChecked="{Binding StyleProgressBarColored, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="6" Grid.Column="2" Margin="0" Text="Multicolor progress bar" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="7" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[StyleProgressBarColored].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="The splits will be represented with their current colors on the progress bar." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="8" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleSubscriptPB" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="8" Grid.Column="1" Margin="0" IsChecked="{Binding StyleSubscriptPB, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="8" Grid.Column="2" Margin="0" Text="Subscripted PB totals" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="9" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[StyleSubscriptPB].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="The PB totals shown for each split will be displayed smaller and lower." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="10" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleUseRoman" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="10" Grid.Column="1" Margin="0" IsChecked="{Binding StyleUseRoman, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="10" Grid.Column="2" Margin="0" Text="Roman numerals" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="11" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[StyleUseRoman].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="The hit counts will be shown with Roman numerals." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="12" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="StyleHightlightCurrentSplit" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="12" Grid.Column="1" Margin="0" IsChecked="{Binding StyleHightlightCurrentSplit, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="12" Grid.Column="2" Margin="0" Text="Highlight current split" TextAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="13" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[StyleHightlightCurrentSplit].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="The row with the current split will stand out a little bit." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+						</Grid>
 
-                <Grid Margin="10,0,10,0" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" HorizontalAlignment="Stretch">
-                    <TextBlock     Grid.Row="0" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Desired width (in px):" />
-                    <NumericUpDown Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
-                                   Value="{Binding StyleDesiredWidth}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
-                    <TextBlock     Grid.Row="1" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Desired height (in px):" />
-                    <NumericUpDown Grid.Row="1" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
-                                   Value="{Binding StyleDesiredHeight}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
-                </Grid>
-                <TextBlock HorizontalAlignment="Stretch" Margin="30,0,0,10" FontFamily="Arial" FontStyle="Italic" Text="When value is set back to 0, you may have to reload the browser." />
+						<Grid Margin="10,0,10,0" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" HorizontalAlignment="Stretch">
+							<TextBlock     Grid.Row="0" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Desired width (in px):" />
+							<NumericUpDown Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
+									Value="{Binding StyleDesiredWidth}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+							<TextBlock     Grid.Row="1" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Desired height (in px):" />
+							<NumericUpDown Grid.Row="1" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
+									Value="{Binding StyleDesiredHeight}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+						</Grid>
+						<TextBlock HorizontalAlignment="Stretch" Margin="30,0,0,10" FontFamily="Arial" FontStyle="Italic" Text="When value is set back to 0, you may have to reload the browser." />
 
-                <TextBlock HorizontalAlignment="Left" Text="Table alignment" />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                    <RadioButton GroupName="TableAlignmentGroup" IsCheckedChanged="TableAlignmentGroupCheckedChanged" Content="Left" IsChecked="{Binding StyleTableAlignmentLeft, Mode=OneTime}"/>
-                    <RadioButton GroupName="TableAlignmentGroup" IsCheckedChanged="TableAlignmentGroupCheckedChanged" Content="Center" IsChecked="{Binding StyleTableAlignmentCenter, Mode=OneTime}"/>
-                    <RadioButton GroupName="TableAlignmentGroup" IsCheckedChanged="TableAlignmentGroupCheckedChanged" Content="Right" IsChecked="{Binding StyleTableAlignmentRight, Mode=OneTime}"/>
-                </StackPanel>
+						<TextBlock HorizontalAlignment="Left" Text="Table alignment" />
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+							<RadioButton GroupName="TableAlignmentGroup" IsCheckedChanged="TableAlignmentGroupCheckedChanged" Content="Left" IsChecked="{Binding StyleTableAlignmentLeft, Mode=OneTime}"/>
+							<RadioButton GroupName="TableAlignmentGroup" IsCheckedChanged="TableAlignmentGroupCheckedChanged" Content="Center" IsChecked="{Binding StyleTableAlignmentCenter, Mode=OneTime}"/>
+							<RadioButton GroupName="TableAlignmentGroup" IsCheckedChanged="TableAlignmentGroupCheckedChanged" Content="Right" IsChecked="{Binding StyleTableAlignmentRight, Mode=OneTime}"/>
+						</StackPanel>
 
-                <TextBlock HorizontalAlignment="Left" Text="Customization" />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                    <ToggleSwitch Margin="0" IsChecked="{Binding StyleUseCustom, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Margin="0" Text="Use custom stylesheet and font" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                </StackPanel>
-                <Grid Margin="10,0,10,0" ColumnDefinitions="Auto,*,28" RowDefinitions="Auto,Auto,Auto" HorizontalAlignment="Stretch">
-                    <TextBlock Grid.Row="0" Grid.Column="0" Margin="0" Text="Font name:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBox   Grid.Row="0" Grid.Column="1" Margin="0" Grid.ColumnSpan="2" Text="{Binding StyleFontName, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    <TextBlock Grid.Row="1" Grid.Column="0" Margin="0" Text="Font (URL):" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBox   Grid.Row="1" Grid.Column="1" Margin="0" Text="{Binding StyleFontUrl, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    <RelativePanel Grid.Row="1" Grid.Column="2" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                        <Button Command="{Binding WebOpenGoogleFontsUrl}" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageSearchWeb}" Width="20" Height="20" />
-                        </Button>
-                    </RelativePanel>
-                    <TextBlock Grid.Row="2" Grid.Column="0" Margin="0" Text="CSS (URL):" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBox   Grid.Row="2" Grid.Column="1" Margin="0" Grid.ColumnSpan="2" Text="{Binding StyleCssUrl, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                </Grid>
-                <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                    <Button DockPanel.Dock="Right" Margin="0" Command="{Binding ApplyCssAndFont}" Content="Apply"/>
-                    <TextBlock HorizontalAlignment="Left" Text="Please hit apply to save and use the custom settings:" />
-                </DockPanel>
+						<TextBlock HorizontalAlignment="Left" Text="Customization" />
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+							<ToggleSwitch Margin="0" IsChecked="{Binding StyleUseCustom, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Margin="0" Text="Use custom stylesheet and font" HorizontalAlignment="Left" VerticalAlignment="Center" />
+						</StackPanel>
+						<Grid Margin="10,0,10,0" ColumnDefinitions="Auto,*,28" RowDefinitions="Auto,Auto,Auto" HorizontalAlignment="Stretch">
+							<TextBlock Grid.Row="0" Grid.Column="0" Margin="0" Text="Font name:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBox   Grid.Row="0" Grid.Column="1" Margin="0" Grid.ColumnSpan="2" Text="{Binding StyleFontName, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Margin="0" Text="Font (URL):" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBox   Grid.Row="1" Grid.Column="1" Margin="0" Text="{Binding StyleFontUrl, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							<RelativePanel Grid.Row="1" Grid.Column="2" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+								<Button Command="{Binding WebOpenGoogleFontsUrl}" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageSearchWeb}" Width="20" Height="20" />
+								</Button>
+							</RelativePanel>
+							<TextBlock Grid.Row="2" Grid.Column="0" Margin="0" Text="CSS (URL):" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBox   Grid.Row="2" Grid.Column="1" Margin="0" Grid.ColumnSpan="2" Text="{Binding StyleCssUrl, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+						</Grid>
+						<DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+							<Button DockPanel.Dock="Right" Margin="0" Command="{Binding ApplyCssAndFont}" Content="Apply"/>
+							<TextBlock HorizontalAlignment="Left" Text="Please hit apply to save and use the custom settings:" />
+						</DockPanel>
 
-                <!-- ================== -->
-                <!-- ================== -->
-                <!-- ================== -->
+					</StackPanel>
+				</TabItem>
 
-                <Border Classes="SettingsSectionHeader">
-                    <TextBlock Text="BEHAVIOR" />
-                </Border>
+				<!-- ================== -->
+				<!-- ================== -->
+				<!-- ================== -->
 
-                <TextBlock HorizontalAlignment="Left" Text="Purpose" />
-                <Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
-                    <RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_SplitCounter" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding RadioPurpose_SplitCounter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="0" Grid.Column="2" Margin="0" Text="Split counter" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[RadioPurpose_SplitCounter].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" Text="This is the most commonly used counter to keep track of hits. As long as the hit count of a split is 0 it is considered a good split." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    </Border>
-                    <RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_Checklist" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding RadioPurpose_Checklist, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="2" Grid.Column="2" Margin="0" Text="Checklist" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[RadioPurpose_Checklist].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" Text="If you do not have a fixed order, this option can be used to keep track of different events (doing random boss runs oder collecting achievements). When a hit is registered a split, it means the split is done." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    </Border>
-                    <RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_NoDeath" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding RadioPurpose_NoDeath, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="4" Grid.Column="2" Margin="0" Text="No death" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[RadioPurpose_NoDeath].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" Text="Similar to the Split counter option but with one the major difference. From the first split that has at least one hit, all further splits are considered bad splits." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    </Border>
-                    <RelativePanel Grid.Row="6" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_DeathCounter" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="6" Grid.Column="1" Margin="0" IsChecked="{Binding RadioPurpose_DeathCounter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="6" Grid.Column="2" Margin="0" Text="Death counter" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="7" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[RadioPurpose_DeathCounter].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" Text="A very simplistic counter that does not show any splits but the total hit count as deaths. It can still be combined with the progress bar and a timer." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    </Border>
-                    <RelativePanel Grid.Row="8" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_ResetCounter" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="8" Grid.Column="1" Margin="0" IsChecked="{Binding RadioPurpose_ResetCounter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="8" Grid.Column="2" Margin="0" Text="Run reset counter" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="9" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[RadioPurpose_ResetCounter].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" Text="Instead of counting hits, this options can be used to COUNT RESETS instead. Keep in mind that PB is not used and the run shall never be reset. Resetting a run means just incrementing the hit count on the split when the reset happens and select the first split using the main window. This will keep your reset counts (hits) alive and you can later see how many runs have died on certain splits." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                    </Border>
-                </Grid>
+				<TabItem Header="Behavior">
+					<!-- Keep bottom Maring high as Scrollviewer may otherwise cut off controls, don't know why yet -->
+					<StackPanel Margin="0 0 0 50" Orientation="Vertical" HorizontalAlignment="Stretch">
 
-                <TextBlock HorizontalAlignment="Left" Text="Hit severity (color of Neither nor)" />
-                <Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
-                    <RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHitSeverity_AnyHitCritical" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHitSeverity_AnyHitCritical, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="0" Grid.Column="2" Margin="0" Text="Any hit is critical" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[RadioHitSeverity_AnyHitCritical].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <x:String xml:space="preserve">Counting independently of the hit type (boss or way)
+						<TextBlock HorizontalAlignment="Left" Text="Purpose" />
+						<Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
+							<RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_SplitCounter" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding RadioPurpose_SplitCounter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="0" Grid.Column="2" Margin="0" Text="Split counter" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[RadioPurpose_SplitCounter].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="This is the most commonly used counter to keep track of hits. As long as the hit count of a split is 0 it is considered a good split." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_Checklist" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding RadioPurpose_Checklist, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="2" Grid.Column="2" Margin="0" Text="Checklist" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[RadioPurpose_Checklist].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="If you do not have a fixed order, this option can be used to keep track of different events (doing random boss runs oder collecting achievements). When a hit is registered a split, it means the split is done." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_NoDeath" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding RadioPurpose_NoDeath, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="4" Grid.Column="2" Margin="0" Text="No death" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[RadioPurpose_NoDeath].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="Similar to the Split counter option but with one the major difference. From the first split that has at least one hit, all further splits are considered bad splits." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="6" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_DeathCounter" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="6" Grid.Column="1" Margin="0" IsChecked="{Binding RadioPurpose_DeathCounter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="6" Grid.Column="2" Margin="0" Text="Death counter" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="7" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[RadioPurpose_DeathCounter].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="A very simplistic counter that does not show any splits but the total hit count as deaths. It can still be combined with the progress bar and a timer." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="8" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioPurpose_ResetCounter" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="8" Grid.Column="1" Margin="0" IsChecked="{Binding RadioPurpose_ResetCounter, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="8" Grid.Column="2" Margin="0" Text="Run reset counter" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="9" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[RadioPurpose_ResetCounter].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="Instead of counting hits, this options can be used to COUNT RESETS instead. Keep in mind that PB is not used and the run shall never be reset. Resetting a run means just incrementing the hit count on the split when the reset happens and select the first split using the main window. This will keep your reset counts (hits) alive and you can later see how many runs have died on certain splits." HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+						</Grid>
+
+						<TextBlock HorizontalAlignment="Left" Text="Hit severity (color of Neither nor)" />
+						<Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
+							<RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHitSeverity_AnyHitCritical" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHitSeverity_AnyHitCritical, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="0" Grid.Column="2" Margin="0" Text="Any hit is critical" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[RadioHitSeverity_AnyHitCritical].Value, Mode=OneWay}">
+								<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+									<TextBlock.Text>
+										<x:String xml:space="preserve">Counting independently of the hit type (boss or way)
 GOOD splits have a hit count of 0
 BAD splits have at least one hit</x:String>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Border>
-                    <RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHitSeverity_ComparePB" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHitSeverity_ComparePB, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="2" Grid.Column="2" Margin="0" Text="Only boss hits are critical" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[RadioHitSeverity_ComparePB].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <x:String xml:space="preserve">Marks hits during boss fight more severe than hits on the way.
+									</TextBlock.Text>
+								</TextBlock>
+							</Border>
+							<RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHitSeverity_ComparePB" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHitSeverity_ComparePB, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="2" Grid.Column="2" Margin="0" Text="Only boss hits are critical" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[RadioHitSeverity_ComparePB].Value, Mode=OneWay}">
+								<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+									<TextBlock.Text>
+										<x:String xml:space="preserve">Marks hits during boss fight more severe than hits on the way.
 GOOD splits have a hit count of 0
 EVEN splits have at least one hit counted for the way but have 0 hits for bosses
 BAD splits have at least one hit counted for bosses</x:String>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Border>
-                    <RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                        <Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHitSeverity_BossHitCritical" Classes="ImageButton">
-                            <Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
-                        </Button>
-                    </RelativePanel>
-                    <ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHitSeverity_BossHitCritical, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock  Grid.Row="4" Grid.Column="2" Margin="0" Text="Compare with PB" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <Border Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                            IsVisible="{Binding ShowInfo[RadioHitSeverity_BossHitCritical].Value, Mode=OneWay}">
-                        <TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <x:String xml:space="preserve">Marks hit counts beyond the PB hit counts more severe.
+									</TextBlock.Text>
+								</TextBlock>
+							</Border>
+							<RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="RadioHitSeverity_BossHitCritical" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="4" Grid.Column="1" Margin="0" IsChecked="{Binding RadioHitSeverity_BossHitCritical, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="4" Grid.Column="2" Margin="0" Text="Compare with PB" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[RadioHitSeverity_BossHitCritical].Value, Mode=OneWay}">
+								<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+									<TextBlock.Text>
+										<x:String xml:space="preserve">Marks hit counts beyond the PB hit counts more severe.
 GOOD splits have a hit count of 0
 EVEN splits have at least one hit counted but still have even or less hits than on the PB run
 BAD splits have more hits than on the PB run</x:String>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Border>
-                </Grid>
+									</TextBlock.Text>
+								</TextBlock>
+							</Border>
+						</Grid>
 
-                <Grid Margin="10,0,10,0" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" HorizontalAlignment="Stretch">
-                    <TextBlock     Grid.Row="0" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Maxium previous splits:" />
-                    <NumericUpDown Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="999"
-                                   Value="{Binding ShowSplitsCountFinished}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
-                    <TextBlock     Grid.Row="1" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Maxium upcoming splits:" />
-                    <NumericUpDown Grid.Row="1" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="999"
-                                   Value="{Binding ShowSplitsCountUpcoming}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
-                </Grid>
-                <!-- Keep bottom Maring high as Scrollviewer may otherwise cut off controls, don't know why yet -->
-                <TextBlock Margin="30,3,0,50" HorizontalAlignment="Left" FontFamily="Arial" FontStyle="Italic">
-                    <Run Text="Current configuration will show up to "/>
-                    <Run Text="{Binding ShowSplitsCountFinished, Mode=OneWay}"/>
-                    <Run Text=" + 1 + "/>
-                    <Run Text="{Binding ShowSplitsCountUpcoming, Mode=OneWay}"/>
-                    <Run Text=" splits."/>
-                </TextBlock>
+						<Grid Margin="10,0,10,0" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" HorizontalAlignment="Stretch">
+							<TextBlock     Grid.Row="0" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Maxium previous splits:" />
+							<NumericUpDown Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="999"
+									Value="{Binding ShowSplitsCountFinished}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+							<TextBlock     Grid.Row="1" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Maxium upcoming splits:" />
+							<NumericUpDown Grid.Row="1" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="999"
+									Value="{Binding ShowSplitsCountUpcoming}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
+						</Grid>
+						<!-- Keep bottom Maring high as Scrollviewer may otherwise cut off controls, don't know why yet -->
+						<TextBlock Margin="30,3,0,0" HorizontalAlignment="Left" FontFamily="Arial" FontStyle="Italic">
+							<Run Text="Current configuration will show up to "/>
+							<Run Text="{Binding ShowSplitsCountFinished, Mode=OneWay}"/>
+							<Run Text=" + 1 + "/>
+							<Run Text="{Binding ShowSplitsCountUpcoming, Mode=OneWay}"/>
+							<Run Text=" splits."/>
+						</TextBlock>
 
-            </StackPanel>
-        </ScrollViewer>
-    </DockPanel>
+					</StackPanel>
+				</TabItem>
+			</TabControl>
+		</ScrollViewer>
+	</DockPanel>
 </UserControl>

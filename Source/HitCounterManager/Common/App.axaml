@@ -69,6 +69,10 @@
 
 		<x:Double x:Key="MainButtonWidth">82</x:Double>
 
+		<!-- Avalonia Icons: https://avaloniaui.github.io/icons.html -->
+		<!-- SVG WYSIWYG: https://www.svgviewer.dev -->
+		<!-- Convert SVG images using https://github.com/BerndK/SvgToXaml/releases/tag/Ver_1.3.0 -->
+
 		<!-- Generic -->
 		<c:LocalResourceBitmap x:Key="ImageTrash">
 			<x:Arguments>/Resources/drawable/icons8_trash_20.png</x:Arguments>
@@ -196,16 +200,6 @@
 			<Setter Property="Background" Value="{DynamicResource TextBoxBackgroundBrush}" />
 		</Style>
 
-		<Style Selector="Border.SettingsSectionHeader">
-			<Setter Property="Background" Value="#CC6600" />
-			<Setter Property="Margin" Value="0,10" />
-			<Setter Property="Padding" Value="8" />
-			<Setter Property="CornerRadius" Value="6" />
-		</Style>
-		<Style Selector="Border.SettingsSectionHeader > TextBlock">
-			<Setter Property="FontWeight" Value="Bold" />
-			<Setter Property="HorizontalAlignment" Value="Center" />
-		</Style>
 		<Style Selector="Button.ImageButton">
 			<Setter Property="Background" Value="{DynamicResource ImageButtonBackgroundBrush}" />
 		</Style>
