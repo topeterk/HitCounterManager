@@ -62,12 +62,52 @@ Source: https://iconka.com/en/269/
 License: Linkware
 
 ==============================================================================
-Application Button Images
+Icon images of colored main buttons
 
 Title: -
 Author: icons8.com
 Source: https://icons8.com/
 Licence: CC BY-ND 3.0  https://creativecommons.org/licenses/by-nd/3.0/
+
+==============================================================================
+Icon images of colorless minor buttons
+
+Title: -
+Author(s): Avalonia Team
+Source: https://avaloniaui.github.io/icons.html
+License: MIT
+
+==============================================================================
+Icon image of dark mode button (Flashlight)
+
+Title: Flashlight SVG Vector 14
+Author: SVG Repo
+Source: https://www.svgrepo.com/svg/64840/flashlight
+Licence: CC0 License  https://creativecommons.org/publicdomain/zero/1.0/
+
+==============================================================================
+Icon image of SP button (24 Hours Circle)
+
+Title: 24 Hours Service SVG Vector 3
+Author: SVG Repo
+Source: https://www.svgrepo.com/svg/64840/flashlight
+Licence: CC0 License  https://creativecommons.org/publicdomain/zero/1.0/
+
+==============================================================================
+Icon image of inactive button (Dashed Circle)
+
+Title: Circle Dashed SVG Vector
+Author: jtblabs
+Source: https://www.svgrepo.com/svg/473116/circle-dashed
+Licence: MIT
+
+==============================================================================
+Icon image of update button (Cloud)
+
+Title: Network Public SVG Vector
+Author: Carbon Design
+Source: https://www.svgrepo.com/svg/340717/network-public
+Licence: Apache License
 
 ==============================================================================
 AutoSplitter Button Image
@@ -122,7 +162,7 @@ Source: https://github.com/zanders3/json
 Licence: MIT
 
 ==============================================================================
-Embedded License:  The MIT License (MIT)
+Embedded License: The MIT License (MIT)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -146,7 +186,12 @@ d.any suggestion that there is an endorsement of products and services by depict
 Please be aware that while all Images and Videos on Pixabay are free to use for commercial and non-commercial purposes, depicted items in the Images or Videos, such as identifiable people, logos, brands, etc. may be subject to additional copyrights, property rights, privacy rights, trademarks etc. and may require the consent of a third party or the license of these rights - particularly for commercial applications. Pixabay does not represent or warrant that such consents or licenses have been obtained, and expressly disclaims any liability in this respect.
 
 URL: https://pixabay.com/de/service/license/
+
+==============================================================================
+Embedded License: Apache License
 EOF
+curl -sL https://www.apache.org/licenses/LICENSE-2.0.txt
+echo ""
 
 echo Fetching NuGet packages 1>&2
 
@@ -158,8 +203,7 @@ echo Printing NuGet packages 1>&2
 
 for nuspec in ${NUGET_PACKAGES_SPECS}
 do
-	# (a) seems to be filler expression to whatever version is available, try detect folder using shell's star autocompletion
-	xml="$(echo ${NUGET_PACKAGES_DIR}/${nuspec} | sed -e 's,/(a)/,/*/,g')"
+	xml="${NUGET_PACKAGES_DIR}/${nuspec}"
 
 	id=$(grepkey id "${xml}")
 	echo ==============================================================================
@@ -204,7 +248,8 @@ do
 		# MIT is already attached above
 		continue
 	elif [ "${lic}" = "https://licenses.nuget.org/Apache-2.0" ] ; then
-		lic=https://www.apache.org/licenses/LICENSE-2.0.txt
+		# Apache License is already attached above
+		continue
 	elif [ ! -z $(echo ${lic} | sed -n 's,^https://go.microsoft.com/fwlink/.*,true,p') ] ; then
 		MSSHORT_URL=$(curl -sL ${lic} | sed -n 's,.*"rawBlobUrl"[ \t]*:[ \t]*"\([^"]*\)".*,\1,p')
 		if [ ! -z ${MSSHORT_URL} ] ; then

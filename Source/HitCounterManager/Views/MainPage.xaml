@@ -2,7 +2,7 @@
 <!--
 //MIT License
 
-//Copyright (c) 2021-2024 Peter Kirmeier
+//Copyright (c) 2021-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@
 	</UserControl.DataContext>
 
 	<ScrollViewer Padding="0" Margin="6,4,0,0" AllowAutoHide="false">
-		<StackPanel Margin="0,0,30,0" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+		<StackPanel Margin="0,0,8,0" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
 			<WrapPanel Margin="2">
 				<WrapPanel.Styles>
@@ -68,66 +68,78 @@
 
 				<StackPanel Margin="0,0,10,0" Orientation="Horizontal">
 					<Button Command="{Binding OpenPageSettings}" Classes="ImageButton">
-						<Image Source="{DynamicResource ImageSettings}" />
+						<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageSettings}"/>
 					</Button>
 					<Button Command="{Binding #profileView.DataContext.SaveToDisk}" Classes="ImageButton">
-						<Image Source="{DynamicResource ImageSave}" />
+						<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageSave}"/>
 					</Button>
 					<Button Command="{Binding OpenWebsiteHome}" Classes="ImageButton">
-						<Image Source="{DynamicResource ImageWeb}" />
+						<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageWeb}"/>
 					</Button>
 					<Button Command="{Binding OpenWebsiteTeamHitless}" Classes="ImageButton">
 						<Image Source="{DynamicResource ImageTeamHitless}" />
 					</Button>
 					<Button Command="{Binding CheckUpdatesOnline}" Classes="ImageButton">
-						<Image Source="{DynamicResource ImageUpdates}" />
+						<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageUpdates}"/>
 					</Button>
 					<Button Command="{Binding OpenPageAbout}" Classes="ImageButton">
-						<Image Source="{DynamicResource ImageAbout}" />
+						<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageAbout}"/>
 					</Button>
 				</StackPanel>
 				<StackPanel Margin="0,0,10,0" Orientation="Horizontal">
 					<Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static vm:ProfileAction.Create}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
-						<Image Source="{DynamicResource ImageProfileCreate}" />
+						<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageProfileCreate}"/>
 					</Button>
 					<Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static vm:ProfileAction.Rename}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
-						<Image Source="{DynamicResource ImageProfileRename}" />
+						<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageProfileRename}"/>
 					</Button>
 					<Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static vm:ProfileAction.Copy}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
-						<Image Source="{DynamicResource ImageProfileCopy}" />
+						<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageProfileCopy}"/>
 					</Button>
 					<Button Command="{Binding OpenPageProfileAction}" CommandParameter="{x:Static vm:ProfileAction.Delete}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
-						<Image Source="{DynamicResource ImageTrash}" />
+						<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageTrash}"/>
 					</Button>
 				</StackPanel>
 				<StackPanel Margin="0,0,10,0" Orientation="Horizontal">
 					<Button Command="{Binding OpenPageSetAttempts}" Classes="ImageButton">
-						<Image Source="{DynamicResource ImageAttempts}" />
+						<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageAttempts}"/>
 					</Button>
 					<Button Command="{Binding #profileView.DataContext.ProfileSplitMoveUp}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
-						<Image Source="{DynamicResource ImageSplitUp}" />
+						<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageSplitUp}"/>
 					</Button>
 					<Button Command="{Binding #profileView.DataContext.ProfileSplitMoveDown}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
-						<Image Source="{DynamicResource ImageSplitDown}" />
+						<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageSplitUp}">
+							<PathIcon.RenderTransform>
+								<RotateTransform Angle="180" />
+							</PathIcon.RenderTransform>
+						</PathIcon>
 					</Button>
 					<Button Command="{Binding #profileView.DataContext.ProfileSplitInsert}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
-						<Image Source="{DynamicResource ImageSplitInsert}" />
+						<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageSplitInsert}"/>
 					</Button>
 				</StackPanel>
 				<StackPanel Margin="0" Orientation="Horizontal">
 					<Button Command="{Binding #profileView.DataContext.ToggleReadOnlyMode}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding #profileView.DataContext.IsReadOnly}">
 						<Button.Styles>
-							<Style Selector="Button > Image">
-								<Setter Property="Source" Value="{DynamicResource ImageLockOff}" />
+							<Style Selector="Button > PathIcon">
+								<Setter Property="Data" Value="{DynamicResource ImageLockOff}" />
 							</Style>
-							<Style Selector="Button.ImageButtonLocked > Image">
-								<Setter Property="Source" Value="{DynamicResource ImageLockOn}" />
+							<Style Selector="Button.ImageButtonLocked > PathIcon">
+								<Setter Property="Data" Value="{DynamicResource ImageLockOn}" />
 							</Style>
 						</Button.Styles>
-						<Image />
+						<PathIcon Margin="2" Height="16" Width="16"/>
 					</Button>
 					<Button Command="{Binding ToggleAlwaysOnTop}" Classes="ImageButton" Classes.ImageButtonLocked="{Binding AlwaysOnTop}" IsVisible="{OnPlatform Default=True, Android=False, iOS=False}">
-						<Image Source="{DynamicResource ImageAlwaysOnTop}" />
+						<Button.Styles>
+							<Style Selector="Button > PathIcon">
+								<Setter Property="Data" Value="{DynamicResource ImageInactiveAlwaysOnTop}" />
+							</Style>
+							<Style Selector="Button.ImageButtonLocked > PathIcon">
+								<Setter Property="Data" Value="{DynamicResource ImageAlwaysOnTop}" />
+							</Style>
+						</Button.Styles>
+						<PathIcon Margin="2" Height="16" Width="16"/>
 					</Button>
 					<Button Command="{Binding ToggleDarkMode}" Classes="ImageButton">
 						<Image Source="{DynamicResource ImageDarkMode}" />

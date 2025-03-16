@@ -100,9 +100,9 @@
 						<ColumnDefinition Width="68"></ColumnDefinition>
 						<ColumnDefinition Width="50"></ColumnDefinition>
 						<ColumnDefinition Width="68"></ColumnDefinition>
-						<ColumnDefinition Width="20"></ColumnDefinition>
-						<ColumnDefinition Width="20"></ColumnDefinition>
-						<ColumnDefinition Width="20"></ColumnDefinition>
+						<ColumnDefinition Width="24"></ColumnDefinition>
+						<ColumnDefinition Width="24"></ColumnDefinition>
+						<ColumnDefinition Width="24"></ColumnDefinition>
 					</Grid.ColumnDefinitions>
 					<RelativePanel Grid.Row="0" Grid.Column="0" Margin="0" MinWidth="24" HorizontalAlignment="Center" VerticalAlignment="Center">
 						<Button Command="{Binding ToggleShowInfo}" CommandParameter="MainColumnHeaders" Classes="ImageButton" Width="18" Height="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -139,9 +139,9 @@
 							<ColumnDefinition Width="68"></ColumnDefinition>
 							<ColumnDefinition Width="50"></ColumnDefinition>
 							<ColumnDefinition Width="68"></ColumnDefinition>
-							<ColumnDefinition Width="20"></ColumnDefinition>
-							<ColumnDefinition Width="20"></ColumnDefinition>
-							<ColumnDefinition Width="20"></ColumnDefinition>
+							<ColumnDefinition Width="24"></ColumnDefinition>
+							<ColumnDefinition Width="24"></ColumnDefinition>
+							<ColumnDefinition Width="24"></ColumnDefinition>
 						</Grid.ColumnDefinitions>
 						<TextBlock Grid.Column="0" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Boss&#10;Hits" />
 						<TextBlock Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Way&#10;Hits" />
@@ -188,7 +188,7 @@
 							</Interaction.Behaviors>
 							<Button Grid.Column="0" Margin="0" MinWidth="24" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Center"
 									Command="{Binding $parent[UserControl].DataContext.CmdSetActiveSplit}" CommandParameter="{Binding .}">
-								<Image Source="{DynamicResource ImageActive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Classes.Inactive="{Binding !Active, Mode=OneWay}" />
+								<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageActive}" Classes.Inactive="{Binding !Active, Mode=OneWay}"/>
 							</Button>
 							<TextBox Grid.Column="1" Margin="2" MinWidth="30" TextAlignment="Left" Text="{Binding Title}" Watermark="       [Empty title]" />
 						</Grid>
@@ -198,9 +198,9 @@
 								<ColumnDefinition Width="68"></ColumnDefinition>
 								<ColumnDefinition Width="50"></ColumnDefinition>
 								<ColumnDefinition Width="68"></ColumnDefinition>
-								<ColumnDefinition Width="20"></ColumnDefinition>
-								<ColumnDefinition Width="20"></ColumnDefinition>
-								<ColumnDefinition Width="20"></ColumnDefinition>
+								<ColumnDefinition Width="24"></ColumnDefinition>
+								<ColumnDefinition Width="24"></ColumnDefinition>
+								<ColumnDefinition Width="24"></ColumnDefinition>
 							</Grid.ColumnDefinitions>
 							<NumericUpDown Grid.Column="0" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
 										   Value="{Binding Hits}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
@@ -211,15 +211,15 @@
 										   Value="{Binding PB}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 							<Button Grid.Column="4" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 									Command="{Binding $parent[UserControl].DataContext.CmdSetSessionProgress}" CommandParameter="{Binding .}">
-								<Image Source="{DynamicResource ImageSP}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Classes.Inactive="{Binding !Active, Mode=OneWay}" />
+								<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageSP}" Classes.Inactive="{Binding !SP, Mode=OneWay}"/>
 							</Button>
 							<Button Grid.Column="5" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 									Command="{Binding $parent[UserControl].DataContext.CmdSetBestProgress}" CommandParameter="{Binding .}">
-								<Image Source="{DynamicResource ImageBP}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Classes="BP" Classes.Inactive="{Binding !BP, Mode=OneWay}" />
+								<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageBP}" Classes="BP" Classes.Inactive="{Binding !BP, Mode=OneWay}"/>
 							</Button>
 							<Button Grid.Column="6" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 									Command="{Binding $parent[UserControl].DataContext.CmdRemoveSplit}" CommandParameter="{Binding .}">
-								<Image Source="{DynamicResource ImageTrash}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+								<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageTrash}"/>
 							</Button>
 						</Grid>
 					</StackPanel>
@@ -233,9 +233,9 @@
 							<ColumnDefinition Width="68"></ColumnDefinition>
 							<ColumnDefinition Width="50"></ColumnDefinition>
 							<ColumnDefinition Width="68"></ColumnDefinition>
-							<ColumnDefinition Width="20"></ColumnDefinition>
-							<ColumnDefinition Width="20"></ColumnDefinition>
-							<ColumnDefinition Width="20"></ColumnDefinition>
+							<ColumnDefinition Width="24"></ColumnDefinition>
+							<ColumnDefinition Width="24"></ColumnDefinition>
+							<ColumnDefinition Width="24"></ColumnDefinition>
 						</Grid.ColumnDefinitions>
 						<Interaction.Behaviors>
 							<DataTriggerBehavior Binding="{Binding Active, Mode=OneWay}" ComparisonCondition="Equal" Value="false">
@@ -247,7 +247,7 @@
 						</Interaction.Behaviors>
 						<Button Grid.Column="0" Margin="0" MinWidth="24" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Center"
 								Command="{Binding $parent[UserControl].DataContext.CmdSetActiveSplit}" CommandParameter="{Binding .}">
-							<Image Source="{DynamicResource ImageActive}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Classes.Inactive="{Binding !Active, Mode=OneWay}" />
+							<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageActive}" Classes.Inactive="{Binding !Active, Mode=OneWay}"/>
 						</Button>
 						<TextBox Grid.Column="1" Margin="2" MinWidth="30" TextAlignment="Left" Text="{Binding Title}" Watermark="       [Empty title]" />
 						<NumericUpDown Grid.Column="2" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
@@ -270,15 +270,15 @@
 								Value="{Binding PB}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 						<Button Grid.Column="6" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 								Command="{Binding $parent[UserControl].DataContext.CmdSetSessionProgress}" CommandParameter="{Binding .}">
-							<Image Source="{DynamicResource ImageSP}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Classes.Inactive="{Binding !SP, Mode=OneWay}" />
+							<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageSP}" Classes.Inactive="{Binding !SP, Mode=OneWay}"/>
 						</Button>
 						<Button Grid.Column="7" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 								Command="{Binding $parent[UserControl].DataContext.CmdSetBestProgress}" CommandParameter="{Binding .}">
-							<Image Source="{DynamicResource ImageBP}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Classes="BP" Classes.Inactive="{Binding !BP, Mode=OneWay}" />
+							<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageBP}" Classes="BP" Classes.Inactive="{Binding !BP, Mode=OneWay}"/>
 						</Button>
 						<Button Grid.Column="8" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 								Command="{Binding $parent[UserControl].DataContext.CmdRemoveSplit}" CommandParameter="{Binding .}">
-							<Image Source="{DynamicResource ImageTrash}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+							<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageTrash}"/>
 						</Button>
 					</Grid>
 				</DataTemplate>

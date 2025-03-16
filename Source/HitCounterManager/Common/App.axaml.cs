@@ -308,6 +308,7 @@ namespace HitCounterManager
 
             string ModeName = DarkMode ? "Dark" : "Light";
 
+            UpdateBrushColor("IconForegroundBrush", "IconForegroundColor" + ModeName);
             UpdateBrushColor("ImageButtonBackgroundBrush", "ImageButtonBackgroundColor" + ModeName);
             UpdateBrushColor("DialogWindowBackgroundBrush", "DialogWindowBackgroundColor" + ModeName);
             UpdateBrushColor("MainWindowBackgroundBrush", "MainWindowBackgroundColor" + ModeName);
