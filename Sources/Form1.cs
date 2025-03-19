@@ -84,12 +84,6 @@ namespace HitCounterManager
             {
                 profCtrl.InterfaceASC = InterfaceASC = new(this);
                 AutoSplitterCoreModule.AutoSplitterRegisterInterface(InterfaceASC);
-                comboBoxGame.Items.Clear();
-                foreach (string game in InterfaceASC.GameList)
-                {
-                    comboBoxGame.Items.Add(game);
-                }
-
                 LoadAutoSplitterHotKeys();
             }
 
