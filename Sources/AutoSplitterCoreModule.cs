@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 using System.Reflection;
 using static HitCounterManager.IAutoSplitterCoreInterface;
@@ -231,6 +232,16 @@ namespace HitCounterManager
         {
             form1 = form;
             profCtrl = form1.profCtrl;
+            GameList.CollectionChanged += (object sender, NotifyCollectionChangedEventArgs e) =>
+            {
+                switch (e.Action)
+                {
+                    case NotifyCollectionChangedAction.Add: foreach (string game in e.NewItems) form1.comboBoxGame.Items.Add(game); break;
+                    case NotifyCollectionChangedAction.Remove: foreach (string game in e.NewItems) form1.comboBoxGame.Items.Remove(game); break;
+                    case NotifyCollectionChangedAction.Reset: form1.comboBoxGame.Items.Clear(); break;
+                    default: break;
+                }
+            };
         }
 
         public bool GetCurrentInGameTime(out long totalTimeMs)

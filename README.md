@@ -97,6 +97,8 @@ There is a great growing community on Discord called [Team Hitless](https://disc
 If you are seeking for help, guidance or just talk about no hit runs, this is the right place for it.  
 Thanks to everyone for helping other community members!
 
+To learn more about Team Hitless you can also have a look at the [website](https://www.teamhitless.com).
+
 ## Special thanks
 I would never have created this tool without the inspiration by watching the awesome 0 hit and no death runners...  
 Thanks to (in alphabetical order):
@@ -104,13 +106,13 @@ Thanks to (in alphabetical order):
 * [Dinossindgeil](https://www.twitch.tv/dinossindgeil)
 * [DonnyRekt](https://www.twitch.tv/donnyrekt)
 * [FaraazKhan](https://www.twitch.tv/faraazkhan)
-* [Kazoodle](https://www.twitch.tv/kazoodle)
 * [Sayvi](https://www.twitch.tv/sayvi)
 * [SlipperySuzie](https://www.twitch.tv/slipperysuzie)
 * [Soldi](https://www.twitch.tv/soldi)
 * [SquillaKilla](https://www.twitch.tv/squillakilla)
 * [The_Happy_Hob](https://www.twitch.tv/the_happy_hob)
 * [TigerG92](https://www.twitch.tv/tigerg92)
+* [Zoodle](https://www.twitch.tv/zoodle)
 * Every member of the [Hitless team on Twitch](https://www.twitch.tv/team/hitless)
 * And also all the other great challenge runners out there that I cannot name here all.
   
