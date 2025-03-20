@@ -89,7 +89,6 @@ namespace HitCounterManager
                 {
                     comboBoxGame.Items.Add(game);
                 }
-                comboBoxGame.SelectedIndex = InterfaceASC.GetActiveGameIndex();
 
                 LoadAutoSplitterHotKeys();
             }
