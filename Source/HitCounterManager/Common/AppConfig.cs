@@ -22,9 +22,9 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Reflection;
 using Avalonia.Platform;
-using Avalonia.Platform.Storage;
 using HitCounterManager.Common;
 using HitCounterManager.Models;
 
@@ -191,31 +191,16 @@ namespace HitCounterManager
         {
             int baseVersion = -1;
             SettingsRoot? loadedSettings;
+            string settingsDir = Statics.ApplicationStorageDir ?? "";
 
-            string settingsDir = "";
-            if (OperatingSystem.IsAndroid())
-            {
-                // https://developer.android.com/training/data-storage/app-specific
-                IStorageFolder? storagefolder = TopLevel?.StorageProvider.TryGetWellKnownFolderAsync(WellKnownFolder.Documents).Result;
-                if (storagefolder is not null)
-                {
-                    settingsDir = storagefolder.Path.OriginalString;
-                }
-                else
-                {
-                    // TODO: We want to load settings early but we get access to storage provider only later: Find proper solution, as quick fix use hardcoded path:
-                    settingsDir = "/storage/emulated/0/Android/data/com.peterkirmeier.HitCounterManager/files/Documents/";
-                }
-            }
-
-            sm = new SaveModule<SettingsRoot>(settingsDir + Statics.ApplicationName + "Save.xml");
+            sm = new (Path.Combine(settingsDir, Statics.ApplicationName + "Save.xml"));
             loadedSettings = sm.ReadXML(true);
             if (null != loadedSettings)
                 IsCleanStart = false;
             else
             {
                 // When no user save file is available, try loading the init file instead to provide predefined profiles and settings
-                loadedSettings = sm.ReadXML(false, settingsDir + Statics.ApplicationName + "Init.xml");
+                loadedSettings = sm.ReadXML(false, Path.Combine(settingsDir, Statics.ApplicationName + "Init.xml"));
                 if (null == loadedSettings)
                 {
                     // When init file cannot be read, fallback to defaults from resources

@@ -40,9 +40,9 @@ namespace HitCounterManager.Views
 
         public  async Task OpenAsDialog(Window? owner)
         {
-            if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+            if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime singleViewLifetime)
             {
-                SingleViewNavigationPage RootPage = (SingleViewNavigationPage)singleViewPlatform.MainView!;
+                SingleViewNavigationPage RootPage = (SingleViewNavigationPage)singleViewLifetime.MainView!;
                 RootPage.PushPage(this);
             }
             else throw new PlatformNotSupportedException("Opening a page is not allowed");
@@ -59,10 +59,10 @@ namespace HitCounterManager.Views
                 // Pass command to parent window
                 ViewModel.OwnerWindow?.Close();
             }
-            else if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+            else if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime singleViewLifetime)
             {
                 // Return to previous page
-                SingleViewNavigationPage RootPage = (SingleViewNavigationPage)singleViewPlatform.MainView!;
+                SingleViewNavigationPage RootPage = (SingleViewNavigationPage)singleViewLifetime.MainView!;
                 RootPage.PopPage();
             }
         }

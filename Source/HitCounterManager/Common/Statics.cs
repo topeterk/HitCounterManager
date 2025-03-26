@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2024 Peter Kirmeier
+//Copyright (c) 2021-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -61,5 +61,11 @@ namespace HitCounterManager.Common
         /// Application is capable of global hotkeys
         /// </summary>
         public static bool GlobalHotKeySupport => OperatingSystem.IsWindows();
+
+        /// <summary>
+        /// Path to the directory where user files should be stored.
+        /// Null defaults to relative paths.
+        /// </summary>
+        public static string? ApplicationStorageDir { get; set; }
     }
 }

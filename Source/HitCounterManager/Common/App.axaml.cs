@@ -53,7 +53,7 @@ namespace HitCounterManager
         public ProfileViewViewModel? ProfileViewViewModel { get; private set; }
         public readonly OutModule om;
         public readonly Shortcuts sc = new ();
-        public SettingsRoot Settings { get; internal set; }
+        public SettingsRoot Settings { get; private set; }
         public bool SettingsDialogOpen = false;
         private bool IsCleanStart = true;
 
@@ -70,7 +70,7 @@ namespace HitCounterManager
         public App()
         {
             LoadSettings();
-            om = new OutModule(Settings);
+            om = new(Settings);
             if (!om.ReloadTemplate())
                 DisplayAlert("Error loading template!", "The file " + (string.IsNullOrEmpty(Settings.Inputfile) ? "<Inputfile not set>" : "\"" + Settings.Inputfile + "\"") + " not found!");
 
@@ -210,7 +210,6 @@ namespace HitCounterManager
         public override void OnFrameworkInitializationCompleted()
         {
             MainPage? mainPage = null;
-            RequestedThemeVariant = Settings.DarkMode ? ThemeVariant.Dark : ThemeVariant.Light;
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
@@ -242,12 +241,12 @@ namespace HitCounterManager
                 bool Success = LoadAllHotKeySettings();
                 if (!Success) DisplayAlert("Error setting up hot keys!", "Not all enabled hot keys could be registered successfully!");
             }
-            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewLifetime)
             {
                 //MainPage main = new MainPage();
                 SingleViewNavigationPage main = new ();
                 mainPage = main.InnerPage;
-                singleViewPlatform.MainView = main;
+                singleViewLifetime.MainView = main;
                 ProfileViewViewModel = (ProfileViewViewModel?)mainPage.ProfileView?.DataContext;
             }
 

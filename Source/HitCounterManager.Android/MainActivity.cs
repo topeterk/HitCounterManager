@@ -21,11 +21,13 @@
 //SOFTWARE.
 
 using Android.App;
+using Android.OS;
 using Android.Content.PM;
 using Avalonia;
 using Avalonia.Android;
 //using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.ReactiveUI;
+using HitCounterManager.Common;
 //using HitCounterManager.Views;
 
 namespace HitCounterManager.Android;
@@ -40,6 +42,13 @@ public class MainActivity : AvaloniaMainActivity<App>
 {
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
+        // https://developer.android.com/training/data-storage/app-specific
+        var documentsDir = GetExternalFilesDir(Environment.DirectoryDocuments);
+        if (documentsDir is not null && documentsDir.Exists())
+        {
+            Statics.ApplicationStorageDir = documentsDir.AbsolutePath;
+        }
+
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
             .UseReactiveUI();
@@ -55,10 +64,10 @@ public class MainActivity : AvaloniaMainActivity<App>
 /*
     public override void OnBackPressed()
     {
-        if (App.CurrentApp.ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+        if (App.CurrentApp.ApplicationLifetime is ISingleViewApplicationLifetime singleViewLifetime)
         {
             // Return to previous page
-            SingleViewNavigationPage RootPage = (SingleViewNavigationPage)singleViewPlatform.MainView!;
+            SingleViewNavigationPage RootPage = (SingleViewNavigationPage)singleViewLifetime.MainView!;
             if (1 < RootPage.NavStack.Count)
             {
                 RootPage.PopPage();
