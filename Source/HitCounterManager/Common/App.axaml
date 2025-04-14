@@ -120,27 +120,60 @@
 			</DrawingImage.Drawing>
 		</DrawingImage>
 		<!-- MainMenu (Run section) -->
-		<c:LocalResourceBitmap x:Key="ImageProfileReset">
-			<x:Arguments>/Resources/drawable/icons8_repeat_one_32.png</x:Arguments>
-		</c:LocalResourceBitmap>
-		<c:LocalResourceBitmap x:Key="ImageProfilePB">
-			<x:Arguments>/Resources/drawable/icons8_trophy_32.png</x:Arguments>
-		</c:LocalResourceBitmap>
-		<c:LocalResourceBitmap x:Key="ImageTimerOff">
-			<x:Arguments>/Resources/drawable/icons8_sleep_32.png</x:Arguments>
-		</c:LocalResourceBitmap>
-		<c:LocalResourceBitmap x:Key="ImageTimerOn">
-			<x:Arguments>/Resources/drawable/icons8_time_32.png</x:Arguments>
-		</c:LocalResourceBitmap>
-		<c:LocalResourceBitmap x:Key="ImageHit">
-			<x:Arguments>/Resources/drawable/icons8_attack_32.png</x:Arguments>
-		</c:LocalResourceBitmap>
-		<c:LocalResourceBitmap x:Key="ImageHitWay">
-			<x:Arguments>/Resources/drawable/icons8_watch_your_step_32.png</x:Arguments>
-		</c:LocalResourceBitmap>
-		<c:LocalResourceBitmap x:Key="ImageNextSplit">
-			<x:Arguments>/Resources/drawable/icons8_staircase_32.png</x:Arguments>
-		</c:LocalResourceBitmap>
+		<StreamGeometry x:Key="ImageProfileResetNew">M8 20v1.932a.5.5 0 0 1-.82.385l-4.12-3.433A.5.5 0 0 1 3.382 18H18a2 2 0 0 0 2-2V8h2v8a4 4 0 0 1-4 4H8zm8-17.932a.5.5 0 0 1 .82-.385l4.12 3.433a.5.5 0 0 1-.321.884H6a2 2 0 0 0-2 2v8H2V8a4 4 0 0 1 4-4h10V2.068zM11 8h2v8h-2v-6H9V9l2-1z</StreamGeometry><!-- Origin: https://www.svgrepo.com/svg/347343/repeat-one -->
+		<DrawingImage x:Key="ImageProfileReset"><!-- Origin: https://www.svgrepo.com/svg/347343/repeat-one -->
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="{DynamicResource IconForegroundBrush}" Geometry="M8 20v1.932a.5.5 0 0 1-.82.385l-4.12-3.433A.5.5 0 0 1 3.382 18H18a2 2 0 0 0 2-2V8h2v8a4 4 0 0 1-4 4H8zm8-17.932a.5.5 0 0 1 .82-.385l4.12 3.433a.5.5 0 0 1-.321.884H6a2 2 0 0 0-2 2v8H2V8a4 4 0 0 1 4-4h10V2.068zM11 8h2v8h-2v-6H9V9l2-1z" />
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+		<DrawingImage x:Key="ImageProfilePB"><!-- Origin: https://www.svgrepo.com/svg/487929/trophy -->
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="{DynamicResource IconForegroundBrush}" Geometry="M22,3H19V2a1,1,0,0,0-1-1H6A1,1,0,0,0,5,2V3H2A1,1,0,0,0,1,4V6a4.994,4.994,0,0,0,4.276,4.927A7.009,7.009,0,0,0,11,15.92V18H7a1,1,0,0,0-.949.684l-1,3A1,1,0,0,0,6,23H18a1,1,0,0,0,.948-1.316l-1-3A1,1,0,0,0,17,18H13V15.92a7.009,7.009,0,0,0,5.724-4.993A4.994,4.994,0,0,0,23,6V4A1,1,0,0,0,22,3ZM5,8.829A3.006,3.006,0,0,1,3,6V5H5ZM16.279,20l.333,1H7.387l.334-1ZM17,9A5,5,0,0,1,7,9V3H17Zm4-3a3.006,3.006,0,0,1-2,2.829V5h2ZM10.667,8.667,9,7.292,11,7l1-2,1,2,2,.292L13.333,8.667,13.854,11,12,9.667,10.146,11Z" />
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+		<DrawingImage x:Key="ImageTimerOn"><!-- Origin: https://www.svgrepo.com/svg/490407/time-fast -->
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="{DynamicResource IconForegroundBrush}" Geometry="M9,24H1a1,1,0,0,1,0-2H9a1,1,0,0,1,0,2Z M7,20H1a1,1,0,0,1,0-2H7a1,1,0,0,1,0,2Z M5,16H1a1,1,0,0,1,0-2H5a1,1,0,0,1,0,2Z M13,23.955a1,1,0,0,1-.089-2A10,10,0,1,0,2.041,11.09a1,1,0,0,1-1.992-.18A12,12,0,0,1,24,12,11.934,11.934,0,0,1,13.09,23.951C13.06,23.954,13.029,23.955,13,23.955Z M12,6a1,1,0,0,0-1,1v5a1,1,0,0,0,.293.707l3,3a1,1,0,0,0,1.414-1.414L13,11.586V7A1,1,0,0,0,12,6Z" />
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+		<DrawingImage x:Key="ImageTimerOff"><!-- Origin: https://www.svgrepo.com/svg/311218/snooze -->
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="{DynamicResource IconForegroundBrush}" Geometry="M9,12.5041675 C9.80051269,12.5041675 10.261621,13.3881602 9.84608348,14.0379597 L9.7806994,14.1290743 L5.081,19.999 L9,20 C9.51283584,20 9.93550716,20.3860402 9.99327227,20.8833789 L10,21 C10,21.5128358 9.61395981,21.9355072 9.11662113,21.9932723 L9,22 L3,22 C2.19948731,22 1.73837904,21.1160073 2.15391652,20.4662078 L2.2193006,20.3750932 L6.918,14.504 L3.00103893,14.5041675 C2.48820309,14.5041675 2.06553176,14.1181273 2.00776666,13.6207886 L2.00103893,13.5041675 C2.00103893,12.9913317 2.38707912,12.5686603 2.8844178,12.5108952 L3.00103893,12.5041675 L9,12.5041675 Z M21,2 C21.8052799,2 22.2651587,2.89321349 21.8406725,3.54229538 L21.7739573,3.63323779 L14.109,13 L21,13 C21.5128358,13 21.9355072,13.3860402 21.9932723,13.8833789 L22,14 C22,14.5128358 21.6139598,14.9355072 21.1166211,14.9932723 L21,15 L12,15 C11.1947201,15 10.7348413,14.1067865 11.1593275,13.4577046 L11.2260427,13.3667622 L18.889,4 L12,4 C11.4871642,4 11.0644928,3.61395981 11.0067277,3.11662113 L11,3 C11,2.48716416 11.3860402,2.06449284 11.8833789,2.00672773 L12,2 L21,2 Z" />
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+		<DrawingImage x:Key="ImageHit"><!-- Origin: https://www.svgrepo.com/svg/323419/sword-brandish -->
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="{DynamicResource IconForegroundBrush}" Geometry="M122.1 17.52L186.6 161l104.5-44.9-44.5-98.58h-51.1l35.8 80.75-16.4 7.23-39-87.98zm265.2 77.75L110.4 215.2l12 28.2 278.1-119.8zm-69.7 98.53l-23.9 11.5c12.8 5.4 26 13.7 38.3 15.6 18.1-13.1-4.9-30.5-14.4-27.1zm-60.7 11.1l-36.2 16.7c-11.9 18.4-14.8 46-18.2 69.7 20.6 30.1 30.5 62.4 39.5 94 17.9-3.7 32.2-6.8 48.7-11.5-24.4-38.7-42.2-78.4-53.6-118.9 0 0 5.6-10.5 8.4-15.8 11.9 7.3 24.9 12.4 36.6 9.9 10-4.1 21.5-7.9 27.7-16.6-17.6-6.9-37.1-17.5-52.9-27.5zm92.6 26.6c-10.8 5.8-23 11.2-31.9 18.9-5.3 4.7-12.1 8.8-20.5 12.3 1.1 7.3-.1 19.6 8.1 18.8 20.5-6.2 40.5-15 59.7-28.4-.1-9.2-8-24.1-15.4-21.6zm-90.2 34.2c11.3 34.8 27.6 69 49.3 102.6 4.7-1.6 9.3-3.3 13.5-5-7.3-6.2-11.7-15.9-12-25.3-16.6-4.1-20.8-29.4-17.2-41.6-9.5-7-13.6-18.1-14.2-28.7-7.2.7-13.6-.1-19.4-2zm103.3 10.4c-13.6 8.1-27.6 14.3-41.6 19.2l-9 4.4c-4.4 4.6-4.5 15.6 1 20.3 9.7 3.5 50.1-21.2 57.7-27.9 1.3-5.8-3.5-14.9-8.1-16zm-178.1 21.2L19.1 335.8V495c95.7-25.3 146.9-47.1 209.7-90.2-10.8-38-20.5-74.8-44.3-107.5zm187.8 16.9c-13.6 10.2-27.2 16.2-42.9 21.4-.4 6.7 2.5 18.1 12.1 16 19.9-4.3 36.3-17.5 36.6-24.6.2-3.7-2-10.5-5.8-12.8zm-7.5 48.6c-14.3 8.2-31.5 15.9-46.7 21.4l18.7 31.8 39.3-18.8zm22.2 49.1L342.9 433l3.1 21.9c15.1.5 46.6-11.3 55.4-26.1v-.1z" />
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+		<DrawingImage x:Key="ImageHitWay"><!-- Origin: https://www.svgrepo.com/svg/74979/falling -->
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="{DynamicResource IconForegroundBrush}" Geometry="M136.254,243.992l-5.904,15.591l-97.808,26.401c-12.552,3.388-19.981,16.311-16.593,28.863 c3.388,12.549,16.306,19.982,28.863,16.593l109.427-29.538c1.962-0.53,3.818-1.311,5.543-2.297l-0.601-15.423L136.254,243.992z" />
+					<GeometryDrawing Brush="{DynamicResource IconForegroundBrush}" Geometry="M 283.822, 40.658 a 40.658,40.658 0 1,1 81.316,0 a 40.658,40.658 0 1,1 -81.316,0" /><!-- was circle originally, changed it to path accordingly to https://www.smashingmagazine.com/2019/03/svg-circle-decomposition-paths/ -->
+					<GeometryDrawing Brush="{DynamicResource IconForegroundBrush}" Geometry="M395.317,207.126l-56.067-45.813l-29.622-45.427c0.75-7.581-1.633-15.434-7.236-21.444L268.99,58.618 c-10.344-11.095-27.724-11.703-38.819-1.359l-103.764,96.744l0.036,0.005c-5.529,5.571-7.903,13.574-6.36,21.224 c1.077,5.345-2.141-1.347,57.077,102.463c-0.731,11.04-6.785,102.495-7.604,114.86c-0.86,12.996,9.273,25.097,23.518,25.097 l154.599-0.033c4.031-0.001,7.761-2.131,9.811-5.602c2.05-3.471,2.113-7.766,0.168-11.296l-35.928-65.185 c-1.711-3.105-4.77-5.236-8.275-5.767c-3.505-0.533-7.058,0.601-9.611,3.059l-18.349,17.671l-38.994,3.455 c-2.086,0.185-4.081,0.941-5.765,2.185l-22.686,16.757c2.09-31.574,5.147-77.739,6.565-99.16c0.292-4.411-0.708-9.128-3.041-13.22 l-57.958-101.6l0,0l0,0l50.303,55.57l19.451-18.135c0.216-1.382-1.221,4.325,20.276-78.22l-1.696,81.243l0,0 c-0.047,6.543,3.173,12.711,8.642,16.402l66.246,44.755c8.979,6.062,21.192,3.67,27.236-5.284 c6.053-8.967,3.712-21.163-5.284-27.236l-56.245-37.967l0.541-74.61l15.953,63.021l50.288,33.946 c9.617,6.491,15.681,16.757,16.777,28.307c7.863,2.911,16.683,0.526,21.998-5.979 C404.951,226.341,403.707,213.982,395.317,207.126z" />
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+		<DrawingImage x:Key="ImageNextSplit"><!-- Origin: https://www.svgrepo.com/svg/113316/man-climbing-stairs -->
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="{DynamicResource IconForegroundBrush}" Geometry="M37.872,113.44c0.204,0.013,0.405,0.024,0.609,0.024c4.028,0,7.447-3.105,7.764-7.19l2.213-28.547l14.958-10.78v41.409 c0,2.082,0.563,4.025,1.464,5.742l-16.791,69.574c-1.209,5.029,1.878,10.078,6.896,11.289c0.743,0.177,1.48,0.256,2.208,0.256 c4.223,0,8.05-2.874,9.085-7.154l16-66.305l18.182,8.671l-1.525,24.612c-0.32,5.151,3.595,9.597,8.753,9.913 c0.201,0.013,0.396,0.019,0.591,0.019c4.901,0,9.018-3.818,9.328-8.775l1.924-30.914c0.231-3.806-1.863-7.38-5.315-9.018 l-25.852-12.325V76.568l9.042,10.793c1.285,1.535,3.112,2.515,5.093,2.74l27.493,3.118c0.298,0.03,0.59,0.049,0.889,0.049 c3.909,0,7.282-2.938,7.733-6.914c0.487-4.278-2.594-8.139-6.869-8.626l-24.393-2.761L87.477,51.246 c-0.591-1.507-1.465-2.868-2.561-4.025c-1.042-4.031-4.67-7.021-9.024-7.021c-3.242,0-6.092,1.645-7.77,4.144L36.417,67.197 c-1.857,1.342-3.036,3.437-3.209,5.717l-2.497,32.147C30.37,109.361,33.582,113.112,37.872,113.44z" />
+					<GeometryDrawing Brush="{DynamicResource IconForegroundBrush}" Geometry="M 64.670, 19.354 a 19.354,19.354 0 1,1 38.708,0 a 19.354,19.354 0 1,1 -38.708,0" /><!-- was circle originally, changed it to path accordingly to https://www.smashingmagazine.com/2019/03/svg-circle-decomposition-paths/ -->
+					<GeometryDrawing Brush="{DynamicResource IconForegroundBrush}" Geometry="M175.179,105.269l-22.963,7.168l5.286,5.285l-25.105,20.137c-0.737,0.591-1.163,1.485-1.163,2.43v28.059H84.024 c-1.72,0-3.118,1.395-3.118,3.117v28.06H33.697c-1.72,0-3.118,1.394-3.118,3.117s1.397,3.118,3.118,3.118h50.327 c1.72,0,3.118-1.395,3.118-3.118v-28.059h47.209c1.717,0,3.118-1.395,3.118-3.118v-29.678l24.472-19.632l6.071,6.071 L175.179,105.269z" />
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
 		<!-- AutoSplitter start -->
 		<c:LocalResourceBitmap x:Key="ImageAutoSplitterConfig">
 			<x:Arguments>/Resources/drawable/icon-autosplitter-32.png</x:Arguments>

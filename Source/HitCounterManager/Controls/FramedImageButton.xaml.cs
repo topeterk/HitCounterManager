@@ -1,6 +1,6 @@
 //MIT License
 
-//Copyright (c) 2021-2023 Peter Kirmeier
+//Copyright (c) 2021-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,6 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
-using Avalonia.Media.Imaging;
 
 namespace HitCounterManager.Controls
 {
@@ -35,7 +34,7 @@ namespace HitCounterManager.Controls
         // Info about StyledProperty, see: https://docs.avaloniaui.net/docs/authoring-controls/defining-properties
         public static readonly StyledProperty<ICommand> OnClickCommandProperty = AvaloniaProperty.Register<FramedImageButton, ICommand>(nameof(OnClickCommand));
         public static readonly StyledProperty<ICommand> OnRightClickCommandProperty = AvaloniaProperty.Register<FramedImageButton, ICommand>(nameof(OnRightClickCommandProperty));
-        public static readonly StyledProperty<Bitmap> ImgSrcProperty = AvaloniaProperty.Register<FramedImageButton, Bitmap>(nameof(ImgSrc));
+        public static readonly StyledProperty<IImage> ImgSrcProperty = AvaloniaProperty.Register<FramedImageButton, IImage>(nameof(ImgSrc));
         public static readonly StyledProperty<IBrush> MainColorProperty = AvaloniaProperty.Register<FramedImageButton, IBrush>(nameof(MainColor));
 
         public FramedImageButton()
@@ -55,7 +54,7 @@ namespace HitCounterManager.Controls
             set => SetValue(OnRightClickCommandProperty, value);
         }
 
-        public Bitmap ImgSrc
+        public IImage ImgSrc
         {
             get => GetValue(ImgSrcProperty);
             set => SetValue(ImgSrcProperty, value);
