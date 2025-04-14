@@ -14,6 +14,7 @@
     <None Include="Helper\JsonWriter.cs" />
     <Compile Remove="Helper\JsonWriter.cs" />
     <AvaloniaResource Include="Resources/**" />
+    <AvaloniaResource Remove="Resources\drawable\team_hitless_logo.svg" />
     <!-- https://learn.microsoft.com/de-de/visualstudio/msbuild/msbuild-well-known-item-metadata?view=vs-2022 -->
     <!-- <AvaloniaResource Include="Resources/**" Link="%(RelativeDir)$([System.String]::Concat('%(Filename)%(Extension)').Replace('-','_'))"/> -->
     <AvaloniaXaml Include="Controls/*.xaml" />
