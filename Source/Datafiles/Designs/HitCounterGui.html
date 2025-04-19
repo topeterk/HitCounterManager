@@ -35,6 +35,8 @@ SOFTWARE.
 var tbl = document.getElementById('table');
 var current_split_time = 0;
 var current_split_time_pb = 0;
+var current_split_duration = 0;
+var current_split_duration_pb = 0;
 var total_time_current = 0;
 var total_time_pb = 0;
 var is_timer_paused = false;
@@ -102,12 +104,17 @@ function DoVisualUpdate(d /*data*/)
 			s.hitless = hitless;
 			s.hitless_pb = hitless_pb;
 			s.reached = (i <= d.split_active);
+			s.active = (d.split_active == i);
+			s.gold = (0 < s.duration_gold && s.duration <= s.duration_gold);
+			s.gold_pb = (0 < s.duration_gold && s.duration_pb <= s.duration_gold);
 
-			// check and remember that we reached farthest point of the currect run
-			if (d.split_active == i)
+			// remember data from farthest point of the run
+			if (s.active)
 			{
 				current_split_time = s.comulative_time;
 				current_split_time_pb = s.comulative_time_pb;
+				current_split_duration = s.duration;
+				current_split_duration_pb = s.duration_pb;
 			}
 
 			// mark entries that should not be displayed
@@ -134,14 +141,13 @@ function DoVisualUpdate(d /*data*/)
 			}
 			s.class_name = (!s.reached || d.high_contrast_names ? '' : s.class_hits_color);
 			s.class_hits = (!s.reached ? '' : s.class_hits_color);
-			if ((0 == s.duration) || (0 == s.duration_pb) || !s.reached) // no color when there is no diff or split is not reached
-				s.class_time = '';
-			else if ((0 < s.duration_gold) && (s.duration < s.duration_gold))
-				s.class_time = 'gold';
-			else if (s.comulative_time_pb - s.comulative_time <= 0) // also see totals update
-				s.class_time = 'worse';
+			if ((0 == s.duration) || (0 == s.duration_pb) || !s.reached) // no color when there is no duration recorded yet or no diff available or split is not reached
+				s.class_time = s.class_duration = '';
 			else
-				s.class_time = (s.duration <= s.duration_pb ? 'better' : 'neither'); // ahead of total time but still better than PB?
+			{
+				s.class_duration = (s.duration <= s.duration_pb ? 'better' : 'worse');
+				s.class_time = (s.comulative_time_pb < s.comulative_time ? 'worse' : (s.duration <= s.duration_pb ? 'better' : 'neither')); // ahead of total time but not better than PB (neither)?
+			}
 		}
 
 		total_hits_class = (total_hits_combined - total_hits_pb <= 0 ? 'better' : 'worse');
@@ -165,14 +171,18 @@ function DoVisualUpdate(d /*data*/)
 			d.show_pb = false;
 			// as resetting whould lose the current hits, there is not timer support
 			d.show_time = false;
-			d.show_time_pb = false;   
 			d.show_time_diff = false;
+			d.show_time_pb = false;
 			d.show_time_footer = false;
+			d.show_duration = false;
+			d.show_duration_diff = false;
+			d.show_duration_pb = false;
+			d.show_duration_gold = false;
 		case 3: // NoDeath
 			d.show_hitscombined = true;
 		case 0: // SplitCounter
 			hit_cols = (d.show_hits ? (d.show_hitscombined ? 1 : 2) : 0) + (d.show_numbers && d.show_diff ? 1 : 0) + (d.show_pb ? 1 : 0);
-			max_cols = 1 + hit_cols + (d.show_time ? 1 : 0) + (d.show_time_diff ? 1 : 0) + (d.show_time_pb ? 1 : 0) + (d.show_session_progress ? 1 : 0);
+			max_cols = 1 + hit_cols + (d.show_time ? 1 : 0) + (d.show_time_diff ? 1 : 0) + (d.show_time_pb ? 1 : 0) + (d.show_duration ? 1 : 0) + (d.show_duration_diff ? 1 : 0) + (d.show_duration_pb ? 1 : 0) + (d.show_duration_gold ? 1 : 0) + (d.show_session_progress ? 1 : 0);
 			break;
 		case 2: // Checklist
 			d.show_progress_bar = false;
@@ -202,8 +212,12 @@ function DoVisualUpdate(d /*data*/)
   (!d.show_numbers || !d.show_diff      ? '' : '<td class="' + majorclass + '" width="30px">Diff</td>') +
   (!d.show_pb                           ? '' : '<td class="' + majorclass + '">PB</td>') +
   (!d.show_time                         ? '' : '<td class="' + majorclass + ' right" width="110px">Time</td>') +
-  (!d.show_time_diff                    ? '' : '<td class="' + majorclass + ' right" width="90px">Delta</td>') +
+  (!d.show_time_diff                    ? '' : '<td class="' + majorclass + ' right" width="100px">Delta</td>') +
   (!d.show_time_pb                      ? '' : '<td class="' + majorclass + ' right" width="110px">PB</td>') +
+  (!d.show_duration                     ? '' : '<td class="' + majorclass + ' right" width="90px">Dur</td>') +
+  (!d.show_duration_diff                ? '' : '<td class="' + majorclass + ' right" width="100px">DeltaDur</td>') +
+  (!d.show_duration_pb                  ? '' : '<td class="' + majorclass + ' right" width="90px">PBDur</td>') +
+  (!d.show_duration_gold                ? '' : '<td class="' + majorclass + ' right" width="90px">Gold</td>') +
   (!d.show_session_progress             ? '' : '<td class="' + majorclass + '" width="22px">&nbsp</td>') +
 			'</tr>';
 		}
@@ -260,6 +274,12 @@ function DoVisualUpdate(d /*data*/)
 	// -------------------------------------- Splits --------------------------------------
 	if ((d.purpose == 0 /*SplitCounter*/) || (d.purpose == 3 /*NoDeath*/) || (d.purpose == 4 /*ResetCounter*/))
 	{
+		var duration_class;
+		var time_diff_class;
+		var duration_pb_class;
+		var time_pb_class;
+		var gold_class;
+		var highlight_class;
 		var bottom_class;
 		var hits_blank;
 		var comulative_time_duration_str;
@@ -272,24 +292,36 @@ function DoVisualUpdate(d /*data*/)
 			// skip entries that should not be displayed
 			if (!s.display) continue;
 
-			highlight_class = (d.highlight_active_split && d.split_active == i ? ' highlight' : '');
+			time_class = (s.reached && !s.active && s.gold ? 'gold' : s.class_time);
+			duration_class =  (s.reached && 0 < s.duration_pb ? (!s.active && s.gold ? 'gold' : s.class_duration) : '');
+			time_diff_class = (s.reached && 0 < s.duration_pb ? (!s.active && s.gold ? 'gold' : s.class_time) : '');
+			duration_pb_class = (0 < s.duration_pb ? (s.gold_pb ? 'gold' : s.class_duration) : '');
+			time_pb_class = (s.gold_pb ? 'gold' : (0 < s.duration_pb ? s.class_time : ''));
+			gold_class = (0 == s.duration_gold ? '' : 'gold');
+			highlight_class = (d.highlight_active_split && s.active ? ' highlight' : '');
 			bottom_class = (!d.show_footer && (d.split_last == i) ? ' bottom' : ''); // no footer? care about last row
-			hits_blank = (d.purpose != 4 /*ResetCounter*/) && (!s.reached || ((d.split_active == i) && (s.hits_combined == 0)));
-			comulative_time_duration_str = (s.reached ? IntToTimeStr(s.comulative_time, false) : DiffToTimeStr(s.duration, false)); // absolute time up to current split, afterwards show duration instead
-			comulative_time_diff_str = (s.reached ? DiffToTimeStr(s.comulative_time - s.comulative_time_pb, true) : DiffToTimeStr(s.duration - s.duration_pb, true));
+			hits_blank = (d.purpose != 4 /*ResetCounter*/) && (!s.reached || (s.active && (s.hits_combined == 0)));
+			time_duration_str = IntToTimeStr(s.duration, false);
+			time_duration_diff_str = DiffToTimeStr(s.duration - s.duration_pb, true);
+			comulative_time_duration_str = (s.reached ? IntToTimeStr(s.comulative_time, false) : time_duration_str); // absolute time up to current split, afterwards show duration instead
+			comulative_time_diff_str = (s.reached ? DiffToTimeStr(s.comulative_time - s.comulative_time_pb, true) : time_duration_diff_str);
 
 			// generate actual split table entry
-			new_tbl += '<tr class="' + (d.split_active == i ? 'current' : (s.reached ? 'completed' : '')) + (d.high_contrast ? (i%2==0 ? ' even' : ' odd') : '') + '">' +
-                                               '<td class="' + s.class_name + highlight_class + bottom_class + ' left">'            + s.name                                                                                                                                                                                                                                                                                                              + '</td>'  + // Split
-  (!d.show_hits || !d.show_hitscombined ? '' : '<td class="' + s.class_hits + highlight_class + bottom_class + '">'                 + (               hits_blank                                          ? empty_str : (d.show_numbers ? IntToDisplayString(s.hits_combined,             false, d.use_roman) : ShowCrossOrCheckMark(hits_blank ? -1 : (d.purpose == 3 && !s.hitless ? 1 : s.hits_combined))))                                            + '</td>') + // Now
-  (!d.show_hits ||  d.show_hitscombined ? '' : '<td class="' + s.class_hits + highlight_class + bottom_class + '">'                 + (               hits_blank                                          ? empty_str : (d.show_numbers ? IntToDisplayString(s.hits_boss,                 false, d.use_roman) : ShowCrossOrCheckMark(hits_blank ? -1 : (d.purpose == 3 && !s.hitless ? 1 : s.hits_boss    ))))                                            + '</td>'+   // Boss
-                                               '<td class="' + s.class_hits + highlight_class + bottom_class + '">'                 + (               hits_blank                                          ? empty_str : (d.show_numbers ? IntToDisplayString(s.hits_way,                  false, d.use_roman) : ShowCrossOrCheckMark(hits_blank ? -1 : (d.purpose == 3 && !s.hitless ? 1 : s.hits_way     ))))                                            + '</td>') + // Way
-  (!d.show_numbers || !d.show_diff      ? '' : '<td class="' + s.class_hits + highlight_class + bottom_class + '">'                 + (!s.reached || (hits_blank && ((s.hits_combined - s.hits_pb) == 0)) ? empty_str :                   IntToDisplayString(s.hits_combined - s.hits_pb, true,  d.use_roman)                                                                                                )                                            + '</td>') + // Diff
-  (!d.show_pb                           ? '' : '<td class="' + s.class_hits + highlight_class + bottom_class + '">'                 + (d.show_numbers ? '&nbsp;' + IntToDisplayString(s.hits_pb, false, d.use_roman) + (d.show_pb_totals ? (d.subPB ? '<sub>&nbsp;' : '') + '(' +IntToDisplayString(s.comulative_pb, false, d.use_roman) + ')' + (d.subPB ? '</sub>' : '') : '') : ShowCrossOrCheckMark(d.purpose == 3 && !s.hitless_pb ? 1 : s.hits_pb)) + '</td>') + // PB
-  (!d.show_time                         ? '' : '<td class="'                + highlight_class + bottom_class + ' timestamp right">' +                      (d.split_active == i ? BuildSpan('time_split_current', '',           comulative_time_duration_str) : (!s.reached && s.duration == 0 ? empty_str : comulative_time_duration_str))                                                                                                               + '</td>') + // Time
-  (!d.show_time_diff                    ? '' : '<td class="' + s.class_time + highlight_class + bottom_class +           ' right">' + (0 < s.duration_pb ? (d.split_active == i ? BuildSpan('time_split_diff',    s.class_time, comulative_time_diff_str    ) : (!s.reached && s.duration == 0 ? empty_str : comulative_time_diff_str    )) : empty_str)                                                                                                  + '</td>') + // Diff (Time)
-  (!d.show_time_pb                      ? '' : '<td class="'                + highlight_class + bottom_class + ' timestamp right">' + (0 < s.duration_pb ? IntToTimeStr(s.comulative_time_pb, false) : empty_str)                                                                                                                                                                                                                                         + '</td>') + // PB (Time)
-  (!d.show_session_progress             ? '' : '<td class="'                + highlight_class + bottom_class + '">'                 + (d.best_progress == i ? ShowBestProgress() : (d.session_progress == i ? ShowSessionProgress() : '&nbsp;'))                                                                                                                                                                                                          + '</td>') + // SP BP (Star / Clock / Flag)
+			new_tbl += '<tr class="' + (s.active ? 'current' : (s.reached ? 'completed' : '')) + (d.high_contrast ? (i%2==0 ? ' even' : ' odd') : '') + '">' +
+                                               '<td class="' + s.class_name      + highlight_class + bottom_class + ' left">'            + s.name                                                                                                                                                                                                                                                                                                              + '</td>'  + // Split
+  (!d.show_hits || !d.show_hitscombined ? '' : '<td class="' + s.class_hits      + highlight_class + bottom_class + '">'                 + (               hits_blank                                          ? empty_str : (d.show_numbers ? IntToDisplayString(s.hits_combined,             false, d.use_roman) : ShowCrossOrCheckMark(hits_blank ? -1 : (d.purpose == 3 && !s.hitless ? 1 : s.hits_combined))))                                            + '</td>') + // Now
+  (!d.show_hits ||  d.show_hitscombined ? '' : '<td class="' + s.class_hits      + highlight_class + bottom_class + '">'                 + (               hits_blank                                          ? empty_str : (d.show_numbers ? IntToDisplayString(s.hits_boss,                 false, d.use_roman) : ShowCrossOrCheckMark(hits_blank ? -1 : (d.purpose == 3 && !s.hitless ? 1 : s.hits_boss    ))))                                            + '</td>'+   // Boss
+                                               '<td class="' + s.class_hits      + highlight_class + bottom_class + '">'                 + (               hits_blank                                          ? empty_str : (d.show_numbers ? IntToDisplayString(s.hits_way,                  false, d.use_roman) : ShowCrossOrCheckMark(hits_blank ? -1 : (d.purpose == 3 && !s.hitless ? 1 : s.hits_way     ))))                                            + '</td>') + // Way
+  (!d.show_numbers || !d.show_diff      ? '' : '<td class="' + s.class_hits      + highlight_class + bottom_class + '">'                 + (!s.reached || (hits_blank && ((s.hits_combined - s.hits_pb) == 0)) ? empty_str :                   IntToDisplayString(s.hits_combined - s.hits_pb, true,  d.use_roman)                                                                                                )                                            + '</td>') + // Diff
+  (!d.show_pb                           ? '' : '<td class="' + s.class_hits      + highlight_class + bottom_class + '">'                 + (d.show_numbers ? '&nbsp;' + IntToDisplayString(s.hits_pb, false, d.use_roman) + (d.show_pb_totals ? (d.subPB ? '<sub>&nbsp;' : '') + '(' +IntToDisplayString(s.comulative_pb, false, d.use_roman) + ')' + (d.subPB ? '</sub>' : '') : '') : ShowCrossOrCheckMark(d.purpose == 3 && !s.hitless_pb ? 1 : s.hits_pb)) + '</td>') + // PB
+  (!d.show_time                         ? '' : '<td class="' + time_class        + highlight_class + bottom_class + ' timestamp right">' +                      (s.active ? BuildSpan('time_split_current',           '',              comulative_time_duration_str) : (!s.reached && s.duration == 0 ? empty_str : comulative_time_duration_str))                                                                                                             + '</td>') + // Time
+  (!d.show_time_diff                    ? '' : '<td class="' + time_diff_class   + highlight_class + bottom_class + ' timestamp right">' + (0 < s.duration_pb ? (s.active ? BuildSpan('time_split_diff',              time_diff_class, comulative_time_diff_str    ) : (!s.reached && s.duration == 0 ? empty_str : comulative_time_diff_str    )) : empty_str)                                                                                                + '</td>') + // Delta (Time)
+  (!d.show_time_pb                      ? '' : '<td class="' + time_pb_class     + highlight_class + bottom_class + ' timestamp right">' + (0 < s.duration_pb ? IntToTimeStr(s.comulative_time_pb, false) : empty_str)                                                                                                                                                                                                                                         + '</td>') + // PB (Time)
+  (!d.show_duration                     ? '' : '<td class="' + duration_class    + highlight_class + bottom_class + ' timestamp right">' +                      (s.active ? BuildSpan('time_split_duration',          '',              time_duration_str           ) : (!s.reached && s.duration == 0 ? empty_str : time_duration_str           ))                                                                                                             + '</td>') + // Dur (Duration)
+  (!d.show_duration_diff                ? '' : '<td class="' + duration_class    + highlight_class + bottom_class + ' timestamp right">' + (0 < s.duration_pb ? (s.active ? BuildSpan('time_split_duration_diff',     duration_class,  time_duration_diff_str      ) : (!s.reached && s.duration == 0 ? empty_str : time_duration_diff_str      )) : empty_str)                                                                                                + '</td>') + // DeltaDur (Duration)
+  (!d.show_duration_pb                  ? '' : '<td class="' + duration_pb_class + highlight_class + bottom_class + ' timestamp right">' + (0 < s.duration_pb ? IntToTimeStr(s.duration_pb, false) : empty_str)                                                                                                                                                                                                                                                + '</td>') + // PBDur (Duration)
+  (!d.show_duration_gold                ? '' : '<td class="' + gold_class        + highlight_class + bottom_class + ' timestamp right">' + (0 < s.duration_gold ? IntToTimeStr(s.duration_gold, false) : empty_str)                                                                                                                                                                                                                                            + '</td>') + // Gold (Duration)
+  (!d.show_session_progress             ? '' : '<td class="'                     + highlight_class + bottom_class + '">'                 + (d.best_progress == i ? ShowBestProgress() : (d.session_progress == i ? ShowSessionProgress() : '&nbsp;'))                                                                                                                                                                                                          + '</td>') + // SP BP (Star / Clock / Flag)
 			'</tr>';
 		}
 	}
@@ -306,7 +338,7 @@ function DoVisualUpdate(d /*data*/)
 		{
 			s = splits[i];
 			new_tbl +=
- '<tr class="' + (d.split_active == i ? 'current' : (d.high_contrast ? (i%2==0 ? 'even' : 'odd') : '')) + '">' +
+ '<tr class="' + (s.active ? 'current' : (d.high_contrast ? (i%2==0 ? 'even' : 'odd') : '')) + '">' +
   '<td class="left">' + s.name + '</td>' +
   '<td>' + ShowCrossOrCheckMark(s.hits_combined > 0 ? 0 : 1) + '</td>' +
  '</tr>';
@@ -320,7 +352,7 @@ function DoVisualUpdate(d /*data*/)
 		if ((d.purpose == 0 /*SplitCounter*/) || (d.purpose == 3 /*NoDeath*/) || (d.purpose == 4 /*ResetCounter*/))
 		{
 			var hit_cols = (d.show_hits ? (d.show_hitscombined ? 1 : 2) : 0) + (d.show_numbers && d.show_diff ? 1 : 0) + (d.show_pb ? 1 : 0);
-			var time_class = (0 < splits.length ? splits[splits.length-1].class_time : '');
+			var time_class = (0 < splits.length ? splits[splits.length-1].class_duration : '');
 
 			if (d.show_numbers)
 			{
@@ -341,6 +373,10 @@ function DoVisualUpdate(d /*data*/)
   (!d.show_time                    ? '' : '<td class="' + majorclass + ' bottom timestamp right">' + BuildSpan('time_total_current', '',         IntToTimeStr(total_time_current, true))                  + '</td>') + // Total Time
   (!d.show_time_diff               ? '' : '<td class="' + majorclass + ' bottom timestamp right">' + BuildSpan('time_total_diff',    time_class, DiffToTimeStr(total_time_current - total_time_pb, true)) + '</td>') + // Diff between Total Time and Total PB (Time)
   (!d.show_time_pb                 ? '' : '<td class="' + majorclass + ' bottom timestamp right">' + IntToTimeStr(total_time_pb, true)                                                                    + '</td>') + // Total PB (Time)
+  (!d.show_duration                ? '' : '<td class="' + majorclass + ' bottom">&nbsp;</td>')                                                                                                                       + // Dur (Duration)
+  (!d.show_duration_diff           ? '' : '<td class="' + majorclass + ' bottom">&nbsp;</td>')                                                                                                                       + // DeltaDur (Duration)
+  (!d.show_duration_pb             ? '' : '<td class="' + majorclass + ' bottom">&nbsp;</td>')                                                                                                                       + // PBDur (Duration)
+  (!d.show_duration_gold           ? '' : '<td class="' + majorclass + ' bottom">&nbsp;</td>')                                                                                                                       + // Gold (Duration)
   (!d.show_session_progress        ? '' : '<td class="' + majorclass + ' bottom">&nbsp;</td>')                                                                                                                       + // SP BP (Star / Clock / Flag)
 				'</tr>';
 
@@ -384,26 +420,38 @@ function OnOffsetTimerTick(offset)
 	{
 		var diff;
 
-		span = document.getElementById('time_split_current');
-		if (span != undefined) span.innerHTML = IntToTimeStr(current_split_time + offset, false);
-		span = document.getElementById('time_split_diff');
-		if (span != undefined)
+		if (undefined  != (span = document.getElementById('time_split_current')))
+		{
+			diff = total_time_current + offset - total_time_pb;
+			span.innerHTML = IntToTimeStr(current_split_time + offset, false);
+			span.className = (0 <= diff ? 'worse' : 'better'); // also see split generation
+		}
+		if (undefined  != (span = document.getElementById('time_split_duration')))
+		{
+			diff = current_split_duration + offset - current_split_duration_pb;
+			span.innerHTML = IntToTimeStr(current_split_duration + offset, false);
+			span.className = (0 <= diff ? 'worse' : 'better'); // also see split generation
+		}
+		if (undefined  != (span = document.getElementById('time_split_diff')))
 		{
 			diff = current_split_time + offset - current_split_time_pb;
 			span.innerHTML = DiffToTimeStr(diff, true);
 			span.className = (0 <= diff ? 'worse' : 'better'); // also see split generation
 		}
-		span = document.getElementById('time_total_current');
-		if (span != undefined) span.innerHTML = IntToTimeStr(total_time_current + offset, true);
-		span = document.getElementById('time_total_diff');
-		if (span != undefined)
+		if (undefined  != (span = document.getElementById('time_split_duration_diff')))
+		{
+			diff = current_split_duration + offset - current_split_duration_pb;
+			span.innerHTML = DiffToTimeStr(diff, true);
+			span.className = (0 <= diff ? 'worse' : 'better'); // also see split generation
+		}
+		if (undefined  != (span = document.getElementById('time_total_current'))) span.innerHTML = IntToTimeStr(total_time_current + offset, true);
+		if (undefined  != (span = document.getElementById('time_total_diff')))
 		{
 			diff = total_time_current + offset - total_time_pb;
 			span.innerHTML = DiffToTimeStr(diff, true);
 			span.className = (0 <= diff ? 'worse' : 'better'); // also see split generation
 		}
-		span = document.getElementById('time_total_footer');
-		if (span != undefined) span.innerHTML = IntToTimeStr(total_time_current + offset, true);
+		if (undefined  != (span = document.getElementById('time_total_footer'))) span.innerHTML = IntToTimeStr(total_time_current + offset, true);
 	}
 }
 

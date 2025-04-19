@@ -96,8 +96,12 @@ namespace HitCounterManager
         public bool ShowPBTotals;
         public bool ShowDiff;
         public bool ShowTimeCurrent;
-        public bool ShowTimePB;
         public bool ShowTimeDiff;
+        public bool ShowTimePB;
+        public bool ShowDurationCurrent;
+        public bool ShowDurationDiff;
+        public bool ShowDurationPB;
+        public bool ShowDurationGold;
         public bool ShowTimeFooter;
         public int Purpose;
         public int Severity;
@@ -372,6 +376,10 @@ namespace HitCounterManager
             {
                 Settings.Version = 11;
                 Settings.StyleTableAlignment = "tblcenter";
+                Settings.ShowDurationCurrent = false;
+                Settings.ShowDurationDiff = false;
+                Settings.ShowDurationPB = false;
+                Settings.ShowDurationGold = false;
 
                 // Hotkeys (introduced with AutoSplitter) will be made available in general.
                 // Keep user settings unless values are not set, then change to default values.

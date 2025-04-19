@@ -8,6 +8,7 @@
 var data =
 /* HITCOUNTER_JSON_START */
 {
+"profile_name": "Dark Souls 3 The Ringed City (All Bosses) [EN] EXAMPLE",
 "list": [
 // list columns: Name, Hits(combined), PB, Hits(Way), RunIndex, Duration, DurationPB, DurationGold
 /* Test strings for different languages..
@@ -16,29 +17,29 @@ var data =
 ["CHI 谢谢", 0, 0, 0, 1, 0, 0, 0],
 ["JPN ありがとう", 0, 0, 0, 1, 0, 0, 0],
 */
-["Gundyr", 0, 0, 0, 1, 2, 2, 2],
-["Vordt", 0, 0, 0, 1, 22, 20, 20],
-["Abyss&nbsp;Watchers", 1, 0, 1, 1, 222, 222, 222],
-["Wolnir", 0, 0, 0, 1, 2220, 2222, 2222],
-["Dancer", 0, 1, 0, 1, 22220, 22222, 22222],
-["Crystal&nbsp;Sage", 2, 2, 1, 1, 222222, 222222, 222222],
-["Deacons", 0, 2, 0, 1, 2222222, 2222222, 2222222],
+["Gundyr", 0, 0, 0, 1, 2220, 2220, 2220],
+["Vordt", 0, 0, 0, 1, 4440, 2220, 2220],
+["Abyss Watchers", 1, 0, 1, 1, 1110, 2220, 1000],
+["Wolnir", 0, 0, 0, 1, 1110, 2222, 1000],
+["Dancer", 0, 1, 0, 1, 22220, 22222, 22000],
+["Crystal Sage", 2, 2, 1, 1, 222222, 333333, 220000],
+["Deacons", 0, 2, 0, 1, 2222222, 4444444, 2222222],
 ["Yhorm", 4, 4, 0, 1, 100000, 81234, 81234],
-["Pontiff", 0, 0, 0, 1, 81234, 100000, 100000],
-["Aldrich", 5, 3, 0, 1, 81234, 100000, 100000],
-["Dragonslayer", 5, 0, 2, 1, 555555, 555555, 0],
-["Princess", 0, 0, 0, 1, 30000, 15000, 5000],
-["Soul&nbsp;of&nbsp;Cinder", 0, 5, 0, 1, 15000, 30000, 0],
-["Greatwood", 0, 0, 0, 1, 555555, 555555, 555554],
-["Old&nbsp;Deamon&nbsp;King", 0, 1, 0, 1, 555555, 555555, 555556],
-["Ocelot", 4, 0, 0, 1, 555555, 555555, 555555],
-["Champion&nbsp;Gundyr", 0, 0, 0, 1, 555555, 555555, 555555],
-["Wyvern", 5, 0, 0, 1, 100000, 86234, 86234],
-["Nameless&nbsp;King", 1, 0, 1, 1, 555555, 555555, 555555],
-["Sister&nbsp;Friede", 0, 0, 0, 1, 555555, 0, 0],
+["Pontiff", 0, 0, 0, 1, 81234, 0, 80000],
+["Aldrich", 5, 3, 0, 1, 81234, 100000, 80000],
+["Dragonslayer", 5, 0, 2, 1, 555555, 0, 0],
+["Princess", 0, 0, 0, 1, 30000, 15000, 10000],
+["Soul of Cinder", 0, 5, 0, 1, 15000, 30000, 0],
+["Greatwood", 0, 0, 0, 1, 555555, 555555, 550000],
+["Old Deamon King", 0, 1, 0, 1, 555555, 0, 555555],
+["Ocelot", 4, 0, 0, 1, 1555555, 555555, 550000],
+["Champion Gundyr", 0, 0, 0, 1, 999999, 555555, 400000],
+["Wyvern", 5, 0, 0, 1, 82222, 86234, 80000],
+["Nameless King", 1, 0, 1, 1, 240000, 555555, 555555],
+["Sister Friede", 0, 0, 0, 1, 0, 555555, 555555],
 ["Gravetenders", 0, 1, 0, 1, 555555, 0, 0],
-["Demon&nbsp;Prince", 0, 0, 0, 1, 0, 555555, 0],
-["Darkeater&nbsp;Midir", 0, 0, 0, 1, 0, 555555, 0],
+["Demon Prince", 0, 0, 0, 1, 4444, 4444, 4444],
+["Darkeater Midir", 0, 0, 0, 1, 0, 0, 0],
 ["Halflight", 0, 1, 0, 1, 0, 0, 0],
 ["Gael", 0, 0, 0, 1, 0, 0, 0]
 ],
@@ -47,7 +48,7 @@ var data =
 "run_active": 1,
 "split_active": 18,
 "split_first": 0,
-"split_last": 999,
+"split_last": 24,
 "attempts": 42,
 "show_attempts": true,
 "show_headline": true,
@@ -58,11 +59,16 @@ var data =
 "show_hitscombined": true,
 "show_numbers": true,
 "show_pb": true,
+"show_pb_totals": true,
 "show_diff": true,
 "show_time": true,
-"show_time_pb": true,
-"show_time_diff": true,
+"show_time_diff": false,
+"show_time_pb": false,
 "show_time_footer": false,
+"show_duration": false,
+"show_duration_diff": false,
+"show_duration_pb": false,
+"show_duration_gold": false,
 "purpose": 0,                // 0 = SplitCounter, 1 = DeathCounter, 2 = Checklist, 3 = NoDeath, 4 = ResetCounter
 "severity": 0,               // 0 = AnyHitsCritical, 1 = BossHitCritical, 2 = ComparePB
 "font_name": undefined,      // "Courier",
@@ -77,8 +83,8 @@ var data =
 "width": 0,
 "tblalign": "tblcenter", // or "tblleft" or "tblright" or any custom value
 "subPB": false,
-"update_time": 1598986122000,
-"timer_paused": false,
+"update_time": 1745084697138,
+"timer_paused": true,
 }
 /* HITCOUNTER_JSON_END */
 ;

@@ -333,7 +333,10 @@
 						</Grid>
 
 						<TextBlock HorizontalAlignment="Left" Text="Columns" />
-						<Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
+						<Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="
+								Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,
+								Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,
+								Auto,Auto,Auto,Auto,Auto,Auto," HorizontalAlignment="Stretch">
 							<RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
 								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowHits" Classes="ImageButton">
 									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
@@ -417,10 +420,10 @@ Allows quick comparison with the current hit count total.</x:String>
 								</Button>
 							</RelativePanel>
 							<ToggleSwitch Grid.Row="10" Grid.Column="1" Margin="0" IsChecked="{Binding ShowTimeCurrent, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-							<TextBlock  Grid.Row="10" Grid.Column="2" Margin="0" Text="Split time" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="10" Grid.Column="2" Margin="0" Text="Split time (accumulated)" HorizontalAlignment="Left" VerticalAlignment="Center" />
 							<Border Grid.Row="11" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
 									IsVisible="{Binding ShowInfo[ShowTimeCurrent].Value, Mode=OneWay}">
-								<TextBlock Padding="0" Text="Show current split times" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+								<TextBlock Padding="0" Text="Show (accumulated) current split times" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
 							</Border>
 							<RelativePanel Grid.Row="12" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
 								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowTimeDiff" Classes="ImageButton">
@@ -428,10 +431,10 @@ Allows quick comparison with the current hit count total.</x:String>
 								</Button>
 							</RelativePanel>
 							<ToggleSwitch Grid.Row="12" Grid.Column="1" Margin="0" IsChecked="{Binding ShowTimeDiff, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-							<TextBlock  Grid.Row="12" Grid.Column="2" Margin="0" Text="Delta time" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="12" Grid.Column="2" Margin="0" Text="Delta time (accumulated)" HorizontalAlignment="Left" VerticalAlignment="Center" />
 							<Border Grid.Row="13" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
 									IsVisible="{Binding ShowInfo[ShowTimeDiff].Value, Mode=OneWay}">
-								<TextBlock Padding="0" Text="Show difference between personal best time and currenct split time" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+								<TextBlock Padding="0" Text="Show difference between (accumulated) personal best times and (accumulated) currenct split times" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
 							</Border>
 							<RelativePanel Grid.Row="14" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
 								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowTimePB" Classes="ImageButton">
@@ -439,19 +442,63 @@ Allows quick comparison with the current hit count total.</x:String>
 								</Button>
 							</RelativePanel>
 							<ToggleSwitch Grid.Row="14" Grid.Column="1" Margin="0" IsChecked="{Binding ShowTimePB, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-							<TextBlock  Grid.Row="14" Grid.Column="2" Margin="0" Text="PB time" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="14" Grid.Column="2" Margin="0" Text="PB time (accumulated)" HorizontalAlignment="Left" VerticalAlignment="Center" />
 							<Border Grid.Row="15" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
 									IsVisible="{Binding ShowInfo[ShowTimePB].Value, Mode=OneWay}">
-								<TextBlock Padding="0" Text="Show personal best times" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+								<TextBlock Padding="0" Text="Show (accumulated) personal best times" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
 							</Border>
 							<RelativePanel Grid.Row="16" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowDurationCurrent" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="16" Grid.Column="1" Margin="0" IsChecked="{Binding ShowDurationCurrent, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="16" Grid.Column="2" Margin="0" Text="Split duration (per split)" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="17" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowDurationCurrent].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="Show (per split) current split durations" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="18" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowDurationDiff" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="18" Grid.Column="1" Margin="0" IsChecked="{Binding ShowDurationDiff, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="18" Grid.Column="2" Margin="0" Text="Delta duration (per split)" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="19" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowDurationDiff].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="Show difference between (per split) personal best durations and (per split) currenct split durations" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="20" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowDurationPB" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="20" Grid.Column="1" Margin="0" IsChecked="{Binding ShowDurationPB, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="20" Grid.Column="2" Margin="0" Text="PB duration (per split)" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="21" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowDurationPB].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="Show (per split) personal best durations" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="22" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowDurationGold" Classes="ImageButton">
+									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+								</Button>
+							</RelativePanel>
+							<ToggleSwitch Grid.Row="22" Grid.Column="1" Margin="0" IsChecked="{Binding ShowDurationGold, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="22" Grid.Column="2" Margin="0" Text="Gold duration (per split)" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="23" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									IsVisible="{Binding ShowInfo[ShowDurationGold].Value, Mode=OneWay}">
+								<TextBlock Padding="0" Text="Show (per split) personal best (ever) durations" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+							</Border>
+							<RelativePanel Grid.Row="24" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
 								<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowSessionProgress" Classes="ImageButton">
 									<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
 								</Button>
 							</RelativePanel>
-							<ToggleSwitch Grid.Row="16" Grid.Column="1" Margin="0" IsChecked="{Binding ShowSessionProgress, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
-							<TextBlock  Grid.Row="16" Grid.Column="2" Margin="0" Text="SP and BP (session progress and best progress)" HorizontalAlignment="Left" VerticalAlignment="Center" />
-							<Border Grid.Row="17" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+							<ToggleSwitch Grid.Row="24" Grid.Column="1" Margin="0" IsChecked="{Binding ShowSessionProgress, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<TextBlock  Grid.Row="24" Grid.Column="2" Margin="0" Text="SP and BP (session progress and best progress)" HorizontalAlignment="Left" VerticalAlignment="Center" />
+							<Border Grid.Row="25" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
 									IsVisible="{Binding ShowInfo[ShowSessionProgress].Value, Mode=OneWay}">
 								<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
 									<TextBlock.Text>

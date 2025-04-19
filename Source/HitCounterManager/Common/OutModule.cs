@@ -232,9 +232,13 @@ namespace HitCounterManager.Models
                     WriteJsonSimpleValue(sr, "show_pb_totals", Settings.ShowPBTotals);
                     WriteJsonSimpleValue(sr, "show_diff", Settings.ShowDiff);
                     WriteJsonSimpleValue(sr, "show_time", Settings.ShowTimeCurrent);
-                    WriteJsonSimpleValue(sr, "show_time_pb", Settings.ShowTimePB);
                     WriteJsonSimpleValue(sr, "show_time_diff", Settings.ShowTimeDiff);
+                    WriteJsonSimpleValue(sr, "show_time_pb", Settings.ShowTimePB);
                     WriteJsonSimpleValue(sr, "show_time_footer", Settings.ShowTimeFooter);
+                    WriteJsonSimpleValue(sr, "show_duration", Settings.ShowDurationCurrent);
+                    WriteJsonSimpleValue(sr, "show_duration_diff", Settings.ShowDurationDiff);
+                    WriteJsonSimpleValue(sr, "show_duration_pb", Settings.ShowDurationPB);
+                    WriteJsonSimpleValue(sr, "show_duration_gold", Settings.ShowDurationGold);
                     WriteJsonSimpleValue(sr, "purpose", (int)Purpose);
                     WriteJsonSimpleValue(sr, "severity", (int)Severity);
 

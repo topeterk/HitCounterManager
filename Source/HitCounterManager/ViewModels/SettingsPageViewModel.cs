@@ -126,6 +126,10 @@ namespace HitCounterManager.ViewModels
             {"ShowTimeCurrent", new ShowInfoBool()},
             {"ShowTimeDiff", new ShowInfoBool()},
             {"ShowTimePB", new ShowInfoBool()},
+            {"ShowDurationCurrent", new ShowInfoBool()},
+            {"ShowDurationDiff", new ShowInfoBool()},
+            {"ShowDurationPB", new ShowInfoBool()},
+            {"ShowDurationGold", new ShowInfoBool() },
             {"ShowSessionProgress", new ShowInfoBool()},
             {"ShowNumbers", new ShowInfoBool()},
             {"StyleUseHighContrast", new ShowInfoBool()},
@@ -813,6 +817,11 @@ namespace HitCounterManager.ViewModels
             get => Settings.ShowTimeCurrent;
             set => SetAndNotifyWhenChanged(ref Settings.ShowTimeCurrent, value);
         }
+        public bool ShowTimeDiff
+        {
+            get => Settings.ShowTimeDiff;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowTimeDiff, value);
+        }
         public bool ShowTimePB
         {
             get => Settings.ShowTimePB;
@@ -823,10 +832,25 @@ namespace HitCounterManager.ViewModels
             get => Settings.ShowTimeFooter;
             set => SetAndNotifyWhenChanged(ref Settings.ShowTimeFooter, value);
         }
-        public bool ShowTimeDiff
+        public bool ShowDurationCurrent
         {
-            get => Settings.ShowTimeDiff;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowTimeDiff, value);
+            get => Settings.ShowDurationCurrent;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowDurationCurrent, value);
+        }
+        public bool ShowDurationDiff
+        {
+            get => Settings.ShowDurationDiff;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowDurationDiff, value);
+        }
+        public bool ShowDurationPB
+        {
+            get => Settings.ShowDurationPB;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowDurationPB, value);
+        }
+        public bool ShowDurationGold
+        {
+            get => Settings.ShowDurationGold;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowDurationGold, value);
         }
 
         public int ShowSplitsCountFinished
