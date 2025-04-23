@@ -20,6 +20,7 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
+using System.IO;
 using Android.App;
 using Android.OS;
 using Android.Content.PM;
@@ -42,11 +43,42 @@ public class MainActivity : AvaloniaMainActivity<App>
 {
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
+        // Browse files on VS emulator:
+        //   Extra > Android > Pompt
+        //     adb devices -l
+        //     adb -s emulator-5554 shell
+        //     su 0
         // https://developer.android.com/training/data-storage/app-specific
+        // https://developer.android.com/guide/topics/resources/providing-resources
         var documentsDir = GetExternalFilesDir(Environment.DirectoryDocuments);
         if (documentsDir is not null && documentsDir.Exists())
         {
-            Statics.ApplicationStorageDir = documentsDir.AbsolutePath;
+            string storageDir = documentsDir.AbsolutePath;
+            Statics.ApplicationStorageDir = storageDir;
+
+            // Copy default template to storage directory when not already existing
+            string templateFilepath = new SettingsRoot().Inputfile;
+            if (!Path.IsPathRooted(templateFilepath))
+            {
+                templateFilepath = Path.Combine(storageDir, templateFilepath);
+            }
+            if (!File.Exists(templateFilepath))
+            {
+                try
+                {
+                    Stream? templateResource = Resources?.OpenRawResource(Android.Resource.Raw.hitcounter);
+                    if (templateResource is not null)
+                    {
+                        FileStream? fileStream = File.Create(templateFilepath);
+                        if (fileStream is not null)
+                        {
+                            templateResource.CopyTo(fileStream);
+                            fileStream.Close();
+                        }
+                    }
+                }
+                catch { }
+            }
         }
 
         return base.CustomizeAppBuilder(builder)
