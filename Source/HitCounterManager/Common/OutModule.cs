@@ -23,6 +23,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using HitCounterManager.Common;
 
 namespace HitCounterManager.Models
 {
@@ -71,11 +72,13 @@ namespace HitCounterManager.Models
         [MemberNotNullWhen(true, nameof(template))]
         public bool ReloadTemplate()
         {
+            string Filepath = GetFullPath(Settings.Inputfile);
+
             // Reload input file handle when possible
-            if (!File.Exists(Settings.Inputfile))
+            if (!File.Exists(Filepath))
                 return false;
 
-            StreamReader sr = new (Settings.Inputfile);
+            StreamReader sr = new (Filepath);
             template = sr.ReadToEnd();
             sr.Close();
             return true;
@@ -122,6 +125,22 @@ namespace HitCounterManager.Models
         #endregion
 
         /// <summary>
+        /// In case of a relative path on certain platforms the path
+        /// will point to special directories rather the workign directory.
+        /// Otherwise the given path will be passed as it is.
+        /// </summary>
+        /// <param name="Filepath">Path to potentially adjust</param>
+        /// <returns>Adjusted path</returns>
+        static private string GetFullPath(string Filepath)
+        {
+            if (!OperatingSystem.IsAndroid() || Path.IsPathRooted(Filepath))
+                return Filepath;
+
+            string storageDir = Statics.ApplicationStorageDir ?? "";
+            return Path.Combine(storageDir, Filepath);
+        }
+
+        /// <summary>
         /// Use buffer to create outputfile while patching some data
         /// </summary>
         public void Update(ProfileModel pi, bool TimerRunning)
@@ -139,7 +158,7 @@ namespace HitCounterManager.Models
             bool IsWritingJson = false;
             try
             {
-                sr = new StreamWriter(Settings.OutputFile, false, System.Text.Encoding.Unicode); // UTF16LE
+                sr = new StreamWriter(GetFullPath(Settings.OutputFile), false, System.Text.Encoding.Unicode); // UTF16LE
             }
             catch { return; }
             sr.NewLine = Environment.NewLine;
