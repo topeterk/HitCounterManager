@@ -195,16 +195,16 @@ namespace HitCounterManager
         {
             int baseVersion = -1;
             SettingsRoot? loadedSettings;
-            string settingsDir = Statics.ApplicationStorageDir ?? "";
+            string storageDir = Statics.ApplicationStorageDir ?? "";
 
-            sm = new (Path.Combine(settingsDir, Statics.ApplicationName + "Save.xml"));
+            sm = new (Path.Combine(storageDir, Statics.ApplicationName + "Save.xml"));
             loadedSettings = sm.ReadXML(true);
             if (null != loadedSettings)
                 IsCleanStart = false;
             else
             {
                 // When no user save file is available, try loading the init file instead to provide predefined profiles and settings
-                loadedSettings = sm.ReadXML(false, Path.Combine(settingsDir, Statics.ApplicationName + "Init.xml"));
+                loadedSettings = sm.ReadXML(false, Path.Combine(storageDir, Statics.ApplicationName + "Init.xml"));
                 if (null == loadedSettings)
                 {
                     // When init file cannot be read, fallback to defaults from resources
