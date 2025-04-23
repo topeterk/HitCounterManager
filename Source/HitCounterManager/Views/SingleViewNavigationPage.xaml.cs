@@ -38,7 +38,6 @@ namespace HitCounterManager.Views
             NavStack.Push(InnerPage);
             Children.Add(InnerPage);
             InnerPage.GetViewModelPure().OnAppearing();
-            App.CurrentApp.MainPageAppearing(this, new ());
         }
 
         public void PushPage(IPageBasePure page)

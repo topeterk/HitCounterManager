@@ -248,6 +248,7 @@ namespace HitCounterManager
                 mainPage = main.InnerPage;
                 singleViewLifetime.MainView = main;
                 ProfileViewViewModel = (ProfileViewViewModel?)mainPage.ProfileView?.DataContext;
+                MainPageAppearing(main, new());
             }
 
             // Check for updates..
