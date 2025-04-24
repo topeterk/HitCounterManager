@@ -45,6 +45,7 @@ table {
 .tblcenter { /*default is centered*/ }
 
 td { padding: 2px 2px 2px 2px; } /* top, right, bottom, left */
+tr.subsplit > td:first-child { padding-left: 25px; } /* indent */
 
 /* split rows */
 .even           { background-color: #333333; }
@@ -58,8 +59,8 @@ td { padding: 2px 2px 2px 2px; } /* top, right, bottom, left */
 #table td { border-bottom: 2px solid #CCCCCC; } /* as progress shadow */
 #table td.bottom { border: 0px; }
 
-.major     { font-size: 23px; }
-.highlight { font-size: 25px; }
+.major     { font-size: 1.20em; }
+.highlight { font-size: 1.25em; }
 .timestamp { color: #FFFFFF; }
 .dark      { background-color: #000000; }
 .better    { color: #00FF33; } /* as progress_better background-color*/
@@ -69,6 +70,7 @@ td { padding: 2px 2px 2px 2px; } /* top, right, bottom, left */
 .top       { text-align: center; }
 .left      { text-align: left; }
 .right     { text-align: right; }
+tr.subsplit > td:first-child { font-size: 0.90em; font-style: italic; }
 
 /* progress bar */
 .progress_cell { padding: 6px 8px 6px 8px; } /* top, right, bottom, left */

@@ -77,6 +77,7 @@ function DoVisualUpdate(d /*data*/)
 			s.duration = d.list[i][5];
 			s.duration_pb = d.list[i][6];
 			s.duration_gold = d.list[i][7];
+			s.subsplit = d.list[i][8];
 
 			// do overall calculations 
 			s.comulative_pb = total_hits_pb;
@@ -307,7 +308,7 @@ function DoVisualUpdate(d /*data*/)
 			comulative_time_diff_str = (s.reached ? DiffToTimeStr(s.comulative_time - s.comulative_time_pb, true) : time_duration_diff_str);
 
 			// generate actual split table entry
-			new_tbl += '<tr class="' + (s.active ? 'current' : (s.reached ? 'completed' : '')) + (d.high_contrast ? (i%2==0 ? ' even' : ' odd') : '') + '">' +
+			new_tbl += '<tr class="' + (s.active ? 'current' : (s.reached ? 'completed' : '')) + (s.subsplit ? ' subsplit' : '') + (d.high_contrast ? (i%2==0 ? ' even' : ' odd') : '') + '">' +
                                                '<td class="' + s.class_name      + highlight_class + bottom_class + ' left">'            + s.name                                                                                                                                                                                                                                                                                                              + '</td>'  + // Split
   (!d.show_hits || !d.show_hitscombined ? '' : '<td class="' + s.class_hits      + highlight_class + bottom_class + '">'                 + (               hits_blank                                          ? empty_str : (d.show_numbers ? IntToDisplayString(s.hits_combined,             false, d.use_roman) : ShowCrossOrCheckMark(hits_blank ? -1 : (d.purpose == 3 && !s.hitless ? 1 : s.hits_combined))))                                            + '</td>') + // Now
   (!d.show_hits ||  d.show_hitscombined ? '' : '<td class="' + s.class_hits      + highlight_class + bottom_class + '">'                 + (               hits_blank                                          ? empty_str : (d.show_numbers ? IntToDisplayString(s.hits_boss,                 false, d.use_roman) : ShowCrossOrCheckMark(hits_blank ? -1 : (d.purpose == 3 && !s.hitless ? 1 : s.hits_boss    ))))                                            + '</td>'+   // Boss

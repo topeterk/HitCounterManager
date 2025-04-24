@@ -158,7 +158,7 @@ namespace HitCounterManager.Models
             bool IsWritingJson = false;
             try
             {
-                sr = new StreamWriter(GetFullPath(Settings.OutputFile), false, System.Text.Encoding.Unicode); // UTF16LE
+                sr = new StreamWriter(GetFullPath(Settings.OutputFile), false, System.Text.Encoding.UTF8); // UTF-8 BOM
             }
             catch { return; }
             sr.NewLine = Environment.NewLine;
@@ -192,7 +192,8 @@ namespace HitCounterManager.Models
                         if (0 < r) sr.WriteLine(","); // separator
                         sr.Write("[\"" + SimpleJsonEscape(pi.Rows[r].Title) + "\", "
                             + (pi.Rows[r].Hits + pi.Rows[r].WayHits) + ", " + pi.Rows[r].PB + ", " + pi.Rows[r].WayHits + ", "
-                            + RunIndex + ", " + pi.Rows[r].Duration + ", " + pi.Rows[r].DurationPB + ", " + pi.Rows[r].DurationGold + "]");
+                            + RunIndex + ", " + pi.Rows[r].Duration + ", " + pi.Rows[r].DurationPB + ", " + pi.Rows[r].DurationGold + ", "
+                            + (false /* TODO */ ? "true" : "false") + "]");
                     }
 
                     // ----- Splits of the upcoming runs:
