@@ -73,7 +73,7 @@ namespace HitCounterManager.ViewModels
             // when no matching profile is found, we start with the first one
             if (null == ProfileSelected) ProfileSelected = ProfileList[0];
 
-            CmdRemoveSplit = ReactiveCommand.Create<ProfileRowModel>((ProfileRowModel item) =>
+            CmdRemoveSplit = ReactiveCommand.Create((ProfileRowModel item) =>
             {
                 // sad there is no try-lock, so we use the "precise equivalent" of lock(){}
                 // from: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/lock-statement
@@ -90,17 +90,17 @@ namespace HitCounterManager.ViewModels
                     if (GotLock) Monitor.Exit(TimerUpdateLock);
                 }
             });
-            CmdSetActiveSplit = ReactiveCommand.Create<ProfileRowModel>((ProfileRowModel item) =>
+            CmdSetActiveSplit = ReactiveCommand.Create((ProfileRowModel item) =>
             {
                 if (item.Active) return;
                 _ProfileSelected.ActiveSplit = _ProfileSelected.Rows.IndexOf(item);
             });
-            CmdSetSessionProgress = ReactiveCommand.Create<ProfileRowModel>((ProfileRowModel item) =>
+            CmdSetSessionProgress = ReactiveCommand.Create((ProfileRowModel item) =>
             {
                 if (item.SP) return;
                 _ProfileSelected.SessionProgress = _ProfileSelected.Rows.IndexOf(item);
             });
-            CmdSetBestProgress = ReactiveCommand.Create<ProfileRowModel>((ProfileRowModel item) =>
+            CmdSetBestProgress = ReactiveCommand.Create((ProfileRowModel item) =>
             {
                 if (item.BP) return;
                 _ProfileSelected.BestProgress = _ProfileSelected.Rows.IndexOf(item);
@@ -224,6 +224,7 @@ namespace HitCounterManager.ViewModels
         public ICommand CmdSetActiveSplit { get; }
         public ICommand CmdSetSessionProgress { get; }
         public ICommand CmdSetBestProgress { get; }
+        public ICommand CmdToggleSubsplit { get; } = ReactiveCommand.Create((ProfileRowModel item) => item.SubSplit = !item.SubSplit);
 
         public ObservableCollection<ProfileModel> ProfileList { get; private set; }
 

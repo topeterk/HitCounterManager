@@ -103,6 +103,7 @@
 						<ColumnDefinition Width="24"></ColumnDefinition>
 						<ColumnDefinition Width="24"></ColumnDefinition>
 						<ColumnDefinition Width="24"></ColumnDefinition>
+						<ColumnDefinition Width="24"></ColumnDefinition>
 					</Grid.ColumnDefinitions>
 					<RelativePanel Grid.Row="0" Grid.Column="0" Margin="0" MinWidth="24" HorizontalAlignment="Center" VerticalAlignment="Center">
 						<Button Command="{Binding ToggleShowInfo}" CommandParameter="MainColumnHeaders" Classes="ImageButton" Width="18" Height="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -114,9 +115,10 @@
 					<TextBlock Grid.Column="3" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Way&#10;Hits" />
 					<TextBlock Grid.Column="4" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Diff" />
 					<TextBlock Grid.Column="5" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="PB" />
-					<TextBlock Grid.Column="6" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="SP" />
-					<TextBlock Grid.Column="7" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="BP" />
-					<TextBlock Grid.Column="8" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text=" " />
+					<TextBlock Grid.Column="6" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="SS" />
+					<TextBlock Grid.Column="7" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="SP" />
+					<TextBlock Grid.Column="8" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="BP" />
+					<TextBlock Grid.Column="9" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text=" " />
 				</Grid>
 			</OnPlatform.Default>
 			<On Options="Android, iOS">
@@ -137,8 +139,9 @@
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="68"></ColumnDefinition>
 							<ColumnDefinition Width="68"></ColumnDefinition>
-							<ColumnDefinition Width="50"></ColumnDefinition>
+							<ColumnDefinition Width="45"></ColumnDefinition>
 							<ColumnDefinition Width="68"></ColumnDefinition>
+							<ColumnDefinition Width="24"></ColumnDefinition>
 							<ColumnDefinition Width="24"></ColumnDefinition>
 							<ColumnDefinition Width="24"></ColumnDefinition>
 							<ColumnDefinition Width="24"></ColumnDefinition>
@@ -147,9 +150,10 @@
 						<TextBlock Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Way&#10;Hits" />
 						<TextBlock Grid.Column="2" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="Diff" />
 						<TextBlock Grid.Column="3" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="PB" />
-						<TextBlock Grid.Column="4" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="SP" />
-						<TextBlock Grid.Column="5" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="BP" />
-						<TextBlock Grid.Column="6" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text=" " />
+						<TextBlock Grid.Column="4" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="SS" />
+						<TextBlock Grid.Column="5" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="SP" />
+						<TextBlock Grid.Column="6" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" TextAlignment="Center" Text="BP" />
+						<TextBlock Grid.Column="7" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text=" " />
 					</Grid>
 				</StackPanel>
 			</On>
@@ -162,6 +166,8 @@
 * Boss Hits: Amount of hits taken by anything or bosses or just a marker that a boss has been defeated (depends on the configured behavior).
 * Way Hits: Amount of hits taken on the way to a boss or not used at all (depends on the configured behavior). E.g. track if a boss or the way through a slit should be trained more.
 * Diff: The difference between the hits taken (sum of Boss Hits and Way Hits) and the personal best hits taken.
+* PB: Amount of hits taken in the personal best run (sum of Boss Hits and Way Hits).
+* SS (Sub Split): Marks the split being a child of the previous "Sub Split" (Used for visual effects only).
 * SP (Session Progress): Marks the farthest reached split per stream session and resets on application start. Represented by a 24 hour clock symbol.
 * BP (Best Progress / Distance PB): Marks the furthest reached split of the best flawless run ever. Represented by a flag symbol.
 * Trash: Removes the split from the list.</x:String>
@@ -196,8 +202,9 @@
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="68"></ColumnDefinition>
 								<ColumnDefinition Width="68"></ColumnDefinition>
-								<ColumnDefinition Width="50"></ColumnDefinition>
+								<ColumnDefinition Width="45"></ColumnDefinition>
 								<ColumnDefinition Width="68"></ColumnDefinition>
+								<ColumnDefinition Width="24"></ColumnDefinition>
 								<ColumnDefinition Width="24"></ColumnDefinition>
 								<ColumnDefinition Width="24"></ColumnDefinition>
 								<ColumnDefinition Width="24"></ColumnDefinition>
@@ -210,14 +217,18 @@
 							<NumericUpDown Grid.Column="3" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
 										   Value="{Binding PB}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 							<Button Grid.Column="4" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+									Command="{Binding $parent[UserControl].DataContext.CmdToggleSubsplit}" CommandParameter="{Binding .}">
+								<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageSubSplit}" Classes="SubSplit" Classes.Inactive="{Binding !SubSplit, Mode=OneWay}"/>
+							</Button>
+							<Button Grid.Column="5" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 									Command="{Binding $parent[UserControl].DataContext.CmdSetSessionProgress}" CommandParameter="{Binding .}">
 								<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageSP}" Classes.Inactive="{Binding !SP, Mode=OneWay}"/>
 							</Button>
-							<Button Grid.Column="5" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+							<Button Grid.Column="6" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 									Command="{Binding $parent[UserControl].DataContext.CmdSetBestProgress}" CommandParameter="{Binding .}">
 								<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageBP}" Classes="BP" Classes.Inactive="{Binding !BP, Mode=OneWay}"/>
 							</Button>
-							<Button Grid.Column="6" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+							<Button Grid.Column="7" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 									Command="{Binding $parent[UserControl].DataContext.CmdRemoveSplit}" CommandParameter="{Binding .}">
 								<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageTrash}"/>
 							</Button>
@@ -233,6 +244,7 @@
 							<ColumnDefinition Width="68"></ColumnDefinition>
 							<ColumnDefinition Width="50"></ColumnDefinition>
 							<ColumnDefinition Width="68"></ColumnDefinition>
+							<ColumnDefinition Width="24"></ColumnDefinition>
 							<ColumnDefinition Width="24"></ColumnDefinition>
 							<ColumnDefinition Width="24"></ColumnDefinition>
 							<ColumnDefinition Width="24"></ColumnDefinition>
@@ -269,14 +281,18 @@
 						<NumericUpDown Grid.Column="5" Margin="2" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
 								Value="{Binding PB}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 						<Button Grid.Column="6" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+								Command="{Binding $parent[UserControl].DataContext.CmdToggleSubsplit}" CommandParameter="{Binding .}">
+							<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageSubSplit}" Classes="SubSplit" Classes.Inactive="{Binding !SubSplit, Mode=OneWay}"/>
+						</Button>
+						<Button Grid.Column="7" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 								Command="{Binding $parent[UserControl].DataContext.CmdSetSessionProgress}" CommandParameter="{Binding .}">
 							<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageSP}" Classes.Inactive="{Binding !SP, Mode=OneWay}"/>
 						</Button>
-						<Button Grid.Column="7" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+						<Button Grid.Column="8" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 								Command="{Binding $parent[UserControl].DataContext.CmdSetBestProgress}" CommandParameter="{Binding .}">
 							<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageBP}" Classes="BP" Classes.Inactive="{Binding !BP, Mode=OneWay}"/>
 						</Button>
-						<Button Grid.Column="8" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+						<Button Grid.Column="9" Margin="0" Classes="ImageButton" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 								Command="{Binding $parent[UserControl].DataContext.CmdRemoveSplit}" CommandParameter="{Binding .}">
 							<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageTrash}"/>
 						</Button>

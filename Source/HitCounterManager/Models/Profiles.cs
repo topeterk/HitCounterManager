@@ -35,6 +35,7 @@ namespace HitCounterManager.Models
         public int Hits = 0;
         public int WayHits = 0;
         public int PB = 0;
+        public bool SubSplit = false;
         public long Duration = 0;
         public long DurationPB = 0;
         public long DurationGold = 0;

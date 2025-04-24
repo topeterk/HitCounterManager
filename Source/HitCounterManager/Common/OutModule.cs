@@ -193,7 +193,7 @@ namespace HitCounterManager.Models
                         sr.Write("[\"" + SimpleJsonEscape(pi.Rows[r].Title) + "\", "
                             + (pi.Rows[r].Hits + pi.Rows[r].WayHits) + ", " + pi.Rows[r].PB + ", " + pi.Rows[r].WayHits + ", "
                             + RunIndex + ", " + pi.Rows[r].Duration + ", " + pi.Rows[r].DurationPB + ", " + pi.Rows[r].DurationGold + ", "
-                            + (false /* TODO */ ? "true" : "false") + "]");
+                            + (pi.Rows[r].SubSplit ? "true" : "false") + "]");
                     }
 
                     // ----- Splits of the upcoming runs:

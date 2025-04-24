@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2022 Peter Kirmeier
+//Copyright (c) 2021-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -50,6 +50,12 @@ namespace HitCounterManager.Models
         {
             get => _origin.PB;
             set { if (SetAndNotifyWhenNaturalNumberChanged(ref _origin.PB, value)) CallPropertyChanged(nameof(Diff)); }
+        }
+
+        public bool SubSplit
+        {
+            get => _origin.SubSplit;
+            set => SetAndNotifyWhenChanged(ref _origin.SubSplit, value);
         }
         public bool SP => this == _parent.SessionProgressModel;
         public void SPChanged() => CallPropertyChanged(nameof(SP));
