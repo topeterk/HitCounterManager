@@ -40,7 +40,7 @@ namespace HitCounterManager.Common
         /// Name of the running application (e.g. exe file)
         /// On Android it may not be set, so fallback to the running platform class library (e.g. PCL/DLL)
         /// </summary>
-        public static string ApplicationName { get => ApplicationNameRaw.Name ?? string.Empty; }
+        public static string ApplicationName { get => ApplicationNameRaw.Name?.Replace(".PCL","") ?? string.Empty; }
 
         /// <summary>
         /// Version of the running platform class library (e.g. PCL/DLL)
