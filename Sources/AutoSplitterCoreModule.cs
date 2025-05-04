@@ -27,6 +27,10 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Reflection;
 using static HitCounterManager.IAutoSplitterCoreInterface;
+using System.Reflection.Emit;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace HitCounterManager
 {
