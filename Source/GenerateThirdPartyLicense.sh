@@ -62,20 +62,12 @@ Source: https://iconka.com/en/269/
 License: Linkware
 
 ==============================================================================
-Icon images of colored main buttons
+Icon image of info button ("i")
 
-Title: -
-Author: icons8.com
-Source: https://icons8.com/
-Licence: CC BY-ND 3.0  https://creativecommons.org/licenses/by-nd/3.0/
-
-==============================================================================
-Icon images of colorless minor buttons
-
-Title: -
-Author(s): Avalonia Team
-Source: https://avaloniaui.github.io/icons.html
-License: MIT
+Title: Info Solid SVG Vector
+Author: Icons8
+Source: https://www.svgrepo.com/svg/314210/info-solid
+Licence: MIT
 
 ==============================================================================
 Icon image of dark mode button (Flashlight)
@@ -193,7 +185,15 @@ Redistribution and use in source and binary forms, without any modification, are
    d. You may not sell this artistic work or any products derived from it or receive payment of monetary compensation in connection with the exchange of it.
 
 ==============================================================================
-Check Mark Image
+Icon images of remaining minor buttons
+
+Title: -
+Author(s): Avalonia Team
+Source: https://avaloniaui.github.io/icons.html
+License: MIT
+
+==============================================================================
+Design image showing a check mark
 
 Title: -
 Author: OpenClipart-Vectors
@@ -201,7 +201,7 @@ Source: https://pixabay.com/p-1292787/
 Licence: Pixabay License
 
 ==============================================================================
-Cross Image
+Design image showing a cross
 
 Title: -
 Author: Clker-Free-Vector-Images
@@ -209,9 +209,17 @@ Source: https://pixabay.com/p-304374/
 Licence: Pixabay License
 
 ==============================================================================
-Bar Image
+Design image showing a bar
 
-Modification based on Cross Image
+Modification based on Design image showing a cross
+
+==============================================================================
+Design image showing a flag pole and Design image showing a 24 in a circle
+
+Title: -
+Author: icons8.com
+Source: https://icons8.com/
+Licence: CC BY-ND 3.0  https://creativecommons.org/licenses/by-nd/3.0/
 
 ==============================================================================
 Setup Banner Image
