@@ -421,7 +421,7 @@ Embedded License: Apache License
    limitations under the License.
 
 ==============================================================================
-NuGet Package: Avalonia.Android 11.2.5
+NuGet Package: Avalonia.Android 11.3.0
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
@@ -439,13 +439,7 @@ Author(s): Avalonia Team
 Source: https://avaloniaui.net/
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Controls.ColorPicker 11.2.5
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Controls.DataGrid 11.2.5
+NuGet Package: Avalonia.Controls.ColorPicker 11.3.0
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
@@ -457,127 +451,127 @@ Author(s): Avalonia Team
 Source: https://avaloniaui.net/
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Desktop 11.2.5
+NuGet Package: Avalonia.Desktop 11.3.0
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Diagnostics 11.2.5
+NuGet Package: Avalonia.Diagnostics 11.3.0
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Fonts.Inter 11.2.5
+NuGet Package: Avalonia.Fonts.Inter 11.3.0
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.FreeDesktop 11.2.5
+NuGet Package: Avalonia.FreeDesktop 11.3.0
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Native 11.2.5
+NuGet Package: Avalonia.Native 11.3.0
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.ReactiveUI 11.2.5
+NuGet Package: Avalonia.ReactiveUI 11.3.0
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Remote.Protocol 11.2.5
+NuGet Package: Avalonia.Remote.Protocol 11.3.0
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Skia 11.2.5
+NuGet Package: Avalonia.Skia 11.3.0
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Themes.Fluent 11.2.5
+NuGet Package: Avalonia.Themes.Fluent 11.3.0
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Themes.Simple 11.2.5
+NuGet Package: Avalonia.Themes.Simple 11.3.0
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Win32 11.2.5
+NuGet Package: Avalonia.Win32 11.3.0
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.X11 11.2.5
+NuGet Package: Avalonia.X11 11.3.0
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Xaml.Behaviors 11.2.0.13
+NuGet Package: Avalonia.Xaml.Behaviors 11.3.0
 
 Author(s): Wiesław Šoltés
 Source: https://github.com/wieslawsoltes/Xaml.Behaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Custom 11.2.0.13
+NuGet Package: Avalonia.Xaml.Interactions.Custom 11.3.0
 
 Author(s): Wiesław Šoltés
 Source: https://github.com/wieslawsoltes/Xaml.Behaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.DragAndDrop 11.2.0.13
+NuGet Package: Avalonia.Xaml.Interactions.DragAndDrop 11.3.0
 
 Author(s): Wiesław Šoltés
 Source: https://github.com/wieslawsoltes/Xaml.Behaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Draggable 11.2.0.13
+NuGet Package: Avalonia.Xaml.Interactions.Draggable 11.3.0
 
 Author(s): Wiesław Šoltés
 Source: https://github.com/wieslawsoltes/Xaml.Behaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Events 11.2.0.13
+NuGet Package: Avalonia.Xaml.Interactions.Events 11.3.0
 
 Author(s): Wiesław Šoltés
 Source: https://github.com/wieslawsoltes/Xaml.Behaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Responsive 11.2.0.13
+NuGet Package: Avalonia.Xaml.Interactions.Responsive 11.3.0
 
 Author(s): Wiesław Šoltés
 Source: https://github.com/wieslawsoltes/Xaml.Behaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions 11.2.0.13
+NuGet Package: Avalonia.Xaml.Interactions 11.3.0
 
 Author(s): Wiesław Šoltés
 Source: https://github.com/wieslawsoltes/Xaml.Behaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Xaml.Interactivity 11.2.0.13
+NuGet Package: Avalonia.Xaml.Interactivity 11.3.0
 
 Author(s): Wiesław Šoltés
 Source: https://github.com/wieslawsoltes/Xaml.Behaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia 11.2.5
+NuGet Package: Avalonia 11.3.0
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
@@ -631,7 +625,7 @@ Author(s): MicroCom.Runtime
 Source:
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Microsoft.NET.ILLink.Tasks 8.0.14
+NuGet Package: Microsoft.NET.ILLink.Tasks 8.0.16
 
 Author(s): Microsoft
 Source: https://dot.net/
@@ -703,7 +697,7 @@ Author(s): .NET Foundation and Contributors
 Source: https://github.com/dotnet/reactive
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Tmds.DBus.Protocol 0.20.0
+NuGet Package: Tmds.DBus.Protocol 0.21.2
 
 Author(s): Tom Deseyn
 Source:
@@ -723,14 +717,14 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Annotation.Jvm 1.9.1.2
+NuGet Package: Xamarin.AndroidX.Annotation.Jvm 1.9.1.3
 
 Author(s): Microsoft
 Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Annotation 1.9.1.2
+NuGet Package: Xamarin.AndroidX.Annotation 1.9.1.3
 
 Author(s): Microsoft
 Source: https://aka.ms/android-libraries
@@ -793,7 +787,7 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Core.SplashScreen 1.0.1.14
+NuGet Package: Xamarin.AndroidX.Core.SplashScreen 1.0.1.15
 
 Author(s): Microsoft
 Source: https://aka.ms/android-libraries
@@ -975,7 +969,7 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.Jetbrains.Annotations 26.0.1.2
+NuGet Package: Xamarin.Jetbrains.Annotations 26.0.2.1
 
 Author(s): Microsoft
 Source: https://aka.ms/android-libraries
@@ -1003,7 +997,7 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.Kotlin.StdLib 2.0.21.2
+NuGet Package: Xamarin.Kotlin.StdLib 2.0.21.3
 
 Author(s): Microsoft
 Source: https://aka.ms/android-libraries

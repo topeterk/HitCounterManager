@@ -22,8 +22,7 @@
     <!-- needed as Android and Desktop NuGet packages are overwriting each other files -->
     <!--<MSBuildProjectExtensionsPath>obj/ext/$(PlatformName)</MSBuildProjectExtensionsPath>-->
 
-    <AvaloniaVersion>11.2.5</AvaloniaVersion>
+    <AvaloniaVersion>11.3.0</AvaloniaVersion>
     <AvaloniaVersionControlsItemsRepeater>11.1.5</AvaloniaVersionControlsItemsRepeater>
-    <AvaloniaVersionXamlBehaviors>11.2.0.13</AvaloniaVersionXamlBehaviors>
   </PropertyGroup>
 </Project>
