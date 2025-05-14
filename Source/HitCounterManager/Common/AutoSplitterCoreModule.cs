@@ -275,6 +275,12 @@ namespace HitCounterManager.Common
 
         public void ProfileReset() => ProfileViewViewModel.ProfileReset.Execute(null);
 
+        public void NewProfile(string profileTitle) => ProfileViewViewModel.ProfileNew(profileTitle);
+
+        public List<string> GetProfiles() => ProfileViewViewModel.ProfileList.Select(row => row.Name).ToList();
+
+        public void ProfileHitGo(int Aumount, bool WayHit) { if (WayHit) ProfileViewViewModel.HitWayIncrease.Execute(null); else ProfileViewViewModel.HitIncrease.Execute(null); }
+
         public int SplitCount => ProfileViewViewModel.ProfileSelected.Rows.Count;
 
         public List<string> SplitsNames => [.. ProfileViewViewModel.ProfileSelected.Rows.Select(profileRowModel => profileRowModel.Title)];
@@ -302,6 +308,8 @@ namespace HitCounterManager.Common
         public Action? SaveSettingsMethod { get; set; }
 
         public Action<int /* ActiveGameIndex */>? SetActiveGameIndexMethod { get; set; }
+
+        public Func<int> GetActiveGameIndexMethod { get; set; } = () => -1;
 
         public Action<bool /* PracticeMode */>? SetPracticeModeMethod { get; set; }
 
