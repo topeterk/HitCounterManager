@@ -66,7 +66,11 @@
 
 		<SolidColorBrush x:Key="DialogWindowBackgroundBrush" Color="#FFFFFFFF" /> <!-- LightTheme -> SystemControlBackgroundAltHighBrush -> SystemAltHighColor -->
 		<Color x:Key="DialogWindowBackgroundColorDark">#FF222222</Color> <!-- AlmostBlack -->
-		<Color x:Key="DialogWindowBackgroundColorLight">#FFDEB887</Color> <!-- BurlyWood -->
+		<Color x:Key="DialogWindowBackgroundColorLight">NavajoWhite</Color>
+
+		<Color x:Key="DialogWindowSectionBackgroundColor">#FFFFFFFF</Color> <!-- near DialogWindowBackgroundBrush -->
+		<Color x:Key="DialogWindowSectionBackgroundColorDark">Black</Color>
+		<Color x:Key="DialogWindowSectionBackgroundColorLight">#88865000</Color> <!-- AlmostNavajoWhite at 50% alpha -->
 
 		<SolidColorBrush x:Key="MainWindowBackgroundBrush" Color="#FFFFFFFF" /> <!-- LightTheme -> SystemControlBackgroundAltHighBrush -> SystemAltHighColor -->
 		<Color x:Key="MainWindowBackgroundColorDark">Black</Color>
@@ -237,6 +241,17 @@
 			<Setter Property="Background" Value="{DynamicResource DialogWindowBackgroundBrush}" />
 			<Setter Property="WindowStartupLocation" Value="CenterOwner" />
 			<Setter Property="ShowInTaskbar" Value="False" />
+		</Style>
+		<Style Selector="StackPanel.Section">
+			<Setter Property="Background">
+				<LinearGradientBrush StartPoint="0,0" EndPoint="0,35">
+					<LinearGradientBrush.GradientStops>
+						<GradientStop Color="{DynamicResource DialogWindowBackgroundColor}" Offset="0"/>
+						<GradientStop Color="{DynamicResource DialogWindowSectionBackgroundColor}" Offset="0.1"/>
+						<GradientStop Color="{DynamicResource DialogWindowBackgroundColor}" Offset="1"/>
+					</LinearGradientBrush.GradientStops>
+				</LinearGradientBrush>
+			</Setter>
 		</Style>
 
 		<Style Selector="PathIcon.Inactive">

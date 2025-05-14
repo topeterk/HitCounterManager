@@ -308,6 +308,8 @@ namespace HitCounterManager
 
             string ModeName = DarkMode ? "Dark" : "Light";
 
+            UpdateColor("DialogWindowSectionBackgroundColor", "DialogWindowSectionBackgroundColor" + ModeName);
+
             UpdateBrushColor("IconForegroundBrush", "IconForegroundColor" + ModeName);
             UpdateBrushColor("ImageButtonBackgroundBrush", "ImageButtonBackgroundColor" + ModeName);
             UpdateBrushColor("DialogWindowBackgroundBrush", "DialogWindowBackgroundColor" + ModeName);
@@ -317,13 +319,23 @@ namespace HitCounterManager
             CurrentApp.RequestedThemeVariant = DarkMode ? ThemeVariant.Dark : ThemeVariant.Light;
         }
 
-        private void UpdateBrushColor(string BrushName, string ColorName)
+        private void UpdateColor(string ResourceName, string ColorName)
         {
-            if (Resources.TryGetValue(BrushName, out var resourceBrush) && Resources.TryGetValue(ColorName, out var resourceColor))
-                (resourceBrush as SolidColorBrush)!.Color = (Color)resourceColor!;
+            if (Resources.TryGetValue(ResourceName, out var resourceTarget) && Resources.TryGetValue(ColorName, out var resourceColor))
+                Resources[ResourceName] = resourceColor;
 #if DEBUG
             else
-                throw new Exception("The brush \"" + BrushName + "\" cannot be updated with the color \"" + ColorName + "\"!");
+                throw new Exception("The color \"" + ResourceName + "\" cannot be updated with the color \"" + ColorName + "\"!");
+#endif
+        }
+
+        private void UpdateBrushColor(string ResourceName, string ColorName)
+        {
+            if (Resources.TryGetValue(ResourceName, out var resourceTarget) && Resources.TryGetValue(ColorName, out var resourceColor))
+                (resourceTarget as SolidColorBrush)!.Color = (Color)resourceColor!;
+#if DEBUG
+            else
+                throw new Exception("The brush \"" + ResourceName + "\" cannot be updated with the color \"" + ColorName + "\"!");
 #endif
         }
 
