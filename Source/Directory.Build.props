@@ -24,5 +24,6 @@
 
     <AvaloniaVersion>11.3.0</AvaloniaVersion>
     <AvaloniaVersionControlsItemsRepeater>11.1.5</AvaloniaVersionControlsItemsRepeater>
+    <XamlBehaviorsAvaloniaVersion>11.3.0.7</XamlBehaviorsAvaloniaVersion>
   </PropertyGroup>
 </Project>

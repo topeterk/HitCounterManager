@@ -531,54 +531,6 @@ Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Xaml.Behaviors 11.3.0
-
-Author(s): Wiesław Šoltés
-Source: https://github.com/wieslawsoltes/Xaml.Behaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Custom 11.3.0
-
-Author(s): Wiesław Šoltés
-Source: https://github.com/wieslawsoltes/Xaml.Behaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.DragAndDrop 11.3.0
-
-Author(s): Wiesław Šoltés
-Source: https://github.com/wieslawsoltes/Xaml.Behaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Draggable 11.3.0
-
-Author(s): Wiesław Šoltés
-Source: https://github.com/wieslawsoltes/Xaml.Behaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Events 11.3.0
-
-Author(s): Wiesław Šoltés
-Source: https://github.com/wieslawsoltes/Xaml.Behaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions.Responsive 11.3.0
-
-Author(s): Wiesław Šoltés
-Source: https://github.com/wieslawsoltes/Xaml.Behaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactions 11.3.0
-
-Author(s): Wiesław Šoltés
-Source: https://github.com/wieslawsoltes/Xaml.Behaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Avalonia.Xaml.Interactivity 11.3.0
-
-Author(s): Wiesław Šoltés
-Source: https://github.com/wieslawsoltes/Xaml.Behaviors
-License: https://licenses.nuget.org/MIT
-==============================================================================
 NuGet Package: Avalonia 11.3.0
 
 Author(s): Avalonia Team
@@ -1025,6 +977,54 @@ Author(s): Microsoft
 Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
+==============================================================================
+NuGet Package: Xaml.Behaviors.Avalonia 11.3.0.7
+
+Author(s): Wiesław Šoltés
+Source: https://github.com/wieslawsoltes/Xaml.Behaviors
+License: https://licenses.nuget.org/MIT
+==============================================================================
+NuGet Package: Xaml.Behaviors.Interactions.Custom 11.3.0.7
+
+Author(s): Wiesław Šoltés
+Source: https://github.com/wieslawsoltes/Xaml.Behaviors
+License: https://licenses.nuget.org/MIT
+==============================================================================
+NuGet Package: Xaml.Behaviors.Interactions.DragAndDrop 11.3.0.7
+
+Author(s): Wiesław Šoltés
+Source: https://github.com/wieslawsoltes/Xaml.Behaviors
+License: https://licenses.nuget.org/MIT
+==============================================================================
+NuGet Package: Xaml.Behaviors.Interactions.Draggable 11.3.0.7
+
+Author(s): Wiesław Šoltés
+Source: https://github.com/wieslawsoltes/Xaml.Behaviors
+License: https://licenses.nuget.org/MIT
+==============================================================================
+NuGet Package: Xaml.Behaviors.Interactions.Events 11.3.0.7
+
+Author(s): Wiesław Šoltés
+Source: https://github.com/wieslawsoltes/Xaml.Behaviors
+License: https://licenses.nuget.org/MIT
+==============================================================================
+NuGet Package: Xaml.Behaviors.Interactions.Responsive 11.3.0.7
+
+Author(s): Wiesław Šoltés
+Source: https://github.com/wieslawsoltes/Xaml.Behaviors
+License: https://licenses.nuget.org/MIT
+==============================================================================
+NuGet Package: Xaml.Behaviors.Interactions 11.3.0.7
+
+Author(s): Wiesław Šoltés
+Source: https://github.com/wieslawsoltes/Xaml.Behaviors
+License: https://licenses.nuget.org/MIT
+==============================================================================
+NuGet Package: Xaml.Behaviors.Interactivity 11.3.0.7
+
+Author(s): Wiesław Šoltés
+Source: https://github.com/wieslawsoltes/Xaml.Behaviors
+License: https://licenses.nuget.org/MIT
 ==============================================================================
 Embedded License: https://raw.githubusercontent.com/AvaloniaUI/angle/master/LICENSE
 
