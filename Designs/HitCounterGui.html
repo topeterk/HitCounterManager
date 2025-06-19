@@ -53,6 +53,7 @@ function DoVisualUpdate(d /*data*/)
 	d.show_duration_diff = false;
 	d.show_duration_pb = false;
 	d.show_duration_gold = false;
+	d.subsplits_visibility = 0; // 0 = always show all subsplits, 1 = collapse alls subsplits except of active, 2 = always hide all subsplits
 	// Notes:
 	// s.subsplit is not available by V1 and will be always false.
 
@@ -66,15 +67,37 @@ function DoVisualUpdate(d /*data*/)
 
 	// refine splits data
 	{
-		var hit_color_class;
+		var class_hits_color;
 		var hitless = true;
 		var hitless_pb = true;
+		var hidden_subsplit;
 
 		total_time_current = 0;
 		total_time_pb = 0;
 		is_timer_paused = d.timer_paused;
 
-		// foreach split in list
+		const calculate_class_hits_color = (/*globals: d, s*/) =>
+		{
+			// prepare colors (CSS classes)
+			if (d.purpose == 4 /*ResetCounter*/)
+				return '';
+			else if (d.purpose == 3 /*NoDeath*/)
+				return (s.hitless ? 'better' : 'worse');
+			else if (s.hits_combined == 0)
+				return 'better';
+
+			switch (d.severity)
+			{
+				case 2: // ComparePB
+					return (s.hits_combined <= s.hits_pb ? 'neither' : 'worse');  break;
+				case 1: // BossHitCritical
+					return (s.hits_boss == 0 ? 'neither' : 'worse');  break;
+				case 0: // AnyHitsCritical
+				default: return 'worse';  break;
+			}
+		}
+
+		// foreach split in list (first pass, before subsplit/visibility calculations)
 		for ( i = 0 ; i < splits.length ; i = i + 1 )
 		{
 			var s = splits[i] = new Object();
@@ -90,7 +113,10 @@ function DoVisualUpdate(d /*data*/)
 			s.duration_gold = d.list[i][7];
 			s.subsplit = d.list[i][8];
 
-			// do overall calculations 
+			// set defaults and values from overall calculations
+			s.display = false;
+			s.active = (d.split_active == i);
+			s.reached = (i <= d.split_active);
 			s.comulative_pb = total_hits_pb;
 			s.comulative_time = total_time_current;
 			s.comulative_time_pb = total_time_pb;
@@ -109,16 +135,59 @@ function DoVisualUpdate(d /*data*/)
 				total_time_pb = total_time_pb + s.duration_pb;
 
 				if (hitless) hitless = (s.hits_combined == 0);
-				if (hitless_pb) hitless_pb = (s.hits_pb == 0);
 			}
 
 			s.hits_boss = s.hits_combined - s.hits_way;
 			s.hitless = hitless;
-			s.hitless_pb = hitless_pb;
-			s.reached = (i <= d.split_active);
-			s.active = (d.split_active == i);
-			s.gold = (0 < s.duration_gold && s.duration <= s.duration_gold);
-			s.gold_pb = (0 < s.duration_gold && s.duration_pb <= s.duration_gold);
+
+			// Calculate colors for progress bar (independend from hidden or collapsed subsplits)
+			class_hits_color = calculate_class_hits_color();
+			s.class_progress = class_hits_color;
+		}
+
+		// reconstruct amount of visible splits (based on pre-calculated legacy data)
+		var display_pre = d.split_active - d.split_first + 1; // add one for always at least one visible active split
+		var display_post = d.split_last - d.split_active;
+
+		// mark the splits for display that do not exeed maximum splits and take care of hidden splits
+		var active_subsplit;
+		const prepare_visible_split = (/*globals: i, d, s, active_subsplit, splits*/) =>
+		{
+			if (s.subsplit)
+			{
+				// show subsplits always (0) or
+				// only for collapsed visibility (1) when this is a subsplit from active group
+				if (d.subsplits_visibility == 0 || (d.subsplits_visibility == 1 && active_subsplit)) s.display = true;
+			}
+			else
+			{
+				// sum up values from hidden (2) or collapsed (1) non-active subsplits
+				if (d.subsplits_visibility == 2 || (d.subsplits_visibility == 1 && !active_subsplit))
+				{
+					for ( k = i + 1; k < splits.length ; k = k + 1 )
+					{
+						var ss = splits[k];
+						if (!ss.subsplit) break;
+
+						s.hits_combined = s.hits_combined + ss.hits_combined;
+						s.hits_pb = s.hits_pb + ss.hits_pb;
+						s.hits_way = s.hits_way + ss.hits_way;
+						s.duration = s.duration + ss.duration;
+						s.duration_pb = s.duration_pb + ss.duration_pb;
+						s.duration_gold = s.duration_gold + s.duration_gold;
+					}
+				}
+				active_subsplit = false;
+				s.display = true;
+			}
+		}
+		// looking from active split backwards
+		active_subsplit = true;
+		for ( i = d.split_active ; 0 <= i ; i = i - 1 )
+		{
+			var s = splits[i];
+
+			prepare_visible_split();
 
 			// remember data from farthest point of the run
 			if (s.active)
@@ -129,30 +198,51 @@ function DoVisualUpdate(d /*data*/)
 				current_split_duration_pb = s.duration_pb;
 			}
 
-			// mark entries that should not be displayed
-			s.display = (d.split_first <= i ) && (i <= d.split_last);
-
-			// prepare colors (CSS classes)
-			if (d.purpose == 4 /*ResetCounter*/)
-				s.class_hits_color = '';
-			else if (d.purpose == 3 /*NoDeath*/)
-				s.class_hits_color = (s.hitless ? 'better' : 'worse');
-			else if (s.hits_combined == 0)
-				s.class_hits_color = 'better';
-			else
+			if (display_pre == 1)
 			{
-				switch (d.severity)
-				{
-					case 2: // ComparePB
-						s.class_hits_color = (s.hits_combined <= s.hits_pb ? 'neither' : 'worse');  break;
-					case 1: // BossHitCritical
-						s.class_hits_color = (s.hits_boss == 0 ? 'neither' : 'worse');  break;
-					case 0: // AnyHitsCritical
-					default: s.class_hits_color = 'worse';  break;
-				}
+				d.split_first = i;
+				break;
 			}
-			s.class_name = (!s.reached || d.high_contrast_names ? '' : s.class_hits_color);
-			s.class_hits = (!s.reached ? '' : s.class_hits_color);
+			display_pre = display_pre - 1;
+		}
+		// looking past the active split onwards
+		active_subsplit = true;
+		for ( i = d.split_active + 1; i < splits.length ; i = i + 1 )
+		{
+			var s = splits[i];
+
+			if (!s.subsplit) active_subsplit = false; // first non-subsplit is not active one
+			prepare_visible_split();
+
+			if (display_post == 1)
+			{
+				d.split_last = i;
+				break;
+			}
+			display_post = display_post - 1;
+		}
+
+		// foreach split in list (second pass, after subsplit/visibility calculations)
+		for ( i = 0 ; i < splits.length ; i = i + 1 )
+		{
+			var s = splits[i];
+
+			if ((s.run_id == d.run_active) || (s.run_id == 0))
+			{
+				if (hitless) hitless = (s.hits_combined == 0);
+				if (hitless_pb) hitless_pb = (s.hits_pb == 0);
+			}
+
+			s.hits_boss = s.hits_combined - s.hits_way;
+			s.hitless = hitless;
+			s.hitless_pb = hitless_pb;
+			s.gold = (0 < s.duration_gold && s.duration <= s.duration_gold);
+			s.gold_pb = (0 < s.duration_gold && s.duration_pb <= s.duration_gold);
+
+			// Calculate colors (for all visible splits)
+			class_hits_color = calculate_class_hits_color();
+			s.class_name = (!s.reached || d.high_contrast_names ? '' : class_hits_color);
+			s.class_hits = (!s.reached ? '' : class_hits_color);
 			// check if we are behind PB (only when PB exists)
 			// when accumulated time is ahead of total time but not better than PB (if any) then set neither
 			s.class_time = (s.comulative_time_pb < s.comulative_time ? (0 < s.duration_pb ? 'worse' : '') : (0 < s.duration_pb ? (s.duration_pb < s.duration ? 'neither' : 'better') : ''));
@@ -269,7 +359,7 @@ function DoVisualUpdate(d /*data*/)
 			{
 				percentage_sum += percentage;
 				new_tbl +=
-     '<td class="progress_' + (d.progress_bar_colored ? s.class_hits_color : 'better') +'" style="width: ' + percentage + '%; width: calc(100% / ' + splits.length + ');"></td>';
+     '<td class="progress_' + (d.progress_bar_colored ? s.class_progress : 'better') +'" style="width: ' + percentage + '%; width: calc(100% / ' + splits.length + ');"></td>';
 			}
 		}
 
