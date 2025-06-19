@@ -80,6 +80,7 @@ function PrepareVisibleSplit(i, d, active_subsplit, splits)
 		// sum up values from hidden (2) or collapsed (1) non-active subsplits
 		if (d.subsplits_visibility == 2 || (d.subsplits_visibility == 1 && !active_subsplit))
 		{
+			let found_active = false;
 			for ( let k = i + 1; k < splits.length ; k = k + 1 )
 			{
 				let ss = splits[k];
@@ -91,7 +92,10 @@ function PrepareVisibleSplit(i, d, active_subsplit, splits)
 				s.duration = s.duration + ss.duration;
 				s.duration_pb = s.duration_pb + ss.duration_pb;
 				s.duration_gold = s.duration_gold + s.duration_gold;
+				if (ss.active) found_active = true;
+				ss.active = false;
 			}
+			if (found_active) s.active = true;
 		}
 		active_subsplit = false;
 		s.display = true;
