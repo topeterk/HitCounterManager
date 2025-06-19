@@ -23,16 +23,18 @@
 // ------------------------------------------------------------------------------------
 // ---------------------------------- Initialization ----------------------------------
 
-var link_font = document.createElement('link');
-var link_font_href = '';
-var link_css = document.createElement('link');
-var link_css_href = 'stylesheet.css';
-var iframe;
-var font_name = undefined;
-var font_name_loaded = undefined;
+//"use strict"; // disallow global implicit variables
 
-var offset_timer_start = performance.now();
-var offset_timer_tick_callback = undefined;
+let link_font = document.createElement('link');
+let link_font_href = '';
+let link_css = document.createElement('link');
+let link_css_href = 'stylesheet.css';
+let iframe;
+let font_name = undefined;
+let font_name_loaded = undefined;
+
+let offset_timer_start = performance.now();
+let offset_timer_tick_callback = undefined;
 
 link_font.rel  = 'stylesheet';
 link_font.href = link_font_href;
@@ -44,7 +46,8 @@ document.getElementsByTagName('head')[0].appendChild(link_css);
 function Start(cb)
 {
 	iframe = document.getElementsByTagName('iframe')[0];
-	iframe.src="../HitCounter.html";
+	iframe.onload = DoUpdate;
+	iframe.src = "../HitCounter.html";
 
 	Watchdog(); // Starts actual eternal loop
 
@@ -68,10 +71,10 @@ function IntToTimeStr(val, show_ms)
 {
 	if (isNaN(val)) { return "0"; }
 
-	var ms  = val % 1000; val = val / 1000;
-	var sec = val %   60; val = val /   60;
-	var min = val %   60; val = val /   60;
-	var h   = val;
+	let ms  = val % 1000; val = val / 1000;
+	let sec = val %   60; val = val /   60;
+	let min = val %   60; val = val /   60;
+	let h   = val;
 
 	return (h >= 1 ? Math.floor(h) + ":" : "") + ((h + min) >= 1 ? IntFloorAndFill(min, h >= 1 ? 2 : 0) + ":" : "") + IntFloorAndFill(sec, (h + min) >= 1 ? 2 : 0) + (show_ms ? "<sub>&nbsp;" + IntFloorAndFill(ms / 10, 2) + "</sub>" : ""); // show with 10ms precision
 }
@@ -84,10 +87,10 @@ function IntToRomanStr(val)
 {
 	if (isNaN(val) || (val <= 0)) { return val; }
 
-	var letters = new Array("M",  "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I");
-	var weight  = new Array(1000, 900 , 500, 400 , 100, 90  , 50 , 40  , 10 , 9   , 5  , 4   , 1  );
-	var result = "";
-	for (var i = 0; i < weight.length; i++)
+	let letters = new Array("M",  "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I");
+	let weight  = new Array(1000, 900 , 500, 400 , 100, 90  , 50 , 40  , 10 , 9   , 5  , 4   , 1  );
+	let result = "";
+	for (let i = 0; i < weight.length; i++)
 	{
 		while (val >= weight[i])
 		{
@@ -103,11 +106,11 @@ function BuildSpan(id, style_class, content) { return '<span id="' + id + '" cla
 // ------------------------------------------------------------------------------------
 // ------------------------------------- Watchdog -------------------------------------
 
-var heartbeat = 0;
-var init_done = false;
+let heartbeat = 0;
+let init_done = false;
 function Watchdog()
 {
-	setTimeout(function() { Watchdog();	}, 1500); // refresh every second
+	setTimeout(Watchdog, 1500); // refresh every second
 	if (heartbeat <= 1)
 		heartbeat++;
 	else
@@ -152,9 +155,12 @@ function Watchdog()
 // ------------------------------------------------------------------------------------
 // ---------------------------------- Periodic update ---------------------------------
 
-var last_update_time = 0;
-function DoUpdate(data)
+let last_update_time = 0;
+function DoUpdate()
 {
+	let data = iframe.contentWindow.data;
+	iframe.contentWindow.close();
+
 	heartbeat = 0; // reset heartbeat, because we are alive
 	init_done = true; // the data file could be loaded successfully
 
@@ -165,11 +171,11 @@ function DoUpdate(data)
 	if ((font_name == undefined) && (link_font_href != ''))
 	{
 		// a font was set but the font name is unknown yet, so get the name from the loaded font
-		var importedSheet = link_font.sheet ? link_font.sheet : link_font.styleSheet;
+		let importedSheet = link_font.sheet ? link_font.sheet : link_font.styleSheet;
 		try
 		{
 			// Some browsers like Firefox don't like accessing another domain by javascript, so catch this exception
-			var rules = importedSheet.cssRules ? importedSheet.cssRules : importedSheet.rules;
+			let rules = importedSheet.cssRules ? importedSheet.cssRules : importedSheet.rules;
 			for ( i = 0 ; i < rules.length ; i = i + 1 )
 			{
 				if (rules[i].type == CSSRule.FONT_FACE_RULE)
@@ -187,11 +193,11 @@ function DoUpdate(data)
 		{
 			font_name_loaded = font_name;
 
-			var importedSheet = link_css.sheet ? link_css.sheet : link_css.styleSheet;
+			let importedSheet = link_css.sheet ? link_css.sheet : link_css.styleSheet;
 			try
 			{
 				// Some browsers like Firefox don't like accessing another domain by javascript, so catch this exception
-				var rules = importedSheet.cssRules ? importedSheet.cssRules : importedSheet.rules; 
+				let rules = importedSheet.cssRules ? importedSheet.cssRules : importedSheet.rules; 
 				for ( i = 0 ; i < rules.length ; i = i + 1 )
 				{
 					if (rules[i].type == CSSRule.STYLE_RULE)
@@ -217,7 +223,7 @@ function DoUpdate(data)
 		DoVisualUpdate(data); // build graphical content
 	}
 
-	setTimeout(function() { RefreshData(); }, 1500); // refresh around every second
+	setTimeout(RefreshData, 1500); // refresh around every second
 }
 
 function RefreshData()
