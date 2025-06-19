@@ -132,6 +132,9 @@ namespace HitCounterManager.ViewModels
             {"ShowDurationGold", new ShowInfoBool() },
             {"ShowSessionProgress", new ShowInfoBool()},
             {"ShowNumbers", new ShowInfoBool()},
+            {"SubSplitVisibilityShowAll", new ShowInfoBool()},
+            {"SubSplitVisibilityCollapseNonActive", new ShowInfoBool()},
+            {"SubSplitVisibilityHideAll", new ShowInfoBool()},
             {"StyleUseHighContrast", new ShowInfoBool()},
             {"StyleUseHighContrastNames", new ShowInfoBool()},
             {"StyleProgressBarColored", new ShowInfoBool()},
@@ -583,6 +586,142 @@ namespace HitCounterManager.ViewModels
 #endregion
 
 #region Style
+
+        #region Visible sections
+
+        public bool ShowAttemptsCounter
+        {
+            get => Settings.ShowAttemptsCounter;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowAttemptsCounter, value);
+        }
+        public bool ShowHeadline
+        {
+            get => Settings.ShowHeadline;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowHeadline, value);
+        }
+        public bool ShowProgressBar
+        {
+            get => Settings.ShowProgressBar;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowProgressBar, value);
+        }
+        public bool ShowFooter
+        {
+            get => Settings.ShowFooter;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowFooter, value);
+        }
+        public bool ShowTimeFooter
+        {
+            get => Settings.ShowTimeFooter;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowTimeFooter, value);
+        }
+
+        #endregion
+        #region Visible splits
+
+#pragma warning disable IDE0079
+#pragma warning disable CA1822
+        public bool SubSplitVisibilityShowAll => Settings.SubSplitVisibility == (int)Settings_SubSplitVisibility.Settings_SubSplitVisibility_ShowAll;
+        public bool SubSplitVisibilityCollapseNonActive => Settings.SubSplitVisibility == (int)Settings_SubSplitVisibility.Settings_SubSplitVisibility_CollapseNonActive;
+        public bool SubSplitVisibilityHideAll => Settings.SubSplitVisibility == (int)Settings_SubSplitVisibility.Settings_SubSplitVisibility_HideAll;
+#pragma warning restore CA1822
+#pragma warning restore IDE0079
+        public void SetSubSplitVisibility(string name)
+        {
+            switch (name)
+            {
+                case "Show all": SetAndNotifyWhenChanged(ref Settings.SubSplitVisibility, (int)Settings_SubSplitVisibility.Settings_SubSplitVisibility_ShowAll); break;
+                case "Collapse non-active": SetAndNotifyWhenChanged(ref Settings.SubSplitVisibility, (int)Settings_SubSplitVisibility.Settings_SubSplitVisibility_CollapseNonActive); break;
+                case "Hide all": SetAndNotifyWhenChanged(ref Settings.SubSplitVisibility, (int)Settings_SubSplitVisibility.Settings_SubSplitVisibility_HideAll); break;
+            }
+        }
+        public int ShowSplitsCountFinished
+        {
+            get => Settings.ShowSplitsCountFinished;
+            set => SetAndNotifyWhenNaturalNumberChanged(ref Settings.ShowSplitsCountFinished, value);
+        }
+        public int ShowSplitsCountUpcoming
+        {
+            get => Settings.ShowSplitsCountUpcoming;
+            set => SetAndNotifyWhenNaturalNumberChanged(ref Settings.ShowSplitsCountUpcoming, value);
+        }
+
+        #endregion
+        #region Visible columns
+
+        public bool ShowHits
+        {
+            get => Settings.ShowHits;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowHits, value);
+        }
+        public bool ShowHitsCombined
+        {
+            get => Settings.ShowHitsCombined;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowHitsCombined, value);
+        }
+        public bool ShowPB
+        {
+            get => Settings.ShowPB;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowPB, value);
+        }
+        public bool ShowPBTotals
+        {
+            get => Settings.ShowPBTotals;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowPBTotals, value);
+        }
+        public bool ShowDiff
+        {
+            get => Settings.ShowDiff;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowDiff, value);
+        }
+        public bool ShowTimeCurrent
+        {
+            get => Settings.ShowTimeCurrent;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowTimeCurrent, value);
+        }
+        public bool ShowTimeDiff
+        {
+            get => Settings.ShowTimeDiff;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowTimeDiff, value);
+        }
+        public bool ShowTimePB
+        {
+            get => Settings.ShowTimePB;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowTimePB, value);
+        }
+        public bool ShowDurationCurrent
+        {
+            get => Settings.ShowDurationCurrent;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowDurationCurrent, value);
+        }
+        public bool ShowDurationDiff
+        {
+            get => Settings.ShowDurationDiff;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowDurationDiff, value);
+        }
+        public bool ShowDurationPB
+        {
+            get => Settings.ShowDurationPB;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowDurationPB, value);
+        }
+        public bool ShowDurationGold
+        {
+            get => Settings.ShowDurationGold;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowDurationGold, value);
+        }
+        public bool ShowSessionProgress
+        {
+            get => Settings.ShowSessionProgress;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowSessionProgress, value);
+        }
+
+        #endregion
+        #region Appearance
+
+        public bool ShowNumbers
+        {
+            get => Settings.ShowNumbers;
+            set => SetAndNotifyWhenChanged(ref Settings.ShowNumbers, value);
+        }
         public bool StyleUseHighContrast
         {
             get => Settings.StyleUseHighContrast;
@@ -613,7 +752,6 @@ namespace HitCounterManager.ViewModels
             get => Settings.StyleHightlightCurrentSplit;
             set => SetAndNotifyWhenChanged(ref Settings.StyleHightlightCurrentSplit, value);
         }
-
         public int StyleDesiredHeight
         {
             get => Settings.StyleDesiredHeight;
@@ -641,6 +779,9 @@ namespace HitCounterManager.ViewModels
             }
         }
 
+        #endregion
+        #region Customization
+
         public bool StyleUseCustom
         {
             get => Settings.StyleUseCustom;
@@ -667,6 +808,8 @@ namespace HitCounterManager.ViewModels
         public ICommand ApplyCssAndFont { get; }
 
         public ICommand WebOpenGoogleFontsUrl { get; } = ReactiveCommand.Create(() => Extensions.OpenWithBrowser(new Uri("https://fonts.google.com")));
+
+        #endregion
 #endregion
 
 #region Behavior
@@ -756,112 +899,6 @@ namespace HitCounterManager.ViewModels
         {
             get => om.Severity == OutModule.OM_Severity.OM_Severity_BossHitCritical;
             set { if (value) SetHitSeverity(OutModule.OM_Severity.OM_Severity_BossHitCritical); }
-        }
-        public bool ShowAttemptsCounter
-        {
-            get => Settings.ShowAttemptsCounter;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowAttemptsCounter, value);
-        }
-        public bool ShowHeadline
-        {
-            get => Settings.ShowHeadline;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowHeadline, value);
-        }
-        public bool ShowFooter
-        {
-            get => Settings.ShowFooter;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowFooter, value);
-        }
-        public bool ShowSessionProgress
-        {
-            get => Settings.ShowSessionProgress;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowSessionProgress, value);
-        }
-        public bool ShowProgressBar
-        {
-            get => Settings.ShowProgressBar;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowProgressBar, value);
-        }
-        public bool ShowHits
-        {
-            get => Settings.ShowHits;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowHits, value);
-        }
-        public bool ShowHitsCombined
-        {
-            get => Settings.ShowHitsCombined;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowHitsCombined, value);
-        }
-        public bool ShowPB
-        {
-            get => Settings.ShowPB;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowPB, value);
-        }
-        public bool ShowPBTotals
-        {
-            get => Settings.ShowPBTotals;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowPBTotals, value);
-        }
-        public bool ShowDiff
-        {
-            get => Settings.ShowDiff;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowDiff, value);
-        }
-        public bool ShowNumbers
-        {
-            get => Settings.ShowNumbers;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowNumbers, value);
-        }
-        public bool ShowTimeCurrent
-        {
-            get => Settings.ShowTimeCurrent;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowTimeCurrent, value);
-        }
-        public bool ShowTimeDiff
-        {
-            get => Settings.ShowTimeDiff;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowTimeDiff, value);
-        }
-        public bool ShowTimePB
-        {
-            get => Settings.ShowTimePB;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowTimePB, value);
-        }
-        public bool ShowTimeFooter
-        {
-            get => Settings.ShowTimeFooter;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowTimeFooter, value);
-        }
-        public bool ShowDurationCurrent
-        {
-            get => Settings.ShowDurationCurrent;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowDurationCurrent, value);
-        }
-        public bool ShowDurationDiff
-        {
-            get => Settings.ShowDurationDiff;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowDurationDiff, value);
-        }
-        public bool ShowDurationPB
-        {
-            get => Settings.ShowDurationPB;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowDurationPB, value);
-        }
-        public bool ShowDurationGold
-        {
-            get => Settings.ShowDurationGold;
-            set => SetAndNotifyWhenChanged(ref Settings.ShowDurationGold, value);
-        }
-
-        public int ShowSplitsCountFinished
-        {
-            get => Settings.ShowSplitsCountFinished;
-            set => SetAndNotifyWhenNaturalNumberChanged(ref Settings.ShowSplitsCountFinished, value);
-        }
-        public int ShowSplitsCountUpcoming
-        {
-            get => Settings.ShowSplitsCountUpcoming;
-            set => SetAndNotifyWhenNaturalNumberChanged(ref Settings.ShowSplitsCountUpcoming, value);
         }
 #endregion
     }

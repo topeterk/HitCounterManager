@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2021-2024 Peter Kirmeier
+//Copyright (c) 2021-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -32,6 +32,17 @@ namespace HitCounterManager.Views
         public SettingsPage()
         {
             AvaloniaXamlLoader.Load(this);
+        }
+
+        public void SubSplitVisibilityCheckedChanged(object sender, RoutedEventArgs args)
+        {
+            if (sender is RadioButton radioButton && radioButton.Content is string content)
+            {
+                if (radioButton.IsChecked.HasValue && radioButton.IsChecked.Value)
+                {
+                    ViewModel.SetSubSplitVisibility(content);
+                }
+            }
         }
 
         public void TableAlignmentGroupCheckedChanged(object sender, RoutedEventArgs args)

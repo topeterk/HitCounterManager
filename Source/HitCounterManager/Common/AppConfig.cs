@@ -103,6 +103,7 @@ namespace HitCounterManager
         public bool ShowDurationPB;
         public bool ShowDurationGold;
         public bool ShowTimeFooter;
+        public int SubSplitVisibility;
         public int Purpose;
         public int Severity;
         public bool StyleUseHighContrast;
@@ -121,6 +122,13 @@ namespace HitCounterManager
         public string ProfileSelected = "Unnamed";
         public Profiles Profiles = new ();
     }
+
+    public enum Settings_SubSplitVisibility
+    {
+        Settings_SubSplitVisibility_ShowAll = 0,
+        Settings_SubSplitVisibility_CollapseNonActive = 1,
+        Settings_SubSplitVisibility_HideAll = 2
+    };
 
     #endregion
 
@@ -375,6 +383,7 @@ namespace HitCounterManager
             if (Settings.Version == 10) // Coming from version 1.21
             {
                 Settings.Version = 11;
+                Settings.SubSplitVisibility = (int)Settings_SubSplitVisibility.Settings_SubSplitVisibility_ShowAll;
                 Settings.StyleTableAlignment = "tblcenter";
                 Settings.ShowDurationCurrent = false;
                 Settings.ShowDurationDiff = false;

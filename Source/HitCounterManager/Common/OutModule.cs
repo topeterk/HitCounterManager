@@ -259,6 +259,7 @@ namespace HitCounterManager.Models
                     WriteJsonSimpleValue(sr, "show_duration_diff", Settings.ShowDurationDiff);
                     WriteJsonSimpleValue(sr, "show_duration_pb", Settings.ShowDurationPB);
                     WriteJsonSimpleValue(sr, "show_duration_gold", Settings.ShowDurationGold);
+                    WriteJsonSimpleValue(sr, "subsplits_visibility", Settings.SubSplitVisibility);
                     WriteJsonSimpleValue(sr, "purpose", (int)Purpose);
                     WriteJsonSimpleValue(sr, "severity", (int)Severity);
 

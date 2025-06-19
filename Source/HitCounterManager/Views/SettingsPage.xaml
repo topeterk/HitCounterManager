@@ -343,6 +343,53 @@
 						<StackPanel Margin="0 10 0 0" Orientation="Vertical" HorizontalAlignment="Stretch" Classes="Section">
 							<TextBlock Margin="5 10 0 10" HorizontalAlignment="Left" Text="Visible splits" FontWeight="Bold"/>
 
+							<TextBlock Margin="10,0,10,0" HorizontalAlignment="Left" Text="Sub splits visibility:" />
+							<Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
+								<RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+									<Button Command="{Binding ToggleShowInfo}" CommandParameter="SubSplitVisibilityShowAll" Classes="ImageButton">
+										<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+									</Button>
+								</RelativePanel>
+								<RadioButton Grid.Row="0" Grid.Column="1" Margin="0" GroupName="SubSplitVisibilityGroup" IsCheckedChanged="SubSplitVisibilityCheckedChanged" Content="Show all" IsChecked="{Binding SubSplitVisibilityShowAll, Mode=OneTime}"/>
+								<Border Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+										IsVisible="{Binding ShowInfo[SubSplitVisibilityShowAll].Value, Mode=OneWay}">
+									<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+										<TextBlock.Text>
+											<x:String xml:space="preserve">All sub splits are shown.</x:String>
+										</TextBlock.Text>
+									</TextBlock>
+								</Border>
+								<RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+									<Button Command="{Binding ToggleShowInfo}" CommandParameter="SubSplitVisibilityCollapseNonActive" Classes="ImageButton">
+										<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+									</Button>
+								</RelativePanel>
+								<RadioButton Grid.Row="2" Grid.Column="1" Margin="0" GroupName="SubSplitVisibilityGroup" IsCheckedChanged="SubSplitVisibilityCheckedChanged" Content="Collapse non-active" IsChecked="{Binding SubSplitVisibilityCollapseNonActive, Mode=OneTime}"/>
+								<Border Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+										IsVisible="{Binding ShowInfo[SubSplitVisibilityCollapseNonActive].Value, Mode=OneWay}">
+									<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+										<TextBlock.Text>
+											<x:String xml:space="preserve">Sub splits are hidden.
+Expection: The sub splits are shown only for the group containing the active split.</x:String>
+										</TextBlock.Text>
+									</TextBlock>
+								</Border>
+								<RelativePanel Grid.Row="4" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+									<Button Command="{Binding ToggleShowInfo}" CommandParameter="SubSplitVisibilityHideAll" Classes="ImageButton">
+										<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+									</Button>
+								</RelativePanel>
+								<RadioButton Grid.Row="4" Grid.Column="1" Margin="0" GroupName="SubSplitVisibilityGroup" IsCheckedChanged="SubSplitVisibilityCheckedChanged" Content="Hide all" IsChecked="{Binding SubSplitVisibilityHideAll, Mode=OneTime}"/>
+								<Border Grid.Row="5" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+										IsVisible="{Binding ShowInfo[SubSplitVisibilityHideAll].Value, Mode=OneWay}">
+									<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+										<TextBlock.Text>
+											<x:String xml:space="preserve">All sub splits are hidden.</x:String>
+										</TextBlock.Text>
+									</TextBlock>
+								</Border>
+							</Grid>
+
 							<Grid Margin="10,0,10,0" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" HorizontalAlignment="Stretch">
 								<TextBlock     Grid.Row="0" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Maxium previous splits:" />
 								<NumericUpDown Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="999"

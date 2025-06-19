@@ -63,6 +63,7 @@
   <ShowDurationPB>false</ShowDurationPB>
   <ShowDurationGold>false</ShowDurationGold>
   <ShowTimeFooter>false</ShowTimeFooter>
+  <SubSplitVisibility>0</SubSplitVisibility>
   <Purpose>0</Purpose>
   <Severity>0</Severity>
   <StyleUseHighContrast>false</StyleUseHighContrast>
