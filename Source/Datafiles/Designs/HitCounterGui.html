@@ -73,12 +73,12 @@ function PrepareVisibleSplit(i, d, active_subsplit, splits)
 	{
 		// show subsplits always (0) or
 		// only for collapsed visibility (1) when this is a subsplit from active group
-		if (d.subsplits_visibility == 0 || (d.subsplits_visibility == 1 && active_subsplit)) s.display = true;
+		if (d.subsplits_visibility == 0 || (d.subsplits_visibility == 1 && active_subsplit.value)) s.display = true;
 	}
 	else
 	{
 		// sum up values from hidden (2) or collapsed (1) non-active subsplits
-		if (d.subsplits_visibility == 2 || (d.subsplits_visibility == 1 && !active_subsplit))
+		if (d.subsplits_visibility == 2 || (d.subsplits_visibility == 1 && !active_subsplit.value))
 		{
 			let found_active = false;
 			for ( let k = i + 1; k < splits.length ; k = k + 1 )
@@ -97,7 +97,7 @@ function PrepareVisibleSplit(i, d, active_subsplit, splits)
 			}
 			if (found_active) s.active = true;
 		}
-		active_subsplit = false;
+		active_subsplit.value = false;
 		s.display = true;
 	}
 }
@@ -178,9 +178,9 @@ function DoVisualUpdate(d /*data*/)
 		let display_post = d.split_last - d.split_active;
 
 		// mark the splits for display that do not exeed maximum splits and take care of hidden splits
-		let active_subsplit;
+		let active_subsplit = { value: true };
 		// looking from active split backwards
-		active_subsplit = true;
+		active_subsplit.value = true;
 		for ( let i = d.split_active ; 0 <= i ; i = i - 1 )
 		{
 			let s = splits[i];
@@ -204,12 +204,12 @@ function DoVisualUpdate(d /*data*/)
 			display_pre = display_pre - 1;
 		}
 		// looking past the active split onwards
-		active_subsplit = true;
+		active_subsplit.value = true;
 		for ( let i = d.split_active + 1; i < splits.length ; i = i + 1 )
 		{
 			let s = splits[i];
 
-			if (!s.subsplit) active_subsplit = false; // first non-subsplit is not active one
+			if (!s.subsplit) active_subsplit.value = false; // first non-subsplit is not active one
 			PrepareVisibleSplit(i, d, active_subsplit, splits);
 
 			if (display_post == 1)
