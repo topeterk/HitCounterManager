@@ -32,17 +32,71 @@ SOFTWARE.
 <table id="table"><tr><td><span class="dark">..loading..</span></td></tr></table>
 <script language="javascript">
 
-var tbl = document.getElementById('table');
-var current_split_time = 0;
-var current_split_time_pb = 0;
-var current_split_duration = 0;
-var current_split_duration_pb = 0;
-var total_time_current = 0;
-var total_time_pb = 0;
-var is_timer_paused = false;
+//"use strict"; // disallow global implicit variables
+
+let tbl = document.getElementById('table');
+let current_split_time = 0;
+let current_split_time_pb = 0;
+let current_split_duration = 0;
+let current_split_duration_pb = 0;
+let total_time_current = 0;
+let total_time_pb = 0;
+let is_timer_paused = false;
 
 function ShowHelpText(instructions) { tbl.innerHTML = '<tr><td class="dark left">' + instructions + '</td></tr>'; }
 
+function CalculateClassHitsColor(d, s)
+{
+	// prepare colors (CSS classes)
+	if (d.purpose == 4 /*ResetCounter*/)
+		return '';
+	else if (d.purpose == 3 /*NoDeath*/)
+		return (s.hitless ? 'better' : 'worse');
+	else if (s.hits_combined == 0)
+		return 'better';
+
+	switch (d.severity)
+	{
+		case 2: // ComparePB
+			return (s.hits_combined <= s.hits_pb ? 'neither' : 'worse');  break;
+		case 1: // BossHitCritical
+			return (s.hits_boss == 0 ? 'neither' : 'worse');  break;
+		case 0: // AnyHitsCritical
+		default: return 'worse';  break;
+	}
+}
+
+function PrepareVisibleSplit(i, d, active_subsplit, splits)
+{
+	let s = splits[i];
+	if (s.subsplit)
+	{
+		// show subsplits always (0) or
+		// only for collapsed visibility (1) when this is a subsplit from active group
+		if (d.subsplits_visibility == 0 || (d.subsplits_visibility == 1 && active_subsplit)) s.display = true;
+	}
+	else
+	{
+		// sum up values from hidden (2) or collapsed (1) non-active subsplits
+		if (d.subsplits_visibility == 2 || (d.subsplits_visibility == 1 && !active_subsplit))
+		{
+			for ( let k = i + 1; k < splits.length ; k = k + 1 )
+			{
+				let ss = splits[k];
+				if (!ss.subsplit) break;
+
+				s.hits_combined = s.hits_combined + ss.hits_combined;
+				s.hits_pb = s.hits_pb + ss.hits_pb;
+				s.hits_way = s.hits_way + ss.hits_way;
+				s.duration = s.duration + ss.duration;
+				s.duration_pb = s.duration_pb + ss.duration_pb;
+				s.duration_gold = s.duration_gold + s.duration_gold;
+			}
+		}
+		active_subsplit = false;
+		s.display = true;
+	}
+}
 function DoVisualUpdate(d /*data*/)
 {
 	// TODO: Move setting into GUI
@@ -50,48 +104,27 @@ function DoVisualUpdate(d /*data*/)
 
 	// ------------------------------------------------------------------------------------
 	// ------------------------------------ Update Data -----------------------------------
-	var total_hits_combined = 0;
-	var total_hits_way = 0;
-	var total_hits_pb = 0;
-	var total_hits_class;
-	var splits = Array(d.list.length);
+	let total_hits_combined = 0;
+	let total_hits_way = 0;
+	let total_hits_pb = 0;
+	let total_hits_class;
+	let splits = Array(d.list.length);
 
 	// refine splits data
 	{
-		var class_hits_color;
-		var hitless = true;
-		var hitless_pb = true;
-		var hidden_subsplit;
+		let class_hits_color;
+		let hitless = true;
+		let hitless_pb = true;
+		let hidden_subsplit;
 
 		total_time_current = 0;
 		total_time_pb = 0;
 		is_timer_paused = d.timer_paused;
 
-		const calculate_class_hits_color = (/*globals: d, s*/) =>
-		{
-			// prepare colors (CSS classes)
-			if (d.purpose == 4 /*ResetCounter*/)
-				return '';
-			else if (d.purpose == 3 /*NoDeath*/)
-				return (s.hitless ? 'better' : 'worse');
-			else if (s.hits_combined == 0)
-				return 'better';
-
-			switch (d.severity)
-			{
-				case 2: // ComparePB
-					return (s.hits_combined <= s.hits_pb ? 'neither' : 'worse');  break;
-				case 1: // BossHitCritical
-					return (s.hits_boss == 0 ? 'neither' : 'worse');  break;
-				case 0: // AnyHitsCritical
-				default: return 'worse';  break;
-			}
-		}
-
 		// foreach split in list (first pass, before subsplit/visibility calculations)
-		for ( i = 0 ; i < splits.length ; i = i + 1 )
+		for ( let i = 0 ; i < splits.length ; i = i + 1 )
 		{
-			var s = splits[i] = new Object();
+			let s = splits[i] = new Object();
 
 			// give data understandable names
 			s.name = d.list[i][0];
@@ -132,53 +165,23 @@ function DoVisualUpdate(d /*data*/)
 			s.hitless = hitless;
 
 			// Calculate colors for progress bar (independend from hidden or collapsed subsplits)
-			class_hits_color = calculate_class_hits_color();
+			class_hits_color = CalculateClassHitsColor(d, s);
 			s.class_progress = class_hits_color;
 		}
 
 		// reconstruct amount of visible splits (based on pre-calculated legacy data)
-		var display_pre = d.split_active - d.split_first + 1; // add one for always at least one visible active split
-		var display_post = d.split_last - d.split_active;
+		let display_pre = d.split_active - d.split_first + 1; // add one for always at least one visible active split
+		let display_post = d.split_last - d.split_active;
 
 		// mark the splits for display that do not exeed maximum splits and take care of hidden splits
-		var active_subsplit;
-		const prepare_visible_split = (/*globals: i, d, s, active_subsplit, splits*/) =>
-		{
-			if (s.subsplit)
-			{
-				// show subsplits always (0) or
-				// only for collapsed visibility (1) when this is a subsplit from active group
-				if (d.subsplits_visibility == 0 || (d.subsplits_visibility == 1 && active_subsplit)) s.display = true;
-			}
-			else
-			{
-				// sum up values from hidden (2) or collapsed (1) non-active subsplits
-				if (d.subsplits_visibility == 2 || (d.subsplits_visibility == 1 && !active_subsplit))
-				{
-					for ( k = i + 1; k < splits.length ; k = k + 1 )
-					{
-						var ss = splits[k];
-						if (!ss.subsplit) break;
-
-						s.hits_combined = s.hits_combined + ss.hits_combined;
-						s.hits_pb = s.hits_pb + ss.hits_pb;
-						s.hits_way = s.hits_way + ss.hits_way;
-						s.duration = s.duration + ss.duration;
-						s.duration_pb = s.duration_pb + ss.duration_pb;
-						s.duration_gold = s.duration_gold + s.duration_gold;
-					}
-				}
-				active_subsplit = false;
-				s.display = true;
-			}
-		}
+		let active_subsplit;
 		// looking from active split backwards
 		active_subsplit = true;
-		for ( i = d.split_active ; 0 <= i ; i = i - 1 )
+		for ( let i = d.split_active ; 0 <= i ; i = i - 1 )
 		{
-			var s = splits[i];
+			let s = splits[i];
 
-			prepare_visible_split();
+			PrepareVisibleSplit(i, d, active_subsplit, splits);
 
 			// remember data from farthest point of the run
 			if (s.active)
@@ -198,12 +201,12 @@ function DoVisualUpdate(d /*data*/)
 		}
 		// looking past the active split onwards
 		active_subsplit = true;
-		for ( i = d.split_active + 1; i < splits.length ; i = i + 1 )
+		for ( let i = d.split_active + 1; i < splits.length ; i = i + 1 )
 		{
-			var s = splits[i];
+			let s = splits[i];
 
 			if (!s.subsplit) active_subsplit = false; // first non-subsplit is not active one
-			prepare_visible_split();
+			PrepareVisibleSplit(i, d, active_subsplit, splits);
 
 			if (display_post == 1)
 			{
@@ -214,9 +217,9 @@ function DoVisualUpdate(d /*data*/)
 		}
 
 		// foreach split in list (second pass, after subsplit/visibility calculations)
-		for ( i = 0 ; i < splits.length ; i = i + 1 )
+		for ( let i = 0 ; i < splits.length ; i = i + 1 )
 		{
-			var s = splits[i];
+			let s = splits[i];
 
 			if ((s.run_id == d.run_active) || (s.run_id == 0))
 			{
@@ -231,7 +234,7 @@ function DoVisualUpdate(d /*data*/)
 			s.gold_pb = (0 < s.duration_gold && s.duration_pb <= s.duration_gold);
 
 			// Calculate colors (for all visible splits)
-			class_hits_color = calculate_class_hits_color();
+			class_hits_color = CalculateClassHitsColor(d, s);
 			s.class_name = (!s.reached || d.high_contrast_names ? '' : class_hits_color);
 			s.class_hits = (!s.reached ? '' : class_hits_color);
 			// check if we are behind PB (only when PB exists)
@@ -245,11 +248,11 @@ function DoVisualUpdate(d /*data*/)
 
 	// ------------------------------------------------------------------------------------
 	// -------------------------------- Prepare Visual Data -------------------------------
-	var new_tbl = "";
-	var majorclass = (d.high_contrast ? 'major dark' : 'major');
-	var tblclass = (d.tblalign != undefined ? d.tblalign : '');
-	var hit_cols = 0;
-	var max_cols = 1;
+	let new_tbl = "";
+	let majorclass = (d.high_contrast ? 'major dark' : 'major');
+	let tblclass = (d.tblalign != undefined ? d.tblalign : '');
+	let hit_cols = 0;
+	let max_cols = 1;
 
 	switch (d.purpose)
 	{
@@ -325,8 +328,8 @@ function DoVisualUpdate(d /*data*/)
 	// ----------------------------------- Progress Bar -----------------------------------
 	if (d.show_progress_bar)
 	{
-		var percentage = 0;
-		var percentage_sum = 0;
+		let percentage = 0;
+		let percentage_sum = 0;
 
 		// fill start
 		if (0 < splits.length) percentage = 100 / splits.length;
@@ -336,9 +339,9 @@ function DoVisualUpdate(d /*data*/)
    '<table class="progress"><tr>';
 
 		// fill splits
-		for ( i = 0 ; i < splits.length ; i = i + 1 )
+		for ( let i = 0 ; i < splits.length ; i = i + 1 )
 		{
-			s = splits[i];
+			let s = splits[i];
 			if (!s.reached) // place a spacer for the upcoming splits and fill rest
 			{
 				new_tbl +=
@@ -364,20 +367,24 @@ function DoVisualUpdate(d /*data*/)
 	// -------------------------------------- Splits --------------------------------------
 	if ((d.purpose == 0 /*SplitCounter*/) || (d.purpose == 3 /*NoDeath*/) || (d.purpose == 4 /*ResetCounter*/))
 	{
-		var duration_class;
-		var time_diff_class;
-		var duration_pb_class;
-		var time_pb_class;
-		var gold_class;
-		var highlight_class;
-		var bottom_class;
-		var hits_blank;
-		var comulative_time_duration_str;
-		var comulative_time_diff_str;
-		var empty_str = (d.show_numbers ? "-" : ShowCrossOrCheckMark(-1));
-		for ( i = 0 ; (i < splits.length) && (i <= d.split_last) ; i = i + 1 )
+		let time_class;
+		let duration_class;
+		let time_diff_class;
+		let duration_diff_class;
+		let duration_pb_class;
+		let time_pb_class;
+		let gold_class;
+		let highlight_class;
+		let bottom_class;
+		let hits_blank;
+		let time_duration_str;
+		let time_duration_diff_str;
+		let comulative_time_duration_str;
+		let comulative_time_diff_str;
+		let empty_str = (d.show_numbers ? "-" : ShowCrossOrCheckMark(-1));
+		for ( let i = 0 ; (i < splits.length) && (i <= d.split_last) ; i = i + 1 )
 		{
-			s = splits[i];
+			let s = splits[i];
 
 			// skip entries that should not be displayed
 			if (!s.display) continue;
@@ -425,9 +432,9 @@ function DoVisualUpdate(d /*data*/)
 	}
 	else if (d.purpose == 2) // Checklist
 	{
-		for ( i = d.split_first ; (i <= d.split_last) && (i < splits.length) ; i = i + 1 )
+		for ( let i = d.split_first ; (i <= d.split_last) && (i < splits.length) ; i = i + 1 )
 		{
-			s = splits[i];
+			let s = splits[i];
 			new_tbl +=
  '<tr class="' + (s.active ? 'current' : (d.high_contrast ? (i%2==0 ? 'even' : 'odd') : '')) + '">' +
   '<td class="left">' + s.name + '</td>' +
@@ -442,9 +449,9 @@ function DoVisualUpdate(d /*data*/)
 	{
 		if ((d.purpose == 0 /*SplitCounter*/) || (d.purpose == 3 /*NoDeath*/) || (d.purpose == 4 /*ResetCounter*/))
 		{
-			var empty_str = (d.show_numbers ? "-" : ShowCrossOrCheckMark(-1));
-			var hit_cols = (d.show_hits ? (d.show_hitscombined ? 1 : 2) : 0) + (d.show_numbers && d.show_diff ? 1 : 0) + (d.show_pb ? 1 : 0);
-			var time_class = (0 < total_time_current - total_time_pb ? (0 < total_time_pb ? 'worse' : '') : 'better'); // also see split generation
+			let empty_str = (d.show_numbers ? "-" : ShowCrossOrCheckMark(-1));
+			let hit_cols = (d.show_hits ? (d.show_hitscombined ? 1 : 2) : 0) + (d.show_numbers && d.show_diff ? 1 : 0) + (d.show_pb ? 1 : 0);
+			let time_class = (0 < total_time_current - total_time_pb ? (0 < total_time_pb ? 'worse' : '') : 'better'); // also see split generation
 
 			if (d.show_numbers)
 			{
@@ -510,8 +517,9 @@ function OnOffsetTimerTick(offset)
 {
 	if (!is_timer_paused)
 	{
-		var diff;
-		var diff_pb;
+		let diff;
+		let diff_pb;
+		let span;
 
 		if (undefined  != (span = document.getElementById('time_split_current')))
 		{
