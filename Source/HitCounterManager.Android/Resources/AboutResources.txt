@@ -1,3 +1,6 @@
+SPDX-FileCopyrightText: © 2023 Peter Kirmeier
+SPDX-License-Identifier: CC0-1.0
+
 Images, layout descriptions, binary blobs and string dictionaries can be included 
 in your application as resource files.  Various Android APIs are designed to 
 operate on the resource IDs instead of dealing with images, strings or binary blobs 

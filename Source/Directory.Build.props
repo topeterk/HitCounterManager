@@ -1,4 +1,8 @@
 <Project>
+<!--
+SPDX-FileCopyrightText: © 2011-2025 Peter Kirmeier
+SPDX-License-Identifier: MIT
+-->
   <PropertyGroup>
     <!-- Consumed by pipeline START -->
     <MajorVersion>2</MajorVersion>
@@ -13,8 +17,9 @@
 
     <Authors>Peter Kirmeier</Authors>
     <Company></Company>
+    <!-- REUSE-IgnoreStart -->
     <Copyright>Copyright © $(Authors) $([System.DateTime]::Now.Year)</Copyright>
-
+    <!-- REUSE-IgnoreEnd -->
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <!-- The path must be set in this property file as it must be loaded before the    -->

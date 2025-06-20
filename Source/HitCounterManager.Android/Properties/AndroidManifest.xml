@@ -1,4 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+SPDX-FileCopyrightText: © 2023-2025 Peter Kirmeier
+SPDX-License-Identifier: MIT
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto">
 	<!-- Selected by TargetFramework, so no need to set it <uses-sdk android:minSdkVersion="21"/> --> <!-- https://apilevels.com -->
 	<!-- https://developer.android.com/reference/android/Manifest.permission -->

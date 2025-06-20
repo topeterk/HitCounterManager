@@ -1,4 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+<!--
+SPDX-FileCopyrightText: © 2018-2025 Peter Kirmeier
+SPDX-License-Identifier: MIT
+-->
   <PropertyGroup>
     <AssemblyName>$(Product).PCL</AssemblyName>
     <TargetFramework>net8.0</TargetFramework>

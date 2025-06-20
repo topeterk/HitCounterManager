@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: © 2025 Peter Kirmeier
+# SPDX-License-Identifier: CC0-1.0
+
 Datafiles/HitCounter.template       diff      text eol=CRLF
 Datafiles/HitCounterManagerInit.xml diff      text eol=CRLF
 *.html                              diff=html text eol=CRLF

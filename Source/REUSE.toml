@@ -1,0 +1,98 @@
+version = 1
+
+SPDX-PackageName = "HitCounterManager"
+SPDX-PackageSupplier = "Peter Kirmeier"
+SPDX-PackageDownloadLocation = "https://github.com/topeterk/HitCounterManager"
+#SPDX-PackageComment = "Some rights reserved"
+
+# This file describes the licensing and copyright situation for files that are not annotated directly.
+# This follows the REUSE specification: https://reuse.software/spec-3.3/#reusetoml
+
+# SPDX identifiers: https://spdx.org/licenses/
+# LicenseRef-Pixabay origin: https://pixabay.com/service/license/
+
+# To run reuse linting:
+#   pip3 install --user reuse
+#   PATH=%APPDATA%\Python\Python313\Scripts;%PATH%
+#   reuse --root . lint
+#   reuse --root . download --all
+#   reuse --root . spdx --creator-person "Peter Kirmeier" --creator-organization https://github.com/topeterk/
+
+# Datafiles without included copyright notices
+[[annotations]]
+path = [
+	"Datafiles/HitCounter.html",
+	"Datafiles/HitCounter.template",
+	"Images/Preview.png",
+	"Images/Preview.xcf"
+]
+precedence = "closest"
+SPDX-FileCopyrightText = "© 2016-2025 Peter Kirmeier"
+SPDX-License-Identifier = "MIT"
+
+# C# JSON parser
+[[annotations]]
+path = [
+	"HitCounterManager/Helper/JsonParser.cs",
+	"HitCounterManager/Helper/JsonWriter.cs"
+]
+precedence = "aggregate"
+SPDX-FileComment = "Tiny Json, origin: https://github.com/zanders3/json/"
+
+# Application Icon
+[[annotations]]
+path = [
+	"HitCounterManager/Resources/FireIcon.ico",
+	"HitCounterManager/Resources/drawable/FireIcon.png"
+]
+precedence = "closest"
+SPDX-FileCopyrightText = "Pioneer Camp © Iconka http://www.iconka.com"
+SPDX-License-Identifier = "LicenseRef-Iconka-Linkware"
+SPDX-FileComment = "origin: https://iconka.com/en/269/"
+
+# AutoSplitter Button Image
+[[annotations]]
+path = "HitCounterManager/Resources/drawable/icon-autosplitter-32.png"
+precedence = "closest"
+SPDX-FileCopyrightText = "Neimex23"
+SPDX-License-Identifier = "MIT"
+SPDX-FileComment = "origin: https://github.com/neimex23"
+
+# Design image showing a check mark and bar
+[[annotations]]
+path = [
+	"Datafiles/Designs/img_check.png",
+	# Bar is modification based on cross image
+	"Datafiles/Designs/img_bar.png",
+]
+precedence = "closest"
+SPDX-FileCopyrightText = "OpenClipart-Vectors"
+SPDX-License-Identifier = "LicenseRef-Pixabay"
+SPDX-FileComment = "origin: https://pixabay.com/p-1292787/"
+
+# Design image showing a flag pole and Design image showing a 24 in a circle
+[[annotations]]
+path = [
+	"Datafiles/Designs/icons8_24_64.png",
+	"Datafiles/Designs/icons8_flagpole_64.png"
+]
+precedence = "closest"
+SPDX-FileCopyrightText = "icons8.com"
+SPDX-License-Identifier = "CC-BY-ND-3.0"
+SPDX-FileComment = "origin: https://icons8.com/"
+
+# Design image showing a cross
+[[annotations]]
+path = "Datafiles/Designs/img_cross.png"
+precedence = "closest"
+SPDX-FileCopyrightText = "Clker-Free-Vector-Images"
+SPDX-License-Identifier = "LicenseRef-Pixabay"
+SPDX-FileComment = "origin: https://pixabay.com/p-304374/"
+
+# Setup Banner Image
+[[annotations]]
+path = "Images/installer-banner.png"
+precedence = "closest"
+SPDX-FileCopyrightText = "Free-Photos"
+SPDX-License-Identifier = "LicenseRef-Pixabay"
+SPDX-FileComment = "origin: https://pixabay.com/photos/bonfire-fire-man-dancing-rituals-1209269/"

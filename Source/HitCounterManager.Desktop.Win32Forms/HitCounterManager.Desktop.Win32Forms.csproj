@@ -1,4 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+<!--
+SPDX-FileCopyrightText: © 2024-2025 Peter Kirmeier
+SPDX-License-Identifier: MIT
+-->
   <PropertyGroup>
     <!-- Consumed by pipeline START -->
     <TargetFramework>net8.0-windows</TargetFramework>

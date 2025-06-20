@@ -1,6 +1,7 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
+# SPDX-FileCopyrightText: © 2016-2024 Peter Kirmeier
+# SPDX-License-Identifier: MIT
 VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HitCounterManager.PCL", "HitCounterManager\HitCounterManager.PCL.csproj", "{BCD87D6B-3F73-46BA-B87E-0977A3D1CAD4}"
