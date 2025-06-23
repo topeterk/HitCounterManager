@@ -54,10 +54,11 @@
             this.btnPB = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnHit = new System.Windows.Forms.Button();
-            this.pnlHideRightButtonsWhenWindowTooShort = new System.Windows.Forms.Panel();
             this.btnWayHit = new System.Windows.Forms.Button();
             this.btnSplit = new System.Windows.Forms.Button();
             this.btnAutoSplitter = new System.Windows.Forms.Button();
+            this.comboBoxGame = new System.Windows.Forms.ComboBox();
+            this.pnlHideRightButtonsWhenWindowTooShort = new System.Windows.Forms.Panel();
             this.Spacer1 = new System.Windows.Forms.Label();
             this.Spacer2 = new System.Windows.Forms.Label();
             this.Spacer3 = new System.Windows.Forms.Label();
@@ -66,10 +67,10 @@
             this.lbl_time = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.GameToSplitLabel = new System.Windows.Forms.Label();
-            this.comboBoxGame = new System.Windows.Forms.ComboBox();
             this.pnlHidePracticeModeCheckWhenWindowTooShort = new System.Windows.Forms.Panel();
             this.PracticeModeCheck = new System.Windows.Forms.CheckBox();
             this.profCtrl = new HitCounterManager.ProfilesControl();
+            this.notifyIconToolBar = new System.Windows.Forms.NotifyIcon(this.components);
             this.SuspendLayout();
             // 
             // ToolTip1
@@ -409,13 +410,6 @@
             this.btnHit.Click += new System.EventHandler(this.btnHit_Click);
             this.btnHit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnHit_MouseDown);
             // 
-            // pnlHideRightButtonsWhenWindowTooShort
-            // 
-            this.pnlHideRightButtonsWhenWindowTooShort.Location = new System.Drawing.Point(0, 30);
-            this.pnlHideRightButtonsWhenWindowTooShort.Name = "pnlHideRightButtonsWhenWindowTooShort";
-            this.pnlHideRightButtonsWhenWindowTooShort.Size = new System.Drawing.Size(255, 40);
-            this.pnlHideRightButtonsWhenWindowTooShort.TabIndex = 49;
-            // 
             // btnWayHit
             // 
             this.btnWayHit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -468,6 +462,30 @@
             this.ToolTip1.SetToolTip(this.btnAutoSplitter, "AutoSplitter Configuration");
             this.btnAutoSplitter.UseVisualStyleBackColor = false;
             this.btnAutoSplitter.Click += new System.EventHandler(this.btnAutoSplitter_Click);
+            // 
+            // comboBoxGame
+            // 
+            this.comboBoxGame.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxGame.BackColor = System.Drawing.SystemColors.Control;
+            this.comboBoxGame.FormattingEnabled = true;
+            this.comboBoxGame.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.comboBoxGame.Items.AddRange(new object[] {
+            "None"});
+            this.comboBoxGame.Location = new System.Drawing.Point(143, 98);
+            this.comboBoxGame.MinimumSize = new System.Drawing.Size(100, 0);
+            this.comboBoxGame.Name = "comboBoxGame";
+            this.comboBoxGame.Size = new System.Drawing.Size(438, 21);
+            this.comboBoxGame.TabIndex = 26;
+            this.ToolTip1.SetToolTip(this.comboBoxGame, "Selected game for automatic splitting");
+            this.comboBoxGame.SelectedIndexChanged += new System.EventHandler(this.comboBoxGame_SelectedIndexChanged);
+            // 
+            // pnlHideRightButtonsWhenWindowTooShort
+            // 
+            this.pnlHideRightButtonsWhenWindowTooShort.Location = new System.Drawing.Point(0, 30);
+            this.pnlHideRightButtonsWhenWindowTooShort.Name = "pnlHideRightButtonsWhenWindowTooShort";
+            this.pnlHideRightButtonsWhenWindowTooShort.Size = new System.Drawing.Size(255, 40);
+            this.pnlHideRightButtonsWhenWindowTooShort.TabIndex = 49;
             // 
             // Spacer1
             // 
@@ -550,23 +568,6 @@
             this.GameToSplitLabel.Text = "AutoSplitter Game:";
             this.GameToSplitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // comboBoxGame
-            // 
-            this.comboBoxGame.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxGame.BackColor = System.Drawing.SystemColors.Control;
-            this.comboBoxGame.FormattingEnabled = true;
-            this.comboBoxGame.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.comboBoxGame.Items.AddRange(new object[] {
-            "None"});
-            this.comboBoxGame.Location = new System.Drawing.Point(143, 98);
-            this.comboBoxGame.MinimumSize = new System.Drawing.Size(100, 21);
-            this.comboBoxGame.Name = "comboBoxGame";
-            this.comboBoxGame.Size = new System.Drawing.Size(438, 21);
-            this.comboBoxGame.TabIndex = 26;
-            this.ToolTip1.SetToolTip(this.comboBoxGame, "Selected game for automatic splitting");
-            this.comboBoxGame.SelectedIndexChanged += new System.EventHandler(this.comboBoxGame_SelectedIndexChanged);
-            // 
             // pnlHidePracticeModeCheckWhenWindowTooShort
             // 
             this.pnlHidePracticeModeCheckWhenWindowTooShort.Location = new System.Drawing.Point(0, 98);
@@ -599,6 +600,12 @@
             this.profCtrl.Size = new System.Drawing.Size(677, 376);
             this.profCtrl.TabIndex = 28;
             this.profCtrl.ProfileChanged += new System.EventHandler<System.EventArgs>(this.ProfileChangedHandler);
+            // 
+            // notifyIconToolBar
+            // 
+            this.notifyIconToolBar.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIconToolBar.Icon")));
+            this.notifyIconToolBar.Text = "HitCounterManager";
+            this.notifyIconToolBar.Visible = true;
             // 
             // Form1
             // 
@@ -695,5 +702,6 @@
         private System.Windows.Forms.Panel pnlHidePracticeModeCheckWhenWindowTooShort;
         public System.Windows.Forms.CheckBox PracticeModeCheck;
         public ProfilesControl profCtrl;
+        private System.Windows.Forms.NotifyIcon notifyIconToolBar;
     }
 }

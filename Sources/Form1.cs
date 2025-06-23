@@ -35,6 +35,25 @@ namespace HitCounterManager
         private AutoSplitterCoreInterface InterfaceASC;
         #endregion
 
+        #region ToolBar
+        private ContextMenuStrip trayMenu = new ContextMenuStrip();
+        private bool CloseOnTry = false;
+
+        private void ShowMainForm()
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
+        }
+
+        private void CloseHCM()
+        {
+            notifyIconToolBar.Visible = false;
+            CloseOnTry = true;
+            Application.Exit();
+        }
+
+        #endregion
+
         public readonly Shortcuts sc;
 
         private bool SettingsDialogOpen = false;
@@ -89,11 +108,67 @@ namespace HitCounterManager
 
             #endregion
 
+            #region ToolBar
+            trayMenu.Items.Add("Open HCM", null, (s, e) => ShowMainForm());
+
+            // Timer
+            var timerMenu = new ToolStripMenuItem("Timer");
+            timerMenu.DropDownItems.Add("StartTimer", null, (s, e) => StartStopTimer(true));
+            timerMenu.DropDownItems.Add("StopTimer", null, (s, e) => StartStopTimer(false));
+            trayMenu.Items.Add(timerMenu);
+
+            // Hit
+            var hitMenu = new ToolStripMenuItem("Hit");
+
+            var wayMenu = new ToolStripMenuItem("Way");
+            wayMenu.DropDownItems.Add("Increase", null, (s, e) => btnWayHit_Click(null,null));
+            wayMenu.DropDownItems.Add("Decrease", null, (s, e) => btnWayHitUndo_Click(null,null));
+            hitMenu.DropDownItems.Add(wayMenu);
+
+            var bossMenu = new ToolStripMenuItem("Boss");
+            bossMenu.DropDownItems.Add("Increase", null, (s, e) => btnHit_Click(null,null));
+            bossMenu.DropDownItems.Add("Decrease", null, (s, e) => btnHitUndo_Click(null, null));
+            hitMenu.DropDownItems.Add(bossMenu);
+
+            trayMenu.Items.Add(hitMenu);
+
+            // Split
+            var splitMenu = new ToolStripMenuItem("Split");
+            splitMenu.DropDownItems.Add("Reset Run", null, (s, e) => btnReset_Click(null,null));
+            splitMenu.DropDownItems.Add("Next Split", null, (s, e) => btnSplit_Click(null,null));
+            splitMenu.DropDownItems.Add("Previous Split", null, (s, e) => btnSplitPrev_Click(null,null));
+            trayMenu.Items.Add(splitMenu);
+
+            // Close HCM
+            trayMenu.Items.Add("Close HCM", null, (s, e) => CloseHCM());
+
+            // NotifyIcon
+            notifyIconToolBar.ContextMenuStrip = trayMenu;
+            notifyIconToolBar.DoubleClick += (s, e) => ShowMainForm();
+            notifyIconToolBar.Visible = true;
+            #endregion
+
             this.UpdateDarkMode();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (!CloseOnTry)
+            {
+                var resultMinimize = MessageBox.Show(
+                   "Do you want to minimize to the taskbar or close the program?\nYes = Minimize - No = Close",
+                   "Exit",
+                  MessageBoxButtons.YesNo,
+                  MessageBoxIcon.Question);
+
+                if (resultMinimize == DialogResult.Yes)
+                {
+                    Hide();
+                    e.Cancel = true;
+                    return;
+                }
+            }  
+
             DialogResult result = MessageBox.Show("Do you want to save this session?", this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
