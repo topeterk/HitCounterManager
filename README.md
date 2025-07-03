@@ -77,6 +77,9 @@ There are addons available now, e.g.:
 * OS: Any (32/64 bit)
   > **Note**: This version is **not supporting global hot keys**  
   * Portable version (Tar ball)
+    * Running with [Wine](https://www.winehq.org) (_tested with 10.0 on Ubuntu 25.04_)  
+      Start the application in the application's directory with **wine HitCounterManager.exe**  
+      > **Note**: Wine seems to required **32 bit mode** (therefore it might not run on OS without 32 bit support!)  
     * Running with [Mono](https://www.mono-project.com/) (_tested with 5.14.0_)  
       Start the application in the application's directory with **mono HitCounterManager.exe**  
       > **Note**: Mono supports **32 bit mode only** (therefore it cannot be run on OS without 32 bit support!)  
