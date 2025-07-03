@@ -36,8 +36,7 @@ namespace HitCounterManager
         #endregion
 
         #region ToolBar
-        private ContextMenuStrip trayMenu = new ContextMenuStrip();
-        private bool CloseOnTry = false;
+        private ContextMenuStrip trayMenu;
 
         private void ShowMainForm()
         {
@@ -48,7 +47,6 @@ namespace HitCounterManager
         private void CloseHCM()
         {
             notifyIconToolBar.Visible = false;
-            CloseOnTry = true;
             Application.Exit();
         }
 
@@ -109,66 +107,54 @@ namespace HitCounterManager
             #endregion
 
             #region ToolBar
-            trayMenu.Items.Add("Open HCM", null, (s, e) => ShowMainForm());
+            if (_settings.TrayIconEnable)
+            {
+                trayMenu = new ContextMenuStrip();
 
-            // Timer
-            var timerMenu = new ToolStripMenuItem("Timer");
-            timerMenu.DropDownItems.Add("StartTimer", null, (s, e) => StartStopTimer(true));
-            timerMenu.DropDownItems.Add("StopTimer", null, (s, e) => StartStopTimer(false));
-            trayMenu.Items.Add(timerMenu);
+                // Split
+                trayMenu.Items.Add("Next split", null, (s, e) => btnSplit_Click(null, null));
+                trayMenu.Items.Add("Previous split", null, (s, e) => btnSplitPrev_Click(null, null));
 
-            // Hit
-            var hitMenu = new ToolStripMenuItem("Hit");
+                // Hit
+                trayMenu.Items.Add(new ToolStripSeparator());
+                trayMenu.Items.Add("Hit increase (way)", null, (s, e) => btnWayHit_Click(null, null));
+                trayMenu.Items.Add("Hit decrease (way)", null, (s, e) => btnWayHitUndo_Click(null, null));
+                trayMenu.Items.Add("Hit increase (boss)", null, (s, e) => btnHit_Click(null, null));
+                trayMenu.Items.Add("Hit decrease (boss)", null, (s, e) => btnHitUndo_Click(null, null));
 
-            var wayMenu = new ToolStripMenuItem("Way");
-            wayMenu.DropDownItems.Add("Increase", null, (s, e) => btnWayHit_Click(null,null));
-            wayMenu.DropDownItems.Add("Decrease", null, (s, e) => btnWayHitUndo_Click(null,null));
-            hitMenu.DropDownItems.Add(wayMenu);
+                // Timer / Run Reset
+                trayMenu.Items.Add(new ToolStripSeparator());
+                var runMenu = new ToolStripMenuItem("Run");
+                runMenu.DropDownItems.Add("Timer start", null, (s, e) => StartStopTimer(true));
+                runMenu.DropDownItems.Add("Timer stop", null, (s, e) => StartStopTimer(false));
+                runMenu.DropDownItems.Add("Reset run", null, (s, e) => btnReset_Click(null, null));
+                trayMenu.Items.Add(runMenu);
 
-            var bossMenu = new ToolStripMenuItem("Boss");
-            bossMenu.DropDownItems.Add("Increase", null, (s, e) => btnHit_Click(null,null));
-            bossMenu.DropDownItems.Add("Decrease", null, (s, e) => btnHitUndo_Click(null, null));
-            hitMenu.DropDownItems.Add(bossMenu);
+                // Open / Close
+                trayMenu.Items.Add("Open", null, (s, e) => ShowMainForm());
+                trayMenu.Items.Add(new ToolStripSeparator()); // Spacing to not close the application by accident
+                trayMenu.Items.Add("Close", null, (s, e) => CloseHCM());
 
-            trayMenu.Items.Add(hitMenu);
-
-            // Split
-            var splitMenu = new ToolStripMenuItem("Split");
-            splitMenu.DropDownItems.Add("Reset Run", null, (s, e) => btnReset_Click(null,null));
-            splitMenu.DropDownItems.Add("Next Split", null, (s, e) => btnSplit_Click(null,null));
-            splitMenu.DropDownItems.Add("Previous Split", null, (s, e) => btnSplitPrev_Click(null,null));
-            trayMenu.Items.Add(splitMenu);
-
-            // Close HCM
-            trayMenu.Items.Add("Close HCM", null, (s, e) => CloseHCM());
-
-            // NotifyIcon
-            notifyIconToolBar.ContextMenuStrip = trayMenu;
-            notifyIconToolBar.DoubleClick += (s, e) => ShowMainForm();
-            notifyIconToolBar.Visible = true;
+                // NotifyIcon
+                notifyIconToolBar.ContextMenuStrip = trayMenu;
+                notifyIconToolBar.DoubleClick += (s, e) => ShowMainForm();
+                notifyIconToolBar.Visible = true;
+            }
             #endregion
 
             this.UpdateDarkMode();
         }
 
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            if (_settings.TrayIconEnable && _settings.TrayIconMinimize && (WindowState == FormWindowState.Minimized))
+            {
+                Hide();
+            }
+        }
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!CloseOnTry)
-            {
-                var resultMinimize = MessageBox.Show(
-                   "Do you want to minimize to the taskbar or close the program?\nYes = Minimize - No = Close",
-                   "Exit",
-                  MessageBoxButtons.YesNo,
-                  MessageBoxIcon.Question);
-
-                if (resultMinimize == DialogResult.Yes)
-                {
-                    Hide();
-                    e.Cancel = true;
-                    return;
-                }
-            }  
-
             DialogResult result = MessageBox.Show("Do you want to save this session?", this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {

@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2024 Peter Kirmeier
+//Copyright (c) 2016-2025 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -96,6 +96,8 @@ namespace HitCounterManager
             txtFontName.Text = _settings.StyleFontName;
 
             // Behavior
+            cbEnableTrayIcon.Checked = _settings.TrayIconEnable;
+            cbMinimizeToTrayIcon.Checked = _settings.TrayIconMinimize;
             cbAllowHtml.Checked = _settings.AllowHtml;
             cbShowAttempts.Checked = _settings.ShowAttemptsCounter;
             cbShowHeadline.Checked = _settings.ShowHeadline;
@@ -319,6 +321,8 @@ namespace HitCounterManager
             btnApApply.Enabled = cbApCustomCss.Checked;
         }
 
+        private void cbEnableTrayIcon_CheckedChanged(object sender, EventArgs e) { _settings.TrayIconEnable = cbEnableTrayIcon.Checked; }
+        private void cbMinimizeToTrayIcon_CheckedChanged(object sender, EventArgs e) { _settings.TrayIconMinimize = cbMinimizeToTrayIcon.Checked; }
         private void btnGoToDownloadPage_Click(object sender, EventArgs e) { GitHubUpdate.WebOpenLatestRelease(); }
         private void cbCheckUpdatesOnStartup_CheckedChanged(object sender, EventArgs e) { _settings.CheckUpdatesOnStartup = cbCheckUpdatesOnStartup.Checked; }
 

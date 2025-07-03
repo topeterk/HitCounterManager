@@ -144,6 +144,8 @@
             this.radioTableAlignmentLeft = new System.Windows.Forms.RadioButton();
             this.radioTableAlignmentCenter = new System.Windows.Forms.RadioButton();
             this.radioTableAlignmentRight = new System.Windows.Forms.RadioButton();
+            this.cbEnableTrayIcon = new System.Windows.Forms.CheckBox();
+            this.cbMinimizeToTrayIcon = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountFinished)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowSplitsCountUpcoming)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredHeight)).BeginInit();
@@ -1208,6 +1210,8 @@
             // 
             // tab_behavior
             // 
+            this.tab_behavior.Controls.Add(this.cbMinimizeToTrayIcon);
+            this.tab_behavior.Controls.Add(this.cbEnableTrayIcon);
             this.tab_behavior.Controls.Add(this.groupBox5);
             this.tab_behavior.Controls.Add(this.groupBox4);
             this.tab_behavior.Controls.Add(this.groupBox2);
@@ -1304,9 +1308,9 @@
             this.groupBox4.Controls.Add(this.radioPurposeDeathCounter);
             this.groupBox4.Controls.Add(this.radioPurposeSplitCounter);
             this.groupBox4.Controls.Add(this.radioPurposeNoDeath);
-            this.groupBox4.Location = new System.Drawing.Point(6, 13);
+            this.groupBox4.Location = new System.Drawing.Point(6, 59);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 151);
+            this.groupBox4.Size = new System.Drawing.Size(200, 139);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Purpose";
@@ -1316,9 +1320,9 @@
             this.groupBox2.Controls.Add(this.radioSeverityBossHitCritical);
             this.groupBox2.Controls.Add(this.radioSeverityComparePB);
             this.groupBox2.Controls.Add(this.radioSeverityAnyHitCritical);
-            this.groupBox2.Location = new System.Drawing.Point(6, 170);
+            this.groupBox2.Location = new System.Drawing.Point(6, 204);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 125);
+            this.groupBox2.Size = new System.Drawing.Size(200, 91);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Hit severity (\"Neither nor\" color)";
@@ -1637,6 +1641,34 @@
             this.radioTableAlignmentRight.UseVisualStyleBackColor = true;
             this.radioTableAlignmentRight.CheckedChanged += new System.EventHandler(this.ApplyAppearance);
             // 
+            // cbEnableTrayIcon
+            // 
+            this.cbEnableTrayIcon.AutoSize = true;
+            this.cbEnableTrayIcon.Checked = true;
+            this.cbEnableTrayIcon.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbEnableTrayIcon.Location = new System.Drawing.Point(13, 13);
+            this.cbEnableTrayIcon.Name = "cbEnableTrayIcon";
+            this.cbEnableTrayIcon.Size = new System.Drawing.Size(107, 17);
+            this.cbEnableTrayIcon.TabIndex = 4;
+            this.cbEnableTrayIcon.Text = "Enable Tray Icon";
+            this.ToolTip1.SetToolTip(this.cbEnableTrayIcon, "Adds icon to the System Tray");
+            this.cbEnableTrayIcon.UseVisualStyleBackColor = true;
+            this.cbEnableTrayIcon.CheckedChanged += new System.EventHandler(this.cbEnableTrayIcon_CheckedChanged);
+            // 
+            // cbMinimizeToTrayIcon
+            // 
+            this.cbMinimizeToTrayIcon.AutoSize = true;
+            this.cbMinimizeToTrayIcon.Checked = true;
+            this.cbMinimizeToTrayIcon.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbMinimizeToTrayIcon.Location = new System.Drawing.Point(13, 36);
+            this.cbMinimizeToTrayIcon.Name = "cbMinimizeToTrayIcon";
+            this.cbMinimizeToTrayIcon.Size = new System.Drawing.Size(126, 17);
+            this.cbMinimizeToTrayIcon.TabIndex = 5;
+            this.cbMinimizeToTrayIcon.Text = "Minimize to Tray Icon";
+            this.ToolTip1.SetToolTip(this.cbMinimizeToTrayIcon, "Upon minimizing: The application hides and can be reopened using the Tray Icon");
+            this.cbMinimizeToTrayIcon.UseVisualStyleBackColor = true;
+            this.cbMinimizeToTrayIcon.CheckedChanged += new System.EventHandler(this.cbMinimizeToTrayIcon_CheckedChanged);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1656,6 +1688,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStyleDesiredWidth)).EndInit();
             this.tab_behavior.ResumeLayout(false);
+            this.tab_behavior.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -1796,5 +1829,7 @@
         private System.Windows.Forms.RadioButton radioTableAlignmentRight;
         private System.Windows.Forms.RadioButton radioTableAlignmentCenter;
         private System.Windows.Forms.RadioButton radioTableAlignmentLeft;
+        private System.Windows.Forms.CheckBox cbEnableTrayIcon;
+        private System.Windows.Forms.CheckBox cbMinimizeToTrayIcon;
     }
 }

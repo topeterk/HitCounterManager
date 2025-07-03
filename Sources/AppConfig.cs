@@ -82,6 +82,8 @@ namespace HitCounterManager
         public bool AlwaysOnTop;
         public bool DarkMode;
         public bool CheckUpdatesOnStartup;
+        public bool TrayIconEnable;
+        public bool TrayIconMinimize;
         public int HotKeyMethod;
         public bool ShortcutResetEnable;
         public int ShortcutResetKeyCode;            // Actually KeyData as it is combined with modifiers
@@ -369,6 +371,8 @@ namespace HitCounterManager
             if (_settings.Version == 10) // Coming from version 1.21
             {
                 _settings.Version = 11;
+                _settings.TrayIconEnable = false;
+                _settings.TrayIconMinimize = true;
                 _settings.AllowHtml = false;
                 _settings.StyleTableAlignment = "tblcenter";
 

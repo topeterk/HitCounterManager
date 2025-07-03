@@ -605,7 +605,7 @@
             // 
             this.notifyIconToolBar.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIconToolBar.Icon")));
             this.notifyIconToolBar.Text = "HitCounterManager";
-            this.notifyIconToolBar.Visible = true;
+            this.notifyIconToolBar.Visible = false;
             // 
             // Form1
             // 
@@ -655,6 +655,7 @@
             this.Text = "HitCounterManager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 
