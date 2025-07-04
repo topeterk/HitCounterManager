@@ -331,4 +331,32 @@ SPDX-License-Identifier: MIT
 		</Style>
 	</Application.Styles>
 
+	<TrayIcon.Icons>
+		<TrayIcons>
+			<TrayIcon Icon="/Resources/FireIcon.ico" ToolTipText="HitCounterManager" Clicked="TrayMenu_Open">
+				<TrayIcon.Menu>
+					<NativeMenu>
+						<NativeMenuItem Header="Next split" Click="TrayMenu_SplitSelectNext" />
+						<NativeMenuItem Header="Previous split" Click="TrayMenu_SplitSelectPrev" />
+						<NativeMenuItemSeparator />
+						<NativeMenuItem Header="Hit increase (way)" Click="TrayMenu_HitWayIncrease" />
+						<NativeMenuItem Header="Hit decrease (way)" Click="TrayMenu_HitWayDecrease" />
+						<NativeMenuItem Header="Hit increase (boss)" Click="TrayMenu_HitIncrease" />
+						<NativeMenuItem Header="Hit decrease (boss)" Click="TrayMenu_HitDecrease" />
+						<NativeMenuItemSeparator />
+						<NativeMenuItem Header="Run">
+							<NativeMenu>
+								<NativeMenuItem Header="Timer start" Click="TrayMenu_TimerStart" />
+								<NativeMenuItem Header="Timer stop" Click="TrayMenu_TimerStop" />
+								<NativeMenuItem Header="Reset run" Click="TrayMenu_ProfileReset" />
+							</NativeMenu>
+						</NativeMenuItem>
+						<NativeMenuItem Header="Open" Click="TrayMenu_Open" />
+						<NativeMenuItemSeparator /><!--Spacing to not close the application by accident-->
+						<NativeMenuItem Header="Close" Click="TrayMenu_Close" />
+					</NativeMenu>
+				</TrayIcon.Menu>
+			</TrayIcon>
+		</TrayIcons>
+	</TrayIcon.Icons>
 </Application>

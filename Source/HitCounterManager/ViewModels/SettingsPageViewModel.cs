@@ -91,45 +91,47 @@ namespace HitCounterManager.ViewModels
         }
 
         private readonly Dictionary<string, ShowInfoBool> _ShowInfo = new () {
-            {"RadioHotKeyMethod_Sync", new ShowInfoBool()},
-            {"RadioHotKeyMethod_Async", new ShowInfoBool()},
-            {"RadioHotKeyMethod_LLKb", new ShowInfoBool()},
-            {"ShowAttemptsCounter", new ShowInfoBool()},
-            {"ShowHeadline", new ShowInfoBool()},
-            {"ShowProgressBar", new ShowInfoBool()},
-            {"ShowFooter", new ShowInfoBool()},
-            {"ShowTimeFooter", new ShowInfoBool()},
-            {"ShowHits", new ShowInfoBool()},
-            {"ShowHitsCombined", new ShowInfoBool()},
-            {"ShowDiff", new ShowInfoBool()},
-            {"ShowPB", new ShowInfoBool()},
-            {"ShowPBTotals", new ShowInfoBool()},
-            {"ShowTimeCurrent", new ShowInfoBool()},
-            {"ShowTimeDiff", new ShowInfoBool()},
-            {"ShowTimePB", new ShowInfoBool()},
-            {"ShowDurationCurrent", new ShowInfoBool()},
-            {"ShowDurationDiff", new ShowInfoBool()},
-            {"ShowDurationPB", new ShowInfoBool()},
-            {"ShowDurationGold", new ShowInfoBool() },
-            {"ShowSessionProgress", new ShowInfoBool()},
-            {"ShowNumbers", new ShowInfoBool()},
-            {"SubSplitVisibilityShowAll", new ShowInfoBool()},
-            {"SubSplitVisibilityCollapseNonActive", new ShowInfoBool()},
-            {"SubSplitVisibilityHideAll", new ShowInfoBool()},
-            {"StyleUseHighContrast", new ShowInfoBool()},
-            {"StyleUseHighContrastNames", new ShowInfoBool()},
-            {"StyleProgressBarColored", new ShowInfoBool()},
-            {"StyleSubscriptPB", new ShowInfoBool()},
-            {"StyleUseRoman", new ShowInfoBool()},
-            {"StyleHightlightCurrentSplit", new ShowInfoBool()},
-            {"RadioPurpose_SplitCounter", new ShowInfoBool()},
-            {"RadioPurpose_Checklist", new ShowInfoBool()},
-            {"RadioPurpose_NoDeath", new ShowInfoBool()},
-            {"RadioPurpose_DeathCounter", new ShowInfoBool()},
-            {"RadioPurpose_ResetCounter", new ShowInfoBool()},
-            {"RadioHitSeverity_AnyHitCritical", new ShowInfoBool()},
-            {"RadioHitSeverity_ComparePB", new ShowInfoBool()},
-            {"RadioHitSeverity_BossHitCritical", new ShowInfoBool()},
+            {"RadioHotKeyMethod_Sync", new()},
+            {"RadioHotKeyMethod_Async", new()},
+            {"RadioHotKeyMethod_LLKb", new()},
+            {"ShowAttemptsCounter", new()},
+            {"ShowHeadline", new()},
+            {"ShowProgressBar", new()},
+            {"ShowFooter", new()},
+            {"ShowTimeFooter", new()},
+            {"ShowHits", new()},
+            {"ShowHitsCombined", new()},
+            {"ShowDiff", new()},
+            {"ShowPB", new()},
+            {"ShowPBTotals", new()},
+            {"ShowTimeCurrent", new()},
+            {"ShowTimeDiff", new()},
+            {"ShowTimePB", new()},
+            {"ShowDurationCurrent", new()},
+            {"ShowDurationDiff", new()},
+            {"ShowDurationPB", new()},
+            {"ShowDurationGold", new()},
+            {"ShowSessionProgress", new()},
+            {"ShowNumbers", new()},
+            {"SubSplitVisibilityShowAll", new()},
+            {"SubSplitVisibilityCollapseNonActive", new()},
+            {"SubSplitVisibilityHideAll", new()},
+            {"StyleUseHighContrast", new()},
+            {"StyleUseHighContrastNames", new()},
+            {"StyleProgressBarColored", new()},
+            {"StyleSubscriptPB", new()},
+            {"StyleUseRoman", new()},
+            {"StyleHightlightCurrentSplit", new()},
+            {"TrayIconEnable", new()},
+            {"TrayIconMinimize", new()},
+            {"RadioPurpose_SplitCounter", new()},
+            {"RadioPurpose_Checklist", new()},
+            {"RadioPurpose_NoDeath", new()},
+            {"RadioPurpose_DeathCounter", new()},
+            {"RadioPurpose_ResetCounter", new()},
+            {"RadioHitSeverity_AnyHitCritical", new()},
+            {"RadioHitSeverity_ComparePB", new()},
+            {"RadioHitSeverity_BossHitCritical", new()},
         };
         public Dictionary<string, ShowInfoBool> ShowInfo { get => _ShowInfo; }
 
@@ -794,6 +796,24 @@ namespace HitCounterManager.ViewModels
 #endregion
 
 #region Behavior
+        public bool TrayIconEnable
+        {
+            get => Settings.TrayIconEnable;
+            set
+            {
+                if (SetAndNotifyWhenChanged(ref Settings.TrayIconEnable, value))
+                {
+                    App.CurrentApp.TrayMenu_SetVisibility(value);
+                }
+            }
+        }
+
+        public bool TrayIconMinimize
+        {
+            get => Settings.TrayIconMinimize;
+            set => SetAndNotifyWhenChanged(ref Settings.TrayIconMinimize, value);
+        }
+
         private void SetPurpose(OutModule.OM_Purpose next)
         {
             OutModule.OM_Purpose prev = om.Purpose;

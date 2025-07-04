@@ -1,6 +1,7 @@
 ﻿// SPDX-FileCopyrightText: © 2023-2025 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using HitCounterManager.Common;
@@ -40,6 +41,19 @@ namespace HitCounterManager.Views
 
             Closing += ClosingHandler;
             PositionChanged += PositionChangedHandler;
+        }
+
+        protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+        {
+            base.OnPropertyChanged(change);
+
+            if (change.Property == WindowStateProperty && (change.NewValue is WindowState newState))
+            {
+                if (Settings.TrayIconEnable && Settings.TrayIconMinimize && (newState == WindowState.Minimized))
+                {
+                    Hide();
+                }
+            }
         }
 
         private void PositionChangedHandler(object? sender, PixelPointEventArgs e)

@@ -707,6 +707,43 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
 					<!-- Keep bottom Margin high as Scrollviewer may otherwise cut off controls, don't know why yet -->
 					<StackPanel Margin="0 0 0 50" Orientation="Vertical" HorizontalAlignment="Stretch">
 						<StackPanel Margin="0 10 0 0" Orientation="Vertical" HorizontalAlignment="Stretch" Classes="Section">
+							<TextBlock Margin="5 10 0 10" HorizontalAlignment="Left" Text="Tray Icon" FontWeight="Bold"/>
+
+							<Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
+								<RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+									<Button Command="{Binding ToggleShowInfo}" CommandParameter="TrayIconEnable" Classes="ImageButton">
+										<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+									</Button>
+								</RelativePanel>
+								<ToggleSwitch Grid.Row="0" Grid.Column="1" Margin="0" IsChecked="{Binding TrayIconEnable, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBlock  Grid.Row="0" Grid.Column="2" Margin="0" Text="Enable Tray Icon" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<Border Grid.Row="1" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+										IsVisible="{Binding ShowInfo[TrayIconEnable].Value, Mode=OneWay}">
+									<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+										<TextBlock.Text>
+											<x:String xml:space="preserve">Adds an icon to the System Tray</x:String>
+										</TextBlock.Text>
+									</TextBlock>
+								</Border>
+								<RelativePanel Grid.Row="2" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+									<Button Command="{Binding ToggleShowInfo}" CommandParameter="TrayIconMinimize" Classes="ImageButton">
+										<Image Source="{DynamicResource ImageInfo}" Width="18" Height="18" />
+									</Button>
+								</RelativePanel>
+								<ToggleSwitch Grid.Row="2" Grid.Column="1" Margin="0" IsChecked="{Binding TrayIconMinimize, Mode=TwoWay}" OnContent="" OffContent="" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<TextBlock  Grid.Row="2" Grid.Column="2" Margin="0" Text="Minimize to Tray Icon" HorizontalAlignment="Left" VerticalAlignment="Center" />
+								<Border Grid.Row="3" Grid.Column="0" Margin="0" Grid.ColumnSpan="3" Classes="InfoBoxBorder" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+										IsVisible="{Binding ShowInfo[TrayIconMinimize].Value, Mode=OneWay}">
+									<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+										<TextBlock.Text>
+											<x:String xml:space="preserve">Upon minimizing: The application hides and can be reopened using the Tray Icon</x:String>
+										</TextBlock.Text>
+									</TextBlock>
+								</Border>
+							</Grid>
+						</StackPanel>
+						
+						<StackPanel Margin="0 10 0 0" Orientation="Vertical" HorizontalAlignment="Stretch" Classes="Section">
 							<TextBlock Margin="5 10 0 10" HorizontalAlignment="Left" Text="Purpose" FontWeight="Bold"/>
 
 							<Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">

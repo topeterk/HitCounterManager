@@ -33,12 +33,12 @@ namespace HitCounterManager
         private IntPtr NativeWindowHandle = IntPtr.Zero;
         public ProfileViewViewModel? ProfileViewViewModel { get; private set; }
         public readonly OutModule om;
-        public readonly Shortcuts sc = new ();
+        public readonly Shortcuts sc = new();
         public SettingsRoot Settings { get; private set; }
         public bool SettingsDialogOpen = false;
         private bool IsCleanStart = true;
 
-        private static readonly IntPtr SubclassID = new (0x48434D); // ASCII = "HCM"
+        private static readonly IntPtr SubclassID = new(0x48434D); // ASCII = "HCM"
         private bool SubclassprocInstalled = false;
         private readonly NativeApi.Subclassproc? _Subclassproc = null;
         private static NativeApi.HookProc? _HookProc = null;
@@ -66,7 +66,53 @@ namespace HitCounterManager
         {
             AvaloniaXamlLoader.Load(this);
             ApplyTheme(Settings.DarkMode); // Initially update values according to selected mode
+            TrayMenu_SetVisibility(Settings.TrayIconEnable);
         }
+
+        internal void TrayMenu_SetVisibility(bool visible)
+        {
+            TrayIcons? trayIcons = TrayIcon.GetIcons(this);
+            if (trayIcons is not null)
+            {
+                foreach (var tracIcon in trayIcons)
+                {
+                    tracIcon.IsVisible = visible;
+                }
+            }
+        }
+
+        internal void TrayMenu_Open(object sender, EventArgs args)
+        {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                if (desktop.MainWindow?.WindowState == WindowState.Minimized)
+                {
+                    desktop.MainWindow.WindowState = WindowState.Normal;
+                }
+                desktop.MainWindow?.Show();
+                desktop.MainWindow?.Activate();
+            }
+        }
+
+        internal void TrayMenu_Close(object sender, EventArgs args)
+        {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                desktop.MainWindow?.Show();
+                desktop.MainWindow?.Activate();
+                desktop.MainWindow?.Close();
+            }
+        }
+
+        internal void TrayMenu_SplitSelectNext(object sender, EventArgs args) => ProfileViewViewModel?.GoSplits(+1);
+        internal void TrayMenu_SplitSelectPrev(object sender, EventArgs args) => ProfileViewViewModel?.GoSplits(-1);
+        internal void TrayMenu_HitIncrease(object sender, EventArgs args) => ProfileViewViewModel?.HitSumUp(+1, false);
+        internal void TrayMenu_HitDecrease(object sender, EventArgs args) => ProfileViewViewModel?.HitSumUp(-1, false);
+        internal void TrayMenu_HitWayIncrease(object sender, EventArgs args) => ProfileViewViewModel?.HitSumUp(+1, true);
+        internal void TrayMenu_HitWayDecrease(object sender, EventArgs args) => ProfileViewViewModel?.HitSumUp(-1, true);
+        internal void TrayMenu_ProfileReset(object sender, EventArgs args) => ProfileViewViewModel?.ProfileReset.Execute(null);
+        internal void TrayMenu_TimerStart(object sender, EventArgs args) { if (ProfileViewViewModel is not null) ProfileViewViewModel.TimerRunning = true; }
+        internal void TrayMenu_TimerStop(object sender, EventArgs args) { if (ProfileViewViewModel is not null) ProfileViewViewModel.TimerRunning = false; }
 
         private struct PostponedAlert(string Title, string Message, NotificationType Type)
         {

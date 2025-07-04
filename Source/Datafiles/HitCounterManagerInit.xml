@@ -13,6 +13,8 @@ SPDX-License-Identifier: MIT
   <AlwaysOnTop>false</AlwaysOnTop>
   <DarkMode>false</DarkMode>
   <CheckUpdatesOnStartup>false</CheckUpdatesOnStartup>
+  <TrayIconEnable>true</TrayIconEnable>
+  <TrayIconMinimize>true</TrayIconMinimize>
   <HotKeyMethod>2</HotKeyMethod>
   <ShortcutResetEnable>false</ShortcutResetEnable>
   <ShortcutResetKeyCode>65655</ShortcutResetKeyCode>
