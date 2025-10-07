@@ -264,6 +264,7 @@ namespace HitCounterManager
             }
             profs.LoadProfile(pvc_sender.SelectedProfile, pvc_sender.ProfileInfo);
             succession.SuccessionList[ptc.IndexOf(pvc_sender)].ProfileSelected = pvc_sender.SelectedProfile;
+            InterfaceASC?.ProfileSelected(pvc_sender.ProfileInfo.ProfileName);
         }
   
         public void ProfileTabPermuting(object sender, Tuple<int, int> indices)
