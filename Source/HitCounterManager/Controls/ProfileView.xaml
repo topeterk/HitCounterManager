@@ -156,8 +156,8 @@ SPDX-License-Identifier: MIT
 			</TextBlock>
 		</Border>
 
-		<ItemsRepeater Margin="0" x:Name="ProfileList" ItemsSource="{Binding ProfileSelected.Rows}" HorizontalAlignment="Stretch" ItemTemplate="{OnPlatform Default={StaticResource DefaultTemplate}, Android={StaticResource SmallTemplate}, iOS={StaticResource SmallTemplate}}">
-			<ItemsRepeater.Resources>
+		<ItemsControl Margin="0" x:Name="ProfileList" ItemsSource="{Binding ProfileSelected.Rows}" HorizontalAlignment="Stretch" ItemTemplate="{OnPlatform Default={StaticResource DefaultTemplate}, Android={StaticResource SmallTemplate}, iOS={StaticResource SmallTemplate}}">
+			<ItemsControl.Resources>
 				<DataTemplate x:Key="SmallTemplate">
 					<StackPanel Spacing="0" Orientation="Vertical">
 						<Grid Margin="2" RowDefinitions="Auto">
@@ -279,17 +279,17 @@ SPDX-License-Identifier: MIT
 						</Button>
 					</Grid>
 				</DataTemplate>
-			</ItemsRepeater.Resources>
+			</ItemsControl.Resources>
 <!--
 			<Interaction.Behaviors>
 				<DataTriggerBehavior Binding="{Binding $parent[UserControl].Bounds.Width}" ComparisonCondition="GreaterThan" Value="400">
-					<ChangePropertyAction TargetObject="{Binding $parent[ItemsRepeater]}" PropertyName="ItemTemplate" Value="{StaticResource DefaultTemplate}" />
+					<ChangePropertyAction TargetObject="{Binding $parent[ItemsControl]}" PropertyName="ItemTemplate" Value="{StaticResource DefaultTemplate}" />
 				</DataTriggerBehavior>
 				<DataTriggerBehavior Binding="{Binding $parent[UserControl].Bounds.Width}" ComparisonCondition="LessThanOrEqual" Value="400">
-					<ChangePropertyAction TargetObject="{Binding $parent[ItemsRepeater]}" PropertyName="ItemTemplate" Value="{StaticResource SmallTemplate}" />
+					<ChangePropertyAction TargetObject="{Binding $parent[ItemsControl]}" PropertyName="ItemTemplate" Value="{StaticResource SmallTemplate}" />
 				</DataTriggerBehavior>
 			</Interaction.Behaviors>
 -->
-		</ItemsRepeater>
+		</ItemsControl>
     </StackPanel>
 </UserControl>
