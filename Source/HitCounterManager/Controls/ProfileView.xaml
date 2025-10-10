@@ -142,17 +142,15 @@ SPDX-License-Identifier: MIT
 		<Border Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Top" Classes="InfoBoxBorder"
 				IsVisible="{Binding ShowInfo[MainColumnHeaders].Value, Mode=OneWay}" >
 			<TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Center">
-				<TextBlock.Text>
-					<x:String xml:space="preserve">* Titel: The name of the split.
-* Boss Hits: Amount of hits taken by anything or bosses or just a marker that a boss has been defeated (depends on the configured behavior).
-* Way Hits: Amount of hits taken on the way to a boss or not used at all (depends on the configured behavior). E.g. track if a boss or the way through a slit should be trained more.
-* Diff: The difference between the hits taken (sum of Boss Hits and Way Hits) and the personal best hits taken.
-* PB: Amount of hits taken in the personal best run (sum of Boss Hits and Way Hits).
-* SS (Sub Split): Marks the split being a child of the previous "Sub Split" (Used for visual effects only).
-* SP (Session Progress): Marks the farthest reached split per stream session and resets on application start. Represented by a 24 hour clock symbol.
-* BP (Best Progress / Distance PB): Marks the furthest reached split of the best flawless run ever. Represented by a flag symbol.
-* Trash: Removes the split from the list.</x:String>
-				</TextBlock.Text>
+				<Run FontWeight="Bold">• Titel:</Run> The name of the split.<LineBreak/>
+				<Run FontWeight="Bold">• Boss Hits:</Run> Amount of hits taken by anything or bosses or just a marker that a boss has been defeated (depends on the configured behavior).<LineBreak/>
+				<Run FontWeight="Bold">• Way Hits:</Run> Amount of hits taken on the way to a boss or not used at all (depends on the configured behavior). E.g. track if a boss or the way through a slit should be trained more.<LineBreak/>
+				<Run FontWeight="Bold">• Diff:</Run> The difference between the hits taken (sum of Boss Hits and Way Hits) and the personal best hits taken.<LineBreak/>
+				<Run FontWeight="Bold">• PB:</Run> Amount of hits taken in the personal best run (sum of Boss Hits and Way Hits).<LineBreak/>
+				<Run FontWeight="Bold">•</Run><PathIcon Margin="3,0,3,0" Height="12" Width="12" Data="{DynamicResource ImageSubSplit}"/><Run FontWeight="Bold">SS (Sub Split):</Run> Marks the split being a child of the previous "Sub Split" (Used for visual effects only).<LineBreak/>
+				<Run FontWeight="Bold">•</Run><PathIcon Margin="3,0,3,0" Height="12" Width="12" Data="{DynamicResource ImageSP}"/><Run FontWeight="Bold">SP (Session Progress):</Run> Marks the farthest reached split per stream session and resets on application start. Represented by a 24 hour clock symbol.<LineBreak/>
+				<Run FontWeight="Bold">•</Run><PathIcon Margin="3,0,3,0" Height="12" Width="12" Data="{DynamicResource ImageBP}"/><Run FontWeight="Bold">BP (Best Progress / Distance PB):</Run> Marks the furthest reached split of the best flawless run ever. Represented by a flag symbol.<LineBreak/>
+				<Run FontWeight="Bold">• Trash:</Run> Removes the split from the list.
 			</TextBlock>
 		</Border>
 

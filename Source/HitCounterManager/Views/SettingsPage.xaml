@@ -236,12 +236,12 @@ SPDX-License-Identifier: MIT
 				<!-- ================== -->
 				<!-- ================== -->
 
-				<TabItem Header="Style">
+				<TabItem Header="Visibility">
 					<!-- Keep bottom Margin high as Scrollviewer may otherwise cut off controls, don't know why yet -->
 					<StackPanel Margin="0 0 0 50" Orientation="Vertical" HorizontalAlignment="Stretch">
 						<StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Classes="Section">
 
-							<TextBlock Margin="5 10 0 10" HorizontalAlignment="Left" Text="Visible sections" FontWeight="Bold"/>
+							<TextBlock Margin="5 10 0 10" HorizontalAlignment="Left" Text="Table" FontWeight="Bold"/>
 							<Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
 								<RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
 									<Button Command="{Binding ToggleShowInfo}" CommandParameter="ShowAttemptsCounter" Classes="ImageButton">
@@ -322,9 +322,13 @@ SPDX-License-Identifier: MIT
 						</StackPanel>
 
 						<StackPanel Margin="0 10 0 0" Orientation="Vertical" HorizontalAlignment="Stretch" Classes="Section">
-							<TextBlock Margin="5 10 0 10" HorizontalAlignment="Left" Text="Visible splits" FontWeight="Bold"/>
+							<TextBlock Margin="5 10 0 10" HorizontalAlignment="Left" Text="Splits" FontWeight="Bold"/>
 
-							<TextBlock Margin="10,0,10,0" HorizontalAlignment="Left" Text="Sub splits visibility:" />
+							<StackPanel Margin="10,0,10,0" Orientation="Horizontal" HorizontalAlignment="Left">
+								<TextBlock HorizontalAlignment="Left" Text="Sub splits (" />
+								<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageSubSplit}"/>
+								<TextBlock HorizontalAlignment="Left" Text=") visibility:" />
+							</StackPanel>
 							<Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Stretch">
 								<RelativePanel Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
 									<Button Command="{Binding ToggleShowInfo}" CommandParameter="SubSplitVisibilityShowAll" Classes="ImageButton">
@@ -336,7 +340,7 @@ SPDX-License-Identifier: MIT
 										IsVisible="{Binding ShowInfo[SubSplitVisibilityShowAll].Value, Mode=OneWay}">
 									<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
 										<TextBlock.Text>
-											<x:String xml:space="preserve">All sub splits are shown.</x:String>
+											<x:String xml:space="preserve">All sub splits are always shown.</x:String>
 										</TextBlock.Text>
 									</TextBlock>
 								</Border>
@@ -350,8 +354,8 @@ SPDX-License-Identifier: MIT
 										IsVisible="{Binding ShowInfo[SubSplitVisibilityCollapseNonActive].Value, Mode=OneWay}">
 									<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
 										<TextBlock.Text>
-											<x:String xml:space="preserve">Sub splits are hidden.
-Expection: The sub splits are shown only for the group containing the active split.</x:String>
+											<x:String xml:space="preserve">Only the sub splits of the group containing the active split are shown.
+All other sub splits are hidden.</x:String>
 										</TextBlock.Text>
 									</TextBlock>
 								</Border>
@@ -365,7 +369,7 @@ Expection: The sub splits are shown only for the group containing the active spl
 										IsVisible="{Binding ShowInfo[SubSplitVisibilityHideAll].Value, Mode=OneWay}">
 									<TextBlock Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
 										<TextBlock.Text>
-											<x:String xml:space="preserve">All sub splits are hidden.</x:String>
+											<x:String xml:space="preserve">All sub splits are always hidden.</x:String>
 										</TextBlock.Text>
 									</TextBlock>
 								</Border>
@@ -390,7 +394,7 @@ Expection: The sub splits are shown only for the group containing the active spl
 						</StackPanel>
 
 						<StackPanel Margin="0 10 0 0" Orientation="Vertical" HorizontalAlignment="Stretch" Classes="Section">
-							<TextBlock Margin="5 10 0 10" HorizontalAlignment="Left" Text="Visible columns" FontWeight="Bold"/>
+							<TextBlock Margin="5 10 0 10" HorizontalAlignment="Left" Text="Columns" FontWeight="Bold"/>
 
 							<Grid Margin="10,0,10,0" ColumnDefinitions="24,Auto,*" RowDefinitions="
 								Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,
@@ -569,7 +573,16 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
 								</Border>
 							</Grid>
 						</StackPanel>
+					</StackPanel>
+				</TabItem>
 
+				<!-- ================== -->
+				<!-- ================== -->
+				<!-- ================== -->
+
+				<TabItem Header="Style">
+					<!-- Keep bottom Margin high as Scrollviewer may otherwise cut off controls, don't know why yet -->
+					<StackPanel Margin="0 0 0 50" Orientation="Vertical" HorizontalAlignment="Stretch">
 						<StackPanel Margin="0 10 0 0" Orientation="Vertical" HorizontalAlignment="Stretch" Classes="Section">
 							<TextBlock Margin="5 10 0 10" HorizontalAlignment="Left" Text="Appearance" FontWeight="Bold"/>
 
