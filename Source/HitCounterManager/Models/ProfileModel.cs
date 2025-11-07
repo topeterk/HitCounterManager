@@ -109,11 +109,10 @@ namespace HitCounterManager.Models
             ProfileRowModel rowModel = new(row, this);
             rowModel.PropertyChanged += PropertyChangedHandler;
 
-            _origin.Rows.Insert(ActiveSplit, row);
-            Rows.Insert(ActiveSplit, rowModel);
-
-            Rows[ActiveSplit].ActiveChanged();
-            if (ActiveSplit+1 < Rows.Count) Rows[ActiveSplit+1].ActiveChanged();
+            int newIndex = (0 == _origin.Rows.Count ? 0 :  ActiveSplit + 1);
+            _origin.Rows.Insert(newIndex, row);
+            Rows.Insert(newIndex, rowModel);
+            ActiveSplit = newIndex;
         }
 
         public void AppendNewRow(string? NewName)
