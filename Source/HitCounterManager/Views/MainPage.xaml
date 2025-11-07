@@ -170,6 +170,9 @@ SPDX-License-Identifier: MIT
 
 			<ctrls:ProfileView Padding="0" Margin="0" x:Name="profileView"/>
 
+			<Button Margin="10,2,10,10" Command="{Binding #profileView.DataContext.ProfileSplitInsert}" CommandParameter="End" Classes="ImageButton" IsVisible="{Binding !#profileView.DataContext.IsReadOnly}">
+				<PathIcon Margin="2" Height="16" Width="16" Data="{DynamicResource ImageSplitInsert}"/>
+			</Button>
 		</StackPanel>
 	</ScrollViewer>
 </UserControl>

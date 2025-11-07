@@ -132,9 +132,9 @@ namespace HitCounterManager.ViewModels
                 if (App.CurrentApp.Settings.ReadOnlyMode) return;
                 _ProfileSelected.PermuteActiveSplit(+1);
             });
-            ProfileSplitInsert = ReactiveCommand.Create(() => {
+            ProfileSplitInsert = ReactiveCommand.Create((string? param) => {
                 if (App.CurrentApp.Settings.ReadOnlyMode) return;
-                _ProfileSelected.InsertNewRow();
+                _ProfileSelected.InsertNewRow("End".Equals(param));
             });
 
             HitIncrease = ReactiveCommand.Create(() => HitSumUp(+1, false));
@@ -277,7 +277,7 @@ namespace HitCounterManager.ViewModels
                 Name = NewName
             };
             ProfileModel profileModel = new (profile);
-            profileModel.InsertNewRow();
+            profileModel.InsertNewRow(false);
             profileModel.ProfileDataChanged += OutputDataChangedHandler;
 
             // Add and select profile

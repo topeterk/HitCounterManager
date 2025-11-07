@@ -103,13 +103,13 @@ namespace HitCounterManager.Models
             }
         }
 
-        public void InsertNewRow()
+        public void InsertNewRow(bool atEnd)
         {
             ProfileRow row = new();
             ProfileRowModel rowModel = new(row, this);
             rowModel.PropertyChanged += PropertyChangedHandler;
 
-            int newIndex = (0 == _origin.Rows.Count ? 0 :  ActiveSplit + 1);
+            int newIndex = (0 == _origin.Rows.Count ? 0 : atEnd ? _origin.Rows.Count : ActiveSplit + 1);
             _origin.Rows.Insert(newIndex, row);
             Rows.Insert(newIndex, rowModel);
             ActiveSplit = newIndex;
