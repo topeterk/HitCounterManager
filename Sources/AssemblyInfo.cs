@@ -1,6 +1,6 @@
 ﻿//MIT License
 
-//Copyright (c) 2016-2025 Peter Kirmeier
+//Copyright (c) 2016-2026 Peter Kirmeier
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy
 //of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("HitCounterManager")]
-[assembly: AssemblyCopyright("Copyright © Peter Kirmeier 2025")]
+[assembly: AssemblyCopyright("Copyright © Peter Kirmeier 2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
