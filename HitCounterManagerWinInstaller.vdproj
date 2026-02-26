@@ -91,12 +91,6 @@
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E73481EAB59C480EAACFF94F3334D77E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
     }
     "Configurations"
     {
@@ -499,15 +493,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:HitCounterManager"
-        "ProductCode" = "8:{96343A68-357C-4FD1-A94A-34945F980237}"
-        "PackageCode" = "8:{8FF4F890-31EF-421F-A3CC-E07F4320959B}"
+        "ProductCode" = "8:{1B3D8153-A0E6-44DE-B7FF-9C163AED3E1D}"
+        "PackageCode" = "8:{7528DDED-5C56-446C-B551-94C69676F0A0}"
         "UpgradeCode" = "8:{E37C963F-DDC5-4776-80DD-7B583A48415F}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.21.0"
+        "ProductVersion" = "8:1.22.0"
         "Manufacturer" = "8:GunriderProductions"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -905,7 +899,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_E73481EAB59C480EAACFF94F3334D77E"
             {
-            "SourcePath" = "8:obj\\ReleaseWin\\HitCounterManager.exe"
+            "SourcePath" = "8:obj\\ReleaseWin\\net48\\HitCounterManager.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_DFB6FB4DFF4E4C228DA381CF60E540D8"
