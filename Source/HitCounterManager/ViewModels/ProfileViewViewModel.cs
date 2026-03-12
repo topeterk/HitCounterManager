@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: © 2021-2025 Peter Kirmeier
+﻿// SPDX-FileCopyrightText: © 2021-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
 using System;
@@ -197,6 +197,8 @@ namespace HitCounterManager.ViewModels
             CallPropertyChanged(nameof(StatsProgress));
             CallPropertyChanged(nameof(StatsTime));
             CallPropertyChanged(nameof(StatsTotalHits));
+
+            RunFinished = e.PropertyName == nameof(RunFinished);
             OutputDataQueueUpdate();
         }
         private void CollectionChangedHandler(object? sender, NotifyCollectionChangedEventArgs e) => OutputDataChangedHandler(sender, new PropertyChangedEventArgs(nameof(ProfileList)));
@@ -256,6 +258,12 @@ namespace HitCounterManager.ViewModels
                 CallPropertyChanged();
             }
         }
+
+        /// <summary>
+        /// Should be set last when changing values for output when splitting on last split.
+        /// The state is kept until any next value update.
+        /// </summary>
+        public bool RunFinished { get; set; }
 
         public class ProfileActionException(string message) : Exception(message)
         {
@@ -391,6 +399,7 @@ namespace HitCounterManager.ViewModels
             {
                 // Stop timer when run completes (when last split is finished)
                 TimerRunning = false;
+                OutputDataChangedHandler(this, new PropertyChangedEventArgs(nameof(RunFinished)));
             }
         }
 
@@ -445,8 +454,8 @@ namespace HitCounterManager.ViewModels
 
         private readonly DispatcherTimer OutputUpdateTimer;
         private readonly object OutputUpdateLock = new ();
-        private bool IsOutputUpdatePending = false;
-        private bool IsOutputUpdateStable = true;
+        private bool IsOutputUpdatePending = false; // Set true on a queued update and kept as long as Stable was not true for two ticks
+        private bool IsOutputUpdateStable = true; // Set true on timer tick but reset on values changes
 
         private void OutputUpdateTimerTick(object? sender, EventArgs e)
         {
@@ -460,7 +469,7 @@ namespace HitCounterManager.ViewModels
             // When update is no longer pending, write output and stop timer
             if (!IsOutputUpdatePending)
             {
-                Dispatcher.UIThread.Post(() => App.CurrentApp.om.Update(_ProfileSelected, TimerRunning));
+                Dispatcher.UIThread.Post(() => App.CurrentApp.om.Update(_ProfileSelected, TimerRunning, RunFinished));
                 OutputUpdateTimer.Stop();
             }
         }

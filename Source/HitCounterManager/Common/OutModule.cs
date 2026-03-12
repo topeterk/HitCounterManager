@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: © 2016-2025 Peter Kirmeier
+﻿// SPDX-FileCopyrightText: © 2016-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
 using System;
@@ -124,7 +124,7 @@ namespace HitCounterManager.Models
         /// <summary>
         /// Use buffer to create outputfile while patching some data
         /// </summary>
-        public void Update(ProfileModel pi, bool TimerRunning)
+        public void Update(ProfileModel pi, bool TimerRunning, bool RunFinished)
         {
             //Console.Beep(); // For debugging to check whenever output is beeing generated :)
 
@@ -216,7 +216,7 @@ namespace HitCounterManager.Models
                     if (iSplitCount <= iSplitLast) iSplitLast =  iSplitCount-1;
 
                     WriteJsonSimpleValue(sr, "run_active", RunIndexActive);
-                    WriteJsonSimpleValue(sr, "split_active", active);
+                    WriteJsonSimpleValue(sr, "split_active", RunFinished ? iSplitCount : active);
                     WriteJsonSimpleValue(sr, "split_first", iSplitFirst);
                     WriteJsonSimpleValue(sr, "split_last", iSplitLast);
 

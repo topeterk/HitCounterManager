@@ -2,7 +2,7 @@
 <html>
 <head>
 <!--
-SPDX-FileCopyrightText: © 2019-2025 Peter Kirmeier
+SPDX-FileCopyrightText: © 2019-2026 Peter Kirmeier
 SPDX-License-Identifier: MIT
 -->
 <title>Hitcounter GUI</title>
@@ -162,6 +162,8 @@ function DoVisualUpdate(d /*data*/)
 		for ( let i = d.split_active ; 0 <= i ; i = i - 1 )
 		{
 			let s = splits[i];
+
+			if (s == undefined) continue; // Ignore non existing entries (e.g. virtual "finished" split)
 
 			PrepareVisibleSplit(i, d, active_subsplit, splits);
 
