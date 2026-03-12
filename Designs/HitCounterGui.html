@@ -4,7 +4,7 @@
 <!--
 MIT License
 
-Copyright (c) 2019-2025 Peter Kirmeier
+Copyright (c) 2019-2026 Peter Kirmeier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -193,6 +193,8 @@ function DoVisualUpdate(d /*data*/)
 		for ( let i = d.split_active ; 0 <= i ; i = i - 1 )
 		{
 			let s = splits[i];
+
+			if (s == undefined) continue; // The last "new row" in V1 does not exist, ignore it
 
 			PrepareVisibleSplit(i, d, active_subsplit, splits);
 
