@@ -8,7 +8,9 @@ SPDX-License-Identifier: MIT
     <TargetFramework>net8.0-android</TargetFramework>
     <ApplicationId>com.peterkirmeier.$(Product)</ApplicationId>
     <!-- Consumed by pipeline END -->
+    <TargetFramework Condition="'$(MSBuildVersion)' >= '18'">net10.0-android</TargetFramework> <!-- Workaround for Visual Studio 2026, not used for production builds -->
 
+    <SupportedOSPlatformVersion>34</SupportedOSPlatformVersion>
     <OutputType>Exe</OutputType>
     <PackageId>$(Product).Android</PackageId>
     <!-- https://docs.microsoft.com/en-us/dotnet/core/rid-catalog -->
@@ -23,7 +25,7 @@ SPDX-License-Identifier: MIT
 
   <ItemGroup>
     <AndroidResource Include="../HitCounterManager/Resources/drawable/FireIcon.png" Link="Resources/drawable/Icon.png" />
-    <AndroidResource Include="../Datafiles/HitCounter.template" Link="Resources/raw/HitCounter.template"/>
+    <AndroidResource Include="../Datafiles/HitCounter.template" Link="Resources/raw/HitCounter.template" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../$(Product)/$(Product).PCL.csproj" />
