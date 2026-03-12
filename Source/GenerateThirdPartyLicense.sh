@@ -1,10 +1,11 @@
 #!bash -e
 
-# SPDX-FileCopyrightText: © 2022-2025 Peter Kirmeier
+# SPDX-FileCopyrightText: © 2022-2026 Peter Kirmeier
 # SPDX-License-Identifier: MIT
 
 #
 #  How to run:  "./GenerateThirdPartyLicense.sh > ../THIRDPARTYLICENSEREADME"
+#  Note: Not clear yet why this happends but in case of errors that nuget files could not be found, try just running the script again.
 #
 
 function grepkey {

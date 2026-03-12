@@ -900,7 +900,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 ==============================================================================
-NuGet Package: Avalonia.Android 11.3.7
+NuGet Package: Avalonia.Android 11.3.12
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
@@ -912,97 +912,91 @@ Author(s): Avalonia Team
 Source: https://github.com/AvaloniaUI/angle/
 License: https://raw.githubusercontent.com/AvaloniaUI/angle/master/LICENSE
 ==============================================================================
-NuGet Package: Avalonia.BuildServices 11.3.1
+NuGet Package: Avalonia.BuildServices 11.3.2
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Controls.ColorPicker 11.3.7
+NuGet Package: Avalonia.Controls.ColorPicker 11.3.12
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Desktop 11.3.7
+NuGet Package: Avalonia.Desktop 11.3.12
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Diagnostics 11.3.7
+NuGet Package: Avalonia.Diagnostics 11.3.12
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Fonts.Inter 11.3.7
+NuGet Package: Avalonia.Fonts.Inter 11.3.12
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.FreeDesktop 11.3.7
+NuGet Package: Avalonia.FreeDesktop 11.3.12
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Native 11.3.7
+NuGet Package: Avalonia.Native 11.3.12
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.ReactiveUI 11.3.7
+NuGet Package: Avalonia.Remote.Protocol 11.3.12
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Remote.Protocol 11.3.7
+NuGet Package: Avalonia.Skia 11.3.12
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Skia 11.3.7
+NuGet Package: Avalonia.Themes.Fluent 11.3.12
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Themes.Fluent 11.3.7
+NuGet Package: Avalonia.Themes.Simple 11.3.12
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Themes.Simple 11.3.7
+NuGet Package: Avalonia.Win32 11.3.12
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.Win32 11.3.7
+NuGet Package: Avalonia.X11 11.3.12
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia.X11 11.3.7
+NuGet Package: Avalonia 11.3.12
 
 Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Avalonia 11.3.7
-
-Author(s): Avalonia Team
-Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: DynamicData 8.4.1
+NuGet Package: DynamicData 9.4.1
 
 Author(s): Roland Pheasant
 Source: http://dynamic-data.org/
@@ -1050,13 +1044,19 @@ Author(s): MicroCom.Runtime
 Source:
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Microsoft.NET.ILLink.Tasks 8.0.16
+NuGet Package: Microsoft.NET.ILLink.Tasks 8.0.24
 
 Author(s): Microsoft
 Source: https://dot.net/
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: ReactiveUI 20.1.1
+NuGet Package: ReactiveUI.Avalonia 11.4.12
+
+Author(s): ReactiveUI and Avalonia Teams, and Contributors
+Source: https://reactiveui.net/
+License: https://licenses.nuget.org/MIT
+==============================================================================
+NuGet Package: ReactiveUI 23.1.8
 
 Author(s): .NET Foundation and Contributors
 Source: https://reactiveui.net/
@@ -1098,16 +1098,28 @@ Author(s): Microsoft
 Source: https://go.microsoft.com/fwlink/?linkid=868515
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Splat 15.1.1
+NuGet Package: Splat.Builder 19.3.1
 
 Author(s): .NET Foundation and Contributors
 Source: https://github.com/reactiveui/splat/
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: System.ComponentModel.Annotations 5.0.0
+NuGet Package: Splat.Core 19.3.1
 
-Author(s): Microsoft
-Source: https://github.com/dotnet/runtime
+Author(s): .NET Foundation and Contributors
+Source: https://github.com/reactiveui/splat/
+License: https://licenses.nuget.org/MIT
+==============================================================================
+NuGet Package: Splat.Logging 19.3.1
+
+Author(s): .NET Foundation and Contributors
+Source: https://github.com/reactiveui/splat/
+License: https://licenses.nuget.org/MIT
+==============================================================================
+NuGet Package: Splat 19.3.1
+
+Author(s): .NET Foundation and Contributors
+Source: https://github.com/reactiveui/splat/
 License: https://licenses.nuget.org/MIT
 ==============================================================================
 NuGet Package: System.IO.Pipelines 8.0.0
@@ -1116,7 +1128,7 @@ Author(s): Microsoft
 Source: https://dot.net/
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: System.Reactive 6.0.1
+NuGet Package: System.Reactive 6.1.0
 
 Author(s): .NET Foundation and Contributors
 Source: https://github.com/dotnet/reactive
@@ -1135,10 +1147,10 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Annotation.Experimental 1.3.1.3
+NuGet Package: Xamarin.AndroidX.Annotation.Experimental 1.5.1.1
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
@@ -1156,10 +1168,10 @@ Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.AppCompat.AppCompatResources 1.6.1.6
+NuGet Package: Xamarin.AndroidX.AppCompat.AppCompatResources 1.7.1.1
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
@@ -1170,38 +1182,38 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Arch.Core.Common 2.2.0.5
+NuGet Package: Xamarin.AndroidX.Arch.Core.Common 2.2.0.18
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Arch.Core.Runtime 2.2.0.5
+NuGet Package: Xamarin.AndroidX.Arch.Core.Runtime 2.2.0.18
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Collection.Jvm 1.3.0.1
+NuGet Package: Xamarin.AndroidX.Collection.Jvm 1.5.0.3
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Collection 1.3.0.1
+NuGet Package: Xamarin.AndroidX.Collection 1.5.0.3
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Concurrent.Futures 1.1.0.16
+NuGet Package: Xamarin.AndroidX.Concurrent.Futures 1.3.0.1
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
@@ -1212,17 +1224,24 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Core.SplashScreen 1.0.1.17
+NuGet Package: Xamarin.AndroidX.Core.SplashScreen 1.2.0
 
 Author(s): Microsoft
 Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Core 1.12.0.2
+NuGet Package: Xamarin.AndroidX.Core.ViewTree 1.0.0.3
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
+License: https://licenses.nuget.org/MIT
+License: https://licenses.nuget.org/Apache-2.0
+==============================================================================
+NuGet Package: Xamarin.AndroidX.Core 1.16.0.3
+
+Author(s): Microsoft
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
@@ -1268,17 +1287,24 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Interpolator 1.0.0.21
+NuGet Package: Xamarin.AndroidX.Interpolator 1.0.0.34
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Lifecycle.Common 2.6.2.2
+NuGet Package: Xamarin.AndroidX.Lifecycle.Common.Jvm 2.9.2.1
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
+License: https://licenses.nuget.org/MIT
+License: https://licenses.nuget.org/Apache-2.0
+==============================================================================
+NuGet Package: Xamarin.AndroidX.Lifecycle.Common 2.9.2.1
+
+Author(s): Microsoft
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
@@ -1296,10 +1322,17 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Lifecycle.Runtime 2.6.2.2
+NuGet Package: Xamarin.AndroidX.Lifecycle.Runtime.Android 2.9.2.1
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
+License: https://licenses.nuget.org/MIT
+License: https://licenses.nuget.org/Apache-2.0
+==============================================================================
+NuGet Package: Xamarin.AndroidX.Lifecycle.Runtime 2.9.2.1
+
+Author(s): Microsoft
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
@@ -1324,10 +1357,10 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.ProfileInstaller.ProfileInstaller 1.3.1.4
+NuGet Package: Xamarin.AndroidX.ProfileInstaller.ProfileInstaller 1.4.1.5
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
@@ -1345,38 +1378,45 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Startup.StartupRuntime 1.1.1.9
+NuGet Package: Xamarin.AndroidX.Startup.StartupRuntime 1.2.0.5
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.Tracing.Tracing 1.1.0.8
+NuGet Package: Xamarin.AndroidX.Tracing.Tracing.Android 1.3.0.1
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.VectorDrawable.Animated 1.1.0.21
+NuGet Package: Xamarin.AndroidX.Tracing.Tracing 1.3.0.1
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.VectorDrawable 1.1.0.21
+NuGet Package: Xamarin.AndroidX.VectorDrawable.Animated 1.2.0.8
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.AndroidX.VersionedParcelable 1.1.1.21
+NuGet Package: Xamarin.AndroidX.VectorDrawable 1.2.0.8
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
+License: https://licenses.nuget.org/MIT
+License: https://licenses.nuget.org/Apache-2.0
+==============================================================================
+NuGet Package: Xamarin.AndroidX.VersionedParcelable 1.2.1.3
+
+Author(s): Microsoft
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
@@ -1387,10 +1427,10 @@ Source: https://aka.ms/androidx
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.Google.Guava.ListenableFuture 1.0.0.16
+NuGet Package: Xamarin.Google.Guava.ListenableFuture 1.0.0.29
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
@@ -1401,91 +1441,84 @@ Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.Kotlin.StdLib.Common 1.9.10.2
-
-Author(s): Microsoft
-Source: https://aka.ms/androidx
-License: https://licenses.nuget.org/MIT
-License: https://licenses.nuget.org/Apache-2.0
-==============================================================================
-NuGet Package: Xamarin.Kotlin.StdLib.Jdk7 1.9.10.2
-
-Author(s): Microsoft
-Source: https://aka.ms/androidx
-License: https://licenses.nuget.org/MIT
-License: https://licenses.nuget.org/Apache-2.0
-==============================================================================
-NuGet Package: Xamarin.Kotlin.StdLib.Jdk8 1.9.10.2
-
-Author(s): Microsoft
-Source: https://aka.ms/androidx
-License: https://licenses.nuget.org/MIT
-License: https://licenses.nuget.org/Apache-2.0
-==============================================================================
-NuGet Package: Xamarin.Kotlin.StdLib 2.2.0.1
+NuGet Package: Xamarin.JSpecify 1.0.0.4
 
 Author(s): Microsoft
 Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.KotlinX.Coroutines.Android 1.7.3.2
+NuGet Package: Xamarin.Kotlin.StdLib 2.2.21
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xamarin.KotlinX.Coroutines.Core.Jvm 1.7.3.2
+NuGet Package: Xamarin.KotlinX.Coroutines.Android 1.10.2.1
 
 Author(s): Microsoft
-Source: https://aka.ms/androidx
+Source: https://aka.ms/android-libraries
 License: https://licenses.nuget.org/MIT
 License: https://licenses.nuget.org/Apache-2.0
 ==============================================================================
-NuGet Package: Xaml.Behaviors.Avalonia 11.3.6.4
+NuGet Package: Xamarin.KotlinX.Coroutines.Core.Jvm 1.10.2.1
+
+Author(s): Microsoft
+Source: https://aka.ms/android-libraries
+License: https://licenses.nuget.org/MIT
+License: https://licenses.nuget.org/Apache-2.0
+==============================================================================
+NuGet Package: Xamarin.KotlinX.Coroutines.Core 1.10.2.1
+
+Author(s): Microsoft
+Source: https://aka.ms/android-libraries
+License: https://licenses.nuget.org/MIT
+License: https://licenses.nuget.org/Apache-2.0
+==============================================================================
+NuGet Package: Xaml.Behaviors.Avalonia 11.3.9.5
 
 Author(s): Wiesław Šoltés
 Source: https://github.com/wieslawsoltes/Xaml.Behaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Xaml.Behaviors.Interactions.Custom 11.3.6.4
+NuGet Package: Xaml.Behaviors.Interactions.Custom 11.3.9.5
 
 Author(s): Wiesław Šoltés
 Source: https://github.com/wieslawsoltes/Xaml.Behaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Xaml.Behaviors.Interactions.DragAndDrop 11.3.6.4
+NuGet Package: Xaml.Behaviors.Interactions.DragAndDrop 11.3.9.5
 
 Author(s): Wiesław Šoltés
 Source: https://github.com/wieslawsoltes/Xaml.Behaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Xaml.Behaviors.Interactions.Draggable 11.3.6.4
+NuGet Package: Xaml.Behaviors.Interactions.Draggable 11.3.9.5
 
 Author(s): Wiesław Šoltés
 Source: https://github.com/wieslawsoltes/Xaml.Behaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Xaml.Behaviors.Interactions.Events 11.3.6.4
+NuGet Package: Xaml.Behaviors.Interactions.Events 11.3.9.5
 
 Author(s): Wiesław Šoltés
 Source: https://github.com/wieslawsoltes/Xaml.Behaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Xaml.Behaviors.Interactions.Responsive 11.3.6.4
+NuGet Package: Xaml.Behaviors.Interactions.Responsive 11.3.9.5
 
 Author(s): Wiesław Šoltés
 Source: https://github.com/wieslawsoltes/Xaml.Behaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Xaml.Behaviors.Interactions 11.3.6.4
+NuGet Package: Xaml.Behaviors.Interactions 11.3.9.5
 
 Author(s): Wiesław Šoltés
 Source: https://github.com/wieslawsoltes/Xaml.Behaviors
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Xaml.Behaviors.Interactivity 11.3.6.4
+NuGet Package: Xaml.Behaviors.Interactivity 11.3.9.5
 
 Author(s): Wiesław Šoltés
 Source: https://github.com/wieslawsoltes/Xaml.Behaviors
