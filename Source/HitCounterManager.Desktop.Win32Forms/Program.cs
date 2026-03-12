@@ -1,8 +1,8 @@
-﻿// SPDX-FileCopyrightText: © 2024 Peter Kirmeier
+﻿// SPDX-FileCopyrightText: © 2024-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
 using Avalonia;
-using Avalonia.ReactiveUI;
+using ReactiveUI.Avalonia;
 using System;
 
 namespace HitCounterManager.Desktop.Win32Forms
@@ -22,6 +22,6 @@ namespace HitCounterManager.Desktop.Win32Forms
                 .UsePlatformDetect()
                 .WithInterFont()
                 .LogToTrace()
-                .UseReactiveUI();
+                .UseReactiveUI(rxAppBuilder => { });
     }
 }

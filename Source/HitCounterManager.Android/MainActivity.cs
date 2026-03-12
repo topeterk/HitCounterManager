@@ -8,7 +8,7 @@ using Android.Content.PM;
 using Avalonia;
 using Avalonia.Android;
 //using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.ReactiveUI;
+using ReactiveUI.Avalonia;
 using HitCounterManager.Common;
 //using HitCounterManager.Views;
 
@@ -64,7 +64,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
-            .UseReactiveUI();
+            .UseReactiveUI(rxAppBuilder => { });
     }
 
     protected override void OnStop()

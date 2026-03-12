@@ -1,6 +1,6 @@
 <Project>
 <!--
-SPDX-FileCopyrightText: © 2011-2025 Peter Kirmeier
+SPDX-FileCopyrightText: © 2011-2026 Peter Kirmeier
 SPDX-License-Identifier: MIT
 -->
   <PropertyGroup>
@@ -27,7 +27,8 @@ SPDX-License-Identifier: MIT
     <!-- needed as Android and Desktop NuGet packages are overwriting each other files -->
     <!--<MSBuildProjectExtensionsPath>obj/ext/$(PlatformName)</MSBuildProjectExtensionsPath>-->
 
-    <AvaloniaVersion>11.3.7</AvaloniaVersion>
-    <XamlBehaviorsAvaloniaVersion>11.3.6.4</XamlBehaviorsAvaloniaVersion>
+    <AvaloniaVersion>11.3.12</AvaloniaVersion>
+    <ReactiveUIAvaloniaVersion>11.4.12</ReactiveUIAvaloniaVersion>
+    <XamlBehaviorsAvaloniaVersion>11.3.9.5</XamlBehaviorsAvaloniaVersion>
   </PropertyGroup>
 </Project>
