@@ -1,5 +1,8 @@
 # HitCounterManager - A Dark Souls inspired Hit Counter
 
+**:bangbang: THIS BRANCH ONLY RECEIVES CRITICAL BUGFIXES :bangbang:**  
+**:bangbang: IT GOT SUPERSEEDED BY BRANCH `v2.x` :bangbang:**  
+
 **Free Hit Counter** that is running in the background, so you can focus on your stream.  
 No need to keep any windows open for a window capture any more.  
 Initially designed for Dark Souls but supports any game.  
