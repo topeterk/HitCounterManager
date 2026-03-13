@@ -168,24 +168,12 @@ stages:
         zipAfterPublish: false
         projects: '**/*.$(PlatformType).csproj'
 
-    - task: Bash@3
-      condition: startsWith(variables['RuntimeRID'], 'android-')
-      displayName: 'Friendly APK name'
-      inputs:
-        targetType: 'inline'
-        script: |
-          echo "Apply friendly APK file name in $(pwd) ..."
-          echo "Original: $(AssemblyApplicationIdAttribute).apk"
-          echo "Friendly: $(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.apk"
-          cp "$(AssemblyApplicationIdAttribute).apk" "$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.apk"
-        workingDirectory: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)'
-
-# example signing check:  "C:\Program Files (x86)\Android\android-sdk\build-tools\32.0.0\apksigner.bat" verify --verbose --print-certs "HitCounterManager.android-arm64-2.0.0.0-PreRelease.apk"
+# example signing check:  "C:\Program Files (x86)\Android\android-sdk\build-tools\32.0.0\apksigner.bat" verify --verbose --print-certs "HitCounterManager-2.0.0.0-android-arm64.apk"
     - task: AndroidSigning@3
       condition: startsWith(variables['RuntimeRID'], 'android-')
       displayName: 'Signing APK'
       inputs:
-        apkFiles: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.apk'
+        apkFiles: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/$(Build.DefinitionName)-$(AssemblyVersionAttribute)-$(System.JobName).apk'
         apksignerKeystoreFile: 'android.keystore'
         apksignerKeystoreAlias: 'hcmkey'
         apksignerKeystorePassword: '$(androidKeyStorePassword)'
@@ -205,21 +193,22 @@ stages:
       inputs:
         rootFolderOrFile: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/publish/'
         includeRootFolder: false
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)-$(AssemblyVersionAttribute)-$(System.JobName).zip'
         archiveType: 'zip'
         replaceExistingArchive: true
         verbose: true
 
-    - task: ArchiveFiles@2
+    - task: Bash@3
       condition: startsWith(variables['RuntimeRID'], 'android-')
-      displayName: 'Archive APK.ZIP'
+      displayName: 'Archive APK'
       inputs:
-        rootFolderOrFile: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.apk'
-        includeRootFolder: false
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.zip'
-        archiveType: 'zip'
-        replaceExistingArchive: true
-        verbose: true
+        targetType: 'inline'
+        script: |
+          echo "Provide APK without additional archiving but apply a friendly file name ..."
+          echo "Src: $(pwd)/$(AssemblyApplicationIdAttribute).apk"
+          echo "Dst: $(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)-$(AssemblyVersionAttribute)-$(System.JobName).apk"
+          cp "$(AssemblyApplicationIdAttribute).apk" "$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)-$(AssemblyVersionAttribute)-$(System.JobName).apk"
+        workingDirectory: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)'
 
     - task: ArchiveFiles@2
       condition: or(startsWith(variables['RuntimeRID'], 'linux-'), startsWith(variables['RuntimeRID'], 'osx-'))
@@ -227,7 +216,7 @@ stages:
       inputs:
         rootFolderOrFile: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/publish/'
         includeRootFolder: false
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName).$(System.JobName)-$(AssemblyVersionAttribute)-PreRelease.tar.gz'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.DefinitionName)-$(AssemblyVersionAttribute)-$(System.JobName).tar.gz'
         archiveType: 'tar'
         tarCompression: 'gz'
         replaceExistingArchive: true
@@ -249,8 +238,8 @@ stages:
 #    steps:
 
     - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: PreRelease'
+      displayName: 'Publish Artifact'
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         publishLocation: 'Container'
-        ArtifactName: 'PreRelease'
+        ArtifactName: 'Release-$(AssemblyVersionAttribute)'
