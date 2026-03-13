@@ -173,7 +173,7 @@ stages:
       condition: startsWith(variables['RuntimeRID'], 'android-')
       displayName: 'Signing APK'
       inputs:
-        apkFiles: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/$(Build.DefinitionName)-$(AssemblyVersionAttribute)-$(System.JobName).apk'
+        apkFiles: '$(Build.SourcesDirectory)/Source/$(AssemblyProductAttribute).$(PlatformType)/bin/$(buildConfiguration)/$(AssemblyTargetFrameworkAttribute)/$(RuntimeRID)/$(AssemblyApplicationIdAttribute).apk'
         apksignerKeystoreFile: 'android.keystore'
         apksignerKeystoreAlias: 'hcmkey'
         apksignerKeystorePassword: '$(androidKeyStorePassword)'
