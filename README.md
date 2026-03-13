@@ -1,13 +1,9 @@
 # HitCounterManager - A Dark Souls inspired Hit Counter
 
-** :bangbang: THIS IS A DEVELOPMENT BRANCH, ANYTHING MAY CHANGE AT ANY TIME :bangbang: **  
-** :bangbang: THE STABLE BRANCH IS `master` :bangbang: **  
-
 [![Releases](https://img.shields.io/github/release/topeterk/HitCounterManager.svg?label=Latest%20release:&longCache=true&style=for-the-badge&colorB=0088FF)](../../releases/latest)
 [![GitHub Releases](https://img.shields.io/github/downloads/topeterk/HitCounterManager/total.svg?label=Downloads:&longCache=true&style=for-the-badge&colorB=0088FF)](../../releases)
 [![GitHub](https://img.shields.io/github/license/topeterk/HitCounterManager.svg?label=License:&longCache=true&style=for-the-badge&colorB=0088FF)](LICENSE)
-
-[![Azure Pipeline](https://dev.azure.com/topeterk/HitCounterManager/_apis/build/status/HitCounterManager?branchName=v2.x)](https://dev.azure.com/topeterk/HitCounterManager/_build)
+[![Azure Pipeline](https://img.shields.io/azure-devops/build/topeterk/daa45126-51f0-4381-9fff-5576388f7cb7/1?label=Azure%20Pipeline:&longCache=true&style=for-the-badge&colorB=0088FF)](https://dev.azure.com/topeterk/HitCounterManager/_build)
 
 [![Download latest version here](https://img.shields.io/badge/-Download%20latest%20version%20here-brightgreen?longCache=true&style=for-the-badge)](../../releases/latest)
 [![Addons](https://img.shields.io/badge/-Addons-yellow?longCache=true&style=for-the-badge)](#addons)
@@ -34,7 +30,7 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 * One single save file for all settings and profiles: **HitCounterManagerSave.xml**
   > Note: The settings will be kept when upgrading on newer versions.
   > I try my best keeping it backwards compatible that you can still load an upgraded save file on older versions.
-* Create profiles for each challenge or game or build a sequence of runs (called succession) like for the Dark Souls trilogy
+* Create profiles for each challenge or game
 * Dark Mode
 * Timer (including current, PB and gold split times)
 * Customizable designs (Find [some examples](../../wiki/Designs) at the [Wiki pages](../../wiki))
@@ -62,7 +58,7 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 * The Surge 2
 
 ## Get the software
-All available releases can be found at the [Releases page](../../releases) on GitHub.
+All available releases (including **HitCounterManager version 1**) can be found at the [Releases page](../../releases) on GitHub.
 
 [![Download latest version here](https://img.shields.io/badge/-Download%20latest%20version%20here-brightgreen?longCache=true&style=for-the-badge)](../../releases/latest)
 
@@ -70,7 +66,7 @@ All available releases can be found at the [Releases page](../../releases) on Gi
 There are addons available now, e.g.:
 * The LiveSplit plugin [**LiveSplit.HitCounterManagerConnector**](https://github.com/topeterk/LiveSplit.HitCounterManagerConnector)
   * Automatically selecting the HCM splits and restarts a new run when LiveSplit is doing so either due to AutoSplitter or manual input.
-* The HitCounterManager plugin [**AutoSplitterCore for HCM**](https://github.com/neimex23/HitCounterManager)
+* The HitCounterManager plugin **AutoSplitterCore** (see [GitHub project](https://github.com/neimex23/HitCounterManager) or [website](https://neimex23.github.io/AutoSplitterCore/))
   * Adds AutoSplitting and InGameTime directly into HitCounterManager without requiring LiveSplit
 
 ## Systemrequirements
@@ -80,15 +76,13 @@ There are addons available now, e.g.:
   * **Without** global hot key support:
     * Most Linux variants like Alpine 3.18+, CentOS 9+, Debian 12+, Fedora 40+, Ubuntu 20.04+, Red Hat Enterprise Linux 8+ (only tested on Ubuntu)
     * macOS 14.2+
-    * Android 34+
+    * Android 14+ (minimum [API Level 34](https://apilevels.com))
   * **Maybe** coming later (at least I try)
     * iOS 17.2+ _(most likely not running yet)_
 * Prerequisites:
   * [.NET 8.0 Runtime](https://dotnet.microsoft.com/download/dotnet/8.0/runtime) or newer, see [supported OS versions](https://github.com/dotnet/core/blob/main/release-notes/8.0/supported-os.md)
   * On Android:
     * As not provided via Google Play Store: [allow installation of unknown apps](https://developer.android.com/studio/publish#publishing-unknown)
-
-Please have a look at the _v2.x_ branch or find *pre-compiled development builds* [here](../../issues/21) or [here](https://dev.azure.com/topeterk/HitCounterManager/_build).
 
 ## Installation, Guides, Help
 Please have a look at the **[Wiki pages](../../wiki)**, the **[Setup Guide](../../wiki/SetupGuide)** or the [FAQ](../../wiki/SetupGuide#FAQ).
