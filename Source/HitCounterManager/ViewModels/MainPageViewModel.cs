@@ -1,10 +1,8 @@
-﻿// SPDX-FileCopyrightText: © 2021-2024 Peter Kirmeier
+﻿// SPDX-FileCopyrightText: © 2021-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
 using System;
 using System.Windows.Input;
-using ReactiveUI;
-using Avalonia.Controls.Notifications;
 using HitCounterManager.Common;
 using HitCounterManager.Controls;
 using HitCounterManager.Views;
@@ -17,11 +15,11 @@ namespace HitCounterManager.ViewModels
 
         public MainPageViewModel()
         {
-            OpenPageSettings = ReactiveCommand.CreateFromTask(async () => { await this.CreatePageOrWindow<SettingsPageViewModel, SettingsPage, SettingsWindow>().OpenAsDialog(OwnerWindow); });
-            OpenPageUpdate = ReactiveCommand.CreateFromTask(async () => { await this.CreatePageOrWindow<UpdatePageViewModel, UpdatePage, UpdateWindow>().OpenAsDialog(OwnerWindow); });
-            OpenPageAbout = ReactiveCommand.CreateFromTask(async () => { await this.CreatePageOrWindow<ViewModelWindowBase, AboutPage, AboutWindow>().OpenAsDialog(OwnerWindow); } );
+            OpenPageSettings = RelayCommand.CreateFromTask(async () => { await this.CreatePageOrWindow<SettingsPageViewModel, SettingsPage, SettingsWindow>().OpenAsDialog(OwnerWindow); });
+            OpenPageUpdate = RelayCommand.CreateFromTask(async () => { await this.CreatePageOrWindow<UpdatePageViewModel, UpdatePage, UpdateWindow>().OpenAsDialog(OwnerWindow); });
+            OpenPageAbout = RelayCommand.CreateFromTask(async () => { await this.CreatePageOrWindow<ViewModelWindowBase, AboutPage, AboutWindow>().OpenAsDialog(OwnerWindow); } );
 
-            OpenPageSetAttempts = ReactiveCommand.CreateFromTask(async () => {
+            OpenPageSetAttempts = RelayCommand.CreateFromTask(async () => {
                 if (null == ProfileView) return;
 
                 IPageBase<ProfileAttemptsPageViewModel> page = this.CreatePageOrWindow<ProfileAttemptsPageViewModel, ProfileAttemptsPage, ProfileAttemptsWindow>();
@@ -30,7 +28,7 @@ namespace HitCounterManager.ViewModels
                 viewModel.UserInput = viewModel.Origin!.ProfileSelected.Attempts;
                 await page.OpenAsDialog(OwnerWindow);
             });
-            OpenPageProfileAction = ReactiveCommand.CreateFromTask(async (ProfileAction type) => {
+            OpenPageProfileAction = RelayCommand.CreateFromTask(async (ProfileAction type) => {
                 if (App.CurrentApp.Settings.ReadOnlyMode || (null == ProfileView)) return;
 
                 IPageBase<ProfileActionPageViewModel> page = this.CreatePageOrWindow<ProfileActionPageViewModel, ProfileActionPage, ProfileActionWindow>();
@@ -39,7 +37,7 @@ namespace HitCounterManager.ViewModels
                 viewModel.Action = type;
                 await page.OpenAsDialog(OwnerWindow);
             });
-            OpenPageAskSaveBeforeClose = ReactiveCommand.CreateFromTask(async () => {
+            OpenPageAskSaveBeforeClose = RelayCommand.CreateFromTask(async () => {
                 IPageBase<AskSaveBeforeClosePageViewModel> page = this.CreatePageOrWindow<AskSaveBeforeClosePageViewModel, AskSaveBeforeClosePage, AskSaveBeforeCloseWindow>();
                 AskSaveBeforeClosePageViewModel viewModel = page.GetViewModel();
                 await page.OpenAsDialog(OwnerWindow);
@@ -50,16 +48,16 @@ namespace HitCounterManager.ViewModels
                 OwnerWindow?.Close();
             });
 
-            CheckUpdatesOnline = ReactiveCommand.Create(() => App.CheckAndShowUpdates(this));
+            CheckUpdatesOnline = RelayCommand.Create(() => App.CheckAndShowUpdates(this));
 
-            ToggleAlwaysOnTop = ReactiveCommand.Create(() => {
+            ToggleAlwaysOnTop = RelayCommand.Create(() => {
                 if (OwnerWindow != null)
                 {
                     OwnerWindow.Topmost = App.CurrentApp.Settings.AlwaysOnTop = !App.CurrentApp.Settings.AlwaysOnTop;
                 }
-                CallPropertyChanged(nameof(AlwaysOnTop));
+                RaisePropertyChanged(nameof(AlwaysOnTop));
             });
-            ToggleDarkMode = ReactiveCommand.Create(() => {
+            ToggleDarkMode = RelayCommand.Create(() => {
                 App app = App.CurrentApp;
                 app.ApplyTheme(!app.Settings.DarkMode); // Toggle
             });
@@ -74,8 +72,8 @@ namespace HitCounterManager.ViewModels
         public ICommand OpenPageAskSaveBeforeClose { get; }
         public bool DoAskSaveBeforeClose { get; private set; } = true;
 
-        public ICommand OpenWebsiteHome { get; } = ReactiveCommand.Create(() => GitHubUpdate.WebOpenLandingPage());
-        public ICommand OpenWebsiteTeamHitless { get; } = ReactiveCommand.Create(() => Extensions.OpenWithBrowser(new Uri("https://discord.gg/4E7cSK7")));
+        public ICommand OpenWebsiteHome { get; } = RelayCommand.Create(() => GitHubUpdate.WebOpenLandingPage());
+        public ICommand OpenWebsiteTeamHitless { get; } = RelayCommand.Create(() => Extensions.OpenWithBrowser(new Uri("https://discord.gg/4E7cSK7")));
         public ICommand CheckUpdatesOnline { get; }
 
         public bool AlwaysOnTopDataTriggerWorkaroundCalled = false;

@@ -1,8 +1,8 @@
-// SPDX-FileCopyrightText: © 2021 Peter Kirmeier
+// SPDX-FileCopyrightText: © 2021-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
 using System.Windows.Input;
-using ReactiveUI;
+using HitCounterManager.Common;
 
 namespace HitCounterManager.ViewModels
 {
@@ -10,7 +10,7 @@ namespace HitCounterManager.ViewModels
     {
         public ProfileAttemptsPageViewModel()
         {
-            Submit = ReactiveCommand.Create(() => {
+            Submit = RelayCommand.Create(() => {
                 _Origin?.ProfileSetAttempts.Execute(_UserInput);
                 OwnerWindow?.Close();
             });
@@ -25,7 +25,7 @@ namespace HitCounterManager.ViewModels
                 if (_Origin != value)
                 {
                     _Origin = value;
-                    CallPropertyChanged();
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -39,7 +39,7 @@ namespace HitCounterManager.ViewModels
                 if (_UserInput != value)
                 {
                     _UserInput = value;
-                    CallPropertyChanged();
+                    RaisePropertyChanged();
                 }
             }
         }

@@ -1,12 +1,14 @@
-﻿// SPDX-FileCopyrightText: © 2021-2025 Peter Kirmeier
+﻿// SPDX-FileCopyrightText: © 2021-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using ReactiveUI;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Avalonia.Markup.Xaml;
@@ -93,15 +95,17 @@ namespace HitCounterManager.Common
     }
 
     /// <summary>
-    /// Wrapper for a ReactiveObject with some additional helper methods
+    /// Wrapper for a INotifyPropertyChanged with some additional helper methods
     /// </summary>
-    public class NotifyPropertyChangedImpl : ReactiveObject
+    public class NotifyPropertyChangedImpl : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         /// <summary>
         /// Triggers an PropertyChanged event of INotifyPropertyChanged
         /// </summary>
         /// <param name="propertyName">Name of the changing property</param>
-        public void CallPropertyChanged([CallerMemberName] string? propertyName = null) => this.RaisePropertyChanged(propertyName);
+        public void RaisePropertyChanged([CallerMemberName] string? propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         /// <summary>
         /// When a different value is set for the property, it gets updated and an INotifyPropertyChanged event is fired 
@@ -116,7 +120,7 @@ namespace HitCounterManager.Common
             if (!property.Equals(newValue))
             {
                 property = newValue;
-                CallPropertyChanged(propertyName);
+                RaisePropertyChanged(propertyName);
                 return true;
             }
             return false;
@@ -135,7 +139,7 @@ namespace HitCounterManager.Common
             if (0 <= newValue)
                 return SetAndNotifyWhenChanged(ref property, newValue, propertyName);
             else
-                CallPropertyChanged(propertyName); // This will reset the UI to last valid value
+                RaisePropertyChanged(propertyName); // This will reset the UI to last valid value
             return false;
         }
     }
@@ -175,5 +179,53 @@ namespace HitCounterManager.Common
         {
             return data is ViewModelBase;
         }
+    }
+
+
+    // Based on template from https://docs.avaloniaui.net/docs/input-interaction/commanding (and MiniCommand from Avalonia samples)
+    public sealed class RelayCommand<T> : ICommand
+    {
+        private readonly Action<T>? _execute;
+        private readonly Func<T, Task>? _executeAsync;
+        private readonly Func<bool>? _canExecute;
+
+#pragma warning disable CS0067
+        public event EventHandler? CanExecuteChanged; // Does not fully support CanExecuteChanged!
+#pragma warning restore CS0067
+
+        public RelayCommand(Action<T> execute, Func<bool>? canExecute = null)
+        {
+            _execute = execute;
+            _canExecute = canExecute;
+        }
+
+        public RelayCommand(Func<T, Task> execute, Func<bool>? canExecute = null)
+        {
+            _executeAsync = execute;
+            _canExecute = canExecute;
+        }
+
+        public bool CanExecute(object? parameter) => _canExecute?.Invoke() ?? true;
+
+        public async void Execute(object? parameter)
+        {
+            if (CanExecute(null))
+            {
+                if (_execute != null)
+                    _execute((T)parameter!);
+                else
+                    await _executeAsync!((T)parameter!);
+            }
+        }
+    }
+
+    // Factory for RelayCommand<T>
+    public sealed class RelayCommand
+    {
+        public static RelayCommand<object> Create(Action execute, Func<bool>? canExecute = null) => new(_ => execute(), canExecute);
+        public static RelayCommand<object> CreateFromTask(Func<Task> execute, Func<bool>? canExecute = null) => new(_ => execute(), canExecute);
+
+        public static RelayCommand<T> Create<T>(Action<T> execute, Func<bool>? canExecute = null) => new(execute, canExecute);
+        public static RelayCommand<T> CreateFromTask<T>(Func<T, Task> execute, Func<bool>? canExecute = null) => new(execute, canExecute);
     }
 }

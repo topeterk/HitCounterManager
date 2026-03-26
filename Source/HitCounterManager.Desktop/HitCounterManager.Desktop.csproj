@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 <!--
-SPDX-FileCopyrightText: © 2023-2025 Peter Kirmeier
+SPDX-FileCopyrightText: © 2023-2026 Peter Kirmeier
 SPDX-License-Identifier: MIT
 -->
   <PropertyGroup>
@@ -21,6 +21,5 @@ SPDX-License-Identifier: MIT
     <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="ReactiveUI.Avalonia" Version="$(ReactiveUIAvaloniaVersion)" />
   </ItemGroup>
 </Project>

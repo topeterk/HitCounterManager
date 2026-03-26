@@ -10,7 +10,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Windows.Input;
-using ReactiveUI;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using Avalonia.Threading;
@@ -31,7 +30,7 @@ namespace HitCounterManager.ViewModels
         {
             monotonic_timer.Start();
 
-            ToggleShowInfo = ReactiveCommand.Create<string>((string name) => { ShowInfo[name].Value = !ShowInfo[name].Value; });
+            ToggleShowInfo = RelayCommand.Create<string>((string name) => { ShowInfo[name].Value = !ShowInfo[name].Value; });
 
             ProfileList = [];
             foreach (Profile prof in Settings.Profiles.ProfileList)
@@ -54,7 +53,7 @@ namespace HitCounterManager.ViewModels
             // when no matching profile is found, we start with the first one
             if (null == ProfileSelected) ProfileSelected = ProfileList[0];
 
-            CmdRemoveSplit = ReactiveCommand.Create((ProfileRowModel item) =>
+            CmdRemoveSplit = RelayCommand.Create((ProfileRowModel item) =>
             {
                 // sad there is no try-lock, so we use the "precise equivalent" of lock(){}
                 // from: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/lock-statement
@@ -71,23 +70,23 @@ namespace HitCounterManager.ViewModels
                     if (GotLock) Monitor.Exit(TimerUpdateLock);
                 }
             });
-            CmdSetActiveSplit = ReactiveCommand.Create((ProfileRowModel item) =>
+            CmdSetActiveSplit = RelayCommand.Create((ProfileRowModel item) =>
             {
                 if (item.Active) return;
                 _ProfileSelected.ActiveSplit = _ProfileSelected.Rows.IndexOf(item);
             });
-            CmdSetSessionProgress = ReactiveCommand.Create((ProfileRowModel item) =>
+            CmdSetSessionProgress = RelayCommand.Create((ProfileRowModel item) =>
             {
                 if (item.SP) return;
                 _ProfileSelected.SessionProgress = _ProfileSelected.Rows.IndexOf(item);
             });
-            CmdSetBestProgress = ReactiveCommand.Create((ProfileRowModel item) =>
+            CmdSetBestProgress = RelayCommand.Create((ProfileRowModel item) =>
             {
                 if (item.BP) return;
                 _ProfileSelected.BestProgress = _ProfileSelected.Rows.IndexOf(item);
             });
 
-            ProfileReset = ReactiveCommand.Create(() =>
+            ProfileReset = RelayCommand.Create(() =>
             {
                 TimerRunning = false;
 
@@ -106,7 +105,7 @@ namespace HitCounterManager.ViewModels
 
                 InterfaceASC?.SplitterReset();
             });
-            ProfilePB = ReactiveCommand.Create(() =>
+            ProfilePB = RelayCommand.Create(() =>
             {
                 TimerRunning = false;
 
@@ -119,39 +118,39 @@ namespace HitCounterManager.ViewModels
                 _ProfileSelected.ActiveSplit = _ProfileSelected.Rows.Count - 1;
                 _ProfileSelected.SessionProgress = _ProfileSelected.Rows.Count - 1;
             });
-            ProfileSetAttempts = ReactiveCommand.Create<int>((int NewAttempts) => _ProfileSelected.Attempts = NewAttempts);
+            ProfileSetAttempts = RelayCommand.Create<int>((int NewAttempts) => _ProfileSelected.Attempts = NewAttempts);
 
-            ToggleTimerPause = ReactiveCommand.Create(() => TimerRunning = !TimerRunning);
-            ToggleReadOnlyMode = ReactiveCommand.Create(() => IsReadOnly = !IsReadOnly);
+            ToggleTimerPause = RelayCommand.Create(() => TimerRunning = !TimerRunning);
+            ToggleReadOnlyMode = RelayCommand.Create(() => IsReadOnly = !IsReadOnly);
 
-            ProfileSplitMoveUp = ReactiveCommand.Create(() => {
+            ProfileSplitMoveUp = RelayCommand.Create(() => {
                 if (App.CurrentApp.Settings.ReadOnlyMode) return;
                 _ProfileSelected.PermuteActiveSplit(-1);
             });
-            ProfileSplitMoveDown = ReactiveCommand.Create(() => {
+            ProfileSplitMoveDown = RelayCommand.Create(() => {
                 if (App.CurrentApp.Settings.ReadOnlyMode) return;
                 _ProfileSelected.PermuteActiveSplit(+1);
             });
-            ProfileSplitInsert = ReactiveCommand.Create((string? param) => {
+            ProfileSplitInsert = RelayCommand.Create((string? param) => {
                 if (App.CurrentApp.Settings.ReadOnlyMode) return;
                 _ProfileSelected.InsertNewRow("End".Equals(param));
             });
 
-            HitIncrease = ReactiveCommand.Create(() => HitSumUp(+1, false));
-            HitDecrease = ReactiveCommand.Create(() => HitSumUp(-1, false));
-            HitWayIncrease = ReactiveCommand.Create(() => HitSumUp(+1, true));
-            HitWayDecrease = ReactiveCommand.Create(() => HitSumUp(-1, true));
-            HitIncreasePrev = ReactiveCommand.Create(() => HitSumUpPrev(+1, false));
-            HitDecreasePrev = ReactiveCommand.Create(() => HitSumUpPrev(-1, false));
-            HitWayIncreasePrev = ReactiveCommand.Create(() => HitSumUpPrev(+1, true));
-            HitWayDecreasePrev = ReactiveCommand.Create(() => HitSumUpPrev(-1, true));
-            SplitSelectNext = ReactiveCommand.Create(() => GoSplits(+1));
-            SplitSelectPrev = ReactiveCommand.Create(() => GoSplits(-1));
+            HitIncrease = RelayCommand.Create(() => HitSumUp(+1, false));
+            HitDecrease = RelayCommand.Create(() => HitSumUp(-1, false));
+            HitWayIncrease = RelayCommand.Create(() => HitSumUp(+1, true));
+            HitWayDecrease = RelayCommand.Create(() => HitSumUp(-1, true));
+            HitIncreasePrev = RelayCommand.Create(() => HitSumUpPrev(+1, false));
+            HitDecreasePrev = RelayCommand.Create(() => HitSumUpPrev(-1, false));
+            HitWayIncreasePrev = RelayCommand.Create(() => HitSumUpPrev(+1, true));
+            HitWayDecreasePrev = RelayCommand.Create(() => HitSumUpPrev(-1, true));
+            SplitSelectNext = RelayCommand.Create(() => GoSplits(+1));
+            SplitSelectPrev = RelayCommand.Create(() => GoSplits(-1));
 
             OutputUpdateTimer = new (TimeSpan.FromMilliseconds(300), DispatcherPriority.Background, OutputUpdateTimerTick);
             OutputUpdateTimer.Start();
 
-            SaveToDisk = ReactiveCommand.Create(() => {
+            SaveToDisk = RelayCommand.Create(() => {
                 App.CurrentApp.SaveSettings();
                 InterfaceASC?.SaveSettings();
                 App.CurrentApp.DisplayAlert("Saving complete!", "Written to \"" + Statics.ApplicationName + "Save.xml\"", NotificationType.Success);
@@ -162,7 +161,7 @@ namespace HitCounterManager.ViewModels
             if (AutoSplitterCoreModule.AutoSplitterCoreLoaded)
             {
                 InterfaceASC = new(this);
-                AutoSplitterOpenConfig = ReactiveCommand.Create(InterfaceASC.OpenSettings);
+                AutoSplitterOpenConfig = RelayCommand.Create(InterfaceASC.OpenSettings);
                 AutoSplitterGameList = InterfaceASC.GameList;
                 AutoSplitterCoreModule.AutoSplitterRegisterInterface(InterfaceASC);
             }
@@ -194,9 +193,9 @@ namespace HitCounterManager.ViewModels
         public void OutputDataChangedHandler(object? sender, PropertyChangedEventArgs e)
         {
             UpdateDuration();
-            CallPropertyChanged(nameof(StatsProgress));
-            CallPropertyChanged(nameof(StatsTime));
-            CallPropertyChanged(nameof(StatsTotalHits));
+            RaisePropertyChanged(nameof(StatsProgress));
+            RaisePropertyChanged(nameof(StatsTime));
+            RaisePropertyChanged(nameof(StatsTotalHits));
 
             RunFinished = e.PropertyName == nameof(RunFinished);
             OutputDataQueueUpdate();
@@ -207,7 +206,7 @@ namespace HitCounterManager.ViewModels
         public ICommand CmdSetActiveSplit { get; }
         public ICommand CmdSetSessionProgress { get; }
         public ICommand CmdSetBestProgress { get; }
-        public ICommand CmdToggleSubsplit { get; } = ReactiveCommand.Create((ProfileRowModel item) => item.SubSplit = !item.SubSplit);
+        public ICommand CmdToggleSubsplit { get; } = RelayCommand.Create((ProfileRowModel item) => item.SubSplit = !item.SubSplit);
 
         public ObservableCollection<ProfileModel> ProfileList { get; private set; }
 
@@ -240,7 +239,7 @@ namespace HitCounterManager.ViewModels
                         string ProfileName = _ProfileSelected.Name;
                         Settings.ProfileSelected = ProfileName;
 
-                        CallPropertyChanged();
+                        RaisePropertyChanged();
                         OutputDataChangedHandler(this, new PropertyChangedEventArgs(nameof(ProfileSelected)));
                         InterfaceASC?.ProfileSelected(ProfileName);
                     }
@@ -255,7 +254,7 @@ namespace HitCounterManager.ViewModels
             set
             {
                 Settings.ReadOnlyMode = value;
-                CallPropertyChanged();
+                RaisePropertyChanged();
             }
         }
 
@@ -517,7 +516,7 @@ namespace HitCounterManager.ViewModels
                     last_elapsed_time = monotonic_timer.ElapsedMilliseconds;
                     _TimerRunning = true;
                     App.CurrentApp.StartApplicationTimer(TimerIDs.GameTime, 10, () => UpdateDuration());
-                    App.CurrentApp.StartApplicationTimer(TimerIDs.GameTimeGui, 300, () => { CallPropertyChanged(nameof(StatsTime)); return _TimerRunning; });
+                    App.CurrentApp.StartApplicationTimer(TimerIDs.GameTimeGui, 300, () => { RaisePropertyChanged(nameof(StatsTime)); return _TimerRunning; });
                 }
                 else
                 {
@@ -525,7 +524,7 @@ namespace HitCounterManager.ViewModels
                     UpdateDuration(true); // AutoSplitterCore might not always update the time, so we have to force update
                     _TimerRunning = false;
                 }
-                CallPropertyChanged();
+                RaisePropertyChanged();
                 OutputDataChangedHandler(this, new PropertyChangedEventArgs(nameof(TimerRunning)));
             }
         }
@@ -603,7 +602,7 @@ namespace HitCounterManager.ViewModels
                 {
                     _AutoSplitterGameSelectedIndex = value;
                     InterfaceASC?.SetActiveGameIndex(value);
-                    CallPropertyChanged();
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -618,7 +617,7 @@ namespace HitCounterManager.ViewModels
                 {
                     _AutoSplitterPracticeModeChecked = value;
                     InterfaceASC?.SetPracticeMode(value);
-                    CallPropertyChanged();
+                    RaisePropertyChanged();
                 }
             }
         }

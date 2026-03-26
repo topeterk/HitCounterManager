@@ -1,11 +1,10 @@
-// SPDX-FileCopyrightText: © 2021-2025 Peter Kirmeier
+// SPDX-FileCopyrightText: © 2021-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
-using ReactiveUI;
 using Avalonia.Controls.Notifications;
 using HitCounterManager.Common;
 using HitCounterManager.Models;
@@ -26,9 +25,9 @@ namespace HitCounterManager.ViewModels
             _StyleFontUrl = Settings.StyleFontUrl;
             _StyleCssUrl = Settings.StyleCssUrl;
 
-            ToggleShowInfo = ReactiveCommand.Create((string name) => { ShowInfo[name].Value = !ShowInfo[name].Value; });
+            ToggleShowInfo = RelayCommand.Create((string name) => { ShowInfo[name].Value = !ShowInfo[name].Value; });
 
-            Capture = ReactiveCommand.Create<SC_Type>((type) =>
+            Capture = RelayCommand.Create<SC_Type>((type) =>
             {
                 SC_Type CapturingIdPrev = CapturingId;
 
@@ -52,7 +51,7 @@ namespace HitCounterManager.ViewModels
                 }
             });
 
-            ApplyCssAndFont = ReactiveCommand.Create(() =>
+            ApplyCssAndFont = RelayCommand.Create(() =>
             {
                 Settings.StyleFontName = _StyleFontName;
                 Settings.StyleFontUrl = _StyleFontUrl;
@@ -61,7 +60,7 @@ namespace HitCounterManager.ViewModels
                 // Implicitly enable custom settings
                 SetAndNotifyWhenChanged(ref Settings.StyleUseCustom, true);
 
-                CallPropertyChanged(nameof(ApplyCssAndFont));
+                RaisePropertyChanged(nameof(ApplyCssAndFont));
             });
 
             PropertyChanged += SettingDataChangedHandler;
@@ -206,64 +205,64 @@ namespace HitCounterManager.ViewModels
             switch (Id)
             {
                 case SC_Type.SC_Type_Hit:
-                    CallPropertyChanged(nameof(ShortcutHitDescription));
+                    RaisePropertyChanged(nameof(ShortcutHitDescription));
                     ShortcutHitEnable = true;
                     break;
                 case SC_Type.SC_Type_HitUndo:
-                    CallPropertyChanged(nameof(ShortcutHitUndoDescription));
+                    RaisePropertyChanged(nameof(ShortcutHitUndoDescription));
                     ShortcutHitUndoEnable = true;
                     break;
                 case SC_Type.SC_Type_WayHit:
-                    CallPropertyChanged(nameof(ShortcutWayHitDescription));
+                    RaisePropertyChanged(nameof(ShortcutWayHitDescription));
                     ShortcutWayHitEnable = true;
                     break;
                 case SC_Type.SC_Type_WayHitUndo:
-                    CallPropertyChanged(nameof(ShortcutWayHitUndoDescription));
+                    RaisePropertyChanged(nameof(ShortcutWayHitUndoDescription));
                     ShortcutWayHitUndoEnable = true;
                     break;
                 case SC_Type.SC_Type_Split:
-                    CallPropertyChanged(nameof(ShortcutSplitDescription));
+                    RaisePropertyChanged(nameof(ShortcutSplitDescription));
                     ShortcutSplitEnable = true;
                     break;
                 case SC_Type.SC_Type_SplitPrev:
-                    CallPropertyChanged(nameof(ShortcutSplitPrevDescription));
+                    RaisePropertyChanged(nameof(ShortcutSplitPrevDescription));
                     ShortcutSplitPrevEnable = true;
                     break;
                 case SC_Type.SC_Type_PB:
-                    CallPropertyChanged(nameof(ShortcutPBDescription));
+                    RaisePropertyChanged(nameof(ShortcutPBDescription));
                     ShortcutPBEnable = true;
                     break;
                 case SC_Type.SC_Type_Reset:
-                    CallPropertyChanged(nameof(ShortcutResetDescription));
+                    RaisePropertyChanged(nameof(ShortcutResetDescription));
                     ShortcutResetEnable = true;
                     break;
                 case SC_Type.SC_Type_TimerStart:
-                    CallPropertyChanged(nameof(ShortcutTimerStartDescription));
+                    RaisePropertyChanged(nameof(ShortcutTimerStartDescription));
                     ShortcutTimerStartEnable = true;
                     break;
                 case SC_Type.SC_Type_TimerStop:
-                    CallPropertyChanged(nameof(ShortcutTimerStopDescription));
+                    RaisePropertyChanged(nameof(ShortcutTimerStopDescription));
                     ShortcutTimerStopEnable = true;
                     break;
                 case SC_Type.SC_Type_HitBossPrev:
-                    CallPropertyChanged(nameof(ShortcutHitBossPrevDescription));
+                    RaisePropertyChanged(nameof(ShortcutHitBossPrevDescription));
                     ShortcutHitBossPrevEnable = true;
                     break;
                 case SC_Type.SC_Type_BossHitUndoPrev:
-                    CallPropertyChanged(nameof(ShortcutBossHitUndoPrevDescription));
+                    RaisePropertyChanged(nameof(ShortcutBossHitUndoPrevDescription));
                     ShortcutBossHitUndoPrevEnable = true;
                     break;
                 case SC_Type.SC_Type_HitWayPrev:
-                    CallPropertyChanged(nameof(ShortcutHitWayPrevDescription));
+                    RaisePropertyChanged(nameof(ShortcutHitWayPrevDescription));
                     ShortcutHitWayPrevEnable = true;
                     break;
                 case SC_Type.SC_Type_WayHitUndoPrev:
-                    CallPropertyChanged(nameof(ShortcutWayHitUndoPrevDescription));
+                    RaisePropertyChanged(nameof(ShortcutWayHitUndoPrevDescription));
                     ShortcutWayHitUndoPrevEnable = true;
                     break;
                 #region AutoSplitter
                 case SC_Type.SC_Type_Practice:
-                    CallPropertyChanged(nameof(ShortcutPracticeDescription));
+                    RaisePropertyChanged(nameof(ShortcutPracticeDescription));
                     ShortcutPracticeEnable = true;
                     break;
                 #endregion
@@ -280,45 +279,45 @@ namespace HitCounterManager.ViewModels
                 // but when this ViewModel gets created, the handle is not know yet
                 // therefore the settings must be loaded again later (=here)
                 // in order to present the correct data
-                CallPropertyChanged(nameof(ShortcutHitRecordAction));
-                CallPropertyChanged(nameof(ShortcutHitUndoRecordAction));
-                CallPropertyChanged(nameof(ShortcutWayHitRecordAction));
-                CallPropertyChanged(nameof(ShortcutWayHitUndoRecordAction));
-                CallPropertyChanged(nameof(ShortcutSplitRecordAction));
-                CallPropertyChanged(nameof(ShortcutSplitPrevRecordAction));
-                CallPropertyChanged(nameof(ShortcutPBRecordAction));
-                CallPropertyChanged(nameof(ShortcutResetRecordAction));
-                CallPropertyChanged(nameof(ShortcutTimerStartRecordAction));
-                CallPropertyChanged(nameof(ShortcutTimerStopRecordAction));
-                CallPropertyChanged(nameof(ShortcutHitBossPrevAction));
-                CallPropertyChanged(nameof(ShortcutBossHitUndoPrevAction));
-                CallPropertyChanged(nameof(ShortcutHitWayPrevAction));
-                CallPropertyChanged(nameof(ShortcutWayHitUndoPrevAction));
+                RaisePropertyChanged(nameof(ShortcutHitRecordAction));
+                RaisePropertyChanged(nameof(ShortcutHitUndoRecordAction));
+                RaisePropertyChanged(nameof(ShortcutWayHitRecordAction));
+                RaisePropertyChanged(nameof(ShortcutWayHitUndoRecordAction));
+                RaisePropertyChanged(nameof(ShortcutSplitRecordAction));
+                RaisePropertyChanged(nameof(ShortcutSplitPrevRecordAction));
+                RaisePropertyChanged(nameof(ShortcutPBRecordAction));
+                RaisePropertyChanged(nameof(ShortcutResetRecordAction));
+                RaisePropertyChanged(nameof(ShortcutTimerStartRecordAction));
+                RaisePropertyChanged(nameof(ShortcutTimerStopRecordAction));
+                RaisePropertyChanged(nameof(ShortcutHitBossPrevAction));
+                RaisePropertyChanged(nameof(ShortcutBossHitUndoPrevAction));
+                RaisePropertyChanged(nameof(ShortcutHitWayPrevAction));
+                RaisePropertyChanged(nameof(ShortcutWayHitUndoPrevAction));
                 #region AutoSplitter
-                CallPropertyChanged(nameof(ShortcutPracticeAction));
+                RaisePropertyChanged(nameof(ShortcutPracticeAction));
                 #endregion
 
-                CallPropertyChanged(nameof(ShortcutHitDescription));
-                CallPropertyChanged(nameof(ShortcutHitUndoDescription));
-                CallPropertyChanged(nameof(ShortcutWayHitDescription));
-                CallPropertyChanged(nameof(ShortcutWayHitUndoDescription));
-                CallPropertyChanged(nameof(ShortcutSplitDescription));
-                CallPropertyChanged(nameof(ShortcutSplitPrevDescription));
-                CallPropertyChanged(nameof(ShortcutPBDescription));
-                CallPropertyChanged(nameof(ShortcutResetDescription));
-                CallPropertyChanged(nameof(ShortcutTimerStartDescription));
-                CallPropertyChanged(nameof(ShortcutTimerStopDescription));
-                CallPropertyChanged(nameof(ShortcutHitBossPrevDescription));
-                CallPropertyChanged(nameof(ShortcutBossHitUndoPrevDescription));
-                CallPropertyChanged(nameof(ShortcutHitWayPrevDescription));
-                CallPropertyChanged(nameof(ShortcutWayHitUndoPrevDescription));
+                RaisePropertyChanged(nameof(ShortcutHitDescription));
+                RaisePropertyChanged(nameof(ShortcutHitUndoDescription));
+                RaisePropertyChanged(nameof(ShortcutWayHitDescription));
+                RaisePropertyChanged(nameof(ShortcutWayHitUndoDescription));
+                RaisePropertyChanged(nameof(ShortcutSplitDescription));
+                RaisePropertyChanged(nameof(ShortcutSplitPrevDescription));
+                RaisePropertyChanged(nameof(ShortcutPBDescription));
+                RaisePropertyChanged(nameof(ShortcutResetDescription));
+                RaisePropertyChanged(nameof(ShortcutTimerStartDescription));
+                RaisePropertyChanged(nameof(ShortcutTimerStopDescription));
+                RaisePropertyChanged(nameof(ShortcutHitBossPrevDescription));
+                RaisePropertyChanged(nameof(ShortcutBossHitUndoPrevDescription));
+                RaisePropertyChanged(nameof(ShortcutHitWayPrevDescription));
+                RaisePropertyChanged(nameof(ShortcutWayHitUndoPrevDescription));
                 #region AutoSplitter
-                CallPropertyChanged(nameof(ShortcutPracticeDescription));
+                RaisePropertyChanged(nameof(ShortcutPracticeDescription));
                 #endregion
 
-                CallPropertyChanged(nameof(RadioHotKeyMethod_Sync));
-                CallPropertyChanged(nameof(RadioHotKeyMethod_Async));
-                CallPropertyChanged(nameof(RadioHotKeyMethod_LLKb));
+                RaisePropertyChanged(nameof(RadioHotKeyMethod_Sync));
+                RaisePropertyChanged(nameof(RadioHotKeyMethod_Async));
+                RaisePropertyChanged(nameof(RadioHotKeyMethod_LLKb));
             }
 
             App.CurrentApp.SettingsDialogOpen = true; // To disable hotkeys (for main application)
@@ -473,22 +472,22 @@ namespace HitCounterManager.ViewModels
         {
             switch (type)
             {
-                case SC_Type.SC_Type_Hit: CallPropertyChanged(nameof(ShortcutHitRecordAction)); break;
-                case SC_Type.SC_Type_HitUndo: CallPropertyChanged(nameof(ShortcutHitUndoRecordAction)); break;
-                case SC_Type.SC_Type_WayHit: CallPropertyChanged(nameof(ShortcutWayHitRecordAction)); break;
-                case SC_Type.SC_Type_WayHitUndo: CallPropertyChanged(nameof(ShortcutWayHitUndoRecordAction)); break;
-                case SC_Type.SC_Type_Split: CallPropertyChanged(nameof(ShortcutSplitRecordAction)); break;
-                case SC_Type.SC_Type_SplitPrev: CallPropertyChanged(nameof(ShortcutSplitPrevRecordAction)); break;
-                case SC_Type.SC_Type_PB: CallPropertyChanged(nameof(ShortcutPBRecordAction)); break;
-                case SC_Type.SC_Type_Reset: CallPropertyChanged(nameof(ShortcutResetRecordAction)); break;
-                case SC_Type.SC_Type_TimerStart: CallPropertyChanged(nameof(ShortcutTimerStartRecordAction)); break;
-                case SC_Type.SC_Type_TimerStop: CallPropertyChanged(nameof(ShortcutTimerStopRecordAction)); break;
-                case SC_Type.SC_Type_HitBossPrev: CallPropertyChanged(nameof(ShortcutHitBossPrevAction)); break;
-                case SC_Type.SC_Type_BossHitUndoPrev: CallPropertyChanged(nameof(ShortcutBossHitUndoPrevAction)); break;
-                case SC_Type.SC_Type_HitWayPrev: CallPropertyChanged(nameof(ShortcutHitWayPrevAction)); break;
-                case SC_Type.SC_Type_WayHitUndoPrev: CallPropertyChanged(nameof(ShortcutWayHitUndoPrevAction)); break;
+                case SC_Type.SC_Type_Hit: RaisePropertyChanged(nameof(ShortcutHitRecordAction)); break;
+                case SC_Type.SC_Type_HitUndo: RaisePropertyChanged(nameof(ShortcutHitUndoRecordAction)); break;
+                case SC_Type.SC_Type_WayHit: RaisePropertyChanged(nameof(ShortcutWayHitRecordAction)); break;
+                case SC_Type.SC_Type_WayHitUndo: RaisePropertyChanged(nameof(ShortcutWayHitUndoRecordAction)); break;
+                case SC_Type.SC_Type_Split: RaisePropertyChanged(nameof(ShortcutSplitRecordAction)); break;
+                case SC_Type.SC_Type_SplitPrev: RaisePropertyChanged(nameof(ShortcutSplitPrevRecordAction)); break;
+                case SC_Type.SC_Type_PB: RaisePropertyChanged(nameof(ShortcutPBRecordAction)); break;
+                case SC_Type.SC_Type_Reset: RaisePropertyChanged(nameof(ShortcutResetRecordAction)); break;
+                case SC_Type.SC_Type_TimerStart: RaisePropertyChanged(nameof(ShortcutTimerStartRecordAction)); break;
+                case SC_Type.SC_Type_TimerStop: RaisePropertyChanged(nameof(ShortcutTimerStopRecordAction)); break;
+                case SC_Type.SC_Type_HitBossPrev: RaisePropertyChanged(nameof(ShortcutHitBossPrevAction)); break;
+                case SC_Type.SC_Type_BossHitUndoPrev: RaisePropertyChanged(nameof(ShortcutBossHitUndoPrevAction)); break;
+                case SC_Type.SC_Type_HitWayPrev: RaisePropertyChanged(nameof(ShortcutHitWayPrevAction)); break;
+                case SC_Type.SC_Type_WayHitUndoPrev: RaisePropertyChanged(nameof(ShortcutWayHitUndoPrevAction)); break;
                 #region AutoSplitter
-                case SC_Type.SC_Type_Practice: CallPropertyChanged(nameof(ShortcutPracticeAction)); break;
+                case SC_Type.SC_Type_Practice: RaisePropertyChanged(nameof(ShortcutPracticeAction)); break;
                 #endregion
                 default: break;
             }
@@ -537,16 +536,16 @@ namespace HitCounterManager.ViewModels
             sc.NextStart_Method = next;
             switch (prev)
             {
-                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync: CallPropertyChanged(nameof(RadioHotKeyMethod_Sync)); break;
-                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async: CallPropertyChanged(nameof(RadioHotKeyMethod_Async)); break;
-                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb: CallPropertyChanged(nameof(RadioHotKeyMethod_LLKb)); break;
+                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync: RaisePropertyChanged(nameof(RadioHotKeyMethod_Sync)); break;
+                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async: RaisePropertyChanged(nameof(RadioHotKeyMethod_Async)); break;
+                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb: RaisePropertyChanged(nameof(RadioHotKeyMethod_LLKb)); break;
                 default: break;
             }
             switch (next)
             {
-                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync: CallPropertyChanged(nameof(RadioHotKeyMethod_Sync)); break;
-                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async: CallPropertyChanged(nameof(RadioHotKeyMethod_Async)); break;
-                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb: CallPropertyChanged(nameof(RadioHotKeyMethod_LLKb)); break;
+                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Sync: RaisePropertyChanged(nameof(RadioHotKeyMethod_Sync)); break;
+                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_Async: RaisePropertyChanged(nameof(RadioHotKeyMethod_Async)); break;
+                case Shortcuts.SC_HotKeyMethod.SC_HotKeyMethod_LLKb: RaisePropertyChanged(nameof(RadioHotKeyMethod_LLKb)); break;
                 default: break;
             }
             App.CurrentApp.DisplayAlert("Restart required", "Changes only take effect after restarting the application.", NotificationType.Information);
@@ -790,7 +789,7 @@ namespace HitCounterManager.ViewModels
         }
         public ICommand ApplyCssAndFont { get; }
 
-        public ICommand WebOpenGoogleFontsUrl { get; } = ReactiveCommand.Create(() => Extensions.OpenWithBrowser(new Uri("https://fonts.google.com")));
+        public ICommand WebOpenGoogleFontsUrl { get; } = RelayCommand.Create(() => Extensions.OpenWithBrowser(new Uri("https://fonts.google.com")));
 
         #endregion
 #endregion
@@ -822,20 +821,20 @@ namespace HitCounterManager.ViewModels
             om.Purpose = next;
             switch (prev)
             {
-                case OutModule.OM_Purpose.OM_Purpose_SplitCounter: CallPropertyChanged(nameof(RadioPurpose_SplitCounter)); break;
-                case OutModule.OM_Purpose.OM_Purpose_Checklist: CallPropertyChanged(nameof(RadioPurpose_Checklist)); break;
-                case OutModule.OM_Purpose.OM_Purpose_NoDeath: CallPropertyChanged(nameof(RadioPurpose_NoDeath)); break;
-                case OutModule.OM_Purpose.OM_Purpose_DeathCounter: CallPropertyChanged(nameof(RadioPurpose_DeathCounter)); break;
-                case OutModule.OM_Purpose.OM_Purpose_ResetCounter: CallPropertyChanged(nameof(RadioPurpose_ResetCounter)); break;
+                case OutModule.OM_Purpose.OM_Purpose_SplitCounter: RaisePropertyChanged(nameof(RadioPurpose_SplitCounter)); break;
+                case OutModule.OM_Purpose.OM_Purpose_Checklist: RaisePropertyChanged(nameof(RadioPurpose_Checklist)); break;
+                case OutModule.OM_Purpose.OM_Purpose_NoDeath: RaisePropertyChanged(nameof(RadioPurpose_NoDeath)); break;
+                case OutModule.OM_Purpose.OM_Purpose_DeathCounter: RaisePropertyChanged(nameof(RadioPurpose_DeathCounter)); break;
+                case OutModule.OM_Purpose.OM_Purpose_ResetCounter: RaisePropertyChanged(nameof(RadioPurpose_ResetCounter)); break;
                 default: break;
             }
             switch (next)
             {
-                case OutModule.OM_Purpose.OM_Purpose_SplitCounter: CallPropertyChanged(nameof(RadioPurpose_SplitCounter)); break;
-                case OutModule.OM_Purpose.OM_Purpose_Checklist: CallPropertyChanged(nameof(RadioPurpose_Checklist)); break;
-                case OutModule.OM_Purpose.OM_Purpose_NoDeath: CallPropertyChanged(nameof(RadioPurpose_NoDeath)); break;
-                case OutModule.OM_Purpose.OM_Purpose_DeathCounter: CallPropertyChanged(nameof(RadioPurpose_DeathCounter)); break;
-                case OutModule.OM_Purpose.OM_Purpose_ResetCounter: CallPropertyChanged(nameof(RadioPurpose_ResetCounter)); break;
+                case OutModule.OM_Purpose.OM_Purpose_SplitCounter: RaisePropertyChanged(nameof(RadioPurpose_SplitCounter)); break;
+                case OutModule.OM_Purpose.OM_Purpose_Checklist: RaisePropertyChanged(nameof(RadioPurpose_Checklist)); break;
+                case OutModule.OM_Purpose.OM_Purpose_NoDeath: RaisePropertyChanged(nameof(RadioPurpose_NoDeath)); break;
+                case OutModule.OM_Purpose.OM_Purpose_DeathCounter: RaisePropertyChanged(nameof(RadioPurpose_DeathCounter)); break;
+                case OutModule.OM_Purpose.OM_Purpose_ResetCounter: RaisePropertyChanged(nameof(RadioPurpose_ResetCounter)); break;
                 default: break;
             }
         }
@@ -873,16 +872,16 @@ namespace HitCounterManager.ViewModels
             om.Severity = next;
             switch (prev)
             {
-                case OutModule.OM_Severity.OM_Severity_AnyHitsCritical: CallPropertyChanged(nameof(RadioHitSeverity_AnyHitCritical)); break;
-                case OutModule.OM_Severity.OM_Severity_ComparePB: CallPropertyChanged(nameof(RadioHitSeverity_ComparePB)); break;
-                case OutModule.OM_Severity.OM_Severity_BossHitCritical: CallPropertyChanged(nameof(RadioHitSeverity_BossHitCritical)); break;
+                case OutModule.OM_Severity.OM_Severity_AnyHitsCritical: RaisePropertyChanged(nameof(RadioHitSeverity_AnyHitCritical)); break;
+                case OutModule.OM_Severity.OM_Severity_ComparePB: RaisePropertyChanged(nameof(RadioHitSeverity_ComparePB)); break;
+                case OutModule.OM_Severity.OM_Severity_BossHitCritical: RaisePropertyChanged(nameof(RadioHitSeverity_BossHitCritical)); break;
                 default: break;
             }
             switch (next)
             {
-                case OutModule.OM_Severity.OM_Severity_AnyHitsCritical: CallPropertyChanged(nameof(RadioHitSeverity_AnyHitCritical)); break;
-                case OutModule.OM_Severity.OM_Severity_ComparePB: CallPropertyChanged(nameof(RadioHitSeverity_ComparePB)); break;
-                case OutModule.OM_Severity.OM_Severity_BossHitCritical: CallPropertyChanged(nameof(RadioHitSeverity_BossHitCritical)); break;
+                case OutModule.OM_Severity.OM_Severity_AnyHitsCritical: RaisePropertyChanged(nameof(RadioHitSeverity_AnyHitCritical)); break;
+                case OutModule.OM_Severity.OM_Severity_ComparePB: RaisePropertyChanged(nameof(RadioHitSeverity_ComparePB)); break;
+                case OutModule.OM_Severity.OM_Severity_BossHitCritical: RaisePropertyChanged(nameof(RadioHitSeverity_BossHitCritical)); break;
                 default: break;
             }
         }

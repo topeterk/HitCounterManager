@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: © 2021-2025 Peter Kirmeier
+﻿// SPDX-FileCopyrightText: © 2021-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
 using System.ComponentModel;
@@ -28,7 +28,7 @@ namespace HitCounterManager.Views
             //             But when the actual value does not change the trigger will not be executed,
             //             so, we return null up to here that we ensure there is a data change during notify.
             ViewModel.AlwaysOnTopDataTriggerWorkaroundCalled = true;
-            ViewModel.CallPropertyChanged(nameof(ViewModel.AlwaysOnTop));
+            ViewModel.RaisePropertyChanged(nameof(ViewModel.AlwaysOnTop));
         }
 
         protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)

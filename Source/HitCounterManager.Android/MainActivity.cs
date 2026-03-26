@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: © 2023-2025 Peter Kirmeier
+﻿// SPDX-FileCopyrightText: © 2023-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
 using System.IO;
@@ -8,7 +8,6 @@ using Android.Content.PM;
 using Avalonia;
 using Avalonia.Android;
 //using Avalonia.Controls.ApplicationLifetimes;
-using ReactiveUI.Avalonia;
 using HitCounterManager.Common;
 //using HitCounterManager.Views;
 
@@ -63,8 +62,7 @@ public class MainActivity : AvaloniaMainActivity<App>
         }
 
         return base.CustomizeAppBuilder(builder)
-            .WithInterFont()
-            .UseReactiveUI(rxAppBuilder => { });
+            .WithInterFont();
     }
 
     protected override void OnStop()

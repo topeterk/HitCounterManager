@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: MIT
 
 using Avalonia;
-using ReactiveUI.Avalonia;
 using System;
 
 namespace HitCounterManager.Desktop.Win32Forms
@@ -21,7 +20,6 @@ namespace HitCounterManager.Desktop.Win32Forms
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
                 .WithInterFont()
-                .LogToTrace()
-                .UseReactiveUI(rxAppBuilder => { });
+                .LogToTrace();
     }
 }

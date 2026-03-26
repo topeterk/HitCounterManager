@@ -28,7 +28,6 @@ SPDX-License-Identifier: MIT
     <!--<MSBuildProjectExtensionsPath>obj/ext/$(PlatformName)</MSBuildProjectExtensionsPath>-->
 
     <AvaloniaVersion>11.3.12</AvaloniaVersion>
-    <ReactiveUIAvaloniaVersion>11.4.12</ReactiveUIAvaloniaVersion>
     <XamlBehaviorsAvaloniaVersion>11.3.9.5</XamlBehaviorsAvaloniaVersion>
   </PropertyGroup>
 </Project>

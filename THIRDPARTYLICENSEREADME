@@ -996,12 +996,6 @@ Author(s): Avalonia Team
 Source: https://avaloniaui.net/?utm_source=nuget&amp;utm_medium=referral&amp;utm_content=project_homepage_link
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: DynamicData 9.4.1
-
-Author(s): Roland Pheasant
-Source: http://dynamic-data.org/
-License: https://licenses.nuget.org/MIT
-==============================================================================
 NuGet Package: HarfBuzzSharp.NativeAssets.Android 8.3.1.1
 
 Author(s): Microsoft
@@ -1044,22 +1038,10 @@ Author(s): MicroCom.Runtime
 Source:
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Microsoft.NET.ILLink.Tasks 8.0.24
+NuGet Package: Microsoft.NET.ILLink.Tasks 10.0.5
 
 Author(s): Microsoft
 Source: https://dot.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: ReactiveUI.Avalonia 11.4.12
-
-Author(s): ReactiveUI and Avalonia Teams, and Contributors
-Source: https://reactiveui.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: ReactiveUI 23.1.8
-
-Author(s): .NET Foundation and Contributors
-Source: https://reactiveui.net/
 License: https://licenses.nuget.org/MIT
 ==============================================================================
 NuGet Package: SkiaSharp.NativeAssets.Android 2.88.9
@@ -1098,40 +1080,10 @@ Author(s): Microsoft
 Source: https://go.microsoft.com/fwlink/?linkid=868515
 License: https://licenses.nuget.org/MIT
 ==============================================================================
-NuGet Package: Splat.Builder 19.3.1
-
-Author(s): .NET Foundation and Contributors
-Source: https://github.com/reactiveui/splat/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Splat.Core 19.3.1
-
-Author(s): .NET Foundation and Contributors
-Source: https://github.com/reactiveui/splat/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Splat.Logging 19.3.1
-
-Author(s): .NET Foundation and Contributors
-Source: https://github.com/reactiveui/splat/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: Splat 19.3.1
-
-Author(s): .NET Foundation and Contributors
-Source: https://github.com/reactiveui/splat/
-License: https://licenses.nuget.org/MIT
-==============================================================================
 NuGet Package: System.IO.Pipelines 8.0.0
 
 Author(s): Microsoft
 Source: https://dot.net/
-License: https://licenses.nuget.org/MIT
-==============================================================================
-NuGet Package: System.Reactive 6.1.0
-
-Author(s): .NET Foundation and Contributors
-Source: https://github.com/dotnet/reactive
 License: https://licenses.nuget.org/MIT
 ==============================================================================
 NuGet Package: Tmds.DBus.Protocol 0.21.2

@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: © 2021-2025 Peter Kirmeier
+﻿// SPDX-FileCopyrightText: © 2021-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
 using System.Collections.ObjectModel;
@@ -49,7 +49,7 @@ namespace HitCounterManager.Models
                 _origin.ActiveSplit = value;
                 if (prevValue < Rows.Count) Rows[prevValue].ActiveChanged();
                 if (value < Rows.Count) Rows[value].ActiveChanged();
-                CallPropertyChanged();
+                RaisePropertyChanged();
             }
         }
 
@@ -66,7 +66,7 @@ namespace HitCounterManager.Models
                 _origin.BestProgress = value;
                 if (prevValue < Rows.Count) Rows[prevValue].BPChanged();
                 if (value < Rows.Count) Rows[value].BPChanged();
-                CallPropertyChanged();
+                RaisePropertyChanged();
             }
         }
         public ProfileRowModel? BestProgressModel => _origin.BestProgress < Rows.Count ? Rows[_origin.BestProgress] : null;
@@ -84,7 +84,7 @@ namespace HitCounterManager.Models
                 _SessionProgress = value;
                 if (prevValue < Rows.Count) Rows[prevValue].SPChanged();
                 if (value < Rows.Count) Rows[value].SPChanged();
-                CallPropertyChanged();
+                RaisePropertyChanged();
             }
         }
         public ProfileRowModel? SessionProgressModel => _SessionProgress < Rows.Count ? Rows[_SessionProgress] : null;

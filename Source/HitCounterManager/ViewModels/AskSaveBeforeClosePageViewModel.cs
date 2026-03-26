@@ -1,8 +1,8 @@
-// SPDX-FileCopyrightText: © 2022 Peter Kirmeier
+// SPDX-FileCopyrightText: © 2022-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
 using System.Windows.Input;
-using ReactiveUI;
+using HitCounterManager.Common;
 
 namespace HitCounterManager.ViewModels
 {
@@ -10,7 +10,7 @@ namespace HitCounterManager.ViewModels
     {
         public AskSaveBeforeClosePageViewModel()
         {
-            Submit = ReactiveCommand.Create((bool input) => {
+            Submit = RelayCommand.Create((bool input) => {
                 PressedYes = input;
                 OwnerWindow?.Close();
             });
