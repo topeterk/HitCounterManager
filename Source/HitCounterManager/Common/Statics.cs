@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: © 2021-2025 Peter Kirmeier
+﻿// SPDX-FileCopyrightText: © 2021-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
 using System;
@@ -36,7 +36,7 @@ namespace HitCounterManager.Common
         /// <summary>
         /// Titel string of the application including its version
         /// </summary>
-        public static string ApplicationTitle { get => ApplicationName + " - v" + ApplicationVersionString + " ALPHAVERSION"; }
+        public static string ApplicationTitle { get => ApplicationName + " - v" + ApplicationVersionString; }
 
         /// <summary>
         /// Application is capable of global hotkeys
