@@ -125,6 +125,175 @@
   <Profiles>
     <ProfileList>
       <Profile>
+        <Name>AI Limit [EN]</Name>
+        <Attempts>0</Attempts>
+        <ActiveSplit>17</ActiveSplit>
+        <Rows>
+          <ProfileRow>
+            <Title>Sewer Cleaner</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Lore, the Lost Lancer</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Scavenger Patriarch</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Necro, the Panic Reaper</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Three-Faced Pardoner</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Cleansing Knight</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Saint</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Choirmaster, the Inspector</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Hunter of Bladers</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Persephone, the Stygian Queen of Woe</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Winged Colossaint</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Eunomia and Dike, the Bishops</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Seraphim Absolver</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Winged Punisher</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Saint of Goldnight</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Inspector of the Uncharted Realm</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Loskid, the Son and Blade of Judgement</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+          <ProfileRow>
+            <Title>Aether, the Father</Title>
+            <Hits>0</Hits>
+            <WayHits>0</WayHits>
+            <PB>0</PB>
+            <Duration>0</Duration>
+            <DurationPB>0</DurationPB>
+            <DurationGold>0</DurationGold>
+          </ProfileRow>
+        </Rows>
+      </Profile>
+      <Profile>
         <Name>Dark Souls 3 (All Bosses) [EN]</Name>
         <Attempts>0</Attempts>
         <ActiveSplit>0</ActiveSplit>
