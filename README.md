@@ -37,6 +37,7 @@ Just add the local HTML file to you broadcasting software and the setup is done.
 
 ### Pre-defined profiles
 
+* AI Limit
 * Bloodborne + The old hunters
 * Celeste
 * Crash Bandicoot 1
