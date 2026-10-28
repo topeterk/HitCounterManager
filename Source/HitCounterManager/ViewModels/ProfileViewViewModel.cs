@@ -30,7 +30,7 @@ namespace HitCounterManager.ViewModels
         {
             monotonic_timer.Start();
 
-            ToggleShowInfo = RelayCommand.Create<string>((string name) => { ShowInfo[name].Value = !ShowInfo[name].Value; });
+            ToggleShowInfo = RelayCommand.Create<string>(name => { ShowInfo[name].Value = !ShowInfo[name].Value; });
 
             ProfileList = [];
             foreach (Profile prof in Settings.Profiles.ProfileList)
@@ -118,7 +118,7 @@ namespace HitCounterManager.ViewModels
                 _ProfileSelected.ActiveSplit = _ProfileSelected.Rows.Count - 1;
                 _ProfileSelected.SessionProgress = _ProfileSelected.Rows.Count - 1;
             });
-            ProfileSetAttempts = RelayCommand.Create<int>((int NewAttempts) => _ProfileSelected.Attempts = NewAttempts);
+            ProfileSetAttempts = RelayCommand.Create<int>(NewAttempts => _ProfileSelected.Attempts = NewAttempts);
 
             ToggleTimerPause = RelayCommand.Create(() => TimerRunning = !TimerRunning);
             ToggleReadOnlyMode = RelayCommand.Create(() => IsReadOnly = !IsReadOnly);
@@ -452,7 +452,7 @@ namespace HitCounterManager.ViewModels
         #region Output Update Queue
 
         private readonly DispatcherTimer OutputUpdateTimer;
-        private readonly object OutputUpdateLock = new ();
+        private readonly Lock OutputUpdateLock = new ();
         private bool IsOutputUpdatePending = false; // Set true on a queued update and kept as long as Stable was not true for two ticks
         private bool IsOutputUpdateStable = true; // Set true on timer tick but reset on values changes
 

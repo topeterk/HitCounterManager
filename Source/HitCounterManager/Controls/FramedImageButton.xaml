@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!--
-SPDX-FileCopyrightText: © 2022-2025 Peter Kirmeier
+SPDX-FileCopyrightText: © 2022-2026 Peter Kirmeier
 SPDX-License-Identifier: MIT
 -->
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="HitCounterManager.Controls.FramedImageButton">
 	<Border Margin="3" CornerRadius="5" BorderThickness="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-			BorderBrush="DimGray" Background="{Binding $parent[UserControl].MainColor}" >
-		<Button Padding="4" Command="{Binding $parent[UserControl].OnClickCommand}" PointerPressed="ButtonPointerPressedHandler" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-			<Image Source="{Binding $parent[UserControl].ImgSrc}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+			BorderBrush="DimGray" Background="{ReflectionBinding $parent[UserControl].MainColor}" >
+		<Button Padding="4" Command="{ReflectionBinding $parent[UserControl].OnClickCommand}" PointerPressed="ButtonPointerPressedHandler" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+			<Image Source="{ReflectionBinding $parent[UserControl].ImgSrc}" VerticalAlignment="Center" HorizontalAlignment="Center" />
 		</Button>
 	</Border>
 </UserControl>

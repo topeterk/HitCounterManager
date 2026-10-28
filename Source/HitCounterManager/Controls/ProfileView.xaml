@@ -6,8 +6,10 @@ SPDX-License-Identifier: MIT
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:c="clr-namespace:HitCounterManager.Common;assembly=HitCounterManager.PCL"
+             xmlns:m="clr-namespace:HitCounterManager.Models;assembly=HitCounterManager.PCL"
              xmlns:vm="clr-namespace:HitCounterManager.ViewModels;assembly=HitCounterManager.PCL"
              x:Class="HitCounterManager.Controls.ProfileView"
+             x:DataType="vm:ProfileViewViewModel"
              x:Name="ProfileViewPage">
 
 	<UserControl.DataContext>
@@ -156,7 +158,7 @@ SPDX-License-Identifier: MIT
 
 		<ItemsControl Margin="0" x:Name="ProfileList" ItemsSource="{Binding ProfileSelected.Rows}" HorizontalAlignment="Stretch" ItemTemplate="{OnPlatform Default={StaticResource DefaultTemplate}, Android={StaticResource SmallTemplate}, iOS={StaticResource SmallTemplate}}">
 			<ItemsControl.Resources>
-				<DataTemplate x:Key="SmallTemplate">
+				<DataTemplate x:Key="SmallTemplate" x:DataType="m:ProfileRowModel">
 					<StackPanel Spacing="0" Orientation="Vertical">
 						<Grid Margin="2" RowDefinitions="Auto">
 							<Grid.ColumnDefinitions>
@@ -214,7 +216,7 @@ SPDX-License-Identifier: MIT
 						</Grid>
 					</StackPanel>
 				</DataTemplate>
-				<DataTemplate x:Key="DefaultTemplate">
+				<DataTemplate x:Key="DefaultTemplate" x:DataType="m:ProfileRowModel">
 					<Grid Margin="2" RowDefinitions="Auto">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="24" MinWidth="24"></ColumnDefinition>

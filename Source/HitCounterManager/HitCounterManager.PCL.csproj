@@ -12,7 +12,6 @@ SPDX-License-Identifier: MIT
     <RepositoryUrl>https://github.com/topeterk/HitCounterManager.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <AvaloniaNameGeneratorIsEnabled>false</AvaloniaNameGeneratorIsEnabled>
-    <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault><!-- TODO: USE COMPILE TIME BINDINGS WHERE POSSIBLE -->
     <NoWarn>$(NoWarn);IDE0130</NoWarn>
   </PropertyGroup>
   <ItemGroup>
