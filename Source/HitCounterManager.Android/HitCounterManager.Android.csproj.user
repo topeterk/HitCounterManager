@@ -5,9 +5,9 @@ SPDX-License-Identifier: MIT
 -->
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <SelectedDevice>pixel_5_-_api_34</SelectedDevice>
+    <SelectedDevice>pixel_5_-_api_36</SelectedDevice>
     <SelectedPlatformGroup>Emulator</SelectedPlatformGroup>
-    <ActiveDebugProfile>Pixel 5 - API 34 (Android 14.0 - API 34)</ActiveDebugProfile>
-    <DefaultDevice>pixel_5_-_api_34</DefaultDevice>
+    <ActiveDebugProfile>Pixel 5 - API 36 (Android 16.0 - API 36)</ActiveDebugProfile>
+    <DefaultDevice>pixel_5_-_api_36</DefaultDevice>
   </PropertyGroup>
 </Project>

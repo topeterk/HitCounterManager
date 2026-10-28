@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!--
-SPDX-FileCopyrightText: © 2021-2025 Peter Kirmeier
+SPDX-FileCopyrightText: © 2021-2026 Peter Kirmeier
 SPDX-License-Identifier: MIT
 -->
 <UserControl xmlns="https://github.com/avaloniaui"
@@ -16,7 +16,7 @@ SPDX-License-Identifier: MIT
 		<vm:MainPageViewModel />
 	</UserControl.DataContext>
 
-	<ScrollViewer Padding="0" Margin="6,4,0,0" AllowAutoHide="false">
+	<ScrollViewer Padding="{OnPlatform Default=0, Android='0,20,0,0', iOS=0}" Margin="6,0,0,0" AllowAutoHide="false">
 		<StackPanel Margin="0,0,8,0" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
 			<WrapPanel Margin="2">

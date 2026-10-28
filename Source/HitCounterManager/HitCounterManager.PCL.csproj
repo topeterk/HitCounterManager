@@ -5,14 +5,15 @@ SPDX-License-Identifier: MIT
 -->
   <PropertyGroup>
     <AssemblyName>$(Product).PCL</AssemblyName>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <PackageLicenseFile>../../LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/topeterk/HitCounterManager</PackageProjectUrl>
     <RepositoryUrl>https://github.com/topeterk/HitCounterManager.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <AvaloniaNameGeneratorIsEnabled>false</AvaloniaNameGeneratorIsEnabled>
-    <NoWarn>$(NoWarn);SYSLIB1054;IDE0130</NoWarn> <!-- Do not use recommended LibraryImport as it requires to enable unsafe code for the whole project which is not required by DllImport, TODO: Check if still required with .Net8 -->
+    <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault><!-- TODO: USE COMPILE TIME BINDINGS WHERE POSSIBLE -->
+    <NoWarn>$(NoWarn);IDE0130</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <None Include="Helper\JsonWriter.cs" />
@@ -32,7 +33,7 @@ SPDX-License-Identifier: MIT
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="AvaloniaUI.DiagnosticsSupport" Version="$(AvaloniaUiDiagnosticsVersion)" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Xaml.Behaviors.Avalonia" Version="$(XamlBehaviorsAvaloniaVersion)" />
   </ItemGroup>

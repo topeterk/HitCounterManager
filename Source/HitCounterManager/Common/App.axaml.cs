@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: © 2021-2025 Peter Kirmeier
+// SPDX-FileCopyrightText: © 2021-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
 using System;
@@ -65,6 +65,17 @@ namespace HitCounterManager
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
+#if DEBUG
+            // With Avalonia 12 this feature requires installation of additional tools
+            // see: https://docs.avaloniaui.net/tools/developer-tools/installation
+            //      dotnet tool install --global AvaloniaUI.DeveloperTools
+            // It also requires a license to use it. Free of charge for open source, but still requires an account.
+            // Be aware: This is a potential kill switch when they run out of business or decide to shut it down, see "stop killing games"!
+            if (OperatingSystem.IsWindows())
+            {
+                this.AttachDeveloperTools();
+            }
+#endif
             ApplyTheme(Settings.DarkMode); // Initially update values according to selected mode
             TrayMenu_SetVisibility(Settings.TrayIconEnable);
         }
@@ -111,8 +122,8 @@ namespace HitCounterManager
         internal void TrayMenu_HitWayIncrease(object sender, EventArgs args) => ProfileViewViewModel?.HitSumUp(+1, true);
         internal void TrayMenu_HitWayDecrease(object sender, EventArgs args) => ProfileViewViewModel?.HitSumUp(-1, true);
         internal void TrayMenu_ProfileReset(object sender, EventArgs args) => ProfileViewViewModel?.ProfileReset.Execute(null);
-        internal void TrayMenu_TimerStart(object sender, EventArgs args) { if (ProfileViewViewModel is not null) ProfileViewViewModel.TimerRunning = true; }
-        internal void TrayMenu_TimerStop(object sender, EventArgs args) { if (ProfileViewViewModel is not null) ProfileViewViewModel.TimerRunning = false; }
+        internal void TrayMenu_TimerStart(object sender, EventArgs args) { ProfileViewViewModel?.TimerRunning = true; }
+        internal void TrayMenu_TimerStop(object sender, EventArgs args) {  ProfileViewViewModel?.TimerRunning = false; }
 
         private struct PostponedAlert(string Title, string Message, NotificationType Type)
         {
@@ -179,14 +190,14 @@ namespace HitCounterManager
                         case SC_Type.SC_Type_WayHit: app.ProfileViewViewModel?.HitWayIncrease.Execute(null); break;
                         case SC_Type.SC_Type_WayHitUndo: app.ProfileViewViewModel?.HitWayDecrease.Execute(null); break;
                         case SC_Type.SC_Type_PB: app.ProfileViewViewModel?.ProfilePB.Execute(null); break;
-                        case SC_Type.SC_Type_TimerStart: if (app.ProfileViewViewModel is not null) app.ProfileViewViewModel.TimerRunning = true; break;
-                        case SC_Type.SC_Type_TimerStop: if (app.ProfileViewViewModel is not null) app.ProfileViewViewModel.TimerRunning = false; break;
+                        case SC_Type.SC_Type_TimerStart: app.ProfileViewViewModel?.TimerRunning = true; break;
+                        case SC_Type.SC_Type_TimerStop: app.ProfileViewViewModel?.TimerRunning = false; break;
                         case SC_Type.SC_Type_HitBossPrev: app.ProfileViewViewModel?.HitIncreasePrev.Execute(null); break;
                         case SC_Type.SC_Type_BossHitUndoPrev: app.ProfileViewViewModel?.HitDecreasePrev.Execute(null); break;
                         case SC_Type.SC_Type_HitWayPrev: app.ProfileViewViewModel?.HitWayIncreasePrev.Execute(null); break;
                         case SC_Type.SC_Type_WayHitUndoPrev: app.ProfileViewViewModel?.HitWayDecreasePrev.Execute(null); break;
                         #region AutoSplitter
-                        case SC_Type.SC_Type_Practice: if (app.ProfileViewViewModel is not null) app.ProfileViewViewModel.AutoSplitterPracticeModeChecked = !app.ProfileViewViewModel.AutoSplitterPracticeModeChecked; break;
+                        case SC_Type.SC_Type_Practice: app.ProfileViewViewModel?.AutoSplitterPracticeModeChecked = !app.ProfileViewViewModel.AutoSplitterPracticeModeChecked; break;
                         #endregion
                         default: break;
                     }
@@ -247,7 +258,7 @@ namespace HitCounterManager
                 #endregion
 
                 MainWindow main = new ();
-                mainPage = main.InnerPage;
+                mainPage = (MainPage)main.InnerPage;
                 ProfileViewViewModel = (ProfileViewViewModel?)mainPage.ProfileView?.DataContext;
                 main.Opened += MainPageAppearing;
 
@@ -268,9 +279,16 @@ namespace HitCounterManager
                 bool Success = LoadAllHotKeySettings();
                 if (!Success) DisplayAlert("Error setting up hot keys!", "Not all enabled hot keys could be registered successfully!");
             }
+            else if (ApplicationLifetime is IActivityApplicationLifetime activityLifetime)
+            {
+                SingleViewNavigationPage main = new ();
+                mainPage = main.InnerPage;
+                activityLifetime.MainViewFactory = () => main;
+                ProfileViewViewModel = (ProfileViewViewModel?)mainPage.ProfileView?.DataContext;
+                MainPageAppearing(main, new());
+            }
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewLifetime)
             {
-                //MainPage main = new MainPage();
                 SingleViewNavigationPage main = new ();
                 mainPage = main.InnerPage;
                 singleViewLifetime.MainView = main;

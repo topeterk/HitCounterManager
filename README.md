@@ -75,13 +75,13 @@ There are addons available now, e.g.:
   * **Including** global hot key support:
     * Windows 10, Windows Server 2012 or newer
   * **Without** global hot key support:
-    * Most Linux variants like Alpine 3.18+, CentOS 9+, Debian 12+, Fedora 40+, Ubuntu 20.04+, Red Hat Enterprise Linux 8+ (only tested on Ubuntu)
-    * macOS 14.2+
-    * Android 14+ (minimum [API Level 34](https://apilevels.com))
+    * Most Linux variants like Alpine 3.21+, CentOS 9+, Debian 13+, Fedora 43+, Ubuntu 22.04+, Red Hat Enterprise Linux 8+ (only tested on Ubuntu)
+    * macOS 15+
+    * Android 16+ (minimum [API Level 36](https://apilevels.com))
   * **Maybe** coming later (at least I try)
-    * iOS 17.2+ _(most likely not running yet)_
+    * iOS 18+ _(most likely not running yet)_
 * Prerequisites:
-  * [.NET 8.0 Runtime](https://dotnet.microsoft.com/download/dotnet/8.0/runtime) or newer, see [supported OS versions](https://github.com/dotnet/core/blob/main/release-notes/8.0/supported-os.md)
+  * [.NET 10.0 Runtime](https://dotnet.microsoft.com/download/dotnet/10.0/runtime) or newer, see [supported OS versions](https://github.com/dotnet/core/blob/main/release-notes/10.0/supported-os.md)
   * On Android:
     * As not provided via Google Play Store: [allow installation of unknown apps](https://developer.android.com/studio/publish#publishing-unknown)
 

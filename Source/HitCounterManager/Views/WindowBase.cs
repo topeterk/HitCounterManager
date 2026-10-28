@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: © 2021-2024 Peter Kirmeier
+﻿// SPDX-FileCopyrightText: © 2021-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
 using System;
@@ -13,7 +13,7 @@ namespace HitCounterManager.Views
 {
     public class WindowBase<TViewModel> : Window, IPageBase<TViewModel> where TViewModel : ViewModelWindowBase
     {
-        private PageBase<TViewModel> InnerPage = null!;
+        public PageBase<TViewModel> InnerPage = null!;
         public TViewModel ViewModel => InnerPage.ViewModel;
         public TViewModel GetViewModel() => InnerPage.ViewModel;
 
@@ -29,14 +29,10 @@ namespace HitCounterManager.Views
 
             Topmost = App.CurrentApp.Settings.AlwaysOnTop;
 
-            Opened += (object? sender, EventArgs e) => ViewModel.OnAppearing();
-            Closed += (object? sender, EventArgs e) => ViewModel.OnDisappearing();
+            Opened += (sender, e) => ViewModel.OnAppearing();
+            Closed += (sender, e) => ViewModel.OnDisappearing();
 
             Closing += InnerPage.OnClosing;
-
-#if DEBUG
-            this.AttachDevTools();
-#endif
         }
 
         public async Task OpenAsDialog(Window? owner)

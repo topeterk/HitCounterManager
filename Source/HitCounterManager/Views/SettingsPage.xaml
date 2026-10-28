@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!--
-SPDX-FileCopyrightText: © 2021-2025 Peter Kirmeier
+SPDX-FileCopyrightText: © 2021-2026 Peter Kirmeier
 SPDX-License-Identifier: MIT
 -->
 <UserControl xmlns="https://github.com/avaloniaui"
@@ -377,10 +377,10 @@ All other sub splits are hidden.</x:String>
 
 							<Grid Margin="10,0,10,0" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" HorizontalAlignment="Stretch">
 								<TextBlock     Grid.Row="0" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Maxium previous splits:" />
-								<NumericUpDown Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="999"
+								<NumericUpDown Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" PlaceholderText="999"
 										Value="{Binding ShowSplitsCountFinished}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 								<TextBlock     Grid.Row="1" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Maxium upcoming splits:" />
-								<NumericUpDown Grid.Row="1" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="999"
+								<NumericUpDown Grid.Row="1" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" PlaceholderText="999"
 										Value="{Binding ShowSplitsCountUpcoming}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 							</Grid>
 							<!-- Keep bottom Margin high as Scrollviewer may otherwise cut off controls, don't know why yet -->
@@ -668,10 +668,10 @@ The best progress (BP) is represented by a flag symbol and marks the farthest re
 
 							<Grid Margin="10,0,10,0" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" HorizontalAlignment="Stretch">
 								<TextBlock     Grid.Row="0" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Desired width (in px):" />
-								<NumericUpDown Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
+								<NumericUpDown Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" PlaceholderText="0"
 										Value="{Binding StyleDesiredWidth}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 								<TextBlock     Grid.Row="1" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Desired height (in px):" />
-								<NumericUpDown Grid.Row="1" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" Watermark="0"
+								<NumericUpDown Grid.Row="1" Grid.Column="1" Margin="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AllowSpin="True" ShowButtonSpinner="False" PlaceholderText="0"
 										Value="{Binding StyleDesiredHeight}" Minimum="0" Maximum="{DynamicResource Int32MaxValueAsDecimal}" ClipValueToMinMax="True" ParsingNumberStyle="Integer" />
 							</Grid>
 							<TextBlock HorizontalAlignment="Stretch" Margin="30,0,0,10" FontFamily="Arial" FontStyle="Italic" Text="When value is set back to 0, you may have to reload the browser." />

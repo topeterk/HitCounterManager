@@ -51,10 +51,7 @@ namespace HitCounterManager.ViewModels
             CheckUpdatesOnline = RelayCommand.Create(() => App.CheckAndShowUpdates(this));
 
             ToggleAlwaysOnTop = RelayCommand.Create(() => {
-                if (OwnerWindow != null)
-                {
-                    OwnerWindow.Topmost = App.CurrentApp.Settings.AlwaysOnTop = !App.CurrentApp.Settings.AlwaysOnTop;
-                }
+                OwnerWindow?.Topmost = App.CurrentApp.Settings.AlwaysOnTop = !App.CurrentApp.Settings.AlwaysOnTop;
                 RaisePropertyChanged(nameof(AlwaysOnTop));
             });
             ToggleDarkMode = RelayCommand.Create(() => {

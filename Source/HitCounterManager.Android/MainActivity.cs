@@ -1,15 +1,17 @@
 ﻿// SPDX-FileCopyrightText: © 2023-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
-using System.IO;
 using Android.App;
-using Android.OS;
 using Android.Content.PM;
+using Android.OS;
+using Android.Runtime;
+using AndroidX.Activity;
 using Avalonia;
 using Avalonia.Android;
-//using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Controls.ApplicationLifetimes;
 using HitCounterManager.Common;
-//using HitCounterManager.Views;
+using HitCounterManager.Views;
+using System.IO;
 
 namespace HitCounterManager.Android;
 
@@ -19,8 +21,70 @@ namespace HitCounterManager.Android;
     Icon = "@drawable/icon",
     MainLauncher = true,
     ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.UiMode)]
-public class MainActivity : AvaloniaMainActivity<App>
+public class MainActivity : AvaloniaMainActivity
 {
+    private readonly BackPressedCallback _currentBackPressedCallback;
+
+    public MainActivity()
+    {
+        _currentBackPressedCallback = new BackPressedCallback(this);
+        OnBackPressedDispatcher.AddCallback(this, _currentBackPressedCallback);
+    }
+
+    protected override void OnStop()
+    {
+        // Save when application becomes invisible
+        App.CurrentApp.SaveSettings();
+        base.OnStop();
+    }
+
+    protected override void OnDestroy()
+    {
+        App.CurrentApp.AppExitHandler(this, new());
+        base.OnDestroy();
+    }
+}
+
+internal class BackPressedCallback(AvaloniaActivity activity) : OnBackPressedCallback(true)
+{
+    public override void HandleOnBackPressed()
+    {
+        if (App.CurrentApp.ApplicationLifetime is IActivityApplicationLifetime activityLifetime)
+        {
+            // As we do not spawn any new pages, we just use the factory method to get access to our single root page
+            SingleViewNavigationPage RootPage = (SingleViewNavigationPage)activityLifetime.MainViewFactory!();
+            if (1 < RootPage.NavStack.Count)
+            {
+                RootPage.PopPage();
+                return;
+            }
+
+#if EXAMPLE_FORCED_SHUTDOWN
+            // Idea of stopping the process by default but this will popup the message box
+            // every time one is pressing the hit back button. Therefore it is better to keep
+            // the application running in the background.
+            // We will save the current state during OnStop().
+            RootPage.MainPage.OnClosing(this, new CancelEventArgs());
+            App.CurrentApp.AppExitHandler(this, null);
+            Finish();
+#endif
+        }
+
+        // run default system handler..
+        this.Enabled = false; // Do not run our handler again indefinitely
+        activity.OnBackPressedDispatcher?.OnBackPressed();
+        this.Enabled = true; // Restore handler
+    }
+}
+
+[Application]
+public class AndroidApp : AvaloniaAndroidApplication<App>
+{
+    protected AndroidApp(nint javaReference, JniHandleOwnership transfer)
+        : base(javaReference, transfer)
+    {
+    }
+
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
         // Browse files on VS emulator:
@@ -64,45 +128,4 @@ public class MainActivity : AvaloniaMainActivity<App>
         return base.CustomizeAppBuilder(builder)
             .WithInterFont();
     }
-
-    protected override void OnStop()
-    {
-        // Save when application becomes invisible
-        App.CurrentApp.SaveSettings();
-        base.OnStop();
-    }
-
-/*
-    public override void OnBackPressed()
-    {
-        if (App.CurrentApp.ApplicationLifetime is ISingleViewApplicationLifetime singleViewLifetime)
-        {
-            // Return to previous page
-            SingleViewNavigationPage RootPage = (SingleViewNavigationPage)singleViewLifetime.MainView!;
-            if (1 < RootPage.NavStack.Count)
-            {
-                RootPage.PopPage();
-                return;
-            }
-
-            // Idea of stopping the process by defualt but this will popup the message box
-            // every time one is about the hit back button. Therefore it is better to keep
-            // the application running in backgroung.
-            // We will save the current state during OnStop().
-#if EXAMPLE_FORCED_SHUTDOWN
-            RootPage.MainPage.OnClosing(this, new CancelEventArgs());
-            App.CurrentApp.AppExitHandler(this, null);
-            Finish();
-#endif
-        }
-
-        base.OnBackPressed();
-    }
-
-    protected override void OnDestroy()
-    {
-        App.CurrentApp.AppExitHandler(this, new());
-        base.OnDestroy();
-    }
-*/
 }

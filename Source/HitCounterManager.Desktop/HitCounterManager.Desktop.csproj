@@ -5,7 +5,7 @@ SPDX-License-Identifier: MIT
 -->
   <PropertyGroup>
     <!-- Consumed by pipeline START -->
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <!-- Consumed by pipeline END -->
 
     <OutputType>WinExe</OutputType>
@@ -20,6 +20,5 @@ SPDX-License-Identifier: MIT
     <ProjectReference Include="../$(Product)/$(Product).PCL.csproj" />
     <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
   </ItemGroup>
 </Project>

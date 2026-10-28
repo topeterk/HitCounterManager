@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: © 2023-2025 Peter Kirmeier
+﻿// SPDX-FileCopyrightText: © 2023-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
 using Avalonia;
@@ -14,12 +14,10 @@ namespace HitCounterManager.Views
     {
         private static SettingsRoot Settings => App.CurrentApp.Settings;
 
-        internal readonly MainPage InnerPage;
-
         public MainWindow()
         {
             AvaloniaXamlLoader.Load(this);
-            InitializeComponent();
+            base.InitializeComponent();
 
             double offset = 0D;
 
@@ -36,8 +34,6 @@ namespace HitCounterManager.Views
 
             Width = Settings.MainWidth + offset;
             Height = Settings.MainHeight;
-
-            InnerPage = this.FindControl<MainPage>("InnerPage")!;
 
             Closing += ClosingHandler;
             PositionChanged += PositionChangedHandler;

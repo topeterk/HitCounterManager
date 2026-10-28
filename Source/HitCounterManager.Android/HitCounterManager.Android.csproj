@@ -5,12 +5,11 @@ SPDX-License-Identifier: MIT
 -->
   <PropertyGroup>
     <!-- Consumed by pipeline START -->
-    <TargetFramework>net8.0-android</TargetFramework>
+    <TargetFramework>net10.0-android</TargetFramework>
     <ApplicationId>com.peterkirmeier.$(Product)</ApplicationId>
     <!-- Consumed by pipeline END -->
-    <TargetFramework Condition="'$(MSBuildVersion)' >= '18'">net10.0-android</TargetFramework> <!-- Workaround for Visual Studio 2026, not used for production builds -->
 
-    <SupportedOSPlatformVersion>34</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion>36</SupportedOSPlatformVersion>
     <OutputType>Exe</OutputType>
     <PackageId>$(Product).Android</PackageId>
     <!-- https://docs.microsoft.com/en-us/dotnet/core/rid-catalog -->
@@ -31,7 +30,7 @@ SPDX-License-Identifier: MIT
     <ProjectReference Include="../$(Product)/$(Product).PCL.csproj" />
     <PackageReference Include="Avalonia.Android" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="Xamarin.AndroidX.Annotation" Version="1.9.1.5" />
-    <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.2.0" />
+    <PackageReference Include="Xamarin.AndroidX.Annotation" Version="1.10.0" />
+    <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.2.0.2" />
   </ItemGroup>
 </Project>

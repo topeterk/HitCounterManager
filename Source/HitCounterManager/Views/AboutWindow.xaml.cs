@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: © 2023 Peter Kirmeier
+﻿// SPDX-FileCopyrightText: © 2023-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
 using Avalonia.Markup.Xaml;
@@ -11,7 +11,7 @@ namespace HitCounterManager.Views
         public AboutWindow()
         {
             AvaloniaXamlLoader.Load(this);
-            InitializeComponent();
+            base.InitializeComponent();
         }
     }
 }

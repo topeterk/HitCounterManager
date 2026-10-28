@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: © 2023-2025 Peter Kirmeier
+﻿// SPDX-FileCopyrightText: © 2023-2026 Peter Kirmeier
 // SPDX-License-Identifier: MIT
 
 using System;
@@ -21,7 +21,13 @@ namespace HitCounterManager.Views
 
         public  async Task OpenAsDialog(Window? owner)
         {
-            if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime singleViewLifetime)
+            if (Application.Current?.ApplicationLifetime is IActivityApplicationLifetime activityLifetime)
+            {
+                // As we do not spawn any new pages, we just use the factory method to get access to our single root page
+                SingleViewNavigationPage RootPage = (SingleViewNavigationPage)activityLifetime.MainViewFactory!();
+                RootPage.PushPage(this);
+            }
+            else if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime singleViewLifetime)
             {
                 SingleViewNavigationPage RootPage = (SingleViewNavigationPage)singleViewLifetime.MainView!;
                 RootPage.PushPage(this);
@@ -40,6 +46,12 @@ namespace HitCounterManager.Views
                 // Pass command to parent window
                 ViewModel.OwnerWindow?.Close();
             }
+            else if (Application.Current?.ApplicationLifetime is IActivityApplicationLifetime activityLifetime)
+            {
+                // As we do not spawn any new pages, we just use the factory method to get access to our single root page
+                SingleViewNavigationPage RootPage = (SingleViewNavigationPage)activityLifetime.MainViewFactory!();
+                RootPage.PopPage();
+            }
             else if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime singleViewLifetime)
             {
                 // Return to previous page
@@ -53,8 +65,8 @@ namespace HitCounterManager.Views
         /// </summary>
         public event EventHandler<WindowClosingEventArgs>? Closing
         {
-            add { if (ViewModel.OwnerWindow is not null) ViewModel.OwnerWindow.Closing += value; }
-            remove { if (ViewModel.OwnerWindow is not null) ViewModel.OwnerWindow.Closing -= value; }
+            add { ViewModel.OwnerWindow?.Closing += value; }
+            remove { ViewModel.OwnerWindow?.Closing -= value; }
         }
     }
 
