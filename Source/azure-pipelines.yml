@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: © 2021-2025 Peter Kirmeier
+# SPDX-FileCopyrightText: © 2021-2026 Peter Kirmeier
 # SPDX-License-Identifier: MIT
 
 # https://aka.ms/yaml
@@ -115,15 +115,15 @@ stages:
 
 # Available versions: https://github.com/dotnet/core/blob/main/release-notes/releases-index.json
     - task: UseDotNet@2
-      displayName: 'Install .NET 8'
+      displayName: 'Install .NET 10'
       inputs:
-        version: '8.x'
+        version: '10.x'
 
 # Available versions: https://dist.nuget.org/tools.json
     - task: NuGetToolInstaller@1
-      displayName: 'Install NuGet 6'
+      displayName: 'Install NuGet 7'
       inputs:
-        versionSpec: '6.x'
+        versionSpec: '7.x'
 
     - task: DotNetCoreCLI@2
       condition: startsWith(variables['RuntimeRID'], 'android-')
@@ -133,12 +133,13 @@ stages:
         custom: 'workload'
         arguments: 'install android'
 
+# For .NET 10 Android we nave to install Java in a specific version, as noted here: https://github.com/dotnet/android/issues/9571
 # https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/java-tool-installer-v0?view=azure-pipelines
     - task: JavaToolInstaller@0
       condition: startsWith(variables['RuntimeRID'], 'android-')
-      displayName: 'Install Java 11'
+      displayName: 'Install Java 21'
       inputs:
-        versionSpec: '11'
+        versionSpec: '21'
         jdkArchitectureOption: 'x64'
         jdkSourceOption: 'PreInstalled'
 
